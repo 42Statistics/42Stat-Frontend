@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  frontend:
+    container_name: frontend
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - type: volume
+        source: frontend-app
+        target: /app
+    ports:
+      - '8080:8080'
+    entrypoint: sh /tmp/entry.sh
+    env_file:
+      - env/.env
+
+volumes:
+  frontend-app:
+    name: frontend-app
+    driver: local
+    driver_opts:
+      device: ./app
+      type: none
+      o: bind

@@ -1,9 +1,9 @@
 import { create } from 'zustand';
 
-type useAuthStoreProps = {
+type Auth = {
   isAuthenticated: boolean;
 };
 
-export const useAuthStore = create<useAuthStoreProps>((set) => ({
+export const useAuthStore = create<Auth>((set) => ({
   isAuthenticated: false,
 }));

@@ -1,6 +1,14 @@
 import { useParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 export const ProfilePage = () => {
   const { username } = useParams();
-  return <>ProfilePage of {username}</>;
+  return (
+    <>
+      <Helmet>
+        <title>{username} | 42Stat</title>
+      </Helmet>
+      ProfilePage of {username}
+    </>
+  );
 };

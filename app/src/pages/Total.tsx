@@ -1,3 +1,12 @@
+import { Helmet } from 'react-helmet';
+
 export const TotalPage = () => {
-  return <>TotalPage</>;
+  return (
+    <>
+      <Helmet>
+        <title>전체 정보 보기 | 42Stat</title>
+      </Helmet>
+      TotalPage
+    </>
+  );
 };

@@ -1,5 +1,5 @@
 import { useAuthStore } from '@/stores/useAuthStore';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 
 export const AuthGuard = () => {
@@ -11,7 +11,7 @@ export const AuthGuard = () => {
       alert('로그인이 필요합니다');
       navigate('/');
     }
-  }, []);
+  }, [isAuthenticated]);
 
   return <Outlet />;
 };

@@ -5,5 +5,5 @@ type Auth = {
 };
 
 export const useAuthStore = create<Auth>((set) => ({
-  isAuthenticated: false,
+  isAuthenticated: true,
 }));

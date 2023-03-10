@@ -15,6 +15,8 @@ import { ProfilePage } from './pages/Profile';
 import { SettingsPage } from './pages/Settings';
 import { TotalPage } from './pages/Total';
 import { useAuthStore } from './stores/useAuthStore';
+import { HelmetProvider } from 'react-helmet-async';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 
 const AppRoutes = () => {
   const { isAuthenticated } = useAuthStore();
@@ -43,8 +45,19 @@ const AppRoutes = () => {
   );
 };
 
+const client = new ApolloClient({
+  uri: import.meta.env.VITE_BACKEND_GRAPHQL_ENDPOINT,
+  cache: new InMemoryCache(),
+});
+
 function App() {
-  return <AppRoutes />;
+  return (
+    <ApolloProvider client={client}>
+      <HelmetProvider>
+        <AppRoutes />
+      </HelmetProvider>
+    </ApolloProvider>
+  );
 }
 
 export default App;

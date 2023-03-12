@@ -12,8 +12,10 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.10",
+    "@emotion/css": "^11.10.6",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@react-oauth/google": "^0.8.0",
     "@vitejs/plugin-basic-ssl": "^1.0.1",
     "graphql": "^16.6.0",
     "path": "^0.12.7",

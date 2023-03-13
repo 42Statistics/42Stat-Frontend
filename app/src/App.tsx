@@ -7,8 +7,7 @@ import { global } from './styles/global';
 function App() {
   return (
     <AppProvider>
-      <Global styles={reset} />
-      <Global styles={global} />
+      <Global styles={[reset, global]} />
       <AppRoutes />
     </AppProvider>
   );

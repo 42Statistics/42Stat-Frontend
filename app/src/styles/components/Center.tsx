@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 
-type CenterProps = {
-  w?: string;
-  h?: string;
-};
+type CenterProps = Partial<{
+  w: string;
+  h: string;
+}>;
 
 export const Center = styled.div<CenterProps>`
   display: flex;

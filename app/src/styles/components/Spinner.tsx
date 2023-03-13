@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 
-type SpinnerProps = {
-  size?: number;
-  color?: string;
-  thickness?: number;
-};
+type SpinnerProps = Partial<{
+  size: number;
+  color: string;
+  thickness: number;
+}>;
 
 export const Spinner = styled.div<SpinnerProps>`
   display: inline-block;

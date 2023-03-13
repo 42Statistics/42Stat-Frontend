@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 
-type StackProps = {
-  w?: string;
-  h?: string;
-  spacing?: number;
-};
+type StackProps = Partial<{
+  w: string;
+  h: string;
+  spacing: number;
+}>;
 
 export const HStack = styled.div<StackProps>`
   display: flex;

@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 
-type DividerProps = {
-  orientation?: 'horizontal' | 'vertical';
-  color?: string;
-  thickness?: number;
-};
+type DividerProps = Partial<{
+  orientation: 'horizontal' | 'vertical';
+  color: string;
+  thickness: number;
+}>;
 
 export const Divider = styled.div<DividerProps>`
   width: ${({ orientation = 'horizontal', thickness = 1 }) =>

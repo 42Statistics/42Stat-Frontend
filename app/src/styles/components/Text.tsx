@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-type TextProps = {};
+type TextProps = Partial<{}>;
 
 export const Text = styled.p<TextProps>`
   font-size: ${({ theme }) => theme.fonts.body};

@@ -4,3 +4,4 @@ export * from './HelpIconSvg';
 export * from './SettingsIconSvg';
 export * from './PassIconSvg';
 export * from './FailIconSvg';
+export * from './SearchIconSvg';

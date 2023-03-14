@@ -1,5 +1,6 @@
 import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
+import styled from '@emotion/styled';
 
 const GET_USER = gql(`
   query GetUser($id: Int!) {
@@ -30,5 +31,9 @@ export const HomePage = () => {
 
   console.log(data);
 
-  return <>HomePage</>;
+  return <HomePageLayout>HomePage</HomePageLayout>;
 };
+
+const HomePageLayout = styled.div`
+  height: 100%;
+`;

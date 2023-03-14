@@ -4,8 +4,8 @@ import {
   Route,
   Routes,
 } from 'react-router-dom';
-import { AuthGuard } from '@/guards/AuthGuard';
-import { DashboardLayout } from '@/layouts/DashboardLayout';
+import { AuthGuard } from '@/components/guards/AuthGuard';
+import { DashboardLayout } from '@/components/layouts/DashboardLayout';
 import { NotFoundPage } from '@/pages/404';
 import { AboutPage } from '@/pages/About';
 import { ErrorPage } from '@/pages/Error';
@@ -14,7 +14,7 @@ import { LoginPage } from '@/pages/Login';
 import { ProfilePage } from '@/pages/Profile';
 import { SettingsPage } from '@/pages/Settings';
 import { TotalPage } from '@/pages/Total';
-import { useAuthStore } from '@/stores/useAuthStore';
+import { useAuthStore } from '@/utils/stores/useAuthStore';
 
 // TODO: Suspense, lazyImport 추가
 export const AppRoutes = () => {

@@ -1,5 +1,5 @@
-import { Header } from '@/components/Header';
-import { Sidebar } from '@/components/Sidebar';
+import { Header } from '@/components/elements/Header';
+import { Sidebar } from '@/components/elements/Sidebar';
 import { HStack, VStack } from '@/styles/components/Stack';
 import { Outlet } from 'react-router-dom';
 

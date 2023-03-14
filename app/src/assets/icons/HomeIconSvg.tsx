@@ -1,4 +1,4 @@
-import { MenuIconSvgProps } from '@/types/Menu';
+import { MenuIconSvgProps } from '@/utils/types/Menu';
 import { useTheme } from '@emotion/react';
 
 export const HomeIconSvg = ({ isFocused }: MenuIconSvgProps) => {

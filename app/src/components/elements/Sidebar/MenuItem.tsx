@@ -1,5 +1,5 @@
 import { Text } from '@/styles/components';
-import { Menu } from '@/types/Menu';
+import { Menu } from '@/utils/types/Menu';
 import { getMenuPath } from '@/utils/getMenuPath';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';

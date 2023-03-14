@@ -4,7 +4,7 @@ import {
   SettingsIconSvg,
   TotalIconSvg,
 } from '@/assets/icons';
-import { Menu } from '@/types/Menu';
+import { Menu } from '@/utils/types/Menu';
 
 type MenuIconProps = {
   menu: Menu;

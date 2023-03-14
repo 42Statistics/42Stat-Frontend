@@ -6,7 +6,8 @@ import { debounce } from 'lodash';
 export const UserSearchBar = () => {
   const [text, setText] = useState<string>('');
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
     const { value } = e.target;
     setText(value);
     debouncedSearchUser(value);
@@ -27,7 +28,7 @@ export const UserSearchBar = () => {
       <UserInputContainer>
         <SearchIconSvg />
         <UserInput
-          onChange={onChange}
+          onChange={handleChange}
           value={text}
           placeholder="유저명을 입력해주세요"
         />

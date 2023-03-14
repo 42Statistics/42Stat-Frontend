@@ -5,12 +5,12 @@ import { useNavigate } from 'react-router-dom';
 export const Logo = () => {
   const navigate = useNavigate();
 
-  const goToHome = () => {
+  const handleClick = () => {
     navigate('/home');
   };
 
   return (
-    <LogoLayout onClick={goToHome}>
+    <LogoLayout onClick={handleClick}>
       <AppLogoSvg />
     </LogoLayout>
   );

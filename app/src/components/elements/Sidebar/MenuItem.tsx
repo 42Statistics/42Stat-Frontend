@@ -5,7 +5,7 @@ import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { MouseEvent } from 'react';
 import { Location, useNavigate } from 'react-router-dom';
-import { MenuIcon } from './MenuIcon';
+import { MenuIcon } from '../MenuIcon';
 
 const getMenuText = (menu: Menu) => {
   switch (menu) {
@@ -51,6 +51,7 @@ type MenuItemLayoutProps = {
 
 const MenuItemLayout = styled.li<MenuItemLayoutProps>`
   display: flex;
+  width: 100%;
   gap: 15px;
   cursor: pointer;
   background-color: ${({ theme, isFocused }) =>

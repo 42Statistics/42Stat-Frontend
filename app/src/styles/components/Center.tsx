@@ -1,14 +1,14 @@
 import styled from '@emotion/styled';
 
 type CenterProps = Partial<{
-  w: string;
-  h: string;
+  w: number | string;
+  h: number | string;
 }>;
 
 export const Center = styled.div<CenterProps>`
   display: flex;
-  width: ${({ w = 'auto' }) => w};
-  height: ${({ h = 'auto' }) => h};
+  width: ${({ w = 'auto' }) => (typeof w === 'number' ? `${w}px` : w)};
+  height: ${({ h = 'auto' }) => (typeof h === 'number' ? `${h}px` : h)};
   justify-content: center;
   align-items: center;
 `;

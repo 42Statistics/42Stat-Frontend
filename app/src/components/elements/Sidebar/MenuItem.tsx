@@ -58,4 +58,8 @@ const MenuItemLayout = styled.li<MenuItemLayoutProps>`
     isFocused ? theme.colors.primary.light : 'inherit'};
   padding: 10px 0 10px 20px;
   border-radius: 20px;
+
+  :hover {
+    background-color: ${({ theme }) => theme.colors.primary.light};
+  }
 `;

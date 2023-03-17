@@ -17,8 +17,8 @@ export const TabBar = () => {
   );
 };
 
-const TabBarLayout = styled.div`
-  position: absolute;
+const TabBarLayout = styled.nav`
+  position: fixed;
   bottom: 0;
   width: 100%;
   padding: 14px 20px;

@@ -25,6 +25,10 @@ export const Sidebar = () => {
 };
 
 const SidebarLayout = styled.nav`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
   height: 100%;
   padding: 30px;
   background-color: ${({ theme }) => theme.colors.mono.white};

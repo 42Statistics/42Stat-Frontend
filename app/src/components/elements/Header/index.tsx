@@ -1,4 +1,4 @@
-import { HStack, VStack } from '@/styles/components';
+import { Center, HStack, VStack } from '@/styles/components';
 import { Desktop, Mobile } from '@/styles/responsive';
 import styled from '@emotion/styled';
 import { Logo } from '../Logo';
@@ -9,9 +9,7 @@ export const Header = () => {
     <>
       <Desktop>
         <DesktopHeaderLayout>
-          <HStack w="100%">
-            <UserSearchBar />
-          </HStack>
+          <UserSearchBar />
         </DesktopHeaderLayout>
       </Desktop>
       <Mobile>

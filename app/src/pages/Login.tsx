@@ -9,8 +9,8 @@ export const LoginPage = () => {
   return (
     <LoginPageLayout>
       <Desktop>
-        <HStack h={400} spacing="5vw">
-          <VStack w={250} spacing={50}>
+        <HStack h="400px" spacing="5vw">
+          <VStack w="250px" spacing="50px">
             <AppLogoSvg />
             <AppIntroText />
           </VStack>
@@ -26,8 +26,8 @@ export const LoginPage = () => {
         </HStack>
       </Desktop>
       <Mobile>
-        <VStack w={250} spacing={60}>
-          <VStack spacing={20}>
+        <VStack w="250px" spacing="60px">
+          <VStack spacing="20px">
             <AppLogoSvg />
             <AppIntroText />
           </VStack>

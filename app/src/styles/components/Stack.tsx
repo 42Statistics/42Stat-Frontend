@@ -2,9 +2,9 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 type StackProps = Partial<{
-  w: number | string;
-  h: number | string;
-  spacing: number | string;
+  w: string;
+  h: string;
+  spacing: string;
 }>;
 
 export const hstack = css`
@@ -15,10 +15,9 @@ export const hstack = css`
 
 export const HStack = styled.div<StackProps>`
   ${hstack}
-  gap: ${({ spacing = 0 }) =>
-    typeof spacing === 'number' ? `${spacing}px` : spacing};
-  width: ${({ w = 'auto' }) => (typeof w === 'number' ? `${w}px` : w)};
-  height: ${({ h = 'auto' }) => (typeof h === 'number' ? `${h}px` : h)};
+  gap: ${({ spacing = '0px' }) => spacing};
+  width: ${({ w = 'auto' }) => w};
+  height: ${({ h = 'auto' }) => h};
 `;
 
 export const vstack = css`
@@ -30,8 +29,7 @@ export const vstack = css`
 
 export const VStack = styled.div<StackProps>`
   ${vstack}
-  gap: ${({ spacing = 0 }) =>
-    typeof spacing === 'number' ? `${spacing}px` : spacing};
-  width: ${({ w = 'auto' }) => (typeof w === 'number' ? `${w}px` : w)};
-  height: ${({ h = 'auto' }) => (typeof h === 'number' ? `${h}px` : h)};
+  gap: ${({ spacing = '0px' }) => spacing};
+  width: ${({ w = 'auto' }) => w};
+  height: ${({ h = 'auto' }) => h};
 `;

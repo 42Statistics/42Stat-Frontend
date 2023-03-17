@@ -9,10 +9,10 @@ export const Sidebar = () => {
 
   return (
     <SidebarLayout>
-      <VStack h="100%" spacing={60}>
+      <VStack h="100%" spacing="60px">
         <Logo />
         <p>박용준</p>
-        <VStack as="ul" w="100%" h="100%" spacing={20}>
+        <VStack as="ul" w="100%" h="100%" spacing="20px">
           <MenuItem menu="Home" location={location} />
           <MenuItem menu="Total" location={location} />
           <Spacer />

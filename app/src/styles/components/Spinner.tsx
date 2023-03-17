@@ -1,17 +1,17 @@
 import styled from '@emotion/styled';
 
 type SpinnerProps = Partial<{
-  size: number;
+  size: string;
   color: string;
-  thickness: number;
+  thickness: string;
 }>;
 
 export const Spinner = styled.div<SpinnerProps>`
   display: inline-block;
   position: relative;
-  width: ${({ size = 24 }) => size}px;
-  height: ${({ size = 24 }) => size}px;
-  border: ${({ thickness = 2 }) => thickness}px solid transparent;
+  width: ${({ size = '24px' }) => size};
+  height: ${({ size = '24px' }) => size};
+  border: ${({ thickness = '2px' }) => thickness}px solid transparent;
   border-top-color: black;
   border-left-color: black;
   border-radius: 50%;

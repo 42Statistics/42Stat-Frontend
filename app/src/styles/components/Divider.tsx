@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 type DividerProps = Partial<{
   orientation: 'horizontal' | 'vertical';
   color: string;
-  thickness: number;
+  thickness: string;
 }>;
 
 export const Divider = styled.div<DividerProps>`
@@ -15,12 +15,12 @@ export const Divider = styled.div<DividerProps>`
     orientation = 'horizontal',
     theme,
     color = theme.colors.primary.default,
-    thickness = 1,
-  }) => (orientation === 'horizontal' ? `${thickness}px solid ${color}` : 0)};
+    thickness = '1px',
+  }) => (orientation === 'horizontal' ? `${thickness} solid ${color}` : 0)};
   border-left: ${({
     orientation = 'horizontal',
     theme,
     color = theme.colors.primary.default,
-    thickness = 1,
-  }) => (orientation === 'vertical' ? `${thickness}px solid ${color}` : 0)};
+    thickness = '1px',
+  }) => (orientation === 'vertical' ? `${thickness} solid ${color}` : 0)};
 `;

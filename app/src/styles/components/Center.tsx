@@ -2,8 +2,8 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 type CenterProps = Partial<{
-  w: number | string;
-  h: number | string;
+  w: string;
+  h: string;
 }>;
 
 export const center = css`
@@ -14,6 +14,6 @@ export const center = css`
 
 export const Center = styled.div<CenterProps>`
   ${center}
-  width: ${({ w = 'auto' }) => (typeof w === 'number' ? `${w}px` : w)};
-  height: ${({ h = 'auto' }) => (typeof h === 'number' ? `${h}px` : h)};
+  width: ${({ w = 'auto' }) => w};
+  height: ${({ h = 'auto' }) => h};
 `;

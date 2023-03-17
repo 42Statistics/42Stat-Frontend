@@ -21,7 +21,7 @@ export const MainLayout = () => {
         </HStack>
       </Desktop>
       <Mobile>
-        <VStack w="100%" spacing={20}>
+        <VStack w="100%" spacing="20px">
           <Header />
           <Divider />
           <main css={{ width: '100%' }}>

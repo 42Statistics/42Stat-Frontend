@@ -14,7 +14,7 @@ export const Header = () => {
       </Desktop>
       <Mobile>
         <MobileHeaderLayout>
-          <VStack w="100%" spacing={10}>
+          <VStack w="100%" spacing="10px">
             <Logo />
             <UserSearchBar />
           </VStack>

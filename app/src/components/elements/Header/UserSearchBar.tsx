@@ -2,6 +2,7 @@ import { SearchIconSvg } from '@/assets/icons';
 import styled from '@emotion/styled';
 import { ChangeEvent, useCallback, useState } from 'react';
 import { debounce } from 'lodash';
+import { Desktop, Mobile } from '@/styles/responsive';
 
 export const UserSearchBar = () => {
   const [text, setText] = useState<string>('');
@@ -24,26 +25,43 @@ export const UserSearchBar = () => {
   };
 
   return (
-    <UserSearchBarLayout>
-      <UserInputContainer>
-        <SearchIconSvg />
-        <UserInput
-          onChange={handleChange}
-          value={text}
-          placeholder="유저명을 입력해주세요"
-        />
-      </UserInputContainer>
-    </UserSearchBarLayout>
+    <>
+      <Desktop>
+        <DesktopUserSearchBarLayout>
+          <SearchIconSvg />
+          <UserInput
+            onChange={handleChange}
+            value={text}
+            placeholder="유저명을 입력해주세요"
+          />
+        </DesktopUserSearchBarLayout>
+      </Desktop>
+      <Mobile>
+        <MobileUserSearchBarLayout>
+          <SearchIconSvg />
+          <UserInput
+            onChange={handleChange}
+            value={text}
+            placeholder="유저명을 입력해주세요"
+          />
+        </MobileUserSearchBarLayout>
+      </Mobile>
+    </>
   );
 };
 
-const UserSearchBarLayout = styled.div`
+const DesktopUserSearchBarLayout = styled.div`
   width: 100%;
-`;
-
-const UserInputContainer = styled.div`
   display: flex;
   gap: 20px;
+`;
+
+const MobileUserSearchBarLayout = styled.div`
+  display: flex;
+  gap: 20px;
+  padding: 12px 30px;
+  border-radius: 20px;
+  background-color: ${({ theme }) => theme.colors.mono.white};
 `;
 
 const UserInput = styled.input`

@@ -1,30 +1,47 @@
 import { AppLogoSvg } from '@/assets/AppLogoSvg';
+import { AppIntroText } from '@/components/elements/Login/AppIntroText';
 import { Divider, HStack, Text, VStack } from '@/styles/components';
+import { Desktop, Mobile } from '@/styles/responsive';
 import styled from '@emotion/styled';
 import { GoogleLogin } from '@react-oauth/google';
 
 export const LoginPage = () => {
   return (
     <LoginPageLayout>
-      <HStack h="400px" spacing={150}>
-        <VStack w="250px" spacing={50}>
-          <AppLogoSvg />
-          <Text css={{ fontWeight: 300 }}>
-            42Stat은 42 Intra API를 이용하여 42서울 교육생들의 학습 데이터를
-            분석하여 표시해주는 서비스입니다. 평소 궁금했던 부분들을 42Stat과
-            함께 알아보세요
-          </Text>
+      <Desktop>
+        <HStack h={400} spacing="5vw">
+          <VStack w={250} spacing={50}>
+            <AppLogoSvg />
+            <AppIntroText />
+          </VStack>
+          <Divider orientation="vertical" />
+          <GoogleLogin
+            onSuccess={(credentialResponse) => {
+              console.log(credentialResponse);
+            }}
+            onError={() => {
+              console.log('Login Failed');
+            }}
+          />
+        </HStack>
+      </Desktop>
+      <Mobile>
+        <VStack w={250} spacing={60}>
+          <VStack spacing={20}>
+            <AppLogoSvg />
+            <AppIntroText />
+          </VStack>
+          <Divider />
+          <GoogleLogin
+            onSuccess={(credentialResponse) => {
+              console.log(credentialResponse);
+            }}
+            onError={() => {
+              console.log('Login Failed');
+            }}
+          />
         </VStack>
-        <Divider orientation="vertical" />
-        <GoogleLogin
-          onSuccess={(credentialResponse) => {
-            console.log(credentialResponse);
-          }}
-          onError={() => {
-            console.log('Login Failed');
-          }}
-        />
-      </HStack>
+      </Mobile>
     </LoginPageLayout>
   );
 };
@@ -34,5 +51,11 @@ const LoginPageLayout = styled.div`
   justify-content: center;
   align-items: center;
   height: 100%;
-  background-color: ${({ theme }) => theme.colors.background};
+  background: linear-gradient(
+    103.55deg,
+    #cfc2e9 13.93%,
+    #fee4e2 102.93%,
+    #ffdb5e 102.94%,
+    #d9d9d9 102.94%
+  );
 `;

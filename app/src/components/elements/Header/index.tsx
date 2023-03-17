@@ -1,19 +1,36 @@
-import { hstack } from '@/styles/components';
+import { HStack, VStack } from '@/styles/components';
+import { Desktop, Mobile } from '@/styles/responsive';
 import styled from '@emotion/styled';
+import { Logo } from '../Logo';
 import { UserSearchBar } from './UserSearchBar';
 
 export const Header = () => {
   return (
-    <HeaderLayout>
-      <UserSearchBar />
-    </HeaderLayout>
+    <>
+      <Desktop>
+        <DesktopHeaderLayout>
+          <HStack w="100%">
+            <UserSearchBar />
+          </HStack>
+        </DesktopHeaderLayout>
+      </Desktop>
+      <Mobile>
+        <MobileHeaderLayout>
+          <VStack w="100%" spacing={10}>
+            <Logo />
+            <UserSearchBar />
+          </VStack>
+        </MobileHeaderLayout>
+      </Mobile>
+    </>
   );
 };
 
-const HeaderLayout = styled.div`
-  ${hstack}
+const DesktopHeaderLayout = styled.div`
   width: 100%;
   padding: 30px 0 30px 50px;
   background-color: ${({ theme }) => theme.colors.mono.white};
   border-bottom: 1px solid ${({ theme }) => theme.colors.mono.gray.default};
 `;
+
+const MobileHeaderLayout = styled.div``;

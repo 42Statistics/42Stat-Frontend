@@ -5,7 +5,7 @@ import {
   Routes,
 } from 'react-router-dom';
 import { AuthGuard } from '@/components/guards/AuthGuard';
-import { DashboardLayout } from '@/components/layouts/DashboardLayout';
+import { MainLayout } from '@/components/layouts/MainLayout';
 import { NotFoundPage } from '@/pages/404';
 import { AboutPage } from '@/pages/About';
 import { ErrorPage } from '@/pages/Error';
@@ -29,7 +29,7 @@ export const AppRoutes = () => {
             element={isAuthenticated ? <Navigate to="/home" /> : <LoginPage />}
           />
           <Route element={<AuthGuard />}>
-            <Route element={<DashboardLayout />}>
+            <Route element={<MainLayout />}>
               <Route path="/home" element={<HomePage />} />
               <Route path="/total" element={<TotalPage />} />
               <Route path="/profile/:username" element={<ProfilePage />} />

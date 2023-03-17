@@ -6,15 +6,15 @@ import { Desktop, Mobile } from '@/styles/responsive';
 import { Outlet } from 'react-router-dom';
 import { TabBar } from '../elements/TabBar';
 
-export const DashboardLayout = () => {
+export const MainLayout = () => {
   return (
     <>
       <Desktop>
-        <HStack h="100%">
+        <HStack>
           <Sidebar />
-          <VStack w="100%" h="100%">
+          <VStack w="100%" css={{ marginLeft: '260px' }}>
             <Header />
-            <main css={{ height: '100%' }}>
+            <main css={{ width: '100%' }}>
               <Outlet />
             </main>
           </VStack>
@@ -24,11 +24,11 @@ export const DashboardLayout = () => {
         <VStack w="100%" spacing={20}>
           <Header />
           <Divider />
-          <main css={{ height: '100%' }}>
+          <main css={{ width: '100%' }}>
             <Outlet />
           </main>
-          <TabBar />
         </VStack>
+        <TabBar />
       </Mobile>
     </>
   );

@@ -25,7 +25,6 @@ specifiers:
   eslint-plugin-prettier: ^4.2.1
   eslint-plugin-react: ^7.32.2
   eslint-plugin-react-hooks: ^4.6.0
-  facepaint: ^1.2.1
   graphql: ^16.6.0
   lodash: ^4.17.21
   path: ^0.12.7
@@ -46,7 +45,6 @@ dependencies:
   '@emotion/styled': 11.10.6_oouaibmszuch5k64ms7uxp2aia
   '@react-oauth/google': 0.8.0_biqbaboplfbrettd7655fr4n2y
   '@vitejs/plugin-basic-ssl': 1.0.1_vite@4.1.4
-  facepaint: 1.2.1
   graphql: 16.6.0
   lodash: 4.17.21
   path: 0.12.7
@@ -2946,10 +2944,6 @@ packages:
     resolution: {integrity: sha512-CvdFfHkC95B4bBBk36hcEmvdR2awOdhhVUYH6S/zrVj3477zven/fJMYg7121h4T1xHZC+tetUpubpAhxwI7hQ==}
     engines: {node: ^10.17.0 || ^12.0.0 || >= 13.7.0}
     dev: true
-
-  /facepaint/1.2.1:
-    resolution: {integrity: sha512-oNvBekbhsm/0PNSOWca5raHNAi6dG960Bx6LJgxDPNF59WpuspgQ17bN5MKwOr7JcFdQYc7StW3VZ28DBZLavQ==}
-    dev: false
 
   /fast-decode-uri-component/1.0.1:
     resolution: {integrity: sha512-WKgKWg5eUxvRZGwW8FvfbaH7AXSh2cL+3j5fMGzUMCxWBJ3dV3a7Wz8y2f/uQ0e3B6WmodD3oS54jTQ9HVTIIg==}

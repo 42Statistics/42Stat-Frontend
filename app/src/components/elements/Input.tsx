@@ -1,0 +1,17 @@
+import styled from '@emotion/styled';
+import { InputHTMLAttributes } from 'react';
+
+export const Input = (props: InputHTMLAttributes<HTMLInputElement>) => {
+  return <StyledInput {...props} />;
+};
+
+const StyledInput = styled.input`
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-size: ${({ theme }) => theme.fonts.h3};
+
+  ::placeholder {
+    color: ${({ theme }) => theme.colors.mono.gray.default};
+  }
+`;

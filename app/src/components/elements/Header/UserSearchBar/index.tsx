@@ -1,37 +1,20 @@
 import { SearchIconSvg } from '@/assets/icons';
 import styled from '@emotion/styled';
-import { ChangeEvent, useCallback, useState } from 'react';
-import { debounce } from 'lodash';
 import { Desktop, Mobile } from '@/styles/responsive';
+import { Input } from '@/components/elements/Input';
+import { useUserSearchBar } from './hooks/useUserSearchBar';
 
 export const UserSearchBar = () => {
-  const [text, setText] = useState<string>('');
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    const { value } = e.target;
-    setText(value);
-    debouncedSearchUser(value);
-  };
-
-  const debouncedSearchUser = useCallback(
-    debounce(async (text: string) => searchUser(text), 100),
-    [],
-  );
-
-  const searchUser = (text: string) => {
-    // TODO: 실제 검색으로 바꾸기
-    console.log(text);
-  };
+  const { input, handleChange } = useUserSearchBar();
 
   return (
     <>
       <Desktop>
         <DesktopUserSearchBarLayout>
           <SearchIconSvg />
-          <UserInput
+          <Input
             onChange={handleChange}
-            value={text}
+            value={input}
             placeholder="유저명을 입력해주세요"
           />
         </DesktopUserSearchBarLayout>
@@ -39,9 +22,9 @@ export const UserSearchBar = () => {
       <Mobile>
         <MobileUserSearchBarLayout>
           <SearchIconSvg />
-          <UserInput
+          <Input
             onChange={handleChange}
-            value={text}
+            value={input}
             placeholder="유저명을 입력해주세요"
           />
         </MobileUserSearchBarLayout>
@@ -62,15 +45,4 @@ const MobileUserSearchBarLayout = styled.div`
   padding: 12px 30px;
   border-radius: 20px;
   background-color: ${({ theme }) => theme.colors.mono.white};
-`;
-
-const UserInput = styled.input`
-  background-color: transparent;
-  border: none;
-  outline: none;
-  font-size: ${({ theme }) => theme.fonts.h3};
-
-  ::placeholder {
-    color: ${({ theme }) => theme.colors.mono.gray.default};
-  }
 `;

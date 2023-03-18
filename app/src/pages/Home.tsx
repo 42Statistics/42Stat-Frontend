@@ -76,6 +76,6 @@ const HomePageLayout = styled.div``;
 const DashboardContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 40px;
+  gap: 2rem;
+  padding: 4rem;
 `;

@@ -21,6 +21,6 @@ const TabBarLayout = styled.nav`
   position: fixed;
   bottom: 0;
   width: 100%;
-  padding: 14px 20px;
+  padding: 1.4rem 2rem;
   background-color: ${({ theme }) => theme.colors.mono.white};
 `;

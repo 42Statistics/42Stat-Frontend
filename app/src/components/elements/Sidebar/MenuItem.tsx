@@ -52,12 +52,12 @@ type MenuItemLayoutProps = {
 const MenuItemLayout = styled.li<MenuItemLayoutProps>`
   display: flex;
   width: 100%;
-  gap: 15px;
+  gap: 1.5rem;
   cursor: pointer;
   background-color: ${({ theme, isFocused }) =>
     isFocused ? theme.colors.primary.light : 'inherit'};
-  padding: 10px 0 10px 20px;
-  border-radius: 20px;
+  padding: 1rem 0 1rem 2rem;
+  border-radius: 2rem;
 
   :hover {
     background-color: ${({ theme }) => theme.colors.primary.light};

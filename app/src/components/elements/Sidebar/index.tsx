@@ -9,10 +9,10 @@ export const Sidebar = () => {
 
   return (
     <SidebarLayout>
-      <VStack h="100%" spacing="60px">
+      <VStack h="100%" spacing="6rem">
         <Logo />
         <p>박용준</p>
-        <VStack as="ul" w="100%" h="100%" spacing="20px">
+        <VStack as="ul" w="100%" h="100%" spacing="2rem">
           <MenuItem menu="Home" location={location} />
           <MenuItem menu="Total" location={location} />
           <Spacer />
@@ -28,9 +28,9 @@ const SidebarLayout = styled.nav`
   position: fixed;
   top: 0;
   left: 0;
-  width: 260px;
+  width: 26rem;
   height: 100%;
-  padding: 30px;
+  padding: 3rem;
   background-color: ${({ theme }) => theme.colors.mono.white};
-  border-right: 1px solid ${({ theme }) => theme.colors.mono.gray.default};
+  border-right: 0.1rem solid ${({ theme }) => theme.colors.mono.gray.default};
 `;

@@ -9,9 +9,9 @@ type SpinnerProps = Partial<{
 export const Spinner = styled.div<SpinnerProps>`
   display: inline-block;
   position: relative;
-  width: ${({ size = '24px' }) => size};
-  height: ${({ size = '24px' }) => size};
-  border: ${({ thickness = '2px' }) => thickness}px solid transparent;
+  width: ${({ size = '2.4rem' }) => size};
+  height: ${({ size = '2.4rem' }) => size};
+  border: ${({ thickness = '0.2rem' }) => thickness} solid transparent;
   border-top-color: black;
   border-left-color: black;
   border-radius: 50%;

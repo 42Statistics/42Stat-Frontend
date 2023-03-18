@@ -15,7 +15,7 @@ export const hstack = css`
 
 export const HStack = styled.div<StackProps>`
   ${hstack}
-  gap: ${({ spacing = '0px' }) => spacing};
+  gap: ${({ spacing = '0' }) => spacing};
   width: ${({ w = 'auto' }) => w};
   height: ${({ h = 'auto' }) => h};
 `;
@@ -29,7 +29,7 @@ export const vstack = css`
 
 export const VStack = styled.div<StackProps>`
   ${vstack}
-  gap: ${({ spacing = '0px' }) => spacing};
+  gap: ${({ spacing = '0' }) => spacing};
   width: ${({ w = 'auto' }) => w};
   height: ${({ h = 'auto' }) => h};
 `;

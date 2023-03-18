@@ -23,8 +23,8 @@ const DashboardRowLayout = styled.div<DashboardRowLayoutProps>`
   grid-template-columns: repeat(itemByRow, 1fr);
   grid-template-rows: repeat(
     2,
-    ${({ itemByRow }) => (itemByRow === 4 ? '135px' : '180px')}
+    ${({ itemByRow }) => (itemByRow === 4 ? '13.5rem' : '18rem')}
   );
-  column-gap: 20px;
-  row-gap: 20px;
+  column-gap: 2rem;
+  row-gap: 2rem;
 `;

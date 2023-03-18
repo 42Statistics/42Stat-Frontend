@@ -42,10 +42,10 @@ const DashboardItemLayout = styled.div<DashboardItemLayoutProps>`
   background-color: ${({ theme }) => theme.colors.mono.white};
   grid-column: ${({ col, colSpan }) => `${col} / span ${colSpan}`};
   grid-row: ${({ row, rowSpan }) => `${row} / span ${rowSpan}`};
-  border-radius: 20px;
+  border-radius: 2rem;
 
   transition: box-shadow 200ms ease-in-out, transform 200ms ease-in-out;
   :hover {
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.25);
   }
 `;

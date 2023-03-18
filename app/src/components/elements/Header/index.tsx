@@ -14,7 +14,7 @@ export const Header = () => {
       </Desktop>
       <Mobile>
         <MobileHeaderLayout>
-          <VStack w="100%" spacing="10px">
+          <VStack w="100%" spacing="1rem">
             <Logo />
             <UserSearchBar />
           </VStack>
@@ -26,9 +26,9 @@ export const Header = () => {
 
 const DesktopHeaderLayout = styled.div`
   width: 100%;
-  padding: 30px 0 30px 50px;
+  padding: 3rem 0 3rem 5rem;
   background-color: ${({ theme }) => theme.colors.mono.white};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.mono.gray.default};
+  border-bottom: 0.1rem solid ${({ theme }) => theme.colors.mono.gray.default};
 `;
 
 const MobileHeaderLayout = styled.div``;

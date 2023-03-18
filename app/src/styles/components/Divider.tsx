@@ -15,12 +15,12 @@ export const Divider = styled.div<DividerProps>`
     orientation = 'horizontal',
     theme,
     color = theme.colors.primary.default,
-    thickness = '1px',
+    thickness = '0.1rem',
   }) => (orientation === 'horizontal' ? `${thickness} solid ${color}` : 0)};
   border-left: ${({
     orientation = 'horizontal',
     theme,
     color = theme.colors.primary.default,
-    thickness = '1px',
+    thickness = '0.1rem',
   }) => (orientation === 'vertical' ? `${thickness} solid ${color}` : 0)};
 `;

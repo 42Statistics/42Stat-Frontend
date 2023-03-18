@@ -9,9 +9,9 @@ const StyledInput = styled.input`
   background-color: transparent;
   border: none;
   outline: none;
-  font-size: ${({ theme }) => theme.fonts.h3};
+  font-size: ${({ theme }) => theme.fonts.size.h3};
 
-  ::placeholder {
+  &::placeholder {
     color: ${({ theme }) => theme.colors.mono.gray.default};
   }
 `;

@@ -32,11 +32,19 @@ type Colors = {
 };
 
 type Fonts = {
-  h1: string;
-  h2: string;
-  h3: string;
-  body: string;
-  caption: string;
+  size: {
+    h1: string;
+    h2: string;
+    h3: string;
+    body: string;
+    caption: string;
+  };
+  weight: {
+    light: number;
+    regular: number;
+    medium: number;
+    bold: number;
+  };
 };
 
 declare module '@emotion/react' {

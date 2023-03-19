@@ -11,7 +11,7 @@ export const Logo = () => {
 
   return (
     <LogoLayout onClick={handleClick}>
-      <AppLogoSvg />
+      <AppLogoSvg size="sm" />
     </LogoLayout>
   );
 };

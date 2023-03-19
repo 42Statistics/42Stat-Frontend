@@ -6,6 +6,7 @@ export const Input = (props: InputHTMLAttributes<HTMLInputElement>) => {
 };
 
 const StyledInput = styled.input`
+  width: 100%;
   background-color: transparent;
   border: none;
   outline: none;

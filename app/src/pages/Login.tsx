@@ -4,10 +4,14 @@ import { Divider, HStack, VStack } from '@/styles/components';
 import { Desktop, Mobile } from '@/styles/responsive';
 import styled from '@emotion/styled';
 import { GoogleLogin } from '@react-oauth/google';
+import { Helmet } from 'react-helmet-async';
 
 export const LoginPage = () => {
   return (
     <LoginPageLayout>
+      <Helmet>
+        <title>42Stat</title>
+      </Helmet>
       <Desktop>
         <HStack h="40rem" spacing="5vw">
           <VStack w="25rem" spacing="5rem">

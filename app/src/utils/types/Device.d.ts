@@ -1,0 +1,1 @@
+type Device = 'desktop' | 'mobile';

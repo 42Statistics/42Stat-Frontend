@@ -1,18 +1,20 @@
 import { SearchIconSvg } from '@/assets/icons';
-import { useIsDesktop } from '@/styles/responsive';
 import { Input } from '@/components/elements/Input';
 import { useUserSearchBar } from './hooks/useUserSearchBar';
 import { css, Theme, useTheme } from '@emotion/react';
+import { getDevice } from '@/styles/responsive/getDevice';
 
 export const UserSearchBar = () => {
   const { input, handleChange } = useUserSearchBar();
-  const { isDesktop } = useIsDesktop();
+  const device = getDevice();
   const theme = useTheme();
 
   return (
     <div
       css={
-        isDesktop ? DesktopUserSearchBarStyle : MobileUserSearchBarStyle(theme)
+        device === 'desktop'
+          ? DesktopUserSearchBarStyle
+          : MobileUserSearchBarStyle(theme)
       }
     >
       <SearchIconSvg />

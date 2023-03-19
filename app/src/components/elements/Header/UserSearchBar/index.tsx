@@ -1,48 +1,41 @@
 import { SearchIconSvg } from '@/assets/icons';
-import styled from '@emotion/styled';
-import { Desktop, Mobile } from '@/styles/responsive';
+import { useIsDesktop } from '@/styles/responsive';
 import { Input } from '@/components/elements/Input';
 import { useUserSearchBar } from './hooks/useUserSearchBar';
+import { css, Theme, useTheme } from '@emotion/react';
 
 export const UserSearchBar = () => {
   const { input, handleChange } = useUserSearchBar();
+  const { isDesktop } = useIsDesktop();
+  const theme = useTheme();
 
   return (
-    <>
-      <Desktop>
-        <DesktopUserSearchBarLayout>
-          <SearchIconSvg />
-          <Input
-            onChange={handleChange}
-            value={input}
-            placeholder="유저명을 입력해주세요"
-          />
-        </DesktopUserSearchBarLayout>
-      </Desktop>
-      <Mobile>
-        <MobileUserSearchBarLayout>
-          <SearchIconSvg />
-          <Input
-            onChange={handleChange}
-            value={input}
-            placeholder="유저명을 입력해주세요"
-          />
-        </MobileUserSearchBarLayout>
-      </Mobile>
-    </>
+    <div
+      css={
+        isDesktop ? DesktopUserSearchBarStyle : MobileUserSearchBarStyle(theme)
+      }
+    >
+      <SearchIconSvg />
+      <Input
+        onChange={handleChange}
+        value={input}
+        placeholder="유저명을 입력해주세요"
+      />
+    </div>
   );
 };
 
-const DesktopUserSearchBarLayout = styled.div`
+const DesktopUserSearchBarStyle = css`
   width: 100%;
   display: flex;
-  gap: 20px;
+  gap: 2rem;
 `;
 
-const MobileUserSearchBarLayout = styled.div`
+const MobileUserSearchBarStyle = (theme: Theme) => css`
+  width: 100%;
   display: flex;
-  gap: 20px;
-  padding: 12px 30px;
-  border-radius: 20px;
-  background-color: ${({ theme }) => theme.colors.mono.white};
+  gap: 2rem;
+  padding: 1.2rem 3rem;
+  border-radius: 2rem;
+  background-color: ${theme.colors.mono.white};
 `;

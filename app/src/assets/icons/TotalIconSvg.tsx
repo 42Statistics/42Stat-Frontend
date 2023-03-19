@@ -1,7 +1,7 @@
-import { MenuIconSvgProps } from '@/utils/types/Menu';
+import { NavMenuIconSvgProps } from '@/utils/types/NavMenu';
 import { useTheme } from '@emotion/react';
 
-export const TotalIconSvg = ({ isFocused }: MenuIconSvgProps) => {
+export const TotalIconSvg = ({ isFocused }: NavMenuIconSvgProps) => {
   const theme = useTheme();
 
   return (

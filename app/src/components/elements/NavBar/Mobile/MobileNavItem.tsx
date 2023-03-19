@@ -1,8 +1,8 @@
+import { NavMenuOption } from '@/utils/types/NavMenu';
 import styled from '@emotion/styled';
 import { MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { NavMenuIcon } from '../NavMenuIcon';
-import { NavMenuOption } from '../hooks/useNavBar';
 
 type MobileNavItemProps = {
   option: NavMenuOption;

@@ -1,6 +1,6 @@
 import { AppLogoSvg } from '@/assets/AppLogoSvg';
 import { AppIntroText } from '@/components/elements/Login/AppIntroText';
-import { Divider, HStack, Text, VStack } from '@/styles/components';
+import { Divider, HStack, VStack } from '@/styles/components';
 import { Desktop, Mobile } from '@/styles/responsive';
 import styled from '@emotion/styled';
 import { GoogleLogin } from '@react-oauth/google';

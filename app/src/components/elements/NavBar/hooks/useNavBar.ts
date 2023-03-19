@@ -1,11 +1,4 @@
-import { NavMenu } from '@/utils/types/NavMenu';
-
-export type NavMenuOption = {
-  menu: NavMenu;
-  text: string;
-  path: string;
-  trailingSpacer?: boolean;
-};
+import { NavMenuOption } from '@/utils/types/NavMenu';
 
 export const useNavBar = () => {
   const options: NavMenuOption[] = [

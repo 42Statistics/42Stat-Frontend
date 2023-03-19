@@ -1,10 +1,10 @@
 import { Text } from '@/styles/components';
+import { NavMenuOption } from '@/utils/types/NavMenu';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { MouseEvent } from 'react';
 import { Location, useNavigate } from 'react-router-dom';
 import { NavMenuIcon } from '../NavMenuIcon';
-import { NavMenuOption } from '../hooks/useNavBar';
 
 type DesktopNavItemProps = {
   option: NavMenuOption;

@@ -1,19 +1,18 @@
-import { Header } from '@/components/elements/Header';
-import { Sidebar } from '@/components/elements/Sidebar';
 import { Divider } from '@/styles/components';
 import { HStack, VStack } from '@/styles/components/Stack';
 import { Desktop, Mobile } from '@/styles/responsive';
 import { Outlet } from 'react-router-dom';
-import { TabBar } from '../elements/TabBar';
+import { DesktopHeader, MobileHeader } from '../elements/Header';
+import { DesktopNavBar, MobileNavBar } from '../elements/NavBar';
 
 export const MainLayout = () => {
   return (
     <>
       <Desktop>
         <HStack>
-          <Sidebar />
+          <DesktopNavBar />
           <VStack w="100%" css={{ marginLeft: '26rem' }}>
-            <Header />
+            <DesktopHeader />
             <main css={{ width: '100%' }}>
               <Outlet />
             </main>
@@ -22,13 +21,13 @@ export const MainLayout = () => {
       </Desktop>
       <Mobile>
         <VStack w="100%" spacing="2rem">
-          <Header />
+          <MobileHeader />
           <Divider />
           <main css={{ width: '100%' }}>
             <Outlet />
           </main>
         </VStack>
-        <TabBar />
+        <MobileNavBar />
       </Mobile>
     </>
   );

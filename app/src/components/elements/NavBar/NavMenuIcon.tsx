@@ -4,14 +4,14 @@ import {
   SettingsIconSvg,
   TotalIconSvg,
 } from '@/assets/icons';
-import { Menu } from '@/utils/types/Menu';
+import { NavMenu } from '@/utils/types/NavMenu';
 
-type MenuIconProps = {
-  menu: Menu;
+type NavMenuIconProps = {
+  menu: NavMenu;
   isFocused: boolean;
 };
 
-export const MenuIcon = ({ menu, isFocused }: MenuIconProps) => {
+export const NavMenuIcon = ({ menu, isFocused }: NavMenuIconProps) => {
   switch (menu) {
     case 'Home':
       return <HomeIconSvg isFocused={isFocused} />;

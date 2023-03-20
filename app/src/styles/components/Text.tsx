@@ -5,6 +5,6 @@ type TextProps = Partial<{
 }>;
 
 export const Text = styled.p<TextProps>`
-  font-size: ${({ theme, fontSize = theme.fonts.body }) => fontSize};
+  font-size: ${({ theme, fontSize = theme.fonts.size.body }) => fontSize};
   line-height: 1.5;
 `;

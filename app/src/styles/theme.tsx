@@ -30,11 +30,19 @@ const colors = {
 };
 
 const fonts = {
-  h1: '32px',
-  h2: '24px',
-  h3: '18px',
-  body: '14px',
-  caption: '12px',
+  size: {
+    h1: '3.2rem',
+    h2: '2.4rem',
+    h3: '1.8rem',
+    body: '1.4rem',
+    caption: '1.2rem',
+  },
+  weight: {
+    light: 300,
+    regular: 400,
+    medium: 500,
+    bold: 700,
+  },
 };
 
 export const theme = {

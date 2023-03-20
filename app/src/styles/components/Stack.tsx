@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 type StackProps = Partial<{
   w: string;
   h: string;
-  spacing: number;
+  spacing: string;
 }>;
 
 export const hstack = css`
@@ -15,7 +15,7 @@ export const hstack = css`
 
 export const HStack = styled.div<StackProps>`
   ${hstack}
-  gap: ${({ spacing = 0 }) => spacing}px;
+  gap: ${({ spacing = '0' }) => spacing};
   width: ${({ w = 'auto' }) => w};
   height: ${({ h = 'auto' }) => h};
 `;
@@ -29,7 +29,7 @@ export const vstack = css`
 
 export const VStack = styled.div<StackProps>`
   ${vstack}
-  gap: ${({ spacing = 0 }) => spacing}px;
+  gap: ${({ spacing = '0' }) => spacing};
   width: ${({ w = 'auto' }) => w};
   height: ${({ h = 'auto' }) => h};
 `;

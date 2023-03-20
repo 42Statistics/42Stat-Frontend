@@ -1,6 +1,6 @@
-import { css } from '@emotion/react';
+import { css, Theme } from '@emotion/react';
 
-export const global = css`
+export const global = (theme: Theme) => css`
   @font-face {
     font-family: 'Noto Sans KR';
     src: url('fonts/NotoSansKR-Light.otf');
@@ -25,6 +25,10 @@ export const global = css`
     font-weight: 700;
   }
 
+  html {
+    font-size: 62.5%; // 1rem = 10px
+  }
+
   html,
   body,
   #root {
@@ -35,6 +39,7 @@ export const global = css`
   body {
     font-family: 'Noto Sans KR', sans-serif;
     background-color: #e4e3ea; // FIXME: Global이라 theme 적용 방법을 모르겠다.
+    font-size: 1.4rem;
   }
 
   * {

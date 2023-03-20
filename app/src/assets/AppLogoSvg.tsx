@@ -1,8 +1,16 @@
-export const AppLogoSvg = () => {
+type AppLogoSvgSize = 'sm' | 'md';
+
+type AppLogoSvgProps = {
+  size?: AppLogoSvgSize;
+};
+
+export const AppLogoSvg = ({ size = 'md' }: AppLogoSvgProps) => {
+  const rate = size === 'sm' ? 0.6 : 0.75;
+
   return (
     <svg
-      width="210"
-      height="95"
+      width={280 * rate}
+      height={127 * rate}
       viewBox="0 0 280 127"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

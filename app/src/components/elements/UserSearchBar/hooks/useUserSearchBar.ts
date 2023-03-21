@@ -1,15 +1,15 @@
-import { useState, ChangeEvent } from 'react';
+import { ChangeEvent, useRef } from 'react';
 import { useDebouncedSearchUser } from './useDebouncedSearchUser';
 export const useUserSearchBar = () => {
   const { debouncedSearchUser } = useDebouncedSearchUser();
-  const [input, setInput] = useState<string>('');
+  const inputRef = useRef<string>('');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const { value } = e.target;
-    setInput(value);
+    inputRef.current = value;
     debouncedSearchUser(value);
   };
 
-  return { input, handleChange };
+  return { inputRef, handleChange };
 };

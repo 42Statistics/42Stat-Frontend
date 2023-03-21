@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
-import { UserSearchBar } from '../UserSearchBar';
+import { UserSearchBar } from '@/components/elements/UserSearchBar';
 
 export const DesktopHeader = () => {
   return (
     <DesktopHeaderLayout>
-      <UserSearchBar />
+      <UserSearchBar device="desktop" />
     </DesktopHeaderLayout>
   );
 };

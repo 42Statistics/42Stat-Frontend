@@ -7,12 +7,8 @@ export const DesktopDashboard = ({ children }: PropsWithChildren) => {
 
 const DesktopDashboardLayout = styled.div`
   display: flex;
+  width: 100%;
   flex-direction: column;
   gap: 2rem;
   padding: 4rem;
-
-  & > div {
-    row-gap: 2rem;
-    column-gap: 2rem;
-  }
 `;

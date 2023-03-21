@@ -2,11 +2,13 @@ import { SearchIconSvg } from '@/assets/icons';
 import { Input } from '@/components/elements/Input';
 import { useUserSearchBar } from './hooks/useUserSearchBar';
 import { css, Theme, useTheme } from '@emotion/react';
-import { getDevice } from '@/styles/responsive/getDevice';
 
-export const UserSearchBar = () => {
+type UserSearchBarProps = {
+  device: Device;
+};
+
+export const UserSearchBar = ({ device }: UserSearchBarProps) => {
   const { input, handleChange } = useUserSearchBar();
-  const device = getDevice();
   const theme = useTheme();
 
   return (

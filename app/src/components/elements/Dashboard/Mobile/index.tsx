@@ -7,12 +7,8 @@ export const MobileDashboard = ({ children }: PropsWithChildren) => {
 
 const MobileDashboardLayout = styled.div`
   display: flex;
+  width: 100%;
   flex-direction: column;
   gap: 1.5rem;
   padding: 2rem;
-
-  & > div {
-    row-gap: 1.5rem;
-    column-gap: 1.5rem;
-  }
 `;

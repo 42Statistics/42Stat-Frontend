@@ -2,28 +2,20 @@ import { center } from '@/styles/components';
 import styled from '@emotion/styled';
 import { ReactNode } from 'react';
 
-type DashboardItemSize = '1/8' | '1/4' | '1/3' | '2/3' | '3/3';
-
 type DashboardItemProps = {
-  size: DashboardItemSize;
+  row: number; // TODO: 더 엄밀한 Type 필요
   col: number;
-  row?: number;
+  rowSpan: number;
+  colSpan: number;
   children: ReactNode;
 };
 
 export const DashboardItem = ({
-  size,
-  col,
-  row = 1,
   children,
+  ...propsExceptChildren
 }: DashboardItemProps) => {
   return (
-    <DashboardItemLayout
-      col={col}
-      colSpan={size === '3/3' ? 3 : size === '2/3' ? 2 : 1}
-      row={row}
-      rowSpan={size === '1/8' ? 1 : 2}
-    >
+    <DashboardItemLayout {...propsExceptChildren}>
       {children}
     </DashboardItemLayout>
   );

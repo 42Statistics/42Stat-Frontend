@@ -6,10 +6,13 @@ import {
   DesktopDashboard,
   MobileDashboard,
 } from '@/components/elements/Dashboard';
-import { DashboardItem } from '@/components/elements/Dashboard/DashboardItem';
-import { DashboardRow } from '@/components/elements/Dashboard/DashboardRow';
+import { DashboardItem } from '@/components/elements/DashboardItem';
 import { vstack } from '@/styles/components';
 import { Helmet } from 'react-helmet-async';
+import {
+  DesktopDashboardRow,
+  MobileDashboardRow,
+} from '@/components/elements/DashboardRow';
 
 const GET_USER = gql(`
   query GetUser($id: Int!) {
@@ -20,6 +23,7 @@ const GET_USER = gql(`
   }
 `);
 
+// TODO: Mobile Page에는 Tabbar 때문에 아래 marginBottom 필요
 export const HomePage = () => {
   const { loading, error, data } = useQuery(GET_USER, {
     variables: {
@@ -48,44 +52,72 @@ export const HomePage = () => {
       </Helmet>
       <Desktop>
         <DesktopDashboard>
-          <DashboardRow row={2} col={4}>
-            <DashboardItem size="1/8" col={1} row={1}>
+          <DesktopDashboardRow row={2} col={4}>
+            <DashboardItem row={1} col={1} rowSpan={1} colSpan={1}>
               1/8
             </DashboardItem>
-            <DashboardItem size="1/8" col={1} row={2}>
+            <DashboardItem row={2} col={1} rowSpan={1} colSpan={1}>
               1/8
             </DashboardItem>
-            <DashboardItem size="1/4" col={2}>
-              1/4
+            <DashboardItem row={1} col={2} rowSpan={2} colSpan={1}>
+              2/8
             </DashboardItem>
-            <DashboardItem size="1/4" col={3}>
-              1/4
+            <DashboardItem row={1} col={3} rowSpan={2} colSpan={1}>
+              2/8
             </DashboardItem>
-            <DashboardItem size="1/4" col={4}>
-              1/4
+            <DashboardItem row={1} col={4} rowSpan={2} colSpan={1}>
+              2/8
             </DashboardItem>
-          </DashboardRow>
+          </DesktopDashboardRow>
+          <DesktopDashboardRow row={2} col={3}>
+            <DashboardItem row={1} col={1} rowSpan={2} colSpan={1}>
+              2/6
+            </DashboardItem>
+            <DashboardItem row={1} col={2} rowSpan={2} colSpan={1}>
+              2/6
+            </DashboardItem>
+            <DashboardItem row={1} col={3} rowSpan={2} colSpan={1}>
+              2/6
+            </DashboardItem>
+          </DesktopDashboardRow>
         </DesktopDashboard>
       </Desktop>
       <Mobile>
         <MobileDashboard>
-          <DashboardRow row={2} col={4}>
-            <DashboardItem size="1/8" col={1} row={1}>
-              1/8
-            </DashboardItem>
-            <DashboardItem size="1/8" col={1} row={2}>
-              1/8
-            </DashboardItem>
-            <DashboardItem size="1/4" col={2}>
+          <MobileDashboardRow row={1} col={2}>
+            <DashboardItem row={1} col={1} rowSpan={1} colSpan={1}>
               1/4
             </DashboardItem>
-            <DashboardItem size="1/4" col={3}>
+            <DashboardItem row={1} col={2} rowSpan={1} colSpan={1}>
               1/4
             </DashboardItem>
-            <DashboardItem size="1/4" col={4}>
-              1/4
+          </MobileDashboardRow>
+          <MobileDashboardRow row={2} col={2}>
+            <DashboardItem row={1} col={1} rowSpan={2} colSpan={1}>
+              2/4
             </DashboardItem>
-          </DashboardRow>
+            <DashboardItem row={1} col={2} rowSpan={2} colSpan={1}>
+              2/4
+            </DashboardItem>
+          </MobileDashboardRow>
+          <MobileDashboardRow row={2} col={2}>
+            <DashboardItem row={1} col={1} rowSpan={2} colSpan={1}>
+              2/4
+            </DashboardItem>
+            <DashboardItem row={1} col={2} rowSpan={2} colSpan={1}>
+              2/4
+            </DashboardItem>
+          </MobileDashboardRow>
+          <MobileDashboardRow row={2} col={2}>
+            <DashboardItem row={1} col={1} rowSpan={2} colSpan={1}>
+              2/4
+            </DashboardItem>
+          </MobileDashboardRow>
+          <MobileDashboardRow row={1} col={1}>
+            <DashboardItem row={1} col={1} rowSpan={1} colSpan={1}>
+              1/1
+            </DashboardItem>
+          </MobileDashboardRow>
         </MobileDashboard>
       </Mobile>
     </HomePageLayout>

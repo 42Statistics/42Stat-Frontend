@@ -13,9 +13,9 @@ import {
   DesktopDashboardRow,
   MobileDashboardRow,
 } from '@/components/elements/DashboardRow';
-import LineTestChart from '@/components/elements/charts/LineTestChart';
-import BarTestChart from '@/components/elements/charts/BarTestChart';
-import PieTestChart from '@/components/elements/charts/PieTestChart';
+import { LineTestChart } from '@/components/elements/charts/LineTestChart';
+import { BarTestChart } from '@/components/elements/charts/BarTestChart';
+import { PieTestChart } from '@/components/elements/charts/PieTestChart';
 
 const GET_USER = gql(`
   query GetUser($id: Int!) {

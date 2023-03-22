@@ -1,12 +1,20 @@
 import ReactApexChart from 'react-apexcharts';
 
-type BarChartProps = {
-  data: number[];
-  labels: string[];
-  size: 'sm' | 'lg' | 'long';
-};
-
-const BarChart = ({ data, labels, size = 'sm' }: BarChartProps) => {
+export const BarChart = ({ data, labels, size }: ChartProps) => {
+  let chartWidth, chartHeight;
+  switch (size) {
+    case 'sm':
+      chartWidth = '300';
+      chartHeight = '250';
+      break;
+    case 'long':
+      chartWidth = '1200';
+      chartHeight = '350';
+      break;
+    default:
+      chartWidth = '400';
+      chartHeight = '350';
+  }
   const options: ApexCharts.ApexOptions = {
     // theme: {
     //   mode: "dark",
@@ -52,12 +60,10 @@ const BarChart = ({ data, labels, size = 'sm' }: BarChartProps) => {
   return (
     <ReactApexChart
       options={options}
-      height={size === 'sm' ? '250' : '350'}
-      width={size === 'sm' ? '300' : size === 'long' ? '1200' : '400'}
+      height={chartHeight}
+      width={chartWidth}
       series={series}
       type="bar"
     />
   );
 };
-
-export default BarChart;

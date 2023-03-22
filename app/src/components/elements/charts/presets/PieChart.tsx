@@ -1,12 +1,17 @@
 import ReactApexChart from 'react-apexcharts';
 
-type PieChartProps = {
-  data: number[];
-  labels: string[];
-  size: 'sm' | 'lg';
-};
-
-const PieChart = ({ data, labels, size = 'sm' }: PieChartProps) => {
+export const PieChart = ({ data, labels, size }: ChartProps) => {
+  let chartWidth, chartHeight;
+  switch (size) {
+    case 'sm':
+      chartWidth = '300';
+      chartHeight = '280';
+      break;
+    default:
+      chartWidth = '400';
+      chartHeight = '370';
+      break;
+  }
   const options: ApexCharts.ApexOptions = {
     chart: {
       type: 'pie',
@@ -35,10 +40,9 @@ const PieChart = ({ data, labels, size = 'sm' }: PieChartProps) => {
     <ReactApexChart
       options={options}
       series={data}
-      height={size === 'sm' ? '280' : '370'}
-      width={size === 'sm' ? '300' : '400'}
+      height={chartHeight}
+      width={chartWidth}
       type="pie"
     />
   );
 };
-export default PieChart;

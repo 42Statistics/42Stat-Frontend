@@ -1,12 +1,20 @@
 import ReactApexChart from 'react-apexcharts';
 
-type LineChartProps = {
-  data: number[];
-  labels: string[];
-  size: 'sm' | 'lg' | 'long';
-};
-// const TestChart = () => {
-const LineChart = ({ data, labels, size = 'sm' }: LineChartProps) => {
+export const LineChart = ({ data, labels, size }: ChartProps) => {
+  let chartWidth, chartHeight;
+  switch (size) {
+    case 'sm':
+      chartWidth = '300';
+      chartHeight = '250';
+      break;
+    case 'long':
+      chartWidth = '1200';
+      chartHeight = '350';
+      break;
+    default:
+      chartWidth = '400';
+      chartHeight = '350';
+  }
   const options: ApexCharts.ApexOptions = {
     // theme: {
     //   mode: "dark",
@@ -56,11 +64,9 @@ const LineChart = ({ data, labels, size = 'sm' }: LineChartProps) => {
     <ReactApexChart
       options={options}
       series={series}
-      height={size === 'sm' ? '250' : '350'}
-      width={size === 'sm' ? '300' : size === 'long' ? '1200' : '400'}
+      height={chartHeight}
+      width={chartWidth}
       type="line"
     />
   );
 };
-
-export default LineChart;

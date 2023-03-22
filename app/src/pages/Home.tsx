@@ -63,24 +63,24 @@ export const HomePage = () => {
               1/8
             </DashboardItem>
             <DashboardItem row={1} col={2} rowSpan={2} colSpan={1}>
-              <LineTestChart size={'250rem'} />
+              <LineTestChart size={'sm'} />
             </DashboardItem>
             <DashboardItem row={1} col={3} rowSpan={2} colSpan={1}>
-              <BarTestChart size={'250rem'} />
+              <BarTestChart size={'sm'} />
             </DashboardItem>
             <DashboardItem row={1} col={4} rowSpan={2} colSpan={1}>
-              <PieTestChart size={'250rem'} />
+              <PieTestChart size={'sm'} />
             </DashboardItem>
           </DesktopDashboardRow>
           <DesktopDashboardRow row={2} col={3}>
             <DashboardItem row={1} col={1} rowSpan={2} colSpan={1}>
-              2/6
+              <PieTestChart size={'lg'} />
             </DashboardItem>
             <DashboardItem row={1} col={2} rowSpan={2} colSpan={1}>
-              2/6
+              <LineTestChart size={'lg'} />
             </DashboardItem>
             <DashboardItem row={1} col={3} rowSpan={2} colSpan={1}>
-              2/6
+              <BarTestChart size={'lg'} />
             </DashboardItem>
           </DesktopDashboardRow>
         </DesktopDashboard>

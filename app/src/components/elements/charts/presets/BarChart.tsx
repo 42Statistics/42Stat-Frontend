@@ -3,17 +3,16 @@ import ReactApexChart from 'react-apexcharts';
 type BarChartProps = {
   data: number[];
   labels: string[];
-  height: string | number | undefined;
+  size: 'sm' | 'lg' | 'long';
 };
 
-const BarChart = ({ data, labels, height }: BarChartProps) => {
+const BarChart = ({ data, labels, size = 'sm' }: BarChartProps) => {
   const options: ApexCharts.ApexOptions = {
     // theme: {
     //   mode: "dark",
     // },
     chart: {
       type: 'bar',
-      height: `${height}`,
     },
     xaxis: {
       categories: labels,
@@ -30,10 +29,10 @@ const BarChart = ({ data, labels, height }: BarChartProps) => {
          * 480 픽셀 미만일때 반응형으로 하는옵션
          * 넓이를 200으로 조정하고 범례의 위치를 bottom으로 조정한다
          * */
-        breakpoint: 480,
+        breakpoint: 3000,
         options: {
           chart: {
-            width: 200,
+            // width: 200,
           },
           legend: {
             position: 'bottom',
@@ -53,9 +52,10 @@ const BarChart = ({ data, labels, height }: BarChartProps) => {
   return (
     <ReactApexChart
       options={options}
+      height={size === 'sm' ? '250' : '350'}
+      width={size === 'sm' ? '300' : size === 'long' ? '1200' : '400'}
       series={series}
       type="bar"
-      height={`${height}`}
     />
   );
 };

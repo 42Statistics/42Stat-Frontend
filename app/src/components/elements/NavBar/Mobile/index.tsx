@@ -1,12 +1,12 @@
 import { HStack } from '@/styles/components';
 import styled from '@emotion/styled';
 import { useLocation } from 'react-router-dom';
-import { useNavBar } from '../hooks/useNavBar';
+import { useNavMenu } from '../hooks/useNavMenu';
 import { MobileNavItem } from './MobileNavItem';
 
 // TODO: User Profile 맨 오른쪽에 추가
 export const MobileNavBar = () => {
-  const { options } = useNavBar();
+  const { options } = useNavMenu();
   const location = useLocation();
 
   return (

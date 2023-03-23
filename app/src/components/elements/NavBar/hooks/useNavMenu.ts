@@ -1,6 +1,6 @@
 import { NavMenuOption } from '@/utils/types/NavMenu';
 
-export const useNavBar = () => {
+export const useNavMenu = () => {
   const options: NavMenuOption[] = [
     { menu: 'Home', text: '홈', path: '/home' },
     { menu: 'Total', text: '전체', path: '/total', trailingSpacer: true },

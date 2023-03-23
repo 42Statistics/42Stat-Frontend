@@ -1,4 +1,4 @@
-import { Logo } from '@/components/elements/Logo';
+import { AppLogoTitleButton } from '@/components/elements/AppLogoTitleButton';
 import { DesktopNavMenu } from './DesktopNavMenu';
 import { VStack } from '@/styles/components';
 import styled from '@emotion/styled';
@@ -21,7 +21,7 @@ export const DesktopNavBar = ({ device }: DesktopNavBarProps) => {
       <VStack h="100%" spacing="6rem">
         {isOpen ? (
           <>
-            <Logo />
+            <AppLogoTitleButton />
             <p>박용준</p>
             <DesktopNavMenu />
           </>

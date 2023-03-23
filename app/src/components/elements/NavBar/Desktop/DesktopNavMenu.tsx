@@ -1,12 +1,12 @@
 import { DesktopNavItem } from './DesktopNavItem';
 import { useLocation } from 'react-router-dom';
 import { Spacer, VStack } from '@/styles/components';
-import { useNavBar } from '../hooks/useNavBar';
+import { useNavMenu } from '../hooks/useNavMenu';
 import { Fragment } from 'react';
 
 // TODO: SidebarMenu와 TabBar의 로직 유사하므로 통합 필요
 export const DesktopNavMenu = () => {
-  const { options } = useNavBar();
+  const { options } = useNavMenu();
   const location = useLocation();
 
   return (

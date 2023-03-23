@@ -9,7 +9,7 @@ export const DesktopHeader = () => {
   );
 };
 
-const DesktopHeaderLayout = styled.div`
+const DesktopHeaderLayout = styled.header`
   width: 100%;
   padding: 2.5rem 5rem;
   background-color: ${({ theme }) => theme.colors.mono.white};

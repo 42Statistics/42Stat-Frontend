@@ -1,16 +1,16 @@
 import { NavMenuOption } from '@/utils/types/NavMenu';
 import styled from '@emotion/styled';
 import { MouseEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { NavMenuIcon } from '../NavMenuIcon';
 
 type MobileNavItemProps = {
   option: NavMenuOption;
-  location: Location;
 };
 
-export const MobileNavItem = ({ option, location }: MobileNavItemProps) => {
+export const MobileNavItem = ({ option }: MobileNavItemProps) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const isFocused = location.pathname === option.path;
 
   const handleClick = (e: MouseEvent<HTMLElement>) => {

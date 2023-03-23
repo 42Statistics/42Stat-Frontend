@@ -1,4 +1,4 @@
-import { AppLogoSvg } from '@/assets/AppLogoSvg';
+import { AppLogoTitle } from '@/assets/AppLogoTitle';
 import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,7 +11,7 @@ export const Logo = () => {
 
   return (
     <LogoLayout onClick={handleClick}>
-      <AppLogoSvg size="sm" />
+      <AppLogoTitle size="sm" />
     </LogoLayout>
   );
 };

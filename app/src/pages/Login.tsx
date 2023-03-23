@@ -1,4 +1,4 @@
-import { AppLogoSvg } from '@/assets/AppLogoSvg';
+import { AppLogoTitle } from '@/assets/AppLogoTitle';
 import { AppIntroText } from '@/components/elements/Login/AppIntroText';
 import { Divider, HStack, VStack } from '@/styles/components';
 import { Desktop, Mobile } from '@/styles/responsive';
@@ -15,7 +15,7 @@ export const LoginPage = () => {
       <Desktop>
         <HStack h="40rem" spacing="5vw">
           <VStack w="25rem" spacing="5rem">
-            <AppLogoSvg />
+            <AppLogoTitle size="md" />
             <AppIntroText />
           </VStack>
           <Divider orientation="vertical" />
@@ -32,7 +32,7 @@ export const LoginPage = () => {
       <Mobile>
         <VStack w="25rem" spacing="6rem">
           <VStack spacing="2rem">
-            <AppLogoSvg />
+            <AppLogoTitle size="md" />
             <AppIntroText />
           </VStack>
           <Divider />

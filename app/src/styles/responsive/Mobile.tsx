@@ -1,8 +1,10 @@
 import { PropsWithChildren } from 'react';
-import { getDevice } from './getDevice';
+import { useMediaQuery } from 'react-responsive';
+
+export const useIsMobile = () => useMediaQuery({ maxWidth: 767 });
 
 export const Mobile = ({ children }: PropsWithChildren) => {
-  const isMobile = getDevice() === 'mobile';
+  const isMobile = useIsMobile();
 
   return <>{isMobile ? children : null}</>;
 };

@@ -1,8 +1,10 @@
 import { PropsWithChildren } from 'react';
-import { getDevice } from './getDevice';
+import { useMediaQuery } from 'react-responsive';
+
+export const useIsDesktop = () => useMediaQuery({ minWidth: 1280 });
 
 export const Desktop = ({ children }: PropsWithChildren) => {
-  const isDesktop = getDevice() === 'desktop';
+  const isDesktop = useIsDesktop();
 
   return <>{isDesktop ? children : null}</>;
 };

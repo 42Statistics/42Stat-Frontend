@@ -1,7 +1,7 @@
 import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import styled from '@emotion/styled';
-import { Desktop, Mobile } from '@/styles/responsive';
+import { AboveTablet, Mobile } from '@/styles/responsive';
 import {
   DesktopDashboard,
   MobileDashboard,
@@ -50,7 +50,7 @@ export const HomePage = () => {
       <Helmet>
         <title>42Stat</title>
       </Helmet>
-      <Desktop>
+      <AboveTablet>
         <DesktopDashboard>
           <DesktopDashboardRow row={2} col={4}>
             <DashboardItem row={1} col={1} rowSpan={1} colSpan={1}>
@@ -81,7 +81,7 @@ export const HomePage = () => {
             </DashboardItem>
           </DesktopDashboardRow>
         </DesktopDashboard>
-      </Desktop>
+      </AboveTablet>
       <Mobile>
         <MobileDashboard>
           <MobileDashboardRow row={1} col={2}>

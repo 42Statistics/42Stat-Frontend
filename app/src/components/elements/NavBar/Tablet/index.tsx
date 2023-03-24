@@ -1,11 +1,10 @@
 import { AppLogoTitleButton } from '@/components/elements/AppLogoTitleButton';
 import { DesktopNavMenu } from '../Desktop/DesktopNavMenu';
-import { HStack, VStack } from '@/styles/components';
+import { VStack } from '@/styles/components';
 import styled from '@emotion/styled';
 import { useSessionStore } from '@/utils/stores/useSessionStore';
 import { useEffect } from 'react';
-import { Button } from '../../Button';
-import { GrClose } from 'react-icons/gr';
+import { Overlay } from '@/components/elements/Overlay';
 
 export const TabletNavBar = () => {
   const { isNavBarOpen, setIsNavBarOpen, toggleIsNavBarOpen } =
@@ -15,15 +14,10 @@ export const TabletNavBar = () => {
 
   return (
     <>
+      {isNavBarOpen && <Overlay onClick={toggleIsNavBarOpen} />}
       <TabletNavBarLayout isOpen={isNavBarOpen}>
         <VStack h="100%" spacing="6rem">
-          <HStack w="100%" spacing="2rem">
-            <AppLogoTitleButton />
-            <Button
-              onClick={toggleIsNavBarOpen}
-              element={<GrClose size="1.4rem" />}
-            />
-          </HStack>
+          <AppLogoTitleButton />
           <p>박용준</p>
           <DesktopNavMenu />
         </VStack>
@@ -47,4 +41,5 @@ const TabletNavBarLayout = styled.nav<TabletNavBarLayoutProps>`
   border-right: 0.1rem solid ${({ theme }) => theme.colors.mono.gray.light};
   transform: ${({ isOpen }) => !isOpen && 'translateX(-100%)'};
   transition: all 0.3s;
+  z-index: 3;
 `;

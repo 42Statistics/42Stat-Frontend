@@ -63,24 +63,24 @@ export const HomePage = () => {
               1/8
             </DashboardItem>
             <DashboardItem row={1} col={2} rowSpan={2} colSpan={1}>
-              <LineTestChart size={'sm'} />
+              {/* <LineTestChart size={'sm'} /> */}
             </DashboardItem>
             <DashboardItem row={1} col={3} rowSpan={2} colSpan={1}>
-              <BarTestChart size={'sm'} />
+              {/* <BarTestChart size={'sm'} /> */}
             </DashboardItem>
             <DashboardItem row={1} col={4} rowSpan={2} colSpan={1}>
-              <PieTestChart size={'sm'} />
+              {/* <PieTestChart size={'sm'} /> */}
             </DashboardItem>
           </DesktopDashboardRow>
           <DesktopDashboardRow row={2} col={3}>
             <DashboardItem row={1} col={1} rowSpan={2} colSpan={1}>
-              <PieTestChart size={'lg'} />
+              {/* <PieTestChart size={'lg'} /> */}
             </DashboardItem>
             <DashboardItem row={1} col={2} rowSpan={2} colSpan={1}>
-              <LineTestChart size={'lg'} />
+              {/* <LineTestChart size={'lg'} /> */}
             </DashboardItem>
             <DashboardItem row={1} col={3} rowSpan={2} colSpan={1}>
-              <BarTestChart size={'lg'} />
+              {/* <BarTestChart size={'lg'} /> */}
             </DashboardItem>
           </DesktopDashboardRow>
         </DesktopDashboard>
@@ -127,6 +127,8 @@ export const HomePage = () => {
   );
 };
 
-const HomePageLayout = styled.div`
+const HomePageLayout = styled.main`
+  width: 100%;
+  height: 100%;
   ${vstack}
 `;

@@ -5,7 +5,7 @@ type AppLogoSvgProps = {
 };
 
 export const AppLogoSvg = ({ size }: AppLogoSvgProps) => {
-  const rate = size === 'sm' ? 0.7 : 0.8;
+  const rate = size === 'sm' ? 0.6 : 0.8;
   return (
     <svg
       width={39 * rate}

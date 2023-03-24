@@ -21,7 +21,7 @@ const DesktopNavBarLayout = styled.nav`
   position: fixed;
   top: 0;
   left: 0;
-  width: 26rem;
+  width: 24rem;
   height: 100%;
   padding: 3rem;
   background-color: ${({ theme }) => theme.colors.mono.white};

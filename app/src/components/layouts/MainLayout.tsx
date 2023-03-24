@@ -11,7 +11,7 @@ export const MainLayout = () => {
       <Desktop>
         <HStack>
           <DesktopNavBar />
-          <VStack w="100%" h="100%" css={{ marginLeft: '26rem' }}>
+          <VStack w="100%" h="100%" css={{ marginLeft: '24rem' }}>
             <DesktopHeader />
             <Outlet />
           </VStack>

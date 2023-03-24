@@ -5,7 +5,7 @@ type AppTitleSvgProps = {
 };
 
 export const AppTitleSvg = ({ size }: AppTitleSvgProps) => {
-  const rate = size === 'sm' ? 0.85 : 1;
+  const rate = size === 'sm' ? 0.75 : 1;
   return (
     <svg
       width={135 * rate}

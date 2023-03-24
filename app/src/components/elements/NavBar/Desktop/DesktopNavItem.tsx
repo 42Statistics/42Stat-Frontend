@@ -24,7 +24,7 @@ export const DesktopNavItem = ({ option }: DesktopNavItemProps) => {
   return (
     <DesktopNavItemLayout onClick={handleClick} isFocused={isFocused}>
       <NavMenuIcon menu={option.menu} isFocused={isFocused} />
-      <Text fontSize={theme.fonts.size.h3}>{option.text}</Text>
+      <Text>{option.text}</Text>
     </DesktopNavItemLayout>
   );
 };

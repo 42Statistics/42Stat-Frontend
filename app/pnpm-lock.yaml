@@ -34,6 +34,7 @@ specifiers:
   react-apexcharts: ^1.4.0
   react-dom: ^18.2.0
   react-helmet-async: ^1.3.0
+  react-icons: ^4.8.0
   react-responsive: ^9.0.2
   react-router-dom: ^6.8.2
   typescript: ^4.9.3
@@ -55,6 +56,7 @@ dependencies:
   react-apexcharts: 1.4.0_cbhe6kbz4fn4qz2xv4h7x6rhii
   react-dom: 18.2.0_react@18.2.0
   react-helmet-async: 1.3.0_biqbaboplfbrettd7655fr4n2y
+  react-icons: 4.8.0_react@18.2.0
   react-responsive: 9.0.2_react@18.2.0
   react-router-dom: 6.8.2_biqbaboplfbrettd7655fr4n2y
   zustand: 4.3.6_react@18.2.0
@@ -4326,6 +4328,14 @@ packages:
       react-dom: 18.2.0_react@18.2.0
       react-fast-compare: 3.2.0
       shallowequal: 1.1.0
+    dev: false
+
+  /react-icons/4.8.0_react@18.2.0:
+    resolution: {integrity: sha512-N6+kOLcihDiAnj5Czu637waJqSnwlMNROzVZMhfX68V/9bu9qHaMIJC4UdozWoOk57gahFCNHwVvWzm0MTzRjg==}
+    peerDependencies:
+      react: '*'
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-is/16.13.1:

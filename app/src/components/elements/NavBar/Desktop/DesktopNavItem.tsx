@@ -37,6 +37,7 @@ const DesktopNavItemLayout = styled.li<DesktopNavItemLayoutProps>`
   display: flex;
   width: 100%;
   gap: 1.5rem;
+  align-items: center;
   cursor: pointer;
   background-color: ${({ theme, isFocused }) =>
     isFocused ? theme.colors.primary.light : 'inherit'};

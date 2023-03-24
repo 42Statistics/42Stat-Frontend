@@ -49,7 +49,7 @@ export const HomePage = () => {
   // console.log(data);
 
   return (
-    <HomePageLayout>
+    <>
       <Helmet>
         <title>42Stat</title>
       </Helmet>
@@ -123,12 +123,6 @@ export const HomePage = () => {
           </MobileDashboardRow>
         </MobileDashboard>
       </Mobile>
-    </HomePageLayout>
+    </>
   );
 };
-
-const HomePageLayout = styled.main`
-  width: 100%;
-  height: 100%;
-  ${vstack}
-`;

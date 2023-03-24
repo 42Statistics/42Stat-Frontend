@@ -1,14 +1,15 @@
-import { SearchIconSvg } from '@/assets/icons';
 import { Input } from '@/components/elements/Input';
 import { useUserSearchBar } from './hooks/useUserSearchBar';
 import { css, Theme, useTheme } from '@emotion/react';
+import { Device } from '@/utils/types/Device';
+import { MdSearch } from 'react-icons/md';
 
 type UserSearchBarProps = {
   device: Device;
 };
 
 export const UserSearchBar = ({ device }: UserSearchBarProps) => {
-  const { input, handleChange } = useUserSearchBar();
+  const { handleChange } = useUserSearchBar();
   const theme = useTheme();
 
   return (
@@ -19,12 +20,8 @@ export const UserSearchBar = ({ device }: UserSearchBarProps) => {
           : MobileUserSearchBarStyle(theme)
       }
     >
-      <SearchIconSvg />
-      <Input
-        onChange={handleChange}
-        value={input}
-        placeholder="유저명을 입력해주세요"
-      />
+      <MdSearch size="2.4rem" />
+      <Input onChange={handleChange} placeholder="유저명을 입력해주세요" />
     </div>
   );
 };

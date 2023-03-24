@@ -1,10 +1,7 @@
-import {
-  HelpIconSvg,
-  HomeIconSvg,
-  SettingsIconSvg,
-  TotalIconSvg,
-} from '@/assets/icons';
 import { NavMenu } from '@/utils/types/NavMenu';
+import { useTheme } from '@emotion/react';
+import { MdHome, MdHelp, MdSettings } from 'react-icons/md';
+import { RiGlobalFill } from 'react-icons/ri';
 
 type NavMenuIconProps = {
   menu: NavMenu;
@@ -12,16 +9,21 @@ type NavMenuIconProps = {
 };
 
 export const NavMenuIcon = ({ menu, isFocused }: NavMenuIconProps) => {
+  const theme = useTheme();
+  const color = isFocused
+    ? theme.colors.primary.default
+    : theme.colors.mono.black;
+
   switch (menu) {
     case 'Home':
-      return <HomeIconSvg isFocused={isFocused} />;
+      return <MdHome size="2.4rem" fill={color} />;
     case 'Total':
-      return <TotalIconSvg isFocused={isFocused} />;
+      return <RiGlobalFill size="2.4rem" fill={color} />;
     case 'About':
-      return <HelpIconSvg isFocused={isFocused} />;
+      return <MdHelp size="2.4rem" fill={color} />;
     case 'Settings':
-      return <SettingsIconSvg isFocused={isFocused} />;
+      return <MdSettings size="2.4rem" fill={color} />;
     default:
-      throw new Error('💥 Wrong Men');
+      throw new Error('💥 Wrong Menu');
   }
 };

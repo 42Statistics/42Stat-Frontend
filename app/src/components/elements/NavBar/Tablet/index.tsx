@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import { useSessionStore } from '@/utils/stores/useSessionStore';
 import { useEffect } from 'react';
 import { Button } from '../../Button';
-import { CloseIconSvg } from '@/assets/icons/CloseIconSvg';
+import { GrClose } from 'react-icons/gr';
 
 export const TabletNavBar = () => {
   const { isNavBarOpen, setIsNavBarOpen, toggleIsNavBarOpen } =
@@ -19,7 +19,10 @@ export const TabletNavBar = () => {
         <VStack h="100%" spacing="6rem">
           <HStack w="100%" spacing="2rem">
             <AppLogoTitleButton />
-            <Button onClick={toggleIsNavBarOpen} element={<CloseIconSvg />} />
+            <Button
+              onClick={toggleIsNavBarOpen}
+              element={<GrClose size="1.4rem" />}
+            />
           </HStack>
           <p>박용준</p>
           <DesktopNavMenu />

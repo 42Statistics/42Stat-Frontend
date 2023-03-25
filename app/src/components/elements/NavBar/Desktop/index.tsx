@@ -4,12 +4,12 @@ import { VStack, Button } from '@/components/common';
 import styled from '@emotion/styled';
 import { NavProfile } from '@/components/elements/NavProfile';
 import { userAtom } from '@/utils/atoms/userAtom';
-import { useAtom } from 'jotai';
+import { useAtomValue } from 'jotai';
 import { useNavigate } from 'react-router-dom';
 import { MouseEvent } from 'react';
 
 export const DesktopNavBar = () => {
-  const [user] = useAtom(userAtom);
+  const user = useAtomValue(userAtom);
 
   const navigate = useNavigate();
 

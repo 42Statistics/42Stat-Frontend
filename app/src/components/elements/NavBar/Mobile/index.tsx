@@ -3,12 +3,11 @@ import { userAtom } from '@/utils/atoms/userAtom';
 import styled from '@emotion/styled';
 import { useNavMenu } from '../hooks/useNavMenu';
 import { MobileNavItem } from './MobileNavItem';
-import { useAtom } from 'jotai';
+import { useAtomValue } from 'jotai';
 
-// TODO: User Profile 맨 오른쪽에 추가
 export const MobileNavBar = () => {
   const { options } = useNavMenu();
-  const [user] = useAtom(userAtom);
+  const user = useAtomValue(userAtom);
 
   return (
     <MobileNavBarLayout>

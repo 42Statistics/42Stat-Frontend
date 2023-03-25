@@ -1,4 +1,4 @@
-import { Text } from '@/styles/components';
+import { Text } from '@/components/common';
 import { NavMenuOption } from '@/utils/types/NavMenu';
 import styled from '@emotion/styled';
 import { MouseEvent } from 'react';

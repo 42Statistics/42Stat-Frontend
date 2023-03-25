@@ -1,4 +1,4 @@
-import { HStack } from '@/styles/components';
+import { HStack } from '@/components/common';
 import { AppLogoSize } from '@/utils/types/AppLogoSize';
 import { AppLogoSvg } from './AppLogoSvg';
 import { AppTitleSvg } from './AppTitleSvg';

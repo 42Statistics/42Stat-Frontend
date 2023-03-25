@@ -1,13 +1,12 @@
 import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import styled from '@emotion/styled';
-import { AboveTablet, Mobile } from '@/styles/responsive';
+import { AboveTablet, Mobile } from '@/utils/responsive';
 import {
   DesktopDashboard,
   MobileDashboard,
 } from '@/components/elements/Dashboard';
 import { DashboardItem } from '@/components/elements/DashboardItem';
-import { vstack } from '@/styles/components';
 import { Helmet } from 'react-helmet-async';
 import {
   DesktopDashboardRow,

@@ -1,6 +1,5 @@
 import { Text } from '@/styles/components';
 import { NavMenuOption } from '@/utils/types/NavMenu';
-import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { MouseEvent } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -14,7 +13,6 @@ export const DesktopNavItem = ({ option }: DesktopNavItemProps) => {
   const navigate = useNavigate();
   const location = useLocation();
   const isFocused = location.pathname === option.path;
-  const theme = useTheme();
 
   const handleClick = (e: MouseEvent<HTMLElement>) => {
     e.preventDefault();

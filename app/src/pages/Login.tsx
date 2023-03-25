@@ -1,7 +1,7 @@
 import { AppLogoTitle } from '@/components/elements/AppLogoTitle';
 import { AppIntroText } from '@/components/elements/Login/AppIntroText';
 import { Divider, HStack, VStack } from '@/components/common';
-import { Desktop, Mobile } from '@/utils/responsive';
+import { AboveTablet, Mobile } from '@/utils/responsive';
 import styled from '@emotion/styled';
 import { GoogleLogin } from '@react-oauth/google';
 import { Helmet } from 'react-helmet-async';
@@ -12,7 +12,7 @@ export const LoginPage = () => {
       <Helmet>
         <title>42Stat</title>
       </Helmet>
-      <Desktop>
+      <AboveTablet>
         <HStack h="40rem" spacing="5vw">
           <VStack w="25rem" spacing="5rem">
             <AppLogoTitle size="md" />
@@ -28,7 +28,7 @@ export const LoginPage = () => {
             }}
           />
         </HStack>
-      </Desktop>
+      </AboveTablet>
       <Mobile>
         <VStack w="25rem" spacing="6rem">
           <VStack spacing="2rem">

@@ -9,7 +9,6 @@ specifiers:
   '@graphql-codegen/cli': ^3.2.2
   '@graphql-codegen/client-preset': ^2.1.1
   '@react-oauth/google': ^0.8.0
-  '@types/facepaint': ^1.2.2
   '@types/lodash': ^4.14.191
   '@types/node': ^18.14.6
   '@types/react': ^18.0.28
@@ -27,6 +26,7 @@ specifiers:
   eslint-plugin-react: ^7.32.2
   eslint-plugin-react-hooks: ^4.6.0
   graphql: ^16.6.0
+  jotai: ^2.0.3
   lodash: ^4.17.21
   path: ^0.12.7
   prettier: ^2.8.4
@@ -39,7 +39,6 @@ specifiers:
   react-router-dom: ^6.8.2
   typescript: ^4.9.3
   vite: ^4.1.0
-  zustand: ^4.3.6
 
 dependencies:
   '@apollo/client': 3.7.10_gdcq4dv6opitr3wbfwyjmanyra
@@ -50,6 +49,7 @@ dependencies:
   '@vitejs/plugin-basic-ssl': 1.0.1_vite@4.1.4
   apexcharts: 3.37.2
   graphql: 16.6.0
+  jotai: 2.0.3_react@18.2.0
   lodash: 4.17.21
   path: 0.12.7
   react: 18.2.0
@@ -59,13 +59,11 @@ dependencies:
   react-icons: 4.8.0_react@18.2.0
   react-responsive: 9.0.2_react@18.2.0
   react-router-dom: 6.8.2_biqbaboplfbrettd7655fr4n2y
-  zustand: 4.3.6_react@18.2.0
 
 devDependencies:
   '@babel/core': 7.21.0
   '@graphql-codegen/cli': 3.2.2_7snnvcuvbzbbhqx6yjmrqby35a
   '@graphql-codegen/client-preset': 2.1.1_graphql@16.6.0
-  '@types/facepaint': 1.2.2
   '@types/lodash': 4.14.191
   '@types/node': 18.15.0
   '@types/react': 18.0.28
@@ -1787,10 +1785,6 @@ packages:
   /@tootallnate/once/2.0.0:
     resolution: {integrity: sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==}
     engines: {node: '>= 10'}
-    dev: true
-
-  /@types/facepaint/1.2.2:
-    resolution: {integrity: sha512-Xl9tAINsQL1s0TdXG5IiG75kZrxem5esbnKJF5gQgFel92OdS5zLtFYnbBw6fBruCMPYJQ9mK5pVmSsMl3Puug==}
     dev: true
 
   /@types/js-yaml/4.0.5:
@@ -3671,6 +3665,18 @@ packages:
     resolution: {integrity: sha512-MSJQC5vXco5Br38mzaQKiq9mwt7lwj2eXpgpRyQYNHYt2lq1PjkWa7DLXX0WVcQLE9HhMh3jPiufS7fhJf+CLQ==}
     dev: true
 
+  /jotai/2.0.3_react@18.2.0:
+    resolution: {integrity: sha512-MMjhSPAL3RoeZD9WbObufRT2quThEAEknHHridf2ma8Ml7ZVQmUiHk0ssdbR3F0h3kcwhYqSGJ59OjhPge7RRg==}
+    engines: {node: '>=12.20.0'}
+    peerDependencies:
+      react: '>=17.0.0'
+    peerDependenciesMeta:
+      react:
+        optional: true
+    dependencies:
+      react: 18.2.0
+    dev: false
+
   /js-sdsl/4.3.0:
     resolution: {integrity: sha512-mifzlm2+5nZ+lEcLJMoBK0/IH/bDg8XnJfd/Wq6IP+xoCjLZsTOnV2QpxlVbX9bMnkl5PdEjNtBJ9Cj1NjifhQ==}
     dev: true
@@ -4971,14 +4977,6 @@ packages:
       braces: 3.0.2
     dev: true
 
-  /use-sync-external-store/1.2.0_react@18.2.0:
-    resolution: {integrity: sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-    dependencies:
-      react: 18.2.0
-    dev: false
-
   /util-deprecate/1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
     dev: true
@@ -5218,20 +5216,4 @@ packages:
 
   /zen-observable/0.8.15:
     resolution: {integrity: sha512-PQ2PC7R9rslx84ndNBZB/Dkv8V8fZEpk83RLgXtYd0fwUgEjseMn1Dgajh2x6S8QbZAFa9p2qVCEuYZNgve0dQ==}
-    dev: false
-
-  /zustand/4.3.6_react@18.2.0:
-    resolution: {integrity: sha512-6J5zDxjxLE+yukC2XZWf/IyWVKnXT9b9HUv09VJ/bwGCpKNcaTqp7Ws28Xr8jnbvnZcdRaidztAPsXFBIqufiw==}
-    engines: {node: '>=12.7.0'}
-    peerDependencies:
-      immer: '>=9.0'
-      react: '>=16.8'
-    peerDependenciesMeta:
-      immer:
-        optional: true
-      react:
-        optional: true
-    dependencies:
-      react: 18.2.0
-      use-sync-external-store: 1.2.0_react@18.2.0
     dev: false

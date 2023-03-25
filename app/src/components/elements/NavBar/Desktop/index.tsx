@@ -2,14 +2,38 @@ import { AppLogoTitleButton } from '@/components/elements/AppLogoTitleButton';
 import { DesktopNavMenu } from './DesktopNavMenu';
 import { VStack } from '@/styles/components';
 import styled from '@emotion/styled';
+import { NavProfile } from '@/components/elements/NavProfile';
+import { Button } from '@/components/elements/Button';
+import { userAtom } from '@/utils/atoms/userAtom';
+import { useAtom } from 'jotai';
+import { useNavigate } from 'react-router-dom';
+import { MouseEvent } from 'react';
 
 export const DesktopNavBar = () => {
+  const [user] = useAtom(userAtom);
+
+  const navigate = useNavigate();
+
+  const handleClick = (e: MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    navigate(`/profile/${user.login}`);
+  };
+
   return (
     <>
       <DesktopNavBarLayout>
         <VStack h="100%" spacing="6rem">
           <AppLogoTitleButton />
-          <p>박용준</p>
+          <Button
+            onClick={handleClick}
+            element={
+              <NavProfile
+                imageUrl={user.imageUrl}
+                name={user.name}
+                login={user.login}
+              />
+            }
+          />
           <DesktopNavMenu />
         </VStack>
       </DesktopNavBarLayout>

@@ -14,12 +14,12 @@ import { LoginPage } from '@/pages/Login';
 import { ProfilePage } from '@/pages/Profile';
 import { SettingsPage } from '@/pages/Settings';
 import { TotalPage } from '@/pages/Total';
-import { useAtom } from 'jotai';
+import { useAtomValue } from 'jotai';
 import { isAuthenticatedAtom } from '@/utils/atoms/isAuthenticatedAtom';
 
 // TODO: Suspense, lazyImport 추가
 export const AppRoutes = () => {
-  const [isAuthenticated] = useAtom(isAuthenticatedAtom);
+  const isAuthenticated = useAtomValue(isAuthenticatedAtom);
 
   return (
     <Router>

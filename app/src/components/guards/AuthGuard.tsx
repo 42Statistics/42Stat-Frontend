@@ -1,10 +1,10 @@
 import { isAuthenticatedAtom } from '@/utils/atoms/isAuthenticatedAtom';
 import { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { useAtom } from 'jotai';
+import { useAtomValue } from 'jotai';
 
 export const AuthGuard = () => {
-  const [isAuthenticated] = useAtom(isAuthenticatedAtom);
+  const isAuthenticated = useAtomValue(isAuthenticatedAtom);
   const navigate = useNavigate();
 
   useEffect(() => {

@@ -4,18 +4,14 @@ import styled from '@emotion/styled';
 import { MouseEvent, useEffect } from 'react';
 import { VStack, Overlay, Button } from '@/components/common';
 import { NavProfile } from '@/components/elements/NavProfile';
-import {
-  isNavBarOpenAtom,
-  toggleIsNavBarOpenAtom,
-} from '@/utils/atoms/isNavBarOpenAtom';
-import { useAtom } from 'jotai';
+import { isNavBarOpenAtom } from '@/utils/atoms/isNavBarOpenAtom';
+import { useAtom, useAtomValue } from 'jotai';
 import { userAtom } from '@/utils/atoms/userAtom';
 import { useNavigate } from 'react-router-dom';
 
 export const TabletNavBar = () => {
   const [isNavBarOpen, setIsNavBarOpen] = useAtom(isNavBarOpenAtom);
-  const [, toggleIsNavBarOpen] = useAtom(toggleIsNavBarOpenAtom);
-  const [user] = useAtom(userAtom);
+  const user = useAtomValue(userAtom);
   const navigate = useNavigate();
 
   const handleClick = (e: MouseEvent<HTMLElement>) => {
@@ -30,7 +26,9 @@ export const TabletNavBar = () => {
 
   return (
     <>
-      {isNavBarOpen && <Overlay onClick={toggleIsNavBarOpen} />}
+      {isNavBarOpen && (
+        <Overlay onClick={() => setIsNavBarOpen((cur) => !cur)} />
+      )}
       <TabletNavBarLayout isOpen={isNavBarOpen}>
         <VStack h="100%" spacing="6rem">
           <AppLogoTitleButton />

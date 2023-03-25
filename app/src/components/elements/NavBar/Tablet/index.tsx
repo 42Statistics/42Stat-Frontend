@@ -2,15 +2,33 @@ import { AppLogoTitleButton } from '@/components/elements/AppLogoTitleButton';
 import { DesktopNavMenu } from '../Desktop/DesktopNavMenu';
 import { VStack } from '@/styles/components';
 import styled from '@emotion/styled';
-import { useSessionStore } from '@/utils/stores/useSessionStore';
-import { useEffect } from 'react';
+import { MouseEvent, useEffect } from 'react';
 import { Overlay } from '@/components/elements/Overlay';
+import { NavProfile } from '@/components/elements/NavProfile';
+import {
+  isNavBarOpenAtom,
+  toggleIsNavBarOpenAtom,
+} from '@/utils/atoms/isNavBarOpenAtom';
+import { useAtom } from 'jotai';
+import { userAtom } from '@/utils/atoms/userAtom';
+import { useNavigate } from 'react-router-dom';
+import { Button } from '../../Button';
 
 export const TabletNavBar = () => {
-  const { isNavBarOpen, setIsNavBarOpen, toggleIsNavBarOpen } =
-    useSessionStore();
+  const [isNavBarOpen, setIsNavBarOpen] = useAtom(isNavBarOpenAtom);
+  const [, toggleIsNavBarOpen] = useAtom(toggleIsNavBarOpenAtom);
+  const [user] = useAtom(userAtom);
+  const navigate = useNavigate();
 
-  useEffect(() => setIsNavBarOpen(false), [setIsNavBarOpen]);
+  const handleClick = (e: MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    navigate(`/profile/${user.login}`);
+  };
+
+  useEffect(() => {
+    setIsNavBarOpen(false);
+    return () => setIsNavBarOpen(false);
+  }, [setIsNavBarOpen]);
 
   return (
     <>
@@ -18,7 +36,16 @@ export const TabletNavBar = () => {
       <TabletNavBarLayout isOpen={isNavBarOpen}>
         <VStack h="100%" spacing="6rem">
           <AppLogoTitleButton />
-          <p>박용준</p>
+          <Button
+            onClick={handleClick}
+            element={
+              <NavProfile
+                imageUrl={user.imageUrl}
+                name={user.name}
+                login={user.login}
+              />
+            }
+          />
           <DesktopNavMenu />
         </VStack>
       </TabletNavBarLayout>

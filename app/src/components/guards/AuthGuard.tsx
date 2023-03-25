@@ -1,9 +1,10 @@
-import { useAuthStore } from '@/utils/stores/useAuthStore';
+import { isAuthenticatedAtom } from '@/utils/atoms/isAuthenticatedAtom';
 import { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
+import { useAtom } from 'jotai';
 
 export const AuthGuard = () => {
-  const { isAuthenticated } = useAuthStore();
+  const [isAuthenticated] = useAtom(isAuthenticatedAtom);
   const navigate = useNavigate();
 
   useEffect(() => {

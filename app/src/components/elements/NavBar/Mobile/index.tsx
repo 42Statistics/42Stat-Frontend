@@ -1,11 +1,14 @@
-import { HStack } from '@/styles/components';
+import { Avatar, HStack } from '@/styles/components';
+import { userAtom } from '@/utils/atoms/userAtom';
 import styled from '@emotion/styled';
 import { useNavMenu } from '../hooks/useNavMenu';
 import { MobileNavItem } from './MobileNavItem';
+import { useAtom } from 'jotai';
 
 // TODO: User Profile 맨 오른쪽에 추가
 export const MobileNavBar = () => {
   const { options } = useNavMenu();
+  const [user] = useAtom(userAtom);
 
   return (
     <MobileNavBarLayout>
@@ -13,6 +16,7 @@ export const MobileNavBar = () => {
         {options.map((option) => (
           <MobileNavItem key={option.menu} option={option} />
         ))}
+        <Avatar size="2rem" src={user.imageUrl} />
       </HStack>
     </MobileNavBarLayout>
   );

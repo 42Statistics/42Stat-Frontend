@@ -1,4 +1,4 @@
-import { AppLogoTitle } from '@/assets/AppLogoTitle';
+import { AppLogoTitle } from '@/components/elements/AppLogoTitle';
 import { AppIntroText } from '@/components/elements/Login/AppIntroText';
 import { Divider, HStack, VStack } from '@/components/common';
 import { Desktop, Mobile } from '@/utils/responsive';

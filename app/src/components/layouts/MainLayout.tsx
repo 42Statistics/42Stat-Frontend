@@ -1,6 +1,5 @@
-import { Divider } from '@/styles/components';
-import { HStack, VStack } from '@/styles/components/Stack';
-import { Desktop, Tablet, Mobile } from '@/styles/responsive';
+import { HStack, VStack, Divider } from '@/components/common';
+import { Desktop, Tablet, Mobile } from '@/utils/responsive';
 import styled from '@emotion/styled';
 import { Outlet } from 'react-router-dom';
 import { DesktopHeader, TabletHeader, MobileHeader } from '../elements/Header';

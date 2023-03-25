@@ -1,4 +1,4 @@
-import { Avatar, HStack } from '@/styles/components';
+import { Avatar, HStack } from '@/components/common';
 import { userAtom } from '@/utils/atoms/userAtom';
 import styled from '@emotion/styled';
 import { useNavMenu } from '../hooks/useNavMenu';

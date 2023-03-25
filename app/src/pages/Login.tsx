@@ -1,7 +1,7 @@
 import { AppLogoTitle } from '@/assets/AppLogoTitle';
 import { AppIntroText } from '@/components/elements/Login/AppIntroText';
-import { Divider, HStack, VStack } from '@/styles/components';
-import { Desktop, Mobile } from '@/styles/responsive';
+import { Divider, HStack, VStack } from '@/components/common';
+import { Desktop, Mobile } from '@/utils/responsive';
 import styled from '@emotion/styled';
 import { GoogleLogin } from '@react-oauth/google';
 import { Helmet } from 'react-helmet-async';

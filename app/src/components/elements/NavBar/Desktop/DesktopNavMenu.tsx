@@ -1,5 +1,5 @@
 import { DesktopNavItem } from './DesktopNavItem';
-import { Spacer, VStack } from '@/styles/components';
+import { Spacer, VStack } from '@/components/common';
 import { useNavMenu } from '../hooks/useNavMenu';
 import { Fragment } from 'react';
 

@@ -1,9 +1,8 @@
 import { AppLogoTitleButton } from '@/components/elements/AppLogoTitleButton';
 import { DesktopNavMenu } from '../Desktop/DesktopNavMenu';
-import { VStack } from '@/styles/components';
 import styled from '@emotion/styled';
 import { MouseEvent, useEffect } from 'react';
-import { Overlay } from '@/components/elements/Overlay';
+import { VStack, Overlay, Button } from '@/components/common';
 import { NavProfile } from '@/components/elements/NavProfile';
 import {
   isNavBarOpenAtom,
@@ -12,7 +11,6 @@ import {
 import { useAtom } from 'jotai';
 import { userAtom } from '@/utils/atoms/userAtom';
 import { useNavigate } from 'react-router-dom';
-import { Button } from '../../Button';
 
 export const TabletNavBar = () => {
   const [isNavBarOpen, setIsNavBarOpen] = useAtom(isNavBarOpenAtom);

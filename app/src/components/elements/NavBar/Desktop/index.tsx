@@ -1,9 +1,8 @@
 import { AppLogoTitleButton } from '@/components/elements/AppLogoTitleButton';
 import { DesktopNavMenu } from './DesktopNavMenu';
-import { VStack } from '@/styles/components';
+import { VStack, Button } from '@/components/common';
 import styled from '@emotion/styled';
 import { NavProfile } from '@/components/elements/NavProfile';
-import { Button } from '@/components/elements/Button';
 import { userAtom } from '@/utils/atoms/userAtom';
 import { useAtom } from 'jotai';
 import { useNavigate } from 'react-router-dom';

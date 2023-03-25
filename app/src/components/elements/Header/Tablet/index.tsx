@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import { UserSearchBar } from '@/components/elements/UserSearchBar';
-import { HStack } from '@/styles/components';
-import { Button } from '@/components/elements/Button';
+import { HStack, Button } from '@/components/common';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { toggleIsNavBarOpenAtom } from '@/utils/atoms/isNavBarOpenAtom';
 import { useAtom } from 'jotai';

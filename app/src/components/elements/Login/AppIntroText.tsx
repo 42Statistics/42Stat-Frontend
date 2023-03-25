@@ -1,4 +1,4 @@
-import { Text } from '@/styles/components';
+import { Text } from '@/components/common';
 import { useTheme } from '@emotion/react';
 
 export const AppIntroText = () => {

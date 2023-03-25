@@ -1,6 +1,6 @@
 import { AppLogoTitle } from '@/assets/AppLogoTitle';
 import { useNavigate } from 'react-router-dom';
-import { Button } from './Button';
+import { Button } from '@/components/common';
 
 export const AppLogoTitleButton = () => {
   const navigate = useNavigate();

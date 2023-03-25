@@ -1,4 +1,4 @@
-import { VStack } from '@/styles/components';
+import { VStack } from '@/components/common';
 import { AppLogoTitleButton } from '@/components/elements/AppLogoTitleButton';
 import { UserSearchBar } from '@/components/elements/UserSearchBar';
 import styled from '@emotion/styled';

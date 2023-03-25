@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { ButtonHTMLAttributes, PropsWithChildren, ReactNode } from 'react';
+import { ButtonHTMLAttributes, ReactNode } from 'react';
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   element: ReactNode;

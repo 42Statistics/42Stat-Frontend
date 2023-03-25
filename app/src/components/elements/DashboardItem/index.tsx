@@ -1,4 +1,4 @@
-import { center } from '@/styles/components';
+import { Center } from '@/components/common';
 import styled from '@emotion/styled';
 import { ReactNode } from 'react';
 
@@ -16,7 +16,9 @@ export const DashboardItem = ({
 }: DashboardItemProps) => {
   return (
     <DashboardItemLayout {...propsExceptChildren}>
-      {children}
+      <Center w="100%" h="100%">
+        {children}
+      </Center>
     </DashboardItemLayout>
   );
 };
@@ -29,8 +31,6 @@ type DashboardItemLayoutProps = {
 };
 
 const DashboardItemLayout = styled.div<DashboardItemLayoutProps>`
-  ${center}
-  height: 100%;
   background-color: ${({ theme }) => theme.colors.mono.white};
   grid-column: ${({ col, colSpan }) => `${col} / span ${colSpan}`};
   grid-row: ${({ row, rowSpan }) => `${row} / span ${rowSpan}`};

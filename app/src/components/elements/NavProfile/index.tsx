@@ -1,4 +1,4 @@
-import { Avatar, HStack, Text, VStack } from '@/styles/components';
+import { Avatar, HStack, Text, VStack } from '@/components/common';
 import { useTheme } from '@emotion/react';
 
 type NavProfile = {

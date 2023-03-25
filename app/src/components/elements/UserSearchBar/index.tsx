@@ -1,4 +1,4 @@
-import { Input } from '@/components/elements/Input';
+import { Input } from '@/components/common';
 import { useUserSearchBar } from './hooks/useUserSearchBar';
 import { css, Theme, useTheme } from '@emotion/react';
 import { Device } from '@/utils/types/Device';

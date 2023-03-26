@@ -31,10 +31,10 @@ export const MainLayout = () => {
         </HStack>
       </Tablet>
       <Mobile>
-        <VStack w="100%" h="100%" spacing="2rem">
+        <VStack w="100%" spacing="2rem">
           <MobileHeader />
           <Divider />
-          <PageLayout>
+          <PageLayout css={{ marginBottom: '6rem' }}>
             <Outlet />
           </PageLayout>
         </VStack>

@@ -1,8 +1,9 @@
+import {
+  MobileDashboardColSize,
+  MobileDashboardRowSize,
+} from '@/utils/types/Dashboard';
 import styled from '@emotion/styled';
 import { ReactNode } from 'react';
-
-type MobileDashboardRowSize = 1 | 2;
-type MobileDashboardColSize = 1 | 2;
 
 type MobileDashboardRowProps = {
   row: MobileDashboardRowSize;

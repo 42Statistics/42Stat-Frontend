@@ -1,43 +1,63 @@
-import { Center } from '@/components/common';
+import { Center, Text, VStack } from '@/components/common';
+import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { ReactNode } from 'react';
 
+// FIXME: title이 없는데 description이 있을 수는 없음
 type DashboardItemProps = {
-  row: number; // TODO: 더 엄밀한 Type 필요
-  col: number;
-  rowSpan: number;
-  colSpan: number;
-  children: ReactNode;
+  title?: string;
+  description?: string;
+  element: ReactNode;
 };
 
 export const DashboardItem = ({
-  children,
-  ...propsExceptChildren
+  title,
+  description,
+  element,
 }: DashboardItemProps) => {
   return (
-    <DashboardItemLayout {...propsExceptChildren}>
-      <Center w="100%" h="100%">
-        {children}
-      </Center>
+    <DashboardItemLayout>
+      <VStack w="100%" h="100%" spacing="2rem" align="start">
+        {title && (
+          <DashboardItemHeader title={title} description={description} />
+        )}
+        <Center w="100%" h="100%">
+          {element}
+        </Center>
+      </VStack>
     </DashboardItemLayout>
   );
 };
 
-type DashboardItemLayoutProps = {
-  col: number;
-  colSpan: number;
-  row: number;
-  rowSpan: number;
+const DashboardItemLayout = styled.div`
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+`;
+
+type DashboardItemHeaderProps = {
+  title?: string;
+  description?: string;
 };
 
-const DashboardItemLayout = styled.div<DashboardItemLayoutProps>`
-  background-color: ${({ theme }) => theme.colors.mono.white};
-  grid-column: ${({ col, colSpan }) => `${col} / span ${colSpan}`};
-  grid-row: ${({ row, rowSpan }) => `${row} / span ${rowSpan}`};
-  border-radius: 2rem;
-
-  transition: box-shadow 200ms ease-in-out, transform 200ms ease-in-out;
-  :hover {
-    box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.25);
-  }
-`;
+const DashboardItemHeader = ({
+  title,
+  description,
+}: DashboardItemHeaderProps) => {
+  const theme = useTheme();
+  return (
+    <VStack w="100%" align="start">
+      {title && (
+        <Text
+          fontSize={theme.fonts.size.h3}
+          fontWeight={theme.fonts.weight.medium}
+        >
+          {title}
+        </Text>
+      )}
+      {description && (
+        <Text fontSize={theme.fonts.size.caption}>{description}</Text>
+      )}
+    </VStack>
+  );
+};

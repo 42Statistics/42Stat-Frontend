@@ -1,8 +1,9 @@
+import {
+  DesktopDashboardColSize,
+  DesktopDashboardRowSize,
+} from '@/utils/types/Dashboard';
 import styled from '@emotion/styled';
 import { ReactNode } from 'react';
-
-type DesktopDashboardRowSize = 1 | 2;
-type DesktopDashboardColSize = 3 | 4;
 
 type DesktopDashboardRowProps = {
   row: DesktopDashboardRowSize;
@@ -31,7 +32,7 @@ const DesktopDashboardRowLayout = styled.div<DesktopDashboardRowLayoutProps>`
   width: 100%;
   grid-template-columns: ${({ col }) => `repeat(${col}, 1fr)`};
   grid-template-rows: ${({ row, col }) =>
-    `repeat(${row}, ${col === 4 ? '13.5rem' : '18rem'})`};
+    `repeat(${row}, ${col === 4 ? '16rem' : '21rem'})`};
   column-gap: 2rem;
   row-gap: 2rem;
 `;

@@ -6,7 +6,7 @@ import {
   DesktopDashboard,
   MobileDashboard,
 } from '@/components/elements/Dashboard';
-import { DashboardItem } from '@/components/elements/DashboardItem';
+import { DashboardItemContainer } from '@/components/elements/DashboardItemContainer';
 import { Helmet } from 'react-helmet-async';
 import {
   DesktopDashboardRow,
@@ -15,6 +15,9 @@ import {
 import { LineTestChart } from '@/components/elements/charts/LineTestChart';
 import { BarTestChart } from '@/components/elements/charts/BarTestChart';
 import { PieTestChart } from '@/components/elements/charts/PieTestChart';
+import { DashboardItem } from '@/components/elements/DashboardItem';
+import { useHomePage } from './hooks/useHomePage';
+import { dashboardContents } from './hooks/dashboardContents';
 
 const GET_USER = gql(`
   query GetUser($id: Int!) {
@@ -27,6 +30,8 @@ const GET_USER = gql(`
 
 // TODO: Mobile Page에는 Tabbar 때문에 아래 marginBottom 필요
 export const HomePage = () => {
+  const { desktopDashboard, mobileDashboard } = useHomePage();
+
   // const { loading, error, data } = useQuery(GET_USER, {
   //   variables: {
   //     id: 99947,
@@ -54,72 +59,54 @@ export const HomePage = () => {
       </Helmet>
       <AboveTablet>
         <DesktopDashboard>
-          <DesktopDashboardRow row={2} col={4}>
-            <DashboardItem row={1} col={1} rowSpan={1} colSpan={1}>
-              1/8
-            </DashboardItem>
-            <DashboardItem row={2} col={1} rowSpan={1} colSpan={1}>
-              1/8
-            </DashboardItem>
-            <DashboardItem row={1} col={2} rowSpan={2} colSpan={1}>
-              {/* <LineTestChart size={'sm'} /> */}
-            </DashboardItem>
-            <DashboardItem row={1} col={3} rowSpan={2} colSpan={1}>
-              {/* <BarTestChart size={'sm'} /> */}
-            </DashboardItem>
-            <DashboardItem row={1} col={4} rowSpan={2} colSpan={1}>
-              {/* <PieTestChart size={'sm'} /> */}
-            </DashboardItem>
-          </DesktopDashboardRow>
-          <DesktopDashboardRow row={2} col={3}>
-            <DashboardItem row={1} col={1} rowSpan={2} colSpan={1}>
-              {/* <PieTestChart size={'lg'} /> */}
-            </DashboardItem>
-            <DashboardItem row={1} col={2} rowSpan={2} colSpan={1}>
-              {/* <LineTestChart size={'lg'} /> */}
-            </DashboardItem>
-            <DashboardItem row={1} col={3} rowSpan={2} colSpan={1}>
-              {/* <BarTestChart size={'lg'} /> */}
-            </DashboardItem>
-          </DesktopDashboardRow>
+          {desktopDashboard.map(({ row, col, items }, rowIdx) => (
+            <DesktopDashboardRow key={rowIdx} row={row} col={col}>
+              {items.map(
+                ({ row, col, rowSpan, colSpan, elementId }, itemIdx) => (
+                  <DashboardItemContainer
+                    key={itemIdx}
+                    row={row}
+                    col={col}
+                    rowSpan={rowSpan}
+                    colSpan={colSpan}
+                    element={
+                      <DashboardItem
+                        title={dashboardContents[elementId].title}
+                        description={dashboardContents[elementId].description}
+                        element={<p>...</p>}
+                      />
+                    }
+                  />
+                ),
+              )}
+            </DesktopDashboardRow>
+          ))}
         </DesktopDashboard>
       </AboveTablet>
       <Mobile>
         <MobileDashboard>
-          <MobileDashboardRow row={1} col={2}>
-            <DashboardItem row={1} col={1} rowSpan={1} colSpan={1}>
-              1/4
-            </DashboardItem>
-            <DashboardItem row={1} col={2} rowSpan={1} colSpan={1}>
-              1/4
-            </DashboardItem>
-          </MobileDashboardRow>
-          <MobileDashboardRow row={2} col={2}>
-            <DashboardItem row={1} col={1} rowSpan={2} colSpan={1}>
-              2/4
-            </DashboardItem>
-            <DashboardItem row={1} col={2} rowSpan={2} colSpan={1}>
-              2/4
-            </DashboardItem>
-          </MobileDashboardRow>
-          <MobileDashboardRow row={2} col={2}>
-            <DashboardItem row={1} col={1} rowSpan={2} colSpan={1}>
-              2/4
-            </DashboardItem>
-            <DashboardItem row={1} col={2} rowSpan={2} colSpan={1}>
-              2/4
-            </DashboardItem>
-          </MobileDashboardRow>
-          <MobileDashboardRow row={2} col={2}>
-            <DashboardItem row={1} col={1} rowSpan={2} colSpan={1}>
-              2/4
-            </DashboardItem>
-          </MobileDashboardRow>
-          <MobileDashboardRow row={1} col={1}>
-            <DashboardItem row={1} col={1} rowSpan={1} colSpan={1}>
-              1/1
-            </DashboardItem>
-          </MobileDashboardRow>
+          {mobileDashboard.map(({ row, col, items }, rowIdx) => (
+            <MobileDashboardRow key={rowIdx} row={row} col={col}>
+              {items.map(
+                ({ row, col, rowSpan, colSpan, elementId }, itemIdx) => (
+                  <DashboardItemContainer
+                    key={itemIdx}
+                    row={row}
+                    col={col}
+                    rowSpan={rowSpan}
+                    colSpan={colSpan}
+                    element={
+                      <DashboardItem
+                        title={dashboardContents[elementId].title}
+                        description={dashboardContents[elementId].description}
+                        element={<p>...</p>}
+                      />
+                    }
+                  />
+                ),
+              )}
+            </MobileDashboardRow>
+          ))}
         </MobileDashboard>
       </Mobile>
     </>

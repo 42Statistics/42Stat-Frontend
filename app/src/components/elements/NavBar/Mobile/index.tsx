@@ -25,6 +25,7 @@ const MobileNavBarLayout = styled.nav`
   position: fixed;
   bottom: 0;
   width: 100%;
+  height: 6rem;
   padding: 1.4rem 2rem;
   background-color: ${({ theme }) => theme.colors.mono.white};
 `;

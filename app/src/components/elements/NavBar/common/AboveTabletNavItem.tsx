@@ -3,13 +3,13 @@ import { NavMenuOption } from '@/utils/types/NavMenu';
 import styled from '@emotion/styled';
 import { MouseEvent } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { NavMenuIcon } from '../NavMenuIcon';
+import { NavMenuIcon } from './NavMenuIcon';
 
 type DesktopNavItemProps = {
   option: NavMenuOption;
 };
 
-export const DesktopNavItem = ({ option }: DesktopNavItemProps) => {
+export const AboveTabletNavItem = ({ option }: DesktopNavItemProps) => {
   const navigate = useNavigate();
   const location = useLocation();
   const isFocused = location.pathname === option.path;

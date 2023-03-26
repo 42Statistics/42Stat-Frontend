@@ -1,46 +1,17 @@
-import { AppLogoTitleButton } from '@/components/elements/AppLogoTitleButton';
-import { DesktopNavMenu } from './DesktopNavMenu';
-import { VStack, Button } from '@/components/common';
 import styled from '@emotion/styled';
-import { NavProfile } from '@/components/elements/NavProfile';
-import { userAtom } from '@/utils/atoms/userAtom';
-import { useAtomValue } from 'jotai';
-import { useNavigate } from 'react-router-dom';
-import { MouseEvent } from 'react';
+import { AboveTabletNavBar } from '../common/AboveTabletNavBar';
 
 export const DesktopNavBar = () => {
-  const user = useAtomValue(userAtom);
-
-  const navigate = useNavigate();
-
-  const handleClick = (e: MouseEvent<HTMLElement>) => {
-    e.preventDefault();
-    navigate(`/profile/${user.login}`);
-  };
-
   return (
     <>
       <DesktopNavBarLayout>
-        <VStack h="100%" spacing="6rem">
-          <AppLogoTitleButton />
-          <Button
-            onClick={handleClick}
-            element={
-              <NavProfile
-                imageUrl={user.imageUrl}
-                name={user.name}
-                login={user.login}
-              />
-            }
-          />
-          <DesktopNavMenu />
-        </VStack>
+        <AboveTabletNavBar />
       </DesktopNavBarLayout>
     </>
   );
 };
 
-const DesktopNavBarLayout = styled.nav`
+export const DesktopNavBarLayout = styled.nav`
   position: fixed;
   top: 0;
   left: 0;

@@ -17,6 +17,7 @@ export const Tablet = ({ children }: PropsWithChildren) => {
 };
 
 export const AboveTablet = ({ children }: PropsWithChildren) => {
-  const isAboveTablet = useDeviceType() === 'desktop' || 'tablet';
+  const device = useDeviceType();
+  const isAboveTablet = device === 'desktop' || device === 'tablet';
   return <>{isAboveTablet ? children : null}</>;
 };

@@ -8,6 +8,7 @@ specifiers:
   '@emotion/styled': ^11.10.6
   '@graphql-codegen/cli': ^3.2.2
   '@graphql-codegen/client-preset': ^2.1.1
+  '@graphql-typed-document-node/core': ^3.2.0
   '@react-oauth/google': ^0.8.0
   '@types/lodash': ^4.14.191
   '@types/node': ^18.14.6
@@ -20,6 +21,7 @@ specifiers:
   '@vitejs/plugin-react': ^3.1.0
   apexcharts: ^3.37.2
   client: link:@types/apollo/client
+  dotenv: ^16.0.3
   eslint: ^8.35.0
   eslint-config-prettier: ^8.7.0
   eslint-plugin-prettier: ^4.2.1
@@ -45,6 +47,7 @@ dependencies:
   '@emotion/css': 11.10.6
   '@emotion/react': 11.10.6_pmekkgnqduwlme35zpnqhenc34
   '@emotion/styled': 11.10.6_oouaibmszuch5k64ms7uxp2aia
+  '@graphql-typed-document-node/core': 3.2.0_graphql@16.6.0
   '@react-oauth/google': 0.8.0_biqbaboplfbrettd7655fr4n2y
   '@vitejs/plugin-basic-ssl': 1.0.1_vite@4.1.4
   apexcharts: 3.37.2
@@ -73,6 +76,7 @@ devDependencies:
   '@typescript-eslint/parser': 5.54.1_ycpbpc6yetojsgtrx3mwntkhsu
   '@vitejs/plugin-react': 3.1.0_vite@4.1.4
   client: link:@types/apollo/client
+  dotenv: 16.0.3
   eslint: 8.35.0
   eslint-config-prettier: 8.7.0_eslint@8.35.0
   eslint-plugin-prettier: 4.2.1_xprnzp4ul2bcpmfe73av4voica
@@ -110,7 +114,7 @@ packages:
       subscriptions-transport-ws:
         optional: true
     dependencies:
-      '@graphql-typed-document-node/core': 3.1.2_graphql@16.6.0
+      '@graphql-typed-document-node/core': 3.2.0_graphql@16.6.0
       '@wry/context': 0.7.0
       '@wry/equality': 0.5.3
       '@wry/trie': 0.3.2
@@ -1622,7 +1626,7 @@ packages:
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
-      '@graphql-typed-document-node/core': 3.1.2_graphql@16.6.0
+      '@graphql-typed-document-node/core': 3.2.0_graphql@16.6.0
       graphql: 16.6.0
       tslib: 2.5.0
     dev: true
@@ -1642,6 +1646,14 @@ packages:
 
   /@graphql-typed-document-node/core/3.1.2_graphql@16.6.0:
     resolution: {integrity: sha512-9anpBMM9mEgZN4wr2v8wHJI2/u5TnnggewRN6OlvXTTnuVyoY19X6rOv9XTqKRw6dcGKwZsBi8n0kDE2I5i4VA==}
+    peerDependencies:
+      graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+    dependencies:
+      graphql: 16.6.0
+    dev: true
+
+  /@graphql-typed-document-node/core/3.2.0_graphql@16.6.0:
+    resolution: {integrity: sha512-mB9oAsNCm9aM3/SOv4YtBMqZbYj10R7dkq8byBqxGY/ncFwhf2oQzMV+LCRlWoDSEBJ3COiR1yeDvMtsoOsuFQ==}
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
@@ -3251,7 +3263,7 @@ packages:
     peerDependencies:
       graphql: 14 - 16
     dependencies:
-      '@graphql-typed-document-node/core': 3.1.2_graphql@16.6.0
+      '@graphql-typed-document-node/core': 3.2.0_graphql@16.6.0
       cross-fetch: 3.1.5
       extract-files: 9.0.0
       form-data: 3.0.1

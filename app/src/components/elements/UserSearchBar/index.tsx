@@ -20,7 +20,7 @@ export const UserSearchBar = ({ device }: UserSearchBarProps) => {
           : MobileUserSearchBarStyle(theme)
       }
     >
-      <MdSearch size="2.4rem" />
+      <MdSearch size="24px" />
       <Input onChange={handleChange} placeholder="유저명을 입력해주세요" />
     </div>
   );

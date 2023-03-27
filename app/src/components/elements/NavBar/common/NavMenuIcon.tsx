@@ -16,13 +16,13 @@ export const NavMenuIcon = ({ menu, isFocused }: NavMenuIconProps) => {
 
   switch (menu) {
     case 'Home':
-      return <MdHome size="2.4rem" fill={color} />;
+      return <MdHome size="24px" fill={color} />;
     case 'Total':
-      return <RiGlobalFill size="2.4rem" fill={color} />;
+      return <RiGlobalFill size="24px" fill={color} />;
     case 'About':
-      return <MdHelp size="2.4rem" fill={color} />;
+      return <MdHelp size="24px" fill={color} />;
     case 'Settings':
-      return <MdSettings size="2.4rem" fill={color} />;
+      return <MdSettings size="24px" fill={color} />;
     default:
       throw new Error('💥 Wrong Menu');
   }

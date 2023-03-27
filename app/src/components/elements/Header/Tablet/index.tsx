@@ -13,7 +13,7 @@ export const TabletHeader = () => {
       <HStack spacing="2.5rem">
         <Button
           onClick={() => setIsNavBarOpen((cur) => !cur)}
-          element={<RxHamburgerMenu size="2rem" />}
+          element={<RxHamburgerMenu size="20px" />}
         />
         <UserSearchBar device="desktop" />
       </HStack>

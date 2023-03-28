@@ -1,20 +1,16 @@
 import { Center, Text, VStack } from '@/components/common';
+import { DashboardItemInfo } from '@/utils/types/Dashboard';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { ReactNode } from 'react';
 
 // FIXME: title이 없는데 description이 있을 수는 없음
-type DashboardItemProps = {
-  title?: string;
-  description?: string;
-  element: ReactNode;
-};
 
 export const DashboardItem = ({
   title,
   description,
   element,
-}: DashboardItemProps) => {
+}: DashboardItemInfo) => {
+  const DataComponent = element;
   return (
     <DashboardItemLayout>
       <VStack w="100%" h="100%" spacing="2rem" align="start">
@@ -22,7 +18,7 @@ export const DashboardItem = ({
           <DashboardItemHeader title={title} description={description} />
         )}
         <Center w="100%" h="100%">
-          {element}
+          <DataComponent />
         </Center>
       </VStack>
     </DashboardItemLayout>

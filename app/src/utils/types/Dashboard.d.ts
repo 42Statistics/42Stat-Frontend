@@ -1,7 +1,8 @@
 export type DashboardItemInfo = {
-  id: number;
+  id?: number;
   title?: string;
   description?: string;
+  element: () => JSX.Element;
 };
 
 export type DashboardItemContainerInfo = {

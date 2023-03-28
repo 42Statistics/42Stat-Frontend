@@ -15,9 +15,12 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "jsxImportSource": "@emotion/react"    
+    "jsxImportSource": "@emotion/react"
   },
-  "include": ["src/**/*"],
+  "include": [
+    "src/**/*",
+    "src/components/elements/charts/Home/MonthlyAccessTimeRank.tsxhlyExpIncrementRank.tsx"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }],
   "extends": "./tsconfig.paths.json"
 }

@@ -1,23 +1,18 @@
 import { gql } from '@/__generated__';
-import { useQuery } from '@apollo/client';
-import styled from '@emotion/styled';
-import { AboveTablet, Mobile } from '@/utils/responsive/Device';
 import {
   DesktopDashboard,
   MobileDashboard,
 } from '@/components/elements/Dashboard';
+import { DashboardItem } from '@/components/elements/DashboardItem';
 import { DashboardItemContainer } from '@/components/elements/DashboardItemContainer';
-import { Helmet } from 'react-helmet-async';
 import {
   DesktopDashboardRow,
   MobileDashboardRow,
 } from '@/components/elements/DashboardRow';
-import { LineTestChart } from '@/components/elements/charts/LineTestChart';
-import { BarTestChart } from '@/components/elements/charts/BarTestChart';
-import { PieTestChart } from '@/components/elements/charts/PieTestChart';
-import { DashboardItem } from '@/components/elements/DashboardItem';
-import { useHomePage } from './hooks/useHomePage';
+import { AboveTablet, Mobile } from '@/utils/responsive/Device';
+import { Helmet } from 'react-helmet-async';
 import { dashboardContents } from './hooks/dashboardContents';
+import { useHomePage } from './hooks/useHomePage';
 
 const GET_USER = gql(`
   query GetUser($id: Int!) {
@@ -31,26 +26,6 @@ const GET_USER = gql(`
 // TODO: Mobile Page에는 Tabbar 때문에 아래 marginBottom 필요
 export const HomePage = () => {
   const { desktopDashboard, mobileDashboard } = useHomePage();
-
-  // const { loading, error, data } = useQuery(GET_USER, {
-  //   variables: {
-  //     id: 99947,
-  //   },
-  // });
-
-  // if (loading) {
-  //   return <h1>loading...</h1>;
-  // }
-
-  // if (error) {
-  //   return <h1>{error.message}</h1>;
-  // }
-
-  // if (!data) {
-  //   return <h1>user not found</h1>;
-  // }
-
-  // console.log(data);
 
   return (
     <>
@@ -73,7 +48,8 @@ export const HomePage = () => {
                       <DashboardItem
                         title={dashboardContents[elementId].title}
                         description={dashboardContents[elementId].description}
-                        element={<p>...</p>}
+                        element={dashboardContents[elementId].element}
+                        // fieldString={dashboardContents[elementId].fieldString}
                       />
                     }
                   />
@@ -99,7 +75,8 @@ export const HomePage = () => {
                       <DashboardItem
                         title={dashboardContents[elementId].title}
                         description={dashboardContents[elementId].description}
-                        element={<p>...</p>}
+                        element={dashboardContents[elementId].element}
+                        // fieldString={dashboardContents[elementId].fieldString}
                       />
                     }
                   />

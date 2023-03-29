@@ -1,7 +1,10 @@
+import { ReactNode } from 'react';
+
 export type DashboardItemInfo = {
-  id: number;
+  id?: number;
   title?: string;
   description?: string;
+  content: () => JSX.Element;
 };
 
 export type DashboardItemContainerInfo = {

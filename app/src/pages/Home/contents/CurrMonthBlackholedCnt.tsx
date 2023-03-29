@@ -1,5 +1,8 @@
 import { gql } from '@/__generated__';
+import { HStack, Text } from '@/components/common';
 import { useQuery } from '@apollo/client';
+import { useTheme } from '@emotion/react';
+import { BsTriangleFill } from 'react-icons/bs';
 
 const GET_CURR_MONTH_BLACKHOLED_CNT = gql(/* GraphQL */ `
   query GetCurrMonthBlackholedCnt {
@@ -12,6 +15,7 @@ const GET_CURR_MONTH_BLACKHOLED_CNT = gql(/* GraphQL */ `
 
 export const CurrMonthBlackholedCnt = () => {
   const { loading, error, data } = useQuery(GET_CURR_MONTH_BLACKHOLED_CNT);
+  const theme = useTheme();
 
   if (loading) {
     return <h1>loading...</h1>;
@@ -24,10 +28,31 @@ export const CurrMonthBlackholedCnt = () => {
   }
 
   const { currMonthBlackholedCnt, lastMonthBlackholedCnt } = data.getHomePage;
+  const diff = currMonthBlackholedCnt - lastMonthBlackholedCnt;
 
   return (
     <>
-      {currMonthBlackholedCnt}/{lastMonthBlackholedCnt}
+      <HStack spacing="0.5rem">
+        <Text style={{ marginRight: '1rem' }}>{currMonthBlackholedCnt} </Text>
+        {diff >= 0 ? (
+          <BsTriangleFill color={theme.colors.secondary.default} />
+        ) : (
+          <BsTriangleFill
+            color={theme.colors.third.default}
+            style={{ transform: 'rotate(180deg)' }}
+          />
+        )}
+
+        <Text
+          color={
+            diff >= 0
+              ? theme.colors.secondary.default
+              : theme.colors.third.default
+          }
+        >
+          {Math.abs(diff)}
+        </Text>
+      </HStack>
     </>
   );
 };

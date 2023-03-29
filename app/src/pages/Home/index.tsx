@@ -1,4 +1,3 @@
-import { gql } from '@/__generated__';
 import {
   DesktopDashboard,
   MobileDashboard,
@@ -14,16 +13,15 @@ import { Helmet } from 'react-helmet-async';
 import { dashboardContents } from './hooks/dashboardContents';
 import { useHomePage } from './hooks/useHomePage';
 
-const GET_USER = gql(`
-  query GetUser($id: Int!) {
-    user(id: $id) {
-      id
-      login
-    }
-  }
-`);
+// const GET_USER = gql(`
+//   query GetUser($id: Int!) {
+//     user(id: $id) {
+//       id
+//       login
+//     }
+//   }
+// `);
 
-// TODO: Mobile Page에는 Tabbar 때문에 아래 marginBottom 필요
 export const HomePage = () => {
   const { desktopDashboard, mobileDashboard } = useHomePage();
 
@@ -48,8 +46,7 @@ export const HomePage = () => {
                       <DashboardItem
                         title={dashboardContents[elementId].title}
                         description={dashboardContents[elementId].description}
-                        element={dashboardContents[elementId].element}
-                        // fieldString={dashboardContents[elementId].fieldString}
+                        content={dashboardContents[elementId].content}
                       />
                     }
                   />
@@ -75,8 +72,7 @@ export const HomePage = () => {
                       <DashboardItem
                         title={dashboardContents[elementId].title}
                         description={dashboardContents[elementId].description}
-                        element={dashboardContents[elementId].element}
-                        // fieldString={dashboardContents[elementId].fieldString}
+                        content={dashboardContents[elementId].content}
                       />
                     }
                   />

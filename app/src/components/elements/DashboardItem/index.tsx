@@ -8,9 +8,8 @@ import styled from '@emotion/styled';
 export const DashboardItem = ({
   title,
   description,
-  element,
+  content: Content,
 }: DashboardItemInfo) => {
-  const DataComponent = element;
   return (
     <DashboardItemLayout>
       <VStack w="100%" h="100%" spacing="2rem" align="start">
@@ -18,7 +17,7 @@ export const DashboardItem = ({
           <DashboardItemHeader title={title} description={description} />
         )}
         <Center w="100%" h="100%">
-          <DataComponent />
+          <Content />
         </Center>
       </VStack>
     </DashboardItemLayout>

@@ -1,8 +1,9 @@
 import { VStack } from '@/components/common';
-import { gql, useQuery } from '@apollo/client';
+import { gql } from '@/__generated__';
+import { useQuery } from '@apollo/client';
 
-const GET_LAST_EXAM_RESULT = gql`
-  query {
+const GET_LAST_EXAM_RESULT = gql(/* GraphQL */ `
+  query GetLastExamResult {
     getHomePage {
       lastExamResult {
         rank
@@ -11,7 +12,8 @@ const GET_LAST_EXAM_RESULT = gql`
       }
     }
   }
-`;
+`);
+
 export const LastExamResult = () => {
   const { loading, error, data } = useQuery(GET_LAST_EXAM_RESULT);
   if (loading) {
@@ -25,18 +27,14 @@ export const LastExamResult = () => {
   if (!data) {
     return <h1>user not found</h1>;
   }
-  const rankList = data.getHomePage.lastExamResult;
+  const result = data.getHomePage.lastExamResult;
 
   return (
     <>
       <VStack>
-        {rankList.map((x: any, idx: number) => (
+        {result.map(({ rank, passCnt, total }, idx) => (
           <div key={idx}>
-            {x.rank}
-            //
-            {x.passCnt}
-            //
-            {x.total}
+            {rank}/{passCnt}/{total}
           </div>
         ))}
       </VStack>

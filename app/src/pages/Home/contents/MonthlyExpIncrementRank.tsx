@@ -1,8 +1,9 @@
 import { VStack } from '@/components/common';
-import { gql, useQuery } from '@apollo/client';
+import { gql } from '@/__generated__';
+import { useQuery } from '@apollo/client';
 
-const GET_MONTLHLY_EXP_RANK = gql`
-  query {
+const GET_MONTHLY_EXP_INCREMENT_RANK = gql(/* GraphQL */ `
+  query GetMonthlyExpIncrementRank {
     getHomePage {
       monthlyExpIncrementRank {
         userPreview {
@@ -14,17 +15,17 @@ const GET_MONTLHLY_EXP_RANK = gql`
       }
     }
   }
-`;
+`);
+
 export const MonthlyExpIncrementRank = () => {
-  const { loading, error, data } = useQuery(GET_MONTLHLY_EXP_RANK);
+  const { loading, error, data } = useQuery(GET_MONTHLY_EXP_INCREMENT_RANK);
+
   if (loading) {
     return <h1>loading...</h1>;
   }
-
   if (error) {
     return <h1>{error.message}</h1>;
   }
-
   if (!data) {
     return <h1>user not found</h1>;
   }
@@ -33,12 +34,9 @@ export const MonthlyExpIncrementRank = () => {
   return (
     <>
       <VStack>
-        {rankList.map((x: any, idx: number) => (
+        {rankList.map(({ userPreview, value }, idx) => (
           <div key={idx}>
-            {x.userPreview.login}
-            {/* {x.userPreview.imgUrl} */}
-            //
-            {x.value}
+            {userPreview.login}/{userPreview.imgUrl}/{value}
           </div>
         ))}
       </VStack>

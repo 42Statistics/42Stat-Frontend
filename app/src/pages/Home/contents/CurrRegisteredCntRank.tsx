@@ -1,8 +1,9 @@
 import { VStack } from '@/components/common';
-import { gql, useQuery } from '@apollo/client';
+import { gql } from '@/__generated__';
+import { useQuery } from '@apollo/client';
 
-const GET_CURR_REGI_RANK = gql`
-  query {
+const GET_CURR_REGISTERED_CNT_RANK = gql(/* GraphQL */ `
+  query GetCurrRegisteredCntRank {
     getHomePage {
       currRegisteredCntRank {
         projectPreview {
@@ -12,27 +13,28 @@ const GET_CURR_REGI_RANK = gql`
       }
     }
   }
-`;
+`);
+
 export const CurrRegisteredCntRank = () => {
-  const { loading, error, data } = useQuery(GET_CURR_REGI_RANK);
+  const { loading, error, data } = useQuery(GET_CURR_REGISTERED_CNT_RANK);
+
   if (loading) {
     return <h1>loading...</h1>;
   }
-
   if (error) {
     return <h1>{error.message}</h1>;
   }
-
   if (!data) {
     return <h1>user not found</h1>;
   }
+
   const rankList = data.getHomePage.currRegisteredCntRank;
   return (
     <>
       <VStack>
-        {rankList.map((x: any, idx: number) => (
+        {rankList.map(({ projectPreview, value }, idx) => (
           <div key={idx}>
-            {x.projectPreview.name} {x.value}
+            {projectPreview.name}/{value}
           </div>
         ))}
       </VStack>

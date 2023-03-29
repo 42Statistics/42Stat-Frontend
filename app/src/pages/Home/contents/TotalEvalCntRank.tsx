@@ -1,5 +1,5 @@
-import { VStack } from '@/components/common';
 import { gql } from '@/__generated__';
+import { Rank } from '@/components/elements/ranks/Rank';
 import { useQuery } from '@apollo/client';
 
 const GET_TOTAL_EVAL_CNT_RANK = gql(/* GraphQL */ `
@@ -31,17 +31,17 @@ export const TotalEvalCntRank = () => {
     return <h1>user not found</h1>;
   }
 
-  const rankList = data.getHomePage.totalEvalCntRank;
-
+  const rankList: RankList[] = data.getHomePage.totalEvalCntRank.map(
+    ({ userPreview, value }, idx): RankList => ({
+      id: userPreview.id,
+      name: userPreview.login,
+      value: value,
+      imgUrl: userPreview.imgUrl,
+    }),
+  );
   return (
     <>
-      <VStack>
-        {rankList.map(({ userPreview, value }, idx) => (
-          <div key={idx}>
-            {userPreview.login}/{userPreview.imgUrl}/{value}
-          </div>
-        ))}
-      </VStack>
+      <Rank rankList={rankList} cnt={3} unit="회" />
     </>
   );
 };

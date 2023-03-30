@@ -1,6 +1,15 @@
+import { useTheme } from '@emotion/react';
 import ReactApexChart from 'react-apexcharts';
 
-export const BarChart = ({ data, labels, size }: ChartProps) => {
+export const BarChart = ({
+  data,
+  labels,
+  size,
+  showData,
+  yUnit,
+  seriesName,
+}: ChartProps) => {
+  const theme = useTheme();
   let chartWidth, chartHeight;
   switch (size) {
     case 'sm':
@@ -15,22 +24,70 @@ export const BarChart = ({ data, labels, size }: ChartProps) => {
       chartWidth = '400';
       chartHeight = '350';
   }
+
   const options: ApexCharts.ApexOptions = {
-    // theme: {
-    //   mode: "dark",
-    // },
     chart: {
       type: 'bar',
     },
     xaxis: {
       categories: labels,
     },
-    // yaxis: {
-    //   min: 0,
-    //   title: {
-    //     text: 'Values',
-    //   },
-    // },
+    colors: [
+      theme.colors.primary.light,
+      theme.colors.secondary.light,
+      theme.colors.third.light,
+    ],
+    tooltip: {
+      y: {
+        formatter: function (
+          value,
+          { series, seriesIndex, dataPointIndex, w },
+        ) {
+          return showData![dataPointIndex];
+        },
+      },
+    },
+    states: {
+      normal: {
+        filter: {
+          type: 'none',
+          value: 0,
+        },
+      },
+      hover: {
+        filter: {
+          type: 'darken',
+          value: 0.8,
+        },
+      },
+      active: {
+        allowMultipleDataPointsSelection: false,
+        filter: {
+          type: 'darken',
+          value: 0.6,
+        },
+      },
+    },
+    yaxis: {
+      labels: {
+        formatter: function (value) {
+          return value + `${yUnit}`;
+        },
+      },
+      // title: {
+      //   text: "Percent"
+      // }
+    },
+    dataLabels: {
+      enabled: true,
+      style: {
+        fontSize: '12px',
+        colors: ['black'],
+      },
+      // formatter: function (val, opt) {
+      //   return showData![idx++];
+      // },
+    },
     responsive: [
       {
         /**
@@ -52,7 +109,7 @@ export const BarChart = ({ data, labels, size }: ChartProps) => {
 
   const series: ApexAxisChartSeries = [
     {
-      name: 'series-1',
+      name: `${seriesName}`,
       data: data,
     },
   ];

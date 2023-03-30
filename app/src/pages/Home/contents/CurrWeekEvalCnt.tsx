@@ -1,7 +1,7 @@
 import { gql } from '@/__generated__';
-import { CompareBoard } from '@/components/elements/compareBoard/CompareBoard';
+import { TextCompare } from '@/components/elements/DashboardContentView/Text/TextCompare';
 import { useQuery } from '@apollo/client';
-import { useTheme } from '@emotion/react';
+
 const GET_CURR_WEEK_EVAL_CNT = gql(/* GraphQL */ `
   query GetCurrWeekEvalCnt {
     getHomePage {
@@ -13,7 +13,6 @@ const GET_CURR_WEEK_EVAL_CNT = gql(/* GraphQL */ `
 
 export const CurrWeekEvalCnt = () => {
   const { loading, error, data } = useQuery(GET_CURR_WEEK_EVAL_CNT);
-  const theme = useTheme();
   if (loading) {
     return <h1>loading...</h1>;
   }
@@ -28,8 +27,6 @@ export const CurrWeekEvalCnt = () => {
 
   const { currWeekEvalCnt, lastWeekEvalCnt } = data.getHomePage;
   return (
-    <>
-      <CompareBoard curr={currWeekEvalCnt} last={lastWeekEvalCnt} unit="회" />
-    </>
+    <TextCompare curr={currWeekEvalCnt} last={lastWeekEvalCnt} unit="회" />
   );
 };

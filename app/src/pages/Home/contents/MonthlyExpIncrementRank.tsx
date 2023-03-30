@@ -1,6 +1,7 @@
 import { gql } from '@/__generated__';
-import { Rank } from '@/components/elements/ranks/Rank';
+import { Rank } from '@/components/elements/DashboardContentView/Rank';
 import { useQuery } from '@apollo/client';
+import { RankItemType } from '@/utils/types/Rank';
 
 const GET_MONTHLY_EXP_INCREMENT_RANK = gql(/* GraphQL */ `
   query GetMonthlyExpIncrementRank {
@@ -30,8 +31,8 @@ export const MonthlyExpIncrementRank = () => {
     return <h1>user not found</h1>;
   }
 
-  const rankList: RankList[] = data.getHomePage.monthlyExpIncrementRank.map(
-    ({ userPreview, value }, idx): RankList => ({
+  const rankList: RankItemType[] = data.getHomePage.monthlyExpIncrementRank.map(
+    ({ userPreview, value }) => ({
       id: userPreview.id,
       name: userPreview.login,
       value: value,

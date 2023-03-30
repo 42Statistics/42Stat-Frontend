@@ -1,7 +1,6 @@
 import { gql } from '@/__generated__';
-import { CompareBoard } from '@/components/elements/compareBoard/CompareBoard';
 import { useQuery } from '@apollo/client';
-import { useTheme } from '@emotion/react';
+import { TextDefault } from '@/components/elements/DashboardContentView/Text/TextDefault';
 
 const GET_CURR_MONTH_BLACKHOLED_CNT = gql(/* GraphQL */ `
   query GetCurrMonthBlackholedCnt {
@@ -14,7 +13,6 @@ const GET_CURR_MONTH_BLACKHOLED_CNT = gql(/* GraphQL */ `
 
 export const CurrMonthBlackholedCnt = () => {
   const { loading, error, data } = useQuery(GET_CURR_MONTH_BLACKHOLED_CNT);
-  const theme = useTheme();
 
   if (loading) {
     return <h1>loading...</h1>;
@@ -26,15 +24,7 @@ export const CurrMonthBlackholedCnt = () => {
     return <h1>user not found</h1>;
   }
 
-  const { currMonthBlackholedCnt, lastMonthBlackholedCnt } = data.getHomePage;
+  const { currMonthBlackholedCnt } = data.getHomePage;
 
-  return (
-    <>
-      <CompareBoard
-        curr={currMonthBlackholedCnt}
-        last={lastMonthBlackholedCnt}
-        unit="명"
-      />
-    </>
-  );
+  return <TextDefault text={`${currMonthBlackholedCnt.toLocaleString()}명`} />;
 };

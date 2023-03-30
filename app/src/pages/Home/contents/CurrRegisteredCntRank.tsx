@@ -1,6 +1,7 @@
 import { gql } from '@/__generated__';
-import { Rank } from '@/components/elements/ranks/Rank';
+import { Rank } from '@/components/elements/DashboardContentView/Rank';
 import { useQuery } from '@apollo/client';
+import { RankItemType } from '@/utils/types/Rank';
 
 const GET_CURR_REGISTERED_CNT_RANK = gql(/* GraphQL */ `
   query GetCurrRegisteredCntRank {
@@ -28,9 +29,8 @@ export const CurrRegisteredCntRank = () => {
     return <h1>user not found</h1>;
   }
 
-  const rankList: RankList[] = data.getHomePage.currRegisteredCntRank.map(
-    ({ projectPreview, value }, idx): RankList => ({
-      id: idx.toString(),
+  const rankList: RankItemType[] = data.getHomePage.currRegisteredCntRank.map(
+    ({ projectPreview, value }) => ({
       name: projectPreview.name,
       value: value,
     }),

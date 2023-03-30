@@ -8,7 +8,7 @@ const GET_LAST_EXAM_RESULT = gql(/* GraphQL */ `
       lastExamResult {
         rank
         passCnt
-        total
+        totalCnt
       }
     }
   }
@@ -32,9 +32,9 @@ export const LastExamResult = () => {
   return (
     <>
       <VStack>
-        {result.map(({ rank, passCnt, total }, idx) => (
+        {result.map(({ rank, passCnt, totalCnt }, idx) => (
           <div key={idx}>
-            {rank}/{passCnt}/{total}
+            {rank}/{passCnt}/{totalCnt}
           </div>
         ))}
       </VStack>

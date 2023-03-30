@@ -1,5 +1,5 @@
-import { VStack } from '@/components/common';
 import { gql } from '@/__generated__';
+import { Rank } from '@/components/elements/ranks/Rank';
 import { useQuery } from '@apollo/client';
 
 const GET_MONTHLY_EXP_INCREMENT_RANK = gql(/* GraphQL */ `
@@ -29,17 +29,18 @@ export const MonthlyExpIncrementRank = () => {
   if (!data) {
     return <h1>user not found</h1>;
   }
-  const rankList = data.getHomePage.monthlyExpIncrementRank;
 
+  const rankList: RankList[] = data.getHomePage.monthlyExpIncrementRank.map(
+    ({ userPreview, value }, idx): RankList => ({
+      id: userPreview.id,
+      name: userPreview.login,
+      value: value,
+      imgUrl: userPreview.imgUrl,
+    }),
+  );
   return (
     <>
-      <VStack>
-        {rankList.map(({ userPreview, value }, idx) => (
-          <div key={idx}>
-            {userPreview.login}/{userPreview.imgUrl}/{value}
-          </div>
-        ))}
-      </VStack>
+      <Rank rankList={rankList} cnt={5} unit="XP" />
     </>
   );
 };

@@ -1,1 +1,1 @@
-pnpm i && pnpm run dev
+pnpm i && pnpm compile && pnpm run dev

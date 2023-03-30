@@ -32,17 +32,30 @@ export const RankItem = ({ rank, item, unit }: RankItemProps) => {
           위
         </Text>
       </HStack>
-      <Text
-        color={color}
-        fontSize={theme.fonts.size.h3}
-        fontWeight={theme.fonts.weight.medium}
+      <HStack
+        w="100%"
+        spacing="1rem"
+        style={{ justifyContent: 'flex-start', flexWrap: 'wrap' }}
       >
-        {`${name} (${value}${unit})`}
-      </Text>
+        <Text
+          color={color}
+          fontSize={theme.fonts.size.h3}
+          fontWeight={theme.fonts.weight.medium}
+        >
+          {name}
+        </Text>
+        <Text
+          color={color}
+          fontSize={theme.fonts.size.h3}
+          fontWeight={theme.fonts.weight.medium}
+        >
+          {`(${value}${unit})`}
+        </Text>
+      </HStack>
       {imgUrl ? (
         <>
           <Spacer />
-          <Avatar size="4rem" src={imgUrl} style={{ marginLeft: '2rem' }} />
+          <Avatar size="4rem" src={imgUrl} />
         </>
       ) : null}
     </HStack>

@@ -49,7 +49,7 @@ export const RankItem = ({ rank, item, unit }: RankItemProps) => {
           fontSize={theme.fonts.size.h3}
           fontWeight={theme.fonts.weight.medium}
         >
-          {`(${value}${unit})`}
+          {`(${value.toLocaleString()}${unit})`}
         </Text>
       </HStack>
       {imgUrl ? (

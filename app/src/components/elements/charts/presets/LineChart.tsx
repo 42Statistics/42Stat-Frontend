@@ -1,6 +1,15 @@
+import { useTheme } from '@emotion/react';
 import ReactApexChart from 'react-apexcharts';
 
-export const LineChart = ({ data, labels, size }: ChartProps) => {
+export const LineChart = ({
+  data,
+  labels,
+  size,
+  showData,
+  yUnit,
+  seriesName,
+}: ChartProps) => {
+  const theme = useTheme();
   let chartWidth, chartHeight;
   switch (size) {
     case 'sm':
@@ -15,25 +24,84 @@ export const LineChart = ({ data, labels, size }: ChartProps) => {
       chartWidth = '400';
       chartHeight = '350';
   }
+
   const options: ApexCharts.ApexOptions = {
-    // theme: {
-    //   mode: "dark",
-    // },
     chart: {
       type: 'line',
-      height: size === 'sm' ? '500' : '500',
-      // width: size === 'long' ? '200%' : '550',
     },
     xaxis: {
       categories: labels,
+      axisBorder: {
+        offsetX: -10,
+      },
     },
-    // yaxis: {
-    //   min: 0,
-    //   title: {
-    //     text: 'Values',
-    //   },
-    // },
-
+    grid: {
+      padding: {
+        left: 20, // or whatever value that works
+        // right: 30, // or whatever value that works
+      },
+    },
+    colors: [
+      theme.colors.primary.default,
+      theme.colors.secondary.default,
+      theme.colors.third.default,
+    ],
+    tooltip: {
+      y: {
+        formatter: function (
+          value,
+          { series, seriesIndex, dataPointIndex, w },
+        ) {
+          return showData![dataPointIndex];
+        },
+      },
+    },
+    states: {
+      normal: {
+        filter: {
+          type: 'none',
+          value: 0,
+        },
+      },
+      hover: {
+        filter: {
+          type: 'darken',
+          value: 0.8,
+        },
+      },
+      active: {
+        allowMultipleDataPointsSelection: false,
+        filter: {
+          type: 'darken',
+          value: 0.6,
+        },
+      },
+    },
+    yaxis: {
+      labels: {
+        formatter: function (value) {
+          return value + `${yUnit}`;
+        },
+      },
+      // title: {
+      //   text: "Percent"
+      // }
+    },
+    dataLabels: {
+      enabled: true,
+      style: {
+        fontSize: '12px',
+        // colors: ['black'],
+      },
+      // formatter: function (val, opt) {
+      //   return showData![idx++];
+      // },
+    },
+    stroke: {
+      width: 2,
+      // curve: 'smooth',
+      curve: 'straight',
+    },
     responsive: [
       {
         /**
@@ -43,7 +111,7 @@ export const LineChart = ({ data, labels, size }: ChartProps) => {
         breakpoint: 3000,
         options: {
           chart: {
-            // height: 200,
+            // width: 200,
           },
           legend: {
             position: 'bottom',
@@ -55,7 +123,7 @@ export const LineChart = ({ data, labels, size }: ChartProps) => {
 
   const series: ApexAxisChartSeries = [
     {
-      name: 'series-1',
+      name: `${seriesName}`,
       data: data,
     },
   ];
@@ -63,9 +131,9 @@ export const LineChart = ({ data, labels, size }: ChartProps) => {
   return (
     <ReactApexChart
       options={options}
-      series={series}
       height={chartHeight}
       width={chartWidth}
+      series={series}
       type="line"
     />
   );

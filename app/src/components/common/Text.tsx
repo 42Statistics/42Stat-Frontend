@@ -13,3 +13,11 @@ export const Text = styled.p<TextProps>`
   color: ${({ theme, color = theme.colors.mono.black }) => color};
   line-height: 1.5;
 `;
+
+export const PrimaryText = styled(Text)`
+  color: ${({ theme }) => theme.colors.primary.default};
+`;
+
+export const SecondaryText = styled(Text)`
+  color: ${({ theme }) => theme.colors.secondary.default};
+`;

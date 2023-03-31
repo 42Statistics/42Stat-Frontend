@@ -3,25 +3,25 @@ import { css, Theme } from '@emotion/react';
 export const global = (theme: Theme) => css`
   @font-face {
     font-family: 'Noto Sans KR';
-    src: url('fonts/NotoSansKR-Light.otf');
+    src: url('/fonts/NotoSansKR-Light.otf');
     font-weight: 300;
   }
 
   @font-face {
     font-family: 'Noto Sans KR';
-    src: url('fonts/NotoSansKR-Regular.otf');
+    src: url('/fonts/NotoSansKR-Regular.otf');
     font-weight: 400;
   }
 
   @font-face {
     font-family: 'Noto Sans KR';
-    src: url('fonts/NotoSansKR-Medium.otf');
+    src: url('/fonts/NotoSansKR-Medium.otf');
     font-weight: 500;
   }
 
   @font-face {
     font-family: 'Noto Sans KR';
-    src: url('fonts/NotoSansKR-Bold.otf');
+    src: url('/fonts/NotoSansKR-Bold.otf');
     font-weight: 700;
   }
 

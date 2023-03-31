@@ -1,6 +1,7 @@
 import { gql } from '@/__generated__';
 import { TextCompare } from '@/components/elements/DashboardContentView/Text/TextCompare';
 import { useQuery } from '@apollo/client';
+import { Spinner } from '@/components/common';
 
 const GET_CURR_WEEK_EVAL_CNT = gql(/* GraphQL */ `
   query GetCurrWeekEvalCnt {
@@ -13,9 +14,7 @@ const GET_CURR_WEEK_EVAL_CNT = gql(/* GraphQL */ `
 
 export const CurrWeekEvalCnt = () => {
   const { loading, error, data } = useQuery(GET_CURR_WEEK_EVAL_CNT);
-  if (loading) {
-    return <h1>loading...</h1>;
-  }
+  if (loading) return <Spinner />;
 
   if (error) {
     return <h1>{error.message}</h1>;

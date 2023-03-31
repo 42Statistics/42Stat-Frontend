@@ -1,6 +1,7 @@
 import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import { TextDefault } from '@/components/elements/DashboardContentView/Text/TextDefault';
+import { Spinner } from '@/components/common';
 
 const GET_CURR_MONTH_BLACKHOLED_CNT = gql(/* GraphQL */ `
   query GetCurrMonthBlackholedCnt {
@@ -14,9 +15,7 @@ const GET_CURR_MONTH_BLACKHOLED_CNT = gql(/* GraphQL */ `
 export const CurrMonthBlackholedCnt = () => {
   const { loading, error, data } = useQuery(GET_CURR_MONTH_BLACKHOLED_CNT);
 
-  if (loading) {
-    return <h1>loading...</h1>;
-  }
+  if (loading) return <Spinner />;
   if (error) {
     return <h1>{error.message}</h1>;
   }

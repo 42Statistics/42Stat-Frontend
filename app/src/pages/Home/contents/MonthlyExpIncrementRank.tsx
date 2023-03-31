@@ -2,6 +2,7 @@ import { gql } from '@/__generated__';
 import { Rank } from '@/components/elements/DashboardContentView/Rank';
 import { useQuery } from '@apollo/client';
 import { RankItemType } from '@/utils/types/Rank';
+import { Spinner } from '@/components/common';
 
 const GET_MONTHLY_EXP_INCREMENT_RANK = gql(/* GraphQL */ `
   query GetMonthlyExpIncrementRank {
@@ -21,9 +22,7 @@ const GET_MONTHLY_EXP_INCREMENT_RANK = gql(/* GraphQL */ `
 export const MonthlyExpIncrementRank = () => {
   const { loading, error, data } = useQuery(GET_MONTHLY_EXP_INCREMENT_RANK);
 
-  if (loading) {
-    return <h1>loading...</h1>;
-  }
+  if (loading) return <Spinner />;
   if (error) {
     return <h1>{error.message}</h1>;
   }
@@ -39,9 +38,5 @@ export const MonthlyExpIncrementRank = () => {
       imgUrl: userPreview.imgUrl,
     }),
   );
-  return (
-    <>
-      <Rank rankList={rankList} cnt={5} unit="XP" />
-    </>
-  );
+  return <Rank rankList={rankList} cnt={5} unit="XP" />;
 };

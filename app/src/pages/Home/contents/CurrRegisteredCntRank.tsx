@@ -2,6 +2,7 @@ import { gql } from '@/__generated__';
 import { Rank } from '@/components/elements/DashboardContentView/Rank';
 import { useQuery } from '@apollo/client';
 import { RankItemType } from '@/utils/types/Rank';
+import { Spinner } from '@/components/common';
 
 const GET_CURR_REGISTERED_CNT_RANK = gql(/* GraphQL */ `
   query GetCurrRegisteredCntRank {
@@ -19,9 +20,7 @@ const GET_CURR_REGISTERED_CNT_RANK = gql(/* GraphQL */ `
 export const CurrRegisteredCntRank = () => {
   const { loading, error, data } = useQuery(GET_CURR_REGISTERED_CNT_RANK);
 
-  if (loading) {
-    return <h1>loading...</h1>;
-  }
+  if (loading) return <Spinner />;
   if (error) {
     return <h1>{error.message}</h1>;
   }

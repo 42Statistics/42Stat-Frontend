@@ -13,3 +13,4 @@ export * from './Input';
 
 /* etc */
 export * from './Overlay';
+export * from './StyledInfoTable';

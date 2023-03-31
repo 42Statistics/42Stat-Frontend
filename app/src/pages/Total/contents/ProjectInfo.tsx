@@ -6,16 +6,18 @@ import {
   Input,
   Spacer,
   Spinner,
+  StyledInfoTable,
   Text,
   VStack,
 } from '@/components/common';
 import { PieChart } from '@/components/elements/charts/presets/PieChart';
-import { theme } from '@/styles/theme';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useRef, useState } from 'react';
 import { BiSearch } from 'react-icons/bi';
+import { Label } from '@/components/common/Label';
+
 const GET_PROJECT_INFO = gql(/* GraphQL */ `
   query GetProjectInfo($projectName: String!) {
     getTotalPage {
@@ -110,28 +112,37 @@ export const ProjectInfo = () => {
           </VStack>
         </VStack>
         <Divider orientation="vertical" />
-        <VStack spacing="1rem">
-          <HStack w="100%" spacing="2rem">
-            <StyledText>사용 기술</StyledText>
-            <Text>{...skills}</Text>
-          </HStack>
-          <HStack w="100%" spacing="2rem">
-            <StyledText>통과 시 평균 점수</StyledText>
-            <Text>{averagePassFinalmark}</Text>
-          </HStack>
-          <HStack w="100%" spacing="2rem">
-            <StyledText>평균 소요 기간</StyledText>
-            <Text>{averageDurationTime}일</Text>
-          </HStack>
-          <HStack w="100%" spacing="2rem">
-            <StyledText>총 제출 횟수</StyledText>
-            <Text>{totalCloseCnt.toLocaleString()}회</Text>
-          </HStack>
-          <HStack w="100%" spacing="2rem">
-            <StyledText>현재 등록 인원</StyledText>
-            <Text>{currRegisteredCnt}명</Text>
-          </HStack>
-        </VStack>
+
+        <StyledInfoTable>
+          <tbody>
+            <tr>
+              <td>사용 기술</td>
+              <td>
+                <HStack spacing="1rem">
+                  {skills.map((skill, idx) => {
+                    return skill ? <Label key={idx} text={skill} /> : null;
+                  })}
+                </HStack>
+              </td>
+            </tr>
+            <tr>
+              <td>통과 시 평균 점수</td>
+              <td>{averagePassFinalmark}</td>
+            </tr>
+            <tr>
+              <td>평균 소요 기간</td>
+              <td>{averageDurationTime}일</td>
+            </tr>
+            <tr>
+              <td>총 제출 횟수</td>
+              <td>{totalCloseCnt.toLocaleString()}개</td>
+            </tr>
+            <tr>
+              <td>현재 등록 인원</td>
+              <td>{currRegisteredCnt.toLocaleString()}명</td>
+            </tr>
+          </tbody>
+        </StyledInfoTable>
         <Divider orientation="vertical" />
         <PieChart
           data={[passPercentage, 100 - passPercentage]}
@@ -146,9 +157,9 @@ export const ProjectInfo = () => {
 const SubjectSearchBarLayout = styled.div`
   padding: 0.8rem 2rem;
   border-radius: 3rem;
-  background-color: ${theme.colors.primary.light};
+  background-color: ${({ theme }) => theme.colors.primary.light};
 `;
 
 const StyledText = styled(Text)`
-  color: ${theme.colors.primary.default};
+  color: ${({ theme }) => theme.colors.primary.default};
 `;

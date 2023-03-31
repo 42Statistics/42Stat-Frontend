@@ -3,6 +3,7 @@ import {
   HStack,
   PrimaryText,
   Spinner,
+  StyledInfoTable,
   Text,
   VStack,
 } from '@/components/common';
@@ -134,7 +135,7 @@ export const UserProfile = () => {
           </HStack>
         </VStack>
       </HStack>
-      <StyledTable>
+      <StyledInfoTable>
         <tbody>
           <tr>
             <td>본과정 시작일</td>
@@ -157,22 +158,7 @@ export const UserProfile = () => {
             <td>{`${scoreInfo.current.toLocaleString()} (${scoreInfo.rankInCoalition.toLocaleString()}위 / 전체 ${scoreInfo.rankInTotal.toLocaleString()}위)`}</td>
           </tr>
         </tbody>
-      </StyledTable>
+      </StyledInfoTable>
     </HStack>
   );
 };
-
-const StyledTable = styled.table`
-  text-align: center;
-  font-size: ${({ theme }) => theme.fonts.size.h3};
-
-  th,
-  td {
-    padding: 0.8rem 2rem;
-  }
-
-  td:first-of-type {
-    color: ${({ theme }) => theme.colors.primary.default};
-    font-weight: ${({ theme }) => theme.fonts.weight.medium};
-  }
-`;

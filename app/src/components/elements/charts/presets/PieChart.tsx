@@ -1,6 +1,8 @@
+import { useTheme } from '@emotion/react';
 import ReactApexChart from 'react-apexcharts';
 
 export const PieChart = ({ data, labels, size }: ChartProps) => {
+  const theme = useTheme();
   let chartWidth, chartHeight;
   switch (size) {
     case 'sm':
@@ -17,6 +19,20 @@ export const PieChart = ({ data, labels, size }: ChartProps) => {
       type: 'pie',
     },
     labels: labels,
+    plotOptions: {
+      pie: {
+        startAngle: -270,
+        endAngle: 90,
+      },
+    },
+    dataLabels: {
+      enabled: false,
+    },
+    colors: [
+      theme.colors.primary.default,
+      theme.colors.secondary.default,
+      theme.colors.third.default,
+    ],
     responsive: [
       {
         /**

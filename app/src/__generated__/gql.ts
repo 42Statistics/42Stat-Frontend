@@ -21,6 +21,7 @@ const documents = {
     "\n  query GetMonthlyAccessTimeRank {\n    getHomePage {\n      monthlyAccessTimeRank {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n": types.GetMonthlyAccessTimeRankDocument,
     "\n  query GetMonthlyExpIncrementRank {\n    getHomePage {\n      monthlyExpIncrementRank {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n": types.GetMonthlyExpIncrementRankDocument,
     "\n  query GetTotalEvalCntRank {\n    getHomePage {\n      totalEvalCntRank {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n": types.GetTotalEvalCntRankDocument,
+    "\n  query GetProjectInfo($projectName: String!) {\n    getTotalPage {\n      projectInfo(projectName: $projectName) {\n        id\n        name\n        skills\n        averageDurationTime\n        averagePassFinalmark\n        totalCloseCnt\n        currRegisteredCnt\n        passPercentage\n        totalEvalCnt\n      }\n    }\n  }\n": types.GetProjectInfoDocument,
 };
 
 /**
@@ -69,6 +70,10 @@ export function gql(source: "\n  query GetMonthlyExpIncrementRank {\n    getHome
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query GetTotalEvalCntRank {\n    getHomePage {\n      totalEvalCntRank {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetTotalEvalCntRank {\n    getHomePage {\n      totalEvalCntRank {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query GetProjectInfo($projectName: String!) {\n    getTotalPage {\n      projectInfo(projectName: $projectName) {\n        id\n        name\n        skills\n        averageDurationTime\n        averagePassFinalmark\n        totalCloseCnt\n        currRegisteredCnt\n        passPercentage\n        totalEvalCnt\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetProjectInfo($projectName: String!) {\n    getTotalPage {\n      projectInfo(projectName: $projectName) {\n        id\n        name\n        skills\n        averageDurationTime\n        averagePassFinalmark\n        totalCloseCnt\n        currRegisteredCnt\n        passPercentage\n        totalEvalCnt\n      }\n    }\n  }\n"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

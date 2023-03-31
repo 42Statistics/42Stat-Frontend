@@ -1,11 +1,11 @@
 import { HStack, VStack, Divider } from '@/components/common';
 import { Desktop, Tablet, Mobile } from '@/utils/responsive/Device';
 import styled from '@emotion/styled';
-import { Outlet } from 'react-router-dom';
+import { PropsWithChildren } from 'react';
 import { DesktopHeader, TabletHeader, MobileHeader } from '../elements/Header';
 import { DesktopNavBar, TabletNavBar, MobileNavBar } from '../elements/NavBar';
 
-export const MainLayout = () => {
+export const MainLayout = ({ children }: PropsWithChildren) => {
   return (
     <>
       <Desktop>
@@ -13,9 +13,7 @@ export const MainLayout = () => {
           <DesktopNavBar />
           <VStack w="100%" h="100%" css={{ marginLeft: '24rem' }}>
             <DesktopHeader />
-            <PageLayout>
-              <Outlet />
-            </PageLayout>
+            <PageLayout>{children}</PageLayout>
           </VStack>
         </HStack>
       </Desktop>
@@ -24,9 +22,7 @@ export const MainLayout = () => {
           <TabletNavBar />
           <VStack w="100%" h="100%">
             <TabletHeader />
-            <PageLayout>
-              <Outlet />
-            </PageLayout>
+            <PageLayout>{children}</PageLayout>
           </VStack>
         </HStack>
       </Tablet>
@@ -34,9 +30,7 @@ export const MainLayout = () => {
         <VStack w="100%" spacing="2rem">
           <MobileHeader />
           <Divider />
-          <PageLayout css={{ marginBottom: '6rem' }}>
-            <Outlet />
-          </PageLayout>
+          <PageLayout css={{ marginBottom: '6rem' }}>{children}</PageLayout>
         </VStack>
         <MobileNavBar />
       </Mobile>

@@ -1,7 +1,7 @@
 import { useTheme } from '@emotion/react';
 import ReactApexChart from 'react-apexcharts';
 
-export const BarChart = ({
+export const CoalitionStackChart = ({
   data,
   labels,
   size,
@@ -25,6 +25,10 @@ export const BarChart = ({
       chartHeight = '350';
   }
 
+  function convertToMillion(num: number) {
+    return (num / 1000000).toFixed(1) + 'M';
+  }
+
   const options: ApexCharts.ApexOptions = {
     chart: {
       type: 'bar',
@@ -32,10 +36,17 @@ export const BarChart = ({
     xaxis: {
       categories: labels,
     },
+    plotOptions: {
+      bar: {
+        columnWidth: '45%',
+        distributed: true,
+      },
+    },
     colors: [
-      theme.colors.primary.default,
-      theme.colors.secondary.default,
-      theme.colors.third.default,
+      theme.colors.coalition.gun,
+      theme.colors.coalition.gon,
+      theme.colors.coalition.gam,
+      theme.colors.coalition.lee,
     ],
     tooltip: {
       y: {
@@ -71,7 +82,7 @@ export const BarChart = ({
     yaxis: {
       labels: {
         formatter: function (value) {
-          return value.toString() + `${yUnit}`;
+          return convertToMillion(value);
         },
       },
       // title: {
@@ -79,7 +90,7 @@ export const BarChart = ({
       // }
     },
     dataLabels: {
-      enabled: true,
+      enabled: false,
       style: {
         fontSize: '12px',
         colors: ['black'],
@@ -88,14 +99,14 @@ export const BarChart = ({
       //   return showData![idx++];
       // },
     },
-    stroke: {
-      width: 1,
-      // curve: 'smooth',
-      curve: 'straight',
-    },
+    // stroke: {
+    //   width: 1,
+    //   // curve: 'smooth',
+    //   curve: 'straight',
+    // },
     fill: {
       type: 'solid',
-      opacity: 0.1,
+      opacity: 1,
     },
     responsive: [
       {

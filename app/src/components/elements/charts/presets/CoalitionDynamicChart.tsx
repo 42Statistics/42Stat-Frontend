@@ -1,7 +1,18 @@
 import { useTheme } from '@emotion/react';
 import ReactApexChart from 'react-apexcharts';
 
-export const BarChart = ({
+function chunkArray<T>(arr: T[], chunkSize: number): T[][] {
+  return arr.reduce((chunks: T[][], el: T, i: number) => {
+    if (i % chunkSize === 0) {
+      chunks.push([el]);
+    } else {
+      chunks[chunks.length - 1].push(el);
+    }
+    return chunks;
+  }, []);
+}
+
+export const CoalitionDynamicChart = ({
   data,
   labels,
   size,
@@ -9,6 +20,10 @@ export const BarChart = ({
   yUnit,
   seriesName,
 }: ChartProps) => {
+  //4등분 해서 건곤감리 시리즈의 배열로 만들기
+  const chunkedData = chunkArray<number>(data, 4);
+  const [dataGun, dataGon, dataGam, dataLee] = chunkedData;
+
   const theme = useTheme();
   let chartWidth, chartHeight;
   switch (size) {
@@ -25,28 +40,23 @@ export const BarChart = ({
       chartHeight = '350';
   }
 
+  function convertToMillion(num: number) {
+    return (num / 1000000).toFixed(2) + 'M';
+  }
+
   const options: ApexCharts.ApexOptions = {
     chart: {
-      type: 'bar',
+      type: 'line',
     },
     xaxis: {
       categories: labels,
     },
     colors: [
-      theme.colors.primary.default,
-      theme.colors.secondary.default,
-      theme.colors.third.default,
+      theme.colors.coalition.gun,
+      theme.colors.coalition.gon,
+      theme.colors.coalition.gam,
+      theme.colors.coalition.lee,
     ],
-    tooltip: {
-      y: {
-        formatter: function (
-          value,
-          { series, seriesIndex, dataPointIndex, w },
-        ) {
-          return showData![dataPointIndex];
-        },
-      },
-    },
     states: {
       normal: {
         filter: {
@@ -71,7 +81,7 @@ export const BarChart = ({
     yaxis: {
       labels: {
         formatter: function (value) {
-          return value.toString() + `${yUnit}`;
+          return convertToMillion(value);
         },
       },
       // title: {
@@ -79,7 +89,7 @@ export const BarChart = ({
       // }
     },
     dataLabels: {
-      enabled: true,
+      enabled: false,
       style: {
         fontSize: '12px',
         colors: ['black'],
@@ -88,14 +98,19 @@ export const BarChart = ({
       //   return showData![idx++];
       // },
     },
-    stroke: {
-      width: 1,
-      // curve: 'smooth',
-      curve: 'straight',
-    },
+    // stroke: {
+    //   width: 1,
+    //   // curve: 'smooth',
+    //   curve: 'straight',
+    // },
     fill: {
       type: 'solid',
-      opacity: 0.1,
+      opacity: 1,
+    },
+    stroke: {
+      width: 1.5,
+      // curve: 'smooth',
+      curve: 'straight',
     },
     responsive: [
       {
@@ -118,8 +133,20 @@ export const BarChart = ({
 
   const series: ApexAxisChartSeries = [
     {
-      name: `${seriesName}`,
-      data: data,
+      name: '건',
+      data: dataGun,
+    },
+    {
+      name: '곤',
+      data: dataGon,
+    },
+    {
+      name: '감',
+      data: dataGam,
+    },
+    {
+      name: '리',
+      data: dataLee,
     },
   ];
 
@@ -129,7 +156,7 @@ export const BarChart = ({
       height={chartHeight}
       width={chartWidth}
       series={series}
-      type="bar"
+      type="line"
     />
   );
 };

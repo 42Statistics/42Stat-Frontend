@@ -12,7 +12,7 @@ import { getTitleWithLogin } from '@/utils/getTitleWithLogin';
 import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
-import styled from '@emotion/styled';
+import { truncate } from 'lodash';
 
 const GET_USER_PROFILE = gql(/* GraphQL */ `
   query GetUserProfile {
@@ -99,11 +99,8 @@ export const UserProfile = () => {
             </Text>
           </VStack>
           <HStack>
-            <Text
-              color={theme.colors.mono.gray.default}
-              fontSize={theme.fonts.size.h3}
-            >
-              {titleWithLogin}
+            <Text color={theme.colors.mono.gray.default}>
+              {truncate(titleWithLogin, { length: 42 })}
             </Text>
             <Text>{coalition?.name}</Text>
           </HStack>

@@ -1,3 +1,3 @@
-export const ProfileEvaluation = () => {
+export const ProfileEvaluationPage = () => {
   return <>ProfileEvaluation</>;
 };

@@ -5,20 +5,27 @@ import { DesktopDashboardRow } from '@/components/elements/DashboardRow';
 import { DashboardItemContainer } from '@/components/elements/DashboardItemContainer';
 import { DashboardItem } from '@/components/elements/DashboardItem';
 import { UserProfile } from './contents';
-import { useState } from 'react';
-import { Button, HStack } from '@/components/common';
+import { Suspense, useState } from 'react';
+import { ProfileTabBar } from './ProfileTabBar';
+import { useProfilePage } from './hooks/useProfilePage';
+import { ProfileMenu } from '@/utils/types/ProfileMenu';
+import styled from '@emotion/styled';
+import { lazyImport } from '@/utils/lazyImport';
+import { Spinner } from '@/components/common';
+
+const { ProfileGeneralPage } = lazyImport(
+  () => import('@/pages/ProfileGeneral'),
+  'ProfileGeneralPage',
+);
+const { ProfileEvaluationPage } = lazyImport(
+  () => import('@/pages/ProfileEvaluation'),
+  'ProfileEvaluationPage',
+);
 
 export const ProfilePage = () => {
   const { username } = useParams();
-  const [isGeneralTab, setIsGeneralTab] = useState(true);
-
-  const onClickGeneralTab = () => {
-    setIsGeneralTab(true);
-  };
-
-  const onClickEvaluationTab = () => {
-    setIsGeneralTab(false);
-  };
+  const { options } = useProfilePage();
+  const [selected, setSelected] = useState<ProfileMenu>('General');
 
   return (
     <>
@@ -36,11 +43,26 @@ export const ProfilePage = () => {
           ></DashboardItemContainer>
         </DesktopDashboardRow>
       </DesktopDashboard>
-      <HStack>
-        <Button element={<p>일반</p>} onClick={onClickGeneralTab} />
-        <Button element={<p>평가</p>} onClick={onClickEvaluationTab} />
-      </HStack>
-      {isGeneralTab ? <div>General</div> : <div>Evaluation</div>}
+      <ProfileTabBarLayout>
+        <ProfileTabBar
+          value={selected}
+          onChange={setSelected}
+          options={options}
+        />
+      </ProfileTabBarLayout>
+
+      <Suspense fallback={<Spinner />}>
+        {selected === 'General' ? (
+          <ProfileGeneralPage />
+        ) : (
+          <ProfileEvaluationPage />
+        )}
+      </Suspense>
     </>
   );
 };
+
+const ProfileTabBarLayout = styled.div`
+  width: 100%;
+  padding: 4rem 3rem;
+`;

@@ -8,6 +8,7 @@ type RankItemProps = {
   unit: string;
 };
 
+// FIXME: 뭔가 Spacer가 공간을 먹는 것 같다. flex가 너무 쉽게 wrap된다.
 export const RankItem = ({ rank, item, unit }: RankItemProps) => {
   const theme = useTheme();
   const { name, value, imgUrl } = item;
@@ -15,7 +16,7 @@ export const RankItem = ({ rank, item, unit }: RankItemProps) => {
     rank === 1 ? theme.colors.secondary.default : theme.colors.mono.black;
 
   return (
-    <HStack spacing="2rem">
+    <HStack w="100%" spacing="2rem">
       <HStack align="baseline">
         <Text
           color={color}

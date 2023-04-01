@@ -5,7 +5,7 @@ export type NavMenuIconSvgProps = {
 };
 
 export type NavMenuOption = {
-  menu: Menu;
+  menu: NavMenu;
   text: string;
   path: string;
   trailingSpacer?: boolean;

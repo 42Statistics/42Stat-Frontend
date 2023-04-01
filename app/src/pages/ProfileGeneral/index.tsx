@@ -1,3 +1,3 @@
-export const ProfileGeneral = () => {
+export const ProfileGeneralPage = () => {
   return <>ProfileGeneral</>;
 };

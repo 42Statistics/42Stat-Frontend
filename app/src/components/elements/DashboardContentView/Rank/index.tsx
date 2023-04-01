@@ -10,7 +10,7 @@ type RankProps = {
 
 export const Rank = ({ rankList, cnt, unit }: RankProps) => {
   return (
-    <VStack spacing="2rem" align="flex-start">
+    <VStack w="100%" spacing="2rem" align="start">
       {rankList.map((rankItem, idx) => {
         const rank = idx + 1;
         return rank <= cnt ? (

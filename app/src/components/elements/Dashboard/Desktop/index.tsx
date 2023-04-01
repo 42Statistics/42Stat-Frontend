@@ -10,5 +10,4 @@ const DesktopDashboardLayout = styled.div`
   width: 100%;
   flex-direction: column;
   gap: 2rem;
-  padding: 4rem;
 `;

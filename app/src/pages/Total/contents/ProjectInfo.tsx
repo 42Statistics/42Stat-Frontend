@@ -1,22 +1,22 @@
-import { gql } from '@/__generated__';
 import {
-  Button,
   Divider,
   HStack,
-  Input,
+  PrimaryText,
   Spacer,
   Spinner,
   StyledInfoTable,
   Text,
   VStack,
 } from '@/components/common';
+import { Label } from '@/components/common/Label';
 import { PieChart } from '@/components/elements/charts/presets/PieChart';
+import { useSearchBar } from '@/components/elements/SearchBar/hooks/useSearchBar';
+import { ProjectSearchBar } from '@/components/elements/SearchBar/ProjectSearchBar';
+import { isEnterKeyReleased } from '@/utils/isEnterKeyReleased';
+import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
-import styled from '@emotion/styled';
-import { useRef, useState } from 'react';
-import { BiSearch } from 'react-icons/bi';
-import { Label } from '@/components/common/Label';
+import { useState } from 'react';
 
 const GET_PROJECT_INFO = gql(/* GraphQL */ `
   query GetProjectInfo($projectName: String!) {
@@ -36,15 +36,27 @@ const GET_PROJECT_INFO = gql(/* GraphQL */ `
   }
 `);
 
-// TODO: input에 debouncer적용예정
+// TODO: 실제 검색으로 변경
+const searchProject = (input: string) => {
+  console.log(input);
+};
+
 // TODO: 서클과 과제설명을 프론트에서 처리해주는거 만들어야됨
 export const ProjectInfo = () => {
-  const [projectName, setProjectName] = useState<string>('');
-  const projectNameRef = useRef<HTMLInputElement>(null);
+  const { input, handleChange } = useSearchBar(searchProject);
+  const [projectName, setProjectName] = useState<string>('libft');
   const theme = useTheme();
   const { loading, error, data } = useQuery(GET_PROJECT_INFO, {
     variables: { projectName },
   });
+
+  // FIXME: ProjectSearchBar와 UserSearchBar 폼 통일
+  // TODO: Enter가 아니라 리스트 클릭으로 이동하도록 변경
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (isEnterKeyReleased(e)) {
+      setProjectName(input);
+    }
+  };
 
   if (loading) return <Spinner />;
   if (error) {
@@ -64,39 +76,16 @@ export const ProjectInfo = () => {
     passPercentage,
   } = data.getTotalPage.projectInfo;
 
-  const handleClick = () => {
-    if (projectNameRef.current !== null) {
-      setProjectName(projectNameRef.current.value);
-    }
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      if (projectNameRef.current !== null) {
-        setProjectName(projectNameRef.current.value);
-      }
-    }
-  };
-
   return (
     <VStack w="100%" h="100%">
       <HStack w="100%">
-        <SubjectSearchBarLayout>
-          <HStack>
-            <Input
-              ref={projectNameRef}
-              onKeyDown={handleKeyDown}
-              css={{ textIndent: '1rem' }}
-            />
-            <Button element={<BiSearch />} onClick={handleClick} />
-          </HStack>
-        </SubjectSearchBarLayout>
+        <ProjectSearchBar onChange={handleChange} onKeyDown={handleKeyDown} />
         <Spacer />
       </HStack>
       <HStack w="100%" h="100%" spacing="5rem">
         <VStack spacing="4rem" align="start">
           <VStack align="start">
-            <StyledText>1서클</StyledText>
+            <PrimaryText>1서클</PrimaryText>
             <Text fontSize="4rem" fontWeight={theme.fonts.weight.bold}>
               {name}
             </Text>
@@ -153,13 +142,3 @@ export const ProjectInfo = () => {
     </VStack>
   );
 };
-
-const SubjectSearchBarLayout = styled.div`
-  padding: 0.8rem 2rem;
-  border-radius: 3rem;
-  background-color: ${({ theme }) => theme.colors.primary.light};
-`;
-
-const StyledText = styled(Text)`
-  color: ${({ theme }) => theme.colors.primary.default};
-`;

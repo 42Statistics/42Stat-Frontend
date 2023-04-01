@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { UserSearchBar } from '@/components/elements/UserSearchBar';
+import { UserSearchBar } from '@/components/elements/SearchBar';
 import { HStack } from '@/components/common';
 
 export const DesktopHeader = () => {

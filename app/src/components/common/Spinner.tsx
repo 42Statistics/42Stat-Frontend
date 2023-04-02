@@ -7,13 +7,11 @@ type SpinnerProps = Partial<{
 }>;
 
 export const Spinner = styled.div<SpinnerProps>`
-  display: inline-block;
-  position: relative;
   width: ${({ size = '2.4rem' }) => size};
   height: ${({ size = '2.4rem' }) => size};
   border: ${({ thickness = '0.2rem' }) => thickness} solid transparent;
-  border-top-color: black;
-  border-left-color: black;
+  border-top-color: ${({ theme }) => theme.colors.mono.black};
+  border-left-color: ${({ theme }) => theme.colors.mono.black};
   border-radius: 50%;
   animation: spin 1s linear infinite;
 

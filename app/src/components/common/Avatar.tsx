@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
-import { ImgHTMLAttributes } from 'react';
 
-type AvatarProps = ImgHTMLAttributes<HTMLImageElement> & {
+type AvatarProps = React.ImgHTMLAttributes<HTMLImageElement> & {
   size?: string;
 };
 
@@ -16,6 +15,7 @@ export const Avatar = ({ size, ...propsExceptSize }: AvatarProps) => {
 type StyledAvatarProps = {
   size?: string;
 };
+
 const StyledAvatar = styled.img<StyledAvatarProps>`
   width: ${({ size = '2.4rem' }) => size};
   height: ${({ size = '2.4rem' }) => size};

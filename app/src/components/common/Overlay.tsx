@@ -1,8 +1,7 @@
 import styled from '@emotion/styled';
-import { MouseEventHandler } from 'react';
 
 type OverlayProps = {
-  onClick: MouseEventHandler<HTMLElement>;
+  onClick: React.MouseEventHandler<HTMLElement>;
 };
 
 export const Overlay = ({ onClick }: OverlayProps) => {

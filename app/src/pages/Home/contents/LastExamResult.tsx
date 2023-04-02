@@ -1,6 +1,6 @@
 import { Spinner } from '@/components/common';
-import { gql } from '@/__generated__';
 import { BarChart } from '@/components/elements/charts/presets/BarChart';
+import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 
 const GET_LAST_EXAM_RESULT = gql(/* GraphQL */ `
@@ -19,11 +19,9 @@ export const LastExamResult = () => {
   const { loading, error, data } = useQuery(GET_LAST_EXAM_RESULT);
 
   if (loading) return <Spinner />;
-
   if (error) {
     return <h1>{error.message}</h1>;
   }
-
   if (!data) {
     return <h1>user not found</h1>;
   }
@@ -37,16 +35,15 @@ export const LastExamResult = () => {
     showDatas.push(passCnt.toString() + '/' + totalCnt.toString());
     barDatas.push(Math.round((passCnt / totalCnt) * 1000) / 10);
   });
+
   return (
-    <>
-      <BarChart
-        data={barDatas}
-        yUnit="%"
-        showData={showDatas}
-        labels={labels}
-        size="lg"
-        seriesName="통과/전체"
-      />
-    </>
+    <BarChart
+      data={barDatas}
+      yUnit="%"
+      showData={showDatas}
+      labels={labels}
+      size="lg"
+      seriesName="통과/전체"
+    />
   );
 };

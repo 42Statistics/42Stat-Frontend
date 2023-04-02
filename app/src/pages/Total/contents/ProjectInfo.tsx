@@ -62,10 +62,10 @@ export const ProjectInfo = () => {
   if (error) {
     return <h1>{error.message}</h1>;
   }
-
   if (!data) {
     return <h1>project not found</h1>;
   }
+
   const {
     name,
     skills,

@@ -9,7 +9,7 @@ export const StyledInfoTable = styled.table`
     padding: 0.8rem 2rem;
   }
 
-  td:first-of-type {
+  & td:first-of-type {
     color: ${({ theme }) => theme.colors.primary.default};
     font-weight: ${({ theme }) => theme.fonts.weight.medium};
   }

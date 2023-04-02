@@ -1,6 +1,6 @@
 import { NavMenu } from '@/utils/types/NavMenu';
 import { useTheme } from '@emotion/react';
-import { MdHome, MdHelp, MdSettings } from 'react-icons/md';
+import { MdHelp, MdHome, MdSettings } from 'react-icons/md';
 import { RiGlobalFill } from 'react-icons/ri';
 
 type NavMenuIconProps = {

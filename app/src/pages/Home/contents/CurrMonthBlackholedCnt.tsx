@@ -1,7 +1,7 @@
+import { Spinner } from '@/components/common';
+import { TextDefault } from '@/components/elements/DashboardContentView/Text/TextDefault';
 import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
-import { TextDefault } from '@/components/elements/DashboardContentView/Text/TextDefault';
-import { Spinner } from '@/components/common';
 
 const GET_CURR_MONTH_BLACKHOLED_CNT = gql(/* GraphQL */ `
   query GetCurrMonthBlackholedCnt {

@@ -1,7 +1,7 @@
-import { HStack } from '@/components/common';
-import { AppLogoSize } from '@/utils/types/AppLogoSize';
 import { AppLogoSvg } from '@/assets/AppLogoSvg';
 import { AppTitleSvg } from '@/assets/AppTitleSvg';
+import { HStack } from '@/components/common';
+import { AppLogoSize } from '@/utils/types/AppLogoSize';
 
 type AppLogoTitleProps = {
   size: AppLogoSize;

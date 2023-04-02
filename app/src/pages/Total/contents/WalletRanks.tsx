@@ -1,7 +1,7 @@
-import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
 import { Rank } from '@/components/elements/DashboardContentView/Rank';
 import { RankItemType } from '@/utils/types/Rank';
+import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 
 const GET_WALLET_RANK = gql(/* GraphQL */ `
@@ -38,5 +38,6 @@ export const WalletRanks = () => {
       imgUrl: userPreview.imgUrl,
     }),
   );
+
   return <Rank rankList={rankList} cnt={3} unit="₳" />;
 };

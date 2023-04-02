@@ -1,11 +1,10 @@
-import { HStack, VStack, Divider } from '@/components/common';
-import { Desktop, Tablet, Mobile } from '@/utils/responsive/Device';
+import { Divider, HStack, VStack } from '@/components/common';
+import { Desktop, Mobile, Tablet } from '@/utils/responsive/Device';
 import styled from '@emotion/styled';
-import { PropsWithChildren } from 'react';
-import { DesktopHeader, TabletHeader, MobileHeader } from '../elements/Header';
-import { DesktopNavBar, TabletNavBar, MobileNavBar } from '../elements/NavBar';
+import { DesktopHeader, MobileHeader, TabletHeader } from '../elements/Header';
+import { DesktopNavBar, MobileNavBar, TabletNavBar } from '../elements/NavBar';
 
-export const MainLayout = ({ children }: PropsWithChildren) => {
+export const MainLayout = ({ children }: React.PropsWithChildren) => {
   return (
     <>
       <Desktop>

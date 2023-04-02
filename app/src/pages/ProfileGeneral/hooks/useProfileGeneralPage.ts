@@ -19,7 +19,6 @@ export const useProfileGeneralPage = () => {
       ],
     },
   ];
-
   const mobileDashboard: MobileDashboardRowInfo[] = [
     {
       row: 2,

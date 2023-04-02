@@ -1,6 +1,6 @@
-import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
 import { BarChart } from '@/components/elements/charts/presets/BarChart';
+import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 
 const GET_USER_CNT_PER_LEVELS = gql(/* GraphQL */ `
@@ -22,10 +22,10 @@ export const UserCntPerLevels = () => {
   if (error) {
     return <h1>{error.message}</h1>;
   }
-
   if (!data) {
     return <h1>user not found</h1>;
   }
+
   const result = data.getTotalPage.userCntPerLevels;
   const showDatas: string[] = [];
   const barDatas: number[] = [];
@@ -41,15 +41,13 @@ export const UserCntPerLevels = () => {
     barDatas.push(Math.round((userCnt / totalNum) * 1000) / 10);
   });
   return (
-    <>
-      <BarChart
-        data={barDatas}
-        yUnit="%"
-        showData={showDatas}
-        labels={labels}
-        size="lg"
-        seriesName="인원수"
-      />
-    </>
+    <BarChart
+      data={barDatas}
+      yUnit="%"
+      showData={showDatas}
+      labels={labels}
+      size="lg"
+      seriesName="인원수"
+    />
   );
 };

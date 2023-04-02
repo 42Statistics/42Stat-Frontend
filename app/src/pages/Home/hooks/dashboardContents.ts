@@ -1,13 +1,13 @@
 import { DashboardItemInfo } from '@/utils/types/Dashboard';
 import {
-  CurrWeekEvalCnt,
-  CurrRegisteredCntRank,
   CurrMonthBlackholedCnt,
-  TotalEvalCntRank,
-  LevelRank,
-  MonthlyExpIncrementRank,
-  MonthlyAccessTimeRank,
+  CurrRegisteredCntRank,
+  CurrWeekEvalCnt,
   LastExamResult,
+  LevelRank,
+  MonthlyAccessTimeRank,
+  MonthlyExpIncrementRank,
+  TotalEvalCntRank,
 } from '../contents';
 
 export const dashboardContents: DashboardItemInfo[] = [

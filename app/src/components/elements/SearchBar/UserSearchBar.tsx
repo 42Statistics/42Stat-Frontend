@@ -18,6 +18,7 @@ const searchUser = (input: string) => {
 export const UserSearchBar = ({ device }: UserSearchBarProps) => {
   const { input, handleChange } = useSearchBar(searchUser);
   const navigate = useNavigate();
+  const theme = useTheme();
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     // e.preventDefault(); // 이걸 넣으면 입력이 안됨
@@ -25,8 +26,6 @@ export const UserSearchBar = ({ device }: UserSearchBarProps) => {
       navigate(`/profile/${input}`);
     }
   };
-
-  const theme = useTheme();
 
   return (
     <div
@@ -47,15 +46,15 @@ export const UserSearchBar = ({ device }: UserSearchBarProps) => {
 };
 
 const DesktopUserSearchBarStyle = css`
-  width: 100%;
   display: flex;
   gap: 2rem;
+  width: 100%;
 `;
 
 const MobileUserSearchBarStyle = (theme: Theme) => css`
-  width: 100%;
   display: flex;
   gap: 2rem;
+  width: 100%;
   padding: 1.2rem 3rem;
   border-radius: 2rem;
   background-color: ${theme.colors.mono.white};

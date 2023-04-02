@@ -1,6 +1,6 @@
+import { Divider, HStack, VStack } from '@/components/common';
 import { AppLogoTitle } from '@/components/elements/AppLogoTitle';
 import { AppIntroText } from '@/components/elements/Login/AppIntroText';
-import { Divider, HStack, VStack } from '@/components/common';
 import { AboveTablet, Mobile } from '@/utils/responsive/Device';
 import styled from '@emotion/styled';
 import { GoogleLogin } from '@react-oauth/google';

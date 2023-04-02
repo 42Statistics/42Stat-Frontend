@@ -1,7 +1,6 @@
-import { PropsWithChildren } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 
-const Provider = ({ children }: PropsWithChildren) => {
+const Provider = ({ children }: React.PropsWithChildren) => {
   return <HelmetProvider>{children}</HelmetProvider>;
 };
 

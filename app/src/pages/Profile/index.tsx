@@ -1,17 +1,17 @@
-import { useParams } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
+import { Spinner } from '@/components/common';
 import { DesktopDashboard } from '@/components/elements/Dashboard';
-import { DesktopDashboardRow } from '@/components/elements/DashboardRow';
-import { DashboardItemContainer } from '@/components/elements/DashboardItemContainer';
 import { DashboardItem } from '@/components/elements/DashboardItem';
-import { UserProfile } from './contents';
-import { Suspense, useState } from 'react';
-import { ProfileTabBar } from './ProfileTabBar';
-import { useProfilePage } from './hooks/useProfilePage';
+import { DashboardItemContainer } from '@/components/elements/DashboardItemContainer';
+import { DesktopDashboardRow } from '@/components/elements/DashboardRow';
+import { lazyImport } from '@/utils/lazyImport';
 import { ProfileMenu } from '@/utils/types/ProfileMenu';
 import styled from '@emotion/styled';
-import { lazyImport } from '@/utils/lazyImport';
-import { Spinner } from '@/components/common';
+import { Suspense, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
+import { useParams } from 'react-router-dom';
+import { UserProfile } from './contents';
+import { useProfilePage } from './hooks/useProfilePage';
+import { ProfileTabBar } from './ProfileTabBar';
 
 const { ProfileGeneralPage } = lazyImport(
   () => import('@/pages/ProfileGeneral'),
@@ -50,7 +50,6 @@ export const ProfilePage = () => {
           options={options}
         />
       </ProfileTabBarLayout>
-
       <Suspense fallback={<Spinner />}>
         {selected === 'General' ? (
           <ProfileGeneralPage />

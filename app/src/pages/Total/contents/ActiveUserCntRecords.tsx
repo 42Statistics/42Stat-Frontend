@@ -1,6 +1,6 @@
-import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
 import { AreaChart } from '@/components/elements/charts/presets/AreaChart';
+import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 
 const GET_ACTIVE_USER_CNT_RECORD = gql(/* GraphQL */ `
@@ -18,11 +18,9 @@ export const ActiveUserCntRecords = () => {
   const { loading, error, data } = useQuery(GET_ACTIVE_USER_CNT_RECORD);
 
   if (loading) return <Spinner />;
-
   if (error) {
     return <h1>{error.message}</h1>;
   }
-
   if (!data) {
     return <h1>user not found</h1>;
   }
@@ -36,6 +34,7 @@ export const ActiveUserCntRecords = () => {
     showDatas.push(value.toString());
     barDatas.push(value);
   });
+
   return (
     <AreaChart
       data={barDatas}

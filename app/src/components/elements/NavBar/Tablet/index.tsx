@@ -1,10 +1,10 @@
-import styled from '@emotion/styled';
-import { useEffect } from 'react';
 import { Overlay } from '@/components/common';
 import { isNavBarOpenAtom } from '@/utils/atoms/isNavBarOpenAtom';
+import styled from '@emotion/styled';
 import { useAtom } from 'jotai';
-import { DesktopNavBarLayout } from '../Desktop';
+import { useEffect } from 'react';
 import { AboveTabletNavBar } from '../common/AboveTabletNavBar';
+import { DesktopNavBarLayout } from '../Desktop';
 
 export const TabletNavBar = () => {
   const [isNavBarOpen, setIsNavBarOpen] = useAtom(isNavBarOpenAtom);

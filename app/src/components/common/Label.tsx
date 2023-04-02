@@ -1,9 +1,8 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { HTMLAttributes, ReactNode } from 'react';
 import { Text } from './Text';
 
-type LabelProps = HTMLAttributes<HTMLDivElement> & {
+type LabelProps = React.HTMLAttributes<HTMLDivElement> & {
   text: string;
 };
 

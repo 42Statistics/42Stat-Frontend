@@ -1,12 +1,11 @@
-import { PropsWithChildren } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
+import { BrowserRouter as Router } from 'react-router-dom';
 import ApolloProvider from './Apollo';
 import GoogleOAuthProvider from './GoogleOAuth';
 import HelmetProvider from './Helmet';
 import ThemeProvider from './Theme';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { ErrorBoundary } from 'react-error-boundary';
 
-export const AppProvider = ({ children }: PropsWithChildren) => {
+export const AppProvider = ({ children }: React.PropsWithChildren) => {
   return (
     <ErrorBoundary fallback={<p>Ooops, something went wrong :(</p>}>
       <ApolloProvider>

@@ -1,6 +1,5 @@
 import { NavMenuOption } from '@/utils/types/NavMenu';
 import styled from '@emotion/styled';
-import { MouseEvent } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { NavMenuIcon } from '../common/NavMenuIcon';
 
@@ -13,7 +12,7 @@ export const MobileNavItem = ({ option }: MobileNavItemProps) => {
   const location = useLocation();
   const isFocused = location.pathname === option.path;
 
-  const handleClick = (e: MouseEvent<HTMLElement>) => {
+  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     navigate(option.path);
   };

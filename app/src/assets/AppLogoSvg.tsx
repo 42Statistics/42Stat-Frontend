@@ -1,7 +1,6 @@
 import { useTheme } from '@emotion/react';
-import { SVGProps } from 'react';
 
-export const AppLogoSvg = (props: SVGProps<SVGSVGElement>) => {
+export const AppLogoSvg = (props: React.SVGProps<SVGSVGElement>) => {
   const theme = useTheme();
 
   return (

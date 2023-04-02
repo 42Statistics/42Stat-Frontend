@@ -1,9 +1,9 @@
-import styled from '@emotion/styled';
-import { UserSearchBar } from '@/components/elements/UserSearchBar';
-import { HStack, Button } from '@/components/common';
-import { RxHamburgerMenu } from 'react-icons/rx';
+import { Button, HStack } from '@/components/common';
+import { UserSearchBar } from '@/components/elements/SearchBar';
 import { isNavBarOpenAtom } from '@/utils/atoms/isNavBarOpenAtom';
+import styled from '@emotion/styled';
 import { useSetAtom } from 'jotai';
+import { RxHamburgerMenu } from 'react-icons/rx';
 
 export const TabletHeader = () => {
   const setIsNavBarOpen = useSetAtom(isNavBarOpenAtom);

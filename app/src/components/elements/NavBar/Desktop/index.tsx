@@ -3,11 +3,9 @@ import { AboveTabletNavBar } from '../common/AboveTabletNavBar';
 
 export const DesktopNavBar = () => {
   return (
-    <>
-      <DesktopNavBarLayout>
-        <AboveTabletNavBar />
-      </DesktopNavBarLayout>
-    </>
+    <DesktopNavBarLayout>
+      <AboveTabletNavBar />
+    </DesktopNavBarLayout>
   );
 };
 

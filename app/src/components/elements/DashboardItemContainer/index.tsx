@@ -1,12 +1,11 @@
 import styled from '@emotion/styled';
-import { ReactNode } from 'react';
 
 type DashboardItemContainerProps = {
   row: number; // TODO: 더 엄밀한 Type 필요
   col: number;
   rowSpan: number;
   colSpan: number;
-  element: ReactNode;
+  element: React.ReactNode;
 };
 
 export const DashboardItemContainer = ({

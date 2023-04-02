@@ -5,10 +5,8 @@ export const Input = (props: React.InputHTMLAttributes<HTMLInputElement>) => {
 };
 
 const StyledInput = styled.input`
+  all: unset;
   width: 100%;
-  background-color: transparent;
-  border: none;
-  outline: none;
   font-size: ${({ theme }) => theme.fonts.size.h3};
 
   &::placeholder {

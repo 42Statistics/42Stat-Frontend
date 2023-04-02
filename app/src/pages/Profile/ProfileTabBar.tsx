@@ -17,8 +17,9 @@ export const ProfileTabBar = ({
   return (
     <ProfileTabBarLayout>
       <HStack>
-        {options.map((option) => (
+        {options.map((option, idx) => (
           <Button
+            key={idx}
             element={
               <ProfileTabItemLayout isFocused={option.menu === value}>
                 {option.text}

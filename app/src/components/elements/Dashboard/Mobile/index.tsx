@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
-import { PropsWithChildren } from 'react';
 
-export const MobileDashboard = ({ children }: PropsWithChildren) => {
+export const MobileDashboard = ({ children }: React.PropsWithChildren) => {
   return <MobileDashboardLayout>{children}</MobileDashboardLayout>;
 };
 

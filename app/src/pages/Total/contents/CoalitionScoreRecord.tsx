@@ -1,6 +1,6 @@
-import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
 import { CoalitionStackChart } from '@/components/elements/charts/presets/CoalitionStackChart';
+import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 
 const GET_COALITION_SCORE_RECORD = gql(/* GraphQL */ `
@@ -24,14 +24,13 @@ export const CoalitionScoreRecord = () => {
   const { loading, error, data } = useQuery(GET_COALITION_SCORE_RECORD);
 
   if (loading) return <Spinner />;
-
   if (error) {
     return <h1>{error.message}</h1>;
   }
-
   if (!data) {
     return <h1>user not found</h1>;
   }
+
   const result = data.getTotalPage.scoreRecords;
   const showDatas: string[] = [];
   const Datas: number[] = [];
@@ -45,16 +44,15 @@ export const CoalitionScoreRecord = () => {
     Datas.push(total);
     showDatas.push(total.toString());
   });
+
   return (
-    <>
-      <CoalitionStackChart
-        data={Datas}
-        yUnit=""
-        showData={showDatas}
-        labels={labels}
-        size="lg"
-        seriesName="합산점수"
-      />
-    </>
+    <CoalitionStackChart
+      data={Datas}
+      yUnit=""
+      showData={showDatas}
+      labels={labels}
+      size="lg"
+      seriesName="합산점수"
+    />
   );
 };

@@ -1,6 +1,6 @@
-import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
 import { TextDefault } from '@/components/elements/DashboardContentView/Text/TextDefault';
+import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 
 const GET_AVERAGE_FEEDBACK_LENGTH = gql(/* GraphQL */ `

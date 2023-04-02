@@ -1,9 +1,9 @@
 import { Avatar, HStack } from '@/components/common';
 import { userAtom } from '@/utils/atoms/userAtom';
 import styled from '@emotion/styled';
+import { useAtomValue } from 'jotai';
 import { useNavMenu } from '../hooks/useNavMenu';
 import { MobileNavItem } from './MobileNavItem';
-import { useAtomValue } from 'jotai';
 
 export const MobileNavBar = () => {
   const { options } = useNavMenu();

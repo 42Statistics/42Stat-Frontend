@@ -1,5 +1,5 @@
-import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
+import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
@@ -17,7 +17,6 @@ const GET_AVERAGE_CIRCLE_DURATION = gql(/* GraphQL */ `
 
 export const AverageCircleDurations = () => {
   const { loading, error, data } = useQuery(GET_AVERAGE_CIRCLE_DURATION);
-  const theme = useTheme();
   if (loading) return <Spinner />;
   if (error) {
     return <h1>{error.message}</h1>;
@@ -32,18 +31,22 @@ export const AverageCircleDurations = () => {
 
   return (
     <StyledTable>
-      <tr>
-        <td>서클</td>
-        <td>D+</td>
-      </tr>
-      {db.map((v, i) => {
-        return (
-          <tr>
-            <td>{i}</td>
-            <td>{v}</td>
-          </tr>
-        );
-      })}
+      <thead>
+        <tr>
+          <td>서클</td>
+          <td>D+</td>
+        </tr>
+      </thead>
+      <tbody>
+        {db.map((v, idx) => {
+          return (
+            <tr key={idx}>
+              <td>{idx}</td>
+              <td>{v}</td>
+            </tr>
+          );
+        })}
+      </tbody>
     </StyledTable>
   );
 };

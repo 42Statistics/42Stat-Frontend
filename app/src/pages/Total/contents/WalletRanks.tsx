@@ -30,7 +30,9 @@ export const WalletRanks = () => {
     return <h1>user not found</h1>;
   }
 
-  const rankList: RankItemType[] = data.getTotalPage.walletRanks.map(
+  const { walletRanks } = data.getTotalPage;
+
+  const rankList: RankItemType[] = walletRanks.map(
     ({ userPreview, value }) => ({
       id: userPreview.id,
       name: userPreview.login,

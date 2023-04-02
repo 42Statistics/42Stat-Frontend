@@ -24,12 +24,13 @@ export const ActiveUserCntRecords = () => {
   if (!data) {
     return <h1>user not found</h1>;
   }
-  const result = data.getTotalPage.activeUserCntRecords;
+
+  const { activeUserCntRecords } = data.getTotalPage;
   const showDatas: string[] = [];
   const barDatas: number[] = [];
   const labels: string[] = [];
 
-  result.forEach(({ at, value }, idx) => {
+  activeUserCntRecords.forEach(({ at, value }, idx) => {
     labels.push(at.substr(2, 5).replace('-', '.'));
     showDatas.push(value.toString());
     barDatas.push(value);

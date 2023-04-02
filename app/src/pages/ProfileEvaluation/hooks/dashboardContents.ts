@@ -1,7 +1,7 @@
-import { DashboardItemInfo } from '@/utils/types/Dashboard';
+import { DashboardItemProps } from '@/utils/types/Dashboard';
 import { CurrMonthCnt } from '../contents';
 
-export const dashboardContents: DashboardItemInfo[] = [
+export const dashboardContents: DashboardItemProps[] = [
   {
     id: 0,
     title: '월간 평가 횟수',

@@ -31,17 +31,17 @@ export const CoalitionScoreDynamic = () => {
     return <h1>user not found</h1>;
   }
 
-  const result = data.getTotalPage.scoreRecords;
+  const { scoreRecords } = data.getTotalPage;
   const Datas: number[] = [];
   const labels: string[] = [];
 
   // 기간 label 작성부
-  result[0].records.forEach(({ at }) => {
+  scoreRecords[0].records.forEach(({ at }) => {
     labels.push(at.substr(2, 5).replace('-', '.'));
   });
 
   // 모든 value 하나의 배열에 담기
-  result.forEach(({ coalition, records }, idx) => {
+  scoreRecords.forEach(({ coalition, records }, idx) => {
     records.forEach(({ value }) => {
       Datas.push(value);
     });

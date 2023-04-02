@@ -25,18 +25,19 @@ export const EvalCntPerPoints = () => {
     return <h1>user not found</h1>;
   }
 
-  const result = data.getTotalPage.evalCntPerPoints;
+  const { evalCntPerPoints } = data.getTotalPage;
+
   const showDatas: string[] = [];
   const barDatas: number[] = [];
   const labels: string[] = [];
 
   let totalNum = 0;
-  result.forEach(({ evalCnt, point }, idx) => {
+  evalCntPerPoints.forEach(({ evalCnt, point }, idx) => {
     labels.push(point.toString() + '점');
     showDatas.push(evalCnt.toString());
     totalNum += evalCnt;
   });
-  result.forEach(({ evalCnt }) => {
+  evalCntPerPoints.forEach(({ evalCnt }) => {
     barDatas.push(Math.round((evalCnt / totalNum) * 1000) / 10);
   });
 

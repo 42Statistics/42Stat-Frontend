@@ -1,30 +1,32 @@
-import { ReactNode } from 'react';
-
-export type DashboardItemInfo = {
+export type DashboardItemProps = {
   id?: number;
   title?: string;
   description?: string;
   content: () => JSX.Element;
 };
 
-export type DashboardItemContainerInfo = {
-  row: number;
-  col: number;
-  rowSpan: number;
-  colSpan: number;
-  elementId: number;
-};
-
-export type DesktopDashboardRowInfo = {
+export type DesktopDashboardRowType = {
   row: DesktopDashboardRowSize;
   col: DesktopDashboardColSize;
-  items: DashboardItemContainerInfo[];
+  items: {
+    row: number;
+    col: number;
+    rowSpan: number;
+    colSpan: number;
+    elementId: number;
+  }[];
 };
 
-export type MobileDashboardRowInfo = {
+export type MobileDashboardRowType = {
   row: MobileDashboardRowSize;
   col: MobileDashboardColSize;
-  items: DashboardItemContainerInfo[];
+  items: {
+    row: number;
+    col: number;
+    rowSpan: number;
+    colSpan: number;
+    elementId: number;
+  }[];
 };
 
 export type DesktopDashboardRowSize = 1 | 2;

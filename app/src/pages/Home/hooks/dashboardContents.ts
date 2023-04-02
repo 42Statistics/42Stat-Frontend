@@ -1,4 +1,4 @@
-import { DashboardItemInfo } from '@/utils/types/Dashboard';
+import { DashboardItemProps } from '@/utils/types/Dashboard';
 import {
   CurrMonthBlackholedCnt,
   CurrRegisteredCntRank,
@@ -10,7 +10,7 @@ import {
   TotalEvalCntRank,
 } from '../contents';
 
-export const dashboardContents: DashboardItemInfo[] = [
+export const dashboardContents: DashboardItemProps[] = [
   {
     id: 0,
     title: '주간 총 평가 횟수',

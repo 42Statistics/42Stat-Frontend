@@ -31,12 +31,12 @@ export const CoalitionScoreRecord = () => {
     return <h1>user not found</h1>;
   }
 
-  const result = data.getTotalPage.scoreRecords;
+  const { scoreRecords } = data.getTotalPage;
   const showDatas: string[] = [];
   const Datas: number[] = [];
   const labels: string[] = ['건', '곤', '감', '리'];
 
-  result.forEach(({ coalition, records }, idx) => {
+  scoreRecords.forEach(({ coalition, records }, idx) => {
     let total = 0;
     records.forEach(({ value }) => {
       total += value;

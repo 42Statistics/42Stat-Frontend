@@ -1,8 +1,8 @@
 import { Spinner } from '@/components/common';
-import { DesktopDashboard } from '@/components/elements/Dashboard';
-import { DashboardItem } from '@/components/elements/DashboardItem';
-import { DashboardItemContainer } from '@/components/elements/DashboardItemContainer';
-import { DesktopDashboardRow } from '@/components/elements/DashboardRow';
+import { DashboardItem } from '@/components/templates/DashboardItem';
+import { DashboardItemWrapper } from '@/components/templates/DashboardItemWrapper';
+import { DesktopDashboardRow } from '@/components/templates/DashboardRow';
+import { DesktopDashboardRowContainer } from '@/components/templates/DashboardRowContainer';
 import { lazyImport } from '@/utils/lazyImport';
 import { ProfileMenu } from '@/utils/types/ProfileMenu';
 import styled from '@emotion/styled';
@@ -32,17 +32,17 @@ export const ProfilePage = () => {
       <Helmet>
         <title>{username} | 42Stat</title>
       </Helmet>
-      <DesktopDashboard>
+      <DesktopDashboardRowContainer>
         <DesktopDashboardRow row={2} col={3}>
-          <DashboardItemContainer
+          <DashboardItemWrapper
             row={1}
             col={1}
             rowSpan={2}
             colSpan={3}
             element={<DashboardItem content={UserProfile} />}
-          ></DashboardItemContainer>
+          ></DashboardItemWrapper>
         </DesktopDashboardRow>
-      </DesktopDashboard>
+      </DesktopDashboardRowContainer>
       <ProfileTabBarLayout>
         <ProfileTabBar
           value={selected}

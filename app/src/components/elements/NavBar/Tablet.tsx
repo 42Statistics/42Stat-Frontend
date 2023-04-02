@@ -3,8 +3,8 @@ import { isNavBarOpenAtom } from '@/utils/atoms/isNavBarOpenAtom';
 import styled from '@emotion/styled';
 import { useAtom } from 'jotai';
 import { useEffect } from 'react';
-import { AboveTabletNavBar } from '../common/AboveTabletNavBar';
-import { DesktopNavBarLayout } from '../Desktop';
+import { AboveTabletNavBar } from './common/AboveTabletNavBar';
+import { DesktopNavBarLayout } from './Desktop';
 
 export const TabletNavBar = () => {
   const [isNavBarOpen, setIsNavBarOpen] = useAtom(isNavBarOpenAtom);

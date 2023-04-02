@@ -30,7 +30,9 @@ export const MonthlyAccessTimeRank = () => {
     return <h1>user not found</h1>;
   }
 
-  const rankList: RankItemType[] = data.getHomePage.monthlyAccessTimeRank.map(
+  const { monthlyAccessTimeRank } = data.getHomePage;
+
+  const rankList: RankItemType[] = monthlyAccessTimeRank.map(
     ({ userPreview, value }) => ({
       name: userPreview.login,
       value: value,

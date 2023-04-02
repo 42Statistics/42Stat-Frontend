@@ -26,18 +26,18 @@ export const UserCntPerLevels = () => {
     return <h1>user not found</h1>;
   }
 
-  const result = data.getTotalPage.userCntPerLevels;
+  const { userCntPerLevels } = data.getTotalPage;
   const showDatas: string[] = [];
   const barDatas: number[] = [];
   const labels: string[] = [];
 
   let totalNum = 0;
-  result.forEach(({ userCnt, level }, idx) => {
+  userCntPerLevels.forEach(({ userCnt, level }, idx) => {
     labels.push(level.toString());
     showDatas.push(userCnt.toString());
     totalNum += userCnt;
   });
-  result.forEach(({ userCnt }) => {
+  userCntPerLevels.forEach(({ userCnt }) => {
     barDatas.push(Math.round((userCnt / totalNum) * 1000) / 10);
   });
   return (

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { AboveTabletNavBar } from '../common/AboveTabletNavBar';
+import { AboveTabletNavBar } from './common/AboveTabletNavBar';
 
 export const DesktopNavBar = () => {
   return (

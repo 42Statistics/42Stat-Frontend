@@ -1,3 +1,4 @@
+import { convertToMillion } from '@/utils/utilFucs';
 import { useTheme } from '@emotion/react';
 import ReactApexChart from 'react-apexcharts';
 
@@ -23,10 +24,6 @@ export const CoalitionStackChart = ({
     default:
       chartWidth = '400';
       chartHeight = '350';
-  }
-
-  function convertToMillion(num: number) {
-    return (num / 1000000).toFixed(1) + 'M';
   }
 
   const options: ApexCharts.ApexOptions = {
@@ -82,7 +79,7 @@ export const CoalitionStackChart = ({
     yaxis: {
       labels: {
         formatter: function (value) {
-          return convertToMillion(value);
+          return convertToMillion(value, 1);
         },
       },
       // title: {

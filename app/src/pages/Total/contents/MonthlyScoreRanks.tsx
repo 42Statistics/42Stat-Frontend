@@ -1,7 +1,6 @@
 import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
 import { Rank } from '@/components/elements/DashboardContentView/Rank';
-import { RankItemType } from '@/utils/types/Rank';
 import { useQuery } from '@apollo/client';
 
 const GET_COALITION_SCORE_RANK = gql(/* GraphQL */ `
@@ -30,13 +29,12 @@ export const MonthlyScoreRanks = () => {
     return <h1>user not found</h1>;
   }
 
-  const rankList: RankItemType[] = data.getTotalPage.monthlyScoreRanks.map(
-    ({ userPreview, value }) => ({
-      id: userPreview.id,
-      name: userPreview.login,
-      value: value,
-      imgUrl: userPreview.imgUrl,
-    }),
-  );
+  const { monthlyScoreRanks } = data.getTotalPage;
+  const rankList = monthlyScoreRanks.map(({ userPreview, value }) => ({
+    id: userPreview.id,
+    name: userPreview.login,
+    value: value,
+    imgUrl: userPreview.imgUrl,
+  }));
   return <Rank rankList={rankList} cnt={3} unit="P" />;
 };

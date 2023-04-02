@@ -1,3 +1,4 @@
+import { convertToMillion } from '@/utils/utilFucs';
 import { useTheme } from '@emotion/react';
 import ReactApexChart from 'react-apexcharts';
 
@@ -40,10 +41,6 @@ export const CoalitionDynamicChart = ({
       chartHeight = '350';
   }
 
-  function convertToMillion(num: number) {
-    return (num / 1000000).toFixed(2) + 'M';
-  }
-
   const options: ApexCharts.ApexOptions = {
     chart: {
       type: 'line',
@@ -81,7 +78,7 @@ export const CoalitionDynamicChart = ({
     yaxis: {
       labels: {
         formatter: function (value) {
-          return convertToMillion(value);
+          return convertToMillion(value, 2);
         },
       },
       // title: {

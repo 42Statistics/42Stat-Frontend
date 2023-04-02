@@ -37,15 +37,13 @@ export const ActiveUserCntRecords = () => {
     barDatas.push(value);
   });
   return (
-    <>
-      <AreaChart
-        data={barDatas}
-        yUnit=""
-        showData={showDatas}
-        labels={labels}
-        size="lg"
-        seriesName="active 유저"
-      />
-    </>
+    <AreaChart
+      data={barDatas}
+      yUnit=""
+      showData={showDatas}
+      labels={labels}
+      size="lg"
+      seriesName="active 유저"
+    />
   );
 };

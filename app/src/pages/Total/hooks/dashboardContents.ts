@@ -1,18 +1,20 @@
 import { DashboardItemInfo } from '@/utils/types/Dashboard';
-import { ProjectInfo } from '../contents';
-import { ActiveUserCntRecords } from '../contents/ActiveUserCntRecords';
-import { AverageCircleDurations } from '../contents/AverageCircleDurations';
-import { AverageFeedbackLength } from '../contents/AverageFeedbackLength';
-import { BlackholedCntPerCircles } from '../contents/BlackholedCntPerCircles';
-import { CoalitionScoreDynamic } from '../contents/CoalitionScoreDynamic';
-import { CoalitionScoreRecord } from '../contents/CoalitionScoreRecord';
-import { CorrectionPointRanks } from '../contents/CorrectionPointRanks';
-import { EvalCntPerPoints } from '../contents/EvalCntPerPoints';
-import { MonthlyScoreRanks } from '../contents/MonthlyScoreRanks';
-import { UserCntPerLevels } from '../contents/UserCntPerLevels';
-import { UserCntPerPoints } from '../contents/UserCntPerPoints';
-import { WalletRanks } from '../contents/WalletRanks';
-import { TotalEvalCnt } from '../contents/totalEvalCnt';
+import {
+  ActiveUserCntRecords,
+  AverageCircleDurations,
+  AverageFeedbackLength,
+  BlackholedCntPerCircles,
+  CoalitionScoreDynamic,
+  CoalitionScoreRecord,
+  CorrectionPointRanks,
+  EvalCntPerPoints,
+  MonthlyScoreRanks,
+  ProjectInfo,
+  TotalEvalCnt,
+  UserCntPerLevels,
+  UserCntPerPoints,
+  WalletRanks,
+} from '../contents';
 
 export const dashboardContents: DashboardItemInfo[] = [
   {

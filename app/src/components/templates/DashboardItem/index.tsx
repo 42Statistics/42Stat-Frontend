@@ -1,5 +1,5 @@
 import { Center, VStack } from '@/components/common';
-import { DashboardItemInfo } from '@/utils/types/Dashboard';
+import { DashboardItemProps } from '@/utils/types/Dashboard';
 import styled from '@emotion/styled';
 import { DashboardItemHeader } from './DashboardItemHeader';
 
@@ -8,7 +8,7 @@ export const DashboardItem = ({
   title,
   description,
   content: Content,
-}: DashboardItemInfo) => {
+}: DashboardItemProps) => {
   return (
     <DashboardItemLayout>
       <VStack w="100%" h="100%" spacing="2rem" align="start">

@@ -30,13 +30,13 @@ export const LevelRank = () => {
     return <h1>user not found</h1>;
   }
 
-  const rankList: RankItemType[] = data.getHomePage.levelRank.map(
-    ({ userPreview, value }) => ({
-      name: userPreview.login,
-      value: value,
-      imgUrl: userPreview.imgUrl,
-    }),
-  );
+  const { levelRank } = data.getHomePage;
+
+  const rankList: RankItemType[] = levelRank.map(({ userPreview, value }) => ({
+    name: userPreview.login,
+    value: value,
+    imgUrl: userPreview.imgUrl,
+  }));
 
   return <Rank rankList={rankList} cnt={3} unit="" />;
 };

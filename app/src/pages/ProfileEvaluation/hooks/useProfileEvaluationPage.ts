@@ -1,10 +1,10 @@
 import {
-  DesktopDashboardRowInfo,
-  MobileDashboardRowInfo,
-} from '@/utils/types/Dashboard.d';
+  DesktopDashboardRowType,
+  MobileDashboardRowType,
+} from '@/utils/types/Dashboard';
 
 export const useProfileEvaluationPage = () => {
-  const desktopDashboard: DesktopDashboardRowInfo[] = [
+  const desktopDashboardRows: DesktopDashboardRowType[] = [
     {
       row: 1,
       col: 4,
@@ -20,7 +20,7 @@ export const useProfileEvaluationPage = () => {
     },
   ];
 
-  const mobileDashboard: MobileDashboardRowInfo[] = [
+  const mobileDashboardRows: MobileDashboardRowType[] = [
     {
       row: 2,
       col: 2,
@@ -36,5 +36,5 @@ export const useProfileEvaluationPage = () => {
     },
   ];
 
-  return { desktopDashboard, mobileDashboard };
+  return { desktopDashboardRows, mobileDashboardRows };
 };

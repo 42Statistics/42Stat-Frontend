@@ -30,7 +30,9 @@ export const TotalEvalCntRank = () => {
     return <h1>user not found</h1>;
   }
 
-  const rankList: RankItemType[] = data.getHomePage.totalEvalCntRank.map(
+  const { totalEvalCntRank } = data.getHomePage;
+
+  const rankList: RankItemType[] = totalEvalCntRank.map(
     ({ userPreview, value }) => ({
       id: userPreview.id,
       name: userPreview.login,

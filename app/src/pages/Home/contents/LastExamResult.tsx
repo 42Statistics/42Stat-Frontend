@@ -25,12 +25,13 @@ export const LastExamResult = () => {
   if (!data) {
     return <h1>user not found</h1>;
   }
-  const result = data.getHomePage.lastExamResult;
+
+  const { lastExamResult } = data.getHomePage;
   const showDatas: string[] = [];
   const barDatas: number[] = [];
   const labels: string[] = [];
 
-  result.forEach(({ rank, passCnt, totalCnt }, idx) => {
+  lastExamResult.forEach(({ rank, passCnt, totalCnt }, idx) => {
     labels.push('Rank 0' + rank.toString());
     showDatas.push(passCnt.toString() + '/' + totalCnt.toString());
     barDatas.push(Math.round((passCnt / totalCnt) * 1000) / 10);

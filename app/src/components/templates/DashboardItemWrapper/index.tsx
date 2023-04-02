@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-type DashboardItemContainerProps = {
+type DashboardItemWrapperProps = {
   row: number; // TODO: 더 엄밀한 Type 필요
   col: number;
   rowSpan: number;
@@ -8,25 +8,25 @@ type DashboardItemContainerProps = {
   element: React.ReactNode;
 };
 
-export const DashboardItemContainer = ({
+export const DashboardItemWrapper = ({
   element,
   ...propsExceptElement
-}: DashboardItemContainerProps) => {
+}: DashboardItemWrapperProps) => {
   return (
-    <DashboardItemContainerLayout {...propsExceptElement}>
+    <DashboardItemWrapperLayout {...propsExceptElement}>
       {element}
-    </DashboardItemContainerLayout>
+    </DashboardItemWrapperLayout>
   );
 };
 
-type DashboardItemContainerLayoutProps = {
+type DashboardItemWrapperLayoutProps = {
   col: number;
   colSpan: number;
   row: number;
   rowSpan: number;
 };
 
-const DashboardItemContainerLayout = styled.div<DashboardItemContainerLayoutProps>`
+const DashboardItemWrapperLayout = styled.div<DashboardItemWrapperLayoutProps>`
   background-color: ${({ theme }) => theme.colors.mono.white};
   grid-column: ${({ col, colSpan }) => `${col} / span ${colSpan}`};
   grid-row: ${({ row, rowSpan }) => `${row} / span ${rowSpan}`};

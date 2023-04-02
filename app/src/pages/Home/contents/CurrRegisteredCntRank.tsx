@@ -28,7 +28,9 @@ export const CurrRegisteredCntRank = () => {
     return <h1>user not found</h1>;
   }
 
-  const rankList: RankItemType[] = data.getHomePage.currRegisteredCntRank.map(
+  const { currRegisteredCntRank } = data.getHomePage;
+
+  const rankList: RankItemType[] = currRegisteredCntRank.map(
     ({ projectPreview, value }) => ({
       name: projectPreview.name,
       value: value,

@@ -30,7 +30,9 @@ export const CorrectionPointRanks = () => {
     return <h1>user not found</h1>;
   }
 
-  const rankList: RankItemType[] = data.getTotalPage.correctionPointRanks.map(
+  const { correctionPointRanks } = data.getTotalPage;
+
+  const rankList: RankItemType[] = correctionPointRanks.map(
     ({ userPreview, value }) => ({
       id: userPreview.id,
       name: userPreview.login,

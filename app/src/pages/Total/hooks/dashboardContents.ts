@@ -1,4 +1,4 @@
-import { DashboardItemInfo } from '@/utils/types/Dashboard';
+import { DashboardItemProps } from '@/utils/types/Dashboard';
 import {
   ActiveUserCntRecords,
   AverageCircleDurations,
@@ -16,7 +16,7 @@ import {
   WalletRanks,
 } from '../contents';
 
-export const dashboardContents: DashboardItemInfo[] = [
+export const dashboardContents: DashboardItemProps[] = [
   {
     id: 0,
     title: '활성화 유저 수 추이',

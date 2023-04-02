@@ -2,7 +2,7 @@ import { Avatar, HStack } from '@/components/common';
 import { userAtom } from '@/utils/atoms/userAtom';
 import styled from '@emotion/styled';
 import { useAtomValue } from 'jotai';
-import { useNavMenu } from '../hooks/useNavMenu';
+import { useNavMenu } from './hooks/useNavMenu';
 import { MobileNavItem } from './MobileNavItem';
 
 export const MobileNavBar = () => {

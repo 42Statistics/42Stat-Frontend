@@ -25,8 +25,10 @@ export const AverageCircleDurations = () => {
     return <h1>user not found</h1>;
   }
 
+  const { averageCircleDurations } = data.getTotalPage;
+
   let db: number[] = [];
-  data.getTotalPage.averageCircleDurations.forEach(({ circle, value }) => {
+  averageCircleDurations.forEach(({ circle, value }) => {
     db.push(value);
   });
 

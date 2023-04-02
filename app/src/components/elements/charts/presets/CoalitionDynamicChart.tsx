@@ -1,17 +1,7 @@
-import { convertToMillion } from '@/utils/utilFucs';
+import { chunkArray } from '@/utils/charts/ChunkArray';
+import { convertToMillion } from '@/utils/charts/ConvertToMillion';
 import { useTheme } from '@emotion/react';
 import ReactApexChart from 'react-apexcharts';
-
-function chunkArray<T>(arr: T[], chunkSize: number): T[][] {
-  return arr.reduce((chunks: T[][], el: T, i: number) => {
-    if (i % chunkSize === 0) {
-      chunks.push([el]);
-    } else {
-      chunks[chunks.length - 1].push(el);
-    }
-    return chunks;
-  }, []);
-}
 
 export const CoalitionDynamicChart = ({
   data,

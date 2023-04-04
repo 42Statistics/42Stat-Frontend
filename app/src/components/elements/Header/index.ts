@@ -1,3 +1,3 @@
-export * from './Desktop';
-export * from './Tablet';
-export * from './Mobile';
+export * from './DesktopHeader';
+export * from './TabletHeader';
+export * from './MobileHeader';

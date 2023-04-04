@@ -1,9 +1,9 @@
 import { NotFoundPage } from '@/pages/404';
-import { LoginPage } from '@/pages/Login';
+import { LoginPage } from '@/pages/LoginPage';
 import { isAuthenticatedAtom } from '@/utils/atoms/isAuthenticatedAtom';
 import { useAtomValue } from 'jotai';
 import { Navigate, useRoutes } from 'react-router-dom';
-import { protectedRoutes } from './protected';
+import { protectedRoutes } from './protectedRoutes';
 // import { ErrorPage } from '@/pages/Error';
 
 // TODO: <Route errorElement={<ErrorPage />} /> 파트 추가

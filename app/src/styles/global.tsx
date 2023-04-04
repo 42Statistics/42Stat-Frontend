@@ -29,20 +29,9 @@ export const global = (theme: Theme) => css`
     font-size: 62.5%; // 1rem = 10px
   }
 
-  html,
-  body,
-  #root {
-    width: 100%;
-    height: 100%;
-  }
-
   body {
     font-family: 'Noto Sans KR', sans-serif;
     background-color: #e4e3ea; // FIXME: Global이라 theme 적용 방법을 모르겠다.
     font-size: 1.4rem;
-  }
-
-  * {
-    box-sizing: border-box;
   }
 `;

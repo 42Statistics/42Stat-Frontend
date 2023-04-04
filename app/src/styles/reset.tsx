@@ -130,4 +130,23 @@ export const reset = css`
     border-collapse: collapse;
     border-spacing: 0;
   }
+
+  /* custom reset */
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+
+  html,
+  body,
+  #root {
+    width: 100%;
+    height: 100%;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 `;

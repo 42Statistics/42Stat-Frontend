@@ -1,3 +1,3 @@
-export * from './Desktop';
-export * from './Mobile';
-export * from './Tablet';
+export * from './DesktopNavBar';
+export * from './MobileNavBar';
+export * from './TabletNavBar';

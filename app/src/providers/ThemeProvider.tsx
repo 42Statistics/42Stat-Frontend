@@ -1,8 +1,8 @@
-import { theme } from '@/styles/theme';
+import { defaultTheme } from '@/styles/defaultTheme';
 import { ThemeProvider } from '@emotion/react';
 
 const Provider = ({ children }: React.PropsWithChildren) => {
-  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+  return <ThemeProvider theme={defaultTheme}>{children}</ThemeProvider>;
 };
 
 export default Provider;

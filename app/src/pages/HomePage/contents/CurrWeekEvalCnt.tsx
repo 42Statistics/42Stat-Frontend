@@ -1,5 +1,5 @@
 import { Spinner } from '@/components/common';
-import { TextCompare } from '@/components/elements/DashboardContentView/Text/TextCompare';
+import { TextCompare } from '@/components/elements/DashboardContentView/Text';
 import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 

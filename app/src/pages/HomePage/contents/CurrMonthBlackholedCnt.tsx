@@ -1,5 +1,5 @@
 import { Spinner } from '@/components/common';
-import { TextDefault } from '@/components/elements/DashboardContentView/Text/TextDefault';
+import { TextDefault } from '@/components/elements/DashboardContentView/Text';
 import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 

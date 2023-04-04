@@ -14,11 +14,11 @@ import { useProfilePage } from './hooks/useProfilePage';
 import { ProfileTabBar } from './ProfileTabBar';
 
 const { ProfileGeneralPage } = lazyImport(
-  () => import('@/pages/ProfileGeneral'),
+  () => import('@/pages/ProfileGeneralPage'),
   'ProfileGeneralPage',
 );
 const { ProfileEvaluationPage } = lazyImport(
-  () => import('@/pages/ProfileEvaluation'),
+  () => import('@/pages/ProfileEvaluationPage'),
   'ProfileEvaluationPage',
 );
 

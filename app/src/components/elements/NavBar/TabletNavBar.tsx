@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 import { AboveTabletNavBar } from './common/AboveTabletNavBar';
-import { DesktopNavBarLayout } from './Desktop';
+import { DesktopNavBarLayout } from './DesktopNavBar';
 
 export const TabletNavBar = () => {
   const [isNavBarOpen, setIsNavBarOpen] = useAtom(isNavBarOpenAtom);

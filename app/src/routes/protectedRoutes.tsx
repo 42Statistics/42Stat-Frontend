@@ -4,15 +4,21 @@ import { lazyImport } from '@/utils/lazyImport';
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 
-const { HomePage } = lazyImport(() => import('@/pages/Home'), 'HomePage');
-const { TotalPage } = lazyImport(() => import('@/pages/Total'), 'TotalPage');
+const { HomePage } = lazyImport(() => import('@/pages/HomePage'), 'HomePage');
+const { TotalPage } = lazyImport(
+  () => import('@/pages/TotalPage'),
+  'TotalPage',
+);
 const { ProfilePage } = lazyImport(
-  () => import('@/pages/Profile'),
+  () => import('@/pages/ProfilePage'),
   'ProfilePage',
 );
-const { AboutPage } = lazyImport(() => import('@/pages/About'), 'AboutPage');
+const { AboutPage } = lazyImport(
+  () => import('@/pages/AboutPage'),
+  'AboutPage',
+);
 const { SettingsPage } = lazyImport(
-  () => import('@/pages/Settings'),
+  () => import('@/pages/SettingsPage'),
   'SettingsPage',
 );
 

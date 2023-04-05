@@ -1,3 +1,4 @@
+import { gql } from '@/__generated__';
 import {
   Avatar,
   HStack,
@@ -8,11 +9,13 @@ import {
   VStack,
 } from '@/components/common';
 import { LevelBar } from '@/components/elements/LevelBar';
+import { getDayDiff } from '@/utils/getDayDiff';
+import { getDateTime } from '@/utils/getTimeNow';
 import { getTitleWithLogin } from '@/utils/getTitleWithLogin';
-import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
 import { truncate } from 'lodash';
+import { CoalitionMark } from './CoalitionMark';
 
 const GET_USER_PROFILE = gql(/* GraphQL */ `
   query GetUserProfile {
@@ -67,6 +70,7 @@ export const UserProfile = () => {
     imgUrl,
     titles,
     coalition,
+    grade,
     level,
     levelRank,
     pooledAt,
@@ -76,7 +80,22 @@ export const UserProfile = () => {
     scoreInfo,
   } = data.getPersonGeneralPage.userProfile;
   const titleWithLogin = getTitleWithLogin(titles, login);
-  const [levelIntegerPart, levelDecimalPart] = [Math.floor(level), level % 1];
+  const {
+    year: pooledYear,
+    month: pooledMonth,
+    day: pooledDay,
+  } = getDateTime(pooledAt);
+  const {
+    year: blackHoleYear,
+    month: blackHoleMonth,
+    day: blackHoleDay,
+  } = getDateTime(blackholedAt);
+  const dayDiffPooledAtFromNow = getDayDiff(new Date(pooledAt), new Date());
+  const dayDiffBlackHoledAtFromNow = getDayDiff(
+    new Date(),
+    new Date(blackholedAt),
+  );
+  const levelDecimalPart = level % 1;
 
   return (
     <HStack spacing="10rem">
@@ -89,34 +108,36 @@ export const UserProfile = () => {
               fontSize={theme.fonts.size.h2}
               fontWeight={theme.fonts.weight.bold}
             >
-              멤버
+              {grade}
             </Text>
-            <Text
-              fontSize={theme.fonts.size.h1}
-              fontWeight={theme.fonts.weight.bold}
-            >
-              {name}
-            </Text>
+            <HStack spacing="2rem">
+              <Text
+                fontSize={theme.fonts.size.h1}
+                fontWeight={theme.fonts.weight.bold}
+              >
+                {name}
+              </Text>
+              <CoalitionMark coalition={coalition} />
+            </HStack>
           </VStack>
           <HStack>
             <Text color={theme.colors.mono.gray.default}>
               {truncate(titleWithLogin, { length: 42 })}
             </Text>
-            <Text>{coalition?.name}</Text>
           </HStack>
           <HStack spacing="1rem">
             <HStack align="baseline">
               <Text
-                fontSize={theme.fonts.size.h2}
-                fontWeight={theme.fonts.weight.bold}
-              >
-                {levelIntegerPart}
-              </Text>
-              <Text
                 color={theme.colors.mono.gray.default}
                 fontSize={theme.fonts.size.caption}
               >
-                레벨
+                lv.
+              </Text>
+              <Text
+                fontSize={theme.fonts.size.h2}
+                fontWeight={theme.fonts.weight.bold}
+              >
+                {level}
               </Text>
             </HStack>
             <LevelBar rate={levelDecimalPart} />
@@ -136,11 +157,33 @@ export const UserProfile = () => {
         <tbody>
           <tr>
             <td>본과정 시작일</td>
-            <td>{pooledAt}</td>
+            <td>
+              <HStack spacing="1rem">
+                {pooledYear + '.' + pooledMonth + '.' + pooledDay}
+                <Text
+                  fontSize={theme.fonts.size.h3}
+                  color={theme.colors.primary.default}
+                >{`(D+${dayDiffPooledAtFromNow})`}</Text>
+              </HStack>
+            </td>
           </tr>
           <tr>
             <td>블랙홀</td>
-            <td>{blackholedAt}</td>
+            <td>
+              {blackholedAt === null ? (
+                '-'
+              ) : (
+                <HStack spacing="1rem">
+                  {blackHoleYear + '.' + blackHoleMonth + '.' + blackHoleDay}
+                  <Text
+                    fontSize={theme.fonts.size.h3}
+                    color={theme.colors.primary.default}
+                  >
+                    {`(D-${dayDiffBlackHoledAtFromNow})`}
+                  </Text>
+                </HStack>
+              )}
+            </td>
           </tr>
           <tr>
             <td>보유 월렛</td>
@@ -152,7 +195,17 @@ export const UserProfile = () => {
           </tr>
           <tr>
             <td>코알리숑 스코어</td>
-            <td>{`${scoreInfo.current.toLocaleString()} (${scoreInfo.rankInCoalition.toLocaleString()}위 / 전체 ${scoreInfo.rankInTotal.toLocaleString()}위)`}</td>
+            <td>
+              <HStack spacing="1rem">
+                <Text
+                  color={theme.colors.primary.default}
+                  fontSize={theme.fonts.size.h3}
+                >
+                  {scoreInfo.current.toLocaleString()}
+                </Text>
+                {`(${scoreInfo.rankInCoalition.toLocaleString()}위 / 전체 ${scoreInfo.rankInTotal.toLocaleString()}위)`}
+              </HStack>
+            </td>
           </tr>
         </tbody>
       </StyledInfoTable>

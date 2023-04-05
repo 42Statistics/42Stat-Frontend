@@ -1,7 +1,5 @@
-export const getDateTime = (
-  dateString: string = new Date().toISOString(),
-): DateTime => {
-  const now = new Date(dateString);
+export const getDateTime = (date: Date = new Date()): DateTime => {
+  const now = new Date(date);
 
   const year = now.getFullYear();
   const month = now.getMonth() + 1; // 0부터 시작하므로 1을 더함

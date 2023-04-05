@@ -90,8 +90,11 @@ export const UserProfile = () => {
     month: blackHoleMonth,
     day: blackHoleDay,
   } = getDateTime(blackholedAt);
-  const dayDiffPool = getDayDiff(pooledAt);
-  const dayDiffBlack = getDayDiff(blackholedAt);
+  const dayDiffPooledAtFromNow = getDayDiff(new Date(pooledAt), new Date());
+  const dayDiffBlackHoledAtFromNow = getDayDiff(
+    new Date(),
+    new Date(blackholedAt),
+  );
   const levelDecimalPart = level % 1;
 
   return (
@@ -160,7 +163,7 @@ export const UserProfile = () => {
                 <Text
                   fontSize={theme.fonts.size.h3}
                   color={theme.colors.primary.default}
-                >{`(D+${dayDiffPool})`}</Text>
+                >{`(D+${dayDiffPooledAtFromNow})`}</Text>
               </HStack>
             </td>
           </tr>
@@ -176,7 +179,7 @@ export const UserProfile = () => {
                     fontSize={theme.fonts.size.h3}
                     color={theme.colors.primary.default}
                   >
-                    {`(D${dayDiffBlack})`}
+                    {`(D-${dayDiffBlackHoledAtFromNow})`}
                   </Text>
                 </HStack>
               )}

@@ -70,6 +70,7 @@ export const UserProfile = () => {
     imgUrl,
     titles,
     coalition,
+    grade,
     level,
     levelRank,
     pooledAt,
@@ -104,7 +105,7 @@ export const UserProfile = () => {
               fontSize={theme.fonts.size.h2}
               fontWeight={theme.fonts.weight.bold}
             >
-              멤버
+              {grade}
             </Text>
             <HStack spacing="2rem">
               <Text

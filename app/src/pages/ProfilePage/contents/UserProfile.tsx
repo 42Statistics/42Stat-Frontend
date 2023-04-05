@@ -1,3 +1,4 @@
+import { gql } from '@/__generated__';
 import {
   Avatar,
   HStack,
@@ -8,13 +9,12 @@ import {
   VStack,
 } from '@/components/common';
 import { LevelBar } from '@/components/elements/LevelBar';
+import { getDayDiff } from '@/utils/getDayDiff';
 import { getDateTime } from '@/utils/getTimeNow';
 import { getTitleWithLogin } from '@/utils/getTitleWithLogin';
-import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
 import { truncate } from 'lodash';
-import { getDayDiff } from '../../../utils/getDayDiff';
 import { CoalitionMark } from './CoalitionMark';
 
 const GET_USER_PROFILE = gql(/* GraphQL */ `

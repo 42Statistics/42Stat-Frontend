@@ -1,8 +1,8 @@
-import { GamSmallSvg } from '@/assets/GamSmallSvg';
-import { GonSmallSvg } from '@/assets/GonSmallSvg';
-import { GunSmallSvg } from '@/assets/GunSmallSvg';
-import { LeeSmallSvg } from '@/assets/LeeSmallSvg';
 import { CoaliltionName, Coalition } from '@/__generated__/graphql';
+import { GamDefaultSvg } from '@/assets/GamDefaultSvg';
+import { GonDefaultSvg } from '@/assets/GonDefaultSvg';
+import { GunDefaultSvg } from '@/assets/GunDefaultSvg';
+import { LeeDefaultSvg } from '@/assets/LeeDefaultSvg';
 
 export const CoalitionMark = ({
   coalition,
@@ -10,9 +10,17 @@ export const CoalitionMark = ({
   coalition?: Coalition | null;
 }) => {
   if (!coalition || !coalition.name) return <></>;
-  if (coalition.name === CoaliltionName.Gun) return <GunSmallSvg />;
-  if (coalition.name === CoaliltionName.Gon) return <GonSmallSvg />;
-  if (coalition.name === CoaliltionName.Gam) return <GamSmallSvg />;
-  if (coalition.name === CoaliltionName.Lee) return <LeeSmallSvg />;
-  return <></>;
+
+  switch (coalition.name) {
+    case CoaliltionName.Gun:
+      return <GunDefaultSvg size="small" />;
+    case CoaliltionName.Gon:
+      return <GonDefaultSvg size="small" />;
+    case CoaliltionName.Gam:
+      return <GamDefaultSvg size="small" />;
+    case CoaliltionName.Lee:
+      return <LeeDefaultSvg size="small" />;
+    default:
+      return <></>;
+  }
 };

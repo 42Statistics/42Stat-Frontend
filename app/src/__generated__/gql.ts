@@ -21,6 +21,11 @@ const documents = {
     "\n  query GetMonthlyAccessTimeRank {\n    getHomePage {\n      monthlyAccessTimeRank {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n": types.GetMonthlyAccessTimeRankDocument,
     "\n  query GetMonthlyExpIncrementRank {\n    getHomePage {\n      monthlyExpIncrementRank {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n": types.GetMonthlyExpIncrementRankDocument,
     "\n  query GetTotalEvalCntRank {\n    getHomePage {\n      totalEvalCntRank {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n": types.GetTotalEvalCntRankDocument,
+    "\n  query getPrefferedTime {\n    getPersonGeneralPage {\n      logtimeInfo {\n        preferredTime {\n          morning\n          daytime\n          evening\n          night\n        }\n      }\n    }\n  }\n": types.GetPrefferedTimeDocument,
+    "\n  query getLastPass {\n    getPersonGeneralPage {\n      teamInfo {\n        lastPass\n      }\n    }\n  }\n": types.GetLastPassDocument,
+    "\n  query getLastRegistered {\n    getPersonGeneralPage {\n      teamInfo {\n        lastRegistered\n      }\n    }\n  }\n": types.GetLastRegisteredDocument,
+    "\n  query getLogtimeInfo {\n    getPersonGeneralPage {\n      logtimeInfo {\n        currMonthLogtime\n        lastMonthLogtime\n      }\n    }\n  }\n": types.GetLogtimeInfoDocument,
+    "\n  query getPersonalTotalEvalCnt {\n    getPersonGeneralPage {\n      evalUserInfo {\n        totalEvalCnt\n      }\n    }\n  }\n": types.GetPersonalTotalEvalCntDocument,
     "\n  query GetUserProfile {\n    getPersonGeneralPage {\n      userProfile {\n        id\n        login\n        grade\n        name\n        coalition {\n          id\n          name\n        }\n        imgUrl\n        titles {\n          id\n          name\n          isSelected\n        }\n        level\n        pooledAt\n        blackholedAt\n        wallet\n        correctionPoint\n        scoreInfo {\n          current\n          rankInCoalition\n          rankInTotal\n        }\n        levelRank\n      }\n    }\n  }\n": types.GetUserProfileDocument,
     "\n  query getActiveUserCntRecord {\n    getTotalPage {\n      activeUserCntRecords {\n        at\n        value\n      }\n    }\n  }\n": types.GetActiveUserCntRecordDocument,
     "\n  query getAverageCircleDuration {\n    getTotalPage {\n      averageCircleDurations {\n        circle\n        value\n      }\n    }\n  }\n": types.GetAverageCircleDurationDocument,
@@ -83,6 +88,26 @@ export function gql(source: "\n  query GetMonthlyExpIncrementRank {\n    getHome
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query GetTotalEvalCntRank {\n    getHomePage {\n      totalEvalCntRank {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetTotalEvalCntRank {\n    getHomePage {\n      totalEvalCntRank {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query getPrefferedTime {\n    getPersonGeneralPage {\n      logtimeInfo {\n        preferredTime {\n          morning\n          daytime\n          evening\n          night\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query getPrefferedTime {\n    getPersonGeneralPage {\n      logtimeInfo {\n        preferredTime {\n          morning\n          daytime\n          evening\n          night\n        }\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query getLastPass {\n    getPersonGeneralPage {\n      teamInfo {\n        lastPass\n      }\n    }\n  }\n"): (typeof documents)["\n  query getLastPass {\n    getPersonGeneralPage {\n      teamInfo {\n        lastPass\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query getLastRegistered {\n    getPersonGeneralPage {\n      teamInfo {\n        lastRegistered\n      }\n    }\n  }\n"): (typeof documents)["\n  query getLastRegistered {\n    getPersonGeneralPage {\n      teamInfo {\n        lastRegistered\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query getLogtimeInfo {\n    getPersonGeneralPage {\n      logtimeInfo {\n        currMonthLogtime\n        lastMonthLogtime\n      }\n    }\n  }\n"): (typeof documents)["\n  query getLogtimeInfo {\n    getPersonGeneralPage {\n      logtimeInfo {\n        currMonthLogtime\n        lastMonthLogtime\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query getPersonalTotalEvalCnt {\n    getPersonGeneralPage {\n      evalUserInfo {\n        totalEvalCnt\n      }\n    }\n  }\n"): (typeof documents)["\n  query getPersonalTotalEvalCnt {\n    getPersonGeneralPage {\n      evalUserInfo {\n        totalEvalCnt\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

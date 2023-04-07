@@ -1,5 +1,11 @@
+import {
+  LastPass,
+  LastRegistered,
+  LogtimeInfo,
+  PrefferedTime,
+  TotalEvalCnt,
+} from '@/pages/ProfileGeneralPage/contents/index';
 import { DashboardItemProps } from '@/utils/types/Dashboard';
-import { LastPass } from '../contents';
 
 export const dashboardContents: DashboardItemProps[] = [
   {
@@ -10,24 +16,24 @@ export const dashboardContents: DashboardItemProps[] = [
   {
     id: 1,
     title: '최근 신청한 과제',
-    content: LastPass,
+    content: LastRegistered,
   },
   {
     id: 2,
     title: '누적 평가 횟수',
-    content: LastPass,
+    content: TotalEvalCnt,
   },
   {
     id: 3,
     title: '월간 출석 시간',
     description: '(2023.01. / 1개월)',
-    content: LastPass,
+    content: LogtimeInfo,
   },
   {
     id: 4,
     title: '주 접속 시간대',
     description: '(2023.01. / 1개월)',
-    content: LastPass,
+    content: PrefferedTime,
   },
   {
     id: 5,

@@ -1,7 +1,7 @@
 import { useTheme } from '@emotion/react';
 import ReactApexChart from 'react-apexcharts';
 
-export const AreaChart = ({
+export const LineChart = ({
   data,
   labels,
   showData,
@@ -12,10 +12,19 @@ export const AreaChart = ({
 
   const options: ApexCharts.ApexOptions = {
     chart: {
-      type: 'area',
+      type: 'line',
     },
     xaxis: {
       categories: labels,
+      axisBorder: {
+        offsetX: -10,
+      },
+    },
+    grid: {
+      padding: {
+        left: 20, // or whatever value that works
+        // right: 30, // or whatever value that works
+      },
     },
     colors: [
       theme.colors.primary.default,
@@ -78,10 +87,6 @@ export const AreaChart = ({
       // curve: 'smooth',
       curve: 'straight',
     },
-    fill: {
-      type: 'solid',
-      opacity: 0.25,
-    },
     responsive: [
       {
         /**
@@ -103,7 +108,7 @@ export const AreaChart = ({
 
   const series: ApexAxisChartSeries = [
     {
-      name: `${seriesName}`,
+      name: seriesName,
       data: data,
     },
   ];
@@ -114,7 +119,7 @@ export const AreaChart = ({
       width="100%"
       height="100%"
       series={series}
-      type="area"
+      type="line"
     />
   );
 };

@@ -1,5 +1,5 @@
 import { Spinner } from '@/components/common';
-import { CoalitionDynamicChart } from '@/components/elements/charts/presets/CoalitionDynamicChart';
+import { CoalitionDynamicChart } from '@/components/elements/Chart';
 import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 

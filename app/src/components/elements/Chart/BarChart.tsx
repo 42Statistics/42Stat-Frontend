@@ -1,8 +1,7 @@
-import { convertToMillion } from '@/utils/chart';
 import { useTheme } from '@emotion/react';
 import ReactApexChart from 'react-apexcharts';
 
-export const CoalitionStackChart = ({
+export const BarChart = ({
   data,
   labels,
   showData,
@@ -18,17 +17,10 @@ export const CoalitionStackChart = ({
     xaxis: {
       categories: labels,
     },
-    plotOptions: {
-      bar: {
-        columnWidth: '45%',
-        distributed: true,
-      },
-    },
     colors: [
-      theme.colors.coalition.gun,
-      theme.colors.coalition.gon,
-      theme.colors.coalition.gam,
-      theme.colors.coalition.lee,
+      theme.colors.primary.default,
+      theme.colors.secondary.default,
+      theme.colors.third.default,
     ],
     tooltip: {
       y: {
@@ -64,7 +56,7 @@ export const CoalitionStackChart = ({
     yaxis: {
       labels: {
         formatter: function (value) {
-          return convertToMillion(value, 1);
+          return value.toString() + `${yUnit}`;
         },
       },
       // title: {
@@ -72,7 +64,7 @@ export const CoalitionStackChart = ({
       // }
     },
     dataLabels: {
-      enabled: false,
+      enabled: true,
       style: {
         fontSize: '12px',
         colors: ['black'],
@@ -81,14 +73,14 @@ export const CoalitionStackChart = ({
       //   return showData![idx++];
       // },
     },
-    // stroke: {
-    //   width: 1,
-    //   // curve: 'smooth',
-    //   curve: 'straight',
-    // },
+    stroke: {
+      width: 1,
+      // curve: 'smooth',
+      curve: 'straight',
+    },
     fill: {
       type: 'solid',
-      opacity: 1,
+      opacity: 0.1,
     },
     responsive: [
       {
@@ -111,8 +103,8 @@ export const CoalitionStackChart = ({
 
   const series: ApexAxisChartSeries = [
     {
-      name: `${seriesName}`,
-      data: data,
+      name: seriesName,
+      data,
     },
   ];
 

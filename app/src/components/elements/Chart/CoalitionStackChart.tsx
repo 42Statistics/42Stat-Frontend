@@ -1,7 +1,8 @@
+import { convertToMillion } from '@/utils/chart';
 import { useTheme } from '@emotion/react';
 import ReactApexChart from 'react-apexcharts';
 
-export const LineChart = ({
+export const CoalitionStackChart = ({
   data,
   labels,
   showData,
@@ -12,24 +13,22 @@ export const LineChart = ({
 
   const options: ApexCharts.ApexOptions = {
     chart: {
-      type: 'line',
+      type: 'bar',
     },
     xaxis: {
       categories: labels,
-      axisBorder: {
-        offsetX: -10,
-      },
     },
-    grid: {
-      padding: {
-        left: 20, // or whatever value that works
-        // right: 30, // or whatever value that works
+    plotOptions: {
+      bar: {
+        columnWidth: '45%',
+        distributed: true,
       },
     },
     colors: [
-      theme.colors.primary.default,
-      theme.colors.secondary.default,
-      theme.colors.third.default,
+      theme.colors.coalition.gun,
+      theme.colors.coalition.gon,
+      theme.colors.coalition.gam,
+      theme.colors.coalition.lee,
     ],
     tooltip: {
       y: {
@@ -65,7 +64,7 @@ export const LineChart = ({
     yaxis: {
       labels: {
         formatter: function (value) {
-          return value + `${yUnit}`;
+          return convertToMillion(value, 1);
         },
       },
       // title: {
@@ -73,19 +72,23 @@ export const LineChart = ({
       // }
     },
     dataLabels: {
-      enabled: true,
+      enabled: false,
       style: {
         fontSize: '12px',
-        // colors: ['black'],
+        colors: ['black'],
       },
       // formatter: function (val, opt) {
       //   return showData![idx++];
       // },
     },
-    stroke: {
-      width: 2,
-      // curve: 'smooth',
-      curve: 'straight',
+    // stroke: {
+    //   width: 1,
+    //   // curve: 'smooth',
+    //   curve: 'straight',
+    // },
+    fill: {
+      type: 'solid',
+      opacity: 1,
     },
     responsive: [
       {
@@ -108,7 +111,7 @@ export const LineChart = ({
 
   const series: ApexAxisChartSeries = [
     {
-      name: `${seriesName}`,
+      name: seriesName,
       data: data,
     },
   ];
@@ -119,7 +122,7 @@ export const LineChart = ({
       width="100%"
       height="100%"
       series={series}
-      type="line"
+      type="bar"
     />
   );
 };

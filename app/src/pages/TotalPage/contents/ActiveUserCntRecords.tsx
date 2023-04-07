@@ -1,6 +1,6 @@
-import { Spinner } from '@/components/common';
-import { AreaChart } from '@/components/elements/charts/presets/AreaChart';
 import { gql } from '@/__generated__';
+import { Spinner } from '@/components/common';
+import { AreaChart } from '@/components/elements/Chart';
 import { useQuery } from '@apollo/client';
 
 const GET_ACTIVE_USER_CNT_RECORD = gql(/* GraphQL */ `

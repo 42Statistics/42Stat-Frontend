@@ -1,7 +1,7 @@
 import { useTheme } from '@emotion/react';
 import ReactApexChart from 'react-apexcharts';
 
-export const BarChart = ({
+export const AreaChart = ({
   data,
   labels,
   showData,
@@ -12,7 +12,7 @@ export const BarChart = ({
 
   const options: ApexCharts.ApexOptions = {
     chart: {
-      type: 'bar',
+      type: 'area',
     },
     xaxis: {
       categories: labels,
@@ -56,7 +56,7 @@ export const BarChart = ({
     yaxis: {
       labels: {
         formatter: function (value) {
-          return value.toString() + `${yUnit}`;
+          return value + `${yUnit}`;
         },
       },
       // title: {
@@ -67,20 +67,20 @@ export const BarChart = ({
       enabled: true,
       style: {
         fontSize: '12px',
-        colors: ['black'],
+        // colors: ['black'],
       },
       // formatter: function (val, opt) {
       //   return showData![idx++];
       // },
     },
     stroke: {
-      width: 1,
+      width: 2,
       // curve: 'smooth',
       curve: 'straight',
     },
     fill: {
       type: 'solid',
-      opacity: 0.1,
+      opacity: 0.25,
     },
     responsive: [
       {
@@ -103,7 +103,7 @@ export const BarChart = ({
 
   const series: ApexAxisChartSeries = [
     {
-      name: `${seriesName}`,
+      name: seriesName,
       data: data,
     },
   ];
@@ -114,7 +114,7 @@ export const BarChart = ({
       width="100%"
       height="100%"
       series={series}
-      type="bar"
+      type="area"
     />
   );
 };

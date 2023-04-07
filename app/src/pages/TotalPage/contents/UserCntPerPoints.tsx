@@ -1,6 +1,6 @@
+import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
 import { BarChart } from '@/components/elements/charts/presets/BarChart';
-import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 
 const GET_USER_CNT_PER_POINTS = gql(/* GraphQL */ `
@@ -45,7 +45,6 @@ export const UserCntPerPoints = () => {
       yUnit="%"
       showData={showDatas}
       labels={labels}
-      size="lg"
       seriesName="인원수"
     />
   );

@@ -51,7 +51,6 @@ export const CoalitionScoreRecord = () => {
       yUnit=""
       showData={showDatas}
       labels={labels}
-      size="lg"
       seriesName="합산점수"
     />
   );

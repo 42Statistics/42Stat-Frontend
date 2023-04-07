@@ -52,7 +52,6 @@ export const CoalitionScoreDynamic = () => {
       data={Datas}
       yUnit=""
       labels={labels}
-      size="long"
       seriesName="코알리숑 점수"
     />
   );

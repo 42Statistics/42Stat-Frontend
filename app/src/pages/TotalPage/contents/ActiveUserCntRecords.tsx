@@ -42,7 +42,6 @@ export const ActiveUserCntRecords = () => {
       yUnit=""
       showData={showDatas}
       labels={labels}
-      size="lg"
       seriesName="active 유저"
     />
   );

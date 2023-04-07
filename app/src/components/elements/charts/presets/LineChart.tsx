@@ -4,26 +4,11 @@ import ReactApexChart from 'react-apexcharts';
 export const LineChart = ({
   data,
   labels,
-  size,
   showData,
   yUnit,
   seriesName,
 }: ChartProps) => {
   const theme = useTheme();
-  let chartWidth, chartHeight;
-  switch (size) {
-    case 'sm':
-      chartWidth = '300';
-      chartHeight = '250';
-      break;
-    case 'long':
-      chartWidth = '1200';
-      chartHeight = '350';
-      break;
-    default:
-      chartWidth = '400';
-      chartHeight = '350';
-  }
 
   const options: ApexCharts.ApexOptions = {
     chart: {
@@ -131,8 +116,8 @@ export const LineChart = ({
   return (
     <ReactApexChart
       options={options}
-      height={chartHeight}
-      width={chartWidth}
+      width="100%"
+      height="100%"
       series={series}
       type="line"
     />

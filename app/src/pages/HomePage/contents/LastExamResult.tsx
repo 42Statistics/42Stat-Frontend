@@ -1,6 +1,6 @@
+import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
 import { BarChart } from '@/components/elements/charts/presets/BarChart';
-import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 
 const GET_LAST_EXAM_RESULT = gql(/* GraphQL */ `
@@ -27,23 +27,22 @@ export const LastExamResult = () => {
   }
 
   const { lastExamResult } = data.getHomePage;
-  const showDatas: string[] = [];
-  const barDatas: number[] = [];
+  const showData: string[] = [];
+  const barData: number[] = [];
   const labels: string[] = [];
 
   lastExamResult.forEach(({ rank, passCnt, totalCnt }, idx) => {
-    labels.push('Rank 0' + rank.toString());
-    showDatas.push(passCnt.toString() + '/' + totalCnt.toString());
-    barDatas.push(Math.round((passCnt / totalCnt) * 1000) / 10);
+    labels.push(`Rank ${rank.toString().padStart(2, '0')}`);
+    barData.push(Math.round((passCnt / totalCnt) * 1000) / 10);
+    showData.push(passCnt.toString() + '/' + totalCnt.toString());
   });
 
   return (
     <BarChart
-      data={barDatas}
+      data={barData}
       yUnit="%"
-      showData={showDatas}
+      showData={showData}
       labels={labels}
-      size="lg"
       seriesName="통과/전체"
     />
   );

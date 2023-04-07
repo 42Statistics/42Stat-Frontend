@@ -46,7 +46,6 @@ export const BlackholedCntPerCircles = () => {
       yUnit="%"
       showData={showDatas}
       labels={labels}
-      size="lg"
       seriesName="블랙홀 간 인원"
     />
   );

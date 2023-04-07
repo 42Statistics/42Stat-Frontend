@@ -46,7 +46,6 @@ export const UserCntPerLevels = () => {
       yUnit="%"
       showData={showDatas}
       labels={labels}
-      size="lg"
       seriesName="인원수"
     />
   );

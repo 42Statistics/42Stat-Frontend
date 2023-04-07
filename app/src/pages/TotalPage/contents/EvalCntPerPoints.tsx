@@ -47,7 +47,6 @@ export const EvalCntPerPoints = () => {
       yUnit="%"
       showData={showDatas}
       labels={labels}
-      size="lg"
       seriesName="인원수"
     />
   );

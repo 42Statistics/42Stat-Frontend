@@ -136,7 +136,6 @@ export const ProjectInfo = () => {
         <PieChart
           data={[passPercentage, 100 - passPercentage]}
           labels={['pass', 'fail']}
-          size="sm"
         />
       </HStack>
     </VStack>

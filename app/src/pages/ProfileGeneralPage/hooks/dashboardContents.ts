@@ -6,6 +6,7 @@ import {
   TotalEvalCnt,
 } from '@/pages/ProfileGeneralPage/contents/index';
 import { DashboardItemProps } from '@/utils/types/Dashboard';
+import { PrefferedCluster } from '../contents/PrefferedCluster';
 
 export const dashboardContents: DashboardItemProps[] = [
   {
@@ -39,7 +40,7 @@ export const dashboardContents: DashboardItemProps[] = [
     id: 5,
     title: '주 접속 클러스터',
     description: '(2023.01. / 1개월)',
-    content: LastPass,
+    content: PrefferedCluster,
   },
   {
     id: 6,

@@ -18,10 +18,17 @@ export type Scalars = {
   URL: any;
 };
 
+export enum CoaliltionName {
+  Gam = 'GAM',
+  Gon = 'GON',
+  Gun = 'GUN',
+  Lee = 'LEE'
+}
+
 export type Coalition = {
   __typename?: 'Coalition';
   id: Scalars['ID'];
-  name: Scalars['Int'];
+  name: CoaliltionName;
 };
 
 export type Corrector = {
@@ -316,7 +323,7 @@ export type UserProfile = {
   blackholedAt?: Maybe<Scalars['DateTime']>;
   coalition?: Maybe<Coalition>;
   correctionPoint: Scalars['Int'];
-  grade?: Maybe<UserGrade>;
+  grade: UserGrade;
   id: Scalars['ID'];
   imgUrl?: Maybe<Scalars['URL']>;
   level: Scalars['Float'];
@@ -397,7 +404,7 @@ export type GetTotalEvalCntRankQuery = { __typename?: 'Query', getHomePage: { __
 export type GetUserProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetUserProfileQuery = { __typename?: 'Query', getPersonGeneralPage: { __typename?: 'PersonalGeneral', userProfile: { __typename?: 'UserProfile', id: string, login: string, grade?: UserGrade | null, name: string, imgUrl?: any | null, level: number, pooledAt: any, blackholedAt?: any | null, wallet: number, correctionPoint: number, levelRank: number, coalition?: { __typename?: 'Coalition', id: string, name: number } | null, titles: Array<{ __typename?: 'UserTitle', id: string, name: string, isSelected: boolean } | null>, scoreInfo: { __typename?: 'ScoreInfo', current: number, rankInCoalition: number, rankInTotal: number } } } };
+export type GetUserProfileQuery = { __typename?: 'Query', getPersonGeneralPage: { __typename?: 'PersonalGeneral', userProfile: { __typename?: 'UserProfile', id: string, login: string, grade: UserGrade, name: string, imgUrl?: any | null, level: number, pooledAt: any, blackholedAt?: any | null, wallet: number, correctionPoint: number, levelRank: number, coalition?: { __typename?: 'Coalition', id: string, name: CoaliltionName } | null, titles: Array<{ __typename?: 'UserTitle', id: string, name: string, isSelected: boolean } | null>, scoreInfo: { __typename?: 'ScoreInfo', current: number, rankInCoalition: number, rankInTotal: number } } } };
 
 export type GetActiveUserCntRecordQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -422,7 +429,7 @@ export type GetWhenGoBlackHoleQuery = { __typename?: 'Query', getTotalPage: { __
 export type GetCoalitionScoreRecordQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCoalitionScoreRecordQuery = { __typename?: 'Query', getTotalPage: { __typename?: 'Total', scoreRecords: Array<{ __typename?: 'ScoreRecords', coalition: { __typename?: 'Coalition', id: string, name: number }, records: Array<{ __typename?: 'ValueRecord', at: any, value: number }> }> } };
+export type GetCoalitionScoreRecordQuery = { __typename?: 'Query', getTotalPage: { __typename?: 'Total', scoreRecords: Array<{ __typename?: 'ScoreRecords', coalition: { __typename?: 'Coalition', id: string, name: CoaliltionName }, records: Array<{ __typename?: 'ValueRecord', at: any, value: number }> }> } };
 
 export type GetCorrectionPointRankQueryVariables = Exact<{ [key: string]: never; }>;
 

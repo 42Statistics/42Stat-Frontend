@@ -14,6 +14,9 @@ export const CoalitionStackChart = ({
   const options: ApexCharts.ApexOptions = {
     chart: {
       type: 'bar',
+      toolbar: {
+        show: false,
+      },
     },
     xaxis: {
       categories: labels,

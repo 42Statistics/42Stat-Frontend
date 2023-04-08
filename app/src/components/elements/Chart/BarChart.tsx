@@ -13,6 +13,9 @@ export const BarChart = ({
   const options: ApexCharts.ApexOptions = {
     chart: {
       type: 'bar',
+      toolbar: {
+        show: false,
+      },
     },
     xaxis: {
       categories: labels,

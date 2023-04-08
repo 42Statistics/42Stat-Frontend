@@ -13,6 +13,9 @@ export const LineChart = ({
   const options: ApexCharts.ApexOptions = {
     chart: {
       type: 'line',
+      toolbar: {
+        show: false,
+      },
     },
     xaxis: {
       categories: labels,

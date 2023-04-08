@@ -13,6 +13,9 @@ export const AreaChart = ({
   const options: ApexCharts.ApexOptions = {
     chart: {
       type: 'area',
+      toolbar: {
+        show: false,
+      },
     },
     xaxis: {
       categories: labels,

@@ -18,6 +18,9 @@ export const CoalitionDynamicChart = ({
   const options: ApexCharts.ApexOptions = {
     chart: {
       type: 'line',
+      toolbar: {
+        show: false,
+      },
     },
     xaxis: {
       categories: labels,

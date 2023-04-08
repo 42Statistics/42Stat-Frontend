@@ -7,6 +7,9 @@ export const PieChart = ({ data, labels }: ChartProps) => {
   const options: ApexCharts.ApexOptions = {
     chart: {
       type: 'pie',
+      toolbar: {
+        show: false,
+      },
     },
     labels: labels,
     plotOptions: {

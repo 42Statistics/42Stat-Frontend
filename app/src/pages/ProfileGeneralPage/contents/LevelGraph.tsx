@@ -19,6 +19,7 @@ const GET_LEVEL_GRAPH = gql(/* GraphQL */ `
 
 export const LevelGraph = () => {
   const { loading, error, data } = useQuery(GET_LEVEL_GRAPH);
+  const user = useAtomValue(userAtom);
 
   if (loading) return <Spinner />;
   if (error) {
@@ -51,7 +52,6 @@ export const LevelGraph = () => {
   //     seriesName="코알리숑 점수"
   //   />
   // );
-  const user = useAtomValue(userAtom);
   return (
     <LevelDynamicChart
       data={[...Datas1, ...Datas2]}

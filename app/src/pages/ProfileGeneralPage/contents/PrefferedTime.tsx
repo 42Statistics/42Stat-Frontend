@@ -18,8 +18,8 @@ const GET_PREFERRED_TIME = gql(/* GraphQL */ `
     }
   }
 `);
-const getPercent = (child: number, parent: number, unit: string): string => {
-  return Math.round((child / parent) * 1000) / 10 + unit;
+const getPercent = (child: number, parent: number): string => {
+  return Math.round((child / parent) * 1000) / 10 + '%';
 };
 export const PrefferedTime = () => {
   const { loading, error, data } = useQuery(GET_PREFERRED_TIME);
@@ -47,10 +47,10 @@ export const PrefferedTime = () => {
         </VStack>
         <VStack>
           <StyledTextValue isMax={max === morning}>
-            {getPercent(morning, total, '%')}
+            {getPercent(morning, total)}
           </StyledTextValue>
           <StyledTextValue isMax={max === evening}>
-            {getPercent(evening, total, '%')}
+            {getPercent(evening, total)}
           </StyledTextValue>
         </VStack>
       </HStack>
@@ -61,10 +61,10 @@ export const PrefferedTime = () => {
         </VStack>
         <VStack>
           <StyledTextValue isMax={max === daytime}>
-            {getPercent(daytime, total, '%')}
+            {getPercent(daytime, total)}
           </StyledTextValue>
           <StyledTextValue isMax={max === night}>
-            {getPercent(night, total, '%')}
+            {getPercent(night, total)}
           </StyledTextValue>
         </VStack>
       </HStack>

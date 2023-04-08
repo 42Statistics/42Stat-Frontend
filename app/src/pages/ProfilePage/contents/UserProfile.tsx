@@ -98,7 +98,7 @@ export const UserProfile = () => {
   const levelDecimalPart = level % 1;
 
   return (
-    <HStack spacing="10rem">
+    <HStack w="100%" h="100%" spacing="10rem">
       <HStack spacing="8rem">
         <Avatar size="18rem" src={imgUrl} />
         <VStack align="start" spacing="1rem">

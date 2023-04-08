@@ -34,7 +34,7 @@ export const TextCompare = ({ curr, last, unit }: TextCompareProps) => {
   const diff = curr - last;
 
   return (
-    <HStack spacing="2rem">
+    <HStack w="100%" h="100%" spacing="2rem">
       <Text
         fontSize={theme.fonts.size.h3}
       >{`${curr.toLocaleString()}${unit}`}</Text>

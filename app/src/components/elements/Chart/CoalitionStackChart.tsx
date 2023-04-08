@@ -1,41 +1,37 @@
+import { convertToMillion } from '@/utils/chart';
 import { useTheme } from '@emotion/react';
 import ReactApexChart from 'react-apexcharts';
 
-export const AreaChart = ({
+export const CoalitionStackChart = ({
   data,
   labels,
-  size,
   showData,
   yUnit,
   seriesName,
 }: ChartProps) => {
   const theme = useTheme();
-  let chartWidth, chartHeight;
-  switch (size) {
-    case 'sm':
-      chartWidth = '300';
-      chartHeight = '250';
-      break;
-    case 'long':
-      chartWidth = '1200';
-      chartHeight = '350';
-      break;
-    default:
-      chartWidth = '400';
-      chartHeight = '350';
-  }
 
   const options: ApexCharts.ApexOptions = {
     chart: {
-      type: 'area',
+      type: 'bar',
+      toolbar: {
+        show: false,
+      },
     },
     xaxis: {
       categories: labels,
     },
+    plotOptions: {
+      bar: {
+        columnWidth: '45%',
+        distributed: true,
+      },
+    },
     colors: [
-      theme.colors.primary.default,
-      theme.colors.secondary.default,
-      theme.colors.third.default,
+      theme.colors.coalition.gun,
+      theme.colors.coalition.gon,
+      theme.colors.coalition.gam,
+      theme.colors.coalition.lee,
     ],
     tooltip: {
       y: {
@@ -71,7 +67,7 @@ export const AreaChart = ({
     yaxis: {
       labels: {
         formatter: function (value) {
-          return value + `${yUnit}`;
+          return convertToMillion(value, 1);
         },
       },
       // title: {
@@ -79,23 +75,23 @@ export const AreaChart = ({
       // }
     },
     dataLabels: {
-      enabled: true,
+      enabled: false,
       style: {
         fontSize: '12px',
-        // colors: ['black'],
+        colors: ['black'],
       },
       // formatter: function (val, opt) {
       //   return showData![idx++];
       // },
     },
-    stroke: {
-      width: 2,
-      // curve: 'smooth',
-      curve: 'straight',
-    },
+    // stroke: {
+    //   width: 1,
+    //   // curve: 'smooth',
+    //   curve: 'straight',
+    // },
     fill: {
       type: 'solid',
-      opacity: 0.25,
+      opacity: 1,
     },
     responsive: [
       {
@@ -118,7 +114,7 @@ export const AreaChart = ({
 
   const series: ApexAxisChartSeries = [
     {
-      name: `${seriesName}`,
+      name: seriesName,
       data: data,
     },
   ];
@@ -126,10 +122,10 @@ export const AreaChart = ({
   return (
     <ReactApexChart
       options={options}
-      height={chartHeight}
-      width={chartWidth}
+      width="100%"
+      height="100%"
       series={series}
-      type="area"
+      type="bar"
     />
   );
 };

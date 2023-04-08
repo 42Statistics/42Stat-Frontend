@@ -1,5 +1,5 @@
 import { Spinner } from '@/components/common';
-import { BarChart } from '@/components/elements/charts/presets/BarChart';
+import { BarChart } from '@/components/elements/Chart';
 import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 
@@ -47,7 +47,6 @@ export const EvalCntPerPoints = () => {
       yUnit="%"
       showData={showDatas}
       labels={labels}
-      size="lg"
       seriesName="인원수"
     />
   );

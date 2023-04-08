@@ -1,45 +1,24 @@
 import { useTheme } from '@emotion/react';
 import ReactApexChart from 'react-apexcharts';
 
-export const LineChart = ({
+export const AreaChart = ({
   data,
   labels,
-  size,
   showData,
   yUnit,
   seriesName,
 }: ChartProps) => {
   const theme = useTheme();
-  let chartWidth, chartHeight;
-  switch (size) {
-    case 'sm':
-      chartWidth = '300';
-      chartHeight = '250';
-      break;
-    case 'long':
-      chartWidth = '1200';
-      chartHeight = '350';
-      break;
-    default:
-      chartWidth = '400';
-      chartHeight = '350';
-  }
 
   const options: ApexCharts.ApexOptions = {
     chart: {
-      type: 'line',
+      type: 'area',
+      toolbar: {
+        show: false,
+      },
     },
     xaxis: {
       categories: labels,
-      axisBorder: {
-        offsetX: -10,
-      },
-    },
-    grid: {
-      padding: {
-        left: 20, // or whatever value that works
-        // right: 30, // or whatever value that works
-      },
     },
     colors: [
       theme.colors.primary.default,
@@ -102,6 +81,10 @@ export const LineChart = ({
       // curve: 'smooth',
       curve: 'straight',
     },
+    fill: {
+      type: 'solid',
+      opacity: 0.25,
+    },
     responsive: [
       {
         /**
@@ -123,7 +106,7 @@ export const LineChart = ({
 
   const series: ApexAxisChartSeries = [
     {
-      name: `${seriesName}`,
+      name: seriesName,
       data: data,
     },
   ];
@@ -131,10 +114,10 @@ export const LineChart = ({
   return (
     <ReactApexChart
       options={options}
-      height={chartHeight}
-      width={chartWidth}
+      width="100%"
+      height="100%"
       series={series}
-      type="line"
+      type="area"
     />
   );
 };

@@ -9,7 +9,7 @@ import {
   VStack,
 } from '@/components/common';
 import { Label } from '@/components/common/Label';
-import { PieChart } from '@/components/elements/charts/presets/PieChart';
+import { PieChart } from '@/components/elements/Chart';
 import { useSearchBar } from '@/components/elements/SearchBar/hooks/useSearchBar';
 import { ProjectSearchBar } from '@/components/elements/SearchBar/ProjectSearchBar';
 import { isEnterKeyReleased } from '@/utils/isEnterKeyReleased';
@@ -136,7 +136,6 @@ export const ProjectInfo = () => {
         <PieChart
           data={[passPercentage, 100 - passPercentage]}
           labels={['pass', 'fail']}
-          size="sm"
         />
       </HStack>
     </VStack>

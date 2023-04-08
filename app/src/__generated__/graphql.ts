@@ -13,9 +13,9 @@ export type Scalars = {
   Int: number;
   Float: number;
   /** A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format. */
-  DateTime: any;
+  DateTime: string;
   /** A field whose value conforms to the standard URL format as specified in RFC3986: https://www.ietf.org/rfc/rfc3986.txt. */
-  URL: any;
+  URL: string;
 };
 
 export enum CoaliltionName {
@@ -384,27 +384,27 @@ export type GetLastExamResultQuery = { __typename?: 'Query', getHomePage: { __ty
 export type GetLevelRankQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetLevelRankQuery = { __typename?: 'Query', getHomePage: { __typename?: 'Home', levelRank: Array<{ __typename?: 'UserRanking', value: number, userPreview: { __typename?: 'UserPreview', id: string, login: string, imgUrl?: any | null } }> } };
+export type GetLevelRankQuery = { __typename?: 'Query', getHomePage: { __typename?: 'Home', levelRank: Array<{ __typename?: 'UserRanking', value: number, userPreview: { __typename?: 'UserPreview', id: string, login: string, imgUrl?: string | null } }> } };
 
 export type GetMonthlyAccessTimeRankQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetMonthlyAccessTimeRankQuery = { __typename?: 'Query', getHomePage: { __typename?: 'Home', monthlyAccessTimeRank: Array<{ __typename?: 'UserRanking', value: number, userPreview: { __typename?: 'UserPreview', id: string, login: string, imgUrl?: any | null } }> } };
+export type GetMonthlyAccessTimeRankQuery = { __typename?: 'Query', getHomePage: { __typename?: 'Home', monthlyAccessTimeRank: Array<{ __typename?: 'UserRanking', value: number, userPreview: { __typename?: 'UserPreview', id: string, login: string, imgUrl?: string | null } }> } };
 
 export type GetMonthlyExpIncrementRankQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetMonthlyExpIncrementRankQuery = { __typename?: 'Query', getHomePage: { __typename?: 'Home', monthlyExpIncrementRank: Array<{ __typename?: 'UserRanking', value: number, userPreview: { __typename?: 'UserPreview', id: string, login: string, imgUrl?: any | null } }> } };
+export type GetMonthlyExpIncrementRankQuery = { __typename?: 'Query', getHomePage: { __typename?: 'Home', monthlyExpIncrementRank: Array<{ __typename?: 'UserRanking', value: number, userPreview: { __typename?: 'UserPreview', id: string, login: string, imgUrl?: string | null } }> } };
 
 export type GetTotalEvalCntRankQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetTotalEvalCntRankQuery = { __typename?: 'Query', getHomePage: { __typename?: 'Home', totalEvalCntRank: Array<{ __typename?: 'UserRanking', value: number, userPreview: { __typename?: 'UserPreview', id: string, login: string, imgUrl?: any | null } }> } };
+export type GetTotalEvalCntRankQuery = { __typename?: 'Query', getHomePage: { __typename?: 'Home', totalEvalCntRank: Array<{ __typename?: 'UserRanking', value: number, userPreview: { __typename?: 'UserPreview', id: string, login: string, imgUrl?: string | null } }> } };
 
 export type GetDestinyUsersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetDestinyUsersQuery = { __typename?: 'Query', getPersonGeneralPage: { __typename?: 'PersonalGeneral', evalUserInfo: { __typename?: 'EvalUserInfo', destinyUsers: Array<{ __typename?: 'DestinyUser', id: string, login: string, imgUrl?: any | null, score: number } | null> } } };
+export type GetDestinyUsersQuery = { __typename?: 'Query', getPersonGeneralPage: { __typename?: 'PersonalGeneral', evalUserInfo: { __typename?: 'EvalUserInfo', destinyUsers: Array<{ __typename?: 'DestinyUser', id: string, login: string, imgUrl?: string | null, score: number } | null> } } };
 
 export type GetDifficultyQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -424,7 +424,7 @@ export type GetLastRegisteredQuery = { __typename?: 'Query', getPersonGeneralPag
 export type GetLevelGraphQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetLevelGraphQuery = { __typename?: 'Query', getPersonGeneralPage: { __typename?: 'PersonalGeneral', levelGraphs: Array<{ __typename?: 'LevelGraph', date: any, userLevel: number, averageLevel: number }> } };
+export type GetLevelGraphQuery = { __typename?: 'Query', getPersonGeneralPage: { __typename?: 'PersonalGeneral', levelGraphs: Array<{ __typename?: 'LevelGraph', date: string, userLevel: number, averageLevel: number }> } };
 
 export type GetLogtimeInfoQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -444,7 +444,7 @@ export type GetPrefferedTimeQuery = { __typename?: 'Query', getPersonGeneralPage
 export type GetTeamInfoQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetTeamInfoQuery = { __typename?: 'Query', getPersonGeneralPage: { __typename?: 'PersonalGeneral', teamInfo: { __typename?: 'TeamInfo', teams: Array<{ __typename?: 'TempTeam', id: string, name: string, occurrence: number, closedAt?: any | null, firstCreatedAt: any, finalMark?: number | null, isValidated?: boolean | null } | null> } } };
+export type GetTeamInfoQuery = { __typename?: 'Query', getPersonGeneralPage: { __typename?: 'PersonalGeneral', teamInfo: { __typename?: 'TeamInfo', teams: Array<{ __typename?: 'TempTeam', id: string, name: string, occurrence: number, closedAt?: string | null, firstCreatedAt: string, finalMark?: number | null, isValidated?: boolean | null } | null> } } };
 
 export type GetPersonalTotalEvalCntQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -454,12 +454,12 @@ export type GetPersonalTotalEvalCntQuery = { __typename?: 'Query', getPersonGene
 export type GetUserProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetUserProfileQuery = { __typename?: 'Query', getPersonGeneralPage: { __typename?: 'PersonalGeneral', userProfile: { __typename?: 'UserProfile', id: string, login: string, grade: UserGrade, name: string, imgUrl?: any | null, level: number, pooledAt: any, blackholedAt?: any | null, wallet: number, correctionPoint: number, levelRank: number, coalition?: { __typename?: 'Coalition', id: string, name: CoaliltionName } | null, titles: Array<{ __typename?: 'UserTitle', id: string, name: string, isSelected: boolean } | null>, scoreInfo: { __typename?: 'ScoreInfo', current: number, rankInCoalition: number, rankInTotal: number } } } };
+export type GetUserProfileQuery = { __typename?: 'Query', getPersonGeneralPage: { __typename?: 'PersonalGeneral', userProfile: { __typename?: 'UserProfile', id: string, login: string, grade: UserGrade, name: string, imgUrl?: string | null, level: number, pooledAt: string, blackholedAt?: string | null, wallet: number, correctionPoint: number, levelRank: number, coalition?: { __typename?: 'Coalition', id: string, name: CoaliltionName } | null, titles: Array<{ __typename?: 'UserTitle', id: string, name: string, isSelected: boolean } | null>, scoreInfo: { __typename?: 'ScoreInfo', current: number, rankInCoalition: number, rankInTotal: number } } } };
 
 export type GetActiveUserCntRecordQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetActiveUserCntRecordQuery = { __typename?: 'Query', getTotalPage: { __typename?: 'Total', activeUserCntRecords: Array<{ __typename?: 'ValueRecord', at: any, value: number }> } };
+export type GetActiveUserCntRecordQuery = { __typename?: 'Query', getTotalPage: { __typename?: 'Total', activeUserCntRecords: Array<{ __typename?: 'ValueRecord', at: string, value: number }> } };
 
 export type GetAverageCircleDurationQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -479,12 +479,12 @@ export type GetWhenGoBlackHoleQuery = { __typename?: 'Query', getTotalPage: { __
 export type GetCoalitionScoreRecordQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCoalitionScoreRecordQuery = { __typename?: 'Query', getTotalPage: { __typename?: 'Total', scoreRecords: Array<{ __typename?: 'ScoreRecords', coalition: { __typename?: 'Coalition', id: string, name: CoaliltionName }, records: Array<{ __typename?: 'ValueRecord', at: any, value: number }> }> } };
+export type GetCoalitionScoreRecordQuery = { __typename?: 'Query', getTotalPage: { __typename?: 'Total', scoreRecords: Array<{ __typename?: 'ScoreRecords', coalition: { __typename?: 'Coalition', id: string, name: CoaliltionName }, records: Array<{ __typename?: 'ValueRecord', at: string, value: number }> }> } };
 
 export type GetCorrectionPointRankQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCorrectionPointRankQuery = { __typename?: 'Query', getTotalPage: { __typename?: 'Total', correctionPointRanks: Array<{ __typename?: 'UserRanking', value: number, userPreview: { __typename?: 'UserPreview', id: string, login: string, imgUrl?: any | null } }> } };
+export type GetCorrectionPointRankQuery = { __typename?: 'Query', getTotalPage: { __typename?: 'Total', correctionPointRanks: Array<{ __typename?: 'UserRanking', value: number, userPreview: { __typename?: 'UserPreview', id: string, login: string, imgUrl?: string | null } }> } };
 
 export type GetEvalCntPerPointsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -494,7 +494,7 @@ export type GetEvalCntPerPointsQuery = { __typename?: 'Query', getTotalPage: { _
 export type GetCoalitionScoreRankQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCoalitionScoreRankQuery = { __typename?: 'Query', getTotalPage: { __typename?: 'Total', monthlyScoreRanks: Array<{ __typename?: 'UserRanking', value: number, userPreview: { __typename?: 'UserPreview', id: string, login: string, imgUrl?: any | null } }> } };
+export type GetCoalitionScoreRankQuery = { __typename?: 'Query', getTotalPage: { __typename?: 'Total', monthlyScoreRanks: Array<{ __typename?: 'UserRanking', value: number, userPreview: { __typename?: 'UserPreview', id: string, login: string, imgUrl?: string | null } }> } };
 
 export type GetProjectInfoQueryVariables = Exact<{
   projectName: Scalars['String'];
@@ -521,7 +521,7 @@ export type GetUserCntPerPointsQuery = { __typename?: 'Query', getTotalPage: { _
 export type GetWalletRankQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetWalletRankQuery = { __typename?: 'Query', getTotalPage: { __typename?: 'Total', walletRanks: Array<{ __typename?: 'UserRanking', value: number, userPreview: { __typename?: 'UserPreview', id: string, login: string, imgUrl?: any | null } }> } };
+export type GetWalletRankQuery = { __typename?: 'Query', getTotalPage: { __typename?: 'Total', walletRanks: Array<{ __typename?: 'UserRanking', value: number, userPreview: { __typename?: 'UserPreview', id: string, login: string, imgUrl?: string | null } }> } };
 
 
 export const GetCurrMonthBlackholedCntDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCurrMonthBlackholedCnt"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getHomePage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"currMonthBlackholedCnt"}},{"kind":"Field","name":{"kind":"Name","value":"lastMonthBlackholedCnt"}}]}}]}}]} as unknown as DocumentNode<GetCurrMonthBlackholedCntQuery, GetCurrMonthBlackholedCntQueryVariables>;

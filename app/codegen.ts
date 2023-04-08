@@ -12,8 +12,8 @@ const config: CodegenConfig = {
       },
       config: {
         scalars: {
-          DateTime: 'Date',
-          URL: 'URL',
+          DateTime: 'string',
+          URL: 'string',
         },
       },
     },

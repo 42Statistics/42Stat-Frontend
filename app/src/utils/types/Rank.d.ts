@@ -2,5 +2,5 @@
 export type RankItemType = {
   name: string;
   value: number;
-  imgUrl?: string;
+  imgUrl?: string | null;
 };

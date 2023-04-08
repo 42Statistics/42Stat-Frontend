@@ -4,10 +4,14 @@ type AvatarProps = React.ImgHTMLAttributes<HTMLImageElement> & {
   size?: string;
 };
 
+const handleError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+  e.currentTarget.src = '/default-avatar.png';
+};
+
 export const Avatar = ({ size, ...propsExceptSize }: AvatarProps) => {
   return (
     <div>
-      <StyledAvatar size={size} {...propsExceptSize} />
+      <StyledAvatar size={size} onError={handleError} {...propsExceptSize} />
     </div>
   );
 };

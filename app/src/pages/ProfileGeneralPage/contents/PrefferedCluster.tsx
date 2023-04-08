@@ -3,18 +3,18 @@ import { Spinner } from '@/components/common';
 import { TextDefault } from '@/components/elements/DashboardContentView/Text';
 import { useQuery } from '@apollo/client';
 
-const GET_LAST_PASS = gql(/* GraphQL */ `
-  query getLastPass {
+const GET_PREFERRED_CLUSTER = gql(/* GraphQL */ `
+  query getPrefferedCluster {
     getPersonGeneralPage {
-      teamInfo {
-        lastPass
+      logtimeInfo {
+        preferredCluster
       }
     }
   }
 `);
 
-export const LastPass = () => {
-  const { loading, error, data } = useQuery(GET_LAST_PASS);
+export const PrefferedCluster = () => {
+  const { loading, error, data } = useQuery(GET_PREFERRED_CLUSTER);
 
   if (loading) return <Spinner />;
   if (error) {
@@ -24,7 +24,7 @@ export const LastPass = () => {
     return <h1>user not found</h1>;
   }
 
-  const { lastPass } = data.getPersonGeneralPage.teamInfo;
+  const { preferredCluster } = data.getPersonGeneralPage.logtimeInfo;
 
-  return <TextDefault text={`${lastPass}`} />;
+  return <TextDefault text={`클러스터 ${preferredCluster}`} />;
 };

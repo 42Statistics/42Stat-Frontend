@@ -1,22 +1,15 @@
 import { useTheme } from '@emotion/react';
 import ReactApexChart from 'react-apexcharts';
 
-export const PieChart = ({ data, labels, size }: ChartProps) => {
+export const PieChart = ({ data, labels }: ChartProps) => {
   const theme = useTheme();
-  let chartWidth, chartHeight;
-  switch (size) {
-    case 'sm':
-      chartWidth = '300';
-      chartHeight = '280';
-      break;
-    default:
-      chartWidth = '400';
-      chartHeight = '370';
-      break;
-  }
+
   const options: ApexCharts.ApexOptions = {
     chart: {
       type: 'pie',
+      toolbar: {
+        show: false,
+      },
     },
     labels: labels,
     plotOptions: {
@@ -56,8 +49,8 @@ export const PieChart = ({ data, labels, size }: ChartProps) => {
     <ReactApexChart
       options={options}
       series={data}
-      height={chartHeight}
-      width={chartWidth}
+      width="100%"
+      height="100%"
       type="pie"
     />
   );

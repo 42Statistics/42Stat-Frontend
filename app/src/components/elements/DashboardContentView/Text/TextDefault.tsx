@@ -1,4 +1,4 @@
-import { Text } from '@/components/common';
+import { Center, Text } from '@/components/common';
 import { useTheme } from '@emotion/react';
 
 type TextDefaultProps = {
@@ -8,5 +8,9 @@ type TextDefaultProps = {
 export const TextDefault = ({ text }: TextDefaultProps) => {
   const theme = useTheme();
 
-  return <Text fontSize={theme.fonts.size.h3}>{text}</Text>;
+  return (
+    <Center w="100%" h="100%">
+      <Text fontSize={theme.fonts.size.h3}>{text}</Text>
+    </Center>
+  );
 };

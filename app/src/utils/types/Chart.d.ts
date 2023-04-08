@@ -4,5 +4,4 @@ type ChartProps = {
   showData?: string[];
   yUnit?: string;
   seriesName?: string;
-  size: 'sm' | 'lg' | 'long';
 };

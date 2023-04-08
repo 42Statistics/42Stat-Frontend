@@ -1,4 +1,4 @@
-import { Avatar, HStack, Spacer, Text } from '@/components/common';
+import { Avatar, HStack, Text } from '@/components/common';
 import { RankItemType } from '@/utils/types/Rank';
 import { useTheme } from '@emotion/react';
 
@@ -8,7 +8,6 @@ type RankItemProps = {
   unit: string;
 };
 
-// FIXME: 뭔가 Spacer가 공간을 먹는 것 같다. flex가 너무 쉽게 wrap된다.
 export const RankItem = ({ rank, item, unit }: RankItemProps) => {
   const theme = useTheme();
   const { name, value, imgUrl } = item;
@@ -53,12 +52,7 @@ export const RankItem = ({ rank, item, unit }: RankItemProps) => {
           {`(${value.toLocaleString()}${unit})`}
         </Text>
       </HStack>
-      {imgUrl ? (
-        <>
-          <Spacer />
-          <Avatar size="4rem" src={imgUrl} />
-        </>
-      ) : null}
+      {imgUrl ? <Avatar size="4rem" src={imgUrl} /> : null}
     </HStack>
   );
 };

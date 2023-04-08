@@ -1,5 +1,5 @@
 import { Spinner } from '@/components/common';
-import { CoalitionStackChart } from '@/components/elements/charts/presets/CoalitionStackChart';
+import { CoalitionStackChart } from '@/components/elements/Chart';
 import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 
@@ -51,7 +51,6 @@ export const CoalitionScoreRecord = () => {
       yUnit=""
       showData={showDatas}
       labels={labels}
-      size="lg"
       seriesName="합산점수"
     />
   );

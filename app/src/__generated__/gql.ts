@@ -21,6 +21,10 @@ const documents = {
     "\n  query GetMonthlyAccessTimeRank {\n    getHomePage {\n      monthlyAccessTimeRank {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n": types.GetMonthlyAccessTimeRankDocument,
     "\n  query GetMonthlyExpIncrementRank {\n    getHomePage {\n      monthlyExpIncrementRank {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n": types.GetMonthlyExpIncrementRankDocument,
     "\n  query GetTotalEvalCntRank {\n    getHomePage {\n      totalEvalCntRank {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n": types.GetTotalEvalCntRankDocument,
+    "\n  query getAverageDuration {\n    getPersonalEvalPage {\n      evalProfile {\n        averageDuration\n      }\n    }\n  }\n": types.GetAverageDurationDocument,
+    "\n  query getPersonalAverageFeedbackLength {\n    getPersonalEvalPage {\n      evalProfile {\n        averageFeedbackLength\n      }\n    }\n  }\n": types.GetPersonalAverageFeedbackLengthDocument,
+    "\n  query getAverageFinalMark {\n    getPersonalEvalPage {\n      evalProfile {\n        averageFinalMark\n      }\n    }\n  }\n": types.GetAverageFinalMarkDocument,
+    "\n  query getMonthlyEvalCnt {\n    getPersonalEvalPage {\n      evalProfile {\n        currMonthCnt\n        lastMonthCnt\n      }\n    }\n  }\n": types.GetMonthlyEvalCntDocument,
     "\n  query getDestinyUsers {\n    getPersonGeneralPage {\n      evalUserInfo {\n        destinyUsers {\n          id\n          login\n          imgUrl\n          score\n        }\n      }\n    }\n  }\n": types.GetDestinyUsersDocument,
     "\n  query getDifficulty {\n    getPersonGeneralPage {\n      evalUserInfo {\n        difficulty\n      }\n    }\n  }\n": types.GetDifficultyDocument,
     "\n  query getLastPass {\n    getPersonGeneralPage {\n      teamInfo {\n        lastPass\n      }\n    }\n  }\n": types.GetLastPassDocument,
@@ -93,6 +97,22 @@ export function gql(source: "\n  query GetMonthlyExpIncrementRank {\n    getHome
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query GetTotalEvalCntRank {\n    getHomePage {\n      totalEvalCntRank {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetTotalEvalCntRank {\n    getHomePage {\n      totalEvalCntRank {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query getAverageDuration {\n    getPersonalEvalPage {\n      evalProfile {\n        averageDuration\n      }\n    }\n  }\n"): (typeof documents)["\n  query getAverageDuration {\n    getPersonalEvalPage {\n      evalProfile {\n        averageDuration\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query getPersonalAverageFeedbackLength {\n    getPersonalEvalPage {\n      evalProfile {\n        averageFeedbackLength\n      }\n    }\n  }\n"): (typeof documents)["\n  query getPersonalAverageFeedbackLength {\n    getPersonalEvalPage {\n      evalProfile {\n        averageFeedbackLength\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query getAverageFinalMark {\n    getPersonalEvalPage {\n      evalProfile {\n        averageFinalMark\n      }\n    }\n  }\n"): (typeof documents)["\n  query getAverageFinalMark {\n    getPersonalEvalPage {\n      evalProfile {\n        averageFinalMark\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query getMonthlyEvalCnt {\n    getPersonalEvalPage {\n      evalProfile {\n        currMonthCnt\n        lastMonthCnt\n      }\n    }\n  }\n"): (typeof documents)["\n  query getMonthlyEvalCnt {\n    getPersonalEvalPage {\n      evalProfile {\n        currMonthCnt\n        lastMonthCnt\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

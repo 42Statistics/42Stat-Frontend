@@ -16,6 +16,27 @@ export const useProfileEvaluationPage = () => {
           colSpan: 1,
           elementId: 0,
         },
+        {
+          row: 1,
+          col: 2,
+          rowSpan: 1,
+          colSpan: 1,
+          elementId: 1,
+        },
+        {
+          row: 1,
+          col: 3,
+          rowSpan: 1,
+          colSpan: 1,
+          elementId: 2,
+        },
+        {
+          row: 1,
+          col: 4,
+          rowSpan: 1,
+          colSpan: 1,
+          elementId: 3,
+        },
       ],
     },
   ];

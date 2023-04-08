@@ -17,6 +17,9 @@ export const CoalitionStackChart = ({
       toolbar: {
         show: false,
       },
+      zoom: {
+        enabled: false,
+      },
     },
     xaxis: {
       categories: labels,

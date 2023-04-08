@@ -10,6 +10,9 @@ export const PieChart = ({ data, labels }: ChartProps) => {
       toolbar: {
         show: false,
       },
+      zoom: {
+        enabled: false,
+      },
     },
     labels: labels,
     plotOptions: {

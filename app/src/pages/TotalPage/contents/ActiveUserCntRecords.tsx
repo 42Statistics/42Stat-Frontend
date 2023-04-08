@@ -1,6 +1,7 @@
 import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
 import { AreaChart } from '@/components/elements/Chart';
+import { getDateTime } from '@/utils/getTimeNow';
 import { useQuery } from '@apollo/client';
 
 const GET_ACTIVE_USER_CNT_RECORD = gql(/* GraphQL */ `
@@ -26,23 +27,29 @@ export const ActiveUserCntRecords = () => {
   }
 
   const { activeUserCntRecords } = data.getTotalPage;
-  const showDatas: string[] = [];
-  const barDatas: number[] = [];
+  const showData: string[] = [];
+  const barData: number[] = [];
   const labels: string[] = [];
 
-  activeUserCntRecords.forEach(({ at, value }, idx) => {
-    labels.push(at.substr(2, 5).replace('-', '.'));
-    showDatas.push(value.toString());
-    barDatas.push(value);
+  activeUserCntRecords.forEach(({ at, value }) => {
+    const { year, month } = getDateTime(new Date(at));
+
+    console.log(new Date(at), value);
+    labels.push(
+      `'${String(Math.floor(year / 100)).padStart(2, '0')}.
+      ${String(month).padStart(2, '0')}`,
+    );
+    barData.push(value);
+    showData.push(value.toString());
   });
 
   return (
     <AreaChart
-      data={barDatas}
+      data={barData}
       yUnit=""
-      showData={showDatas}
+      showData={showData}
       labels={labels}
-      seriesName="active 유저"
+      seriesName="활성화 유저"
     />
   );
 };

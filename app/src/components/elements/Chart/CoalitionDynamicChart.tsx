@@ -21,6 +21,9 @@ export const CoalitionDynamicChart = ({
       toolbar: {
         show: false,
       },
+      zoom: {
+        enabled: false,
+      },
     },
     xaxis: {
       categories: labels,

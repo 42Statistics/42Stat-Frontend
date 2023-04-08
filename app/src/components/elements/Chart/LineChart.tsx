@@ -16,6 +16,9 @@ export const LineChart = ({
       toolbar: {
         show: false,
       },
+      zoom: {
+        enabled: false,
+      },
     },
     xaxis: {
       categories: labels,

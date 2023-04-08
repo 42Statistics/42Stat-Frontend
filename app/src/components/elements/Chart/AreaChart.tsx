@@ -16,6 +16,9 @@ export const AreaChart = ({
       toolbar: {
         show: false,
       },
+      zoom: {
+        enabled: false,
+      },
     },
     xaxis: {
       categories: labels,

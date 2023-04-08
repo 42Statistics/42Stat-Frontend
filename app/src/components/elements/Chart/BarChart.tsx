@@ -16,6 +16,9 @@ export const BarChart = ({
       toolbar: {
         show: false,
       },
+      zoom: {
+        enabled: false,
+      },
     },
     xaxis: {
       categories: labels,

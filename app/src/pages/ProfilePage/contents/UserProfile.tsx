@@ -8,14 +8,14 @@ import {
   Text,
   VStack,
 } from '@/components/common';
+import { CoalitionMark } from '@/components/elements/CoalitionMark';
 import { LevelBar } from '@/components/elements/LevelBar';
 import { getDayDiff } from '@/utils/getDayDiff';
 import { getDateTime } from '@/utils/getTimeNow';
 import { getTitleWithLogin } from '@/utils/getTitleWithLogin';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
-import { truncate } from 'lodash';
-import { CoalitionMark } from './CoalitionMark';
+import { capitalize, truncate } from 'lodash';
 
 const GET_USER_PROFILE = gql(/* GraphQL */ `
   query GetUserProfile {
@@ -108,16 +108,16 @@ export const UserProfile = () => {
               fontSize={theme.fonts.size.h2}
               fontWeight={theme.fonts.weight.bold}
             >
-              {grade}
+              {capitalize(grade)}
             </Text>
             <HStack spacing="2rem">
               <Text
                 fontSize={theme.fonts.size.h1}
                 fontWeight={theme.fonts.weight.bold}
               >
-                {name}
+                {capitalize(name)}
               </Text>
-              <CoalitionMark coalition={coalition} />
+              <CoalitionMark coalition={coalition} width="24px" />
             </HStack>
           </VStack>
           <HStack>
@@ -197,13 +197,16 @@ export const UserProfile = () => {
             <td>코알리숑 스코어</td>
             <td>
               <HStack spacing="1rem">
-                <Text
-                  color={theme.colors.primary.default}
-                  fontSize={theme.fonts.size.h3}
-                >
-                  {scoreInfo.current.toLocaleString()}
+                <Text fontSize={theme.fonts.size.h3}>
+                  {`${scoreInfo.current.toLocaleString()}P`}
                 </Text>
-                {`(${scoreInfo.rankInCoalition.toLocaleString()}위 / 전체 ${scoreInfo.rankInTotal.toLocaleString()}위)`}
+                <HStack spacing="0.5rem">
+                  <Text>(</Text>
+                  <CoalitionMark width="14px" coalition={coalition} />
+                  <Text>
+                    {`${scoreInfo.rankInCoalition.toLocaleString()}위 / 전체 ${scoreInfo.rankInTotal.toLocaleString()}위)`}
+                  </Text>
+                </HStack>
               </HStack>
             </td>
           </tr>

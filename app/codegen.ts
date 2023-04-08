@@ -10,6 +10,12 @@ const config: CodegenConfig = {
       presetConfig: {
         gqlTagName: 'gql',
       },
+      config: {
+        scalars: {
+          DateTime: 'Date',
+          URL: 'URL',
+        },
+      },
     },
   },
   ignoreNoDocuments: true,

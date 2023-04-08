@@ -1,6 +1,9 @@
 import { gql } from '@/__generated__';
-import { Spinner, Text } from '@/components/common';
+import { Spinner } from '@/components/common';
+import { LevelDynamicChart } from '@/components/elements/Chart/LevelDynamicChart';
+import { userAtom } from '@/utils/atoms/userAtom';
 import { useQuery } from '@apollo/client';
+import { useAtomValue } from 'jotai';
 
 const GET_LEVEL_GRAPH = gql(/* GraphQL */ `
   query getLevelGraph {
@@ -48,10 +51,12 @@ export const LevelGraph = () => {
   //     seriesName="코알리숑 점수"
   //   />
   // );
+  const user = useAtomValue(userAtom);
   return (
-    <Text>
-      {[...Datas1, ...Datas2]}
-      {labels}
-    </Text>
+    <LevelDynamicChart
+      data={[...Datas1, ...Datas2]}
+      labels={labels}
+      login={user.login}
+    />
   );
 };

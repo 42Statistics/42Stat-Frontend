@@ -10,8 +10,8 @@ import {
 } from '@/components/common';
 import { CoalitionMark } from '@/components/elements/CoalitionMark';
 import { LevelBar } from '@/components/elements/LevelBar';
+import { getDateTime } from '@/utils/getDateTime';
 import { getDayDiff } from '@/utils/getDayDiff';
-import { getDateTime } from '@/utils/getTimeNow';
 import { getTitleWithLogin } from '@/utils/getTitleWithLogin';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';

@@ -32,14 +32,12 @@ export const DestinyUsers = () => {
 
   const { destinyUsers } = data.getPersonGeneralPage.evalUserInfo;
 
-  //TODO: UserPreview 형식으로 오게 된다면 수정해야함. 일단 임시
-  const rankList: RankItemType[] = destinyUsers.map((v) => {
-    return {
-      name: v!.login,
-      value: v!.score,
-      imgUrl: v!.imgUrl,
-    };
-  });
+  // FIXME: BE와 논의 후 Type Assertion 제거
+  const rankList: RankItemType[] = destinyUsers.map((destinyUser) => ({
+    name: destinyUser!.login,
+    value: destinyUser!.score,
+    imgUrl: destinyUser!.imgUrl,
+  }));
 
   return <Rank rankList={rankList} cnt={3} unit="회" />;
 };

@@ -26,5 +26,5 @@ export const LastPass = () => {
 
   const { lastPass } = data.getPersonGeneralPage.teamInfo;
 
-  return <TextDefault text={`${lastPass}`} />;
+  return lastPass != null ? <TextDefault text={lastPass} /> : <></>;
 };

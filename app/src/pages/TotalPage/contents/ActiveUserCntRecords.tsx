@@ -1,7 +1,7 @@
 import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
 import { AreaChart } from '@/components/elements/Chart';
-import { getDateTime } from '@/utils/getTimeNow';
+import { getDateTime } from '@/utils/getDateTime';
 import { useQuery } from '@apollo/client';
 
 const GET_ACTIVE_USER_CNT_RECORD = gql(/* GraphQL */ `
@@ -34,9 +34,8 @@ export const ActiveUserCntRecords = () => {
   activeUserCntRecords.forEach(({ at, value }) => {
     const { year, month } = getDateTime(new Date(at));
 
-    console.log(new Date(at), value);
     labels.push(
-      `'${String(Math.floor(year / 100)).padStart(2, '0')}.
+      `'${String(Math.floor(year % 100)).padStart(2, '0')}.
       ${String(month).padStart(2, '0')}`,
     );
     barData.push(value);

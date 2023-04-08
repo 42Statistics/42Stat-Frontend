@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { Center } from './Center';
 
 type SpinnerProps = Partial<{
   size: string;
@@ -6,7 +7,16 @@ type SpinnerProps = Partial<{
   thickness: string;
 }>;
 
-export const Spinner = styled.div<SpinnerProps>`
+// ApexChart의 100% 문제를 고치기 위해 Center를 빼서 어쩔 수 없이 해당 구조로 만듦
+export const Spinner = () => {
+  return (
+    <Center w="100%" h="100%">
+      <SpinnerInner />
+    </Center>
+  );
+};
+
+const SpinnerInner = styled.div<SpinnerProps>`
   width: ${({ size = '2.4rem' }) => size};
   height: ${({ size = '2.4rem' }) => size};
   border: ${({ thickness = '0.2rem' }) => thickness} solid transparent;

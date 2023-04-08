@@ -40,17 +40,20 @@ export const TeamInfo = () => {
   return (
     <VStack h="100%" w="100%" style={{ overflow: 'scroll' }}>
       {teams.map(
-        ({
-          id,
-          name,
-          occurrence,
-          closedAt,
-          firstCreatedAt,
-          finalMark,
-          isValidated,
-        }: any) => {
+        (
+          {
+            id,
+            name,
+            occurrence,
+            closedAt,
+            firstCreatedAt,
+            finalMark,
+            isValidated,
+          }: any,
+          idx,
+        ) => {
           return (
-            <HStack>
+            <HStack key={idx}>
               {id}
               {name}
               {occurrence}

@@ -34,7 +34,6 @@ export const CorrectionPointRanks = () => {
 
   const rankList: RankItemType[] = correctionPointRanks.map(
     ({ userPreview, value }) => ({
-      id: userPreview.id,
       name: userPreview.login,
       value: value,
       imgUrl: userPreview.imgUrl,

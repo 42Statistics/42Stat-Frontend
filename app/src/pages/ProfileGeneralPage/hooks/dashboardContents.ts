@@ -1,3 +1,4 @@
+import { DashboardItemProps } from '@/utils/types/Dashboard';
 import {
   DestinyUsers,
   Difficulty,
@@ -5,12 +6,11 @@ import {
   LastRegistered,
   LevelGraph,
   LogtimeInfo,
+  PrefferedCluster,
   PrefferedTime,
   TeamInfo,
   TotalEvalCnt,
-} from '@/pages/ProfileGeneralPage/contents/index';
-import { DashboardItemProps } from '@/utils/types/Dashboard';
-import { PrefferedCluster } from '../contents/PrefferedCluster';
+} from '../contents';
 
 export const dashboardContents: DashboardItemProps[] = [
   {

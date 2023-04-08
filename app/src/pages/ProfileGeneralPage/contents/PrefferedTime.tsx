@@ -1,7 +1,6 @@
 import { gql } from '@/__generated__';
 import { HStack, Spinner, Text, VStack } from '@/components/common';
 import { useQuery } from '@apollo/client';
-import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 
 const GET_PREFERRED_TIME = gql(/* GraphQL */ `
@@ -31,9 +30,6 @@ export const PrefferedTime = () => {
   if (!data) {
     return <h1>user not found</h1>;
   }
-
-  const theme = useTheme();
-
   const { morning, daytime, evening, night } =
     data.getPersonGeneralPage.logtimeInfo.preferredTime;
   const total = morning + daytime + evening + night;

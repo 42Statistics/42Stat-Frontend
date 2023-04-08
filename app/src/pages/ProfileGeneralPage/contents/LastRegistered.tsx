@@ -24,13 +24,7 @@ export const LastRegistered = () => {
     return <h1>user not found</h1>;
   }
 
-  // const theme = useTheme();
   const { lastRegistered } = data.getPersonGeneralPage.teamInfo;
 
-  // return (
-  //   <Text fontSize={theme.fonts.size.h3} fontWeight={theme.fonts.weight.medium}>
-  //     {lastRegistered}
-  //   </Text>
-  // );
   return <TextDefault text={`${lastRegistered}`} />;
 };

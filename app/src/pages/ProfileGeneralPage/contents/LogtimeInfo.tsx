@@ -25,8 +25,6 @@ export const LogtimeInfo = () => {
     return <h1>user not found</h1>;
   }
 
-  // const theme = useTheme();
-
   const { currMonthLogtime, lastMonthLogtime } =
     data.getPersonGeneralPage.logtimeInfo;
 

@@ -24,14 +24,7 @@ export const TotalEvalCnt = () => {
     return <h1>user not found</h1>;
   }
 
-  // const theme = useTheme();
-
   const { totalEvalCnt } = data.getPersonGeneralPage.evalUserInfo;
 
-  // return (
-  //   <Text fontSize={theme.fonts.size.h3} fontWeight={theme.fonts.weight.medium}>
-  //     {totalEvalCnt}회
-  //   </Text>
-  // );
   return <TextDefault text={`${totalEvalCnt}회`} />;
 };

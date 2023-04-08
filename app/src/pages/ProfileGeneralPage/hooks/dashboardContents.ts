@@ -1,8 +1,12 @@
 import {
+  DestinyUsers,
+  Difficulty,
   LastPass,
   LastRegistered,
+  LevelGraph,
   LogtimeInfo,
   PrefferedTime,
+  TeamInfo,
   TotalEvalCnt,
 } from '@/pages/ProfileGeneralPage/contents/index';
 import { DashboardItemProps } from '@/utils/types/Dashboard';
@@ -46,16 +50,16 @@ export const dashboardContents: DashboardItemProps[] = [
     id: 6,
     title: '운명의 장난 스코어',
     description: '평가에서 가장 자주 마주친 유저 랭킹',
-    content: LastPass,
+    content: DestinyUsers,
   },
   {
     id: 7,
-    content: LastPass,
+    content: TeamInfo,
   },
   {
     id: 8,
     title: '이 유저를 평가자로 만난다면?',
-    content: LastPass,
+    content: Difficulty,
   },
   {
     id: 9,
@@ -67,6 +71,6 @@ export const dashboardContents: DashboardItemProps[] = [
     id: 10,
     title: '레벨 증가 그래프',
     description: '(2023.03.01. 기준 / 과거 1년)',
-    content: LastPass,
+    content: LevelGraph,
   },
 ];

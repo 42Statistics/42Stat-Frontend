@@ -20,6 +20,13 @@ export const BarChart = ({
         enabled: false,
       },
     },
+    plotOptions: {
+      bar: {
+        dataLabels: {
+          position: 'top',
+        },
+      },
+    },
     xaxis: {
       categories: labels,
     },
@@ -78,6 +85,7 @@ export const BarChart = ({
       // formatter: function (val, opt) {
       //   return showData![idx++];
       // },
+      offsetY: -20,
     },
     stroke: {
       width: 1,

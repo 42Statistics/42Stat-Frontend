@@ -3,18 +3,18 @@ import { Spinner } from '@/components/common';
 import { TextDefault } from '@/components/elements/DashboardContentView/Text';
 import { useQuery } from '@apollo/client';
 
-const GET_LAST_PASS = gql(/* GraphQL */ `
-  query getLastPass {
+const GET_PERSONAL_TOTAL_EVAL_CNT = gql(/* GraphQL */ `
+  query getPersonalTotalEvalCnt {
     getPersonGeneralPage {
-      teamInfo {
-        lastPass
+      evalUserInfo {
+        totalEvalCnt
       }
     }
   }
 `);
 
-export const LastPass = () => {
-  const { loading, error, data } = useQuery(GET_LAST_PASS);
+export const TotalEvalCnt = () => {
+  const { loading, error, data } = useQuery(GET_PERSONAL_TOTAL_EVAL_CNT);
 
   if (loading) return <Spinner />;
   if (error) {
@@ -24,7 +24,7 @@ export const LastPass = () => {
     return <h1>user not found</h1>;
   }
 
-  const { lastPass } = data.getPersonGeneralPage.teamInfo;
+  const { totalEvalCnt } = data.getPersonGeneralPage.evalUserInfo;
 
-  return <TextDefault text={`${lastPass}`} />;
+  return <TextDefault text={`${totalEvalCnt}회`} />;
 };

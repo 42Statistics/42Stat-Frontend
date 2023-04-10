@@ -82,59 +82,40 @@ export const TeamInfo = () => {
   );
 };
 
-const StyledTable = styled.table`
-  width: 100%;
-  height: 100%;
-  thead {
-    position: relative;
-    top: 0;
-    z-index: 1;
-    color: ${({ theme }) => theme.colors.primary.default};
+export const StyledTable = styled.table`
+  text-align: center;
+  font-size: ${({ theme }) => theme.fonts.size.h3};
+  border-collapse: collapse;
+
+  th,
+  td {
+    padding: 0.8rem 2rem;
+    white-space: nowrap;
   }
 
   tbody {
-    position: relative;
-    overflow-y: auto;
     display: block;
-    height: 100%;
+    overflow-y: scroll;
+    height: 37rem;
+  }
+
+  thead,
+  tbody tr {
+    display: table;
     width: 100%;
+    table-layout: fixed;
   }
 
-  tr:hover {
-    background-color: ${({ theme }) => theme.colors.primary.light};
+  tbody tr {
+    &:hover {
+      background-color: ${({ theme }) => theme.colors.primary.light};
+    }
   }
 
-  th,
-  td,
-  tr {
-    padding: 0.5rem;
-    text-align: center;
-  }
-
-  th,
-  tr {
-    display: flex;
-    justify-content: space-around;
-  }
-
-  td {
-    flex-grow: 1;
-  }
-
-  th,
-  td:nth-child(2) {
-    width: 10%;
-  }
-  th,
-  td:nth-child(3) {
-    width: 10%;
-  }
-  th,
-  td:nth-child(4) {
-    width: 10%;
-  }
-  th,
-  td:nth-child(5) {
-    width: 10%;
+  th {
+    color: ${({ theme }) => theme.colors.primary.default};
+    font-weight: ${({ theme }) => theme.fonts.weight.medium};
+    position: relative;
+    top: 0;
   }
 `;

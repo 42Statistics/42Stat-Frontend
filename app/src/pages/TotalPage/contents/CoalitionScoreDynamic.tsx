@@ -38,7 +38,7 @@ export const CoalitionScoreDynamic = () => {
 
   // 기간 label 작성부
   scoreRecords[0].records.forEach(({ at }) => {
-    dateFormatter(at, 'sm');
+    labels.push(dateFormatter(at, 'sm'));
   });
 
   // 모든 value 하나의 배열에 담기

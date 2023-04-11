@@ -1,8 +1,11 @@
 import { gql } from '@/__generated__';
-import { Spinner } from '@/components/common';
+import { HStack, Spinner } from '@/components/common';
+import { dateFormatter } from '@/utils/dateFormatter';
+import { getDayDiff } from '@/utils/getDayDiff';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai';
 
 const GET_TEAM_INFO = gql(/* GraphQL */ `
   query getTeamInfo {
@@ -42,7 +45,8 @@ export const TeamInfo = () => {
   //임시 데이터임
   return (
     <StyledTable>
-      <thead>
+      <thead></thead>
+      <tbody>
         <tr>
           <th>과제명</th>
           <th>시도</th>
@@ -52,8 +56,6 @@ export const TeamInfo = () => {
           <th>소요기간</th>
           <th>점수</th>
         </tr>
-      </thead>
-      <tbody>
         {teams.map(
           ({
             id,
@@ -67,12 +69,25 @@ export const TeamInfo = () => {
             return (
               <tr key={id}>
                 <td>{name}</td>
-                <td>{occurrence}</td>
-                <td></td>
-                <td>{firstCreatedAt[0]}</td>
-                <td>{closedAt[0]}</td>
-                <td>{isValidated}</td>
-                <td>{finalMark}</td>
+                <td>{occurrence}번째</td>
+                <td>{getDayDiff(new Date(), new Date(closedAt))}일 전 제출</td>
+                <td>{dateFormatter(firstCreatedAt, 'lg')}</td>
+                <td>{dateFormatter(closedAt, 'lg')}</td>
+                <td>
+                  {getDayDiff(new Date(closedAt), new Date(firstCreatedAt))}일
+                </td>
+                <td>
+                  <HStack
+                    style={{
+                      color: isValidated
+                        ? theme.colors.third.dark
+                        : theme.colors.secondary.default,
+                    }}
+                  >
+                    {isValidated ? <AiOutlineCheck /> : <AiOutlineClose />}
+                    {finalMark == null ? 0 : finalMark}
+                  </HStack>
+                </td>
               </tr>
             );
           },
@@ -82,7 +97,10 @@ export const TeamInfo = () => {
   );
 };
 
-export const StyledTable = styled.table`
+//AiOutlineCheck
+//AiOutlineClose
+
+const StyledTable = styled.table`
   text-align: center;
   font-size: ${({ theme }) => theme.fonts.size.h3};
   border-collapse: collapse;
@@ -97,25 +115,34 @@ export const StyledTable = styled.table`
     display: block;
     overflow-y: scroll;
     height: 37rem;
+
+    tr:first-child {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      color: ${({ theme }) => theme.colors.primary.default};
+      font-weight: ${({ theme }) => theme.fonts.weight.medium};
+      background-color: ${({ theme }) => theme.colors.mono.white};
+    }
+
+    tr:not(:first-child) {
+      &:hover {
+        background-color: ${({ theme }) => theme.colors.primary.light};
+      }
+    }
   }
 
-  thead,
   tbody tr {
     display: table;
     width: 100%;
     table-layout: fixed;
   }
-
-  tbody tr {
-    &:hover {
-      background-color: ${({ theme }) => theme.colors.primary.light};
-    }
-  }
-
-  th {
-    color: ${({ theme }) => theme.colors.primary.default};
-    font-weight: ${({ theme }) => theme.fonts.weight.medium};
-    position: relative;
-    top: 0;
-  }
 `;
+
+// const StyledCheck = styled(AiOutlineCheck)`
+//   color: ${({ theme }) => theme.colors.third.default};
+// `;
+
+// const StyledCancel = styled(AiOutlineClose)`
+//   color: ${({ theme }) => theme.colors.third.default};
+// `;

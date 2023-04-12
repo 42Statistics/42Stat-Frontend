@@ -97,13 +97,11 @@ export const TeamInfo = () => {
   );
 };
 
-//AiOutlineCheck
-//AiOutlineClose
-
 const StyledTable = styled.table`
   text-align: center;
   font-size: ${({ theme }) => theme.fonts.size.h3};
-  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
 
   th,
   td {
@@ -113,8 +111,9 @@ const StyledTable = styled.table`
 
   tbody {
     display: block;
-    overflow-y: scroll;
+    overflow: auto;
     height: 37rem;
+    width: 100%;
 
     tr:first-child {
       position: sticky;
@@ -133,16 +132,7 @@ const StyledTable = styled.table`
   }
 
   tbody tr {
-    display: table;
     width: 100%;
     table-layout: fixed;
   }
 `;
-
-// const StyledCheck = styled(AiOutlineCheck)`
-//   color: ${({ theme }) => theme.colors.third.default};
-// `;
-
-// const StyledCancel = styled(AiOutlineClose)`
-//   color: ${({ theme }) => theme.colors.third.default};
-// `;

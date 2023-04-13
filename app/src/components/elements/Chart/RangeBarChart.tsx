@@ -3,39 +3,39 @@ import { merge } from 'lodash';
 import ReactApexChart from 'react-apexcharts';
 import { defaultOptions } from './options';
 
-type PieChartProps = {
-  labels: string[];
-  series: number[];
+type RangeBarChartProps = {
+  series: ApexAxisChartSeries;
   options: ApexCharts.ApexOptions;
 };
 
-export const PieChart = ({
-  labels,
+export const RangeBarChart = ({
   series,
   options: additionalOptions,
-}: PieChartProps) => {
+}: RangeBarChartProps) => {
   const theme = useTheme();
 
-  const pieChartOptions: ApexCharts.ApexOptions = {
-    labels,
-    plotOptions: {
-      pie: {
-        startAngle: -270,
-        endAngle: 90,
-      },
-    },
-    legend: {
-      position: 'bottom',
+  const rangeBarChartOptions: ApexCharts.ApexOptions = {
+    stroke: {
+      width: 1.5,
     },
     colors: [theme.colors.primary.default],
+    fill: {
+      type: 'solid',
+      colors: [theme.colors.primary.light],
+    },
     responsive: [],
   };
 
-  const options = merge({}, defaultOptions, pieChartOptions, additionalOptions);
+  const options = merge(
+    {},
+    defaultOptions,
+    rangeBarChartOptions,
+    additionalOptions,
+  );
 
   return (
     <ReactApexChart
-      type="pie"
+      type="rangeBar"
       series={series}
       options={options}
       width="100%"

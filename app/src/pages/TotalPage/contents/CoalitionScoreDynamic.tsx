@@ -1,24 +1,8 @@
 import { Spinner } from '@/components/common';
-import { CoalitionDynamicChart } from '@/components/elements/Chart';
-import { gql } from '@/__generated__';
+import { numberWithUnitFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
-
-const GET_COALITION_SCORE_RECORD = gql(/* GraphQL */ `
-  query getCoalitionScoreRecord {
-    getTotalPage {
-      scoreRecords {
-        coalition {
-          id
-          name
-        }
-        records {
-          at
-          value
-        }
-      }
-    }
-  }
-`);
+import { GET_COALITION_SCORE_RECORD } from './CoalitionScoreSum';
+import { LineChart } from '@/components/elements/Chart';
 
 export const CoalitionScoreDynamic = () => {
   const { loading, error, data } = useQuery(GET_COALITION_SCORE_RECORD);
@@ -32,27 +16,45 @@ export const CoalitionScoreDynamic = () => {
   }
 
   const { scoreRecords } = data.getTotalPage;
-  const Datas: number[] = [];
-  const labels: string[] = [];
-
-  // 기간 label 작성부
-  scoreRecords[0].records.forEach(({ at }) => {
-    labels.push(at.substr(2, 5).replace('-', '.'));
+  const series = scoreRecords.map(({ coalition, records }) => {
+    const seriesData = records.map(({ at, value }) => ({
+      x: at,
+      y: value,
+    }));
+    return {
+      name: coalition.name,
+      data: seriesData,
+    };
   });
 
-  // 모든 value 하나의 배열에 담기
-  scoreRecords.forEach(({ coalition, records }, idx) => {
-    records.forEach(({ value }) => {
-      Datas.push(value);
-    });
-  });
+  return <CoalitionScoreDynamicChart series={series} />;
+};
 
-  return (
-    <CoalitionDynamicChart
-      data={Datas}
-      yUnit=""
-      labels={labels}
-      seriesName="코알리숑 점수"
-    />
-  );
+type CoalitionScoreDynamicChartProps = {
+  series: ApexAxisChartSeries;
+};
+
+const CoalitionScoreDynamicChart = ({
+  series,
+}: CoalitionScoreDynamicChartProps) => {
+  const options: ApexCharts.ApexOptions = {
+    xaxis: {
+      type: 'datetime',
+      labels: {
+        format: 'yy.MM.',
+      },
+    },
+    yaxis: {
+      labels: {
+        formatter: (value) => numberWithUnitFormatter(value, 'P'),
+      },
+    },
+    tooltip: {
+      x: {
+        format: 'yyyy년 M월',
+      },
+    },
+  };
+
+  return <LineChart series={series} options={options} />;
 };

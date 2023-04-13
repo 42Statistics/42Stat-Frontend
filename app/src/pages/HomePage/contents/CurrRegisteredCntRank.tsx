@@ -1,7 +1,7 @@
+import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
 import { Rank } from '@/components/elements/DashboardContentView/Rank';
 import { RankItemType } from '@/utils/types/Rank';
-import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 
 const GET_CURR_REGISTERED_CNT_RANK = gql(/* GraphQL */ `

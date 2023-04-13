@@ -1,6 +1,6 @@
+import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
 import { BarChart } from '@/components/elements/Chart';
-import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 
 const GET_USER_CNT_PER_LEVELS = gql(/* GraphQL */ `
@@ -27,26 +27,46 @@ export const UserCntPerLevels = () => {
   }
 
   const { userCntPerLevels } = data.getTotalPage;
-  const showDatas: string[] = [];
-  const barDatas: number[] = [];
-  const labels: string[] = [];
+  const categories = userCntPerLevels.map(({ level }) => level);
+  const seriesData = userCntPerLevels.map(({ userCnt }) => userCnt);
+  const series: ApexAxisChartSeries = [
+    {
+      name: '인원수',
+      data: seriesData,
+    },
+  ];
 
-  let totalNum = 0;
-  userCntPerLevels.forEach(({ userCnt, level }, idx) => {
-    labels.push(level.toString());
-    showDatas.push(userCnt.toString());
-    totalNum += userCnt;
-  });
-  userCntPerLevels.forEach(({ userCnt }) => {
-    barDatas.push(Math.round((userCnt / totalNum) * 1000) / 10);
-  });
-  return (
-    <BarChart
-      data={barDatas}
-      yUnit="%"
-      showData={showDatas}
-      labels={labels}
-      seriesName="인원수"
-    />
-  );
+  return <UserCntPerLevelsChart categories={categories} series={series} />;
+};
+
+type UserCntPerLevelsChartProps = {
+  categories: number[];
+  series: ApexAxisChartSeries;
+};
+
+const UserCntPerLevelsChart = ({
+  categories,
+  series,
+}: UserCntPerLevelsChartProps) => {
+  const options: ApexCharts.ApexOptions = {
+    xaxis: {
+      categories,
+      labels: {
+        formatter: (value) => value,
+      },
+    },
+    yaxis: {
+      max: 100,
+      labels: {
+        formatter: (value) => `${value}명`,
+      },
+    },
+    tooltip: {
+      x: {
+        formatter: (value) => `Level ${value}`,
+      },
+    },
+  };
+
+  return <BarChart options={options} series={series} />;
 };

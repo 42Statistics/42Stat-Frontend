@@ -3,39 +3,48 @@ import { merge } from 'lodash';
 import ReactApexChart from 'react-apexcharts';
 import { defaultOptions } from './options';
 
-type PieChartProps = {
+type DonutChartProps = {
   labels: string[];
   series: number[];
   options: ApexCharts.ApexOptions;
 };
 
-export const PieChart = ({
+export const DonutChart = ({
   labels,
   series,
   options: additionalOptions,
-}: PieChartProps) => {
+}: DonutChartProps) => {
   const theme = useTheme();
 
-  const pieChartOptions: ApexCharts.ApexOptions = {
+  const donutChartOptions: ApexCharts.ApexOptions = {
     labels,
     plotOptions: {
       pie: {
-        startAngle: -270,
-        endAngle: 90,
+        donut: {
+          size: '50%',
+        },
       },
     },
     legend: {
       position: 'bottom',
     },
+    fill: {
+      type: 'solid',
+    },
     colors: [theme.colors.primary.default],
     responsive: [],
   };
 
-  const options = merge({}, defaultOptions, pieChartOptions, additionalOptions);
+  const options = merge(
+    {},
+    defaultOptions,
+    donutChartOptions,
+    additionalOptions,
+  );
 
   return (
     <ReactApexChart
-      type="pie"
+      type="donut"
       series={series}
       options={options}
       width="100%"

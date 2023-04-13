@@ -1,7 +1,7 @@
 import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
 import { AreaChart } from '@/components/elements/Chart';
-import { getDateTime } from '@/utils/getDateTime';
+import { numberFormatter, numberWithUnitFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
 
 const GET_ACTIVE_USER_CNT_RECORD = gql(/* GraphQL */ `
@@ -27,28 +27,47 @@ export const ActiveUserCntRecords = () => {
   }
 
   const { activeUserCntRecords } = data.getTotalPage;
-  const showData: string[] = [];
-  const barData: number[] = [];
-  const labels: string[] = [];
+  const seriesData = activeUserCntRecords.map(({ at, value }) => ({
+    x: at,
+    y: value,
+  }));
+  const series: ApexAxisChartSeries = [
+    {
+      name: '활성화 유저',
+      data: seriesData,
+    },
+  ];
 
-  activeUserCntRecords.forEach(({ at, value }) => {
-    const { year, month } = getDateTime(new Date(at));
+  return <ActiveUserCntRecordsChart series={series} />;
+};
 
-    labels.push(
-      `'${String(Math.floor(year % 100)).padStart(2, '0')}.
-      ${String(month).padStart(2, '0')}`,
-    );
-    barData.push(value);
-    showData.push(value.toString());
-  });
+type ActiveUserCntRecordsChartProps = {
+  series: ApexAxisChartSeries;
+};
 
-  return (
-    <AreaChart
-      data={barData}
-      yUnit=""
-      showData={showData}
-      labels={labels}
-      seriesName="활성화 유저"
-    />
-  );
+const ActiveUserCntRecordsChart = ({
+  series,
+}: ActiveUserCntRecordsChartProps) => {
+  const options: ApexCharts.ApexOptions = {
+    xaxis: {
+      type: 'datetime',
+      labels: {
+        format: 'yy.MM.',
+      },
+    },
+    yaxis: {
+      labels: {
+        formatter: (value) => numberFormatter(value),
+      },
+    },
+    tooltip: {
+      x: {
+        format: 'yyyy년 M월',
+      },
+      y: {
+        formatter: (value) => numberWithUnitFormatter(value, '명'),
+      },
+    },
+  };
+  return <AreaChart series={series} options={options} />;
 };

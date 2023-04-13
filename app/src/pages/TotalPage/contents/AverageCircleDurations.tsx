@@ -1,7 +1,12 @@
-import { Spinner } from '@/components/common';
 import { gql } from '@/__generated__';
+import { Spinner } from '@/components/common';
+import { RangeBarChart } from '@/components/elements/Chart';
+import {
+  dDayFormatter,
+  numberFormatter,
+  numberWithUnitFormatter,
+} from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
-import styled from '@emotion/styled';
 
 const GET_AVERAGE_CIRCLE_DURATION = gql(/* GraphQL */ `
   query getAverageCircleDuration {
@@ -26,46 +31,55 @@ export const AverageCircleDurations = () => {
   }
 
   const { averageCircleDurations } = data.getTotalPage;
-
-  let db: number[] = [];
-  averageCircleDurations.forEach(({ circle, value }) => {
-    db.push(value);
-  });
-
-  return (
-    <StyledTable>
-      <thead>
-        <tr>
-          <td>서클</td>
-          <td>D+</td>
-        </tr>
-      </thead>
-      <tbody>
-        {db.map((v, idx) => {
-          return (
-            <tr key={idx}>
-              <td>{idx}</td>
-              <td>{v}</td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </StyledTable>
+  const seriesData = averageCircleDurations.reduce(
+    (result: { x: number; y: [number, number] }[], { circle, value }, idx) => {
+      const prevValue = idx !== 0 ? averageCircleDurations[idx - 1]?.value : 0;
+      result.push({
+        x: circle,
+        y: [prevValue, value],
+      });
+      return result;
+    },
+    [],
   );
+  const series: ApexAxisChartSeries = [
+    {
+      name: '평균 서클 체류 기간',
+      data: seriesData,
+    },
+  ];
+
+  return <AverageCircleDurationsChart series={series} />;
 };
 
-const StyledTable = styled.table`
-  text-align: center;
-  font-size: ${({ theme }) => theme.fonts.size.h3};
+type AverageCircleDurationsChartProps = {
+  series: ApexAxisChartSeries;
+};
 
-  th,
-  td {
-    padding: 1rem 2rem;
-    border: 1px solid black; /* 테두리 설정 */
-    width: 11rem;
-  }
-  tr:first-of-type {
-    font-weight: ${({ theme }) => theme.fonts.weight.bold};
-    background-color: ${({ theme }) => theme.colors.primary.light};
-  }
-`;
+const AverageCircleDurationsChart = ({
+  series,
+}: AverageCircleDurationsChartProps) => {
+  const options: ApexCharts.ApexOptions = {
+    xaxis: {
+      type: 'category',
+      tickPlacement: 'on',
+      labels: {
+        formatter: (value) => numberFormatter(parseInt(value)),
+      },
+    },
+    yaxis: {
+      labels: {
+        formatter: (value) => dDayFormatter(value),
+      },
+    },
+    tooltip: {
+      x: {
+        formatter: (value) => numberWithUnitFormatter(value, '서클'),
+      },
+      y: {
+        formatter: (value) => numberWithUnitFormatter(value, '일'),
+      },
+    },
+  };
+  return <RangeBarChart series={series} options={options} />;
+};

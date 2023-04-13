@@ -1,3 +1,4 @@
+import { gql } from '@/__generated__';
 import {
   Divider,
   HStack,
@@ -10,10 +11,9 @@ import {
 } from '@/components/common';
 import { Label } from '@/components/common/Label';
 import { PieChart } from '@/components/elements/Chart';
-import { useSearchBar } from '@/components/elements/SearchBar/hooks/useSearchBar';
 import { ProjectSearchBar } from '@/components/elements/SearchBar/ProjectSearchBar';
+import { useSearchBar } from '@/components/elements/SearchBar/hooks/useSearchBar';
 import { isEnterKeyReleased } from '@/utils/isEnterKeyReleased';
-import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
 import { useState } from 'react';
@@ -133,11 +133,31 @@ export const ProjectInfo = () => {
           </tbody>
         </StyledInfoTable>
         <Divider orientation="vertical" />
-        <PieChart
-          data={[passPercentage, 100 - passPercentage]}
-          labels={['pass', 'fail']}
+        <PassPercentageChart
+          labels={['Pass', 'Fail']}
+          series={[passPercentage, 100 - passPercentage]}
         />
       </HStack>
     </VStack>
   );
+};
+
+type PassPercentageChartProps = {
+  labels: string[];
+  series: number[];
+};
+
+const PassPercentageChart = ({ labels, series }: PassPercentageChartProps) => {
+  const theme = useTheme();
+
+  const options: ApexCharts.ApexOptions = {
+    colors: [theme.colors.third.default, theme.colors.secondary.default],
+    tooltip: {
+      y: {
+        formatter: (value) => `${value.toFixed(1)}%`,
+      },
+    },
+  };
+
+  return <PieChart labels={labels} series={series} options={options} />;
 };

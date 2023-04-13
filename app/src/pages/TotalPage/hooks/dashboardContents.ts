@@ -5,7 +5,7 @@ import {
   AverageFeedbackLength,
   BlackholedCntPerCircles,
   CoalitionScoreDynamic,
-  CoalitionScoreRecord,
+  CoalitionScoreSum,
   CorrectionPointRanks,
   EvalCntPerPoints,
   MonthlyScoreRanks,
@@ -30,7 +30,7 @@ export const dashboardContents: DashboardItemProps[] = [
   {
     id: 2,
     title: '누적 코알리숑 스코어 합산',
-    content: CoalitionScoreRecord,
+    content: CoalitionScoreSum,
   },
   {
     id: 3,

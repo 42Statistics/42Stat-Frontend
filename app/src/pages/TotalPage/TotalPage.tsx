@@ -2,24 +2,32 @@ import {
   DesktopDashboard,
   MobileDashboard,
 } from '@/components/templates/Dashboard';
-import { AboveTablet, Mobile } from '@/utils/responsive/Device';
+import { TabletDashboard } from '@/components/templates/Dashboard/TabletDashboard';
+import { Desktop, Mobile, Tablet } from '@/utils/responsive/Device';
 import { Helmet } from 'react-helmet-async';
 import { dashboardContents } from './hooks/dashboardContents';
 import { useTotalPage } from './hooks/useTotalPage';
 
 export const TotalPage = () => {
-  const { desktopDashboardRows, mobileDashboardRows } = useTotalPage();
+  const { desktopDashboardRows, tabletDashboardRows, mobileDashboardRows } =
+    useTotalPage();
   return (
     <>
       <Helmet>
         <title>전체 정보 보기 | 42Stat</title>
       </Helmet>
-      <AboveTablet>
+      <Desktop>
         <DesktopDashboard
           rows={desktopDashboardRows}
           contents={dashboardContents}
         />
-      </AboveTablet>
+      </Desktop>
+      <Tablet>
+        <TabletDashboard
+          rows={tabletDashboardRows}
+          contents={dashboardContents}
+        />
+      </Tablet>
       <Mobile>
         <MobileDashboard
           rows={mobileDashboardRows}

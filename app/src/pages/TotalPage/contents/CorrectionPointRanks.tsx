@@ -1,7 +1,8 @@
+import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
 import { Rank } from '@/components/elements/DashboardContentView/Rank';
+import { BelowTablet, Desktop } from '@/utils/responsive/Device';
 import { RankItemType } from '@/utils/types/Rank';
-import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 
 const GET_CORRECTION_POINT_RANK = gql(/* GraphQL */ `
@@ -31,6 +32,7 @@ export const CorrectionPointRanks = () => {
   }
 
   const { correctionPointRanks } = data.getTotalPage;
+  const unit = '개';
 
   const rankList: RankItemType[] = correctionPointRanks.map(
     ({ userPreview, value }) => ({
@@ -40,5 +42,18 @@ export const CorrectionPointRanks = () => {
     }),
   );
 
-  return <Rank rankList={rankList} cnt={3} unit="개" />;
+  const rankListWithoutImgUrl: RankItemType[] = rankList.map(
+    ({ name, value }) => ({ name, value }),
+  );
+
+  return (
+    <>
+      <Desktop>
+        <Rank rankList={rankList} cnt={3} unit={unit} />
+      </Desktop>
+      <BelowTablet>
+        <Rank rankList={rankListWithoutImgUrl} cnt={3} unit={unit} />
+      </BelowTablet>
+    </>
+  );
 };

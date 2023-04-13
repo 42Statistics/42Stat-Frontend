@@ -15,5 +15,4 @@ const MobileDashboardRowContainerLayout = styled.div`
   width: 100%;
   flex-direction: column;
   gap: 1.5rem;
-  padding: 2rem;
 `;

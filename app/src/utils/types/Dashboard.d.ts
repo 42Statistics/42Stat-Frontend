@@ -17,6 +17,18 @@ export type DesktopDashboardRowType = {
   }[];
 };
 
+export type TabletDashboardRowType = {
+  row: TabletDashboardRowSize;
+  col: TabletDashboardColSize;
+  items: {
+    row: number;
+    col: number;
+    rowSpan: number;
+    colSpan: number;
+    elementId: number;
+  }[];
+};
+
 export type MobileDashboardRowType = {
   row: MobileDashboardRowSize;
   col: MobileDashboardColSize;
@@ -31,6 +43,9 @@ export type MobileDashboardRowType = {
 
 export type DesktopDashboardRowSize = 1 | 2;
 export type DesktopDashboardColSize = 3 | 4;
+
+export type TabletDashboardRowSize = 1 | 2;
+export type TabletDashboardColSize = 2 | 3;
 
 export type MobileDashboardRowSize = 1 | 2;
 export type MobileDashboardColSize = 1 | 2;

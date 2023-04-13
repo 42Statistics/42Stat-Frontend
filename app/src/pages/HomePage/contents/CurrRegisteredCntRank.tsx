@@ -29,6 +29,7 @@ export const CurrRegisteredCntRank = () => {
   }
 
   const { currRegisteredCntRank } = data.getHomePage;
+  const unit = '명';
 
   const rankList: RankItemType[] = currRegisteredCntRank.map(
     ({ projectPreview, value }) => ({
@@ -37,5 +38,5 @@ export const CurrRegisteredCntRank = () => {
     }),
   );
 
-  return <Rank rankList={rankList} cnt={3} unit="명" />;
+  return <Rank rankList={rankList} cnt={3} unit={unit} />;
 };

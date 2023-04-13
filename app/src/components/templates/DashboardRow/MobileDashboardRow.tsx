@@ -30,7 +30,7 @@ const MobileDashboardRowLayout = styled.div<MobileDashboardRowLayoutProps>`
   display: grid;
   grid-template-columns: ${({ col }) => `repeat(${col}, 1fr)`};
   grid-template-rows: ${({ row, col }) =>
-    `repeat(${row}, ${col === 2 ? '8rem' : '35rem'})`};
+    `repeat(${row}, ${col === 2 ? '15rem' : '60rem'})`};
   column-gap: 1.5rem;
   row-gap: 1.5rem;
   width: 100%;

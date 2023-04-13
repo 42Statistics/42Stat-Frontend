@@ -1,6 +1,6 @@
+import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
 import { TextCompare } from '@/components/elements/DashboardContentView/Text';
-import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 
 const GET_CURR_WEEK_EVAL_CNT = gql(/* GraphQL */ `
@@ -24,8 +24,9 @@ export const CurrWeekEvalCnt = () => {
   }
 
   const { currWeekEvalCnt, lastWeekEvalCnt } = data.getHomePage;
+  const unit = '회';
 
   return (
-    <TextCompare curr={currWeekEvalCnt} last={lastWeekEvalCnt} unit="회" />
+    <TextCompare curr={currWeekEvalCnt} last={lastWeekEvalCnt} unit={unit} />
   );
 };

@@ -20,3 +20,9 @@ export const AboveTablet = ({ children }: React.PropsWithChildren) => {
   const isAboveTablet = device === 'desktop' || device === 'tablet';
   return <>{isAboveTablet ? children : null}</>;
 };
+
+export const BelowTablet = ({ children }: React.PropsWithChildren) => {
+  const device = useDeviceType();
+  const isBelowTablet = device === 'mobile' || device === 'tablet';
+  return <>{isBelowTablet ? children : null}</>;
+};

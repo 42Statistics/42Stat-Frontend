@@ -1,7 +1,8 @@
+import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
 import { Rank } from '@/components/elements/DashboardContentView/Rank';
+import { Desktop, Mobile, Tablet } from '@/utils/responsive/Device';
 import { RankItemType } from '@/utils/types/Rank';
-import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 
 const GET_WALLET_RANK = gql(/* GraphQL */ `
@@ -31,6 +32,7 @@ export const WalletRanks = () => {
   }
 
   const { walletRanks } = data.getTotalPage;
+  const unit = '₳';
 
   const rankList: RankItemType[] = walletRanks.map(
     ({ userPreview, value }) => ({
@@ -40,5 +42,21 @@ export const WalletRanks = () => {
     }),
   );
 
-  return <Rank rankList={rankList} cnt={3} unit="₳" />;
+  const rankListWithoutImgUrl: RankItemType[] = rankList.map(
+    ({ name, value }) => ({ name, value }),
+  );
+
+  return (
+    <>
+      <Desktop>
+        <Rank rankList={rankList} cnt={3} unit={unit} />
+      </Desktop>
+      <Tablet>
+        <Rank rankList={rankList} cnt={5} unit={unit} />
+      </Tablet>
+      <Mobile>
+        <Rank rankList={rankListWithoutImgUrl} cnt={3} unit={unit} />
+      </Mobile>
+    </>
+  );
 };

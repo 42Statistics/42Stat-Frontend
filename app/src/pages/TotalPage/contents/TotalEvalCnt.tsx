@@ -1,6 +1,7 @@
+import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
 import { TextDefault } from '@/components/elements/DashboardContentView/Text';
-import { gql } from '@/__generated__';
+import { numberWithUnitFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
 
 const GET_TOTAL_EVAL_CNT = gql(/* GraphQL */ `
@@ -23,6 +24,7 @@ export const TotalEvalCnt = () => {
   }
 
   const { totalEvalCnt } = data.getTotalPage;
+  const unit = '회';
 
-  return <TextDefault text={`${totalEvalCnt.toLocaleString()}회`} />;
+  return <TextDefault text={numberWithUnitFormatter(totalEvalCnt, '회')} />;
 };

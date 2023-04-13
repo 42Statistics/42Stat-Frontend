@@ -25,8 +25,9 @@ export const CurrMonthBlackholedCnt = () => {
   }
 
   const { currMonthBlackholedCnt } = data.getHomePage;
+  const unit = '명';
 
   return (
-    <TextDefault text={numberWithUnitFormatter(currMonthBlackholedCnt, '명')} />
+    <TextDefault text={numberWithUnitFormatter(currMonthBlackholedCnt, unit)} />
   );
 };

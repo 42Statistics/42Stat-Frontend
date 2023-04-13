@@ -19,13 +19,13 @@ export const NavProfile = ({ imageUrl, name, login }: NavProfile) => {
           fontSize={theme.fonts.size.h3}
           fontWeight={theme.fonts.weight.bold}
         >
-          {capitalize(name)}
+          {login}
         </Text>
         <Text
           fontSize={theme.fonts.size.caption}
           color={theme.colors.mono.gray.default}
         >
-          {login}
+          {capitalize(name)}
         </Text>
       </VStack>
     </HStack>

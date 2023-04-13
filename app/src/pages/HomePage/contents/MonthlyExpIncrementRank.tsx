@@ -1,7 +1,8 @@
+import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
 import { Rank } from '@/components/elements/DashboardContentView/Rank';
+import { BelowTablet, Desktop } from '@/utils/responsive/Device';
 import { RankItemType } from '@/utils/types/Rank';
-import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 
 const GET_MONTHLY_EXP_INCREMENT_RANK = gql(/* GraphQL */ `
@@ -31,6 +32,7 @@ export const MonthlyExpIncrementRank = () => {
   }
 
   const { monthlyExpIncrementRank } = data.getHomePage;
+  const unit = 'XP';
 
   const rankList: RankItemType[] = monthlyExpIncrementRank.map(
     ({ userPreview, value }) => ({
@@ -41,5 +43,18 @@ export const MonthlyExpIncrementRank = () => {
     }),
   );
 
-  return <Rank rankList={rankList} cnt={5} unit="XP" />;
+  const rankListWithoutImgUrl: RankItemType[] = rankList.map(
+    ({ name, value }) => ({ name, value }),
+  );
+
+  return (
+    <>
+      <Desktop>
+        <Rank rankList={rankList} cnt={5} unit={unit} />
+      </Desktop>
+      <BelowTablet>
+        <Rank rankList={rankListWithoutImgUrl} cnt={3} unit={unit} />
+      </BelowTablet>
+    </>
+  );
 };

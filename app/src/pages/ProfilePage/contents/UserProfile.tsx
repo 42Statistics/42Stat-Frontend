@@ -10,7 +10,7 @@ import {
 } from '@/components/common';
 import { CoalitionMark } from '@/components/elements/CoalitionMark';
 import { LevelBar } from '@/components/elements/LevelBar';
-import { getDateTime } from '@/utils/getDateTime';
+import { dateFormatter } from '@/utils/dateFormatter';
 import { getDayDiff } from '@/utils/getDayDiff';
 import { getTitleWithLogin } from '@/utils/getTitleWithLogin';
 import { useQuery } from '@apollo/client';
@@ -80,21 +80,10 @@ export const UserProfile = () => {
     scoreInfo,
   } = data.getPersonGeneralPage.userProfile;
   const titleWithLogin = getTitleWithLogin(titles, login);
-  const {
-    year: pooledYear,
-    month: pooledMonth,
-    day: pooledDay,
-  } = getDateTime(pooledAt);
-  const {
-    year: blackHoleYear,
-    month: blackHoleMonth,
-    day: blackHoleDay,
-  } = getDateTime(blackholedAt);
   const dayDiffPooledAtFromNow = getDayDiff(new Date(pooledAt), new Date());
-  const dayDiffBlackHoledAtFromNow = getDayDiff(
-    new Date(),
-    new Date(blackholedAt),
-  );
+  const dayDiffBlackHoledAtFromNow = blackholedAt
+    ? getDayDiff(new Date(), new Date(blackholedAt))
+    : 0;
   const levelDecimalPart = level % 1;
 
   return (
@@ -159,7 +148,7 @@ export const UserProfile = () => {
             <td>본과정 시작일</td>
             <td>
               <HStack spacing="1rem">
-                {pooledYear + '.' + pooledMonth + '.' + pooledDay}
+                {dateFormatter(pooledAt, 'lg')}
                 <Text
                   fontSize={theme.fonts.size.h3}
                   color={theme.colors.primary.default}
@@ -170,11 +159,11 @@ export const UserProfile = () => {
           <tr>
             <td>블랙홀</td>
             <td>
-              {blackholedAt === null ? (
+              {blackholedAt == null ? (
                 '-'
               ) : (
                 <HStack spacing="1rem">
-                  {blackHoleYear + '.' + blackHoleMonth + '.' + blackHoleDay}
+                  {dateFormatter(blackholedAt, 'lg')}
                   <Text
                     fontSize={theme.fonts.size.h3}
                     color={theme.colors.primary.default}

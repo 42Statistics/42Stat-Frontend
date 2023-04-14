@@ -2,6 +2,7 @@ import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
 import { LevelDynamicChart } from '@/components/elements/Chart/LevelDynamicChart';
 import { userAtom } from '@/utils/atoms/userAtom';
+import { dateFormatter } from '@/utils/dateFormatter';
 import { useQuery } from '@apollo/client';
 import { useAtomValue } from 'jotai';
 
@@ -36,7 +37,7 @@ export const LevelGraph = () => {
 
   // 기간 label 작성부
   levelGraphs.forEach(({ date, userLevel, averageLevel }) => {
-    labels.push(date.substr(2, 5).replace('-', '.'));
+    labels.push(dateFormatter(date, 'sm'));
     Datas1.push(userLevel);
     Datas2.push(averageLevel);
   });

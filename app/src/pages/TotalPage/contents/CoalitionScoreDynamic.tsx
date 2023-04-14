@@ -1,6 +1,7 @@
+import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
 import { CoalitionDynamicChart } from '@/components/elements/Chart';
-import { gql } from '@/__generated__';
+import { dateFormatter } from '@/utils/dateFormatter';
 import { useQuery } from '@apollo/client';
 
 const GET_COALITION_SCORE_RECORD = gql(/* GraphQL */ `
@@ -37,7 +38,7 @@ export const CoalitionScoreDynamic = () => {
 
   // 기간 label 작성부
   scoreRecords[0].records.forEach(({ at }) => {
-    labels.push(at.substr(2, 5).replace('-', '.'));
+    labels.push(dateFormatter(at, 'sm'));
   });
 
   // 모든 value 하나의 배열에 담기

@@ -42,10 +42,6 @@ export const WalletRanks = () => {
     }),
   );
 
-  const rankListWithoutImgUrl: RankItemType[] = rankList.map(
-    ({ name, value }) => ({ name, value }),
-  );
-
   return (
     <>
       <Desktop>
@@ -55,7 +51,7 @@ export const WalletRanks = () => {
         <Rank rankList={rankList} cnt={5} unit={unit} />
       </Tablet>
       <Mobile>
-        <Rank rankList={rankListWithoutImgUrl} cnt={3} unit={unit} />
+        <Rank rankList={rankList} showImg={false} cnt={3} unit={unit} />
       </Mobile>
     </>
   );

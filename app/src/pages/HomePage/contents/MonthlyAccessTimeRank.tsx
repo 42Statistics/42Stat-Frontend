@@ -42,17 +42,13 @@ export const MonthlyAccessTimeRank = () => {
     }),
   );
 
-  const rankListWithoutImgUrl: RankItemType[] = rankList.map(
-    ({ name, value }) => ({ name, value }),
-  );
-
   return (
     <>
       <Desktop>
         <Rank rankList={rankList} cnt={5} unit={unit} />
       </Desktop>
       <BelowTablet>
-        <Rank rankList={rankListWithoutImgUrl} cnt={3} unit={unit} />
+        <Rank rankList={rankList} showImg={false} cnt={3} unit={unit} />
       </BelowTablet>
     </>
   );

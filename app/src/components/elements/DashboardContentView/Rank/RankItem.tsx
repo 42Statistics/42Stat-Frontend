@@ -1,14 +1,16 @@
 import { Avatar, HStack, Text } from '@/components/common';
+import { numberWithUnitFormatter } from '@/utils/formatters';
 import { RankItemType } from '@/utils/types/Rank';
 import { useTheme } from '@emotion/react';
 
 type RankItemProps = {
   rank: number;
+  showImg: boolean;
   item: RankItemType;
   unit: string;
 };
 
-export const RankItem = ({ rank, item, unit }: RankItemProps) => {
+export const RankItem = ({ rank, showImg, item, unit }: RankItemProps) => {
   const theme = useTheme();
   const { name, value, imgUrl } = item;
   const color =
@@ -24,11 +26,7 @@ export const RankItem = ({ rank, item, unit }: RankItemProps) => {
         >
           {rank}
         </Text>
-        <Text
-          color={color}
-          fontWeight={theme.fonts.weight.medium}
-          fontSize={theme.fonts.size.body}
-        >
+        <Text color={color} fontWeight={theme.fonts.weight.medium}>
           위
         </Text>
       </HStack>
@@ -49,10 +47,10 @@ export const RankItem = ({ rank, item, unit }: RankItemProps) => {
           fontSize={theme.fonts.size.h3}
           fontWeight={theme.fonts.weight.medium}
         >
-          {`(${value.toLocaleString()}${unit})`}
+          {`(${numberWithUnitFormatter(value, unit)})`}
         </Text>
       </HStack>
-      {imgUrl ? <Avatar size="4rem" src={imgUrl} /> : null}
+      {showImg ? <Avatar size="4rem" imgUrl={imgUrl} /> : null}
     </HStack>
   );
 };

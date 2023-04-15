@@ -15,7 +15,7 @@ export const MobileNavBar = () => {
         {options.map((option) => (
           <MobileNavItem key={option.menu} option={option} />
         ))}
-        <Avatar size="2rem" src={user.imageUrl} />
+        <Avatar size="2rem" imgUrl={user.imageUrl} />
       </HStack>
     </MobileNavBarLayout>
   );

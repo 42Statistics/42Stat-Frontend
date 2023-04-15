@@ -1,6 +1,6 @@
 import { Avatar, HStack, Text, VStack } from '@/components/common';
+import { titleCase } from '@/utils/titleCase';
 import { useTheme } from '@emotion/react';
-import { capitalize } from 'lodash';
 
 type NavProfile = {
   imageUrl: string;
@@ -13,7 +13,7 @@ export const NavProfile = ({ imageUrl, name, login }: NavProfile) => {
 
   return (
     <HStack spacing="1.4rem">
-      <Avatar size="4rem" src={imageUrl} />
+      <Avatar size="4rem" imgUrl={imageUrl} />
       <VStack w="100%" align="start" spacing="0.3rem">
         <Text
           fontSize={theme.fonts.size.h3}
@@ -25,7 +25,7 @@ export const NavProfile = ({ imageUrl, name, login }: NavProfile) => {
           fontSize={theme.fonts.size.caption}
           color={theme.colors.mono.gray.default}
         >
-          {capitalize(name)}
+          {titleCase(name)}
         </Text>
       </VStack>
     </HStack>

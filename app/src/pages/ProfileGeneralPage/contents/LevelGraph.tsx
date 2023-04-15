@@ -2,7 +2,7 @@ import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
 import { LevelDynamicChart } from '@/components/elements/Chart/LevelDynamicChart';
 import { userAtom } from '@/utils/atoms/userAtom';
-import { dateFormatter } from '@/utils/dateFormatter';
+import { dateFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
 import { useAtomValue } from 'jotai';
 

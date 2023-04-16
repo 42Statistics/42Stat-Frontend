@@ -9,10 +9,15 @@ const { TotalPage } = lazyImport(
   () => import('@/pages/TotalPage'),
   'TotalPage',
 );
+const { EvaluationLogSearchPage } = lazyImport(
+  () => import('@/pages/EvaluationLogSearchPage'),
+  'EvaluationLogSearchPage',
+);
 const { ProfilePage } = lazyImport(
   () => import('@/pages/ProfilePage'),
   'ProfilePage',
 );
+
 const { AboutPage } = lazyImport(
   () => import('@/pages/AboutPage'),
   'AboutPage',
@@ -42,6 +47,7 @@ export const protectedRoutes = [
     children: [
       { path: '/home', element: <HomePage /> },
       { path: '/total', element: <TotalPage /> },
+      { path: '/evaluation-log-search', element: <EvaluationLogSearchPage /> },
       { path: '/profile/:username', element: <ProfilePage /> },
       { path: '/about', element: <AboutPage /> },
       { path: '/settings', element: <SettingsPage /> },

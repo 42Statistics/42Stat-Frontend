@@ -1,7 +1,9 @@
 import { gql } from '@/__generated__';
-import { Spinner, Text } from '@/components/common';
+import { Spinner } from '@/components/common';
+import { TextDefault } from '@/components/elements/DashboardContentView/Text';
 import { useQuery } from '@apollo/client';
 
+// TODO: getPersonGeneralPage -> getPersonEvaluationPage
 const GET_DIFFICULTY = gql(/* GraphQL */ `
   query getDifficulty {
     getPersonGeneralPage {
@@ -25,5 +27,5 @@ export const Difficulty = () => {
 
   const { difficulty } = data.getPersonGeneralPage.evalUserInfo;
 
-  return <Text>{difficulty}</Text>;
+  return <TextDefault text={difficulty} />;
 };

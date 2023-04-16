@@ -1,6 +1,7 @@
+import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
 import { TextDefault } from '@/components/elements/DashboardContentView/Text';
-import { gql } from '@/__generated__';
+import { numberWithUnitFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
 
 const GET_AVERAGE_FEEDBACK_LENGTH = gql(/* GraphQL */ `
@@ -23,6 +24,9 @@ export const AverageFeedbackLength = () => {
   }
 
   const { averageFeedbackLength } = data.getTotalPage;
+  const unit = '자';
 
-  return <TextDefault text={`${averageFeedbackLength.toLocaleString()}회`} />;
+  return (
+    <TextDefault text={numberWithUnitFormatter(averageFeedbackLength, unit)} />
+  );
 };

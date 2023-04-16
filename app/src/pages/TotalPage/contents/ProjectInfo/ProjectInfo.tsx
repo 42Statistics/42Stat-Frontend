@@ -1,3 +1,4 @@
+import { gql } from '@/__generated__';
 import {
   Divider,
   HStack,
@@ -10,10 +11,10 @@ import {
 } from '@/components/common';
 import { Label } from '@/components/common/Label';
 import { PieChart } from '@/components/elements/Chart';
-import { useSearchBar } from '@/components/elements/SearchBar/hooks/useSearchBar';
 import { ProjectSearchBar } from '@/components/elements/SearchBar/ProjectSearchBar';
+import { useSearchBar } from '@/components/elements/SearchBar/hooks/useSearchBar';
+import { numberWithUnitFormatter } from '@/utils/formatters';
 import { isEnterKeyReleased } from '@/utils/isEnterKeyReleased';
-import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
 import { useState } from 'react';
@@ -120,24 +121,44 @@ export const ProjectInfo = () => {
             </tr>
             <tr>
               <td>평균 소요 기간</td>
-              <td>{averageDurationTime}일</td>
+              <td>{numberWithUnitFormatter(averageDurationTime, '일')}</td>
             </tr>
             <tr>
               <td>총 제출 횟수</td>
-              <td>{totalCloseCnt.toLocaleString()}개</td>
+              <td>{numberWithUnitFormatter(totalCloseCnt, '개')}</td>
             </tr>
             <tr>
               <td>현재 등록 인원</td>
-              <td>{currRegisteredCnt.toLocaleString()}명</td>
+              <td>{numberWithUnitFormatter(currRegisteredCnt, '명')}</td>
             </tr>
           </tbody>
         </StyledInfoTable>
         <Divider orientation="vertical" />
-        <PieChart
-          data={[passPercentage, 100 - passPercentage]}
-          labels={['pass', 'fail']}
+        <PassPercentageChart
+          labels={['Pass', 'Fail']}
+          series={[passPercentage, 100 - passPercentage]}
         />
       </HStack>
     </VStack>
   );
+};
+
+type PassPercentageChartProps = {
+  labels: string[];
+  series: number[];
+};
+
+const PassPercentageChart = ({ labels, series }: PassPercentageChartProps) => {
+  const theme = useTheme();
+
+  const options: ApexCharts.ApexOptions = {
+    colors: [theme.colors.third.default, theme.colors.secondary.default],
+    tooltip: {
+      y: {
+        formatter: (value) => `${value.toFixed(1)}%`,
+      },
+    },
+  };
+
+  return <PieChart labels={labels} series={series} options={options} />;
 };

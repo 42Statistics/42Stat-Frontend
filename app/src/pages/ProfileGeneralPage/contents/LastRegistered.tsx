@@ -26,5 +26,5 @@ export const LastRegistered = () => {
 
   const { lastRegistered } = data.getPersonGeneralPage.teamInfo;
 
-  return <TextDefault text={`${lastRegistered}`} />;
+  return <TextDefault text={lastRegistered ?? '-'} />;
 };

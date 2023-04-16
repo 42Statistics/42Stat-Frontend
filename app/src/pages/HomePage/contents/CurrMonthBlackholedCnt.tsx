@@ -1,6 +1,7 @@
+import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
 import { TextDefault } from '@/components/elements/DashboardContentView/Text';
-import { gql } from '@/__generated__';
+import { numberWithUnitFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
 
 const GET_CURR_MONTH_BLACKHOLED_CNT = gql(/* GraphQL */ `
@@ -24,6 +25,9 @@ export const CurrMonthBlackholedCnt = () => {
   }
 
   const { currMonthBlackholedCnt } = data.getHomePage;
+  const unit = '명';
 
-  return <TextDefault text={`${currMonthBlackholedCnt.toLocaleString()}명`} />;
+  return (
+    <TextDefault text={numberWithUnitFormatter(currMonthBlackholedCnt, unit)} />
+  );
 };

@@ -27,23 +27,51 @@ export const LastExamResult = () => {
   }
 
   const { lastExamResult } = data.getHomePage;
-  const showData: string[] = [];
-  const barData: number[] = [];
-  const labels: string[] = [];
-
-  lastExamResult.forEach(({ rank, passCnt, totalCnt }, idx) => {
-    labels.push(`Rank ${rank.toString().padStart(2, '0')}`);
-    barData.push(Math.round((passCnt / totalCnt) * 1000) / 10);
-    showData.push(passCnt.toString() + '/' + totalCnt.toString());
-  });
-
-  return (
-    <BarChart
-      data={barData}
-      yUnit="%"
-      showData={showData}
-      labels={labels}
-      seriesName="통과/전체"
-    />
+  const categories = lastExamResult.map(({ rank }) => rank);
+  const seriesData = lastExamResult.map(
+    ({ passCnt, totalCnt }) => passCnt / totalCnt,
   );
+  const series: ApexAxisChartSeries = [
+    {
+      name: 'Exam 통과율',
+      data: seriesData,
+    },
+  ];
+
+  return <LastExamResultChart categories={categories} series={series} />;
+};
+
+type LastExamResultChartProps = {
+  categories: number[];
+  series: ApexAxisChartSeries;
+};
+
+const LastExamResultChart = ({
+  categories,
+  series,
+}: LastExamResultChartProps) => {
+  const options: ApexCharts.ApexOptions = {
+    xaxis: {
+      categories,
+      labels: {
+        formatter: (value) => `Rank ${String(value).padStart(2, '0')}`,
+      },
+    },
+    yaxis: {
+      max: 1,
+      labels: {
+        formatter: (value) => `${(value * 100).toFixed(0)}%`,
+      },
+    },
+    tooltip: {
+      y: {
+        formatter: (value) => `${(value * 100).toFixed(1)}%`,
+      },
+    },
+    dataLabels: {
+      enabled: false,
+    },
+  };
+
+  return <BarChart options={options} series={series} />;
 };

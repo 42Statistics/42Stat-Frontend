@@ -2,21 +2,29 @@ import {
   DesktopDashboard,
   MobileDashboard,
 } from '@/components/templates/Dashboard';
-import { AboveTablet, Mobile } from '@/utils/responsive/Device';
+import { TabletDashboard } from '@/components/templates/Dashboard/TabletDashboard';
+import { Desktop, Mobile, Tablet } from '@/utils/responsive/Device';
 import { dashboardContents } from './hooks/dashboardContents';
 import { useProfileGeneralPage } from './hooks/useProfileGeneralPage';
 
 export const ProfileGeneralPage = () => {
-  const { desktopDashboardRows, mobileDashboardRows } = useProfileGeneralPage();
+  const { desktopDashboardRows, tabletDashboardRows, mobileDashboardRows } =
+    useProfileGeneralPage();
 
   return (
     <>
-      <AboveTablet>
+      <Desktop>
         <DesktopDashboard
           rows={desktopDashboardRows}
           contents={dashboardContents}
         />
-      </AboveTablet>
+      </Desktop>
+      <Tablet>
+        <TabletDashboard
+          rows={tabletDashboardRows}
+          contents={dashboardContents}
+        />
+      </Tablet>
       <Mobile>
         <MobileDashboard
           rows={mobileDashboardRows}

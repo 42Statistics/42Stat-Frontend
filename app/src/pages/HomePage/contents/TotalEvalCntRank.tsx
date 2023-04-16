@@ -1,6 +1,7 @@
 import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
 import { Rank } from '@/components/elements/DashboardContentView/Rank';
+import { BelowTablet, Desktop } from '@/utils/responsive/Device';
 import { RankItemType } from '@/utils/types/Rank';
 import { useQuery } from '@apollo/client';
 
@@ -31,6 +32,7 @@ export const TotalEvalCntRank = () => {
   }
 
   const { totalEvalCntRank } = data.getHomePage;
+  const unit = '회';
 
   const rankList: RankItemType[] = totalEvalCntRank.map(
     ({ userPreview, value }) => ({
@@ -40,5 +42,14 @@ export const TotalEvalCntRank = () => {
     }),
   );
 
-  return <Rank rankList={rankList} cnt={3} unit="회" />;
+  return (
+    <>
+      <Desktop>
+        <Rank rankList={rankList} cnt={3} unit={unit} />
+      </Desktop>
+      <BelowTablet>
+        <Rank rankList={rankList} showImg={false} cnt={3} unit={unit} />
+      </BelowTablet>
+    </>
+  );
 };

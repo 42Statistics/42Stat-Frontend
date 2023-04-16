@@ -3,7 +3,7 @@ export * from './AverageCircleDurations';
 export * from './AverageFeedbackLength';
 export * from './BlackholedCntPerCircles';
 export * from './CoalitionScoreDynamic';
-export * from './CoalitionScoreRecord';
+export * from './CoalitionScoreSum';
 export * from './CorrectionPointRanks';
 export * from './EvalCntPerPoints';
 export * from './MonthlyScoreRanks';

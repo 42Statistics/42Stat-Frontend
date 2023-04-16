@@ -2,7 +2,8 @@ import {
   DesktopDashboard,
   MobileDashboard,
 } from '@/components/templates/Dashboard';
-import { AboveTablet, Mobile } from '@/utils/responsive/Device';
+import { TabletDashboard } from '@/components/templates/Dashboard/TabletDashboard';
+import { Desktop, Mobile, Tablet } from '@/utils/responsive/Device';
 import { Helmet } from 'react-helmet-async';
 import { dashboardContents } from './hooks/dashboardContents';
 import { useHomePage } from './hooks/useHomePage';
@@ -17,19 +18,26 @@ import { useHomePage } from './hooks/useHomePage';
 // `);
 
 export const HomePage = () => {
-  const { desktopDashboardRows, mobileDashboardRows } = useHomePage();
+  const { desktopDashboardRows, tabletDashboardRows, mobileDashboardRows } =
+    useHomePage();
 
   return (
     <>
       <Helmet>
         <title>42Stat</title>
       </Helmet>
-      <AboveTablet>
+      <Desktop>
         <DesktopDashboard
           rows={desktopDashboardRows}
           contents={dashboardContents}
         />
-      </AboveTablet>
+      </Desktop>
+      <Tablet>
+        <TabletDashboard
+          rows={tabletDashboardRows}
+          contents={dashboardContents}
+        />
+      </Tablet>
       <Mobile>
         <MobileDashboard
           rows={mobileDashboardRows}

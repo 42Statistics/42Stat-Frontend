@@ -1,17 +1,19 @@
 import { Spinner } from '@/components/common';
-import { DashboardItem } from '@/components/templates/DashboardItem';
-import { DashboardItemWrapper } from '@/components/templates/DashboardItemWrapper';
-import { DesktopDashboardRow } from '@/components/templates/DashboardRow';
-import { DesktopDashboardRowContainer } from '@/components/templates/DashboardRowContainer';
+import {
+  DesktopDashboard,
+  MobileDashboard,
+} from '@/components/templates/Dashboard';
+import { TabletDashboard } from '@/components/templates/Dashboard/TabletDashboard';
 import { lazyImport } from '@/utils/lazyImport';
+import { Desktop, Mobile, Tablet } from '@/utils/responsive/Device';
 import { ProfileMenu } from '@/utils/types/ProfileMenu';
 import styled from '@emotion/styled';
 import { Suspense, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
-import { UserProfile } from './contents';
-import { useProfilePage } from './hooks/useProfilePage';
 import { ProfileTabBar } from './ProfileTabBar';
+import { useProfilePage } from './hooks/useProfilePage';
+import { dashboardContents } from './hooks/dashboardContents';
 
 const { ProfileGeneralPage } = lazyImport(
   () => import('@/pages/ProfileGeneralPage'),
@@ -24,7 +26,12 @@ const { ProfileEvaluationPage } = lazyImport(
 
 export const ProfilePage = () => {
   const { username } = useParams();
-  const { options } = useProfilePage();
+  const {
+    options,
+    desktopDashboardRows,
+    tabletDashboardRows,
+    mobileDashboardRows,
+  } = useProfilePage();
   const [selected, setSelected] = useState<ProfileMenu>('General');
 
   return (
@@ -32,17 +39,24 @@ export const ProfilePage = () => {
       <Helmet>
         <title>{username} | 42Stat</title>
       </Helmet>
-      <DesktopDashboardRowContainer>
-        <DesktopDashboardRow row={2} col={3}>
-          <DashboardItemWrapper
-            row={1}
-            col={1}
-            rowSpan={2}
-            colSpan={3}
-            element={<DashboardItem content={UserProfile} />}
-          ></DashboardItemWrapper>
-        </DesktopDashboardRow>
-      </DesktopDashboardRowContainer>
+      <Desktop>
+        <DesktopDashboard
+          rows={desktopDashboardRows}
+          contents={dashboardContents}
+        />
+      </Desktop>
+      <Tablet>
+        <TabletDashboard
+          rows={tabletDashboardRows}
+          contents={dashboardContents}
+        />
+      </Tablet>
+      <Mobile>
+        <MobileDashboard
+          rows={mobileDashboardRows}
+          contents={dashboardContents}
+        />
+      </Mobile>
       <ProfileTabBarLayout>
         <ProfileTabBar
           value={selected}

@@ -4,17 +4,24 @@ import { RankItem } from './RankItem';
 
 type RankProps = {
   rankList: RankItemType[];
+  showImg?: boolean;
   cnt: number;
   unit: string;
 };
 
-export const Rank = ({ rankList, cnt, unit }: RankProps) => {
+export const Rank = ({ rankList, showImg = true, cnt, unit }: RankProps) => {
   return (
     <VStack w="100%" h="100%" spacing="2rem" align="start">
       {rankList.map((rankItem, idx) => {
         const rank = idx + 1;
         return rank <= cnt ? (
-          <RankItem key={idx} rank={idx + 1} item={rankItem} unit={unit} />
+          <RankItem
+            key={idx}
+            rank={idx + 1}
+            item={rankItem}
+            showImg={showImg}
+            unit={unit}
+          />
         ) : null;
       })}
     </VStack>

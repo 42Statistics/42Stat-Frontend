@@ -12,7 +12,7 @@ export const AboveTabletNavBar = () => {
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    navigate(`/profile/${user.login}`);
+    navigate('/profile/me');
   };
 
   return (
@@ -22,7 +22,7 @@ export const AboveTabletNavBar = () => {
         onClick={handleClick}
         element={
           <NavProfile
-            imageUrl={user.imageUrl}
+            imgUrl={user.imgUrl}
             name={user.name}
             login={user.login}
           />

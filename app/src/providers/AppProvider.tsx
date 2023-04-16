@@ -7,7 +7,27 @@ import ThemeProvider from './ThemeProvider';
 
 export const AppProvider = ({ children }: React.PropsWithChildren) => {
   return (
-    <ErrorBoundary fallback={<p>Ooops, something went wrong :(</p>}>
+    <ErrorBoundary
+      fallback={
+        <div
+          css={{
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+        >
+          <div
+            css={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <p>💥 Rendering Error</p>
+            <p>Please see the console :(</p>
+          </div>
+        </div>
+      }
+    >
       <ApolloProvider>
         <GoogleOAuthProvider>
           <HelmetProvider>

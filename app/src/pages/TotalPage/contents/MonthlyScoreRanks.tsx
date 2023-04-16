@@ -1,6 +1,8 @@
+import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
 import { Rank } from '@/components/elements/DashboardContentView/Rank';
-import { gql } from '@/__generated__';
+import { BelowTablet, Desktop } from '@/utils/responsive/Device';
+import { RankItemType } from '@/utils/types/Rank';
 import { useQuery } from '@apollo/client';
 
 const GET_COALITION_SCORE_RANK = gql(/* GraphQL */ `
@@ -30,12 +32,25 @@ export const MonthlyScoreRanks = () => {
   }
 
   const { monthlyScoreRanks } = data.getTotalPage;
-  const rankList = monthlyScoreRanks.map(({ userPreview, value }) => ({
-    id: userPreview.id,
-    name: userPreview.login,
-    value: value,
-    imgUrl: userPreview.imgUrl,
-  }));
+  const unit = 'P';
 
-  return <Rank rankList={rankList} cnt={3} unit="P" />;
+  const rankList: RankItemType[] = monthlyScoreRanks.map(
+    ({ userPreview, value }) => ({
+      id: userPreview.id,
+      name: userPreview.login,
+      value: value,
+      imgUrl: userPreview.imgUrl,
+    }),
+  );
+
+  return (
+    <>
+      <Desktop>
+        <Rank rankList={rankList} cnt={3} unit={unit} />
+      </Desktop>
+      <BelowTablet>
+        <Rank rankList={rankList} showImg={false} cnt={3} unit={unit} />
+      </BelowTablet>
+    </>
+  );
 };

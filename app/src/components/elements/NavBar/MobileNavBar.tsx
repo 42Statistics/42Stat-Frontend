@@ -1,13 +1,20 @@
-import { Avatar, HStack } from '@/components/common';
+import { Avatar, Button, HStack } from '@/components/common';
 import { userAtom } from '@/utils/atoms/userAtom';
 import styled from '@emotion/styled';
 import { useAtomValue } from 'jotai';
-import { useNavMenu } from './hooks/useNavMenu';
+import { useNavigate } from 'react-router-dom';
 import { MobileNavItem } from './MobileNavItem';
+import { useNavMenu } from './hooks/useNavMenu';
 
 export const MobileNavBar = () => {
   const { options } = useNavMenu();
   const user = useAtomValue(userAtom);
+  const navigate = useNavigate();
+
+  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    navigate('/profile/me');
+  };
 
   return (
     <MobileNavBarLayout>
@@ -15,7 +22,10 @@ export const MobileNavBar = () => {
         {options.map((option) => (
           <MobileNavItem key={option.menu} option={option} />
         ))}
-        <Avatar size="2rem" src={user.imageUrl} />
+        <Button
+          element={<Avatar size="2rem" imgUrl={user.imgUrl} />}
+          onClick={handleClick}
+        />
       </HStack>
     </MobileNavBarLayout>
   );

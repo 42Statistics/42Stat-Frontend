@@ -10,9 +10,10 @@ import {
 } from '@/components/common';
 import { CoalitionMark } from '@/components/elements/CoalitionMark';
 import { LevelBar } from '@/components/elements/LevelBar';
-import { dateFormatter } from '@/utils/dateFormatter';
+import { dDayFormatter, dateFormatter } from '@/utils/formatters';
 import { getDayDiff } from '@/utils/getDayDiff';
 import { getTitleWithLogin } from '@/utils/getTitleWithLogin';
+import { titleCase } from '@/utils/titleCase';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
 import { capitalize, truncate } from 'lodash';
@@ -87,61 +88,59 @@ export const UserProfile = () => {
   const levelDecimalPart = level % 1;
 
   return (
-    <HStack w="100%" h="100%" spacing="10rem">
-      <HStack spacing="8rem">
-        <Avatar size="18rem" src={imgUrl} />
-        <VStack align="start" spacing="1rem">
-          <VStack align="inherit">
+    <HStack w="100%" h="100%" spacing="2.5vw">
+      <Avatar size="16rem" imgUrl={imgUrl} />
+      <VStack align="start" spacing="1rem">
+        <VStack align="inherit">
+          <Text
+            color={theme.colors.third.default}
+            fontSize={theme.fonts.size.h2}
+            fontWeight={theme.fonts.weight.bold}
+          >
+            {capitalize(grade)}
+          </Text>
+          <HStack spacing="2rem">
             <Text
-              color={theme.colors.third.default}
+              fontSize={theme.fonts.size.h1}
+              fontWeight={theme.fonts.weight.bold}
+            >
+              {titleCase(name)}
+            </Text>
+            <CoalitionMark coalition={coalition} width="24px" />
+          </HStack>
+        </VStack>
+        <HStack>
+          <Text color={theme.colors.mono.gray.default}>
+            {truncate(titleWithLogin, { length: 42 })}
+          </Text>
+        </HStack>
+        <HStack spacing="1rem">
+          <HStack align="baseline">
+            <Text
+              color={theme.colors.mono.gray.default}
+              fontSize={theme.fonts.size.caption}
+            >
+              lv.
+            </Text>
+            <Text
               fontSize={theme.fonts.size.h2}
               fontWeight={theme.fonts.weight.bold}
             >
-              {capitalize(grade)}
-            </Text>
-            <HStack spacing="2rem">
-              <Text
-                fontSize={theme.fonts.size.h1}
-                fontWeight={theme.fonts.weight.bold}
-              >
-                {capitalize(name)}
-              </Text>
-              <CoalitionMark coalition={coalition} width="24px" />
-            </HStack>
-          </VStack>
-          <HStack>
-            <Text color={theme.colors.mono.gray.default}>
-              {truncate(titleWithLogin, { length: 42 })}
+              {level}
             </Text>
           </HStack>
-          <HStack spacing="1rem">
-            <HStack align="baseline">
-              <Text
-                color={theme.colors.mono.gray.default}
-                fontSize={theme.fonts.size.caption}
-              >
-                lv.
-              </Text>
-              <Text
-                fontSize={theme.fonts.size.h2}
-                fontWeight={theme.fonts.weight.bold}
-              >
-                {level}
-              </Text>
-            </HStack>
-            <LevelBar rate={levelDecimalPart} />
-            <HStack align="baseline">
-              <PrimaryText
-                fontSize={theme.fonts.size.h3}
-                fontWeight={theme.fonts.weight.medium}
-              >
-                {levelRank}
-              </PrimaryText>
-              <PrimaryText fontSize={theme.fonts.size.caption}>위</PrimaryText>
-            </HStack>
+          <LevelBar rate={levelDecimalPart} />
+          <HStack align="baseline">
+            <PrimaryText
+              fontSize={theme.fonts.size.h3}
+              fontWeight={theme.fonts.weight.medium}
+            >
+              {levelRank}
+            </PrimaryText>
+            <PrimaryText fontSize={theme.fonts.size.caption}>위</PrimaryText>
           </HStack>
-        </VStack>
-      </HStack>
+        </HStack>
+      </VStack>
       <StyledInfoTable>
         <tbody>
           <tr>
@@ -152,7 +151,7 @@ export const UserProfile = () => {
                 <Text
                   fontSize={theme.fonts.size.h3}
                   color={theme.colors.primary.default}
-                >{`(D+${dayDiffPooledAtFromNow})`}</Text>
+                >{`(${dDayFormatter(dayDiffPooledAtFromNow)})`}</Text>
               </HStack>
             </td>
           </tr>
@@ -168,7 +167,7 @@ export const UserProfile = () => {
                     fontSize={theme.fonts.size.h3}
                     color={theme.colors.primary.default}
                   >
-                    {`(D-${dayDiffBlackHoledAtFromNow})`}
+                    {`(${dDayFormatter(dayDiffBlackHoledAtFromNow)})`}
                   </Text>
                 </HStack>
               )}

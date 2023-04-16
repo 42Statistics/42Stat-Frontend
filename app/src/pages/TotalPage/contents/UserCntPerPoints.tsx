@@ -1,6 +1,7 @@
 import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
 import { BarChart } from '@/components/elements/Chart';
+import { numberWithUnitFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
 
 const GET_USER_CNT_PER_POINTS = gql(/* GraphQL */ `
@@ -50,13 +51,13 @@ const UserCntPerPointsChart = ({
     xaxis: {
       categories,
       labels: {
-        formatter: (value) => `${value}개`,
+        formatter: (value) => numberWithUnitFormatter(parseInt(value), '개'),
       },
     },
     yaxis: {
       max: 500,
       labels: {
-        formatter: (value) => `${value}명`,
+        formatter: (value) => numberWithUnitFormatter(value, '명'),
       },
     },
   };

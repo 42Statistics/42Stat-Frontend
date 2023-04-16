@@ -13,6 +13,7 @@ import { Label } from '@/components/common/Label';
 import { PieChart } from '@/components/elements/Chart';
 import { ProjectSearchBar } from '@/components/elements/SearchBar/ProjectSearchBar';
 import { useSearchBar } from '@/components/elements/SearchBar/hooks/useSearchBar';
+import { numberWithUnitFormatter } from '@/utils/formatters';
 import { isEnterKeyReleased } from '@/utils/isEnterKeyReleased';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
@@ -120,15 +121,15 @@ export const ProjectInfo = () => {
             </tr>
             <tr>
               <td>평균 소요 기간</td>
-              <td>{averageDurationTime}일</td>
+              <td>{numberWithUnitFormatter(averageDurationTime, '일')}</td>
             </tr>
             <tr>
               <td>총 제출 횟수</td>
-              <td>{totalCloseCnt.toLocaleString()}개</td>
+              <td>{numberWithUnitFormatter(totalCloseCnt, '개')}</td>
             </tr>
             <tr>
               <td>현재 등록 인원</td>
-              <td>{currRegisteredCnt.toLocaleString()}명</td>
+              <td>{numberWithUnitFormatter(currRegisteredCnt, '명')}</td>
             </tr>
           </tbody>
         </StyledInfoTable>

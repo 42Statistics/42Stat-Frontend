@@ -1,6 +1,7 @@
 import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
 import { BarChart } from '@/components/elements/Chart';
+import { numberWithUnitFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
 
 const GET_USER_CNT_PER_LEVELS = gql(/* GraphQL */ `
@@ -58,7 +59,7 @@ const UserCntPerLevelsChart = ({
     yaxis: {
       max: 100,
       labels: {
-        formatter: (value) => `${value}명`,
+        formatter: (value) => numberWithUnitFormatter(value, '명'),
       },
     },
     tooltip: {

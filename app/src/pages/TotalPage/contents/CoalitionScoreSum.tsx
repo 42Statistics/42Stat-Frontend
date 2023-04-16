@@ -34,7 +34,6 @@ export const CoalitionScoreSum = () => {
   }
 
   const { scoreRecords } = data.getTotalPage;
-  console.log(scoreRecords);
   const categories = scoreRecords.map(({ coalition }) => coalition.name);
   const seriesData = scoreRecords.map(({ records }) =>
     records.reduce((result, { value }) => {
@@ -70,7 +69,7 @@ const CoalitionScoreSumChart = ({
     },
     yaxis: {
       labels: {
-        formatter: (value) => numberWithUnitFormatter(value),
+        formatter: (value) => numberWithUnitFormatter(value, 'P'),
       },
     },
   };

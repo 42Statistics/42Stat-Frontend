@@ -26,5 +26,5 @@ export const TotalEvalCnt = () => {
   const { totalEvalCnt } = data.getTotalPage;
   const unit = '회';
 
-  return <TextDefault text={numberWithUnitFormatter(totalEvalCnt, '회')} />;
+  return <TextDefault text={numberWithUnitFormatter(totalEvalCnt, unit)} />;
 };

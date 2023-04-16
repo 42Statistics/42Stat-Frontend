@@ -4,7 +4,7 @@ type User = {
   id: number;
   login: string;
   name: string;
-  imageUrl: string;
+  imgUrl: string;
   title: string;
 };
 
@@ -13,6 +13,7 @@ export const userAtom = atom<User>({
   id: 1,
   login: 'yopark',
   name: 'yongjun Park',
-  imageUrl: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png',
+  imgUrl:
+    'https://cdn.intra.42.fr/users/0d34125b0e84b97d0b63dba4a78c094b/yopark.jpg',
   title: 'Philantropist yopark',
 });

@@ -22,7 +22,7 @@ export const AboveTabletNavBar = () => {
         onClick={handleClick}
         element={
           <NavProfile
-            imageUrl={user.imageUrl}
+            imgUrl={user.imgUrl}
             name={user.name}
             login={user.login}
           />

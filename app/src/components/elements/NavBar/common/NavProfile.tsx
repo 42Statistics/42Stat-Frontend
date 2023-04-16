@@ -3,17 +3,17 @@ import { titleCase } from '@/utils/titleCase';
 import { useTheme } from '@emotion/react';
 
 type NavProfile = {
-  imageUrl: string;
+  imgUrl: string;
   name: string;
   login: string;
 };
 
-export const NavProfile = ({ imageUrl, name, login }: NavProfile) => {
+export const NavProfile = ({ imgUrl, name, login }: NavProfile) => {
   const theme = useTheme();
 
   return (
     <HStack spacing="1.4rem">
-      <Avatar size="4rem" imgUrl={imageUrl} />
+      <Avatar size="4.5rem" imgUrl={imgUrl} />
       <VStack w="100%" align="start" spacing="0.3rem">
         <Text
           fontSize={theme.fonts.size.h3}

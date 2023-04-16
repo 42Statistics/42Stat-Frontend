@@ -212,13 +212,13 @@ export const useTotalPage = () => {
       ],
     },
     {
-      row: 2,
+      row: 4,
       col: 3,
       items: [
         {
           row: 1,
           col: 1,
-          rowSpan: 2,
+          rowSpan: 4,
           colSpan: 3,
           elementId: 8,
         },

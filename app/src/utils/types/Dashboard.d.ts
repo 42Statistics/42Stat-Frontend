@@ -6,7 +6,7 @@ export type DashboardItemProps = {
 };
 
 export type DesktopDashboardRowType = {
-  row: DesktopDashboardRowSize;
+  row: number;
   col: DesktopDashboardColSize;
   items: {
     row: number;
@@ -18,7 +18,7 @@ export type DesktopDashboardRowType = {
 };
 
 export type TabletDashboardRowType = {
-  row: TabletDashboardRowSize;
+  row: number;
   col: TabletDashboardColSize;
   items: {
     row: number;
@@ -30,7 +30,7 @@ export type TabletDashboardRowType = {
 };
 
 export type MobileDashboardRowType = {
-  row: MobileDashboardRowSize;
+  row: number;
   col: MobileDashboardColSize;
   items: {
     row: number;
@@ -41,11 +41,8 @@ export type MobileDashboardRowType = {
   }[];
 };
 
-export type DesktopDashboardRowSize = 1 | 2;
 export type DesktopDashboardColSize = 3 | 4;
 
-export type TabletDashboardRowSize = 1 | 2;
 export type TabletDashboardColSize = 2 | 3;
 
-export type MobileDashboardRowSize = 1 | 2;
 export type MobileDashboardColSize = 1 | 2;

@@ -2,6 +2,7 @@ import { gql } from '@/__generated__';
 import { HStack, Spinner } from '@/components/common';
 import { dateFormatter } from '@/utils/formatters';
 import { getDayDiff } from '@/utils/getDayDiff';
+import { isDefined } from '@/utils/isDefined';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
@@ -53,42 +54,55 @@ export const TeamInfo = () => {
         </tr>
       </thead>
       <tbody>
-        {teams.map(
-          ({
-            id,
-            name,
-            occurrence,
-            closedAt,
-            firstCreatedAt,
-            finalMark,
-            isValidated,
-          }: any) => {
-            return (
-              <tr key={id}>
-                <td>{name}</td>
-                <td>{occurrence}번째</td>
-                <td>{getDayDiff(new Date(), new Date(closedAt))}일 전</td>
-                <td>{dateFormatter(firstCreatedAt, 'lg')}</td>
-                <td>{dateFormatter(closedAt, 'lg')}</td>
-                <td>
-                  {getDayDiff(new Date(closedAt), new Date(firstCreatedAt))}일
-                </td>
-                <td>
-                  <HStack
-                    style={{
-                      color: isValidated
-                        ? theme.colors.third.dark
-                        : theme.colors.secondary.default,
-                    }}
-                  >
-                    {isValidated ? <AiOutlineCheck /> : <AiOutlineClose />}
-                    {finalMark == null ? 0 : finalMark}
-                  </HStack>
-                </td>
-              </tr>
-            );
-          },
-        )}
+        {teams
+          .filter(isDefined)
+          .map(
+            ({
+              id,
+              name,
+              occurrence,
+              closedAt,
+              firstCreatedAt,
+              finalMark,
+              isValidated,
+            }) => {
+              return (
+                <tr key={id}>
+                  <td>{name}</td>
+                  <td>{occurrence}번째</td>
+                  <td>
+                    {closedAt != null
+                      ? `${getDayDiff(new Date(), new Date(closedAt))}일 전`
+                      : '-'}
+                  </td>
+                  <td>{dateFormatter(firstCreatedAt, 'lg')}</td>
+                  <td>
+                    {closedAt != null ? dateFormatter(closedAt, 'lg') : '-'}
+                  </td>
+                  <td>
+                    {closedAt != null
+                      ? `${getDayDiff(
+                          new Date(closedAt),
+                          new Date(firstCreatedAt),
+                        )}일`
+                      : '-'}
+                  </td>
+                  <td>
+                    <HStack
+                      style={{
+                        color: isValidated
+                          ? theme.colors.third.dark
+                          : theme.colors.secondary.default,
+                      }}
+                    >
+                      {isValidated ? <AiOutlineCheck /> : <AiOutlineClose />}
+                      {finalMark == null ? 0 : finalMark}
+                    </HStack>
+                  </td>
+                </tr>
+              );
+            },
+          )}
       </tbody>
     </TeamInfoTable>
   );

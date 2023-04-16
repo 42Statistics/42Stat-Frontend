@@ -12,7 +12,7 @@ export const AboveTabletNavBar = () => {
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    navigate(`/profile/${user.login}`);
+    navigate('/profile/me');
   };
 
   return (

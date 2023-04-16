@@ -2,7 +2,7 @@ import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
 import { Rank } from '@/components/elements/DashboardContentView/Rank';
 import { isDefined } from '@/utils/isDefined';
-import { BelowTablet, Desktop } from '@/utils/responsive/Device';
+import { AboveTablet, Mobile } from '@/utils/responsive/Device';
 import { RankItemType } from '@/utils/types/Rank';
 import { useQuery } from '@apollo/client';
 
@@ -48,12 +48,12 @@ export const DestinyUsers = () => {
 
   return (
     <>
-      <Desktop>
+      <AboveTablet>
         <Rank rankList={rankList} cnt={3} unit={unit} />
-      </Desktop>
-      <BelowTablet>
+      </AboveTablet>
+      <Mobile>
         <Rank rankList={rankList} showImg={false} cnt={3} unit={unit} />
-      </BelowTablet>
+      </Mobile>
     </>
   );
 };

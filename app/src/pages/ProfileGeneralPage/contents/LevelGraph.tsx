@@ -1,8 +1,7 @@
 import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
-import { LevelDynamicChart } from '@/components/elements/Chart/LevelDynamicChart';
+import { LineChart } from '@/components/elements/Chart';
 import { userAtom } from '@/utils/atoms/userAtom';
-import { dateFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
 import { useAtomValue } from 'jotai';
 
@@ -31,33 +30,51 @@ export const LevelGraph = () => {
   }
 
   const { levelGraphs } = data.getPersonGeneralPage;
-  const Datas1: number[] = [];
-  const Datas2: number[] = [];
-  const labels: string[] = [];
+  const userLevelSeries = levelGraphs.map(({ date, userLevel }) => ({
+    x: date,
+    y: userLevel,
+  }));
+  const averageLevelSeries = levelGraphs.map(({ date, averageLevel }) => ({
+    x: date,
+    y: averageLevel,
+  }));
+  const series = [
+    {
+      name: '유저', // TODO: user login 가져오기
+      data: userLevelSeries,
+    },
+    {
+      name: '평균',
+      data: averageLevelSeries,
+    },
+  ];
 
-  // 기간 label 작성부
-  levelGraphs.forEach(({ date, userLevel, averageLevel }) => {
-    labels.push(dateFormatter(date, 'sm'));
-    Datas1.push(userLevel);
-    Datas2.push(averageLevel);
-  });
+  return <LevelGraphChart series={series} />;
+};
 
-  // 모든 value 하나의 배열에 담기
+type LevelGraphChartProps = {
+  series: ApexAxisChartSeries;
+};
 
-  // return (
-  //   <CoalitionDynamicChart
-  //     data={[...Datas1, ...Datas2]}
-  //     yUnit=""
-  //     labels={labels}
-  //     size="long"
-  //     seriesName="코알리숑 점수"
-  //   />
-  // );
-  return (
-    <LevelDynamicChart
-      data={[...Datas1, ...Datas2]}
-      labels={labels}
-      login={user.login}
-    />
-  );
+const LevelGraphChart = ({ series }: LevelGraphChartProps) => {
+  const options: ApexCharts.ApexOptions = {
+    xaxis: {
+      type: 'datetime',
+      labels: {
+        format: 'yy.MM.',
+      },
+    },
+    yaxis: {
+      labels: {
+        formatter: (value) => `lv. ${value}`,
+      },
+    },
+    tooltip: {
+      x: {
+        format: 'yyyy년 M월',
+      },
+    },
+  };
+
+  return <LineChart series={series} options={options} />;
 };

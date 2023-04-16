@@ -1,8 +1,10 @@
 import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
 import { TextDefault } from '@/components/elements/DashboardContentView/Text';
+import { numberWithUnitFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
 
+// TODO: getPersonGeneralPage -> getPersonEvaluationPage
 const GET_PERSONAL_TOTAL_EVAL_CNT = gql(/* GraphQL */ `
   query getPersonalTotalEvalCnt {
     getPersonGeneralPage {
@@ -25,6 +27,7 @@ export const TotalEvalCnt = () => {
   }
 
   const { totalEvalCnt } = data.getPersonGeneralPage.evalUserInfo;
+  const unit = '회';
 
-  return <TextDefault text={`${totalEvalCnt}회`} />;
+  return <TextDefault text={numberWithUnitFormatter(totalEvalCnt, unit)} />;
 };

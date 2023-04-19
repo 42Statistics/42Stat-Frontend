@@ -4,11 +4,9 @@ import { TextDefault } from '@/components/elements/DashboardContentView/Text';
 import { useQuery } from '@apollo/client';
 
 const GET_PERSONAL_AVERAGE_FEEDBACK_LENGTH = gql(/* GraphQL */ `
-  query getPersonalAverageFeedbackLength {
-    getPersonalEvalPage {
-      evalProfile {
-        averageFeedbackLength
-      }
+  query getPersonalAverageFeedbackLength($uid: Int!) {
+    getPersonalEvalPage(uid: $uid) {
+      averageFeedbackLength
     }
   }
 `);
@@ -16,6 +14,11 @@ const GET_PERSONAL_AVERAGE_FEEDBACK_LENGTH = gql(/* GraphQL */ `
 export const AverageFeedbackLength = () => {
   const { loading, error, data } = useQuery(
     GET_PERSONAL_AVERAGE_FEEDBACK_LENGTH,
+    {
+      variables: {
+        uid: 1,
+      },
+    },
   );
 
   if (loading) return <Spinner />;
@@ -26,7 +29,7 @@ export const AverageFeedbackLength = () => {
     return <h1>user not found</h1>;
   }
 
-  const { averageFeedbackLength } = data.getPersonalEvalPage.evalProfile;
+  const { averageFeedbackLength } = data.getPersonalEvalPage;
 
   return <TextDefault text={`${averageFeedbackLength}자`} />;
 };

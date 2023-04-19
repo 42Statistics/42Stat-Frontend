@@ -6,17 +6,17 @@ import { useQuery } from '@apollo/client';
 
 // TODO: getPersonGeneralPage -> getPersonEvaluationPage
 const GET_PERSONAL_TOTAL_EVAL_CNT = gql(/* GraphQL */ `
-  query getPersonalTotalEvalCnt {
-    getPersonGeneralPage {
-      evalUserInfo {
-        totalEvalCnt
-      }
+  query getPersonalTotalEvalCnt($uid: Int!) {
+    getPersonalEvalPage(uid: $uid) {
+      totalCount
     }
   }
 `);
 
 export const TotalEvalCnt = () => {
-  const { loading, error, data } = useQuery(GET_PERSONAL_TOTAL_EVAL_CNT);
+  const { loading, error, data } = useQuery(GET_PERSONAL_TOTAL_EVAL_CNT, {
+    variables: { uid: 1 },
+  });
 
   if (loading) return <Spinner />;
   if (error) {
@@ -26,8 +26,8 @@ export const TotalEvalCnt = () => {
     return <h1>user not found</h1>;
   }
 
-  const { totalEvalCnt } = data.getPersonGeneralPage.evalUserInfo;
+  const { totalCount } = data.getPersonalEvalPage;
   const unit = '회';
 
-  return <TextDefault text={numberWithUnitFormatter(totalEvalCnt, unit)} />;
+  return <TextDefault text={numberWithUnitFormatter(totalCount, unit)} />;
 };

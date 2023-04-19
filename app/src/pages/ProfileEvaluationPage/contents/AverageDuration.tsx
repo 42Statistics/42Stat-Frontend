@@ -4,17 +4,19 @@ import { TextDefault } from '@/components/elements/DashboardContentView/Text';
 import { useQuery } from '@apollo/client';
 
 const GET_AVERAGE_DURATION = gql(/* GraphQL */ `
-  query getAverageDuration {
-    getPersonalEvalPage {
-      evalProfile {
-        averageDuration
-      }
+  query getAverageDuration($uid: Int!) {
+    getPersonalEvalPage(uid: $uid) {
+      averageDuration
     }
   }
 `);
 
 export const AverageDuration = () => {
-  const { loading, error, data } = useQuery(GET_AVERAGE_DURATION);
+  const { loading, error, data } = useQuery(GET_AVERAGE_DURATION, {
+    variables: {
+      uid: 1,
+    },
+  });
 
   if (loading) return <Spinner />;
   if (error) {
@@ -24,7 +26,7 @@ export const AverageDuration = () => {
     return <h1>user not found</h1>;
   }
 
-  const { averageDuration } = data.getPersonalEvalPage.evalProfile;
+  const { averageDuration } = data.getPersonalEvalPage;
 
   return <TextDefault text={`${averageDuration}분`} />;
 };

@@ -3,7 +3,7 @@ import { Divider, HStack, Spacer, Spinner, VStack } from '@/components/common';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import { SyntheticEvent, useRef, useState } from 'react';
 import { EvalLogUnit } from './EvalLogUnit';
 
 type GetEvalLogsQueryVariables = {
@@ -68,14 +68,100 @@ const GET_EVAL_LOGS = gql(/* GraphQL */ `
   }
 `);
 
+// export const EvalSearchBoard = () => {
+//   const theme = useTheme();
+//   const [pageSize, setPageSize] = useState<number>(1);
+//   const [pageNumber, setPageNumber] = useState<number>(1);
+//   const [projectName, setProjectName] = useState<string>('');
+//   const [outstandingOnly, setOutstandingOnly] = useState<boolean>(false);
+//   const [corrector, setCorrector] = useState<string>('');
+//   const [corrected, setCorrected] = useState<string>('');
+//   const { loading, error, data } = useQuery(GET_EVAL_LOGS, {
+//     variables: {
+//       pageSize,
+//       pageNumber,
+//       projectName,
+//       outstandingOnly,
+//       corrector,
+//       corrected,
+//     },
+//   });
+
+//   if (loading) return <Spinner />;
+//   if (error) {
+//     return <h1>{error.message}</h1>;
+//   }
+//   if (!data) {
+//     return <h1>user not found</h1>;
+//   }
+
+//   return (
+//     <EvalSearchBoardLayout>
+//       <form>
+//         <VStack align="start" spacing="1rem">
+//           <HStack w="30%">
+//             <StyledLabel htmlFor="subject">SUBJECT</StyledLabel>
+//             <Spacer />
+//             <StyledInput id="subject" />
+//           </HStack>
+//           <HStack w="30%">
+//             <StyledLabel htmlFor="from">FROM</StyledLabel>
+//             <Spacer />
+//             <StyledInput id="from" />
+//           </HStack>
+//           <HStack w="30%">
+//             <StyledLabel htmlFor="to">TO</StyledLabel>
+//             <Spacer />
+//             <StyledInput id="to" />
+//           </HStack>
+//           <HStack w="30%">
+//             <StyledLabel htmlFor="flag">FLAG</StyledLabel>
+//             <Spacer />
+//             <StyledRadioInput
+//               id="flag"
+//               type="radio"
+//               name="outstanding"
+//               value="false"
+//             />
+//             전체
+//             <Spacer />
+//             <StyledRadioInput
+//               id="flag"
+//               type="radio"
+//               name="outstanding"
+//               value="true"
+//             />
+//             Outatanding
+//           </HStack>
+//           <HStack w="30%" align="center">
+//             <StyledButton>SEARCH</StyledButton>
+//           </HStack>
+//         </VStack>
+//       </form>
+//       <Divider style={{ width: '100%' }} />
+//       {data.getEvalLogs.map((v, idx) => {
+//         console.log('hihi');
+//         // return <div key={idx}>hi</div>;
+//         return <EvalLogUnit key={idx} data={v} />;
+//       })}
+//     </EvalSearchBoardLayout>
+//   );
+// };
 export const EvalSearchBoard = () => {
   const theme = useTheme();
-  const [pageSize, setPageSize] = useState<number>(1);
+  const [pageSize, setPageSize] = useState<number>(5);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [projectName, setProjectName] = useState<string>('');
   const [outstandingOnly, setOutstandingOnly] = useState<boolean>(false);
   const [corrector, setCorrector] = useState<string>('');
   const [corrected, setCorrected] = useState<string>('');
+
+  const projectNameRef = useRef<HTMLInputElement>(null);
+  const correctorRef = useRef<HTMLInputElement>(null);
+  const correctedRef = useRef<HTMLInputElement>(null);
+  //TODO: 라디오박스도 랜더링 최적화 관리하는방법 찾기
+  // const outstandingRef = useRef(false);
+
   const { loading, error, data } = useQuery(GET_EVAL_LOGS, {
     variables: {
       pageSize,
@@ -86,6 +172,24 @@ export const EvalSearchBoard = () => {
       corrected,
     },
   });
+
+  const handleSearch = () => {
+    setProjectName(projectNameRef.current?.value || '');
+    setCorrector(correctorRef.current?.value || '');
+    setCorrected(correctedRef.current?.value || '');
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      handleSearch();
+    }
+  };
+
+  const handleRadioChange = (e: SyntheticEvent<HTMLInputElement>) => {
+    const { value } = e.target as HTMLInputElement;
+    setOutstandingOnly(value === 'true');
+  };
 
   if (loading) return <Spinner />;
   if (error) {
@@ -102,17 +206,25 @@ export const EvalSearchBoard = () => {
           <HStack w="30%">
             <StyledLabel htmlFor="subject">SUBJECT</StyledLabel>
             <Spacer />
-            <StyledInput id="subject" />
+            <StyledInput
+              id="subject"
+              ref={projectNameRef}
+              onKeyDown={handleKeyDown}
+            />
           </HStack>
           <HStack w="30%">
             <StyledLabel htmlFor="from">FROM</StyledLabel>
             <Spacer />
-            <StyledInput id="from" />
+            <StyledInput
+              id="from"
+              ref={correctorRef}
+              onKeyDown={handleKeyDown}
+            />
           </HStack>
           <HStack w="30%">
             <StyledLabel htmlFor="to">TO</StyledLabel>
             <Spacer />
-            <StyledInput id="to" />
+            <StyledInput id="to" ref={correctedRef} onKeyDown={handleKeyDown} />
           </HStack>
           <HStack w="30%">
             <StyledLabel htmlFor="flag">FLAG</StyledLabel>
@@ -122,6 +234,8 @@ export const EvalSearchBoard = () => {
               type="radio"
               name="outstanding"
               value="false"
+              checked={outstandingOnly}
+              onChange={handleRadioChange}
             />
             전체
             <Spacer />
@@ -130,24 +244,25 @@ export const EvalSearchBoard = () => {
               type="radio"
               name="outstanding"
               value="true"
+              checked={outstandingOnly}
+              onChange={handleRadioChange}
             />
             Outatanding
           </HStack>
           <HStack w="30%" align="center">
-            <StyledButton>SEARCH</StyledButton>
+            <StyledButton onClick={handleSearch}>SEARCH</StyledButton>
           </HStack>
         </VStack>
       </form>
       <Divider style={{ width: '100%' }} />
-      {data.getEvalLogs.map((v, idx) => {
-        console.log('hihi');
-        // return <div key={idx}>hi</div>;
-        return <EvalLogUnit key={idx} data={v} />;
-      })}
+      <VStack style={{ overflowY: 'auto' }}>
+        {data.getEvalLogs.map((v, idx) => (
+          <EvalLogUnit key={idx} data={v} />
+        ))}
+      </VStack>
     </EvalSearchBoardLayout>
   );
 };
-
 const EvalSearchBoardLayout = styled.div`
   background-color: ${({ theme }) => theme.colors.mono.white};
   width: 100%;

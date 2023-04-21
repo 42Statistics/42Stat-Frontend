@@ -1,9 +1,17 @@
 import { gql } from '@/__generated__';
-import { Divider, HStack, Spacer, Spinner, VStack } from '@/components/common';
+import {
+  Divider,
+  HStack,
+  Spacer,
+  Spinner,
+  Text,
+  VStack,
+} from '@/components/common';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { SyntheticEvent, useRef, useState } from 'react';
+import { RxTriangleLeft, RxTriangleRight } from 'react-icons/rx';
 import { EvalLogUnit } from './EvalLogUnit';
 
 type GetEvalLogsQueryVariables = {
@@ -149,7 +157,7 @@ const GET_EVAL_LOGS = gql(/* GraphQL */ `
 // };
 export const EvalSearchBoard = () => {
   const theme = useTheme();
-  const [pageSize, setPageSize] = useState<number>(5);
+  const [pageSize, setPageSize] = useState<number>(1);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [projectName, setProjectName] = useState<string>('');
   const [outstandingOnly, setOutstandingOnly] = useState<boolean>(false);
@@ -259,6 +267,39 @@ export const EvalSearchBoard = () => {
         {data.getEvalLogs.map((v, idx) => (
           <EvalLogUnit key={idx} data={v} />
         ))}
+      </VStack>
+      <VStack
+        h="100%"
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'flex-end',
+          alignItems: 'center',
+        }}
+      >
+        <HStack>
+          <RxTriangleLeft
+            size="30"
+            color={theme.colors.primary.default}
+            onClick={() => {
+              setPageNumber((prev) => (prev > 1 ? prev - 1 : 1));
+            }}
+          />
+          <Text
+            style={{ letterSpacing: '0.5rem' }}
+            fontSize={theme.fonts.size.h3}
+          >
+            {pageNumber}/n
+          </Text>
+          <RxTriangleRight
+            size="30"
+            color={theme.colors.primary.default}
+            onClick={() => {
+              setPageNumber((prev) => prev + 1);
+              // TODO:maxpagenum 못넘게 설정 필요
+            }}
+          />
+        </HStack>
       </VStack>
     </EvalSearchBoardLayout>
   );

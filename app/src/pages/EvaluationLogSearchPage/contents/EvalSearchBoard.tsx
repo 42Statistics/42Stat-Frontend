@@ -1,9 +1,11 @@
 import { gql } from '@/__generated__';
-import { Divider, HStack, Spinner, Text, VStack } from '@/components/common';
-import { useQuery } from '@apollo/client';
+import { EvalLogs } from '@/__generated__/graphql';
+import { Divider, HStack, Text, VStack } from '@/components/common';
+import { useApolloClient, useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { SyntheticEvent, useRef, useState } from 'react';
+import { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { RxTriangleLeft, RxTriangleRight } from 'react-icons/rx';
 import { EvalLogUnit } from './EvalLogUnit';
 
@@ -14,6 +16,13 @@ type GetEvalLogsQueryVariables = {
   outstandingOnly: boolean;
   corrector?: string;
   corrected?: string;
+};
+
+type FormValues = {
+  subject: string;
+  from: string;
+  to: string;
+  outstanding: boolean;
 };
 
 //TODO: 실제로는 안쓰는 필드들은 받아오지 않게 나중에 완성하고 수정필요
@@ -70,67 +79,75 @@ const GET_EVAL_LOGS = gql(/* GraphQL */ `
 `);
 
 export const EvalSearchBoard = () => {
+  const { register, handleSubmit, watch } = useForm();
   const theme = useTheme();
-  const pageSize = 1;
+  const pageSize = 2;
   const [pageNumber, setPageNumber] = useState<number>(1);
-  const [projectName, setProjectName] = useState<string>('');
-  const [corrector, setCorrector] = useState<string>('');
-  const [corrected, setCorrected] = useState<string>('');
-  const [outstandingOnly, setOutstandingOnly] = useState<boolean>(false);
+  const [evalLogs, setEvalLogs] = useState<EvalLogs[]>([]);
+  const client = useApolloClient();
 
-  const projectNameRef = useRef<HTMLInputElement>(null);
-  const correctorRef = useRef<HTMLInputElement>(null);
-  const correctedRef = useRef<HTMLInputElement>(null);
-  //TODO: 라디오박스도 랜더링 최적화 관리하는방법 찾기
-  // const outstandingRef = useRef(false);
-
-  const { loading, error, data } = useQuery(GET_EVAL_LOGS, {
+  const { loading, error, data, refetch } = useQuery(GET_EVAL_LOGS, {
     variables: {
       pageSize,
       pageNumber,
-      projectName,
-      outstandingOnly,
-      corrector,
-      corrected,
+      projectName: 'libft',
+      outstandingOnly: false,
+      corrector: '',
+      corrected: '',
     },
   });
 
-  const handleSearch = () => {
-    setProjectName(projectNameRef.current?.value || '');
-    setCorrector(correctorRef.current?.value || '');
-    setCorrected(correctedRef.current?.value || '');
+  if (data) {
+    setEvalLogs(data.getEvalLogs);
+  }
+
+  const handleSearch: SubmitHandler<FormValues> = async (result) => {
+    refetch({
+      pageSize,
+      pageNumber,
+      projectName: result.subject,
+      outstandingOnly: result.outstanding,
+      corrector: result.from,
+      corrected: result.to,
+    });
+    // setProjectName(watch('subject'));
+    // setCorrector(watch('from'));
+    // setCorrected(watch('to'));
+    // setOutstandingOnly(watch('outstanding'));
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       event.preventDefault();
-      handleSearch();
+      // handleSearch();
     }
   };
 
-  const handleRadioChange = (e: SyntheticEvent<HTMLInputElement>) => {
-    const { value } = e.target as HTMLInputElement;
-    setOutstandingOnly(value === 'true');
-  };
+  // const handleRadioChange = (e: SyntheticEvent<HTMLInputElement>) => {
+  //   const { value } = e.target as HTMLInputElement;
+  //   setOutstandingOnly(value === 'true');
+  // };
 
-  if (loading) return <Spinner />;
-  if (error) {
-    return <h1>{error.message}</h1>;
-  }
-  if (!data) {
-    return <h1>user not found</h1>;
-  }
+  // if (loading) return <Spinner />;
+  // if (error) {
+  //   return <h1>{error.message}</h1>;
+  // }
+  // if (!data) {
+  //   return <h1>user not found</h1>;
+  // }
 
   return (
     <EvalSearchBoardLayout>
-      <form css={{ width: '100%' }}>
+      <form css={{ width: '100%' }} onSubmit={handleSubmit(handleSearch)}>
         <HStack w="100%" h="100%">
           <VStack align="start" spacing="1rem">
             <HStack w="100%" css={{ justifyContent: 'flex-start' }}>
               <StyledLabel htmlFor="subject">SUBJECT</StyledLabel>
               <StyledInput
                 id="subject"
-                ref={projectNameRef}
+                {...register('subject')}
+                name="subject"
+                // ref={projectNameRef}
                 onKeyDown={handleKeyDown}
               />
             </HStack>
@@ -138,7 +155,9 @@ export const EvalSearchBoard = () => {
               <StyledLabel htmlFor="from">FROM</StyledLabel>
               <StyledInput
                 id="from"
-                ref={correctorRef}
+                {...register('from')}
+                name="from"
+                // ref={correctorRef}
                 onKeyDown={handleKeyDown}
               />
             </HStack>
@@ -146,7 +165,9 @@ export const EvalSearchBoard = () => {
               <StyledLabel htmlFor="to">TO</StyledLabel>
               <StyledInput
                 id="to"
-                ref={correctedRef}
+                {...register('to')}
+                name="to"
+                // ref={correctedRef}
                 onKeyDown={handleKeyDown}
               />
             </HStack>
@@ -157,10 +178,12 @@ export const EvalSearchBoard = () => {
                   <StyledRadioInput
                     id="flag"
                     type="radio"
+                    {...register('outstanding')}
                     name="outstanding"
                     value="false"
-                    checked={outstandingOnly}
-                    onChange={handleRadioChange}
+                    checked={watch('outstanding') === 'false'}
+                    // checked={outstandingOnly}
+                    // onChange={handleRadioChange}
                   />
                   전체
                 </div>
@@ -168,10 +191,12 @@ export const EvalSearchBoard = () => {
                   <StyledRadioInput
                     id="flag"
                     type="radio"
+                    {...register('outstanding')}
                     name="outstanding"
                     value="true"
-                    checked={outstandingOnly}
-                    onChange={handleRadioChange}
+                    checked={watch('outstanding') === 'true'}
+                    // checked={outstandingOnly}
+                    // onChange={handleRadioChange}
                   />
                   Outstanding
                 </div>
@@ -179,16 +204,7 @@ export const EvalSearchBoard = () => {
             </HStack>
           </VStack>
           <div css={{ position: 'relative', width: '100%', height: '100%' }}>
-            <StyledButton
-              css={{
-                position: 'absolute',
-                bottom: 0,
-                left: '2rem',
-              }}
-              onClick={handleSearch}
-            >
-              SEARCH
-            </StyledButton>
+            <StyledInputBtn type="submit" value="SEARCH" />
           </div>
         </HStack>
       </form>
@@ -201,7 +217,7 @@ export const EvalSearchBoard = () => {
           paddingRight: '4rem',
         }}
       >
-        {data.getEvalLogs.map((v, idx) => (
+        {evalLogs.map((v, idx) => (
           <EvalLogUnit key={idx} data={v} />
         ))}
         <HStack>
@@ -259,7 +275,7 @@ const StyledInput = styled.input`
   outline-color: ${({ theme }) => theme.colors.primary.default};
 `;
 
-const StyledButton = styled.button`
+const StyledInputBtn = styled.input`
   padding: 0.8rem 2rem;
   border-radius: 3rem;
   background-color: ${({ theme }) => theme.colors.primary.default};
@@ -270,6 +286,9 @@ const StyledButton = styled.button`
   }
   outline: none;
   margin-top: 1rem;
+  position: absolute;
+  bottom: 0;
+  left: 2rem;
 `;
 
 const StyledRadioInput = styled.input`

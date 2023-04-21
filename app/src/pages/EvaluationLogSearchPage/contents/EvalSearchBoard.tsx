@@ -1,12 +1,5 @@
 import { gql } from '@/__generated__';
-import {
-  Divider,
-  HStack,
-  Spacer,
-  Spinner,
-  Text,
-  VStack,
-} from '@/components/common';
+import { Divider, HStack, Spinner, Text, VStack } from '@/components/common';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
@@ -76,93 +69,14 @@ const GET_EVAL_LOGS = gql(/* GraphQL */ `
   }
 `);
 
-// export const EvalSearchBoard = () => {
-//   const theme = useTheme();
-//   const [pageSize, setPageSize] = useState<number>(1);
-//   const [pageNumber, setPageNumber] = useState<number>(1);
-//   const [projectName, setProjectName] = useState<string>('');
-//   const [outstandingOnly, setOutstandingOnly] = useState<boolean>(false);
-//   const [corrector, setCorrector] = useState<string>('');
-//   const [corrected, setCorrected] = useState<string>('');
-//   const { loading, error, data } = useQuery(GET_EVAL_LOGS, {
-//     variables: {
-//       pageSize,
-//       pageNumber,
-//       projectName,
-//       outstandingOnly,
-//       corrector,
-//       corrected,
-//     },
-//   });
-
-//   if (loading) return <Spinner />;
-//   if (error) {
-//     return <h1>{error.message}</h1>;
-//   }
-//   if (!data) {
-//     return <h1>user not found</h1>;
-//   }
-
-//   return (
-//     <EvalSearchBoardLayout>
-//       <form>
-//         <VStack align="start" spacing="1rem">
-//           <HStack w="30%">
-//             <StyledLabel htmlFor="subject">SUBJECT</StyledLabel>
-//             <Spacer />
-//             <StyledInput id="subject" />
-//           </HStack>
-//           <HStack w="30%">
-//             <StyledLabel htmlFor="from">FROM</StyledLabel>
-//             <Spacer />
-//             <StyledInput id="from" />
-//           </HStack>
-//           <HStack w="30%">
-//             <StyledLabel htmlFor="to">TO</StyledLabel>
-//             <Spacer />
-//             <StyledInput id="to" />
-//           </HStack>
-//           <HStack w="30%">
-//             <StyledLabel htmlFor="flag">FLAG</StyledLabel>
-//             <Spacer />
-//             <StyledRadioInput
-//               id="flag"
-//               type="radio"
-//               name="outstanding"
-//               value="false"
-//             />
-//             전체
-//             <Spacer />
-//             <StyledRadioInput
-//               id="flag"
-//               type="radio"
-//               name="outstanding"
-//               value="true"
-//             />
-//             Outatanding
-//           </HStack>
-//           <HStack w="30%" align="center">
-//             <StyledButton>SEARCH</StyledButton>
-//           </HStack>
-//         </VStack>
-//       </form>
-//       <Divider style={{ width: '100%' }} />
-//       {data.getEvalLogs.map((v, idx) => {
-//         console.log('hihi');
-//         // return <div key={idx}>hi</div>;
-//         return <EvalLogUnit key={idx} data={v} />;
-//       })}
-//     </EvalSearchBoardLayout>
-//   );
-// };
 export const EvalSearchBoard = () => {
   const theme = useTheme();
-  const [pageSize, setPageSize] = useState<number>(1);
+  const pageSize = 1;
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [projectName, setProjectName] = useState<string>('');
-  const [outstandingOnly, setOutstandingOnly] = useState<boolean>(false);
   const [corrector, setCorrector] = useState<string>('');
   const [corrected, setCorrected] = useState<string>('');
+  const [outstandingOnly, setOutstandingOnly] = useState<boolean>(false);
 
   const projectNameRef = useRef<HTMLInputElement>(null);
   const correctorRef = useRef<HTMLInputElement>(null);
@@ -209,74 +123,87 @@ export const EvalSearchBoard = () => {
 
   return (
     <EvalSearchBoardLayout>
-      <form>
-        <VStack align="start" spacing="1rem">
-          <HStack w="30%">
-            <StyledLabel htmlFor="subject">SUBJECT</StyledLabel>
-            <Spacer />
-            <StyledInput
-              id="subject"
-              ref={projectNameRef}
-              onKeyDown={handleKeyDown}
-            />
-          </HStack>
-          <HStack w="30%">
-            <StyledLabel htmlFor="from">FROM</StyledLabel>
-            <Spacer />
-            <StyledInput
-              id="from"
-              ref={correctorRef}
-              onKeyDown={handleKeyDown}
-            />
-          </HStack>
-          <HStack w="30%">
-            <StyledLabel htmlFor="to">TO</StyledLabel>
-            <Spacer />
-            <StyledInput id="to" ref={correctedRef} onKeyDown={handleKeyDown} />
-          </HStack>
-          <HStack w="30%">
-            <StyledLabel htmlFor="flag">FLAG</StyledLabel>
-            <Spacer />
-            <StyledRadioInput
-              id="flag"
-              type="radio"
-              name="outstanding"
-              value="false"
-              checked={outstandingOnly}
-              onChange={handleRadioChange}
-            />
-            전체
-            <Spacer />
-            <StyledRadioInput
-              id="flag"
-              type="radio"
-              name="outstanding"
-              value="true"
-              checked={outstandingOnly}
-              onChange={handleRadioChange}
-            />
-            Outatanding
-          </HStack>
-          <HStack w="30%" align="center">
-            <StyledButton onClick={handleSearch}>SEARCH</StyledButton>
-          </HStack>
-        </VStack>
+      <form css={{ width: '100%' }}>
+        <HStack w="100%" h="100%">
+          <VStack align="start" spacing="1rem">
+            <HStack w="100%" css={{ justifyContent: 'flex-start' }}>
+              <StyledLabel htmlFor="subject">SUBJECT</StyledLabel>
+              <StyledInput
+                id="subject"
+                ref={projectNameRef}
+                onKeyDown={handleKeyDown}
+              />
+            </HStack>
+            <HStack w="100%" css={{ justifyContent: 'flex-start' }}>
+              <StyledLabel htmlFor="from">FROM</StyledLabel>
+              <StyledInput
+                id="from"
+                ref={correctorRef}
+                onKeyDown={handleKeyDown}
+              />
+            </HStack>
+            <HStack w="100%" css={{ justifyContent: 'flex-start' }}>
+              <StyledLabel htmlFor="to">TO</StyledLabel>
+              <StyledInput
+                id="to"
+                ref={correctedRef}
+                onKeyDown={handleKeyDown}
+              />
+            </HStack>
+            <HStack w="100%" css={{ justifyContent: 'flex-start' }}>
+              <StyledLabel htmlFor="flag">OPTION</StyledLabel>
+              <HStack spacing="2rem">
+                <div>
+                  <StyledRadioInput
+                    id="flag"
+                    type="radio"
+                    name="outstanding"
+                    value="false"
+                    checked={outstandingOnly}
+                    onChange={handleRadioChange}
+                  />
+                  전체
+                </div>
+                <div>
+                  <StyledRadioInput
+                    id="flag"
+                    type="radio"
+                    name="outstanding"
+                    value="true"
+                    checked={outstandingOnly}
+                    onChange={handleRadioChange}
+                  />
+                  Outstanding
+                </div>
+              </HStack>
+            </HStack>
+          </VStack>
+          <div css={{ position: 'relative', width: '100%', height: '100%' }}>
+            <StyledButton
+              css={{
+                position: 'absolute',
+                bottom: 0,
+                left: '2rem',
+              }}
+              onClick={handleSearch}
+            >
+              SEARCH
+            </StyledButton>
+          </div>
+        </HStack>
       </form>
       <Divider style={{ width: '100%' }} />
-      <VStack style={{ overflowY: 'auto' }}>
+      <VStack
+        w="100%"
+        spacing="2rem"
+        style={{
+          justifyContent: 'flex-start',
+          paddingRight: '4rem',
+        }}
+      >
         {data.getEvalLogs.map((v, idx) => (
           <EvalLogUnit key={idx} data={v} />
         ))}
-      </VStack>
-      <VStack
-        h="100%"
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'flex-end',
-          alignItems: 'center',
-        }}
-      >
         <HStack>
           <RxTriangleLeft
             size="30"
@@ -304,21 +231,19 @@ export const EvalSearchBoard = () => {
     </EvalSearchBoardLayout>
   );
 };
-const EvalSearchBoardLayout = styled.div`
+const EvalSearchBoardLayout = styled(VStack)`
   background-color: ${({ theme }) => theme.colors.mono.white};
   width: 100%;
   height: 100%;
-  border-radius: 2rem;
-  padding: 2rem 2rem 2rem 2rem;
+  justify-content: flex-start;
+  gap: 3rem;
+  padding: 5rem;
+  overflow-y: auto;
   transition: box-shadow 200ms ease-in-out, transform 200ms ease-in-out;
-
-  & > * + * {
-    margin-top: 2rem;
-  }
 `;
 
 const StyledLabel = styled.label`
-  width: 20%;
+  width: 10rem;
   color: ${({ theme }) => theme.colors.primary.default};
   text-align: center;
 `;

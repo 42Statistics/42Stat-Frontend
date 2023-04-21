@@ -1,28 +1,25 @@
 import { gql } from '@/__generated__';
-import { EvalLogs } from '@/__generated__/graphql';
-import { Divider, HStack, Text, VStack } from '@/components/common';
-import { useApolloClient, useQuery } from '@apollo/client';
+import {
+  Button,
+  Divider,
+  HStack,
+  Spinner,
+  Text,
+  VStack,
+} from '@/components/common';
+import { useLazyQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { RxTriangleLeft, RxTriangleRight } from 'react-icons/rx';
+import { BsTriangleFill } from 'react-icons/bs';
 import { EvalLogUnit } from './EvalLogUnit';
 
-type GetEvalLogsQueryVariables = {
-  pageSize: number;
-  pageNumber: number;
+type FormValues = {
   projectName: string;
   outstandingOnly: boolean;
-  corrector?: string;
-  corrected?: string;
-};
-
-type FormValues = {
-  subject: string;
-  from: string;
-  to: string;
-  outstanding: boolean;
+  corrector: string;
+  corrected: string;
 };
 
 //TODO: 실제로는 안쓰는 필드들은 받아오지 않게 나중에 완성하고 수정필요
@@ -79,136 +76,106 @@ const GET_EVAL_LOGS = gql(/* GraphQL */ `
 `);
 
 export const EvalSearchBoard = () => {
-  const { register, handleSubmit, watch } = useForm();
-  const theme = useTheme();
-  const pageSize = 2;
-  const [pageNumber, setPageNumber] = useState<number>(1);
-  const [evalLogs, setEvalLogs] = useState<EvalLogs[]>([]);
-  const client = useApolloClient();
-
-  const { loading, error, data, refetch } = useQuery(GET_EVAL_LOGS, {
-    variables: {
-      pageSize,
-      pageNumber,
-      projectName: 'libft',
-      outstandingOnly: false,
-      corrector: '',
-      corrected: '',
-    },
+  const [formValue, setFormValue] = useState<FormValues>({
+    projectName: '',
+    outstandingOnly: false,
+    corrector: '',
+    corrected: '',
+  });
+  const { register, handleSubmit } = useForm<FormValues>({
+    defaultValues: formValue,
   });
 
-  if (data) {
-    setEvalLogs(data.getEvalLogs);
-  }
+  const pageSize = 5;
+  const [pageNumber, setPageNumber] = useState<number>(1);
+  const [search, { loading, error, data }] = useLazyQuery(GET_EVAL_LOGS);
+  const theme = useTheme();
 
-  const handleSearch: SubmitHandler<FormValues> = async (result) => {
-    refetch({
-      pageSize,
-      pageNumber,
-      projectName: result.subject,
-      outstandingOnly: result.outstanding,
-      corrector: result.from,
-      corrected: result.to,
+  const onSubmit: SubmitHandler<FormValues> = ({
+    projectName,
+    outstandingOnly,
+    corrector,
+    corrected,
+  }) => {
+    setPageNumber(1);
+    setFormValue({
+      projectName,
+      outstandingOnly,
+      corrector,
+      corrected,
     });
-    // setProjectName(watch('subject'));
-    // setCorrector(watch('from'));
-    // setCorrected(watch('to'));
-    // setOutstandingOnly(watch('outstanding'));
+    search({
+      variables: {
+        pageSize,
+        pageNumber,
+        projectName,
+        outstandingOnly,
+        corrector,
+        corrected,
+      },
+    });
   };
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      // handleSearch();
-    }
-  };
-
-  // const handleRadioChange = (e: SyntheticEvent<HTMLInputElement>) => {
-  //   const { value } = e.target as HTMLInputElement;
-  //   setOutstandingOnly(value === 'true');
-  // };
-
-  // if (loading) return <Spinner />;
-  // if (error) {
-  //   return <h1>{error.message}</h1>;
-  // }
-  // if (!data) {
-  //   return <h1>user not found</h1>;
-  // }
+  useEffect(() => {
+    search({
+      variables: {
+        pageSize,
+        pageNumber,
+        projectName: formValue.projectName,
+        outstandingOnly: formValue.outstandingOnly,
+        corrector: formValue.corrector,
+        corrected: formValue.corrected,
+      },
+    });
+  }, [pageNumber]);
 
   return (
-    <EvalSearchBoardLayout>
-      <form css={{ width: '100%' }} onSubmit={handleSubmit(handleSearch)}>
+    <Layout>
+      <form css={{ width: '100%' }} onSubmit={handleSubmit(onSubmit)}>
         <HStack w="100%" h="100%">
-          <VStack align="start" spacing="1rem">
-            <HStack w="100%" css={{ justifyContent: 'flex-start' }}>
-              <StyledLabel htmlFor="subject">SUBJECT</StyledLabel>
-              <StyledInput
-                id="subject"
-                {...register('subject')}
-                name="subject"
-                // ref={projectNameRef}
-                onKeyDown={handleKeyDown}
-              />
+          <VStack spacing="1rem" align="start">
+            <HStack>
+              <StyledLabel>과제명</StyledLabel>
+              <StyledInput {...register('projectName')} />
             </HStack>
-            <HStack w="100%" css={{ justifyContent: 'flex-start' }}>
-              <StyledLabel htmlFor="from">FROM</StyledLabel>
-              <StyledInput
-                id="from"
-                {...register('from')}
-                name="from"
-                // ref={correctorRef}
-                onKeyDown={handleKeyDown}
-              />
+            <HStack>
+              <StyledLabel>FROM</StyledLabel>
+              <StyledInput {...register('corrector')} />
             </HStack>
-            <HStack w="100%" css={{ justifyContent: 'flex-start' }}>
-              <StyledLabel htmlFor="to">TO</StyledLabel>
-              <StyledInput
-                id="to"
-                {...register('to')}
-                name="to"
-                // ref={correctedRef}
-                onKeyDown={handleKeyDown}
-              />
+            <HStack>
+              <StyledLabel>TO</StyledLabel>
+              <StyledInput {...register('corrected')} />
             </HStack>
-            <HStack w="100%" css={{ justifyContent: 'flex-start' }}>
-              <StyledLabel htmlFor="flag">OPTION</StyledLabel>
+            <HStack>
+              <StyledLabel>플래그</StyledLabel>
               <HStack spacing="2rem">
-                <div>
-                  <StyledRadioInput
-                    id="flag"
+                <HStack spacing="1rem">
+                  <input
                     type="radio"
-                    {...register('outstanding')}
-                    name="outstanding"
+                    {...register('outstandingOnly')}
                     value="false"
-                    checked={watch('outstanding') === 'false'}
-                    // checked={outstandingOnly}
-                    // onChange={handleRadioChange}
                   />
                   전체
-                </div>
-                <div>
-                  <StyledRadioInput
-                    id="flag"
+                </HStack>
+                <HStack spacing="1rem">
+                  <input
                     type="radio"
-                    {...register('outstanding')}
-                    name="outstanding"
+                    {...register('outstandingOnly')}
                     value="true"
-                    checked={watch('outstanding') === 'true'}
-                    // checked={outstandingOnly}
-                    // onChange={handleRadioChange}
                   />
                   Outstanding
-                </div>
+                </HStack>
               </HStack>
             </HStack>
           </VStack>
           <div css={{ position: 'relative', width: '100%', height: '100%' }}>
-            <StyledInputBtn type="submit" value="SEARCH" />
+            <SubmitBtn type="submit" value="검색하기" />
           </div>
         </HStack>
       </form>
       <Divider style={{ width: '100%' }} />
+      {loading && <Spinner />}
+      {error && <h1>{error.message}</h1>}
       <VStack
         w="100%"
         spacing="2rem"
@@ -217,45 +184,53 @@ export const EvalSearchBoard = () => {
           paddingRight: '4rem',
         }}
       >
-        {evalLogs.map((v, idx) => (
+        {data?.getEvalLogs.map((v, idx) => (
           <EvalLogUnit key={idx} data={v} />
         ))}
-        <HStack>
-          <RxTriangleLeft
-            size="30"
-            color={theme.colors.primary.default}
+        <HStack spacing="1rem">
+          <Button
+            element={
+              <BsTriangleFill
+                size="12px"
+                css={{ transform: 'rotate(-90deg)' }}
+                color={theme.colors.primary.default}
+              />
+            }
             onClick={() => {
-              setPageNumber((prev) => (prev > 1 ? prev - 1 : 1));
+              setPageNumber((prev) => Math.max(prev - 1, 1));
             }}
           />
-          <Text
-            style={{ letterSpacing: '0.5rem' }}
-            fontSize={theme.fonts.size.h3}
-          >
-            {pageNumber}/n
-          </Text>
-          <RxTriangleRight
-            size="30"
-            color={theme.colors.primary.default}
+          {data && (
+            <Text fontSize={theme.fonts.size.h3}>
+              {pageNumber} / {42}
+            </Text>
+          )}
+          <Button
+            element={
+              <BsTriangleFill
+                size="12px"
+                css={{ transform: 'rotate(90deg)' }}
+                color={theme.colors.primary.default}
+              />
+            }
             onClick={() => {
-              setPageNumber((prev) => prev + 1);
-              // TODO:maxpagenum 못넘게 설정 필요
+              setPageNumber((prev) => Math.min(prev + 1, 42));
+              // TODO: maxpagenum 못넘게 설정 필요
             }}
           />
         </HStack>
       </VStack>
-    </EvalSearchBoardLayout>
+    </Layout>
   );
 };
-const EvalSearchBoardLayout = styled(VStack)`
-  background-color: ${({ theme }) => theme.colors.mono.white};
+const Layout = styled(VStack)`
+  gap: 3rem;
+  justify-content: flex-start;
   width: 100%;
   height: 100%;
-  justify-content: flex-start;
-  gap: 3rem;
+  background-color: ${({ theme }) => theme.colors.mono.white};
   padding: 5rem;
   overflow-y: auto;
-  transition: box-shadow 200ms ease-in-out, transform 200ms ease-in-out;
 `;
 
 const StyledLabel = styled.label`
@@ -269,37 +244,18 @@ const StyledInput = styled.input`
   border-radius: 3rem;
   background-color: ${({ theme }) => theme.colors.primary.light};
   border: none;
-  :hover {
-    box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.25);
-  }
   outline-color: ${({ theme }) => theme.colors.primary.default};
 `;
 
-const StyledInputBtn = styled.input`
+const SubmitBtn = styled.input`
   padding: 0.8rem 2rem;
   border-radius: 3rem;
   background-color: ${({ theme }) => theme.colors.primary.default};
   color: ${({ theme }) => theme.colors.mono.white};
   border: none;
-  :hover {
-    box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.25);
-  }
   outline: none;
   margin-top: 1rem;
   position: absolute;
   bottom: 0;
   left: 2rem;
-`;
-
-const StyledRadioInput = styled.input`
-  margin-right: 1rem;
-  // :checked {
-  //   appearance: none;
-  // TODO: appearance를제거하고 다시 그리는 방법 고안 필요
-  //   background-color: purple;
-  //   border-color: purple;
-  // }
-  :hover {
-    cursor: pointer;
-  }
 `;

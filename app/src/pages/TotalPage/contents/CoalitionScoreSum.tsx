@@ -64,6 +64,17 @@ const CoalitionScoreSumChart = ({
   const theme = useTheme();
 
   const options: ApexCharts.ApexOptions = {
+    plotOptions: {
+      bar: {
+        distributed: true,
+      },
+    },
+    colors: [
+      theme.colors.coalition.gun,
+      theme.colors.coalition.gon,
+      theme.colors.coalition.gam,
+      theme.colors.coalition.lee,
+    ],
     xaxis: {
       categories,
     },

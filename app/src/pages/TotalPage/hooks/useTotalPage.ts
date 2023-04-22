@@ -380,14 +380,14 @@ export const useTotalPage = () => {
       ],
     },
     {
-      row: 1,
-      col: 1,
+      row: 6,
+      col: 2,
       items: [
         {
           row: 1,
           col: 1,
-          rowSpan: 1,
-          colSpan: 1,
+          rowSpan: 6,
+          colSpan: 2,
           elementId: 8,
         },
       ],

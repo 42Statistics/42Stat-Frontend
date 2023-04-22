@@ -1,4 +1,5 @@
 import { AuthGuard } from '@/components/guards/AuthGuard';
+import { DashboardLayout } from '@/components/layouts/DashboardLayout';
 import { MainLayout } from '@/components/layouts/MainLayout';
 import { lazyImport } from '@/utils/lazyImport';
 import { Suspense } from 'react';
@@ -9,9 +10,9 @@ const { TotalPage } = lazyImport(
   () => import('@/pages/TotalPage'),
   'TotalPage',
 );
-const { EvaluationLogSearchPage } = lazyImport(
-  () => import('@/pages/EvaluationLogSearchPage'),
-  'EvaluationLogSearchPage',
+const { EvalLogSearchPage } = lazyImport(
+  () => import('@/pages/EvalLogSearchPage'),
+  'EvalLogSearchPage',
 );
 const { ProfilePage } = lazyImport(
   () => import('@/pages/ProfilePage'),
@@ -28,7 +29,19 @@ const { SettingsPage } = lazyImport(
 );
 
 // TODO: Suspense fallback
-const App = () => {
+const DashboardApp = () => {
+  return (
+    <AuthGuard>
+      <DashboardLayout>
+        <Suspense>
+          <Outlet />
+        </Suspense>
+      </DashboardLayout>
+    </AuthGuard>
+  );
+};
+
+const MainApp = () => {
   return (
     <AuthGuard>
       <MainLayout>
@@ -43,14 +56,18 @@ const App = () => {
 export const protectedRoutes = [
   {
     path: '/',
-    element: <App />,
+    element: <DashboardApp />,
     children: [
       { path: '/home', element: <HomePage /> },
       { path: '/total', element: <TotalPage /> },
-      { path: '/evaluation-log-search', element: <EvaluationLogSearchPage /> },
       { path: '/profile/:username', element: <ProfilePage /> },
       { path: '/about', element: <AboutPage /> },
       { path: '/settings', element: <SettingsPage /> },
     ],
+  },
+  {
+    path: '/',
+    element: <MainApp />,
+    children: [{ path: '/eval-log-search', element: <EvalLogSearchPage /> }],
   },
 ];

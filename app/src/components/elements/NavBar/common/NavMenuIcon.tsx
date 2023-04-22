@@ -24,7 +24,7 @@ export const NavMenuIcon = ({ menu, isFocused }: NavMenuIconProps) => {
       return <MdHome size="24px" fill={color} />;
     case 'Total':
       return <RiGlobalFill size="24px" fill={color} />;
-    case 'EvaluationLogSearch':
+    case 'EvalLogSearch':
       return <MdContentPasteSearch size="24px" fill={color} />;
     case 'About':
       return <MdHelp size="24px" fill={color} />;

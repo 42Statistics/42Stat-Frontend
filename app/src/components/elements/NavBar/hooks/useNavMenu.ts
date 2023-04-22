@@ -5,9 +5,9 @@ export const useNavMenu = () => {
     { menu: 'Home', text: '홈', path: '/home' },
     { menu: 'Total', text: '전체', path: '/total' },
     {
-      menu: 'EvaluationLogSearch',
+      menu: 'EvalLogSearch',
       text: '평가로그 검색기',
-      path: '/evaluation-log-search',
+      path: '/eval-log-search',
       trailingSpacer: true,
     },
     { menu: 'About', text: '서비스 소개', path: '/about' },

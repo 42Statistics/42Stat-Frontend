@@ -5,6 +5,7 @@ const colors = {
   },
   secondary: {
     default: '#F9837C',
+    dark: '#BF3E37',
     light: '#FFB1B7',
   },
   third: {

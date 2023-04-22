@@ -102,7 +102,7 @@ const FlagLabelLayout = styled.div<{ isPositive: boolean }>`
   background-color: ${({ theme, isPositive }) =>
     isPositive ? theme.colors.third.light : theme.colors.secondary.light};
   color: ${({ theme, isPositive }) =>
-    isPositive ? theme.colors.third.dark : theme.colors.secondary.default};
+    isPositive ? theme.colors.third.dark : theme.colors.secondary.dark};
   padding: 0.5rem 1rem;
   border-radius: 2rem;
   font-weight: ${({ theme }) => theme.fonts.weight.bold};

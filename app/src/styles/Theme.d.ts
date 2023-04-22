@@ -7,6 +7,7 @@ type Colors = {
   };
   secondary: {
     default: string;
+    dark: string;
     light: string;
   };
   third: {

@@ -95,7 +95,6 @@ export const EvalSearchBoard = () => {
   const theme = useTheme();
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    console.log(data);
     setPageNumber(1);
     setFormValue({ ...data });
     search({

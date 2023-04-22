@@ -1,34 +1,43 @@
-import { GetEvalLogsQuery } from '@/__generated__/graphql';
+import { EvalLogs } from '@/__generated__/graphql';
 import { HStack, Spacer, Text, VStack } from '@/components/common';
+import { dateFormatter, snakeCaseFormatter } from '@/utils/formatters';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 
 type EvalLogUnitProps = {
-  data: GetEvalLogsQuery['getEvalLogs'][0];
+  data: EvalLogs;
 };
 
-export const EvalLogUnit = ({ data }: EvalLogUnitProps) => {
+export const EvalLogBox = ({ data }: EvalLogUnitProps) => {
   const theme = useTheme();
-  const { header, correctorReview, correctedsReview } = data; // FIXME: 타입 에러?
+  const { header, correctorReview, correctedsReview } = data;
   return (
     <VStack w="100%" align="start" spacing="2rem">
-      <HStack w="100%">
-        <Text
-          color={theme.colors.primary.default}
-          fontWeight={theme.fonts.weight.bold}
-        >
-          {header.corrector.login}
-        </Text>
-        <Text>님이&nbsp;</Text>
-        <Text
-          color={theme.colors.primary.default}
-          fontWeight={theme.fonts.weight.bold}
-        >
-          {header.teamPreview.name}
-        </Text>
-        <Text>을&nbsp;</Text>
-        <Text fontWeight={theme.fonts.weight.bold}>{header.beginAt}</Text>
-        <Text>에 평가하였습니다</Text>
+      <HStack
+        w="100%"
+        spacing="1rem"
+        css={{ justifyContent: 'flex-start', flexWrap: 'wrap' }}
+      >
+        <HStack css={{ justifyContent: 'flex-start' }}>
+          <Text
+            color={theme.colors.primary.default}
+            fontWeight={theme.fonts.weight.bold}
+          >
+            {header.corrector.login}
+          </Text>
+          <Text>님이&nbsp;</Text>
+          <Text
+            color={theme.colors.primary.default}
+            fontWeight={theme.fonts.weight.bold}
+          >
+            {header.teamPreview.name}
+          </Text>
+          <Text>을&nbsp;</Text>
+          <Text fontWeight={theme.fonts.weight.bold}>
+            {dateFormatter(header.beginAt, 'xl')}
+          </Text>
+          <Text>에 평가하였습니다</Text>
+        </HStack>
         <Spacer />
         <HStack spacing="1rem">
           <Text fontWeight={theme.fonts.weight.bold}>
@@ -78,14 +87,10 @@ type FlagLabelProps = {
   isPositive: boolean;
 };
 
-const getSnakeCase = (str: string) => {
-  return str.split(' ').join('_').toLowerCase();
-};
-
 const FlagLabel = ({ name, isPositive }: FlagLabelProps) => {
   return (
     <FlagLabelLayout isPositive={isPositive}>
-      {getSnakeCase(name)}
+      {snakeCaseFormatter(name)}
     </FlagLabelLayout>
   );
 };

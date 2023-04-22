@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import { DesktopHeader, MobileHeader, TabletHeader } from '../elements/Header';
 import { DesktopNavBar, MobileNavBar, TabletNavBar } from '../elements/NavBar';
 
-export const MainLayout = ({ children }: React.PropsWithChildren) => {
+export const DashboardLayout = ({ children }: React.PropsWithChildren) => {
   return (
     <>
       <Desktop>
@@ -43,5 +43,6 @@ const PageLayout = styled.main`
   align-items: center;
   width: 100%;
   height: 100%;
+  padding: 4rem;
   overflow: auto;
 `;

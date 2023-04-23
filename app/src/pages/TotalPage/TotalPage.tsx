@@ -1,6 +1,6 @@
 import { Dashboard } from '@/components/templates/Dashboard';
 import { Helmet } from 'react-helmet-async';
-import { useTotalPageDashboard } from './hooks/useTotalPageDashboard';
+import { useTotalPageDashboard } from './hooks';
 
 export const TotalPage = () => {
   return (

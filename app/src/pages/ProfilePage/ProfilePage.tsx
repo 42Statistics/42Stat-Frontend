@@ -29,13 +29,13 @@ export const ProfilePage = () => {
         <title>{username} | 42Stat</title>
       </Helmet>
       <Dashboard {...useProfilePageDashboard()} />
-      <Layout>
+      <ProfilePageLayout>
         <ProfileTabBar
           value={selected}
           onChange={setSelected}
           options={options}
         />
-      </Layout>
+      </ProfilePageLayout>
       <Suspense fallback={<Spinner />}>
         {selected === 'General' ? <ProfileGeneralPage /> : <ProfileEvalPage />}
       </Suspense>
@@ -43,7 +43,7 @@ export const ProfilePage = () => {
   );
 };
 
-const Layout = styled.div`
+const ProfilePageLayout = styled.div`
   width: 100%;
   padding: 4rem 3rem;
 `;

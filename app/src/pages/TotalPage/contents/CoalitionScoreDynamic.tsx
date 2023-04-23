@@ -1,8 +1,25 @@
+import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
+import { LineChart } from '@/components/elements/Chart';
 import { numberWithUnitFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
-import { GET_COALITION_SCORE_RECORD } from './CoalitionScoreSum';
-import { LineChart } from '@/components/elements/Chart';
+
+export const GET_COALITION_SCORE_RECORD = gql(/* GraphQL */ `
+  query getCoalitionScoreRecord {
+    getTotalPage {
+      scoreRecords {
+        coalition {
+          id
+          name
+        }
+        records {
+          at
+          value
+        }
+      }
+    }
+  }
+`);
 
 export const CoalitionScoreDynamic = () => {
   const { loading, error, data } = useQuery(GET_COALITION_SCORE_RECORD);

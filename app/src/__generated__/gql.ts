@@ -40,6 +40,7 @@ const documents = {
     "\n  query getAverageFeedbackLength {\n    getTotalPage {\n      averageFeedbackLength\n    }\n  }\n": types.GetAverageFeedbackLengthDocument,
     "\n  query getWhenGoBlackHole {\n    getTotalPage {\n      blackholedCntPerCircles {\n        circle\n        value\n      }\n    }\n  }\n": types.GetWhenGoBlackHoleDocument,
     "\n  query getCoalitionScoreRecord {\n    getTotalPage {\n      scoreRecords {\n        coalition {\n          id\n          name\n        }\n        records {\n          at\n          value\n        }\n      }\n    }\n  }\n": types.GetCoalitionScoreRecordDocument,
+    "\n  query getCoalitionTotalScores {\n    getTotalPage {\n      totalScores {\n        coalition {\n          id\n          name\n        }\n        score\n      }\n    }\n  }\n": types.GetCoalitionTotalScoresDocument,
     "\n  query getCorrectionPointRank {\n    getTotalPage {\n      correctionPointRanks {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n": types.GetCorrectionPointRankDocument,
     "\n  query getEvalCntPerPoints {\n    getTotalPage {\n      evalCntPerPoints {\n        evalCnt\n        point\n      }\n    }\n  }\n": types.GetEvalCntPerPointsDocument,
     "\n  query getCoalitionScoreRank {\n    getTotalPage {\n      monthlyScoreRanks {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n": types.GetCoalitionScoreRankDocument,
@@ -172,6 +173,10 @@ export function gql(source: "\n  query getWhenGoBlackHole {\n    getTotalPage {\
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query getCoalitionScoreRecord {\n    getTotalPage {\n      scoreRecords {\n        coalition {\n          id\n          name\n        }\n        records {\n          at\n          value\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query getCoalitionScoreRecord {\n    getTotalPage {\n      scoreRecords {\n        coalition {\n          id\n          name\n        }\n        records {\n          at\n          value\n        }\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query getCoalitionTotalScores {\n    getTotalPage {\n      totalScores {\n        coalition {\n          id\n          name\n        }\n        score\n      }\n    }\n  }\n"): (typeof documents)["\n  query getCoalitionTotalScores {\n    getTotalPage {\n      totalScores {\n        coalition {\n          id\n          name\n        }\n        score\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

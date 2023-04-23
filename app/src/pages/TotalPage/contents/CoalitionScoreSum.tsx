@@ -5,25 +5,22 @@ import { numberWithUnitFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
 
-export const GET_COALITION_SCORE_RECORD = gql(/* GraphQL */ `
-  query getCoalitionScoreRecord {
+export const GET_COALITION_TOTAL_SCORES = gql(/* GraphQL */ `
+  query getCoalitionTotalScores {
     getTotalPage {
-      scoreRecords {
+      totalScores {
         coalition {
           id
           name
         }
-        records {
-          at
-          value
-        }
+        score
       }
     }
   }
 `);
 
 export const CoalitionScoreSum = () => {
-  const { loading, error, data } = useQuery(GET_COALITION_SCORE_RECORD);
+  const { loading, error, data } = useQuery(GET_COALITION_TOTAL_SCORES);
 
   if (loading) return <Spinner />;
   if (error) {
@@ -33,14 +30,9 @@ export const CoalitionScoreSum = () => {
     return <h1>user not found</h1>;
   }
 
-  const { scoreRecords } = data.getTotalPage;
-  const categories = scoreRecords.map(({ coalition }) => coalition.name);
-  const seriesData = scoreRecords.map(({ records }) =>
-    records.reduce((result, { value }) => {
-      result += value;
-      return result;
-    }, 0),
-  );
+  const { totalScores } = data.getTotalPage;
+  const categories = totalScores.map(({ coalition }) => coalition.name);
+  const seriesData = totalScores.map(({ score }) => score);
 
   const series: ApexAxisChartSeries = [
     {

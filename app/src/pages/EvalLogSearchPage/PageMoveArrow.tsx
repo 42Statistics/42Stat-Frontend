@@ -22,10 +22,15 @@ export const PageMoveArrow = ({
           <BsTriangleFill
             size="12px"
             css={{ transform: 'rotate(-90deg)' }}
-            color={theme.colors.primary.default}
+            color={
+              pageNumber !== 1
+                ? theme.colors.primary.default
+                : theme.colors.mono.gray.light
+            }
           />
         }
         onClick={handleDecrease}
+        disabled={pageNumber === 1}
       />
       <Text color={theme.colors.primary.default}>
         {pageNumber.toLocaleString()} / {maxPageNumber.toLocaleString()}
@@ -35,10 +40,15 @@ export const PageMoveArrow = ({
           <BsTriangleFill
             size="12px"
             css={{ transform: 'rotate(90deg)' }}
-            color={theme.colors.primary.default}
+            color={
+              pageNumber !== maxPageNumber
+                ? theme.colors.primary.default
+                : theme.colors.mono.gray.light
+            }
           />
         }
         onClick={handleIncrease}
+        disabled={pageNumber === maxPageNumber}
       />
     </HStack>
   );

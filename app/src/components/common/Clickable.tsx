@@ -13,5 +13,5 @@ export const Clickable = ({
 
 const StyledClickable = styled.button`
   all: unset;
-  cursor: pointer;
+  cursor: ${({ disabled }) => (!disabled ? 'pointer' : 'default')};
 `;

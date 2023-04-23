@@ -1,14 +1,13 @@
 import { gql } from '@/__generated__';
-import { Divider, Scroll, Spinner, Text, VStack } from '@/components/common';
+import { Divider, Scroll, VStack } from '@/components/common';
 import { AboveTablet, Mobile } from '@/utils/responsive/Device';
 import { useLazyQuery } from '@apollo/client';
 import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { SubmitHandler } from 'react-hook-form';
-import { EvalLogList } from './EvalLogList';
+import { EvalLogSearchBoard } from './EvalLogSearchBoard';
 import { EvalLogSearchHeader } from './EvalLogSearchHeader';
-import { PageMoveArrow } from './PageMoveArrow';
 
 export type FormValue = {
   projectName: string;
@@ -117,27 +116,14 @@ export const EvalLogSearchPage = () => {
           <EvalLogSearchPageLayout>
             <VStack spacing="3rem" justify="start">
               <EvalLogSearchHeader formValue={formValue} onSubmit={onSubmit} />
-              <Divider style={{ width: '100%' }} />
-              {loading && <Spinner />}
-              {error && <h1>{error.message}</h1>}
-              {!loading && data && data.getEvalLogs.length !== 0 && (
-                <>
-                  <EvalLogList list={data.getEvalLogs} />
-                  <PageMoveArrow
-                    handleDecrease={() => {
-                      setPageNumber((cur) => Math.max(cur - 1, 1));
-                    }}
-                    handleIncrease={() => {
-                      setPageNumber((cur) => Math.min(cur + 1, 42));
-                    }}
-                    pageNumber={pageNumber}
-                    maxPageNumber={42}
-                  />
-                </>
-              )}
-              {!loading && data?.getEvalLogs.length === 0 && (
-                <Text>검색 결과가 없습니다.</Text>
-              )}
+              <Divider css={{ width: '100%' }} />
+              <EvalLogSearchBoard
+                loading={loading}
+                error={error}
+                data={data}
+                pageNumber={pageNumber}
+                setPageNumber={setPageNumber}
+              />
             </VStack>
           </EvalLogSearchPageLayout>
         </Scroll>
@@ -148,6 +134,7 @@ export const EvalLogSearchPage = () => {
 };
 
 const EvalLogSearchPageLayout = styled.div`
+  width: 100%;
   background-color: ${({ theme }) => theme.colors.mono.white};
   padding: 5rem;
 `;

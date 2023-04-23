@@ -1,4 +1,4 @@
-import { Divider, HStack, VStack } from '@/components/common';
+import { Divider, HStack, VStack, center } from '@/components/common';
 import { AppLogoTitle } from '@/components/elements/AppLogoTitle';
 import { AppIntroText } from '@/components/elements/Login/AppIntroText';
 import { AboveTablet, Mobile } from '@/utils/responsive/Device';
@@ -51,9 +51,7 @@ export const LoginPage = () => {
 };
 
 const LoginPageLayout = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${center}
   height: 100%;
   background: linear-gradient(
     103.55deg,

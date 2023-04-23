@@ -1,4 +1,4 @@
-import { Avatar, Button, HStack } from '@/components/common';
+import { Avatar, Clickable, HStack } from '@/components/common';
 import { userAtom } from '@/utils/atoms/userAtom';
 import styled from '@emotion/styled';
 import { useAtomValue } from 'jotai';
@@ -18,11 +18,11 @@ export const MobileNavBar = () => {
 
   return (
     <MobileNavBarLayout>
-      <HStack as="ul" w="100%" css={{ justifyContent: 'space-around' }}>
+      <HStack as="ul" w="100%" justify="space-around">
         {options.map((option) => (
           <MobileNavItem key={option.menu} option={option} />
         ))}
-        <Button
+        <Clickable
           element={<Avatar size="2rem" imgUrl={user.imgUrl} />}
           onClick={handleClick}
         />

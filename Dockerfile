@@ -4,3 +4,5 @@ RUN apk add python3 make g++
 EXPOSE 8080
 WORKDIR /app
 COPY entry.sh /tmp/
+COPY entry.prod.sh /tmp/
+

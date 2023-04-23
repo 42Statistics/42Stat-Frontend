@@ -1,30 +1,38 @@
 import { EvalLogs } from '@/__generated__/graphql';
-import { HStack, Spacer, Text, VStack } from '@/components/common';
+import {
+  Clickable,
+  HStack,
+  Spacer,
+  Text,
+  VStack,
+  center,
+} from '@/components/common';
 import { dateFormatter, snakeCaseFormatter } from '@/utils/formatters';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { useNavigate } from 'react-router-dom';
 
-type EvalLogUnitProps = {
-  data: EvalLogs;
-};
+export const EvalLogItem = ({ element }: { element: EvalLogs }) => {
+  const { header, correctorReview, correctedsReview } = element;
 
-export const EvalLogBox = ({ data }: EvalLogUnitProps) => {
   const theme = useTheme();
-  const { header, correctorReview, correctedsReview } = data;
+  const navigate = useNavigate();
+
   return (
     <VStack w="100%" align="start" spacing="2rem">
-      <HStack
-        w="100%"
-        spacing="1rem"
-        css={{ justifyContent: 'flex-start', flexWrap: 'wrap' }}
-      >
-        <HStack css={{ justifyContent: 'flex-start' }}>
-          <Text
-            color={theme.colors.primary.default}
-            fontWeight={theme.fonts.weight.bold}
-          >
-            {header.corrector.login}
-          </Text>
+      <HStack w="100%" spacing="1rem" justify="start" wrap="wrap">
+        <HStack justify="start">
+          <Clickable
+            onClick={() => navigate('/profile/' + header.corrector.login)}
+            element={
+              <Text
+                color={theme.colors.primary.default}
+                fontWeight={theme.fonts.weight.bold}
+              >
+                {header.corrector.login}
+              </Text>
+            }
+          />
           <Text>님이&nbsp;</Text>
           <Text
             color={theme.colors.primary.default}
@@ -50,7 +58,7 @@ export const EvalLogBox = ({ data }: EvalLogUnitProps) => {
         </HStack>
       </HStack>
       <VStack w="100%" align="start" spacing="1rem">
-        <HStack w="100%" css={{ justifyContent: 'flex-start' }}>
+        <HStack w="100%" justify="start">
           <HStack w="13rem">
             <ScoreBox>{correctorReview.mark}%</ScoreBox>
           </HStack>
@@ -58,7 +66,7 @@ export const EvalLogBox = ({ data }: EvalLogUnitProps) => {
             <Text>{correctorReview.review}</Text>
           </div>
         </HStack>
-        <HStack w="100%" css={{ justifyContent: 'flex-start' }}>
+        <HStack w="100%" justify="start">
           <HStack w="13rem">
             <ScoreBox>{correctedsReview.mark} / 5</ScoreBox>
           </HStack>
@@ -72,14 +80,12 @@ export const EvalLogBox = ({ data }: EvalLogUnitProps) => {
 };
 
 const ScoreBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  padding: 0.8rem 1.5rem;
+  ${center}
+  padding: 0.7rem 1.5rem;
   border-radius: 2rem;
   background-color: ${({ theme }) => theme.colors.primary.light};
   color: ${({ theme }) => theme.colors.primary.default};
+  font-weight: ${({ theme }) => theme.fonts.weight.medium};
 `;
 
 type FlagLabelProps = {
@@ -96,9 +102,7 @@ const FlagLabel = ({ name, isPositive }: FlagLabelProps) => {
 };
 
 const FlagLabelLayout = styled.div<{ isPositive: boolean }>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${center}
   background-color: ${({ theme, isPositive }) =>
     isPositive ? theme.colors.third.light : theme.colors.secondary.light};
   color: ${({ theme, isPositive }) =>

@@ -42,7 +42,7 @@ const GET_USER_PROFILE = gql(/* GraphQL */ `
         wallet
         correctionPoint
         scoreInfo {
-          current
+          value
           rankInCoalition
           rankInTotal
         }
@@ -186,7 +186,7 @@ export const UserProfile = () => {
             <td>
               <HStack spacing="1rem">
                 <Text fontSize={theme.fonts.size.h3}>
-                  {`${scoreInfo.current.toLocaleString()}P`}
+                  {`${scoreInfo.value.toLocaleString()}P`}
                 </Text>
                 <HStack spacing="0.5rem">
                   <Text>(</Text>

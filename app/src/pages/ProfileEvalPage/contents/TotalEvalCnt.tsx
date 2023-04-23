@@ -15,7 +15,7 @@ const GET_PERSONAL_TOTAL_EVAL_CNT = gql(/* GraphQL */ `
 
 export const TotalEvalCnt = () => {
   const { loading, error, data } = useQuery(GET_PERSONAL_TOTAL_EVAL_CNT, {
-    variables: { uid: 1 },
+    variables: { uid: 99947 },
   });
 
   if (loading) return <Spinner />;

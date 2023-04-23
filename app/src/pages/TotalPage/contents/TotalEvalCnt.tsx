@@ -4,16 +4,16 @@ import { TextDefault } from '@/components/elements/DashboardContentView/Text';
 import { numberWithUnitFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
 
-const GET_TOTAL_EVAL_CNT = gql(/* GraphQL */ `
-  query getTotalEvalCnt {
+const GET_TOTAL_EVAL_COUNT = gql(/* GraphQL */ `
+  query getTotalEvalCount {
     getTotalPage {
-      totalEvalCnt
+      totalEvalCount
     }
   }
 `);
 
 export const TotalEvalCnt = () => {
-  const { loading, error, data } = useQuery(GET_TOTAL_EVAL_CNT);
+  const { loading, error, data } = useQuery(GET_TOTAL_EVAL_COUNT);
 
   if (loading) return <Spinner />;
   if (error) {
@@ -23,8 +23,8 @@ export const TotalEvalCnt = () => {
     return <h1>user not found</h1>;
   }
 
-  const { totalEvalCnt } = data.getTotalPage;
+  const { totalEvalCount } = data.getTotalPage;
   const unit = '회';
 
-  return <TextDefault text={numberWithUnitFormatter(totalEvalCnt, unit)} />;
+  return <TextDefault text={numberWithUnitFormatter(totalEvalCount, unit)} />;
 };

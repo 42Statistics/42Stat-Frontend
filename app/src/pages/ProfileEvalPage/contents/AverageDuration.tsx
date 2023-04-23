@@ -14,7 +14,7 @@ const GET_AVERAGE_DURATION = gql(/* GraphQL */ `
 export const AverageDuration = () => {
   const { loading, error, data } = useQuery(GET_AVERAGE_DURATION, {
     variables: {
-      uid: 1,
+      uid: 99947,
     },
   });
 

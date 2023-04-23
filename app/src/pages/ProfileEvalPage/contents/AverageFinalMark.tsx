@@ -14,7 +14,7 @@ const GET_AVERAGE_FINAL_MARK = gql(/* GraphQL */ `
 export const AverageFinalMark = () => {
   const { loading, error, data } = useQuery(GET_AVERAGE_FINAL_MARK, {
     variables: {
-      uid: 1,
+      uid: 99947,
     },
   });
 

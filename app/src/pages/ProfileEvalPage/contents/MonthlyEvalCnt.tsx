@@ -14,7 +14,7 @@ const GET_MONTHLY_EVAL_CNT = gql(/* GraphQL */ `
 
 export const MonthlyEvalCnt = () => {
   const { loading, error, data } = useQuery(GET_MONTHLY_EVAL_CNT, {
-    variables: { uid: 1 },
+    variables: { uid: 99947 },
   });
 
   if (loading) return <Spinner />;

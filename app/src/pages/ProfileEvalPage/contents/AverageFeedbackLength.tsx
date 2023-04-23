@@ -16,7 +16,7 @@ export const AverageFeedbackLength = () => {
     GET_PERSONAL_AVERAGE_FEEDBACK_LENGTH,
     {
       variables: {
-        uid: 1,
+        uid: 99947,
       },
     },
   );

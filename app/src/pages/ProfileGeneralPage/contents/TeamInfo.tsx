@@ -1,5 +1,5 @@
 import { gql } from '@/__generated__';
-import { HStack, Spinner } from '@/components/common';
+import { HStack, Scroll, Spinner } from '@/components/common';
 import { dateFormatter } from '@/utils/formatters';
 import { getDayDiff } from '@/utils/getDayDiff';
 import { isDefined } from '@/utils/isDefined';
@@ -41,70 +41,72 @@ export const TeamInfo = () => {
   const { teams } = data.getPersonGeneralPage.teamInfo;
 
   return (
-    <TeamInfoTable>
-      <thead>
-        <tr>
-          <th>과제명</th>
-          <th>시도</th>
-          <th>제출</th>
-          <th>등록일</th>
-          <th>제출일</th>
-          <th>소요 기간</th>
-          <th>점수</th>
-        </tr>
-      </thead>
-      <tbody>
-        {teams
-          .filter(isDefined)
-          .map(
-            ({
-              id,
-              name,
-              occurrence,
-              closedAt,
-              firstCreatedAt,
-              finalMark,
-              isValidated,
-            }) => {
-              return (
-                <tr key={id}>
-                  <td>{name}</td>
-                  <td>{occurrence}번째</td>
-                  <td>
-                    {closedAt != null
-                      ? `${getDayDiff(new Date(), new Date(closedAt))}일 전`
-                      : '-'}
-                  </td>
-                  <td>{dateFormatter(firstCreatedAt, 'lg')}</td>
-                  <td>
-                    {closedAt != null ? dateFormatter(closedAt, 'lg') : '-'}
-                  </td>
-                  <td>
-                    {closedAt != null
-                      ? `${getDayDiff(
-                          new Date(closedAt),
-                          new Date(firstCreatedAt),
-                        )}일`
-                      : '-'}
-                  </td>
-                  <td>
-                    <HStack
-                      style={{
-                        color: isValidated
-                          ? theme.colors.third.dark
-                          : theme.colors.secondary.default,
-                      }}
-                    >
-                      {isValidated ? <AiOutlineCheck /> : <AiOutlineClose />}
-                      {finalMark == null ? 0 : finalMark}
-                    </HStack>
-                  </td>
-                </tr>
-              );
-            },
-          )}
-      </tbody>
-    </TeamInfoTable>
+    <Scroll>
+      <TeamInfoTable>
+        <thead>
+          <tr>
+            <th>과제명</th>
+            <th>시도</th>
+            <th>제출</th>
+            <th>등록일</th>
+            <th>제출일</th>
+            <th>소요 기간</th>
+            <th>점수</th>
+          </tr>
+        </thead>
+        <tbody>
+          {teams
+            .filter(isDefined)
+            .map(
+              ({
+                id,
+                name,
+                occurrence,
+                closedAt,
+                firstCreatedAt,
+                finalMark,
+                isValidated,
+              }) => {
+                return (
+                  <tr key={id}>
+                    <td>{name}</td>
+                    <td>{occurrence}번째</td>
+                    <td>
+                      {closedAt != null
+                        ? `${getDayDiff(new Date(), new Date(closedAt))}일 전`
+                        : '-'}
+                    </td>
+                    <td>{dateFormatter(firstCreatedAt, 'lg')}</td>
+                    <td>
+                      {closedAt != null ? dateFormatter(closedAt, 'lg') : '-'}
+                    </td>
+                    <td>
+                      {closedAt != null
+                        ? `${getDayDiff(
+                            new Date(closedAt),
+                            new Date(firstCreatedAt),
+                          )}일`
+                        : '-'}
+                    </td>
+                    <td>
+                      <HStack
+                        style={{
+                          color: isValidated
+                            ? theme.colors.third.dark
+                            : theme.colors.secondary.default,
+                        }}
+                      >
+                        {isValidated ? <AiOutlineCheck /> : <AiOutlineClose />}
+                        {finalMark == null ? 0 : finalMark}
+                      </HStack>
+                    </td>
+                  </tr>
+                );
+              },
+            )}
+        </tbody>
+      </TeamInfoTable>
+    </Scroll>
   );
 };
 
@@ -112,7 +114,6 @@ const TeamInfoTable = styled.table`
   display: block;
   width: 100%;
   max-height: 40rem;
-  overflow-y: scroll;
 
   thead,
   tbody tr {

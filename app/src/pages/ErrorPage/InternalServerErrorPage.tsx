@@ -1,5 +1,5 @@
 import {
-  Button,
+  Clickable,
   HStack,
   SecondaryText,
   Text,
@@ -33,7 +33,7 @@ export const InternalServerErrorPage = () => {
           width="100px"
           src="https://data1.pokemonkorea.co.kr/newdata/pokedex/full/039301.png"
         />
-        <Button
+        <Clickable
           onClick={() => navigate('/')}
           element={<Text>홈으로 돌아가기</Text>}
         />

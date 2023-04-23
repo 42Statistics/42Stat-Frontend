@@ -8,6 +8,7 @@ export * from './Spacer';
 export * from './Avatar';
 
 /* Component that extends HTML element */
+export * from './Clickable';
 export * from './Button';
 export * from './Input';
 

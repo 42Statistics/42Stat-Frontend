@@ -1,4 +1,4 @@
-import { Button, HStack, Spacer } from '@/components/common';
+import { Clickable, HStack, Spacer } from '@/components/common';
 import { ProfileMenu, ProfileMenuOption } from '@/utils/types/ProfileMenu';
 import styled from '@emotion/styled';
 
@@ -18,7 +18,7 @@ export const ProfileTabBar = ({
     <ProfileTabBarLayout>
       <HStack>
         {options.map((option, idx) => (
-          <Button
+          <Clickable
             key={idx}
             element={
               <ProfileTabItemLayout isFocused={option.menu === value}>

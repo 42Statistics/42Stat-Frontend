@@ -1,4 +1,4 @@
-export type ProfileMenu = 'General' | 'Evaluation';
+export type ProfileMenu = 'General' | 'Eval';
 
 export type ProfileMenuOption = {
   menu: ProfileMenu;

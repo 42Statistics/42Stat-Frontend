@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 type CenterProps = Partial<{
@@ -5,10 +6,14 @@ type CenterProps = Partial<{
   h: string;
 }>;
 
-export const Center = styled.div<CenterProps>`
+export const center = css`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const Center = styled.div<CenterProps>`
+  ${center}
   width: ${({ w = 'auto' }) => w};
   height: ${({ h = 'auto' }) => h};
 `;

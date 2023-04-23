@@ -1,37 +1,26 @@
 import { Spinner } from '@/components/common';
-import {
-  DesktopDashboard,
-  MobileDashboard,
-} from '@/components/templates/Dashboard';
-import { TabletDashboard } from '@/components/templates/Dashboard/TabletDashboard';
+import { Dashboard } from '@/components/templates/Dashboard';
 import { lazyImport } from '@/utils/lazyImport';
-import { Desktop, Mobile, Tablet } from '@/utils/responsive/Device';
 import { ProfileMenu } from '@/utils/types/ProfileMenu';
 import styled from '@emotion/styled';
 import { Suspense, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import { ProfileTabBar } from './ProfileTabBar';
-import { useProfilePage } from './hooks/useProfilePage';
-import { dashboardContents } from './hooks/dashboardContents';
+import { useProfilePage, useProfilePageDashboard } from './hooks';
 
 const { ProfileGeneralPage } = lazyImport(
   () => import('@/pages/ProfileGeneralPage'),
   'ProfileGeneralPage',
 );
-const { ProfileEvaluationPage } = lazyImport(
-  () => import('@/pages/ProfileEvaluationPage'),
-  'ProfileEvaluationPage',
+const { ProfileEvalPage } = lazyImport(
+  () => import('@/pages/ProfileEvalPage'),
+  'ProfileEvalPage',
 );
 
 export const ProfilePage = () => {
   const { username } = useParams();
-  const {
-    options,
-    desktopDashboardRows,
-    tabletDashboardRows,
-    mobileDashboardRows,
-  } = useProfilePage();
+  const { options } = useProfilePage();
   const [selected, setSelected] = useState<ProfileMenu>('General');
 
   return (
@@ -39,43 +28,22 @@ export const ProfilePage = () => {
       <Helmet>
         <title>{username} | 42Stat</title>
       </Helmet>
-      <Desktop>
-        <DesktopDashboard
-          rows={desktopDashboardRows}
-          contents={dashboardContents}
-        />
-      </Desktop>
-      <Tablet>
-        <TabletDashboard
-          rows={tabletDashboardRows}
-          contents={dashboardContents}
-        />
-      </Tablet>
-      <Mobile>
-        <MobileDashboard
-          rows={mobileDashboardRows}
-          contents={dashboardContents}
-        />
-      </Mobile>
-      <ProfileTabBarLayout>
+      <Dashboard {...useProfilePageDashboard()} />
+      <ProfilePageLayout>
         <ProfileTabBar
           value={selected}
           onChange={setSelected}
           options={options}
         />
-      </ProfileTabBarLayout>
+      </ProfilePageLayout>
       <Suspense fallback={<Spinner />}>
-        {selected === 'General' ? (
-          <ProfileGeneralPage />
-        ) : (
-          <ProfileEvaluationPage />
-        )}
+        {selected === 'General' ? <ProfileGeneralPage /> : <ProfileEvalPage />}
       </Suspense>
     </>
   );
 };
 
-const ProfileTabBarLayout = styled.div`
+const ProfilePageLayout = styled.div`
   width: 100%;
   padding: 4rem 3rem;
 `;

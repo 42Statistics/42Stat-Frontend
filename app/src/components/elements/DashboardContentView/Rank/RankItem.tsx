@@ -30,11 +30,7 @@ export const RankItem = ({ rank, showImg, item, unit }: RankItemProps) => {
           위
         </Text>
       </HStack>
-      <HStack
-        w="100%"
-        spacing="1rem"
-        style={{ justifyContent: 'flex-start', flexWrap: 'wrap' }}
-      >
+      <HStack w="100%" spacing="1rem" justify="start" wrap="wrap">
         <Text
           color={color}
           fontSize={theme.fonts.size.h3}

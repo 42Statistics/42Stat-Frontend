@@ -1,4 +1,4 @@
-import { Button, VStack } from '@/components/common';
+import { Clickable, VStack } from '@/components/common';
 import { AppLogoTitleButton } from '@/components/elements/AppLogoTitleButton';
 import { userAtom } from '@/utils/atoms/userAtom';
 import { useAtomValue } from 'jotai';
@@ -18,7 +18,7 @@ export const AboveTabletNavBar = () => {
   return (
     <VStack h="100%" spacing="6rem">
       <AppLogoTitleButton />
-      <Button
+      <Clickable
         onClick={handleClick}
         element={
           <NavProfile

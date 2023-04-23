@@ -1,5 +1,7 @@
-import { PropsWithChildren } from 'react';
+import styled from '@emotion/styled';
 
-export const Scroll = ({ children }: PropsWithChildren) => {
-  return <div css={{ overflowY: 'auto', height: '100%' }}>{children}</div>;
-};
+export const Scroll = styled.div`
+  overflow-y: auto;
+  width: 100%;
+  height: 100%;
+`;

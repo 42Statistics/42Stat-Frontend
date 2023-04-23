@@ -1,4 +1,4 @@
-import { Button, HStack } from '@/components/common';
+import { Clickable, HStack } from '@/components/common';
 import { UserSearchBar } from '@/components/elements/SearchBar';
 import { isNavBarOpenAtom } from '@/utils/atoms/isNavBarOpenAtom';
 import styled from '@emotion/styled';
@@ -11,7 +11,7 @@ export const TabletHeader = () => {
   return (
     <TabletHeaderLayout>
       <HStack spacing="2.5rem">
-        <Button
+        <Clickable
           onClick={() => setIsNavBarOpen((cur) => !cur)}
           element={<RxHamburgerMenu size="20px" />}
         />

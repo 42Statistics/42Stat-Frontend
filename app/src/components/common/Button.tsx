@@ -1,14 +1,24 @@
 import styled from '@emotion/styled';
+import { Clickable } from './Clickable';
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  element: React.ReactNode;
+  text: string;
 };
 
-export const Button = ({ element, ...propsExceptElement }: ButtonProps) => {
-  return <StyledButton {...propsExceptElement}>{element}</StyledButton>;
+export const Button = ({ text, ...propsExceptText }: ButtonProps) => {
+  return (
+    <Clickable element={<ButtonView text={text} />} {...propsExceptText} />
+  );
 };
 
-const StyledButton = styled.button`
-  all: unset;
-  cursor: pointer;
+const ButtonView = ({ text }: { text: string }) => {
+  return <ButtonViewLayout>{text}</ButtonViewLayout>;
+};
+
+const ButtonViewLayout = styled.div`
+  padding: 0.8rem 2rem;
+  border-radius: 3rem;
+  background-color: ${({ theme }) => theme.colors.primary.default};
+  color: ${({ theme }) => theme.colors.mono.white};
+  font-weight: ${({ theme }) => theme.fonts.weight.medium};
 `;

@@ -1,4 +1,4 @@
-import { Button } from '@/components/common';
+import { Clickable } from '@/components/common';
 import { AppLogoTitle } from '@/components/elements/AppLogoTitle';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,5 +9,7 @@ export const AppLogoTitleButton = () => {
     navigate('/home');
   };
 
-  return <Button onClick={handleClick} element={<AppLogoTitle size="sm" />} />;
+  return (
+    <Clickable onClick={handleClick} element={<AppLogoTitle size="sm" />} />
+  );
 };

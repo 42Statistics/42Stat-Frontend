@@ -1,5 +1,9 @@
 import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
+import {
+  ApolloBadRequest,
+  ApolloNotFound,
+} from '@/components/elements/DashboardContentView';
 import { Rank } from '@/components/elements/DashboardContentView/Rank';
 import { BelowTablet, Desktop } from '@/utils/responsive/Device';
 import { RankItemType } from '@/utils/types/Rank';
@@ -24,12 +28,8 @@ export const CorrectionPointRanks = () => {
   const { loading, error, data } = useQuery(GET_CORRECTION_POINT_RANK);
 
   if (loading) return <Spinner />;
-  if (error) {
-    return <h1>{error.message}</h1>;
-  }
-  if (!data) {
-    return <h1>user not found</h1>;
-  }
+  if (error) return <ApolloBadRequest msg={error.message} />;
+  if (!data) return <ApolloNotFound />;
 
   const { correctionPointRanks } = data.getTotalPage;
   const unit = '개';

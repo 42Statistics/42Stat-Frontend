@@ -10,6 +10,7 @@ import { useTheme } from '@emotion/react';
 import { useState } from 'react';
 import { ProjectInfoTable } from './ProjectInfoTable';
 import { ProjectInfoTitle } from './ProjectInfoTitle';
+import { ApolloBadRequest, ApolloNotFound } from '@/components/elements/DashboardContentView';
 
 const GET_PROJECT_INFO = gql(/* GraphQL */ `
   query GetProjectInfo($projectName: String!) {
@@ -49,12 +50,8 @@ export const ProjectInfo = () => {
   };
 
   if (loading) return <Spinner />;
-  if (error) {
-    return <h1>{error.message}</h1>;
-  }
-  if (!data) {
-    return <h1>project not found</h1>;
-  }
+  if (error) return <ApolloBadRequest msg={error.message} />;
+  if (!data) return <ApolloNotFound />;
 
   const {
     name,

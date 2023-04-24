@@ -1,6 +1,10 @@
 import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
 import { BarChart } from '@/components/elements/Chart';
+import {
+  ApolloBadRequest,
+  ApolloNotFound,
+} from '@/components/elements/DashboardContentView';
 import { useQuery } from '@apollo/client';
 
 const GET_LAST_EXAM_RESULT = gql(/* GraphQL */ `
@@ -19,12 +23,8 @@ export const LastExamResult = () => {
   const { loading, error, data } = useQuery(GET_LAST_EXAM_RESULT);
 
   if (loading) return <Spinner />;
-  if (error) {
-    return <h1>{error.message}</h1>;
-  }
-  if (!data) {
-    return <h1>user not found</h1>;
-  }
+  if (error) return <ApolloBadRequest msg={error.message} />;
+  if (!data) return <ApolloNotFound />;
 
   const { lastExamResult } = data.getHomePage;
   const categories = lastExamResult.map(({ rank }) => rank);

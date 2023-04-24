@@ -9,6 +9,10 @@ import {
   VStack,
 } from '@/components/common';
 import { CoalitionMark } from '@/components/elements/CoalitionMark';
+import {
+  ApolloBadRequest,
+  ApolloNotFound,
+} from '@/components/elements/DashboardContentView';
 import { LevelBar } from '@/components/elements/LevelBar';
 import { dDayFormatter, dateFormatter } from '@/utils/formatters';
 import { getDayDiff } from '@/utils/getDayDiff';
@@ -57,14 +61,9 @@ export const UserProfile = () => {
   const { loading, error, data } = useQuery(GET_USER_PROFILE);
 
   if (loading) return <Spinner />;
+  if (error) return <ApolloBadRequest msg={error.message} />;
+  if (!data) return <ApolloNotFound />;
 
-  if (error) {
-    return <h1>{error.message}</h1>;
-  }
-
-  if (!data) {
-    return <h1>user not found</h1>;
-  }
   const {
     name,
     login,

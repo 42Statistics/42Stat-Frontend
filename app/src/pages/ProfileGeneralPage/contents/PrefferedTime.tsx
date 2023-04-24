@@ -1,5 +1,9 @@
 import { gql } from '@/__generated__';
 import { Spinner, Text, VStack } from '@/components/common';
+import {
+  ApolloBadRequest,
+  ApolloNotFound,
+} from '@/components/elements/DashboardContentView';
 import { percentFormatter } from '@/utils/formatters/percentFormatter';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
@@ -25,12 +29,9 @@ export const PrefferedTime = () => {
   const theme = useTheme();
 
   if (loading) return <Spinner />;
-  if (error) {
-    return <h1>{error.message}</h1>;
-  }
-  if (!data) {
-    return <h1>user not found</h1>;
-  }
+  if (error) return <ApolloBadRequest msg={error.message} />;
+  if (!data) return <ApolloNotFound />;
+
   const { morning, daytime, evening, night } =
     data.getPersonGeneralPage.logtimeInfo.preferredTime;
   const total = morning + daytime + evening + night;

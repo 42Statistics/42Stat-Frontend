@@ -1,6 +1,10 @@
 import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
 import { DonutChart } from '@/components/elements/Chart';
+import {
+  ApolloBadRequest,
+  ApolloNotFound,
+} from '@/components/elements/DashboardContentView';
 import { numberWithUnitFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
@@ -20,12 +24,8 @@ export const BlackholedCntPerCircles = () => {
   const { loading, error, data } = useQuery(GET_WHEN_GO_BLACKHOLE);
 
   if (loading) return <Spinner />;
-  if (error) {
-    return <h1>{error.message}</h1>;
-  }
-  if (!data) {
-    return <h1>user not found</h1>;
-  }
+  if (error) return <ApolloBadRequest msg={error.message} />;
+  if (!data) return <ApolloNotFound />;
 
   const { blackholedCntPerCircles } = data.getTotalPage;
 

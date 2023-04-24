@@ -1,6 +1,11 @@
 import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
+import {
+  ApolloBadRequest,
+  ApolloNotFound,
+} from '@/components/elements/DashboardContentView';
 import { TextDefault } from '@/components/elements/DashboardContentView/Text';
+import { numberWithUnitFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
 
 const GET_PERSONAL_AVERAGE_FEEDBACK_LENGTH = gql(/* GraphQL */ `
@@ -22,14 +27,13 @@ export const AverageFeedbackLength = () => {
   );
 
   if (loading) return <Spinner />;
-  if (error) {
-    return <h1>{error.message}</h1>;
-  }
-  if (!data) {
-    return <h1>user not found</h1>;
-  }
+  if (error) return <ApolloBadRequest msg={error.message} />;
+  if (!data) return <ApolloNotFound />;
 
   const { averageFeedbackLength } = data.getPersonalEvalPage;
+  const unit = '자';
 
-  return <TextDefault text={`${averageFeedbackLength}자`} />;
+  return (
+    <TextDefault text={numberWithUnitFormatter(averageFeedbackLength, unit)} />
+  );
 };

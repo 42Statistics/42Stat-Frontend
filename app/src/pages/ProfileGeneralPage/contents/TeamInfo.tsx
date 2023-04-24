@@ -1,5 +1,9 @@
 import { gql } from '@/__generated__';
 import { HStack, Scroll, Spinner } from '@/components/common';
+import {
+  ApolloBadRequest,
+  ApolloNotFound,
+} from '@/components/elements/DashboardContentView';
 import { dateFormatter } from '@/utils/formatters';
 import { getDayDiff } from '@/utils/getDayDiff';
 import { isDefined } from '@/utils/isDefined';
@@ -31,12 +35,8 @@ export const TeamInfo = () => {
   const theme = useTheme();
 
   if (loading) return <Spinner />;
-  if (error) {
-    return <h1>{error.message}</h1>;
-  }
-  if (!data) {
-    return <h1>user not found</h1>;
-  }
+  if (error) return <ApolloBadRequest msg={error.message} />;
+  if (!data) return <ApolloNotFound />;
 
   const { teams } = data.getPersonGeneralPage.teamInfo;
 

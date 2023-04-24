@@ -16,6 +16,7 @@ export const BarChart = ({
   const barChartOptions: ApexCharts.ApexOptions = {
     plotOptions: {
       bar: {
+        borderRadius: 4,
         dataLabels: {
           position: 'top',
         },
@@ -34,7 +35,7 @@ export const BarChart = ({
     },
     fill: {
       type: 'solid',
-      opacity: 0.1,
+      opacity: 0.4,
     },
   };
 

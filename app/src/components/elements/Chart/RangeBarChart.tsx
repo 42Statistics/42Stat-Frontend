@@ -15,13 +15,18 @@ export const RangeBarChart = ({
   const theme = useTheme();
 
   const rangeBarChartOptions: ApexCharts.ApexOptions = {
+    plotOptions: {
+      bar: {
+        borderRadius: 4,
+      },
+    },
     stroke: {
       width: 1.5,
     },
     colors: [theme.colors.primary.default],
     fill: {
       type: 'solid',
-      colors: [theme.colors.primary.light],
+      opacity: 0.4,
     },
     responsive: [],
   };

@@ -41,10 +41,15 @@ type Fonts = {
     caption: string;
   };
   weight: {
+    thin: number;
+    extralight: number;
     light: number;
     regular: number;
     medium: number;
+    semibold: number;
     bold: number;
+    extrabold: number;
+    black: number;
   };
 };
 

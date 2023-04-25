@@ -1,7 +1,7 @@
 import { useTheme } from '@emotion/react';
 import { merge } from 'lodash';
 import ReactApexChart from 'react-apexcharts';
-import { defaultOptions } from './options';
+import { defaultOptions } from '../options';
 
 type RangeBarChartProps = {
   series: ApexAxisChartSeries;

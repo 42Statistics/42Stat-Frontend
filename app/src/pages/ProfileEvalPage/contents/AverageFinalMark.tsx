@@ -4,8 +4,7 @@ import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
-import { TextDefault } from '@/components/elements/DashboardContentView/Text';
-import { numberWithUnitFormatter } from '@/utils/formatters';
+import { NumberDefault } from '@/components/elements/DashboardContentView/Text';
 import { useQuery } from '@apollo/client';
 
 const GET_AVERAGE_FINAL_MARK = gql(/* GraphQL */ `
@@ -30,5 +29,5 @@ export const AverageFinalMark = () => {
   const { averageFinalMark } = data.getPersonalEvalPage;
   const unit = '점';
 
-  return <TextDefault text={numberWithUnitFormatter(averageFinalMark, unit)} />;
+  return <NumberDefault number={averageFinalMark} unit={unit} />;
 };

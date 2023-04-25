@@ -36,9 +36,9 @@ const MobileDashboardRowLayout = styled.div<MobileDashboardRowLayoutProps>`
 const getHeightByCol = (col: MobileDashboardColSize) => {
   switch (col) {
     case 2:
-      return '15rem';
+      return '10rem';
     case 1:
-      return '60rem';
+      return '40rem';
     default:
       throw new Error('Invalid col size');
   }

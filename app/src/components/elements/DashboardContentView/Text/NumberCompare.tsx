@@ -1,9 +1,8 @@
 import { HStack, Text } from '@/components/common';
-import { numberWithUnitFormatter } from '@/utils/formatters';
 import { useTheme } from '@emotion/react';
 import { BsTriangleFill } from 'react-icons/bs';
 
-type TextCompareProps = {
+type NumberCompareProps = {
   curr: number;
   last: number;
   unit: string;
@@ -17,7 +16,7 @@ const Arrow = ({ direction }: ArrowType) => {
   const theme = useTheme();
   return (
     <BsTriangleFill
-      size="18px"
+      size="12px"
       color={
         direction === 'up'
           ? theme.colors.secondary.default
@@ -30,15 +29,16 @@ const Arrow = ({ direction }: ArrowType) => {
   );
 };
 
-export const TextCompare = ({ curr, last, unit }: TextCompareProps) => {
+export const NumberCompare = ({ curr, last, unit }: NumberCompareProps) => {
   const theme = useTheme();
   const diff = curr - last;
 
   return (
-    <HStack w="100%" h="100%" spacing="2rem">
-      <Text fontSize={theme.fonts.size.h3}>
-        {numberWithUnitFormatter(curr, unit)}
-      </Text>
+    <HStack h="100%" spacing="2rem">
+      <HStack align="baseline">
+        <Text fontSize={theme.fonts.size.h3}>{curr.toLocaleString()}</Text>
+        <Text>{unit}</Text>
+      </HStack>
       <HStack spacing="0.5rem">
         <Arrow direction={diff >= 0 ? 'up' : 'down'} />
         <Text

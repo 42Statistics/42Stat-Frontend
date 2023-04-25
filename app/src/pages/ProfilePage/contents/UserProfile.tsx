@@ -14,13 +14,17 @@ import {
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
 import { LevelBar } from '@/components/elements/LevelBar';
-import { dDayFormatter, dateFormatter } from '@/utils/formatters';
+import {
+  dDayFormatter,
+  dateFormatter,
+  numberWithUnitFormatter,
+} from '@/utils/formatters';
 import { getDayDiff } from '@/utils/getDayDiff';
 import { getTitleWithLogin } from '@/utils/getTitleWithLogin';
 import { titleCase } from '@/utils/titleCase';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
-import { capitalize, truncate } from 'lodash';
+import { truncate } from 'lodash';
 
 const GET_USER_PROFILE = gql(/* GraphQL */ `
   query GetUserProfile {
@@ -93,15 +97,15 @@ export const UserProfile = () => {
         <VStack align="inherit">
           <Text
             color={theme.colors.third.default}
-            fontSize={theme.fonts.size.h2}
+            fontSize={theme.fonts.size.h3}
             fontWeight={theme.fonts.weight.bold}
           >
-            {capitalize(grade)}
+            {titleCase(grade)}
           </Text>
           <HStack spacing="2rem">
             <Text
               fontSize={theme.fonts.size.h1}
-              fontWeight={theme.fonts.weight.bold}
+              fontWeight={theme.fonts.weight.extrabold}
             >
               {titleCase(name)}
             </Text>
@@ -147,10 +151,9 @@ export const UserProfile = () => {
             <td>
               <HStack spacing="1rem">
                 {dateFormatter(pooledAt, 'lg')}
-                <Text
-                  fontSize={theme.fonts.size.h3}
-                  color={theme.colors.primary.default}
-                >{`(${dDayFormatter(dayDiffPooledAtFromNow)})`}</Text>
+                <Text color={theme.colors.primary.default}>{`(${dDayFormatter(
+                  dayDiffPooledAtFromNow,
+                )})`}</Text>
               </HStack>
             </td>
           </tr>
@@ -184,9 +187,7 @@ export const UserProfile = () => {
             <td>코알리숑 스코어</td>
             <td>
               <HStack spacing="1rem">
-                <Text fontSize={theme.fonts.size.h3}>
-                  {`${scoreInfo.value.toLocaleString()}P`}
-                </Text>
+                <Text>{numberWithUnitFormatter(scoreInfo.value, 'P')}</Text>
                 <HStack spacing="0.5rem">
                   <Text>(</Text>
                   <CoalitionMark width="14px" coalition={coalition} />

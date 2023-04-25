@@ -4,8 +4,7 @@ import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
-import { TextDefault } from '@/components/elements/DashboardContentView/Text';
-import { numberWithUnitFormatter } from '@/utils/formatters';
+import { NumberDefault } from '@/components/elements/DashboardContentView/Text';
 import { useQuery } from '@apollo/client';
 
 const GET_AVERAGE_DURATION = gql(/* GraphQL */ `
@@ -30,5 +29,5 @@ export const AverageDuration = () => {
   const { averageDuration } = data.getPersonalEvalPage;
   const unit = '분';
 
-  return <TextDefault text={numberWithUnitFormatter(averageDuration, unit)} />;
+  return <NumberDefault number={averageDuration} unit={unit} />;
 };

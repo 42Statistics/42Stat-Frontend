@@ -4,8 +4,7 @@ import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
-import { TextDefault } from '@/components/elements/DashboardContentView/Text';
-import { numberWithUnitFormatter } from '@/utils/formatters';
+import { NumberDefault } from '@/components/elements/DashboardContentView/Text';
 import { useQuery } from '@apollo/client';
 
 const GET_CURR_MONTH_BLACKHOLED_CNT = gql(/* GraphQL */ `
@@ -27,7 +26,5 @@ export const CurrMonthBlackholedCnt = () => {
   const { currMonthBlackholedCnt } = data.getHomePage;
   const unit = '명';
 
-  return (
-    <TextDefault text={numberWithUnitFormatter(currMonthBlackholedCnt, unit)} />
-  );
+  return <NumberDefault number={currMonthBlackholedCnt} unit={unit} />;
 };

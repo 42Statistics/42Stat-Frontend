@@ -13,8 +13,8 @@ export const LevelBar = (props: LevelBarProps) => {
 };
 
 const LevelBarLayout = styled.div`
-  width: 20rem;
-  height: 2rem;
+  width: 15rem;
+  height: 1.2rem;
   background-color: ${({ theme }) => theme.colors.primary.light};
   border-radius: 2rem;
 `;

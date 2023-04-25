@@ -1,6 +1,6 @@
-import { css, Theme } from '@emotion/react';
+import { css } from '@emotion/react';
 
-export const global = (theme: Theme) => css`
+export const global = () => css`
   @font-face {
     font-family: 'Noto Sans KR';
     src: url('/fonts/NotoSansKR-Light.otf');
@@ -26,6 +26,7 @@ export const global = (theme: Theme) => css`
   }
 
   html {
+    // FIXME: 이렇게 하는거 맞나? 휴대폰으로 보면 다 뭉개지던데.
     font-size: 62.5%; // 1rem = 10px
   }
 

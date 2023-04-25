@@ -1,6 +1,7 @@
 import {
   Button,
   HStack,
+  Input,
   PrimaryText,
   Spacer,
   VStack,
@@ -27,15 +28,15 @@ export const EvalLogSearchHeader = ({
       <HStack as="ul" w="100%" spacing="2rem" justify="start" wrap="wrap">
         <HStack as="li" spacing="1rem">
           <PrimaryText>과제명</PrimaryText>
-          <StyledInput {...register('projectName')} />
+          <EvalLogSearchInput {...register('projectName')} />
         </HStack>
         <HStack as="li" spacing="1rem">
           <PrimaryText>FROM</PrimaryText>
-          <StyledInput {...register('corrector')} />
+          <EvalLogSearchInput {...register('corrector')} />
         </HStack>
         <HStack as="li" spacing="1rem">
           <PrimaryText>TO</PrimaryText>
-          <StyledInput {...register('corrected')} />
+          <EvalLogSearchInput {...register('corrected')} />
         </HStack>
         <HStack as="li" spacing="1rem">
           <PrimaryText>플래그</PrimaryText>
@@ -69,7 +70,7 @@ export const EvalLogSearchHeader = ({
   );
 };
 
-const StyledInput = styled.input`
+const EvalLogSearchInput = styled(Input)`
   all: unset;
   padding: 0.7rem 2rem;
   border-radius: 2rem;

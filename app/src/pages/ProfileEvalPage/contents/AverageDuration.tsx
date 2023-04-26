@@ -1,6 +1,10 @@
 import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
-import { TextDefault } from '@/components/elements/DashboardContentView/Text';
+import {
+  ApolloBadRequest,
+  ApolloNotFound,
+} from '@/components/elements/DashboardContentView';
+import { NumberDefault } from '@/components/elements/DashboardContentView/Text';
 import { useQuery } from '@apollo/client';
 
 const GET_AVERAGE_DURATION = gql(/* GraphQL */ `
@@ -19,14 +23,11 @@ export const AverageDuration = () => {
   });
 
   if (loading) return <Spinner />;
-  if (error) {
-    return <h1>{error.message}</h1>;
-  }
-  if (!data) {
-    return <h1>user not found</h1>;
-  }
+  if (error) return <ApolloBadRequest msg={error.message} />;
+  if (!data) return <ApolloNotFound />;
 
   const { averageDuration } = data.getPersonalEvalPage;
+  const unit = '분';
 
-  return <TextDefault text={`${averageDuration}분`} />;
+  return <NumberDefault number={averageDuration} unit={unit} />;
 };

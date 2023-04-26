@@ -36,9 +36,9 @@ const DesktopDashboardRowLayout = styled.div<DesktopDashboardRowLayoutProps>`
 const getHeightByCol = (col: DesktopDashboardColSize) => {
   switch (col) {
     case 4:
-      return '16rem';
+      return '14rem';
     case 3:
-      return '21rem';
+      return '18rem';
     default:
       throw new Error('Invalid col size');
   }

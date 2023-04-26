@@ -1,9 +1,12 @@
 import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
 import { LineChart } from '@/components/elements/Chart';
-import { userAtom } from '@/utils/atoms/userAtom';
+import {
+  ApolloBadRequest,
+  ApolloNotFound,
+} from '@/components/elements/DashboardContentView';
 import { useQuery } from '@apollo/client';
-import { useAtomValue } from 'jotai';
+import { useTheme } from '@emotion/react';
 
 const GET_LEVEL_GRAPH = gql(/* GraphQL */ `
   query getLevelGraph {
@@ -19,15 +22,10 @@ const GET_LEVEL_GRAPH = gql(/* GraphQL */ `
 
 export const LevelGraph = () => {
   const { loading, error, data } = useQuery(GET_LEVEL_GRAPH);
-  const user = useAtomValue(userAtom);
 
   if (loading) return <Spinner />;
-  if (error) {
-    return <h1>{error.message}</h1>;
-  }
-  if (!data) {
-    return <h1>user not found</h1>;
-  }
+  if (error) return <ApolloBadRequest msg={error.message} />;
+  if (!data) return <ApolloNotFound />;
 
   const { levelGraphs } = data.getPersonGeneralPage;
   const userLevelSeries = levelGraphs.map(({ date, userLevel }) => ({
@@ -57,7 +55,10 @@ type LevelGraphChartProps = {
 };
 
 const LevelGraphChart = ({ series }: LevelGraphChartProps) => {
+  const theme = useTheme();
+
   const options: ApexCharts.ApexOptions = {
+    colors: [theme.colors.primary.default, theme.colors.secondary.default],
     xaxis: {
       type: 'datetime',
       labels: {

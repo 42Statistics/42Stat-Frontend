@@ -1,6 +1,10 @@
 import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
-import { TextCompare } from '@/components/elements/DashboardContentView/Text';
+import {
+  ApolloBadRequest,
+  ApolloNotFound,
+} from '@/components/elements/DashboardContentView';
+import { NumberCompare } from '@/components/elements/DashboardContentView/Text';
 import { useQuery } from '@apollo/client';
 
 const GET_MONTHLY_EVAL_CNT = gql(/* GraphQL */ `
@@ -18,14 +22,12 @@ export const MonthlyEvalCnt = () => {
   });
 
   if (loading) return <Spinner />;
-  if (error) {
-    return <h1>{error.message}</h1>;
-  }
-  if (!data) {
-    return <h1>user not found</h1>;
-  }
+  if (error) return <ApolloBadRequest msg={error.message} />;
+  if (!data) return <ApolloNotFound />;
 
   const { currMonthCount, lastMonthCount } = data.getPersonalEvalPage;
 
-  return <TextCompare curr={currMonthCount} last={lastMonthCount} unit="회" />;
+  return (
+    <NumberCompare curr={currMonthCount} last={lastMonthCount} unit="회" />
+  );
 };

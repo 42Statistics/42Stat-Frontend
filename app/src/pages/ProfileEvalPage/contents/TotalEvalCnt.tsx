@@ -1,7 +1,10 @@
 import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
-import { TextDefault } from '@/components/elements/DashboardContentView/Text';
-import { numberWithUnitFormatter } from '@/utils/formatters';
+import {
+  ApolloBadRequest,
+  ApolloNotFound,
+} from '@/components/elements/DashboardContentView';
+import { NumberDefault } from '@/components/elements/DashboardContentView/Text';
 import { useQuery } from '@apollo/client';
 
 // TODO: getPersonGeneralPage -> getPersonEvaluationPage
@@ -19,15 +22,11 @@ export const TotalEvalCnt = () => {
   });
 
   if (loading) return <Spinner />;
-  if (error) {
-    return <h1>{error.message}</h1>;
-  }
-  if (!data) {
-    return <h1>user not found</h1>;
-  }
+  if (error) return <ApolloBadRequest msg={error.message} />;
+  if (!data) return <ApolloNotFound />;
 
   const { totalCount } = data.getPersonalEvalPage;
   const unit = '회';
 
-  return <TextDefault text={numberWithUnitFormatter(totalCount, unit)} />;
+  return <NumberDefault number={totalCount} unit={unit} />;
 };

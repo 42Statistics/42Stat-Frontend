@@ -1,6 +1,10 @@
 import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
 import { LineChart } from '@/components/elements/Chart';
+import {
+  ApolloBadRequest,
+  ApolloNotFound,
+} from '@/components/elements/DashboardContentView';
 import { numberWithUnitFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
 
@@ -25,12 +29,8 @@ export const CoalitionScoreDynamic = () => {
   const { loading, error, data } = useQuery(GET_COALITION_SCORE_RECORD);
 
   if (loading) return <Spinner />;
-  if (error) {
-    return <h1>{error.message}</h1>;
-  }
-  if (!data) {
-    return <h1>user not found</h1>;
-  }
+  if (error) return <ApolloBadRequest msg={error.message} />;
+  if (!data) return <ApolloNotFound />;
 
   const { scoreRecords } = data.getTotalPage;
   const series = scoreRecords.map(({ coalition, records }) => {

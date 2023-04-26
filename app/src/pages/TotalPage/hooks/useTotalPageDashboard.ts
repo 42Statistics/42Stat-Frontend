@@ -13,12 +13,10 @@ import {
   CoalitionScoreDynamic,
   CoalitionScoreSum,
   CorrectionPointRanks,
-  EvalCntPerPoints,
   MonthlyScoreRanks,
   ProjectInfo,
   TotalEvalCnt,
   UserCntPerLevels,
-  UserCntPerPoints,
   WalletRanks,
 } from '../contents';
 
@@ -88,20 +86,7 @@ const contents: DashboardItemProps[] = [
   },
   {
     id: 11,
-    title: '보유 평가 포인트 별 유저 분포',
-    description: '(2023.02.01 기준)',
-    content: UserCntPerPoints,
-  },
-  {
-    id: 12,
-    title: '보유 평가 포인트 별 평가 횟수',
-    description: '(2023.02.01 기준 / 2023.3.1 / 1개월)',
-    content: EvalCntPerPoints,
-  },
-  {
-    id: 13,
     title: '레벨 별 유저 분포',
-    description: '(2023.02.01 기준 / 2023.3.1 / 1개월)',
     content: UserCntPerLevels,
   },
 ];
@@ -214,24 +199,10 @@ const desktopRows: DesktopDashboardRowType[] = [
     items: [
       {
         row: 1,
-        col: 1,
-        rowSpan: 2,
-        colSpan: 1,
-        elementId: 11,
-      },
-      {
-        row: 1,
-        col: 2,
-        rowSpan: 2,
-        colSpan: 1,
-        elementId: 12,
-      },
-      {
-        row: 1,
         col: 3,
         rowSpan: 2,
         colSpan: 1,
-        elementId: 13,
+        elementId: 11,
       },
     ],
   },
@@ -355,26 +326,6 @@ const tabletRows: TabletDashboardRowType[] = [
         rowSpan: 2,
         colSpan: 1,
         elementId: 11,
-      },
-    ],
-  },
-  {
-    row: 2,
-    col: 2,
-    items: [
-      {
-        row: 1,
-        col: 1,
-        rowSpan: 2,
-        colSpan: 1,
-        elementId: 12,
-      },
-      {
-        row: 1,
-        col: 2,
-        rowSpan: 2,
-        colSpan: 1,
-        elementId: 13,
       },
     ],
   },
@@ -516,32 +467,6 @@ const mobileRows: MobileDashboardRowType[] = [
         rowSpan: 1,
         colSpan: 1,
         elementId: 11,
-      },
-    ],
-  },
-  {
-    row: 1,
-    col: 1,
-    items: [
-      {
-        row: 1,
-        col: 1,
-        rowSpan: 1,
-        colSpan: 1,
-        elementId: 12,
-      },
-    ],
-  },
-  {
-    row: 1,
-    col: 1,
-    items: [
-      {
-        row: 1,
-        col: 1,
-        rowSpan: 1,
-        colSpan: 1,
-        elementId: 13,
       },
     ],
   },

@@ -1,13 +1,15 @@
 import { gql } from '@/__generated__';
 import { Divider, HStack, Spacer, Spinner, VStack } from '@/components/common';
 import { PieChart } from '@/components/elements/Chart';
-import { ProjectSearchBar } from '@/components/elements/SearchBar/ProjectSearchBar';
-import { useSearchBar } from '@/components/elements/SearchBar/hooks/useSearchBar';
-import { isEnterKeyReleased } from '@/utils/isEnterKeyReleased';
+import {
+  ApolloBadRequest,
+  ApolloNotFound,
+} from '@/components/elements/DashboardContentView';
+import { ProjectSearchBar } from '@/pages/TotalPage/contents/ProjectInfo/ProjectSearchBar';
 import { Desktop, Mobile, Tablet } from '@/utils/responsive/Device';
-import { useQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { ProjectInfoTable } from './ProjectInfoTable';
 import { ProjectInfoTitle } from './ProjectInfoTitle';
 
@@ -29,32 +31,25 @@ const GET_PROJECT_INFO = gql(/* GraphQL */ `
   }
 `);
 
-// TODO: 실제 검색으로 변경
-const searchProject = (input: string) => {
-  console.log(input);
-};
-
 // TODO: 서클과 과제설명을 프론트에서 처리해주는거 만들어야됨
 export const ProjectInfo = () => {
-  const { input, handleChange } = useSearchBar(searchProject);
-  const [projectName, setProjectName] = useState<string>('libft');
-  const { loading, error, data } = useQuery(GET_PROJECT_INFO, {
-    variables: { projectName },
-  });
+  const [search, { loading, error, data }] = useLazyQuery(GET_PROJECT_INFO);
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (isEnterKeyReleased(e)) {
-      setProjectName(input);
-    }
+  const handleSubmit = (projectName: string) => {
+    search({
+      variables: { projectName },
+    });
   };
 
+  useEffect(() => {
+    search({
+      variables: { projectName: 'libft' },
+    });
+  }, []);
+
   if (loading) return <Spinner />;
-  if (error) {
-    return <h1>{error.message}</h1>;
-  }
-  if (!data) {
-    return <h1>project not found</h1>;
-  }
+  if (error) return <ApolloBadRequest msg={error.message} />;
+  if (!data) return <ApolloNotFound />;
 
   const {
     name,
@@ -69,37 +64,14 @@ export const ProjectInfo = () => {
   return (
     <>
       <Desktop>
-        <HStack w="100%">
-          <ProjectSearchBar onChange={handleChange} onKeyDown={handleKeyDown} />
-          <Spacer />
-        </HStack>
-        <HStack w="100%" h="100%" spacing="5rem">
-          <ProjectInfoTitle name={name} />
-          <Divider orientation="vertical" />
-          <ProjectInfoTable
-            skills={skills}
-            averagePassFinalmark={averagePassFinalmark}
-            averageDurationTime={averageDurationTime}
-            totalCloseCnt={totalCloseCnt}
-            currRegisteredCnt={currRegisteredCnt}
-          />
-          <Divider orientation="vertical" />
-          <div style={{ width: '30rem', height: '30rem' }}>
-            <PassPercentageChart
-              labels={['Pass', 'Fail']}
-              series={[passPercentage, 100 - passPercentage]}
-            />
-          </div>
-        </HStack>
-      </Desktop>
-      <Tablet>
-        <HStack w="100%">
-          <ProjectSearchBar onChange={handleChange} onKeyDown={handleKeyDown} />
-          <Spacer />
-        </HStack>
-        <VStack w="100%" h="100%" spacing="5rem">
-          <HStack w="100%" spacing="5rem">
+        <VStack h="100%">
+          <HStack w="100%">
+            <ProjectSearchBar onSubmit={handleSubmit} />
+            <Spacer />
+          </HStack>
+          <HStack w="100%" h="100%" spacing="2rem">
             <ProjectInfoTitle name={name} />
+            <Divider orientation="vertical" />
             <ProjectInfoTable
               skills={skills}
               averagePassFinalmark={averagePassFinalmark}
@@ -107,38 +79,67 @@ export const ProjectInfo = () => {
               totalCloseCnt={totalCloseCnt}
               currRegisteredCnt={currRegisteredCnt}
             />
+            <Divider orientation="vertical" />
+
+            <div style={{ width: '30rem', height: '30rem' }}>
+              <PassPercentageChart
+                labels={['Pass', 'Fail']}
+                series={[passPercentage, 100 - passPercentage]}
+              />
+            </div>
           </HStack>
-          <Divider />
-          <div style={{ width: '300px', height: '300px' }}>
-            <PassPercentageChart
-              labels={['Pass', 'Fail']}
-              series={[passPercentage, 100 - passPercentage]}
-            />
-          </div>
+        </VStack>
+      </Desktop>
+      <Tablet>
+        <VStack h="100%">
+          <HStack w="100%">
+            <ProjectSearchBar onSubmit={handleSubmit} />
+            <Spacer />
+          </HStack>
+          <VStack w="100%" h="100%" spacing="5rem">
+            <HStack w="100%" spacing="5rem">
+              <ProjectInfoTitle name={name} />
+              <ProjectInfoTable
+                skills={skills}
+                averagePassFinalmark={averagePassFinalmark}
+                averageDurationTime={averageDurationTime}
+                totalCloseCnt={totalCloseCnt}
+                currRegisteredCnt={currRegisteredCnt}
+              />
+            </HStack>
+            <div style={{ width: '300px', height: '300px' }}>
+              <PassPercentageChart
+                labels={['Pass', 'Fail']}
+                series={[passPercentage, 100 - passPercentage]}
+              />
+            </div>
+          </VStack>
         </VStack>
       </Tablet>
       <Mobile>
-        <HStack w="100%">
-          <ProjectSearchBar onChange={handleChange} onKeyDown={handleKeyDown} />
-          <Spacer />
-        </HStack>
-        <VStack w="100%" h="100%" spacing="5rem">
-          <ProjectInfoTitle name={name} />
-          <Divider />
-          <ProjectInfoTable
-            skills={skills}
-            averagePassFinalmark={averagePassFinalmark}
-            averageDurationTime={averageDurationTime}
-            totalCloseCnt={totalCloseCnt}
-            currRegisteredCnt={currRegisteredCnt}
-          />
-          <Divider />
-          <div style={{ width: '300px', height: '300px' }}>
-            <PassPercentageChart
-              labels={['Pass', 'Fail']}
-              series={[passPercentage, 100 - passPercentage]}
+        <VStack h="100%">
+          <HStack w="100%">
+            <ProjectSearchBar onSubmit={handleSubmit} />
+            <Spacer />
+          </HStack>
+          <VStack w="100%" h="100%" spacing="5rem">
+            <ProjectInfoTitle name={name} />
+            <Divider />
+            <ProjectInfoTable
+              skills={skills}
+              averagePassFinalmark={averagePassFinalmark}
+              averageDurationTime={averageDurationTime}
+              totalCloseCnt={totalCloseCnt}
+              currRegisteredCnt={currRegisteredCnt}
             />
-          </div>
+            <Divider />
+            <div style={{ width: '300px', height: '300px' }}>
+              <PassPercentageChart
+                labels={['Pass', 'Fail']}
+                series={[passPercentage, 100 - passPercentage]}
+              />
+            </div>
+          </VStack>
         </VStack>
       </Mobile>
     </>

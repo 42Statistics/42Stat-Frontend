@@ -1,5 +1,9 @@
 import { GetEvalLogsQuery } from '@/__generated__/graphql';
 import { Spinner, Text } from '@/components/common';
+import {
+  ApolloBadRequest,
+  ApolloNotFound,
+} from '@/components/elements/DashboardContentView';
 import { ApolloError } from '@apollo/client';
 import { EvalLogList } from './EvalLogList';
 import { PageMoveArrow } from './PageMoveArrow';
@@ -20,9 +24,10 @@ export const EvalLogSearchBoard = ({
   setPageNumber,
 }: EvalLogSearchBoardProps) => {
   if (loading) return <Spinner />;
-  if (error) return <h1>{error.message}</h1>;
-  if (!data) return <h1>result not found</h1>;
+  if (error) return <ApolloBadRequest msg={error.message} />;
+  if (!data) return <ApolloNotFound />;
   if (data.getEvalLogs.length === 0) return <Text>검색 결과가 없습니다.</Text>;
+
   return (
     <>
       <EvalLogList list={data.getEvalLogs} />

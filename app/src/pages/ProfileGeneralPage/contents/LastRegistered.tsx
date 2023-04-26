@@ -1,5 +1,9 @@
 import { gql } from '@/__generated__';
 import { Spinner } from '@/components/common';
+import {
+  ApolloBadRequest,
+  ApolloNotFound,
+} from '@/components/elements/DashboardContentView';
 import { TextDefault } from '@/components/elements/DashboardContentView/Text';
 import { useQuery } from '@apollo/client';
 
@@ -17,12 +21,8 @@ export const LastRegistered = () => {
   const { loading, error, data } = useQuery(GET_LAST_REGISTERED);
 
   if (loading) return <Spinner />;
-  if (error) {
-    return <h1>{error.message}</h1>;
-  }
-  if (!data) {
-    return <h1>user not found</h1>;
-  }
+  if (error) return <ApolloBadRequest msg={error.message} />;
+  if (!data) return <ApolloNotFound />;
 
   const { lastRegistered } = data.getPersonGeneralPage.teamInfo;
 

@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 
 export const StyledInfoTable = styled.table`
   text-align: center;
-  font-size: ${({ theme }) => theme.fonts.size.h3};
 
   th,
   td {

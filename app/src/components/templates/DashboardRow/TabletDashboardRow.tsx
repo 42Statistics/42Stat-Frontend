@@ -36,9 +36,9 @@ const TabletDashboardRowLayout = styled.div<TabletDashboardRowLayoutProps>`
 const getHeightByCol = (col: TabletDashboardColSize) => {
   switch (col) {
     case 3:
-      return '16rem';
+      return '14rem';
     case 2:
-      return '21rem';
+      return '18rem';
     default:
       throw new Error('Invalid col size');
   }

@@ -4,7 +4,7 @@ import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
-import { TextCompare } from '@/components/elements/DashboardContentView/Text';
+import { NumberCompare } from '@/components/elements/DashboardContentView/Text';
 import { useQuery } from '@apollo/client';
 
 const GET_MONTHLY_EVAL_CNT = gql(/* GraphQL */ `
@@ -27,5 +27,7 @@ export const MonthlyEvalCnt = () => {
 
   const { currMonthCount, lastMonthCount } = data.getPersonalEvalPage;
 
-  return <TextCompare curr={currMonthCount} last={lastMonthCount} unit="회" />;
+  return (
+    <NumberCompare curr={currMonthCount} last={lastMonthCount} unit="회" />
+  );
 };

@@ -5,7 +5,7 @@ import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
-import { numberFormatter, numberWithUnitFormatter } from '@/utils/formatters';
+import { numberWithUnitFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
 
 const GET_ACTIVE_USER_CNT_RECORD = gql(/* GraphQL */ `
@@ -57,7 +57,7 @@ const ActiveUserCntRecordsChart = ({
     },
     yaxis: {
       labels: {
-        formatter: (value) => numberFormatter(value),
+        formatter: (value) => value.toLocaleString(),
       },
     },
     tooltip: {

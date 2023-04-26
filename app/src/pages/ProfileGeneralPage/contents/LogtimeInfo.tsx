@@ -4,7 +4,7 @@ import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
-import { TextCompare } from '@/components/elements/DashboardContentView/Text';
+import { NumberCompare } from '@/components/elements/DashboardContentView/Text';
 import { useQuery } from '@apollo/client';
 
 const GET_LOGTIME_INFO = gql(/* GraphQL */ `
@@ -29,6 +29,10 @@ export const LogtimeInfo = () => {
     data.getPersonGeneralPage.logtimeInfo;
 
   return (
-    <TextCompare curr={currMonthLogtime} last={lastMonthLogtime} unit="시간" />
+    <NumberCompare
+      curr={currMonthLogtime}
+      last={lastMonthLogtime}
+      unit="시간"
+    />
   );
 };

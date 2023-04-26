@@ -4,8 +4,7 @@ import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
-import { TextDefault } from '@/components/elements/DashboardContentView/Text';
-import { numberWithUnitFormatter } from '@/utils/formatters';
+import { NumberDefault } from '@/components/elements/DashboardContentView/Text';
 import { useQuery } from '@apollo/client';
 
 const GET_TOTAL_EVAL_COUNT = gql(/* GraphQL */ `
@@ -26,5 +25,5 @@ export const TotalEvalCnt = () => {
   const { totalEvalCount } = data.getTotalPage;
   const unit = '회';
 
-  return <TextDefault text={numberWithUnitFormatter(totalEvalCount, unit)} />;
+  return <NumberDefault number={totalEvalCount} unit={unit} />;
 };

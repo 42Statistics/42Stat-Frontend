@@ -1,13 +1,18 @@
 import styled from '@emotion/styled';
+import { forwardRef } from 'react';
 
-export const Input = (props: React.InputHTMLAttributes<HTMLInputElement>) => {
-  return <StyledInput {...props} />;
-};
+export const Input = forwardRef(
+  (
+    props: React.InputHTMLAttributes<HTMLInputElement>,
+    ref: React.Ref<HTMLInputElement>,
+  ) => {
+    return <StyledInput {...props} ref={ref} autoComplete="off" />;
+  },
+);
 
 const StyledInput = styled.input`
   all: unset;
   width: 100%;
-  font-size: ${({ theme }) => theme.fonts.size.h3};
 
   &::placeholder {
     color: ${({ theme }) => theme.colors.mono.gray.default};

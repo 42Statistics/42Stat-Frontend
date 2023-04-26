@@ -1,5 +1,5 @@
 import { Clickable, HStack } from '@/components/common';
-import { UserSearchBar } from '@/components/elements/SearchBar';
+import { UserSearchBar } from './UserSearchBar';
 import { isNavBarOpenAtom } from '@/utils/atoms/isNavBarOpenAtom';
 import styled from '@emotion/styled';
 import { useSetAtom } from 'jotai';

@@ -4,8 +4,7 @@ import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
-import { TextDefault } from '@/components/elements/DashboardContentView/Text';
-import { numberWithUnitFormatter } from '@/utils/formatters';
+import { NumberDefault } from '@/components/elements/DashboardContentView/Text';
 import { useQuery } from '@apollo/client';
 
 const GET_PERSONAL_AVERAGE_FEEDBACK_LENGTH = gql(/* GraphQL */ `
@@ -33,7 +32,5 @@ export const AverageFeedbackLength = () => {
   const { averageFeedbackLength } = data.getPersonalEvalPage;
   const unit = '자';
 
-  return (
-    <TextDefault text={numberWithUnitFormatter(averageFeedbackLength, unit)} />
-  );
+  return <NumberDefault number={averageFeedbackLength} unit={unit} />;
 };

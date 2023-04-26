@@ -4,8 +4,7 @@ import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
-import { TextDefault } from '@/components/elements/DashboardContentView/Text';
-import { numberWithUnitFormatter } from '@/utils/formatters';
+import { NumberDefault } from '@/components/elements/DashboardContentView/Text';
 import { useQuery } from '@apollo/client';
 
 // TODO: getPersonGeneralPage -> getPersonEvaluationPage
@@ -29,5 +28,5 @@ export const TotalEvalCnt = () => {
   const { totalCount } = data.getPersonalEvalPage;
   const unit = '회';
 
-  return <TextDefault text={numberWithUnitFormatter(totalCount, unit)} />;
+  return <NumberDefault number={totalCount} unit={unit} />;
 };

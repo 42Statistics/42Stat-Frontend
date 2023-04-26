@@ -20,11 +20,10 @@ jobs:
           submodules: true
           token: ${{ secrets.READ_PRIVATE_SUBMODULE_TOKEN }}
 
-      - name: Build using Docker Compose
-        run: docker-compose -f docker-compose.prod.yml up -d
-
-      - name: Wait for 10 seconds
-        run: sleep 10
+      - name: Waiting build using Docker Compose
+        run: | 
+          docker-compose -f docker-compose.prod.yml up -d
+          docker-compose -f docker-compose.prod.yml logs -f
 
       - name: Copy built files to ./dist
         run: |

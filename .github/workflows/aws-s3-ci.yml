@@ -11,6 +11,8 @@ jobs:
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      DEFAULT_BUCKET_REGION: ${{ secrets.DEFAULT_BUCKET_REGION }}
+      S3_BUCKET: ${{ secrets.S3_BUCKET }}
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
@@ -19,19 +21,22 @@ jobs:
           token: ${{ secrets.READ_PRIVATE_SUBMODULE_TOKEN }}
 
       - name: Build using Docker Compose
-        uses: isbang/compose-action@v1.4.1
-        with:
-          compose-file: docker-compose.prod.yml
-          up-flags: "-d"
+        run: docker-compose -f docker-compose.prod.yml up -d
+
+      - name: Wait for 10 seconds
+        run: sleep 10
 
       - name: Copy built files to ./dist
         run: |
           mkdir -p ./dist
           cp -r ./app/dist/* ./dist/
 
+      - name: Install AWS
+        run: |
+          sudo apt-get update
+          sudo apt-get install awscli
+
       - name: Upload to S3
-        uses: reggionick/s3-deploy@v3
-        with:
-          folder: ./dist
-          bucket: ${{ secrets.S3_BUCKET }}
-          bucket-region: ${{secrets.DEFAULT_BUCKET_REGION}}
+        run: |
+          aws s3 sync ./dist s3://$S3_BUCKET --region $DEFAULT_BUCKET_REGION
+

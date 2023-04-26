@@ -22,15 +22,13 @@ jobs:
         uses: isbang/compose-action@v1.4.1
         with:
           compose-file: docker-compose.prod.yml
+          up-flags: "-d"
 
-      - name: Install AWS
-        run: |
-          sudo apt-get update
-          sudo apt-get install awscli
       - name: Copy built files to ./dist
         run: |
           mkdir -p ./dist
           cp -r ./app/dist/* ./dist/
+
       - name: Upload to S3
         uses: reggionick/s3-deploy@v3
         with:

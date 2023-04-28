@@ -1,33 +1,17 @@
-import { Clickable, VStack } from '@/components/common';
+import { VStack } from '@/components/common';
 import { AppLogoTitleButton } from '@/components/elements/AppLogoTitleButton';
 import { userAtom } from '@/utils/atoms/userAtom';
 import { useAtomValue } from 'jotai';
-import { useNavigate } from 'react-router-dom';
 import { AboveTabletNavMenu } from './AboveTabletNavMenu';
 import { NavProfile } from './NavProfile';
 
 export const AboveTabletNavBar = () => {
   const user = useAtomValue(userAtom);
-  const navigate = useNavigate();
-
-  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault();
-    navigate('/profile/me');
-  };
 
   return (
     <VStack h="100%" spacing="6rem">
       <AppLogoTitleButton />
-      <Clickable
-        onClick={handleClick}
-        element={
-          <NavProfile
-            imgUrl={user.imgUrl}
-            name={user.name}
-            login={user.login}
-          />
-        }
-      />
+      <NavProfile imgUrl={user.imgUrl} name={user.name} login={user.login} />
       <AboveTabletNavMenu />
     </VStack>
   );

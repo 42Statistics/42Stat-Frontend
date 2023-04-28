@@ -13,11 +13,13 @@ const GET_PREFERRED_TIME = gql(/* GraphQL */ `
   query getPrefferedTime {
     getPersonGeneralPage {
       logtimeInfo {
-        preferredTime {
-          morning
-          daytime
-          evening
-          night
+        data {
+          preferredTime {
+            morning
+            daytime
+            evening
+            night
+          }
         }
       }
     }
@@ -33,7 +35,7 @@ export const PrefferedTime = () => {
   if (!data) return <ApolloNotFound />;
 
   const { morning, daytime, evening, night } =
-    data.getPersonGeneralPage.logtimeInfo.preferredTime;
+    data.getPersonGeneralPage.logtimeInfo.data.preferredTime;
   const total = morning + daytime + evening + night;
   const max = Math.max(morning, daytime, evening, night);
 

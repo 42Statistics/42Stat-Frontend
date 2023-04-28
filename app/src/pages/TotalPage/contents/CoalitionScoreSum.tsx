@@ -14,8 +14,13 @@ export const GET_COALITION_TOTAL_SCORES = gql(/* GraphQL */ `
         coalition {
           id
           name
+          slug
+          imageUrl
+          coverUrl
+          color
+          userId
         }
-        score
+        value
       }
     }
   }
@@ -30,7 +35,7 @@ export const CoalitionScoreSum = () => {
 
   const { totalScores } = data.getTotalPage;
   const categories = totalScores.map(({ coalition }) => coalition.name);
-  const seriesData = totalScores.map(({ score }) => score);
+  const seriesData = totalScores.map(({ value }) => value);
 
   const series: ApexAxisChartSeries = [
     {

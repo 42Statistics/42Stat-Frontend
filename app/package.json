@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "compile": "DOTENV_CONFIG_PATH=../env/.env graphql-codegen -r dotenv/config",
+    "compile": "NODE_TLS_REJECT_UNAUTHORIZED=0 DOTENV_CONFIG_PATH=../env/.env graphql-codegen -r dotenv/config",
     "watch": "DOTENV_CONFIG_PATH=../env/.env graphql-codegen -r dotenv/config -w"
   },
   "dependencies": {

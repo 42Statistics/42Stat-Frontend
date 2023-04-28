@@ -13,12 +13,16 @@ const GET_COALITION_SCORE_RANK = gql(/* GraphQL */ `
   query getCoalitionScoreRank {
     getTotalPage {
       monthlyScoreRanks {
-        userPreview {
-          id
-          login
-          imgUrl
+        data {
+          userPreview {
+            id
+            login
+            imgUrl
+          }
+          value
         }
-        value
+        from
+        to
       }
     }
   }
@@ -34,7 +38,7 @@ export const MonthlyScoreRanks = () => {
   const { monthlyScoreRanks } = data.getTotalPage;
   const unit = 'P';
 
-  const rankList: RankItemType[] = monthlyScoreRanks.map(
+  const rankList: RankItemType[] = monthlyScoreRanks.data.map(
     ({ userPreview, value }) => ({
       id: userPreview.id,
       name: userPreview.login,

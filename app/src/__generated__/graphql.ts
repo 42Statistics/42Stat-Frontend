@@ -18,17 +18,37 @@ export type Scalars = {
   URL: string;
 };
 
-export enum CoaliltionName {
-  Gam = 'GAM',
-  Gon = 'GON',
-  Gun = 'GUN',
-  Lee = 'LEE'
-}
-
 export type Coalition = {
   __typename?: 'Coalition';
-  id: Scalars['ID'];
-  name: CoaliltionName;
+  color?: Maybe<Scalars['String']>;
+  coverUrl?: Maybe<Scalars['String']>;
+  id: Scalars['Int'];
+  imageUrl?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+  score: Scalars['Int'];
+  slug: Scalars['String'];
+  userId: Scalars['Int'];
+};
+
+export type CoalitionScore = {
+  __typename?: 'CoalitionScore';
+  coalition: Coalition;
+  value: Scalars['Int'];
+};
+
+export type CoalitionScoreRecords = {
+  __typename?: 'CoalitionScoreRecords';
+  coalition: Coalition;
+  records: Array<Maybe<ValueRecord>>;
+};
+
+export type EvalLog = {
+  __typename?: 'EvalLog';
+  /** 피평가자가 부여한 점수와 리뷰 입니다. */
+  correctedsReview: EvalReview;
+  /** 평가자가 부여한 점수와 리뷰 입니다. */
+  correctorReview: EvalReview;
+  header: EvalLogHeader;
 };
 
 export type EvalLogHeader = {
@@ -40,13 +60,12 @@ export type EvalLogHeader = {
   teamPreview: TeamPreview;
 };
 
-export type EvalLogs = {
-  __typename?: 'EvalLogs';
-  /** 피평가자가 부여한 점수와 리뷰 입니다. */
-  correctedsReview: EvalReview;
-  /** 평가자가 부여한 점수와 리뷰 입니다. */
-  correctorReview: EvalReview;
-  header: EvalLogHeader;
+export type EvalLogsPaginated = {
+  __typename?: 'EvalLogsPaginated';
+  nodes: Array<Maybe<EvalLog>>;
+  pageNumber: Scalars['Int'];
+  pageSize: Scalars['Int'];
+  totalCount: Scalars['Int'];
 };
 
 export type EvalReview = {
@@ -62,6 +81,13 @@ export type ExamResult = {
   totalCnt: Scalars['Int'];
 };
 
+export type ExamResultDateRanged = {
+  __typename?: 'ExamResultDateRanged';
+  data: Array<ExamResult>;
+  from: Scalars['DateTime'];
+  to: Scalars['DateTime'];
+};
+
 export type Flag = {
   __typename?: 'Flag';
   id: Scalars['ID'];
@@ -71,15 +97,15 @@ export type Flag = {
 
 export type Home = {
   __typename?: 'Home';
-  currMonthBlackholedCnt: Scalars['Int'];
+  currMonthBlackholedCnt: NumberDateRanged;
   currRegisteredCntRank: Array<ProjectRanking>;
-  currWeekEvalCnt: Scalars['Int'];
-  lastExamResult: Array<ExamResult>;
-  lastMonthBlackholedCnt: Scalars['Int'];
-  lastWeekEvalCnt: Scalars['Int'];
+  currWeekEvalCnt: NumberDateRanged;
+  lastExamResult: ExamResultDateRanged;
+  lastMonthBlackholedCnt: NumberDateRanged;
+  lastWeekEvalCnt: NumberDateRanged;
   levelRank: Array<UserRanking>;
   monthlyAccessTimeRank: Array<UserRanking>;
-  monthlyEvalCntRank: Array<UserRanking>;
+  monthlyEvalCntRank: UserRankingDateRanged;
   monthlyExpIncrementRank: Array<UserRanking>;
   totalEvalCntRank: Array<UserRanking>;
 };
@@ -91,12 +117,33 @@ export type LevelGraph = {
   userLevel: Scalars['Float'];
 };
 
+export type LevelGraphDateRanged = {
+  __typename?: 'LevelGraphDateRanged';
+  data: Array<LevelGraph>;
+  from: Scalars['DateTime'];
+  to: Scalars['DateTime'];
+};
+
 export type LogtimeInfo = {
   __typename?: 'LogtimeInfo';
   currMonthLogtime: Scalars['Int'];
   lastMonthLogtime: Scalars['Int'];
   preferredCluster: Scalars['String'];
   preferredTime: PreferredTime;
+};
+
+export type LogtimeInfoDateRanged = {
+  __typename?: 'LogtimeInfoDateRanged';
+  data: LogtimeInfo;
+  from: Scalars['DateTime'];
+  to: Scalars['DateTime'];
+};
+
+export type NumberDateRanged = {
+  __typename?: 'NumberDateRanged';
+  data: Scalars['Int'];
+  from: Scalars['DateTime'];
+  to: Scalars['DateTime'];
 };
 
 export type PersonalEval = {
@@ -108,16 +155,16 @@ export type PersonalEval = {
   averageFeedbackLength: Scalars['Int'];
   /** 평가자 기준으로 준 평균 점수 입니다. */
   averageFinalMark: Scalars['Float'];
-  currMonthCount: Scalars['Int'];
-  lastMonthCount: Scalars['Int'];
+  currMonthCount: NumberDateRanged;
+  lastMonthCount: NumberDateRanged;
   totalCount: Scalars['Int'];
   userProfile: UserProfile;
 };
 
 export type PersonalGeneral = {
   __typename?: 'PersonalGeneral';
-  levelGraphs: Array<LevelGraph>;
-  logtimeInfo: LogtimeInfo;
+  levelGraphs: LevelGraphDateRanged;
+  logtimeInfo: LogtimeInfoDateRanged;
   teamInfo: TeamInfo;
   userProfile: UserProfile;
 };
@@ -164,7 +211,7 @@ export type ProjectRanking = {
 export type Query = {
   __typename?: 'Query';
   findProjectPreview: Array<Maybe<ProjectPreview>>;
-  getEvalLogs: Array<Maybe<EvalLogs>>;
+  getEvalLogs: EvalLogsPaginated;
   getHomePage: Home;
   getPersonGeneralPage: PersonalGeneral;
   getPersonalEvalPage: PersonalEval;
@@ -183,18 +230,12 @@ export type QueryGetEvalLogsArgs = {
   outstandingOnly?: Scalars['Boolean'];
   pageNumber?: Scalars['Int'];
   pageSize?: Scalars['Int'];
-  projectName?: Scalars['String'];
+  projectName?: InputMaybe<Scalars['String']>;
 };
 
 
 export type QueryGetPersonalEvalPageArgs = {
   uid: Scalars['Int'];
-};
-
-export type ScoreRecords = {
-  __typename?: 'ScoreRecords';
-  coalition: Coalition;
-  records: Array<ValueRecord>;
 };
 
 export type TeamInfo = {
@@ -231,11 +272,11 @@ export type Total = {
   averageFeedbackLength: Scalars['Int'];
   blackholedCntPerCircles: Array<ValuePerCircle>;
   correctionPointRanks: Array<UserRanking>;
-  monthlyScoreRanks: Array<UserRanking>;
+  monthlyScoreRanks: UserRankingDateRanged;
   projectInfo: ProjectInfo;
-  scoreRecords: Array<ScoreRecords>;
+  scoreRecords: Array<CoalitionScoreRecords>;
   totalEvalCount: Scalars['Int'];
-  totalScores: Array<TotalScore>;
+  totalScores: Array<CoalitionScore>;
   userCntPerLevels: Array<UserCntPerLevel>;
   walletRanks: Array<UserRanking>;
 };
@@ -245,22 +286,11 @@ export type TotalProjectInfoArgs = {
   projectName?: Scalars['String'];
 };
 
-export type TotalScore = {
-  __typename?: 'TotalScore';
-  coalition: Coalition;
-  score: Scalars['Int'];
-};
-
 export type UserCntPerLevel = {
   __typename?: 'UserCntPerLevel';
   level: Scalars['Int'];
   userCnt: Scalars['Int'];
 };
-
-export enum UserGrade {
-  Learner = 'LEARNER',
-  Member = 'MEMBER'
-}
 
 export type UserPreview = {
   __typename?: 'UserPreview';
@@ -274,7 +304,7 @@ export type UserProfile = {
   blackholedAt?: Maybe<Scalars['DateTime']>;
   coalition?: Maybe<Coalition>;
   correctionPoint: Scalars['Int'];
-  grade: UserGrade;
+  grade: Scalars['String'];
   id: Scalars['ID'];
   imgUrl?: Maybe<Scalars['URL']>;
   level: Scalars['Float'];
@@ -291,6 +321,13 @@ export type UserRanking = {
   __typename?: 'UserRanking';
   userPreview: UserPreview;
   value: Scalars['Float'];
+};
+
+export type UserRankingDateRanged = {
+  __typename?: 'UserRankingDateRanged';
+  data: Array<UserRanking>;
+  from: Scalars['DateTime'];
+  to: Scalars['DateTime'];
 };
 
 export type UserScoreInfo = {
@@ -319,22 +356,17 @@ export type ValueRecord = {
   value: Scalars['Int'];
 };
 
-export type GetEvalLogsQueryVariables = Exact<{
-  pageSize: Scalars['Int'];
-  pageNumber: Scalars['Int'];
-  projectName: Scalars['String'];
-  outstandingOnly: Scalars['Boolean'];
-  corrector?: InputMaybe<Scalars['String']>;
-  corrected?: InputMaybe<Scalars['String']>;
+export type FindProjectPreviewQueryVariables = Exact<{
+  name: Scalars['String'];
 }>;
 
 
-export type GetEvalLogsQuery = { __typename?: 'Query', getEvalLogs: Array<{ __typename?: 'EvalLogs', header: { __typename?: 'EvalLogHeader', beginAt: string, corrector: { __typename?: 'UserPreview', id: string, login: string, imgUrl?: string | null }, teamPreview: { __typename?: 'TeamPreview', id: string, name: string, url: string }, projectPreview: { __typename?: 'ProjectPreview', id: string, name: string, url: string }, flag: { __typename?: 'Flag', id: string, name: string, isPositive: boolean } }, correctorReview: { __typename?: 'EvalReview', mark: number, review: string }, correctedsReview: { __typename?: 'EvalReview', mark: number, review: string } } | null> };
+export type FindProjectPreviewQuery = { __typename?: 'Query', findProjectPreview: Array<{ __typename?: 'ProjectPreview', id: string, name: string, url: string } | null> };
 
 export type GetCurrMonthBlackholedCntQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCurrMonthBlackholedCntQuery = { __typename?: 'Query', getHomePage: { __typename?: 'Home', currMonthBlackholedCnt: number, lastMonthBlackholedCnt: number } };
+export type GetCurrMonthBlackholedCntQuery = { __typename?: 'Query', getHomePage: { __typename?: 'Home', currMonthBlackholedCnt: { __typename?: 'NumberDateRanged', data: number, from: string, to: string }, lastMonthBlackholedCnt: { __typename?: 'NumberDateRanged', data: number, from: string, to: string } } };
 
 export type GetCurrRegisteredCntRankQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -344,12 +376,12 @@ export type GetCurrRegisteredCntRankQuery = { __typename?: 'Query', getHomePage:
 export type GetCurrWeekEvalCntQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCurrWeekEvalCntQuery = { __typename?: 'Query', getHomePage: { __typename?: 'Home', currWeekEvalCnt: number, lastWeekEvalCnt: number } };
+export type GetCurrWeekEvalCntQuery = { __typename?: 'Query', getHomePage: { __typename?: 'Home', currWeekEvalCnt: { __typename?: 'NumberDateRanged', data: number, from: string, to: string }, lastWeekEvalCnt: { __typename?: 'NumberDateRanged', data: number, from: string, to: string } } };
 
 export type GetLastExamResultQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetLastExamResultQuery = { __typename?: 'Query', getHomePage: { __typename?: 'Home', lastExamResult: Array<{ __typename?: 'ExamResult', rank: number, passCnt: number, totalCnt: number }> } };
+export type GetLastExamResultQuery = { __typename?: 'Query', getHomePage: { __typename?: 'Home', lastExamResult: { __typename?: 'ExamResultDateRanged', from: string, to: string, data: Array<{ __typename?: 'ExamResult', rank: number, passCnt: number, totalCnt: number }> } } };
 
 export type GetLevelRankQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -397,7 +429,7 @@ export type GetMonthlyEvalCntQueryVariables = Exact<{
 }>;
 
 
-export type GetMonthlyEvalCntQuery = { __typename?: 'Query', getPersonalEvalPage: { __typename?: 'PersonalEval', currMonthCount: number, lastMonthCount: number } };
+export type GetMonthlyEvalCntQuery = { __typename?: 'Query', getPersonalEvalPage: { __typename?: 'PersonalEval', currMonthCount: { __typename?: 'NumberDateRanged', data: number, from: string, to: string }, lastMonthCount: { __typename?: 'NumberDateRanged', data: number, from: string, to: string } } };
 
 export type GetPersonalTotalEvalCntQueryVariables = Exact<{
   uid: Scalars['Int'];
@@ -419,22 +451,22 @@ export type GetLastRegisteredQuery = { __typename?: 'Query', getPersonGeneralPag
 export type GetLevelGraphQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetLevelGraphQuery = { __typename?: 'Query', getPersonGeneralPage: { __typename?: 'PersonalGeneral', levelGraphs: Array<{ __typename?: 'LevelGraph', date: string, userLevel: number, averageLevel: number }> } };
+export type GetLevelGraphQuery = { __typename?: 'Query', getPersonGeneralPage: { __typename?: 'PersonalGeneral', levelGraphs: { __typename?: 'LevelGraphDateRanged', from: string, to: string, data: Array<{ __typename?: 'LevelGraph', date: string, userLevel: number, averageLevel: number }> } } };
 
 export type GetLogtimeInfoQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetLogtimeInfoQuery = { __typename?: 'Query', getPersonGeneralPage: { __typename?: 'PersonalGeneral', logtimeInfo: { __typename?: 'LogtimeInfo', currMonthLogtime: number, lastMonthLogtime: number } } };
+export type GetLogtimeInfoQuery = { __typename?: 'Query', getPersonGeneralPage: { __typename?: 'PersonalGeneral', logtimeInfo: { __typename?: 'LogtimeInfoDateRanged', from: string, to: string, data: { __typename?: 'LogtimeInfo', currMonthLogtime: number, lastMonthLogtime: number, preferredCluster: string, preferredTime: { __typename?: 'PreferredTime', morning: number, daytime: number, evening: number, night: number } } } } };
 
 export type GetPrefferedClusterQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPrefferedClusterQuery = { __typename?: 'Query', getPersonGeneralPage: { __typename?: 'PersonalGeneral', logtimeInfo: { __typename?: 'LogtimeInfo', preferredCluster: string } } };
+export type GetPrefferedClusterQuery = { __typename?: 'Query', getPersonGeneralPage: { __typename?: 'PersonalGeneral', logtimeInfo: { __typename?: 'LogtimeInfoDateRanged', data: { __typename?: 'LogtimeInfo', preferredCluster: string } } } };
 
 export type GetPrefferedTimeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPrefferedTimeQuery = { __typename?: 'Query', getPersonGeneralPage: { __typename?: 'PersonalGeneral', logtimeInfo: { __typename?: 'LogtimeInfo', preferredTime: { __typename?: 'PreferredTime', morning: number, daytime: number, evening: number, night: number } } } };
+export type GetPrefferedTimeQuery = { __typename?: 'Query', getPersonGeneralPage: { __typename?: 'PersonalGeneral', logtimeInfo: { __typename?: 'LogtimeInfoDateRanged', data: { __typename?: 'LogtimeInfo', preferredTime: { __typename?: 'PreferredTime', morning: number, daytime: number, evening: number, night: number } } } } };
 
 export type GetTeamInfoQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -444,7 +476,7 @@ export type GetTeamInfoQuery = { __typename?: 'Query', getPersonGeneralPage: { _
 export type GetUserProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetUserProfileQuery = { __typename?: 'Query', getPersonGeneralPage: { __typename?: 'PersonalGeneral', userProfile: { __typename?: 'UserProfile', id: string, login: string, grade: UserGrade, name: string, imgUrl?: string | null, level: number, pooledAt: string, blackholedAt?: string | null, wallet: number, correctionPoint: number, levelRank: number, coalition?: { __typename?: 'Coalition', id: string, name: CoaliltionName } | null, titles: Array<{ __typename?: 'UserTitle', id: string, name: string, isSelected: boolean } | null>, scoreInfo: { __typename?: 'UserScoreInfo', value: number, rankInCoalition: number, rankInTotal: number } } } };
+export type GetUserProfileQuery = { __typename?: 'Query', getPersonGeneralPage: { __typename?: 'PersonalGeneral', userProfile: { __typename?: 'UserProfile', id: string, login: string, grade: string, name: string, imgUrl?: string | null, level: number, pooledAt: string, blackholedAt?: string | null, wallet: number, correctionPoint: number, levelRank: number, coalition?: { __typename?: 'Coalition', id: number, name: string } | null, titles: Array<{ __typename?: 'UserTitle', id: string, name: string, isSelected: boolean } | null>, scoreInfo: { __typename?: 'UserScoreInfo', value: number, rankInCoalition: number, rankInTotal: number } } } };
 
 export type GetActiveUserCntRecordQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -469,12 +501,12 @@ export type GetWhenGoBlackHoleQuery = { __typename?: 'Query', getTotalPage: { __
 export type GetCoalitionScoreRecordQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCoalitionScoreRecordQuery = { __typename?: 'Query', getTotalPage: { __typename?: 'Total', scoreRecords: Array<{ __typename?: 'ScoreRecords', coalition: { __typename?: 'Coalition', id: string, name: CoaliltionName }, records: Array<{ __typename?: 'ValueRecord', at: string, value: number }> }> } };
+export type GetCoalitionScoreRecordQuery = { __typename?: 'Query', getTotalPage: { __typename?: 'Total', scoreRecords: Array<{ __typename?: 'CoalitionScoreRecords', coalition: { __typename?: 'Coalition', id: number, name: string }, records: Array<{ __typename?: 'ValueRecord', at: string, value: number } | null> }> } };
 
 export type GetCoalitionTotalScoresQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCoalitionTotalScoresQuery = { __typename?: 'Query', getTotalPage: { __typename?: 'Total', totalScores: Array<{ __typename?: 'TotalScore', score: number, coalition: { __typename?: 'Coalition', id: string, name: CoaliltionName } }> } };
+export type GetCoalitionTotalScoresQuery = { __typename?: 'Query', getTotalPage: { __typename?: 'Total', totalScores: Array<{ __typename?: 'CoalitionScore', value: number, coalition: { __typename?: 'Coalition', id: number, name: string, slug: string, imageUrl?: string | null, coverUrl?: string | null, color?: string | null, userId: number } }> } };
 
 export type GetCorrectionPointRankQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -484,7 +516,7 @@ export type GetCorrectionPointRankQuery = { __typename?: 'Query', getTotalPage: 
 export type GetCoalitionScoreRankQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCoalitionScoreRankQuery = { __typename?: 'Query', getTotalPage: { __typename?: 'Total', monthlyScoreRanks: Array<{ __typename?: 'UserRanking', value: number, userPreview: { __typename?: 'UserPreview', id: string, login: string, imgUrl?: string | null } }> } };
+export type GetCoalitionScoreRankQuery = { __typename?: 'Query', getTotalPage: { __typename?: 'Total', monthlyScoreRanks: { __typename?: 'UserRankingDateRanged', from: string, to: string, data: Array<{ __typename?: 'UserRanking', value: number, userPreview: { __typename?: 'UserPreview', id: string, login: string, imgUrl?: string | null } }> } } };
 
 export type GetProjectInfoQueryVariables = Exact<{
   projectName: Scalars['String'];
@@ -492,13 +524,6 @@ export type GetProjectInfoQueryVariables = Exact<{
 
 
 export type GetProjectInfoQuery = { __typename?: 'Query', getTotalPage: { __typename?: 'Total', projectInfo: { __typename?: 'ProjectInfo', id: string, name: string, skills: Array<string | null>, averageDurationTime: number, averagePassFinalmark: number, totalCloseCnt: number, currRegisteredCnt: number, passPercentage: number, totalEvalCnt: number } } };
-
-export type FindProjectPreviewQueryVariables = Exact<{
-  name: Scalars['String'];
-}>;
-
-
-export type FindProjectPreviewQuery = { __typename?: 'Query', findProjectPreview: Array<{ __typename?: 'ProjectPreview', id: string, name: string, url: string } | null> };
 
 export type GetTotalEvalCountQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -516,11 +541,11 @@ export type GetWalletRankQueryVariables = Exact<{ [key: string]: never; }>;
 export type GetWalletRankQuery = { __typename?: 'Query', getTotalPage: { __typename?: 'Total', walletRanks: Array<{ __typename?: 'UserRanking', value: number, userPreview: { __typename?: 'UserPreview', id: string, login: string, imgUrl?: string | null } }> } };
 
 
-export const GetEvalLogsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetEvalLogs"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"pageSize"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"pageNumber"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"projectName"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"outstandingOnly"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Boolean"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"corrector"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"corrected"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getEvalLogs"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"pageSize"},"value":{"kind":"Variable","name":{"kind":"Name","value":"pageSize"}}},{"kind":"Argument","name":{"kind":"Name","value":"pageNumber"},"value":{"kind":"Variable","name":{"kind":"Name","value":"pageNumber"}}},{"kind":"Argument","name":{"kind":"Name","value":"projectName"},"value":{"kind":"Variable","name":{"kind":"Name","value":"projectName"}}},{"kind":"Argument","name":{"kind":"Name","value":"outstandingOnly"},"value":{"kind":"Variable","name":{"kind":"Name","value":"outstandingOnly"}}},{"kind":"Argument","name":{"kind":"Name","value":"corrector"},"value":{"kind":"Variable","name":{"kind":"Name","value":"corrector"}}},{"kind":"Argument","name":{"kind":"Name","value":"corrected"},"value":{"kind":"Variable","name":{"kind":"Name","value":"corrected"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"header"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"corrector"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"login"}},{"kind":"Field","name":{"kind":"Name","value":"imgUrl"}}]}},{"kind":"Field","name":{"kind":"Name","value":"teamPreview"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"beginAt"}},{"kind":"Field","name":{"kind":"Name","value":"projectPreview"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"flag"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"isPositive"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"correctorReview"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mark"}},{"kind":"Field","name":{"kind":"Name","value":"review"}}]}},{"kind":"Field","name":{"kind":"Name","value":"correctedsReview"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mark"}},{"kind":"Field","name":{"kind":"Name","value":"review"}}]}}]}}]}}]} as unknown as DocumentNode<GetEvalLogsQuery, GetEvalLogsQueryVariables>;
-export const GetCurrMonthBlackholedCntDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCurrMonthBlackholedCnt"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getHomePage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"currMonthBlackholedCnt"}},{"kind":"Field","name":{"kind":"Name","value":"lastMonthBlackholedCnt"}}]}}]}}]} as unknown as DocumentNode<GetCurrMonthBlackholedCntQuery, GetCurrMonthBlackholedCntQueryVariables>;
+export const FindProjectPreviewDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"FindProjectPreview"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"name"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"findProjectPreview"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"name"},"value":{"kind":"Variable","name":{"kind":"Name","value":"name"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]} as unknown as DocumentNode<FindProjectPreviewQuery, FindProjectPreviewQueryVariables>;
+export const GetCurrMonthBlackholedCntDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCurrMonthBlackholedCnt"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getHomePage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"currMonthBlackholedCnt"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"}},{"kind":"Field","name":{"kind":"Name","value":"from"}},{"kind":"Field","name":{"kind":"Name","value":"to"}}]}},{"kind":"Field","name":{"kind":"Name","value":"lastMonthBlackholedCnt"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"}},{"kind":"Field","name":{"kind":"Name","value":"from"}},{"kind":"Field","name":{"kind":"Name","value":"to"}}]}}]}}]}}]} as unknown as DocumentNode<GetCurrMonthBlackholedCntQuery, GetCurrMonthBlackholedCntQueryVariables>;
 export const GetCurrRegisteredCntRankDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCurrRegisteredCntRank"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getHomePage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"currRegisteredCntRank"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"projectPreview"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]}}]} as unknown as DocumentNode<GetCurrRegisteredCntRankQuery, GetCurrRegisteredCntRankQueryVariables>;
-export const GetCurrWeekEvalCntDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCurrWeekEvalCnt"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getHomePage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"currWeekEvalCnt"}},{"kind":"Field","name":{"kind":"Name","value":"lastWeekEvalCnt"}}]}}]}}]} as unknown as DocumentNode<GetCurrWeekEvalCntQuery, GetCurrWeekEvalCntQueryVariables>;
-export const GetLastExamResultDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetLastExamResult"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getHomePage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lastExamResult"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rank"}},{"kind":"Field","name":{"kind":"Name","value":"passCnt"}},{"kind":"Field","name":{"kind":"Name","value":"totalCnt"}}]}}]}}]}}]} as unknown as DocumentNode<GetLastExamResultQuery, GetLastExamResultQueryVariables>;
+export const GetCurrWeekEvalCntDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCurrWeekEvalCnt"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getHomePage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"currWeekEvalCnt"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"}},{"kind":"Field","name":{"kind":"Name","value":"from"}},{"kind":"Field","name":{"kind":"Name","value":"to"}}]}},{"kind":"Field","name":{"kind":"Name","value":"lastWeekEvalCnt"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"}},{"kind":"Field","name":{"kind":"Name","value":"from"}},{"kind":"Field","name":{"kind":"Name","value":"to"}}]}}]}}]}}]} as unknown as DocumentNode<GetCurrWeekEvalCntQuery, GetCurrWeekEvalCntQueryVariables>;
+export const GetLastExamResultDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetLastExamResult"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getHomePage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lastExamResult"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rank"}},{"kind":"Field","name":{"kind":"Name","value":"passCnt"}},{"kind":"Field","name":{"kind":"Name","value":"totalCnt"}}]}},{"kind":"Field","name":{"kind":"Name","value":"from"}},{"kind":"Field","name":{"kind":"Name","value":"to"}}]}}]}}]}}]} as unknown as DocumentNode<GetLastExamResultQuery, GetLastExamResultQueryVariables>;
 export const GetLevelRankDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetLevelRank"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getHomePage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"levelRank"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"userPreview"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"login"}},{"kind":"Field","name":{"kind":"Name","value":"imgUrl"}}]}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]}}]} as unknown as DocumentNode<GetLevelRankQuery, GetLevelRankQueryVariables>;
 export const GetMonthlyAccessTimeRankDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetMonthlyAccessTimeRank"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getHomePage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"monthlyAccessTimeRank"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"userPreview"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"login"}},{"kind":"Field","name":{"kind":"Name","value":"imgUrl"}}]}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]}}]} as unknown as DocumentNode<GetMonthlyAccessTimeRankQuery, GetMonthlyAccessTimeRankQueryVariables>;
 export const GetMonthlyExpIncrementRankDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetMonthlyExpIncrementRank"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getHomePage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"monthlyExpIncrementRank"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"userPreview"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"login"}},{"kind":"Field","name":{"kind":"Name","value":"imgUrl"}}]}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]}}]} as unknown as DocumentNode<GetMonthlyExpIncrementRankQuery, GetMonthlyExpIncrementRankQueryVariables>;
@@ -528,14 +553,14 @@ export const GetTotalEvalCntRankDocument = {"kind":"Document","definitions":[{"k
 export const GetAverageDurationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getAverageDuration"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"uid"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getPersonalEvalPage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"uid"},"value":{"kind":"Variable","name":{"kind":"Name","value":"uid"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"averageDuration"}}]}}]}}]} as unknown as DocumentNode<GetAverageDurationQuery, GetAverageDurationQueryVariables>;
 export const GetPersonalAverageFeedbackLengthDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getPersonalAverageFeedbackLength"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"uid"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getPersonalEvalPage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"uid"},"value":{"kind":"Variable","name":{"kind":"Name","value":"uid"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"averageFeedbackLength"}}]}}]}}]} as unknown as DocumentNode<GetPersonalAverageFeedbackLengthQuery, GetPersonalAverageFeedbackLengthQueryVariables>;
 export const GetAverageFinalMarkDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getAverageFinalMark"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"uid"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getPersonalEvalPage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"uid"},"value":{"kind":"Variable","name":{"kind":"Name","value":"uid"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"averageFinalMark"}}]}}]}}]} as unknown as DocumentNode<GetAverageFinalMarkQuery, GetAverageFinalMarkQueryVariables>;
-export const GetMonthlyEvalCntDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getMonthlyEvalCnt"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"uid"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getPersonalEvalPage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"uid"},"value":{"kind":"Variable","name":{"kind":"Name","value":"uid"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"currMonthCount"}},{"kind":"Field","name":{"kind":"Name","value":"lastMonthCount"}}]}}]}}]} as unknown as DocumentNode<GetMonthlyEvalCntQuery, GetMonthlyEvalCntQueryVariables>;
+export const GetMonthlyEvalCntDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getMonthlyEvalCnt"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"uid"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getPersonalEvalPage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"uid"},"value":{"kind":"Variable","name":{"kind":"Name","value":"uid"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"currMonthCount"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"}},{"kind":"Field","name":{"kind":"Name","value":"from"}},{"kind":"Field","name":{"kind":"Name","value":"to"}}]}},{"kind":"Field","name":{"kind":"Name","value":"lastMonthCount"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"}},{"kind":"Field","name":{"kind":"Name","value":"from"}},{"kind":"Field","name":{"kind":"Name","value":"to"}}]}}]}}]}}]} as unknown as DocumentNode<GetMonthlyEvalCntQuery, GetMonthlyEvalCntQueryVariables>;
 export const GetPersonalTotalEvalCntDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getPersonalTotalEvalCnt"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"uid"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getPersonalEvalPage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"uid"},"value":{"kind":"Variable","name":{"kind":"Name","value":"uid"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"totalCount"}}]}}]}}]} as unknown as DocumentNode<GetPersonalTotalEvalCntQuery, GetPersonalTotalEvalCntQueryVariables>;
 export const GetLastPassDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getLastPass"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getPersonGeneralPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"teamInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lastPass"}}]}}]}}]}}]} as unknown as DocumentNode<GetLastPassQuery, GetLastPassQueryVariables>;
 export const GetLastRegisteredDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getLastRegistered"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getPersonGeneralPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"teamInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lastRegistered"}}]}}]}}]}}]} as unknown as DocumentNode<GetLastRegisteredQuery, GetLastRegisteredQueryVariables>;
-export const GetLevelGraphDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getLevelGraph"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getPersonGeneralPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"levelGraphs"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"date"}},{"kind":"Field","name":{"kind":"Name","value":"userLevel"}},{"kind":"Field","name":{"kind":"Name","value":"averageLevel"}}]}}]}}]}}]} as unknown as DocumentNode<GetLevelGraphQuery, GetLevelGraphQueryVariables>;
-export const GetLogtimeInfoDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getLogtimeInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getPersonGeneralPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logtimeInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"currMonthLogtime"}},{"kind":"Field","name":{"kind":"Name","value":"lastMonthLogtime"}}]}}]}}]}}]} as unknown as DocumentNode<GetLogtimeInfoQuery, GetLogtimeInfoQueryVariables>;
-export const GetPrefferedClusterDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getPrefferedCluster"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getPersonGeneralPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logtimeInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"preferredCluster"}}]}}]}}]}}]} as unknown as DocumentNode<GetPrefferedClusterQuery, GetPrefferedClusterQueryVariables>;
-export const GetPrefferedTimeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getPrefferedTime"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getPersonGeneralPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logtimeInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"preferredTime"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"morning"}},{"kind":"Field","name":{"kind":"Name","value":"daytime"}},{"kind":"Field","name":{"kind":"Name","value":"evening"}},{"kind":"Field","name":{"kind":"Name","value":"night"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetPrefferedTimeQuery, GetPrefferedTimeQueryVariables>;
+export const GetLevelGraphDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getLevelGraph"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getPersonGeneralPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"levelGraphs"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"date"}},{"kind":"Field","name":{"kind":"Name","value":"userLevel"}},{"kind":"Field","name":{"kind":"Name","value":"averageLevel"}}]}},{"kind":"Field","name":{"kind":"Name","value":"from"}},{"kind":"Field","name":{"kind":"Name","value":"to"}}]}}]}}]}}]} as unknown as DocumentNode<GetLevelGraphQuery, GetLevelGraphQueryVariables>;
+export const GetLogtimeInfoDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getLogtimeInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getPersonGeneralPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logtimeInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"currMonthLogtime"}},{"kind":"Field","name":{"kind":"Name","value":"lastMonthLogtime"}},{"kind":"Field","name":{"kind":"Name","value":"preferredTime"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"morning"}},{"kind":"Field","name":{"kind":"Name","value":"daytime"}},{"kind":"Field","name":{"kind":"Name","value":"evening"}},{"kind":"Field","name":{"kind":"Name","value":"night"}}]}},{"kind":"Field","name":{"kind":"Name","value":"preferredCluster"}}]}},{"kind":"Field","name":{"kind":"Name","value":"from"}},{"kind":"Field","name":{"kind":"Name","value":"to"}}]}}]}}]}}]} as unknown as DocumentNode<GetLogtimeInfoQuery, GetLogtimeInfoQueryVariables>;
+export const GetPrefferedClusterDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getPrefferedCluster"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getPersonGeneralPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logtimeInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"preferredCluster"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetPrefferedClusterQuery, GetPrefferedClusterQueryVariables>;
+export const GetPrefferedTimeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getPrefferedTime"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getPersonGeneralPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logtimeInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"preferredTime"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"morning"}},{"kind":"Field","name":{"kind":"Name","value":"daytime"}},{"kind":"Field","name":{"kind":"Name","value":"evening"}},{"kind":"Field","name":{"kind":"Name","value":"night"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetPrefferedTimeQuery, GetPrefferedTimeQueryVariables>;
 export const GetTeamInfoDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getTeamInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getPersonGeneralPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"teamInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"teams"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"occurrence"}},{"kind":"Field","name":{"kind":"Name","value":"closedAt"}},{"kind":"Field","name":{"kind":"Name","value":"firstCreatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"finalMark"}},{"kind":"Field","name":{"kind":"Name","value":"isValidated"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetTeamInfoQuery, GetTeamInfoQueryVariables>;
 export const GetUserProfileDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetUserProfile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getPersonGeneralPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"userProfile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"login"}},{"kind":"Field","name":{"kind":"Name","value":"grade"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"coalition"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"imgUrl"}},{"kind":"Field","name":{"kind":"Name","value":"titles"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"isSelected"}}]}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"pooledAt"}},{"kind":"Field","name":{"kind":"Name","value":"blackholedAt"}},{"kind":"Field","name":{"kind":"Name","value":"wallet"}},{"kind":"Field","name":{"kind":"Name","value":"correctionPoint"}},{"kind":"Field","name":{"kind":"Name","value":"scoreInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"value"}},{"kind":"Field","name":{"kind":"Name","value":"rankInCoalition"}},{"kind":"Field","name":{"kind":"Name","value":"rankInTotal"}}]}},{"kind":"Field","name":{"kind":"Name","value":"levelRank"}}]}}]}}]}}]} as unknown as DocumentNode<GetUserProfileQuery, GetUserProfileQueryVariables>;
 export const GetActiveUserCntRecordDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getActiveUserCntRecord"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getTotalPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"activeUserCntRecords"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"at"}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]}}]} as unknown as DocumentNode<GetActiveUserCntRecordQuery, GetActiveUserCntRecordQueryVariables>;
@@ -543,11 +568,10 @@ export const GetAverageCircleDurationDocument = {"kind":"Document","definitions"
 export const GetAverageFeedbackLengthDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getAverageFeedbackLength"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getTotalPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"averageFeedbackLength"}}]}}]}}]} as unknown as DocumentNode<GetAverageFeedbackLengthQuery, GetAverageFeedbackLengthQueryVariables>;
 export const GetWhenGoBlackHoleDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getWhenGoBlackHole"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getTotalPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blackholedCntPerCircles"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"circle"}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]}}]} as unknown as DocumentNode<GetWhenGoBlackHoleQuery, GetWhenGoBlackHoleQueryVariables>;
 export const GetCoalitionScoreRecordDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getCoalitionScoreRecord"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getTotalPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"scoreRecords"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"coalition"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"records"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"at"}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetCoalitionScoreRecordQuery, GetCoalitionScoreRecordQueryVariables>;
-export const GetCoalitionTotalScoresDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getCoalitionTotalScores"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getTotalPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"totalScores"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"coalition"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"score"}}]}}]}}]}}]} as unknown as DocumentNode<GetCoalitionTotalScoresQuery, GetCoalitionTotalScoresQueryVariables>;
+export const GetCoalitionTotalScoresDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getCoalitionTotalScores"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getTotalPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"totalScores"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"coalition"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"imageUrl"}},{"kind":"Field","name":{"kind":"Name","value":"coverUrl"}},{"kind":"Field","name":{"kind":"Name","value":"color"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}}]}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]}}]} as unknown as DocumentNode<GetCoalitionTotalScoresQuery, GetCoalitionTotalScoresQueryVariables>;
 export const GetCorrectionPointRankDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getCorrectionPointRank"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getTotalPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"correctionPointRanks"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"userPreview"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"login"}},{"kind":"Field","name":{"kind":"Name","value":"imgUrl"}}]}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]}}]} as unknown as DocumentNode<GetCorrectionPointRankQuery, GetCorrectionPointRankQueryVariables>;
-export const GetCoalitionScoreRankDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getCoalitionScoreRank"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getTotalPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"monthlyScoreRanks"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"userPreview"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"login"}},{"kind":"Field","name":{"kind":"Name","value":"imgUrl"}}]}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]}}]} as unknown as DocumentNode<GetCoalitionScoreRankQuery, GetCoalitionScoreRankQueryVariables>;
+export const GetCoalitionScoreRankDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getCoalitionScoreRank"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getTotalPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"monthlyScoreRanks"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"userPreview"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"login"}},{"kind":"Field","name":{"kind":"Name","value":"imgUrl"}}]}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}},{"kind":"Field","name":{"kind":"Name","value":"from"}},{"kind":"Field","name":{"kind":"Name","value":"to"}}]}}]}}]}}]} as unknown as DocumentNode<GetCoalitionScoreRankQuery, GetCoalitionScoreRankQueryVariables>;
 export const GetProjectInfoDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetProjectInfo"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"projectName"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getTotalPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"projectInfo"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"projectName"},"value":{"kind":"Variable","name":{"kind":"Name","value":"projectName"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"skills"}},{"kind":"Field","name":{"kind":"Name","value":"averageDurationTime"}},{"kind":"Field","name":{"kind":"Name","value":"averagePassFinalmark"}},{"kind":"Field","name":{"kind":"Name","value":"totalCloseCnt"}},{"kind":"Field","name":{"kind":"Name","value":"currRegisteredCnt"}},{"kind":"Field","name":{"kind":"Name","value":"passPercentage"}},{"kind":"Field","name":{"kind":"Name","value":"totalEvalCnt"}}]}}]}}]}}]} as unknown as DocumentNode<GetProjectInfoQuery, GetProjectInfoQueryVariables>;
-export const FindProjectPreviewDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"FindProjectPreview"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"name"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"findProjectPreview"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"name"},"value":{"kind":"Variable","name":{"kind":"Name","value":"name"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]} as unknown as DocumentNode<FindProjectPreviewQuery, FindProjectPreviewQueryVariables>;
 export const GetTotalEvalCountDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getTotalEvalCount"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getTotalPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"totalEvalCount"}}]}}]}}]} as unknown as DocumentNode<GetTotalEvalCountQuery, GetTotalEvalCountQueryVariables>;
 export const GetUserCntPerLevelsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUserCntPerLevels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getTotalPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"userCntPerLevels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"userCnt"}},{"kind":"Field","name":{"kind":"Name","value":"level"}}]}}]}}]}}]} as unknown as DocumentNode<GetUserCntPerLevelsQuery, GetUserCntPerLevelsQueryVariables>;
 export const GetWalletRankDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getWalletRank"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getTotalPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"walletRanks"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"userPreview"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"login"}},{"kind":"Field","name":{"kind":"Name","value":"imgUrl"}}]}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]}}]} as unknown as DocumentNode<GetWalletRankQuery, GetWalletRankQueryVariables>;

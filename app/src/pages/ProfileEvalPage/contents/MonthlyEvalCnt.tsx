@@ -10,8 +10,16 @@ import { useQuery } from '@apollo/client';
 const GET_MONTHLY_EVAL_CNT = gql(/* GraphQL */ `
   query getMonthlyEvalCnt($uid: Int!) {
     getPersonalEvalPage(uid: $uid) {
-      currMonthCount
-      lastMonthCount
+      currMonthCount {
+        data
+        from
+        to
+      }
+      lastMonthCount {
+        data
+        from
+        to
+      }
     }
   }
 `);
@@ -28,6 +36,10 @@ export const MonthlyEvalCnt = () => {
   const { currMonthCount, lastMonthCount } = data.getPersonalEvalPage;
 
   return (
-    <NumberCompare curr={currMonthCount} last={lastMonthCount} unit="회" />
+    <NumberCompare
+      curr={currMonthCount.data}
+      last={lastMonthCount.data}
+      unit="회"
+    />
   );
 };

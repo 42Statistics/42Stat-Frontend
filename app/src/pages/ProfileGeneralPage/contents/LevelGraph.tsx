@@ -12,9 +12,13 @@ const GET_LEVEL_GRAPH = gql(/* GraphQL */ `
   query getLevelGraph {
     getPersonGeneralPage {
       levelGraphs {
-        date
-        userLevel
-        averageLevel
+        data {
+          date
+          userLevel
+          averageLevel
+        }
+        from
+        to
       }
     }
   }
@@ -28,11 +32,11 @@ export const LevelGraph = () => {
   if (!data) return <ApolloNotFound />;
 
   const { levelGraphs } = data.getPersonGeneralPage;
-  const userLevelSeries = levelGraphs.map(({ date, userLevel }) => ({
+  const userLevelSeries = levelGraphs.data.map(({ date, userLevel }) => ({
     x: date,
     y: userLevel,
   }));
-  const averageLevelSeries = levelGraphs.map(({ date, averageLevel }) => ({
+  const averageLevelSeries = levelGraphs.data.map(({ date, averageLevel }) => ({
     x: date,
     y: averageLevel,
   }));

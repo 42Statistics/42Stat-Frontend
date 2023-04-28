@@ -4,14 +4,22 @@ import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
-import { NumberDefault } from '@/components/elements/DashboardContentView/Text';
+import { NumberCompare } from '@/components/elements/DashboardContentView/Text';
 import { useQuery } from '@apollo/client';
 
 const GET_CURR_MONTH_BLACKHOLED_CNT = gql(/* GraphQL */ `
   query GetCurrMonthBlackholedCnt {
     getHomePage {
-      currMonthBlackholedCnt
-      lastMonthBlackholedCnt
+      currMonthBlackholedCnt {
+        data
+        from
+        to
+      }
+      lastMonthBlackholedCnt {
+        data
+        from
+        to
+      }
     }
   }
 `);
@@ -23,8 +31,14 @@ export const CurrMonthBlackholedCnt = () => {
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 
-  const { currMonthBlackholedCnt } = data.getHomePage;
+  const { currMonthBlackholedCnt, lastMonthBlackholedCnt } = data.getHomePage;
   const unit = '명';
 
-  return <NumberDefault number={currMonthBlackholedCnt} unit={unit} />;
+  return (
+    <NumberCompare
+      curr={currMonthBlackholedCnt.data}
+      last={lastMonthBlackholedCnt.data}
+      unit={unit}
+    />
+  );
 };

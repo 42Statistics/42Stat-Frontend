@@ -10,8 +10,16 @@ import { useQuery } from '@apollo/client';
 const GET_CURR_WEEK_EVAL_CNT = gql(/* GraphQL */ `
   query GetCurrWeekEvalCnt {
     getHomePage {
-      currWeekEvalCnt
-      lastWeekEvalCnt
+      currWeekEvalCnt {
+        data
+        from
+        to
+      }
+      lastWeekEvalCnt {
+        data
+        from
+        to
+      }
     }
   }
 `);
@@ -27,6 +35,10 @@ export const CurrWeekEvalCnt = () => {
   const unit = '회';
 
   return (
-    <NumberCompare curr={currWeekEvalCnt} last={lastWeekEvalCnt} unit={unit} />
+    <NumberCompare
+      curr={currWeekEvalCnt.data}
+      last={lastWeekEvalCnt.data}
+      unit={unit}
+    />
   );
 };

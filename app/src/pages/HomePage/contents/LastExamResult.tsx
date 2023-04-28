@@ -11,9 +11,13 @@ const GET_LAST_EXAM_RESULT = gql(/* GraphQL */ `
   query GetLastExamResult {
     getHomePage {
       lastExamResult {
-        rank
-        passCnt
-        totalCnt
+        data {
+          rank
+          passCnt
+          totalCnt
+        }
+        from
+        to
       }
     }
   }
@@ -27,8 +31,8 @@ export const LastExamResult = () => {
   if (!data) return <ApolloNotFound />;
 
   const { lastExamResult } = data.getHomePage;
-  const categories = lastExamResult.map(({ rank }) => rank);
-  const seriesData = lastExamResult.map(
+  const categories = lastExamResult.data.map(({ rank }) => rank);
+  const seriesData = lastExamResult.data.map(
     ({ passCnt, totalCnt }) => passCnt / totalCnt,
   );
   const series: ApexAxisChartSeries = [

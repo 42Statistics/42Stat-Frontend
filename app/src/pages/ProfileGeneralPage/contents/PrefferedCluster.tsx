@@ -11,7 +11,9 @@ const GET_PREFERRED_CLUSTER = gql(/* GraphQL */ `
   query getPrefferedCluster {
     getPersonGeneralPage {
       logtimeInfo {
-        preferredCluster
+        data {
+          preferredCluster
+        }
       }
     }
   }
@@ -23,7 +25,7 @@ export const PrefferedCluster = () => {
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 
-  const { preferredCluster } = data.getPersonGeneralPage.logtimeInfo;
+  const { preferredCluster } = data.getPersonGeneralPage.logtimeInfo.data;
 
   return <TextDefault text={`클러스터 ${preferredCluster}`} />;
 };

@@ -11,8 +11,19 @@ const GET_LOGTIME_INFO = gql(/* GraphQL */ `
   query getLogtimeInfo {
     getPersonGeneralPage {
       logtimeInfo {
-        currMonthLogtime
-        lastMonthLogtime
+        data {
+          currMonthLogtime
+          lastMonthLogtime
+          preferredTime {
+            morning
+            daytime
+            evening
+            night
+          }
+          preferredCluster
+        }
+        from
+        to
       }
     }
   }
@@ -26,7 +37,7 @@ export const LogtimeInfo = () => {
   if (!data) return <ApolloNotFound />;
 
   const { currMonthLogtime, lastMonthLogtime } =
-    data.getPersonGeneralPage.logtimeInfo;
+    data.getPersonGeneralPage.logtimeInfo.data;
 
   return (
     <NumberCompare

@@ -1,4 +1,10 @@
-export type NavMenu = 'Home' | 'Total' | 'EvalLogSearch' | 'About' | 'Settings';
+export type NavMenu =
+  | 'Home'
+  | 'Total'
+  | 'MyProfile'
+  | 'EvalLogSearch'
+  | 'About'
+  | 'Settings';
 
 export type NavMenuIconSvgProps = {
   isFocused: boolean;

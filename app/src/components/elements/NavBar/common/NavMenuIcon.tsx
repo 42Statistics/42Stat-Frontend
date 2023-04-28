@@ -4,6 +4,7 @@ import {
   MdContentPasteSearch,
   MdHelp,
   MdHome,
+  MdPerson,
   MdSettings,
 } from 'react-icons/md';
 import { RiGlobalFill } from 'react-icons/ri';
@@ -24,6 +25,8 @@ export const NavMenuIcon = ({ menu, isFocused }: NavMenuIconProps) => {
       return <MdHome size="24px" fill={color} />;
     case 'Total':
       return <RiGlobalFill size="24px" fill={color} />;
+    case 'MyProfile':
+      return <MdPerson size="24px" fill={color} />;
     case 'EvalLogSearch':
       return <MdContentPasteSearch size="24px" fill={color} />;
     case 'About':

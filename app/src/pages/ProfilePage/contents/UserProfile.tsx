@@ -8,7 +8,7 @@ import {
   Text,
   VStack,
 } from '@/components/common';
-import { CoalitionMark } from '@/components/elements/CoalitionMark';
+// import { CoalitionMark } from '@/components/elements/CoalitionMark';
 import {
   ApolloBadRequest,
   ApolloNotFound,
@@ -37,6 +37,12 @@ const GET_USER_PROFILE = gql(/* GraphQL */ `
         coalition {
           id
           name
+          slug
+          imageUrl
+          coverUrl
+          color
+          score
+          userId
         }
         imgUrl
         titles {
@@ -109,7 +115,7 @@ export const UserProfile = () => {
             >
               {titleCase(name)}
             </Text>
-            <CoalitionMark coalition={coalition} width="24px" />
+            {/* <CoalitionMark coalition={coalition} width="24px" /> */}
           </HStack>
         </VStack>
         <HStack>
@@ -190,7 +196,7 @@ export const UserProfile = () => {
                 <Text>{numberWithUnitFormatter(scoreInfo.value, 'P')}</Text>
                 <HStack spacing="0.5rem">
                   <Text>(</Text>
-                  <CoalitionMark width="14px" coalition={coalition} />
+                  {/* <CoalitionMark width="14px" coalition={coalition} /> */}
                   <Text>
                     {`${scoreInfo.rankInCoalition.toLocaleString()}위 / 전체 ${scoreInfo.rankInTotal.toLocaleString()}위)`}
                   </Text>

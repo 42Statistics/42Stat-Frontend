@@ -6,6 +6,7 @@ import {
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
 import { numberWithUnitFormatter } from '@/utils/formatters';
+import { isDefined } from '@/utils/isDefined';
 import { useQuery } from '@apollo/client';
 
 export const GET_COALITION_SCORE_RECORD = gql(/* GraphQL */ `
@@ -15,6 +16,12 @@ export const GET_COALITION_SCORE_RECORD = gql(/* GraphQL */ `
         coalition {
           id
           name
+          slug
+          imageUrl
+          coverUrl
+          color
+          score
+          userId
         }
         records {
           at
@@ -33,26 +40,30 @@ export const CoalitionScoreDynamic = () => {
   if (!data) return <ApolloNotFound />;
 
   const { scoreRecords } = data.getTotalPage;
+  const colorList: string[] = [];
   const series = scoreRecords.map(({ coalition, records }) => {
-    const seriesData = records.map(({ at, value }) => ({
+    const seriesData = records.filter(isDefined).map(({ at, value }) => ({
       x: at,
       y: value,
     }));
+    colorList.push(coalition.color || 'black');
     return {
       name: coalition.name,
       data: seriesData,
     };
   });
 
-  return <CoalitionScoreDynamicChart series={series} />;
+  return <CoalitionScoreDynamicChart series={series} colors={colorList} />;
 };
 
 type CoalitionScoreDynamicChartProps = {
   series: ApexAxisChartSeries;
+  colors: string[];
 };
 
 const CoalitionScoreDynamicChart = ({
   series,
+  colors,
 }: CoalitionScoreDynamicChartProps) => {
   const options: ApexCharts.ApexOptions = {
     xaxis: {
@@ -61,6 +72,7 @@ const CoalitionScoreDynamicChart = ({
         format: 'yy.MM.',
       },
     },
+    colors: colors,
     yaxis: {
       labels: {
         formatter: (value) => numberWithUnitFormatter(value, 'P'),

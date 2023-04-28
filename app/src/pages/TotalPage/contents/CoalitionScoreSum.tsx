@@ -34,8 +34,16 @@ export const CoalitionScoreSum = () => {
   if (!data) return <ApolloNotFound />;
 
   const { totalScores } = data.getTotalPage;
-  const categories = totalScores.map(({ coalition }) => coalition.name);
-  const seriesData = totalScores.map(({ value }) => value);
+  const categories: string[] = [];
+  const seriesData: number[] = [];
+  const colorList: string[] = [];
+  totalScores.forEach(({ coalition, value }) => {
+    categories.push(coalition.name);
+    colorList.push(coalition.color || 'black');
+    seriesData.push(value);
+  });
+  // const categories = totalScores.map(({ coalition }) => coalition.name);
+  // const seriesData = totalScores.map(({ value }) => value);
 
   const series: ApexAxisChartSeries = [
     {
@@ -44,17 +52,25 @@ export const CoalitionScoreSum = () => {
     },
   ];
 
-  return <CoalitionScoreSumChart categories={categories} series={series} />;
+  return (
+    <CoalitionScoreSumChart
+      categories={categories}
+      series={series}
+      colors={colorList}
+    />
+  );
 };
 
 type CoalitionScoreSumChartProps = {
   categories: string[];
   series: ApexAxisChartSeries;
+  colors: string[];
 };
 
 const CoalitionScoreSumChart = ({
   categories,
   series,
+  colors,
 }: CoalitionScoreSumChartProps) => {
   const theme = useTheme();
 
@@ -64,12 +80,8 @@ const CoalitionScoreSumChart = ({
         distributed: true,
       },
     },
-    // colors: [
-    //   theme.colors.coalition.gun,
-    //   theme.colors.coalition.gon,
-    //   theme.colors.coalition.gam,
-    //   theme.colors.coalition.lee,
-    // ],
+
+    colors: colors,
 
     xaxis: {
       categories,

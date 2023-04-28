@@ -4,7 +4,8 @@ export const useNavMenu = () => {
   const options: NavMenuOption[] = [
     { menu: 'Home', text: '홈', path: '/home' },
     { menu: 'MyProfile', text: '내 정보', path: '/profile/me' },
-    { menu: 'Total', text: '전체', path: '/total' },
+    { menu: 'Stat', text: '통계', path: '/stat' },
+    { menu: 'LeaderBoard', text: '랭킹', path: '/leaderboard' },
     {
       menu: 'EvalLogSearch',
       text: '평가로그 검색기',

@@ -5,7 +5,7 @@ import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
-import { ProjectSearchBar } from '@/pages/TotalPage/contents/ProjectInfo/ProjectSearchBar';
+import { ProjectSearchBar } from '@/pages/StatPage/contents/ProjectInfo/ProjectSearchBar';
 import { Desktop, Mobile, Tablet } from '@/utils/responsive/Device';
 import { useLazyQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';

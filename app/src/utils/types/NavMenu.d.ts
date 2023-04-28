@@ -1,6 +1,7 @@
 export type NavMenu =
   | 'Home'
-  | 'Total'
+  | 'Stat'
+  | 'LeaderBoard'
   | 'MyProfile'
   | 'EvalLogSearch'
   | 'About'

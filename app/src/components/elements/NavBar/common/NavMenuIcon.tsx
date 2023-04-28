@@ -2,12 +2,13 @@ import { NavMenu } from '@/utils/types/NavMenu';
 import { useTheme } from '@emotion/react';
 import {
   MdContentPasteSearch,
+  MdEqualizer,
   MdHelp,
   MdHome,
+  MdOutlineEmojiEvents,
   MdPerson,
   MdSettings,
 } from 'react-icons/md';
-import { RiGlobalFill } from 'react-icons/ri';
 
 type NavMenuIconProps = {
   menu: NavMenu;
@@ -23,8 +24,10 @@ export const NavMenuIcon = ({ menu, isFocused }: NavMenuIconProps) => {
   switch (menu) {
     case 'Home':
       return <MdHome size="24px" fill={color} />;
-    case 'Total':
-      return <RiGlobalFill size="24px" fill={color} />;
+    case 'Stat':
+      return <MdEqualizer size="24px" fill={color} />;
+    case 'LeaderBoard':
+      return <MdOutlineEmojiEvents size="24px" fill={color} />;
     case 'MyProfile':
       return <MdPerson size="24px" fill={color} />;
     case 'EvalLogSearch':

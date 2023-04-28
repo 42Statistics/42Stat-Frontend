@@ -20,7 +20,7 @@ import {
   WalletRanks,
 } from '../contents';
 
-export const useTotalPageDashboard = () => ({
+export const useStatPageDashboard = () => ({
   contents,
   desktopRows,
   tabletRows,

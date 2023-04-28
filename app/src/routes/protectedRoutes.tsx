@@ -6,9 +6,10 @@ import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 
 const { HomePage } = lazyImport(() => import('@/pages/HomePage'), 'HomePage');
-const { TotalPage } = lazyImport(
-  () => import('@/pages/TotalPage'),
-  'TotalPage',
+const { StatPage } = lazyImport(() => import('@/pages/StatPage'), 'StatPage');
+const { LeaderBoardPage } = lazyImport(
+  () => import('@/pages/LeaderBoardPage'),
+  'LeaderBoardPage',
 );
 const { EvalLogSearchPage } = lazyImport(
   () => import('@/pages/EvalLogSearchPage'),
@@ -59,7 +60,8 @@ export const protectedRoutes = [
     element: <DashboardApp />,
     children: [
       { path: '/home', element: <HomePage /> },
-      { path: '/total', element: <TotalPage /> },
+      { path: '/stat', element: <StatPage /> },
+      { path: '/leaderboard', element: <LeaderBoardPage /> },
       { path: '/profile/:username', element: <ProfilePage /> },
       { path: '/about', element: <AboutPage /> },
       { path: '/settings', element: <SettingsPage /> },

@@ -43,6 +43,6 @@ const PageLayout = styled.main`
   align-items: center;
   width: 100%;
   height: 100%;
-  padding: 2rem;
+  padding: 3rem;
   overflow: auto;
 `;

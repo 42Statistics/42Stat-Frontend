@@ -6,17 +6,16 @@ import {
 } from '@/utils/types/Dashboard';
 
 import {
-  LastPass,
-  LastRegistered,
-  LevelGraph,
-  LogtimeInfo,
-  PrefferedCluster,
-  PrefferedTime,
-  SimilarCharacter,
-  TeamInfo,
+  AverageDuration,
+  AverageFeedbackLength,
+  AverageFinalMark,
+  DestinyUsers,
+  Difficulty,
+  MonthlyEvalCnt,
+  TotalEvalCnt,
 } from '../contents';
 
-export const useProfileGeneralPageDashboard = () => ({
+export const useProfileEvalTabDashboard = () => ({
   contents,
   desktopRows,
   tabletRows,
@@ -26,47 +25,49 @@ export const useProfileGeneralPageDashboard = () => ({
 const contents: DashboardItemProps[] = [
   {
     id: 0,
-    title: '최근 통과한 과제',
-    content: LastPass,
+    title: '월간 평가 횟수',
+    description: '(평가자일 때만 / 2023.01. / 1개월)',
+    content: MonthlyEvalCnt,
   },
   {
     id: 1,
-    title: '최근 신청한 과제',
-    content: LastRegistered,
+    title: '누적 평가 횟수',
+    content: TotalEvalCnt,
   },
   {
     id: 2,
-    title: '월간 출석 시간',
-    description: '(2023.01. / 1개월)',
-    content: LogtimeInfo,
+    title: '평균 평가 시간',
+    description: '(평가자일 때만)',
+    content: AverageDuration,
   },
   {
     id: 3,
-    title: '주 접속 클러스터',
-    description: '(2023.01. / 1개월)',
-    content: PrefferedCluster,
+    title: '평균 평가 점수',
+    description: '(평가자일 때만)',
+    content: AverageFinalMark,
   },
   {
     id: 4,
-    title: '주 접속 시간대',
-    description: '(2023.01. / 1개월)',
-    content: PrefferedTime,
+    title: '평균 피드백 길이',
+    description: '(평가자일 때)',
+    content: AverageFeedbackLength, // TODO: 평가자일 때 & 평가받을 때 분리
   },
   {
     id: 5,
-    content: TeamInfo,
+    title: '평균 피드백 길이',
+    description: '(평가받을 때)',
+    content: AverageFeedbackLength, // TODO: 평가자일 때 & 평가받을 때 분리
   },
   {
     id: 6,
-    title: '이 유저를 캐릭터로 표현한다면?',
-    description: '(과제 점수, 레벨 증가 속도, 접속 시간, 평가 횟수 기준)',
-    content: SimilarCharacter,
+    title: '운명의 장난 스코어',
+    description: '평가에서 가장 자주 마주친 유저 랭킹',
+    content: DestinyUsers,
   },
   {
     id: 7,
-    title: '레벨 증가 그래프',
-    description: '(2023.03.01. 기준 / 과거 1년)',
-    content: LevelGraph,
+    title: '이 유저를 평가자로 만난다면?',
+    content: Difficulty,
   },
 ];
 
@@ -106,41 +107,35 @@ const desktopRows: DesktopDashboardRowType[] = [
       {
         row: 1,
         col: 3,
-        rowSpan: 2,
+        rowSpan: 1,
         colSpan: 1,
         elementId: 4,
       },
-    ],
-  },
-  {
-    row: 2,
-    col: 3,
-    items: [
       {
-        row: 1,
-        col: 1,
-        rowSpan: 2,
-        colSpan: 3,
+        row: 2,
+        col: 3,
+        rowSpan: 1,
+        colSpan: 1,
         elementId: 5,
       },
-    ],
-  },
-  {
-    row: 2,
-    col: 3,
-    items: [
       {
         row: 1,
-        col: 1,
+        col: 4,
         rowSpan: 2,
         colSpan: 1,
         elementId: 6,
       },
+    ],
+  },
+  {
+    row: 2,
+    col: 3,
+    items: [
       {
         row: 1,
-        col: 2,
+        col: 1,
         rowSpan: 2,
-        colSpan: 2,
+        colSpan: 1,
         elementId: 7,
       },
     ],
@@ -183,21 +178,15 @@ const tabletRows: TabletDashboardRowType[] = [
       {
         row: 1,
         col: 3,
-        rowSpan: 2,
+        rowSpan: 1,
         colSpan: 1,
         elementId: 4,
       },
-    ],
-  },
-  {
-    row: 2,
-    col: 2,
-    items: [
       {
-        row: 1,
-        col: 1,
-        rowSpan: 2,
-        colSpan: 3,
+        row: 2,
+        col: 3,
+        rowSpan: 1,
+        colSpan: 1,
         elementId: 5,
       },
     ],
@@ -213,17 +202,11 @@ const tabletRows: TabletDashboardRowType[] = [
         colSpan: 1,
         elementId: 6,
       },
-    ],
-  },
-  {
-    row: 2,
-    col: 2,
-    items: [
       {
         row: 1,
-        col: 1,
+        col: 2,
         rowSpan: 2,
-        colSpan: 2,
+        colSpan: 1,
         elementId: 7,
       },
     ],
@@ -243,15 +226,15 @@ const mobileRows: MobileDashboardRowType[] = [
         elementId: 0,
       },
       {
-        row: 2,
-        col: 1,
+        row: 1,
+        col: 2,
         rowSpan: 1,
         colSpan: 1,
         elementId: 1,
       },
       {
-        row: 1,
-        col: 2,
+        row: 2,
+        col: 1,
         rowSpan: 1,
         colSpan: 1,
         elementId: 2,
@@ -266,25 +249,19 @@ const mobileRows: MobileDashboardRowType[] = [
     ],
   },
   {
-    row: 2,
+    row: 1,
     col: 2,
     items: [
       {
         row: 1,
         col: 1,
-        rowSpan: 2,
+        rowSpan: 1,
         colSpan: 1,
         elementId: 4,
       },
-    ],
-  },
-  {
-    row: 1,
-    col: 1,
-    items: [
       {
         row: 1,
-        col: 1,
+        col: 2,
         rowSpan: 1,
         colSpan: 1,
         elementId: 5,
@@ -292,13 +269,13 @@ const mobileRows: MobileDashboardRowType[] = [
     ],
   },
   {
-    row: 1,
-    col: 1,
+    row: 2,
+    col: 2,
     items: [
       {
         row: 1,
         col: 1,
-        rowSpan: 1,
+        rowSpan: 2,
         colSpan: 1,
         elementId: 6,
       },

@@ -1,49 +1,55 @@
-import { Spinner } from '@/components/common';
+import { Spinner, VStack } from '@/components/common';
+import { Tab, TabList, TabPanel, Tabs } from '@/components/common/Tab';
 import { Dashboard } from '@/components/templates/Dashboard';
 import { lazyImport } from '@/utils/lazyImport';
-import { ProfileMenu } from '@/utils/types/ProfileMenu';
 import styled from '@emotion/styled';
-import { Suspense, useState } from 'react';
+import { Suspense } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
-import { ProfileTabBar } from './ProfileTabBar';
-import { useProfilePage, useProfilePageDashboard } from './hooks';
+import { useProfilePageDashboard } from './hooks';
 
-const { ProfileGeneralPage } = lazyImport(
-  () => import('@/pages/ProfileGeneralPage'),
-  'ProfileGeneralPage',
+const { ProfileGeneralTab } = lazyImport(
+  () => import('@/pages/ProfileGeneralTab'),
+  'ProfileGeneralTab',
 );
-const { ProfileEvalPage } = lazyImport(
-  () => import('@/pages/ProfileEvalPage'),
-  'ProfileEvalPage',
+const { ProfileEvalTab } = lazyImport(
+  () => import('@/pages/ProfileEvalTab'),
+  'ProfileEvalTab',
 );
 
 export const ProfilePage = () => {
   const { username } = useParams();
-  const { options } = useProfilePage();
-  const [selected, setSelected] = useState<ProfileMenu>('General');
 
   return (
     <>
       <Helmet>
         <title>{username} | 42Stat</title>
       </Helmet>
-      <Dashboard {...useProfilePageDashboard()} />
       <ProfilePageLayout>
-        <ProfileTabBar
-          value={selected}
-          onChange={setSelected}
-          options={options}
-        />
+        <VStack w="100%" spacing="2rem">
+          <Dashboard {...useProfilePageDashboard()} />
+          <Tabs>
+            <TabList>
+              <Tab>일반</Tab>
+              <Tab>평가</Tab>
+            </TabList>
+            <TabPanel>
+              <Suspense fallback={<Spinner />}>
+                <ProfileGeneralTab />
+              </Suspense>
+            </TabPanel>
+            <TabPanel>
+              <Suspense fallback={<Spinner />}>
+                <ProfileEvalTab />
+              </Suspense>
+            </TabPanel>
+          </Tabs>
+        </VStack>
       </ProfilePageLayout>
-      <Suspense fallback={<Spinner />}>
-        {selected === 'General' ? <ProfileGeneralPage /> : <ProfileEvalPage />}
-      </Suspense>
     </>
   );
 };
 
 const ProfilePageLayout = styled.div`
   width: 100%;
-  padding: 4rem 3rem;
 `;

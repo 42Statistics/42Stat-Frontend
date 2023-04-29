@@ -6,16 +6,17 @@ import {
 } from '@/utils/types/Dashboard';
 
 import {
-  AverageDuration,
-  AverageFeedbackLength,
-  AverageFinalMark,
-  DestinyUsers,
-  Difficulty,
-  MonthlyEvalCnt,
-  TotalEvalCnt,
+  LastPass,
+  LastRegistered,
+  LevelGraph,
+  LogtimeInfo,
+  PrefferedCluster,
+  PrefferedTime,
+  SimilarCharacter,
+  TeamInfo,
 } from '../contents';
 
-export const useProfileEvalPageDashboard = () => ({
+export const useProfileGeneralTabDashboard = () => ({
   contents,
   desktopRows,
   tabletRows,
@@ -25,49 +26,47 @@ export const useProfileEvalPageDashboard = () => ({
 const contents: DashboardItemProps[] = [
   {
     id: 0,
-    title: '월간 평가 횟수',
-    description: '(평가자일 때만 / 2023.01. / 1개월)',
-    content: MonthlyEvalCnt,
+    title: '최근 통과한 과제',
+    content: LastPass,
   },
   {
     id: 1,
-    title: '누적 평가 횟수',
-    content: TotalEvalCnt,
+    title: '최근 신청한 과제',
+    content: LastRegistered,
   },
   {
     id: 2,
-    title: '평균 평가 시간',
-    description: '(평가자일 때만)',
-    content: AverageDuration,
+    title: '월간 출석 시간',
+    description: '(2023.01. / 1개월)',
+    content: LogtimeInfo,
   },
   {
     id: 3,
-    title: '평균 평가 점수',
-    description: '(평가자일 때만)',
-    content: AverageFinalMark,
+    title: '주 접속 클러스터',
+    description: '(2023.01. / 1개월)',
+    content: PrefferedCluster,
   },
   {
     id: 4,
-    title: '평균 피드백 길이',
-    description: '(평가자일 때)',
-    content: AverageFeedbackLength, // TODO: 평가자일 때 & 평가받을 때 분리
+    title: '주 접속 시간대',
+    description: '(2023.01. / 1개월)',
+    content: PrefferedTime,
   },
   {
     id: 5,
-    title: '평균 피드백 길이',
-    description: '(평가받을 때)',
-    content: AverageFeedbackLength, // TODO: 평가자일 때 & 평가받을 때 분리
+    content: TeamInfo,
   },
   {
     id: 6,
-    title: '운명의 장난 스코어',
-    description: '평가에서 가장 자주 마주친 유저 랭킹',
-    content: DestinyUsers,
+    title: '이 유저를 캐릭터로 표현한다면?',
+    description: '(과제 점수, 레벨 증가 속도, 접속 시간, 평가 횟수 기준)',
+    content: SimilarCharacter,
   },
   {
     id: 7,
-    title: '이 유저를 평가자로 만난다면?',
-    content: Difficulty,
+    title: '레벨 증가 그래프',
+    description: '(2023.03.01. 기준 / 과거 1년)',
+    content: LevelGraph,
   },
 ];
 
@@ -107,23 +106,22 @@ const desktopRows: DesktopDashboardRowType[] = [
       {
         row: 1,
         col: 3,
-        rowSpan: 1,
+        rowSpan: 2,
         colSpan: 1,
         elementId: 4,
       },
-      {
-        row: 2,
-        col: 3,
-        rowSpan: 1,
-        colSpan: 1,
-        elementId: 5,
-      },
+    ],
+  },
+  {
+    row: 2,
+    col: 3,
+    items: [
       {
         row: 1,
-        col: 4,
+        col: 1,
         rowSpan: 2,
-        colSpan: 1,
-        elementId: 6,
+        colSpan: 3,
+        elementId: 5,
       },
     ],
   },
@@ -136,6 +134,13 @@ const desktopRows: DesktopDashboardRowType[] = [
         col: 1,
         rowSpan: 2,
         colSpan: 1,
+        elementId: 6,
+      },
+      {
+        row: 1,
+        col: 2,
+        rowSpan: 2,
+        colSpan: 2,
         elementId: 7,
       },
     ],
@@ -178,15 +183,21 @@ const tabletRows: TabletDashboardRowType[] = [
       {
         row: 1,
         col: 3,
-        rowSpan: 1,
+        rowSpan: 2,
         colSpan: 1,
         elementId: 4,
       },
+    ],
+  },
+  {
+    row: 2,
+    col: 2,
+    items: [
       {
-        row: 2,
-        col: 3,
-        rowSpan: 1,
-        colSpan: 1,
+        row: 1,
+        col: 1,
+        rowSpan: 2,
+        colSpan: 3,
         elementId: 5,
       },
     ],
@@ -202,11 +213,17 @@ const tabletRows: TabletDashboardRowType[] = [
         colSpan: 1,
         elementId: 6,
       },
+    ],
+  },
+  {
+    row: 2,
+    col: 2,
+    items: [
       {
         row: 1,
-        col: 2,
+        col: 1,
         rowSpan: 2,
-        colSpan: 1,
+        colSpan: 2,
         elementId: 7,
       },
     ],
@@ -226,15 +243,15 @@ const mobileRows: MobileDashboardRowType[] = [
         elementId: 0,
       },
       {
-        row: 1,
-        col: 2,
+        row: 2,
+        col: 1,
         rowSpan: 1,
         colSpan: 1,
         elementId: 1,
       },
       {
-        row: 2,
-        col: 1,
+        row: 1,
+        col: 2,
         rowSpan: 1,
         colSpan: 1,
         elementId: 2,
@@ -249,26 +266,6 @@ const mobileRows: MobileDashboardRowType[] = [
     ],
   },
   {
-    row: 1,
-    col: 2,
-    items: [
-      {
-        row: 1,
-        col: 1,
-        rowSpan: 1,
-        colSpan: 1,
-        elementId: 4,
-      },
-      {
-        row: 1,
-        col: 2,
-        rowSpan: 1,
-        colSpan: 1,
-        elementId: 5,
-      },
-    ],
-  },
-  {
     row: 2,
     col: 2,
     items: [
@@ -276,6 +273,32 @@ const mobileRows: MobileDashboardRowType[] = [
         row: 1,
         col: 1,
         rowSpan: 2,
+        colSpan: 1,
+        elementId: 4,
+      },
+    ],
+  },
+  {
+    row: 1,
+    col: 1,
+    items: [
+      {
+        row: 1,
+        col: 1,
+        rowSpan: 1,
+        colSpan: 1,
+        elementId: 5,
+      },
+    ],
+  },
+  {
+    row: 1,
+    col: 1,
+    items: [
+      {
+        row: 1,
+        col: 1,
+        rowSpan: 1,
         colSpan: 1,
         elementId: 6,
       },

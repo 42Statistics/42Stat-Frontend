@@ -40,10 +40,8 @@ export const UserSearchBar = ({ device }: UserSearchBarProps) => {
   const [preview, { loading, error, data }] =
     useLazyQuery(FIND_PROJECT_PREVIEW);
   const isPreviewDisplaying =
-    (debouncedInput !== '' &&
-      data?.findProjectPreview.length !== 0 &&
-      !loading) ||
-    error;
+    debouncedInput !== '' && data?.findProjectPreview.length !== 0 && !loading;
+  // ) || error;
   const inputRef = useRef<HTMLInputElement>(null);
   const theme = useTheme();
   const navigate = useNavigate();
@@ -85,7 +83,7 @@ export const UserSearchBar = ({ device }: UserSearchBarProps) => {
       {isPreviewDisplaying && (
         <UserSearchResult>
           <VStack w="100%" align="start" spacing="1rem">
-            {error && <Text>Error! {error.message}</Text>}
+            {/* {error && <Text>Error! {error.message}</Text>} */}
             {data?.findProjectPreview
               .slice(0, 5)
               .filter(isDefined)

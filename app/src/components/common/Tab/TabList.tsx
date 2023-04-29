@@ -1,0 +1,17 @@
+import styled from '@emotion/styled';
+import { ReactTabsFunctionComponent, TabList, TabListProps } from 'react-tabs';
+
+const CustomTabList: ReactTabsFunctionComponent<TabListProps> = ({
+  children,
+  ...propsExceptChildren
+}) => <StyledTabList {...propsExceptChildren}>{children}</StyledTabList>;
+
+CustomTabList.tabsRole = 'TabList';
+
+const StyledTabList = styled(TabList)`
+  display: flex;
+  margin-bottom: 2rem;
+  border-bottom: ${({ theme }) => `1px solid ${theme.colors.primary.default}`};
+`;
+
+export { CustomTabList as TabList };

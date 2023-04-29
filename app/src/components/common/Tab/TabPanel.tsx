@@ -5,10 +5,9 @@ import {
   TabPanelProps,
 } from 'react-tabs';
 
-const CustomTabPanel: ReactTabsFunctionComponent<TabPanelProps> = ({
-  children,
-  ...propsExceptChildren
-}) => <StyledTabPanel {...propsExceptChildren}>{children}</StyledTabPanel>;
+const CustomTabPanel: ReactTabsFunctionComponent<TabPanelProps> = (props) => (
+  <StyledTabPanel {...props} />
+);
 
 CustomTabPanel.tabsRole = 'TabPanel';
 

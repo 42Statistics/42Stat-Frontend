@@ -29,26 +29,42 @@ export const AverageCircleDurations = () => {
   const { averageCircleDurations } = data.getTotalPage;
   const categories = averageCircleDurations.map(({ circle }) => String(circle));
   const seriesData = averageCircleDurations.map(({ value }) => value);
+
+  const seriesLabel = averageCircleDurations.reduce(
+    (result: number[], { value }, idx) => {
+      const prevValue = idx !== 0 ? averageCircleDurations[idx - 1]?.value : 0;
+      result.push(value - prevValue);
+      return result;
+    },
+    [],
+  );
+
   const series: ApexAxisChartSeries = [
     {
-      name: '통과할 때까지',
+      name: '평균 체류 기간',
       data: seriesData,
     },
   ];
 
   return (
-    <AverageCircleDurationsChart categories={categories} series={series} />
+    <AverageCircleDurationsChart
+      categories={categories}
+      series={series}
+      seriesLabel={seriesLabel}
+    />
   );
 };
 
 type AverageCircleDurationsChartProps = {
   categories: string[];
   series: ApexAxisChartSeries;
+  seriesLabel: number[];
 };
 
 const AverageCircleDurationsChart = ({
   categories,
   series,
+  seriesLabel,
 }: AverageCircleDurationsChartProps) => {
   const options: ApexCharts.ApexOptions = {
     xaxis: {
@@ -65,8 +81,11 @@ const AverageCircleDurationsChart = ({
       },
     },
     tooltip: {
+      shared: false,
       y: {
-        formatter: (value) => numberWithUnitFormatter(value, '일'),
+        // formatter: (value) => numberWithUnitFormatter(value, '일'),
+        formatter: (value, { dataPointIndex }) =>
+          numberWithUnitFormatter(seriesLabel[dataPointIndex], '일'),
       },
     },
   };

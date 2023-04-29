@@ -75,8 +75,8 @@ const contents: DashboardItemProps[] = [
   },
   {
     id: 9,
-    title: 'N서클 통과할 때까지의 평균 기간',
-    description: '(본과정 시작일 기준)',
+    title: 'N서클 통과할 때까지의 누적 기간',
+    description: '(본과정 시작일 기준 평균 기간)',
     content: AverageCircleDurations,
   },
   {

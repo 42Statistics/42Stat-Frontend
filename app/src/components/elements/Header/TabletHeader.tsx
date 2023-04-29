@@ -1,29 +1,35 @@
 import { Clickable, HStack } from '@/components/common';
-import { UserSearchBar } from './UserSearchBar';
+import { AboveTabletUserSearchBar } from '@/components/elements/UserSearchBar';
 import { isNavBarOpenAtom } from '@/utils/atoms/isNavBarOpenAtom';
+import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useSetAtom } from 'jotai';
 import { RxHamburgerMenu } from 'react-icons/rx';
 
 export const TabletHeader = () => {
   const setIsNavBarOpen = useSetAtom(isNavBarOpenAtom);
+  const theme = useTheme();
 
   return (
     <TabletHeaderLayout>
-      <HStack spacing="2.5rem">
+      <HStack spacing="2.5rem" justify="start">
         <Clickable
           onClick={() => setIsNavBarOpen((cur) => !cur)}
-          element={<RxHamburgerMenu size="20px" />}
+          element={
+            <RxHamburgerMenu color={theme.colors.mono.white} size="20px" />
+          }
         />
-        <UserSearchBar device="desktop" />
+        <AboveTabletUserSearchBar />
       </HStack>
     </TabletHeaderLayout>
   );
 };
 
 const TabletHeaderLayout = styled.header`
+  position: fixed;
+  top: 0;
   width: 100%;
-  padding: 2.5rem 2.5rem;
-  background-color: ${({ theme }) => theme.colors.mono.white};
-  border-bottom: 0.1rem solid ${({ theme }) => theme.colors.mono.gray.light};
+  height: 8rem;
+  padding: 1rem 2rem;
+  z-index: 100;
 `;

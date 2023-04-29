@@ -12,7 +12,7 @@ export const DashboardLayout = ({ children }: React.PropsWithChildren) => {
           <DesktopNavBar />
           <VStack w="100%" h="100%" css={{ marginLeft: '24rem' }}>
             <DesktopHeader />
-            <PageLayout>{children}</PageLayout>
+            <AboveTabletPageLayout>{children}</AboveTabletPageLayout>
           </VStack>
         </HStack>
       </Desktop>
@@ -21,7 +21,7 @@ export const DashboardLayout = ({ children }: React.PropsWithChildren) => {
           <TabletNavBar />
           <VStack w="100%" h="100%">
             <TabletHeader />
-            <PageLayout>{children}</PageLayout>
+            <AboveTabletPageLayout>{children}</AboveTabletPageLayout>
           </VStack>
         </HStack>
       </Tablet>
@@ -29,7 +29,7 @@ export const DashboardLayout = ({ children }: React.PropsWithChildren) => {
         <VStack w="100%" spacing="2rem">
           <MobileHeader />
           <Divider />
-          <PageLayout css={{ marginBottom: '6rem' }}>{children}</PageLayout>
+          <MobilePageLayout>{children}</MobilePageLayout>
         </VStack>
         <MobileNavBar />
       </Mobile>
@@ -37,12 +37,23 @@ export const DashboardLayout = ({ children }: React.PropsWithChildren) => {
   );
 };
 
-const PageLayout = styled.main`
+const AboveTabletPageLayout = styled.main`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 11rem 3rem 3rem 3rem;
+  overflow: auto;
+`;
+
+const MobilePageLayout = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
   height: 100%;
   padding: 3rem;
+  margin-bottom: 6rem;
   overflow: auto;
 `;

@@ -1,14 +1,14 @@
 import { VStack } from '@/components/common';
 import { AppLogoTitleButton } from '@/components/elements/AppLogoTitleButton';
+import { MobileUserSearchBar } from '@/components/elements/UserSearchBar';
 import styled from '@emotion/styled';
-import { UserSearchBar } from './UserSearchBar';
 
 export const MobileHeader = () => {
   return (
     <MobileHeaderLayout>
       <VStack spacing="2rem">
         <AppLogoTitleButton />
-        <UserSearchBar device="mobile" />
+        <MobileUserSearchBar />
       </VStack>
     </MobileHeaderLayout>
   );

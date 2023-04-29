@@ -92,7 +92,7 @@ export const TeamInfo = () => {
                       <HStack
                         style={{
                           color: isValidated
-                            ? theme.colors.third.dark
+                            ? theme.colors.primary.default
                             : theme.colors.secondary.default,
                         }}
                       >
@@ -120,7 +120,7 @@ const TeamInfoTable = styled.table`
     display: table;
     width: 100%;
     table-layout: fixed;
-    border-radius: 1rem;
+    border-radius: 2rem;
   }
 
   th,
@@ -132,6 +132,10 @@ const TeamInfoTable = styled.table`
 
   th {
     color: ${({ theme }) => theme.colors.primary.default};
+  }
+
+  tbody tr {
+    transition: all 0.2s;
   }
 
   tbody tr:hover {

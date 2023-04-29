@@ -19,6 +19,7 @@
     "@react-oauth/google": "^0.8.0",
     "@vitejs/plugin-basic-ssl": "^1.0.1",
     "apexcharts": "^3.37.2",
+    "emotion-rgba": "^0.0.11",
     "graphql": "^16.6.0",
     "jotai": "^2.0.3",
     "lodash": "^4.17.21",

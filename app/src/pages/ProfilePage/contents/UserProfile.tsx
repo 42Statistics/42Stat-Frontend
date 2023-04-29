@@ -102,7 +102,7 @@ export const UserProfile = () => {
       <VStack align="start" spacing="1rem">
         <VStack align="inherit">
           <Text
-            color={theme.colors.third.default}
+            color={theme.colors.primary.default}
             fontSize={theme.fonts.size.h3}
             fontWeight={theme.fonts.weight.bold}
           >

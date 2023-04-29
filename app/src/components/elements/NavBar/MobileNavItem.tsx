@@ -19,7 +19,7 @@ export const MobileNavItem = ({ option }: MobileNavItemProps) => {
 
   return (
     <MobileNavItemLayout onClick={handleClick} isFocused={isFocused}>
-      <NavMenuIcon menu={option.menu} isFocused={isFocused} />
+      <NavMenuIcon size="24px" menu={option.menu} isFocused={isFocused} />
     </MobileNavItemLayout>
   );
 };

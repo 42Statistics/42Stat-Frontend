@@ -27,5 +27,5 @@ export const PrefferedCluster = () => {
 
   const { preferredCluster } = data.getPersonGeneralPage.logtimeInfo.data;
 
-  return <TextDefault text={`클러스터 ${preferredCluster}`} />;
+  return <TextDefault text={`클러스터 ${preferredCluster.toUpperCase()}`} />;
 };

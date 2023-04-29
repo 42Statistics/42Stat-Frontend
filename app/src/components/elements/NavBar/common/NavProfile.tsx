@@ -18,12 +18,13 @@ export const NavProfile = ({ imgUrl, name, login }: NavProfile) => {
         <Text
           fontSize={theme.fonts.size.h3}
           fontWeight={theme.fonts.weight.bold}
+          color={theme.colors.mono.white}
         >
           {login}
         </Text>
         <Text
           fontSize={theme.fonts.size.caption}
-          color={theme.colors.mono.gray.default}
+          color={theme.colors.mono.gray.light}
         >
           {titleCase(name)}
         </Text>

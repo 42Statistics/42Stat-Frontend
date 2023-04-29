@@ -89,13 +89,12 @@ export const PrefferedTime = () => {
 const TextMax = styled(Text)<{ isMax: boolean }>`
   font-size: ${({ theme }) => theme.fonts.size.h3};
   color: ${({ theme, isMax }) =>
-    isMax ? theme.colors.secondary.default : theme.colors.mono.black};
+    isMax ? theme.colors.primary.default : theme.colors.mono.black};
 `;
 
 const PrefferedTimeTable = styled.table`
   width: 100%;
   font-size: ${({ theme }) => theme.fonts.size.h3};
-  margin-top: 1rem;
 
   td:nth-of-type(2) {
     text-align: right;

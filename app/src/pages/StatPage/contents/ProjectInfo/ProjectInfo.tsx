@@ -155,7 +155,7 @@ const PassPercentageChart = ({ labels, series }: PassPercentageChartProps) => {
   const theme = useTheme();
 
   const options: ApexCharts.ApexOptions = {
-    colors: [theme.colors.third.default, theme.colors.secondary.default],
+    colors: [theme.colors.primary.default, theme.colors.secondary.default],
     tooltip: {
       y: {
         formatter: (value) => `${value.toFixed(1)}%`,

@@ -25,6 +25,9 @@ dependencies:
   apexcharts:
     specifier: ^3.37.2
     version: 3.37.2
+  emotion-rgba:
+    specifier: ^0.0.11
+    version: 0.0.11
   graphql:
     specifier: ^16.6.0
     version: 16.6.0
@@ -2708,6 +2711,10 @@ packages:
   /emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
     dev: true
+
+  /emotion-rgba@0.0.11:
+    resolution: {integrity: sha512-kDXihvTe/Y0qMlH/7YNQd/6QPsUQ/cF7XiOdvqABMj2osaQwbN/cBjJj6pDDDfEKwK54NyjxBlTtUsVXtUTBbQ==}
+    dev: false
 
   /error-ex@1.3.2:
     resolution: {integrity: sha512-7dFHNmqeFSEt2ZBsCriorKnn3Z2pj+fd9kmI6QoWw4//DL+icEBfc0U7qJCisqrTsKTjw4fNFy2pW9OqStD84g==}

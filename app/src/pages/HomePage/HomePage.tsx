@@ -3,7 +3,7 @@ import { useTheme } from '@emotion/react';
 import { Helmet } from 'react-helmet-async';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css'; // FIXME: import 말고 Styled Components 방식으로 Slick 적용
-
+import { CountUp } from 'use-count-up';
 // const GET_USER = gql(`
 //   query GetUser($id: Int!) {
 //     user(id: $id) {
@@ -34,14 +34,16 @@ export const HomePage = () => {
           fontWeight={theme.fonts.weight.extrabold}
           color={theme.colors.mono.white}
         >
-          은하수를 여행한지 982일째
+          은하수를 여행한지{' '}
+          {<CountUp isCounting={true} end={982} duration={3.5} />}일째
         </Text>
         <Text
           fontSize={theme.fonts.size.h2}
           fontWeight={theme.fonts.weight.extrabold}
           color={theme.colors.mono.white}
         >
-          810명의 히치하이커와 함께 여행중
+          {<CountUp isCounting={true} end={810} duration={3.5} />}명의
+          히치하이커와 함께 여행중
         </Text>
         <Slider
           arrows={false}

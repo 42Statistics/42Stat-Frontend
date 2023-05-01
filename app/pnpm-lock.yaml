@@ -75,7 +75,10 @@ dependencies:
     version: 6.0.1(react@18.2.0)
   slick-carousel:
     specifier: ^1.8.1
-    version: 1.8.1(jquery@3.6.4)
+    version: 1.8.1
+  use-count-up:
+    specifier: ^3.0.1
+    version: 3.0.1(react@18.2.0)
 
 devDependencies:
   '@babel/core':
@@ -3771,10 +3774,6 @@ packages:
       react: 18.2.0
     dev: false
 
-  /jquery@3.6.4:
-    resolution: {integrity: sha512-v28EW9DWDFpzcD9O5iyJXg3R3+q+mET5JhnjJzQUZMHOv67bpSIHq81GEYpPNZHG+XXHsfSme3nxp/hndKEcsQ==}
-    dev: false
-
   /js-sdsl@4.3.0:
     resolution: {integrity: sha512-mifzlm2+5nZ+lEcLJMoBK0/IH/bDg8XnJfd/Wq6IP+xoCjLZsTOnV2QpxlVbX9bMnkl5PdEjNtBJ9Cj1NjifhQ==}
     dev: true
@@ -4804,12 +4803,10 @@ packages:
       is-fullwidth-code-point: 3.0.0
     dev: true
 
-  /slick-carousel@1.8.1(jquery@3.6.4):
+  /slick-carousel@1.8.1:
     resolution: {integrity: sha512-XB9Ftrf2EEKfzoQXt3Nitrt/IPbT+f1fgqBdoxO3W/+JYvtEOW6EgxnWfr9GH6nmULv7Y2tPmEX3koxThVmebA==}
     peerDependencies:
       jquery: '>=1.8.0'
-    dependencies:
-      jquery: 3.6.4
     dev: false
 
   /snake-case@3.0.4:
@@ -5143,6 +5140,23 @@ packages:
     dependencies:
       braces: 3.0.2
     dev: true
+
+  /use-count-up@3.0.1(react@18.2.0):
+    resolution: {integrity: sha512-jlVsXJYje6jh+xwQaCEYrwHoB+nRyillNEmr21bhe9kw7tpRzyrSq9jQs9UOlo+8hCFkuOmjUihL3IjEK/piVg==}
+    peerDependencies:
+      react: '>=16.8.0'
+    dependencies:
+      react: 18.2.0
+      use-elapsed-time: 3.0.2(react@18.2.0)
+    dev: false
+
+  /use-elapsed-time@3.0.2(react@18.2.0):
+    resolution: {integrity: sha512-2EY9lJ5DWbAvT8wWiEp6Ztnl46DjXz2j78uhWbXaz/bg3OfpbgVucCAlcN8Bih6hTJfFTdVYX9L6ySMn5py/wQ==}
+    peerDependencies:
+      react: '>=16.8.0'
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}

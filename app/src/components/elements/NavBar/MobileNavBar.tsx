@@ -1,6 +1,7 @@
 import { Avatar, Clickable, HStack } from '@/components/common';
 import { userAtom } from '@/utils/atoms/userAtom';
 import styled from '@emotion/styled';
+import { rgba } from 'emotion-rgba';
 import { useAtomValue } from 'jotai';
 import { useNavigate } from 'react-router-dom';
 import { MobileNavItem } from './MobileNavItem';
@@ -37,5 +38,5 @@ const MobileNavBarLayout = styled.nav`
   width: 100%;
   height: 6rem;
   padding: 1.4rem 2rem;
-  background-color: ${({ theme }) => theme.colors.mono.white};
+  background-color: ${({ theme }) => rgba(theme.colors.mono.black, 0.8)};
 `;

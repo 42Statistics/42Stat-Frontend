@@ -62,7 +62,8 @@ export const global = () => css`
 
   body {
     font-family: 'Pretendard', sans-serif;
-    background-color: #e4e3ea; // FIXME: Global이라 theme 적용 방법을 모르겠다.
+    background-image: url('/black-galaxy-wallpaper.jpeg');
+    background-size: cover;
     font-size: 1.4rem;
   }
 `;

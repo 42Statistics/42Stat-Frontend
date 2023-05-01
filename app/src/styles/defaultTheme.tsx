@@ -1,17 +1,11 @@
 const colors = {
   primary: {
-    default: '#765DA6',
-    light: '#EFEAF5',
+    default: '#12146c',
+    light: '#c6d3e7',
   },
   secondary: {
-    default: '#F9837C',
-    dark: '#BF3E37',
+    default: '#d03b3b',
     light: '#FFB1B7',
-  },
-  third: {
-    default: '#70B6C1',
-    dark: '#357E89',
-    light: '#B9E7EE',
   },
   mono: {
     black: '#161616',

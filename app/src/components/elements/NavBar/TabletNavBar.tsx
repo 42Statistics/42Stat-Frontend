@@ -1,10 +1,11 @@
 import { Overlay } from '@/components/common';
 import { isNavBarOpenAtom } from '@/utils/atoms/isNavBarOpenAtom';
 import styled from '@emotion/styled';
+import { rgba } from 'emotion-rgba';
 import { useAtom } from 'jotai';
 import { useEffect } from 'react';
-import { AboveTabletNavBar } from './common/AboveTabletNavBar';
 import { DesktopNavBarLayout } from './DesktopNavBar';
+import { AboveTabletNavBar } from './common/AboveTabletNavBar';
 
 export const TabletNavBar = () => {
   const [isNavBarOpen, setIsNavBarOpen] = useAtom(isNavBarOpenAtom);
@@ -31,7 +32,8 @@ type TabletNavBarLayoutProps = {
 };
 
 const TabletNavBarLayout = styled(DesktopNavBarLayout)<TabletNavBarLayoutProps>`
+  background-color: ${({ theme }) => rgba(theme.colors.mono.black, 0.95)};
   transform: ${({ isOpen }) => !isOpen && 'translateX(-100%)'};
-  transition: all 0.3s;
-  z-index: 3;
+  transition: all 0.2s;
+  z-index: 200;
 `;

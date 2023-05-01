@@ -20,7 +20,7 @@ const Arrow = ({ direction }: ArrowType) => {
       color={
         direction === 'up'
           ? theme.colors.secondary.default
-          : theme.colors.third.default
+          : theme.colors.primary.default
       }
       style={{
         transform: direction === 'up' ? 'rotate(0deg)' : 'rotate(180deg)',
@@ -46,7 +46,7 @@ export const NumberCompare = ({ curr, last, unit }: NumberCompareProps) => {
           color={
             diff >= 0
               ? theme.colors.secondary.default
-              : theme.colors.third.default
+              : theme.colors.primary.default
           }
         >
           {Math.abs(diff).toLocaleString()}

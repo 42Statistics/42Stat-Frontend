@@ -1,4 +1,3 @@
-import { gql } from '@/__generated__';
 import {
   Avatar,
   Clickable,
@@ -9,32 +8,17 @@ import {
 } from '@/components/common';
 import { isDefined } from '@/utils/isDefined';
 import { isEnterKeyReleased } from '@/utils/isEnterKeyReleased';
-import { Device } from '@/utils/types/Device';
 import { useDebounce } from '@/utils/useDebounce';
 import { useLazyQuery } from '@apollo/client';
-import { Theme, css, useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { rgba } from 'emotion-rgba';
 import { useEffect, useRef, useState } from 'react';
 import { MdSearch } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
-
-type UserSearchBarProps = {
-  device: Device;
-};
+import { FIND_PROJECT_PREVIEW } from './common';
 
 // TODO: SearchBar 추상화
-// FIXME: FIND_USER_PREVIEW 쿼리로 변경
-const FIND_PROJECT_PREVIEW = gql(/* GraphQL */ `
-  query FindProjectPreview($name: String!) {
-    findProjectPreview(name: $name) {
-      id
-      name
-      url
-    }
-  }
-`);
-
-export const UserSearchBar = ({ device }: UserSearchBarProps) => {
+export const AboveTabletUserSearchBar = () => {
   const [input, setInput] = useState<string>('');
   const debouncedInput = useDebounce(input, 100);
   const [preview, { loading, error, data }] =
@@ -43,7 +27,6 @@ export const UserSearchBar = ({ device }: UserSearchBarProps) => {
     debouncedInput !== '' && data?.findProjectPreview.length !== 0 && !loading;
   // ) || error;
   const inputRef = useRef<HTMLInputElement>(null);
-  const theme = useTheme();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -66,20 +49,16 @@ export const UserSearchBar = ({ device }: UserSearchBarProps) => {
   };
 
   return (
-    <div
-      css={
-        device === 'desktop'
-          ? DesktopUserSearchBarStyle
-          : MobileUserSearchBarStyle(theme)
-      }
-    >
-      <MdSearch size="24px" />
-      <Input
-        ref={inputRef}
-        onChange={(e) => setInput(e.target.value)}
-        onKeyDown={handleKeyDown}
-        placeholder="유저명을 입력해주세요"
-      />
+    <AboveTabletUserSearchBarLayout>
+      <HStack spacing="2rem">
+        <MdSearch id="search-icon" size="24px" />
+        <Input
+          ref={inputRef}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={handleKeyDown}
+          placeholder="유저명을 입력해주세요"
+        />
+      </HStack>
       {isPreviewDisplaying && (
         <UserSearchResult>
           <VStack w="100%" align="start" spacing="1rem">
@@ -102,25 +81,36 @@ export const UserSearchBar = ({ device }: UserSearchBarProps) => {
           </VStack>
         </UserSearchResult>
       )}
-    </div>
+    </AboveTabletUserSearchBarLayout>
   );
 };
 
-const DesktopUserSearchBarStyle = css`
+export const AboveTabletUserSearchBarLayout = styled.div`
   position: relative;
-  display: flex;
-  gap: 2rem;
-  width: 100%;
-`;
-
-const MobileUserSearchBarStyle = (theme: Theme) => css`
-  position: relative;
-  display: flex;
-  gap: 2rem;
-  width: 100%;
-  padding: 1.2rem 3rem;
+  width: 35rem;
+  padding: 1rem 2rem;
   border-radius: 2rem;
-  background-color: ${theme.colors.mono.white};
+  transition: all 0.2s;
+  background-color: ${({ theme }) => rgba(theme.colors.mono.black, 0.7)};
+
+  & #search-icon,
+  & input {
+    color: ${({ theme }) => theme.colors.mono.white};
+  }
+  & input::placeholder {
+    color: ${({ theme }) => theme.colors.mono.gray.light};
+  }
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.mono.white};
+  }
+  &:hover #search-icon,
+  &:hover input {
+    color: ${({ theme }) => theme.colors.mono.black};
+  }
+  &:hover input::placeholder {
+    color: ${({ theme }) => theme.colors.mono.gray.default};
+  }
 `;
 
 const UserSearchResult = styled.div`

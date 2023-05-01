@@ -9,8 +9,9 @@ CustomTabList.tabsRole = 'TabList';
 
 const StyledTabList = styled(TabList)`
   display: flex;
+  flex-wrap: wrap;
   margin-bottom: 2rem;
-  border-bottom: ${({ theme }) => `1px solid ${theme.colors.primary.default}`};
+  border-bottom: ${({ theme }) => `1px solid ${theme.colors.primary.light}`};
 `;
 
 export { CustomTabList as TabList };

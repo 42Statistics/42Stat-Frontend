@@ -3,8 +3,6 @@ import { useTheme } from '@emotion/react';
 import {
   MdContentPasteSearch,
   MdEqualizer,
-  MdHelp,
-  MdHome,
   MdOutlineEmojiEvents,
   MdPerson,
   MdSettings,
@@ -12,30 +10,31 @@ import {
 
 type NavMenuIconProps = {
   menu: NavMenu;
+  size?: string;
   isFocused: boolean;
 };
 
-export const NavMenuIcon = ({ menu, isFocused }: NavMenuIconProps) => {
+export const NavMenuIcon = ({
+  menu,
+  size = '16px',
+  isFocused,
+}: NavMenuIconProps) => {
   const theme = useTheme();
   const color = isFocused
-    ? theme.colors.primary.default
-    : theme.colors.mono.black;
+    ? theme.colors.primary.light
+    : theme.colors.mono.white;
 
   switch (menu) {
-    case 'Home':
-      return <MdHome size="24px" fill={color} />;
     case 'Stat':
-      return <MdEqualizer size="24px" fill={color} />;
+      return <MdEqualizer size={size} fill={color} />;
     case 'LeaderBoard':
-      return <MdOutlineEmojiEvents size="24px" fill={color} />;
+      return <MdOutlineEmojiEvents size={size} fill={color} />;
     case 'MyProfile':
-      return <MdPerson size="24px" fill={color} />;
+      return <MdPerson size={size} fill={color} />;
     case 'EvalLogSearch':
-      return <MdContentPasteSearch size="24px" fill={color} />;
-    case 'About':
-      return <MdHelp size="24px" fill={color} />;
+      return <MdContentPasteSearch size={size} fill={color} />;
     case 'Settings':
-      return <MdSettings size="24px" fill={color} />;
+      return <MdSettings size={size} fill={color} />;
     default:
       throw new Error('💥 Wrong Menu');
   }

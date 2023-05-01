@@ -1,10 +1,8 @@
 export type NavMenu =
-  | 'Home'
   | 'Stat'
   | 'LeaderBoard'
   | 'MyProfile'
   | 'EvalLogSearch'
-  | 'About'
   | 'Settings';
 
 export type NavMenuIconSvgProps = {

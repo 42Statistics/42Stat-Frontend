@@ -16,7 +16,7 @@ export const TabletHeader = () => {
         <Clickable
           onClick={() => setIsNavBarOpen((cur) => !cur)}
           element={
-            <RxHamburgerMenu color={theme.colors.mono.white} size="20px" />
+            <RxHamburgerMenu color={theme.colors.mono.white} size="20px" /> // FIXME: 밑으로 내려갈 때 카드와 안 겹치게
           }
         />
         <AboveTabletUserSearchBar />

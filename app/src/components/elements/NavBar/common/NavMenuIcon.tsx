@@ -3,8 +3,6 @@ import { useTheme } from '@emotion/react';
 import {
   MdContentPasteSearch,
   MdEqualizer,
-  MdHelp,
-  MdHome,
   MdOutlineEmojiEvents,
   MdPerson,
   MdSettings,
@@ -27,8 +25,6 @@ export const NavMenuIcon = ({
     : theme.colors.mono.white;
 
   switch (menu) {
-    case 'Home':
-      return <MdHome size={size} fill={color} />;
     case 'Stat':
       return <MdEqualizer size={size} fill={color} />;
     case 'LeaderBoard':
@@ -37,8 +33,6 @@ export const NavMenuIcon = ({
       return <MdPerson size={size} fill={color} />;
     case 'EvalLogSearch':
       return <MdContentPasteSearch size={size} fill={color} />;
-    case 'About':
-      return <MdHelp size={size} fill={color} />;
     case 'Settings':
       return <MdSettings size={size} fill={color} />;
     default:

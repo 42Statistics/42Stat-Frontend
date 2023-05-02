@@ -7,7 +7,7 @@ export const ApolloBadRequest = ({ msg }: { msg?: string }) => {
   if (msg) console.log(msg); // for development
   return (
     <VStack w="100%" h="100%">
-      <AppLogoSvg width="70px" fill={theme.colors.mono.gray.light} />
+      <AppLogoSvg width="70px" fill={theme.colors.mono.gray[200]} />
     </VStack>
   );
 };

@@ -15,6 +15,6 @@ const StyledInput = styled.input`
   width: 100%;
 
   &::placeholder {
-    color: ${({ theme }) => theme.colors.mono.gray.default};
+    color: ${({ theme }) => theme.colors.mono.gray[300]};
   }
 `;

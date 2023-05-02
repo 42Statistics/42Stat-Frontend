@@ -11,8 +11,9 @@ const colors = {
     black: '#161616',
     white: '#F9F9F9',
     gray: {
-      default: '#777777',
-      light: '#CCCCCC',
+      300: '#777777',
+      200: '#999999',
+      100: '#CCCCCC',
     },
   },
   background: '#E4E3EA',

@@ -13,8 +13,9 @@ type Colors = {
     black: string;
     white: string;
     gray: {
-      default: string;
-      light: string;
+      300: string;
+      200: string;
+      100: string;
     };
   };
   background: string;

@@ -98,7 +98,7 @@ export const AboveTabletUserSearchBarLayout = styled.div`
     color: ${({ theme }) => theme.colors.mono.white};
   }
   & input::placeholder {
-    color: ${({ theme }) => theme.colors.mono.gray.light};
+    color: ${({ theme }) => theme.colors.mono.gray[100]};
   }
 
   &:hover {
@@ -109,7 +109,7 @@ export const AboveTabletUserSearchBarLayout = styled.div`
     color: ${({ theme }) => theme.colors.mono.black};
   }
   &:hover input::placeholder {
-    color: ${({ theme }) => theme.colors.mono.gray.default};
+    color: ${({ theme }) => theme.colors.mono.gray[300]};
   }
 `;
 

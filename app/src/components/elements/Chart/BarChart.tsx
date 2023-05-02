@@ -25,7 +25,7 @@ export const BarChart = ({
     dataLabels: {
       offsetY: -20,
       style: {
-        colors: [theme.colors.mono.gray.default],
+        colors: [theme.colors.mono.gray[300]],
         fontWeight: 400,
       },
     },

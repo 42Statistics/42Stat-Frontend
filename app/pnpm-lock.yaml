@@ -34,7 +34,7 @@ dependencies:
   jotai:
     specifier: ^2.0.3
     version: 2.0.3(react@18.2.0)
-  lodash:
+  lodash-es:
     specifier: ^4.17.21
     version: 4.17.21
   path:
@@ -75,7 +75,7 @@ dependencies:
     version: 6.0.1(react@18.2.0)
   slick-carousel:
     specifier: ^1.8.1
-    version: 1.8.1
+    version: 1.8.1(jquery@3.6.4)
   use-count-up:
     specifier: ^3.0.1
     version: 3.0.1(react@18.2.0)
@@ -90,9 +90,9 @@ devDependencies:
   '@graphql-codegen/client-preset':
     specifier: ^2.1.1
     version: 2.1.1(graphql@16.6.0)
-  '@types/lodash':
-    specifier: ^4.14.191
-    version: 4.14.191
+  '@types/lodash-es':
+    specifier: ^4.17.7
+    version: 4.17.7
   '@types/node':
     specifier: ^18.14.6
     version: 18.15.0
@@ -1871,6 +1871,12 @@ packages:
 
   /@types/json-stable-stringify@1.0.34:
     resolution: {integrity: sha512-s2cfwagOQAS8o06TcwKfr9Wx11dNGbH2E9vJz1cqV+a/LOyhWNLUNd6JSRYNzvB4d29UuJX2M0Dj9vE1T8fRXw==}
+    dev: true
+
+  /@types/lodash-es@4.17.7:
+    resolution: {integrity: sha512-z0ptr6UI10VlU6l5MYhGwS4mC8DZyYer2mCoyysZtSF7p26zOX8UpbrV0YpNYLGS8K4PUFIyEr62IMFFjveSiQ==}
+    dependencies:
+      '@types/lodash': 4.14.191
     dev: true
 
   /@types/lodash@4.14.191:
@@ -3774,6 +3780,10 @@ packages:
       react: 18.2.0
     dev: false
 
+  /jquery@3.6.4:
+    resolution: {integrity: sha512-v28EW9DWDFpzcD9O5iyJXg3R3+q+mET5JhnjJzQUZMHOv67bpSIHq81GEYpPNZHG+XXHsfSme3nxp/hndKEcsQ==}
+    dev: false
+
   /js-sdsl@4.3.0:
     resolution: {integrity: sha512-mifzlm2+5nZ+lEcLJMoBK0/IH/bDg8XnJfd/Wq6IP+xoCjLZsTOnV2QpxlVbX9bMnkl5PdEjNtBJ9Cj1NjifhQ==}
     dev: true
@@ -3887,6 +3897,10 @@ packages:
       p-locate: 5.0.0
     dev: true
 
+  /lodash-es@4.17.21:
+    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
+    dev: false
+
   /lodash.debounce@4.0.8:
     resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
     dev: false
@@ -3901,6 +3915,7 @@ packages:
 
   /lodash@4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
+    dev: true
 
   /log-symbols@4.1.0:
     resolution: {integrity: sha512-8XPvpAA8uyhfteu8pIvQxpJZ7SYYdpUivZpGy6sFsBuKRY/7rQGavedeB8aK+Zkyq6upMFVL/9AW6vOYzfRyLg==}
@@ -4803,10 +4818,12 @@ packages:
       is-fullwidth-code-point: 3.0.0
     dev: true
 
-  /slick-carousel@1.8.1:
+  /slick-carousel@1.8.1(jquery@3.6.4):
     resolution: {integrity: sha512-XB9Ftrf2EEKfzoQXt3Nitrt/IPbT+f1fgqBdoxO3W/+JYvtEOW6EgxnWfr9GH6nmULv7Y2tPmEX3koxThVmebA==}
     peerDependencies:
       jquery: '>=1.8.0'
+    dependencies:
+      jquery: 3.6.4
     dev: false
 
   /snake-case@3.0.4:

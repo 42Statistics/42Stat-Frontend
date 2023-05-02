@@ -1,5 +1,5 @@
 import { useTheme } from '@emotion/react';
-import { merge } from 'lodash';
+import { merge } from 'lodash-es';
 import ReactApexChart from 'react-apexcharts';
 import { defaultOptions } from './options';
 

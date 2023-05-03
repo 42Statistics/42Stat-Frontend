@@ -1,6 +1,6 @@
 import { HStack, Text } from '@/components/common';
 import { useTheme } from '@emotion/react';
-import { BsTriangleFill } from 'react-icons/bs';
+import { BsTriangleFill } from '@react-icons/all-files/bs/BsTriangleFill';
 
 type NumberCompareProps = {
   curr: number;

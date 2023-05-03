@@ -5,8 +5,8 @@ import { isEnterKeyReleased } from '@/utils/isEnterKeyReleased';
 import { useDebounce } from '@/utils/useDebounce';
 import { useLazyQuery } from '@apollo/client';
 import styled from '@emotion/styled';
+import { BiSearch } from '@react-icons/all-files/bi/BiSearch';
 import { useEffect, useRef, useState } from 'react';
-import { BiSearch } from 'react-icons/bi';
 
 const FIND_PROJECT_PREVIEW = gql(/* GraphQL */ `
   query FindProjectPreview($name: String!) {

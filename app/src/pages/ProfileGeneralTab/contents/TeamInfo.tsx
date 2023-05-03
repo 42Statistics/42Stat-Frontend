@@ -10,7 +10,8 @@ import { isDefined } from '@/utils/isDefined';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai';
+import { AiOutlineCheck } from '@react-icons/all-files/ai/AiOutlineCheck';
+import { AiOutlineClose } from '@react-icons/all-files/ai/AiOutlineClose';
 
 const GET_TEAM_INFO = gql(/* GraphQL */ `
   query getTeamInfo {

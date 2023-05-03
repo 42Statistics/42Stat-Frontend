@@ -3,8 +3,8 @@ import { AboveTabletUserSearchBar } from '@/components/elements/UserSearchBar';
 import { isNavBarOpenAtom } from '@/utils/atoms/isNavBarOpenAtom';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { GiHamburgerMenu } from '@react-icons/all-files/gi/GiHamburgerMenu';
 import { useSetAtom } from 'jotai';
-import { RxHamburgerMenu } from 'react-icons/rx';
 
 export const TabletHeader = () => {
   const setIsNavBarOpen = useSetAtom(isNavBarOpenAtom);
@@ -16,7 +16,7 @@ export const TabletHeader = () => {
         <Clickable
           onClick={() => setIsNavBarOpen((cur) => !cur)}
           element={
-            <RxHamburgerMenu color={theme.colors.mono.white} size="20px" /> // FIXME: 밑으로 내려갈 때 카드와 안 겹치게
+            <GiHamburgerMenu color={theme.colors.mono.white} size="20px" /> // FIXME: 밑으로 내려갈 때 카드와 안 겹치게
           }
         />
         <AboveTabletUserSearchBar />

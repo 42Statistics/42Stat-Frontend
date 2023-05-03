@@ -31,7 +31,7 @@ export const HomePage = () => {
       <VStack w="100%" h="100%" align="start" justify="start">
         <Text
           fontSize={theme.fonts.size.h2}
-          fontWeight={theme.fonts.weight.extrabold}
+          fontWeight={theme.fonts.weight.bold}
           color={theme.colors.mono.white}
         >
           은하수를 여행한지{' '}
@@ -39,7 +39,7 @@ export const HomePage = () => {
         </Text>
         <Text
           fontSize={theme.fonts.size.h2}
-          fontWeight={theme.fonts.weight.extrabold}
+          fontWeight={theme.fonts.weight.bold}
           color={theme.colors.mono.white}
         >
           {<CountUp isCounting={true} end={810} duration={3.5} />}명의
@@ -60,7 +60,7 @@ export const HomePage = () => {
             <Text
               key={index}
               fontSize={theme.fonts.size.h2}
-              fontWeight={theme.fonts.weight.extrabold}
+              fontWeight={theme.fonts.weight.bold}
               color={theme.colors.mono.white}
             >
               {text}

@@ -110,7 +110,7 @@ export const UserProfile = () => {
           <HStack spacing="2rem">
             <Text
               fontSize={theme.fonts.size.h1}
-              fontWeight={theme.fonts.weight.extrabold}
+              fontWeight={theme.fonts.weight.bold}
             >
               {titleCase(name)}
             </Text>

@@ -1,3 +1,25 @@
+export type DashboardProps = {
+  desktopRows: DesktopDashboardRowType[];
+  tabletRows: TabletDashboardRowType[];
+  mobileRows: MobileDashboardRowType[];
+  contents: DashboardItemProps[];
+};
+
+export type DesktopDashboardProps = {
+  rows: DesktopDashboardRowType[];
+  contents: DashboardItemProps[];
+};
+
+export type TabletDashboardProps = {
+  rows: TabletDashboardRowType[];
+  contents: DashboardItemProps[];
+};
+
+export type MobileDashboardProps = {
+  rows: MobileDashboardRowType[];
+  contents: DashboardItemProps[];
+};
+
 export type DashboardItemProps = {
   id?: number;
   title?: string;

@@ -1,20 +1,8 @@
 import { Desktop, Mobile, Tablet } from '@/utils/responsive/Device';
-import {
-  DashboardItemProps,
-  DesktopDashboardRowType,
-  MobileDashboardRowType,
-  TabletDashboardRowType,
-} from '@/utils/types/Dashboard';
+import { DashboardProps } from '@/utils/types/Dashboard';
 import { DesktopDashboard } from './DesktopDashboard';
 import { MobileDashboard } from './MobileDashboard';
 import { TabletDashboard } from './TabletDashboard';
-
-type DashboardProps = {
-  desktopRows: DesktopDashboardRowType[];
-  tabletRows: TabletDashboardRowType[];
-  mobileRows: MobileDashboardRowType[];
-  contents: DashboardItemProps[];
-};
 
 export const Dashboard = ({
   desktopRows,

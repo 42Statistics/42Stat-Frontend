@@ -16,3 +16,4 @@ export * from './Input';
 export * from './Overlay';
 export * from './StyledInfoTable';
 export * from './Scroll';
+export * from './DeferredComponent';

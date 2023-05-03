@@ -1,28 +1,26 @@
-import { DashboardItem } from '@/components/templates/DashboardItem';
 import { DashboardItemWrapper } from '@/components/templates/DashboardItemWrapper';
 import { DesktopDashboardRow } from '@/components/templates/DashboardRow';
 import { DesktopDashboardRowContainer } from '@/components/templates/DashboardRowContainer';
 import { DesktopDashboardProps } from '@/utils/types/Dashboard';
+import { DashboardSkeletonItem } from '../DashboardSkeletonItem';
 
-export const DesktopDashboard = ({ rows, contents }: DesktopDashboardProps) => {
+type DesktopDashboardSkeletonProps = Omit<DesktopDashboardProps, 'contents'>;
+
+export const DesktopDashboardSkeleton = ({
+  rows,
+}: DesktopDashboardSkeletonProps) => {
   return (
     <DesktopDashboardRowContainer>
       {rows.map(({ row, col, items }, rowIdx) => (
         <DesktopDashboardRow key={rowIdx} row={row} col={col}>
-          {items.map(({ row, col, rowSpan, colSpan, elementId }, itemIdx) => (
+          {items.map(({ row, col, rowSpan, colSpan }, itemIdx) => (
             <DashboardItemWrapper
               key={itemIdx}
               row={row}
               col={col}
               rowSpan={rowSpan}
               colSpan={colSpan}
-              element={
-                <DashboardItem
-                  title={contents[elementId].title}
-                  description={contents[elementId].description}
-                  content={contents[elementId].content}
-                />
-              }
+              element={<DashboardSkeletonItem />}
             />
           ))}
         </DesktopDashboardRow>

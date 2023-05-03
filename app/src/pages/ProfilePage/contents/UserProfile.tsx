@@ -3,7 +3,6 @@ import {
   Avatar,
   HStack,
   PrimaryText,
-  Spinner,
   StyledInfoTable,
   Text,
   VStack,
@@ -24,7 +23,7 @@ import { getTitleWithLogin } from '@/utils/getTitleWithLogin';
 import { titleCase } from '@/utils/titleCase';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
-import { truncate } from 'lodash';
+import { truncate } from 'lodash-es';
 
 const GET_USER_PROFILE = gql(/* GraphQL */ `
   query GetUserProfile {
@@ -70,7 +69,7 @@ export const UserProfile = () => {
   const theme = useTheme();
   const { loading, error, data } = useQuery(GET_USER_PROFILE);
 
-  if (loading) return <Spinner />;
+  if (loading) return <></>;
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 
@@ -119,14 +118,14 @@ export const UserProfile = () => {
           </HStack>
         </VStack>
         <HStack>
-          <Text color={theme.colors.mono.gray.default}>
+          <Text color={theme.colors.mono.gray[300]}>
             {truncate(titleWithLogin, { length: 42 })}
           </Text>
         </HStack>
         <HStack spacing="1rem">
           <HStack align="baseline">
             <Text
-              color={theme.colors.mono.gray.default}
+              color={theme.colors.mono.gray[300]}
               fontSize={theme.fonts.size.caption}
             >
               lv.

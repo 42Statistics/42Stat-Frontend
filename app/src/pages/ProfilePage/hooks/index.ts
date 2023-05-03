@@ -1,2 +1,2 @@
-export * from './useProfilePage';
 export * from './useProfilePageDashboard';
+export * from './useProfilePageDashboardSkeleton';

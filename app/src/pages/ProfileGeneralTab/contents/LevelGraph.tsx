@@ -1,5 +1,4 @@
 import { gql } from '@/__generated__';
-import { Spinner } from '@/components/common';
 import { LineChart } from '@/components/elements/Chart';
 import {
   ApolloBadRequest,
@@ -27,7 +26,7 @@ const GET_LEVEL_GRAPH = gql(/* GraphQL */ `
 export const LevelGraph = () => {
   const { loading, error, data } = useQuery(GET_LEVEL_GRAPH);
 
-  if (loading) return <Spinner />;
+  if (loading) return <></>;
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 

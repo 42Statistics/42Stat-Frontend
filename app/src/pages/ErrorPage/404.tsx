@@ -35,7 +35,7 @@ export const NotFoundPage = () => {
         />
         <Clickable
           onClick={() => navigate('/')}
-          element={<Text>홈으로 돌아가기</Text>}
+          element={<Text color={theme.colors.mono.white}>홈으로 돌아가기</Text>}
         />
       </VStack>
     </>

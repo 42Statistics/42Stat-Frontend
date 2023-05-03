@@ -1,4 +1,5 @@
 import { gql } from '@/__generated__';
+import { Loader } from '@/components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
@@ -26,7 +27,7 @@ const GET_CURR_WEEK_EVAL_CNT = gql(/* GraphQL */ `
 export const CurrWeekEvalCnt = () => {
   const { loading, error, data } = useQuery(GET_CURR_WEEK_EVAL_CNT);
 
-  if (loading) return <></>;
+  if (loading) return <Loader />;
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 

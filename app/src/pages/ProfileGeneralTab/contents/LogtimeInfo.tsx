@@ -1,4 +1,5 @@
 import { gql } from '@/__generated__';
+import { Loader } from '@/components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
@@ -31,7 +32,7 @@ const GET_LOGTIME_INFO = gql(/* GraphQL */ `
 export const LogtimeInfo = () => {
   const { loading, error, data } = useQuery(GET_LOGTIME_INFO);
 
-  if (loading) return <></>;
+  if (loading) return <Loader />;
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 

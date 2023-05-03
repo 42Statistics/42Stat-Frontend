@@ -1,4 +1,5 @@
 import { gql } from '@/__generated__';
+import { Loader } from '@/components/common';
 import { HorizontalBarChart } from '@/components/elements/Chart';
 import {
   ApolloBadRequest,
@@ -21,7 +22,7 @@ const GET_AVERAGE_CIRCLE_DURATION = gql(/* GraphQL */ `
 export const AverageCircleDurations = () => {
   const { loading, error, data } = useQuery(GET_AVERAGE_CIRCLE_DURATION);
 
-  if (loading) return <></>;
+  if (loading) return <Loader />;
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 

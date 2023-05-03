@@ -16,7 +16,7 @@ export const EvalCntPerPoints = () => {
   return <></>;
   // const { loading, error, data } = useQuery(GET_EVAL_CNT_PER_POINTS);
 
-  // if (loading) return <></>;
+  // if (loading) return <Loader />;
   // if (error) {
   //   return <h1>{error.message}</h1>;
   // }

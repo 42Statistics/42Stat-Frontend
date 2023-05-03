@@ -12,7 +12,7 @@
 // export const Difficulty = () => {
 //   const { loading, error, data } = useQuery(GET_DIFFICULTY);
 
-//   if (loading) return <></>;
+//   if (loading) return <Loader />;
 //   if (error) {
 //     return <h1>{error.message}</h1>;
 //   }

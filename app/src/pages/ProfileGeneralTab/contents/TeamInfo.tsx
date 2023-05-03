@@ -1,5 +1,5 @@
 import { gql } from '@/__generated__';
-import { HStack, Scroll } from '@/components/common';
+import { HStack, Loader, Scroll } from '@/components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
@@ -35,7 +35,7 @@ export const TeamInfo = () => {
   const { loading, error, data } = useQuery(GET_TEAM_INFO);
   const theme = useTheme();
 
-  if (loading) return <></>;
+  if (loading) return <Loader />;
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 

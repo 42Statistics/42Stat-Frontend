@@ -1,5 +1,5 @@
 import { GetEvalLogsQuery } from '@/__generated__/graphql';
-import { Text } from '@/components/common';
+import { Loader, Text } from '@/components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
@@ -23,7 +23,7 @@ export const EvalLogSearchBoard = ({
   pageNumber,
   setPageNumber,
 }: EvalLogSearchBoardProps) => {
-  if (loading) return <></>;
+  if (loading) return <Loader />;
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
   if (data.getEvalLogs.length === 0) return <Text>검색 결과가 없습니다.</Text>;

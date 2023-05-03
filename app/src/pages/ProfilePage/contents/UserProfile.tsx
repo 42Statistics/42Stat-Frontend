@@ -2,6 +2,7 @@ import { gql } from '@/__generated__';
 import {
   Avatar,
   HStack,
+  Loader,
   PrimaryText,
   StyledInfoTable,
   Text,
@@ -69,7 +70,7 @@ export const UserProfile = () => {
   const theme = useTheme();
   const { loading, error, data } = useQuery(GET_USER_PROFILE);
 
-  if (loading) return <></>;
+  if (loading) return <Loader />;
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 

@@ -1,5 +1,4 @@
 import { gql } from '@/__generated__';
-import { Spinner } from '@/components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
@@ -27,7 +26,7 @@ const GET_CURR_WEEK_EVAL_CNT = gql(/* GraphQL */ `
 export const CurrWeekEvalCnt = () => {
   const { loading, error, data } = useQuery(GET_CURR_WEEK_EVAL_CNT);
 
-  if (loading) return <Spinner />;
+  if (loading) return <></>;
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 

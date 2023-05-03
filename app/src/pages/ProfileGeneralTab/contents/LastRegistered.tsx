@@ -1,5 +1,4 @@
 import { gql } from '@/__generated__';
-import { Spinner } from '@/components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
@@ -20,7 +19,7 @@ const GET_LAST_REGISTERED = gql(/* GraphQL */ `
 export const LastRegistered = () => {
   const { loading, error, data } = useQuery(GET_LAST_REGISTERED);
 
-  if (loading) return <Spinner />;
+  if (loading) return <></>;
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 

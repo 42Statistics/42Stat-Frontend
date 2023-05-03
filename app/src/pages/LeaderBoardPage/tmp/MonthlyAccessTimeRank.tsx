@@ -1,5 +1,4 @@
 import { gql } from '@/__generated__';
-import { Spinner } from '@/components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
@@ -27,7 +26,7 @@ const GET_MONTHLY_ACCESS_TIME_RANK = gql(/* GraphQL */ `
 export const MonthlyAccessTimeRank = () => {
   const { loading, error, data } = useQuery(GET_MONTHLY_ACCESS_TIME_RANK);
 
-  if (loading) return <Spinner />;
+  if (loading) return <></>;
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 

@@ -17,7 +17,7 @@
 // export const DestinyUsers = () => {
 //   const { loading, error, data } = useQuery(GET_DESTINY_USERS);
 
-//   if (loading) return <Spinner />;
+//   if (loading) return <></>;
 //   if (error) {
 //     return <h1>{error.message}</h1>;
 //   }

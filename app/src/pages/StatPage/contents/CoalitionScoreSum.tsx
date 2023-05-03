@@ -1,5 +1,4 @@
 import { gql } from '@/__generated__';
-import { Spinner } from '@/components/common';
 import { BarChart } from '@/components/elements/Chart';
 import { ApolloNotFound } from '@/components/elements/DashboardContentView';
 import { ApolloBadRequest } from '@/components/elements/DashboardContentView/ApolloBadRequest';
@@ -29,7 +28,7 @@ export const GET_COALITION_TOTAL_SCORES = gql(/* GraphQL */ `
 export const CoalitionScoreSum = () => {
   const { loading, error, data } = useQuery(GET_COALITION_TOTAL_SCORES);
 
-  if (loading) return <Spinner />;
+  if (loading) return <></>;
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 

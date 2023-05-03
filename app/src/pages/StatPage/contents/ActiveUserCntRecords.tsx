@@ -1,5 +1,4 @@
 import { gql } from '@/__generated__';
-import { Spinner } from '@/components/common';
 import { AreaChart } from '@/components/elements/Chart';
 import {
   ApolloBadRequest,
@@ -22,7 +21,7 @@ const GET_ACTIVE_USER_CNT_RECORD = gql(/* GraphQL */ `
 export const ActiveUserCntRecords = () => {
   const { loading, error, data } = useQuery(GET_ACTIVE_USER_CNT_RECORD);
 
-  if (loading) return <Spinner />;
+  if (loading) return <></>;
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 

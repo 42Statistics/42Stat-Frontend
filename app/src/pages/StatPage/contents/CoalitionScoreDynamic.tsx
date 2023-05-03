@@ -1,5 +1,4 @@
 import { gql } from '@/__generated__';
-import { Spinner } from '@/components/common';
 import { LineChart } from '@/components/elements/Chart';
 import {
   ApolloBadRequest,
@@ -35,7 +34,7 @@ export const GET_COALITION_SCORE_RECORD = gql(/* GraphQL */ `
 export const CoalitionScoreDynamic = () => {
   const { loading, error, data } = useQuery(GET_COALITION_SCORE_RECORD);
 
-  if (loading) return <Spinner />;
+  if (loading) return <></>;
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 

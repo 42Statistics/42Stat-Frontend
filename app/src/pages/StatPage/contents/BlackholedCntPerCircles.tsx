@@ -1,5 +1,4 @@
 import { gql } from '@/__generated__';
-import { Spinner } from '@/components/common';
 import { DonutChart } from '@/components/elements/Chart';
 import {
   ApolloBadRequest,
@@ -23,7 +22,7 @@ const GET_WHEN_GO_BLACKHOLE = gql(/* GraphQL */ `
 export const BlackholedCntPerCircles = () => {
   const { loading, error, data } = useQuery(GET_WHEN_GO_BLACKHOLE);
 
-  if (loading) return <Spinner />;
+  if (loading) return <></>;
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 

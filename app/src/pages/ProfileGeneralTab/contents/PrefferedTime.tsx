@@ -1,5 +1,5 @@
 import { gql } from '@/__generated__';
-import { Spinner, Text, VStack } from '@/components/common';
+import { Text, VStack } from '@/components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
@@ -30,7 +30,7 @@ export const PrefferedTime = () => {
   const { loading, error, data } = useQuery(GET_PREFERRED_TIME);
   const theme = useTheme();
 
-  if (loading) return <Spinner />;
+  if (loading) return <></>;
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 

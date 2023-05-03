@@ -1,5 +1,4 @@
 import { gql } from '@/__generated__';
-import { Spinner } from '@/components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
@@ -21,7 +20,7 @@ const GET_PREFERRED_CLUSTER = gql(/* GraphQL */ `
 
 export const PrefferedCluster = () => {
   const { loading, error, data } = useQuery(GET_PREFERRED_CLUSTER);
-  if (loading) return <Spinner />;
+  if (loading) return <></>;
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 

@@ -1,5 +1,4 @@
 import { gql } from '@/__generated__';
-import { Spinner } from '@/components/common';
 import { BarChart } from '@/components/elements/Chart';
 import {
   ApolloBadRequest,
@@ -22,7 +21,7 @@ const GET_USER_CNT_PER_LEVELS = gql(/* GraphQL */ `
 export const UserCntPerLevels = () => {
   const { loading, error, data } = useQuery(GET_USER_CNT_PER_LEVELS);
 
-  if (loading) return <Spinner />;
+  if (loading) return <></>;
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 

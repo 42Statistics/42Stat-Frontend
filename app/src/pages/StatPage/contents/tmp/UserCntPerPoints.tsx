@@ -16,7 +16,7 @@ export const UserCntPerPoints = () => {
   return <></>;
   // const { loading, error, data } = useQuery(GET_USER_CNT_PER_POINTS);
 
-  // if (loading) return <Spinner />;
+  // if (loading) return <></>;
   // if (error) {
   //   return <h1>{error.message}</h1>;
   // }

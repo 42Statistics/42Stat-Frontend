@@ -1,8 +1,5 @@
-import { gql } from '@/__generated__';
-import { Spinner } from '@/components/common';
 import { BarChart } from '@/components/elements/Chart';
 import { numberWithUnitFormatter } from '@/utils/formatters';
-import { useQuery } from '@apollo/client';
 
 // const GET_EVAL_CNT_PER_POINTS = gql(/* GraphQL */ `
 //   query getEvalCntPerPoints {
@@ -19,7 +16,7 @@ export const EvalCntPerPoints = () => {
   return <></>;
   // const { loading, error, data } = useQuery(GET_EVAL_CNT_PER_POINTS);
 
-  // if (loading) return <Spinner />;
+  // if (loading) return <></>;
   // if (error) {
   //   return <h1>{error.message}</h1>;
   // }

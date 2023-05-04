@@ -1,5 +1,5 @@
 import { Clickable, HStack } from '@/components/common';
-import { AboveTabletUserSearchBar } from '@/components/elements/UserSearchBar';
+import { AboveTabletUserSearchBar } from '@/components/elements/UserSearchBar/AboveTabletUserSearchBar';
 import { isNavBarOpenAtom } from '@/utils/atoms/isNavBarOpenAtom';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';

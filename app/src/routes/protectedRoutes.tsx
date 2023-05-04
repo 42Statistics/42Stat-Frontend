@@ -1,7 +1,5 @@
 import { DeferredComponent } from '@/components/common';
 import { AuthGuard } from '@/components/guards/AuthGuard';
-import { DashboardLayout } from '@/components/layouts/DashboardLayout';
-import { MainLayout } from '@/components/layouts/MainLayout';
 import { ProfilePageSkeleton } from '@/pages/SkeletonPages/ProfilePageSkeleton';
 import { StatPageSkeleton } from '@/pages/SkeletonPages/StatPageSkeleton';
 import { lazyImport } from '@/utils/lazyImport';
@@ -27,13 +25,24 @@ const { SettingsPage } = lazyImport(
   () => import('@/pages/SettingsPage'),
   'SettingsPage',
 );
+const { DashboardLayout } = lazyImport(
+  () => import('@/components/layouts/DashboardLayout'),
+  'DashboardLayout',
+);
+
+const { MainLayout } = lazyImport(
+  () => import('@/components/layouts/MainLayout/MainLayout'),
+  'MainLayout',
+);
 
 const DashboardApp = () => {
   return (
     <AuthGuard>
-      <DashboardLayout>
-        <Outlet />
-      </DashboardLayout>
+      <Suspense>
+        <DashboardLayout>
+          <Outlet />
+        </DashboardLayout>
+      </Suspense>
     </AuthGuard>
   );
 };
@@ -41,9 +50,11 @@ const DashboardApp = () => {
 const MainApp = () => {
   return (
     <AuthGuard>
-      <MainLayout>
-        <Outlet />
-      </MainLayout>
+      <Suspense>
+        <MainLayout>
+          <Outlet />
+        </MainLayout>
+      </Suspense>
     </AuthGuard>
   );
 };

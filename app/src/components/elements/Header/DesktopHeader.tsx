@@ -1,5 +1,5 @@
 import { HStack, Spacer } from '@/components/common';
-import { AboveTabletUserSearchBar } from '@/components/elements/UserSearchBar';
+import { AboveTabletUserSearchBar } from '@/components/elements/UserSearchBar/AboveTabletUserSearchBar';
 import styled from '@emotion/styled';
 
 export const DesktopHeader = () => {

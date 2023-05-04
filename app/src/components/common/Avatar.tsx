@@ -1,33 +1,51 @@
 import styled from '@emotion/styled';
+import { useState } from 'react';
 
 type AvatarProps = React.ImgHTMLAttributes<HTMLImageElement> & {
   size?: string;
   imgUrl?: string | null;
 };
 
-const handleError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-  e.currentTarget.src = '/default-avatar.png';
-};
-
 export const Avatar = ({ size, imgUrl, ...remainProps }: AvatarProps) => {
-  if (imgUrl == null) imgUrl = '/default-avatar.png';
+  const DEFAULT_AVATAR = '/default-avatar.png';
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  if (imgUrl == null) imgUrl = DEFAULT_AVATAR;
+
+  const handleLoad = () => {
+    setIsLoaded(true);
+  };
+
+  const handleError = () => {
+    imgUrl = DEFAULT_AVATAR;
+  };
+
   return (
-    <div>
+    <div css={{ position: 'relative' }}>
+      {!isLoaded && <Cover size={size} />}
       <StyledAvatar
         size={size}
+        onLoad={handleLoad}
         onError={handleError}
         src={imgUrl}
+        css={{
+          opacity: isLoaded ? 1 : 0,
+        }}
         {...remainProps}
       />
     </div>
   );
 };
 
-type StyledAvatarProps = {
-  size?: string;
-};
+const Cover = styled.div<{ size?: string }>`
+  position: absolute;
+  width: ${({ size = '2.4rem' }) => size};
+  height: ${({ size = '2.4rem' }) => size};
+  border-radius: 50%;
+  background-color: ${({ theme }) => theme.colors.mono.gray[100]};
+`;
 
-const StyledAvatar = styled.img<StyledAvatarProps>`
+const StyledAvatar = styled.img<{ size?: string }>`
   width: ${({ size = '2.4rem' }) => size};
   height: ${({ size = '2.4rem' }) => size};
   object-fit: cover;

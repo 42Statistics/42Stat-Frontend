@@ -1,4 +1,5 @@
 import { VStack } from '@/components/common';
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 export const DashboardSkeletonItem = () => {
@@ -18,16 +19,29 @@ const DashboardSkeletonItemLayout = styled.div`
   padding: 2rem;
 `;
 
+const skeletonBackgroundAnimation = css`
+  background: #bebebe;
+  background: linear-gradient(110deg, #bebebe 8%, #c9c9c9 18%, #bebebe 33%);
+  background-size: 200% 100%;
+  animation: 1.4s shine linear infinite;
+
+  @keyframes shine {
+    to {
+      background-position-x: -200%;
+    }
+  }
+`;
+
 const DashboardSkeletonItemHeader = styled.div`
   width: 100%;
   height: 3rem;
   border-radius: 1.4rem;
-  background-color: ${({ theme }) => theme.colors.mono.gray[200]};
+  ${skeletonBackgroundAnimation}
 `;
 
 const DashboardSkeletonItemContents = styled.div`
   width: 100%;
   height: 100%;
   border-radius: 1.4rem;
-  background-color: ${({ theme }) => theme.colors.mono.gray[200]};
+  ${skeletonBackgroundAnimation}
 `;

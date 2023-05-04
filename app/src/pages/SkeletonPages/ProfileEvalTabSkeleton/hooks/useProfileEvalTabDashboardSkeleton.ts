@@ -2,7 +2,7 @@ import {
   profileEvalTabDesktopDashboardRows,
   profileEvalTabMobileDashboardRows,
   profileEvalTabTabletDashboardRows,
-} from './profileEvalTabDashboardRows';
+} from '@/pages/ProfileEvalTab/hooks/profileEvalTabDashboardRows';
 
 export const useProfileEvalTabDashboardSkeleton = () => ({
   desktopRows: profileEvalTabDesktopDashboardRows,

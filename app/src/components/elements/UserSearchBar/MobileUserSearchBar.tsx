@@ -12,8 +12,8 @@ import { useDebounce } from '@/utils/useDebounce';
 import { useLazyQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { MdSearch } from '@react-icons/all-files/md/MdSearch';
 import { useEffect, useRef, useState } from 'react';
-import { MdSearch } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import { FIND_PROJECT_PREVIEW } from './common';
 

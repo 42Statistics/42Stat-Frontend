@@ -2,7 +2,7 @@ import {
   statPageDesktopDashboardRows,
   statPageMobileDashboardRows,
   statPageTabletDashboardRows,
-} from './statPageDashboardRows';
+} from '@/pages/StatPage/hooks/statPageDashboardRows';
 
 export const useStatPageDashboardSkeleton = () => ({
   desktopRows: statPageDesktopDashboardRows,

@@ -36,15 +36,15 @@ type Fonts = {
     caption: string;
   };
   weight: {
-    thin: number;
-    extralight: number;
-    light: number;
+    // thin: number;
+    // extralight: number;
+    // light: number;
     regular: number;
     medium: number;
-    semibold: number;
+    // semibold: number;
     bold: number;
-    extrabold: number;
-    black: number;
+    // extrabold: number;
+    // black: number;
   };
 };
 

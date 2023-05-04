@@ -1,8 +1,8 @@
 import { Desktop, Mobile, Tablet } from '@/utils/responsive/Device';
 import { DashboardProps } from '@/utils/types/Dashboard';
 import { DesktopDashboardSkeleton } from './DesktopDashboardSkeleton';
-import { MobileDashboardSkeleton } from './MobileDashboardSkeleton';
 import { TabletDashboardSkeleton } from './TabletDashboardSkeleton';
+import { MobileDashboardSkeleton } from './MobileDashboardSkeleton';
 
 type DashboardSkeletonProps = Omit<DashboardProps, 'contents'>;
 

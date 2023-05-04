@@ -1,12 +1,10 @@
 import { NavMenu } from '@/utils/types/NavMenu';
 import { useTheme } from '@emotion/react';
-import {
-  MdContentPasteSearch,
-  MdEqualizer,
-  MdOutlineEmojiEvents,
-  MdPerson,
-  MdSettings,
-} from 'react-icons/md';
+import { FiAward } from '@react-icons/all-files/fi/FiAward';
+import { MdAssignment } from '@react-icons/all-files/md/MdAssignment';
+import { MdEqualizer } from '@react-icons/all-files/md/MdEqualizer';
+import { MdPerson } from '@react-icons/all-files/md/MdPerson';
+import { MdSettings } from '@react-icons/all-files/md/MdSettings';
 
 type NavMenuIconProps = {
   menu: NavMenu;
@@ -28,11 +26,11 @@ export const NavMenuIcon = ({
     case 'Stat':
       return <MdEqualizer size={size} fill={color} />;
     case 'LeaderBoard':
-      return <MdOutlineEmojiEvents size={size} fill={color} />;
+      return <FiAward size={size} fill={color} />;
     case 'MyProfile':
       return <MdPerson size={size} fill={color} />;
     case 'EvalLogSearch':
-      return <MdContentPasteSearch size={size} fill={color} />;
+      return <MdAssignment size={size} fill={color} />;
     case 'Settings':
       return <MdSettings size={size} fill={color} />;
     default:

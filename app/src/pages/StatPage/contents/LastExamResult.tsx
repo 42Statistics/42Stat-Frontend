@@ -1,4 +1,5 @@
 import { gql } from '@/__generated__';
+import { Loader } from '@/components/common';
 import { BarChart } from '@/components/elements/Chart';
 import {
   ApolloBadRequest,
@@ -25,7 +26,7 @@ const GET_LAST_EXAM_RESULT = gql(/* GraphQL */ `
 export const LastExamResult = () => {
   const { loading, error, data } = useQuery(GET_LAST_EXAM_RESULT);
 
-  if (loading) return <></>;
+  if (loading) return <Loader/>;
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 

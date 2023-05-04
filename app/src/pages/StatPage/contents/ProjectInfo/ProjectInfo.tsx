@@ -1,5 +1,5 @@
 import { gql } from '@/__generated__';
-import { Divider, HStack, Spacer, VStack } from '@/components/common';
+import { Divider, HStack, Loader, Spacer, VStack } from '@/components/common';
 import { PieChart } from '@/components/elements/Chart';
 import {
   ApolloBadRequest,
@@ -47,7 +47,7 @@ export const ProjectInfo = () => {
     });
   }, []);
 
-  if (loading) return <></>;
+  if (loading) return <Loader />;
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 

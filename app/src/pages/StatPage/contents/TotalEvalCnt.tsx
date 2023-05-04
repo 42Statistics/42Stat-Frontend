@@ -1,4 +1,5 @@
 import { gql } from '@/__generated__';
+import { Loader } from '@/components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
@@ -17,7 +18,7 @@ const GET_TOTAL_EVAL_COUNT = gql(/* GraphQL */ `
 export const TotalEvalCnt = () => {
   const { loading, error, data } = useQuery(GET_TOTAL_EVAL_COUNT);
 
-  if (loading) return <></>;
+  if (loading) return <Loader />;
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 

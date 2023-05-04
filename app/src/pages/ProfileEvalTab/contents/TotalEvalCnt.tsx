@@ -1,4 +1,5 @@
 import { gql } from '@/__generated__';
+import { Loader } from '@/components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
@@ -20,7 +21,7 @@ export const TotalEvalCnt = () => {
     variables: { uid: 99947 },
   });
 
-  if (loading) return <></>;
+  if (loading) return <Loader />;
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 

@@ -42,7 +42,7 @@ const Cover = styled.div<{ size?: string }>`
   width: ${({ size = '2.4rem' }) => size};
   height: ${({ size = '2.4rem' }) => size};
   border-radius: 50%;
-  background-color: ${({ theme }) => theme.colors.mono.gray[200]};
+  background-color: ${({ theme }) => theme.colors.mono.gray[100]};
 `;
 
 const StyledAvatar = styled.img<{ size?: string }>`

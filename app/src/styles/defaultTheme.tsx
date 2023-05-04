@@ -13,7 +13,7 @@ const colors = {
     gray: {
       300: '#777777',
       200: '#999999',
-      100: '#CCCCCC',
+      100: '#bbbbbb',
     },
   },
   background: '#E4E3EA',

@@ -24,7 +24,7 @@ export const NavProfile = ({ imgUrl, name, login }: NavProfile) => {
         </Text>
         <Text
           fontSize={theme.fonts.size.caption}
-          color={theme.colors.mono.gray[100]}
+          color={theme.colors.mono.gray[200]}
         >
           {titleCase(name)}
         </Text>

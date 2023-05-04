@@ -63,7 +63,8 @@ export const global = () => css`
   }
 
   body {
-    background-image: url('/black-galaxy-wallpaper-compressed.jpeg');
+    background: url('/black-galaxy-wallpaper-compressed.jpeg'),
+      linear-gradient(142deg, #212222 0%, #000000 100%); // fallback gradient for UX
     background-size: cover;
     font-size: 1.4rem;
   }

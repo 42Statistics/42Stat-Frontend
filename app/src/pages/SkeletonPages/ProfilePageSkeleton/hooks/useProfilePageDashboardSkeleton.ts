@@ -2,7 +2,7 @@ import {
   profilePageDesktopDashboardRows,
   profilePageMobileDashboardRows,
   profilePageTabletDashboardRows,
-} from './profilePageDashboardRows';
+} from '@/pages/ProfilePage/hooks/profilePageDashboardRows';
 
 export const useprofilePageDashboardSkeleton = () => ({
   desktopRows: profilePageDesktopDashboardRows,

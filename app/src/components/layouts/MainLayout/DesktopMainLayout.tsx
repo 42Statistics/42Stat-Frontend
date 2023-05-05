@@ -21,5 +21,6 @@ const DesktopPageLayout = styled.main`
   align-items: center;
   width: 100%;
   height: 100%;
+  padding: 8rem 0 0 0;
   overflow: auto;
 `;

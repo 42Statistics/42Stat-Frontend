@@ -28,10 +28,10 @@ type DashboardItemWrapperLayoutProps = {
 };
 
 const DashboardItemWrapperLayout = styled.div<DashboardItemWrapperLayoutProps>`
-  background-color: ${({ theme }) => rgba(theme.colors.mono.white, 0.85)};
   grid-column: ${({ col, colSpan }) => `${col} / span ${colSpan}`};
   grid-row: ${({ row, rowSpan }) => `${row} / span ${rowSpan}`};
   border-radius: 2rem;
+  background-color: ${({ theme }) => rgba(theme.colors.mono.white, 0.85)};
 
   transition: all 0.2s;
   :hover {

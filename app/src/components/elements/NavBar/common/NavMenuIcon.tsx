@@ -1,4 +1,4 @@
-import { NavMenu } from '@/utils/types/NavMenu';
+import type { NavMenu } from '@/utils/types/NavMenu';
 import { useTheme } from '@emotion/react';
 import { FiAward } from '@react-icons/all-files/fi/FiAward';
 import { MdAssignment } from '@react-icons/all-files/md/MdAssignment';

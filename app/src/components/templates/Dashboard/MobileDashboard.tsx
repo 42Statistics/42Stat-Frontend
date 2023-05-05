@@ -2,7 +2,7 @@ import { DashboardItem } from '@/components/templates/DashboardItem';
 import { DashboardItemWrapper } from '@/components/templates/DashboardItemWrapper';
 import { MobileDashboardRow } from '@/components/templates/DashboardRow';
 import { MobileDashboardRowContainer } from '@/components/templates/DashboardRowContainer';
-import { MobileDashboardProps } from '@/utils/types/Dashboard';
+import type { MobileDashboardProps } from '@/utils/types/Dashboard';
 
 export const MobileDashboard = ({ rows, contents }: MobileDashboardProps) => {
   return (

@@ -1,5 +1,5 @@
 import { VStack } from '@/components/common';
-import { DashboardItemProps } from '@/utils/types/Dashboard';
+import type { DashboardItemProps } from '@/utils/types/Dashboard';
 import styled from '@emotion/styled';
 import { DashboardItemHeader } from './DashboardItemHeader';
 

@@ -1,6 +1,6 @@
 import { Avatar, HStack, Text } from '@/components/common';
 import { numberWithUnitFormatter } from '@/utils/formatters';
-import { RankItemType } from '@/utils/types/Rank';
+import type { RankItemType } from '@/utils/types/Rank';
 import { useTheme } from '@emotion/react';
 
 type RankItemProps = {

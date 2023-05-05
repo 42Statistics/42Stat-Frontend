@@ -2,7 +2,7 @@ import { DashboardItem } from '@/components/templates/DashboardItem';
 import { DashboardItemWrapper } from '@/components/templates/DashboardItemWrapper';
 import { TabletDashboardRow } from '@/components/templates/DashboardRow';
 import { TabletDashboardRowContainer } from '@/components/templates/DashboardRowContainer';
-import { TabletDashboardProps } from '@/utils/types/Dashboard';
+import type { TabletDashboardProps } from '@/utils/types/Dashboard';
 
 export const TabletDashboard = ({ rows, contents }: TabletDashboardProps) => {
   return (

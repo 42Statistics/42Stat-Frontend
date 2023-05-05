@@ -1,5 +1,5 @@
 import { Desktop, Mobile, Tablet } from '@/utils/responsive/Device';
-import { DashboardProps } from '@/utils/types/Dashboard';
+import type { DashboardProps } from '@/utils/types/Dashboard';
 import { DesktopDashboardSkeleton } from './DesktopDashboardSkeleton';
 import { TabletDashboardSkeleton } from './TabletDashboardSkeleton';
 import { MobileDashboardSkeleton } from './MobileDashboardSkeleton';

@@ -6,7 +6,7 @@ import {
 } from '@/components/elements/DashboardContentView';
 import { Rank } from '@/components/elements/DashboardContentView/Rank';
 import { BelowTablet, Desktop } from '@/utils/responsive/Device';
-import { RankItemType } from '@/utils/types/Rank';
+import type { RankItemType } from '@/utils/types/Rank';
 import { useQuery } from '@apollo/client';
 
 const GET_MONTHLY_EXP_INCREMENT_RANK = gql(/* GraphQL */ `

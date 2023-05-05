@@ -1,4 +1,4 @@
-import { DesktopDashboardColSize } from '@/utils/types/Dashboard';
+import type { DesktopDashboardColSize } from '@/utils/types/Dashboard';
 import styled from '@emotion/styled';
 
 type DesktopDashboardRowProps = {

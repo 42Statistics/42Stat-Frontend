@@ -1,4 +1,4 @@
-import { TabletDashboardColSize } from '@/utils/types/Dashboard';
+import type { TabletDashboardColSize } from '@/utils/types/Dashboard';
 import styled from '@emotion/styled';
 
 type TabletDashboardRowProps = {

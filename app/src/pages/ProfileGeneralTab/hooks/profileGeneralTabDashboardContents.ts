@@ -1,4 +1,4 @@
-import { DashboardItemProps } from '@/utils/types/Dashboard';
+import type { DashboardItemProps } from '@/utils/types/Dashboard';
 import {
   LastPass,
   LastRegistered,

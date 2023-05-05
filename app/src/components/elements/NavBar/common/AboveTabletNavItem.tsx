@@ -1,5 +1,5 @@
 import { Text } from '@/components/common';
-import { NavMenuOption } from '@/utils/types/NavMenu';
+import type { NavMenuOption } from '@/utils/types/NavMenu';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useLocation, useNavigate } from 'react-router-dom';

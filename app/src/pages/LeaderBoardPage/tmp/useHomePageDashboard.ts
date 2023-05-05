@@ -1,10 +1,10 @@
-// import {
+// import type {
 //   DesktopDashboardRowType,
 //   MobileDashboardRowType,
 //   TabletDashboardRowType,
 // } from '@/utils/types/Dashboard';
 
-// import { DashboardItemProps } from '@/utils/types/Dashboard';
+// import type { DashboardItemProps } from '@/utils/types/Dashboard';
 // import {
 //   CurrMonthBlackholedCnt,
 //   CurrRegisteredCntRank,

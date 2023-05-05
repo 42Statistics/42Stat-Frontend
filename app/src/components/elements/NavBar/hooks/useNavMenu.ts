@@ -1,4 +1,4 @@
-import { NavMenuOption } from '@/utils/types/NavMenu';
+import type { NavMenuOption } from '@/utils/types/NavMenu';
 
 export const useNavMenu = () => {
   const options: NavMenuOption[] = [

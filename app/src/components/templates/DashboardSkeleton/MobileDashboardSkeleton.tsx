@@ -1,7 +1,7 @@
 import { DashboardItemWrapper } from '@/components/templates/DashboardItemWrapper';
 import { MobileDashboardRow } from '@/components/templates/DashboardRow';
 import { MobileDashboardRowContainer } from '@/components/templates/DashboardRowContainer';
-import { MobileDashboardProps } from '@/utils/types/Dashboard';
+import type { MobileDashboardProps } from '@/utils/types/Dashboard';
 import { DashboardSkeletonItem } from '../DashboardSkeletonItem';
 
 type MobileDashboardSkeletonProps = Omit<MobileDashboardProps, 'contents'>;

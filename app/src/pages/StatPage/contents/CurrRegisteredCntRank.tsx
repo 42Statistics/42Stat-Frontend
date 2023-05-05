@@ -5,7 +5,7 @@ import {
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
 import { Rank } from '@/components/elements/DashboardContentView/Rank';
-import { RankItemType } from '@/utils/types/Rank';
+import type { RankItemType } from '@/utils/types/Rank';
 import { useQuery } from '@apollo/client';
 
 const GET_CURR_REGISTERED_CNT_RANK = gql(/* GraphQL */ `

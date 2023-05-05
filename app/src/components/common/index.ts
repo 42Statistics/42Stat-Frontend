@@ -7,6 +7,7 @@ export * from './Spinner';
 export * from './Spacer';
 export * from './Avatar';
 export * from './Loader';
+export * from './SegmentedControl';
 
 /* Component that extends HTML element */
 export * from './Clickable';

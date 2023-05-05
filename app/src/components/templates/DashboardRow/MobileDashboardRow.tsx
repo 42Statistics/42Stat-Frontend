@@ -1,4 +1,4 @@
-import { MobileDashboardColSize } from '@/utils/types/Dashboard';
+import type { MobileDashboardColSize } from '@/utils/types/Dashboard';
 import styled from '@emotion/styled';
 
 type MobileDashboardRowProps = {

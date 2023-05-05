@@ -1,4 +1,4 @@
-import { NavMenuOption } from '@/utils/types/NavMenu';
+import type { NavMenuOption } from '@/utils/types/NavMenu';
 import styled from '@emotion/styled';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { NavMenuIcon } from './common/NavMenuIcon';

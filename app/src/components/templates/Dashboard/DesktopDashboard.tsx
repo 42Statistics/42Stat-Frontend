@@ -2,7 +2,7 @@ import { DashboardItem } from '@/components/templates/DashboardItem';
 import { DashboardItemWrapper } from '@/components/templates/DashboardItemWrapper';
 import { DesktopDashboardRow } from '@/components/templates/DashboardRow';
 import { DesktopDashboardRowContainer } from '@/components/templates/DashboardRowContainer';
-import { DesktopDashboardProps } from '@/utils/types/Dashboard';
+import type { DesktopDashboardProps } from '@/utils/types/Dashboard';
 
 export const DesktopDashboard = ({ rows, contents }: DesktopDashboardProps) => {
   return (

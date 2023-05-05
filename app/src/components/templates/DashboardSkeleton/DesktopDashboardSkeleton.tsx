@@ -1,7 +1,7 @@
 import { DashboardItemWrapper } from '@/components/templates/DashboardItemWrapper';
 import { DesktopDashboardRow } from '@/components/templates/DashboardRow';
 import { DesktopDashboardRowContainer } from '@/components/templates/DashboardRowContainer';
-import { DesktopDashboardProps } from '@/utils/types/Dashboard';
+import type { DesktopDashboardProps } from '@/utils/types/Dashboard';
 import { DashboardSkeletonItem } from '../DashboardSkeletonItem';
 
 type DesktopDashboardSkeletonProps = Omit<DesktopDashboardProps, 'contents'>;

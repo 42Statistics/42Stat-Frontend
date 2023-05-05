@@ -1,5 +1,6 @@
 export * from './ActiveUserCntRecords';
 export * from './AverageCircleDurations';
+export * from './AverageCommentLength';
 export * from './AverageFeedbackLength';
 export * from './BlackholedCntPerCircles';
 export * from './CoalitionScoreDynamic';

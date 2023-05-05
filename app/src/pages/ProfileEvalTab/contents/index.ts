@@ -1,3 +1,4 @@
+export * from './AverageCommentLength';
 export * from './AverageDuration';
 export * from './AverageFeedbackLength';
 export * from './AverageFinalMark';

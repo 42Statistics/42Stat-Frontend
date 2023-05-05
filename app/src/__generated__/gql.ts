@@ -22,6 +22,7 @@ const documents = {
     "\n  query getCoalitionScoreRank {\n    getTotalPage {\n      monthlyScoreRanks {\n        data {\n          userPreview {\n            id\n            login\n            imgUrl\n          }\n          value\n        }\n        from\n        to\n      }\n    }\n  }\n": types.GetCoalitionScoreRankDocument,
     "\n  query GetTotalEvalCntRank {\n    getHomePage {\n      totalEvalCntRank {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n": types.GetTotalEvalCntRankDocument,
     "\n  query getWalletRank {\n    getTotalPage {\n      walletRanks {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n": types.GetWalletRankDocument,
+    "\n  query getPersonalAverageCommentLength($uid: Int!) {\n    getPersonalEvalPage(uid: $uid) {\n      averageCommentLength\n    }\n  }\n": types.GetPersonalAverageCommentLengthDocument,
     "\n  query getAverageDuration($uid: Int!) {\n    getPersonalEvalPage(uid: $uid) {\n      averageDuration\n    }\n  }\n": types.GetAverageDurationDocument,
     "\n  query getPersonalAverageFeedbackLength($uid: Int!) {\n    getPersonalEvalPage(uid: $uid) {\n      averageFeedbackLength\n    }\n  }\n": types.GetPersonalAverageFeedbackLengthDocument,
     "\n  query getAverageFinalMark($uid: Int!) {\n    getPersonalEvalPage(uid: $uid) {\n      averageFinalMark\n    }\n  }\n": types.GetAverageFinalMarkDocument,
@@ -37,6 +38,7 @@ const documents = {
     "\n  query GetUserProfile {\n    getPersonGeneralPage {\n      userProfile {\n        id\n        login\n        grade\n        name\n        coalition {\n          id\n          name\n          slug\n          imageUrl\n          coverUrl\n          color\n          score\n          userId\n        }\n        imgUrl\n        titles {\n          id\n          name\n          isSelected\n        }\n        level\n        pooledAt\n        blackholedAt\n        wallet\n        correctionPoint\n        scoreInfo {\n          value\n          rankInCoalition\n          rankInTotal\n        }\n        levelRank\n      }\n    }\n  }\n": types.GetUserProfileDocument,
     "\n  query getActiveUserCntRecord {\n    getTotalPage {\n      activeUserCntRecords {\n        at\n        value\n      }\n    }\n  }\n": types.GetActiveUserCntRecordDocument,
     "\n  query getAverageCircleDuration {\n    getTotalPage {\n      averageCircleDurations {\n        circle\n        value\n      }\n    }\n  }\n": types.GetAverageCircleDurationDocument,
+    "\n  query getAverageCommentLength {\n    getTotalPage {\n      averageCommentLength\n    }\n  }\n": types.GetAverageCommentLengthDocument,
     "\n  query getAverageFeedbackLength {\n    getTotalPage {\n      averageFeedbackLength\n    }\n  }\n": types.GetAverageFeedbackLengthDocument,
     "\n  query getWhenGoBlackHole {\n    getTotalPage {\n      blackholedCntPerCircles {\n        circle\n        value\n      }\n    }\n  }\n": types.GetWhenGoBlackHoleDocument,
     "\n  query getCoalitionScoreRecord {\n    getTotalPage {\n      scoreRecords {\n        coalition {\n          id\n          name\n          slug\n          imageUrl\n          coverUrl\n          color\n          score\n          userId\n        }\n        records {\n          at\n          value\n        }\n      }\n    }\n  }\n": types.GetCoalitionScoreRecordDocument,
@@ -103,6 +105,10 @@ export function gql(source: "\n  query getWalletRank {\n    getTotalPage {\n    
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function gql(source: "\n  query getPersonalAverageCommentLength($uid: Int!) {\n    getPersonalEvalPage(uid: $uid) {\n      averageCommentLength\n    }\n  }\n"): (typeof documents)["\n  query getPersonalAverageCommentLength($uid: Int!) {\n    getPersonalEvalPage(uid: $uid) {\n      averageCommentLength\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function gql(source: "\n  query getAverageDuration($uid: Int!) {\n    getPersonalEvalPage(uid: $uid) {\n      averageDuration\n    }\n  }\n"): (typeof documents)["\n  query getAverageDuration($uid: Int!) {\n    getPersonalEvalPage(uid: $uid) {\n      averageDuration\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -160,6 +166,10 @@ export function gql(source: "\n  query getActiveUserCntRecord {\n    getTotalPag
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query getAverageCircleDuration {\n    getTotalPage {\n      averageCircleDurations {\n        circle\n        value\n      }\n    }\n  }\n"): (typeof documents)["\n  query getAverageCircleDuration {\n    getTotalPage {\n      averageCircleDurations {\n        circle\n        value\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query getAverageCommentLength {\n    getTotalPage {\n      averageCommentLength\n    }\n  }\n"): (typeof documents)["\n  query getAverageCommentLength {\n    getTotalPage {\n      averageCommentLength\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -1,5 +1,6 @@
 import { DashboardItemProps } from '@/utils/types/Dashboard';
 import {
+  AverageCommentLength,
   AverageDuration,
   AverageFeedbackLength,
   AverageFinalMark,
@@ -35,14 +36,12 @@ export const profileEvalTabDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 4,
-    title: '평균 피드백 길이',
-    description: '(평가자일 때)',
-    content: AverageFeedbackLength, // TODO: 평가자일 때 & 평가받을 때 분리
+    title: '평균 코멘트 길이',
+    content: AverageCommentLength, // TODO: 평가자일 때 & 평가받을 때 분리
   },
   {
     id: 5,
     title: '평균 피드백 길이',
-    description: '(평가받을 때)',
     content: AverageFeedbackLength, // TODO: 평가자일 때 & 평가받을 때 분리
   },
   {

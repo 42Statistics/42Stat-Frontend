@@ -3,6 +3,7 @@ import { DashboardItemProps } from '@/utils/types/Dashboard';
 import {
   ActiveUserCntRecords,
   AverageCircleDurations,
+  AverageCommentLength,
   AverageFeedbackLength,
   BlackholedCntPerCircles,
   CoalitionScoreDynamic,
@@ -36,8 +37,8 @@ export const statPageDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 3,
-    title: '역대 총 평가 횟수',
-    content: TotalEvalCnt,
+    title: '평균 코멘트 길이',
+    content: AverageCommentLength,
   },
   {
     id: 4,
@@ -46,42 +47,47 @@ export const statPageDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 5,
+    title: '역대 총 평가 횟수',
+    content: TotalEvalCnt,
+  },
+  {
+    id: 6,
     title: '활성화 유저 수 추이',
     content: ActiveUserCntRecords,
   },
   {
-    id: 6,
+    id: 7,
     title: '언제 블랙홀에 많이 빠질까?',
     content: BlackholedCntPerCircles,
   },
   {
-    id: 7,
+    id: 8,
     title: 'N서클 통과할 때까지의 누적 기간',
     description: '(본과정 시작일 기준)',
     content: AverageCircleDurations,
   },
   {
-    id: 8,
+    id: 9,
     content: ProjectInfo,
   },
 
   {
-    id: 9,
+    id: 10,
     title: '누적 코알리숑 스코어 합산',
     content: CoalitionScoreSum,
   },
   {
-    id: 10,
+    id: 11,
     title: '역대 코알리숑 스코어 변동 추이',
     content: CoalitionScoreDynamic,
   },
   {
-    id: 11,
+    id: 12,
     title: '레벨 별 유저 분포',
     content: UserCntPerLevels,
   },
   {
-    id: 12,
+    id: 13,
     title: '직전 회차 시험 Rank 별 통과율',
     description: '(응시 시간 : 2023.02.24.(금) 14:00)',
     content: LastExamResult,

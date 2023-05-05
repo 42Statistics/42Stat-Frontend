@@ -41,7 +41,7 @@ export const PrefferedTime = () => {
 
   return (
     <VStack w="100%" h="100%">
-      <VStack w="70%" h="100%" spacing="2rem">
+      <VStack w="80%" h="100%" spacing="2rem">
         <Text fontSize={theme.fonts.size.h3}>
           {prefferedTimeTitle(morning, daytime, evening, night)}
         </Text>

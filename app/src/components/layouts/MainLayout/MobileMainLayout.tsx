@@ -1,17 +1,26 @@
-import { Divider, VStack } from '@/components/common';
-import { MobileHeader } from '@/components/elements/Header/MobileHeader';
-import { MobileNavBar } from '@/components/elements/NavBar/MobileNavBar';
+import { VStack } from '@/components/common';
+import { MobileTabBar } from '@/components/elements/NavBar/MobileTabBar';
+import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { Helmet } from 'react-helmet-async';
 
 export const MobileMainLayout = ({ children }: React.PropsWithChildren) => {
+  const theme = useTheme();
+
   return (
     <>
-      <VStack w="100%" spacing="2rem">
-        <MobileHeader />
-        <Divider />
+      <Helmet>
+        <meta name="theme-color" content={theme.colors.mono.white} />
+      </Helmet>
+      <VStack
+        w="100%"
+        h="100%"
+        spacing="2rem"
+        css={{ backgroundColor: theme.colors.mono.white }}
+      >
         <MobilePageLayout>{children}</MobilePageLayout>
       </VStack>
-      <MobileNavBar />
+      <MobileTabBar />
     </>
   );
 };

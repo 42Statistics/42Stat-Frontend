@@ -5,13 +5,17 @@ import { Suspense } from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
 import { protectedRoutes } from './protectedRoutes';
 
-const { LoginPage } = lazyImport(
-  () => import('@/pages/LoginPage'),
-  'LoginPage',
+const { LandingPage } = lazyImport(
+  () => import('@/pages/LandingPage'),
+  'LandingPage',
 );
 const { NotFoundPage } = lazyImport(
   () => import('@/pages/ErrorPages/404'),
   'NotFoundPage',
+);
+const { LandingLayout } = lazyImport(
+  () => import('@/components/layouts/LandingLayout'),
+  'LandingLayout',
 );
 
 // TODO: <Route errorElement={<ErrorPage />} /> 파트 추가
@@ -25,7 +29,9 @@ export const AppRoutes = () => {
         <Navigate to="/home" />
       ) : (
         <Suspense>
-          <LoginPage />
+          <LandingLayout>
+            <LandingPage />
+          </LandingLayout>
         </Suspense>
       ),
     },

@@ -8,7 +8,7 @@ export const AboveTabletNavMenu = () => {
   const { options } = useNavMenu();
 
   return (
-    <VStack as="ul" w="100%" h="100%" spacing="2rem">
+    <VStack as="ul" w="100%" spacing="2rem">
       {options.map((option) => (
         <Fragment key={option.menu}>
           <AboveTabletNavItem option={option} />

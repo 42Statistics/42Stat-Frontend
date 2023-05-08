@@ -17,11 +17,7 @@ const Arrow = ({ direction }: ArrowType) => {
   return (
     <BsTriangleFill
       size="12px"
-      color={
-        direction === 'up'
-          ? theme.colors.secondary.default
-          : theme.colors.primary.default
-      }
+      color={direction === 'up' ? '#00C48C' : '#FF3D71'}
       style={{
         transform: direction === 'up' ? 'rotate(0deg)' : 'rotate(180deg)',
       }}
@@ -43,11 +39,7 @@ export const NumberCompare = ({ curr, last, unit }: NumberCompareProps) => {
         <Arrow direction={diff >= 0 ? 'up' : 'down'} />
         <Text
           fontSize={theme.fonts.size.h3}
-          color={
-            diff >= 0
-              ? theme.colors.secondary.default
-              : theme.colors.primary.default
-          }
+          color={diff >= 0 ? '#00C48C' : '#FF3D71'}
         >
           {Math.abs(diff).toLocaleString()}
         </Text>

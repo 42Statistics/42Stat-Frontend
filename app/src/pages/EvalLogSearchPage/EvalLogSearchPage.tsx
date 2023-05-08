@@ -1,6 +1,5 @@
 import { gql } from '@/__generated__';
 import { VStack } from '@/components/common';
-import { AboveTablet, Mobile } from '@/utils/responsive/Device';
 import { useLazyQuery } from '@apollo/client';
 import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
@@ -116,27 +115,26 @@ export const EvalLogSearchPage = () => {
       <Helmet>
         <title>평가로그 검색기 | 42Stat</title>
       </Helmet>
-      <AboveTablet>
-        <EvalLogSearchPageLayout>
+      <EvalLogSearchPageLayout>
+        <VStack h="100%" spacing="2rem">
           <EvalLogSearchHeader formValue={formValue} onSubmit={onSubmit} />
-          <VStack spacing="3rem" justify="start">
-            <EvalLogSearchBoard
-              loading={loading}
-              error={error}
-              data={data}
-              pageNumber={pageNumber}
-              setPageNumber={setPageNumber}
-            />
-          </VStack>
-        </EvalLogSearchPageLayout>
-      </AboveTablet>
-      <Mobile></Mobile>
+          <EvalLogSearchBoard
+            loading={loading}
+            error={error}
+            data={data}
+            pageNumber={pageNumber}
+            setPageNumber={setPageNumber}
+          />
+        </VStack>
+      </EvalLogSearchPageLayout>
     </>
   );
 };
 
 const EvalLogSearchPageLayout = styled.div`
-  padding: 0 3rem 3rem 3rem;
+  width: 100%;
+  height: 100%;
+  padding: 0 0 4rem 0;
 `;
 
 // export const EvalLogSearchPage = () => {

@@ -6,7 +6,7 @@ export const AppLogoTitleButton = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/home');
+    navigate('/');
   };
 
   return (

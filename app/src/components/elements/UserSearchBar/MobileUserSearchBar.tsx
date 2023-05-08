@@ -10,9 +10,9 @@ import { isDefined } from '@/utils/isDefined';
 import { isEnterKeyReleased } from '@/utils/isEnterKeyReleased';
 import { useDebounce } from '@/utils/useDebounce';
 import { useLazyQuery } from '@apollo/client';
-import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { MdSearch } from '@react-icons/all-files/md/MdSearch';
+import { rgba } from 'emotion-rgba';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FIND_PROJECT_PREVIEW } from './common';
@@ -20,6 +20,7 @@ import { FIND_PROJECT_PREVIEW } from './common';
 // TODO: SearchBar 추상화
 export const MobileUserSearchBar = () => {
   const [input, setInput] = useState<string>('');
+  const [isFocused, setIsFocused] = useState<boolean>(false);
   const debouncedInput = useDebounce(input, 100);
   const [preview, { loading, error, data }] =
     useLazyQuery(FIND_PROJECT_PREVIEW);
@@ -27,7 +28,6 @@ export const MobileUserSearchBar = () => {
     debouncedInput !== '' && data?.findProjectPreview.length !== 0 && !loading;
   // ) || error;
   const inputRef = useRef<HTMLInputElement>(null);
-  const theme = useTheme();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -50,14 +50,16 @@ export const MobileUserSearchBar = () => {
   };
 
   return (
-    <MobileUserSearchBarLayout>
+    <MobileUserSearchBarLayout isFocused={isFocused}>
       <HStack spacing="2rem">
         <MdSearch id="search-icon" size="24px" />
         <Input
           ref={inputRef}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="유저명을 입력해주세요"
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          placeholder="유저명을 입력하세요"
         />
       </HStack>
       {isPreviewDisplaying && (
@@ -86,12 +88,22 @@ export const MobileUserSearchBar = () => {
   );
 };
 
-const MobileUserSearchBarLayout = styled.div`
+const MobileUserSearchBarLayout = styled.div<{ isFocused: boolean }>`
   position: relative;
   padding: 1rem 2rem;
   border-radius: 2rem;
   transition: all 0.2s;
   background-color: ${({ theme }) => theme.colors.mono.white};
+
+  box-shadow: ${({ theme, isFocused }) =>
+    isFocused
+      ? `0 0.4rem 0.4rem ${rgba(theme.colors.mono.black, 0.25)}`
+      : `0 0.4rem 0.4rem ${rgba(theme.colors.mono.black, 0.1)}`};
+
+  &:hover {
+    box-shadow: ${({ theme }) =>
+      `0 0.4rem 0.4rem ${rgba(theme.colors.mono.black, 0.25)}`};
+  }
 `;
 
 const UserSearchResult = styled.div`

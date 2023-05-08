@@ -25,7 +25,7 @@ export const PageMoveArrow = ({
             color={
               pageNumber !== 1
                 ? theme.colors.primary.default
-                : theme.colors.mono.gray[200]
+                : theme.colors.mono.gray200
             }
           />
         }
@@ -43,7 +43,7 @@ export const PageMoveArrow = ({
             color={
               pageNumber !== maxPageNumber
                 ? theme.colors.primary.default
-                : theme.colors.mono.gray[200]
+                : theme.colors.mono.gray200
             }
           />
         }

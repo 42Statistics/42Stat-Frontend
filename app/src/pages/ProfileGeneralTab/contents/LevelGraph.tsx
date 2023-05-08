@@ -62,7 +62,7 @@ const LevelGraphChart = ({ series }: LevelGraphChartProps) => {
   const theme = useTheme();
 
   const options: ApexCharts.ApexOptions = {
-    colors: [theme.colors.primary.default, theme.colors.secondary.default],
+    colors: [theme.colors.primary.default, theme.colors.accent.default],
     xaxis: {
       type: 'datetime',
       labels: {

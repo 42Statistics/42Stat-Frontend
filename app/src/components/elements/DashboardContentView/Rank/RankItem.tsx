@@ -14,7 +14,7 @@ export const RankItem = ({ rank, showImg, item, unit }: RankItemProps) => {
   const theme = useTheme();
   const { name, value, imgUrl } = item;
   const color =
-    rank === 1 ? theme.colors.primary.default : theme.colors.mono.black;
+    rank === 1 ? theme.colors.accent.default : theme.colors.mono.black;
 
   return (
     <HStack w="100%" spacing="2rem">

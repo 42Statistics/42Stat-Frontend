@@ -14,13 +14,13 @@ export const Divider = styled.div<DividerProps>`
   border-top: ${({
     orientation = 'horizontal',
     theme,
-    color = theme.colors.primary.light,
+    color = theme.colors.mono.gray100,
     thickness = '0.1rem',
   }) => (orientation === 'horizontal' ? `${thickness} solid ${color}` : 0)};
   border-left: ${({
     orientation = 'horizontal',
     theme,
-    color = theme.colors.primary.light,
+    color = theme.colors.mono.gray100,
     thickness = '0.1rem',
   }) => (orientation === 'vertical' ? `${thickness} solid ${color}` : 0)};
 `;

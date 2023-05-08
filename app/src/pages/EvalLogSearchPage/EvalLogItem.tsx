@@ -10,6 +10,7 @@ import {
 import { dateFormatter, snakeCaseFormatter } from '@/utils/formatters';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { rgba } from 'emotion-rgba';
 import { useNavigate } from 'react-router-dom';
 
 export const EvalLogItem = ({ element }: { element: EvalLog }) => {
@@ -20,8 +21,8 @@ export const EvalLogItem = ({ element }: { element: EvalLog }) => {
 
   return (
     <VStack w="100%" align="start" spacing="2rem">
-      <HStack w="100%" spacing="1rem" justify="start" wrap="wrap">
-        <HStack justify="start">
+      <HStack w="100%" justify="start" wrap="wrap">
+        <HStack>
           <Clickable
             onClick={() => navigate('/profile/' + header.corrector.login)}
             element={
@@ -41,6 +42,8 @@ export const EvalLogItem = ({ element }: { element: EvalLog }) => {
             {header.teamPreview.name}
           </Text>
           <Text>을&nbsp;</Text>
+        </HStack>
+        <HStack>
           <Text fontWeight={theme.fonts.weight.bold}>
             {dateFormatter(header.beginAt, 'xl')}
           </Text>
@@ -104,9 +107,11 @@ const FlagLabel = ({ name, isPositive }: FlagLabelProps) => {
 const FlagLabelLayout = styled.div<{ isPositive: boolean }>`
   ${center}
   background-color: ${({ theme, isPositive }) =>
-    isPositive ? theme.colors.primary.light : theme.colors.secondary.light};
+    isPositive
+      ? rgba(theme.colors.semantic.pass, 0.3)
+      : rgba(theme.colors.semantic.fail, 0.3)};
   color: ${({ theme, isPositive }) =>
-    isPositive ? theme.colors.primary.default : theme.colors.secondary.default};
+    isPositive ? theme.colors.semantic.pass : theme.colors.semantic.fail};
   padding: 0.5rem 1rem;
   border-radius: 2rem;
   font-weight: ${({ theme }) => theme.fonts.weight.bold};

@@ -1,4 +1,4 @@
-import { Text } from '@/components/common';
+import { HStack, Text } from '@/components/common';
 import type { NavMenuOption } from '@/utils/types/NavMenu';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
@@ -11,9 +11,9 @@ type DesktopNavItemProps = {
 
 export const AboveTabletNavItem = ({ option }: DesktopNavItemProps) => {
   const navigate = useNavigate();
-  const theme = useTheme();
   const location = useLocation();
   const isFocused = location.pathname === option.path;
+  const theme = useTheme();
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
@@ -22,8 +22,15 @@ export const AboveTabletNavItem = ({ option }: DesktopNavItemProps) => {
 
   return (
     <DesktopNavItemLayout onClick={handleClick} isFocused={isFocused}>
-      <NavMenuIcon menu={option.menu} isFocused={isFocused} />
-      <Text color={theme.colors.mono.white}>{option.text}</Text>
+      <HStack spacing="1.5rem" justify="start">
+        <NavMenuIcon
+          menu={option.menu}
+          color={isFocused ? theme.colors.mono.white : theme.colors.mono.black}
+        />
+        <Text color={isFocused ? theme.colors.mono.white : 'inherit'}>
+          {option.text}
+        </Text>
+      </HStack>
     </DesktopNavItemLayout>
   );
 };
@@ -33,16 +40,16 @@ type DesktopNavItemLayoutProps = {
 };
 
 const DesktopNavItemLayout = styled.li<DesktopNavItemLayoutProps>`
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
   width: 100%;
   padding: 1rem 0 1rem 2rem;
   border-radius: 2rem;
-  opacity: ${({ isFocused }) => (isFocused ? 1 : 0.8)};
   cursor: pointer;
+  background-color: ${({ isFocused, theme }) =>
+    isFocused ? theme.colors.primary.default : 'transparent'};
+  transition: all 0.2s;
 
   &:hover {
-    opacity: 1;
+    background-color: ${({ isFocused, theme }) =>
+      isFocused ? theme.colors.primary.default : theme.colors.primary.light};
   }
 `;

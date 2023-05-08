@@ -6,7 +6,6 @@ import {
 } from '@/components/elements/DashboardContentView';
 import { ApolloError } from '@apollo/client';
 import styled from '@emotion/styled';
-import { rgba } from 'emotion-rgba';
 import { EvalLogList } from './EvalLogList';
 import { PageMoveArrow } from './PageMoveArrow';
 
@@ -52,14 +51,10 @@ export const EvalLogSearchBoard = ({
 };
 
 export const EvalLogSearchBoardLayout = styled.div`
-  padding: 4rem;
-  border-radius: 2rem;
-  background-color: ${({ theme }) => rgba(theme.colors.mono.white, 0.85)};
-
-  transition: all 0.2s;
-  :hover {
-    background-color: ${({ theme }) => rgba(theme.colors.mono.white, 1)};
-  }
+  width: 100%;
+  height: 100%;
+  max-width: 1440px;
+  padding: 0 4rem;
 `;
 
 // export {};

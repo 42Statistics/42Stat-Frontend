@@ -38,13 +38,13 @@ export const profilePageTabletDashboardRows: TabletDashboardRowType[] = [
 
 export const profilePageMobileDashboardRows: MobileDashboardRowType[] = [
   {
-    row: 1,
+    row: 5,
     col: 1,
     items: [
       {
         row: 1,
         col: 1,
-        rowSpan: 1,
+        rowSpan: 5,
         colSpan: 1,
         elementId: 0,
       },

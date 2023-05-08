@@ -89,7 +89,7 @@ export const PrefferedTime = () => {
 const TextMax = styled(Text)<{ isMax: boolean }>`
   font-size: ${({ theme }) => theme.fonts.size.h3};
   color: ${({ theme, isMax }) =>
-    isMax ? theme.colors.primary.default : theme.colors.mono.black};
+    isMax ? theme.colors.accent.default : theme.colors.mono.black};
 `;
 
 const PrefferedTimeTable = styled.table`
@@ -150,6 +150,6 @@ const prefferedTimeTitle = (
 // const TimeBarInner = styled.div<TimeBarProps>`
 //   width: ${({ hour }) => (hour / 200) * 100}%;
 //   height: 1rem;
-//   background-color: ${({ theme }) => theme.colors.secondary.default};
+//   background-color: ${({ theme }) => theme.colors.accent.default};
 //   border-radius: 0.5rem 0 0 0.5rem;
 // `;

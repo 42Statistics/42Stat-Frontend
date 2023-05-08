@@ -20,7 +20,7 @@ export const ProjectInfoTitle = ({ name }: ProjectInfoTitleProps) => {
         <Text>나만의 라이브러리 만들기</Text>
         <Text
           fontSize={theme.fonts.size.caption}
-          color={theme.colors.secondary.default}
+          color={theme.colors.accent.default}
         >
           서브젝트 보기
         </Text>

@@ -17,7 +17,7 @@ import {
   UserCntPerLevels,
 } from '../contents';
 
-export const statPageDashboardContents: DashboardItemProps[] = [
+export const homePageDashboardContents: DashboardItemProps[] = [
   {
     id: 0,
     title: '주간 총 평가 횟수',

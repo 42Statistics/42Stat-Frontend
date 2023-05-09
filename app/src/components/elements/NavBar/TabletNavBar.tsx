@@ -5,18 +5,20 @@ import styled from '@emotion/styled';
 import { GiHamburgerMenu } from '@react-icons/all-files/gi/GiHamburgerMenu';
 import { useAtom, useAtomValue } from 'jotai';
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { DesktopNavBarLayout } from './DesktopNavBar';
 import { NavBar } from './NavBar';
 import { TabletNavMenu } from './TabletNavMenu';
 
 export const TabletNavBar = () => {
+  const location = useLocation();
   const user = useAtomValue(userAtom);
   const [isNavBarOpen, setIsNavBarOpen] = useAtom(isNavBarOpenAtom);
 
   useEffect(() => {
     setIsNavBarOpen(false);
     return () => setIsNavBarOpen(false);
-  }, [setIsNavBarOpen]);
+  }, [location.pathname, setIsNavBarOpen]);
 
   return (
     <>

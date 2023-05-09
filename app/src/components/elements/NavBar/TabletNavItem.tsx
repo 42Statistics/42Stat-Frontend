@@ -1,0 +1,37 @@
+import { Text, VStack } from '@/components/common';
+import { useTheme } from '@emotion/react';
+import styled from '@emotion/styled';
+import { useLocation, useNavigate } from 'react-router-dom';
+import type { NavItemProps } from './NavItem';
+
+export const TabletNavItem = ({ route }: NavItemProps) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isFocused = location.pathname === route.path;
+  const theme = useTheme();
+  const NavItemIcon = route.icon;
+  const color = isFocused
+    ? theme.colors.primary.default
+    : theme.colors.mono.black;
+
+  return (
+    <TabletNavItemLayout
+      onClick={() => navigate(route.path)}
+      isFocused={isFocused}
+    >
+      <VStack>
+        <NavItemIcon size="20px" fill={color} />
+        <Text color={color} fontSize={theme.fonts.size.caption}>
+          {route.abbr}
+        </Text>
+      </VStack>
+    </TabletNavItemLayout>
+  );
+};
+
+const TabletNavItemLayout = styled.li<{ isFocused: boolean }>`
+  width: 100%;
+  padding: 1rem 0;
+  cursor: pointer;
+  transition: background-color 0.2s;
+`;

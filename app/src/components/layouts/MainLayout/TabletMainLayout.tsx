@@ -1,20 +1,21 @@
-import { TabletHamburger } from '@/components/elements/Header/TabletHamburger';
+import { HStack } from '@/components/common';
 import { TabletNavBar } from '@/components/elements/NavBar/TabletNavBar';
 import styled from '@emotion/styled';
 
 export const TabletMainLayout = ({ children }: React.PropsWithChildren) => {
   return (
     <Layout>
-      <TabletNavBar />
-      <TabletHamburger />
-      <TabletMainPageLayout>{children}</TabletMainPageLayout>
+      <HStack>
+        <TabletNavBar />
+        <TabletMainPageLayout>{children}</TabletMainPageLayout>
+      </HStack>
     </Layout>
   );
 };
 
 const TabletMainPageLayout = styled.main`
   width: 100%;
-  height: 100%;
+  margin-left: 7rem;
 `;
 
 const Layout = styled.div`

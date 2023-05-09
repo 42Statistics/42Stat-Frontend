@@ -1,6 +1,6 @@
 import { Divider, VStack } from '@/components/common';
 import { MobileHeader } from '@/components/elements/Header/MobileHeader';
-import { MobileTabBar } from '@/components/elements/NavBar/MobileTabBar';
+import { TabBar } from '@/components/elements/TabBar';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { Helmet } from 'react-helmet-async';
@@ -21,7 +21,7 @@ export const MobileDashboardLayout = ({
           <Divider />
           <MobileDashboardPageLayout>{children}</MobileDashboardPageLayout>
         </VStack>
-        <MobileTabBar />
+        <TabBar />
       </Layout>
     </>
   );

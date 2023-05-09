@@ -1,5 +1,4 @@
-import { Button, Center, HStack, Input, Text } from '@/components/common';
-import { useTheme } from '@emotion/react';
+import { Button, HStack, Input, Text, VStack } from '@/components/common';
 import styled from '@emotion/styled';
 import { rgba } from 'emotion-rgba';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -20,57 +19,57 @@ export const EvalLogSearchHeader = ({
 
   return (
     <EvalLogSearchHeaderLayout>
-      <Center>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <HStack as="ul" w="100%" spacing="2rem" wrap="wrap">
-            <HStack as="li" spacing="1rem">
-              <Text>과제명</Text>
-              <EvalLogSearchInput {...register('projectName')} />
-            </HStack>
-            <HStack as="li" spacing="1rem">
-              <Text>FROM</Text>
-              <EvalLogSearchInput {...register('corrector')} />
-            </HStack>
-            <HStack as="li" spacing="1rem">
-              <Text>TO</Text>
-              <EvalLogSearchInput {...register('corrected')} />
-            </HStack>
-            <HStack as="li" spacing="1rem">
-              <Text>플래그</Text>
-              <HStack spacing="2rem">
-                <HStack spacing="1rem">
-                  <input
-                    type="radio"
-                    {...register('outstandingOnly')}
-                    value="all"
-                    defaultChecked={formValue.outstandingOnly === 'all'}
-                  />
-                  <Text>전체</Text>
-                </HStack>
-                <HStack spacing="1rem">
-                  <input
-                    type="radio"
-                    {...register('outstandingOnly')}
-                    value="outstanding"
-                    defaultChecked={formValue.outstandingOnly === 'outstanding'}
-                  />
-                  <Text>Outstanding</Text>
-                </HStack>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <VStack as="ul" w="100%" spacing="2rem">
+          <HStack w="100%" as="li" justify="space-between">
+            <Text>과제명</Text>
+            <EvalLogSearchInput {...register('projectName')} />
+          </HStack>
+          <HStack w="100%" as="li" justify="space-between">
+            <Text>FROM</Text>
+            <EvalLogSearchInput {...register('corrector')} />
+          </HStack>
+          <HStack w="100%" as="li" justify="space-between">
+            <Text>TO</Text>
+            <EvalLogSearchInput {...register('corrected')} />
+          </HStack>
+          <HStack w="100%" as="li" justify="space-between">
+            <Text>플래그</Text>
+            <HStack spacing="2rem">
+              <HStack spacing="1rem">
+                <input
+                  type="radio"
+                  {...register('outstandingOnly')}
+                  value="all"
+                  defaultChecked={formValue.outstandingOnly === 'all'}
+                />
+                <Text>전체</Text>
+              </HStack>
+              <HStack spacing="1rem">
+                <input
+                  type="radio"
+                  {...register('outstandingOnly')}
+                  value="outstanding"
+                  defaultChecked={formValue.outstandingOnly === 'outstanding'}
+                />
+                <Text>Outstanding</Text>
               </HStack>
             </HStack>
-            <Button type="submit" text="검색하기" />
           </HStack>
-        </form>
-      </Center>
+          <Button type="submit" text="검색하기" />
+        </VStack>
+      </form>
     </EvalLogSearchHeaderLayout>
   );
 };
 
 const EvalLogSearchHeaderLayout = styled.div`
-  position: sticky;
-  top: 0;
-  width: 100%;
-  padding: 1.5rem 2rem;
+  position: fixed;
+  bottom: 7rem;
+  right: 12rem;
+  padding: 3rem;
+  width: 30rem;
+  border-radius: 2rem;
   background-color: ${({ theme }) => theme.colors.mono.white};
   box-shadow: ${({ theme }) =>
     `0 0.1rem 0.5rem 0 ${theme.colors.mono.gray100}}`};
@@ -78,7 +77,7 @@ const EvalLogSearchHeaderLayout = styled.div`
 
 const EvalLogSearchInput = styled(Input)`
   all: unset;
-  padding: 0.7rem 2rem;
+  padding: 0.5rem 1.5rem;
   border-radius: 2rem;
 
   box-shadow: ${({ theme }) =>

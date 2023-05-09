@@ -1,7 +1,9 @@
 import { gql } from '@/__generated__';
-import { VStack } from '@/components/common';
+import { Clickable, VStack } from '@/components/common';
 import { useLazyQuery } from '@apollo/client';
+import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { MdSearch } from '@react-icons/all-files/md/MdSearch';
 import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { SubmitHandler } from 'react-hook-form';
@@ -77,6 +79,8 @@ export const EvalLogSearchPage = () => {
   const RESULT_PER_PAGE = 10;
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [search, { loading, error, data }] = useLazyQuery(GET_EVAL_LOGS);
+  const theme = useTheme();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const [formValue, setFormValue] = useState<FormValue>({
     projectName: '',
@@ -97,6 +101,7 @@ export const EvalLogSearchPage = () => {
         outstandingOnly: data.outstandingOnly === 'outstanding',
       },
     });
+    setIsOpen(false);
   };
 
   useEffect(() => {
@@ -115,9 +120,21 @@ export const EvalLogSearchPage = () => {
       <Helmet>
         <title>평가로그 검색기 | 42Stat</title>
       </Helmet>
+
+      {/* TODO: Headless Modal 제작하기 */}
+      <Clickable
+        onClick={() => setIsOpen((cur) => !cur)}
+        element={
+          <SearchIconLayout>
+            <MdSearch color={theme.colors.mono.white} size="20px" />
+          </SearchIconLayout>
+        }
+      />
+      {isOpen && (
+        <EvalLogSearchHeader formValue={formValue} onSubmit={onSubmit} />
+      )}
       <EvalLogSearchPageLayout>
         <VStack h="100%" spacing="2rem">
-          <EvalLogSearchHeader formValue={formValue} onSubmit={onSubmit} />
           <EvalLogSearchBoard
             loading={loading}
             error={error}
@@ -131,8 +148,18 @@ export const EvalLogSearchPage = () => {
   );
 };
 
+const SearchIconLayout = styled.div`
+  position: fixed;
+  bottom: 8rem;
+  right: 5rem;
+  border-radius: 999px;
+  padding: 1.5rem;
+  background-color: ${({ theme }) => theme.colors.primary.default};
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  z-index: 100;
+  cursor: pointer;
+`;
+
 const EvalLogSearchPageLayout = styled.div`
-  width: 100%;
-  height: 100%;
-  padding: 0 0 4rem 0;
+  padding: 4rem;
 `;

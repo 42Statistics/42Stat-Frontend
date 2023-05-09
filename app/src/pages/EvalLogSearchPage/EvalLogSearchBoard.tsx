@@ -51,8 +51,5 @@ export const EvalLogSearchBoard = ({
 };
 
 export const EvalLogSearchBoardLayout = styled.div`
-  width: 100%;
-  height: 100%;
   max-width: 1440px;
-  padding: 0 4rem;
 `;

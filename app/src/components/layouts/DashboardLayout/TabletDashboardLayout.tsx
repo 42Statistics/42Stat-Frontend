@@ -1,5 +1,5 @@
-import { HStack, VStack } from '@/components/common';
-import { TabletHeader } from '@/components/elements/Header/TabletHeader';
+import { Center } from '@/components/common';
+import { TabletHamburger } from '@/components/elements/Header/TabletHamburger';
 import { TabletNavBar } from '@/components/elements/NavBar/TabletNavBar';
 import styled from '@emotion/styled';
 
@@ -7,22 +7,24 @@ export const TabletDashboardLayout = ({
   children,
 }: React.PropsWithChildren) => {
   return (
-    <HStack w="100%" h="100%">
+    <Layout>
       <TabletNavBar />
-      <VStack w="100%" h="100%">
-        <TabletHeader />
+      <TabletHamburger />
+      <Center w="100%">
         <TabletDashboardPageLayout>{children}</TabletDashboardPageLayout>
-      </VStack>
-    </HStack>
+      </Center>
+    </Layout>
   );
 };
 
 const TabletDashboardPageLayout = styled.main`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   width: 100%;
-  height: 100%;
-  padding: 11rem 3rem 3rem 3rem;
-  overflow: auto;
+  max-width: 800px;
+  padding: 3rem;
+`;
+
+const Layout = styled.div`
+  width: 100%;
+  min-height: 100vh;
+  background-color: ${({ theme }) => theme.colors.background};
 `;

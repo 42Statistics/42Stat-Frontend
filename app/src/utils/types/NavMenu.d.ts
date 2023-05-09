@@ -1,5 +1,5 @@
 export type NavMenu =
-  | 'Stat'
+  | 'Home'
   | 'LeaderBoard'
   | 'MyProfile'
   | 'EvalLogSearch'

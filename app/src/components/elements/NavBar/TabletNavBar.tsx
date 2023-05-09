@@ -1,7 +1,6 @@
 import { Overlay } from '@/components/common';
 import { isNavBarOpenAtom } from '@/utils/atoms/isNavBarOpenAtom';
 import styled from '@emotion/styled';
-import { rgba } from 'emotion-rgba';
 import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 import { DesktopNavBarLayout } from './DesktopNavBar';
@@ -32,8 +31,7 @@ type TabletNavBarLayoutProps = {
 };
 
 const TabletNavBarLayout = styled(DesktopNavBarLayout)<TabletNavBarLayoutProps>`
-  background-color: ${({ theme }) => rgba(theme.colors.mono.black, 0.95)};
   transform: ${({ isOpen }) => !isOpen && 'translateX(-100%)'};
-  transition: all 0.2s;
+  transition: all 0.5s;
   z-index: 200;
 `;

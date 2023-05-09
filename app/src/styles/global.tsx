@@ -56,16 +56,17 @@ export const global = () => css`
   } */
 
   html {
-    // FIXME: 이렇게 하는거 맞나? 휴대폰으로 보면 다 뭉개지던데.
     font-family: 'Pretendard', sans-serif;
     font-display: fallback; // for UX
     font-size: 62.5%; // 1rem = 10px
   }
 
   body {
-    background: url('/black-galaxy-wallpaper-compressed.jpeg'),
-      linear-gradient(142deg, #212222 0%, #000000 100%); // fallback gradient for UX
-    background-size: cover;
     font-size: 1.4rem;
+  }
+
+  img {
+    user-select: none;
+    -webkit-user-drag: none; // 이미지 드래그 제한
   }
 `;

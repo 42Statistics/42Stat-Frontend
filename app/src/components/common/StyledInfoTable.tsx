@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 
 export const StyledInfoTable = styled.table`
   text-align: center;
+  white-space: nowrap;
 
   th,
   td {

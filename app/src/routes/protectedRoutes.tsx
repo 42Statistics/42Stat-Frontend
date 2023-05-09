@@ -1,13 +1,12 @@
 import { DeferredComponent } from '@/components/common';
 import { AuthGuard } from '@/components/guards/AuthGuard';
+import { HomePageSkeleton } from '@/pages/SkeletonPages/HomePageSkeleton';
 import { ProfilePageSkeleton } from '@/pages/SkeletonPages/ProfilePageSkeleton';
-import { StatPageSkeleton } from '@/pages/SkeletonPages/StatPageSkeleton';
 import { lazyImport } from '@/utils/lazyImport';
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 
 const { HomePage } = lazyImport(() => import('@/pages/HomePage'), 'HomePage');
-const { StatPage } = lazyImport(() => import('@/pages/StatPage'), 'StatPage');
 const { LeaderBoardPage } = lazyImport(
   () => import('@/pages/LeaderBoardPage'),
   'LeaderBoardPage',
@@ -21,17 +20,13 @@ const { ProfilePage } = lazyImport(
   'ProfilePage',
 );
 
-const { SettingsPage } = lazyImport(
-  () => import('@/pages/SettingsPage'),
-  'SettingsPage',
-);
 const { DashboardLayout } = lazyImport(
   () => import('@/components/layouts/DashboardLayout'),
   'DashboardLayout',
 );
 
 const { MainLayout } = lazyImport(
-  () => import('@/components/layouts/MainLayout/MainLayout'),
+  () => import('@/components/layouts/MainLayout'),
   'MainLayout',
 );
 
@@ -67,22 +62,14 @@ export const protectedRoutes = [
       {
         path: '/home',
         element: (
-          <Suspense>
-            <HomePage />
-          </Suspense>
-        ),
-      },
-      {
-        path: '/stat',
-        element: (
           <Suspense
             fallback={
               <DeferredComponent>
-                <StatPageSkeleton />
+                <HomePageSkeleton />
               </DeferredComponent>
             }
           >
-            <StatPage />
+            <HomePage />
           </Suspense>
         ),
       },
@@ -108,14 +95,6 @@ export const protectedRoutes = [
           </Suspense>
         ),
       },
-      {
-        path: '/settings',
-        element: (
-          <Suspense>
-            <SettingsPage />
-          </Suspense>
-        ),
-      },
     ],
   },
   {
@@ -123,7 +102,7 @@ export const protectedRoutes = [
     element: <MainApp />,
     children: [
       {
-        path: '/eval-log-search',
+        path: '/evallog',
         element: (
           <Suspense>
             <EvalLogSearchPage />

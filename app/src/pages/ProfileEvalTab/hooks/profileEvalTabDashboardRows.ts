@@ -78,7 +78,7 @@ export const profileEvalTabDesktopDashboardRows: DesktopDashboardRowType[] = [
 export const profileEvalTabTabletDashboardRows: TabletDashboardRowType[] = [
   {
     row: 2,
-    col: 3,
+    col: 2,
     items: [
       {
         row: 1,
@@ -108,16 +108,22 @@ export const profileEvalTabTabletDashboardRows: TabletDashboardRowType[] = [
         colSpan: 1,
         elementId: 3,
       },
+    ],
+  },
+  {
+    row: 1,
+    col: 2,
+    items: [
       {
         row: 1,
-        col: 3,
+        col: 1,
         rowSpan: 1,
         colSpan: 1,
         elementId: 4,
       },
       {
-        row: 2,
-        col: 3,
+        row: 1,
+        col: 2,
         rowSpan: 1,
         colSpan: 1,
         elementId: 5,
@@ -148,8 +154,8 @@ export const profileEvalTabTabletDashboardRows: TabletDashboardRowType[] = [
 
 export const profileEvalTabMobileDashboardRows: MobileDashboardRowType[] = [
   {
-    row: 2,
-    col: 2,
+    row: 10,
+    col: 1,
     items: [
       {
         row: 1,
@@ -159,69 +165,51 @@ export const profileEvalTabMobileDashboardRows: MobileDashboardRowType[] = [
         elementId: 0,
       },
       {
-        row: 1,
-        col: 2,
+        row: 2,
+        col: 1,
         rowSpan: 1,
         colSpan: 1,
         elementId: 1,
       },
       {
-        row: 2,
+        row: 3,
         col: 1,
         rowSpan: 1,
         colSpan: 1,
         elementId: 2,
       },
       {
-        row: 2,
-        col: 2,
+        row: 4,
+        col: 1,
         rowSpan: 1,
         colSpan: 1,
         elementId: 3,
       },
-    ],
-  },
-  {
-    row: 1,
-    col: 2,
-    items: [
       {
-        row: 1,
+        row: 5,
         col: 1,
         rowSpan: 1,
         colSpan: 1,
         elementId: 4,
       },
       {
-        row: 1,
-        col: 2,
+        row: 6,
+        col: 1,
         rowSpan: 1,
         colSpan: 1,
         elementId: 5,
       },
-    ],
-  },
-  {
-    row: 2,
-    col: 2,
-    items: [
       {
-        row: 1,
+        row: 7,
         col: 1,
         rowSpan: 2,
         colSpan: 1,
         elementId: 6,
       },
-    ],
-  },
-  {
-    row: 1,
-    col: 1,
-    items: [
       {
-        row: 1,
+        row: 9,
         col: 1,
-        rowSpan: 1,
+        rowSpan: 2,
         colSpan: 1,
         elementId: 7,
       },

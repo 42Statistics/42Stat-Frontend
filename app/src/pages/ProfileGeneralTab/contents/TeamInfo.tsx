@@ -1,5 +1,5 @@
 import { gql } from '@/__generated__';
-import { HStack, Loader, Scroll } from '@/components/common';
+import { HStack, Loader } from '@/components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
@@ -12,6 +12,7 @@ import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { AiOutlineCheck } from '@react-icons/all-files/ai/AiOutlineCheck';
 import { AiOutlineClose } from '@react-icons/all-files/ai/AiOutlineClose';
+import { rgba } from 'emotion-rgba';
 
 const GET_TEAM_INFO = gql(/* GraphQL */ `
   query getTeamInfo {
@@ -42,7 +43,14 @@ export const TeamInfo = () => {
   const { teams } = data.getPersonGeneralPage.teamInfo;
 
   return (
-    <Scroll>
+    <div
+      css={{
+        position: 'relative',
+        width: '100%',
+        height: '100%',
+        overflow: 'auto',
+      }}
+    >
       <TeamInfoTable>
         <thead>
           <tr>
@@ -93,8 +101,8 @@ export const TeamInfo = () => {
                       <HStack
                         style={{
                           color: isValidated
-                            ? theme.colors.primary.default
-                            : theme.colors.secondary.default,
+                            ? theme.colors.semantic.pass
+                            : theme.colors.semantic.fail,
                         }}
                       >
                         {isValidated ? <AiOutlineCheck /> : <AiOutlineClose />}
@@ -107,28 +115,19 @@ export const TeamInfo = () => {
             )}
         </tbody>
       </TeamInfoTable>
-    </Scroll>
+    </div>
   );
 };
 
 const TeamInfoTable = styled.table`
-  display: block;
+  position: absolute;
   width: 100%;
-  max-height: 40rem;
-
-  thead,
-  tbody tr {
-    display: table;
-    width: 100%;
-    table-layout: fixed;
-    border-radius: 2rem;
-  }
+  white-space: nowrap;
 
   th,
   td {
     text-align: center;
     padding: 0.8rem 2rem;
-    white-space: nowrap;
   }
 
   th {
@@ -136,10 +135,11 @@ const TeamInfoTable = styled.table`
   }
 
   tbody tr {
-    transition: all 0.2s;
+    border-radius: 1rem;
+    transition: all 0.3s;
   }
 
   tbody tr:hover {
-    background-color: ${({ theme }) => theme.colors.primary.light};
+    background-color: ${({ theme }) => rgba(theme.colors.accent.default, 0.15)};
   }
 `;

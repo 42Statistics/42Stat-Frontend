@@ -14,6 +14,6 @@ export const MobileHeader = () => {
   );
 };
 
-const MobileHeaderLayout = styled.div`
-  margin-top: 5rem;
+const MobileHeaderLayout = styled.header`
+  padding: 1.5rem 0;
 `;

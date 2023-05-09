@@ -28,13 +28,16 @@ type DashboardItemWrapperLayoutProps = {
 };
 
 const DashboardItemWrapperLayout = styled.div<DashboardItemWrapperLayoutProps>`
-  background-color: ${({ theme }) => rgba(theme.colors.mono.white, 0.85)};
   grid-column: ${({ col, colSpan }) => `${col} / span ${colSpan}`};
   grid-row: ${({ row, rowSpan }) => `${row} / span ${rowSpan}`};
   border-radius: 2rem;
+  background-color: ${({ theme }) => theme.colors.mono.white};
+  user-select: none; // 텍스트 드래그 제한
 
   transition: all 0.2s;
   :hover {
-    background-color: ${({ theme }) => rgba(theme.colors.mono.white, 1)};
+    transform: scale(1.015);
+    box-shadow: 0.4rem 0.4rem 0.1rem
+      ${({ theme }) => rgba(theme.colors.mono.black, 0.2)};
   }
 `;

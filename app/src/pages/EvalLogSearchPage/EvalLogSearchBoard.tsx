@@ -1,10 +1,11 @@
 import { GetEvalLogsQuery } from '@/__generated__/graphql';
-import { Loader, Text } from '@/components/common';
+import { Loader, Text, VStack } from '@/components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
 import { ApolloError } from '@apollo/client';
+import styled from '@emotion/styled';
 import { EvalLogList } from './EvalLogList';
 import { PageMoveArrow } from './PageMoveArrow';
 
@@ -31,20 +32,29 @@ export const EvalLogSearchBoard = ({
     return <Text>검색 결과가 없습니다.</Text>;
 
   return (
-    <>
-      <EvalLogList list={data.getEvalLogs.nodes} />
-      <PageMoveArrow
-        handleDecrease={() => {
-          setPageNumber((cur) => Math.max(cur - 1, 1));
-        }}
-        handleIncrease={() => {
-          setPageNumber((cur) => Math.min(cur + 1, 42));
-        }}
-        pageNumber={pageNumber}
-        maxPageNumber={42}
-      />
-    </>
+    <EvalLogSearchBoardLayout>
+      <VStack spacing="4rem">
+        <EvalLogList list={data.getEvalLogs.nodes} />
+        <PageMoveArrow
+          handleDecrease={() => {
+            setPageNumber((cur) => Math.max(cur - 1, 1));
+          }}
+          handleIncrease={() => {
+            setPageNumber((cur) => Math.min(cur + 1, 42));
+          }}
+          pageNumber={pageNumber}
+          maxPageNumber={42}
+        />
+      </VStack>
+    </EvalLogSearchBoardLayout>
   );
 };
+
+export const EvalLogSearchBoardLayout = styled.div`
+  width: 100%;
+  height: 100%;
+  max-width: 1440px;
+  padding: 0 4rem;
+`;
 
 // export {};

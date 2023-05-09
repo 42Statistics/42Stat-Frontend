@@ -1,15 +1,15 @@
-import { statPageDashboardContents } from './statPageDashboardContents';
 import {
-  statPageDesktopDashboardRows,
-  statPageMobileDashboardRows,
-  statPageTabletDashboardRows,
-} from './statPageDashboardRows';
+  homePageDesktopDashboardRows,
+  homePageMobileDashboardRows,
+  homePageTabletDashboardRows,
+} from './homePageDashboardRows';
+import { homePageDashboardContents } from './homePageDashboardContents';
 
-export const useStatPageDashboard = () => ({
-  contents: statPageDashboardContents,
-  desktopRows: statPageDesktopDashboardRows,
-  tabletRows: statPageTabletDashboardRows,
-  mobileRows: statPageMobileDashboardRows,
+export const useHomePageDashboard = () => ({
+  contents: homePageDashboardContents,
+  desktopRows: homePageDesktopDashboardRows,
+  tabletRows: homePageTabletDashboardRows,
+  mobileRows: homePageMobileDashboardRows,
 });
 
 // 랭킹 리더보드로 이전하면서 삭제된 요소들 임시 저장

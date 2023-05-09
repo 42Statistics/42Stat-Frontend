@@ -26,7 +26,7 @@ export const LevelDynamicChart = ({
     xaxis: {
       categories: labels,
     },
-    colors: [theme.colors.primary.default, theme.colors.secondary.default],
+    colors: [theme.colors.primary.default, theme.colors.accent.default],
     states: {
       normal: {
         filter: {

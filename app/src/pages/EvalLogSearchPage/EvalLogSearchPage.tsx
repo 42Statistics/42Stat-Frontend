@@ -1,6 +1,5 @@
 import { gql } from '@/__generated__';
-import { Divider, Scroll, VStack } from '@/components/common';
-import { AboveTablet, Mobile } from '@/utils/responsive/Device';
+import { VStack } from '@/components/common';
 import { useLazyQuery } from '@apollo/client';
 import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
@@ -116,32 +115,26 @@ export const EvalLogSearchPage = () => {
       <Helmet>
         <title>평가로그 검색기 | 42Stat</title>
       </Helmet>
-      <AboveTablet>
-        <Scroll>
-          <EvalLogSearchPageLayout>
-            <VStack spacing="3rem" justify="start">
-              <EvalLogSearchHeader formValue={formValue} onSubmit={onSubmit} />
-              <Divider css={{ width: '100%' }} />
-              <EvalLogSearchBoard
-                loading={loading}
-                error={error}
-                data={data}
-                pageNumber={pageNumber}
-                setPageNumber={setPageNumber}
-              />
-            </VStack>
-          </EvalLogSearchPageLayout>
-        </Scroll>
-      </AboveTablet>
-      <Mobile></Mobile>
+      <EvalLogSearchPageLayout>
+        <VStack h="100%" spacing="2rem">
+          <EvalLogSearchHeader formValue={formValue} onSubmit={onSubmit} />
+          <EvalLogSearchBoard
+            loading={loading}
+            error={error}
+            data={data}
+            pageNumber={pageNumber}
+            setPageNumber={setPageNumber}
+          />
+        </VStack>
+      </EvalLogSearchPageLayout>
     </>
   );
 };
 
 const EvalLogSearchPageLayout = styled.div`
   width: 100%;
-  background-color: ${({ theme }) => theme.colors.mono.white};
-  padding: 5rem;
+  height: 100%;
+  padding: 0 0 4rem 0;
 `;
 
 // export const EvalLogSearchPage = () => {

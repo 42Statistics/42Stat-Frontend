@@ -37,12 +37,12 @@ export const Avatar = ({ size, imgUrl, ...remainProps }: AvatarProps) => {
   );
 };
 
-const Cover = styled.div<{ size?: string }>`
+const Cover = styled.div<{ size?: string; color?: string }>`
   position: absolute;
   width: ${({ size = '2.4rem' }) => size};
   height: ${({ size = '2.4rem' }) => size};
   border-radius: 50%;
-  background-color: ${({ theme }) => theme.colors.mono.gray[100]};
+  background-color: ${({ theme, color = theme.colors.mono.gray100 }) => color};
 `;
 
 const StyledAvatar = styled.img<{ size?: string }>`

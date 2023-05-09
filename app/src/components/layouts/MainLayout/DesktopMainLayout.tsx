@@ -1,25 +1,24 @@
-import { HStack, VStack } from '@/components/common';
-import { DesktopHeader } from '@/components/elements/Header/DesktopHeader';
+import { HStack } from '@/components/common';
 import { DesktopNavBar } from '@/components/elements/NavBar/DesktopNavBar';
 import styled from '@emotion/styled';
 
 export const DesktopMainLayout = ({ children }: React.PropsWithChildren) => {
   return (
-    <HStack w="100%" h="100%">
-      <DesktopNavBar />
-      <VStack w="100%" h="100%" css={{ marginLeft: '24rem' }}>
-        <DesktopHeader />
-        <DesktopPageLayout>{children}</DesktopPageLayout>
-      </VStack>
-    </HStack>
+    <Layout>
+      <HStack>
+        <DesktopNavBar />
+        <DesktopMainPageLayout>{children}</DesktopMainPageLayout>
+      </HStack>
+    </Layout>
   );
 };
 
-const DesktopPageLayout = styled.main`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+const DesktopMainPageLayout = styled.main`
   width: 100%;
-  height: 100%;
-  overflow: auto;
+  margin-left: 24rem;
+`;
+
+const Layout = styled.div`
+  min-height: 100vh;
+  background-color: ${({ theme }) => theme.colors.mono.white};
 `;

@@ -12,19 +12,18 @@ export const NavProfile = ({ imgUrl, name, login }: NavProfile) => {
   const theme = useTheme();
 
   return (
-    <HStack spacing="1.4rem">
-      <Avatar size="4.5rem" imgUrl={imgUrl} />
-      <VStack w="100%" align="start" spacing="0.3rem">
+    <HStack spacing="2rem">
+      <Avatar size="4rem" imgUrl={imgUrl} />
+      <VStack align="start" spacing="0.3rem">
         <Text
           fontSize={theme.fonts.size.h3}
           fontWeight={theme.fonts.weight.bold}
-          color={theme.colors.mono.white}
         >
           {login}
         </Text>
         <Text
           fontSize={theme.fonts.size.caption}
-          color={theme.colors.mono.gray[200]}
+          color={theme.colors.mono.gray300}
         >
           {titleCase(name)}
         </Text>

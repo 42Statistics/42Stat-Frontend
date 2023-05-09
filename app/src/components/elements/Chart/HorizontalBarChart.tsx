@@ -26,7 +26,7 @@ export const HorizontalBarChart = ({
     dataLabels: {
       offsetX: 40,
       style: {
-        colors: [theme.colors.mono.gray[300]],
+        colors: [theme.colors.mono.gray300],
         fontWeight: 400,
       },
     },

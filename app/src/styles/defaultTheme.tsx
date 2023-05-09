@@ -1,28 +1,23 @@
 const colors = {
   primary: {
-    default: '#12146c',
-    light: '#c6d3e7',
+    default: '#2B3E77',
+    light: '#e4f0f6',
   },
-  secondary: {
-    default: '#d03b3b',
-    light: '#FFB1B7',
+  accent: {
+    default: '#00C48C',
+  },
+  semantic: {
+    pass: '#60c0c4',
+    fail: '#f17c88',
   },
   mono: {
     black: '#161616',
-    white: '#F9F9F9',
-    gray: {
-      300: '#777777',
-      200: '#999999',
-      100: '#bbbbbb',
-    },
+    white: '#f9f9f9',
+    gray300: '#777777',
+    gray200: '#999999',
+    gray100: '#bbbbbb',
   },
-  background: '#E4E3EA',
-  coalition: {
-    gun: '#FCC21B',
-    gon: '#559F7A',
-    gam: '#649CBC',
-    lee: '#BB4140',
-  },
+  background: '#e4e3ea',
 };
 
 const fonts = {

@@ -7,7 +7,7 @@ export const Loader = () => {
 
   return (
     <Center w="100%" h="100%">
-      <PulseLoader size={12} color={theme.colors.mono.gray[200]} />
+      <PulseLoader size={12} color={theme.colors.mono.gray200} />
     </Center>
   );
 };

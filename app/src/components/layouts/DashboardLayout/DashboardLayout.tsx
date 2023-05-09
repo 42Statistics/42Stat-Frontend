@@ -24,19 +24,13 @@ export const DashboardLayout = (props: React.PropsWithChildren) => {
   return (
     <>
       <Desktop>
-        {/* <Suspense> */}
         <DesktopDashboardLayout {...props} />
-        {/* </Suspense> */}
       </Desktop>
       <Tablet>
-        {/* <Suspense> */}
         <TabletDashboardLayout {...props} />
-        {/* </Suspense> */}
       </Tablet>
       <Mobile>
-        {/* <Suspense> */}
         <MobileDashboardLayout {...props} />
-        {/* </Suspense> */}
       </Mobile>
     </>
   );

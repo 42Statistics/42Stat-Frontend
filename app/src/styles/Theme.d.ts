@@ -5,26 +5,21 @@ type Colors = {
     default: string;
     light: string;
   };
-  secondary: {
+  accent: {
     default: string;
-    light: string;
+  };
+  semantic: {
+    pass: string;
+    fail: string;
   };
   mono: {
     black: string;
     white: string;
-    gray: {
-      300: string;
-      200: string;
-      100: string;
-    };
+    gray300: string;
+    gray200: string;
+    gray100: string;
   };
   background: string;
-  coalition: {
-    gun: string;
-    gon: string;
-    gam: string;
-    lee: string;
-  };
 };
 
 type Fonts = {
@@ -36,7 +31,7 @@ type Fonts = {
     caption: string;
   };
   weight: {
-    // thin: number;
+    thin: number;
     // extralight: number;
     // light: number;
     regular: number;

@@ -4,7 +4,7 @@ import type {
   TabletDashboardRowType,
 } from '@/utils/types/Dashboard';
 
-export const statPageDesktopDashboardRows: DesktopDashboardRowType[] = [
+export const homePageDesktopDashboardRows: DesktopDashboardRowType[] = [
   {
     row: 2,
     col: 4,
@@ -135,10 +135,10 @@ export const statPageDesktopDashboardRows: DesktopDashboardRowType[] = [
   },
 ];
 
-export const statPageTabletDashboardRows: TabletDashboardRowType[] = [
+export const homePageTabletDashboardRows: TabletDashboardRowType[] = [
   {
     row: 2,
-    col: 3,
+    col: 2,
     items: [
       {
         row: 1,
@@ -161,19 +161,32 @@ export const statPageTabletDashboardRows: TabletDashboardRowType[] = [
         colSpan: 1,
         elementId: 2,
       },
+    ],
+  },
+  {
+    row: 2,
+    col: 2,
+    items: [
       {
         row: 1,
-        col: 3,
+        col: 1,
         rowSpan: 1,
         colSpan: 1,
         elementId: 3,
       },
       {
         row: 2,
-        col: 3,
+        col: 1,
         rowSpan: 1,
         colSpan: 1,
         elementId: 4,
+      },
+      {
+        row: 1,
+        col: 2,
+        rowSpan: 1,
+        colSpan: 1,
+        elementId: 5,
       },
     ],
   },
@@ -186,14 +199,14 @@ export const statPageTabletDashboardRows: TabletDashboardRowType[] = [
         col: 1,
         rowSpan: 2,
         colSpan: 1,
-        elementId: 5,
+        elementId: 6,
       },
       {
         row: 1,
         col: 2,
         rowSpan: 2,
         colSpan: 1,
-        elementId: 6,
+        elementId: 7,
       },
     ],
   },
@@ -206,26 +219,6 @@ export const statPageTabletDashboardRows: TabletDashboardRowType[] = [
         col: 1,
         rowSpan: 4,
         colSpan: 2,
-        elementId: 8,
-      },
-    ],
-  },
-  {
-    row: 2,
-    col: 2,
-    items: [
-      {
-        row: 1,
-        col: 1,
-        rowSpan: 2,
-        colSpan: 1,
-        elementId: 7,
-      },
-      {
-        row: 1,
-        col: 2,
-        rowSpan: 2,
-        colSpan: 1,
         elementId: 9,
       },
     ],
@@ -238,7 +231,14 @@ export const statPageTabletDashboardRows: TabletDashboardRowType[] = [
         row: 1,
         col: 1,
         rowSpan: 2,
-        colSpan: 2,
+        colSpan: 1,
+        elementId: 8,
+      },
+      {
+        row: 1,
+        col: 2,
+        rowSpan: 2,
+        colSpan: 1,
         elementId: 10,
       },
     ],
@@ -251,19 +251,136 @@ export const statPageTabletDashboardRows: TabletDashboardRowType[] = [
         row: 1,
         col: 1,
         rowSpan: 2,
-        colSpan: 1,
+        colSpan: 2,
         elementId: 11,
+      },
+    ],
+  },
+  {
+    row: 2,
+    col: 2,
+    items: [
+      {
+        row: 1,
+        col: 1,
+        rowSpan: 2,
+        colSpan: 1,
+        elementId: 12,
       },
       {
         row: 1,
         col: 2,
         rowSpan: 2,
         colSpan: 1,
-        elementId: 12,
+        elementId: 13,
       },
     ],
   },
 ];
 
-// TODO: 이후 모바일 너비에 맞게 개편 예정
-export const statPageMobileDashboardRows: MobileDashboardRowType[] = [];
+export const homePageMobileDashboardRows: MobileDashboardRowType[] = [
+  {
+    row: 26,
+    col: 1,
+    items: [
+      {
+        row: 1,
+        col: 1,
+        rowSpan: 1,
+        colSpan: 1,
+        elementId: 0,
+      },
+      {
+        row: 2,
+        col: 1,
+        rowSpan: 1,
+        colSpan: 1,
+        elementId: 1,
+      },
+      {
+        row: 3,
+        col: 1,
+        rowSpan: 2,
+        colSpan: 1,
+        elementId: 2,
+      },
+      {
+        row: 5,
+        col: 1,
+        rowSpan: 1,
+        colSpan: 1,
+        elementId: 3,
+      },
+      {
+        row: 6,
+        col: 1,
+        rowSpan: 1,
+        colSpan: 1,
+        elementId: 4,
+      },
+      {
+        row: 7,
+        col: 1,
+        rowSpan: 1,
+        colSpan: 1,
+        elementId: 5,
+      },
+      {
+        row: 8,
+        col: 1,
+        rowSpan: 2,
+        colSpan: 1,
+        elementId: 6,
+      },
+      {
+        row: 10,
+        col: 1,
+        rowSpan: 2,
+        colSpan: 1,
+        elementId: 7,
+      },
+      {
+        row: 12,
+        col: 1,
+        rowSpan: 2,
+        colSpan: 1,
+        elementId: 8,
+      },
+      {
+        row: 14,
+        col: 1,
+        rowSpan: 5,
+        colSpan: 1,
+        elementId: 9,
+      },
+      {
+        row: 19,
+        col: 1,
+        rowSpan: 2,
+        colSpan: 1,
+        elementId: 10,
+      },
+      {
+        row: 21,
+        col: 1,
+        rowSpan: 2,
+        colSpan: 1,
+        elementId: 11,
+      },
+      {
+        row: 23,
+        col: 1,
+        rowSpan: 2,
+        colSpan: 1,
+        elementId: 12,
+      },
+      {
+        row: 25,
+        col: 1,
+        rowSpan: 2,
+        colSpan: 1,
+        elementId: 13,
+      },
+    ],
+  },
+];

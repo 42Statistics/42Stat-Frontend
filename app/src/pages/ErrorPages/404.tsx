@@ -1,18 +1,17 @@
 import {
+  AccentBoldText,
+  AccentH3Text,
   Clickable,
   HStack,
-  SecondaryText,
-  Text,
   VStack,
+  WhiteText,
 } from '@/components/common';
-import { useTheme } from '@emotion/react';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 
 export const NotFoundPage = () => {
   const statusCode = 404;
   const statusText = 'Not Found';
-  const theme = useTheme();
   const navigate = useNavigate();
 
   return (
@@ -22,12 +21,8 @@ export const NotFoundPage = () => {
       </Helmet>
       <VStack w="100%" h="100%" spacing="6rem">
         <HStack align="baseline" spacing="2rem">
-          <SecondaryText fontSize="6rem" fontWeight={theme.fonts.weight.bold}>
-            {statusCode}
-          </SecondaryText>
-          <SecondaryText fontSize={theme.fonts.size.h3}>
-            {statusText}
-          </SecondaryText>
+          <AccentBoldText fontSize="6rem">{statusCode}</AccentBoldText>
+          <AccentH3Text>{statusText}</AccentH3Text>
         </HStack>
         <img
           width="100px"
@@ -35,7 +30,7 @@ export const NotFoundPage = () => {
         />
         <Clickable
           onClick={() => navigate('/')}
-          element={<Text color={theme.colors.mono.white}>홈으로 돌아가기</Text>}
+          element={<WhiteText>홈으로 돌아가기</WhiteText>}
         />
       </VStack>
     </>

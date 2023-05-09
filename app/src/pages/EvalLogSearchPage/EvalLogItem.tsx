@@ -1,7 +1,9 @@
 import { EvalLog } from '@/__generated__/graphql';
 import {
+  BoldText,
   Clickable,
   HStack,
+  PrimaryBoldText,
   Spacer,
   Text,
   VStack,
@@ -16,7 +18,6 @@ import { useNavigate } from 'react-router-dom';
 export const EvalLogItem = ({ element }: { element: EvalLog }) => {
   const { header, correctorReview, correctedsReview } = element;
 
-  const theme = useTheme();
   const navigate = useNavigate();
 
   return (
@@ -26,34 +27,20 @@ export const EvalLogItem = ({ element }: { element: EvalLog }) => {
           <Clickable
             onClick={() => navigate('/profile/' + header.corrector.login)}
             element={
-              <Text
-                color={theme.colors.primary.default}
-                fontWeight={theme.fonts.weight.bold}
-              >
-                {header.corrector.login}
-              </Text>
+              <PrimaryBoldText>{header.corrector.login}</PrimaryBoldText>
             }
           />
           <Text>님이&nbsp;</Text>
-          <Text
-            color={theme.colors.primary.default}
-            fontWeight={theme.fonts.weight.bold}
-          >
-            {header.teamPreview.name}
-          </Text>
+          <PrimaryBoldText>{header.teamPreview.name}</PrimaryBoldText>
           <Text>을&nbsp;</Text>
         </HStack>
         <HStack>
-          <Text fontWeight={theme.fonts.weight.bold}>
-            {dateFormatter(header.beginAt, 'xl')}
-          </Text>
+          <BoldText>{dateFormatter(header.beginAt, 'xl')}</BoldText>
           <Text>에 평가하였습니다</Text>
         </HStack>
         <Spacer />
         <HStack spacing="1rem">
-          <Text fontWeight={theme.fonts.weight.bold}>
-            {header.projectPreview.name}
-          </Text>
+          <BoldText>{header.projectPreview.name}</BoldText>
           <FlagLabel
             name={header.flag.name}
             isPositive={header.flag.isPositive}

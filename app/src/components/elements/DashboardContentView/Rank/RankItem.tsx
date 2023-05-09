@@ -1,4 +1,10 @@
-import { Avatar, HStack, Text } from '@/components/common';
+import {
+  Avatar,
+  H2BoldText,
+  H3MediumText,
+  HStack,
+  MediumText,
+} from '@/components/common';
 import { numberWithUnitFormatter } from '@/utils/formatters';
 import type { RankItemType } from '@/utils/types/Rank';
 import { useTheme } from '@emotion/react';
@@ -18,13 +24,7 @@ export const RankItem = ({ rank, showImg, item, unit }: RankItemProps) => {
 
   return (
     <HStack w="100%" spacing="2rem">
-      <Text
-        color={color}
-        fontWeight={theme.fonts.weight.bold}
-        fontSize={theme.fonts.size.h2}
-      >
-        {rank}
-      </Text>
+      <H2BoldText color={color}>{rank}</H2BoldText>
       {showImg ? <Avatar size="3rem" imgUrl={imgUrl} /> : null}
       <HStack
         w="100%"
@@ -33,16 +33,10 @@ export const RankItem = ({ rank, showImg, item, unit }: RankItemProps) => {
         justify="start"
         wrap="wrap"
       >
-        <Text
-          color={color}
-          fontSize={theme.fonts.size.h3}
-          fontWeight={theme.fonts.weight.medium}
-        >
-          {name}
-        </Text>
-        <Text color={color} fontWeight={theme.fonts.weight.medium}>
+        <H3MediumText color={color}>{name}</H3MediumText>
+        <MediumText color={color}>
           {numberWithUnitFormatter(value, unit)}
-        </Text>
+        </MediumText>
       </HStack>
     </HStack>
   );

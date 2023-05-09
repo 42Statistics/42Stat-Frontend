@@ -14,7 +14,6 @@ export const EvalLogSearchHeader = ({
   formValue,
   onSubmit,
 }: EvalLogSearchHeaderProps) => {
-  const theme = useTheme();
   const { register, handleSubmit } = useForm<FormValue>({
     defaultValues: formValue,
   });

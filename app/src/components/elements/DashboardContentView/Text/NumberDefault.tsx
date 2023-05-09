@@ -1,5 +1,4 @@
-import { HStack, Text } from '@/components/common';
-import { useTheme } from '@emotion/react';
+import { H3Text, HStack, Text } from '@/components/common';
 
 type NumberDefaultProps = {
   number: number;
@@ -7,12 +6,10 @@ type NumberDefaultProps = {
 };
 
 export const NumberDefault = ({ number, unit }: NumberDefaultProps) => {
-  const theme = useTheme();
-
   return (
     <HStack h="100%">
       <HStack align="baseline">
-        <Text fontSize={theme.fonts.size.h3}>{number.toLocaleString()}</Text>
+        <H3Text>{number.toLocaleString()}</H3Text>
         <Text>{unit}</Text>
       </HStack>
     </HStack>

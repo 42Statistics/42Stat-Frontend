@@ -1,12 +1,11 @@
 import { gql } from '@/__generated__';
-import { Loader, Text, VStack } from '@/components/common';
+import { H3Text, Loader, Text, VStack } from '@/components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
 import { percentFormatter } from '@/utils/formatters/percentFormatter';
 import { useQuery } from '@apollo/client';
-import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 
 const GET_PREFERRED_TIME = gql(/* GraphQL */ `
@@ -28,7 +27,6 @@ const GET_PREFERRED_TIME = gql(/* GraphQL */ `
 
 export const PrefferedTime = () => {
   const { loading, error, data } = useQuery(GET_PREFERRED_TIME);
-  const theme = useTheme();
 
   if (loading) return <Loader />;
   if (error) return <ApolloBadRequest msg={error.message} />;
@@ -42,9 +40,7 @@ export const PrefferedTime = () => {
   return (
     <VStack w="100%" h="100%">
       <VStack w="80%" h="100%" spacing="2rem">
-        <Text fontSize={theme.fonts.size.h3}>
-          {prefferedTimeTitle(morning, daytime, evening, night)}
-        </Text>
+        <H3Text>{prefferedTimeTitle(morning, daytime, evening, night)}</H3Text>
         <PrefferedTimeTable>
           <tbody>
             <tr>

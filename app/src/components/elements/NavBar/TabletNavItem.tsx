@@ -1,4 +1,4 @@
-import { Text, VStack } from '@/components/common';
+import { CaptionText, VStack } from '@/components/common';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -21,9 +21,7 @@ export const TabletNavItem = ({ route }: NavItemProps) => {
     >
       <VStack>
         <NavItemIcon size="20px" fill={color} />
-        <Text color={color} fontSize={theme.fonts.size.caption}>
-          {route.abbr}
-        </Text>
+        <CaptionText color={color}>{route.abbr}</CaptionText>
       </VStack>
     </TabletNavItemLayout>
   );

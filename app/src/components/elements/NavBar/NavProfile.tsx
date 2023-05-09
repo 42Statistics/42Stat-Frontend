@@ -1,4 +1,10 @@
-import { Avatar, HStack, Text, VStack } from '@/components/common';
+import {
+  Avatar,
+  CaptionText,
+  H3BoldText,
+  HStack,
+  VStack,
+} from '@/components/common';
 import { titleCase } from '@/utils/titleCase';
 import { useTheme } from '@emotion/react';
 
@@ -15,18 +21,10 @@ export const NavProfile = ({ imgUrl, name, login }: NavProfile) => {
     <HStack spacing="2rem">
       <Avatar size="4rem" imgUrl={imgUrl} />
       <VStack align="start" spacing="0.3rem">
-        <Text
-          fontSize={theme.fonts.size.h3}
-          fontWeight={theme.fonts.weight.bold}
-        >
-          {login}
-        </Text>
-        <Text
-          fontSize={theme.fonts.size.caption}
-          color={theme.colors.mono.gray300}
-        >
+        <H3BoldText>{login}</H3BoldText>
+        <CaptionText color={theme.colors.mono.gray300}>
           {titleCase(name)}
-        </Text>
+        </CaptionText>
       </VStack>
     </HStack>
   );

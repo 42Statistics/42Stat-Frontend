@@ -1,16 +1,13 @@
-import { HStack, Text } from '@/components/common';
-import { useTheme } from '@emotion/react';
+import { H3Text, HStack } from '@/components/common';
 
 type TextDefaultProps = {
   text: string;
 };
 
 export const TextDefault = ({ text }: TextDefaultProps) => {
-  const theme = useTheme();
-
   return (
     <HStack h="100%">
-      <Text fontSize={theme.fonts.size.h3}>{text}</Text>
+      <H3Text>{text}</H3Text>
     </HStack>
   );
 };

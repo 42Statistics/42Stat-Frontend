@@ -1,4 +1,4 @@
-import { Text, VStack } from '@/components/common';
+import { CaptionText, VStack } from '@/components/common';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -18,9 +18,7 @@ export const TabItem = ({ route }: NavItemProps) => {
     <TabItemLayout onClick={() => navigate(route.path)}>
       <VStack>
         <TabItemIcon size="22px" fill={color} />
-        <Text color={color} fontSize={theme.fonts.size.caption}>
-          {route.abbr}
-        </Text>
+        <CaptionText color={color}>{route.abbr}</CaptionText>
       </VStack>
     </TabItemLayout>
   );

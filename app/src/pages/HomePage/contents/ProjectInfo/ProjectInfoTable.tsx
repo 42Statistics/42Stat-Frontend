@@ -1,4 +1,4 @@
-import { HStack, StyledInfoTable } from '@/components/common';
+import { HStack, StyledInfoTable, Text } from '@/components/common';
 import { Label } from '@/components/common/Label';
 import { numberWithUnitFormatter } from '@/utils/formatters';
 
@@ -21,7 +21,9 @@ export const ProjectInfoTable = ({
     <StyledInfoTable>
       <tbody>
         <tr>
-          <td>사용 기술</td>
+          <td>
+            <Text>사용 기술</Text>
+          </td>
           <td>
             <HStack spacing="1rem">
               {skills.map((skill, idx) => {
@@ -31,20 +33,36 @@ export const ProjectInfoTable = ({
           </td>
         </tr>
         <tr>
-          <td>통과 시 평균 점수</td>
-          <td>{averagePassFinalmark}</td>
+          <td>
+            <Text>통과 시 평균 점수</Text>
+          </td>
+          <td>
+            <Text>{averagePassFinalmark}</Text>
+          </td>
         </tr>
         <tr>
-          <td>평균 소요 기간</td>
-          <td>{numberWithUnitFormatter(averageDurationTime, '일')}</td>
+          <td>
+            <Text>평균 소요 기간</Text>
+          </td>
+          <td>
+            <Text>{numberWithUnitFormatter(averageDurationTime, '일')}</Text>
+          </td>
         </tr>
         <tr>
-          <td>총 제출 횟수</td>
-          <td>{numberWithUnitFormatter(totalCloseCnt, '개')}</td>
+          <td>
+            <Text>총 제출 횟수</Text>
+          </td>
+          <td>
+            <Text>{numberWithUnitFormatter(totalCloseCnt, '개')}</Text>
+          </td>
         </tr>
         <tr>
-          <td>현재 등록 인원</td>
-          <td>{numberWithUnitFormatter(currRegisteredCnt, '명')}</td>
+          <td>
+            <Text>현재 등록 인원</Text>
+          </td>
+          <td>
+            <Text>{numberWithUnitFormatter(currRegisteredCnt, '명')}</Text>
+          </td>
         </tr>
       </tbody>
     </StyledInfoTable>

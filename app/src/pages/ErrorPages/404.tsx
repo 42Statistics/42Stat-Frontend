@@ -3,6 +3,7 @@ import {
   AccentH3Text,
   Clickable,
   HStack,
+  Image,
   VStack,
   WhiteText,
 } from '@/components/common';
@@ -24,7 +25,7 @@ export const NotFoundPage = () => {
           <AccentBoldText fontSize="6rem">{statusCode}</AccentBoldText>
           <AccentH3Text>{statusText}</AccentH3Text>
         </HStack>
-        <img
+        <Image
           width="100px"
           src="https://data1.pokemonkorea.co.kr/newdata/pokedex/full/005001.png"
         />

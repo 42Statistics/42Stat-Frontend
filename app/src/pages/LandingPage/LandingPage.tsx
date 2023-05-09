@@ -1,4 +1,10 @@
-import { Button, Center, VStack, WhiteH2BoldText } from '@/components/common';
+import {
+  Button,
+  Center,
+  Image,
+  VStack,
+  WhiteH2BoldText,
+} from '@/components/common';
 import { AppLogoTitle } from '@/components/elements/AppLogoTitle';
 import { isAuthenticatedAtom } from '@/utils/atoms/isAuthenticatedAtom';
 import { css, useTheme } from '@emotion/react';
@@ -62,7 +68,7 @@ export const LandingPage = () => {
             ))}
           </Slider>
         </VStack>
-        <img src="/animated-ship.gif" width="200px" />
+        <Image src="/animated-ship.gif" width="200px" />
         <VStack spacing="2rem">
           {/* <Text
               fontSize={theme.fonts.size.h3}

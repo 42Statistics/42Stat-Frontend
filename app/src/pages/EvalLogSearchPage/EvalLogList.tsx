@@ -12,5 +12,3 @@ export const EvalLogList = ({ list = [] }: { list?: (EvalLog | null)[] }) => {
     </VStack>
   );
 };
-
-// export {};

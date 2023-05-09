@@ -64,9 +64,4 @@ export const global = () => css`
   body {
     font-size: 1.4rem;
   }
-
-  img {
-    user-select: none;
-    -webkit-user-drag: none; // 이미지 드래그 제한
-  }
 `;

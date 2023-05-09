@@ -44,7 +44,9 @@ export const PrefferedTime = () => {
         <PrefferedTimeTable>
           <tbody>
             <tr>
-              <td>🌞 아침</td>
+              <td>
+                <H3Text>🌞 아침</H3Text>
+              </td>
               <td>
                 <TextMax isMax={max === morning}>
                   {percentFormatter(morning, total)}
@@ -52,7 +54,9 @@ export const PrefferedTime = () => {
               </td>
             </tr>
             <tr>
-              <td>🌆 낮</td>
+              <td>
+                <H3Text>🌆 낮</H3Text>
+              </td>
               <td>
                 <TextMax isMax={max === morning}>
                   {percentFormatter(daytime, total)}
@@ -60,7 +64,9 @@ export const PrefferedTime = () => {
               </td>
             </tr>
             <tr>
-              <td>🌃 저녁</td>
+              <td>
+                <H3Text>🌃 저녁</H3Text>
+              </td>
               <td>
                 <TextMax isMax={max === morning}>
                   {percentFormatter(evening, total)}
@@ -68,7 +74,9 @@ export const PrefferedTime = () => {
               </td>
             </tr>
             <tr>
-              <td>🌙 새벽</td>
+              <td>
+                <H3Text>🌙 새벽</H3Text>
+              </td>
               <td>
                 <TextMax isMax={max === morning}>
                   {percentFormatter(night, total)}
@@ -90,7 +98,6 @@ const TextMax = styled(Text)<{ isMax: boolean }>`
 
 const PrefferedTimeTable = styled.table`
   width: 100%;
-  font-size: ${({ theme }) => theme.fonts.size.h3};
 
   td:nth-of-type(2) {
     text-align: right;

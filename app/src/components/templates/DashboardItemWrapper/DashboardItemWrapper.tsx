@@ -32,7 +32,6 @@ const DashboardItemWrapperLayout = styled.div<DashboardItemWrapperLayoutProps>`
   grid-row: ${({ row, rowSpan }) => `${row} / span ${rowSpan}`};
   border-radius: 2rem;
   background-color: ${({ theme }) => theme.colors.mono.white};
-  user-select: none; // 텍스트 드래그 제한
 
   transition: all 0.2s;
   :hover {

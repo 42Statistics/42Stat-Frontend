@@ -3,10 +3,10 @@ import {
   AccentH3Text,
   Clickable,
   HStack,
+  Image,
   Text,
   VStack,
 } from '@/components/common';
-import { useTheme } from '@emotion/react';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 
@@ -25,7 +25,7 @@ export const InternalServerErrorPage = () => {
           <AccentBoldText fontSize="6rem">{statusCode}</AccentBoldText>
           <AccentH3Text>{statusText}</AccentH3Text>
         </HStack>
-        <img
+        <Image
           width="100px"
           src="https://data1.pokemonkorea.co.kr/newdata/pokedex/full/039301.png"
         />

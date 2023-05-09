@@ -1,4 +1,4 @@
-import { DeferredComponent, VStack } from '@/components/common';
+import { DeferredComponent, Text, VStack } from '@/components/common';
 import { Tab, TabList, TabPanel, Tabs } from '@/components/common/Tab';
 import { Dashboard } from '@/components/templates/Dashboard';
 import { ProfileEvalTabSkeleton } from '@/pages/SkeletonPages/ProfileEvalTabSkeleton';
@@ -32,8 +32,12 @@ export const ProfilePage = () => {
           <Dashboard {...useProfilePageDashboard()} />
           <Tabs>
             <TabList>
-              <Tab>일반</Tab>
-              <Tab>평가</Tab>
+              <Tab>
+                <Text>일반</Text>
+              </Tab>
+              <Tab>
+                <Text>평가</Text>
+              </Tab>
             </TabList>
             <TabPanel>
               <Suspense

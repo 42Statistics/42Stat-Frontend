@@ -134,10 +134,12 @@ export const UserProfile = () => {
         <StyledInfoTable>
           <tbody>
             <tr>
-              <td>본과정 시작일</td>
+              <td>
+                <Text>본과정 시작일</Text>
+              </td>
               <td>
                 <HStack spacing="1rem">
-                  {dateFormatter(pooledAt, 'lg')}
+                  <Text>{dateFormatter(pooledAt, 'lg')}</Text>
                   <PrimaryText>{`(${dDayFormatter(
                     dayDiffPooledAtFromNow,
                   )})`}</PrimaryText>
@@ -145,13 +147,15 @@ export const UserProfile = () => {
               </td>
             </tr>
             <tr>
-              <td>블랙홀</td>
+              <td>
+                <Text>블랙홀</Text>
+              </td>
               <td>
                 {blackholedAt == null ? (
-                  '-'
+                  <Text>-</Text>
                 ) : (
                   <HStack spacing="1rem">
-                    {dateFormatter(blackholedAt, 'lg')}
+                    <Text>{dateFormatter(blackholedAt, 'lg')}</Text>
                     <PrimaryH3Text>
                       {`(${dDayFormatter(dayDiffBlackHoledAtFromNow)})`}
                     </PrimaryH3Text>
@@ -160,15 +164,25 @@ export const UserProfile = () => {
               </td>
             </tr>
             <tr>
-              <td>보유 월렛</td>
-              <td>{wallet.toLocaleString()}₳</td>
+              <td>
+                <Text>보유 월렛</Text>
+              </td>
+              <td>
+                <Text>{wallet.toLocaleString()}₳</Text>
+              </td>
             </tr>
             <tr>
-              <td>보유 평가 포인트</td>
-              <td>{correctionPoint.toLocaleString()}개</td>
+              <td>
+                <Text>보유 평가 포인트</Text>
+              </td>
+              <td>
+                <Text>{correctionPoint.toLocaleString()}개</Text>
+              </td>
             </tr>
             <tr>
-              <td>코알리숑 스코어</td>
+              <td>
+                <Text>코알리숑 스코어</Text>
+              </td>
               <td>
                 <HStack spacing="1rem" wrap="wrap">
                   <Text>{numberWithUnitFormatter(scoreInfo.value, 'P')}</Text>

@@ -136,7 +136,3 @@ const EvalLogSearchPageLayout = styled.div`
   height: 100%;
   padding: 0 0 4rem 0;
 `;
-
-// export const EvalLogSearchPage = () => {
-//   return <></>;
-// };

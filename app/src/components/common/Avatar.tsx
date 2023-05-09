@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
+import { Image } from './Image';
 
 type AvatarProps = React.ImgHTMLAttributes<HTMLImageElement> & {
   size?: string;
@@ -45,7 +46,7 @@ const Cover = styled.div<{ size?: string; color?: string }>`
   background-color: ${({ theme, color = theme.colors.mono.gray100 }) => color};
 `;
 
-const StyledAvatar = styled.img<{ size?: string }>`
+const StyledAvatar = styled(Image)<{ size?: string }>`
   width: ${({ size = '2.4rem' }) => size};
   height: ${({ size = '2.4rem' }) => size};
   object-fit: cover;

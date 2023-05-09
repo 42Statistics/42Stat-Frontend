@@ -13,6 +13,7 @@ export * from './SegmentedControl';
 export * from './Clickable';
 export * from './Button';
 export * from './Input';
+export * from './Image';
 
 /* etc */
 export * from './Overlay';

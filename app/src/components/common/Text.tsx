@@ -12,6 +12,7 @@ export const Text = styled.p<TextProps>`
     fontWeight};
   color: ${({ color = 'inherit' }) => color};
   line-height: 1.5;
+  user-select: none; // 텍스트 드래그 제한
 `;
 
 export const H1ThinText = styled(Text)`

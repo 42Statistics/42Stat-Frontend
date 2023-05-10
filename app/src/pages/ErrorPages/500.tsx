@@ -1,18 +1,18 @@
 import {
+  AccentBoldText,
+  AccentH3Text,
   Clickable,
   HStack,
-  SecondaryText,
+  Image,
   Text,
   VStack,
 } from '@/components/common';
-import { useTheme } from '@emotion/react';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 
 export const InternalServerErrorPage = () => {
   const statusCode = 500;
   const statusText = 'Internal Server Error';
-  const theme = useTheme();
   const navigate = useNavigate();
 
   return (
@@ -22,14 +22,10 @@ export const InternalServerErrorPage = () => {
       </Helmet>
       <VStack w="100%" h="100%" spacing="4rem">
         <HStack align="baseline" spacing="2rem">
-          <SecondaryText fontSize="6rem" fontWeight={theme.fonts.weight.bold}>
-            {statusCode}
-          </SecondaryText>
-          <SecondaryText fontSize={theme.fonts.size.h3}>
-            {statusText}
-          </SecondaryText>
+          <AccentBoldText fontSize="6rem">{statusCode}</AccentBoldText>
+          <AccentH3Text>{statusText}</AccentH3Text>
         </HStack>
-        <img
+        <Image
           width="100px"
           src="https://data1.pokemonkorea.co.kr/newdata/pokedex/full/039301.png"
         />

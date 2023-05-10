@@ -1,15 +1,20 @@
 import { gql } from '@/__generated__';
 import {
   Avatar,
+  CaptionText,
   Center,
+  H1BoldText,
+  H2BoldText,
   HStack,
   Loader,
+  PrimaryH3BoldText,
+  PrimaryH3MediumText,
+  PrimaryH3Text,
   PrimaryText,
   StyledInfoTable,
   Text,
   VStack,
 } from '@/components/common';
-// import { CoalitionMark } from '@/components/elements/CoalitionMark';
 import {
   ApolloBadRequest,
   ApolloNotFound,
@@ -103,20 +108,9 @@ export const UserProfile = () => {
         <Avatar size="16rem" imgUrl={imgUrl} />
         <VStack align="start" spacing="1rem">
           <VStack align="inherit">
-            <Text
-              color={theme.colors.primary.default}
-              fontSize={theme.fonts.size.h3}
-              fontWeight={theme.fonts.weight.bold}
-            >
-              {titleCase(grade)}
-            </Text>
+            <PrimaryH3BoldText>{titleCase(grade)}</PrimaryH3BoldText>
             <HStack spacing="2rem">
-              <Text
-                fontSize={theme.fonts.size.h1}
-                fontWeight={theme.fonts.weight.bold}
-              >
-                {titleCase(name)}
-              </Text>
+              <H1BoldText>{titleCase(name)}</H1BoldText>
               {/* <CoalitionMark coalition={coalition} width="24px" /> */}
             </HStack>
           </VStack>
@@ -127,27 +121,12 @@ export const UserProfile = () => {
           </HStack>
           <HStack spacing="1rem">
             <HStack align="baseline">
-              <Text
-                color={theme.colors.mono.gray300}
-                fontSize={theme.fonts.size.caption}
-              >
-                lv.
-              </Text>
-              <Text
-                fontSize={theme.fonts.size.h2}
-                fontWeight={theme.fonts.weight.bold}
-              >
-                {level}
-              </Text>
+              <CaptionText color={theme.colors.mono.gray300}>lv.</CaptionText>
+              <H2BoldText>{level}</H2BoldText>
             </HStack>
             <LevelBar rate={levelDecimalPart} />
             <HStack align="baseline">
-              <PrimaryText
-                fontSize={theme.fonts.size.h3}
-                fontWeight={theme.fonts.weight.medium}
-              >
-                {levelRank}
-              </PrimaryText>
+              <PrimaryH3MediumText>{levelRank}</PrimaryH3MediumText>
               <PrimaryText fontSize={theme.fonts.size.caption}>위</PrimaryText>
             </HStack>
           </HStack>
@@ -155,44 +134,55 @@ export const UserProfile = () => {
         <StyledInfoTable>
           <tbody>
             <tr>
-              <td>본과정 시작일</td>
+              <td>
+                <Text>본과정 시작일</Text>
+              </td>
               <td>
                 <HStack spacing="1rem">
-                  {dateFormatter(pooledAt, 'lg')}
-                  <Text color={theme.colors.primary.default}>{`(${dDayFormatter(
+                  <Text>{dateFormatter(pooledAt, 'lg')}</Text>
+                  <PrimaryText>{`(${dDayFormatter(
                     dayDiffPooledAtFromNow,
-                  )})`}</Text>
+                  )})`}</PrimaryText>
                 </HStack>
               </td>
             </tr>
             <tr>
-              <td>블랙홀</td>
+              <td>
+                <Text>블랙홀</Text>
+              </td>
               <td>
                 {blackholedAt == null ? (
-                  '-'
+                  <Text>-</Text>
                 ) : (
                   <HStack spacing="1rem">
-                    {dateFormatter(blackholedAt, 'lg')}
-                    <Text
-                      fontSize={theme.fonts.size.h3}
-                      color={theme.colors.primary.default}
-                    >
+                    <Text>{dateFormatter(blackholedAt, 'lg')}</Text>
+                    <PrimaryH3Text>
                       {`(${dDayFormatter(dayDiffBlackHoledAtFromNow)})`}
-                    </Text>
+                    </PrimaryH3Text>
                   </HStack>
                 )}
               </td>
             </tr>
             <tr>
-              <td>보유 월렛</td>
-              <td>{wallet.toLocaleString()}₳</td>
+              <td>
+                <Text>보유 월렛</Text>
+              </td>
+              <td>
+                <Text>{wallet.toLocaleString()}₳</Text>
+              </td>
             </tr>
             <tr>
-              <td>보유 평가 포인트</td>
-              <td>{correctionPoint.toLocaleString()}개</td>
+              <td>
+                <Text>보유 평가 포인트</Text>
+              </td>
+              <td>
+                <Text>{correctionPoint.toLocaleString()}개</Text>
+              </td>
             </tr>
             <tr>
-              <td>코알리숑 스코어</td>
+              <td>
+                <Text>코알리숑 스코어</Text>
+              </td>
               <td>
                 <HStack spacing="1rem" wrap="wrap">
                   <Text>{numberWithUnitFormatter(scoreInfo.value, 'P')}</Text>

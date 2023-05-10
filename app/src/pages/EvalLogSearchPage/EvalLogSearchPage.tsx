@@ -1,14 +1,19 @@
 import { gql } from '@/__generated__';
-import { VStack } from '@/components/common';
+import { EvalLog } from '@/__generated__/graphql';
+import { Center, Clickable, Loader, VStack } from '@/components/common';
+import { isDefined } from '@/utils/isDefined';
+import { useIntersectionObserver } from '@/utils/useIntersectionObserver';
 import { useLazyQuery } from '@apollo/client';
+import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { useEffect, useState } from 'react';
+import { MdSearch } from '@react-icons/all-files/md/MdSearch';
+import { useEffect, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { SubmitHandler } from 'react-hook-form';
-import { EvalLogSearchBoard } from './EvalLogSearchBoard';
+import { EvalLogItem } from './EvalLogItem';
 import { EvalLogSearchHeader } from './EvalLogSearchHeader';
 
-export type FormValue = {
+export type EvalLogSearchForm = {
   projectName: string;
   outstandingOnly: 'all' | 'outstanding';
   corrector: string;
@@ -75,68 +80,106 @@ const GET_EVAL_LOGS = gql(/* GraphQL */ `
 
 export const EvalLogSearchPage = () => {
   const RESULT_PER_PAGE = 10;
-  const [pageNumber, setPageNumber] = useState<number>(1);
+  const [page, setPage] = useState<number>(1);
   const [search, { loading, error, data }] = useLazyQuery(GET_EVAL_LOGS);
+  const theme = useTheme();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const [formValue, setFormValue] = useState<FormValue>({
+  const [form, setForm] = useState<EvalLogSearchForm>({
     projectName: '',
     outstandingOnly: 'all',
     corrector: '',
     corrected: '',
   });
 
-  const onSubmit: SubmitHandler<FormValue> = (data) => {
-    if (data === formValue) return;
-    setPageNumber(1);
-    setFormValue({ ...data });
+  const [evalLogs, setEvalLogs] = useState<EvalLog[]>([]);
+  const ref = useRef<HTMLDivElement>(null);
+  const entry = useIntersectionObserver(ref, { threshold: 0.5 });
+  const isVisible = !!entry?.isIntersecting;
+
+  const fetch = () => {
     search({
       variables: {
         pageSize: RESULT_PER_PAGE,
-        pageNumber,
-        ...data,
-        outstandingOnly: data.outstandingOnly === 'outstanding',
+        pageNumber: page,
+        ...form,
+        outstandingOnly: form.outstandingOnly === 'outstanding',
       },
     });
+    setPage((cur) => cur + 1);
   };
 
   useEffect(() => {
-    search({
-      variables: {
-        pageSize: RESULT_PER_PAGE,
-        pageNumber,
-        ...formValue,
-        outstandingOnly: formValue.outstandingOnly === 'outstanding',
-      },
-    });
-  }, [pageNumber]);
+    if (!data) {
+      return;
+    }
+    const { nodes } = data.getEvalLogs;
+    setEvalLogs((cur) => [...cur, ...nodes.filter(isDefined)]);
+  }, [data]);
+
+  const onSubmit: SubmitHandler<EvalLogSearchForm> = (data) => {
+    if (data === form) {
+      return;
+    }
+    setEvalLogs([]);
+    setForm(data);
+    setPage(1);
+    setIsOpen(false);
+  };
+
+  useEffect(() => {
+    if (!isVisible) {
+      return;
+    }
+    if (loading) {
+      return;
+    }
+    fetch();
+  }, [isVisible, loading, fetch]);
 
   return (
     <>
       <Helmet>
         <title>평가로그 검색기 | 42Stat</title>
       </Helmet>
-      <EvalLogSearchPageLayout>
-        <VStack h="100%" spacing="2rem">
-          <EvalLogSearchHeader formValue={formValue} onSubmit={onSubmit} />
-          <EvalLogSearchBoard
-            loading={loading}
-            error={error}
-            data={data}
-            pageNumber={pageNumber}
-            setPageNumber={setPageNumber}
-          />
+
+      {/* TODO: Headless Modal 제작하기 */}
+      <Clickable
+        onClick={() => setIsOpen((cur) => !cur)}
+        element={
+          <SearchIconLayout>
+            <MdSearch color={theme.colors.mono.white} size="20px" />
+          </SearchIconLayout>
+        }
+      />
+      {isOpen && <EvalLogSearchHeader form={form} onSubmit={onSubmit} />}
+      <EvalLogSearchDetailLayout>
+        <VStack as="ul" w="100%" spacing="2rem">
+          {evalLogs.map((evalLog, idx) => (
+            <EvalLogItem key={idx} element={evalLog} />
+          ))}
+          <Center w="100%" h="10rem" ref={ref}>
+            {loading && <Loader />}
+          </Center>
         </VStack>
-      </EvalLogSearchPageLayout>
+      </EvalLogSearchDetailLayout>
     </>
   );
 };
 
-const EvalLogSearchPageLayout = styled.div`
-  width: 100%;
-  height: 100%;
-  padding: 0 0 4rem 0;
+const SearchIconLayout = styled.div`
+  position: fixed;
+  bottom: 8rem;
+  right: 5rem;
+  border-radius: 999px;
+  padding: 1.5rem;
+  background-color: ${({ theme }) => theme.colors.primary.default};
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  z-index: 100;
+  cursor: pointer;
 `;
 
-// export const EvalLogSearchPage = () => {
-//   return <></>;
-// };
+const EvalLogSearchDetailLayout = styled.div`
+  padding: 4rem;
+  max-width: 1440px;
+`;

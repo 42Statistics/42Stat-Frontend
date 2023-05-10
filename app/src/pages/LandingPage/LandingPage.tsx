@@ -1,4 +1,10 @@
-import { Button, Center, Text, VStack } from '@/components/common';
+import {
+  Button,
+  Center,
+  Image,
+  VStack,
+  WhiteH2BoldText,
+} from '@/components/common';
 import { AppLogoTitle } from '@/components/elements/AppLogoTitle';
 import { isAuthenticatedAtom } from '@/utils/atoms/isAuthenticatedAtom';
 import { css, useTheme } from '@emotion/react';
@@ -35,23 +41,15 @@ export const LandingPage = () => {
       <VStack h="100%" spacing="10rem">
         <AppLogoTitle size="md" color={theme.colors.mono.white} />
         <VStack>
-          <Text
-            fontSize={theme.fonts.size.h2}
-            fontWeight={theme.fonts.weight.bold}
-            color={theme.colors.mono.white}
-          >
+          <WhiteH2BoldText>
             은하수를 여행한지{' '}
             {<CountUp isCounting={true} end={982} duration={3.5} />}
             일째
-          </Text>
-          <Text
-            fontSize={theme.fonts.size.h2}
-            fontWeight={theme.fonts.weight.bold}
-            color={theme.colors.mono.white}
-          >
+          </WhiteH2BoldText>
+          <WhiteH2BoldText>
             {<CountUp isCounting={true} end={810} duration={3.5} />}명의
             히치하이커와 함께 여행중
-          </Text>
+          </WhiteH2BoldText>
           <Slider
             arrows={false}
             infinite={true}
@@ -65,18 +63,12 @@ export const LandingPage = () => {
           >
             {textList.map((text, index) => (
               <Center w="100%" key={index}>
-                <Text
-                  fontSize={theme.fonts.size.h2}
-                  fontWeight={theme.fonts.weight.bold}
-                  color={theme.colors.mono.white}
-                >
-                  {text}
-                </Text>
+                <WhiteH2BoldText>{text}</WhiteH2BoldText>
               </Center>
             ))}
           </Slider>
         </VStack>
-        <img src="/animated-ship.gif" width="200px" />
+        <Image src="/animated-ship.gif" width="200px" />
         <VStack spacing="2rem">
           {/* <Text
               fontSize={theme.fonts.size.h3}

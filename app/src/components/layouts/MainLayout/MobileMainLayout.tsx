@@ -1,5 +1,5 @@
 import { VStack } from '@/components/common';
-import { MobileTabBar } from '@/components/elements/NavBar/MobileTabBar';
+import { TabBar } from '@/components/elements/TabBar';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { Helmet } from 'react-helmet-async';
@@ -20,7 +20,7 @@ export const MobileMainLayout = ({ children }: React.PropsWithChildren) => {
       >
         <MobilePageLayout>{children}</MobilePageLayout>
       </VStack>
-      <MobileTabBar />
+      <TabBar />
     </>
   );
 };

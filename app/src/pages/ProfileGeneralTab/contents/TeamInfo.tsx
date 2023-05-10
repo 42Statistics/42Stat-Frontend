@@ -1,5 +1,5 @@
 import { gql } from '@/__generated__';
-import { HStack, Loader } from '@/components/common';
+import { HStack, Loader, PrimaryText, Text } from '@/components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
@@ -54,13 +54,27 @@ export const TeamInfo = () => {
       <TeamInfoTable>
         <thead>
           <tr>
-            <th>과제명</th>
-            <th>시도</th>
-            <th>제출</th>
-            <th>등록일</th>
-            <th>제출일</th>
-            <th>소요 기간</th>
-            <th>점수</th>
+            <th>
+              <PrimaryText>과제명</PrimaryText>
+            </th>
+            <th>
+              <PrimaryText>시도</PrimaryText>
+            </th>
+            <th>
+              <PrimaryText>제출</PrimaryText>
+            </th>
+            <th>
+              <PrimaryText>등록일</PrimaryText>
+            </th>
+            <th>
+              <PrimaryText>제출일</PrimaryText>
+            </th>
+            <th>
+              <PrimaryText>소요 기간</PrimaryText>
+            </th>
+            <th>
+              <PrimaryText>점수</PrimaryText>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -78,24 +92,36 @@ export const TeamInfo = () => {
               }) => {
                 return (
                   <tr key={id}>
-                    <td>{name}</td>
-                    <td>{occurrence}번째</td>
                     <td>
-                      {closedAt != null
-                        ? `${getDayDiff(new Date(), new Date(closedAt))}일 전`
-                        : '-'}
-                    </td>
-                    <td>{dateFormatter(firstCreatedAt, 'lg')}</td>
-                    <td>
-                      {closedAt != null ? dateFormatter(closedAt, 'lg') : '-'}
+                      <Text>{name}</Text>
                     </td>
                     <td>
-                      {closedAt != null
-                        ? `${getDayDiff(
-                            new Date(closedAt),
-                            new Date(firstCreatedAt),
-                          )}일`
-                        : '-'}
+                      <Text>{occurrence}번째</Text>
+                    </td>
+                    <td>
+                      <Text>
+                        {closedAt != null
+                          ? `${getDayDiff(new Date(), new Date(closedAt))}일 전`
+                          : '-'}
+                      </Text>
+                    </td>
+                    <td>
+                      <Text>{dateFormatter(firstCreatedAt, 'lg')}</Text>
+                    </td>
+                    <td>
+                      <Text>
+                        {closedAt != null ? dateFormatter(closedAt, 'lg') : '-'}
+                      </Text>
+                    </td>
+                    <td>
+                      <Text>
+                        {closedAt != null
+                          ? `${getDayDiff(
+                              new Date(closedAt),
+                              new Date(firstCreatedAt),
+                            )}일`
+                          : '-'}
+                      </Text>
                     </td>
                     <td>
                       <HStack
@@ -128,10 +154,6 @@ const TeamInfoTable = styled.table`
   td {
     text-align: center;
     padding: 0.8rem 2rem;
-  }
-
-  th {
-    color: ${({ theme }) => theme.colors.primary.default};
   }
 
   tbody tr {

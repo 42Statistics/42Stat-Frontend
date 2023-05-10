@@ -1,4 +1,4 @@
-import { Clickable, HStack, Text } from '@/components/common';
+import { Clickable, HStack, PrimaryText } from '@/components/common';
 import { useTheme } from '@emotion/react';
 import { BsTriangleFill } from '@react-icons/all-files/bs/BsTriangleFill';
 
@@ -32,9 +32,9 @@ export const PageMoveArrow = ({
         onClick={handleDecrease}
         disabled={pageNumber === 1}
       />
-      <Text color={theme.colors.primary.default}>
+      <PrimaryText>
         {pageNumber.toLocaleString()} / {maxPageNumber.toLocaleString()}
-      </Text>
+      </PrimaryText>
       <Clickable
         element={
           <BsTriangleFill

@@ -1,10 +1,12 @@
 import { DeferredComponent } from '@/components/common';
 import { AuthGuard } from '@/components/guards/AuthGuard';
+import { LogoutPage } from '@/pages/LogoutPage';
 import { HomePageSkeleton } from '@/pages/SkeletonPages/HomePageSkeleton';
 import { ProfilePageSkeleton } from '@/pages/SkeletonPages/ProfilePageSkeleton';
 import { lazyImport } from '@/utils/lazyImport';
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
+import { ROUTES } from './ROUTES';
 
 const { HomePage } = lazyImport(() => import('@/pages/HomePage'), 'HomePage');
 const { LeaderBoardPage } = lazyImport(
@@ -56,11 +58,11 @@ const MainApp = () => {
 
 export const protectedRoutes = [
   {
-    path: '/',
+    path: ROUTES.ROOT,
     element: <DashboardApp />,
     children: [
       {
-        path: '/home',
+        path: ROUTES.HOME,
         element: (
           <Suspense
             fallback={
@@ -74,7 +76,7 @@ export const protectedRoutes = [
         ),
       },
       {
-        path: '/leaderboard',
+        path: ROUTES.LEADERBOARD,
         element: (
           <Suspense>
             <LeaderBoardPage />
@@ -82,7 +84,7 @@ export const protectedRoutes = [
         ),
       },
       {
-        path: '/profile/:username',
+        path: ROUTES.PROFILE,
         element: (
           <Suspense
             fallback={
@@ -98,11 +100,11 @@ export const protectedRoutes = [
     ],
   },
   {
-    path: '/',
+    path: ROUTES.ROOT,
     element: <MainApp />,
     children: [
       {
-        path: '/evallog',
+        path: ROUTES.EVALLOG,
         element: (
           <Suspense>
             <EvalLogSearchPage />
@@ -110,5 +112,13 @@ export const protectedRoutes = [
         ),
       },
     ],
+  },
+  {
+    path: ROUTES.LOGOUT,
+    element: (
+      <AuthGuard>
+        <LogoutPage />
+      </AuthGuard>
+    ),
   },
 ];

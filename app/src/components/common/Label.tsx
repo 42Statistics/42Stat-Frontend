@@ -1,17 +1,14 @@
-import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { Text } from './Text';
+import { WhiteText } from './Text';
 
 type LabelProps = React.HTMLAttributes<HTMLDivElement> & {
   text: string;
 };
 
 export const Label = ({ text, ...propsExceptElement }: LabelProps) => {
-  const theme = useTheme();
-
   return (
     <StyledLabel {...propsExceptElement}>
-      <Text color={theme.colors.mono.white}>{text}</Text>
+      <WhiteText>{text}</WhiteText>
     </StyledLabel>
   );
 };

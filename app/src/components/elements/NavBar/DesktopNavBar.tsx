@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
-import { AboveTabletNavBar } from './common/AboveTabletNavBar';
+import { NavBar } from './NavBar';
 
 export const DesktopNavBar = () => {
   return (
     <DesktopNavBarLayout>
-      <AboveTabletNavBar />
+      <NavBar />
     </DesktopNavBarLayout>
   );
 };

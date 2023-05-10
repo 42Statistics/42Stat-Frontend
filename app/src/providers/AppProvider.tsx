@@ -3,6 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import ApolloProvider from './ApolloProvider';
 import GoogleOAuthProvider from './GoogleOAuthProvider';
 import HelmetProvider from './HelmetProvider';
+import { ScrollToTop } from './ScrollToTop';
 import ThemeProvider from './ThemeProvider';
 
 export const AppProvider = ({ children }: React.PropsWithChildren) => {
@@ -32,7 +33,9 @@ export const AppProvider = ({ children }: React.PropsWithChildren) => {
         <GoogleOAuthProvider>
           <HelmetProvider>
             <ThemeProvider>
-              <Router>{children}</Router>
+              <Router>
+                <ScrollToTop>{children}</ScrollToTop>
+              </Router>
             </ThemeProvider>
           </HelmetProvider>
         </GoogleOAuthProvider>

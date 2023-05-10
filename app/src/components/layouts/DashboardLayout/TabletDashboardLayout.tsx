@@ -1,5 +1,4 @@
-import { Center } from '@/components/common';
-import { TabletHamburger } from '@/components/elements/Header/TabletHamburger';
+import { Center, HStack } from '@/components/common';
 import { TabletNavBar } from '@/components/elements/NavBar/TabletNavBar';
 import styled from '@emotion/styled';
 
@@ -8,11 +7,12 @@ export const TabletDashboardLayout = ({
 }: React.PropsWithChildren) => {
   return (
     <Layout>
-      <TabletNavBar />
-      <TabletHamburger />
-      <Center w="100%">
-        <TabletDashboardPageLayout>{children}</TabletDashboardPageLayout>
-      </Center>
+      <HStack w="100%">
+        <TabletNavBar />
+        <Center w="100%" css={{ marginLeft: '7rem' }}>
+          <TabletDashboardPageLayout>{children}</TabletDashboardPageLayout>
+        </Center>
+      </HStack>
     </Layout>
   );
 };

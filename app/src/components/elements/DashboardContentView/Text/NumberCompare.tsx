@@ -1,4 +1,4 @@
-import { HStack, Text } from '@/components/common';
+import { H3Text, HStack, Text } from '@/components/common';
 import { useTheme } from '@emotion/react';
 import { BsTriangleFill } from '@react-icons/all-files/bs/BsTriangleFill';
 
@@ -32,17 +32,14 @@ export const NumberCompare = ({ curr, last, unit }: NumberCompareProps) => {
   return (
     <HStack h="100%" spacing="2rem">
       <HStack align="baseline">
-        <Text fontSize={theme.fonts.size.h3}>{curr.toLocaleString()}</Text>
+        <H3Text>{curr.toLocaleString()}</H3Text>
         <Text>{unit}</Text>
       </HStack>
       <HStack spacing="0.5rem">
         <Arrow direction={diff >= 0 ? 'up' : 'down'} />
-        <Text
-          fontSize={theme.fonts.size.h3}
-          color={diff >= 0 ? '#00C48C' : '#FF3D71'}
-        >
+        <H3Text color={diff >= 0 ? '#00C48C' : '#FF3D71'}>
           {Math.abs(diff).toLocaleString()}
-        </Text>
+        </H3Text>
       </HStack>
     </HStack>
   );

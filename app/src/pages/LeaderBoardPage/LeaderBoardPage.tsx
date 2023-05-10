@@ -1,4 +1,4 @@
-import { center } from '@/components/common';
+import { Text, center } from '@/components/common';
 import { Tab, TabList, TabPanel, Tabs } from '@/components/common/Tab';
 import styled from '@emotion/styled';
 import { Helmet } from 'react-helmet-async';
@@ -19,12 +19,24 @@ export const LeaderBoardPage = () => {
       </Helmet>
       <Tabs>
         <TabList>
-          <Tab>레벨 랭킹</Tab>
-          <Tab>경험치 증가량</Tab>
-          <Tab>코알리숑 스코어</Tab>
-          <Tab>평가 횟수</Tab>
-          <Tab>보유 평가 포인트</Tab>
-          <Tab>보유 월렛</Tab>
+          <Tab>
+            <Text>레벨 랭킹</Text>
+          </Tab>
+          <Tab>
+            <Text>경험치 증가량</Text>
+          </Tab>
+          <Tab>
+            <Text>코알리숑 스코어</Text>
+          </Tab>
+          <Tab>
+            <Text>평가 횟수</Text>
+          </Tab>
+          <Tab>
+            <Text>보유 평가 포인트</Text>
+          </Tab>
+          <Tab>
+            <Text>보유 월렛</Text>
+          </Tab>
         </TabList>
         <TabPanel>
           <LeaderBoardDetailLayout>

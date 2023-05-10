@@ -3,6 +3,7 @@ import { lazyImport } from '@/utils/lazyImport';
 import { useAtomValue } from 'jotai';
 import { Suspense } from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
+import { ROUTES } from './ROUTES';
 import { protectedRoutes } from './protectedRoutes';
 
 const { LandingPage } = lazyImport(
@@ -18,15 +19,14 @@ const { LandingLayout } = lazyImport(
   'LandingLayout',
 );
 
-// TODO: <Route errorElement={<ErrorPage />} /> 파트 추가
 export const AppRoutes = () => {
   const isAuthenticated = useAtomValue(isAuthenticatedAtom);
 
   const commonRoutes = [
     {
-      path: '/',
+      path: ROUTES.ROOT,
       element: isAuthenticated ? (
-        <Navigate to="/home" />
+        <Navigate to={ROUTES.HOME} />
       ) : (
         <Suspense>
           <LandingLayout>

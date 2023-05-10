@@ -1,4 +1,12 @@
-import { Avatar, HStack, Spacer, Text } from '@/components/common';
+import {
+  Avatar,
+  H2BoldText,
+  H3BoldText,
+  H3MediumText,
+  HStack,
+  MediumText,
+  Spacer,
+} from '@/components/common';
 import { numberWithUnitFormatter } from '@/utils/formatters';
 import { AboveTablet, Mobile } from '@/utils/responsive/Device';
 import type { RankItemType } from '@/utils/types/Rank';
@@ -22,50 +30,26 @@ export const LeaderBoardItem = ({ rank, item, unit }: LeaderBoardItemProps) => {
       <AboveTablet>
         <AboveTabletLeaderBoardItemLayout>
           <HStack w="100%" spacing="4rem">
-            <Text
-              color={color}
-              fontWeight={theme.fonts.weight.bold}
-              fontSize={theme.fonts.size.h2}
-            >
-              {rank}
-            </Text>
+            <H2BoldText color={color}>{rank}</H2BoldText>
             <Avatar size="3.5rem" imgUrl={imgUrl} />
-            <Text
-              color={color}
-              fontSize={theme.fonts.size.h3}
-              fontWeight={theme.fonts.weight.medium}
-            >
-              {name}
-            </Text>
+            <H3MediumText color={color}>{name}</H3MediumText>
             <Spacer />
-            <Text
-              color={color}
-              fontSize={theme.fonts.size.h3}
-              fontWeight={theme.fonts.weight.medium}
-            >
+            <H3MediumText color={color}>
               {numberWithUnitFormatter(value, unit)}
-            </Text>
+            </H3MediumText>
           </HStack>
         </AboveTabletLeaderBoardItemLayout>
       </AboveTablet>
       <Mobile>
         <MobileLeaderBoardItemLayout>
           <HStack w="100%" spacing="3rem">
-            <Text
-              color={color}
-              fontWeight={theme.fonts.weight.bold}
-              fontSize={theme.fonts.size.h3}
-            >
-              {rank}
-            </Text>
+            <H3BoldText color={color}>{rank}</H3BoldText>
             <Avatar size="3.5rem" imgUrl={imgUrl} />
-            <Text color={color} fontWeight={theme.fonts.weight.medium}>
-              {name}
-            </Text>
+            <MediumText color={color}>{name}</MediumText>
             <Spacer />
-            <Text color={color} fontWeight={theme.fonts.weight.medium}>
+            <MediumText color={color}>
               {numberWithUnitFormatter(value, unit)}
-            </Text>
+            </MediumText>
           </HStack>
         </MobileLeaderBoardItemLayout>
       </Mobile>

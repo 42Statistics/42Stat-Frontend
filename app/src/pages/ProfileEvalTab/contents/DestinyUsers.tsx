@@ -1,3 +1,17 @@
+import { DashboardContent } from '@/components/templates/Dashboard';
+
+export const DestinyUsers = () => {
+  const title = '운명의 장난 스코어';
+  const description = '평가에서 가장 자주 마주친 유저 랭킹';
+
+  return (
+    <DashboardContent
+      title={title}
+      description={description}
+    ></DashboardContent>
+  );
+};
+
 // TODO: getPersonGeneralPage -> getPersonEvaluationPage
 // const GET_DESTINY_USERS = gql(/* GraphQL */ `
 //   query getDestinyUsers {
@@ -49,7 +63,3 @@
 //     </>
 //   );
 // };
-
-export const DestinyUsers = () => {
-  return <></>;
-};

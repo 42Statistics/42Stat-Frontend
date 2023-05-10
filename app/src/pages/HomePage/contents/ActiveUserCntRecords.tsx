@@ -5,6 +5,7 @@ import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
+import { DashboardContent } from '@/components/templates/Dashboard';
 import { numberWithUnitFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
 
@@ -22,11 +23,12 @@ const GET_ACTIVE_USER_CNT_RECORD = gql(/* GraphQL */ `
 export const ActiveUserCntRecords = () => {
   const { loading, error, data } = useQuery(GET_ACTIVE_USER_CNT_RECORD);
 
-  if (loading) return <Loader/>;
+  if (loading) return <Loader />;
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 
   const { activeUserCntRecords } = data.getTotalPage;
+  const title = '활성화 유저 수 추이';
   const seriesData = activeUserCntRecords.map(({ at, value }) => ({
     x: at,
     y: value,
@@ -38,7 +40,11 @@ export const ActiveUserCntRecords = () => {
     },
   ];
 
-  return <ActiveUserCntRecordsChart series={series} />;
+  return (
+    <DashboardContent title={title}>
+      <ActiveUserCntRecordsChart series={series} />
+    </DashboardContent>
+  );
 };
 
 type ActiveUserCntRecordsChartProps = {

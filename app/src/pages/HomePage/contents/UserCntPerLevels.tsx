@@ -5,6 +5,7 @@ import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
+import { DashboardContent } from '@/components/templates/Dashboard';
 import { numberWithUnitFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
 
@@ -27,6 +28,8 @@ export const UserCntPerLevels = () => {
   if (!data) return <ApolloNotFound />;
 
   const { userCntPerLevels } = data.getTotalPage;
+  const title = '레벨 별 유저 분포';
+
   const categories = userCntPerLevels.map(({ level }) => level);
   const seriesData = userCntPerLevels.map(({ userCnt }) => userCnt);
   const series: ApexAxisChartSeries = [
@@ -36,7 +39,11 @@ export const UserCntPerLevels = () => {
     },
   ];
 
-  return <UserCntPerLevelsChart categories={categories} series={series} />;
+  return (
+    <DashboardContent title={title}>
+      <UserCntPerLevelsChart categories={categories} series={series} />
+    </DashboardContent>
+  );
 };
 
 type UserCntPerLevelsChartProps = {

@@ -1,8 +1,8 @@
+import type { MobileDashboardProps } from '@/utils/types/Dashboard';
+import styled from '@emotion/styled';
 import { DashboardItem } from './DashboardItem';
 import { DashboardItemWrapper } from './DashboardItemWrapper';
 import { MobileDashboardRow } from './MobileDashboardRow';
-import type { MobileDashboardProps } from '@/utils/types/Dashboard';
-import styled from '@emotion/styled';
 
 export const MobileDashboard = ({ rows, contents }: MobileDashboardProps) => {
   return (
@@ -18,8 +18,7 @@ export const MobileDashboard = ({ rows, contents }: MobileDashboardProps) => {
               colSpan={colSpan}
               element={
                 <DashboardItem
-                  title={contents[elementId].title}
-                  description={contents[elementId].description}
+                  id={contents[elementId].id}
                   content={contents[elementId].content}
                 />
               }

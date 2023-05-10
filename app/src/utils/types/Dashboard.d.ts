@@ -21,9 +21,7 @@ export type MobileDashboardProps = {
 };
 
 export type DashboardItemProps = {
-  id?: number;
-  title?: string;
-  description?: string;
+  id: number;
   content: () => JSX.Element;
 };
 

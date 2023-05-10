@@ -5,6 +5,7 @@ import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
+import { DashboardContent } from '@/components/templates/Dashboard';
 import { numberWithUnitFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
 
@@ -27,6 +28,9 @@ export const AverageCircleDurations = () => {
   if (!data) return <ApolloNotFound />;
 
   const { averageCircleDurations } = data.getTotalPage;
+  const title = 'N서클 통과할 때까지의 누적 기간';
+  const description = '(본과정 시작일 기준)';
+
   const categories = averageCircleDurations.map(({ circle }) => String(circle));
   const seriesData = averageCircleDurations.map(({ value }) => value);
 
@@ -47,11 +51,13 @@ export const AverageCircleDurations = () => {
   ];
 
   return (
-    <AverageCircleDurationsChart
-      categories={categories}
-      series={series}
-      seriesLabel={seriesLabel}
-    />
+    <DashboardContent title={title} description={description}>
+      <AverageCircleDurationsChart
+        categories={categories}
+        series={series}
+        seriesLabel={seriesLabel}
+      />
+    </DashboardContent>
   );
 };
 

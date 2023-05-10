@@ -5,6 +5,8 @@ import {
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
 import { TextDefault } from '@/components/elements/DashboardContentView/Text';
+import { DashboardContent } from '@/components/templates/Dashboard';
+import { dateFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
 
 const GET_PREFERRED_CLUSTER = gql(/* GraphQL */ `
@@ -14,6 +16,8 @@ const GET_PREFERRED_CLUSTER = gql(/* GraphQL */ `
         data {
           preferredCluster
         }
+        from
+        to
       }
     }
   }
@@ -26,6 +30,15 @@ export const PrefferedCluster = () => {
   if (!data) return <ApolloNotFound />;
 
   const { preferredCluster } = data.getPersonGeneralPage.logtimeInfo.data;
+  const { from, to } = data.getPersonGeneralPage.logtimeInfo;
+  const [fromStr, toStr] = [dateFormatter(from, 'lg'), dateFormatter(to, 'lg')];
 
-  return <TextDefault text={`클러스터 ${preferredCluster.toUpperCase()}`} />;
+  const title = '주 접속 클러스터';
+  const description = `(${fromStr} 시작 / 1개월)`;
+
+  return (
+    <DashboardContent title={title} description={description}>
+      <TextDefault text={`클러스터 ${preferredCluster.toUpperCase()}`} />
+    </DashboardContent>
+  );
 };

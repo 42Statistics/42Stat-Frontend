@@ -5,6 +5,7 @@ import {
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
 import { NumberDefault } from '@/components/elements/DashboardContentView/Text';
+import { DashboardContent } from '@/components/templates/Dashboard';
 import { useQuery } from '@apollo/client';
 
 const GET_TOTAL_EVAL_COUNT = gql(/* GraphQL */ `
@@ -23,7 +24,12 @@ export const TotalEvalCnt = () => {
   if (!data) return <ApolloNotFound />;
 
   const { totalEvalCount } = data.getTotalPage;
+  const title = '역대 총 평가 횟수';
   const unit = '회';
 
-  return <NumberDefault number={totalEvalCount} unit={unit} />;
+  return (
+    <DashboardContent title={title}>
+      <NumberDefault number={totalEvalCount} unit={unit} />
+    </DashboardContent>
+  );
 };

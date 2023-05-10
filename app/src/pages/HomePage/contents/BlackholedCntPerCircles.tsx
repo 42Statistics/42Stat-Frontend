@@ -5,6 +5,7 @@ import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
+import { DashboardContent } from '@/components/templates/Dashboard';
 import { numberWithUnitFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
@@ -28,11 +29,16 @@ export const BlackholedCntPerCircles = () => {
   if (!data) return <ApolloNotFound />;
 
   const { blackholedCntPerCircles } = data.getTotalPage;
+  const title = '언제 블랙홀에 많이 빠질까?';
 
   const labels = blackholedCntPerCircles.map(({ circle }) => `${circle}서클`);
   const series = blackholedCntPerCircles.map(({ value }) => value);
 
-  return <BlackholedCntPerCirclesChart labels={labels} series={series} />;
+  return (
+    <DashboardContent title={title}>
+      <BlackholedCntPerCirclesChart labels={labels} series={series} />
+    </DashboardContent>
+  );
 };
 
 type BlackholedCntPerCirclesChartProps = {

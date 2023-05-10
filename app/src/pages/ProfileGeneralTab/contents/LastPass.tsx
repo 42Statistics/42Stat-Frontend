@@ -5,6 +5,7 @@ import {
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
 import { TextDefault } from '@/components/elements/DashboardContentView/Text';
+import { DashboardContent } from '@/components/templates/Dashboard';
 import { useQuery } from '@apollo/client';
 
 const GET_LAST_PASS = gql(/* GraphQL */ `
@@ -25,6 +26,11 @@ export const LastPass = () => {
   if (!data) return <ApolloNotFound />;
 
   const { lastPass } = data.getPersonGeneralPage.teamInfo;
+  const title = '최근 통과한 과제';
 
-  return <TextDefault text={lastPass ?? '-'} />;
+  return (
+    <DashboardContent title={title}>
+      <TextDefault text={lastPass ?? '-'} />
+    </DashboardContent>
+  );
 };

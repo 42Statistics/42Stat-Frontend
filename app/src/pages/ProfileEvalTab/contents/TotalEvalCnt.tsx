@@ -5,6 +5,7 @@ import {
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
 import { NumberDefault } from '@/components/elements/DashboardContentView/Text';
+import { DashboardContent } from '@/components/templates/Dashboard';
 import { useQuery } from '@apollo/client';
 
 // TODO: getPersonGeneralPage -> getPersonEvaluationPage
@@ -26,7 +27,13 @@ export const TotalEvalCnt = () => {
   if (!data) return <ApolloNotFound />;
 
   const { totalCount } = data.getPersonalEvalPage;
+
+  const title = '누적 평가 횟수';
   const unit = '회';
 
-  return <NumberDefault number={totalCount} unit={unit} />;
+  return (
+    <DashboardContent title={title}>
+      <NumberDefault number={totalCount} unit={unit} />
+    </DashboardContent>
+  );
 };

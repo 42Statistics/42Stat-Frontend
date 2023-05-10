@@ -5,6 +5,8 @@ import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
+import { DashboardContent } from '@/components/templates/Dashboard';
+import { dateFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
 
 const GET_LAST_EXAM_RESULT = gql(/* GraphQL */ `
@@ -26,11 +28,17 @@ const GET_LAST_EXAM_RESULT = gql(/* GraphQL */ `
 export const LastExamResult = () => {
   const { loading, error, data } = useQuery(GET_LAST_EXAM_RESULT);
 
-  if (loading) return <Loader/>;
+  if (loading) return <Loader />;
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 
   const { lastExamResult } = data.getHomePage;
+  const { from, to } = lastExamResult;
+  const [fromStr, toStr] = [dateFormatter(from, 'xl'), dateFormatter(to, 'xl')];
+
+  const title = '직전 회차 시험 Rank 별 통과율';
+  const description = `(응시 시간 : ${fromStr})`;
+
   const categories = lastExamResult.data.map(({ rank }) => rank);
   const seriesData = lastExamResult.data.map(
     ({ passCnt, totalCnt }) => passCnt / totalCnt,
@@ -42,7 +50,11 @@ export const LastExamResult = () => {
     },
   ];
 
-  return <LastExamResultChart categories={categories} series={series} />;
+  return (
+    <DashboardContent title={title} description={description}>
+      <LastExamResultChart categories={categories} series={series} />
+    </DashboardContent>
+  );
 };
 
 type LastExamResultChartProps = {

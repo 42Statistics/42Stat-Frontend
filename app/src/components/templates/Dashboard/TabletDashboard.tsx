@@ -18,8 +18,7 @@ export const TabletDashboard = ({ rows, contents }: TabletDashboardProps) => {
               colSpan={colSpan}
               element={
                 <DashboardItem
-                  title={contents[elementId].title}
-                  description={contents[elementId].description}
+                  id={contents[elementId].id}
                   content={contents[elementId].content}
                 />
               }

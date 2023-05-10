@@ -5,6 +5,8 @@ import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
+import { DashboardContent } from '@/components/templates/Dashboard';
+import { dateFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
 
@@ -32,6 +34,9 @@ export const LevelGraph = () => {
   if (!data) return <ApolloNotFound />;
 
   const { levelGraphs } = data.getPersonGeneralPage;
+  const [from, to] = [levelGraphs.from, levelGraphs.to];
+  const [fromStr, toStr] = [dateFormatter(from, 'lg'), dateFormatter(to, 'lg')];
+
   const userLevelSeries = levelGraphs.data.map(({ date, userLevel }) => ({
     x: date,
     y: userLevel,
@@ -51,7 +56,14 @@ export const LevelGraph = () => {
     },
   ];
 
-  return <LevelGraphChart series={series} />;
+  const title = '레벨 증가 그래프';
+  const description = `(${toStr} 기준 / 과거 1년)`;
+
+  return (
+    <DashboardContent title={title} description={description}>
+      <LevelGraphChart series={series} />
+    </DashboardContent>
+  );
 };
 
 type LevelGraphChartProps = {

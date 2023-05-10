@@ -5,6 +5,7 @@ import {
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
 import { TextDefault } from '@/components/elements/DashboardContentView/Text';
+import { DashboardContent } from '@/components/templates/Dashboard';
 import { useQuery } from '@apollo/client';
 
 const GET_LAST_REGISTERED = gql(/* GraphQL */ `
@@ -25,6 +26,11 @@ export const LastRegistered = () => {
   if (!data) return <ApolloNotFound />;
 
   const { lastRegistered } = data.getPersonGeneralPage.teamInfo;
+  const title = '최근 신청한 과제';
 
-  return <TextDefault text={lastRegistered ?? '-'} />;
+  return (
+    <DashboardContent title={title}>
+      <TextDefault text={lastRegistered ?? '-'} />
+    </DashboardContent>
+  );
 };

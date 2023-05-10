@@ -5,6 +5,7 @@ import {
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
 import { NumberDefault } from '@/components/elements/DashboardContentView/Text';
+import { DashboardContent } from '@/components/templates/Dashboard';
 import { useQuery } from '@apollo/client';
 
 const GET_AVERAGE_FEEDBACK_LENGTH = gql(/* GraphQL */ `
@@ -23,7 +24,12 @@ export const AverageFeedbackLength = () => {
   if (!data) return <ApolloNotFound />;
 
   const { averageFeedbackLength } = data.getTotalPage;
+  const title = '평균 피드백 길이';
   const unit = '자';
 
-  return <NumberDefault number={averageFeedbackLength} unit={unit} />;
+  return (
+    <DashboardContent title={title}>
+      <NumberDefault number={averageFeedbackLength} unit={unit} />
+    </DashboardContent>
+  );
 };

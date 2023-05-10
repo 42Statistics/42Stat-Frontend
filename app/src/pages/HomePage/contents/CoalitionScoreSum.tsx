@@ -3,6 +3,7 @@ import { Loader } from '@/components/common';
 import { BarChart } from '@/components/elements/Chart';
 import { ApolloNotFound } from '@/components/elements/DashboardContentView';
 import { ApolloBadRequest } from '@/components/elements/DashboardContentView/ApolloBadRequest';
+import { DashboardContent } from '@/components/templates/Dashboard';
 import { millionFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
@@ -34,6 +35,8 @@ export const CoalitionScoreSum = () => {
   if (!data) return <ApolloNotFound />;
 
   const { totalScores } = data.getTotalPage;
+  const title = '누적 코알리숑 스코어 합산';
+
   const categories: string[] = [];
   const seriesData: number[] = [];
   const colorList: string[] = [];
@@ -53,11 +56,13 @@ export const CoalitionScoreSum = () => {
   ];
 
   return (
-    <CoalitionScoreSumChart
-      categories={categories}
-      series={series}
-      colors={colorList}
-    />
+    <DashboardContent title={title}>
+      <CoalitionScoreSumChart
+        categories={categories}
+        series={series}
+        colors={colorList}
+      />
+    </DashboardContent>
   );
 };
 

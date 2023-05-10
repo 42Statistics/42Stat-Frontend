@@ -5,6 +5,8 @@ import {
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
 import { NumberCompare } from '@/components/elements/DashboardContentView/Text';
+import { DashboardContent } from '@/components/templates/Dashboard';
+import { dateFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
 
 const GET_MONTHLY_EVAL_CNT = gql(/* GraphQL */ `
@@ -34,12 +36,19 @@ export const MonthlyEvalCnt = () => {
   if (!data) return <ApolloNotFound />;
 
   const { currMonthCount, lastMonthCount } = data.getPersonalEvalPage;
+  const { from, to } = currMonthCount;
+  const [fromStr, toStr] = [dateFormatter(from, 'lg'), dateFormatter(to, 'lg')];
+
+  const title = '월간 평가 횟수';
+  const description = `(평가자일 때만 / ${fromStr} 시작 / 1개월)`;
 
   return (
-    <NumberCompare
-      curr={currMonthCount.data}
-      last={lastMonthCount.data}
-      unit="회"
-    />
+    <DashboardContent title={title} description={description}>
+      <NumberCompare
+        curr={currMonthCount.data}
+        last={lastMonthCount.data}
+        unit="회"
+      />
+    </DashboardContent>
   );
 };

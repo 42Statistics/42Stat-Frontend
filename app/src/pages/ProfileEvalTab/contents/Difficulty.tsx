@@ -1,3 +1,11 @@
+import { DashboardContent } from '@/components/templates/Dashboard';
+
+export const Difficulty = () => {
+  const title = '이 유저를 평가자로 만난다면?';
+
+  return <DashboardContent title={title}></DashboardContent>;
+};
+
 // TODO: getPersonGeneralPage -> getPersonEvaluationPage
 // const GET_DIFFICULTY = gql(/* GraphQL */ `
 //   query getDifficulty {
@@ -24,7 +32,3 @@
 
 //   return <TextDefault text={difficulty} />;
 // };
-
-export const Difficulty = () => {
-  return <></>;
-};

@@ -5,6 +5,7 @@ import {
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
 import { NumberDefault } from '@/components/elements/DashboardContentView/Text';
+import { DashboardContent } from '@/components/templates/Dashboard';
 import { useQuery } from '@apollo/client';
 
 const GET_AVERAGE_FINAL_MARK = gql(/* GraphQL */ `
@@ -27,7 +28,14 @@ export const AverageFinalMark = () => {
   if (!data) return <ApolloNotFound />;
 
   const { averageFinalMark } = data.getPersonalEvalPage;
+
+  const title = '평균 평가 점수';
+  const description = '(평가자일 때만)';
   const unit = '점';
 
-  return <NumberDefault number={averageFinalMark} unit={unit} />;
+  return (
+    <DashboardContent title={title} description={description}>
+      <NumberDefault number={averageFinalMark} unit={unit} />
+    </DashboardContent>
+  );
 };

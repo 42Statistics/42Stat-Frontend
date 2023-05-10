@@ -5,6 +5,7 @@ import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
+import { DashboardContent } from '@/components/templates/Dashboard';
 import { numberWithUnitFormatter } from '@/utils/formatters';
 import { isDefined } from '@/utils/isDefined';
 import { useQuery } from '@apollo/client';
@@ -40,6 +41,8 @@ export const CoalitionScoreDynamic = () => {
   if (!data) return <ApolloNotFound />;
 
   const { scoreRecords } = data.getTotalPage;
+  const title = '역대 코알리숑 스코어 변동 추이';
+
   const colorList: string[] = [];
   const series = scoreRecords.map(({ coalition, records }) => {
     const seriesData = records.filter(isDefined).map(({ at, value }) => ({
@@ -53,7 +56,11 @@ export const CoalitionScoreDynamic = () => {
     };
   });
 
-  return <CoalitionScoreDynamicChart series={series} colors={colorList} />;
+  return (
+    <DashboardContent title={title}>
+      <CoalitionScoreDynamicChart series={series} colors={colorList} />
+    </DashboardContent>
+  );
 };
 
 type CoalitionScoreDynamicChartProps = {

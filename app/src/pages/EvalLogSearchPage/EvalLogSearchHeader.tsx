@@ -2,19 +2,19 @@ import { Button, HStack, Input, Text, VStack } from '@/components/common';
 import styled from '@emotion/styled';
 import { rgba } from 'emotion-rgba';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { FormValue } from './EvalLogSearchPage';
+import { EvalLogSearchForm } from './EvalLogSearchPage';
 
 type EvalLogSearchHeaderProps = {
-  formValue: FormValue;
-  onSubmit: SubmitHandler<FormValue>;
+  form: EvalLogSearchForm;
+  onSubmit: SubmitHandler<EvalLogSearchForm>;
 };
 
 export const EvalLogSearchHeader = ({
-  formValue,
+  form,
   onSubmit,
 }: EvalLogSearchHeaderProps) => {
-  const { register, handleSubmit } = useForm<FormValue>({
-    defaultValues: formValue,
+  const { register, handleSubmit } = useForm<EvalLogSearchForm>({
+    defaultValues: form,
   });
 
   return (
@@ -41,7 +41,7 @@ export const EvalLogSearchHeader = ({
                   type="radio"
                   {...register('outstandingOnly')}
                   value="all"
-                  defaultChecked={formValue.outstandingOnly === 'all'}
+                  defaultChecked={form.outstandingOnly === 'all'}
                 />
                 <Text>전체</Text>
               </HStack>
@@ -50,7 +50,7 @@ export const EvalLogSearchHeader = ({
                   type="radio"
                   {...register('outstandingOnly')}
                   value="outstanding"
-                  defaultChecked={formValue.outstandingOnly === 'outstanding'}
+                  defaultChecked={form.outstandingOnly === 'outstanding'}
                 />
                 <Text>Outstanding</Text>
               </HStack>

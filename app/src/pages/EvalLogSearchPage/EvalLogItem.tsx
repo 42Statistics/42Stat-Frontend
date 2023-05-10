@@ -3,7 +3,6 @@ import {
   BoldText,
   Clickable,
   HStack,
-  MediumText,
   PrimaryBoldText,
   PrimaryMediumText,
   Spacer,
@@ -89,7 +88,7 @@ type FlagLabelProps = {
 const FlagLabel = ({ name, isPositive }: FlagLabelProps) => {
   return (
     <FlagLabelLayout isPositive={isPositive}>
-      <MediumText>{snakeCaseFormatter(name)}</MediumText>
+      <BoldText>{snakeCaseFormatter(name)}</BoldText>
     </FlagLabelLayout>
   );
 };

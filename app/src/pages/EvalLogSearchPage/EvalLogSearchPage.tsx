@@ -1,16 +1,19 @@
 import { gql } from '@/__generated__';
-import { Clickable, VStack } from '@/components/common';
+import { EvalLog } from '@/__generated__/graphql';
+import { Center, Clickable, Loader, VStack } from '@/components/common';
+import { isDefined } from '@/utils/isDefined';
+import { useIntersectionObserver } from '@/utils/useIntersectionObserver';
 import { useLazyQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { MdSearch } from '@react-icons/all-files/md/MdSearch';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { SubmitHandler } from 'react-hook-form';
-import { EvalLogSearchBoard } from './EvalLogSearchBoard';
+import { EvalLogItem } from './EvalLogItem';
 import { EvalLogSearchHeader } from './EvalLogSearchHeader';
 
-export type FormValue = {
+export type EvalLogSearchForm = {
   projectName: string;
   outstandingOnly: 'all' | 'outstanding';
   corrector: string;
@@ -77,43 +80,62 @@ const GET_EVAL_LOGS = gql(/* GraphQL */ `
 
 export const EvalLogSearchPage = () => {
   const RESULT_PER_PAGE = 10;
-  const [pageNumber, setPageNumber] = useState<number>(1);
+  const [page, setPage] = useState<number>(1);
   const [search, { loading, error, data }] = useLazyQuery(GET_EVAL_LOGS);
   const theme = useTheme();
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const [formValue, setFormValue] = useState<FormValue>({
+  const [form, setForm] = useState<EvalLogSearchForm>({
     projectName: '',
     outstandingOnly: 'all',
     corrector: '',
     corrected: '',
   });
 
-  const onSubmit: SubmitHandler<FormValue> = (data) => {
-    if (data === formValue) return;
-    setPageNumber(1);
-    setFormValue({ ...data });
+  const [evalLogs, setEvalLogs] = useState<EvalLog[]>([]);
+  const ref = useRef<HTMLDivElement>(null);
+  const entry = useIntersectionObserver(ref, { threshold: 0.5 });
+  const isVisible = !!entry?.isIntersecting;
+
+  const fetch = () => {
     search({
       variables: {
         pageSize: RESULT_PER_PAGE,
-        pageNumber,
-        ...data,
-        outstandingOnly: data.outstandingOnly === 'outstanding',
+        pageNumber: page,
+        ...form,
+        outstandingOnly: form.outstandingOnly === 'outstanding',
       },
     });
+    setPage((cur) => cur + 1);
+  };
+
+  useEffect(() => {
+    if (!data) {
+      return;
+    }
+    const { nodes } = data.getEvalLogs;
+    setEvalLogs((cur) => [...cur, ...nodes.filter(isDefined)]);
+  }, [data]);
+
+  const onSubmit: SubmitHandler<EvalLogSearchForm> = (data) => {
+    if (data === form) {
+      return;
+    }
+    setEvalLogs([]);
+    setForm(data);
+    setPage(1);
     setIsOpen(false);
   };
 
   useEffect(() => {
-    search({
-      variables: {
-        pageSize: RESULT_PER_PAGE,
-        pageNumber,
-        ...formValue,
-        outstandingOnly: formValue.outstandingOnly === 'outstanding',
-      },
-    });
-  }, [pageNumber]);
+    if (!isVisible) {
+      return;
+    }
+    if (loading) {
+      return;
+    }
+    fetch();
+  }, [isVisible, loading, fetch]);
 
   return (
     <>
@@ -130,20 +152,17 @@ export const EvalLogSearchPage = () => {
           </SearchIconLayout>
         }
       />
-      {isOpen && (
-        <EvalLogSearchHeader formValue={formValue} onSubmit={onSubmit} />
-      )}
-      <EvalLogSearchPageLayout>
-        <VStack h="100%" spacing="2rem">
-          <EvalLogSearchBoard
-            loading={loading}
-            error={error}
-            data={data}
-            pageNumber={pageNumber}
-            setPageNumber={setPageNumber}
-          />
+      {isOpen && <EvalLogSearchHeader form={form} onSubmit={onSubmit} />}
+      <EvalLogSearchDetailLayout>
+        <VStack as="ul" w="100%" spacing="2rem">
+          {evalLogs.map((evalLog, idx) => (
+            <EvalLogItem key={idx} element={evalLog} />
+          ))}
+          <Center w="100%" h="10rem" ref={ref}>
+            {loading && <Loader />}
+          </Center>
         </VStack>
-      </EvalLogSearchPageLayout>
+      </EvalLogSearchDetailLayout>
     </>
   );
 };
@@ -160,6 +179,7 @@ const SearchIconLayout = styled.div`
   cursor: pointer;
 `;
 
-const EvalLogSearchPageLayout = styled.div`
+const EvalLogSearchDetailLayout = styled.div`
   padding: 4rem;
+  max-width: 1440px;
 `;

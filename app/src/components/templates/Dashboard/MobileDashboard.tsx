@@ -1,12 +1,12 @@
-import { DashboardItem } from '@/components/templates/DashboardItem';
-import { DashboardItemWrapper } from '@/components/templates/DashboardItemWrapper';
-import { MobileDashboardRow } from '@/components/templates/DashboardRow';
-import { MobileDashboardRowContainer } from '@/components/templates/DashboardRowContainer';
+import { DashboardItem } from './DashboardItem';
+import { DashboardItemWrapper } from './DashboardItemWrapper';
+import { MobileDashboardRow } from './MobileDashboardRow';
 import type { MobileDashboardProps } from '@/utils/types/Dashboard';
+import styled from '@emotion/styled';
 
 export const MobileDashboard = ({ rows, contents }: MobileDashboardProps) => {
   return (
-    <MobileDashboardRowContainer>
+    <MobileDashboardLayout>
       {rows.map(({ row, col, items }, rowIdx) => (
         <MobileDashboardRow key={rowIdx} row={row} col={col}>
           {items.map(({ row, col, rowSpan, colSpan, elementId }, itemIdx) => (
@@ -27,6 +27,13 @@ export const MobileDashboard = ({ rows, contents }: MobileDashboardProps) => {
           ))}
         </MobileDashboardRow>
       ))}
-    </MobileDashboardRowContainer>
+    </MobileDashboardLayout>
   );
 };
+
+export const MobileDashboardLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+`;

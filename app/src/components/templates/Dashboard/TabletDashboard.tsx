@@ -1,12 +1,12 @@
-import { DashboardItem } from '@/components/templates/DashboardItem';
-import { DashboardItemWrapper } from '@/components/templates/DashboardItemWrapper';
-import { TabletDashboardRow } from '@/components/templates/DashboardRow';
-import { TabletDashboardRowContainer } from '@/components/templates/DashboardRowContainer';
 import type { TabletDashboardProps } from '@/utils/types/Dashboard';
+import styled from '@emotion/styled';
+import { DashboardItem } from './DashboardItem';
+import { DashboardItemWrapper } from './DashboardItemWrapper';
+import { TabletDashboardRow } from './TabletDashboardRow';
 
 export const TabletDashboard = ({ rows, contents }: TabletDashboardProps) => {
   return (
-    <TabletDashboardRowContainer>
+    <TabletDashboardLayout>
       {rows.map(({ row, col, items }, rowIdx) => (
         <TabletDashboardRow key={rowIdx} row={row} col={col}>
           {items.map(({ row, col, rowSpan, colSpan, elementId }, itemIdx) => (
@@ -27,6 +27,13 @@ export const TabletDashboard = ({ rows, contents }: TabletDashboardProps) => {
           ))}
         </TabletDashboardRow>
       ))}
-    </TabletDashboardRowContainer>
+    </TabletDashboardLayout>
   );
 };
+
+export const TabletDashboardLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+`;

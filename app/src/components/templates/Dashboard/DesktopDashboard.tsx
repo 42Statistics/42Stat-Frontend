@@ -1,12 +1,12 @@
-import { DashboardItem } from '@/components/templates/DashboardItem';
-import { DashboardItemWrapper } from '@/components/templates/DashboardItemWrapper';
-import { DesktopDashboardRow } from '@/components/templates/DashboardRow';
-import { DesktopDashboardRowContainer } from '@/components/templates/DashboardRowContainer';
 import type { DesktopDashboardProps } from '@/utils/types/Dashboard';
+import styled from '@emotion/styled';
+import { DashboardItem } from './DashboardItem';
+import { DashboardItemWrapper } from './DashboardItemWrapper';
+import { DesktopDashboardRow } from './DesktopDashboardRow';
 
 export const DesktopDashboard = ({ rows, contents }: DesktopDashboardProps) => {
   return (
-    <DesktopDashboardRowContainer>
+    <DesktopDashboardLayout>
       {rows.map(({ row, col, items }, rowIdx) => (
         <DesktopDashboardRow key={rowIdx} row={row} col={col}>
           {items.map(({ row, col, rowSpan, colSpan, elementId }, itemIdx) => (
@@ -27,6 +27,13 @@ export const DesktopDashboard = ({ rows, contents }: DesktopDashboardProps) => {
           ))}
         </DesktopDashboardRow>
       ))}
-    </DesktopDashboardRowContainer>
+    </DesktopDashboardLayout>
   );
 };
+
+export const DesktopDashboardLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+`;

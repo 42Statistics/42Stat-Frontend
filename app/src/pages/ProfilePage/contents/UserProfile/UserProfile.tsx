@@ -19,7 +19,6 @@ import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
-import { LevelBar } from '@/components/elements/LevelBar';
 import {
   dDayFormatter,
   dateFormatter,
@@ -31,6 +30,7 @@ import { titleCase } from '@/utils/titleCase';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
 import { truncate } from 'lodash-es';
+import { LevelBar } from './LevelBar';
 
 const GET_USER_PROFILE = gql(/* GraphQL */ `
   query GetUserProfile {

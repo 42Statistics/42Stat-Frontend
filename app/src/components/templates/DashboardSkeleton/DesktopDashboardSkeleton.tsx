@@ -1,8 +1,8 @@
-import { DashboardItemWrapper } from '@/components/templates/DashboardItemWrapper';
-import { DesktopDashboardRow } from '@/components/templates/DashboardRow';
-import { DesktopDashboardRowContainer } from '@/components/templates/DashboardRowContainer';
+import { DashboardItemWrapper } from '@/components/templates/Dashboard/DashboardItemWrapper';
+import { DesktopDashboardLayout } from '@/components/templates/Dashboard/DesktopDashboard';
+import { DesktopDashboardRow } from '@/components/templates/Dashboard/DesktopDashboardRow';
 import type { DesktopDashboardProps } from '@/utils/types/Dashboard';
-import { DashboardSkeletonItem } from '../DashboardSkeletonItem';
+import { DashboardSkeletonItem } from './DashboardSkeletonItem';
 
 type DesktopDashboardSkeletonProps = Omit<DesktopDashboardProps, 'contents'>;
 
@@ -10,7 +10,7 @@ export const DesktopDashboardSkeleton = ({
   rows,
 }: DesktopDashboardSkeletonProps) => {
   return (
-    <DesktopDashboardRowContainer>
+    <DesktopDashboardLayout>
       {rows.map(({ row, col, items }, rowIdx) => (
         <DesktopDashboardRow key={rowIdx} row={row} col={col}>
           {items.map(({ row, col, rowSpan, colSpan }, itemIdx) => (
@@ -25,6 +25,6 @@ export const DesktopDashboardSkeleton = ({
           ))}
         </DesktopDashboardRow>
       ))}
-    </DesktopDashboardRowContainer>
+    </DesktopDashboardLayout>
   );
 };

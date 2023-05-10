@@ -1,22 +1,17 @@
-/* Chakra UI like components */
-export * from './Center';
-export * from './Stack';
-export * from './Text';
-export * from './Divider';
-export * from './Spinner';
-export * from './Spacer';
 export * from './Avatar';
-export * from './Loader';
-export * from './SegmentedControl';
-
-/* Component that extends HTML element */
-export * from './Clickable';
 export * from './Button';
-export * from './Input';
-export * from './Image';
-
-/* etc */
-export * from './Overlay';
-export * from './StyledInfoTable';
-export * from './Scroll';
+export * from './Center';
+export * from './Clickable';
 export * from './DeferredComponent';
+export * from './Divider';
+export * from './Image';
+export * from './Input';
+export * from './Loader';
+export * from './Overlay';
+export * from './Scroll';
+export * from './Segment';
+export * from './Spacer';
+export * from './Spinner';
+export * from './Stack';
+export * from './StyledInfoTable';
+export * from './Text';

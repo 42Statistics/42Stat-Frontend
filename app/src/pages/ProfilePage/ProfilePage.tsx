@@ -1,8 +1,8 @@
 import { DeferredComponent, Text, VStack } from '@/components/common';
 import { Tab, TabList, TabPanel, Tabs } from '@/components/common/Tab';
 import { Dashboard } from '@/components/templates/Dashboard';
-import { ProfileEvalTabSkeleton } from '@/pages/SkeletonPages/ProfileEvalTabSkeleton';
-import { ProfileGeneralTabSkeleton } from '@/pages/SkeletonPages/ProfileGeneralTabSkeleton';
+import { ProfileEvalTabSkeleton } from '@/pages/PageSkeletons/ProfileEvalTabSkeleton';
+import { ProfileGeneralTabSkeleton } from '@/pages/PageSkeletons/ProfileGeneralTabSkeleton';
 import { lazyImport } from '@/utils/lazyImport';
 import styled from '@emotion/styled';
 import { Suspense } from 'react';

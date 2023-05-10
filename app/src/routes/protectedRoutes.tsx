@@ -1,8 +1,8 @@
 import { DeferredComponent } from '@/components/common';
 import { AuthGuard } from '@/components/guards/AuthGuard';
+import { HomePageSkeleton } from '@/pages/PageSkeletons/HomePageSkeleton';
+import { ProfilePageSkeleton } from '@/pages/PageSkeletons/ProfilePageSkeleton';
 import { LogoutPage } from '@/pages/LogoutPage';
-import { HomePageSkeleton } from '@/pages/SkeletonPages/HomePageSkeleton';
-import { ProfilePageSkeleton } from '@/pages/SkeletonPages/ProfilePageSkeleton';
 import { lazyImport } from '@/utils/lazyImport';
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';

@@ -22,8 +22,8 @@ const colors = {
 
 const fonts = {
   size: {
-    h1: '3.2rem',
-    h2: '2.4rem',
+    h1: '2.8rem',
+    h2: '2.0rem',
     h3: '1.6rem',
     body: '1.4rem',
     caption: '1.1rem',

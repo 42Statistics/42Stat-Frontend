@@ -23,7 +23,7 @@ export const RankItem = ({ rank, showImg, item, unit }: RankItemProps) => {
     rank === 1 ? theme.colors.accent.default : theme.colors.mono.black;
 
   return (
-    <HStack w="100%" spacing="2rem">
+    <HStack w="70%" spacing="2rem">
       <H2BoldText color={color}>{rank}</H2BoldText>
       {showImg ? <Avatar size="3rem" imgUrl={imgUrl} /> : null}
       <HStack

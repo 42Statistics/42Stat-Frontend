@@ -22,13 +22,13 @@ export const profilePageDesktopDashboardRows: DesktopDashboardRowType[] = [
 
 export const profilePageTabletDashboardRows: TabletDashboardRowType[] = [
   {
-    row: 1,
+    row: 2,
     col: 3,
     items: [
       {
         row: 1,
         col: 1,
-        rowSpan: 1,
+        rowSpan: 2,
         colSpan: 3,
         elementId: 0,
       },

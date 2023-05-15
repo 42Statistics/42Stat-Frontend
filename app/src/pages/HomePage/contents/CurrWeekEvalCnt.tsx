@@ -37,7 +37,7 @@ export const CurrWeekEvalCnt = () => {
   const { from, to } = currWeekEvalCnt;
 
   const title = '주간 총 평가 횟수';
-  const description = `${dayjs(from).format('YYYY년 M월 W주')}`;
+  const description = `${dayjs(from).format('YYYY년 M월 w주')}`;
   const unit = '회';
 
   return (

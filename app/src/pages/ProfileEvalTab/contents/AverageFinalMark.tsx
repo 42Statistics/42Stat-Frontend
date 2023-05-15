@@ -30,7 +30,7 @@ export const AverageFinalMark = () => {
   const { averageFinalMark } = data.getPersonalEvalPage;
 
   const title = '평균 평가 점수';
-  const description = '(평가자일 때만)';
+  const description = '(평가자일 때)';
   const unit = '점';
 
   return (

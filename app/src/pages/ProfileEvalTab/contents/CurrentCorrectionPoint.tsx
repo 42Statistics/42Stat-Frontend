@@ -8,31 +8,30 @@ import { NumberDefault } from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
 import { useQuery } from '@apollo/client';
 
-const GET_PERSONAL_TOTAL_EVAL_CNT = gql(/* GraphQL */ `
-  query getPersonalTotalEvalCnt($uid: Int!) {
-    getPersonalEvalPage(uid: $uid) {
-      totalCount
+const GET_CURRENT_CORRECTION_POINT = gql(/* GraphQL */ `
+  query getCurrentCorrectionPoint {
+    getPersonGeneralPage {
+      userProfile {
+        correctionPoint
+      }
     }
   }
 `);
 
-export const TotalEvalCnt = () => {
-  const { loading, error, data } = useQuery(GET_PERSONAL_TOTAL_EVAL_CNT, {
-    variables: { uid: 99947 },
-  });
+export const CurrentCorrectionPoint = () => {
+  const { loading, error, data } = useQuery(GET_CURRENT_CORRECTION_POINT);
 
   if (loading) return <Loader />;
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 
-  const { totalCount } = data.getPersonalEvalPage;
-
-  const title = '누적 평가 횟수';
-  const unit = '회';
+  const { correctionPoint } = data.getPersonGeneralPage.userProfile;
+  const title = '보유 평가 포인트';
+  const unit = '개';
 
   return (
     <DashboardContent title={title}>
-      <NumberDefault number={totalCount} unit={unit} />
+      <NumberDefault number={correctionPoint} unit={unit} />
     </DashboardContent>
   );
 };

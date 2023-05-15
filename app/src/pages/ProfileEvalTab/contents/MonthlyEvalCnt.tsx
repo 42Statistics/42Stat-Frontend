@@ -40,7 +40,7 @@ export const MonthlyEvalCnt = () => {
   const [fromStr, toStr] = [dateFormatter(from, 'lg'), dateFormatter(to, 'lg')];
 
   const title = '월간 평가 횟수';
-  const description = `(평가자일 때만 / ${fromStr} 시작 / 1개월)`;
+  const description = `(${fromStr} 시작 / 1개월)`;
 
   return (
     <DashboardContent title={title} description={description}>

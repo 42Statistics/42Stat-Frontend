@@ -4,43 +4,58 @@ import {
   AverageDuration,
   AverageFeedbackLength,
   AverageFinalMark,
+  CurrentCorrectionPoint,
   DestinyUsers,
-  Difficulty,
+  EvalLogSearchLink,
+  LatestFeedback,
   MonthlyEvalCnt,
   TotalEvalCnt,
+  TotalEvalTime,
 } from '../contents';
 
 export const profileEvalTabDashboardContents: DashboardItemProps[] = [
   {
     id: 0,
-    content: MonthlyEvalCnt,
+    content: CurrentCorrectionPoint,
   },
   {
     id: 1,
-    content: TotalEvalCnt,
+    content: MonthlyEvalCnt,
   },
   {
     id: 2,
-    content: AverageDuration,
+    content: TotalEvalCnt,
   },
   {
     id: 3,
-    content: AverageFinalMark,
+    content: TotalEvalTime,
   },
   {
     id: 4,
-    content: AverageCommentLength,
+    content: AverageDuration,
   },
   {
     id: 5,
-    content: AverageFeedbackLength,
+    content: AverageFinalMark,
   },
   {
     id: 6,
-    content: DestinyUsers,
+    content: AverageCommentLength,
   },
   {
     id: 7,
-    content: Difficulty,
+    content: AverageFeedbackLength,
+  },
+  {
+    id: 8,
+    content: DestinyUsers,
+  },
+  {
+    id: 9,
+    content: LatestFeedback,
+  },
+  {
+    id: 10,
+    content: EvalLogSearchLink,
   },
 ];

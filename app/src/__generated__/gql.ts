@@ -40,6 +40,7 @@ const documents = {
     "\n  query getAverageDuration($uid: Int!) {\n    getPersonalEvalPage(uid: $uid) {\n      averageDuration\n    }\n  }\n": types.GetAverageDurationDocument,
     "\n  query getPersonalAverageFeedbackLength($uid: Int!) {\n    getPersonalEvalPage(uid: $uid) {\n      averageFeedbackLength\n    }\n  }\n": types.GetPersonalAverageFeedbackLengthDocument,
     "\n  query getAverageFinalMark($uid: Int!) {\n    getPersonalEvalPage(uid: $uid) {\n      averageFinalMark\n    }\n  }\n": types.GetAverageFinalMarkDocument,
+    "\n  query getCurrentCorrectionPoint {\n    getPersonGeneralPage {\n      userProfile {\n        correctionPoint\n      }\n    }\n  }\n": types.GetCurrentCorrectionPointDocument,
     "\n  query getMonthlyEvalCnt($uid: Int!) {\n    getPersonalEvalPage(uid: $uid) {\n      currMonthCount {\n        data\n        from\n        to\n      }\n      lastMonthCount {\n        data\n        from\n        to\n      }\n    }\n  }\n": types.GetMonthlyEvalCntDocument,
     "\n  query getPersonalTotalEvalCnt($uid: Int!) {\n    getPersonalEvalPage(uid: $uid) {\n      totalCount\n    }\n  }\n": types.GetPersonalTotalEvalCntDocument,
     "\n  query getBlackholedAt {\n    getPersonGeneralPage {\n      userProfile {\n        blackholedAt\n      }\n    }\n  }\n": types.GetBlackholedAtDocument,
@@ -178,6 +179,10 @@ export function gql(source: "\n  query getPersonalAverageFeedbackLength($uid: In
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query getAverageFinalMark($uid: Int!) {\n    getPersonalEvalPage(uid: $uid) {\n      averageFinalMark\n    }\n  }\n"): (typeof documents)["\n  query getAverageFinalMark($uid: Int!) {\n    getPersonalEvalPage(uid: $uid) {\n      averageFinalMark\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query getCurrentCorrectionPoint {\n    getPersonGeneralPage {\n      userProfile {\n        correctionPoint\n      }\n    }\n  }\n"): (typeof documents)["\n  query getCurrentCorrectionPoint {\n    getPersonGeneralPage {\n      userProfile {\n        correctionPoint\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

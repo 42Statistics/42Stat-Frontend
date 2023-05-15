@@ -8,6 +8,7 @@ const colors = {
   },
   semantic: {
     pass: '#60c0c4',
+    warning: '#f5b461',
     fail: '#f17c88',
   },
   mono: {

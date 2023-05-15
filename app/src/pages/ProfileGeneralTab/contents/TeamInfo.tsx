@@ -4,7 +4,6 @@ import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
-import { dateFormatter } from '@/utils/formatters';
 import { getDayDiff } from '@/utils/getDayDiff';
 import { isDefined } from '@/utils/isDefined';
 import { useQuery } from '@apollo/client';
@@ -61,16 +60,10 @@ export const TeamInfo = () => {
               <PrimaryText>시도</PrimaryText>
             </th>
             <th>
-              <PrimaryText>제출</PrimaryText>
+              <PrimaryText>팀명</PrimaryText>
             </th>
             <th>
-              <PrimaryText>등록일</PrimaryText>
-            </th>
-            <th>
-              <PrimaryText>제출일</PrimaryText>
-            </th>
-            <th>
-              <PrimaryText>소요 기간</PrimaryText>
+              <PrimaryText>현재일로부터</PrimaryText>
             </th>
             <th>
               <PrimaryText>점수</PrimaryText>
@@ -96,30 +89,15 @@ export const TeamInfo = () => {
                       <Text>{name}</Text>
                     </td>
                     <td>
-                      <Text>{occurrence}번째</Text>
+                      <Text>#{occurrence}</Text>
+                    </td>
+                    <td>
+                      <Text>Example Team</Text>
                     </td>
                     <td>
                       <Text>
                         {closedAt != null
                           ? `${getDayDiff(new Date(), new Date(closedAt))}일 전`
-                          : '-'}
-                      </Text>
-                    </td>
-                    <td>
-                      <Text>{dateFormatter(firstCreatedAt, 'lg')}</Text>
-                    </td>
-                    <td>
-                      <Text>
-                        {closedAt != null ? dateFormatter(closedAt, 'lg') : '-'}
-                      </Text>
-                    </td>
-                    <td>
-                      <Text>
-                        {closedAt != null
-                          ? `${getDayDiff(
-                              new Date(closedAt),
-                              new Date(firstCreatedAt),
-                            )}일`
                           : '-'}
                       </Text>
                     </td>

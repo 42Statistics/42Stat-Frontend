@@ -1,9 +1,13 @@
 import type { DashboardItemProps } from '@/utils/types/Dashboard';
 import {
+  BlackholedAt,
+  CurrentCoalitionScore,
+  CurrentWallet,
   LastPass,
   LastRegistered,
   LevelGraph,
   LogtimeInfo,
+  PooledAt,
   PrefferedCluster,
   PrefferedTime,
   SimilarCharacter,
@@ -13,11 +17,11 @@ import {
 export const profileGeneralTabDashboardContents: DashboardItemProps[] = [
   {
     id: 0,
-    content: LastPass,
+    content: PooledAt,
   },
   {
     id: 1,
-    content: LastRegistered,
+    content: LastPass,
   },
   {
     id: 2,
@@ -25,22 +29,38 @@ export const profileGeneralTabDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 3,
-    content: PrefferedCluster,
+    content: LastRegistered,
   },
   {
     id: 4,
-    content: PrefferedTime,
+    content: CurrentWallet,
   },
   {
     id: 5,
-    content: TeamInfo,
+    content: PrefferedCluster,
   },
   {
     id: 6,
-    content: SimilarCharacter,
+    content: CurrentCoalitionScore,
   },
   {
     id: 7,
+    content: BlackholedAt,
+  },
+  {
+    id: 8,
     content: LevelGraph,
+  },
+  {
+    id: 9,
+    content: SimilarCharacter,
+  },
+  {
+    id: 10,
+    content: PrefferedTime,
+  },
+  {
+    id: 11,
+    content: TeamInfo,
   },
 ];

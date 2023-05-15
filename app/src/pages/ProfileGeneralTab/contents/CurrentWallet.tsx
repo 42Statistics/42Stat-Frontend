@@ -1,0 +1,37 @@
+import { gql } from '@/__generated__';
+import { Loader } from '@/components/common';
+import {
+  ApolloBadRequest,
+  ApolloNotFound,
+} from '@/components/elements/DashboardContentView';
+import { NumberDefault } from '@/components/elements/DashboardContentView/Text';
+import { DashboardContent } from '@/components/templates/Dashboard';
+import { useQuery } from '@apollo/client';
+
+const GET_CURRENT_WALLET = gql(/* GraphQL */ `
+  query getCurrentWallet {
+    getPersonGeneralPage {
+      userProfile {
+        wallet
+      }
+    }
+  }
+`);
+
+export const CurrentWallet = () => {
+  const { loading, error, data } = useQuery(GET_CURRENT_WALLET);
+
+  if (loading) return <Loader />;
+  if (error) return <ApolloBadRequest msg={error.message} />;
+  if (!data) return <ApolloNotFound />;
+
+  const { wallet } = data.getPersonGeneralPage.userProfile;
+  const title = '보유 월렛';
+  const unit = '₳';
+
+  return (
+    <DashboardContent title={title}>
+      <NumberDefault number={wallet} unit={unit} />
+    </DashboardContent>
+  );
+};

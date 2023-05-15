@@ -42,10 +42,14 @@ const documents = {
     "\n  query getAverageFinalMark($uid: Int!) {\n    getPersonalEvalPage(uid: $uid) {\n      averageFinalMark\n    }\n  }\n": types.GetAverageFinalMarkDocument,
     "\n  query getMonthlyEvalCnt($uid: Int!) {\n    getPersonalEvalPage(uid: $uid) {\n      currMonthCount {\n        data\n        from\n        to\n      }\n      lastMonthCount {\n        data\n        from\n        to\n      }\n    }\n  }\n": types.GetMonthlyEvalCntDocument,
     "\n  query getPersonalTotalEvalCnt($uid: Int!) {\n    getPersonalEvalPage(uid: $uid) {\n      totalCount\n    }\n  }\n": types.GetPersonalTotalEvalCntDocument,
+    "\n  query getBlackholedAt {\n    getPersonGeneralPage {\n      userProfile {\n        blackholedAt\n      }\n    }\n  }\n": types.GetBlackholedAtDocument,
+    "\n  query getCurrentCoalitionScore {\n    getPersonGeneralPage {\n      userProfile {\n        coalition {\n          score\n        }\n      }\n    }\n  }\n": types.GetCurrentCoalitionScoreDocument,
+    "\n  query getCurrentWallet {\n    getPersonGeneralPage {\n      userProfile {\n        wallet\n      }\n    }\n  }\n": types.GetCurrentWalletDocument,
     "\n  query getLastPass {\n    getPersonGeneralPage {\n      teamInfo {\n        lastPass\n      }\n    }\n  }\n": types.GetLastPassDocument,
     "\n  query getLastRegistered {\n    getPersonGeneralPage {\n      teamInfo {\n        lastRegistered\n      }\n    }\n  }\n": types.GetLastRegisteredDocument,
     "\n  query getLevelGraph {\n    getPersonGeneralPage {\n      levelGraphs {\n        data {\n          date\n          userLevel\n          averageLevel\n        }\n        from\n        to\n      }\n    }\n  }\n": types.GetLevelGraphDocument,
     "\n  query getLogtimeInfo {\n    getPersonGeneralPage {\n      logtimeInfo {\n        data {\n          currMonthLogtime\n          lastMonthLogtime\n          preferredTime {\n            morning\n            daytime\n            evening\n            night\n          }\n          preferredCluster\n        }\n        from\n        to\n      }\n    }\n  }\n": types.GetLogtimeInfoDocument,
+    "\n  query getPooledAt {\n    getPersonGeneralPage {\n      userProfile {\n        pooledAt\n      }\n    }\n  }\n": types.GetPooledAtDocument,
     "\n  query getPrefferedCluster {\n    getPersonGeneralPage {\n      logtimeInfo {\n        data {\n          preferredCluster\n        }\n        from\n        to\n      }\n    }\n  }\n": types.GetPrefferedClusterDocument,
     "\n  query getPrefferedTime {\n    getPersonGeneralPage {\n      logtimeInfo {\n        data {\n          preferredTime {\n            morning\n            daytime\n            evening\n            night\n          }\n        }\n        from\n        to\n      }\n    }\n  }\n": types.GetPrefferedTimeDocument,
     "\n  query getTeamInfo {\n    getPersonGeneralPage {\n      teamInfo {\n        teams {\n          id\n          name\n          occurrence\n          closedAt\n          firstCreatedAt\n          finalMark\n          isValidated\n        }\n      }\n    }\n  }\n": types.GetTeamInfoDocument,
@@ -185,6 +189,18 @@ export function gql(source: "\n  query getPersonalTotalEvalCnt($uid: Int!) {\n  
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function gql(source: "\n  query getBlackholedAt {\n    getPersonGeneralPage {\n      userProfile {\n        blackholedAt\n      }\n    }\n  }\n"): (typeof documents)["\n  query getBlackholedAt {\n    getPersonGeneralPage {\n      userProfile {\n        blackholedAt\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query getCurrentCoalitionScore {\n    getPersonGeneralPage {\n      userProfile {\n        coalition {\n          score\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query getCurrentCoalitionScore {\n    getPersonGeneralPage {\n      userProfile {\n        coalition {\n          score\n        }\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query getCurrentWallet {\n    getPersonGeneralPage {\n      userProfile {\n        wallet\n      }\n    }\n  }\n"): (typeof documents)["\n  query getCurrentWallet {\n    getPersonGeneralPage {\n      userProfile {\n        wallet\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function gql(source: "\n  query getLastPass {\n    getPersonGeneralPage {\n      teamInfo {\n        lastPass\n      }\n    }\n  }\n"): (typeof documents)["\n  query getLastPass {\n    getPersonGeneralPage {\n      teamInfo {\n        lastPass\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -198,6 +214,10 @@ export function gql(source: "\n  query getLevelGraph {\n    getPersonGeneralPage
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query getLogtimeInfo {\n    getPersonGeneralPage {\n      logtimeInfo {\n        data {\n          currMonthLogtime\n          lastMonthLogtime\n          preferredTime {\n            morning\n            daytime\n            evening\n            night\n          }\n          preferredCluster\n        }\n        from\n        to\n      }\n    }\n  }\n"): (typeof documents)["\n  query getLogtimeInfo {\n    getPersonGeneralPage {\n      logtimeInfo {\n        data {\n          currMonthLogtime\n          lastMonthLogtime\n          preferredTime {\n            morning\n            daytime\n            evening\n            night\n          }\n          preferredCluster\n        }\n        from\n        to\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query getPooledAt {\n    getPersonGeneralPage {\n      userProfile {\n        pooledAt\n      }\n    }\n  }\n"): (typeof documents)["\n  query getPooledAt {\n    getPersonGeneralPage {\n      userProfile {\n        pooledAt\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

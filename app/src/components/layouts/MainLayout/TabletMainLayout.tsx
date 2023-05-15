@@ -1,4 +1,4 @@
-import { HStack } from '@/components/common';
+import { Center, HStack } from '@/components/common';
 import { IntraLink } from '@/components/elements/IntraLink';
 import { TabletNavBar } from '@/components/elements/NavBar/TabletNavBar';
 import styled from '@emotion/styled';
@@ -9,7 +9,9 @@ export const TabletMainLayout = ({ children }: React.PropsWithChildren) => {
       <IntraLink />
       <HStack>
         <TabletNavBar />
-        <TabletMainPageLayout>{children}</TabletMainPageLayout>
+        <Center w="100%" css={{ marginLeft: '7rem' }}>
+          <TabletMainPageLayout>{children}</TabletMainPageLayout>
+        </Center>
       </HStack>
     </Layout>
   );
@@ -17,7 +19,6 @@ export const TabletMainLayout = ({ children }: React.PropsWithChildren) => {
 
 const TabletMainPageLayout = styled.main`
   width: 100%;
-  margin-left: 7rem;
 `;
 
 const Layout = styled.div`

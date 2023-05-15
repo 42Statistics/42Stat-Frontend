@@ -36,7 +36,7 @@ export const LastExamResult = () => {
   const { from, to } = lastExamResult;
 
   const title = '직전 회차 시험 Rank 별 통과율';
-  const description = `${dayjs().format('M월 D일 H시 m분')}`;
+  const description = `${dayjs(from).format('YYYY년 M월 D일 H시 m분')}`;
 
   const categories = lastExamResult.data.map(({ rank }) => rank);
   const seriesData = lastExamResult.data.map(

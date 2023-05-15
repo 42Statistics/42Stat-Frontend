@@ -4,11 +4,8 @@ import styled from '@emotion/styled';
 import { Helmet } from 'react-helmet-async';
 import {
   CoalitionScoreRankTab,
-  CorrectionPointRankTab,
-  EvalCntRankTab,
   ExpIncrementRankTab,
   LevelRankTab,
-  WalletRankTab,
 } from './tabs';
 
 export const LeaderBoardPage = () => {
@@ -31,12 +28,6 @@ export const LeaderBoardPage = () => {
           <Tab>
             <Text>평가 횟수</Text>
           </Tab>
-          <Tab>
-            <Text>보유 평가 포인트</Text>
-          </Tab>
-          <Tab>
-            <Text>보유 월렛</Text>
-          </Tab>
         </TabList>
         <TabPanel>
           <LeaderBoardDetailLayout>
@@ -51,21 +42,6 @@ export const LeaderBoardPage = () => {
         <TabPanel>
           <LeaderBoardDetailLayout>
             <CoalitionScoreRankTab />
-          </LeaderBoardDetailLayout>
-        </TabPanel>
-        <TabPanel>
-          <LeaderBoardDetailLayout>
-            <EvalCntRankTab />
-          </LeaderBoardDetailLayout>
-        </TabPanel>
-        <TabPanel>
-          <LeaderBoardDetailLayout>
-            <CorrectionPointRankTab />
-          </LeaderBoardDetailLayout>
-        </TabPanel>
-        <TabPanel>
-          <LeaderBoardDetailLayout>
-            <WalletRankTab />
           </LeaderBoardDetailLayout>
         </TabPanel>
       </Tabs>

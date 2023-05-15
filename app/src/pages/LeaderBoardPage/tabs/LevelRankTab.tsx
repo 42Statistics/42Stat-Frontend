@@ -5,6 +5,7 @@ import {
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
 import { LeaderBoard } from '@/components/templates/LeaderBoard';
+import { LeaderBoardItem } from '@/components/templates/LeaderBoard/LeaderBoardItem';
 import type { RankItemType } from '@/utils/types/Rank';
 import { useQuery } from '@apollo/client';
 
@@ -45,6 +46,7 @@ export const LevelRankTab = () => {
       <VStack w="100%" align="start">
         SegmentedControl
       </VStack>
+      <LeaderBoardItem rank={2} item={rankList[1]} unit={unit} />
       <LeaderBoard rankList={rankList} unit={unit} />
     </VStack>
   );

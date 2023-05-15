@@ -149,4 +149,8 @@ export const reset = css`
     color: inherit;
     text-decoration: none;
   }
+
+  li {
+    list-style: none;
+  }
 `;

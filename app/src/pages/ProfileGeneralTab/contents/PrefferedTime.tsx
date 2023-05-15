@@ -43,7 +43,7 @@ export const PrefferedTime = () => {
   const total = morning + daytime + evening + night;
   const max = Math.max(morning, daytime, evening, night);
 
-  const title = '주 접속 클러스터';
+  const title = '주 접속 시간대';
   const description = `(${fromStr} 시작 / 1개월)`;
 
   return (
@@ -111,10 +111,7 @@ const TextMax = styled(Text)<{ isMax: boolean }>`
 
 const PrefferedTimeTable = styled.table`
   width: 100%;
-
-  td:nth-of-type(2) {
-    text-align: right;
-  }
+  text-align: center;
 
   td {
     padding: 0.6rem;

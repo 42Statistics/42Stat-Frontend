@@ -31,6 +31,9 @@ export const DonutChart = ({
     fill: {
       type: 'solid',
     },
+    stroke: {
+      show: false,
+    },
     colors: [theme.colors.primary.default],
     responsive: [],
   };

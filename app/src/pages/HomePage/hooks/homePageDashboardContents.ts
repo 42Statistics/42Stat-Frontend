@@ -6,7 +6,7 @@ import {
   AverageCommentLength,
   AverageFeedbackLength,
   BlackholedCntPerCircles,
-  BlackholedRate,
+  BlackholedPercentage,
   CoalitionScoreDynamic,
   CoalitionScoreSum,
   CorrectionPointRanks,
@@ -16,7 +16,7 @@ import {
   CurrWeekEvalCnt,
   Hero,
   LastExamResult,
-  MemberRate,
+  MemberPercentage,
   TigCntPerCoalition,
   TotalEvalCnt,
   UserCntPerLevels,
@@ -66,11 +66,11 @@ export const homePageDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 10,
-    content: MemberRate,
+    content: MemberPercentage,
   },
   {
     id: 11,
-    content: BlackholedRate,
+    content: BlackholedPercentage,
   },
   {
     id: 12,

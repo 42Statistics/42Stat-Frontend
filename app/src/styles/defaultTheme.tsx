@@ -17,16 +17,16 @@ const colors = {
     gray200: '#999999',
     gray100: '#bbbbbb',
   },
-  background: '#e4e3ea',
+  background: '#e7e8ed',
 };
 
 const fonts = {
   size: {
     h1: '3.2rem',
     h2: '2.4rem',
-    h3: '1.8rem',
+    h3: '1.6rem',
     body: '1.4rem',
-    caption: '1.2rem',
+    caption: '1.1rem',
   },
   weight: {
     // thin: 100,

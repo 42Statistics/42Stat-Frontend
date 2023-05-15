@@ -5,7 +5,7 @@ export const IntraLink = () => {
   return (
     <a target="_blank" href="https://intra.42.fr">
       <IntraLinkLayout>
-        <Image src="42-logo.png" width="20px" />
+        <Image src="/42-logo.png" width="20px" />
       </IntraLinkLayout>
     </a>
   );

@@ -192,13 +192,13 @@ export const homePageDesktopDashboardRows: DesktopDashboardRowType[] = [
 export const homePageTabletDashboardRows: TabletDashboardRowType[] = [
   {
     row: 1,
-    col: 2,
+    col: 3,
     items: [
       {
         row: 1,
         col: 1,
         rowSpan: 1,
-        colSpan: 2,
+        colSpan: 3,
         elementId: 0,
       },
     ],

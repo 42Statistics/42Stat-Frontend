@@ -1,8 +1,8 @@
 import { IconType } from '@react-icons/all-files';
-import { MdGrade } from '@react-icons/all-files/md/MdGrade';
+import { MdAssignment } from '@react-icons/all-files/md/MdAssignment';
 import { MdHome } from '@react-icons/all-files/md/MdHome';
 import { MdPerson } from '@react-icons/all-files/md/MdPerson';
-import { MdSearch } from '@react-icons/all-files/md/MdSearch';
+import { RiBarChartFill } from '@react-icons/all-files/ri/RiBarChartFill';
 import { RiLogoutBoxRFill } from '@react-icons/all-files/ri/RiLogoutBoxRFill';
 import { ROUTES } from './ROUTES';
 
@@ -25,13 +25,13 @@ export const NAV_ROUTES: { [name: string]: NavRoute } = {
     text: '랭킹',
     abbr: '랭킹',
     path: ROUTES.LEADERBOARD,
-    icon: MdGrade,
+    icon: RiBarChartFill,
   },
   EVALLOG: {
     text: '평가로그 검색기',
     abbr: '평가로그',
     path: ROUTES.EVALLOG,
-    icon: MdSearch,
+    icon: MdAssignment,
   },
   LOGOUT: {
     text: '로그아웃',

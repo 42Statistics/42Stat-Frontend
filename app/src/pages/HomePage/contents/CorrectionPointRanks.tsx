@@ -5,7 +5,7 @@ import {
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
 import { Rank } from '@/components/elements/DashboardContentView/Rank';
-import { BelowTablet, Desktop } from '@/utils/responsive/Device';
+import { DashboardContent } from '@/components/templates/Dashboard';
 import type { RankItemType } from '@/utils/types/Rank';
 import { useQuery } from '@apollo/client';
 
@@ -32,6 +32,8 @@ export const CorrectionPointRanks = () => {
   if (!data) return <ApolloNotFound />;
 
   const { correctionPointRanks } = data.getTotalPage;
+
+  const title = '보유 평가 포인트 랭킹';
   const unit = '개';
 
   const rankList: RankItemType[] = correctionPointRanks.map(
@@ -43,13 +45,8 @@ export const CorrectionPointRanks = () => {
   );
 
   return (
-    <>
-      <Desktop>
-        <Rank rankList={rankList} cnt={3} unit={unit} />
-      </Desktop>
-      <BelowTablet>
-        <Rank rankList={rankList} showImg={false} cnt={3} unit={unit} />
-      </BelowTablet>
-    </>
+    <DashboardContent title={title}>
+      <Rank rankList={rankList} cnt={5} unit={unit} />
+    </DashboardContent>
   );
 };

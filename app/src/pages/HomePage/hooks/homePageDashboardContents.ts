@@ -6,73 +6,102 @@ import {
   AverageCommentLength,
   AverageFeedbackLength,
   BlackholedCntPerCircles,
+  BlackholedRate,
   CoalitionScoreDynamic,
   CoalitionScoreSum,
+  CorrectionPointRanks,
   CurrMonthBlackholedCnt,
   CurrRegisteredCntRank,
+  CurrWeekAverageEvalCnt,
   CurrWeekEvalCnt,
+  Hero,
   LastExamResult,
-  ProjectInfo,
+  MemberRate,
+  TigCntPerCoalition,
   TotalEvalCnt,
   UserCntPerLevels,
+  WalletRanks,
 } from '../contents';
 
 export const homePageDashboardContents: DashboardItemProps[] = [
   {
     id: 0,
-    content: CurrWeekEvalCnt,
+    content: Hero,
   },
   {
     id: 1,
-    content: CurrMonthBlackholedCnt,
+    content: CurrWeekEvalCnt,
   },
   {
     id: 2,
-    content: CurrRegisteredCntRank,
+    content: CurrMonthBlackholedCnt,
   },
   {
     id: 3,
-    content: AverageCommentLength,
+    content: CurrWeekAverageEvalCnt,
   },
   {
     id: 4,
-    content: AverageFeedbackLength,
-  },
-  {
-    id: 5,
     content: TotalEvalCnt,
   },
   {
+    id: 5,
+    content: CurrRegisteredCntRank,
+  },
+  {
     id: 6,
-    content: ActiveUserCntRecords,
+    content: AverageCommentLength,
   },
   {
     id: 7,
-    content: BlackholedCntPerCircles,
+    content: AverageFeedbackLength,
   },
   {
     id: 8,
-    content: AverageCircleDurations,
+    content: ActiveUserCntRecords,
   },
   {
     id: 9,
-    content: ProjectInfo,
-  },
-
-  {
-    id: 10,
-    content: CoalitionScoreSum,
-  },
-  {
-    id: 11,
-    content: CoalitionScoreDynamic,
-  },
-  {
-    id: 12,
     content: UserCntPerLevels,
   },
   {
+    id: 10,
+    content: MemberRate,
+  },
+  {
+    id: 11,
+    content: BlackholedRate,
+  },
+  {
+    id: 12,
+    content: BlackholedCntPerCircles,
+  },
+  {
     id: 13,
+    content: AverageCircleDurations,
+  },
+  {
+    id: 14,
+    content: CorrectionPointRanks,
+  },
+  {
+    id: 15,
+    content: WalletRanks,
+  },
+  {
+    id: 16,
     content: LastExamResult,
+  },
+  {
+    id: 17,
+    content: CoalitionScoreDynamic,
+  },
+  {
+    id: 18,
+    content: CoalitionScoreSum,
+  },
+  {
+    id: 19,
+    content: TigCntPerCoalition,
   },
 ];

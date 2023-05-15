@@ -1,4 +1,5 @@
 import { Center, HStack } from '@/components/common';
+import { IntraLink } from '@/components/elements/IntraLink';
 import { DesktopNavBar } from '@/components/elements/NavBar/DesktopNavBar';
 import styled from '@emotion/styled';
 
@@ -7,6 +8,7 @@ export const DesktopDashboardLayout = ({
 }: React.PropsWithChildren) => {
   return (
     <Layout>
+      <IntraLink />
       <HStack w="100%">
         <DesktopNavBar />
         <Center w="100%" css={{ marginLeft: '24rem' }}>

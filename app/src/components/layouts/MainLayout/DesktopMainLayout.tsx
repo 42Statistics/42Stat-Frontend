@@ -1,10 +1,12 @@
 import { HStack } from '@/components/common';
+import { IntraLink } from '@/components/elements/IntraLink';
 import { DesktopNavBar } from '@/components/elements/NavBar/DesktopNavBar';
 import styled from '@emotion/styled';
 
 export const DesktopMainLayout = ({ children }: React.PropsWithChildren) => {
   return (
     <Layout>
+      <IntraLink />
       <HStack>
         <DesktopNavBar />
         <DesktopMainPageLayout>{children}</DesktopMainPageLayout>

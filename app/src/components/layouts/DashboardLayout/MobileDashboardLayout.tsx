@@ -1,5 +1,6 @@
 import { Divider, VStack } from '@/components/common';
 import { MobileHeader } from '@/components/elements/Header/MobileHeader';
+import { IntraLink } from '@/components/elements/IntraLink';
 import { TabBar } from '@/components/elements/TabBar';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
@@ -16,6 +17,7 @@ export const MobileDashboardLayout = ({
         <meta name="theme-color" content={theme.colors.background} />
       </Helmet>
       <Layout>
+        <IntraLink />
         <VStack justify="start" spacing="1.5rem">
           <MobileHeader />
           <Divider />

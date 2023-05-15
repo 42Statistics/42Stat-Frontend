@@ -1,10 +1,12 @@
 import { HStack } from '@/components/common';
+import { IntraLink } from '@/components/elements/IntraLink';
 import { TabletNavBar } from '@/components/elements/NavBar/TabletNavBar';
 import styled from '@emotion/styled';
 
 export const TabletMainLayout = ({ children }: React.PropsWithChildren) => {
   return (
     <Layout>
+      <IntraLink />
       <HStack>
         <TabletNavBar />
         <TabletMainPageLayout>{children}</TabletMainPageLayout>

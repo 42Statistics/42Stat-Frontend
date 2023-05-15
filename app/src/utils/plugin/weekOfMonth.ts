@@ -1,16 +1,10 @@
-import dayjs, { Dayjs } from 'dayjs';
-
-type PluginFunc<T = unknown> = (
-  option: T,
-  c: typeof Dayjs,
-  d: typeof dayjs,
-) => void;
+import { PluginFunc } from 'dayjs';
 
 const FORMAT_DEFAULT = 'YYYY-MM-DDTHH:mm:ssZ';
 
 // dayjs plugin 중에 week of month를 구하는 게 없어서 만들었습니다.
-const weekOfMonth: PluginFunc = (option, c, d) => {
-  const proto = c.prototype;
+const weekOfMonth: PluginFunc = (option, dayjs) => {
+  const proto = dayjs.prototype;
   const oldFormat = proto.format;
 
   proto.format = function (formatStr) {

@@ -100,4 +100,5 @@ const UserProfileLayout = styled.div`
   height: 100%;
   background-image: url('/gam_cover.jpg'); // FIXME: 임시
   background-size: cover;
+  border-radius: 2rem; // FIXME: 왜 background-image 있는 쪽에도 border-radius를 줘야 하지?
 `;

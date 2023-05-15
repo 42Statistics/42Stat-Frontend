@@ -1,16 +1,6 @@
 import type { DashboardItemProps } from '@/utils/types/Dashboard';
-import styled from '@emotion/styled';
 
+// TODO: 리팩토링 시 DashboardItem 컴포넌트 삭제
 export const DashboardItem = ({ id, content: Content }: DashboardItemProps) => {
-  return (
-    <DashboardItemLayout>
-      <Content />
-    </DashboardItemLayout>
-  );
+  return <Content />;
 };
-
-const DashboardItemLayout = styled.div`
-  width: 100%;
-  height: 100%;
-  padding: 2rem;
-`;

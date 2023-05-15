@@ -14,7 +14,6 @@ export * from './CurrWeekEvalCnt';
 export * from './Hero';
 export * from './LastExamResult';
 export * from './MemberRate';
-export * from './ProjectInfo';
 export * from './TigCntPerCoalition';
 export * from './TotalEvalCnt';
 export * from './UserCntPerLevels';

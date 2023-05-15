@@ -17,6 +17,9 @@ export const Hero = () => {
 };
 
 const HeroLayout = styled.div`
-  background-image: url('black-space.jpeg'); // FIXME: DashboardItemWrapper 바깥의 배경을 변경해야 함
+  background-image: url('black-space.jpeg');
+  background-size: cover;
+  border-radius: 2rem; // FIXME: 왜 background-image 있는 쪽에도 border-radius를 줘야 하지?
+  padding: 0 4rem;
   height: 100%;
 `;

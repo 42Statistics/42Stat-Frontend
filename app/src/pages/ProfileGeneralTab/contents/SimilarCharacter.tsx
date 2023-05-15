@@ -7,7 +7,7 @@ export const SimilarCharacter = () => {
   const characterName = '알통몬';
 
   const title = '이 유저를 캐릭터로 표현한다면?';
-  const description = '(과제 점수, 레벨 증가 속도, 접속 시간, 평가 횟수 기준)';
+  const description = '과제 점수, 레벨 증가, 접속 시간, 평가 횟수 기준';
 
   return (
     <DashboardContent title={title} description={description}>

@@ -30,7 +30,7 @@ export const AverageDuration = () => {
   const { averageDuration } = data.getPersonalEvalPage;
 
   const title = '평균 평가 시간';
-  const description = '(평가자일 때)';
+  const description = '평가자일 때';
   const unit = '분';
 
   return (

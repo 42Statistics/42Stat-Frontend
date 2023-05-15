@@ -6,8 +6,8 @@ import {
 } from '@/components/elements/DashboardContentView';
 import { NumberCompare } from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
-import { dateFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
+import dayjs from 'dayjs';
 
 const GET_CURR_WEEK_EVAL_CNT = gql(/* GraphQL */ `
   query GetCurrWeekEvalCnt {
@@ -35,10 +35,9 @@ export const CurrWeekEvalCnt = () => {
 
   const { currWeekEvalCnt, lastWeekEvalCnt } = data.getHomePage;
   const { from, to } = currWeekEvalCnt;
-  const [fromStr, toStr] = [dateFormatter(from, 'lg'), dateFormatter(to, 'lg')];
 
   const title = '주간 총 평가 횟수';
-  const description = `(${fromStr} ~ ${toStr} / 1주)`;
+  const description = `${dayjs(from).format('YYYY년 M월 W주')}`;
   const unit = '회';
 
   return (

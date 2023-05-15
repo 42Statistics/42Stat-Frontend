@@ -29,7 +29,7 @@ export const AverageCircleDurations = () => {
 
   const { averageCircleDurations } = data.getTotalPage;
   const title = 'N서클 통과할 때까지의 누적 기간';
-  const description = '(본과정 시작일 기준)';
+  const description = '본과정 시작일 기준';
 
   const categories = averageCircleDurations.map(({ circle }) => String(circle));
   const seriesData = averageCircleDurations.map(({ value }) => value);

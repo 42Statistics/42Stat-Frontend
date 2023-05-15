@@ -6,8 +6,8 @@ import {
 } from '@/components/elements/DashboardContentView';
 import { NumberCompare } from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
-import { dateFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
+import dayjs from 'dayjs';
 
 const GET_CURR_MONTH_BLACKHOLED_CNT = gql(/* GraphQL */ `
   query GetCurrMonthBlackholedCnt {
@@ -35,10 +35,9 @@ export const CurrMonthBlackholedCnt = () => {
 
   const { currMonthBlackholedCnt, lastMonthBlackholedCnt } = data.getHomePage;
   const { from, to } = currMonthBlackholedCnt;
-  const [fromStr, toStr] = [dateFormatter(from, 'lg'), dateFormatter(to, 'lg')];
 
   const title = '이번 달 누적 블랙홀 인원';
-  const description = `(${fromStr} 시작)`;
+  const description = `${dayjs(from).format('YYYY년 M월')}`;
   const unit = '명';
 
   return (

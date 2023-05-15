@@ -6,8 +6,8 @@ import {
 } from '@/components/elements/DashboardContentView';
 import { TextDefault } from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
-import { dateFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
+import dayjs from 'dayjs';
 
 const GET_PREFERRED_CLUSTER = gql(/* GraphQL */ `
   query getPrefferedCluster {
@@ -31,10 +31,9 @@ export const PrefferedCluster = () => {
 
   const { preferredCluster } = data.getPersonGeneralPage.logtimeInfo.data;
   const { from, to } = data.getPersonGeneralPage.logtimeInfo;
-  const [fromStr, toStr] = [dateFormatter(from, 'lg'), dateFormatter(to, 'lg')];
 
   const title = '주 접속 클러스터';
-  const description = `(${fromStr} 시작 / 1개월)`;
+  const description = `${dayjs(from).format('YYYY년 M월')}`;
 
   return (
     <DashboardContent title={title} description={description}>

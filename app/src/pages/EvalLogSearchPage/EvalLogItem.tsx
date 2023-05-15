@@ -10,8 +10,9 @@ import {
   VStack,
   center,
 } from '@/components/common';
-import { dateFormatter, snakeCaseFormatter } from '@/utils/formatters';
+import { snakeCaseFormatter } from '@/utils/formatters';
 import styled from '@emotion/styled';
+import dayjs from 'dayjs';
 import { rgba } from 'emotion-rgba';
 import { useNavigate } from 'react-router-dom';
 
@@ -35,7 +36,9 @@ export const EvalLogItem = ({ element }: { element: EvalLog }) => {
           <Text>을&nbsp;</Text>
         </HStack>
         <HStack>
-          <BoldText>{dateFormatter(header.beginAt, 'xl')}</BoldText>
+          <BoldText>
+            {dayjs(header.beginAt).format('YYYY-MM-DD hh:mm')}
+          </BoldText>
           <Text>에 평가하였습니다</Text>
         </HStack>
         <Spacer />

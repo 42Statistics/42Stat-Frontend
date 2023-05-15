@@ -2,6 +2,7 @@ import { Center, H3Text, Text, VStack } from '@/components/common';
 import { DashboardContent } from '@/components/templates/Dashboard';
 import { numberWithUnitFormatter } from '@/utils/formatters';
 import styled from '@emotion/styled';
+import dayjs from 'dayjs';
 import { capitalize } from 'lodash-es';
 
 export const TigCntPerCoalition = () => {
@@ -34,7 +35,7 @@ export const TigCntPerCoalition = () => {
   const max = Math.max(...test.map((item) => item.value));
 
   const title = '이번 달 누적 코알리숑 티그 횟수';
-  const description = '(2000.00.00 시작)';
+  const description = `${dayjs().format('YYYY년 M월')}`;
   const unit = '회';
 
   return (
@@ -44,7 +45,7 @@ export const TigCntPerCoalition = () => {
           <TigCntPerCoalitionTable>
             <tbody>
               {test.map(({ coalition, value }) => (
-                <tr>
+                <tr key={coalition.name}>
                   <td>
                     <H3Text>{capitalize(coalition.name)}</H3Text>
                   </td>

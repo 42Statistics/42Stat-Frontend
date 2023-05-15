@@ -6,8 +6,8 @@ import {
 } from '@/components/elements/DashboardContentView';
 import { TextDefault } from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
-import { dateFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
+import dayjs from 'dayjs';
 
 const GET_POOLED_AT = gql(/* GraphQL */ `
   query getPooledAt {
@@ -31,7 +31,7 @@ export const PooledAt = () => {
 
   return (
     <DashboardContent title={title}>
-      <TextDefault text={dateFormatter(pooledAt, 'lg')} />
+      <TextDefault text={dayjs(pooledAt).format('YYYY년 M월 D일')} />
     </DashboardContent>
   );
 };

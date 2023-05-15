@@ -6,8 +6,8 @@ import {
 } from '@/components/elements/DashboardContentView';
 import { NumberCompare } from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
-import { dateFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
+import dayjs from 'dayjs';
 
 const GET_LOGTIME_INFO = gql(/* GraphQL */ `
   query getLogtimeInfo {
@@ -41,10 +41,9 @@ export const LogtimeInfo = () => {
   const { currMonthLogtime, lastMonthLogtime } =
     data.getPersonGeneralPage.logtimeInfo.data;
   const { from, to } = data.getPersonGeneralPage.logtimeInfo;
-  const [fromStr, toStr] = [dateFormatter(from, 'lg'), dateFormatter(to, 'lg')];
 
   const title = '월간 출석 시간';
-  const description = `(${fromStr} 시작 / 1개월)`;
+  const description = `${dayjs(from).format('YYYY년 M월')}`;
 
   return (
     <DashboardContent title={title} description={description}>

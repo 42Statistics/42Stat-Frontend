@@ -5,10 +5,10 @@ import {
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
 import { DashboardContent } from '@/components/templates/Dashboard';
-import { dateFormatter } from '@/utils/formatters';
 import { percentFormatter } from '@/utils/formatters/percentFormatter';
 import { useQuery } from '@apollo/client';
 import styled from '@emotion/styled';
+import dayjs from 'dayjs';
 
 const GET_PREFERRED_TIME = gql(/* GraphQL */ `
   query getPrefferedTime {
@@ -39,12 +39,11 @@ export const PrefferedTime = () => {
   const { morning, daytime, evening, night } =
     data.getPersonGeneralPage.logtimeInfo.data.preferredTime;
   const { from, to } = data.getPersonGeneralPage.logtimeInfo;
-  const [fromStr, toStr] = [dateFormatter(from, 'lg'), dateFormatter(to, 'lg')];
   const total = morning + daytime + evening + night;
   const max = Math.max(morning, daytime, evening, night);
 
-  const title = '주 접속 클러스터';
-  const description = `(${fromStr} 시작 / 1개월)`;
+  const title = '주 접속 시간대';
+  const description = `${dayjs(from).format('YYYY년 M월')}`;
 
   return (
     <DashboardContent title={title} description={description}>
@@ -111,10 +110,7 @@ const TextMax = styled(Text)<{ isMax: boolean }>`
 
 const PrefferedTimeTable = styled.table`
   width: 100%;
-
-  td:nth-of-type(2) {
-    text-align: right;
-  }
+  text-align: center;
 
   td {
     padding: 0.6rem;

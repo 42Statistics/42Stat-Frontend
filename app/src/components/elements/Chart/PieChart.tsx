@@ -20,14 +20,17 @@ export const PieChart = ({
     labels,
     plotOptions: {
       pie: {
-        startAngle: -270,
-        endAngle: 90,
+        // startAngle: -270,
+        // endAngle: 90,
       },
     },
     legend: {
       position: 'bottom',
     },
     colors: [theme.colors.primary.default],
+    stroke: {
+      show: false,
+    },
     responsive: [],
   };
 

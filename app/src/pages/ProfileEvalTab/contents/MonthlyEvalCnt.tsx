@@ -6,8 +6,8 @@ import {
 } from '@/components/elements/DashboardContentView';
 import { NumberCompare } from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
-import { dateFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
+import dayjs from 'dayjs';
 
 const GET_MONTHLY_EVAL_CNT = gql(/* GraphQL */ `
   query getMonthlyEvalCnt($uid: Int!) {
@@ -37,10 +37,9 @@ export const MonthlyEvalCnt = () => {
 
   const { currMonthCount, lastMonthCount } = data.getPersonalEvalPage;
   const { from, to } = currMonthCount;
-  const [fromStr, toStr] = [dateFormatter(from, 'lg'), dateFormatter(to, 'lg')];
 
   const title = '월간 평가 횟수';
-  const description = `(평가자일 때만 / ${fromStr} 시작 / 1개월)`;
+  const description = `${dayjs(from).format('YYYY년 M월')}`;
 
   return (
     <DashboardContent title={title} description={description}>

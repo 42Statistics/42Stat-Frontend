@@ -10,6 +10,7 @@ type Colors = {
   };
   semantic: {
     pass: string;
+    warning: string;
     fail: string;
   };
   mono: {

@@ -1,6 +1,7 @@
 import { ErrorBoundary } from 'react-error-boundary';
 import { BrowserRouter as Router } from 'react-router-dom';
 import ApolloProvider from './ApolloProvider';
+import DayjsProvider from './DayjsProvider';
 import GoogleOAuthProvider from './GoogleOAuthProvider';
 import HelmetProvider from './HelmetProvider';
 import { ScrollToTop } from './ScrollToTop';
@@ -32,11 +33,13 @@ export const AppProvider = ({ children }: React.PropsWithChildren) => {
       <ApolloProvider>
         <GoogleOAuthProvider>
           <HelmetProvider>
-            <ThemeProvider>
-              <Router>
-                <ScrollToTop>{children}</ScrollToTop>
-              </Router>
-            </ThemeProvider>
+            <DayjsProvider>
+              <ThemeProvider>
+                <Router>
+                  <ScrollToTop>{children}</ScrollToTop>
+                </Router>
+              </ThemeProvider>
+            </DayjsProvider>
           </HelmetProvider>
         </GoogleOAuthProvider>
       </ApolloProvider>

@@ -5,7 +5,7 @@ import {
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
 import { Rank } from '@/components/elements/DashboardContentView/Rank';
-import { Desktop, Mobile, Tablet } from '@/utils/responsive/Device';
+import { DashboardContent } from '@/components/templates/Dashboard';
 import type { RankItemType } from '@/utils/types/Rank';
 import { useQuery } from '@apollo/client';
 
@@ -32,6 +32,8 @@ export const WalletRanks = () => {
   if (!data) return <ApolloNotFound />;
 
   const { walletRanks } = data.getTotalPage;
+
+  const title = '보유 월렛 랭킹';
   const unit = '₳';
 
   const rankList: RankItemType[] = walletRanks.map(
@@ -43,16 +45,8 @@ export const WalletRanks = () => {
   );
 
   return (
-    <>
-      <Desktop>
-        <Rank rankList={rankList} cnt={3} unit={unit} />
-      </Desktop>
-      <Tablet>
-        <Rank rankList={rankList} cnt={5} unit={unit} />
-      </Tablet>
-      <Mobile>
-        <Rank rankList={rankList} showImg={false} cnt={3} unit={unit} />
-      </Mobile>
-    </>
+    <DashboardContent title={title}>
+      <Rank rankList={rankList} cnt={5} unit={unit} />
+    </DashboardContent>
   );
 };

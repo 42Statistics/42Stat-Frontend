@@ -1,6 +1,13 @@
 import { gql } from '@/__generated__';
 import { EvalLog } from '@/__generated__/graphql';
-import { Center, Clickable, Loader, VStack } from '@/components/common';
+import {
+  BoldText,
+  Center,
+  Clickable,
+  Loader,
+  Text,
+  VStack,
+} from '@/components/common';
 import { isDefined } from '@/utils/isDefined';
 import { useIntersectionObserver } from '@/utils/useIntersectionObserver';
 import { useLazyQuery } from '@apollo/client';
@@ -153,16 +160,30 @@ export const EvalLogSearchPage = () => {
         }
       />
       {isOpen && <EvalLogSearchHeader form={form} onSubmit={onSubmit} />}
-      <EvalLogSearchDetailLayout>
-        <VStack as="ul" w="100%" spacing="2rem">
-          {evalLogs.map((evalLog, idx) => (
-            <EvalLogItem key={idx} element={evalLog} />
-          ))}
-          <Center w="100%" h="10rem" ref={ref}>
-            {loading && <Loader />}
-          </Center>
+      <EvalLogSearchPageLayout>
+        <VStack w="100%" spacing="4rem">
+          <VStack w="100%" align="start">
+            <BoldText>{`${
+              form.corrector === '' ? 'Anyone' : form.corrector
+            } → ${form.corrected === '' ? 'Anyone' : form.corrected} / ${
+              form.projectName === '' ? '모든 서브젝트' : form.projectName
+            } / ${
+              form.outstandingOnly === 'outstanding'
+                ? 'Outstanding만'
+                : '모든 평가'
+            } / 최신순`}</BoldText>
+            <Text color={theme.colors.mono.gray300}>검색결과 32,801건</Text>
+          </VStack>
+          <VStack as="ul" w="100%" spacing="2rem">
+            {evalLogs.map((evalLog, idx) => (
+              <EvalLogItem key={idx} element={evalLog} />
+            ))}
+            <Center w="100%" h="10rem" ref={ref}>
+              {loading && <Loader />}
+            </Center>
+          </VStack>
         </VStack>
-      </EvalLogSearchDetailLayout>
+      </EvalLogSearchPageLayout>
     </>
   );
 };
@@ -179,7 +200,6 @@ const SearchIconLayout = styled.div`
   cursor: pointer;
 `;
 
-const EvalLogSearchDetailLayout = styled.div`
+const EvalLogSearchPageLayout = styled.div`
   padding: 4rem;
-  max-width: 1440px;
 `;

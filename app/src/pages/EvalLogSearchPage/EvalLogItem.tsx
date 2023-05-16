@@ -4,14 +4,14 @@ import {
   Clickable,
   HStack,
   PrimaryBoldText,
-  PrimaryMediumText,
   Spacer,
   Text,
   VStack,
-  center,
 } from '@/components/common';
-import { dateFormatter, snakeCaseFormatter } from '@/utils/formatters';
-import styled from '@emotion/styled';
+import { Label } from '@/components/common/Label';
+import { snakeCaseFormatter } from '@/utils/formatters';
+import { useTheme } from '@emotion/react';
+import dayjs from 'dayjs';
 import { rgba } from 'emotion-rgba';
 import { useNavigate } from 'react-router-dom';
 
@@ -35,7 +35,9 @@ export const EvalLogItem = ({ element }: { element: EvalLog }) => {
           <Text>을&nbsp;</Text>
         </HStack>
         <HStack>
-          <BoldText>{dateFormatter(header.beginAt, 'xl')}</BoldText>
+          <BoldText>
+            {dayjs(header.beginAt).format('YYYY-MM-DD hh:mm')}
+          </BoldText>
           <Text>에 평가하였습니다</Text>
         </HStack>
         <Spacer />
@@ -49,20 +51,16 @@ export const EvalLogItem = ({ element }: { element: EvalLog }) => {
       </HStack>
       <VStack w="100%" align="start" spacing="1rem">
         <HStack w="100%" justify="start">
-          <HStack w="13rem">
-            <ScoreBox>
-              <PrimaryMediumText>{correctorReview.mark}%</PrimaryMediumText>
-            </ScoreBox>
+          <HStack w="10rem">
+            <CorrectorReviewLabel number={correctorReview.mark} />
           </HStack>
           <div css={{ width: '100%' }}>
             <Text css={{ userSelect: 'auto' }}>{correctorReview.review}</Text>
           </div>
         </HStack>
         <HStack w="100%" justify="start">
-          <HStack w="13rem">
-            <ScoreBox>
-              <PrimaryMediumText>{correctedsReview.mark} / 5</PrimaryMediumText>
-            </ScoreBox>
+          <HStack w="10rem">
+            <CorrectedsReviewLabel number={correctedsReview.mark} />
           </HStack>
           <div css={{ width: '100%' }}>
             <Text css={{ userSelect: 'auto' }}>{correctedsReview.review}</Text>
@@ -73,12 +71,45 @@ export const EvalLogItem = ({ element }: { element: EvalLog }) => {
   );
 };
 
-const ScoreBox = styled.div`
-  ${center}
-  padding: 0.3rem 1.5rem;
-  border-radius: 2rem;
-  background-color: ${({ theme }) => theme.colors.primary.light};
-`;
+const CorrectorReviewLabel = ({ number }: { number: number }) => {
+  const getCorrectorReviewLabelColor = (number: number) => {
+    if (number >= 100) return theme.colors.semantic.pass;
+    if (number >= 80) return theme.colors.semantic.warning;
+    return theme.colors.semantic.fail;
+  };
+
+  const theme = useTheme();
+  const color = getCorrectorReviewLabelColor(number);
+
+  return (
+    <Label
+      color={color}
+      bgColor={rgba(color, 0.15)}
+      fontWeight={theme.fonts.weight.medium}
+      text={`${number}%`}
+    />
+  );
+};
+
+const CorrectedsReviewLabel = ({ number }: { number: number }) => {
+  const getCorrectorReviewLabelColor = (number: number) => {
+    if (number >= 5) return theme.colors.semantic.pass;
+    if (number >= 3) return theme.colors.semantic.warning;
+    return theme.colors.semantic.fail;
+  };
+
+  const theme = useTheme();
+  const color = getCorrectorReviewLabelColor(number);
+
+  return (
+    <Label
+      color={color}
+      bgColor={rgba(color, 0.15)}
+      fontWeight={theme.fonts.weight.medium}
+      text={`${number} / 5`}
+    />
+  );
+};
 
 type FlagLabelProps = {
   name: string;
@@ -86,21 +117,17 @@ type FlagLabelProps = {
 };
 
 const FlagLabel = ({ name, isPositive }: FlagLabelProps) => {
+  const theme = useTheme();
+  const color = isPositive
+    ? theme.colors.semantic.pass
+    : theme.colors.semantic.fail;
+
   return (
-    <FlagLabelLayout isPositive={isPositive}>
-      <BoldText>{snakeCaseFormatter(name)}</BoldText>
-    </FlagLabelLayout>
+    <Label
+      color={color}
+      bgColor={rgba(color, 0.15)}
+      fontWeight={theme.fonts.weight.bold}
+      text={snakeCaseFormatter(name)}
+    />
   );
 };
-
-const FlagLabelLayout = styled.div<{ isPositive: boolean }>`
-  ${center}
-  background-color: ${({ theme, isPositive }) =>
-    isPositive
-      ? rgba(theme.colors.semantic.pass, 0.2)
-      : rgba(theme.colors.semantic.fail, 0.2)};
-  color: ${({ theme, isPositive }) =>
-    isPositive ? theme.colors.semantic.pass : theme.colors.semantic.fail};
-  padding: 0.2rem 1rem;
-  border-radius: 2rem;
-`;

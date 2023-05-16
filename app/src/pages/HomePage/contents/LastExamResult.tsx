@@ -6,8 +6,8 @@ import {
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
 import { DashboardContent } from '@/components/templates/Dashboard';
-import { dateFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
+import dayjs from 'dayjs';
 
 const GET_LAST_EXAM_RESULT = gql(/* GraphQL */ `
   query GetLastExamResult {
@@ -34,10 +34,9 @@ export const LastExamResult = () => {
 
   const { lastExamResult } = data.getHomePage;
   const { from, to } = lastExamResult;
-  const [fromStr, toStr] = [dateFormatter(from, 'xl'), dateFormatter(to, 'xl')];
 
   const title = '직전 회차 시험 Rank 별 통과율';
-  const description = `(응시 시간 : ${fromStr})`;
+  const description = `${dayjs(from).format('YYYY년 M월 D일 H시 m분')}`;
 
   const categories = lastExamResult.data.map(({ rank }) => rank);
   const seriesData = lastExamResult.data.map(

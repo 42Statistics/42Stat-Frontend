@@ -28,7 +28,7 @@ export const UserCntPerLevels = () => {
   if (!data) return <ApolloNotFound />;
 
   const { userCntPerLevels } = data.getTotalPage;
-  const title = '레벨 별 유저 분포';
+  const title = '레벨 분포';
 
   const categories = userCntPerLevels.map(({ level }) => level);
   const seriesData = userCntPerLevels.map(({ userCnt }) => userCnt);

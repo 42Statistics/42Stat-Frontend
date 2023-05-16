@@ -6,6 +6,22 @@ import type {
 
 export const profilePageDesktopDashboardRows: DesktopDashboardRowType[] = [
   {
+    row: 1,
+    col: 4,
+    items: [
+      {
+        row: 1,
+        col: 1,
+        rowSpan: 1,
+        colSpan: 4,
+        elementId: 0,
+      },
+    ],
+  },
+];
+
+export const profilePageTabletDashboardRows: TabletDashboardRowType[] = [
+  {
     row: 2,
     col: 3,
     items: [
@@ -20,31 +36,15 @@ export const profilePageDesktopDashboardRows: DesktopDashboardRowType[] = [
   },
 ];
 
-export const profilePageTabletDashboardRows: TabletDashboardRowType[] = [
-  {
-    row: 3,
-    col: 2,
-    items: [
-      {
-        row: 1,
-        col: 1,
-        rowSpan: 3,
-        colSpan: 2,
-        elementId: 0,
-      },
-    ],
-  },
-];
-
 export const profilePageMobileDashboardRows: MobileDashboardRowType[] = [
   {
-    row: 5,
+    row: 2,
     col: 1,
     items: [
       {
         row: 1,
         col: 1,
-        rowSpan: 5,
+        rowSpan: 2,
         colSpan: 1,
         elementId: 0,
       },

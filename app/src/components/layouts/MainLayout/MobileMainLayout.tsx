@@ -1,4 +1,5 @@
 import { VStack } from '@/components/common';
+import { IntraLink } from '@/components/elements/IntraLink';
 import { TabBar } from '@/components/elements/TabBar';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
@@ -12,6 +13,7 @@ export const MobileMainLayout = ({ children }: React.PropsWithChildren) => {
       <Helmet>
         <meta name="theme-color" content={theme.colors.mono.white} />
       </Helmet>
+      <IntraLink />
       <VStack
         w="100%"
         h="100%"

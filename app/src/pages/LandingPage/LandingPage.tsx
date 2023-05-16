@@ -3,7 +3,7 @@ import {
   Center,
   Image,
   VStack,
-  WhiteH2BoldText,
+  WhiteH1BoldText,
 } from '@/components/common';
 import { AppLogoTitle } from '@/components/elements/AppLogoTitle';
 import { isAuthenticatedAtom } from '@/utils/atoms/isAuthenticatedAtom';
@@ -41,15 +41,15 @@ export const LandingPage = () => {
       <VStack h="100%" spacing="10rem">
         <AppLogoTitle size="md" color={theme.colors.mono.white} />
         <VStack>
-          <WhiteH2BoldText>
+          <WhiteH1BoldText>
             은하수를 여행한지{' '}
             {<CountUp isCounting={true} end={982} duration={3.5} />}
             일째
-          </WhiteH2BoldText>
-          <WhiteH2BoldText>
+          </WhiteH1BoldText>
+          <WhiteH1BoldText>
             {<CountUp isCounting={true} end={810} duration={3.5} />}명의
             히치하이커와 함께 여행중
-          </WhiteH2BoldText>
+          </WhiteH1BoldText>
           <Slider
             arrows={false}
             infinite={true}
@@ -63,7 +63,7 @@ export const LandingPage = () => {
           >
             {textList.map((text, index) => (
               <Center w="100%" key={index}>
-                <WhiteH2BoldText>{text}</WhiteH2BoldText>
+                <WhiteH1BoldText>{text}</WhiteH1BoldText>
               </Center>
             ))}
           </Slider>

@@ -4,7 +4,6 @@ import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
-import { dateFormatter } from '@/utils/formatters';
 import { getDayDiff } from '@/utils/getDayDiff';
 import { isDefined } from '@/utils/isDefined';
 import { useQuery } from '@apollo/client';
@@ -43,107 +42,101 @@ export const TeamInfo = () => {
   const { teams } = data.getPersonGeneralPage.teamInfo;
 
   return (
-    <div
-      css={{
-        position: 'relative',
-        width: '100%',
-        height: '100%',
-        overflow: 'auto',
-      }}
-    >
-      <TeamInfoTable>
-        <thead>
-          <tr>
-            <th>
-              <PrimaryText>과제명</PrimaryText>
-            </th>
-            <th>
-              <PrimaryText>시도</PrimaryText>
-            </th>
-            <th>
-              <PrimaryText>제출</PrimaryText>
-            </th>
-            <th>
-              <PrimaryText>등록일</PrimaryText>
-            </th>
-            <th>
-              <PrimaryText>제출일</PrimaryText>
-            </th>
-            <th>
-              <PrimaryText>소요 기간</PrimaryText>
-            </th>
-            <th>
-              <PrimaryText>점수</PrimaryText>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {teams
-            .filter(isDefined)
-            .map(
-              ({
-                id,
-                name,
-                occurrence,
-                closedAt,
-                firstCreatedAt,
-                finalMark,
-                isValidated,
-              }) => {
-                return (
-                  <tr key={id}>
-                    <td>
-                      <Text>{name}</Text>
-                    </td>
-                    <td>
-                      <Text>{occurrence}번째</Text>
-                    </td>
-                    <td>
-                      <Text>
-                        {closedAt != null
-                          ? `${getDayDiff(new Date(), new Date(closedAt))}일 전`
-                          : '-'}
-                      </Text>
-                    </td>
-                    <td>
-                      <Text>{dateFormatter(firstCreatedAt, 'lg')}</Text>
-                    </td>
-                    <td>
-                      <Text>
-                        {closedAt != null ? dateFormatter(closedAt, 'lg') : '-'}
-                      </Text>
-                    </td>
-                    <td>
-                      <Text>
-                        {closedAt != null
-                          ? `${getDayDiff(
-                              new Date(closedAt),
-                              new Date(firstCreatedAt),
-                            )}일`
-                          : '-'}
-                      </Text>
-                    </td>
-                    <td>
-                      <HStack
-                        style={{
-                          color: isValidated
-                            ? theme.colors.semantic.pass
-                            : theme.colors.semantic.fail,
-                        }}
-                      >
-                        {isValidated ? <AiOutlineCheck /> : <AiOutlineClose />}
-                        {finalMark == null ? 0 : finalMark}
-                      </HStack>
-                    </td>
-                  </tr>
-                );
-              },
-            )}
-        </tbody>
-      </TeamInfoTable>
-    </div>
+    <TeamInfoLayout>
+      <div
+        css={{
+          position: 'relative',
+          width: '100%',
+          height: '100%',
+          overflow: 'auto',
+        }}
+      >
+        <TeamInfoTable>
+          <thead>
+            <tr>
+              <th>
+                <PrimaryText>과제명</PrimaryText>
+              </th>
+              <th>
+                <PrimaryText>시도</PrimaryText>
+              </th>
+              <th>
+                <PrimaryText>팀명</PrimaryText>
+              </th>
+              <th>
+                <PrimaryText>현재일로부터</PrimaryText>
+              </th>
+              <th>
+                <PrimaryText>점수</PrimaryText>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {teams
+              .filter(isDefined)
+              .map(
+                ({
+                  id,
+                  name,
+                  occurrence,
+                  closedAt,
+                  firstCreatedAt,
+                  finalMark,
+                  isValidated,
+                }) => {
+                  return (
+                    <tr key={id}>
+                      <td>
+                        <Text>{name}</Text>
+                      </td>
+                      <td>
+                        <Text>#{occurrence}</Text>
+                      </td>
+                      <td>
+                        <Text>Example Team</Text>
+                      </td>
+                      <td>
+                        <Text>
+                          {closedAt != null
+                            ? `${getDayDiff(
+                                new Date(),
+                                new Date(closedAt),
+                              )}일 전`
+                            : '-'}
+                        </Text>
+                      </td>
+                      <td>
+                        <HStack
+                          style={{
+                            color: isValidated
+                              ? theme.colors.semantic.pass
+                              : theme.colors.semantic.fail,
+                          }}
+                        >
+                          {isValidated ? (
+                            <AiOutlineCheck />
+                          ) : (
+                            <AiOutlineClose />
+                          )}
+                          {finalMark == null ? 0 : finalMark}
+                        </HStack>
+                      </td>
+                    </tr>
+                  );
+                },
+              )}
+          </tbody>
+        </TeamInfoTable>
+      </div>
+    </TeamInfoLayout>
   );
 };
+
+const TeamInfoLayout = styled.div`
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+`;
 
 const TeamInfoTable = styled.table`
   position: absolute;

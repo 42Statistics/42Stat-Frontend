@@ -8,7 +8,6 @@ import { NumberDefault } from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
 import { useQuery } from '@apollo/client';
 
-// TODO: getPersonGeneralPage -> getPersonEvaluationPage
 const GET_PERSONAL_TOTAL_EVAL_CNT = gql(/* GraphQL */ `
   query getPersonalTotalEvalCnt($uid: Int!) {
     getPersonalEvalPage(uid: $uid) {

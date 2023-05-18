@@ -1,4 +1,4 @@
-import { VStack } from '@/components/common';
+import { Center } from '@/components/common';
 import { IntraLink } from '@/components/elements/IntraLink';
 import { TabBar } from '@/components/elements/TabBar';
 import { useTheme } from '@emotion/react';
@@ -9,30 +9,26 @@ export const MobileMainLayout = ({ children }: React.PropsWithChildren) => {
   const theme = useTheme();
 
   return (
-    <>
+    <Layout>
       <Helmet>
-        <meta name="theme-color" content={theme.colors.mono.white} />
+        <meta name="theme-color" content={theme.colors.background} />
       </Helmet>
       <IntraLink />
-      <VStack
-        w="100%"
-        h="100%"
-        spacing="2rem"
-        css={{ backgroundColor: theme.colors.mono.white }}
-      >
-        <MobilePageLayout>{children}</MobilePageLayout>
-      </VStack>
+      <MobileMainPageLayout>
+        <Center w="100%">{children}</Center>
+      </MobileMainPageLayout>
       <TabBar />
-    </>
+    </Layout>
   );
 };
 
-const MobilePageLayout = styled.main`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+const MobileMainPageLayout = styled.main`
   width: 100%;
-  height: 100%;
-  margin-bottom: 6rem;
-  overflow: auto;
+  padding: 3rem;
+  padding-bottom: calc(3rem + 6rem);
+`;
+
+const Layout = styled.div`
+  min-height: 100vh;
+  background-color: ${({ theme }) => theme.colors.background};
 `;

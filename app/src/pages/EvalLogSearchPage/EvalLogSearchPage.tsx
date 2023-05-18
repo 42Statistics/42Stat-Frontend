@@ -1,10 +1,10 @@
 import { gql } from '@/__generated__';
 import { EvalLog } from '@/__generated__/graphql';
 import {
-  BoldText,
   Center,
   Clickable,
   Loader,
+  PrimaryBoldText,
   Text,
   VStack,
 } from '@/components/common';
@@ -160,30 +160,28 @@ export const EvalLogSearchPage = () => {
         }
       />
       {isOpen && <EvalLogSearchHeader form={form} onSubmit={onSubmit} />}
-      <EvalLogSearchPageLayout>
-        <VStack w="100%" spacing="4rem">
-          <VStack w="100%" align="start">
-            <BoldText>{`${
-              form.corrector === '' ? 'Anyone' : form.corrector
-            } → ${form.corrected === '' ? 'Anyone' : form.corrected} / ${
-              form.projectName === '' ? '모든 서브젝트' : form.projectName
-            } / ${
-              form.outstandingOnly === 'outstanding'
-                ? 'Outstanding만'
-                : '모든 평가'
-            } / 최신순`}</BoldText>
-            <Text color={theme.colors.mono.gray300}>검색결과 32,801건</Text>
-          </VStack>
-          <VStack as="ul" w="100%" spacing="2rem">
-            {evalLogs.map((evalLog, idx) => (
-              <EvalLogItem key={idx} element={evalLog} />
-            ))}
-            <Center w="100%" h="10rem" ref={ref}>
-              {loading && <Loader />}
-            </Center>
-          </VStack>
+      <VStack w="100%" spacing="2rem">
+        <VStack w="100%" align="start">
+          <PrimaryBoldText>{`${
+            form.corrector === '' ? 'Anyone' : form.corrector
+          } → ${form.corrected === '' ? 'Anyone' : form.corrected} / ${
+            form.projectName === '' ? '모든 서브젝트' : form.projectName
+          } / ${
+            form.outstandingOnly === 'outstanding'
+              ? 'Outstanding만'
+              : '모든 평가'
+          } / 최신순`}</PrimaryBoldText>
+          <Text color={theme.colors.mono.gray300}>검색결과 32,801건</Text>
         </VStack>
-      </EvalLogSearchPageLayout>
+        <VStack as="ul" w="100%" spacing="1rem">
+          {evalLogs.map((evalLog, idx) => (
+            <EvalLogItem key={idx} element={evalLog} />
+          ))}
+          <Center w="100%" h="10rem" ref={ref}>
+            {loading && <Loader />}
+          </Center>
+        </VStack>
+      </VStack>
     </>
   );
 };
@@ -198,8 +196,4 @@ const SearchIconLayout = styled.div`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   z-index: 100;
   cursor: pointer;
-`;
-
-const EvalLogSearchPageLayout = styled.div`
-  padding: 4rem;
 `;

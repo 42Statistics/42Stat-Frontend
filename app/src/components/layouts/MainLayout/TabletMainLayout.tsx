@@ -9,9 +9,9 @@ export const TabletMainLayout = ({ children }: React.PropsWithChildren) => {
       <IntraLink />
       <HStack>
         <TabletNavBar />
-        <Center w="100%" css={{ marginLeft: '7rem' }}>
-          <TabletMainPageLayout>{children}</TabletMainPageLayout>
-        </Center>
+        <TabletMainPageLayout>
+          <Center w="100%">{children}</Center>
+        </TabletMainPageLayout>
       </HStack>
     </Layout>
   );
@@ -19,9 +19,11 @@ export const TabletMainLayout = ({ children }: React.PropsWithChildren) => {
 
 const TabletMainPageLayout = styled.main`
   width: 100%;
+  padding: 3rem;
+  margin-left: 7rem;
 `;
 
 const Layout = styled.div`
   min-height: 100vh;
-  background-color: ${({ theme }) => theme.colors.mono.white};
+  background-color: ${({ theme }) => theme.colors.background};
 `;

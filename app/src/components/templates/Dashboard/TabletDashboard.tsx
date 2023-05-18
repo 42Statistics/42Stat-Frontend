@@ -35,4 +35,5 @@ export const TabletDashboardLayout = styled.div`
   flex-direction: column;
   gap: 2rem;
   width: 100%;
+  max-width: 800px;
 `;

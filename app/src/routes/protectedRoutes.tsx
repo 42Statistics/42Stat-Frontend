@@ -1,8 +1,8 @@
 import { DeferredComponent } from '@/components/common';
 import { AuthGuard } from '@/components/guards/AuthGuard';
+import { LogoutPage } from '@/pages/LogoutPage';
 import { HomePageSkeleton } from '@/pages/PageSkeletons/HomePageSkeleton';
 import { ProfilePageSkeleton } from '@/pages/PageSkeletons/ProfilePageSkeleton';
-import { LogoutPage } from '@/pages/LogoutPage';
 import { lazyImport } from '@/utils/lazyImport';
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
@@ -22,27 +22,10 @@ const { ProfilePage } = lazyImport(
   'ProfilePage',
 );
 
-const { DashboardLayout } = lazyImport(
-  () => import('@/components/layouts/DashboardLayout'),
-  'DashboardLayout',
-);
-
 const { MainLayout } = lazyImport(
   () => import('@/components/layouts/MainLayout'),
   'MainLayout',
 );
-
-const DashboardApp = () => {
-  return (
-    <AuthGuard>
-      <Suspense>
-        <DashboardLayout>
-          <Outlet />
-        </DashboardLayout>
-      </Suspense>
-    </AuthGuard>
-  );
-};
 
 const MainApp = () => {
   return (
@@ -59,7 +42,7 @@ const MainApp = () => {
 export const protectedRoutes = [
   {
     path: ROUTES.ROOT,
-    element: <DashboardApp />,
+    element: <MainApp />,
     children: [
       {
         path: ROUTES.HOME,
@@ -97,12 +80,6 @@ export const protectedRoutes = [
           </Suspense>
         ),
       },
-    ],
-  },
-  {
-    path: ROUTES.ROOT,
-    element: <MainApp />,
-    children: [
       {
         path: ROUTES.EVALLOG,
         element: (

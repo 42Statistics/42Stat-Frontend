@@ -1,3 +1,4 @@
+import { Center } from '@/components/common';
 import { Desktop, Mobile, Tablet } from '@/utils/responsive/Device';
 import type { DashboardProps } from '@/utils/types/Dashboard';
 import { DesktopDashboard } from './DesktopDashboard';
@@ -11,7 +12,7 @@ export const Dashboard = ({
   contents,
 }: DashboardProps) => {
   return (
-    <>
+    <Center w="100%">
       <Desktop>
         <DesktopDashboard rows={desktopRows} contents={contents} />
       </Desktop>
@@ -21,6 +22,6 @@ export const Dashboard = ({
       <Mobile>
         <MobileDashboard rows={mobileRows} contents={contents} />
       </Mobile>
-    </>
+    </Center>
   );
 };

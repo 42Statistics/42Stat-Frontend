@@ -55,17 +55,17 @@ export const EvalLogItem = ({ element }: { element: EvalLog }) => {
         </HStack>
         <VStack w="100%" align="start" spacing="1rem">
           <HStack w="100%" justify="start">
-            <div style={{ width: '10rem' }}>
+            <HStack w="10rem">
               <CorrectorReviewLabel number={correctorReview.mark} />
-            </div>
+            </HStack>
             <div style={{ width: '100%' }}>
               <Text selectable>{correctorReview.review}</Text>
             </div>
           </HStack>
           <HStack w="100%" justify="start">
-            <div style={{ width: '10rem' }}>
+            <HStack w="10rem">
               <CorrectedsReviewLabel number={correctedsReview.mark} />
-            </div>
+            </HStack>
             <div style={{ width: '100%' }}>
               <Text selectable>{correctedsReview.review}</Text>
             </div>

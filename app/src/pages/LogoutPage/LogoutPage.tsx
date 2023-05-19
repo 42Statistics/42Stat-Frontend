@@ -7,5 +7,5 @@ export const LogoutPage = () => {
 
   useEffect(() => setIsAuthenticated(false), [setIsAuthenticated]);
 
-  return null;
+  return <></>;
 };

@@ -25,23 +25,25 @@ export const EvalLogItem = ({ element }: { element: EvalLog }) => {
     <EvalLogItemLayout>
       <VStack w="100%" align="start" spacing="2rem">
         <HStack w="100%" justify="start" wrap="wrap">
-          <HStack>
+          <Text selectable css={{ display: 'flex', flexWrap: 'wrap' }}>
             <Clickable
               onClick={() => navigate('/profile/' + header.corrector.login)}
               element={
-                <PrimaryBoldText>{header.corrector.login}</PrimaryBoldText>
+                <PrimaryBoldText selectable>
+                  {header.corrector.login}
+                </PrimaryBoldText>
               }
             />
-            <Text>님이&nbsp;</Text>
-            <PrimaryBoldText>{header.teamPreview.name}</PrimaryBoldText>
-            <Text>을&nbsp;</Text>
-          </HStack>
-          <HStack>
-            <BoldText>
+            님이&nbsp;
+            <PrimaryBoldText selectable>
+              {header.teamPreview.name}
+            </PrimaryBoldText>
+            을&nbsp;
+            <BoldText selectable>
               {dayjs(header.beginAt).format('YYYY-MM-DD hh:mm')}
             </BoldText>
-            <Text>에 평가하였습니다</Text>
-          </HStack>
+            에 평가하였습니다
+          </Text>
           <Spacer />
           <HStack spacing="1rem">
             <BoldText>{header.projectPreview.name}</BoldText>
@@ -57,7 +59,7 @@ export const EvalLogItem = ({ element }: { element: EvalLog }) => {
               <CorrectorReviewLabel number={correctorReview.mark} />
             </HStack>
             <div css={{ width: '100%' }}>
-              <Text css={{ userSelect: 'auto' }}>{correctorReview.review}</Text>
+              <Text selectable>{correctorReview.review}</Text>
             </div>
           </HStack>
           <HStack w="100%" justify="start">
@@ -65,9 +67,7 @@ export const EvalLogItem = ({ element }: { element: EvalLog }) => {
               <CorrectedsReviewLabel number={correctedsReview.mark} />
             </HStack>
             <div css={{ width: '100%' }}>
-              <Text css={{ userSelect: 'auto' }}>
-                {correctedsReview.review}
-              </Text>
+              <Text selectable>{correctedsReview.review}</Text>
             </div>
           </HStack>
         </VStack>
@@ -77,6 +77,7 @@ export const EvalLogItem = ({ element }: { element: EvalLog }) => {
 };
 
 const EvalLogItemLayout = styled.div`
+  width: 100%;
   background-color: ${({ theme }) => theme.colors.mono.white};
   padding: 2.5rem 3.5rem;
   border-radius: 2rem;

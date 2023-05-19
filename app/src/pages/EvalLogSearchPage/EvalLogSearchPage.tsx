@@ -162,7 +162,7 @@ export const EvalLogSearchPage = () => {
       {isOpen && <EvalLogSearchHeader form={form} onSubmit={onSubmit} />}
       <VStack w="100%" spacing="2rem">
         <VStack w="100%" align="start">
-          <PrimaryBoldText>{`${
+          <PrimaryBoldText selectable>{`${
             form.corrector === '' ? 'Anyone' : form.corrector
           } → ${form.corrected === '' ? 'Anyone' : form.corrected} / ${
             form.projectName === '' ? '모든 서브젝트' : form.projectName
@@ -171,7 +171,9 @@ export const EvalLogSearchPage = () => {
               ? 'Outstanding만'
               : '모든 평가'
           } / 최신순`}</PrimaryBoldText>
-          <Text color={theme.colors.mono.gray300}>검색결과 32,801건</Text>
+          <Text color={theme.colors.mono.gray300} selectable>
+            검색결과 32,801건
+          </Text>
         </VStack>
         <VStack as="ul" w="100%" spacing="1rem">
           {evalLogs.map((evalLog, idx) => (

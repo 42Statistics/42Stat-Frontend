@@ -10,6 +10,7 @@ export const TabletNavItem = ({ route }: NavItemProps) => {
   const isFocused = location.pathname === route.path;
   const theme = useTheme();
   const NavItemIcon = route.icon;
+  const NavItemIconFocused = route.iconFocused;
   const color = isFocused
     ? theme.colors.primary.default
     : theme.colors.mono.black;
@@ -20,7 +21,11 @@ export const TabletNavItem = ({ route }: NavItemProps) => {
       isFocused={isFocused}
     >
       <VStack>
-        <NavItemIcon size="20px" fill={color} />
+        {!isFocused ? (
+          <NavItemIcon size="20px" fill={color} />
+        ) : (
+          <NavItemIconFocused size="20px" fill={color} />
+        )}
         <CaptionText color={color}>{route.abbr}</CaptionText>
       </VStack>
     </TabletNavItemLayout>

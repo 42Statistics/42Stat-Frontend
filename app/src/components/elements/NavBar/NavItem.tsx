@@ -14,12 +14,17 @@ export const NavItem = ({ route }: NavItemProps) => {
   const isFocused = location.pathname === route.path;
   const theme = useTheme();
   const NavItemIcon = route.icon;
+  const NavItemIconFocused = route.iconFocused;
   const color = isFocused ? theme.colors.mono.white : theme.colors.mono.black;
 
   return (
     <NavItemLayout onClick={() => navigate(route.path)} isFocused={isFocused}>
       <HStack spacing="1.5rem" justify="start">
-        <NavItemIcon size="16px" fill={color} />
+        {!isFocused ? (
+          <NavItemIcon size="16px" fill={color} />
+        ) : (
+          <NavItemIconFocused size="16px" fill={color} />
+        )}
         <Text color={color}>{route.text}</Text>
       </HStack>
     </NavItemLayout>

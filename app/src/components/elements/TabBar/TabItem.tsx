@@ -10,6 +10,7 @@ export const TabItem = ({ route }: NavItemProps) => {
   const isFocused = location.pathname === route.path;
   const theme = useTheme();
   const TabItemIcon = route.icon;
+  const TabItemIconFocused = route.iconFocused;
   const color = isFocused
     ? theme.colors.primary.default
     : theme.colors.mono.black;
@@ -17,7 +18,11 @@ export const TabItem = ({ route }: NavItemProps) => {
   return (
     <TabItemLayout onClick={() => navigate(route.path)}>
       <VStack>
-        <TabItemIcon size="22px" fill={color} />
+        {!isFocused ? (
+          <TabItemIcon size="22px" fill={color} />
+        ) : (
+          <TabItemIconFocused size="22px" fill={color} />
+        )}
         <CaptionText color={color}>{route.abbr}</CaptionText>
       </VStack>
     </TabItemLayout>

@@ -6,5 +6,12 @@ export const defaultOptions: ApexCharts.ApexOptions = {
     zoom: {
       enabled: false,
     },
+    // events: {
+    //   mounted: (chart) => {
+    //     chart.windowResizeHandler();
+    //   },
+    // },
+    // redrawOnParentResize: true,
+    // redrawOnWindowResize: true,
   },
 };

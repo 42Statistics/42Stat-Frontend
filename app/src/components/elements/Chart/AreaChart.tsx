@@ -41,7 +41,7 @@ export const AreaChart = ({
       type="area"
       series={series}
       options={options}
-      width="100%"
+      width="99%"
       height="100%"
     />
   );

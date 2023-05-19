@@ -50,7 +50,7 @@ export const DonutChart = ({
       type="donut"
       series={series}
       options={options}
-      width="100%"
+      width="99%"
       height="100%"
     />
   );

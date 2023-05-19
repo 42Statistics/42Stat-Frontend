@@ -33,7 +33,7 @@ export const LineChart = ({
       type="line"
       series={series}
       options={options}
-      width="100%"
+      width="99%"
       height="100%"
     />
   );

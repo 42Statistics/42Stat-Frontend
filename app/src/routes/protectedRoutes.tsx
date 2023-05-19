@@ -21,7 +21,10 @@ const { ProfilePage } = lazyImport(
   () => import('@/pages/ProfilePage'),
   'ProfilePage',
 );
-
+const { ProjectPage } = lazyImport(
+  () => import('@/pages/ProjectPage'),
+  'ProjectPage',
+);
 const { MainLayout } = lazyImport(
   () => import('@/components/layouts/MainLayout'),
   'MainLayout',
@@ -77,6 +80,14 @@ export const protectedRoutes = [
             }
           >
             <ProfilePage />
+          </Suspense>
+        ),
+      },
+      {
+        path: ROUTES.PROJECT,
+        element: (
+          <Suspense>
+            <ProjectPage />
           </Suspense>
         ),
       },

@@ -1,4 +1,5 @@
 import { Center } from '@/components/common';
+import { MobileHeader } from '@/components/elements/Header/MobileHeader';
 import { IntraLink } from '@/components/elements/IntraLink';
 import { TabBar } from '@/components/elements/TabBar';
 import { useTheme } from '@emotion/react';
@@ -15,6 +16,7 @@ export const MobileMainLayout = ({ children }: React.PropsWithChildren) => {
       </Helmet>
       <IntraLink />
       <MobileMainPageLayout>
+        <MobileHeader />
         <Center w="100%">{children}</Center>
       </MobileMainPageLayout>
       <TabBar />

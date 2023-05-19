@@ -30,7 +30,7 @@ const fonts = {
     caption: '1.1rem',
   },
   weight: {
-    // thin: 100,
+    thin: 100,
     // extralight: 200,
     // light: 300,
     regular: 400,

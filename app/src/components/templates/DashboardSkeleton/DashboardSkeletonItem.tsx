@@ -20,8 +20,8 @@ const DashboardSkeletonItemLayout = styled.div`
 `;
 
 const skeletonBackgroundAnimation = css`
-  background: #f0f0f0;
-  background: linear-gradient(110deg, #f0f0f0 8%, #f3f3f3 18%, #f0f0f0 33%);
+  background: #eeeeee;
+  background: linear-gradient(110deg, #eeeeee 8%, #f3f3f3 18%, #eeeeee 33%);
   background-size: 200% 100%;
   animation: 1.4s shine linear infinite;
 

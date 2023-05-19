@@ -1,6 +1,15 @@
+import { VStack } from '@/components/common';
 import { DashboardSkeleton } from '@/components/templates/DashboardSkeleton';
-import { useprofilePageDashboardSkeleton } from './hooks';
+import {
+  useProfileGeneralTabDashboardSkeleton,
+  useProfilePageDashboardSkeleton,
+} from './hooks';
 
 export const ProfilePageSkeleton = () => {
-  return <DashboardSkeleton {...useprofilePageDashboardSkeleton()} />;
+  return (
+    <VStack w="100%" spacing="7rem">
+      <DashboardSkeleton {...useProfilePageDashboardSkeleton()} />
+      <DashboardSkeleton {...useProfileGeneralTabDashboardSkeleton()} />
+    </VStack>
+  );
 };

@@ -2,7 +2,7 @@ import { DeferredComponent, Text, VStack } from '@/components/common';
 import { Tab, TabList, TabPanel, Tabs } from '@/components/common/Tab';
 import { Dashboard } from '@/components/templates/Dashboard';
 import { ProfileEvalTabSkeleton } from '@/pages/PageSkeletons/ProfileEvalTabSkeleton';
-import { ProfileGeneralTabSkeleton } from '@/pages/PageSkeletons/ProfileGeneralTabSkeleton';
+import { ProfileGeneralTab } from '@/pages/ProfileGeneralTab';
 import { lazyImport } from '@/utils/lazyImport';
 import styled from '@emotion/styled';
 import { Suspense } from 'react';
@@ -10,10 +10,6 @@ import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import { useProfilePageDashboard } from './hooks';
 
-const { ProfileGeneralTab } = lazyImport(
-  () => import('@/pages/ProfileGeneralTab'),
-  'ProfileGeneralTab',
-);
 const { ProfileEvalTab } = lazyImport(
   () => import('@/pages/ProfileEvalTab'),
   'ProfileEvalTab',
@@ -40,15 +36,7 @@ export const ProfilePage = () => {
               </Tab>
             </TabList>
             <TabPanel>
-              <Suspense
-                fallback={
-                  <DeferredComponent>
-                    <ProfileGeneralTabSkeleton />
-                  </DeferredComponent>
-                }
-              >
-                <ProfileGeneralTab />
-              </Suspense>
+              <ProfileGeneralTab />
             </TabPanel>
             <TabPanel>
               <Suspense

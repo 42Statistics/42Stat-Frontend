@@ -1,8 +1,9 @@
+import { Center } from '@/components/common';
 import { Desktop, Mobile, Tablet } from '@/utils/responsive/Device';
 import type { DashboardProps } from '@/utils/types/Dashboard';
 import { DesktopDashboardSkeleton } from './DesktopDashboardSkeleton';
-import { TabletDashboardSkeleton } from './TabletDashboardSkeleton';
 import { MobileDashboardSkeleton } from './MobileDashboardSkeleton';
+import { TabletDashboardSkeleton } from './TabletDashboardSkeleton';
 
 type DashboardSkeletonProps = Omit<DashboardProps, 'contents'>;
 
@@ -12,7 +13,7 @@ export const DashboardSkeleton = ({
   mobileRows,
 }: DashboardSkeletonProps) => {
   return (
-    <>
+    <Center w="100%">
       <Desktop>
         <DesktopDashboardSkeleton rows={desktopRows} />
       </Desktop>
@@ -22,6 +23,6 @@ export const DashboardSkeleton = ({
       <Mobile>
         <MobileDashboardSkeleton rows={mobileRows} />
       </Mobile>
-    </>
+    </Center>
   );
 };

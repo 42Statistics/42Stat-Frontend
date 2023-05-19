@@ -4,7 +4,7 @@ import {
   profilePageTabletDashboardRows,
 } from '@/pages/ProfilePage/hooks/profilePageDashboardRows';
 
-export const useprofilePageDashboardSkeleton = () => ({
+export const useProfilePageDashboardSkeleton = () => ({
   desktopRows: profilePageDesktopDashboardRows,
   tabletRows: profilePageTabletDashboardRows,
   mobileRows: profilePageMobileDashboardRows,

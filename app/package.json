@@ -8,7 +8,9 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "compile": "NODE_TLS_REJECT_UNAUTHORIZED=0 DOTENV_CONFIG_PATH=../env/.env graphql-codegen -r dotenv/config",
-    "watch": "DOTENV_CONFIG_PATH=../env/.env graphql-codegen -r dotenv/config -w"
+    "watch": "DOTENV_CONFIG_PATH=../env/.env graphql-codegen -r dotenv/config -w",
+    "lint": "eslint './src/**/*.{ts,tsx}'",
+    "lint:fix": "eslint './src/**/*.{ts,tsx}' --fix"
   },
   "dependencies": {
     "@apollo/client": "^3.7.10",

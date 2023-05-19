@@ -23,7 +23,7 @@ export const Avatar = ({ size, imgUrl, ...remainProps }: AvatarProps) => {
   };
 
   return (
-    <div css={{ position: 'relative' }}>
+    <div style={{ position: 'relative' }}>
       {isLoading && <Cover size={size} />}
       <StyledAvatar
         size={size}

@@ -1,22 +1,24 @@
 import { isAuthenticatedAtom } from '@/utils/atoms/isAuthenticatedAtom';
-import { lazyImport } from '@/utils/lazyImport';
 import { useAtomValue } from 'jotai';
-import { Suspense } from 'react';
+import { Suspense, lazy } from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
 import { ROUTES } from './ROUTES';
 import { protectedRoutes } from './protectedRoutes';
 
-const { LandingPage } = lazyImport(
-  () => import('@/pages/LandingPage'),
-  'LandingPage',
+const LandingPage = lazy(() =>
+  import('@/pages/LandingPage').then((module) => ({
+    default: module.LandingPage,
+  })),
 );
-const { NotFoundPage } = lazyImport(
-  () => import('@/pages/ErrorPages/404'),
-  'NotFoundPage',
+const NotFoundPage = lazy(() =>
+  import('@/pages/ErrorPages/404').then((module) => ({
+    default: module.NotFoundPage,
+  })),
 );
-const { LandingLayout } = lazyImport(
-  () => import('@/components/layouts/LandingLayout'),
-  'LandingLayout',
+const LandingLayout = lazy(() =>
+  import('@/components/layouts/LandingLayout').then((module) => ({
+    default: module.LandingLayout,
+  })),
 );
 
 export const AppRoutes = () => {
@@ -52,5 +54,5 @@ export const AppRoutes = () => {
     ...restRoutes,
   ]);
 
-  return <>{element}</>;
+  return element;
 };

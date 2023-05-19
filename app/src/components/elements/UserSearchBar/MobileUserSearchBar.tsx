@@ -41,7 +41,7 @@ export const MobileUserSearchBar = () => {
     preview({
       variables: { name: debouncedInput },
     });
-  }, [debouncedInput]);
+  }, [debouncedInput, preview]);
 
   const handleUserSubmit = (username: string) => {
     if (inputRef != null && inputRef.current != null) {

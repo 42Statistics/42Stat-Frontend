@@ -3,31 +3,39 @@ import { AuthGuard } from '@/components/guards/AuthGuard';
 import { LogoutPage } from '@/pages/LogoutPage';
 import { HomePageSkeleton } from '@/pages/PageSkeletons/HomePageSkeleton';
 import { ProfilePageSkeleton } from '@/pages/PageSkeletons/ProfilePageSkeleton';
-import { lazyImport } from '@/utils/lazyImport';
-import { Suspense } from 'react';
+import { Suspense, lazy } from 'react';
 import { Outlet } from 'react-router-dom';
 import { ROUTES } from './ROUTES';
 
-const { HomePage } = lazyImport(() => import('@/pages/HomePage'), 'HomePage');
-const { LeaderBoardPage } = lazyImport(
-  () => import('@/pages/LeaderBoardPage'),
-  'LeaderBoardPage',
+const HomePage = lazy(() =>
+  import('@/pages/HomePage').then((module) => ({
+    default: module.HomePage,
+  })),
 );
-const { EvalLogSearchPage } = lazyImport(
-  () => import('@/pages/EvalLogSearchPage'),
-  'EvalLogSearchPage',
+const LeaderBoardPage = lazy(() =>
+  import('@/pages/LeaderBoardPage').then((module) => ({
+    default: module.LeaderBoardPage,
+  })),
 );
-const { ProfilePage } = lazyImport(
-  () => import('@/pages/ProfilePage'),
-  'ProfilePage',
+const EvalLogSearchPage = lazy(() =>
+  import('@/pages/EvalLogSearchPage').then((module) => ({
+    default: module.EvalLogSearchPage,
+  })),
 );
-const { ProjectPage } = lazyImport(
-  () => import('@/pages/ProjectPage'),
-  'ProjectPage',
+const ProfilePage = lazy(() =>
+  import('@/pages/ProfilePage').then((module) => ({
+    default: module.ProfilePage,
+  })),
 );
-const { MainLayout } = lazyImport(
-  () => import('@/components/layouts/MainLayout'),
-  'MainLayout',
+const ProjectPage = lazy(() =>
+  import('@/pages/ProjectPage').then((module) => ({
+    default: module.ProjectPage,
+  })),
+);
+const MainLayout = lazy(() =>
+  import('@/components/layouts/MainLayout').then((module) => ({
+    default: module.MainLayout,
+  })),
 );
 
 const MainApp = () => {

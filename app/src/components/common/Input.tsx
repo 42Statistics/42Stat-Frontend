@@ -10,6 +10,8 @@ export const Input = forwardRef(
   },
 );
 
+Input.displayName = 'Input';
+
 const StyledInput = styled.input`
   all: unset;
   width: 100%;

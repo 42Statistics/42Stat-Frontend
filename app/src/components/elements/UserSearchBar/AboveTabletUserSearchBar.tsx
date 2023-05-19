@@ -37,7 +37,7 @@ export const AboveTabletUserSearchBar = () => {
     preview({
       variables: { name: debouncedInput },
     });
-  }, [debouncedInput]);
+  }, [debouncedInput, preview]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (!isEnterKeyReleased(e)) return;

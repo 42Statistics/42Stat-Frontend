@@ -3,7 +3,7 @@ import { Image } from '../common';
 
 export const IntraLink = () => {
   return (
-    <a target="_blank" href="https://intra.42.fr">
+    <a target="_blank" rel="noreferrer" href="https://intra.42.fr">
       <IntraLinkLayout>
         <Image src="/42-logo.png" width="20px" />
       </IntraLinkLayout>

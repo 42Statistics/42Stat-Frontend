@@ -20,14 +20,28 @@ const GET_POOLED_AT = gql(/* GraphQL */ `
 `);
 
 export const PooledAt = () => {
+  const title = '본과정 시작일';
   const { loading, error, data } = useQuery(GET_POOLED_AT);
-
-  if (loading) return <Loader />;
-  if (error) return <ApolloBadRequest msg={error.message} />;
-  if (!data) return <ApolloNotFound />;
+  if (loading)
+    return (
+      <DashboardContent title={title}>
+        <Loader />
+      </DashboardContent>
+    );
+  if (error)
+    return (
+      <DashboardContent title={title}>
+        <ApolloBadRequest msg={error.message} />
+      </DashboardContent>
+    );
+  if (!data)
+    return (
+      <DashboardContent title={title}>
+        <ApolloNotFound />
+      </DashboardContent>
+    );
 
   const { pooledAt } = data.getPersonGeneralPage.userProfile;
-  const title = '본과정 시작일';
 
   return (
     <DashboardContent title={title}>

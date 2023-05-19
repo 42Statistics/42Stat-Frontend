@@ -21,15 +21,29 @@ const GET_AVERAGE_CIRCLE_DURATION = gql(/* GraphQL */ `
 `);
 
 export const AverageCircleDurations = () => {
-  const { loading, error, data } = useQuery(GET_AVERAGE_CIRCLE_DURATION);
-
-  if (loading) return <Loader />;
-  if (error) return <ApolloBadRequest msg={error.message} />;
-  if (!data) return <ApolloNotFound />;
-
-  const { averageCircleDurations } = data.getTotalPage;
   const title = 'N서클 통과할 때까지의 누적 기간';
   const description = '본과정 시작일 기준';
+  const { loading, error, data } = useQuery(GET_AVERAGE_CIRCLE_DURATION);
+  if (loading)
+    return (
+      <DashboardContent title={title} description={description}>
+        <Loader />
+      </DashboardContent>
+    );
+  if (error)
+    return (
+      <DashboardContent title={title} description={description}>
+        <ApolloBadRequest msg={error.message} />
+      </DashboardContent>
+    );
+  if (!data)
+    return (
+      <DashboardContent title={title} description={description}>
+        <ApolloNotFound />
+      </DashboardContent>
+    );
+
+  const { averageCircleDurations } = data.getTotalPage;
 
   const categories = averageCircleDurations.map(({ circle }) => String(circle));
   const seriesData = averageCircleDurations.map(({ value }) => value);

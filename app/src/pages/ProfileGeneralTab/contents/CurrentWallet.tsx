@@ -19,14 +19,28 @@ const GET_CURRENT_WALLET = gql(/* GraphQL */ `
 `);
 
 export const CurrentWallet = () => {
+  const title = '보유 월렛';
   const { loading, error, data } = useQuery(GET_CURRENT_WALLET);
-
-  if (loading) return <Loader />;
-  if (error) return <ApolloBadRequest msg={error.message} />;
-  if (!data) return <ApolloNotFound />;
+  if (loading)
+    return (
+      <DashboardContent title={title}>
+        <Loader />
+      </DashboardContent>
+    );
+  if (error)
+    return (
+      <DashboardContent title={title}>
+        <ApolloBadRequest msg={error.message} />
+      </DashboardContent>
+    );
+  if (!data)
+    return (
+      <DashboardContent title={title}>
+        <ApolloNotFound />
+      </DashboardContent>
+    );
 
   const { wallet } = data.getPersonGeneralPage.userProfile;
-  const title = '보유 월렛';
   const unit = '₳';
 
   return (

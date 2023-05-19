@@ -17,17 +17,30 @@ const GET_PERSONAL_TOTAL_EVAL_CNT = gql(/* GraphQL */ `
 `);
 
 export const TotalEvalCnt = () => {
+  const title = '누적 평가 횟수';
   const { loading, error, data } = useQuery(GET_PERSONAL_TOTAL_EVAL_CNT, {
     variables: { uid: 99947 },
   });
-
-  if (loading) return <Loader />;
-  if (error) return <ApolloBadRequest msg={error.message} />;
-  if (!data) return <ApolloNotFound />;
+  if (loading)
+    return (
+      <DashboardContent title={title}>
+        <Loader />
+      </DashboardContent>
+    );
+  if (error)
+    return (
+      <DashboardContent title={title}>
+        <ApolloBadRequest msg={error.message} />
+      </DashboardContent>
+    );
+  if (!data)
+    return (
+      <DashboardContent title={title}>
+        <ApolloNotFound />
+      </DashboardContent>
+    );
 
   const { totalCount } = data.getPersonalEvalPage;
-
-  const title = '누적 평가 횟수';
   const unit = '회';
 
   return (

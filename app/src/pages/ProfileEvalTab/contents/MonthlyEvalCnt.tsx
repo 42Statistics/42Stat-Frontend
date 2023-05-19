@@ -27,18 +27,31 @@ const GET_MONTHLY_EVAL_CNT = gql(/* GraphQL */ `
 `);
 
 export const MonthlyEvalCnt = () => {
+  const title = '월간 평가 횟수';
   const { loading, error, data } = useQuery(GET_MONTHLY_EVAL_CNT, {
     variables: { uid: 99947 },
   });
-
-  if (loading) return <Loader />;
-  if (error) return <ApolloBadRequest msg={error.message} />;
-  if (!data) return <ApolloNotFound />;
+  if (loading)
+    return (
+      <DashboardContent title={title}>
+        <Loader />
+      </DashboardContent>
+    );
+  if (error)
+    return (
+      <DashboardContent title={title}>
+        <ApolloBadRequest msg={error.message} />
+      </DashboardContent>
+    );
+  if (!data)
+    return (
+      <DashboardContent title={title}>
+        <ApolloNotFound />
+      </DashboardContent>
+    );
 
   const { currMonthCount, lastMonthCount } = data.getPersonalEvalPage;
   const { from, to } = currMonthCount;
-
-  const title = '월간 평가 횟수';
   const description = `${dayjs(from).format('YYYY년 M월')}`;
 
   return (

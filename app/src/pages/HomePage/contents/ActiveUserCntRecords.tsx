@@ -21,14 +21,28 @@ const GET_ACTIVE_USER_CNT_RECORD = gql(/* GraphQL */ `
 `);
 
 export const ActiveUserCntRecords = () => {
+  const title = '활성화 유저 수 추이';
   const { loading, error, data } = useQuery(GET_ACTIVE_USER_CNT_RECORD);
-
-  if (loading) return <Loader />;
-  if (error) return <ApolloBadRequest msg={error.message} />;
-  if (!data) return <ApolloNotFound />;
+  if (loading)
+    return (
+      <DashboardContent title={title}>
+        <Loader />
+      </DashboardContent>
+    );
+  if (error)
+    return (
+      <DashboardContent title={title}>
+        <ApolloBadRequest msg={error.message} />
+      </DashboardContent>
+    );
+  if (!data)
+    return (
+      <DashboardContent title={title}>
+        <ApolloNotFound />
+      </DashboardContent>
+    );
 
   const { activeUserCntRecords } = data.getTotalPage;
-  const title = '활성화 유저 수 추이';
   const seriesData = activeUserCntRecords.map(({ at, value }) => ({
     x: at,
     y: value,

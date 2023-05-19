@@ -37,28 +37,33 @@ export const EvalCntPerPoints = () => {
   // return <EvalCntPerPointsChart categories={categories} series={series} />;
 };
 
-type EvalCntPerPointsChartProps = {
-  categories: number[];
-  series: ApexAxisChartSeries;
-};
+// type EvalCntPerPointsChartProps = {
+//   categories: number[];
+//   series: ApexAxisChartSeries;
+// };
 
-const EvalCntPerPointsChart = ({
-  categories,
-  series,
-}: EvalCntPerPointsChartProps) => {
-  const options: ApexCharts.ApexOptions = {
-    xaxis: {
-      categories,
-      labels: {
-        formatter: (value) => numberWithUnitFormatter(parseInt(value), '개'),
-      },
-    },
-    yaxis: {
-      max: 80,
-      labels: {
-        formatter: (value) => numberWithUnitFormatter(value, '회'),
-      },
-    },
-  };
-  return <BarChart series={series} options={options} />;
-};
+// const EvalCntPerPointsChart = ({
+//   categories,
+//   series,
+// }: EvalCntPerPointsChartProps) => {
+//   const options: ApexCharts.ApexOptions = {
+//     xaxis: {
+//       categories,
+//       labels: {
+//         formatter: (value) => numberWithUnitFormatter(parseInt(value), '개'),
+//       },
+//     },
+//     yaxis: {
+//       max: 80,
+//       labels: {
+//         formatter: (value) => numberWithUnitFormatter(value, '회'),
+//       },
+//     },
+//   };
+//   return (
+//     <BarChart
+//       series={series}
+//       options={options}
+//     />
+//   );
+// };

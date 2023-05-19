@@ -6,6 +6,7 @@ import dayjs from 'dayjs';
 import { capitalize } from 'lodash-es';
 
 export const TigCntPerCoalition = () => {
+  const title = '이번 달 누적 코알리숑 티그 횟수';
   const test = [
     {
       coalition: {
@@ -34,7 +35,6 @@ export const TigCntPerCoalition = () => {
   ];
   const max = Math.max(...test.map((item) => item.value));
 
-  const title = '이번 달 누적 코알리숑 티그 횟수';
   const description = `${dayjs().format('YYYY년 M월')}`;
   const unit = '회';
 

@@ -24,14 +24,28 @@ const GET_CURRENT_COALITION_SCORE = gql(/* GraphQL */ `
 `);
 
 export const CurrentCoalitionScore = () => {
+  const title = '코알리숑 스코어';
   const { loading, error, data } = useQuery(GET_CURRENT_COALITION_SCORE);
-
-  if (loading) return <Loader />;
-  if (error) return <ApolloBadRequest msg={error.message} />;
-  if (!data) return <ApolloNotFound />;
+  if (loading)
+    return (
+      <DashboardContent title={title}>
+        <Loader />
+      </DashboardContent>
+    );
+  if (error)
+    return (
+      <DashboardContent title={title}>
+        <ApolloBadRequest msg={error.message} />
+      </DashboardContent>
+    );
+  if (!data)
+    return (
+      <DashboardContent title={title}>
+        <ApolloNotFound />
+      </DashboardContent>
+    );
 
   const { coalition } = data.getPersonGeneralPage.userProfile;
-  const title = '코알리숑 스코어';
 
   return (
     <DashboardContent title={title}>

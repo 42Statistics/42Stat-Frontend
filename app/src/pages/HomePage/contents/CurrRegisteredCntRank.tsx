@@ -23,14 +23,29 @@ const GET_CURR_REGISTERED_CNT_RANK = gql(/* GraphQL */ `
 `);
 
 export const CurrRegisteredCntRank = () => {
+  const title = '지금 가장 많은 사람이 참여하는 과제는?';
   const { loading, error, data } = useQuery(GET_CURR_REGISTERED_CNT_RANK);
 
-  if (loading) return <Loader />;
-  if (error) return <ApolloBadRequest msg={error.message} />;
-  if (!data) return <ApolloNotFound />;
+  if (loading)
+    return (
+      <DashboardContent title={title}>
+        <Loader />
+      </DashboardContent>
+    );
+  if (error)
+    return (
+      <DashboardContent title={title}>
+        <ApolloBadRequest msg={error.message} />
+      </DashboardContent>
+    );
+  if (!data)
+    return (
+      <DashboardContent title={title}>
+        <ApolloNotFound />
+      </DashboardContent>
+    );
 
   const { currRegisteredCntRank } = data.getHomePage;
-  const title = '지금 가장 많은 사람이 참여하는 과제는?';
   const unit = '명';
 
   const rankList: RankItemType[] = currRegisteredCntRank.map(

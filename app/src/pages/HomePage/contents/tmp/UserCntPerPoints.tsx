@@ -36,29 +36,34 @@ export const UserCntPerPoints = () => {
   // return <UserCntPerPointsChart categories={categories} series={series} />;
 };
 
-type UserCntPerPointsChartProps = {
-  categories: number[];
-  series: ApexAxisChartSeries;
-};
+// type UserCntPerPointsChartProps = {
+//   categories: number[];
+//   series: ApexAxisChartSeries;
+// };
 
-const UserCntPerPointsChart = ({
-  categories,
-  series,
-}: UserCntPerPointsChartProps) => {
-  const options: ApexCharts.ApexOptions = {
-    xaxis: {
-      categories,
-      labels: {
-        formatter: (value) => numberWithUnitFormatter(parseInt(value), '개'),
-      },
-    },
-    yaxis: {
-      max: 500,
-      labels: {
-        formatter: (value) => numberWithUnitFormatter(value, '명'),
-      },
-    },
-  };
+// const UserCntPerPointsChart = ({
+//   categories,
+//   series,
+// }: UserCntPerPointsChartProps) => {
+//   const options: ApexCharts.ApexOptions = {
+//     xaxis: {
+//       categories,
+//       labels: {
+//         formatter: (value) => numberWithUnitFormatter(parseInt(value), '개'),
+//       },
+//     },
+//     yaxis: {
+//       max: 500,
+//       labels: {
+//         formatter: (value) => numberWithUnitFormatter(value, '명'),
+//       },
+//     },
+//   };
 
-  return <BarChart options={options} series={series} />;
-};
+//   return (
+//     <BarChart
+//       options={options}
+//       series={series}
+//     />
+//   );
+// };

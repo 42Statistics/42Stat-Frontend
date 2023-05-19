@@ -17,6 +17,7 @@ const GET_PERSONAL_AVERAGE_FEEDBACK_LENGTH = gql(/* GraphQL */ `
 `);
 
 export const AverageFeedbackLength = () => {
+  const title = '평균 피드백 길이';
   const { loading, error, data } = useQuery(
     GET_PERSONAL_AVERAGE_FEEDBACK_LENGTH,
     {
@@ -25,14 +26,26 @@ export const AverageFeedbackLength = () => {
       },
     },
   );
-
-  if (loading) return <Loader />;
-  if (error) return <ApolloBadRequest msg={error.message} />;
-  if (!data) return <ApolloNotFound />;
+  if (loading)
+    return (
+      <DashboardContent title={title}>
+        <Loader />
+      </DashboardContent>
+    );
+  if (error)
+    return (
+      <DashboardContent title={title}>
+        <ApolloBadRequest msg={error.message} />
+      </DashboardContent>
+    );
+  if (!data)
+    return (
+      <DashboardContent title={title}>
+        <ApolloNotFound />
+      </DashboardContent>
+    );
 
   const { averageFeedbackLength } = data.getPersonalEvalPage;
-
-  const title = '평균 피드백 길이';
   const unit = '자';
 
   return (

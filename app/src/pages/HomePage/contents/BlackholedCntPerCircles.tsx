@@ -22,14 +22,28 @@ const GET_WHEN_GO_BLACKHOLE = gql(/* GraphQL */ `
 `);
 
 export const BlackholedCntPerCircles = () => {
+  const title = '언제 블랙홀에 많이 빠질까?';
   const { loading, error, data } = useQuery(GET_WHEN_GO_BLACKHOLE);
-
-  if (loading) return <Loader />;
-  if (error) return <ApolloBadRequest msg={error.message} />;
-  if (!data) return <ApolloNotFound />;
+  if (loading)
+    return (
+      <DashboardContent title={title}>
+        <Loader />
+      </DashboardContent>
+    );
+  if (error)
+    return (
+      <DashboardContent title={title}>
+        <ApolloBadRequest msg={error.message} />
+      </DashboardContent>
+    );
+  if (!data)
+    return (
+      <DashboardContent title={title}>
+        <ApolloNotFound />
+      </DashboardContent>
+    );
 
   const { blackholedCntPerCircles } = data.getTotalPage;
-  const title = '언제 블랙홀에 많이 빠질까?';
 
   const labels = blackholedCntPerCircles.map(({ circle }) => `${circle}서클`);
   const series = blackholedCntPerCircles.map(({ value }) => value);

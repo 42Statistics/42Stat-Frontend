@@ -30,20 +30,34 @@ const GET_PREFERRED_TIME = gql(/* GraphQL */ `
 `);
 
 export const PrefferedTime = () => {
+  const title = '주 접속 시간대';
   const { loading, error, data } = useQuery(GET_PREFERRED_TIME);
-
-  if (loading) return <Loader />;
-  if (error) return <ApolloBadRequest msg={error.message} />;
-  if (!data) return <ApolloNotFound />;
+  if (loading)
+    return (
+      <DashboardContent title={title}>
+        <Loader />
+      </DashboardContent>
+    );
+  if (error)
+    return (
+      <DashboardContent title={title}>
+        <ApolloBadRequest msg={error.message} />
+      </DashboardContent>
+    );
+  if (!data)
+    return (
+      <DashboardContent title={title}>
+        <ApolloNotFound />
+      </DashboardContent>
+    );
 
   const { morning, daytime, evening, night } =
     data.getPersonGeneralPage.logtimeInfo.data.preferredTime;
   const { from, to } = data.getPersonGeneralPage.logtimeInfo;
+  const description = `${dayjs(from).format('YYYY년 M월')}`;
+
   const total = morning + daytime + evening + night;
   const max = Math.max(morning, daytime, evening, night);
-
-  const title = '주 접속 시간대';
-  const description = `${dayjs(from).format('YYYY년 M월')}`;
 
   return (
     <DashboardContent title={title} description={description}>

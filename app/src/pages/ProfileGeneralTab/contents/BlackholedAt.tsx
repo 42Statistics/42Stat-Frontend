@@ -19,14 +19,28 @@ const GET_BLACKHOLED_AT = gql(/* GraphQL */ `
 `);
 
 export const BlackholedAt = () => {
+  const title = 'Black Hole Absorption';
   const { loading, error, data } = useQuery(GET_BLACKHOLED_AT);
-
-  if (loading) return <Loader />;
-  if (error) return <ApolloBadRequest msg={error.message} />;
-  if (!data) return <ApolloNotFound />;
+  if (loading)
+    return (
+      <DashboardContent title={title}>
+        <Loader />
+      </DashboardContent>
+    );
+  if (error)
+    return (
+      <DashboardContent title={title}>
+        <ApolloBadRequest msg={error.message} />
+      </DashboardContent>
+    );
+  if (!data)
+    return (
+      <DashboardContent title={title}>
+        <ApolloNotFound />
+      </DashboardContent>
+    );
 
   const { blackholedAt } = data.getPersonGeneralPage.userProfile;
-  const title = 'Black Hole Absorption';
 
   return (
     <DashboardContent title={title}>

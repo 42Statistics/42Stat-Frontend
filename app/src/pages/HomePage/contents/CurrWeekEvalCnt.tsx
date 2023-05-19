@@ -27,16 +27,30 @@ const GET_CURR_WEEK_EVAL_CNT = gql(/* GraphQL */ `
 `);
 
 export const CurrWeekEvalCnt = () => {
+  const title = '주간 총 평가 횟수';
   const { loading, error, data } = useQuery(GET_CURR_WEEK_EVAL_CNT);
-
-  if (loading) return <Loader />;
-  if (error) return <ApolloBadRequest msg={error.message} />;
-  if (!data) return <ApolloNotFound />;
+  if (loading)
+    return (
+      <DashboardContent title={title}>
+        <Loader />
+      </DashboardContent>
+    );
+  if (error)
+    return (
+      <DashboardContent title={title}>
+        <ApolloBadRequest msg={error.message} />
+      </DashboardContent>
+    );
+  if (!data)
+    return (
+      <DashboardContent title={title}>
+        <ApolloNotFound />
+      </DashboardContent>
+    );
 
   const { currWeekEvalCnt, lastWeekEvalCnt } = data.getHomePage;
   const { from, to } = currWeekEvalCnt;
 
-  const title = '주간 총 평가 횟수';
   const description = `${dayjs(from).format('YYYY년 M월 w주')}`;
   const unit = '회';
 

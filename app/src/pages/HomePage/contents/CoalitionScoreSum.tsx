@@ -28,14 +28,28 @@ export const GET_COALITION_TOTAL_SCORES = gql(/* GraphQL */ `
 `);
 
 export const CoalitionScoreSum = () => {
+  const title = '누적 코알리숑 스코어 합산';
   const { loading, error, data } = useQuery(GET_COALITION_TOTAL_SCORES);
-
-  if (loading) return <Loader />;
-  if (error) return <ApolloBadRequest msg={error.message} />;
-  if (!data) return <ApolloNotFound />;
+  if (loading)
+    return (
+      <DashboardContent title={title}>
+        <Loader />
+      </DashboardContent>
+    );
+  if (error)
+    return (
+      <DashboardContent title={title}>
+        <ApolloBadRequest msg={error.message} />
+      </DashboardContent>
+    );
+  if (!data)
+    return (
+      <DashboardContent title={title}>
+        <ApolloNotFound />
+      </DashboardContent>
+    );
 
   const { totalScores } = data.getTotalPage;
-  const title = '누적 코알리숑 스코어 합산';
 
   const categories: string[] = [];
   const seriesData: number[] = [];

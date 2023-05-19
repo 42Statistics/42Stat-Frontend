@@ -3,10 +3,10 @@ import { DashboardContent } from '@/components/templates/Dashboard';
 import { useTheme } from '@emotion/react';
 
 export const MemberPercentage = () => {
-  const { memberPercentage } = { memberPercentage: 4.242 };
-
   const title = 'Member 비율';
   const description = '비활성화 유저도 직전 상태로 포함';
+
+  const { memberPercentage } = { memberPercentage: 4.242 };
 
   return (
     <DashboardContent title={title} description={description}>

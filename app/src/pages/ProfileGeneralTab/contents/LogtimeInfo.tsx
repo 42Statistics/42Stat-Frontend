@@ -32,17 +32,30 @@ const GET_LOGTIME_INFO = gql(/* GraphQL */ `
 `);
 
 export const LogtimeInfo = () => {
+  const title = '월간 출석 시간';
   const { loading, error, data } = useQuery(GET_LOGTIME_INFO);
-
-  if (loading) return <Loader />;
-  if (error) return <ApolloBadRequest msg={error.message} />;
-  if (!data) return <ApolloNotFound />;
+  if (loading)
+    return (
+      <DashboardContent title={title}>
+        <Loader />
+      </DashboardContent>
+    );
+  if (error)
+    return (
+      <DashboardContent title={title}>
+        <ApolloBadRequest msg={error.message} />
+      </DashboardContent>
+    );
+  if (!data)
+    return (
+      <DashboardContent title={title}>
+        <ApolloNotFound />
+      </DashboardContent>
+    );
 
   const { currMonthLogtime, lastMonthLogtime } =
     data.getPersonGeneralPage.logtimeInfo.data;
   const { from, to } = data.getPersonGeneralPage.logtimeInfo;
-
-  const title = '월간 출석 시간';
   const description = `${dayjs(from).format('YYYY년 M월')}`;
 
   return (

@@ -27,16 +27,30 @@ const GET_CURR_MONTH_BLACKHOLED_CNT = gql(/* GraphQL */ `
 `);
 
 export const CurrMonthBlackholedCnt = () => {
+  const title = '이번 달 누적 블랙홀 인원';
   const { loading, error, data } = useQuery(GET_CURR_MONTH_BLACKHOLED_CNT);
-
-  if (loading) return <Loader />;
-  if (error) return <ApolloBadRequest msg={error.message} />;
-  if (!data) return <ApolloNotFound />;
+  if (loading)
+    return (
+      <DashboardContent title={title}>
+        <Loader />
+      </DashboardContent>
+    );
+  if (error)
+    return (
+      <DashboardContent title={title}>
+        <ApolloBadRequest msg={error.message} />
+      </DashboardContent>
+    );
+  if (!data)
+    return (
+      <DashboardContent title={title}>
+        <ApolloNotFound />
+      </DashboardContent>
+    );
 
   const { currMonthBlackholedCnt, lastMonthBlackholedCnt } = data.getHomePage;
   const { from, to } = currMonthBlackholedCnt;
 
-  const title = '이번 달 누적 블랙홀 인원';
   const description = `${dayjs(from).format('YYYY년 M월')}`;
   const unit = '명';
 

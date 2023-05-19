@@ -3,10 +3,10 @@ import { DashboardContent } from '@/components/templates/Dashboard';
 import { useTheme } from '@emotion/react';
 
 export const BlackholedPercentage = () => {
-  const { blackholedPercentage } = { blackholedPercentage: 72.42 };
-
   const title = '블랙홀 유저 비율';
   const description = '비활성화 Member는 Survived에 포함';
+
+  const { blackholedPercentage } = { blackholedPercentage: 72.42 };
 
   return (
     <DashboardContent title={title} description={description}>

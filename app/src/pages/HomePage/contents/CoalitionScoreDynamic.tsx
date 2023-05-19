@@ -34,14 +34,28 @@ export const GET_COALITION_SCORE_RECORD = gql(/* GraphQL */ `
 `);
 
 export const CoalitionScoreDynamic = () => {
+  const title = '역대 코알리숑 스코어 변동 추이';
   const { loading, error, data } = useQuery(GET_COALITION_SCORE_RECORD);
-
-  if (loading) return <Loader />;
-  if (error) return <ApolloBadRequest msg={error.message} />;
-  if (!data) return <ApolloNotFound />;
+  if (loading)
+    return (
+      <DashboardContent title={title}>
+        <Loader />
+      </DashboardContent>
+    );
+  if (error)
+    return (
+      <DashboardContent title={title}>
+        <ApolloBadRequest msg={error.message} />
+      </DashboardContent>
+    );
+  if (!data)
+    return (
+      <DashboardContent title={title}>
+        <ApolloNotFound />
+      </DashboardContent>
+    );
 
   const { scoreRecords } = data.getTotalPage;
-  const title = '역대 코알리숑 스코어 변동 추이';
 
   const colorList: string[] = [];
   const series = scoreRecords.map(({ coalition, records }) => {

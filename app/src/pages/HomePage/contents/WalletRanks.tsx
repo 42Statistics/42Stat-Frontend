@@ -25,15 +25,28 @@ const GET_WALLET_RANK = gql(/* GraphQL */ `
 `);
 
 export const WalletRanks = () => {
+  const title = '보유 월렛 랭킹';
   const { loading, error, data } = useQuery(GET_WALLET_RANK);
-
-  if (loading) return <Loader />;
-  if (error) return <ApolloBadRequest msg={error.message} />;
-  if (!data) return <ApolloNotFound />;
+  if (loading)
+    return (
+      <DashboardContent title={title}>
+        <Loader />
+      </DashboardContent>
+    );
+  if (error)
+    return (
+      <DashboardContent title={title}>
+        <ApolloBadRequest msg={error.message} />
+      </DashboardContent>
+    );
+  if (!data)
+    return (
+      <DashboardContent title={title}>
+        <ApolloNotFound />
+      </DashboardContent>
+    );
 
   const { walletRanks } = data.getTotalPage;
-
-  const title = '보유 월렛 랭킹';
   const unit = '₳';
 
   const rankList: RankItemType[] = walletRanks.map(

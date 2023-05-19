@@ -26,11 +26,27 @@ const GET_LEVEL_GRAPH = gql(/* GraphQL */ `
 `);
 
 export const LevelGraph = () => {
+  const title = '레벨 증가 그래프';
+  const description = `현재일로부터 1년`;
   const { loading, error, data } = useQuery(GET_LEVEL_GRAPH);
-
-  if (loading) return <Loader />;
-  if (error) return <ApolloBadRequest msg={error.message} />;
-  if (!data) return <ApolloNotFound />;
+  if (loading)
+    return (
+      <DashboardContent title={title} description={description}>
+        <Loader />
+      </DashboardContent>
+    );
+  if (error)
+    return (
+      <DashboardContent title={title} description={description}>
+        <ApolloBadRequest msg={error.message} />
+      </DashboardContent>
+    );
+  if (!data)
+    return (
+      <DashboardContent title={title} description={description}>
+        <ApolloNotFound />
+      </DashboardContent>
+    );
 
   const { levelGraphs } = data.getPersonGeneralPage;
   const [from, to] = [levelGraphs.from, levelGraphs.to];
@@ -53,9 +69,6 @@ export const LevelGraph = () => {
       data: averageLevelSeries,
     },
   ];
-
-  const title = '레벨 증가 그래프';
-  const description = `현재일로부터 1년`;
 
   return (
     <DashboardContent title={title} description={description}>

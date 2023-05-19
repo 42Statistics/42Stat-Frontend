@@ -19,14 +19,28 @@ const GET_CURRENT_CORRECTION_POINT = gql(/* GraphQL */ `
 `);
 
 export const CurrentCorrectionPoint = () => {
+  const title = '보유 평가 포인트';
   const { loading, error, data } = useQuery(GET_CURRENT_CORRECTION_POINT);
-
-  if (loading) return <Loader />;
-  if (error) return <ApolloBadRequest msg={error.message} />;
-  if (!data) return <ApolloNotFound />;
+  if (loading)
+    return (
+      <DashboardContent title={title}>
+        <Loader />
+      </DashboardContent>
+    );
+  if (error)
+    return (
+      <DashboardContent title={title}>
+        <ApolloBadRequest msg={error.message} />
+      </DashboardContent>
+    );
+  if (!data)
+    return (
+      <DashboardContent title={title}>
+        <ApolloNotFound />
+      </DashboardContent>
+    );
 
   const { correctionPoint } = data.getPersonGeneralPage.userProfile;
-  const title = '보유 평가 포인트';
   const unit = '개';
 
   return (

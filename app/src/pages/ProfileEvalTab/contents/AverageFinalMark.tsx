@@ -17,20 +17,33 @@ const GET_AVERAGE_FINAL_MARK = gql(/* GraphQL */ `
 `);
 
 export const AverageFinalMark = () => {
+  const title = '평균 평가 점수';
+  const description = '평가자일 때';
   const { loading, error, data } = useQuery(GET_AVERAGE_FINAL_MARK, {
     variables: {
       uid: 99947,
     },
   });
-
-  if (loading) return <Loader />;
-  if (error) return <ApolloBadRequest msg={error.message} />;
-  if (!data) return <ApolloNotFound />;
+  if (loading)
+    return (
+      <DashboardContent title={title} description={description}>
+        <Loader />
+      </DashboardContent>
+    );
+  if (error)
+    return (
+      <DashboardContent title={title} description={description}>
+        <ApolloBadRequest msg={error.message} />
+      </DashboardContent>
+    );
+  if (!data)
+    return (
+      <DashboardContent title={title} description={description}>
+        <ApolloNotFound />
+      </DashboardContent>
+    );
 
   const { averageFinalMark } = data.getPersonalEvalPage;
-
-  const title = '평균 평가 점수';
-  const description = '평가자일 때';
   const unit = '점';
 
   return (

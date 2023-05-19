@@ -19,14 +19,28 @@ const GET_LAST_REGISTERED = gql(/* GraphQL */ `
 `);
 
 export const LastRegistered = () => {
+  const title = '최근 신청한 과제';
   const { loading, error, data } = useQuery(GET_LAST_REGISTERED);
-
-  if (loading) return <Loader />;
-  if (error) return <ApolloBadRequest msg={error.message} />;
-  if (!data) return <ApolloNotFound />;
+  if (loading)
+    return (
+      <DashboardContent title={title}>
+        <Loader />
+      </DashboardContent>
+    );
+  if (error)
+    return (
+      <DashboardContent title={title}>
+        <ApolloBadRequest msg={error.message} />
+      </DashboardContent>
+    );
+  if (!data)
+    return (
+      <DashboardContent title={title}>
+        <ApolloNotFound />
+      </DashboardContent>
+    );
 
   const { lastRegistered } = data.getPersonGeneralPage.teamInfo;
-  const title = '최근 신청한 과제';
 
   return (
     <DashboardContent title={title}>

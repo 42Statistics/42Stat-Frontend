@@ -17,14 +17,28 @@ const GET_AVERAGE_COMMENT_LENGTH = gql(/* GraphQL */ `
 `);
 
 export const AverageCommentLength = () => {
+  const title = '평균 코멘트 길이';
   const { loading, error, data } = useQuery(GET_AVERAGE_COMMENT_LENGTH);
-
-  if (loading) return <Loader />;
-  if (error) return <ApolloBadRequest msg={error.message} />;
-  if (!data) return <ApolloNotFound />;
+  if (loading)
+    return (
+      <DashboardContent title={title}>
+        <Loader />
+      </DashboardContent>
+    );
+  if (error)
+    return (
+      <DashboardContent title={title}>
+        <ApolloBadRequest msg={error.message} />
+      </DashboardContent>
+    );
+  if (!data)
+    return (
+      <DashboardContent title={title}>
+        <ApolloNotFound />
+      </DashboardContent>
+    );
 
   const { averageCommentLength } = data.getTotalPage;
-  const title = '평균 코멘트 길이';
   const unit = '자';
 
   return (

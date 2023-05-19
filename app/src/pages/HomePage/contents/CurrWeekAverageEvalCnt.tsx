@@ -3,9 +3,9 @@ import { DashboardContent } from '@/components/templates/Dashboard';
 import dayjs from 'dayjs';
 
 export const CurrWeekAverageEvalCnt = () => {
+  const title = '주간 1인당 평가 횟수';
   const test = 1.71;
 
-  const title = '주간 1인당 평가 횟수';
   const description = `${dayjs().format('YYYY년 M월 w주')}`;
   const unit = '회';
 

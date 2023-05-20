@@ -1,6 +1,3 @@
-import { BarChart } from '@/components/elements/Chart';
-import { numberWithUnitFormatter } from '@/utils/formatters';
-
 // const GET_EVAL_CNT_PER_POINTS = gql(/* GraphQL */ `
 //   query getEvalCntPerPoints {
 //     getTotalPage {

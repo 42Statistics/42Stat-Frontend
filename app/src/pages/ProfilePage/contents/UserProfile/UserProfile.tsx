@@ -19,7 +19,6 @@ import { getTitleWithLogin } from '@/utils/getTitleWithLogin';
 import { BelowTablet, Desktop } from '@/utils/responsive/Device';
 import { titleCase } from '@/utils/titleCase';
 import { useQuery } from '@apollo/client';
-import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { truncate } from 'lodash-es';
 
@@ -54,7 +53,6 @@ const GET_USER_PROFILE = gql(/* GraphQL */ `
 `);
 
 export const UserProfile = () => {
-  const theme = useTheme();
   const { loading, error, data } = useQuery(GET_USER_PROFILE);
 
   if (loading) return <Loader />;

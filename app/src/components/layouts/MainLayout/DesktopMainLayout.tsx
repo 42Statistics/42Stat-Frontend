@@ -1,4 +1,5 @@
-import { Center, HStack } from '@/components/common';
+import { HStack, VStack } from '@/components/common';
+import { AboveTabletFooter } from '@/components/elements/Footer/AboveTabletFooter';
 import { IntraLink } from '@/components/elements/IntraLink';
 import { DesktopNavBar } from '@/components/elements/NavBar/DesktopNavBar';
 import styled from '@emotion/styled';
@@ -10,7 +11,10 @@ export const DesktopMainLayout = ({ children }: React.PropsWithChildren) => {
       <HStack>
         <DesktopNavBar />
         <DesktopMainPageLayout>
-          <Center w="100%">{children}</Center>
+          <VStack w="100%">
+            {children}
+            <AboveTabletFooter />
+          </VStack>
         </DesktopMainPageLayout>
       </HStack>
     </Layout>

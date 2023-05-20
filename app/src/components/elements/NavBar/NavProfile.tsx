@@ -8,13 +8,13 @@ import {
 import { titleCase } from '@/utils/titleCase';
 import { useTheme } from '@emotion/react';
 
-type NavProfile = {
+type NavProfileProps = {
   imgUrl: string;
   name: string;
   login: string;
 };
 
-export const NavProfile = ({ imgUrl, name, login }: NavProfile) => {
+export const NavProfile = ({ imgUrl, name, login }: NavProfileProps) => {
   const theme = useTheme();
 
   return (

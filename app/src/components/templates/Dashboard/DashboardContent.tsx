@@ -21,7 +21,7 @@ export const DashboardContent = ({
           {title && <H3MediumText>{title}</H3MediumText>}
           {description && <CaptionText>{description}</CaptionText>}
         </VStack>
-        <div css={{ width: '100%', height: '100%' }}>{children}</div>
+        <div style={{ width: '100%', height: '100%' }}>{children}</div>
       </VStack>
     </DashboardContentLayout>
   );

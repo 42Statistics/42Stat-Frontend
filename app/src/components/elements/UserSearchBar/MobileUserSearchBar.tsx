@@ -1,119 +1,173 @@
 import {
   Avatar,
+  BoldText,
   Clickable,
+  Divider,
   HStack,
+  Image,
   Input,
+  Spacer,
   Text,
   VStack,
 } from '@/components/common';
 import { isDefined } from '@/utils/isDefined';
-import { isEnterKeyReleased } from '@/utils/isEnterKeyReleased';
 import { useDebounce } from '@/utils/useDebounce';
 import { useLazyQuery } from '@apollo/client';
+import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { MdArrowBack } from '@react-icons/all-files/md/MdArrowBack';
 import { MdSearch } from '@react-icons/all-files/md/MdSearch';
 import { rgba } from 'emotion-rgba';
 import { useEffect, useRef, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
+import Modal from 'react-modal';
 import { useNavigate } from 'react-router-dom';
 import { FIND_PROJECT_PREVIEW } from './common';
 
 // TODO: SearchBar 추상화
 export const MobileUserSearchBar = () => {
   const [input, setInput] = useState<string>('');
-  const [isFocused, setIsFocused] = useState<boolean>(false);
   const debouncedInput = useDebounce(input, 100);
   const [preview, { loading, error, data }] =
     useLazyQuery(FIND_PROJECT_PREVIEW);
   const isPreviewDisplaying =
-    debouncedInput !== '' && data?.findProjectPreview.length !== 0 && !loading;
-  // ) || error;
+    debouncedInput !== '' && data?.findProjectPreview.length !== 0;
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
+  const theme = useTheme();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   useEffect(() => {
     preview({
       variables: { name: debouncedInput },
     });
-  }, [debouncedInput]);
+  }, [debouncedInput, preview]);
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (!isEnterKeyReleased(e)) return;
-    handleSubmit(input);
-  };
-
-  const handleSubmit = (username: string) => {
+  const handleUserSubmit = (username: string) => {
     if (inputRef != null && inputRef.current != null) {
       inputRef.current.value = '';
     }
+    setIsOpen(false);
     setInput('');
     navigate('/profile/' + username);
   };
 
+  const handleProjectSubmit = (username: string) => {
+    if (inputRef != null && inputRef.current != null) {
+      inputRef.current.value = '';
+    }
+    setIsOpen(false);
+    setInput('');
+    navigate('/project/' + username);
+  };
+
   return (
-    <MobileUserSearchBarLayout isFocused={isFocused}>
-      <HStack spacing="2rem">
-        <MdSearch id="search-icon" size="24px" />
-        <Input
-          ref={inputRef}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={handleKeyDown}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
-          placeholder="유저명을 입력하세요"
-        />
-      </HStack>
-      {isPreviewDisplaying && (
-        <UserSearchResult>
-          <VStack w="100%" align="start" spacing="1rem">
-            {/* {error && <Text>Error! {error.message}</Text>} */}
-            {data?.findProjectPreview
-              .slice(0, 5)
-              .filter(isDefined)
-              .map((project, idx) => (
-                <Clickable
-                  key={idx}
-                  onClick={() => handleSubmit(project.name)}
-                  element={
-                    <HStack spacing="1rem">
-                      <Avatar size="1.6rem" />
-                      <Text>{project.name}</Text>
-                    </HStack>
-                  }
-                />
-              ))}
+    <>
+      <Clickable
+        onClick={() => setIsOpen(true)}
+        element={
+          <MobileUserSearchBarLayout>
+            <HStack spacing="2rem">
+              <MdSearch id="search-icon" size="24px" />
+              <Text color={theme.colors.mono.gray300} css={{ width: '12rem' }}>
+                Search...
+              </Text>
+            </HStack>
+          </MobileUserSearchBarLayout>
+        }
+      />
+      <SearchModal isOpen={isOpen}>
+        <>
+          <Helmet>
+            <meta name="theme-color" content={theme.colors.mono.white} />
+          </Helmet>
+          <VStack w="100%" align="start" spacing="4rem">
+            <HStack w="100%" spacing="2rem">
+              <Clickable
+                onClick={() => setIsOpen(false)}
+                element={<MdArrowBack size="24px" />}
+              />
+              <Input
+                ref={inputRef}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="유저명 또는 프로젝트명 검색"
+                css={{
+                  fontSize: '1.6rem', // 웹 접근성을 위해 Safari에서는 input font-size가 16px 미만이면 줌이 되어버림.
+                }}
+              />
+              <Spacer />
+              <MdSearch size="24px" />
+            </HStack>
+            {isPreviewDisplaying ? (
+              <VStack w="100%" spacing="4rem">
+                <VStack w="100%" align="start" spacing="1rem">
+                  <BoldText>유저</BoldText>
+                  <Divider />
+                  {/* {error && <Text>Error! {error.message}</Text>} */}
+                  {data?.findProjectPreview
+                    .slice(0, 5)
+                    .filter(isDefined)
+                    .map((project, idx) => (
+                      <Clickable
+                        key={idx}
+                        onClick={() => handleUserSubmit(project.name)}
+                        element={
+                          <HStack spacing="1rem">
+                            <Avatar size="1.6rem" />
+                            <Text>{project.name}</Text>
+                          </HStack>
+                        }
+                      />
+                    ))}
+                </VStack>
+                <VStack w="100%" align="start" spacing="1rem">
+                  <BoldText>프로젝트</BoldText>
+                  <Divider />
+                  {data?.findProjectPreview
+                    .slice(0, 5)
+                    .filter(isDefined)
+                    .map((project, idx) => (
+                      <Clickable
+                        key={idx}
+                        onClick={() => handleProjectSubmit(project.name)}
+                        element={
+                          <HStack spacing="1rem">
+                            <Image src="/42-logo.png" width="16px" />
+                            <Text>{project.name}</Text>
+                          </HStack>
+                        }
+                      />
+                    ))}
+                </VStack>
+              </VStack>
+            ) : (
+              <VStack w="100%" h="10rem">
+                <Text color={theme.colors.mono.gray300}>
+                  검색어를 입력해주세요
+                </Text>
+              </VStack>
+            )}
           </VStack>
-        </UserSearchResult>
-      )}
-    </MobileUserSearchBarLayout>
+        </>
+      </SearchModal>
+    </>
   );
 };
 
-const MobileUserSearchBarLayout = styled.div<{ isFocused: boolean }>`
+const SearchModal = styled(Modal)`
+  width: 100%;
+  height: 100%;
+  background-color: ${({ theme }) => theme.colors.mono.white};
+  padding: 1.5rem;
+`;
+
+const MobileUserSearchBarLayout = styled.div`
   position: relative;
   padding: 1rem 2rem;
   border-radius: 2rem;
   transition: all 0.2s;
   background-color: ${({ theme }) => theme.colors.mono.white};
 
-  box-shadow: ${({ theme, isFocused }) =>
-    isFocused
-      ? `0 0.4rem 0.4rem ${rgba(theme.colors.mono.black, 0.25)}`
-      : `0 0.4rem 0.4rem ${rgba(theme.colors.mono.black, 0.1)}`};
-
-  &:hover {
-    box-shadow: ${({ theme }) =>
-      `0 0.4rem 0.4rem ${rgba(theme.colors.mono.black, 0.25)}`};
-  }
-`;
-
-const UserSearchResult = styled.div`
-  position: absolute;
-  top: 6rem;
-  left: 0;
-  z-index: 100;
-  width: 30rem;
-  padding: 1.5rem 4rem;
-  border-radius: 3rem;
-  box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.25);
-  background-color: ${({ theme }) => theme.colors.mono.white};
+  box-shadow: ${({ theme }) =>
+    `0 0.4rem 0.4rem ${rgba(theme.colors.mono.black, 0.1)}`};
 `;

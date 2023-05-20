@@ -42,23 +42,22 @@ export const LandingPage = () => {
         <AppLogoTitle size="md" color={theme.colors.mono.white} />
         <VStack>
           <WhiteH1BoldText>
-            은하수를 여행한지{' '}
-            {<CountUp isCounting={true} end={982} duration={3.5} />}
+            은하수를 여행한지 {<CountUp isCounting end={982} duration={3.5} />}
             일째
           </WhiteH1BoldText>
           <WhiteH1BoldText>
-            {<CountUp isCounting={true} end={810} duration={3.5} />}명의
-            히치하이커와 함께 여행중
+            {<CountUp isCounting end={810} duration={3.5} />}명의 히치하이커와
+            함께 여행중
           </WhiteH1BoldText>
           <Slider
             arrows={false}
-            infinite={true}
+            infinite
             speed={1000}
             slidesToShow={1}
             slidesToScroll={1}
-            autoplay={true}
+            autoplay
             autoplaySpeed={3000}
-            vertical={true}
+            vertical
             css={SliderCenterStyle}
           >
             {textList.map((text, index) => (

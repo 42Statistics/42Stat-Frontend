@@ -104,18 +104,6 @@ export const EvalLogSearchPage = () => {
   const entry = useIntersectionObserver(ref, { threshold: 0.5 });
   const isVisible = !!entry?.isIntersecting;
 
-  const fetch = () => {
-    search({
-      variables: {
-        pageSize: RESULT_PER_PAGE,
-        pageNumber: page,
-        ...form,
-        outstandingOnly: form.outstandingOnly === 'outstanding',
-      },
-    });
-    setPage((cur) => cur + 1);
-  };
-
   useEffect(() => {
     if (!data) {
       return;
@@ -135,6 +123,18 @@ export const EvalLogSearchPage = () => {
   };
 
   useEffect(() => {
+    const fetch = () => {
+      search({
+        variables: {
+          pageSize: RESULT_PER_PAGE,
+          pageNumber: page,
+          ...form,
+          outstandingOnly: form.outstandingOnly === 'outstanding',
+        },
+      });
+      setPage((cur) => cur + 1);
+    };
+
     if (!isVisible) {
       return;
     }
@@ -142,7 +142,7 @@ export const EvalLogSearchPage = () => {
       return;
     }
     fetch();
-  }, [isVisible, loading, fetch]);
+  }, [isVisible, loading, form, page, search]);
 
   return (
     <>

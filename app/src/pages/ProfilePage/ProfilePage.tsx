@@ -3,16 +3,16 @@ import { Tab, TabList, TabPanel, Tabs } from '@/components/common/Tab';
 import { Dashboard } from '@/components/templates/Dashboard';
 import { ProfileEvalTabSkeleton } from '@/pages/PageSkeletons/ProfileEvalTabSkeleton';
 import { ProfileGeneralTab } from '@/pages/ProfileGeneralTab';
-import { lazyImport } from '@/utils/lazyImport';
 import styled from '@emotion/styled';
-import { Suspense } from 'react';
+import { Suspense, lazy } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import { useProfilePageDashboard } from './hooks';
 
-const { ProfileEvalTab } = lazyImport(
-  () => import('@/pages/ProfileEvalTab'),
-  'ProfileEvalTab',
+const ProfileEvalTab = lazy(() =>
+  import('@/pages/ProfileEvalTab').then((module) => ({
+    default: module.ProfileEvalTab,
+  })),
 );
 
 export const ProfilePage = () => {

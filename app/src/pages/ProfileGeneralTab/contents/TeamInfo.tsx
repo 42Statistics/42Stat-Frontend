@@ -44,7 +44,7 @@ export const TeamInfo = () => {
   return (
     <TeamInfoLayout>
       <div
-        css={{
+        style={{
           position: 'relative',
           width: '100%',
           height: '100%',

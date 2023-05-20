@@ -11,10 +11,14 @@ type LabelProps = React.HTMLAttributes<HTMLDivElement> & {
 
 export const Label = ({
   text,
-  color = useTheme().colors.mono.white,
-  fontWeight = useTheme().fonts.weight.regular,
+  color,
+  fontWeight,
   ...propsExceptElement
 }: LabelProps) => {
+  const theme = useTheme();
+  color = color || theme.colors.mono.white;
+  fontWeight = fontWeight || theme.fonts.weight.regular;
+
   return (
     <StyledLabel {...propsExceptElement}>
       <Text color={color} fontWeight={fontWeight}>

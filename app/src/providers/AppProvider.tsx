@@ -12,13 +12,13 @@ export const AppProvider = ({ children }: React.PropsWithChildren) => {
     <ErrorBoundary
       fallback={
         <div
-          css={{
+          style={{
             display: 'flex',
             justifyContent: 'center',
           }}
         >
           <div
-            css={{
+            style={{
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',

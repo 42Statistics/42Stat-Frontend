@@ -1,4 +1,5 @@
 import { Global } from '@emotion/react';
+import ReactModal from 'react-modal';
 import { AppProvider } from './providers';
 import { AppRoutes } from './routes';
 import { global } from './styles/global';
@@ -12,5 +13,7 @@ function App() {
     </AppProvider>
   );
 }
+
+ReactModal.setAppElement('#root');
 
 export default App;

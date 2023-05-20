@@ -36,13 +36,7 @@ export const useIntersectionObserver = (
     return () => observer.disconnect();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    elementRef?.current,
-    JSON.stringify(threshold),
-    root,
-    rootMargin,
-    frozen,
-  ]);
+  }, [elementRef?.current, threshold, root, rootMargin, frozen]);
 
   return entry;
 };

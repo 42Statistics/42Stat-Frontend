@@ -1,5 +1,4 @@
 import { H3Text, HStack, Text } from '@/components/common';
-import { useTheme } from '@emotion/react';
 import { BsTriangleFill } from '@react-icons/all-files/bs/BsTriangleFill';
 
 type NumberCompareProps = {
@@ -13,7 +12,6 @@ type ArrowType = {
 };
 
 const Arrow = ({ direction }: ArrowType) => {
-  const theme = useTheme();
   return (
     <BsTriangleFill
       size="12px"
@@ -26,7 +24,6 @@ const Arrow = ({ direction }: ArrowType) => {
 };
 
 export const NumberCompare = ({ curr, last, unit }: NumberCompareProps) => {
-  const theme = useTheme();
   const diff = curr - last;
 
   return (

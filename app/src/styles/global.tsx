@@ -1,13 +1,13 @@
 import { css } from '@emotion/react';
 
 export const global = () => css`
-  /* @font-face {
+  @font-face {
     font-family: 'Pretendard';
     src: url('/fonts/Pretendard-Thin.woff') format('woff');
     font-weight: 100;
   }
 
-  @font-face {
+  /* @font-face {
     font-family: 'Pretendard';
     src: url('/fonts/Pretendard-ExtraLight.woff') format('woff');
     font-weight: 200;

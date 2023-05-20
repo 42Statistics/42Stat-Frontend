@@ -6,7 +6,6 @@ import { ApolloBadRequest } from '@/components/elements/DashboardContentView/Apo
 import { DashboardContent } from '@/components/templates/Dashboard';
 import { millionFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
-import { useTheme } from '@emotion/react';
 
 export const GET_COALITION_TOTAL_SCORES = gql(/* GraphQL */ `
   query getCoalitionTotalScores {
@@ -91,8 +90,6 @@ const CoalitionScoreSumChart = ({
   series,
   colors,
 }: CoalitionScoreSumChartProps) => {
-  const theme = useTheme();
-
   const options: ApexCharts.ApexOptions = {
     plotOptions: {
       bar: {

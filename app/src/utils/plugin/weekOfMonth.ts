@@ -31,8 +31,9 @@ const weekOfMonth: PluginFunc = (option, dayjs) => {
 
 // TODO: 더 정확한 알고리즘으로 수정
 const getWeekOfMonth = (date: Date) => {
-  const currentDay = date.getDate();
-  const firstDay = new Date(date.setDate(1)).getDay();
+  const dateCpy = new Date(date); // setDate()는 원본을 수정하므로 복사본을 만들어 사용
+  const currentDay = dateCpy.getDate();
+  const firstDay = new Date(dateCpy.setDate(1)).getDay();
 
   return Math.ceil((currentDay + firstDay) / 7);
 };

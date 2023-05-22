@@ -12,7 +12,7 @@ const weekOfMonth: PluginFunc = (option, dayjs) => {
       return oldFormat.bind(this)(formatStr);
     }
 
-    const str = formatStr || FORMAT_DEFAULT;
+    const str = formatStr ?? FORMAT_DEFAULT;
     const result = str.replace(/\[([^\]]+)]|ww|w{1,2}|S/g, (match) => {
       switch (match) {
         case 'w':

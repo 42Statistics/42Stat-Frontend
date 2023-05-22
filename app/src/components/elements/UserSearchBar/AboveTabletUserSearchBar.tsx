@@ -55,7 +55,7 @@ export const AboveTabletUserSearchBar = () => {
   };
 
   const handleUserSubmit = (name: string) => {
-    if (inputRef != null && inputRef.current != null) {
+    if (inputRef?.current) {
       inputRef.current.value = '';
     }
     setInput('');
@@ -63,7 +63,7 @@ export const AboveTabletUserSearchBar = () => {
   };
 
   const handleProjectSubmit = (name: string) => {
-    if (inputRef != null && inputRef.current != null) {
+    if (inputRef?.current) {
       inputRef.current.value = '';
     }
     setInput('');
@@ -93,9 +93,9 @@ export const AboveTabletUserSearchBar = () => {
               {userData?.findUserPreview
                 .slice(0, 5)
                 .filter(isDefined)
-                .map((user, idx) => (
+                .map((user) => (
                   <Clickable
-                    key={idx}
+                    key={user.id}
                     onClick={() => handleUserSubmit(user.login)}
                     element={
                       <HStack spacing="1rem">

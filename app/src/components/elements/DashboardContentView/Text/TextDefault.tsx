@@ -8,7 +8,7 @@ type TextDefaultProps = {
 
 export const TextDefault = ({ text, color }: TextDefaultProps) => {
   const theme = useTheme();
-  color = color || theme.colors.mono.black;
+  color = color ?? theme.colors.mono.black;
 
   return (
     <HStack h="100%">

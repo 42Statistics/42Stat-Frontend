@@ -56,7 +56,7 @@ export const MobileUserSearchBar = () => {
   }, [debouncedInput, searchUser, searchProject]);
 
   const handleUserSubmit = (name: string) => {
-    if (inputRef != null && inputRef.current != null) {
+    if (inputRef?.current) {
       inputRef.current.value = '';
     }
     setIsOpen(false);
@@ -65,7 +65,7 @@ export const MobileUserSearchBar = () => {
   };
 
   const handleProjectSubmit = (name: string) => {
-    if (inputRef != null && inputRef.current != null) {
+    if (inputRef?.current) {
       inputRef.current.value = '';
     }
     setIsOpen(false);
@@ -119,9 +119,9 @@ export const MobileUserSearchBar = () => {
                   {userData?.findUserPreview
                     .slice(0, 5)
                     .filter(isDefined)
-                    .map((user, idx) => (
+                    .map((user) => (
                       <Clickable
-                        key={idx}
+                        key={user.id}
                         onClick={() => handleUserSubmit(user.login)}
                         element={
                           <HStack spacing="1rem">
@@ -138,9 +138,9 @@ export const MobileUserSearchBar = () => {
                   {projectData?.findProjectPreview
                     .slice(0, 5)
                     .filter(isDefined)
-                    .map((project, idx) => (
+                    .map((project) => (
                       <Clickable
-                        key={idx}
+                        key={project.id}
                         onClick={() => handleProjectSubmit(project.name)}
                         element={
                           <HStack spacing="1rem">

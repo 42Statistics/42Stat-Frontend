@@ -12,12 +12,12 @@ import dayjs from 'dayjs';
 const GET_CURR_WEEK_EVAL_CNT = gql(/* GraphQL */ `
   query GetCurrWeekEvalCnt {
     getHomePage {
-      currWeekEvalCnt {
+      currWeekEvalCount {
         data
         from
         to
       }
-      lastWeekEvalCnt {
+      lastWeekEvalCount {
         data
         from
         to
@@ -48,8 +48,8 @@ export const CurrWeekEvalCnt = () => {
       </DashboardContent>
     );
 
-  const { currWeekEvalCnt, lastWeekEvalCnt } = data.getHomePage;
-  const { from, to } = currWeekEvalCnt;
+  const { currWeekEvalCount, lastWeekEvalCount } = data.getHomePage;
+  const { from, to } = currWeekEvalCount;
 
   const description = `${dayjs(from).format('YYYY년 M월 w주')}`;
   const unit = '회';
@@ -57,8 +57,8 @@ export const CurrWeekEvalCnt = () => {
   return (
     <DashboardContent title={title} description={description}>
       <NumberCompare
-        curr={currWeekEvalCnt.data}
-        last={lastWeekEvalCnt.data}
+        curr={currWeekEvalCount.data}
+        last={lastWeekEvalCount.data}
         unit={unit}
       />
     </DashboardContent>

@@ -6,22 +6,27 @@ import {
 } from '@/components/elements/DashboardContentView';
 import { TextDefault } from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
+import { userAtom } from '@/utils/atoms/userAtom';
 import { useQuery } from '@apollo/client';
 import dayjs from 'dayjs';
+import { useAtomValue } from 'jotai';
 
-const GET_POOLED_AT = gql(/* GraphQL */ `
-  query getPooledAt {
-    getPersonGeneralPage {
+const GET_BEGIN_AT = gql(/* GraphQL */ `
+  query getBeginAt($uid: Int!) {
+    getPersonGeneralPage(uid: $uid) {
       userProfile {
-        pooledAt
+        beginAt
       }
     }
   }
 `);
 
-export const PooledAt = () => {
+export const BeginAt = () => {
+  const user = useAtomValue(userAtom);
   const title = '본과정 시작일';
-  const { loading, error, data } = useQuery(GET_POOLED_AT);
+  const { loading, error, data } = useQuery(GET_BEGIN_AT, {
+    variables: { uid: user.id },
+  });
   if (loading)
     return (
       <DashboardContent title={title}>
@@ -41,11 +46,11 @@ export const PooledAt = () => {
       </DashboardContent>
     );
 
-  const { pooledAt } = data.getPersonGeneralPage.userProfile;
+  const { beginAt } = data.getPersonGeneralPage.userProfile;
 
   return (
     <DashboardContent title={title}>
-      <TextDefault text={dayjs(pooledAt).format('YYYY년 M월 D일')} />
+      <TextDefault text={dayjs(beginAt).format('YYYY년 M월 D일')} />
     </DashboardContent>
   );
 };

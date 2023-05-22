@@ -48,6 +48,10 @@ export const AverageCircleDurations = () => {
   const categories = averageCircleDurations.map(({ circle }) => String(circle));
   const seriesData = averageCircleDurations.map(({ value }) => value);
 
+  //X축 범례 최대값 추출 로직
+  const _maxX = Math.max(...Object.values(seriesData));
+  const maxX = Math.ceil(_maxX / 100) * 100;
+
   const seriesLabel = averageCircleDurations.reduce(
     (result: number[], { value }, idx) => {
       const prevValue = idx !== 0 ? averageCircleDurations[idx - 1]?.value : 0;
@@ -70,6 +74,7 @@ export const AverageCircleDurations = () => {
         categories={categories}
         series={series}
         seriesLabel={seriesLabel}
+        maxX={maxX}
       />
     </DashboardContent>
   );
@@ -79,18 +84,20 @@ type AverageCircleDurationsChartProps = {
   categories: string[];
   series: ApexAxisChartSeries;
   seriesLabel: number[];
+  maxX: number;
 };
 
 const AverageCircleDurationsChart = ({
   categories,
   series,
   seriesLabel,
+  maxX,
 }: AverageCircleDurationsChartProps) => {
   const options: ApexCharts.ApexOptions = {
     xaxis: {
       categories,
       tickAmount: 4,
-      max: 500,
+      max: maxX,
       labels: {
         formatter: (value) => numberWithUnitFormatter(parseInt(value), '일'),
       },

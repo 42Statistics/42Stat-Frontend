@@ -6,8 +6,10 @@ import {
 } from '@/components/elements/DashboardContentView';
 import { NumberCompare } from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
+import { userAtom } from '@/utils/atoms/userAtom';
 import { useQuery } from '@apollo/client';
 import dayjs from 'dayjs';
+import { useAtomValue } from 'jotai';
 
 const GET_MONTHLY_EVAL_CNT = gql(/* GraphQL */ `
   query getMonthlyEvalCnt($uid: Int!) {
@@ -27,9 +29,10 @@ const GET_MONTHLY_EVAL_CNT = gql(/* GraphQL */ `
 `);
 
 export const MonthlyEvalCnt = () => {
+  const user = useAtomValue(userAtom);
   const title = '월간 평가 횟수';
   const { loading, error, data } = useQuery(GET_MONTHLY_EVAL_CNT, {
-    variables: { uid: 99947 },
+    variables: { uid: user.id },
   });
   if (loading)
     return (

@@ -32,10 +32,10 @@ const GET_PROJECT_INFO = gql(/* GraphQL */ `
         skills
         averageDurationTime
         averagePassFinalmark
-        totalCloseCnt
-        currRegisteredCnt
+        totalCloseCount
+        currRegisteredCount
         passPercentage
-        totalEvalCnt
+        totalEvalCount
       }
     }
   }
@@ -55,8 +55,8 @@ export const ProjectPage = () => {
     name,
     skills,
     averagePassFinalmark,
-    totalCloseCnt,
-    currRegisteredCnt,
+    totalCloseCount,
+    currRegisteredCount,
     passPercentage,
   } = data.getTotalPage.projectInfo;
 
@@ -80,7 +80,7 @@ export const ProjectPage = () => {
               <HStack spacing="2rem">
                 <HiUsers size="16px" />
                 <Text selectable>
-                  {numberWithUnitFormatter(currRegisteredCnt, '팀')} 진행 중
+                  {numberWithUnitFormatter(currRegisteredCount, '팀')} 진행 중
                 </Text>
               </HStack>
             </VStack>
@@ -118,7 +118,7 @@ export const ProjectPage = () => {
             <VStack align="start" spacing="1rem">
               <HStack>
                 <H3BoldText selectable>
-                  지금까지 {numberWithUnitFormatter(totalCloseCnt, '팀')}
+                  지금까지 {numberWithUnitFormatter(totalCloseCount, '팀')}
                 </H3BoldText>
                 <H3Text selectable>이 제출했어요</H3Text>
               </HStack>

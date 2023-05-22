@@ -6,11 +6,13 @@ import {
 } from '@/components/elements/DashboardContentView';
 import { TextDefault } from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
+import { userAtom } from '@/utils/atoms/userAtom';
 import { useQuery } from '@apollo/client';
+import { useAtomValue } from 'jotai';
 
 const GET_BLACKHOLED_AT = gql(/* GraphQL */ `
-  query getBlackholedAt {
-    getPersonGeneralPage {
+  query getBlackholedAt($uid: Int!) {
+    getPersonGeneralPage(uid: $uid) {
       userProfile {
         blackholedAt
       }
@@ -19,8 +21,14 @@ const GET_BLACKHOLED_AT = gql(/* GraphQL */ `
 `);
 
 export const BlackholedAt = () => {
+  const user = useAtomValue(userAtom);
+
   const title = 'Black Hole Absorption';
-  const { loading, error, data } = useQuery(GET_BLACKHOLED_AT);
+  const { loading, error, data } = useQuery(GET_BLACKHOLED_AT, {
+    variables: {
+      uid: user.id,
+    },
+  });
   if (loading)
     return (
       <DashboardContent title={title}>

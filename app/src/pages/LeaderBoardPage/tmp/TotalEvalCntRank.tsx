@@ -12,7 +12,7 @@ import { useQuery } from '@apollo/client';
 const GET_TOTAL_EVAL_CNT_RANK = gql(/* GraphQL */ `
   query GetTotalEvalCntRank {
     getHomePage {
-      totalEvalCntRank {
+      totalEvalCountRank {
         userPreview {
           id
           login
@@ -31,10 +31,10 @@ export const TotalEvalCntRank = () => {
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 
-  const { totalEvalCntRank } = data.getHomePage;
+  const { totalEvalCountRank } = data.getHomePage;
   const unit = '회';
 
-  const rankList: RankItemType[] = totalEvalCntRank.map(
+  const rankList: RankItemType[] = totalEvalCountRank.map(
     ({ userPreview, value }) => ({
       name: userPreview.login,
       value: value,

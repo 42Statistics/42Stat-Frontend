@@ -12,7 +12,7 @@ import { useQuery } from '@apollo/client';
 const GET_CURR_REGISTERED_CNT_RANK = gql(/* GraphQL */ `
   query GetCurrRegisteredCntRank {
     getHomePage {
-      currRegisteredCntRank {
+      currRegisteredCountRank {
         projectPreview {
           name
         }
@@ -45,10 +45,10 @@ export const CurrRegisteredCntRank = () => {
       </DashboardContent>
     );
 
-  const { currRegisteredCntRank } = data.getHomePage;
+  const { currRegisteredCountRank } = data.getHomePage;
   const unit = '명';
 
-  const rankList: RankItemType[] = currRegisteredCntRank.map(
+  const rankList: RankItemType[] = currRegisteredCountRank.map(
     ({ projectPreview, value }) => ({
       name: projectPreview.name,
       value: value,

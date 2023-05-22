@@ -4,6 +4,7 @@ import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
+import { userAtom } from '@/utils/atoms/userAtom';
 import { getDayDiff } from '@/utils/getDayDiff';
 import { isDefined } from '@/utils/isDefined';
 import { useQuery } from '@apollo/client';
@@ -12,10 +13,11 @@ import styled from '@emotion/styled';
 import { AiOutlineCheck } from '@react-icons/all-files/ai/AiOutlineCheck';
 import { AiOutlineClose } from '@react-icons/all-files/ai/AiOutlineClose';
 import { rgba } from 'emotion-rgba';
+import { useAtomValue } from 'jotai';
 
 const GET_TEAM_INFO = gql(/* GraphQL */ `
-  query getTeamInfo {
-    getPersonGeneralPage {
+  query getTeamInfo($uid: Int!) {
+    getPersonGeneralPage(uid: $uid) {
       teamInfo {
         teams {
           id
@@ -32,7 +34,11 @@ const GET_TEAM_INFO = gql(/* GraphQL */ `
 `);
 
 export const TeamInfo = () => {
-  const { loading, error, data } = useQuery(GET_TEAM_INFO);
+  const user = useAtomValue(userAtom);
+
+  const { loading, error, data } = useQuery(GET_TEAM_INFO, {
+    variables: { uid: user.id },
+  });
   const theme = useTheme();
 
   if (loading) return <Loader />;

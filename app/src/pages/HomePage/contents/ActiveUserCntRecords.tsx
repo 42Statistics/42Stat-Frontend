@@ -12,7 +12,7 @@ import { useQuery } from '@apollo/client';
 const GET_ACTIVE_USER_CNT_RECORD = gql(/* GraphQL */ `
   query getActiveUserCntRecord {
     getTotalPage {
-      activeUserCntRecords {
+      activeUserCountRecords {
         at
         value
       }
@@ -42,11 +42,13 @@ export const ActiveUserCntRecords = () => {
       </DashboardContent>
     );
 
-  const { activeUserCntRecords } = data.getTotalPage;
-  const seriesData = activeUserCntRecords.map(({ at, value }) => ({
+  const { activeUserCountRecords } = data.getTotalPage;
+  const seriesData = activeUserCountRecords.map(({ at, value }) => ({
     x: at,
     y: value,
   }));
+  //FIXME: 왜인지 처음에 1970 데이터가 와서 임의로 하나 지움
+  seriesData.shift();
   const series: ApexAxisChartSeries = [
     {
       name: '활성화 유저',

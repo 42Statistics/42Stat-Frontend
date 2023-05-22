@@ -6,7 +6,9 @@ import {
 } from '@/components/elements/DashboardContentView';
 import { NumberDefault } from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
+import { userAtom } from '@/utils/atoms/userAtom';
 import { useQuery } from '@apollo/client';
+import { useAtomValue } from 'jotai';
 
 const GET_AVERAGE_FINAL_MARK = gql(/* GraphQL */ `
   query getAverageFinalMark($uid: Int!) {
@@ -17,11 +19,12 @@ const GET_AVERAGE_FINAL_MARK = gql(/* GraphQL */ `
 `);
 
 export const AverageFinalMark = () => {
+  const user = useAtomValue(userAtom);
   const title = '평균 평가 점수';
   const description = '평가자일 때';
   const { loading, error, data } = useQuery(GET_AVERAGE_FINAL_MARK, {
     variables: {
-      uid: 99947,
+      uid: user.id,
     },
   });
   if (loading)

@@ -15,8 +15,8 @@ const GET_LAST_EXAM_RESULT = gql(/* GraphQL */ `
       lastExamResult {
         data {
           rank
-          passCnt
-          totalCnt
+          passCount
+          totalCount
         }
         from
         to
@@ -54,7 +54,7 @@ export const LastExamResult = () => {
 
   const categories = lastExamResult.data.map(({ rank }) => rank);
   const seriesData = lastExamResult.data.map(
-    ({ passCnt, totalCnt }) => passCnt / totalCnt,
+    ({ passCount, totalCount }) => passCount / totalCount,
   );
   const series: ApexAxisChartSeries = [
     {

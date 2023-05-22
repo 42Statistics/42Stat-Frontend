@@ -1,5 +1,6 @@
 import type { DashboardItemProps } from '@/utils/types/Dashboard';
 import {
+  BeginAt,
   BlackholedAt,
   CurrentCoalitionScore,
   CurrentWallet,
@@ -7,7 +8,6 @@ import {
   LastRegistered,
   LevelGraph,
   LogtimeInfo,
-  PooledAt,
   PrefferedCluster,
   PrefferedTime,
   SimilarCharacter,
@@ -17,7 +17,7 @@ import {
 export const profileGeneralTabDashboardContents: DashboardItemProps[] = [
   {
     id: 0,
-    content: PooledAt,
+    content: BeginAt,
   },
   {
     id: 1,

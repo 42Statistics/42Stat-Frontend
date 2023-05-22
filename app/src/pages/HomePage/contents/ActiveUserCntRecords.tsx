@@ -47,6 +47,8 @@ export const ActiveUserCntRecords = () => {
     x: at,
     y: value,
   }));
+  //FIXME: 왜인지 처음에 1970 데이터가 와서 임의로 하나 지움
+  seriesData.shift();
   const series: ApexAxisChartSeries = [
     {
       name: '활성화 유저',

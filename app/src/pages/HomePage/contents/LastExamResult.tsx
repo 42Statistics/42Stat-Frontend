@@ -54,7 +54,7 @@ export const LastExamResult = () => {
 
   const categories = lastExamResult.data.map(({ rank }) => rank);
   const seriesData = lastExamResult.data.map(
-    ({ passCnt, totalCnt }) => passCnt / totalCnt,
+    ({ passCount, totalCount }) => passCount / totalCount,
   );
   const series: ApexAxisChartSeries = [
     {

@@ -6,7 +6,9 @@ import {
 } from '@/components/elements/DashboardContentView';
 import { NumberDefault } from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
+import { userAtom } from '@/utils/atoms/userAtom';
 import { useQuery } from '@apollo/client';
+import { useAtomValue } from 'jotai';
 
 const GET_PERSONAL_TOTAL_EVAL_CNT = gql(/* GraphQL */ `
   query getPersonalTotalEvalCnt($uid: Int!) {
@@ -17,10 +19,12 @@ const GET_PERSONAL_TOTAL_EVAL_CNT = gql(/* GraphQL */ `
 `);
 
 export const TotalEvalCnt = () => {
+  const user = useAtomValue(userAtom);
   const title = '누적 평가 횟수';
   const { loading, error, data } = useQuery(GET_PERSONAL_TOTAL_EVAL_CNT, {
-    variables: { uid: 99947 },
+    variables: { uid: user.id },
   });
+
   if (loading)
     return (
       <DashboardContent title={title}>

@@ -6,7 +6,9 @@ import {
 } from '@/components/elements/DashboardContentView';
 import { NumberDefault } from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
+import { userAtom } from '@/utils/atoms/userAtom';
 import { useQuery } from '@apollo/client';
+import { useAtomValue } from 'jotai';
 
 const GET_PERSONAL_AVERAGE_FEEDBACK_LENGTH = gql(/* GraphQL */ `
   query getPersonalAverageFeedbackLength($uid: Int!) {
@@ -17,12 +19,13 @@ const GET_PERSONAL_AVERAGE_FEEDBACK_LENGTH = gql(/* GraphQL */ `
 `);
 
 export const AverageFeedbackLength = () => {
+  const user = useAtomValue(userAtom);
   const title = '평균 피드백 길이';
   const { loading, error, data } = useQuery(
     GET_PERSONAL_AVERAGE_FEEDBACK_LENGTH,
     {
       variables: {
-        uid: 99947,
+        uid: user.id,
       },
     },
   );

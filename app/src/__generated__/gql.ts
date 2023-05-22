@@ -14,6 +14,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\n  query FindProjectPreview($name: String!) {\n    findProjectPreview(name: $name) {\n      id\n      name\n      url\n    }\n  }\n": types.FindProjectPreviewDocument,
+    "\n  query FindUserPreview($login: String!) {\n    findUserPreview(login: $login) {\n      id\n      login\n    }\n  }\n": types.FindUserPreviewDocument,
     "\n  query GetEvalLogs(\n    $pageSize: Int!\n    $pageNumber: Int!\n    $projectName: String!\n    $outstandingOnly: Boolean!\n    $corrector: String\n    $corrected: String\n  ) {\n    getEvalLogs(\n      pageSize: $pageSize\n      pageNumber: $pageNumber\n      projectName: $projectName\n      outstandingOnly: $outstandingOnly\n      corrector: $corrector\n      corrected: $corrected\n    ) {\n      nodes {\n        header {\n          corrector {\n            id\n            login\n            imgUrl\n          }\n          teamPreview {\n            id\n            name\n            url\n          }\n          beginAt\n          projectPreview {\n            id\n            name\n            url\n          }\n          flag {\n            id\n            name\n            isPositive\n          }\n        }\n        correctorReview {\n          mark\n          review\n        }\n        correctedsReview {\n          mark\n          review\n        }\n      }\n      totalCount\n      pageSize\n      pageNumber\n    }\n  }\n": types.GetEvalLogsDocument,
     "\n  query getActiveUserCntRecord {\n    getTotalPage {\n      activeUserCountRecords {\n        at\n        value\n      }\n    }\n  }\n": types.GetActiveUserCntRecordDocument,
     "\n  query getAverageCircleDuration {\n    getTotalPage {\n      averageCircleDurations {\n        circle\n        value\n      }\n    }\n  }\n": types.GetAverageCircleDurationDocument,
@@ -75,6 +76,10 @@ export function gql(source: string): unknown;
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query FindProjectPreview($name: String!) {\n    findProjectPreview(name: $name) {\n      id\n      name\n      url\n    }\n  }\n"): (typeof documents)["\n  query FindProjectPreview($name: String!) {\n    findProjectPreview(name: $name) {\n      id\n      name\n      url\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query FindUserPreview($login: String!) {\n    findUserPreview(login: $login) {\n      id\n      login\n    }\n  }\n"): (typeof documents)["\n  query FindUserPreview($login: String!) {\n    findUserPreview(login: $login) {\n      id\n      login\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

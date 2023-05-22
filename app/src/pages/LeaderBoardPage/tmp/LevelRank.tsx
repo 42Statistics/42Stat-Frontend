@@ -35,6 +35,7 @@ export const LevelRank = () => {
   const unit = '';
 
   const rankList: RankItemType[] = levelRank.map(({ userPreview, value }) => ({
+    id: userPreview.id,
     name: userPreview.login,
     value: value,
     imgUrl: userPreview.imgUrl,

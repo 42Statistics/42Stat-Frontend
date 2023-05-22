@@ -34,9 +34,9 @@ export const AboveTabletUserSearchBar = () => {
     { loading: projectLoading, error: projectEror, data: projectData },
   ] = useLazyQuery(FIND_PROJECT_PREVIEW);
 
-  const hasUserData = userData != null && !!userData.findUserPreview.length;
+  const hasUserData = userData != null && userData.findUserPreview.length !== 0;
   const hasProjectData =
-    projectData != null && !!projectData.findProjectPreview.length;
+    projectData != null && projectData.findProjectPreview.length !== 0;
   const isPreviewDisplaying =
     debouncedInput !== '' && (hasUserData || hasProjectData);
 

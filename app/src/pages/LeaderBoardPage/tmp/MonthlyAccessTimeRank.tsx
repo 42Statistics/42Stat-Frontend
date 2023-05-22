@@ -36,6 +36,7 @@ export const MonthlyAccessTimeRank = () => {
 
   const rankList: RankItemType[] = monthlyAccessTimeRank.map(
     ({ userPreview, value }) => ({
+      id: userPreview.id,
       name: userPreview.login,
       value: value,
       imgUrl: userPreview.imgUrl,

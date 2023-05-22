@@ -54,6 +54,7 @@ export const WalletRanks = () => {
 
   const rankList: RankItemType[] = walletRanks.map(
     ({ userPreview, value }) => ({
+      id: userPreview.id,
       name: userPreview.login,
       value: value,
       imgUrl: userPreview.imgUrl,

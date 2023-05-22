@@ -14,7 +14,7 @@ export const Rank = ({ rankList, showImg = true, cnt, unit }: RankProps) => {
     <VStack w="100%" h="100%" spacing="2rem">
       {rankList.slice(0, cnt).map((rankItem, idx) => (
         <RankItem
-          key={idx}
+          key={rankItem.id}
           rank={idx + 1}
           item={rankItem}
           showImg={showImg}

@@ -36,6 +36,7 @@ export const TotalEvalCountRank = () => {
 
   const rankList: RankItemType[] = totalEvalCountRank.map(
     ({ userPreview, value }) => ({
+      id: userPreview.id,
       name: userPreview.login,
       value: value,
       imgUrl: userPreview.imgUrl,

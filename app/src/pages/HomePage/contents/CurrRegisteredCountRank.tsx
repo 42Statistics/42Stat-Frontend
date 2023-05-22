@@ -49,7 +49,8 @@ export const CurrRegisteredCountRank = () => {
   const unit = '명';
 
   const rankList: RankItemType[] = currRegisteredCountRank.map(
-    ({ projectPreview, value }) => ({
+    ({ projectPreview, value }, idx) => ({
+      id: idx, // FIXME: projectPreivew.id로 수정
       name: projectPreview.name,
       value: value,
     }),

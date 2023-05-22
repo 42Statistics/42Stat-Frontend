@@ -15,8 +15,8 @@ const GET_LAST_EXAM_RESULT = gql(/* GraphQL */ `
       lastExamResult {
         data {
           rank
-          passCnt
-          totalCnt
+          passCount
+          totalCount
         }
         from
         to

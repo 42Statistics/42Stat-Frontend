@@ -15,16 +15,18 @@ import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
+import { userAtom } from '@/utils/atoms/userAtom';
 import { getTitleWithLogin } from '@/utils/getTitleWithLogin';
 import { BelowTablet, Desktop } from '@/utils/responsive/Device';
 import { titleCase } from '@/utils/titleCase';
 import { useQuery } from '@apollo/client';
 import styled from '@emotion/styled';
+import { useAtomValue } from 'jotai';
 import { truncate } from 'lodash-es';
 
 const GET_USER_PROFILE = gql(/* GraphQL */ `
-  query GetUserProfile {
-    getPersonGeneralPage {
+  query GetUserProfile($uid: Int!) {
+    getPersonGeneralPage(uid: $uid) {
       userProfile {
         id
         login
@@ -53,7 +55,11 @@ const GET_USER_PROFILE = gql(/* GraphQL */ `
 `);
 
 export const UserProfile = () => {
-  const { loading, error, data } = useQuery(GET_USER_PROFILE);
+  const user = useAtomValue(userAtom);
+
+  const { loading, error, data } = useQuery(GET_USER_PROFILE, {
+    variables: { uid: user.id },
+  });
 
   if (loading) return <Loader />;
   if (error) return <ApolloBadRequest msg={error.message} />;

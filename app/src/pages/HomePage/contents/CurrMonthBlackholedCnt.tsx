@@ -12,12 +12,12 @@ import dayjs from 'dayjs';
 const GET_CURR_MONTH_BLACKHOLED_CNT = gql(/* GraphQL */ `
   query GetCurrMonthBlackholedCnt {
     getHomePage {
-      currMonthBlackholedCnt {
+      currMonthBlackholedCount {
         data
         from
         to
       }
-      lastMonthBlackholedCnt {
+      lastMonthBlackholedCount {
         data
         from
         to
@@ -48,8 +48,9 @@ export const CurrMonthBlackholedCnt = () => {
       </DashboardContent>
     );
 
-  const { currMonthBlackholedCnt, lastMonthBlackholedCnt } = data.getHomePage;
-  const { from, to } = currMonthBlackholedCnt;
+  const { currMonthBlackholedCount, lastMonthBlackholedCount } =
+    data.getHomePage;
+  const { from, to } = currMonthBlackholedCount;
 
   const description = `${dayjs(from).format('YYYY년 M월')}`;
   const unit = '명';
@@ -57,8 +58,8 @@ export const CurrMonthBlackholedCnt = () => {
   return (
     <DashboardContent title={title} description={description}>
       <NumberCompare
-        curr={currMonthBlackholedCnt.data}
-        last={lastMonthBlackholedCnt.data}
+        curr={currMonthBlackholedCount.data}
+        last={lastMonthBlackholedCount.data}
         unit={unit}
       />
     </DashboardContent>

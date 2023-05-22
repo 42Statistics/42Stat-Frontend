@@ -6,12 +6,14 @@ import {
 } from '@/components/elements/DashboardContentView';
 import { NumberCompare } from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
+import { userAtom } from '@/utils/atoms/userAtom';
 import { useQuery } from '@apollo/client';
 import dayjs from 'dayjs';
+import { useAtomValue } from 'jotai';
 
 const GET_LOGTIME_INFO = gql(/* GraphQL */ `
-  query getLogtimeInfo {
-    getPersonGeneralPage {
+  query getLogtimeInfo($uid: Int!) {
+    getPersonGeneralPage(uid: $uid) {
       logtimeInfo {
         data {
           currMonthLogtime
@@ -32,8 +34,12 @@ const GET_LOGTIME_INFO = gql(/* GraphQL */ `
 `);
 
 export const LogtimeInfo = () => {
+  const user = useAtomValue(userAtom);
+
   const title = '월간 출석 시간';
-  const { loading, error, data } = useQuery(GET_LOGTIME_INFO);
+  const { loading, error, data } = useQuery(GET_LOGTIME_INFO, {
+    variables: { uid: user.id },
+  });
   if (loading)
     return (
       <DashboardContent title={title}>

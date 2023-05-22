@@ -6,11 +6,13 @@ import {
 } from '@/components/elements/DashboardContentView';
 import { NumberDefault } from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
+import { userAtom } from '@/utils/atoms/userAtom';
 import { useQuery } from '@apollo/client';
+import { useAtomValue } from 'jotai';
 
 const GET_CURRENT_WALLET = gql(/* GraphQL */ `
-  query getCurrentWallet {
-    getPersonGeneralPage {
+  query getCurrentWallet($uid: Int!) {
+    getPersonGeneralPage(uid: $uid) {
       userProfile {
         wallet
       }
@@ -19,8 +21,14 @@ const GET_CURRENT_WALLET = gql(/* GraphQL */ `
 `);
 
 export const CurrentWallet = () => {
+  const user = useAtomValue(userAtom);
+
   const title = '보유 월렛';
-  const { loading, error, data } = useQuery(GET_CURRENT_WALLET);
+  const { loading, error, data } = useQuery(GET_CURRENT_WALLET, {
+    variables: {
+      uid: user.id,
+    },
+  });
   if (loading)
     return (
       <DashboardContent title={title}>

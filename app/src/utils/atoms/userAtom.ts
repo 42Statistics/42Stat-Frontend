@@ -10,7 +10,7 @@ type User = {
 
 // TODO: 초기값 바르게 설정
 export const userAtom = atom<User>({
-  id: 1,
+  id: 69116,
   login: 'yopark',
   name: 'yongjun Park',
   imgUrl:

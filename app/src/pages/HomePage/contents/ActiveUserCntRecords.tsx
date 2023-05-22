@@ -12,7 +12,7 @@ import { useQuery } from '@apollo/client';
 const GET_ACTIVE_USER_CNT_RECORD = gql(/* GraphQL */ `
   query getActiveUserCntRecord {
     getTotalPage {
-      activeUserCntRecords {
+      activeUserCountRecords {
         at
         value
       }
@@ -42,8 +42,8 @@ export const ActiveUserCntRecords = () => {
       </DashboardContent>
     );
 
-  const { activeUserCntRecords } = data.getTotalPage;
-  const seriesData = activeUserCntRecords.map(({ at, value }) => ({
+  const { activeUserCountRecords } = data.getTotalPage;
+  const seriesData = activeUserCountRecords.map(({ at, value }) => ({
     x: at,
     y: value,
   }));

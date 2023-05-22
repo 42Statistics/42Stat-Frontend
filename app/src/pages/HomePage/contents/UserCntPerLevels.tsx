@@ -12,8 +12,8 @@ import { useQuery } from '@apollo/client';
 const GET_USER_CNT_PER_LEVELS = gql(/* GraphQL */ `
   query getUserCntPerLevels {
     getTotalPage {
-      userCntPerLevels {
-        userCnt
+      userCountPerLevels {
+        userCount
         level
       }
     }
@@ -42,10 +42,10 @@ export const UserCntPerLevels = () => {
       </DashboardContent>
     );
 
-  const { userCntPerLevels } = data.getTotalPage;
+  const { userCountPerLevels } = data.getTotalPage;
 
-  const categories = userCntPerLevels.map(({ level }) => level);
-  const seriesData = userCntPerLevels.map(({ userCnt }) => userCnt);
+  const categories = userCountPerLevels.map(({ level }) => level);
+  const seriesData = userCountPerLevels.map(({ userCount }) => userCount);
   const series: ApexAxisChartSeries = [
     {
       name: '인원수',

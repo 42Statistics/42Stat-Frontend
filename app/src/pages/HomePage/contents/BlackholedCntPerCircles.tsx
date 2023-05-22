@@ -13,7 +13,7 @@ import { useTheme } from '@emotion/react';
 const GET_WHEN_GO_BLACKHOLE = gql(/* GraphQL */ `
   query getWhenGoBlackHole {
     getTotalPage {
-      blackholedCntPerCircles {
+      blackholedCountPerCircles {
         circle
         value
       }
@@ -43,10 +43,10 @@ export const BlackholedCntPerCircles = () => {
       </DashboardContent>
     );
 
-  const { blackholedCntPerCircles } = data.getTotalPage;
+  const { blackholedCountPerCircles } = data.getTotalPage;
 
-  const labels = blackholedCntPerCircles.map(({ circle }) => `${circle}서클`);
-  const series = blackholedCntPerCircles.map(({ value }) => value);
+  const labels = blackholedCountPerCircles.map(({ circle }) => `${circle}서클`);
+  const series = blackholedCountPerCircles.map(({ value }) => value);
 
   return (
     <DashboardContent title={title}>

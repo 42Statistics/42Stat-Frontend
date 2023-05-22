@@ -6,11 +6,13 @@ import {
 } from '@/components/elements/DashboardContentView';
 import { TextDefault } from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
+import { userAtom } from '@/utils/atoms/userAtom';
 import { useQuery } from '@apollo/client';
+import { useAtomValue } from 'jotai';
 
 const GET_LAST_PASS = gql(/* GraphQL */ `
-  query getLastPass {
-    getPersonGeneralPage {
+  query getLastPass($uid: Int!) {
+    getPersonGeneralPage(uid: $uid) {
       teamInfo {
         lastPass
       }
@@ -19,8 +21,12 @@ const GET_LAST_PASS = gql(/* GraphQL */ `
 `);
 
 export const LastPass = () => {
+  const user = useAtomValue(userAtom);
+
   const title = '최근 통과한 과제';
-  const { loading, error, data } = useQuery(GET_LAST_PASS);
+  const { loading, error, data } = useQuery(GET_LAST_PASS, {
+    variables: { uid: user.id },
+  });
   if (loading)
     return (
       <DashboardContent title={title}>

@@ -6,12 +6,14 @@ import {
 } from '@/components/elements/DashboardContentView';
 import { TextDefault } from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
+import { userAtom } from '@/utils/atoms/userAtom';
 import { useQuery } from '@apollo/client';
 import dayjs from 'dayjs';
+import { useAtomValue } from 'jotai';
 
 const GET_PREFERRED_CLUSTER = gql(/* GraphQL */ `
-  query getPrefferedCluster {
-    getPersonGeneralPage {
+  query getPrefferedCluster($uid: Int!) {
+    getPersonGeneralPage(uid: $uid) {
       logtimeInfo {
         data {
           preferredCluster
@@ -24,8 +26,12 @@ const GET_PREFERRED_CLUSTER = gql(/* GraphQL */ `
 `);
 
 export const PrefferedCluster = () => {
+  const user = useAtomValue(userAtom);
+
   const title = '주 접속 클러스터';
-  const { loading, error, data } = useQuery(GET_PREFERRED_CLUSTER);
+  const { loading, error, data } = useQuery(GET_PREFERRED_CLUSTER, {
+    variables: { uid: user.id },
+  });
   if (loading)
     return (
       <DashboardContent title={title}>

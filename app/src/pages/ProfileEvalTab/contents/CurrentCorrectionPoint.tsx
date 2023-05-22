@@ -9,8 +9,8 @@ import { DashboardContent } from '@/components/templates/Dashboard';
 import { useQuery } from '@apollo/client';
 
 const GET_CURRENT_CORRECTION_POINT = gql(/* GraphQL */ `
-  query getCurrentCorrectionPoint {
-    getPersonGeneralPage {
+  query getCurrentCorrectionPoint($uid: Int!) {
+    getPersonGeneralPage(uid: $uid) {
       userProfile {
         correctionPoint
       }

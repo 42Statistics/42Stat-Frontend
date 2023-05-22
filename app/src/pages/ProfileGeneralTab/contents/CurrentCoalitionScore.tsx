@@ -9,11 +9,13 @@ import {
   TextDefault,
 } from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
+import { userAtom } from '@/utils/atoms/userAtom';
 import { useQuery } from '@apollo/client';
+import { useAtomValue } from 'jotai';
 
 const GET_CURRENT_COALITION_SCORE = gql(/* GraphQL */ `
-  query getCurrentCoalitionScore {
-    getPersonGeneralPage {
+  query getCurrentCoalitionScore($uid: Int!) {
+    getPersonGeneralPage(uid: $uid) {
       userProfile {
         coalition {
           score
@@ -24,8 +26,14 @@ const GET_CURRENT_COALITION_SCORE = gql(/* GraphQL */ `
 `);
 
 export const CurrentCoalitionScore = () => {
+  const user = useAtomValue(userAtom);
+
   const title = '코알리숑 스코어';
-  const { loading, error, data } = useQuery(GET_CURRENT_COALITION_SCORE);
+  const { loading, error, data } = useQuery(GET_CURRENT_COALITION_SCORE, {
+    variables: {
+      uid: user.id,
+    },
+  });
   if (loading)
     return (
       <DashboardContent title={title}>

@@ -5,14 +5,16 @@ import {
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
 import { DashboardContent } from '@/components/templates/Dashboard';
+import { userAtom } from '@/utils/atoms/userAtom';
 import { percentFormatter } from '@/utils/formatters/percentFormatter';
 import { useQuery } from '@apollo/client';
 import styled from '@emotion/styled';
 import dayjs from 'dayjs';
+import { useAtomValue } from 'jotai';
 
 const GET_PREFERRED_TIME = gql(/* GraphQL */ `
-  query getPrefferedTime {
-    getPersonGeneralPage {
+  query getPrefferedTime($uid: Int!) {
+    getPersonGeneralPage(uid: $uid) {
       logtimeInfo {
         data {
           preferredTime {
@@ -30,8 +32,12 @@ const GET_PREFERRED_TIME = gql(/* GraphQL */ `
 `);
 
 export const PrefferedTime = () => {
+  const user = useAtomValue(userAtom);
+
   const title = '주 접속 시간대';
-  const { loading, error, data } = useQuery(GET_PREFERRED_TIME);
+  const { loading, error, data } = useQuery(GET_PREFERRED_TIME, {
+    variables: { uid: user.id },
+  });
   if (loading)
     return (
       <DashboardContent title={title}>

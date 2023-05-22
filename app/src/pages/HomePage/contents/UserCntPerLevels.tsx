@@ -46,6 +46,10 @@ export const UserCntPerLevels = () => {
 
   const categories = userCountPerLevels.map(({ level }) => level);
   const seriesData = userCountPerLevels.map(({ userCount }) => userCount);
+  //Y축 범례 최대값 추출 로직
+  const _maxY = Math.max(...Object.values(seriesData));
+  const maxY = Math.ceil(_maxY / 100) * 100;
+
   const series: ApexAxisChartSeries = [
     {
       name: '인원수',
@@ -55,7 +59,11 @@ export const UserCntPerLevels = () => {
 
   return (
     <DashboardContent title={title}>
-      <UserCntPerLevelsChart categories={categories} series={series} />
+      <UserCntPerLevelsChart
+        categories={categories}
+        series={series}
+        maxY={maxY}
+      />
     </DashboardContent>
   );
 };
@@ -63,11 +71,13 @@ export const UserCntPerLevels = () => {
 type UserCntPerLevelsChartProps = {
   categories: number[];
   series: ApexAxisChartSeries;
+  maxY: number;
 };
 
 const UserCntPerLevelsChart = ({
   categories,
   series,
+  maxY,
 }: UserCntPerLevelsChartProps) => {
   const options: ApexCharts.ApexOptions = {
     xaxis: {
@@ -77,7 +87,7 @@ const UserCntPerLevelsChart = ({
       },
     },
     yaxis: {
-      max: 100,
+      max: maxY,
       labels: {
         formatter: (value) => numberWithUnitFormatter(value, '명'),
       },

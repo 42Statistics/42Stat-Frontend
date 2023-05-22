@@ -1,17 +1,14 @@
 import { H3Text, HStack, Text } from '@/components/common';
+import { useTheme } from '@emotion/react';
+import { BsDash } from '@react-icons/all-files/bs/BsDash';
 import { BsTriangleFill } from '@react-icons/all-files/bs/BsTriangleFill';
-
 type NumberCompareProps = {
   curr: number;
   last: number;
   unit: string;
 };
 
-type ArrowType = {
-  direction: 'up' | 'down';
-};
-
-const Arrow = ({ direction }: ArrowType) => {
+const Arrow = ({ direction }: { direction: 'up' | 'down' }) => {
   return (
     <BsTriangleFill
       size="12px"
@@ -24,7 +21,9 @@ const Arrow = ({ direction }: ArrowType) => {
 };
 
 export const NumberCompare = ({ curr, last, unit }: NumberCompareProps) => {
+  const theme = useTheme();
   const diff = curr - last;
+  const color = diff > 0 ? '#00C48C' : '#FF3D71';
 
   return (
     <HStack h="100%" spacing="2rem">
@@ -33,10 +32,14 @@ export const NumberCompare = ({ curr, last, unit }: NumberCompareProps) => {
         <Text>{unit}</Text>
       </HStack>
       <HStack spacing="0.5rem">
-        <Arrow direction={diff >= 0 ? 'up' : 'down'} />
-        <H3Text color={diff >= 0 ? '#00C48C' : '#FF3D71'}>
-          {Math.abs(diff).toLocaleString()}
-        </H3Text>
+        {diff !== 0 ? (
+          <>
+            <Arrow direction={diff > 0 ? 'up' : 'down'} />
+            <H3Text color={color}>{Math.abs(diff).toLocaleString()}</H3Text>
+          </>
+        ) : (
+          <BsDash size="12px" color={theme.colors.mono.black} />
+        )}
       </HStack>
     </HStack>
   );

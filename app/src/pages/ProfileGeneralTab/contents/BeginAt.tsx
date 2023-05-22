@@ -52,7 +52,7 @@ export const BeginAt = () => {
 
   return (
     <DashboardContent title={title}>
-      <TextDefault text={dayjs(beginAt).format('YYYY년 M월 D일')} />
+      <TextDefault text={dayjs(beginAt).format('YYYY. MM. DD.')} />
     </DashboardContent>
   );
 };

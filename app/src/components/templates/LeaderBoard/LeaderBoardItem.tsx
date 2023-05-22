@@ -23,7 +23,7 @@ export const LeaderBoardItem = ({ rank, item, unit }: LeaderBoardItemProps) => {
   const theme = useTheme();
   const { name, imgUrl, value } = item;
   const color =
-    rank === 1 ? theme.colors.accent.default : theme.colors.mono.black;
+    rank <= 3 ? theme.colors.accent.default : theme.colors.mono.black;
 
   return (
     <>

@@ -60,25 +60,30 @@ export const BlackholedAt = () => {
     : 0; // TODO: days left 로직 검증
 
   const getColorAndText = (isFree: boolean, daysLeft: number) => {
-    if (isFree) return { color: theme.colors.mono.black, text: "I'm FREE 🕶️" }; // 반드시 Member일 때만 blackholedAt === null
+    if (isFree) return { color: theme.colors.mono.black, text: 'Free 🦋' }; // 반드시 Member일 때만 blackholedAt === null
+    if (daysLeft >= 365)
+      return {
+        color: '#3db618',
+        text: `🥱 ${daysLeft.toLocaleString()} days left`,
+      };
     if (daysLeft >= 100)
       return {
-        color: theme.colors.semantic.pass,
-        text: `${daysLeft.toLocaleString()} days left`,
+        color: '#3db618',
+        text: `😄 ${daysLeft.toLocaleString()} days left`,
       };
     if (daysLeft >= 15)
       return {
-        color: theme.colors.semantic.warning,
-        text: `${daysLeft.toLocaleString()} days left`,
+        color: '#d7a900',
+        text: `🙁 ${daysLeft.toLocaleString()} days left`,
       };
     if (daysLeft >= 0)
       return {
-        color: theme.colors.semantic.fail,
-        text: `${daysLeft.toLocaleString()} days left`,
+        color: '#ff0303',
+        text: `😫 ${daysLeft.toLocaleString()} days left`,
       };
     return {
       color: theme.colors.mono.black,
-      text: "You've been absorbed by the Black Hole.",
+      text: 'Absorbed by Black Hole',
     };
   };
 

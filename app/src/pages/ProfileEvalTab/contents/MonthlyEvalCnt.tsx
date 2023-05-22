@@ -10,6 +10,7 @@ import { userAtom } from '@/utils/atoms/userAtom';
 import { useQuery } from '@apollo/client';
 import dayjs from 'dayjs';
 import { useAtomValue } from 'jotai';
+import { useParams } from 'react-router-dom';
 
 const GET_MONTHLY_EVAL_CNT = gql(/* GraphQL */ `
   query getMonthlyEvalCnt($uid: Int!) {
@@ -29,10 +30,11 @@ const GET_MONTHLY_EVAL_CNT = gql(/* GraphQL */ `
 `);
 
 export const MonthlyEvalCnt = () => {
+  const { username } = useParams() as { username: string };
   const user = useAtomValue(userAtom);
   const title = '월간 평가 횟수';
   const { loading, error, data } = useQuery(GET_MONTHLY_EVAL_CNT, {
-    variables: { uid: user.id },
+    variables: { uid: username === 'me' ? user.id : 110650 },
   });
   if (loading)
     return (

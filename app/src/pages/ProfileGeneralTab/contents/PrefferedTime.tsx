@@ -11,6 +11,7 @@ import { useQuery } from '@apollo/client';
 import styled from '@emotion/styled';
 import dayjs from 'dayjs';
 import { useAtomValue } from 'jotai';
+import { useParams } from 'react-router-dom';
 
 const GET_PREFERRED_TIME = gql(/* GraphQL */ `
   query getPrefferedTime($uid: Int!) {
@@ -32,11 +33,12 @@ const GET_PREFERRED_TIME = gql(/* GraphQL */ `
 `);
 
 export const PrefferedTime = () => {
+  const { username } = useParams() as { username: string };
   const user = useAtomValue(userAtom);
 
   const title = '주 접속 시간대';
   const { loading, error, data } = useQuery(GET_PREFERRED_TIME, {
-    variables: { uid: user.id },
+    variables: { uid: username === 'me' ? user.id : 110650 },
   });
   if (loading)
     return (

@@ -37,10 +37,12 @@ export const MobileUserSearchBar = () => {
     { loading: projectLoading, error: projectEror, data: projectData },
   ] = useLazyQuery(FIND_PROJECT_PREVIEW);
 
+  const hasUserData = userData != null && !!userData.findUserPreview.length;
+  const hasProjectData =
+    projectData != null && !!projectData.findProjectPreview.length;
   const isPreviewDisplaying =
-    debouncedInput !== '' &&
-    (userData?.findUserPreview.length !== 0 ||
-      projectData?.findProjectPreview.length !== 0);
+    debouncedInput !== '' && (hasUserData || hasProjectData);
+
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const theme = useTheme();
@@ -112,45 +114,48 @@ export const MobileUserSearchBar = () => {
             </HStack>
             {isPreviewDisplaying ? (
               <VStack w="100%" spacing="4rem">
-                <VStack w="100%" align="start" spacing="1rem">
-                  <BoldText>유저</BoldText>
-                  <Divider />
-                  {/* {error && <Text>Error! {error.message}</Text>} */}
-                  {userData?.findUserPreview
-                    .slice(0, 5)
-                    .filter(isDefined)
-                    .map((user) => (
-                      <Clickable
-                        key={user.id}
-                        onClick={() => handleUserSubmit(user.login)}
-                        element={
-                          <HStack spacing="1rem">
-                            <Avatar size="1.6rem" />
-                            <Text>{user.login}</Text>
-                          </HStack>
-                        }
-                      />
-                    ))}
-                </VStack>
-                <VStack w="100%" align="start" spacing="1rem">
-                  <BoldText>프로젝트</BoldText>
-                  <Divider />
-                  {projectData?.findProjectPreview
-                    .slice(0, 5)
-                    .filter(isDefined)
-                    .map((project) => (
-                      <Clickable
-                        key={project.id}
-                        onClick={() => handleProjectSubmit(project.name)}
-                        element={
-                          <HStack spacing="1rem">
-                            <Image src="/42-logo.png" width="16px" />
-                            <Text>{project.name}</Text>
-                          </HStack>
-                        }
-                      />
-                    ))}
-                </VStack>
+                {hasUserData && (
+                  <VStack w="100%" align="start" spacing="1rem">
+                    <BoldText>유저</BoldText>
+                    <Divider />
+                    {userData.findUserPreview
+                      .slice(0, 5)
+                      .filter(isDefined)
+                      .map((user) => (
+                        <Clickable
+                          key={user.id}
+                          onClick={() => handleUserSubmit(user.login)}
+                          element={
+                            <HStack spacing="1rem">
+                              <Avatar size="1.6rem" />
+                              <Text>{user.login}</Text>
+                            </HStack>
+                          }
+                        />
+                      ))}
+                  </VStack>
+                )}
+                {hasProjectData && (
+                  <VStack w="100%" align="start" spacing="1rem">
+                    <BoldText>프로젝트</BoldText>
+                    <Divider />
+                    {projectData.findProjectPreview
+                      .slice(0, 5)
+                      .filter(isDefined)
+                      .map((project) => (
+                        <Clickable
+                          key={project.id}
+                          onClick={() => handleProjectSubmit(project.name)}
+                          element={
+                            <HStack spacing="1rem">
+                              <Image src="/42-logo.png" width="16px" />
+                              <Text>{project.name}</Text>
+                            </HStack>
+                          }
+                        />
+                      ))}
+                  </VStack>
+                )}
               </VStack>
             ) : (
               <VStack w="100%" h="10rem">

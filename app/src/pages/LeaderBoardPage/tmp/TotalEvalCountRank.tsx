@@ -9,8 +9,8 @@ import { BelowTablet, Desktop } from '@/utils/responsive/Device';
 import type { RankItemType } from '@/utils/types/Rank';
 import { useQuery } from '@apollo/client';
 
-const GET_TOTAL_EVAL_CNT_RANK = gql(/* GraphQL */ `
-  query GetTotalEvalCntRank {
+const GET_TOTAL_EVAL_COUNT_RANK = gql(/* GraphQL */ `
+  query GetTotalEvalCountRank {
     getHomePage {
       totalEvalCountRank {
         userPreview {
@@ -24,8 +24,8 @@ const GET_TOTAL_EVAL_CNT_RANK = gql(/* GraphQL */ `
   }
 `);
 
-export const TotalEvalCntRank = () => {
-  const { loading, error, data } = useQuery(GET_TOTAL_EVAL_CNT_RANK);
+export const TotalEvalCountRank = () => {
+  const { loading, error, data } = useQuery(GET_TOTAL_EVAL_COUNT_RANK);
 
   if (loading) return <Loader />;
   if (error) return <ApolloBadRequest msg={error.message} />;

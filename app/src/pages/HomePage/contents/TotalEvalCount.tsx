@@ -16,7 +16,7 @@ const GET_TOTAL_EVAL_COUNT = gql(/* GraphQL */ `
   }
 `);
 
-export const TotalEvalCnt = () => {
+export const TotalEvalCount = () => {
   const title = '역대 총 평가 횟수';
   const { loading, error, data } = useQuery(GET_TOTAL_EVAL_COUNT);
   if (loading)

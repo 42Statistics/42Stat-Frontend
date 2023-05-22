@@ -9,8 +9,8 @@ import { DashboardContent } from '@/components/templates/Dashboard';
 import { numberWithUnitFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
 
-const GET_ACTIVE_USER_CNT_RECORD = gql(/* GraphQL */ `
-  query getActiveUserCntRecord {
+const GET_ACTIVE_USER_COUNT_RECORD = gql(/* GraphQL */ `
+  query getActiveUserCountRecord {
     getTotalPage {
       activeUserCountRecords {
         at
@@ -20,9 +20,9 @@ const GET_ACTIVE_USER_CNT_RECORD = gql(/* GraphQL */ `
   }
 `);
 
-export const ActiveUserCntRecords = () => {
+export const ActiveUserCountRecords = () => {
   const title = '활성화 유저 수 추이';
-  const { loading, error, data } = useQuery(GET_ACTIVE_USER_CNT_RECORD);
+  const { loading, error, data } = useQuery(GET_ACTIVE_USER_COUNT_RECORD);
   if (loading)
     return (
       <DashboardContent title={title}>
@@ -58,18 +58,18 @@ export const ActiveUserCntRecords = () => {
 
   return (
     <DashboardContent title={title}>
-      <ActiveUserCntRecordsChart series={series} />
+      <ActiveUserCountRecordsChart series={series} />
     </DashboardContent>
   );
 };
 
-type ActiveUserCntRecordsChartProps = {
+type ActiveUserCountRecordsChartProps = {
   series: ApexAxisChartSeries;
 };
 
-const ActiveUserCntRecordsChart = ({
+const ActiveUserCountRecordsChart = ({
   series,
-}: ActiveUserCntRecordsChartProps) => {
+}: ActiveUserCountRecordsChartProps) => {
   const options: ApexCharts.ApexOptions = {
     xaxis: {
       type: 'datetime',

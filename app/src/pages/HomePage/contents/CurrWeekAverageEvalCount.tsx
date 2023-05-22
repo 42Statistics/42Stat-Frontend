@@ -2,7 +2,7 @@ import { NumberDefault } from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
 import dayjs from 'dayjs';
 
-export const CurrWeekAverageEvalCnt = () => {
+export const CurrWeekAverageEvalCount = () => {
   const title = '주간 1인당 평가 횟수';
   const test = 1.71;
 

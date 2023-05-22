@@ -6,6 +6,6 @@ export * from './CurrentCorrectionPoint';
 export * from './DestinyUsers';
 export * from './EvalLogSearchLink';
 export * from './LatestFeedback';
-export * from './MonthlyEvalCnt';
-export * from './TotalEvalCnt';
+export * from './MonthlyEvalCount';
+export * from './TotalEvalCount';
 export * from './TotalEvalTime';

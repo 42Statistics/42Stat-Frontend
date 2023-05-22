@@ -6,21 +6,18 @@ import {
 } from '@/components/elements/DashboardContentView';
 import { NumberCompare } from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
-import { userAtom } from '@/utils/atoms/userAtom';
 import { useQuery } from '@apollo/client';
 import dayjs from 'dayjs';
-import { useAtomValue } from 'jotai';
-import { useParams } from 'react-router-dom';
 
-const GET_MONTHLY_EVAL_CNT = gql(/* GraphQL */ `
-  query getMonthlyEvalCnt($uid: Int!) {
-    getPersonalEvalPage(uid: $uid) {
-      currMonthCount {
+const GET_CURR_MONTH_BLACKHOLED_COUNT = gql(/* GraphQL */ `
+  query GetCurrMonthBlackholedCount {
+    getHomePage {
+      currMonthBlackholedCount {
         data
         from
         to
       }
-      lastMonthCount {
+      lastMonthBlackholedCount {
         data
         from
         to
@@ -29,13 +26,9 @@ const GET_MONTHLY_EVAL_CNT = gql(/* GraphQL */ `
   }
 `);
 
-export const MonthlyEvalCnt = () => {
-  const { username } = useParams() as { username: string };
-  const user = useAtomValue(userAtom);
-  const title = '월간 평가 횟수';
-  const { loading, error, data } = useQuery(GET_MONTHLY_EVAL_CNT, {
-    variables: { uid: username === 'me' ? user.id : 110650 },
-  });
+export const CurrMonthBlackholedCount = () => {
+  const title = '이번 달 누적 블랙홀 인원';
+  const { loading, error, data } = useQuery(GET_CURR_MONTH_BLACKHOLED_COUNT);
   if (loading)
     return (
       <DashboardContent title={title}>
@@ -55,16 +48,19 @@ export const MonthlyEvalCnt = () => {
       </DashboardContent>
     );
 
-  const { currMonthCount, lastMonthCount } = data.getPersonalEvalPage;
-  const { from, to } = currMonthCount;
+  const { currMonthBlackholedCount, lastMonthBlackholedCount } =
+    data.getHomePage;
+  const { from, to } = currMonthBlackholedCount;
+
   const description = `${dayjs(from).format('YYYY년 M월')}`;
+  const unit = '명';
 
   return (
     <DashboardContent title={title} description={description}>
       <NumberCompare
-        curr={currMonthCount.data}
-        last={lastMonthCount.data}
-        unit="회"
+        curr={currMonthBlackholedCount.data}
+        last={lastMonthBlackholedCount.data}
+        unit={unit}
       />
     </DashboardContent>
   );

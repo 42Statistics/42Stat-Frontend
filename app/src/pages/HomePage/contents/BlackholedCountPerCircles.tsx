@@ -10,8 +10,8 @@ import { numberWithUnitFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
 
-const GET_WHEN_GO_BLACKHOLE = gql(/* GraphQL */ `
-  query getWhenGoBlackHole {
+const GET_BLACKHOLED_COUNT_PER_CIRCLES = gql(/* GraphQL */ `
+  query getBlackholedCountPerCircles {
     getTotalPage {
       blackholedCountPerCircles {
         circle
@@ -21,9 +21,9 @@ const GET_WHEN_GO_BLACKHOLE = gql(/* GraphQL */ `
   }
 `);
 
-export const BlackholedCntPerCircles = () => {
+export const BlackholedCountPerCircles = () => {
   const title = '언제 블랙홀에 많이 빠질까?';
-  const { loading, error, data } = useQuery(GET_WHEN_GO_BLACKHOLE);
+  const { loading, error, data } = useQuery(GET_BLACKHOLED_COUNT_PER_CIRCLES);
   if (loading)
     return (
       <DashboardContent title={title}>
@@ -50,20 +50,20 @@ export const BlackholedCntPerCircles = () => {
 
   return (
     <DashboardContent title={title}>
-      <BlackholedCntPerCirclesChart labels={labels} series={series} />
+      <BlackholedCountPerCirclesChart labels={labels} series={series} />
     </DashboardContent>
   );
 };
 
-type BlackholedCntPerCirclesChartProps = {
+type BlackholedCountPerCirclesChartProps = {
   labels: string[];
   series: number[];
 };
 
-const BlackholedCntPerCirclesChart = ({
+const BlackholedCountPerCirclesChart = ({
   labels,
   series,
-}: BlackholedCntPerCirclesChartProps) => {
+}: BlackholedCountPerCirclesChartProps) => {
   const theme = useTheme();
 
   const options: ApexCharts.ApexOptions = {

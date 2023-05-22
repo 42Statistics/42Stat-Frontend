@@ -1,25 +1,25 @@
 import type { DashboardItemProps } from '@/utils/types/Dashboard';
 
 import {
-  ActiveUserCntRecords,
+  ActiveUserCountRecords,
   AverageCircleDurations,
   AverageCommentLength,
   AverageFeedbackLength,
-  BlackholedCntPerCircles,
+  BlackholedCountPerCircles,
   BlackholedPercentage,
   CoalitionScoreDynamic,
   CoalitionScoreSum,
   CorrectionPointRanks,
-  CurrMonthBlackholedCnt,
-  CurrRegisteredCntRank,
-  CurrWeekAverageEvalCnt,
-  CurrWeekEvalCnt,
+  CurrMonthBlackholedCount,
+  CurrRegisteredCountRank,
+  CurrWeekAverageEvalCount,
+  CurrWeekEvalCount,
   Hero,
   LastExamResult,
   MemberPercentage,
-  TigCntPerCoalition,
-  TotalEvalCnt,
-  UserCntPerLevels,
+  TigCountPerCoalition,
+  TotalEvalCount,
+  UserCountPerLevels,
   WalletRanks,
 } from '../contents';
 
@@ -30,23 +30,23 @@ export const homePageDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 1,
-    content: CurrWeekEvalCnt,
+    content: CurrWeekEvalCount,
   },
   {
     id: 2,
-    content: CurrMonthBlackholedCnt,
+    content: CurrMonthBlackholedCount,
   },
   {
     id: 3,
-    content: CurrWeekAverageEvalCnt,
+    content: CurrWeekAverageEvalCount,
   },
   {
     id: 4,
-    content: TotalEvalCnt,
+    content: TotalEvalCount,
   },
   {
     id: 5,
-    content: CurrRegisteredCntRank,
+    content: CurrRegisteredCountRank,
   },
   {
     id: 6,
@@ -58,11 +58,11 @@ export const homePageDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 8,
-    content: ActiveUserCntRecords,
+    content: ActiveUserCountRecords,
   },
   {
     id: 9,
-    content: UserCntPerLevels,
+    content: UserCountPerLevels,
   },
   {
     id: 10,
@@ -74,7 +74,7 @@ export const homePageDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 12,
-    content: BlackholedCntPerCircles,
+    content: BlackholedCountPerCircles,
   },
   {
     id: 13,
@@ -102,6 +102,6 @@ export const homePageDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 19,
-    content: TigCntPerCoalition,
+    content: TigCountPerCoalition,
   },
 ];

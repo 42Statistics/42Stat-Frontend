@@ -1,5 +1,5 @@
 import { gql } from '@/__generated__';
-import { Loader, VStack } from '@/components/common';
+import { Loader, SegmentedControl, VStack } from '@/components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
@@ -7,6 +7,7 @@ import {
 import { LeaderBoard } from '@/components/templates/LeaderBoard';
 import { LeaderBoardItem } from '@/components/templates/LeaderBoard/LeaderBoardItem';
 import type { RankItemType } from '@/utils/types/Rank';
+import { useSegmentedControl } from '@/utils/useSegmentedControl';
 import { useQuery } from '@apollo/client';
 
 const GET_LEVEL_RANK = gql(/* GraphQL */ `
@@ -26,6 +27,21 @@ const GET_LEVEL_RANK = gql(/* GraphQL */ `
 
 export const LevelRankTab = () => {
   const { loading, error, data } = useQuery(GET_LEVEL_RANK);
+  const options = [
+    {
+      label: '주간',
+      value: 'weekly',
+    },
+    {
+      label: '월간',
+      value: 'monthly',
+    },
+    {
+      label: '누적',
+      value: 'total',
+    },
+  ];
+  const { controlRef, segments } = useSegmentedControl(options);
 
   if (loading) return <Loader />;
   if (error) return <ApolloBadRequest msg={error.message} />;
@@ -41,11 +57,14 @@ export const LevelRankTab = () => {
     imgUrl: userPreview.imgUrl,
   }));
 
-  // https://letsbuildui.dev/articles/building-a-segmented-control-component
   return (
     <VStack w="100%" spacing="2rem">
       <VStack w="100%" align="start">
-        SegmentedControl
+        <SegmentedControl
+          callback={console.log}
+          controlRef={controlRef}
+          segments={segments}
+        />
       </VStack>
       <LeaderBoardItem rank={6} item={rankList[5]} unit={unit} />
       <LeaderBoard rankList={rankList} unit={unit} />

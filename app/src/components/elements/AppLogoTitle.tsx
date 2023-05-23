@@ -1,8 +1,8 @@
 import { AppLogoSvg } from '@/assets/AppLogoSvg';
 import { AppTitleSvg } from '@/assets/AppTitleSvg';
-import { Clickable, HStack } from '@/components/common';
+import { HStack } from '@/components/common';
 import type { AppLogoSize } from '@/utils/types/AppLogoSize';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 type AppLogoTitleProps = {
   size: AppLogoSize;
@@ -20,12 +20,9 @@ export const AppLogoTitle = ({ size, color }: AppLogoTitleProps) => {
 };
 
 export const AppLogoTitleButton = () => {
-  const navigate = useNavigate();
-
   return (
-    <Clickable
-      onClick={() => navigate('/')}
-      element={<AppLogoTitle size="sm" />}
-    />
+    <Link to="/">
+      <AppLogoTitle size="sm" />
+    </Link>
   );
 };

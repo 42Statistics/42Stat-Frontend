@@ -1,7 +1,6 @@
 import { EvalLog } from '@/__generated__/graphql';
 import {
   BoldText,
-  Clickable,
   HStack,
   PrimaryBoldText,
   Spacer,
@@ -14,25 +13,20 @@ import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import dayjs from 'dayjs';
 import { rgba } from 'emotion-rgba';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export const EvalLogItem = ({ element }: { element: EvalLog }) => {
   const { header, correctorReview, correctedsReview } = element;
-
-  const navigate = useNavigate();
 
   return (
     <EvalLogItemLayout>
       <VStack w="100%" align="start" spacing="2rem">
         <HStack w="100%" justify="start" wrap="wrap">
-          <Clickable
-            onClick={() => navigate('/profile/' + header.corrector.login)}
-            element={
-              <PrimaryBoldText selectable>
-                {header.corrector.login}
-              </PrimaryBoldText>
-            }
-          />
+          <Link to={`/profile/${header.corrector.login}`}>
+            <PrimaryBoldText selectable>
+              {header.corrector.login}
+            </PrimaryBoldText>
+          </Link>
           <Text selectable>님이&nbsp;</Text>
           <PrimaryBoldText selectable>
             {header.teamPreview.name}

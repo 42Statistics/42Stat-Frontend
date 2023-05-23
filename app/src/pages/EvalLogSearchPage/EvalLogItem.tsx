@@ -33,7 +33,7 @@ export const EvalLogItem = ({ element }: { element: EvalLog }) => {
           </PrimaryBoldText>
           <Text selectable>을&nbsp;</Text>
           <BoldText selectable>
-            {dayjs(header.beginAt).format('YYYY-MM-DD hh:mm')}
+            {dayjs(header.beginAt).format('YYYY-MM-DD HH:mm')}
           </BoldText>
           <Text selectable>에 평가하였습니다</Text>
           <Spacer />

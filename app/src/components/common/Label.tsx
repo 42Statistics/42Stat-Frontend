@@ -16,8 +16,8 @@ export const Label = ({
   ...propsExceptElement
 }: LabelProps) => {
   const theme = useTheme();
-  color = color || theme.colors.mono.white;
-  fontWeight = fontWeight || theme.fonts.weight.regular;
+  color = color ?? theme.colors.mono.white;
+  fontWeight = fontWeight ?? theme.fonts.weight.regular;
 
   return (
     <StyledLabel {...propsExceptElement}>

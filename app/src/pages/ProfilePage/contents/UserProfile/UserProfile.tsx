@@ -23,6 +23,7 @@ import { useQuery } from '@apollo/client';
 import styled from '@emotion/styled';
 import { useAtomValue } from 'jotai';
 import { truncate } from 'lodash-es';
+import { useParams } from 'react-router-dom';
 
 const GET_USER_PROFILE = gql(/* GraphQL */ `
   query GetUserProfile($uid: Int!) {
@@ -55,10 +56,12 @@ const GET_USER_PROFILE = gql(/* GraphQL */ `
 `);
 
 export const UserProfile = () => {
+  const { username } = useParams() as { username: string }; // FIXME: Type Assertion
   const user = useAtomValue(userAtom);
 
+  // FIXME: user.id가 아니라 user.login으로 검색할 수 있도록 요청해야 함
   const { loading, error, data } = useQuery(GET_USER_PROFILE, {
-    variables: { uid: user.id },
+    variables: { uid: username === 'me' ? user.id : 110650 },
   });
 
   if (loading) return <Loader />;
@@ -70,7 +73,7 @@ export const UserProfile = () => {
   const titleWithLogin = getTitleWithLogin(titles, login);
 
   return (
-    <UserProfileLayout>
+    <UserProfileLayout backgroundUrl={coalition?.coverUrl}>
       <Desktop>
         <HStack h="100%" spacing="4rem">
           <Avatar size="6rem" imgUrl={imgUrl} />
@@ -105,10 +108,12 @@ export const UserProfile = () => {
   );
 };
 
-const UserProfileLayout = styled.div`
+const UserProfileLayout = styled.div<{ backgroundUrl?: string | null }>`
   height: 100%;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3)),
-    url('/gam_cover.jpg'); // FIXME: 임시
+  background-image: ${({ backgroundUrl }) =>
+    backgroundUrl != null
+      ? `url(${backgroundUrl})`
+      : 'black'}; // TODO: fallback 시 기존에 있는 코알리숑 background로 대체
   background-size: cover;
   background-position: center;
   border-radius: 2rem; // FIXME: 왜 background-image 있는 쪽에도 border-radius를 줘야 하지?

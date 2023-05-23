@@ -8,8 +8,8 @@ import {
   DestinyUsers,
   EvalLogSearchLink,
   LatestFeedback,
-  MonthlyEvalCnt,
-  TotalEvalCnt,
+  MonthlyEvalCount,
+  TotalEvalCount,
   TotalEvalTime,
 } from '../contents';
 
@@ -20,11 +20,11 @@ export const profileEvalTabDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 1,
-    content: MonthlyEvalCnt,
+    content: MonthlyEvalCount,
   },
   {
     id: 2,
-    content: TotalEvalCnt,
+    content: TotalEvalCount,
   },
   {
     id: 3,

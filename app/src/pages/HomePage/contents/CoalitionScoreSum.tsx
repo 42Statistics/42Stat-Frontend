@@ -55,7 +55,7 @@ export const CoalitionScoreSum = () => {
   const colorList: string[] = [];
   totalScores.forEach(({ coalition, value }) => {
     categories.push(coalition.name);
-    colorList.push(coalition.color || 'black');
+    colorList.push(coalition.color ?? 'black');
     seriesData.push(value);
   });
   // const categories = totalScores.map(({ coalition }) => coalition.name);

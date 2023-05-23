@@ -18,46 +18,59 @@ import { MdSearch } from '@react-icons/all-files/md/MdSearch';
 import { rgba } from 'emotion-rgba';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FIND_PROJECT_PREVIEW } from './common';
+import { FIND_PROJECT_PREVIEW, FIND_USER_PREVIEW } from './common';
 
 // TODO: SearchBar 추상화
 export const AboveTabletUserSearchBar = () => {
   const [input, setInput] = useState<string>('');
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const debouncedInput = useDebounce(input, 100);
-  const [preview, { loading, error, data }] =
-    useLazyQuery(FIND_PROJECT_PREVIEW);
+  const [
+    searchUser,
+    { loading: userLoading, error: userError, data: userData },
+  ] = useLazyQuery(FIND_USER_PREVIEW);
+  const [
+    searchProject,
+    { loading: projectLoading, error: projectEror, data: projectData },
+  ] = useLazyQuery(FIND_PROJECT_PREVIEW);
+
+  const hasUserData = userData != null && userData.findUserPreview.length !== 0;
+  const hasProjectData =
+    projectData != null && projectData.findProjectPreview.length !== 0;
   const isPreviewDisplaying =
-    debouncedInput !== '' && data?.findProjectPreview.length !== 0 && !loading;
-  // ) || error;
+    debouncedInput !== '' && (hasUserData || hasProjectData);
+
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    preview({
+    searchUser({
+      variables: { login: debouncedInput },
+    });
+    searchProject({
       variables: { name: debouncedInput },
     });
-  }, [debouncedInput, preview]);
+  }, [debouncedInput, searchUser, searchProject]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (!isEnterKeyReleased(e)) return;
     handleUserSubmit(input);
   };
 
-  const handleUserSubmit = (username: string) => {
-    if (inputRef != null && inputRef.current != null) {
+  const handleUserSubmit = (name: string) => {
+    if (inputRef?.current) {
       inputRef.current.value = '';
     }
     setInput('');
-    navigate('/profile/' + username);
+    navigate('/profile/' + name);
   };
 
-  const handleProjectSubmit = (username: string) => {
-    if (inputRef != null && inputRef.current != null) {
+  const handleProjectSubmit = (name: string) => {
+    if (inputRef?.current) {
       inputRef.current.value = '';
     }
     setInput('');
-    navigate('/project/' + username);
+    navigate('/project/' + name);
   };
 
   return (
@@ -76,45 +89,48 @@ export const AboveTabletUserSearchBar = () => {
       {isPreviewDisplaying && (
         <UserSearchResult>
           <VStack spacing="3rem">
-            <VStack w="100%" align="start" spacing="1rem">
-              <BoldText>유저</BoldText>
-              <Divider />
-              {/* {error && <Text>Error! {error.message}</Text>} */}
-              {data?.findProjectPreview
-                .slice(0, 5)
-                .filter(isDefined)
-                .map((project, idx) => (
-                  <Clickable
-                    key={idx}
-                    onClick={() => handleUserSubmit(project.name)}
-                    element={
-                      <HStack spacing="1rem">
-                        <Avatar size="1.6rem" />
-                        <Text>{project.name}</Text>
-                      </HStack>
-                    }
-                  />
-                ))}
-            </VStack>
-            <VStack w="100%" align="start" spacing="1rem">
-              <BoldText>프로젝트</BoldText>
-              <Divider />
-              {data?.findProjectPreview
-                .slice(0, 5)
-                .filter(isDefined)
-                .map((project, idx) => (
-                  <Clickable
-                    key={idx}
-                    onClick={() => handleProjectSubmit(project.name)}
-                    element={
-                      <HStack spacing="1rem">
-                        <Image src="/42-logo.png" width="16px" />
-                        <Text>{project.name}</Text>
-                      </HStack>
-                    }
-                  />
-                ))}
-            </VStack>
+            {hasUserData && (
+              <VStack w="100%" align="start" spacing="1rem">
+                <BoldText>유저</BoldText>
+                <Divider />
+                {userData.findUserPreview
+                  .slice(0, 5)
+                  .filter(isDefined)
+                  .map((user) => (
+                    <Clickable
+                      key={user.id}
+                      onClick={() => handleUserSubmit(user.login)}
+                      element={
+                        <HStack spacing="1rem">
+                          <Avatar size="1.6rem" />
+                          <Text>{user.login}</Text>
+                        </HStack>
+                      }
+                    />
+                  ))}
+              </VStack>
+            )}
+            {hasProjectData && (
+              <VStack w="100%" align="start" spacing="1rem">
+                <BoldText>프로젝트</BoldText>
+                <Divider />
+                {projectData.findProjectPreview
+                  .slice(0, 5)
+                  .filter(isDefined)
+                  .map((project, idx) => (
+                    <Clickable
+                      key={idx}
+                      onClick={() => handleProjectSubmit(project.name)}
+                      element={
+                        <HStack spacing="1rem">
+                          <Image src="/42-logo.png" width="16px" />
+                          <Text>{project.name}</Text>
+                        </HStack>
+                      }
+                    />
+                  ))}
+              </VStack>
+            )}
           </VStack>
         </UserSearchResult>
       )}

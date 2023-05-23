@@ -12,18 +12,15 @@ type RankProps = {
 export const Rank = ({ rankList, showImg = true, cnt, unit }: RankProps) => {
   return (
     <VStack w="100%" h="100%" spacing="2rem">
-      {rankList.map((rankItem, idx) => {
-        const rank = idx + 1;
-        return rank <= cnt ? (
-          <RankItem
-            key={idx}
-            rank={idx + 1}
-            item={rankItem}
-            showImg={showImg}
-            unit={unit}
-          />
-        ) : null;
-      })}
+      {rankList.slice(0, cnt).map((rankItem, idx) => (
+        <RankItem
+          key={rankItem.id}
+          rank={idx + 1}
+          item={rankItem}
+          showImg={showImg}
+          unit={unit}
+        />
+      ))}
     </VStack>
   );
 };

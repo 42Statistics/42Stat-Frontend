@@ -14,34 +14,35 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\n  query FindProjectPreview($name: String!) {\n    findProjectPreview(name: $name) {\n      id\n      name\n      url\n    }\n  }\n": types.FindProjectPreviewDocument,
+    "\n  query FindUserPreview($login: String!) {\n    findUserPreview(login: $login) {\n      id\n      login\n    }\n  }\n": types.FindUserPreviewDocument,
     "\n  query GetEvalLogs(\n    $pageSize: Int!\n    $pageNumber: Int!\n    $projectName: String!\n    $outstandingOnly: Boolean!\n    $corrector: String\n    $corrected: String\n  ) {\n    getEvalLogs(\n      pageSize: $pageSize\n      pageNumber: $pageNumber\n      projectName: $projectName\n      outstandingOnly: $outstandingOnly\n      corrector: $corrector\n      corrected: $corrected\n    ) {\n      nodes {\n        header {\n          corrector {\n            id\n            login\n            imgUrl\n          }\n          teamPreview {\n            id\n            name\n            url\n          }\n          beginAt\n          projectPreview {\n            id\n            name\n            url\n          }\n          flag {\n            id\n            name\n            isPositive\n          }\n        }\n        correctorReview {\n          mark\n          review\n        }\n        correctedsReview {\n          mark\n          review\n        }\n      }\n      totalCount\n      pageSize\n      pageNumber\n    }\n  }\n": types.GetEvalLogsDocument,
-    "\n  query getActiveUserCntRecord {\n    getTotalPage {\n      activeUserCountRecords {\n        at\n        value\n      }\n    }\n  }\n": types.GetActiveUserCntRecordDocument,
+    "\n  query getActiveUserCountRecord {\n    getTotalPage {\n      activeUserCountRecords {\n        at\n        value\n      }\n    }\n  }\n": types.GetActiveUserCountRecordDocument,
     "\n  query getAverageCircleDuration {\n    getTotalPage {\n      averageCircleDurations {\n        circle\n        value\n      }\n    }\n  }\n": types.GetAverageCircleDurationDocument,
     "\n  query getAverageCommentLength {\n    getTotalPage {\n      averageCommentLength\n    }\n  }\n": types.GetAverageCommentLengthDocument,
     "\n  query getAverageFeedbackLength {\n    getTotalPage {\n      averageFeedbackLength\n    }\n  }\n": types.GetAverageFeedbackLengthDocument,
-    "\n  query getWhenGoBlackHole {\n    getTotalPage {\n      blackholedCountPerCircles {\n        circle\n        value\n      }\n    }\n  }\n": types.GetWhenGoBlackHoleDocument,
+    "\n  query getBlackholedCountPerCircles {\n    getTotalPage {\n      blackholedCountPerCircles {\n        circle\n        value\n      }\n    }\n  }\n": types.GetBlackholedCountPerCirclesDocument,
     "\n  query getCoalitionScoreRecord {\n    getTotalPage {\n      scoreRecords {\n        coalition {\n          id\n          name\n          slug\n          imageUrl\n          coverUrl\n          color\n          score\n          userId\n        }\n        records {\n          at\n          value\n        }\n      }\n    }\n  }\n": types.GetCoalitionScoreRecordDocument,
     "\n  query getCoalitionTotalScores {\n    getTotalPage {\n      totalScores {\n        coalition {\n          id\n          name\n          slug\n          imageUrl\n          coverUrl\n          color\n          userId\n        }\n        value\n      }\n    }\n  }\n": types.GetCoalitionTotalScoresDocument,
-    "\n  query getCorrectionPointRank {\n    getTotalPage {\n      correctionPointRanks {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n": types.GetCorrectionPointRankDocument,
-    "\n  query GetCurrMonthBlackholedCnt {\n    getHomePage {\n      currMonthBlackholedCount {\n        data\n        from\n        to\n      }\n      lastMonthBlackholedCount {\n        data\n        from\n        to\n      }\n    }\n  }\n": types.GetCurrMonthBlackholedCntDocument,
-    "\n  query GetCurrRegisteredCntRank {\n    getHomePage {\n      currRegisteredCountRank {\n        projectPreview {\n          name\n        }\n        value\n      }\n    }\n  }\n": types.GetCurrRegisteredCntRankDocument,
-    "\n  query GetCurrWeekEvalCnt {\n    getHomePage {\n      currWeekEvalCount {\n        data\n        from\n        to\n      }\n      lastWeekEvalCount {\n        data\n        from\n        to\n      }\n    }\n  }\n": types.GetCurrWeekEvalCntDocument,
+    "\n  query getCorrectionPointRank($limit: Int!) {\n    getTotalPage {\n      correctionPointRanks(limit: $limit) {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n": types.GetCorrectionPointRankDocument,
+    "\n  query GetCurrMonthBlackholedCount {\n    getHomePage {\n      currMonthBlackholedCount {\n        data\n        from\n        to\n      }\n      lastMonthBlackholedCount {\n        data\n        from\n        to\n      }\n    }\n  }\n": types.GetCurrMonthBlackholedCountDocument,
+    "\n  query GetCurrRegisteredCountRank {\n    getHomePage {\n      currRegisteredCountRank {\n        projectPreview {\n          name\n        }\n        value\n      }\n    }\n  }\n": types.GetCurrRegisteredCountRankDocument,
+    "\n  query GetCurrWeekEvalCount {\n    getHomePage {\n      currWeekEvalCount {\n        data\n        from\n        to\n      }\n      lastWeekEvalCount {\n        data\n        from\n        to\n      }\n    }\n  }\n": types.GetCurrWeekEvalCountDocument,
     "\n  query GetLastExamResult {\n    getHomePage {\n      lastExamResult {\n        data {\n          rank\n          passCount\n          totalCount\n        }\n        from\n        to\n      }\n    }\n  }\n": types.GetLastExamResultDocument,
     "\n  query getTotalEvalCount {\n    getTotalPage {\n      totalEvalCount\n    }\n  }\n": types.GetTotalEvalCountDocument,
-    "\n  query getUserCntPerLevels {\n    getTotalPage {\n      userCountPerLevels {\n        userCount\n        level\n      }\n    }\n  }\n": types.GetUserCntPerLevelsDocument,
-    "\n  query getWalletRank {\n    getTotalPage {\n      walletRanks {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n": types.GetWalletRankDocument,
+    "\n  query getUserCountPerLevels {\n    getTotalPage {\n      userCountPerLevels {\n        userCount\n        level\n      }\n    }\n  }\n": types.GetUserCountPerLevelsDocument,
+    "\n  query getWalletRank($limit: Int!) {\n    getTotalPage {\n      walletRanks(limit: $limit) {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n": types.GetWalletRankDocument,
     "\n  query GetLevelRank {\n    getHomePage {\n      levelRank {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n": types.GetLevelRankDocument,
     "\n  query GetMonthlyAccessTimeRank {\n    getHomePage {\n      monthlyAccessTimeRank {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n": types.GetMonthlyAccessTimeRankDocument,
     "\n  query GetMonthlyExpIncrementRank {\n    getHomePage {\n      monthlyExpIncrementRank {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n": types.GetMonthlyExpIncrementRankDocument,
     "\n  query getCoalitionScoreRank {\n    getTotalPage {\n      monthlyScoreRanks {\n        data {\n          userPreview {\n            id\n            login\n            imgUrl\n          }\n          value\n        }\n        from\n        to\n      }\n    }\n  }\n": types.GetCoalitionScoreRankDocument,
-    "\n  query GetTotalEvalCntRank {\n    getHomePage {\n      totalEvalCountRank {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n": types.GetTotalEvalCntRankDocument,
+    "\n  query GetTotalEvalCountRank {\n    getHomePage {\n      totalEvalCountRank {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n": types.GetTotalEvalCountRankDocument,
     "\n  query getPersonalAverageCommentLength($uid: Int!) {\n    getPersonalEvalPage(uid: $uid) {\n      averageCommentLength\n    }\n  }\n": types.GetPersonalAverageCommentLengthDocument,
     "\n  query getAverageDuration($uid: Int!) {\n    getPersonalEvalPage(uid: $uid) {\n      averageDuration\n    }\n  }\n": types.GetAverageDurationDocument,
     "\n  query getPersonalAverageFeedbackLength($uid: Int!) {\n    getPersonalEvalPage(uid: $uid) {\n      averageFeedbackLength\n    }\n  }\n": types.GetPersonalAverageFeedbackLengthDocument,
     "\n  query getAverageFinalMark($uid: Int!) {\n    getPersonalEvalPage(uid: $uid) {\n      averageFinalMark\n    }\n  }\n": types.GetAverageFinalMarkDocument,
     "\n  query getCurrentCorrectionPoint($uid: Int!) {\n    getPersonGeneralPage(uid: $uid) {\n      userProfile {\n        correctionPoint\n      }\n    }\n  }\n": types.GetCurrentCorrectionPointDocument,
-    "\n  query getMonthlyEvalCnt($uid: Int!) {\n    getPersonalEvalPage(uid: $uid) {\n      currMonthCount {\n        data\n        from\n        to\n      }\n      lastMonthCount {\n        data\n        from\n        to\n      }\n    }\n  }\n": types.GetMonthlyEvalCntDocument,
-    "\n  query getPersonalTotalEvalCnt($uid: Int!) {\n    getPersonalEvalPage(uid: $uid) {\n      totalCount\n    }\n  }\n": types.GetPersonalTotalEvalCntDocument,
+    "\n  query getMonthlyEvalCount($uid: Int!) {\n    getPersonalEvalPage(uid: $uid) {\n      currMonthCount {\n        data\n        from\n        to\n      }\n      lastMonthCount {\n        data\n        from\n        to\n      }\n    }\n  }\n": types.GetMonthlyEvalCountDocument,
+    "\n  query getPersonalTotalEvalCount($uid: Int!) {\n    getPersonalEvalPage(uid: $uid) {\n      totalCount\n    }\n  }\n": types.GetPersonalTotalEvalCountDocument,
     "\n  query getBeginAt($uid: Int!) {\n    getPersonGeneralPage(uid: $uid) {\n      userProfile {\n        beginAt\n      }\n    }\n  }\n": types.GetBeginAtDocument,
     "\n  query getBlackholedAt($uid: Int!) {\n    getPersonGeneralPage(uid: $uid) {\n      userProfile {\n        blackholedAt\n      }\n    }\n  }\n": types.GetBlackholedAtDocument,
     "\n  query getCurrentCoalitionScore($uid: Int!) {\n    getPersonGeneralPage(uid: $uid) {\n      userProfile {\n        coalition {\n          score\n        }\n      }\n    }\n  }\n": types.GetCurrentCoalitionScoreDocument,
@@ -78,11 +79,15 @@ export function gql(source: "\n  query FindProjectPreview($name: String!) {\n   
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function gql(source: "\n  query FindUserPreview($login: String!) {\n    findUserPreview(login: $login) {\n      id\n      login\n    }\n  }\n"): (typeof documents)["\n  query FindUserPreview($login: String!) {\n    findUserPreview(login: $login) {\n      id\n      login\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function gql(source: "\n  query GetEvalLogs(\n    $pageSize: Int!\n    $pageNumber: Int!\n    $projectName: String!\n    $outstandingOnly: Boolean!\n    $corrector: String\n    $corrected: String\n  ) {\n    getEvalLogs(\n      pageSize: $pageSize\n      pageNumber: $pageNumber\n      projectName: $projectName\n      outstandingOnly: $outstandingOnly\n      corrector: $corrector\n      corrected: $corrected\n    ) {\n      nodes {\n        header {\n          corrector {\n            id\n            login\n            imgUrl\n          }\n          teamPreview {\n            id\n            name\n            url\n          }\n          beginAt\n          projectPreview {\n            id\n            name\n            url\n          }\n          flag {\n            id\n            name\n            isPositive\n          }\n        }\n        correctorReview {\n          mark\n          review\n        }\n        correctedsReview {\n          mark\n          review\n        }\n      }\n      totalCount\n      pageSize\n      pageNumber\n    }\n  }\n"): (typeof documents)["\n  query GetEvalLogs(\n    $pageSize: Int!\n    $pageNumber: Int!\n    $projectName: String!\n    $outstandingOnly: Boolean!\n    $corrector: String\n    $corrected: String\n  ) {\n    getEvalLogs(\n      pageSize: $pageSize\n      pageNumber: $pageNumber\n      projectName: $projectName\n      outstandingOnly: $outstandingOnly\n      corrector: $corrector\n      corrected: $corrected\n    ) {\n      nodes {\n        header {\n          corrector {\n            id\n            login\n            imgUrl\n          }\n          teamPreview {\n            id\n            name\n            url\n          }\n          beginAt\n          projectPreview {\n            id\n            name\n            url\n          }\n          flag {\n            id\n            name\n            isPositive\n          }\n        }\n        correctorReview {\n          mark\n          review\n        }\n        correctedsReview {\n          mark\n          review\n        }\n      }\n      totalCount\n      pageSize\n      pageNumber\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query getActiveUserCntRecord {\n    getTotalPage {\n      activeUserCountRecords {\n        at\n        value\n      }\n    }\n  }\n"): (typeof documents)["\n  query getActiveUserCntRecord {\n    getTotalPage {\n      activeUserCountRecords {\n        at\n        value\n      }\n    }\n  }\n"];
+export function gql(source: "\n  query getActiveUserCountRecord {\n    getTotalPage {\n      activeUserCountRecords {\n        at\n        value\n      }\n    }\n  }\n"): (typeof documents)["\n  query getActiveUserCountRecord {\n    getTotalPage {\n      activeUserCountRecords {\n        at\n        value\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -98,7 +103,7 @@ export function gql(source: "\n  query getAverageFeedbackLength {\n    getTotalP
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query getWhenGoBlackHole {\n    getTotalPage {\n      blackholedCountPerCircles {\n        circle\n        value\n      }\n    }\n  }\n"): (typeof documents)["\n  query getWhenGoBlackHole {\n    getTotalPage {\n      blackholedCountPerCircles {\n        circle\n        value\n      }\n    }\n  }\n"];
+export function gql(source: "\n  query getBlackholedCountPerCircles {\n    getTotalPage {\n      blackholedCountPerCircles {\n        circle\n        value\n      }\n    }\n  }\n"): (typeof documents)["\n  query getBlackholedCountPerCircles {\n    getTotalPage {\n      blackholedCountPerCircles {\n        circle\n        value\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -110,19 +115,19 @@ export function gql(source: "\n  query getCoalitionTotalScores {\n    getTotalPa
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query getCorrectionPointRank {\n    getTotalPage {\n      correctionPointRanks {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n"): (typeof documents)["\n  query getCorrectionPointRank {\n    getTotalPage {\n      correctionPointRanks {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n"];
+export function gql(source: "\n  query getCorrectionPointRank($limit: Int!) {\n    getTotalPage {\n      correctionPointRanks(limit: $limit) {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n"): (typeof documents)["\n  query getCorrectionPointRank($limit: Int!) {\n    getTotalPage {\n      correctionPointRanks(limit: $limit) {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query GetCurrMonthBlackholedCnt {\n    getHomePage {\n      currMonthBlackholedCount {\n        data\n        from\n        to\n      }\n      lastMonthBlackholedCount {\n        data\n        from\n        to\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetCurrMonthBlackholedCnt {\n    getHomePage {\n      currMonthBlackholedCount {\n        data\n        from\n        to\n      }\n      lastMonthBlackholedCount {\n        data\n        from\n        to\n      }\n    }\n  }\n"];
+export function gql(source: "\n  query GetCurrMonthBlackholedCount {\n    getHomePage {\n      currMonthBlackholedCount {\n        data\n        from\n        to\n      }\n      lastMonthBlackholedCount {\n        data\n        from\n        to\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetCurrMonthBlackholedCount {\n    getHomePage {\n      currMonthBlackholedCount {\n        data\n        from\n        to\n      }\n      lastMonthBlackholedCount {\n        data\n        from\n        to\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query GetCurrRegisteredCntRank {\n    getHomePage {\n      currRegisteredCountRank {\n        projectPreview {\n          name\n        }\n        value\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetCurrRegisteredCntRank {\n    getHomePage {\n      currRegisteredCountRank {\n        projectPreview {\n          name\n        }\n        value\n      }\n    }\n  }\n"];
+export function gql(source: "\n  query GetCurrRegisteredCountRank {\n    getHomePage {\n      currRegisteredCountRank {\n        projectPreview {\n          name\n        }\n        value\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetCurrRegisteredCountRank {\n    getHomePage {\n      currRegisteredCountRank {\n        projectPreview {\n          name\n        }\n        value\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query GetCurrWeekEvalCnt {\n    getHomePage {\n      currWeekEvalCount {\n        data\n        from\n        to\n      }\n      lastWeekEvalCount {\n        data\n        from\n        to\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetCurrWeekEvalCnt {\n    getHomePage {\n      currWeekEvalCount {\n        data\n        from\n        to\n      }\n      lastWeekEvalCount {\n        data\n        from\n        to\n      }\n    }\n  }\n"];
+export function gql(source: "\n  query GetCurrWeekEvalCount {\n    getHomePage {\n      currWeekEvalCount {\n        data\n        from\n        to\n      }\n      lastWeekEvalCount {\n        data\n        from\n        to\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetCurrWeekEvalCount {\n    getHomePage {\n      currWeekEvalCount {\n        data\n        from\n        to\n      }\n      lastWeekEvalCount {\n        data\n        from\n        to\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -134,11 +139,11 @@ export function gql(source: "\n  query getTotalEvalCount {\n    getTotalPage {\n
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query getUserCntPerLevels {\n    getTotalPage {\n      userCountPerLevels {\n        userCount\n        level\n      }\n    }\n  }\n"): (typeof documents)["\n  query getUserCntPerLevels {\n    getTotalPage {\n      userCountPerLevels {\n        userCount\n        level\n      }\n    }\n  }\n"];
+export function gql(source: "\n  query getUserCountPerLevels {\n    getTotalPage {\n      userCountPerLevels {\n        userCount\n        level\n      }\n    }\n  }\n"): (typeof documents)["\n  query getUserCountPerLevels {\n    getTotalPage {\n      userCountPerLevels {\n        userCount\n        level\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query getWalletRank {\n    getTotalPage {\n      walletRanks {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n"): (typeof documents)["\n  query getWalletRank {\n    getTotalPage {\n      walletRanks {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n"];
+export function gql(source: "\n  query getWalletRank($limit: Int!) {\n    getTotalPage {\n      walletRanks(limit: $limit) {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n"): (typeof documents)["\n  query getWalletRank($limit: Int!) {\n    getTotalPage {\n      walletRanks(limit: $limit) {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -158,7 +163,7 @@ export function gql(source: "\n  query getCoalitionScoreRank {\n    getTotalPage
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query GetTotalEvalCntRank {\n    getHomePage {\n      totalEvalCountRank {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetTotalEvalCntRank {\n    getHomePage {\n      totalEvalCountRank {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n"];
+export function gql(source: "\n  query GetTotalEvalCountRank {\n    getHomePage {\n      totalEvalCountRank {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetTotalEvalCountRank {\n    getHomePage {\n      totalEvalCountRank {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -182,11 +187,11 @@ export function gql(source: "\n  query getCurrentCorrectionPoint($uid: Int!) {\n
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query getMonthlyEvalCnt($uid: Int!) {\n    getPersonalEvalPage(uid: $uid) {\n      currMonthCount {\n        data\n        from\n        to\n      }\n      lastMonthCount {\n        data\n        from\n        to\n      }\n    }\n  }\n"): (typeof documents)["\n  query getMonthlyEvalCnt($uid: Int!) {\n    getPersonalEvalPage(uid: $uid) {\n      currMonthCount {\n        data\n        from\n        to\n      }\n      lastMonthCount {\n        data\n        from\n        to\n      }\n    }\n  }\n"];
+export function gql(source: "\n  query getMonthlyEvalCount($uid: Int!) {\n    getPersonalEvalPage(uid: $uid) {\n      currMonthCount {\n        data\n        from\n        to\n      }\n      lastMonthCount {\n        data\n        from\n        to\n      }\n    }\n  }\n"): (typeof documents)["\n  query getMonthlyEvalCount($uid: Int!) {\n    getPersonalEvalPage(uid: $uid) {\n      currMonthCount {\n        data\n        from\n        to\n      }\n      lastMonthCount {\n        data\n        from\n        to\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query getPersonalTotalEvalCnt($uid: Int!) {\n    getPersonalEvalPage(uid: $uid) {\n      totalCount\n    }\n  }\n"): (typeof documents)["\n  query getPersonalTotalEvalCnt($uid: Int!) {\n    getPersonalEvalPage(uid: $uid) {\n      totalCount\n    }\n  }\n"];
+export function gql(source: "\n  query getPersonalTotalEvalCount($uid: Int!) {\n    getPersonalEvalPage(uid: $uid) {\n      totalCount\n    }\n  }\n"): (typeof documents)["\n  query getPersonalTotalEvalCount($uid: Int!) {\n    getPersonalEvalPage(uid: $uid) {\n      totalCount\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

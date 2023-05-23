@@ -9,20 +9,22 @@ import { DashboardContent } from '@/components/templates/Dashboard';
 import { userAtom } from '@/utils/atoms/userAtom';
 import { useQuery } from '@apollo/client';
 import { useAtomValue } from 'jotai';
+import { useParams } from 'react-router-dom';
 
-const GET_PERSONAL_TOTAL_EVAL_CNT = gql(/* GraphQL */ `
-  query getPersonalTotalEvalCnt($uid: Int!) {
+const GET_PERSONAL_TOTAL_EVAL_COUNT = gql(/* GraphQL */ `
+  query getPersonalTotalEvalCount($uid: Int!) {
     getPersonalEvalPage(uid: $uid) {
       totalCount
     }
   }
 `);
 
-export const TotalEvalCnt = () => {
+export const TotalEvalCount = () => {
+  const { username } = useParams() as { username: string };
   const user = useAtomValue(userAtom);
   const title = '누적 평가 횟수';
-  const { loading, error, data } = useQuery(GET_PERSONAL_TOTAL_EVAL_CNT, {
-    variables: { uid: user.id },
+  const { loading, error, data } = useQuery(GET_PERSONAL_TOTAL_EVAL_COUNT, {
+    variables: { uid: username === 'me' ? user.id : 110650 },
   });
 
   if (loading)

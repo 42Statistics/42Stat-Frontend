@@ -63,7 +63,7 @@ export const CoalitionScoreDynamic = () => {
       x: at,
       y: value,
     }));
-    colorList.push(coalition.color || 'black');
+    colorList.push(coalition.color ?? 'black');
     return {
       name: coalition.name,
       data: seriesData,

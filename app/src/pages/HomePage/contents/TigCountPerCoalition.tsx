@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import dayjs from 'dayjs';
 import { capitalize } from 'lodash-es';
 
-export const TigCntPerCoalition = () => {
+export const TigCountPerCoalition = () => {
   const title = '이번 달 누적 코알리숑 티그 횟수';
   const test = [
     {
@@ -42,7 +42,7 @@ export const TigCntPerCoalition = () => {
     <DashboardContent title={title} description={description}>
       <Center w="100%" h="100%">
         <VStack w="80%" h="100%">
-          <TigCntPerCoalitionTable>
+          <TigCountPerCoalitionTable>
             <tbody>
               {test.map(({ coalition, value }) => (
                 <tr key={coalition.name}>
@@ -57,14 +57,14 @@ export const TigCntPerCoalition = () => {
                 </tr>
               ))}
             </tbody>
-          </TigCntPerCoalitionTable>
+          </TigCountPerCoalitionTable>
         </VStack>
       </Center>
     </DashboardContent>
   );
 };
 
-const TigCntPerCoalitionTable = styled.table`
+const TigCountPerCoalitionTable = styled.table`
   width: 100%;
   text-align: center;
 

@@ -9,8 +9,8 @@ import { DashboardContent } from '@/components/templates/Dashboard';
 import { useQuery } from '@apollo/client';
 import dayjs from 'dayjs';
 
-const GET_CURR_WEEK_EVAL_CNT = gql(/* GraphQL */ `
-  query GetCurrWeekEvalCnt {
+const GET_CURR_WEEK_EVAL_COUNT = gql(/* GraphQL */ `
+  query GetCurrWeekEvalCount {
     getHomePage {
       currWeekEvalCount {
         data
@@ -26,9 +26,9 @@ const GET_CURR_WEEK_EVAL_CNT = gql(/* GraphQL */ `
   }
 `);
 
-export const CurrWeekEvalCnt = () => {
+export const CurrWeekEvalCount = () => {
   const title = '주간 총 평가 횟수';
-  const { loading, error, data } = useQuery(GET_CURR_WEEK_EVAL_CNT);
+  const { loading, error, data } = useQuery(GET_CURR_WEEK_EVAL_COUNT);
   if (loading)
     return (
       <DashboardContent title={title}>

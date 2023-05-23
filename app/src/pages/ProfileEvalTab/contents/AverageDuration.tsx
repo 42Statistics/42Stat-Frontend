@@ -9,6 +9,7 @@ import { DashboardContent } from '@/components/templates/Dashboard';
 import { userAtom } from '@/utils/atoms/userAtom';
 import { useQuery } from '@apollo/client';
 import { useAtomValue } from 'jotai';
+import { useParams } from 'react-router-dom';
 
 const GET_AVERAGE_DURATION = gql(/* GraphQL */ `
   query getAverageDuration($uid: Int!) {
@@ -19,12 +20,13 @@ const GET_AVERAGE_DURATION = gql(/* GraphQL */ `
 `);
 
 export const AverageDuration = () => {
+  const { username } = useParams() as { username: string };
   const user = useAtomValue(userAtom);
   const title = '평균 평가 시간';
   const description = '평가자일 때';
   const { loading, error, data } = useQuery(GET_AVERAGE_DURATION, {
     variables: {
-      uid: user.id,
+      uid: username === 'me' ? user.id : 110650,
     },
   });
   if (loading)

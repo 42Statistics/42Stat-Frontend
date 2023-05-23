@@ -8,7 +8,9 @@ import { TextDefault } from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
 import { userAtom } from '@/utils/atoms/userAtom';
 import { useQuery } from '@apollo/client';
+import { useTheme } from '@emotion/react';
 import { useAtomValue } from 'jotai';
+import { useParams } from 'react-router-dom';
 
 const GET_BLACKHOLED_AT = gql(/* GraphQL */ `
   query getBlackholedAt($uid: Int!) {
@@ -21,12 +23,14 @@ const GET_BLACKHOLED_AT = gql(/* GraphQL */ `
 `);
 
 export const BlackholedAt = () => {
+  const { username } = useParams() as { username: string };
   const user = useAtomValue(userAtom);
+  const theme = useTheme();
 
   const title = 'Black Hole Absorption';
   const { loading, error, data } = useQuery(GET_BLACKHOLED_AT, {
     variables: {
-      uid: user.id,
+      uid: username === 'me' ? user.id : 110650,
     },
   });
   if (loading)
@@ -49,14 +53,45 @@ export const BlackholedAt = () => {
     );
 
   const { blackholedAt } = data.getPersonGeneralPage.userProfile;
+  const daysLeft = blackholedAt
+    ? Math.floor(
+        (new Date(blackholedAt).getTime() - Date.now()) / 1000 / 60 / 60 / 24,
+      )
+    : 0; // TODO: days left 로직 검증
+
+  const getColorAndText = (isFree: boolean, daysLeft: number) => {
+    if (isFree) return { color: theme.colors.mono.black, text: 'Free 🦋' }; // 반드시 Member일 때만 blackholedAt === null
+    if (daysLeft >= 365)
+      return {
+        color: '#3db618',
+        text: `🥱 ${daysLeft.toLocaleString()} days left`,
+      };
+    if (daysLeft >= 100)
+      return {
+        color: '#3db618',
+        text: `😄 ${daysLeft.toLocaleString()} days left`,
+      };
+    if (daysLeft >= 15)
+      return {
+        color: '#d7a900',
+        text: `🙁 ${daysLeft.toLocaleString()} days left`,
+      };
+    if (daysLeft >= 0)
+      return {
+        color: '#ff0303',
+        text: `😫 ${daysLeft.toLocaleString()} days left`,
+      };
+    return {
+      color: theme.colors.mono.black,
+      text: 'Absorbed by Black Hole',
+    };
+  };
+
+  const { color, text } = getColorAndText(blackholedAt === null, daysLeft);
 
   return (
     <DashboardContent title={title}>
-      {blackholedAt == null ? (
-        <TextDefault text="I'm FREE 🕶️" /> // 반드시 Member만 blackholedAt == null인지 확인해야 함
-      ) : (
-        <TextDefault text={`${blackholedAt.toLocaleString()} days left`} />
-      )}
+      <TextDefault color={color} text={text} />
     </DashboardContent>
   );
 };

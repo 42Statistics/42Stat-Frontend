@@ -20,8 +20,8 @@ export const Button = ({
   ...propsExceptText
 }: ButtonProps) => {
   const theme = useTheme();
-  color = color || theme.colors.mono.white;
-  bgColor = bgColor || theme.colors.primary.default;
+  color = color ?? theme.colors.mono.white;
+  bgColor = bgColor ?? theme.colors.primary.default;
   const fontSize = size === 'sm' ? theme.fonts.size.body : theme.fonts.size.h3;
   const padding = size === 'sm' ? '1.1rem 2rem' : '1.3rem 2.4rem';
 

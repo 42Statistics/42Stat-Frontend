@@ -9,8 +9,8 @@ import { DashboardContent } from '@/components/templates/Dashboard';
 import type { RankItemType } from '@/utils/types/Rank';
 import { useQuery } from '@apollo/client';
 
-const GET_CURR_REGISTERED_CNT_RANK = gql(/* GraphQL */ `
-  query GetCurrRegisteredCntRank {
+const GET_CURR_REGISTERED_COUNT_RANK = gql(/* GraphQL */ `
+  query GetCurrRegisteredCountRank {
     getHomePage {
       currRegisteredCountRank {
         projectPreview {
@@ -22,9 +22,9 @@ const GET_CURR_REGISTERED_CNT_RANK = gql(/* GraphQL */ `
   }
 `);
 
-export const CurrRegisteredCntRank = () => {
+export const CurrRegisteredCountRank = () => {
   const title = '지금 가장 많은 사람이 참여하는 과제는?';
-  const { loading, error, data } = useQuery(GET_CURR_REGISTERED_CNT_RANK);
+  const { loading, error, data } = useQuery(GET_CURR_REGISTERED_COUNT_RANK);
 
   if (loading)
     return (
@@ -49,7 +49,8 @@ export const CurrRegisteredCntRank = () => {
   const unit = '명';
 
   const rankList: RankItemType[] = currRegisteredCountRank.map(
-    ({ projectPreview, value }) => ({
+    ({ projectPreview, value }, idx) => ({
+      id: idx, // FIXME: projectPreivew.id로 수정
       name: projectPreview.name,
       value: value,
     }),

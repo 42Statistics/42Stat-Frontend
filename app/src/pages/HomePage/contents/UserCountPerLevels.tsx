@@ -9,8 +9,8 @@ import { DashboardContent } from '@/components/templates/Dashboard';
 import { numberWithUnitFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
 
-const GET_USER_CNT_PER_LEVELS = gql(/* GraphQL */ `
-  query getUserCntPerLevels {
+const GET_USER_COUNT_PER_LEVELS = gql(/* GraphQL */ `
+  query getUserCountPerLevels {
     getTotalPage {
       userCountPerLevels {
         userCount
@@ -20,9 +20,9 @@ const GET_USER_CNT_PER_LEVELS = gql(/* GraphQL */ `
   }
 `);
 
-export const UserCntPerLevels = () => {
+export const UserCountPerLevels = () => {
   const title = '레벨 분포';
-  const { loading, error, data } = useQuery(GET_USER_CNT_PER_LEVELS);
+  const { loading, error, data } = useQuery(GET_USER_COUNT_PER_LEVELS);
   if (loading)
     return (
       <DashboardContent title={title}>
@@ -59,7 +59,7 @@ export const UserCntPerLevels = () => {
 
   return (
     <DashboardContent title={title}>
-      <UserCntPerLevelsChart
+      <UserCountPerLevelsChart
         categories={categories}
         series={series}
         maxY={maxY}
@@ -68,17 +68,17 @@ export const UserCntPerLevels = () => {
   );
 };
 
-type UserCntPerLevelsChartProps = {
+type UserCountPerLevelsChartProps = {
   categories: number[];
   series: ApexAxisChartSeries;
   maxY: number;
 };
 
-const UserCntPerLevelsChart = ({
+const UserCountPerLevelsChart = ({
   categories,
   series,
   maxY,
-}: UserCntPerLevelsChartProps) => {
+}: UserCountPerLevelsChartProps) => {
   const options: ApexCharts.ApexOptions = {
     xaxis: {
       categories,

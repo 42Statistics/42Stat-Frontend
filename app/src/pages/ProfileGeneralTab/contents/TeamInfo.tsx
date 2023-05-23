@@ -14,6 +14,7 @@ import { AiOutlineCheck } from '@react-icons/all-files/ai/AiOutlineCheck';
 import { AiOutlineClose } from '@react-icons/all-files/ai/AiOutlineClose';
 import { rgba } from 'emotion-rgba';
 import { useAtomValue } from 'jotai';
+import { useParams } from 'react-router-dom';
 
 const GET_TEAM_INFO = gql(/* GraphQL */ `
   query getTeamInfo($uid: Int!) {
@@ -34,10 +35,11 @@ const GET_TEAM_INFO = gql(/* GraphQL */ `
 `);
 
 export const TeamInfo = () => {
+  const { username } = useParams() as { username: string };
   const user = useAtomValue(userAtom);
 
   const { loading, error, data } = useQuery(GET_TEAM_INFO, {
-    variables: { uid: user.id },
+    variables: { uid: username === 'me' ? user.id : 110650 },
   });
   const theme = useTheme();
 

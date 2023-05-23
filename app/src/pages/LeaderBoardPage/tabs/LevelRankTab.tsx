@@ -35,6 +35,7 @@ export const LevelRankTab = () => {
   const unit = '';
 
   const rankList: RankItemType[] = levelRank.map(({ userPreview, value }) => ({
+    id: userPreview.id,
     name: userPreview.login,
     value: value,
     imgUrl: userPreview.imgUrl,
@@ -46,7 +47,7 @@ export const LevelRankTab = () => {
       <VStack w="100%" align="start">
         SegmentedControl
       </VStack>
-      <LeaderBoardItem rank={2} item={rankList[1]} unit={unit} />
+      <LeaderBoardItem rank={6} item={rankList[5]} unit={unit} />
       <LeaderBoard rankList={rankList} unit={unit} />
     </VStack>
   );

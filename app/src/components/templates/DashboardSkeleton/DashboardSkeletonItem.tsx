@@ -6,7 +6,7 @@ export const DashboardSkeletonItem = () => {
   return (
     <DashboardSkeletonItemLayout>
       <VStack w="100%" h="100%" spacing="2rem" align="start">
-        <DashboardSkeletonItemHeader />
+        {/* <DashboardSkeletonItemHeader /> */}
         <DashboardSkeletonItemContents />
       </VStack>
     </DashboardSkeletonItemLayout>

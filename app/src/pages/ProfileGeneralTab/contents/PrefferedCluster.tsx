@@ -10,6 +10,7 @@ import { userAtom } from '@/utils/atoms/userAtom';
 import { useQuery } from '@apollo/client';
 import dayjs from 'dayjs';
 import { useAtomValue } from 'jotai';
+import { useParams } from 'react-router-dom';
 
 const GET_PREFERRED_CLUSTER = gql(/* GraphQL */ `
   query getPrefferedCluster($uid: Int!) {
@@ -26,11 +27,12 @@ const GET_PREFERRED_CLUSTER = gql(/* GraphQL */ `
 `);
 
 export const PrefferedCluster = () => {
+  const { username } = useParams() as { username: string };
   const user = useAtomValue(userAtom);
 
   const title = '주 접속 클러스터';
   const { loading, error, data } = useQuery(GET_PREFERRED_CLUSTER, {
-    variables: { uid: user.id },
+    variables: { uid: username === 'me' ? user.id : 110650 },
   });
   if (loading)
     return (

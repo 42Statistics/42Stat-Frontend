@@ -25,25 +25,23 @@ export const EvalLogItem = ({ element }: { element: EvalLog }) => {
     <EvalLogItemLayout>
       <VStack w="100%" align="start" spacing="2rem">
         <HStack w="100%" justify="start" wrap="wrap">
-          <Text selectable css={{ display: 'flex', flexWrap: 'wrap' }}>
-            <Clickable
-              onClick={() => navigate('/profile/' + header.corrector.login)}
-              element={
-                <PrimaryBoldText selectable>
-                  {header.corrector.login}
-                </PrimaryBoldText>
-              }
-            />
-            님이&nbsp;
-            <PrimaryBoldText selectable>
-              {header.teamPreview.name}
-            </PrimaryBoldText>
-            을&nbsp;
-            <BoldText selectable>
-              {dayjs(header.beginAt).format('YYYY-MM-DD hh:mm')}
-            </BoldText>
-            에 평가하였습니다
-          </Text>
+          <Clickable
+            onClick={() => navigate('/profile/' + header.corrector.login)}
+            element={
+              <PrimaryBoldText selectable>
+                {header.corrector.login}
+              </PrimaryBoldText>
+            }
+          />
+          <Text selectable>님이&nbsp;</Text>
+          <PrimaryBoldText selectable>
+            {header.teamPreview.name}
+          </PrimaryBoldText>
+          <Text selectable>을&nbsp;</Text>
+          <BoldText selectable>
+            {dayjs(header.beginAt).format('YYYY-MM-DD hh:mm')}
+          </BoldText>
+          <Text selectable>에 평가하였습니다</Text>
           <Spacer />
           <HStack spacing="1rem">
             <BoldText>{header.projectPreview.name}</BoldText>

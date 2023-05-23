@@ -72,21 +72,19 @@ export const CurrentCoalitionScore = () => {
           <NumberDefault number={coalition.score} />
         )}
         <HStack spacing="0.5rem">
-          {coalition != null &&
-          coalition.imageUrl != null &&
-          coalition.color != null ? (
+          {coalition && coalition.imageUrl && coalition.color && (
             <StyledMark
               size="1.8rem"
               src={coalition?.imageUrl}
               style={{ backgroundColor: coalition.color }}
             />
-          ) : null}
-          {scoreInfo != null && scoreInfo.rankInCoalition != null ? (
+          )}
+          {scoreInfo && scoreInfo.rankInCoalition && (
             <HStack spacing="0.1rem">
               <NumberDefault number={scoreInfo.rankInCoalition} />
               <TextDefault text="위" />
             </HStack>
-          ) : null}
+          )}
         </HStack>
       </HStack>
     </DashboardContent>

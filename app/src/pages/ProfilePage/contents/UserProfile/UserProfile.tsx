@@ -2,7 +2,6 @@ import { gql } from '@/__generated__';
 import {
   Avatar,
   HStack,
-  Loader,
   VStack,
   WhiteBoldText,
   WhiteCaptionText,
@@ -64,7 +63,7 @@ export const UserProfile = () => {
     variables: { uid: username === 'me' ? user.id : 110650 },
   });
 
-  if (loading) return <Loader />;
+  if (loading) return <UserProfileLoader />;
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 
@@ -117,4 +116,17 @@ const UserProfileLayout = styled.div<{ backgroundUrl?: string | null }>`
   background-size: cover;
   background-position: center;
   border-radius: 2rem; // FIXME: 왜 background-image 있는 쪽에도 border-radius를 줘야 하지?
+`;
+
+// TODO: Loader가 아니라 Skeleton으로 이동. 여러 타입의 Skeleton을 적용시킬 수 있도록 변경해야 함
+const UserProfileLoader = () => {
+  return <UserProfileLoaderLayout />;
+};
+
+const UserProfileLoaderLayout = styled.div`
+  height: 100%;
+  background-image: url('/coalition-mono.png');
+  background-size: cover;
+  background-position: center;
+  border-radius: 2rem;
 `;

@@ -59,7 +59,7 @@ export const BlackholedAt = () => {
     : 0; // TODO: days left 로직 검증
 
   const getColorAndText = (isFree: boolean, daysLeft: number) => {
-    if (isFree) return { color: theme.colors.mono.black, text: '-' }; // 반드시 Member일 때만 blackholedAt === null
+    if (isFree) return { color: theme.colors.mono.black, text: '🚀' }; // 반드시 Member일 때만 blackholedAt === null
     if (daysLeft >= 365)
       return {
         color: '#3db618',

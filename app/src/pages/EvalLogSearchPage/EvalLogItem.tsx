@@ -1,7 +1,6 @@
 import { EvalLog } from '@/__generated__/graphql';
 import {
   BoldText,
-  Clickable,
   HStack,
   PrimaryBoldText,
   Spacer,
@@ -14,36 +13,29 @@ import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import dayjs from 'dayjs';
 import { rgba } from 'emotion-rgba';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export const EvalLogItem = ({ element }: { element: EvalLog }) => {
   const { header, correctorReview, correctedsReview } = element;
-
-  const navigate = useNavigate();
 
   return (
     <EvalLogItemLayout>
       <VStack w="100%" align="start" spacing="2rem">
         <HStack w="100%" justify="start" wrap="wrap">
-          <Text selectable css={{ display: 'flex', flexWrap: 'wrap' }}>
-            <Clickable
-              onClick={() => navigate('/profile/' + header.corrector.login)}
-              element={
-                <PrimaryBoldText selectable>
-                  {header.corrector.login}
-                </PrimaryBoldText>
-              }
-            />
-            님이&nbsp;
+          <Link to={`/profile/${header.corrector.login}`}>
             <PrimaryBoldText selectable>
-              {header.teamPreview.name}
+              {header.corrector.login}
             </PrimaryBoldText>
-            을&nbsp;
-            <BoldText selectable>
-              {dayjs(header.beginAt).format('YYYY-MM-DD hh:mm')}
-            </BoldText>
-            에 평가하였습니다
-          </Text>
+          </Link>
+          <Text selectable>님이&nbsp;</Text>
+          <PrimaryBoldText selectable>
+            {header.teamPreview.name}
+          </PrimaryBoldText>
+          <Text selectable>을&nbsp;</Text>
+          <BoldText selectable>
+            {dayjs(header.beginAt).format('YYYY-MM-DD HH:mm')}
+          </BoldText>
+          <Text selectable>에 평가하였습니다</Text>
           <Spacer />
           <HStack spacing="1rem">
             <BoldText>{header.projectPreview.name}</BoldText>

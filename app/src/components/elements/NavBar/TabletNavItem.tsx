@@ -1,11 +1,10 @@
 import { CaptionText, VStack } from '@/components/common';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import type { NavItemProps } from './NavItem';
 
 export const TabletNavItem = ({ route }: NavItemProps) => {
-  const navigate = useNavigate();
   const location = useLocation();
   const isFocused = location.pathname === route.path;
   const theme = useTheme();
@@ -16,18 +15,17 @@ export const TabletNavItem = ({ route }: NavItemProps) => {
     : theme.colors.mono.black;
 
   return (
-    <TabletNavItemLayout
-      onClick={() => navigate(route.path)}
-      isFocused={isFocused}
-    >
-      <VStack>
-        {!isFocused ? (
-          <NavItemIcon size="20px" fill={color} />
-        ) : (
-          <NavItemIconFocused size="20px" fill={color} />
-        )}
-        <CaptionText color={color}>{route.abbr}</CaptionText>
-      </VStack>
+    <TabletNavItemLayout isFocused={isFocused}>
+      <Link to={route.path}>
+        <VStack>
+          {!isFocused ? (
+            <NavItemIcon size="20px" fill={color} />
+          ) : (
+            <NavItemIconFocused size="20px" fill={color} />
+          )}
+          <CaptionText color={color}>{route.abbr}</CaptionText>
+        </VStack>
+      </Link>
     </TabletNavItemLayout>
   );
 };

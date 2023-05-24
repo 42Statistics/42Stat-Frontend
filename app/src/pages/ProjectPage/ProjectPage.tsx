@@ -21,7 +21,7 @@ import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { HiUsers } from '@react-icons/all-files/hi/HiUsers';
 import { Helmet } from 'react-helmet-async';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const GET_PROJECT_INFO = gql(/* GraphQL */ `
   query GetProjectInfo($projectName: String!) {
@@ -128,7 +128,9 @@ export const ProjectPage = () => {
                 </H3BoldText>
                 <H3Text selectable>으로 통과합니다</H3Text>
               </HStack>
-              <AccentText>지난 평가 보기</AccentText>
+              <Link to={`/evallog?projectName=${name}`}>
+                <AccentText>지난 평가 보기</AccentText>
+              </Link>
             </VStack>
             <div style={{ width: '26rem', height: '26rem' }}>
               <ProjectResultPercentageChart

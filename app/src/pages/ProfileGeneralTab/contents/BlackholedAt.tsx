@@ -1,10 +1,9 @@
 import { gql } from '@/__generated__';
-import { Loader } from '@/components/common';
+import { Center, H2BoldText, Loader } from '@/components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
-import { TextDefault } from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
 import { userAtom } from '@/utils/atoms/userAtom';
 import { useQuery } from '@apollo/client';
@@ -60,7 +59,7 @@ export const BlackholedAt = () => {
     : 0; // TODO: days left 로직 검증
 
   const getColorAndText = (isFree: boolean, daysLeft: number) => {
-    if (isFree) return { color: theme.colors.mono.black, text: 'Free 🦋' }; // 반드시 Member일 때만 blackholedAt === null
+    if (isFree) return { color: theme.colors.mono.black, text: '🚀' }; // 반드시 Member일 때만 blackholedAt === null
     if (daysLeft >= 365)
       return {
         color: '#3db618',
@@ -91,7 +90,9 @@ export const BlackholedAt = () => {
 
   return (
     <DashboardContent title={title}>
-      <TextDefault color={color} text={text} />
+      <Center w="100%" h="100%">
+        <H2BoldText color={color}>{text}</H2BoldText>
+      </Center>
     </DashboardContent>
   );
 };

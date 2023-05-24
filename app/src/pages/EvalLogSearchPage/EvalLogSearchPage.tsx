@@ -17,6 +17,7 @@ import { MdSearch } from '@react-icons/all-files/md/MdSearch';
 import { useEffect, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { SubmitHandler } from 'react-hook-form';
+import { useSearchParams } from 'react-router-dom';
 import { EvalLogItem } from './EvalLogItem';
 import { EvalLogSearchHeader } from './EvalLogSearchHeader';
 
@@ -91,12 +92,16 @@ export const EvalLogSearchPage = () => {
   const [search, { loading, error, data }] = useLazyQuery(GET_EVAL_LOGS);
   const theme = useTheme();
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [searchParams] = useSearchParams();
 
   const [form, setForm] = useState<EvalLogSearchForm>({
-    projectName: '',
-    outstandingOnly: 'all',
-    corrector: '',
-    corrected: '',
+    projectName: searchParams.get('projectName') ?? '',
+    outstandingOnly:
+      searchParams.get('outstandingOnly') === 'outstanding'
+        ? 'outstanding'
+        : 'all',
+    corrector: searchParams.get('corrector') ?? '',
+    corrected: searchParams.get('corrected') ?? '',
   });
 
   const [evalLogs, setEvalLogs] = useState<EvalLog[]>([]);

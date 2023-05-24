@@ -33,5 +33,5 @@ const MobileMainPageLayout = styled.main`
 
 const Layout = styled.div`
   min-height: 100vh;
-  background-color: ${({ theme }) => theme.colors.background};
+  /* background-color: ${({ theme }) => theme.colors.background}; */
 `;

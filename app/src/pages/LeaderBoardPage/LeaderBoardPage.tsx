@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import { Helmet } from 'react-helmet-async';
 import {
   CoalitionScoreRankTab,
-  CorrectionPointRankTab,
+  EvalCountRankTab,
   ExpIncrementRankTab,
   LevelRankTab,
 } from './tabs';
@@ -47,7 +47,7 @@ export const LeaderBoardPage = () => {
         </TabPanel>
         <TabPanel>
           <LeaderBoardDetailLayout>
-            <CorrectionPointRankTab />
+            <EvalCountRankTab />
           </LeaderBoardDetailLayout>
         </TabPanel>
       </Tabs>

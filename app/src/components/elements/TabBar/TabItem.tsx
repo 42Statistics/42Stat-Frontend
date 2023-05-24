@@ -1,11 +1,10 @@
 import { CaptionText, VStack } from '@/components/common';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import type { NavItemProps } from '../NavBar/NavItem';
 
 export const TabItem = ({ route }: NavItemProps) => {
-  const navigate = useNavigate();
   const location = useLocation();
   const isFocused = location.pathname === route.path;
   const theme = useTheme();
@@ -16,15 +15,17 @@ export const TabItem = ({ route }: NavItemProps) => {
     : theme.colors.mono.black;
 
   return (
-    <TabItemLayout onClick={() => navigate(route.path)}>
-      <VStack>
-        {!isFocused ? (
-          <TabItemIcon size="22px" fill={color} />
-        ) : (
-          <TabItemIconFocused size="22px" fill={color} />
-        )}
-        <CaptionText color={color}>{route.abbr}</CaptionText>
-      </VStack>
+    <TabItemLayout>
+      <Link to={route.path}>
+        <VStack>
+          {!isFocused ? (
+            <TabItemIcon size="22px" fill={color} />
+          ) : (
+            <TabItemIconFocused size="22px" fill={color} />
+          )}
+          <CaptionText color={color}>{route.abbr}</CaptionText>
+        </VStack>
+      </Link>
     </TabItemLayout>
   );
 };

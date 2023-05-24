@@ -1,14 +1,22 @@
 import { gql } from '@/__generated__';
-import { Loader } from '@/components/common';
+import {
+  HStack,
+  Loader,
+  SegmentedControl,
+  Spacer,
+  VStack,
+} from '@/components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
-import { Rank } from '@/components/elements/DashboardContentView/Rank';
-import { BelowTablet, Desktop } from '@/utils/responsive/Device';
+import { LeaderBoard } from '@/components/templates/LeaderBoard';
+import { LeaderBoardItem } from '@/components/templates/LeaderBoard/LeaderBoardItem';
 import type { RankItemType } from '@/utils/types/Rank';
+import { useSegmentedControl } from '@/utils/useSegmentedControl';
 import { useQuery } from '@apollo/client';
 
+// 임시
 const GET_TOTAL_EVAL_COUNT_RANK = gql(/* GraphQL */ `
   query GetTotalEvalCountRank {
     getHomePage {
@@ -24,8 +32,23 @@ const GET_TOTAL_EVAL_COUNT_RANK = gql(/* GraphQL */ `
   }
 `);
 
-export const TotalEvalCountRank = () => {
+export const EvalCountRankTab = () => {
   const { loading, error, data } = useQuery(GET_TOTAL_EVAL_COUNT_RANK);
+  const options = [
+    {
+      label: '주간',
+      value: 'weekly',
+    },
+    {
+      label: '월간',
+      value: 'monthly',
+    },
+    {
+      label: '누적',
+      value: 'total',
+    },
+  ];
+  const { controlRef, segments } = useSegmentedControl(options);
 
   if (loading) return <Loader />;
   if (error) return <ApolloBadRequest msg={error.message} />;
@@ -44,13 +67,17 @@ export const TotalEvalCountRank = () => {
   );
 
   return (
-    <>
-      <Desktop>
-        <Rank rankList={rankList} cnt={3} unit={unit} />
-      </Desktop>
-      <BelowTablet>
-        <Rank rankList={rankList} showImg={false} cnt={3} unit={unit} />
-      </BelowTablet>
-    </>
+    <VStack w="100%" spacing="2rem">
+      <HStack w="100%">
+        <SegmentedControl
+          callback={console.log}
+          controlRef={controlRef}
+          segments={segments}
+        />
+        <Spacer />
+      </HStack>
+      <LeaderBoardItem rank={1} item={rankList[0]} unit={unit} />
+      <LeaderBoard rankList={rankList} unit={unit} />
+    </VStack>
   );
 };

@@ -9,7 +9,7 @@ export * from './Input';
 export * from './Loader';
 export * from './Overlay';
 export * from './Scroll';
-export * from './Segment';
+export * from './SegmentedControl';
 export * from './Spacer';
 export * from './Spinner';
 export * from './Stack';

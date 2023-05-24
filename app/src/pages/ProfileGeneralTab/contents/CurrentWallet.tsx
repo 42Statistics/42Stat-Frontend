@@ -10,8 +10,8 @@ import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 
 const GET_CURRENT_WALLET = gql(/* GraphQL */ `
-  query getCurrentWallet($uid: Int!) {
-    getPersonGeneralPage(uid: $uid) {
+  query getCurrentWallet($login: String!) {
+    getPersonGeneralPage(login: $login) {
       userProfile {
         wallet
       }
@@ -20,11 +20,11 @@ const GET_CURRENT_WALLET = gql(/* GraphQL */ `
 `);
 
 export const CurrentWallet = () => {
-  const { userId } = useParams() as { userId: string };
+  const { username } = useParams() as { username: string };
 
   const title = '보유 월렛';
   const { loading, error, data } = useQuery(GET_CURRENT_WALLET, {
-    variables: { uid: Number(userId) },
+    variables: { login: username },
   });
   if (loading)
     return (

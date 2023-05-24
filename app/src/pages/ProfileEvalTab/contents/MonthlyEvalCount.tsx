@@ -11,8 +11,8 @@ import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
 
 const GET_MONTHLY_EVAL_COUNT = gql(/* GraphQL */ `
-  query getMonthlyEvalCount($uid: Int!) {
-    getPersonalEvalPage(uid: $uid) {
+  query getMonthlyEvalCount($login: String!) {
+    getPersonalEvalPage(login: $login) {
       currMonthCount {
         data
         from
@@ -28,11 +28,11 @@ const GET_MONTHLY_EVAL_COUNT = gql(/* GraphQL */ `
 `);
 
 export const MonthlyEvalCount = () => {
-  const { userId } = useParams() as { userId: string };
+  const { username } = useParams() as { username: string };
 
   const title = '월간 평가 횟수';
   const { loading, error, data } = useQuery(GET_MONTHLY_EVAL_COUNT, {
-    variables: { uid: Number(userId) },
+    variables: { login: username },
   });
   if (loading)
     return (

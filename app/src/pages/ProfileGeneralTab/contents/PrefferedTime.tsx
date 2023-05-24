@@ -12,8 +12,8 @@ import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
 
 const GET_PREFERRED_TIME = gql(/* GraphQL */ `
-  query getPrefferedTime($uid: Int!) {
-    getPersonGeneralPage(uid: $uid) {
+  query getPrefferedTime($login: String!) {
+    getPersonGeneralPage(login: $login) {
       logtimeInfo {
         data {
           preferredTime {
@@ -31,11 +31,11 @@ const GET_PREFERRED_TIME = gql(/* GraphQL */ `
 `);
 
 export const PrefferedTime = () => {
-  const { userId } = useParams() as { userId: string };
+  const { username } = useParams() as { username: string };
 
   const title = '주 접속 시간대';
   const { loading, error, data } = useQuery(GET_PREFERRED_TIME, {
-    variables: { uid: Number(userId) },
+    variables: { login: username },
   });
   if (loading)
     return (

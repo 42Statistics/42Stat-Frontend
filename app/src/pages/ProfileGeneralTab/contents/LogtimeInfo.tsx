@@ -11,8 +11,8 @@ import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
 
 const GET_LOGTIME_INFO = gql(/* GraphQL */ `
-  query getLogtimeInfo($uid: Int!) {
-    getPersonGeneralPage(uid: $uid) {
+  query getLogtimeInfo($login: String!) {
+    getPersonGeneralPage(login: $login) {
       logtimeInfo {
         data {
           currMonthLogtime
@@ -33,11 +33,11 @@ const GET_LOGTIME_INFO = gql(/* GraphQL */ `
 `);
 
 export const LogtimeInfo = () => {
-  const { userId } = useParams() as { userId: string };
+  const { username } = useParams() as { username: string };
 
   const title = '월간 출석 시간';
   const { loading, error, data } = useQuery(GET_LOGTIME_INFO, {
-    variables: { uid: Number(userId) },
+    variables: { login: username },
   });
   if (loading)
     return (

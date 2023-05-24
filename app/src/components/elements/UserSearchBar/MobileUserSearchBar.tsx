@@ -57,13 +57,13 @@ export const MobileUserSearchBar = () => {
     });
   }, [debouncedInput, searchUser, searchProject]);
 
-  const handleUserSubmit = (id: number) => {
+  const handleUserSubmit = (name: string) => {
     if (inputRef?.current) {
       inputRef.current.value = '';
     }
     setIsOpen(false);
     setInput('');
-    navigate('/profile/' + id);
+    navigate('/profile/' + name);
   };
 
   const handleProjectSubmit = (name: string) => {
@@ -124,7 +124,7 @@ export const MobileUserSearchBar = () => {
                       .map((user) => (
                         <Clickable
                           key={user.id}
-                          onClick={() => handleUserSubmit(user.id)}
+                          onClick={() => handleUserSubmit(user.login)}
                           element={
                             <HStack spacing="1rem">
                               <Avatar size="1.6rem" imgUrl={user.imgUrl} />

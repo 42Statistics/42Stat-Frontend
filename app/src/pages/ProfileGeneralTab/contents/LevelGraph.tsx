@@ -11,8 +11,8 @@ import { useTheme } from '@emotion/react';
 import { useParams } from 'react-router-dom';
 
 const GET_LEVEL_GRAPH = gql(/* GraphQL */ `
-  query getLevelGraph($uid: Int!) {
-    getPersonGeneralPage(uid: $uid) {
+  query getLevelGraph($login: String!) {
+    getPersonGeneralPage(login: $login) {
       levelGraphs {
         data {
           date
@@ -27,12 +27,12 @@ const GET_LEVEL_GRAPH = gql(/* GraphQL */ `
 `);
 
 export const LevelGraph = () => {
-  const { userId } = useParams() as { userId: string };
+  const { username } = useParams() as { username: string };
 
   const title = '레벨 증가 그래프';
   const description = `현재일로부터 1년`;
   const { loading, error, data } = useQuery(GET_LEVEL_GRAPH, {
-    variables: { uid: Number(userId) },
+    variables: { login: username },
   });
   if (loading)
     return (

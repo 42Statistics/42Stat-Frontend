@@ -11,8 +11,8 @@ import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
 
 const GET_PREFERRED_CLUSTER = gql(/* GraphQL */ `
-  query getPrefferedCluster($uid: Int!) {
-    getPersonGeneralPage(uid: $uid) {
+  query getPrefferedCluster($login: String!) {
+    getPersonGeneralPage(login: $login) {
       logtimeInfo {
         data {
           preferredCluster
@@ -25,11 +25,11 @@ const GET_PREFERRED_CLUSTER = gql(/* GraphQL */ `
 `);
 
 export const PrefferedCluster = () => {
-  const { userId } = useParams() as { userId: string };
+  const { username } = useParams() as { username: string };
 
   const title = '주 접속 클러스터';
   const { loading, error, data } = useQuery(GET_PREFERRED_CLUSTER, {
-    variables: { uid: Number(userId) },
+    variables: { login: username },
   });
   if (loading)
     return (

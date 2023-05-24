@@ -10,21 +10,21 @@ import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 
 const GET_PERSONAL_AVERAGE_COMMENT_LENGTH = gql(/* GraphQL */ `
-  query getPersonalAverageCommentLength($uid: Int!) {
-    getPersonalEvalPage(uid: $uid) {
+  query getPersonalAverageCommentLength($login: String!) {
+    getPersonalEvalPage(login: $login) {
       averageCommentLength
     }
   }
 `);
 
 export const AverageCommentLength = () => {
-  const { userId } = useParams() as { userId: string };
+  const { username } = useParams() as { username: string };
 
   const title = '평균 코멘트 길이';
   const { loading, error, data } = useQuery(
     GET_PERSONAL_AVERAGE_COMMENT_LENGTH,
     {
-      variables: { uid: Number(userId) },
+      variables: { login: username },
     },
   );
   if (loading)

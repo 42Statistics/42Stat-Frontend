@@ -10,8 +10,8 @@ import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 
 const GET_LAST_REGISTERED = gql(/* GraphQL */ `
-  query getLastRegistered($uid: Int!) {
-    getPersonGeneralPage(uid: $uid) {
+  query getLastRegistered($login: String!) {
+    getPersonGeneralPage(login: $login) {
       teamInfo {
         lastRegistered
       }
@@ -20,11 +20,11 @@ const GET_LAST_REGISTERED = gql(/* GraphQL */ `
 `);
 
 export const LastRegistered = () => {
-  const { userId } = useParams() as { userId: string };
+  const { username } = useParams() as { username: string };
 
   const title = '최근 신청한 과제';
   const { loading, error, data } = useQuery(GET_LAST_REGISTERED, {
-    variables: { uid: Number(userId) },
+    variables: { login: username },
   });
   if (loading)
     return (

@@ -23,8 +23,8 @@ import { truncate } from 'lodash-es';
 import { useParams } from 'react-router-dom';
 
 const GET_USER_PROFILE = gql(/* GraphQL */ `
-  query GetUserProfile($uid: Int!) {
-    getPersonGeneralPage(uid: $uid) {
+  query GetUserProfile($login: String!) {
+    getPersonGeneralPage(login: $login) {
       userProfile {
         id
         login
@@ -53,11 +53,10 @@ const GET_USER_PROFILE = gql(/* GraphQL */ `
 `);
 
 export const UserProfile = () => {
-  const { userId } = useParams() as { userId: string };
+  const { username } = useParams() as { username: string };
 
-  // FIXME: user.id가 아니라 user.login으로 검색할 수 있도록 요청해야 함
   const { loading, error, data } = useQuery(GET_USER_PROFILE, {
-    variables: { uid: Number(userId) },
+    variables: { login: username },
   });
 
   if (loading) return <UserProfileLoader />;

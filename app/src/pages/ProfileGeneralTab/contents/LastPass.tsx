@@ -10,8 +10,8 @@ import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 
 const GET_LAST_PASS = gql(/* GraphQL */ `
-  query getLastPass($uid: Int!) {
-    getPersonGeneralPage(uid: $uid) {
+  query getLastPass($login: String!) {
+    getPersonGeneralPage(login: $login) {
       teamInfo {
         lastPass
       }
@@ -20,11 +20,11 @@ const GET_LAST_PASS = gql(/* GraphQL */ `
 `);
 
 export const LastPass = () => {
-  const { userId } = useParams() as { userId: string };
+  const { username } = useParams() as { username: string };
 
   const title = '최근 통과한 과제';
   const { loading, error, data } = useQuery(GET_LAST_PASS, {
-    variables: { uid: Number(userId) },
+    variables: { login: username },
   });
   if (loading)
     return (

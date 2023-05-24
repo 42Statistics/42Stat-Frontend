@@ -15,8 +15,8 @@ import { rgba } from 'emotion-rgba';
 import { useParams } from 'react-router-dom';
 
 const GET_TEAM_INFO = gql(/* GraphQL */ `
-  query getTeamInfo($uid: Int!) {
-    getPersonGeneralPage(uid: $uid) {
+  query getTeamInfo($login: String!) {
+    getPersonGeneralPage(login: $login) {
       teamInfo {
         teams {
           id
@@ -33,10 +33,10 @@ const GET_TEAM_INFO = gql(/* GraphQL */ `
 `);
 
 export const TeamInfo = () => {
-  const { userId } = useParams() as { userId: string };
+  const { username } = useParams() as { username: string };
 
   const { loading, error, data } = useQuery(GET_TEAM_INFO, {
-    variables: { uid: Number(userId) },
+    variables: { login: username },
   });
   const theme = useTheme();
 

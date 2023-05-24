@@ -16,13 +16,12 @@ const ProfileEvalTab = lazy(() =>
 );
 
 export const ProfilePage = () => {
-  const { userId } = useParams() as { userId: string };
-  // TODO: userId로 유저명을 알 수 없음
+  const { username } = useParams() as { username: string };
 
   return (
     <>
       <Helmet>
-        <title>{'유저 검색'} | 42Stat</title>
+        <title>{username} | 42Stat</title>
       </Helmet>
       <ProfilePageLayout>
         <VStack w="100%" spacing="2rem">

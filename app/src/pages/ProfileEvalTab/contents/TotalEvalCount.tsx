@@ -10,19 +10,19 @@ import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 
 const GET_PERSONAL_TOTAL_EVAL_COUNT = gql(/* GraphQL */ `
-  query getPersonalTotalEvalCount($uid: Int!) {
-    getPersonalEvalPage(uid: $uid) {
+  query getPersonalTotalEvalCount($login: String!) {
+    getPersonalEvalPage(login: $login) {
       totalCount
     }
   }
 `);
 
 export const TotalEvalCount = () => {
-  const { userId } = useParams() as { userId: string };
+  const { username } = useParams() as { username: string };
 
   const title = '누적 평가 횟수';
   const { loading, error, data } = useQuery(GET_PERSONAL_TOTAL_EVAL_COUNT, {
-    variables: { uid: Number(userId) },
+    variables: { login: username },
   });
 
   if (loading)

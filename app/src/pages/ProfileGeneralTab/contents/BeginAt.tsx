@@ -11,8 +11,8 @@ import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
 
 const GET_BEGIN_AT = gql(/* GraphQL */ `
-  query getBeginAt($uid: Int!) {
-    getPersonGeneralPage(uid: $uid) {
+  query getBeginAt($login: String!) {
+    getPersonGeneralPage(login: $login) {
       userProfile {
         beginAt
       }
@@ -21,11 +21,11 @@ const GET_BEGIN_AT = gql(/* GraphQL */ `
 `);
 
 export const BeginAt = () => {
-  const { userId } = useParams() as { userId: string };
+  const { username } = useParams() as { username: string };
 
   const title = '본과정 시작일';
   const { loading, error, data } = useQuery(GET_BEGIN_AT, {
-    variables: { uid: Number(userId) },
+    variables: { login: username },
   });
   if (loading)
     return (

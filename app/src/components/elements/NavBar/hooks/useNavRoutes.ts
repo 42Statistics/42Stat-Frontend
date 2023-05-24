@@ -35,7 +35,7 @@ export const useNavRoutes = () => {
     MY_PROFILE: {
       text: '내 정보',
       abbr: '내 정보',
-      path: `/profile/${user.id}`,
+      path: `/profile/${user.login}`,
       icon: MdPersonOutline,
       iconFocused: MdPerson,
     },

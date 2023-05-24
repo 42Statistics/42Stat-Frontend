@@ -10,21 +10,21 @@ import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 
 const GET_PERSONAL_AVERAGE_FEEDBACK_LENGTH = gql(/* GraphQL */ `
-  query getPersonalAverageFeedbackLength($uid: Int!) {
-    getPersonalEvalPage(uid: $uid) {
+  query getPersonalAverageFeedbackLength($login: String!) {
+    getPersonalEvalPage(login: $login) {
       averageFeedbackLength
     }
   }
 `);
 
 export const AverageFeedbackLength = () => {
-  const { userId } = useParams() as { userId: string };
+  const { username } = useParams() as { username: string };
 
   const title = '평균 피드백 길이';
   const { loading, error, data } = useQuery(
     GET_PERSONAL_AVERAGE_FEEDBACK_LENGTH,
     {
-      variables: { uid: Number(userId) },
+      variables: { login: username },
     },
   );
   if (loading)

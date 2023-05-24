@@ -55,15 +55,15 @@ export const AboveTabletUserSearchBar = () => {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (!isEnterKeyReleased(e)) return;
     userData &&
-      handleUserSubmit(userData.findUserPreview.filter(isDefined)[0].id);
+      handleUserSubmit(userData.findUserPreview.filter(isDefined)[0].login);
   };
 
-  const handleUserSubmit = (id: number) => {
+  const handleUserSubmit = (name: string) => {
     if (inputRef?.current) {
       inputRef.current.value = '';
     }
     setInput('');
-    navigate('/profile/' + id);
+    navigate('/profile/' + name);
   };
 
   const handleProjectSubmit = (name: string) => {
@@ -100,7 +100,7 @@ export const AboveTabletUserSearchBar = () => {
                   .map((user) => (
                     <Clickable
                       key={user.id}
-                      onClick={() => handleUserSubmit(user.id)}
+                      onClick={() => handleUserSubmit(user.login)}
                       element={
                         <HStack spacing="1rem">
                           <Avatar size="1.6rem" imgUrl={user.imgUrl} />

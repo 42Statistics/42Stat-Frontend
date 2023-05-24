@@ -10,8 +10,8 @@ import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 
 const GET_CURRENT_CORRECTION_POINT = gql(/* GraphQL */ `
-  query getCurrentCorrectionPoint($uid: Int!) {
-    getPersonGeneralPage(uid: $uid) {
+  query getCurrentCorrectionPoint($login: String!) {
+    getPersonGeneralPage(login: $login) {
       userProfile {
         correctionPoint
       }
@@ -20,11 +20,11 @@ const GET_CURRENT_CORRECTION_POINT = gql(/* GraphQL */ `
 `);
 
 export const CurrentCorrectionPoint = () => {
-  const { userId } = useParams() as { userId: string };
+  const { username } = useParams() as { username: string };
 
   const title = '보유 평가 포인트';
   const { loading, error, data } = useQuery(GET_CURRENT_CORRECTION_POINT, {
-    variables: { uid: Number(userId) },
+    variables: { login: username },
   });
   if (loading)
     return (

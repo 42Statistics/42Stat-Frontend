@@ -10,8 +10,8 @@ import styled from '@emotion/styled';
 import { useParams } from 'react-router-dom';
 
 const GET_CURRENT_COALITION_SCORE = gql(/* GraphQL */ `
-  query getCurrentCoalitionScore($uid: Int!) {
-    getPersonGeneralPage(uid: $uid) {
+  query getCurrentCoalitionScore($login: String!) {
+    getPersonGeneralPage(login: $login) {
       userProfile {
         coalition {
           score
@@ -27,11 +27,11 @@ const GET_CURRENT_COALITION_SCORE = gql(/* GraphQL */ `
 `);
 
 export const CurrentCoalitionScore = () => {
-  const { userId } = useParams() as { userId: string };
+  const { username } = useParams() as { username: string };
 
   const title = '코알리숑 스코어';
   const { loading, error, data } = useQuery(GET_CURRENT_COALITION_SCORE, {
-    variables: { uid: Number(userId) },
+    variables: { login: username },
   });
   if (loading)
     return (

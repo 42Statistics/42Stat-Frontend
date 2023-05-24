@@ -16,12 +16,12 @@ const ProfileEvalTab = lazy(() =>
 );
 
 export const ProfilePage = () => {
-  const { username } = useParams();
+  const { username } = useParams() as { username: string };
 
   return (
     <>
       <Helmet>
-        <title>{username === 'me' ? '내 정보' : username} | 42Stat</title>
+        <title>{username} | 42Stat</title>
       </Helmet>
       <ProfilePageLayout>
         <VStack w="100%" spacing="2rem">

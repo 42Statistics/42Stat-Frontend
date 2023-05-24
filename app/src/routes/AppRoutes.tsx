@@ -1,13 +1,44 @@
+import { DeferredComponent } from '@/components/common';
+import { AuthGuard } from '@/components/guards/AuthGuard';
+import { LandingLayout } from '@/components/layouts/LandingLayout';
+import { MainLayout } from '@/components/layouts/MainLayout';
+import { LogoutPage } from '@/pages/LogoutPage';
+import { HomePageSkeleton } from '@/pages/PageSkeletons/HomePageSkeleton';
+import { ProfilePageSkeleton } from '@/pages/PageSkeletons/ProfilePageSkeleton';
 import { isAuthenticatedAtom } from '@/utils/atoms/isAuthenticatedAtom';
 import { useAtomValue } from 'jotai';
 import { Suspense, lazy } from 'react';
-import { Navigate, useRoutes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { ROUTES } from './ROUTES';
-import { protectedRoutes } from './protectedRoutes';
 
 const LandingPage = lazy(() =>
   import('@/pages/LandingPage').then((module) => ({
     default: module.LandingPage,
+  })),
+);
+const HomePage = lazy(() =>
+  import('@/pages/HomePage').then((module) => ({
+    default: module.HomePage,
+  })),
+);
+const LeaderBoardPage = lazy(() =>
+  import('@/pages/LeaderBoardPage').then((module) => ({
+    default: module.LeaderBoardPage,
+  })),
+);
+const EvalLogSearchPage = lazy(() =>
+  import('@/pages/EvalLogSearchPage').then((module) => ({
+    default: module.EvalLogSearchPage,
+  })),
+);
+const ProfilePage = lazy(() =>
+  import('@/pages/ProfilePage').then((module) => ({
+    default: module.ProfilePage,
+  })),
+);
+const ProjectPage = lazy(() =>
+  import('@/pages/ProjectPage').then((module) => ({
+    default: module.ProjectPage,
   })),
 );
 const NotFoundPage = lazy(() =>
@@ -15,44 +46,93 @@ const NotFoundPage = lazy(() =>
     default: module.NotFoundPage,
   })),
 );
-const LandingLayout = lazy(() =>
-  import('@/components/layouts/LandingLayout').then((module) => ({
-    default: module.LandingLayout,
-  })),
-);
 
 export const AppRoutes = () => {
   const isAuthenticated = useAtomValue(isAuthenticatedAtom);
 
-  const commonRoutes = [
-    {
-      path: ROUTES.ROOT,
-      element: isAuthenticated ? (
-        <Navigate to={ROUTES.HOME} />
-      ) : (
-        <Suspense>
-          <LandingLayout>
-            <LandingPage />
-          </LandingLayout>
-        </Suspense>
-      ),
-    },
-  ];
-  const restRoutes = [
-    {
-      path: '*',
-      element: (
-        <Suspense>
-          <NotFoundPage />
-        </Suspense>
-      ),
-    },
-  ];
-  const element = useRoutes([
-    ...commonRoutes,
-    ...protectedRoutes,
-    ...restRoutes,
-  ]);
-
-  return element;
+  return (
+    <Routes>
+      {!isAuthenticated && (
+        <Route element={<LandingLayout />}>
+          <Route path={ROUTES.ROOT} element={<LandingPage />} />
+        </Route>
+      )}
+      <Route element={<AuthGuard />}>
+        <Route element={<MainLayout />}>
+          <Route
+            path={ROUTES.ROOT}
+            element={
+              <Suspense
+                fallback={
+                  <DeferredComponent>
+                    <HomePageSkeleton />
+                  </DeferredComponent>
+                }
+              >
+                <HomePage />
+              </Suspense>
+            }
+          />
+          <Route
+            path={ROUTES.PROFILE}
+            element={
+              <Suspense
+                fallback={
+                  <DeferredComponent>
+                    <ProfilePageSkeleton />
+                  </DeferredComponent>
+                }
+              >
+                <ProfilePage />
+              </Suspense>
+            }
+          />
+          <Route
+            path={ROUTES.LEADERBOARD}
+            element={
+              <Suspense
+                fallback={
+                  <DeferredComponent>
+                    <></>
+                  </DeferredComponent>
+                }
+              >
+                <LeaderBoardPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path={ROUTES.EVALLOG}
+            element={
+              <Suspense
+                fallback={
+                  <DeferredComponent>
+                    <></>
+                  </DeferredComponent>
+                }
+              >
+                <EvalLogSearchPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path={ROUTES.PROJECT}
+            element={
+              <Suspense
+                fallback={
+                  <DeferredComponent>
+                    <></>
+                  </DeferredComponent>
+                }
+              >
+                <ProjectPage />
+              </Suspense>
+            }
+          />
+        </Route>
+        <Route path={ROUTES.LOGOUT} element={<LogoutPage />} />
+      </Route>
+      <Route path="*" element={<NotFoundPage />} />
+    </Routes>
+  );
 };

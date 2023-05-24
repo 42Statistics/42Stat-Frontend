@@ -1,9 +1,9 @@
 import { isAuthenticatedAtom } from '@/utils/atoms/isAuthenticatedAtom';
 import { useAtomValue } from 'jotai';
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 
-export const AuthGuard = ({ children }: React.PropsWithChildren) => {
+export const AuthGuard = () => {
   const isAuthenticated = useAtomValue(isAuthenticatedAtom);
   const navigate = useNavigate();
 
@@ -14,5 +14,5 @@ export const AuthGuard = ({ children }: React.PropsWithChildren) => {
     }
   }, [isAuthenticated, navigate]);
 
-  return <>{children}</>;
+  return <Outlet />;
 };

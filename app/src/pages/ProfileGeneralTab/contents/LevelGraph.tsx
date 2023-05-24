@@ -6,15 +6,13 @@ import {
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
 import { DashboardContent } from '@/components/templates/Dashboard';
-import { userAtom } from '@/utils/atoms/userAtom';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
-import { useAtomValue } from 'jotai';
 import { useParams } from 'react-router-dom';
 
 const GET_LEVEL_GRAPH = gql(/* GraphQL */ `
-  query getLevelGraph($uid: Int!) {
-    getPersonGeneralPage(uid: $uid) {
+  query getLevelGraph($login: String!) {
+    getPersonGeneralPage(login: $login) {
       levelGraphs {
         data {
           date
@@ -30,12 +28,11 @@ const GET_LEVEL_GRAPH = gql(/* GraphQL */ `
 
 export const LevelGraph = () => {
   const { username } = useParams() as { username: string };
-  const user = useAtomValue(userAtom);
 
   const title = '레벨 증가 그래프';
   const description = `현재일로부터 1년`;
   const { loading, error, data } = useQuery(GET_LEVEL_GRAPH, {
-    variables: { uid: username === 'me' ? user.id : 110650 },
+    variables: { login: username },
   });
   if (loading)
     return (

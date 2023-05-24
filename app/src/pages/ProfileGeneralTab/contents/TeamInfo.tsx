@@ -4,7 +4,6 @@ import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
-import { userAtom } from '@/utils/atoms/userAtom';
 import { getDayDiff } from '@/utils/getDayDiff';
 import { isDefined } from '@/utils/isDefined';
 import { useQuery } from '@apollo/client';
@@ -13,12 +12,11 @@ import styled from '@emotion/styled';
 import { AiOutlineCheck } from '@react-icons/all-files/ai/AiOutlineCheck';
 import { AiOutlineClose } from '@react-icons/all-files/ai/AiOutlineClose';
 import { rgba } from 'emotion-rgba';
-import { useAtomValue } from 'jotai';
 import { useParams } from 'react-router-dom';
 
 const GET_TEAM_INFO = gql(/* GraphQL */ `
-  query getTeamInfo($uid: Int!) {
-    getPersonGeneralPage(uid: $uid) {
+  query getTeamInfo($login: String!) {
+    getPersonGeneralPage(login: $login) {
       teamInfo {
         teams {
           id
@@ -36,10 +34,9 @@ const GET_TEAM_INFO = gql(/* GraphQL */ `
 
 export const TeamInfo = () => {
   const { username } = useParams() as { username: string };
-  const user = useAtomValue(userAtom);
 
   const { loading, error, data } = useQuery(GET_TEAM_INFO, {
-    variables: { uid: username === 'me' ? user.id : 110650 },
+    variables: { login: username },
   });
   const theme = useTheme();
 

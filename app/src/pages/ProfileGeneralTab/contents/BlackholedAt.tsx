@@ -5,15 +5,13 @@ import {
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
 import { DashboardContent } from '@/components/templates/Dashboard';
-import { userAtom } from '@/utils/atoms/userAtom';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
-import { useAtomValue } from 'jotai';
 import { useParams } from 'react-router-dom';
 
 const GET_BLACKHOLED_AT = gql(/* GraphQL */ `
-  query getBlackholedAt($uid: Int!) {
-    getPersonGeneralPage(uid: $uid) {
+  query getBlackholedAt($login: String!) {
+    getPersonGeneralPage(login: $login) {
       userProfile {
         blackholedAt
       }
@@ -23,14 +21,12 @@ const GET_BLACKHOLED_AT = gql(/* GraphQL */ `
 
 export const BlackholedAt = () => {
   const { username } = useParams() as { username: string };
-  const user = useAtomValue(userAtom);
+
   const theme = useTheme();
 
   const title = 'Black Hole Absorption';
   const { loading, error, data } = useQuery(GET_BLACKHOLED_AT, {
-    variables: {
-      uid: username === 'me' ? user.id : 110650,
-    },
+    variables: { login: username },
   });
   if (loading)
     return (

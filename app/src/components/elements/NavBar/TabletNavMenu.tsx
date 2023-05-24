@@ -1,8 +1,10 @@
 import { Spacer, VStack } from '@/components/common';
-import { NAV_ROUTES } from '@/routes/NAV_ROUTES';
 import { TabletNavItem } from './TabletNavItem';
+import { useNavRoutes } from './hooks';
 
 export const TabletNavMenu = () => {
+  const { NAV_ROUTES } = useNavRoutes();
+
   return (
     <VStack as="ul" w="100%" h="100%" spacing="2rem">
       <TabletNavItem route={NAV_ROUTES.HOME} />

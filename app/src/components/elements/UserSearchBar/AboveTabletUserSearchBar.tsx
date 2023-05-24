@@ -34,9 +34,9 @@ export const AboveTabletUserSearchBar = () => {
     { loading: projectLoading, error: projectEror, data: projectData },
   ] = useLazyQuery(FIND_PROJECT_PREVIEW);
 
-  const hasUserData = userData != null && userData.findUserPreview.length !== 0;
+  const hasUserData = userData && userData.findUserPreview.length !== 0;
   const hasProjectData =
-    projectData != null && projectData.findProjectPreview.length !== 0;
+    projectData && projectData.findProjectPreview.length !== 0;
   const isPreviewDisplaying =
     debouncedInput !== '' && (hasUserData || hasProjectData);
 
@@ -54,7 +54,8 @@ export const AboveTabletUserSearchBar = () => {
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (!isEnterKeyReleased(e)) return;
-    handleUserSubmit(input);
+    userData &&
+      handleUserSubmit(userData.findUserPreview.filter(isDefined)[0].login);
   };
 
   const handleUserSubmit = (name: string) => {
@@ -102,7 +103,7 @@ export const AboveTabletUserSearchBar = () => {
                       onClick={() => handleUserSubmit(user.login)}
                       element={
                         <HStack spacing="1rem">
-                          <Avatar size="1.6rem" />
+                          <Avatar size="1.6rem" imgUrl={user.imgUrl} />
                           <Text>{user.login}</Text>
                         </HStack>
                       }

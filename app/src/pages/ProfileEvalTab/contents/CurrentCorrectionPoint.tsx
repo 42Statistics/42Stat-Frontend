@@ -6,14 +6,12 @@ import {
 } from '@/components/elements/DashboardContentView';
 import { NumberDefault } from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
-import { userAtom } from '@/utils/atoms/userAtom';
 import { useQuery } from '@apollo/client';
-import { useAtomValue } from 'jotai';
 import { useParams } from 'react-router-dom';
 
 const GET_CURRENT_CORRECTION_POINT = gql(/* GraphQL */ `
-  query getCurrentCorrectionPoint($uid: Int!) {
-    getPersonGeneralPage(uid: $uid) {
+  query getCurrentCorrectionPoint($login: String!) {
+    getPersonGeneralPage(login: $login) {
       userProfile {
         correctionPoint
       }
@@ -23,10 +21,10 @@ const GET_CURRENT_CORRECTION_POINT = gql(/* GraphQL */ `
 
 export const CurrentCorrectionPoint = () => {
   const { username } = useParams() as { username: string };
-  const user = useAtomValue(userAtom);
+
   const title = '보유 평가 포인트';
   const { loading, error, data } = useQuery(GET_CURRENT_CORRECTION_POINT, {
-    variables: { uid: username === 'me' ? user.id : 110650 },
+    variables: { login: username },
   });
   if (loading)
     return (

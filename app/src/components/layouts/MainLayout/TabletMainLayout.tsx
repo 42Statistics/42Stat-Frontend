@@ -3,8 +3,9 @@ import { AboveTabletFooter } from '@/components/elements/Footer/AboveTabletFoote
 import { IntraLink } from '@/components/elements/IntraLink';
 import { TabletNavBar } from '@/components/elements/NavBar/TabletNavBar';
 import styled from '@emotion/styled';
+import { Outlet } from 'react-router-dom';
 
-export const TabletMainLayout = ({ children }: React.PropsWithChildren) => {
+export const TabletMainLayout = () => {
   return (
     <Layout>
       <IntraLink />
@@ -12,7 +13,7 @@ export const TabletMainLayout = ({ children }: React.PropsWithChildren) => {
         <TabletNavBar />
         <TabletMainPageLayout>
           <VStack w="100%">
-            {children}
+            <Outlet />
             <AboveTabletFooter />
           </VStack>
         </TabletMainPageLayout>

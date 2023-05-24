@@ -1,19 +1,17 @@
 import { gql } from '@/__generated__';
-import { HStack, Image, Loader } from '@/components/common';
+import { H3Text, HStack, Image, Loader } from '@/components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
 import { DashboardContent } from '@/components/templates/Dashboard';
-import { userAtom } from '@/utils/atoms/userAtom';
 import { useQuery } from '@apollo/client';
 import styled from '@emotion/styled';
-import { useAtomValue } from 'jotai';
 import { useParams } from 'react-router-dom';
 
 const GET_CURRENT_COALITION_SCORE = gql(/* GraphQL */ `
-  query getCurrentCoalitionScore($uid: Int!) {
-    getPersonGeneralPage(uid: $uid) {
+  query getCurrentCoalitionScore($login: String!) {
+    getPersonGeneralPage(login: $login) {
       userProfile {
         coalition {
           score
@@ -30,13 +28,10 @@ const GET_CURRENT_COALITION_SCORE = gql(/* GraphQL */ `
 
 export const CurrentCoalitionScore = () => {
   const { username } = useParams() as { username: string };
-  const user = useAtomValue(userAtom);
 
   const title = '코알리숑 스코어';
   const { loading, error, data } = useQuery(GET_CURRENT_COALITION_SCORE, {
-    variables: {
-      uid: username === 'me' ? user.id : 110650,
-    },
+    variables: { login: username },
   });
   if (loading)
     return (
@@ -61,25 +56,19 @@ export const CurrentCoalitionScore = () => {
   return (
     <DashboardContent title={title}>
       <HStack spacing="1rem" style={{ marginTop: '1rem' }}>
-        {coalition == null ? (
-          '-'
-        ) : (
-          <>
-            {coalition.score.toLocaleString()}
-            <HStack spacing="0.5rem">
-              {coalition.imageUrl && coalition.color && (
-                <StyledCoalitionMark
-                  size="1.8rem"
-                  src={coalition?.imageUrl}
-                  style={{ backgroundColor: coalition.color }}
-                />
-              )}
-              {scoreInfo &&
-                scoreInfo.rankInCoalition &&
-                `${scoreInfo.rankInCoalition.toLocaleString()}위`}
-            </HStack>
-          </>
-        )}
+        <H3Text>{coalition.score.toLocaleString()}</H3Text>
+        <HStack spacing="0.5rem">
+          {coalition.imageUrl && coalition.color && (
+            <StyledCoalitionMark
+              size="1.8rem"
+              src={coalition.imageUrl}
+              style={{ backgroundColor: coalition.color }}
+            />
+          )}
+          {scoreInfo?.rankInCoalition && (
+            <H3Text>{scoreInfo.rankInCoalition.toLocaleString()}위</H3Text>
+          )}
+        </HStack>
       </HStack>
     </DashboardContent>
   );

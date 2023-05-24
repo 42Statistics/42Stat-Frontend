@@ -6,14 +6,12 @@ import {
 } from '@/components/elements/DashboardContentView';
 import { NumberDefault } from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
-import { userAtom } from '@/utils/atoms/userAtom';
 import { useQuery } from '@apollo/client';
-import { useAtomValue } from 'jotai';
 import { useParams } from 'react-router-dom';
 
 const GET_PERSONAL_AVERAGE_FEEDBACK_LENGTH = gql(/* GraphQL */ `
-  query getPersonalAverageFeedbackLength($uid: Int!) {
-    getPersonalEvalPage(uid: $uid) {
+  query getPersonalAverageFeedbackLength($login: String!) {
+    getPersonalEvalPage(login: $login) {
       averageFeedbackLength
     }
   }
@@ -21,15 +19,12 @@ const GET_PERSONAL_AVERAGE_FEEDBACK_LENGTH = gql(/* GraphQL */ `
 
 export const AverageFeedbackLength = () => {
   const { username } = useParams() as { username: string };
-  const user = useAtomValue(userAtom);
 
   const title = '평균 피드백 길이';
   const { loading, error, data } = useQuery(
     GET_PERSONAL_AVERAGE_FEEDBACK_LENGTH,
     {
-      variables: {
-        uid: username === 'me' ? user.id : 110650,
-      },
+      variables: { login: username },
     },
   );
   if (loading)

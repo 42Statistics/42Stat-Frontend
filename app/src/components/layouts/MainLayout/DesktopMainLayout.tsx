@@ -3,8 +3,9 @@ import { AboveTabletFooter } from '@/components/elements/Footer/AboveTabletFoote
 import { IntraLink } from '@/components/elements/IntraLink';
 import { DesktopNavBar } from '@/components/elements/NavBar/DesktopNavBar';
 import styled from '@emotion/styled';
+import { Outlet } from 'react-router-dom';
 
-export const DesktopMainLayout = ({ children }: React.PropsWithChildren) => {
+export const DesktopMainLayout = () => {
   return (
     <Layout>
       <IntraLink />
@@ -12,7 +13,7 @@ export const DesktopMainLayout = ({ children }: React.PropsWithChildren) => {
         <DesktopNavBar />
         <DesktopMainPageLayout>
           <VStack w="100%">
-            {children}
+            <Outlet />
             <AboveTabletFooter />
           </VStack>
         </DesktopMainPageLayout>

@@ -1,9 +1,11 @@
 import { HStack } from '@/components/common';
-import { NAV_ROUTES } from '@/routes/NAV_ROUTES';
 import styled from '@emotion/styled';
 import { TabItem } from './TabItem';
+import { useNavRoutes } from './hooks';
 
 export const TabBar = () => {
+  const { NAV_ROUTES } = useNavRoutes();
+
   return (
     <TabBarLayout>
       <HStack as="ul" w="100%" justify="space-around">

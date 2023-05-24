@@ -1,6 +1,5 @@
 export const ROUTES = {
   ROOT: '/',
-  HOME: '/home',
   PROFILE: '/profile/:username',
   PROJECT: '/project/:projectName',
   LEADERBOARD: '/leaderboard',

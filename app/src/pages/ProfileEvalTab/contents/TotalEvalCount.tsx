@@ -6,14 +6,12 @@ import {
 } from '@/components/elements/DashboardContentView';
 import { NumberDefault } from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
-import { userAtom } from '@/utils/atoms/userAtom';
 import { useQuery } from '@apollo/client';
-import { useAtomValue } from 'jotai';
 import { useParams } from 'react-router-dom';
 
 const GET_PERSONAL_TOTAL_EVAL_COUNT = gql(/* GraphQL */ `
-  query getPersonalTotalEvalCount($uid: Int!) {
-    getPersonalEvalPage(uid: $uid) {
+  query getPersonalTotalEvalCount($login: String!) {
+    getPersonalEvalPage(login: $login) {
       totalCount
     }
   }
@@ -21,10 +19,10 @@ const GET_PERSONAL_TOTAL_EVAL_COUNT = gql(/* GraphQL */ `
 
 export const TotalEvalCount = () => {
   const { username } = useParams() as { username: string };
-  const user = useAtomValue(userAtom);
+
   const title = '누적 평가 횟수';
   const { loading, error, data } = useQuery(GET_PERSONAL_TOTAL_EVAL_COUNT, {
-    variables: { uid: username === 'me' ? user.id : 110650 },
+    variables: { login: username },
   });
 
   if (loading)

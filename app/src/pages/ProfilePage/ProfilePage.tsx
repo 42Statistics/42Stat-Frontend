@@ -3,7 +3,9 @@ import { Tab, TabList, TabPanel, Tabs } from '@/components/common/Tab';
 import { Dashboard } from '@/components/templates/Dashboard';
 import { ProfileEvalTabSkeleton } from '@/pages/PageSkeletons/ProfileEvalTabSkeleton';
 import { ProfileGeneralTab } from '@/pages/ProfileGeneralTab';
+import { userAtom } from '@/utils/atoms/userAtom';
 import styled from '@emotion/styled';
+import { useAtomValue } from 'jotai';
 import { Suspense, lazy } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
@@ -18,10 +20,11 @@ const ProfileEvalTab = lazy(() =>
 export const ProfilePage = () => {
   const { username } = useParams();
 
+  const { login } = useAtomValue(userAtom);
   return (
     <>
       <Helmet>
-        <title>{username === 'me' ? '내 정보' : username} | 42Stat</title>
+        <title>{username === login ? '내 정보' : username} | 42Stat</title>
       </Helmet>
       <ProfilePageLayout>
         <VStack w="100%" spacing="2rem">

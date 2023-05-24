@@ -14,15 +14,13 @@ import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
-import { userAtom } from '@/utils/atoms/userAtom';
 import { getTitleWithLogin } from '@/utils/getTitleWithLogin';
 import { BelowTablet, Desktop } from '@/utils/responsive/Device';
 import { titleCase } from '@/utils/titleCase';
 import { useQuery } from '@apollo/client';
 import styled from '@emotion/styled';
-import { useAtomValue } from 'jotai';
 import { truncate } from 'lodash-es';
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const GET_USER_PROFILE = gql(/* GraphQL */ `
   query GetUserProfile($uid: Int!) {
@@ -55,12 +53,11 @@ const GET_USER_PROFILE = gql(/* GraphQL */ `
 `);
 
 export const UserProfile = () => {
-  const { username } = useParams() as { username: string }; // FIXME: Type Assertion
-  const user = useAtomValue(userAtom);
+  const { pathname } = useLocation();
 
   // FIXME: user.id가 아니라 user.login으로 검색할 수 있도록 요청해야 함
   const { loading, error, data } = useQuery(GET_USER_PROFILE, {
-    variables: { uid: username === 'me' ? user.id : 110650 },
+    variables: { uid: Number(pathname.split('/')[2]) },
   });
 
   if (loading) return <UserProfileLoader />;

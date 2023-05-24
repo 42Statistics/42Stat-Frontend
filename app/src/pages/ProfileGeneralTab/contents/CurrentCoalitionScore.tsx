@@ -5,11 +5,9 @@ import {
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
 import { DashboardContent } from '@/components/templates/Dashboard';
-import { userAtom } from '@/utils/atoms/userAtom';
 import { useQuery } from '@apollo/client';
 import styled from '@emotion/styled';
-import { useAtomValue } from 'jotai';
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const GET_CURRENT_COALITION_SCORE = gql(/* GraphQL */ `
   query getCurrentCoalitionScore($uid: Int!) {
@@ -29,14 +27,12 @@ const GET_CURRENT_COALITION_SCORE = gql(/* GraphQL */ `
 `);
 
 export const CurrentCoalitionScore = () => {
-  const { username } = useParams() as { username: string };
-  const user = useAtomValue(userAtom);
+  // const { username } = useParams() as { username: string };
+  const { pathname } = useLocation();
 
   const title = '코알리숑 스코어';
   const { loading, error, data } = useQuery(GET_CURRENT_COALITION_SCORE, {
-    variables: {
-      uid: username === 'me' ? user.id : 110650,
-    },
+    variables: { uid: Number(pathname.split('/')[2]) },
   });
   if (loading)
     return (

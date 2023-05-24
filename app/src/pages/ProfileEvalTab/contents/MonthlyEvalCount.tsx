@@ -8,7 +8,7 @@ import { NumberCompare } from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
 import { useQuery } from '@apollo/client';
 import dayjs from 'dayjs';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const GET_MONTHLY_EVAL_COUNT = gql(/* GraphQL */ `
   query getMonthlyEvalCount($uid: Int!) {
@@ -28,12 +28,11 @@ const GET_MONTHLY_EVAL_COUNT = gql(/* GraphQL */ `
 `);
 
 export const MonthlyEvalCount = () => {
-  // const { username } = useParams() as { username: string };
-  const { pathname } = useLocation();
+  const { userId } = useParams() as { userId: string };
 
   const title = '월간 평가 횟수';
   const { loading, error, data } = useQuery(GET_MONTHLY_EVAL_COUNT, {
-    variables: { uid: Number(pathname.split('/')[2]) },
+    variables: { uid: Number(userId) },
   });
   if (loading)
     return (

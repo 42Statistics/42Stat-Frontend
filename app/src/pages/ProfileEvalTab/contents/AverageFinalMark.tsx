@@ -7,7 +7,7 @@ import {
 import { NumberDefault } from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
 import { useQuery } from '@apollo/client';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const GET_AVERAGE_FINAL_MARK = gql(/* GraphQL */ `
   query getAverageFinalMark($uid: Int!) {
@@ -18,13 +18,12 @@ const GET_AVERAGE_FINAL_MARK = gql(/* GraphQL */ `
 `);
 
 export const AverageFinalMark = () => {
-  // const { username } = useParams() as { username: string };
-  const { pathname } = useLocation();
+  const { userId } = useParams() as { userId: string };
 
   const title = '평균 평가 점수';
   const description = '평가자일 때';
   const { loading, error, data } = useQuery(GET_AVERAGE_FINAL_MARK, {
-    variables: { uid: Number(pathname.split('/')[2]) },
+    variables: { uid: Number(userId) },
   });
   if (loading)
     return (

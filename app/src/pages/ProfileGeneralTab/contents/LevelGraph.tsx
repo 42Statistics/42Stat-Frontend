@@ -8,7 +8,7 @@ import {
 import { DashboardContent } from '@/components/templates/Dashboard';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const GET_LEVEL_GRAPH = gql(/* GraphQL */ `
   query getLevelGraph($uid: Int!) {
@@ -27,13 +27,12 @@ const GET_LEVEL_GRAPH = gql(/* GraphQL */ `
 `);
 
 export const LevelGraph = () => {
-  // const { username } = useParams() as { username: string };
-  const { pathname } = useLocation();
+  const { userId } = useParams() as { userId: string };
 
   const title = '레벨 증가 그래프';
   const description = `현재일로부터 1년`;
   const { loading, error, data } = useQuery(GET_LEVEL_GRAPH, {
-    variables: { uid: Number(pathname.split('/')[2]) },
+    variables: { uid: Number(userId) },
   });
   if (loading)
     return (

@@ -7,7 +7,7 @@ import {
 import { NumberDefault } from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
 import { useQuery } from '@apollo/client';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const GET_PERSONAL_AVERAGE_FEEDBACK_LENGTH = gql(/* GraphQL */ `
   query getPersonalAverageFeedbackLength($uid: Int!) {
@@ -18,14 +18,13 @@ const GET_PERSONAL_AVERAGE_FEEDBACK_LENGTH = gql(/* GraphQL */ `
 `);
 
 export const AverageFeedbackLength = () => {
-  // const { username } = useParams() as { username: string };
-  const { pathname } = useLocation();
+  const { userId } = useParams() as { userId: string };
 
   const title = '평균 피드백 길이';
   const { loading, error, data } = useQuery(
     GET_PERSONAL_AVERAGE_FEEDBACK_LENGTH,
     {
-      variables: { uid: Number(pathname.split('/')[2]) },
+      variables: { uid: Number(userId) },
     },
   );
   if (loading)

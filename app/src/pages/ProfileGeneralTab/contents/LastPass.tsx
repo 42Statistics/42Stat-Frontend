@@ -7,7 +7,7 @@ import {
 import { TextDefault } from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
 import { useQuery } from '@apollo/client';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const GET_LAST_PASS = gql(/* GraphQL */ `
   query getLastPass($uid: Int!) {
@@ -20,12 +20,11 @@ const GET_LAST_PASS = gql(/* GraphQL */ `
 `);
 
 export const LastPass = () => {
-  // const { username } = useParams() as { username: string };
-  const { pathname } = useLocation();
+  const { userId } = useParams() as { userId: string };
 
   const title = '최근 통과한 과제';
   const { loading, error, data } = useQuery(GET_LAST_PASS, {
-    variables: { uid: Number(pathname.split('/')[2]) },
+    variables: { uid: Number(userId) },
   });
   if (loading)
     return (

@@ -7,7 +7,7 @@ import {
 import { NumberDefault } from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
 import { useQuery } from '@apollo/client';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const GET_CURRENT_CORRECTION_POINT = gql(/* GraphQL */ `
   query getCurrentCorrectionPoint($uid: Int!) {
@@ -20,12 +20,11 @@ const GET_CURRENT_CORRECTION_POINT = gql(/* GraphQL */ `
 `);
 
 export const CurrentCorrectionPoint = () => {
-  // const { username } = useParams() as { username: string };
-  const { pathname } = useLocation();
+  const { userId } = useParams() as { userId: string };
 
   const title = '보유 평가 포인트';
   const { loading, error, data } = useQuery(GET_CURRENT_CORRECTION_POINT, {
-    variables: { uid: Number(pathname.split('/')[2]) },
+    variables: { uid: Number(userId) },
   });
   if (loading)
     return (

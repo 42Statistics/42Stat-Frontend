@@ -7,7 +7,7 @@ import {
 import { NumberDefault } from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
 import { useQuery } from '@apollo/client';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const GET_PERSONAL_TOTAL_EVAL_COUNT = gql(/* GraphQL */ `
   query getPersonalTotalEvalCount($uid: Int!) {
@@ -18,12 +18,11 @@ const GET_PERSONAL_TOTAL_EVAL_COUNT = gql(/* GraphQL */ `
 `);
 
 export const TotalEvalCount = () => {
-  // const { username } = useParams() as { username: string };
-  const { pathname } = useLocation();
+  const { userId } = useParams() as { userId: string };
 
   const title = '누적 평가 횟수';
   const { loading, error, data } = useQuery(GET_PERSONAL_TOTAL_EVAL_COUNT, {
-    variables: { uid: Number(pathname.split('/')[2]) },
+    variables: { uid: Number(userId) },
   });
 
   if (loading)

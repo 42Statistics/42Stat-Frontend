@@ -12,7 +12,7 @@ import styled from '@emotion/styled';
 import { AiOutlineCheck } from '@react-icons/all-files/ai/AiOutlineCheck';
 import { AiOutlineClose } from '@react-icons/all-files/ai/AiOutlineClose';
 import { rgba } from 'emotion-rgba';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const GET_TEAM_INFO = gql(/* GraphQL */ `
   query getTeamInfo($uid: Int!) {
@@ -33,11 +33,10 @@ const GET_TEAM_INFO = gql(/* GraphQL */ `
 `);
 
 export const TeamInfo = () => {
-  // const { username } = useParams() as { username: string };
-  const { pathname } = useLocation();
+  const { userId } = useParams() as { userId: string };
 
   const { loading, error, data } = useQuery(GET_TEAM_INFO, {
-    variables: { uid: Number(pathname.split('/')[2]) },
+    variables: { uid: Number(userId) },
   });
   const theme = useTheme();
 

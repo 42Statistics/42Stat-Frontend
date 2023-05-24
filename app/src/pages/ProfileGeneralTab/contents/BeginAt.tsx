@@ -8,7 +8,7 @@ import { TextDefault } from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
 import { useQuery } from '@apollo/client';
 import dayjs from 'dayjs';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const GET_BEGIN_AT = gql(/* GraphQL */ `
   query getBeginAt($uid: Int!) {
@@ -21,12 +21,11 @@ const GET_BEGIN_AT = gql(/* GraphQL */ `
 `);
 
 export const BeginAt = () => {
-  // const { username } = useParams() as { username: string };
-  const { pathname } = useLocation();
+  const { userId } = useParams() as { userId: string };
 
   const title = '본과정 시작일';
   const { loading, error, data } = useQuery(GET_BEGIN_AT, {
-    variables: { uid: Number(pathname.split('/')[2]) },
+    variables: { uid: Number(userId) },
   });
   if (loading)
     return (

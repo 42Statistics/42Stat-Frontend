@@ -9,7 +9,7 @@ import { percentFormatter } from '@/utils/formatters/percentFormatter';
 import { useQuery } from '@apollo/client';
 import styled from '@emotion/styled';
 import dayjs from 'dayjs';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const GET_PREFERRED_TIME = gql(/* GraphQL */ `
   query getPrefferedTime($uid: Int!) {
@@ -31,13 +31,11 @@ const GET_PREFERRED_TIME = gql(/* GraphQL */ `
 `);
 
 export const PrefferedTime = () => {
-  // const { username } = useParams() as { username: string };
-
-  const { pathname } = useLocation();
+  const { userId } = useParams() as { userId: string };
 
   const title = '주 접속 시간대';
   const { loading, error, data } = useQuery(GET_PREFERRED_TIME, {
-    variables: { uid: Number(pathname.split('/')[2]) },
+    variables: { uid: Number(userId) },
   });
   if (loading)
     return (

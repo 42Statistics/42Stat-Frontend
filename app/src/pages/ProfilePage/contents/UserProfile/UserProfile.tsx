@@ -20,7 +20,7 @@ import { titleCase } from '@/utils/titleCase';
 import { useQuery } from '@apollo/client';
 import styled from '@emotion/styled';
 import { truncate } from 'lodash-es';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const GET_USER_PROFILE = gql(/* GraphQL */ `
   query GetUserProfile($uid: Int!) {
@@ -53,11 +53,11 @@ const GET_USER_PROFILE = gql(/* GraphQL */ `
 `);
 
 export const UserProfile = () => {
-  const { pathname } = useLocation();
+  const { userId } = useParams() as { userId: string };
 
   // FIXME: user.id가 아니라 user.login으로 검색할 수 있도록 요청해야 함
   const { loading, error, data } = useQuery(GET_USER_PROFILE, {
-    variables: { uid: Number(pathname.split('/')[2]) },
+    variables: { uid: Number(userId) },
   });
 
   if (loading) return <UserProfileLoader />;

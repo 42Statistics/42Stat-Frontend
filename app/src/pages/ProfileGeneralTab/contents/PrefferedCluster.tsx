@@ -8,7 +8,7 @@ import { TextDefault } from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
 import { useQuery } from '@apollo/client';
 import dayjs from 'dayjs';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const GET_PREFERRED_CLUSTER = gql(/* GraphQL */ `
   query getPrefferedCluster($uid: Int!) {
@@ -25,12 +25,11 @@ const GET_PREFERRED_CLUSTER = gql(/* GraphQL */ `
 `);
 
 export const PrefferedCluster = () => {
-  // const { username } = useParams() as { username: string };
-  const { pathname } = useLocation();
+  const { userId } = useParams() as { userId: string };
 
   const title = '주 접속 클러스터';
   const { loading, error, data } = useQuery(GET_PREFERRED_CLUSTER, {
-    variables: { uid: Number(pathname.split('/')[2]) },
+    variables: { uid: Number(userId) },
   });
   if (loading)
     return (

@@ -1,5 +1,11 @@
 import { gql } from '@/__generated__';
-import { Loader, SegmentedControl, VStack } from '@/components/common';
+import {
+  HStack,
+  Loader,
+  SegmentedControl,
+  Spacer,
+  VStack,
+} from '@/components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
@@ -29,14 +35,6 @@ export const LevelRankTab = () => {
   const { loading, error, data } = useQuery(GET_LEVEL_RANK);
   const options = [
     {
-      label: '주간',
-      value: 'weekly',
-    },
-    {
-      label: '월간',
-      value: 'monthly',
-    },
-    {
       label: '누적',
       value: 'total',
     },
@@ -59,14 +57,15 @@ export const LevelRankTab = () => {
 
   return (
     <VStack w="100%" spacing="2rem">
-      <VStack w="100%" align="start">
+      <HStack w="100%">
         <SegmentedControl
           callback={console.log}
           controlRef={controlRef}
           segments={segments}
         />
-      </VStack>
-      <LeaderBoardItem rank={6} item={rankList[5]} unit={unit} />
+        <Spacer />
+      </HStack>
+      <LeaderBoardItem rank={1} item={rankList[0]} unit={unit} />
       <LeaderBoard rankList={rankList} unit={unit} />
     </VStack>
   );

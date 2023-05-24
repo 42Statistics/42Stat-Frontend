@@ -1,4 +1,4 @@
 export * from './CoalitionScoreRankTab';
-export * from './CorrectionPointRankTab';
+export * from './EvalCountRankTab';
 export * from './ExpIncrementRankTab';
 export * from './LevelRankTab';

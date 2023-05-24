@@ -23,7 +23,7 @@ export const NAV_ROUTES: { [name: string]: NavRoute } = {
   HOME: {
     text: '홈',
     abbr: '홈',
-    path: ROUTES.HOME,
+    path: ROUTES.ROOT,
     icon: RiHome2Line,
     iconFocused: RiHome2Fill,
   },

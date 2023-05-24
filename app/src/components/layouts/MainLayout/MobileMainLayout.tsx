@@ -5,8 +5,9 @@ import { TabBar } from '@/components/elements/TabBar';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { Helmet } from 'react-helmet-async';
+import { Outlet } from 'react-router-dom';
 
-export const MobileMainLayout = ({ children }: React.PropsWithChildren) => {
+export const MobileMainLayout = () => {
   const theme = useTheme();
 
   return (
@@ -17,7 +18,7 @@ export const MobileMainLayout = ({ children }: React.PropsWithChildren) => {
       <IntraLink />
       <MobileMainPageLayout>
         <MobileHeader />
-        {children}
+        <Outlet />
         <MobileFooter />
       </MobileMainPageLayout>
       <TabBar />

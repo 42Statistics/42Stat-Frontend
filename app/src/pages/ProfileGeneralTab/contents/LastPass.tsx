@@ -6,10 +6,8 @@ import {
 } from '@/components/elements/DashboardContentView';
 import { TextDefault } from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
-import { userAtom } from '@/utils/atoms/userAtom';
 import { useQuery } from '@apollo/client';
-import { useAtomValue } from 'jotai';
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const GET_LAST_PASS = gql(/* GraphQL */ `
   query getLastPass($uid: Int!) {
@@ -22,12 +20,12 @@ const GET_LAST_PASS = gql(/* GraphQL */ `
 `);
 
 export const LastPass = () => {
-  const { username } = useParams() as { username: string };
-  const user = useAtomValue(userAtom);
+  // const { username } = useParams() as { username: string };
+  const { pathname } = useLocation();
 
   const title = '최근 통과한 과제';
   const { loading, error, data } = useQuery(GET_LAST_PASS, {
-    variables: { uid: username === 'me' ? user.id : 110650 },
+    variables: { uid: Number(pathname.split('/')[2]) },
   });
   if (loading)
     return (

@@ -6,10 +6,8 @@ import {
 } from '@/components/elements/DashboardContentView';
 import { NumberDefault } from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
-import { userAtom } from '@/utils/atoms/userAtom';
 import { useQuery } from '@apollo/client';
-import { useAtomValue } from 'jotai';
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const GET_CURRENT_WALLET = gql(/* GraphQL */ `
   query getCurrentWallet($uid: Int!) {
@@ -22,14 +20,12 @@ const GET_CURRENT_WALLET = gql(/* GraphQL */ `
 `);
 
 export const CurrentWallet = () => {
-  const { username } = useParams() as { username: string };
-  const user = useAtomValue(userAtom);
+  // const { username } = useParams() as { username: string };
+  const { pathname } = useLocation();
 
   const title = '보유 월렛';
   const { loading, error, data } = useQuery(GET_CURRENT_WALLET, {
-    variables: {
-      uid: username === 'me' ? user.id : 110650,
-    },
+    variables: { uid: Number(pathname.split('/')[2]) },
   });
   if (loading)
     return (

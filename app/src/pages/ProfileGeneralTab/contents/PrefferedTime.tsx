@@ -5,13 +5,11 @@ import {
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
 import { DashboardContent } from '@/components/templates/Dashboard';
-import { userAtom } from '@/utils/atoms/userAtom';
 import { percentFormatter } from '@/utils/formatters/percentFormatter';
 import { useQuery } from '@apollo/client';
 import styled from '@emotion/styled';
 import dayjs from 'dayjs';
-import { useAtomValue } from 'jotai';
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const GET_PREFERRED_TIME = gql(/* GraphQL */ `
   query getPrefferedTime($uid: Int!) {
@@ -33,12 +31,13 @@ const GET_PREFERRED_TIME = gql(/* GraphQL */ `
 `);
 
 export const PrefferedTime = () => {
-  const { username } = useParams() as { username: string };
-  const user = useAtomValue(userAtom);
+  // const { username } = useParams() as { username: string };
+
+  const { pathname } = useLocation();
 
   const title = '주 접속 시간대';
   const { loading, error, data } = useQuery(GET_PREFERRED_TIME, {
-    variables: { uid: username === 'me' ? user.id : 110650 },
+    variables: { uid: Number(pathname.split('/')[2]) },
   });
   if (loading)
     return (

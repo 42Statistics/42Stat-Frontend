@@ -1,5 +1,5 @@
 import { gql } from '@/__generated__';
-import { HStack, Image, Loader } from '@/components/common';
+import { H3Text, HStack, Image, Loader } from '@/components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
@@ -56,25 +56,19 @@ export const CurrentCoalitionScore = () => {
   return (
     <DashboardContent title={title}>
       <HStack spacing="1rem" style={{ marginTop: '1rem' }}>
-        {coalition == null ? (
-          '-'
-        ) : (
-          <>
-            {coalition.score.toLocaleString()}
-            <HStack spacing="0.5rem">
-              {coalition.imageUrl && coalition.color && (
-                <StyledCoalitionMark
-                  size="1.8rem"
-                  src={coalition?.imageUrl}
-                  style={{ backgroundColor: coalition.color }}
-                />
-              )}
-              {scoreInfo &&
-                scoreInfo.rankInCoalition &&
-                `${scoreInfo.rankInCoalition.toLocaleString()}위`}
-            </HStack>
-          </>
-        )}
+        <H3Text>{coalition.score.toLocaleString()}</H3Text>
+        <HStack spacing="0.5rem">
+          {coalition.imageUrl && coalition.color && (
+            <StyledCoalitionMark
+              size="1.8rem"
+              src={coalition.imageUrl}
+              style={{ backgroundColor: coalition.color }}
+            />
+          )}
+          {scoreInfo?.rankInCoalition && (
+            <H3Text>{scoreInfo.rankInCoalition.toLocaleString()}위</H3Text>
+          )}
+        </HStack>
       </HStack>
     </DashboardContent>
   );

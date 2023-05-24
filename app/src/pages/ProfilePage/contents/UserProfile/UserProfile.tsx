@@ -68,7 +68,7 @@ export const UserProfile = () => {
   const titleWithLogin = getTitleWithLogin(titles, login);
 
   return (
-    <UserProfileLayout backgroundUrl={coalition?.coverUrl}>
+    <UserProfileLayout backgroundUrl={coalition.coverUrl}>
       <Desktop>
         <HStack h="100%" spacing="4rem">
           <Avatar size="6rem" imgUrl={imgUrl} />

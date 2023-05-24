@@ -1,16 +1,13 @@
 import { gql } from '@/__generated__';
-import { Loader } from '@/components/common';
+import { HStack, Image, Loader } from '@/components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
-import {
-  NumberDefault,
-  TextDefault,
-} from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
 import { userAtom } from '@/utils/atoms/userAtom';
 import { useQuery } from '@apollo/client';
+import styled from '@emotion/styled';
 import { useAtomValue } from 'jotai';
 import { useParams } from 'react-router-dom';
 
@@ -20,6 +17,11 @@ const GET_CURRENT_COALITION_SCORE = gql(/* GraphQL */ `
       userProfile {
         coalition {
           score
+          imageUrl
+          color
+        }
+        scoreInfo {
+          rankInCoalition
         }
       }
     }
@@ -55,15 +57,37 @@ export const CurrentCoalitionScore = () => {
       </DashboardContent>
     );
 
-  const { coalition } = data.getPersonGeneralPage.userProfile;
-
+  const { coalition, scoreInfo } = data.getPersonGeneralPage.userProfile;
   return (
     <DashboardContent title={title}>
-      {coalition == null ? (
-        <TextDefault text="-" />
-      ) : (
-        <NumberDefault number={coalition.score} />
-      )}
+      <HStack spacing="1rem" style={{ marginTop: '1rem' }}>
+        {coalition == null ? (
+          '-'
+        ) : (
+          <>
+            {coalition.score.toLocaleString()}
+            <HStack spacing="0.5rem">
+              {coalition.imageUrl && coalition.color && (
+                <StyledCoalitionMark
+                  size="1.8rem"
+                  src={coalition?.imageUrl}
+                  style={{ backgroundColor: coalition.color }}
+                />
+              )}
+              {scoreInfo &&
+                scoreInfo.rankInCoalition &&
+                `${scoreInfo.rankInCoalition.toLocaleString()}위`}
+            </HStack>
+          </>
+        )}
+      </HStack>
     </DashboardContent>
   );
 };
+
+const StyledCoalitionMark = styled(Image)<{ size?: string }>`
+  width: ${({ size = '2.2rem' }) => size};
+  height: ${({ size = '2.4rem' }) => size};
+  object-fit: cover;
+  border-radius: 50%;
+`;

@@ -4,10 +4,6 @@ import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
-import {
-  NumberDefault,
-  TextDefault,
-} from '@/components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@/components/templates/Dashboard';
 import { userAtom } from '@/utils/atoms/userAtom';
 import { useQuery } from '@apollo/client';
@@ -60,40 +56,36 @@ export const CurrentCoalitionScore = () => {
     );
 
   const { coalition, scoreInfo } = data.getPersonGeneralPage.userProfile;
-
   return (
     <DashboardContent title={title}>
       <HStack spacing="1rem" style={{ marginTop: '1rem' }}>
         {coalition == null ? (
-          <TextDefault text="-" />
+          '-'
         ) : (
-          <NumberDefault number={coalition.score} />
-        )}
-        <HStack spacing="0.5rem">
-          {coalition && coalition.imageUrl && coalition.color && (
-            <StyledMark
-              size="1.8rem"
-              src={coalition?.imageUrl}
-              style={{ backgroundColor: coalition.color }}
-            />
-          )}
-          {scoreInfo && scoreInfo.rankInCoalition && (
-            <HStack spacing="0.1rem">
-              <NumberDefault number={scoreInfo.rankInCoalition} />
-              <TextDefault text="위" />
+          <>
+            {coalition.score.toLocaleString()}
+            <HStack spacing="0.5rem">
+              {coalition.imageUrl && coalition.color && (
+                <StyledCoalitionMark
+                  size="1.8rem"
+                  src={coalition?.imageUrl}
+                  style={{ backgroundColor: coalition.color }}
+                />
+              )}
+              {scoreInfo &&
+                scoreInfo.rankInCoalition &&
+                `${scoreInfo.rankInCoalition.toLocaleString()}위`}
             </HStack>
-          )}
-        </HStack>
+          </>
+        )}
       </HStack>
     </DashboardContent>
   );
 };
 
-const StyledMark = styled(Image)<{ size?: string }>`
+const StyledCoalitionMark = styled(Image)<{ size?: string }>`
   width: ${({ size = '2.2rem' }) => size};
   height: ${({ size = '2.4rem' }) => size};
   object-fit: cover;
   border-radius: 50%;
-  user-select: none;
-  -webkit-user-drag: none; // 이미지 드래그 제한
 `;

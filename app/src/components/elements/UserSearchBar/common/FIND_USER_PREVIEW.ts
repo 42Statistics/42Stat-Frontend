@@ -5,6 +5,7 @@ export const FIND_USER_PREVIEW = gql(/* GraphQL */ `
     findUserPreview(login: $login) {
       id
       login
+      imgUrl
     }
   }
 `);

@@ -18,7 +18,7 @@ const colors = {
     gray200: '#999999',
     gray100: '#bbbbbb',
   },
-  background: '#e7e8ed',
+  background: '#f9f9f9',
 };
 
 const fonts = {

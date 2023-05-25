@@ -28,8 +28,8 @@ export const MobileMainLayout = () => {
 
 const MobileMainPageLayout = styled.main`
   width: 100%;
-  padding: 3rem;
-  padding-bottom: calc(3rem + 6rem);
+  padding: 2rem;
+  padding-bottom: calc(2rem + 6rem);
 `;
 
 const Layout = styled.div`

@@ -17,7 +17,6 @@ import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { MdArrowBack } from '@react-icons/all-files/md/MdArrowBack';
 import { MdSearch } from '@react-icons/all-files/md/MdSearch';
-import { rgba } from 'emotion-rgba';
 import { useEffect, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Modal from 'react-modal';
@@ -185,6 +184,5 @@ const MobileUserSearchBarLayout = styled.div`
   transition: all 0.2s;
   background-color: ${({ theme }) => theme.colors.mono.white};
 
-  box-shadow: ${({ theme }) =>
-    `0 0.4rem 0.4rem ${rgba(theme.colors.mono.black, 0.1)}`};
+  box-shadow: 8px 8px 10px #d8d8d8, -8px -8px 10px #ffffff;
 `;

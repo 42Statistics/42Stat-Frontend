@@ -1,8 +1,8 @@
 import { HStack, Text } from '@/components/common';
-import type { NavRoute } from '@/routes/NAV_ROUTES';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import type { NavRoute } from './hooks';
 
 export type NavItemProps = {
   route: NavRoute;
@@ -11,38 +11,39 @@ export type NavItemProps = {
 export const NavItem = ({ route }: NavItemProps) => {
   const location = useLocation();
   const isFocused = location.pathname === route.path;
-  const theme = useTheme();
   const NavItemIcon = route.icon;
   const NavItemIconFocused = route.iconFocused;
-  const color = isFocused ? theme.colors.mono.white : theme.colors.mono.black;
+  const navigate = useNavigate();
 
+  // Link를 NavItemLayout 안에 넣으면 padding 부분을 눌렀을 때 작동하지 않아서 navigate으로 대체
   return (
-    <NavItemLayout isFocused={isFocused}>
-      <Link to={route.path}>
-        <HStack spacing="1.5rem" justify="start">
-          {!isFocused ? (
-            <NavItemIcon size="16px" fill={color} />
-          ) : (
-            <NavItemIconFocused size="16px" fill={color} />
-          )}
-          <Text color={color}>{route.text}</Text>
-        </HStack>
-      </Link>
+    <NavItemLayout isFocused={isFocused} onClick={() => navigate(route.path)}>
+      <HStack spacing="1.5rem" justify="start">
+        {!isFocused ? (
+          <NavItemIcon size="16px" />
+        ) : (
+          <NavItemIconFocused size="16px" />
+        )}
+        <Text>{route.text}</Text>
+      </HStack>
     </NavItemLayout>
   );
 };
 
 const NavItemLayout = styled.li<{ isFocused: boolean }>`
   width: 100%;
-  padding: 1rem 0 1rem 2rem;
+  padding: 1.2rem 0 1.2rem 2rem;
   border-radius: 2rem;
   cursor: pointer;
-  background-color: ${({ isFocused, theme }) =>
-    isFocused ? theme.colors.primary.default : 'inherit'};
-  transition: background-color 0.2s;
+  box-shadow: ${({ isFocused }) =>
+    isFocused && 'inset 7px 7px 7px #f0f0f0, inset -7px -7px 7px #ffffff'};
+  transition: box-shadow 0.4s;
 
-  &:hover {
-    background-color: ${({ isFocused, theme }) =>
-      isFocused ? theme.colors.primary.default : theme.colors.primary.light};
+  :hover {
+    box-shadow: ${({ isFocused }) =>
+      !isFocused && '7px 7px 7px #e9e9e9, -7px -7px 7px #ffffff'};
+  }
+  :active {
+    box-shadow: inset 7px 7px 7px #f0f0f0, inset -7px -7px 7px #ffffff;
   }
 `;

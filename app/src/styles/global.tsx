@@ -63,6 +63,6 @@ export const global = () => css`
 
   body {
     font-size: 1.4rem;
-    background-color: #e7e8ed; // body가 아닌 다른 곳에 넣으면 스크롤 시 흰색이 보임
+    background-color: #f9f9f9; // body가 아닌 다른 곳에 넣으면 스크롤 시 흰색이 보임
   }
 `;

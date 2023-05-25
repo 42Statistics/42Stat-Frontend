@@ -15,7 +15,6 @@ import { useDebounce } from '@/utils/useDebounce';
 import { useLazyQuery } from '@apollo/client';
 import styled from '@emotion/styled';
 import { MdSearch } from '@react-icons/all-files/md/MdSearch';
-import { rgba } from 'emotion-rgba';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FIND_PROJECT_PREVIEW, FIND_USER_PREVIEW } from './common';
@@ -145,16 +144,15 @@ export const AboveTabletUserSearchBarLayout = styled.div<{
   position: relative;
   padding: 1rem 2rem;
   border-radius: 2rem;
-  transition: all 0.2s;
+  transition: all 0.5s;
 
-  box-shadow: ${({ theme, isFocused }) =>
-    isFocused
-      ? `0 0.4rem 0.4rem ${rgba(theme.colors.mono.black, 0.25)}`
-      : `0 0.4rem 0.4rem ${rgba(theme.colors.mono.black, 0.1)}`};
+  box-shadow: ${({ isFocused }) =>
+    !isFocused
+      ? '8px 8px 10px #eeeeee, -8px -8px 10px #ffffff'
+      : '8px 8px 10px #dddddd, -8px -8px 10px #ffffff'};
 
-  &:hover {
-    box-shadow: ${({ theme }) =>
-      `0 0.4rem 0.4rem ${rgba(theme.colors.mono.black, 0.25)}`};
+  :hover {
+    box-shadow: 8px 8px 10px #dddddd, -8px -8px 10px #ffffff;
   }
 `;
 

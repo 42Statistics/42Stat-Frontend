@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { rgba } from 'emotion-rgba';
 
 type DashboardItemWrapperProps = {
   row: number; // TODO: 더 엄밀한 Type 필요
@@ -32,11 +31,14 @@ const DashboardItemWrapperLayout = styled.div<DashboardItemWrapperLayoutProps>`
   grid-row: ${({ row, rowSpan }) => `${row} / span ${rowSpan}`};
   border-radius: 2rem;
   background-color: ${({ theme }) => theme.colors.mono.white};
+  box-shadow: 10px 10px 10px #eeeeee, -10px -10px 10px #ffffff;
 
-  transition: all 0.2s;
+  transition: all 0.3s;
   :hover {
-    transform: scale(1.015);
-    box-shadow: 0.4rem 0.4rem 0.1rem
-      ${({ theme }) => rgba(theme.colors.mono.black, 0.2)};
+    transform: scale(100.5%);
+    box-shadow: 10px 10px 10px #dddddd, -10px -10px 10px #ffffff;
+  }
+  :active {
+    box-shadow: inset 10px 10px 10px #f2f2f2, inset -10px -10px 10px #ffffff;
   }
 `;

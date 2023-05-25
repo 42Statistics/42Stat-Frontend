@@ -16,12 +16,13 @@ export const DashboardSkeletonItem = () => {
 const DashboardSkeletonItemLayout = styled.div`
   width: 100%;
   height: 100%;
-  padding: 2rem;
+  padding: 0.2rem;
+  /* padding: 2rem; */
 `;
 
 const skeletonBackgroundAnimation = css`
-  background: #eeeeee;
-  background: linear-gradient(110deg, #eeeeee 8%, #f3f3f3 18%, #eeeeee 33%);
+  background: #f0f0f0;
+  background: linear-gradient(110deg, #f0f0f0 8%, #f5f5f5 18%, #f0f0f0 33%);
   background-size: 200% 100%;
   animation: 1.4s shine linear infinite;
 

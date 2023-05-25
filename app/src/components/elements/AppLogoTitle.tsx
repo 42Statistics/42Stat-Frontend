@@ -2,7 +2,6 @@ import { AppLogoSvg } from '@/assets/AppLogoSvg';
 import { AppTitleSvg } from '@/assets/AppTitleSvg';
 import { HStack } from '@/components/common';
 import type { AppLogoSize } from '@/utils/types/AppLogoSize';
-import { Link } from 'react-router-dom';
 
 type AppLogoTitleProps = {
   size: AppLogoSize;
@@ -20,9 +19,10 @@ export const AppLogoTitle = ({ size, color }: AppLogoTitleProps) => {
 };
 
 export const AppLogoTitleButton = () => {
+  // AppLogo를 눌렀을 때는 반드시 뭔가 반응이 있어야 할 것 같아서, Link -> a
   return (
-    <Link to="/">
+    <a href="/">
       <AppLogoTitle size="sm" />
-    </Link>
+    </a>
   );
 };

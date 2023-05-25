@@ -50,15 +50,13 @@ const TabletNavBarLayout = styled.div`
   height: 100%;
   padding: 3rem 1rem;
   background-color: ${({ theme }) => theme.colors.mono.white};
-  box-shadow: ${({ theme }) =>
-    `0.1rem 0 0.3rem 0 ${theme.colors.mono.gray100}`};
   z-index: 100;
 `;
 
 const OpenDesktopNavBarLayout = styled(DesktopNavBarLayout)<{
   isOpen: boolean;
 }>`
+  box-shadow: none;
   transform: ${({ isOpen }) => !isOpen && 'translateX(-100%)'};
   transition: all 0.5s;
-  z-index: 200;
 `;

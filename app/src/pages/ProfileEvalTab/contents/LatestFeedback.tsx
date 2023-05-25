@@ -14,7 +14,7 @@ export const LatestFeedback = () => {
           {title && <H3MediumText>{title}</H3MediumText>}
         </VStack>
         <Scroll>
-          <Text>{test}</Text>
+          <Text selectable>{test}</Text>
         </Scroll>
       </VStack>
     </DashboardContentLayout>

@@ -74,11 +74,12 @@ const EvalLogItemLayout = styled.div`
   padding: 2.5rem 3.5rem;
   border-radius: 2rem;
 
-  transition: all 0.2s;
+  box-shadow: 10px 10px 10px #eeeeee, -10px -10px 10px #ffffff;
+
+  transition: all 0.3s;
   :hover {
-    transform: scale(1.015);
-    box-shadow: 0.4rem 0.4rem 0.1rem
-      ${({ theme }) => rgba(theme.colors.mono.black, 0.2)};
+    transform: scale(100.5%);
+    box-shadow: 10px 10px 10px #dddddd, -10px -10px 10px #ffffff;
   }
 `;
 

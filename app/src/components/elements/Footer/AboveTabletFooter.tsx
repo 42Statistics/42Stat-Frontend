@@ -16,7 +16,7 @@ export const AboveTabletFooter = () => {
           rel="noreferrer"
           href="https://github.com/orgs/42Statistics/repositories"
         >
-          <BoldText color={theme.colors.mono.gray300}>
+          <BoldText color={theme.colors.mono.gray300} selectable>
             &nbsp;Github&nbsp;
           </BoldText>
         </a>
@@ -30,5 +30,5 @@ export const AboveTabletFooter = () => {
 
 const FooterLayout = styled.footer`
   width: 100%;
-  padding: 4rem 2rem 0 2rem;
+  padding: 10rem 2rem 1rem 2rem;
 `;

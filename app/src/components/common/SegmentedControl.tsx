@@ -76,16 +76,19 @@ const ControlsContainer = styled.div`
 const Controls = styled.div<{ ready: boolean }>`
   display: inline-flex;
   justify-content: space-between;
-  background: ${({ theme }) => theme.colors.background};
   border-radius: 2rem;
   padding: 0.5rem;
   margin: auto;
   overflow: hidden;
   position: relative;
+  transition: box-shadow 0.4s;
+
+  :hover {
+    box-shadow: 4px 4px 4px #dddddd, -4px -4px 4px #ffffff;
+  }
 
   ::before {
     content: '';
-    background: ${({ theme }) => theme.colors.primary.default};
     border-radius: 2rem;
     width: var(--highlight-width);
     transform: translateX(var(--highlight-x-pos));
@@ -96,6 +99,8 @@ const Controls = styled.div<{ ready: boolean }>`
     z-index: 0;
     transition: ${({ ready }) =>
       ready && 'transform 0.3s ease, width 0.3s ease'};
+
+    box-shadow: inset 4px 4px 4px #eeeeee, inset -4px -4px 4px #ffffff;
   }
 `;
 
@@ -122,8 +127,8 @@ const SegmentInput = styled(Input)`
 const SegmentLabel = styled.label<{ active: boolean }>`
   cursor: pointer;
   display: block;
-  font-weight: 700;
+  font-weight: medium;
   position: relative;
   transition: color 0.3s ease;
-  color: ${({ active, theme }) => active && theme.colors.mono.white};
+  /* color: ${({ active, theme }) => active && theme.colors.mono.white}; */
 `;

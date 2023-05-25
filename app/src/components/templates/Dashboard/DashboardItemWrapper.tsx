@@ -38,7 +38,7 @@ const DashboardItemWrapperLayout = styled.div<DashboardItemWrapperLayoutProps>`
     transform: scale(100.5%);
     box-shadow: 10px 10px 10px #dddddd, -10px -10px 10px #ffffff;
   }
-  :active {
+  /* :active {
     box-shadow: inset 10px 10px 10px #f2f2f2, inset -10px -10px 10px #ffffff;
-  }
+  } */
 `;

@@ -180,7 +180,7 @@ export const EvalLogSearchPage = () => {
             검색결과 32,801건
           </Text>
         </VStack>
-        <VStack as="ul" w="100%" spacing="1rem">
+        <VStack as="ul" w="100%" spacing="2rem">
           {evalLogs.map((evalLog, idx) => (
             <EvalLogItem key={idx} element={evalLog} />
           ))}

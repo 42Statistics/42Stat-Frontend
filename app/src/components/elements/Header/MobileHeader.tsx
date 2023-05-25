@@ -6,7 +6,7 @@ import styled from '@emotion/styled';
 export const MobileHeader = () => {
   return (
     <MobileHeaderLayout>
-      <VStack spacing="2rem">
+      <VStack spacing="4rem">
         <AppLogoTitleButton />
         <MobileUserSearchBar />
       </VStack>
@@ -15,5 +15,5 @@ export const MobileHeader = () => {
 };
 
 const MobileHeaderLayout = styled.header`
-  padding: 3rem 0;
+  padding: 5rem 0;
 `;

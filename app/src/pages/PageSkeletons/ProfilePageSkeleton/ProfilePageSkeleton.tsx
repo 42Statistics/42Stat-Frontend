@@ -7,7 +7,7 @@ import {
 
 export const ProfilePageSkeleton = () => {
   return (
-    <VStack w="100%" spacing="7rem">
+    <VStack w="100%" spacing="9rem">
       <DashboardSkeleton {...useProfilePageDashboardSkeleton()} />
       <DashboardSkeleton {...useProfileGeneralTabDashboardSkeleton()} />
     </VStack>

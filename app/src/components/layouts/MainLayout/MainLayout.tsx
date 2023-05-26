@@ -3,17 +3,17 @@ import { DesktopMainLayout } from './DesktopMainLayout';
 import { MobileMainLayout } from './MobileMainLayout';
 import { TabletMainLayout } from './TabletMainLayout';
 
-export const MainLayout = (props: React.PropsWithChildren) => {
+export const MainLayout = () => {
   return (
     <>
       <Desktop>
-        <DesktopMainLayout {...props} />
+        <DesktopMainLayout />
       </Desktop>
       <Tablet>
-        <TabletMainLayout {...props} />
+        <TabletMainLayout />
       </Tablet>
       <Mobile>
-        <MobileMainLayout {...props} />
+        <MobileMainLayout />
       </Mobile>
     </>
   );

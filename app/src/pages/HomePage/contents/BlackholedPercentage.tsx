@@ -35,6 +35,7 @@ const BlackholedPercentageChart = ({
       y: {
         formatter: (value) => `${value.toFixed(1)}%`,
       },
+      fillSeriesColor: false,
     },
   };
 

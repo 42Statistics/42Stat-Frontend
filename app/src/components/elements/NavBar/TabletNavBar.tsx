@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import { GiHamburgerMenu } from '@react-icons/all-files/gi/GiHamburgerMenu';
 import { useAtom, useAtomValue } from 'jotai';
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { DesktopNavBarLayout } from './DesktopNavBar';
 import { NavBar } from './NavBar';
 import { TabletNavMenu } from './TabletNavMenu';
@@ -28,7 +28,9 @@ export const TabletNavBar = () => {
             onClick={() => setIsNavBarOpen((cur) => !cur)}
             element={<GiHamburgerMenu size="18px" />}
           />
-          <Avatar imgUrl={user.imgUrl} />
+          <Link to={`/profile/${user.login}`}>
+            <Avatar imgUrl={user.imgUrl} />
+          </Link>
           <TabletNavMenu />
         </VStack>
       </TabletNavBarLayout>

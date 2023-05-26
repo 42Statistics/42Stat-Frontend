@@ -1,13 +1,8 @@
-import {
-  Button,
-  Center,
-  Image,
-  VStack,
-  WhiteH1BoldText,
-} from '@/components/common';
+import { Center, Image, VStack, WhiteH1BoldText } from '@/components/common';
 import { AppLogoTitle } from '@/components/elements/AppLogoTitle';
 import { isAuthenticatedAtom } from '@/utils/atoms/isAuthenticatedAtom';
 import { css, useTheme } from '@emotion/react';
+import { GoogleLogin } from '@react-oauth/google';
 import { useSetAtom } from 'jotai';
 import { Helmet } from 'react-helmet-async';
 import Slider from 'react-slick';
@@ -68,21 +63,29 @@ export const LandingPage = () => {
           </Slider>
         </VStack>
         <Image src="/animated-ship.gif" width="200px" />
-        <VStack spacing="2rem">
-          {/* <Text
+        <GoogleLogin
+          onSuccess={(credentialResponse) => {
+            console.log(credentialResponse);
+          }}
+          onError={() => {
+            console.log('Login Failed');
+          }}
+        />
+        {/* <VStack spacing="2rem">
+          <Text
               fontSize={theme.fonts.size.h3}
               fontWeight={theme.fonts.weight.medium}
               color={theme.colors.mono.white}
             >
               🤔 지난 시험의 합격률이 궁금하다면?
-            </Text> */}
+            </Text>
           <Button
             size="md"
             onClick={() => setIsAuthenticated(true)}
             text="지금 시작하기 🚀"
             bg="linear-gradient(122deg, rgba(34,160,195,1) 0%, rgba(109,45,253,1) 120%)"
           />
-        </VStack>
+        </VStack> */}
       </VStack>
     </>
   );

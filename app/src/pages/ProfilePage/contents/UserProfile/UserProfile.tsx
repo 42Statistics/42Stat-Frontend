@@ -79,7 +79,7 @@ export const UserProfile = () => {
           </WhiteMediumText>
           <HStack align="baseline">
             <WhiteText>lv.</WhiteText>
-            <WhiteH3BoldText>{level}</WhiteH3BoldText>
+            <WhiteH3BoldText>{level.toFixed(2)}</WhiteH3BoldText>
           </HStack>
         </HStack>
       </Desktop>
@@ -95,7 +95,7 @@ export const UserProfile = () => {
           </WhiteMediumText>
           <HStack align="baseline">
             <WhiteCaptionText>lv.</WhiteCaptionText>
-            <WhiteH3BoldText>{level}</WhiteH3BoldText>
+            <WhiteH3BoldText>{level.toFixed(2)}</WhiteH3BoldText>
           </HStack>
         </VStack>
       </BelowTablet>

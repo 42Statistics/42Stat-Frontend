@@ -14,12 +14,12 @@ import { useLazyQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { MdSearch } from '@react-icons/all-files/md/MdSearch';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { SubmitHandler } from 'react-hook-form';
 import { useSearchParams } from 'react-router-dom';
 import { EvalLogItem } from './EvalLogItem';
-import { EvalLogSearchHeader } from './EvalLogSearchHeader';
+import { EvalLogSearchModal } from './EvalLogSearchModal';
 
 export type EvalLogSearchForm = {
   projectName: string;
@@ -91,8 +91,9 @@ export const EvalLogSearchPage = () => {
   const [page, setPage] = useState<number>(1);
   const [search, { loading, error, data }] = useLazyQuery(GET_EVAL_LOGS);
   const theme = useTheme();
-  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [searchParams] = useSearchParams();
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const toggleModal = useCallback(() => setIsModalOpen((cur) => !cur), []);
 
   const [form, setForm] = useState<EvalLogSearchForm>({
     projectName: searchParams.get('projectName') ?? '',
@@ -124,7 +125,7 @@ export const EvalLogSearchPage = () => {
     setEvalLogs([]);
     setForm(data);
     setPage(1);
-    setIsOpen(false);
+    toggleModal();
   };
 
   useEffect(() => {
@@ -157,14 +158,19 @@ export const EvalLogSearchPage = () => {
 
       {/* TODO: Headless Modal 제작하기 */}
       <Clickable
-        onClick={() => setIsOpen((cur) => !cur)}
+        onClick={toggleModal}
         element={
           <SearchIconLayout>
             <MdSearch color={theme.colors.mono.white} size="20px" />
           </SearchIconLayout>
         }
       />
-      {isOpen && <EvalLogSearchHeader form={form} onSubmit={onSubmit} />}
+      <EvalLogSearchModal
+        isOpen={isModalOpen}
+        toggle={toggleModal}
+        form={form}
+        onSubmit={onSubmit}
+      />
       <VStack w="100%" spacing="2rem">
         <VStack w="100%" align="start">
           <PrimaryBoldText selectable>{`${

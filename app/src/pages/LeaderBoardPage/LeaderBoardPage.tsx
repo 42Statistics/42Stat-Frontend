@@ -8,6 +8,9 @@ import {
   ExpIncrementRankTab,
   LevelRankTab,
 } from './tabs';
+import { AboveTablet, Mobile } from '@/utils/responsive/Device';
+import { AboveTabletFooter } from '@/components/elements/Footer/AboveTabletFooter';
+import { MobileFooter } from '@/components/elements/Footer/MobileFooter';
 
 export const LeaderBoardPage = () => {
   return (
@@ -51,6 +54,12 @@ export const LeaderBoardPage = () => {
           </LeaderBoardDetailLayout>
         </TabPanel>
       </Tabs>
+      <AboveTablet>
+        <AboveTabletFooter />
+      </AboveTablet>
+      <Mobile>
+        <MobileFooter />
+      </Mobile>
     </>
   );
 };

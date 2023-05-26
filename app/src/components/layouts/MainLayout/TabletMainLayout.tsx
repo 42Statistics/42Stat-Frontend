@@ -1,5 +1,4 @@
 import { HStack, VStack } from '@/components/common';
-import { AboveTabletFooter } from '@/components/elements/Footer/AboveTabletFooter';
 import { IntraLink } from '@/components/elements/IntraLink';
 import { TabletNavBar } from '@/components/elements/NavBar/TabletNavBar';
 import styled from '@emotion/styled';
@@ -14,7 +13,6 @@ export const TabletMainLayout = () => {
         <TabletMainPageLayout>
           <VStack w="100%">
             <Outlet />
-            <AboveTabletFooter />
           </VStack>
         </TabletMainPageLayout>
       </HStack>

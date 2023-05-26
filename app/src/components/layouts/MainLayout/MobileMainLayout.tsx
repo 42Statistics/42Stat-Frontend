@@ -1,4 +1,3 @@
-import { MobileFooter } from '@/components/elements/Footer/MobileFooter';
 import { MobileHeader } from '@/components/elements/Header/MobileHeader';
 import { IntraLink } from '@/components/elements/IntraLink';
 import { TabBar } from '@/components/elements/NavBar/TabBar';
@@ -19,7 +18,6 @@ export const MobileMainLayout = () => {
       <MobileMainPageLayout>
         <MobileHeader />
         <Outlet />
-        <MobileFooter />
       </MobileMainPageLayout>
       <TabBar />
     </Layout>

@@ -15,7 +15,10 @@ import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
+import { AboveTabletFooter } from '@/components/elements/Footer/AboveTabletFooter';
+import { MobileFooter } from '@/components/elements/Footer/MobileFooter';
 import { numberWithUnitFormatter } from '@/utils/formatters';
+import { AboveTablet, Mobile } from '@/utils/responsive/Device';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
@@ -141,6 +144,12 @@ export const ProjectPage = () => {
           </HStack>
         </VStack>
       </ProjectPageLayout>
+      <AboveTablet>
+        <AboveTabletFooter />
+      </AboveTablet>
+      <Mobile>
+        <MobileFooter />
+      </Mobile>
     </>
   );
 };

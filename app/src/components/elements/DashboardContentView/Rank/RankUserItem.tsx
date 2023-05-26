@@ -1,28 +1,37 @@
 import {
+  Avatar,
   H2BoldText,
   H3MediumText,
   HStack,
   MediumText,
 } from '@/components/common';
 import { numberWithUnitFormatter } from '@/utils/formatters';
-import type { RankItemType } from '@/utils/types/Rank';
+import type { RankUserItemType } from '@/utils/types/Rank';
 import { useTheme } from '@emotion/react';
+import { Link } from 'react-router-dom';
 
-type RankItemProps = {
+type RankUserItemProps = {
   rank: number;
-  item: RankItemType;
+  showImg: boolean;
+  item: RankUserItemType;
   unit: string;
 };
 
-export const RankItem = ({ rank, item, unit }: RankItemProps) => {
+export const RankUserItem = ({
+  rank,
+  showImg,
+  item,
+  unit,
+}: RankUserItemProps) => {
   const theme = useTheme();
-  const { name, value } = item;
+  const { name, value, imgUrl } = item;
   const color =
     rank === 1 ? theme.colors.accent.default : theme.colors.mono.black;
 
   return (
     <HStack w="70%" spacing="2rem">
       <H2BoldText color={color}>{rank}</H2BoldText>
+      {showImg ? <Avatar size="3rem" imgUrl={imgUrl} /> : null}
       <HStack
         w="100%"
         spacing="1rem"
@@ -30,7 +39,9 @@ export const RankItem = ({ rank, item, unit }: RankItemProps) => {
         justify="start"
         wrap="wrap"
       >
-        <H3MediumText color={color}>{name}</H3MediumText>
+        <Link to={`/profile/${name}`}>
+          <H3MediumText color={color}>{name}</H3MediumText>
+        </Link>
         <MediumText color={color}>
           {numberWithUnitFormatter(value, unit)}
         </MediumText>

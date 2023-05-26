@@ -1,5 +1,5 @@
 import { gql } from '@/__generated__';
-import { H3Text, HStack, Image, Loader } from '@/components/common';
+import { H3Text, HStack, Image, Loader, Text } from '@/components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
@@ -66,7 +66,10 @@ export const CurrentCoalitionScore = () => {
             />
           )}
           {scoreInfo?.rankInCoalition && (
-            <H3Text>{scoreInfo.rankInCoalition.toLocaleString()}위</H3Text>
+            <HStack align="baseline">
+              <H3Text>{scoreInfo.rankInCoalition.toLocaleString()}</H3Text>
+              <Text>위</Text>
+            </HStack>
           )}
         </HStack>
       </HStack>

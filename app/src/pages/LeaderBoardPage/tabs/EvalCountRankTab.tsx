@@ -12,7 +12,7 @@ import {
 } from '@/components/elements/DashboardContentView';
 import { LeaderBoard } from '@/components/templates/LeaderBoard';
 import { LeaderBoardItem } from '@/components/templates/LeaderBoard/LeaderBoardItem';
-import type { RankItemType } from '@/utils/types/Rank';
+import type { RankUserItemType } from '@/utils/types/Rank';
 import { useSegmentedControl } from '@/utils/useSegmentedControl';
 import { useQuery } from '@apollo/client';
 
@@ -57,7 +57,7 @@ export const EvalCountRankTab = () => {
   const { totalEvalCountRank } = data.getHomePage;
   const unit = '회';
 
-  const rankList: RankItemType[] = totalEvalCountRank.map(
+  const rankList: RankUserItemType[] = totalEvalCountRank.map(
     ({ userPreview, value }) => ({
       id: userPreview.id,
       name: userPreview.login,

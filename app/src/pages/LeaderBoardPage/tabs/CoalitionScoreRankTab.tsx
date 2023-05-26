@@ -12,7 +12,7 @@ import {
 } from '@/components/elements/DashboardContentView';
 import { LeaderBoard } from '@/components/templates/LeaderBoard';
 import { LeaderBoardItem } from '@/components/templates/LeaderBoard/LeaderBoardItem';
-import type { RankItemType } from '@/utils/types/Rank';
+import type { RankUserItemType } from '@/utils/types/Rank';
 import { useSegmentedControl } from '@/utils/useSegmentedControl';
 import { useQuery } from '@apollo/client';
 
@@ -59,9 +59,9 @@ export const CoalitionScoreRankTab = () => {
   if (!data) return <ApolloNotFound />;
 
   const { monthlyScoreRanks } = data.getTotalPage;
-  const unit = '회';
+  const unit = '';
 
-  const rankList: RankItemType[] = monthlyScoreRanks.data.map(
+  const rankList: RankUserItemType[] = monthlyScoreRanks.data.map(
     ({ userPreview, value }) => ({
       id: userPreview.id,
       name: userPreview.login,

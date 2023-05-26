@@ -1,21 +1,28 @@
 import { VStack } from '@/components/common';
-import type { RankItemType } from '@/utils/types/Rank';
-import { RankItem } from './RankItem';
+import type { RankUserItemType } from '@/utils/types/Rank';
+import { RankUserItem } from './RankUserItem';
 
-type RankProps = {
-  rankList: RankItemType[];
+type RankUserProps = {
+  rankList: RankUserItemType[];
+  showImg?: boolean;
   cnt: number;
   unit: string;
 };
 
-export const Rank = ({ rankList, cnt, unit }: RankProps) => {
+export const RankUser = ({
+  rankList,
+  showImg = true,
+  cnt,
+  unit,
+}: RankUserProps) => {
   return (
     <VStack w="100%" h="100%" spacing="2rem">
       {rankList.slice(0, cnt).map((rankItem, idx) => (
-        <RankItem
+        <RankUserItem
           key={rankItem.id}
           rank={idx + 1}
           item={rankItem}
+          showImg={showImg}
           unit={unit}
         />
       ))}

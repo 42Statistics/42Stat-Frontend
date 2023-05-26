@@ -9,13 +9,14 @@ import {
 } from '@/components/common';
 import { numberWithUnitFormatter } from '@/utils/formatters';
 import { AboveTablet, Mobile } from '@/utils/responsive/Device';
-import type { RankItemType } from '@/utils/types/Rank';
+import type { RankUserItemType } from '@/utils/types/Rank';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { Link } from 'react-router-dom';
 
 type LeaderBoardItemProps = {
   rank: number;
-  item: RankItemType;
+  item: RankUserItemType;
   unit: string;
 };
 
@@ -32,7 +33,9 @@ export const LeaderBoardItem = ({ rank, item, unit }: LeaderBoardItemProps) => {
           <HStack w="100%" spacing="4rem">
             <H2BoldText color={color}>{rank}</H2BoldText>
             <Avatar size="3.5rem" imgUrl={imgUrl} />
-            <H3MediumText color={color}>{name}</H3MediumText>
+            <Link to={`/profile/${name}`}>
+              <H3MediumText color={color}>{name}</H3MediumText>
+            </Link>
             <Spacer />
             <H3MediumText color={color}>
               {numberWithUnitFormatter(value, unit)}

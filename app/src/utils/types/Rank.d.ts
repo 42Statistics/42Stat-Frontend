@@ -3,5 +3,8 @@ export type RankItemType = {
   id: number;
   name: string;
   value: number;
+};
+
+export type RankUserItemType = RankItemType & {
   imgUrl?: string | null;
 };

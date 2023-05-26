@@ -12,7 +12,7 @@ import {
 } from '@/components/elements/DashboardContentView';
 import { LeaderBoard } from '@/components/templates/LeaderBoard';
 import { LeaderBoardItem } from '@/components/templates/LeaderBoard/LeaderBoardItem';
-import type { RankItemType } from '@/utils/types/Rank';
+import type { RankUserItemType } from '@/utils/types/Rank';
 import { useSegmentedControl } from '@/utils/useSegmentedControl';
 import { useQuery } from '@apollo/client';
 
@@ -53,7 +53,7 @@ export const ExpIncrementRankTab = () => {
   const { monthlyExpIncrementRank } = data.getHomePage;
   const unit = 'XP';
 
-  const rankList: RankItemType[] = monthlyExpIncrementRank.map(
+  const rankList: RankUserItemType[] = monthlyExpIncrementRank.map(
     ({ userPreview, value }) => ({
       id: userPreview.id,
       name: userPreview.login,

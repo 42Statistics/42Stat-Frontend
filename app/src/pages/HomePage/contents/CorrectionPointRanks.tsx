@@ -4,10 +4,10 @@ import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
-import { Rank } from '@/components/elements/DashboardContentView/Rank';
+import { RankUser } from '@/components/elements/DashboardContentView/Rank';
 import { DashboardContent } from '@/components/templates/Dashboard';
 import { AboveTablet, Mobile } from '@/utils/responsive/Device';
-import type { RankItemType } from '@/utils/types/Rank';
+import type { RankUserItemType } from '@/utils/types/Rank';
 import { useQuery } from '@apollo/client';
 
 const GET_CORRECTION_POINT_RANK = gql(/* GraphQL */ `
@@ -53,7 +53,7 @@ export const CorrectionPointRanks = () => {
 
   const unit = '개';
 
-  const rankList: RankItemType[] = correctionPointRanks.map(
+  const rankList: RankUserItemType[] = correctionPointRanks.map(
     ({ userPreview, value }) => ({
       id: userPreview.id,
       name: userPreview.login,
@@ -65,10 +65,10 @@ export const CorrectionPointRanks = () => {
   return (
     <DashboardContent title={title}>
       <AboveTablet>
-        <Rank rankList={rankList} cnt={5} unit={unit} />
+        <RankUser rankList={rankList} cnt={5} unit={unit} />
       </AboveTablet>
       <Mobile>
-        <Rank rankList={rankList} cnt={3} unit={unit} />
+        <RankUser rankList={rankList} cnt={3} unit={unit} />
       </Mobile>
     </DashboardContent>
   );

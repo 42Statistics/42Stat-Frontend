@@ -56,10 +56,9 @@ export const CurrRegisteredCountRank = () => {
     }),
   );
 
-  // FIXME: 유저가 아닌데 showImg={false}를 넣어야만 되는게 적절하지 않음. Rank & RankUser로 분리해야 하나?
   return (
     <DashboardContent title={title}>
-      <Rank rankList={rankList} showImg={false} cnt={3} unit={unit} />
+      <Rank rankList={rankList} cnt={3} unit={unit} />
     </DashboardContent>
   );
 };

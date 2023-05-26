@@ -35,5 +35,4 @@ export const DesktopDashboardLayout = styled.div`
   flex-direction: column;
   gap: 2rem;
   width: 100%;
-  max-width: 1440px;
 `;

@@ -22,6 +22,7 @@ export const TabletMainLayout = () => {
 
 const TabletMainPageLayout = styled.main`
   width: 100%;
+  max-width: 800px;
   padding: 3rem;
   margin-left: 7rem;
 `;

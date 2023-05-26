@@ -35,5 +35,4 @@ export const MobileDashboardLayout = styled.div`
   flex-direction: column;
   gap: 1.5rem;
   width: 100%;
-  max-width: 480px;
 `;

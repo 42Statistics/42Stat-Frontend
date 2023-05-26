@@ -22,6 +22,7 @@ export const DesktopMainLayout = () => {
 
 const DesktopMainPageLayout = styled.main`
   width: 100%;
+  max-width: 1440px;
   padding: 3rem 4.5rem;
   margin-left: 24rem;
 `;

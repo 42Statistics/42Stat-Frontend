@@ -1,3 +1,4 @@
+import { VStack } from '@/components/common';
 import { MobileHeader } from '@/components/elements/Header/MobileHeader';
 import { IntraLink } from '@/components/elements/IntraLink';
 import { TabBar } from '@/components/elements/NavBar/TabBar';
@@ -15,10 +16,12 @@ export const MobileMainLayout = () => {
         <meta name="theme-color" content={theme.colors.background} />
       </Helmet>
       <IntraLink />
-      <MobileMainPageLayout>
-        <MobileHeader />
-        <Outlet />
-      </MobileMainPageLayout>
+      <VStack w="100%">
+        <MobileMainPageLayout>
+          <MobileHeader />
+          <Outlet />
+        </MobileMainPageLayout>
+      </VStack>
       <TabBar />
     </Layout>
   );
@@ -26,6 +29,7 @@ export const MobileMainLayout = () => {
 
 const MobileMainPageLayout = styled.main`
   width: 100%;
+  max-width: 480px;
   padding: 2rem;
   padding-bottom: calc(2rem + 6rem);
 `;

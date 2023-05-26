@@ -17,5 +17,4 @@ export const DesktopNavBarLayout = styled.nav`
   height: 100%;
   padding: 3rem;
   background-color: ${({ theme }) => theme.colors.mono.white};
-  z-index: 200;
 `;

@@ -67,18 +67,6 @@ export const EvalLogSearchModal = ({
   );
 };
 
-const EvalLogSearchModalLayout = styled(Modal)`
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.25);
-`;
-
-const EvalLogSearchModalContent = styled.div`
-  padding: 4rem;
-  background-color: ${({ theme }) => theme.colors.mono.white};
-  border-radius: 2rem;
-`;
-
 const EvalLogSearchInput = styled(Input)`
   all: unset;
   padding: 0.5rem 1.5rem;

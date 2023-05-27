@@ -10,6 +10,7 @@ import {
   Text,
   VStack,
 } from '@/components/common';
+import { Modal } from '@/components/common/Modal';
 import { isDefined } from '@/utils/isDefined';
 import { ModalType } from '@/utils/types/Modal';
 import { useDebounce } from '@/utils/useDebounce';
@@ -20,7 +21,6 @@ import { MdArrowBack } from '@react-icons/all-files/md/MdArrowBack';
 import { MdSearch } from '@react-icons/all-files/md/MdSearch';
 import { useEffect, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import Modal from 'react-modal';
 import { useNavigate } from 'react-router-dom';
 import { FIND_PROJECT_PREVIEW, FIND_USER_PREVIEW } from './common';
 
@@ -74,7 +74,7 @@ export const UserSearchModal = ({ isOpen, toggle }: ModalType) => {
   };
 
   return (
-    <UserSearchModalLayout isOpen={isOpen}>
+    <Modal isOpen={isOpen} toggle={toggle}>
       <Helmet>
         <meta name="theme-color" content={theme.colors.mono.white} />
       </Helmet>
@@ -143,7 +143,7 @@ export const UserSearchModal = ({ isOpen, toggle }: ModalType) => {
           </VStack>
         )}
       </VStack>
-    </UserSearchModalLayout>
+    </Modal>
   );
 };
 

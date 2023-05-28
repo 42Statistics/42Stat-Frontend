@@ -78,7 +78,14 @@ export const UserSearchModal = ({ isOpen, toggle }: ModalType) => {
       <Helmet>
         <meta name="theme-color" content={theme.colors.mono.white} />
       </Helmet>
-      <VStack w="100%" align="start" spacing="4rem">
+      <VStack
+        w="100vw"
+        h="100vh"
+        spacing="4rem"
+        style={{
+          padding: '4rem',
+        }}
+      >
         <HStack w="100%" spacing="2rem">
           <Clickable onClick={toggle} element={<MdArrowBack size="24px" />} />
           <Input
@@ -90,7 +97,15 @@ export const UserSearchModal = ({ isOpen, toggle }: ModalType) => {
             }}
           />
           <Spacer />
-          <MdSearch size="24px" />
+          {/* 그냥 제출시 제일 첫번째 유저 검색하도록 하는 로직 */}
+          <MdSearch
+            size="24px"
+            onClick={() =>
+              userData &&
+              userData.findUserPreview[0] &&
+              handleUserSubmit(userData?.findUserPreview[0]?.login)
+            }
+          />
         </HStack>
         {isPreviewDisplaying ? (
           <VStack w="100%" spacing="4rem">
@@ -142,6 +157,7 @@ export const UserSearchModal = ({ isOpen, toggle }: ModalType) => {
             <Text color={theme.colors.mono.gray300}>검색어를 입력해주세요</Text>
           </VStack>
         )}
+        <Spacer />
       </VStack>
     </Modal>
   );

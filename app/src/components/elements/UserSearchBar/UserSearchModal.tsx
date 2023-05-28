@@ -10,6 +10,7 @@ import {
   Text,
   VStack,
 } from '@/components/common';
+import { Modal } from '@/components/common/Modal';
 import { isDefined } from '@/utils/isDefined';
 import { ModalType } from '@/utils/types/Modal';
 import { useDebounce } from '@/utils/useDebounce';
@@ -20,7 +21,6 @@ import { MdArrowBack } from '@react-icons/all-files/md/MdArrowBack';
 import { MdSearch } from '@react-icons/all-files/md/MdSearch';
 import { useEffect, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import Modal from 'react-modal';
 import { useNavigate } from 'react-router-dom';
 import { FIND_PROJECT_PREVIEW, FIND_USER_PREVIEW } from './common';
 
@@ -74,11 +74,18 @@ export const UserSearchModal = ({ isOpen, toggle }: ModalType) => {
   };
 
   return (
-    <UserSearchModalLayout isOpen={isOpen}>
+    <Modal isOpen={isOpen} toggle={toggle}>
       <Helmet>
         <meta name="theme-color" content={theme.colors.mono.white} />
       </Helmet>
-      <VStack w="100%" align="start" spacing="4rem">
+      <VStack
+        w="100vw"
+        h="100vh"
+        spacing="4rem"
+        style={{
+          padding: '4rem',
+        }}
+      >
         <HStack w="100%" spacing="2rem">
           <Clickable onClick={toggle} element={<MdArrowBack size="24px" />} />
           <Input
@@ -90,7 +97,15 @@ export const UserSearchModal = ({ isOpen, toggle }: ModalType) => {
             }}
           />
           <Spacer />
-          <MdSearch size="24px" />
+          {/* 그냥 제출시 제일 첫번째 유저 검색하도록 하는 로직 */}
+          <MdSearch
+            size="24px"
+            onClick={() =>
+              userData &&
+              userData.findUserPreview[0] &&
+              handleUserSubmit(userData?.findUserPreview[0]?.login)
+            }
+          />
         </HStack>
         {isPreviewDisplaying ? (
           <VStack w="100%" spacing="4rem">
@@ -142,8 +157,9 @@ export const UserSearchModal = ({ isOpen, toggle }: ModalType) => {
             <Text color={theme.colors.mono.gray300}>검색어를 입력해주세요</Text>
           </VStack>
         )}
+        <Spacer />
       </VStack>
-    </UserSearchModalLayout>
+    </Modal>
   );
 };
 

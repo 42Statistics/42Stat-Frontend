@@ -82,15 +82,7 @@ const GET_EVAL_LOGS = gql(/* GraphQL */ `
 const EvalLogSearchPage = () => {
   const RESULT_PER_PAGE = 10;
   const [end, setEnd] = useState<boolean>(false);
-  const [search, { loading, error }] = useLazyQuery(GET_EVAL_LOGS, {
-    onCompleted: (data) => {
-      if (data.getEvalLogs.nodes.length === 0) {
-        setEnd(true);
-      }
-      const { nodes } = data.getEvalLogs;
-      setEvalLogs((cur) => [...cur, ...nodes.filter(isDefined)]);
-    },
-  });
+  const [search, { data, loading, error }] = useLazyQuery(GET_EVAL_LOGS);
   const [page, setPage] = useState<number>(1);
   const [searchParams] = useSearchParams();
   const [form, setForm] = useState<EvalLogSearchForm>({
@@ -99,12 +91,7 @@ const EvalLogSearchPage = () => {
     corrector: searchParams.get('corrector') ?? '',
     corrected: searchParams.get('corrected') ?? '',
   });
-
   const [evalLogs, setEvalLogs] = useState<EvalLog[]>([]);
-  const { ref, isVisible } = useInfiniteScroll();
-
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const toggleModal = useCallback(() => setIsModalOpen((cur) => !cur), []);
 
   const onSubmit: SubmitHandler<EvalLogSearchForm> = (newForm) => {
     setEvalLogs([]);
@@ -113,6 +100,23 @@ const EvalLogSearchPage = () => {
     setEnd(false);
     toggleModal();
   };
+
+  const { ref, isVisible } = useInfiniteScroll();
+
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const toggleModal = useCallback(() => setIsModalOpen((cur) => !cur), []);
+
+  useEffect(() => {
+    if (!data) {
+      return;
+    }
+    if (data.getEvalLogs.nodes.length === 0) {
+      setEnd(true);
+      return;
+    }
+    const { nodes } = data.getEvalLogs;
+    setEvalLogs((cur) => [...cur, ...nodes.filter(isDefined)]);
+  }, [data]);
 
   useEffect(() => {
     if (!isVisible || loading) {

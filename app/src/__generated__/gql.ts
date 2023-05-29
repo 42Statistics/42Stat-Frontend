@@ -25,7 +25,7 @@ const documents = {
     "\n  query getCoalitionTotalScores {\n    getTotalPage {\n      totalScores {\n        coalition {\n          id\n          name\n          slug\n          imageUrl\n          coverUrl\n          color\n          userId\n        }\n        value\n      }\n    }\n  }\n": types.GetCoalitionTotalScoresDocument,
     "\n  query getCorrectionPointRank($limit: Int!) {\n    getTotalPage {\n      correctionPointRanks(limit: $limit) {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n": types.GetCorrectionPointRankDocument,
     "\n  query GetCurrMonthBlackholedCount {\n    getHomePage {\n      currMonthBlackholedCount {\n        data\n        from\n        to\n      }\n      lastMonthBlackholedCount {\n        data\n        from\n        to\n      }\n    }\n  }\n": types.GetCurrMonthBlackholedCountDocument,
-    "\n  query GetCurrRegisteredCountRank {\n    getHomePage {\n      currRegisteredCountRank {\n        projectPreview {\n          name\n        }\n        value\n      }\n    }\n  }\n": types.GetCurrRegisteredCountRankDocument,
+    "\n  query GetCurrRegisteredCountRank {\n    getHomePage {\n      currRegisteredCountRank {\n        projectPreview {\n          id\n          name\n        }\n        value\n      }\n    }\n  }\n": types.GetCurrRegisteredCountRankDocument,
     "\n  query GetCurrWeekEvalCount {\n    getHomePage {\n      currWeekEvalCount {\n        data\n        from\n        to\n      }\n      lastWeekEvalCount {\n        data\n        from\n        to\n      }\n    }\n  }\n": types.GetCurrWeekEvalCountDocument,
     "\n  query GetLastExamResult {\n    getHomePage {\n      lastExamResult {\n        data {\n          rank\n          passCount\n          totalCount\n        }\n        from\n        to\n      }\n    }\n  }\n": types.GetLastExamResultDocument,
     "\n  query getTotalEvalCount {\n    getTotalPage {\n      totalEvalCount\n    }\n  }\n": types.GetTotalEvalCountDocument,
@@ -122,7 +122,7 @@ export function gql(source: "\n  query GetCurrMonthBlackholedCount {\n    getHom
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query GetCurrRegisteredCountRank {\n    getHomePage {\n      currRegisteredCountRank {\n        projectPreview {\n          name\n        }\n        value\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetCurrRegisteredCountRank {\n    getHomePage {\n      currRegisteredCountRank {\n        projectPreview {\n          name\n        }\n        value\n      }\n    }\n  }\n"];
+export function gql(source: "\n  query GetCurrRegisteredCountRank {\n    getHomePage {\n      currRegisteredCountRank {\n        projectPreview {\n          id\n          name\n        }\n        value\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetCurrRegisteredCountRank {\n    getHomePage {\n      currRegisteredCountRank {\n        projectPreview {\n          id\n          name\n        }\n        value\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

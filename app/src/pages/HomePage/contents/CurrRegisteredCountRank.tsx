@@ -14,6 +14,7 @@ const GET_CURR_REGISTERED_COUNT_RANK = gql(/* GraphQL */ `
     getHomePage {
       currRegisteredCountRank {
         projectPreview {
+          id
           name
         }
         value
@@ -49,8 +50,8 @@ export const CurrRegisteredCountRank = () => {
   const unit = '명';
 
   const rankList: RankItemType[] = currRegisteredCountRank.map(
-    ({ projectPreview, value }, idx) => ({
-      id: idx, // FIXME: projectPreivew.id로 수정
+    ({ projectPreview, value }) => ({
+      id: projectPreview.id,
       name: projectPreview.name,
       value: value,
     }),

@@ -12,7 +12,7 @@ export const FtOAuthLoginBtn = () => {
 
   const handleClick = () => {
     // FIXME: 실제 로직으로 교체
-    setIsNeedFtOAuth('false');
+    setIsNeedFtOAuth(false);
     navigate(ROUTES.ROOT);
   };
   return (

@@ -1,10 +1,9 @@
 import { ROUTES } from '@/routes/ROUTES';
-import { needFtOAuthAtom } from '@/utils/atoms/needFtOAuthAtom';
-import { useAtomValue } from 'jotai';
 import { Navigate, Outlet } from 'react-router-dom';
 
 export const FtOAuthGuard = () => {
-  const needFtOAuth = useAtomValue(needFtOAuthAtom);
+  // const needFtOAuth = useAtomValue(needFtOAuthAtom);
+  const needFtOAuth = localStorage.getItem('needFtOAuth');
 
   return needFtOAuth === 'false' ? (
     <Outlet />

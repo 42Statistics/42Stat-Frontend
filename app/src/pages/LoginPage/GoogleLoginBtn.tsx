@@ -14,8 +14,8 @@ export const GoogleLoginBtn = () => {
 
   const handleClick = () => {
     // FIXME: 실제 로직으로 교체
-    setIsAuthenticated('true');
-    setIsNeedFtOAuth('true');
+    setIsAuthenticated(true);
+    setIsNeedFtOAuth(true);
     navigate(ROUTES.FTOAUTH);
   };
 

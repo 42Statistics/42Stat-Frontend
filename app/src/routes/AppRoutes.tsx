@@ -29,7 +29,7 @@ export const AppRoutes = () => {
   return (
     <Routes>
       <Route element={<LandingLayout />}>
-        {isAuthenticated !== 'true' && (
+        {!isAuthenticated && (
           <Route
             path={ROUTES.ROOT}
             element={

@@ -3,7 +3,7 @@ import { DashboardSkeletonItem } from '@/components/templates/DashboardSkeleton/
 
 export const EvalLogSkeleton = () => {
   return (
-    <Center w="100%" h="150px">
+    <Center w="100%" h="200px">
       <DashboardSkeletonItem />
     </Center>
   );

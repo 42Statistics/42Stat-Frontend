@@ -55,7 +55,7 @@ export const CurrentCoalitionScore = () => {
   const { coalition, scoreInfo } = data.getPersonGeneralPage.userProfile;
   return (
     <DashboardContent title={title}>
-      <HStack spacing="1rem" style={{ marginTop: '1rem' }}>
+      <HStack h="100%" spacing="1rem">
         <H3Text>{coalition.score.toLocaleString()}</H3Text>
         <HStack spacing="0.5rem">
           {coalition.imageUrl && coalition.color && (

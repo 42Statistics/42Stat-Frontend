@@ -1,9 +1,10 @@
 import { EvalLog } from '@/__generated__/graphql';
-import { Center, Text } from '@/components/common';
+import { Center, Text, VStack } from '@/components/common';
 import { ApolloBadRequest } from '@/components/elements/DashboardContentView';
 import { Footer } from '@/components/elements/Footer/Footer';
 import { ApolloError } from '@apollo/client';
 import { useTheme } from '@emotion/react';
+import React from 'react';
 import { EvalLogList } from './EvalLogList';
 import { EvalLogSkeleton } from './EvalLogSkeleton';
 
@@ -46,12 +47,12 @@ export const EvalLogSearchDetail = ({
   }
   if (evalLogs.length === 0 && loading) {
     return (
-      <>
+      <VStack w="100%" spacing="1.2rem">
         <EvalLogSkeleton />
         <EvalLogSkeleton />
         <EvalLogSkeleton />
         <EvalLogSkeleton />
-      </>
+      </VStack>
     );
   }
 
@@ -59,10 +60,11 @@ export const EvalLogSearchDetail = ({
     <>
       <EvalLogList evalLogs={evalLogs} />
       {!end ? (
-        <div ref={infiniteScrollRef}>
+        <VStack w="100%" spacing="1.2rem" ref={infiniteScrollRef}>
           <EvalLogSkeleton />
           <EvalLogSkeleton />
-        </div>
+          <EvalLogSkeleton />
+        </VStack>
       ) : (
         <Footer />
       )}

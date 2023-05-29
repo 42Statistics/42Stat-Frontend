@@ -6,6 +6,7 @@ import {
   WhiteH1BoldText,
 } from '@/components/common';
 import { AppLogoTitle } from '@/components/elements/AppLogoTitle';
+import { withHead } from '@/components/hoc/withHead';
 import { ROUTES } from '@/routes/ROUTES';
 import { css, useTheme } from '@emotion/react';
 import { Helmet } from 'react-helmet-async';
@@ -22,7 +23,7 @@ import { CountUp } from 'use-count-up';
 //   }
 // `);
 
-export const LandingPage = () => {
+const LandingPage = () => {
   // TODO: 리더보드 만든 이후 BE 쿼리 위치 정착되면 기준일 HomePage 단에서 전체 다 받아서 description에 주입
   // const { data, loading, error } = useQuery(GET_HOME_PAGE_DESCRIPTION_DATE);
 
@@ -83,6 +84,8 @@ export const LandingPage = () => {
     </>
   );
 };
+
+export default withHead(LandingPage);
 
 // Slider 가운데 정렬을 위해 필요한 스타일
 const SliderCenterStyle = css`

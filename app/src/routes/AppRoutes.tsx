@@ -4,69 +4,32 @@ import { FtOAuthGuard } from '@/components/guards/FtOAuthGuard';
 import { NoFtOAuthGuard } from '@/components/guards/NoFtOAuthGuard';
 import { LandingLayout } from '@/components/layouts/LandingLayout';
 import { MainLayout } from '@/components/layouts/MainLayout';
-import { FtOAuthPage } from '@/pages/FtOAuthPage';
-import { LogoutPage } from '@/pages/LogoutPage';
+import LogoutPage from '@/pages/LogoutPage';
 import { HomePageSkeleton } from '@/pages/PageSkeletons/HomePageSkeleton';
 import { ProfilePageSkeleton } from '@/pages/PageSkeletons/ProfilePageSkeleton';
-import { needFtOAuthAtom } from '@/utils/atoms/needFtOAuthAtom';
+import { isAuthenticatedAtom } from '@/utils/atoms/isAuthenticatedAtom';
 import { useAtomValue } from 'jotai';
 import { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { ROUTES } from './ROUTES';
 
-const LandingPage = lazy(() =>
-  import('@/pages/LandingPage').then((module) => ({
-    default: module.LandingPage,
-  })),
-);
-const HomePage = lazy(() =>
-  import('@/pages/HomePage').then((module) => ({
-    default: module.HomePage,
-  })),
-);
-const LoginPage = lazy(() =>
-  import('@/pages/LoginPage').then((module) => ({
-    default: module.LoginPage,
-  })),
-);
-const FtOAuthage = lazy(() =>
-  import('@/pages/FtOAuthPage').then((module) => ({
-    default: module.FtOAuthPage,
-  })),
-);
-const LeaderBoardPage = lazy(() =>
-  import('@/pages/LeaderBoardPage').then((module) => ({
-    default: module.LeaderBoardPage,
-  })),
-);
-const EvalLogSearchPage = lazy(() =>
-  import('@/pages/EvalLogSearchPage').then((module) => ({
-    default: module.EvalLogSearchPage,
-  })),
-);
-const ProfilePage = lazy(() =>
-  import('@/pages/ProfilePage').then((module) => ({
-    default: module.ProfilePage,
-  })),
-);
-const ProjectPage = lazy(() =>
-  import('@/pages/ProjectPage').then((module) => ({
-    default: module.ProjectPage,
-  })),
-);
-const NotFoundPage = lazy(() =>
-  import('@/pages/ErrorPages/404').then((module) => ({
-    default: module.NotFoundPage,
-  })),
-);
+const LandingPage = lazy(() => import('@/pages/LandingPage'));
+const HomePage = lazy(() => import('@/pages/HomePage'));
+const LoginPage = lazy(() => import('@/pages/LoginPage'));
+const FtOAuthPage = lazy(() => import('@/pages/FtOAuthPage'));
+const LeaderBoardPage = lazy(() => import('@/pages/LeaderBoardPage'));
+const EvalLogSearchPage = lazy(() => import('@/pages/EvalLogSearchPage'));
+const ProfilePage = lazy(() => import('@/pages/ProfilePage'));
+const ProjectPage = lazy(() => import('@/pages/ProjectPage'));
+const NotFoundPage = lazy(() => import('@/pages/ErrorPages/404'));
 
 export const AppRoutes = () => {
-  const needFtOAuth = useAtomValue(needFtOAuthAtom);
+  const isAuthenticated = useAtomValue(isAuthenticatedAtom);
 
   return (
     <Routes>
       <Route element={<LandingLayout />}>
-        {needFtOAuth !== 'false' && (
+        {isAuthenticated !== 'true' && (
           <Route
             path={ROUTES.ROOT}
             element={

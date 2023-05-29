@@ -3,13 +3,15 @@ import {
   AccentH3Text,
   HStack,
   Image,
+  Text,
   VStack,
-  WhiteText,
 } from '@/components/common';
+import { Seo } from '@/components/elements/Seo';
+import { withHead } from '@/components/hoc/withHead';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 
-export const NotFoundPage = () => {
+const NotFoundPage = () => {
   const statusCode = 404;
   const statusText = 'Not Found';
 
@@ -28,9 +30,17 @@ export const NotFoundPage = () => {
           src="https://data1.pokemonkorea.co.kr/newdata/pokedex/full/005001.png"
         />
         <Link to="/">
-          <WhiteText>홈으로 돌아가기</WhiteText>
+          <Text>홈으로 돌아가기</Text>
         </Link>
       </VStack>
     </>
   );
 };
+
+const Head = () => {
+  const statusText = 'Not Found';
+
+  return <Seo title={statusText} />;
+};
+
+export default withHead(NotFoundPage, Head);

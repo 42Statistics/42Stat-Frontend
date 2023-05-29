@@ -1,13 +1,13 @@
 import { VStack, WhiteText } from '@/components/common';
 import { AppLogoTitle } from '@/components/elements/AppLogoTitle';
+import { withHead } from '@/components/hoc/withHead';
 import { ROUTES } from '@/routes/ROUTES';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { GoogleLoginBtn } from './GoogleLoginBtn';
 
-export const LoginPage = () => {
+const LoginPage = () => {
   const theme = useTheme();
 
   // const setIsAuthenticated = useSetAtom(isAuthenticatedAtom);
@@ -38,24 +38,21 @@ export const LoginPage = () => {
   // };
 
   return (
-    <>
-      <Helmet>
-        <title>42Stat</title>
-      </Helmet>
-      <LoginPageLayout>
-        <VStack h="100%" spacing="5rem">
-          <Link to={ROUTES.ROOT}>
-            <AppLogoTitle size="sm" color={theme.colors.mono.white} />
-          </Link>
-          <WhiteText>
-            42Stat은 42서울의 교육생들을 위한 통계 서비스입니다.
-          </WhiteText>
-          <GoogleLoginBtn />
-        </VStack>
-      </LoginPageLayout>
-    </>
+    <LoginPageLayout>
+      <VStack h="100%" spacing="5rem">
+        <Link to={ROUTES.ROOT}>
+          <AppLogoTitle size="sm" color={theme.colors.mono.white} />
+        </Link>
+        <WhiteText>
+          42Stat은 42서울의 교육생들을 위한 통계 서비스입니다.
+        </WhiteText>
+        <GoogleLoginBtn />
+      </VStack>
+    </LoginPageLayout>
   );
 };
+
+export default withHead(LoginPage);
 
 const LoginPageLayout = styled.div`
   background: rgba(0, 0, 0, 0.25);

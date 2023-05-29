@@ -1,1 +1,1 @@
-export * from './FtOAuthPage';
+export { default } from './FtOAuthPage';

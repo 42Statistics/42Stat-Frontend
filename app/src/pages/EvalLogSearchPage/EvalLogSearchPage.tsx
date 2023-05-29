@@ -1,11 +1,12 @@
 import { gql } from '@/__generated__';
 import { EvalLog } from '@/__generated__/graphql';
 import { VStack } from '@/components/common';
+import { Seo } from '@/components/elements/Seo';
+import { withHead } from '@/components/hoc/withHead';
 import { isDefined } from '@/utils/isDefined';
 import { useInfiniteScroll } from '@/utils/useInfiniteScroll';
 import { useLazyQuery } from '@apollo/client';
 import { useCallback, useEffect, useState } from 'react';
-import { Helmet } from 'react-helmet-async';
 import { SubmitHandler } from 'react-hook-form';
 import { useSearchParams } from 'react-router-dom';
 import { EvalLogSearchAbsoluteBtn } from './EvalLogSearchAbsoluteBtn';
@@ -78,7 +79,7 @@ const GET_EVAL_LOGS = gql(/* GraphQL */ `
   }
 `);
 
-export const EvalLogSearchPage = () => {
+const EvalLogSearchPage = () => {
   const RESULT_PER_PAGE = 10;
   const [end, setEnd] = useState<boolean>(false);
   const [search, { loading, error }] = useLazyQuery(GET_EVAL_LOGS, {
@@ -130,9 +131,6 @@ export const EvalLogSearchPage = () => {
   // TODO: Headless Modal
   return (
     <>
-      <Helmet>
-        <title>평가로그 검색기 | 42Stat</title>
-      </Helmet>
       <EvalLogSearchAbsoluteBtn toggleModal={toggleModal} />
       <EvalLogSearchModal
         isOpen={isModalOpen}
@@ -153,3 +151,9 @@ export const EvalLogSearchPage = () => {
     </>
   );
 };
+
+const Head = () => {
+  return <Seo title="평가로그 검색기" />;
+};
+
+export default withHead(EvalLogSearchPage, Head);

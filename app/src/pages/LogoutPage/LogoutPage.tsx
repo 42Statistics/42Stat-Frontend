@@ -1,9 +1,10 @@
+import { withHead } from '@/components/hoc/withHead';
 import { isAuthenticatedAtom } from '@/utils/atoms/isAuthenticatedAtom';
 import { needFtOAuthAtom } from '@/utils/atoms/needFtOAuthAtom';
 import { useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 
-export const LogoutPage = () => {
+const LogoutPage = () => {
   const setIsAuthenticated = useSetAtom(isAuthenticatedAtom);
   const setNeedFtOAuth = useSetAtom(needFtOAuthAtom);
 
@@ -14,3 +15,5 @@ export const LogoutPage = () => {
 
   return <></>;
 };
+
+export default withHead(LogoutPage);

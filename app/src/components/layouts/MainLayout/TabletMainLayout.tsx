@@ -6,7 +6,7 @@ import { Outlet } from 'react-router-dom';
 
 export const TabletMainLayout = () => {
   return (
-    <Layout>
+    <>
       <IntraLink />
       <HStack>
         <TabletNavBar />
@@ -16,18 +16,14 @@ export const TabletMainLayout = () => {
           </VStack>
         </TabletMainPageLayout>
       </HStack>
-    </Layout>
+    </>
   );
 };
 
 const TabletMainPageLayout = styled.main`
   width: 100%;
   max-width: 800px;
+  min-height: 100vh;
   padding: 3rem;
   margin-left: 7rem;
-`;
-
-const Layout = styled.div`
-  min-height: 100vh;
-  /* background-color: ${({ theme }) => theme.colors.background}; */
 `;

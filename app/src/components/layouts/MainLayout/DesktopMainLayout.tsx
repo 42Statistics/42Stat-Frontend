@@ -6,7 +6,7 @@ import { Outlet } from 'react-router-dom';
 
 export const DesktopMainLayout = () => {
   return (
-    <Layout>
+    <>
       <IntraLink />
       <HStack>
         <DesktopNavBar />
@@ -16,18 +16,14 @@ export const DesktopMainLayout = () => {
           </VStack>
         </DesktopMainPageLayout>
       </HStack>
-    </Layout>
+    </>
   );
 };
 
 const DesktopMainPageLayout = styled.main`
   width: 100%;
   max-width: 1440px;
+  min-height: 100vh;
   padding: 3rem 4.5rem;
   margin-left: 24rem;
-`;
-
-const Layout = styled.div`
-  min-height: 100vh;
-  /* background-color: ${({ theme }) => theme.colors.background}; */
 `;

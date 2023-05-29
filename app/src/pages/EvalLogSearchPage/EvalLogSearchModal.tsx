@@ -17,7 +17,7 @@ export const EvalLogSearchModal = ({
   form,
   onSubmit,
 }: EvalLogSearchModalProps) => {
-  const { register, handleSubmit } = useForm<EvalLogSearchForm>({
+  const { register, handleSubmit, setValue } = useForm<EvalLogSearchForm>({
     defaultValues: form,
   });
 
@@ -43,18 +43,19 @@ export const EvalLogSearchModal = ({
               <HStack spacing="1rem">
                 <input
                   type="radio"
-                  {...register('outstandingOnly')}
-                  value="all"
-                  defaultChecked={form.outstandingOnly === 'all'}
+                  name="outstandingOnly"
+                  onChange={() => setValue('outstandingOnly', false)}
+                  defaultChecked={!form.outstandingOnly}
                 />
                 <Text>전체</Text>
               </HStack>
               <HStack spacing="1rem">
                 <input
                   type="radio"
-                  {...register('outstandingOnly')}
-                  value="outstanding"
-                  defaultChecked={form.outstandingOnly === 'outstanding'}
+                  name="outstandingOnly"
+                  onChange={() => setValue('outstandingOnly', true)}
+                  value="true"
+                  defaultChecked={form.outstandingOnly}
                 />
                 <Text>Outstanding</Text>
               </HStack>

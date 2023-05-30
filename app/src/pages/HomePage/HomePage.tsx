@@ -1,7 +1,7 @@
-import { Seo } from '@/components/elements/Seo';
-import { withFooter } from '@/components/hoc/withFooter';
-import { withHead } from '@/components/hoc/withHead';
-import { Dashboard } from '@/components/templates/Dashboard';
+import { Seo } from '@components/elements/Seo';
+import { Dashboard } from '@components/templates/Dashboard';
+import { withFooter } from '@hoc/withFooter';
+import { withHead } from '@hoc/withHead';
 import { useHomePageDashboard } from './hooks';
 
 const HomePage = () => {

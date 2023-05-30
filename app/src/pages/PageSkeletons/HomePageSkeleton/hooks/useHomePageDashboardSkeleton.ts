@@ -2,7 +2,7 @@ import {
   homePageDesktopDashboardRows,
   homePageMobileDashboardRows,
   homePageTabletDashboardRows,
-} from '@/pages/HomePage/hooks/homePageDashboardRows';
+} from '@pages/HomePage/hooks/homePageDashboardRows';
 
 export const useHomePageDashboardSkeleton = () => ({
   desktopRows: homePageDesktopDashboardRows,

@@ -1,4 +1,4 @@
-import { ROUTES } from '@/routes/ROUTES';
+import { ROUTES } from '@routes/ROUTES';
 import { Navigate, Outlet } from 'react-router-dom';
 
 export const AuthGuard = () => {

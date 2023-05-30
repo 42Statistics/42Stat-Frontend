@@ -1,5 +1,5 @@
-import { VStack } from '@/components/common';
-import type { RankUserItemType } from '@/utils/types/Rank';
+import { VStack } from '@components/common';
+import type { RankUserItemType } from '@utils/types/Rank';
 import { RankUserItem } from './RankUserItem';
 
 type RankUserProps = {

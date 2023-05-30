@@ -6,11 +6,11 @@ import {
   Spacer,
   Text,
   VStack,
-} from '@/components/common';
-import { Label } from '@/components/common/Label';
-import { snakeCaseFormatter } from '@/utils/formatters';
+} from '@components/common';
+import { Label } from '@components/common/Label';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { snakeCaseFormatter } from '@utils/formatters';
 import dayjs from 'dayjs';
 import { rgba } from 'emotion-rgba';
 import { Link } from 'react-router-dom';

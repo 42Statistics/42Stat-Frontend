@@ -1,4 +1,4 @@
-import { VStack } from '@/components/common';
+import { VStack } from '@components/common';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 

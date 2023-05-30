@@ -1,4 +1,4 @@
-import { AboveTablet, Mobile } from '@/utils/responsive/Device';
+import { AboveTablet, Mobile } from '@utils/responsive/Device';
 import { AboveTabletFooter } from './AboveTabletFooter';
 import { MobileFooter } from './MobileFooter';
 

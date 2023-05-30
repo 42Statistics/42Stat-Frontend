@@ -1,4 +1,4 @@
-import { HStack, Text } from '@/components/common';
+import { HStack, Text } from '@components/common';
 import { useTheme } from '@emotion/react';
 import { MdErrorOutline } from '@react-icons/all-files/md/MdErrorOutline';
 

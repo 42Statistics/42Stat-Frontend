@@ -1,5 +1,4 @@
-import { CaptionText, VStack } from '@/components/common';
-import { useTheme } from '@emotion/react';
+import { CaptionText, VStack } from '@components/common';
 import styled from '@emotion/styled';
 import { useLocation, useNavigate } from 'react-router-dom';
 import type { NavItemProps } from './NavItem';

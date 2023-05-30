@@ -1,4 +1,4 @@
-import { Seo } from '../elements/Seo';
+import { Seo } from '@components/elements/Seo';
 
 const defaultHead = () => {
   return <Seo />;

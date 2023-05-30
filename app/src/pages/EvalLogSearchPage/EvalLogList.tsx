@@ -1,5 +1,5 @@
 import { EvalLog } from '@/__generated__/graphql';
-import { VStack } from '@/components/common';
+import { VStack } from '@components/common';
 import { EvalLogItem } from './EvalLogItem';
 
 export const EvalLogList = ({ evalLogs }: { evalLogs: EvalLog[] }) => {

@@ -1,9 +1,9 @@
-import google_logo from '@/assets/google-logo.svg';
-import { Clickable, HStack, Image, MediumText } from '@/components/common';
-import { ROUTES } from '@/routes/ROUTES';
-import { isAuthenticatedAtom } from '@/utils/atoms/isAuthenticatedAtom';
-import { needFtOAuthAtom } from '@/utils/atoms/needFtOAuthAtom';
+import google_logo from '@assets/google-logo.svg';
+import { isAuthenticatedAtom } from '@atoms/isAuthenticatedAtom';
+import { needFtOAuthAtom } from '@atoms/needFtOAuthAtom';
+import { Clickable, HStack, Image, MediumText } from '@components/common';
 import styled from '@emotion/styled';
+import { ROUTES } from '@routes/ROUTES';
 import { useSetAtom } from 'jotai';
 import { useNavigate } from 'react-router-dom';
 

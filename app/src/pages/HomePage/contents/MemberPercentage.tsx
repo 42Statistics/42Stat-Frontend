@@ -1,5 +1,5 @@
-import { PieChart } from '@/components/elements/Chart';
-import { DashboardContent } from '@/components/templates/Dashboard';
+import { PieChart } from '@components/elements/Chart';
+import { DashboardContent } from '@components/templates/Dashboard';
 import { useTheme } from '@emotion/react';
 
 export const MemberPercentage = () => {

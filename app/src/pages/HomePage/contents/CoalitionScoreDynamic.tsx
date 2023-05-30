@@ -1,14 +1,14 @@
 import { gql } from '@/__generated__';
-import { Loader } from '@/components/common';
-import { LineChart } from '@/components/elements/Chart';
+import { useQuery } from '@apollo/client';
+import { Loader } from '@components/common';
+import { LineChart } from '@components/elements/Chart';
 import {
   ApolloBadRequest,
   ApolloNotFound,
-} from '@/components/elements/DashboardContentView';
-import { DashboardContent } from '@/components/templates/Dashboard';
-import { numberWithUnitFormatter } from '@/utils/formatters';
-import { isDefined } from '@/utils/isDefined';
-import { useQuery } from '@apollo/client';
+} from '@components/elements/DashboardContentView';
+import { DashboardContent } from '@components/templates/Dashboard';
+import { numberWithUnitFormatter } from '@utils/formatters';
+import { isDefined } from '@utils/isDefined';
 
 export const GET_COALITION_SCORE_RECORD = gql(/* GraphQL */ `
   query getCoalitionScoreRecord {

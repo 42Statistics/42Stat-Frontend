@@ -1,4 +1,5 @@
 import { gql } from '@/__generated__';
+import { useQuery } from '@apollo/client';
 import {
   AccentText,
   BoldText,
@@ -9,20 +10,19 @@ import {
   Loader,
   Text,
   VStack,
-} from '@/components/common';
-import { PieChart } from '@/components/elements/Chart';
+} from '@components/common';
+import { PieChart } from '@components/elements/Chart';
 import {
   ApolloBadRequest,
   ApolloNotFound,
-} from '@/components/elements/DashboardContentView';
-import { Seo } from '@/components/elements/Seo';
-import { withFooter } from '@/components/hoc/withFooter';
-import { withHead } from '@/components/hoc/withHead';
-import { numberWithUnitFormatter } from '@/utils/formatters';
-import { useQuery } from '@apollo/client';
+} from '@components/elements/DashboardContentView';
+import { Seo } from '@components/elements/Seo';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { withFooter } from '@hoc/withFooter';
+import { withHead } from '@hoc/withHead';
 import { HiUsers } from '@react-icons/all-files/hi/HiUsers';
+import { numberWithUnitFormatter } from '@utils/formatters';
 import { Link, useParams } from 'react-router-dom';
 
 const GET_PROJECT_INFO = gql(/* GraphQL */ `

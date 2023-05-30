@@ -1,3 +1,5 @@
+import { useLazyQuery } from '@apollo/client';
+import ft_logo from '@assets/42-logo.svg';
 import {
   Avatar,
   BoldText,
@@ -6,24 +8,22 @@ import {
   HStack,
   Image,
   Input,
+  Modal,
   Spacer,
   Text,
   VStack,
-} from '@/components/common';
-import { Modal } from '@/components/common/Modal';
-import { isDefined } from '@/utils/isDefined';
-import { ModalType } from '@/utils/types/Modal';
-import { useDebounce } from '@/utils/useDebounce';
-import { useLazyQuery } from '@apollo/client';
+} from '@components/common';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { MdArrowBack } from '@react-icons/all-files/md/MdArrowBack';
 import { MdSearch } from '@react-icons/all-files/md/MdSearch';
+import { isDefined } from '@utils/isDefined';
+import { ModalType } from '@utils/types/Modal';
+import { useDebounce } from '@utils/useDebounce';
 import { useEffect, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 import { FIND_PROJECT_PREVIEW, FIND_USER_PREVIEW } from './common';
-import ft_logo from '@/assets/42-logo.svg';
 
 export const UserSearchModal = ({ isOpen, toggle }: ModalType) => {
   const theme = useTheme();

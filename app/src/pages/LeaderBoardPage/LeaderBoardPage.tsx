@@ -1,9 +1,9 @@
-import { Text, center } from '@/components/common';
-import { Tab, TabList, TabPanel, Tabs } from '@/components/common/Tab';
-import { Seo } from '@/components/elements/Seo';
-import { withFooter } from '@/components/hoc/withFooter';
-import { withHead } from '@/components/hoc/withHead';
+import { Text, center } from '@components/common';
+import { Tab, TabList, TabPanel, Tabs } from '@components/common/Tab';
+import { Seo } from '@components/elements/Seo';
 import styled from '@emotion/styled';
+import { withFooter } from '@hoc/withFooter';
+import { withHead } from '@hoc/withHead';
 import {
   CoalitionScoreRankTab,
   EvalCountRankTab,

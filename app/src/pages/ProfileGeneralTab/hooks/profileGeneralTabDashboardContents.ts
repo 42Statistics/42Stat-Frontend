@@ -1,4 +1,4 @@
-import type { DashboardItemProps } from '@/utils/types/Dashboard';
+import type { DashboardItemProps } from '@utils/types/Dashboard';
 import {
   BeginAt,
   BlackholedAt,

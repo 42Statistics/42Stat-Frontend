@@ -1,5 +1,5 @@
-import { Center } from '@/components/common';
-import { DashboardSkeletonItem } from '@/components/templates/DashboardSkeleton/DashboardSkeletonItem';
+import { Center } from '@components/common';
+import { DashboardSkeletonItem } from '@components/templates/DashboardSkeleton/DashboardSkeletonItem';
 
 export const EvalLogSkeleton = () => {
   return (

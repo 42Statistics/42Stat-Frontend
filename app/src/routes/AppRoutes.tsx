@@ -1,27 +1,27 @@
-import { DeferredComponent } from '@/components/common';
-import { AuthGuard } from '@/components/guards/AuthGuard';
-import { FtOAuthGuard } from '@/components/guards/FtOAuthGuard';
-import { NoFtOAuthGuard } from '@/components/guards/NoFtOAuthGuard';
-import { LandingLayout } from '@/components/layouts/LandingLayout';
-import { MainLayout } from '@/components/layouts/MainLayout';
-import LogoutPage from '@/pages/LogoutPage';
-import { HomePageSkeleton } from '@/pages/PageSkeletons/HomePageSkeleton';
-import { ProfilePageSkeleton } from '@/pages/PageSkeletons/ProfilePageSkeleton';
-import { isAuthenticatedAtom } from '@/utils/atoms/isAuthenticatedAtom';
+import { isAuthenticatedAtom } from '@atoms/isAuthenticatedAtom';
+import { DeferredComponent } from '@components/common';
+import { AuthGuard } from '@guards/AuthGuard';
+import { FtOAuthGuard } from '@guards/FtOAuthGuard';
+import { NoFtOAuthGuard } from '@guards/NoFtOAuthGuard';
+import { LandingLayout } from '@layouts/LandingLayout';
+import { MainLayout } from '@layouts/MainLayout';
+import LogoutPage from '@pages/LogoutPage';
+import { HomePageSkeleton } from '@pages/PageSkeletons/HomePageSkeleton';
+import { ProfilePageSkeleton } from '@pages/PageSkeletons/ProfilePageSkeleton';
 import { useAtomValue } from 'jotai';
 import { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { ROUTES } from './ROUTES';
 
-const LandingPage = lazy(() => import('@/pages/LandingPage'));
-const HomePage = lazy(() => import('@/pages/HomePage'));
-const LoginPage = lazy(() => import('@/pages/LoginPage'));
-const FtOAuthPage = lazy(() => import('@/pages/FtOAuthPage'));
-const LeaderBoardPage = lazy(() => import('@/pages/LeaderBoardPage'));
-const EvalLogSearchPage = lazy(() => import('@/pages/EvalLogSearchPage'));
-const ProfilePage = lazy(() => import('@/pages/ProfilePage'));
-const ProjectPage = lazy(() => import('@/pages/ProjectPage'));
-const NotFoundPage = lazy(() => import('@/pages/ErrorPages/404'));
+const LandingPage = lazy(() => import('@pages/LandingPage'));
+const HomePage = lazy(() => import('@pages/HomePage'));
+const LoginPage = lazy(() => import('@pages/LoginPage'));
+const FtOAuthPage = lazy(() => import('@pages/FtOAuthPage'));
+const LeaderBoardPage = lazy(() => import('@pages/LeaderBoardPage'));
+const EvalLogSearchPage = lazy(() => import('@pages/EvalLogSearchPage'));
+const ProfilePage = lazy(() => import('@pages/ProfilePage'));
+const ProjectPage = lazy(() => import('@pages/ProjectPage'));
+const NotFoundPage = lazy(() => import('@pages/ErrorPages/404'));
 
 export const AppRoutes = () => {
   const isAuthenticated = useAtomValue(isAuthenticatedAtom);

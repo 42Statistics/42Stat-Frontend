@@ -1,7 +1,7 @@
-import { VStack } from '@/components/common';
-import { MobileHeader } from '@/components/elements/Header/MobileHeader';
-import { IntraLink } from '@/components/elements/IntraLink';
-import { TabBar } from '@/components/elements/NavBar/TabBar';
+import { VStack } from '@components/common';
+import { MobileHeader } from '@components/elements/Header/MobileHeader';
+import { IntraLink } from '@components/elements/IntraLink';
+import { TabBar } from '@components/elements/NavBar/TabBar';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { Helmet } from 'react-helmet-async';

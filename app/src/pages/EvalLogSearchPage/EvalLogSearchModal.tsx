@@ -1,7 +1,6 @@
-import { Button, HStack, Input, Text, VStack } from '@/components/common';
-import { Modal } from '@/components/common/Modal';
-import type { ModalType } from '@/utils/types/Modal';
+import { Button, HStack, Input, Modal, Text, VStack } from '@components/common';
 import styled from '@emotion/styled';
+import type { ModalType } from '@utils/types/Modal';
 import { rgba } from 'emotion-rgba';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { EvalLogSearchForm } from './EvalLogSearchPage';

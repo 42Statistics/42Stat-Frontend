@@ -6,12 +6,12 @@ import {
   HStack,
   MediumText,
   Spacer,
-} from '@/components/common';
-import { numberWithUnitFormatter } from '@/utils/formatters';
-import { AboveTablet, Mobile } from '@/utils/responsive/Device';
-import type { RankUserItemType } from '@/utils/types/Rank';
+} from '@components/common';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { numberWithUnitFormatter } from '@utils/formatters';
+import { AboveTablet, Mobile } from '@utils/responsive/Device';
+import type { RankUserItemType } from '@utils/types/Rank';
 import { Link } from 'react-router-dom';
 
 type LeaderBoardItemProps = {

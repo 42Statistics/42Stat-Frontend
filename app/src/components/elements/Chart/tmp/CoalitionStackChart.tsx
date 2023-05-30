@@ -1,4 +1,4 @@
-// import { convertToMillion } from '@/utils/chart';
+// import { convertToMillion } from '@utils/chart';
 // import { useTheme } from '@emotion/react';
 // import ReactApexChart from 'react-apexcharts';
 

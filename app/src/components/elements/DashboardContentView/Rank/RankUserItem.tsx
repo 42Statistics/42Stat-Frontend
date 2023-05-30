@@ -4,10 +4,10 @@ import {
   H3MediumText,
   HStack,
   MediumText,
-} from '@/components/common';
-import { numberWithUnitFormatter } from '@/utils/formatters';
-import type { RankUserItemType } from '@/utils/types/Rank';
+} from '@components/common';
 import { useTheme } from '@emotion/react';
+import { numberWithUnitFormatter } from '@utils/formatters';
+import type { RankUserItemType } from '@utils/types/Rank';
 import { Link } from 'react-router-dom';
 
 type RankUserItemProps = {

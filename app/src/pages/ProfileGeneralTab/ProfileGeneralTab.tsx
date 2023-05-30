@@ -1,4 +1,4 @@
-import { Dashboard } from '@/components/templates/Dashboard';
+import { Dashboard } from '@components/templates/Dashboard';
 import { useProfileGeneralTabDashboard } from './hooks';
 
 const ProfileGeneralTab = () => {

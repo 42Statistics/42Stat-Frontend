@@ -1,5 +1,5 @@
-import type { TabletDashboardColSize } from '@/utils/types/Dashboard';
 import styled from '@emotion/styled';
+import type { TabletDashboardColSize } from '@utils/types/Dashboard';
 
 type TabletDashboardRowProps = {
   row: number;

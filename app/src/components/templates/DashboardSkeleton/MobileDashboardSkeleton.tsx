@@ -1,7 +1,7 @@
-import { DashboardItemWrapper } from '@/components/templates/Dashboard/DashboardItemWrapper';
-import { MobileDashboardLayout } from '@/components/templates/Dashboard/MobileDashboard';
-import { MobileDashboardRow } from '@/components/templates/Dashboard/MobileDashboardRow';
-import type { MobileDashboardProps } from '@/utils/types/Dashboard';
+import { DashboardItemWrapper } from '@components/templates/Dashboard/DashboardItemWrapper';
+import { MobileDashboardLayout } from '@components/templates/Dashboard/MobileDashboard';
+import { MobileDashboardRow } from '@components/templates/Dashboard/MobileDashboardRow';
+import type { MobileDashboardProps } from '@utils/types/Dashboard';
 import { DashboardSkeletonItem } from './DashboardSkeletonItem';
 
 type MobileDashboardSkeletonProps = Omit<MobileDashboardProps, 'contents'>;

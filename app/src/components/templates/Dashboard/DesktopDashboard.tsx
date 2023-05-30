@@ -1,5 +1,5 @@
-import type { DesktopDashboardProps } from '@/utils/types/Dashboard';
 import styled from '@emotion/styled';
+import type { DesktopDashboardProps } from '@utils/types/Dashboard';
 import { DashboardItem } from './DashboardItem';
 import { DashboardItemWrapper } from './DashboardItemWrapper';
 import { DesktopDashboardRow } from './DesktopDashboardRow';

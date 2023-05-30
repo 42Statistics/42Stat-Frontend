@@ -1,8 +1,8 @@
-import ft_logo from '@/assets/42-logo.svg';
-import { Clickable, HStack, Image, MediumText } from '@/components/common';
-import { ROUTES } from '@/routes/ROUTES';
-import { needFtOAuthAtom } from '@/utils/atoms/needFtOAuthAtom';
+import ft_logo from '@assets/42-logo.svg';
+import { needFtOAuthAtom } from '@atoms/needFtOAuthAtom';
+import { Clickable, HStack, Image, MediumText } from '@components/common';
 import styled from '@emotion/styled';
+import { ROUTES } from '@routes/ROUTES';
 import { useSetAtom } from 'jotai';
 import { useNavigate } from 'react-router-dom';
 

@@ -1,4 +1,5 @@
 import { gql } from '@/__generated__';
+import { useQuery } from '@apollo/client';
 import {
   Avatar,
   HStack,
@@ -9,16 +10,15 @@ import {
   WhiteH3BoldText,
   WhiteMediumText,
   WhiteText,
-} from '@/components/common';
+} from '@components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
-} from '@/components/elements/DashboardContentView';
-import { getTitleWithLogin } from '@/utils/getTitleWithLogin';
-import { BelowTablet, Desktop } from '@/utils/responsive/Device';
-import { titleCase } from '@/utils/titleCase';
-import { useQuery } from '@apollo/client';
+} from '@components/elements/DashboardContentView';
 import styled from '@emotion/styled';
+import { getTitleWithLogin } from '@utils/getTitleWithLogin';
+import { BelowTablet, Desktop } from '@utils/responsive/Device';
+import { titleCase } from '@utils/titleCase';
 import { truncate } from 'lodash-es';
 import { useParams } from 'react-router-dom';
 

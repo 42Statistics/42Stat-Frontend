@@ -1,4 +1,4 @@
-import { PrimaryBoldText, Text, VStack } from '@/components/common';
+import { PrimaryBoldText, Text, VStack } from '@components/common';
 import { useTheme } from '@emotion/react';
 import { EvalLogSearchForm } from './EvalLogSearchPage';
 

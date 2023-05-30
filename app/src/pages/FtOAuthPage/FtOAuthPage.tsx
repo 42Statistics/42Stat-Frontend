@@ -1,9 +1,9 @@
-import { VStack, WhiteText } from '@/components/common';
-import { AppLogoTitle } from '@/components/elements/AppLogoTitle';
-import { withHead } from '@/components/hoc/withHead';
-import { ROUTES } from '@/routes/ROUTES';
+import { VStack, WhiteText } from '@components/common';
+import { AppLogoTitle } from '@components/elements/AppLogoTitle';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { withHead } from '@hoc/withHead';
+import { ROUTES } from '@routes/ROUTES';
 import { Link } from 'react-router-dom';
 import { FtOAuthLoginBtn } from './FtOAuthLoginBtn';
 

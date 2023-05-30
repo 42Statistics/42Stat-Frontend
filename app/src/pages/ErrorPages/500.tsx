@@ -5,9 +5,9 @@ import {
   Image,
   Text,
   VStack,
-} from '@/components/common';
-import { Seo } from '@/components/elements/Seo';
-import { withHead } from '@/components/hoc/withHead';
+} from '@components/common';
+import { Seo } from '@components/elements/Seo';
+import { withHead } from '@hoc/withHead';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 

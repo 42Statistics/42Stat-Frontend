@@ -1,11 +1,11 @@
 import { gql } from '@/__generated__';
 import { EvalLog } from '@/__generated__/graphql';
-import { VStack } from '@/components/common';
-import { Seo } from '@/components/elements/Seo';
-import { withHead } from '@/components/hoc/withHead';
-import { isDefined } from '@/utils/isDefined';
-import { useInfiniteScroll } from '@/utils/useInfiniteScroll';
 import { useLazyQuery } from '@apollo/client';
+import { VStack } from '@components/common';
+import { Seo } from '@components/elements/Seo';
+import { withHead } from '@hoc/withHead';
+import { isDefined } from '@utils/isDefined';
+import { useInfiniteScroll } from '@utils/useInfiniteScroll';
 import { useCallback, useEffect, useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { useSearchParams } from 'react-router-dom';

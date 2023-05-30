@@ -1,20 +1,20 @@
 import { gql } from '@/__generated__';
+import { useQuery } from '@apollo/client';
 import {
   HStack,
   Loader,
   SegmentedControl,
   Spacer,
   VStack,
-} from '@/components/common';
+} from '@components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
-} from '@/components/elements/DashboardContentView';
-import { LeaderBoard } from '@/components/templates/LeaderBoard';
-import { LeaderBoardItem } from '@/components/templates/LeaderBoard/LeaderBoardItem';
-import type { RankUserItemType } from '@/utils/types/Rank';
-import { useSegmentedControl } from '@/utils/useSegmentedControl';
-import { useQuery } from '@apollo/client';
+} from '@components/elements/DashboardContentView';
+import { LeaderBoard } from '@components/templates/LeaderBoard';
+import { LeaderBoardItem } from '@components/templates/LeaderBoard/LeaderBoardItem';
+import type { RankUserItemType } from '@utils/types/Rank';
+import { useSegmentedControl } from '@utils/useSegmentedControl';
 
 const GET_LEVEL_RANK = gql(/* GraphQL */ `
   query GetLevelRank {

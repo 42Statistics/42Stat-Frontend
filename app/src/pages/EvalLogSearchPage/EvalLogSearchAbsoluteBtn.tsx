@@ -1,4 +1,4 @@
-import { Clickable } from '@/components/common';
+import { Clickable } from '@components/common';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { MdSearch } from '@react-icons/all-files/md/MdSearch';

@@ -1,4 +1,4 @@
-import { Dashboard } from '@/components/templates/Dashboard';
+import { Dashboard } from '@components/templates/Dashboard';
 import { useProfileEvalTabDashboard } from './hooks';
 
 const ProfileEvalTab = () => {

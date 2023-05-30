@@ -1,15 +1,15 @@
-import animated_ship from '@/assets/animated-ship.gif';
+import animated_ship from '@assets/animated-ship.gif';
 import {
   Button,
   Center,
   Image,
   VStack,
   WhiteH1BoldText,
-} from '@/components/common';
-import { AppLogoTitle } from '@/components/elements/AppLogoTitle';
-import { withHead } from '@/components/hoc/withHead';
-import { ROUTES } from '@/routes/ROUTES';
+} from '@components/common';
+import { AppLogoTitle } from '@components/elements/AppLogoTitle';
 import { css, useTheme } from '@emotion/react';
+import { withHead } from '@hoc/withHead';
+import { ROUTES } from '@routes/ROUTES';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';

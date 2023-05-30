@@ -1,11 +1,11 @@
-import { Text, VStack } from '@/components/common';
-import { Tab, TabList, TabPanel, Tabs } from '@/components/common/Tab';
-import { Seo } from '@/components/elements/Seo';
-import { withFooter } from '@/components/hoc/withFooter';
-import { withHead } from '@/components/hoc/withHead';
-import { Dashboard } from '@/components/templates/Dashboard';
-import ProfileEvalTab from '@/pages/ProfileEvalTab';
-import ProfileGeneralTab from '@/pages/ProfileGeneralTab';
+import { Text, VStack } from '@components/common';
+import { Tab, TabList, TabPanel, Tabs } from '@components/common/Tab';
+import { Seo } from '@components/elements/Seo';
+import { Dashboard } from '@components/templates/Dashboard';
+import { withFooter } from '@hoc/withFooter';
+import { withHead } from '@hoc/withHead';
+import ProfileEvalTab from '@pages/ProfileEvalTab';
+import ProfileGeneralTab from '@pages/ProfileGeneralTab';
 import { useParams } from 'react-router-dom';
 import { useProfilePageDashboard } from './hooks';
 

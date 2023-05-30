@@ -4,9 +4,9 @@ import {
   H3BoldText,
   HStack,
   VStack,
-} from '@/components/common';
-import { titleCase } from '@/utils/titleCase';
+} from '@components/common';
 import { useTheme } from '@emotion/react';
+import { titleCase } from '@utils/titleCase';
 
 type NavProfileProps = {
   imgUrl: string;

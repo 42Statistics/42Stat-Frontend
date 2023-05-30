@@ -1,16 +1,16 @@
 import { gql } from '@/__generated__';
+import { useQuery } from '@apollo/client';
 import {
   SmileySadSvg,
   SmileyShockSvg,
   SmileySmile1Svg,
-} from '@/assets/blackhole';
-import { H2BoldText, HStack, Loader } from '@/components/common';
+} from '@assets/blackhole';
+import { H2BoldText, HStack, Loader } from '@components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
-} from '@/components/elements/DashboardContentView';
-import { DashboardContent } from '@/components/templates/Dashboard';
-import { useQuery } from '@apollo/client';
+} from '@components/elements/DashboardContentView';
+import { DashboardContent } from '@components/templates/Dashboard';
 import { useTheme } from '@emotion/react';
 import { useParams } from 'react-router-dom';
 

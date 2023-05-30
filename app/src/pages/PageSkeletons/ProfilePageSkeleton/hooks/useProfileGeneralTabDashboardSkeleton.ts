@@ -2,7 +2,7 @@ import {
   profileGeneralTabDesktopDashboardRows,
   profileGeneralTabMobileDashboardRows,
   profileGeneralTabTabletDashboardRows,
-} from '@/pages/ProfileGeneralTab/hooks/profileGeneralTabDashboardRows';
+} from '@pages/ProfileGeneralTab/hooks/profileGeneralTabDashboardRows';
 
 export const useProfileGeneralTabDashboardSkeleton = () => ({
   desktopRows: profileGeneralTabDesktopDashboardRows,

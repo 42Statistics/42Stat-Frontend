@@ -1,6 +1,6 @@
-import { withHead } from '@/components/hoc/withHead';
-import { isAuthenticatedAtom } from '@/utils/atoms/isAuthenticatedAtom';
-import { needFtOAuthAtom } from '@/utils/atoms/needFtOAuthAtom';
+import { isAuthenticatedAtom } from '@atoms/isAuthenticatedAtom';
+import { needFtOAuthAtom } from '@atoms/needFtOAuthAtom';
+import { withHead } from '@components/hoc/withHead';
 import { useSetAtom } from 'jotai';
 import { RESET } from 'jotai/utils';
 import { useEffect } from 'react';

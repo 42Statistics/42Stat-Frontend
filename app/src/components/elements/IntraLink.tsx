@@ -1,6 +1,6 @@
-import ft_logo from '@/assets/42-logo.svg';
+import ft_logo from '@assets/42-logo.svg';
 import styled from '@emotion/styled';
-import { Image } from '../common';
+import { Image } from '@components/common';
 
 export const IntraLink = () => {
   return (

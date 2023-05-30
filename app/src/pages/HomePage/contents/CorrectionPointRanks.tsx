@@ -1,14 +1,14 @@
 import { gql } from '@/__generated__';
-import { Loader } from '@/components/common';
+import { useQuery } from '@apollo/client';
+import { Loader } from '@components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
-} from '@/components/elements/DashboardContentView';
-import { RankUser } from '@/components/elements/DashboardContentView/Rank';
-import { DashboardContent } from '@/components/templates/Dashboard';
-import { AboveTablet, Mobile } from '@/utils/responsive/Device';
-import type { RankUserItemType } from '@/utils/types/Rank';
-import { useQuery } from '@apollo/client';
+} from '@components/elements/DashboardContentView';
+import { RankUser } from '@components/elements/DashboardContentView/Rank';
+import { DashboardContent } from '@components/templates/Dashboard';
+import { AboveTablet, Mobile } from '@utils/responsive/Device';
+import type { RankUserItemType } from '@utils/types/Rank';
 
 const GET_CORRECTION_POINT_RANK = gql(/* GraphQL */ `
   query getCorrectionPointRank($limit: Int!) {

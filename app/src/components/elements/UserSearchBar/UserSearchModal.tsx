@@ -23,6 +23,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 import { FIND_PROJECT_PREVIEW, FIND_USER_PREVIEW } from './common';
+import ft_logo from '@/assets/42-logo.svg';
 
 export const UserSearchModal = ({ isOpen, toggle }: ModalType) => {
   const theme = useTheme();
@@ -143,7 +144,7 @@ export const UserSearchModal = ({ isOpen, toggle }: ModalType) => {
                       onClick={() => handleProjectSubmit(project.name)}
                       element={
                         <HStack spacing="1rem">
-                          <Image src="/42-logo.png" width="16px" />
+                          <Image src={ft_logo} width="16px" />
                           <Text>{project.name}</Text>
                         </HStack>
                       }

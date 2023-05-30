@@ -18,6 +18,7 @@ import { MdSearch } from '@react-icons/all-files/md/MdSearch';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FIND_PROJECT_PREVIEW, FIND_USER_PREVIEW } from './common';
+import ft_logo from '@/assets/42-logo.svg';
 
 // TODO: SearchBar 추상화
 export const AboveTabletUserSearchBar = () => {
@@ -123,7 +124,7 @@ export const AboveTabletUserSearchBar = () => {
                       onClick={() => handleProjectSubmit(project.name)}
                       element={
                         <HStack spacing="1rem">
-                          <Image src="/42-logo.png" width="16px" />
+                          <Image src={ft_logo} width="16px" />
                           <Text>{project.name}</Text>
                         </HStack>
                       }

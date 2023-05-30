@@ -1,3 +1,4 @@
+import animated_ship from '@/assets/animated-ship.gif';
 import {
   Button,
   Center,
@@ -14,6 +15,7 @@ import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css'; // FIXME: import 말고 Styled Components 방식으로 Slick 적용
 import { CountUp } from 'use-count-up';
+
 // const GET_USER = gql(`
 //   query GetUser($id: Int!) {
 //     user(id: $id) {
@@ -70,7 +72,7 @@ const LandingPage = () => {
             ))}
           </Slider>
         </VStack>
-        <Image src="animated-ship.gif" width="200px" />
+        <Image src={animated_ship} width="200px" />
         <VStack spacing="2rem">
           <Link to={ROUTES.LOGIN}>
             <Button

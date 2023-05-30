@@ -1,4 +1,4 @@
-import google_icon from '@/assets/g-logo.svg';
+import google_logo from '@/assets/google-logo.svg';
 import { Clickable, HStack, Image, MediumText } from '@/components/common';
 import { ROUTES } from '@/routes/ROUTES';
 import { isAuthenticatedAtom } from '@/utils/atoms/isAuthenticatedAtom';
@@ -25,7 +25,7 @@ export const GoogleLoginBtn = () => {
       element={
         <GoogleLoginBtnLayout>
           <HStack spacing="24px">
-            <Image src={google_icon} width="18px" />
+            <Image src={google_logo} width="18px" />
             <MediumText color="rgba(0, 0, 0, 0.54)">
               Google 계정으로 로그인
             </MediumText>

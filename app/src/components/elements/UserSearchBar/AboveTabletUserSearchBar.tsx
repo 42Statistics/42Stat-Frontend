@@ -1,3 +1,5 @@
+import { useLazyQuery } from '@apollo/client';
+import ft_logo from '@assets/42-logo.svg';
 import {
   Avatar,
   BoldText,
@@ -8,13 +10,12 @@ import {
   Input,
   Text,
   VStack,
-} from '@/components/common';
-import { isDefined } from '@/utils/isDefined';
-import { isEnterKeyReleased } from '@/utils/isEnterKeyReleased';
-import { useDebounce } from '@/utils/useDebounce';
-import { useLazyQuery } from '@apollo/client';
+} from '@components/common';
 import styled from '@emotion/styled';
 import { MdSearch } from '@react-icons/all-files/md/MdSearch';
+import { isDefined } from '@utils/isDefined';
+import { isEnterKeyReleased } from '@utils/isEnterKeyReleased';
+import { useDebounce } from '@utils/useDebounce';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FIND_PROJECT_PREVIEW, FIND_USER_PREVIEW } from './common';
@@ -123,7 +124,7 @@ export const AboveTabletUserSearchBar = () => {
                       onClick={() => handleProjectSubmit(project.name)}
                       element={
                         <HStack spacing="1rem">
-                          <Image src="/42-logo.png" width="16px" />
+                          <Image src={ft_logo} width="16px" />
                           <Text>{project.name}</Text>
                         </HStack>
                       }

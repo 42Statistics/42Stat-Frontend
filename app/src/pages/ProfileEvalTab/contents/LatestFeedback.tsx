@@ -1,4 +1,4 @@
-import { H3MediumText, Scroll, Text, VStack } from '@/components/common';
+import { H3MediumText, Scroll, Text, VStack } from '@components/common';
 import styled from '@emotion/styled';
 
 export const LatestFeedback = () => {

@@ -1,4 +1,4 @@
-import { Spacer, VStack } from '@/components/common';
+import { Spacer, VStack } from '@components/common';
 import { TabletNavItem } from './TabletNavItem';
 import { useNavRoutes } from './hooks';
 

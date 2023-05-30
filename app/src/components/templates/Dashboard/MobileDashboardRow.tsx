@@ -1,5 +1,5 @@
-import type { MobileDashboardColSize } from '@/utils/types/Dashboard';
 import styled from '@emotion/styled';
+import type { MobileDashboardColSize } from '@utils/types/Dashboard';
 
 type MobileDashboardRowProps = {
   row: number;

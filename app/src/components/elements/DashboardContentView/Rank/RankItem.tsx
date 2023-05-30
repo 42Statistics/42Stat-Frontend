@@ -3,10 +3,10 @@ import {
   H3MediumText,
   HStack,
   MediumText,
-} from '@/components/common';
-import { numberWithUnitFormatter } from '@/utils/formatters';
-import type { RankItemType } from '@/utils/types/Rank';
+} from '@components/common';
 import { useTheme } from '@emotion/react';
+import { numberWithUnitFormatter } from '@utils/formatters';
+import type { RankItemType } from '@utils/types/Rank';
 
 type RankItemProps = {
   rank: number;

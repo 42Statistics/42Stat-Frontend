@@ -1,18 +1,13 @@
-import { isAuthenticatedAtom } from '@/utils/atoms/isAuthenticatedAtom';
-import { useAtomValue } from 'jotai';
-import { useEffect } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { ROUTES } from '@routes/ROUTES';
+import { Navigate, Outlet } from 'react-router-dom';
 
 export const AuthGuard = () => {
-  const isAuthenticated = useAtomValue(isAuthenticatedAtom);
-  const navigate = useNavigate();
+  // const isAuthenticated = useAtomValue(isAuthenticatedAtom);
+  const isAuthenticated = localStorage.getItem('isAuthenticated');
 
-  useEffect(() => {
-    if (!isAuthenticated) {
-      alert('로그인이 필요합니다');
-      navigate('/');
-    }
-  }, [isAuthenticated, navigate]);
-
-  return <Outlet />;
+  return isAuthenticated === 'true' ? (
+    <Outlet />
+  ) : (
+    <Navigate to={ROUTES.ROOT} />
+  );
 };

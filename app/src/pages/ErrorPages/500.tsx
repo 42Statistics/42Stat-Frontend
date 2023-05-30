@@ -5,7 +5,9 @@ import {
   Image,
   Text,
   VStack,
-} from '@/components/common';
+} from '@components/common';
+import { Seo } from '@components/elements/Seo';
+import { withHead } from '@hoc/withHead';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 
@@ -34,3 +36,11 @@ export const InternalServerErrorPage = () => {
     </>
   );
 };
+
+const Head = () => {
+  const statusText = 'Internal Server Error';
+
+  return <Seo title={statusText} />;
+};
+
+export default withHead(InternalServerErrorPage, Head);

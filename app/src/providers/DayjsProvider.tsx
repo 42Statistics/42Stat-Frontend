@@ -1,4 +1,4 @@
-import weekOfMonth from '@/utils/plugin/weekOfMonth';
+import weekOfMonth from '@utils/plugin/weekOfMonth';
 import dayjs from 'dayjs';
 
 const Provider = ({ children }: React.PropsWithChildren) => {

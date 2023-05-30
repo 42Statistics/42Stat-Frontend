@@ -1,16 +1,16 @@
 import { gql } from '@/__generated__';
-import { HStack, Loader, PrimaryText, Text } from '@/components/common';
+import { useQuery } from '@apollo/client';
+import { HStack, Loader, PrimaryText, Text } from '@components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
-} from '@/components/elements/DashboardContentView';
-import { getDayDiff } from '@/utils/getDayDiff';
-import { isDefined } from '@/utils/isDefined';
-import { useQuery } from '@apollo/client';
+} from '@components/elements/DashboardContentView';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { AiOutlineCheck } from '@react-icons/all-files/ai/AiOutlineCheck';
 import { AiOutlineClose } from '@react-icons/all-files/ai/AiOutlineClose';
+import { getDayDiff } from '@utils/getDayDiff';
+import { isDefined } from '@utils/isDefined';
 import { rgba } from 'emotion-rgba';
 import { useParams } from 'react-router-dom';
 

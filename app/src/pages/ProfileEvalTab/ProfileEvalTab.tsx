@@ -1,6 +1,8 @@
-import { Dashboard } from '@/components/templates/Dashboard';
+import { Dashboard } from '@components/templates/Dashboard';
 import { useProfileEvalTabDashboard } from './hooks';
 
-export const ProfileEvalTab = () => {
+const ProfileEvalTab = () => {
   return <Dashboard {...useProfileEvalTabDashboard()} />;
 };
+
+export default ProfileEvalTab;

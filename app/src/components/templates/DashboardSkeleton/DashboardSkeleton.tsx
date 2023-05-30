@@ -1,6 +1,6 @@
-import { Center } from '@/components/common';
-import { Desktop, Mobile, Tablet } from '@/utils/responsive/Device';
-import type { DashboardProps } from '@/utils/types/Dashboard';
+import { Center } from '@components/common';
+import { Desktop, Mobile, Tablet } from '@utils/responsive/Device';
+import type { DashboardProps } from '@utils/types/Dashboard';
 import { DesktopDashboardSkeleton } from './DesktopDashboardSkeleton';
 import { MobileDashboardSkeleton } from './MobileDashboardSkeleton';
 import { TabletDashboardSkeleton } from './TabletDashboardSkeleton';

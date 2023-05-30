@@ -1,4 +1,4 @@
-import { Clickable, HStack, PrimaryText } from '@/components/common';
+import { Clickable, HStack, PrimaryText } from '@components/common';
 import { useTheme } from '@emotion/react';
 import { BsTriangleFill } from '@react-icons/all-files/bs/BsTriangleFill';
 

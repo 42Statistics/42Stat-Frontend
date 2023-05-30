@@ -4,7 +4,7 @@ import { Center } from './Center';
 export const Loader = () => {
   return (
     <Center w="100%" h="100%">
-      <PulseLoader size={8} color="#dddddd" speedMultiplier={0.6} />
+      <PulseLoader size={8} color="#bbbbbb" speedMultiplier={0.6} />
     </Center>
   );
 };

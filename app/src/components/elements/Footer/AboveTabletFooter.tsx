@@ -1,4 +1,4 @@
-import { BoldText, HStack, Text } from '@/components/common';
+import { BoldText, HStack, Text } from '@components/common';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 

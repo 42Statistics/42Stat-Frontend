@@ -1,4 +1,4 @@
-// import { chunkArray, convertToMillion } from '@/utils/chart';
+// import { chunkArray, convertToMillion } from '@utils/chart';
 // import { useTheme } from '@emotion/react';
 // import ReactApexChart from 'react-apexcharts';
 

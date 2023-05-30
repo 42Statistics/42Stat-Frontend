@@ -1,4 +1,4 @@
-import { Desktop, Mobile, Tablet } from '@/utils/responsive/Device';
+import { Desktop, Mobile, Tablet } from '@utils/responsive/Device';
 import { DesktopMainLayout } from './DesktopMainLayout';
 import { MobileMainLayout } from './MobileMainLayout';
 import { TabletMainLayout } from './TabletMainLayout';

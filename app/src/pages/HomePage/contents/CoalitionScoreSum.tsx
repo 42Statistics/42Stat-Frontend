@@ -1,11 +1,11 @@
 import { gql } from '@/__generated__';
-import { Loader } from '@/components/common';
-import { BarChart } from '@/components/elements/Chart';
-import { ApolloNotFound } from '@/components/elements/DashboardContentView';
-import { ApolloBadRequest } from '@/components/elements/DashboardContentView/ApolloBadRequest';
-import { DashboardContent } from '@/components/templates/Dashboard';
-import { millionFormatter } from '@/utils/formatters';
 import { useQuery } from '@apollo/client';
+import { Loader } from '@components/common';
+import { BarChart } from '@components/elements/Chart';
+import { ApolloNotFound } from '@components/elements/DashboardContentView';
+import { ApolloBadRequest } from '@components/elements/DashboardContentView/ApolloBadRequest';
+import { DashboardContent } from '@components/templates/Dashboard';
+import { millionFormatter } from '@utils/formatters';
 
 export const GET_COALITION_TOTAL_SCORES = gql(/* GraphQL */ `
   query getCoalitionTotalScores {

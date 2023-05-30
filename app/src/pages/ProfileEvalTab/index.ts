@@ -1,1 +1,1 @@
-export * from './ProfileEvalTab';
+export { default } from './ProfileEvalTab';

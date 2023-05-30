@@ -1,7 +1,7 @@
-import { DashboardItemWrapper } from '@/components/templates/Dashboard/DashboardItemWrapper';
-import { TabletDashboardLayout } from '@/components/templates/Dashboard/TabletDashboard';
-import { TabletDashboardRow } from '@/components/templates/Dashboard/TabletDashboardRow';
-import type { TabletDashboardProps } from '@/utils/types/Dashboard';
+import { DashboardItemWrapper } from '@components/templates/Dashboard/DashboardItemWrapper';
+import { TabletDashboardLayout } from '@components/templates/Dashboard/TabletDashboard';
+import { TabletDashboardRow } from '@components/templates/Dashboard/TabletDashboardRow';
+import type { TabletDashboardProps } from '@utils/types/Dashboard';
 import { DashboardSkeletonItem } from './DashboardSkeletonItem';
 
 type TabletDashboardSkeletonProps = Omit<TabletDashboardProps, 'contents'>;

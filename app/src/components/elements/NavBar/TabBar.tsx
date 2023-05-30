@@ -1,4 +1,4 @@
-import { HStack } from '@/components/common';
+import { HStack } from '@components/common';
 import styled from '@emotion/styled';
 import { TabItem } from './TabItem';
 import { useNavRoutes } from './hooks';

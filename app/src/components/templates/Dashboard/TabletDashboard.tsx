@@ -1,5 +1,5 @@
-import type { TabletDashboardProps } from '@/utils/types/Dashboard';
 import styled from '@emotion/styled';
+import type { TabletDashboardProps } from '@utils/types/Dashboard';
 import { DashboardItem } from './DashboardItem';
 import { DashboardItemWrapper } from './DashboardItemWrapper';
 import { TabletDashboardRow } from './TabletDashboardRow';

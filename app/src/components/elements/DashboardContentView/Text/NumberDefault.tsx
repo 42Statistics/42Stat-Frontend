@@ -1,4 +1,4 @@
-import { H3Text, HStack, Text } from '@/components/common';
+import { H3Text, HStack, Text } from '@components/common';
 
 type NumberDefaultProps = {
   number: number;

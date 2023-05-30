@@ -1,4 +1,4 @@
-import { Center } from '@/components/common';
+import { Center } from '@components/common';
 import styled from '@emotion/styled';
 import { Helmet } from 'react-helmet-async';
 import { Outlet } from 'react-router-dom';

@@ -1,7 +1,7 @@
-import { VStack } from '@/components/common';
-import { AppLogoTitleButton } from '@/components/elements/AppLogoTitle';
-import { AboveTabletUserSearchBar } from '@/components/elements/UserSearchBar/AboveTabletUserSearchBar';
-import { userAtom } from '@/utils/atoms/userAtom';
+import { VStack } from '@components/common';
+import { AppLogoTitleButton } from '@components/elements/AppLogoTitle';
+import { AboveTabletUserSearchBar } from '@components/elements/UserSearchBar/AboveTabletUserSearchBar';
+import { userAtom } from '@atoms/userAtom';
 import { useAtomValue } from 'jotai';
 import { Link } from 'react-router-dom';
 import { NavMenu } from './NavMenu';

@@ -1,1 +1,1 @@
-export * from './EvalLogSearchPage';
+export { default } from './EvalLogSearchPage';

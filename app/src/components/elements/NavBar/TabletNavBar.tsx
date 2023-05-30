@@ -1,6 +1,6 @@
-import { Avatar, Clickable, Overlay, VStack } from '@/components/common';
-import { isNavBarOpenAtom } from '@/utils/atoms/isNavBarOpenAtom';
-import { userAtom } from '@/utils/atoms/userAtom';
+import { isNavBarOpenAtom } from '@atoms/isNavBarOpenAtom';
+import { userAtom } from '@atoms/userAtom';
+import { Avatar, Clickable, Overlay, VStack } from '@components/common';
 import styled from '@emotion/styled';
 import { GiHamburgerMenu } from '@react-icons/all-files/gi/GiHamburgerMenu';
 import { useAtom, useAtomValue } from 'jotai';

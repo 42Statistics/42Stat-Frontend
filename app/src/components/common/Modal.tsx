@@ -1,54 +1,61 @@
-import { ModalType } from '@/utils/types/Modal';
 import styled from '@emotion/styled';
-
-export const ModalContainer = styled.div`
-  // Modal을 구현하는데 전체적으로 필요한 컨테이너 CSS
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-`;
-
-// z-index: ${({ theme }) => theme.zIndex.modal};
-export const ModalBackdrop = styled.div`
-  // Modal이 떴을 때의 배경을 깔아주는 CSS
-  z-index: 500;
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.4);
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-`;
+import type { ModalType } from '@utils/types/Modal';
+import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
+import { Center } from './Center';
+import { Overlay } from './Overlay';
 
 export const ModalView = styled.div`
-  // Modal창 CSS를 구현합니다.
-  padding: 4rem;
   display: flex;
+  padding: 4rem;
   border-radius: 2rem;
   background-color: ${({ theme }) => theme.colors.mono.white};
 `;
 
 type ModalProps = ModalType & React.PropsWithChildren;
 
+// https://velog.io/@sunohvoiin/ReactCSS-%EB%AA%A8%EB%8B%AC%EC%B0%BD%EC%9D%B4-%EC%97%B4%EB%A0%A4%EC%9E%88%EC%9D%84-%EB%95%8C-body-%EC%8A%A4%ED%81%AC%EB%A1%A4-%EB%B0%A9%EC%A7%80%ED%95%98%EA%B8%B0
+const preventScroll = () => {
+  const currentScrollY = window.scrollY;
+  document.body.style.position = 'fixed';
+  document.body.style.width = '100%';
+  document.body.style.top = `-${currentScrollY}px`; // 현재 스크롤 위치
+  document.body.style.overflowY = 'scroll';
+  return currentScrollY;
+};
+
+const allowScroll = (prevScrollY: number) => {
+  document.body.style.position = '';
+  document.body.style.width = '';
+  document.body.style.top = '';
+  document.body.style.overflowY = '';
+  window.scrollTo(0, prevScrollY);
+};
+
 export const Modal = ({ isOpen, toggle, children }: ModalProps) => {
-  const openModalHandler = () => {
-    toggle();
-  };
+  useEffect(() => {
+    if (isOpen) {
+      const prevScrollY = preventScroll();
+      return () => allowScroll(prevScrollY);
+    }
+  }, [isOpen]);
+
   return (
     <>
-      <ModalContainer>
-        {isOpen ? (
-          <ModalBackdrop onClick={openModalHandler}>
-            <ModalView role="dialog" onClick={(e) => e.stopPropagation()}>
-              {children}
-            </ModalView>
-          </ModalBackdrop>
-        ) : null}
-      </ModalContainer>
+      {isOpen ? (
+        <>
+          {createPortal(
+            <Overlay onClick={toggle}>
+              <Center w="100%" h="100%">
+                <ModalView role="dialog" onClick={(e) => e.stopPropagation()}>
+                  {children}
+                </ModalView>
+              </Center>
+            </Overlay>,
+            document.getElementById('modal') as HTMLElement,
+          )}
+        </>
+      ) : null}
     </>
   );
 };

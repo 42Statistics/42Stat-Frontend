@@ -4,13 +4,13 @@ import {
   AccentText,
   BoldText,
   Divider,
-  H3BoldText,
   H3Text,
   HStack,
   Loader,
   Text,
   VStack,
 } from '@components/common';
+import { Label } from '@components/common/Label';
 import { PieChart } from '@components/elements/Chart';
 import {
   ApolloBadRequest,
@@ -21,8 +21,9 @@ import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { withFooter } from '@hoc/withFooter';
 import { withHead } from '@hoc/withHead';
-import { HiUsers } from '@react-icons/all-files/hi/HiUsers';
+import { HiUsers } from '@react-icons/all-files/hi/HiUSers';
 import { numberWithUnitFormatter } from '@utils/formatters';
+import { titleCase } from '@utils/titleCase';
 import { Link, useParams } from 'react-router-dom';
 
 const GET_PROJECT_INFO = gql(/* GraphQL */ `
@@ -44,6 +45,7 @@ const GET_PROJECT_INFO = gql(/* GraphQL */ `
 `);
 
 const ProjectPage = () => {
+  const theme = useTheme();
   const { projectName } = useParams() as { projectName: string }; // FIXME: Type Assertion 제거
   const { loading, error, data } = useQuery(GET_PROJECT_INFO, {
     variables: { projectName },
@@ -55,113 +57,85 @@ const ProjectPage = () => {
 
   const {
     name,
-    skills,
     averagePassFinalmark,
     totalCloseCount,
     currRegisteredCount,
     passPercentage,
   } = data.getTotalPage.projectInfo;
 
+  const keywords = ['Unix logic'];
+  const skills = ['Algorithms & AI', 'Rigor', 'Imperative programming'];
+  const description =
+    'This project is your very first project as a student at 42. You will need to recode a few functions of the C standard library as well as some functions that you will use during your whole cursus.';
+
   return (
     <ProjectPageLayout>
-      <VStack w="100%" spacing="8rem">
-        <HStack spacing="10rem" wrap="wrap" align="end">
-          <VStack align="start" spacing="2rem">
-            <VStack align="start">
-              <Text>0서클</Text>
-              <BoldText fontSize="4rem">{name}</BoldText>
-            </VStack>
-            <VStack align="start" spacing="1rem">
-              <Text selectable>나만의 라이브러리 만들기</Text>
-              <AccentText>서브젝트 보기</AccentText>
-            </VStack>
-            <HStack spacing="2rem">
-              <HiUsers size="16px" />
-              <Text selectable>
-                {numberWithUnitFormatter(currRegisteredCount, '팀')} 진행 중
-              </Text>
-            </HStack>
-          </VStack>
-          <ProjectTable>
-            <tbody>
-              <tr>
-                <td>
-                  <Text>인원</Text>
-                </td>
-                <td>
-                  <Text>1인</Text>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <Text>기간</Text>
-                </td>
-                <td>
-                  <Text>70시간</Text>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <Text>경험치</Text>
-                </td>
-                <td>
-                  <Text>462 XP</Text>
-                </td>
-              </tr>
-            </tbody>
-          </ProjectTable>
-        </HStack>
-        <Divider />
-        <HStack spacing="10rem" wrap="wrap">
-          <VStack align="start" spacing="1rem">
-            <HStack>
-              <H3BoldText selectable>
-                지금까지 {numberWithUnitFormatter(totalCloseCount, '팀')}
-              </H3BoldText>
-              <H3Text selectable>이 제출했어요</H3Text>
-            </HStack>
-            <HStack>
-              <H3BoldText selectable>
-                평균 {numberWithUnitFormatter(averagePassFinalmark, '점')}
-              </H3BoldText>
-              <H3Text selectable>으로 통과합니다</H3Text>
-            </HStack>
-            <Link to={`/evallog?projectName=${name}`}>
-              <AccentText>지난 평가 보기</AccentText>
-            </Link>
-          </VStack>
-          <div style={{ width: '26rem', height: '26rem' }}>
-            <ProjectResultPercentageChart
-              labels={['101점 ~', '80 ~ 100점', '0 ~ 79점']}
-              series={[1280, 310, 551]}
+      <VStack w="100%" spacing="5rem">
+        <VStack spacing="0.5rem">
+          <Text>0서클</Text>
+          <BoldText fontSize="4rem" style={{ fontStyle: 'italic' }}>
+            {name.toUpperCase()}
+          </BoldText>
+        </VStack>
+        <VStack spacing="1rem">
+          <Text>Solo / 70 hrs. / 462 XP</Text>
+          <HStack spacing="1rem">
+            <HiUsers size="16px" />
+            <Text>
+              {numberWithUnitFormatter(currRegisteredCount, '팀')} 진행 중
+            </Text>
+          </HStack>
+        </VStack>
+        <HStack spacing="1rem" wrap="wrap">
+          {[...keywords, ...skills].map((text) => (
+            <Label
+              key={text}
+              text={titleCase(text)}
+              fontWeight={theme.fonts.weight.medium}
             />
-          </div>
+          ))}
         </HStack>
+        <div style={{ maxWidth: '400px' }}>
+          <Text selectable style={{ textAlign: 'center' }}>
+            {description}
+          </Text>
+        </div>
+        <AccentText>Intra 프로젝트 링크</AccentText>
+        <Divider />
+        <VStack spacing="2rem">
+          <HStack>
+            <H3Text selectable>
+              지금까지&nbsp;
+              <strong>{numberWithUnitFormatter(totalCloseCount, '팀')}</strong>
+              이 제출했어요
+            </H3Text>
+          </HStack>
+          <HStack>
+            <H3Text selectable>
+              평균&nbsp;
+              <strong>
+                {numberWithUnitFormatter(averagePassFinalmark, '점')}
+              </strong>
+              으로 통과합니다
+            </H3Text>
+          </HStack>
+        </VStack>
+        <Link to={`/evallog?projectName=${name}`}>
+          <AccentText>Past Evaluations</AccentText>
+        </Link>
+        <div style={{ width: '26rem', height: '26rem' }}>
+          <ProjectResultPercentageChart
+            labels={['Pass', 'Fail']}
+            series={[passPercentage, 100 - passPercentage]}
+          />
+        </div>
       </VStack>
     </ProjectPageLayout>
   );
 };
 
 const ProjectPageLayout = styled.div`
-  width: 100%;
-  padding: 10rem;
-  background-color: ${({ theme }) => theme.colors.mono.white};
-  border-radius: 2rem;
-`;
-
-const ProjectTable = styled.table`
-  text-align: center;
-  white-space: nowrap;
-
-  th,
-  td {
-    padding: 0.8rem 2rem;
-  }
-
-  & td:first-of-type {
-    color: ${({ theme }) => theme.colors.primary.default};
-    font-weight: ${({ theme }) => theme.fonts.weight.medium};
-  }
+  padding-top: 4rem;
 `;
 
 type ProjectResultPercentageChartProps = {
@@ -176,11 +150,7 @@ const ProjectResultPercentageChart = ({
   const theme = useTheme();
 
   const options: ApexCharts.ApexOptions = {
-    colors: [
-      theme.colors.semantic.pass,
-      theme.colors.semantic.warning,
-      theme.colors.semantic.fail,
-    ],
+    colors: [theme.colors.semantic.pass, theme.colors.semantic.fail],
     tooltip: {
       y: {
         formatter: (value) => numberWithUnitFormatter(value, '팀'),

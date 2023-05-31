@@ -31,7 +31,7 @@ export const Label = ({
 type StyledLabelProps = Omit<LabelProps, 'text' | 'color'>;
 
 const StyledLabel = styled.div<StyledLabelProps>`
-  padding: 0.2rem 1.2rem;
+  padding: 0.3rem 1.5rem;
   border-radius: 2rem;
   background-color: ${({ theme, bgColor = theme.colors.primary.default }) =>
     bgColor};

@@ -65,4 +65,8 @@ export const global = () => css`
     font-size: 1.4rem;
     background-color: #f9f9f9; // body가 아닌 다른 곳에 넣으면 스크롤 시 흰색이 보임
   }
+
+  strong {
+    font-weight: bold; // 글 쓸 때 필요함
+  }
 `;

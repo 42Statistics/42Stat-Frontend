@@ -162,8 +162,8 @@ const UserSearchResult = styled.div`
   top: 6rem;
   left: 0;
   width: 30rem;
-  padding: 1.5rem 4rem;
-  border-radius: 3rem;
+  padding: 2.5rem;
+  border-radius: 2rem;
   box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.25);
   background-color: ${({ theme }) => theme.colors.mono.white};
   z-index: ${({ theme }) => theme.zIndex.searchResult};

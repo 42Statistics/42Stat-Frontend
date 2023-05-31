@@ -5,6 +5,8 @@ import {
   BoldText,
   Clickable,
   Divider,
+  H3BoldText,
+  H3Text,
   HStack,
   Image,
   Input,
@@ -14,7 +16,6 @@ import {
   VStack,
 } from '@components/common';
 import { useTheme } from '@emotion/react';
-import styled from '@emotion/styled';
 import { MdArrowBack } from '@react-icons/all-files/md/MdArrowBack';
 import { MdSearch } from '@react-icons/all-files/md/MdSearch';
 import { isDefined } from '@utils/isDefined';
@@ -111,8 +112,8 @@ export const UserSearchModal = ({ isOpen, toggle }: ModalType) => {
         {isPreviewDisplaying ? (
           <VStack w="100%" spacing="4rem">
             {hasUserData && (
-              <VStack w="100%" align="start" spacing="1rem">
-                <BoldText>유저</BoldText>
+              <VStack w="100%" align="start" spacing="1.4rem">
+                <H3BoldText>유저</H3BoldText>
                 <Divider />
                 {userData.findUserPreview
                   .slice(0, 5)
@@ -122,9 +123,9 @@ export const UserSearchModal = ({ isOpen, toggle }: ModalType) => {
                       key={user.id}
                       onClick={() => handleUserSubmit(user.login)}
                       element={
-                        <HStack spacing="1rem">
-                          <Avatar size="1.6rem" imgUrl={user.imgUrl} />
-                          <Text>{user.login}</Text>
+                        <HStack spacing="1.4rem">
+                          <Avatar size="2rem" imgUrl={user.imgUrl} />
+                          <H3Text>{user.login}</H3Text>
                         </HStack>
                       }
                     />
@@ -132,7 +133,7 @@ export const UserSearchModal = ({ isOpen, toggle }: ModalType) => {
               </VStack>
             )}
             {hasProjectData && (
-              <VStack w="100%" align="start" spacing="1rem">
+              <VStack w="100%" align="start" spacing="1.4rem">
                 <BoldText>프로젝트</BoldText>
                 <Divider />
                 {projectData.findProjectPreview
@@ -144,8 +145,8 @@ export const UserSearchModal = ({ isOpen, toggle }: ModalType) => {
                       onClick={() => handleProjectSubmit(project.name)}
                       element={
                         <HStack spacing="1rem">
-                          <Image src={ft_logo} width="16px" />
-                          <Text>{project.name}</Text>
+                          <Image src={ft_logo} width="20px" />
+                          <H3Text>{project.name}</H3Text>
                         </HStack>
                       }
                     />
@@ -163,10 +164,3 @@ export const UserSearchModal = ({ isOpen, toggle }: ModalType) => {
     </Modal>
   );
 };
-
-const UserSearchModalLayout = styled(Modal)`
-  width: 100%;
-  height: 100%;
-  background-color: ${({ theme }) => theme.colors.mono.white};
-  padding: 1.5rem;
-`;

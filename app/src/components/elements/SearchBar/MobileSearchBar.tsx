@@ -3,10 +3,10 @@ import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { MdSearch } from '@react-icons/all-files/md/MdSearch';
 import { useCallback, useState } from 'react';
-import { UserSearchModal } from './UserSearchModal';
+import { SearchModal } from './SearchModal';
 
 // TODO: SearchBar 추상화
-export const MobileUserSearchBar = () => {
+export const MobileSearchBar = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const toggleModal = useCallback(() => setIsModalOpen((cur) => !cur), []);
   const theme = useTheme();
@@ -16,22 +16,22 @@ export const MobileUserSearchBar = () => {
       <Clickable
         onClick={toggleModal}
         element={
-          <MobileUserSearchBarLayout>
+          <MobileSearchBarLayout>
             <HStack spacing="2rem">
               <MdSearch id="search-icon" size="24px" />
               <Text color={theme.colors.mono.gray300} css={{ width: '12rem' }}>
                 Search...
               </Text>
             </HStack>
-          </MobileUserSearchBarLayout>
+          </MobileSearchBarLayout>
         }
       />
-      <UserSearchModal isOpen={isModalOpen} toggle={toggleModal} />
+      <SearchModal isOpen={isModalOpen} toggle={toggleModal} />
     </>
   );
 };
 
-const MobileUserSearchBarLayout = styled.div`
+const MobileSearchBarLayout = styled.div`
   position: relative;
   padding: 1rem 2rem;
   border-radius: 2rem;

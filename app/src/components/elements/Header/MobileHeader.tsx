@@ -1,6 +1,6 @@
 import { VStack } from '@components/common';
 import { AppLogoTitleButton } from '@components/elements/AppLogoTitle';
-import { MobileUserSearchBar } from '@components/elements/UserSearchBar/MobileUserSearchBar';
+import { MobileSearchBar } from '@components/elements/SearchBar/MobileSearchBar';
 import styled from '@emotion/styled';
 
 export const MobileHeader = () => {
@@ -8,7 +8,7 @@ export const MobileHeader = () => {
     <MobileHeaderLayout>
       <VStack spacing="4rem">
         <AppLogoTitleButton />
-        <MobileUserSearchBar />
+        <MobileSearchBar />
       </VStack>
     </MobileHeaderLayout>
   );

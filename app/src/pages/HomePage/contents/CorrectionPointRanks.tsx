@@ -6,7 +6,7 @@ import {
   ApolloNotFound,
 } from '@components/elements/DashboardContentView';
 import { RankUser } from '@components/elements/DashboardContentView/Rank';
-import { DashboardContent } from '@components/templates/Dashboard';
+import { DashboardContent } from '@components/templates/DashboardContent';
 import { AboveTablet, Mobile } from '@utils/responsive/Device';
 import type { RankUserItemType } from '@utils/types/Rank';
 

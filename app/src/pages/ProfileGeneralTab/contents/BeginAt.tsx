@@ -6,7 +6,7 @@ import {
   ApolloNotFound,
 } from '@components/elements/DashboardContentView';
 import { TextDefault } from '@components/elements/DashboardContentView/Text';
-import { DashboardContent } from '@components/templates/Dashboard';
+import { DashboardContent } from '@components/templates/DashboardContent';
 import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
 

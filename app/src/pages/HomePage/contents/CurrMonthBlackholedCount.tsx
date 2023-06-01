@@ -6,7 +6,7 @@ import {
   ApolloNotFound,
 } from '@components/elements/DashboardContentView';
 import { NumberCompare } from '@components/elements/DashboardContentView/Text';
-import { DashboardContent } from '@components/templates/Dashboard';
+import { DashboardContent } from '@components/templates/DashboardContent';
 import dayjs from 'dayjs';
 
 const GET_CURR_MONTH_BLACKHOLED_COUNT = gql(/* GraphQL */ `

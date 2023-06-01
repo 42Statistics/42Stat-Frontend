@@ -6,7 +6,7 @@ import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@components/elements/DashboardContentView';
-import { DashboardContent } from '@components/templates/Dashboard';
+import { DashboardContent } from '@components/templates/DashboardContent';
 import dayjs from 'dayjs';
 
 const GET_LAST_EXAM_RESULT = gql(/* GraphQL */ `

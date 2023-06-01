@@ -1,5 +1,5 @@
 import { TextDefault } from '@components/elements/DashboardContentView/Text';
-import { DashboardContent } from '@components/templates/Dashboard';
+import { DashboardContent } from '@components/templates/DashboardContent';
 
 export const TotalEvalTime = () => {
   const title = '누적 평가 시간';

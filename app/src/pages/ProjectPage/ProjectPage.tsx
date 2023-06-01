@@ -63,8 +63,12 @@ const ProjectPage = () => {
     passPercentage,
   } = data.getTotalPage.projectInfo;
 
-  const keywords = ['Unix logic'];
-  const skills = ['Algorithms & AI', 'Rigor', 'Imperative programming'];
+  const keywords = [
+    'Sorting algorithms',
+    'Battery concept and handling elements',
+    'Algorithm implementation',
+  ];
+  const skills = ['Unix', 'Rigor', 'Algorithms & AI', 'Imperative programming'];
   const description =
     'This project is your very first project as a student at 42. You will need to recode a few functions of the C standard library as well as some functions that you will use during your whole cursus.';
 
@@ -86,15 +90,27 @@ const ProjectPage = () => {
             </Text>
           </HStack>
         </VStack>
-        <HStack spacing="1rem" wrap="wrap">
-          {[...keywords, ...skills].map((text) => (
-            <Label
-              key={text}
-              text={titleCase(text)}
-              fontWeight={theme.fonts.weight.medium}
-            />
-          ))}
-        </HStack>
+        <VStack spacing="3rem">
+          <HStack spacing="1rem" wrap="wrap">
+            {keywords.map((text) => (
+              <Label
+                key={text}
+                text={titleCase(text)}
+                bgColor={theme.colors.accent.default}
+                fontWeight={theme.fonts.weight.medium}
+              />
+            ))}
+          </HStack>
+          <HStack spacing="1rem" wrap="wrap">
+            {skills.map((text) => (
+              <Label
+                key={text}
+                text={titleCase(text)}
+                fontWeight={theme.fonts.weight.medium}
+              />
+            ))}
+          </HStack>
+        </VStack>
         <div style={{ maxWidth: '400px' }}>
           <Text selectable style={{ textAlign: 'center' }}>
             {description}

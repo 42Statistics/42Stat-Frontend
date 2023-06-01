@@ -69,4 +69,13 @@ export const global = () => css`
   strong {
     font-weight: bold; // 글 쓸 때 필요함
   }
+
+  ::moz-selection {
+    /* moz-는 firefox에서 사용하는 속성 */
+    background: #e5f6e4;
+  }
+
+  ::selection {
+    background: #e5f6e4;
+  }
 `;

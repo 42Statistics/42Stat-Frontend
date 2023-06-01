@@ -1,13 +1,13 @@
-import { AboveTablet, Mobile } from '@utils/responsive/Device';
-import { AboveTabletFooter } from './AboveTabletFooter';
+import { TabletAndAbove, Mobile } from '@utils/responsive/Device';
+import { TabletAndAboveFooter } from './TabletAndAboveFooter';
 import { MobileFooter } from './MobileFooter';
 
 export const Footer = () => {
   return (
     <>
-      <AboveTablet>
-        <AboveTabletFooter />
-      </AboveTablet>
+      <TabletAndAbove>
+        <TabletAndAboveFooter />
+      </TabletAndAbove>
       <Mobile>
         <MobileFooter />
       </Mobile>

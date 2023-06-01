@@ -2,7 +2,7 @@ import { HStack, Text } from '@components/common';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 
-export const AboveTabletFooter = () => {
+export const TabletAndAboveFooter = () => {
   const theme = useTheme();
 
   return (

@@ -1,12 +1,12 @@
 import styled from '@emotion/styled';
 import { isEnterKeyReleased } from '@utils/isEnterKeyReleased';
 import { useEffect, useState } from 'react';
-import { AboveTabletSearchInput } from './AboveTabletSearchInput';
-import { AboveTabletSearchResult } from './AboveTabletSearchResult';
+import { TabletAndAboveSearchInput } from './TabletAndAboveSearchInput';
+import { TabletAndAboveSearchResult } from './TabletAndAboveSearchResult';
 import { useSearchBar } from './hooks';
 
 // TODO: SearchBar 추상화
-export const AboveTabletSearchBar = () => {
+export const TabletAndAboveSearchBar = () => {
   const {
     setInput,
     debouncedInput,
@@ -46,26 +46,26 @@ export const AboveTabletSearchBar = () => {
   };
 
   return (
-    <AboveTabletSearchBarLayout isFocused={isFocused}>
-      <AboveTabletSearchInput
+    <TabletAndAboveSearchBarLayout isFocused={isFocused}>
+      <TabletAndAboveSearchInput
         inputRef={inputRef}
         setInput={setInput}
         onKeyDown={handleKeyDown}
         setIsFocused={setIsFocused}
       />
       {isPreviewDisplaying && (
-        <AboveTabletSearchResult
+        <TabletAndAboveSearchResult
           users={users}
           onUserSubmit={handleUserSubmit}
           projects={projects}
           onProjectSubmit={handleProjectSubmit}
         />
       )}
-    </AboveTabletSearchBarLayout>
+    </TabletAndAboveSearchBarLayout>
   );
 };
 
-export const AboveTabletSearchBarLayout = styled.div<{
+export const TabletAndAboveSearchBarLayout = styled.div<{
   isFocused: boolean;
 }>`
   position: relative;

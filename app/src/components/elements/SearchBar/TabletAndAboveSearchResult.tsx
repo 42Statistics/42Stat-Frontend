@@ -4,32 +4,32 @@ import styled from '@emotion/styled';
 import { ProjectSearchList } from './ProjectSearchList';
 import { UserSearchList } from './UserSearchList';
 
-type AboveTabletSearchResultProps = {
+type TabletAndAboveSearchResultProps = {
   users: UserPreview[];
   projects: ProjectPreview[];
   onUserSubmit: (name: string) => void;
   onProjectSubmit: (name: string) => void;
 };
 
-export const AboveTabletSearchResult = ({
+export const TabletAndAboveSearchResult = ({
   users,
   projects,
   onUserSubmit,
   onProjectSubmit,
-}: AboveTabletSearchResultProps) => {
+}: TabletAndAboveSearchResultProps) => {
   return (
-    <AboveTabletSearchResultLayout>
+    <TabletAndAboveSearchResultLayout>
       {!!users.length && (
         <UserSearchList users={users} onSubmit={onUserSubmit} />
       )}
       {!!projects.length && (
         <ProjectSearchList projects={projects} onSubmit={onProjectSubmit} />
       )}
-    </AboveTabletSearchResultLayout>
+    </TabletAndAboveSearchResultLayout>
   );
 };
 
-const AboveTabletSearchResultLayout = styled(VStack)`
+const TabletAndAboveSearchResultLayout = styled(VStack)`
   position: absolute;
   top: 6rem;
   left: 0;

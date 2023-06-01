@@ -6,7 +6,6 @@ import {
   Divider,
   H3Text,
   HStack,
-  Loader,
   Text,
   VStack,
 } from '@components/common';
@@ -21,6 +20,7 @@ import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { withFooter } from '@hoc/withFooter';
 import { withHead } from '@hoc/withHead';
+import { ProjectPageSkeleton } from '@pages/PageSkeletons/ProjectPageSkeleton';
 import { HiUsers } from '@react-icons/all-files/hi/HiUSers';
 import { numberWithUnitFormatter } from '@utils/formatters';
 import { titleCase } from '@utils/titleCase';
@@ -51,7 +51,7 @@ const ProjectPage = () => {
     variables: { projectName },
   });
 
-  if (loading) return <Loader />;
+  if (loading) return <ProjectPageSkeleton />;
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 

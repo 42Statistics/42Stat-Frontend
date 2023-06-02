@@ -47,10 +47,10 @@ export const EvalLogSearchDetail = ({
   if (evalLogs.length === 0 && loading) {
     return (
       <VStack w="100%" spacing="1.2rem">
-        <Skeleton style={{ height: '200px' }} />
-        <Skeleton style={{ height: '200px' }} />
-        <Skeleton style={{ height: '200px' }} />
-        <Skeleton style={{ height: '200px' }} />
+        <EvalLogSkeleton />
+        <EvalLogSkeleton />
+        <EvalLogSkeleton />
+        <EvalLogSkeleton />
       </VStack>
     );
   }
@@ -60,13 +60,17 @@ export const EvalLogSearchDetail = ({
       <EvalLogList evalLogs={evalLogs} />
       {!end ? (
         <VStack w="100%" spacing="1.2rem" ref={infiniteScrollRef}>
-          <Skeleton style={{ height: '200px' }} />
-          <Skeleton style={{ height: '200px' }} />
-          <Skeleton style={{ height: '200px' }} />
+          <EvalLogSkeleton />
+          <EvalLogSkeleton />
+          <EvalLogSkeleton />
         </VStack>
       ) : (
         <Footer />
       )}
     </>
   );
+};
+
+const EvalLogSkeleton = () => {
+  return <Skeleton style={{ height: '200px' }} />;
 };

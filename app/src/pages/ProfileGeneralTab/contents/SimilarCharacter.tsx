@@ -1,5 +1,5 @@
 import { H3Text, Image, VStack } from '@components/common';
-import { DashboardContent } from '@components/templates/Dashboard';
+import { DashboardContent } from '@components/templates/DashboardContent';
 
 export const SimilarCharacter = () => {
   const title = '이 유저를 캐릭터로 표현한다면?';

@@ -6,7 +6,7 @@ import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@components/elements/DashboardContentView';
-import { DashboardContent } from '@components/templates/Dashboard';
+import { DashboardContent } from '@components/templates/DashboardContent';
 import { numberWithUnitFormatter } from '@utils/formatters';
 
 const GET_ACTIVE_USER_COUNT_RECORD = gql(/* GraphQL */ `

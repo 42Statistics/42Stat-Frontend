@@ -1,12 +1,11 @@
 import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
-import { Loader } from '@components/common';
+import { H3Text, HStack, Loader, Text } from '@components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@components/elements/DashboardContentView';
-import { TextDefault } from '@components/elements/DashboardContentView/Text';
-import { DashboardContent } from '@components/templates/Dashboard';
+import { DashboardContent } from '@components/templates/DashboardContent';
 import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
 
@@ -47,10 +46,16 @@ export const BeginAt = () => {
     );
 
   const { beginAt } = data.getPersonGeneralPage.userProfile;
+  const daysFromBegin = Math.floor(
+    (Date.now() - new Date(beginAt).getTime()) / 1000 / 60 / 60 / 24,
+  );
 
   return (
     <DashboardContent title={title}>
-      <TextDefault text={dayjs(beginAt).format('YYYY. MM. DD.')} />
+      <HStack w="100%" h="100%" spacing="1rem">
+        <H3Text>{dayjs(beginAt).format('YYYY. MM. DD.')}</H3Text>
+        <Text>D+{daysFromBegin}</Text>
+      </HStack>
     </DashboardContent>
   );
 };

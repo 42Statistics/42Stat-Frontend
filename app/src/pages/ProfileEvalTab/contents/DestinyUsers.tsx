@@ -1,4 +1,4 @@
-import { DashboardContent } from '@components/templates/Dashboard';
+import { DashboardContent } from '@components/templates/DashboardContent';
 
 export const DestinyUsers = () => {
   const title = '운명의 장난 스코어';

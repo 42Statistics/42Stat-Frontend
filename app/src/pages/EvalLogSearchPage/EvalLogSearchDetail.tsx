@@ -1,12 +1,11 @@
 import { EvalLog } from '@/__generated__/graphql';
 import { ApolloError } from '@apollo/client';
-import { Center, Text, VStack } from '@components/common';
+import { Center, Skeleton, Text, VStack } from '@components/common';
 import { ApolloBadRequest } from '@components/elements/DashboardContentView';
 import { Footer } from '@components/elements/Footer/Footer';
 import { useTheme } from '@emotion/react';
 import React from 'react';
 import { EvalLogList } from './EvalLogList';
-import { EvalLogSkeleton } from './EvalLogSkeleton';
 
 type EvalLogSearchDetailProps = {
   evalLogs: EvalLog[];
@@ -70,4 +69,8 @@ export const EvalLogSearchDetail = ({
       )}
     </>
   );
+};
+
+const EvalLogSkeleton = () => {
+  return <Skeleton style={{ height: '200px' }} />;
 };

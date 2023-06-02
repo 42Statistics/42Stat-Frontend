@@ -6,8 +6,8 @@ import {
   ApolloNotFound,
 } from '@components/elements/DashboardContentView';
 import { RankUser } from '@components/elements/DashboardContentView/Rank';
-import { DashboardContent } from '@components/templates/Dashboard';
-import { AboveTablet, Mobile } from '@utils/responsive/Device';
+import { DashboardContent } from '@components/templates/DashboardContent';
+import { TabletAndAbove, Mobile } from '@utils/responsive/Device';
 import type { RankUserItemType } from '@utils/types/Rank';
 
 const GET_WALLET_RANK = gql(/* GraphQL */ `
@@ -63,9 +63,9 @@ export const WalletRanks = () => {
 
   return (
     <DashboardContent title={title}>
-      <AboveTablet>
+      <TabletAndAbove>
         <RankUser rankList={rankList} cnt={5} unit={unit} />
-      </AboveTablet>
+      </TabletAndAbove>
       <Mobile>
         <RankUser rankList={rankList} cnt={3} unit={unit} />
       </Mobile>

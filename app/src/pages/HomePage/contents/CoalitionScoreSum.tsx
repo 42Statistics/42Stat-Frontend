@@ -4,7 +4,7 @@ import { Loader } from '@components/common';
 import { BarChart } from '@components/elements/Chart';
 import { ApolloNotFound } from '@components/elements/DashboardContentView';
 import { ApolloBadRequest } from '@components/elements/DashboardContentView/ApolloBadRequest';
-import { DashboardContent } from '@components/templates/Dashboard';
+import { DashboardContent } from '@components/templates/DashboardContent';
 import { millionFormatter } from '@utils/formatters';
 
 export const GET_COALITION_TOTAL_SCORES = gql(/* GraphQL */ `

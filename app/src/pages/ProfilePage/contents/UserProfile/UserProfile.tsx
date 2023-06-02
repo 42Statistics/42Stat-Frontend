@@ -17,7 +17,7 @@ import {
 } from '@components/elements/DashboardContentView';
 import styled from '@emotion/styled';
 import { getTitleWithLogin } from '@utils/getTitleWithLogin';
-import { BelowTablet, Desktop } from '@utils/responsive/Device';
+import { TabletAndBelow, Desktop } from '@utils/responsive/Device';
 import { titleCase } from '@utils/titleCase';
 import { truncate } from 'lodash-es';
 import { useParams } from 'react-router-dom';
@@ -83,7 +83,7 @@ export const UserProfile = () => {
           </HStack>
         </HStack>
       </Desktop>
-      <BelowTablet>
+      <TabletAndBelow>
         <VStack h="100%" spacing="2rem">
           <Avatar size="6rem" imgUrl={imgUrl} />
           <VStack>
@@ -98,7 +98,7 @@ export const UserProfile = () => {
             <WhiteH3BoldText>{level.toFixed(2)}</WhiteH3BoldText>
           </HStack>
         </VStack>
-      </BelowTablet>
+      </TabletAndBelow>
     </UserProfileLayout>
   );
 };

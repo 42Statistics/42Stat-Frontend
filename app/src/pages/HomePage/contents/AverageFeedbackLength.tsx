@@ -6,7 +6,7 @@ import {
   ApolloNotFound,
 } from '@components/elements/DashboardContentView';
 import { NumberDefault } from '@components/elements/DashboardContentView/Text';
-import { DashboardContent } from '@components/templates/Dashboard';
+import { DashboardContent } from '@components/templates/DashboardContent';
 
 const GET_AVERAGE_FEEDBACK_LENGTH = gql(/* GraphQL */ `
   query getAverageFeedbackLength {

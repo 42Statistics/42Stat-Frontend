@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import type { DesktopDashboardProps } from '@utils/types/Dashboard';
 import { DashboardItem } from './DashboardItem';
-import { DashboardItemWrapper } from './DashboardItemWrapper';
 import { DesktopDashboardRow } from './DesktopDashboardRow';
 
 export const DesktopDashboard = ({ rows, contents }: DesktopDashboardProps) => {
@@ -10,18 +9,13 @@ export const DesktopDashboard = ({ rows, contents }: DesktopDashboardProps) => {
       {rows.map(({ row, col, items }, rowIdx) => (
         <DesktopDashboardRow key={rowIdx} row={row} col={col}>
           {items.map(({ row, col, rowSpan, colSpan, elementId }, itemIdx) => (
-            <DashboardItemWrapper
+            <DashboardItem
               key={itemIdx}
               row={row}
               col={col}
               rowSpan={rowSpan}
               colSpan={colSpan}
-              element={
-                <DashboardItem
-                  id={contents[elementId].id}
-                  content={contents[elementId].content}
-                />
-              }
+              content={contents[elementId].content}
             />
           ))}
         </DesktopDashboardRow>

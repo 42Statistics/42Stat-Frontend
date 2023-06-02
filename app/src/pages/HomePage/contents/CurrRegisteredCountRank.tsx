@@ -6,7 +6,7 @@ import {
   ApolloNotFound,
 } from '@components/elements/DashboardContentView';
 import { Rank } from '@components/elements/DashboardContentView/Rank';
-import { DashboardContent } from '@components/templates/Dashboard';
+import { DashboardContent } from '@components/templates/DashboardContent';
 import type { RankItemType } from '@utils/types/Rank';
 
 const GET_CURR_REGISTERED_COUNT_RANK = gql(/* GraphQL */ `

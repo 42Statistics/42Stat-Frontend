@@ -15,14 +15,14 @@ export const Tablet = ({ children }: React.PropsWithChildren) => {
   return <>{isTablet ? children : null}</>;
 };
 
-export const AboveTablet = ({ children }: React.PropsWithChildren) => {
+export const TabletAndAbove = ({ children }: React.PropsWithChildren) => {
   const device = useDeviceType();
-  const isAboveTablet = device === 'desktop' || device === 'tablet';
-  return <>{isAboveTablet ? children : null}</>;
+  const isTabletAndAbove = device === 'desktop' || device === 'tablet';
+  return <>{isTabletAndAbove ? children : null}</>;
 };
 
-export const BelowTablet = ({ children }: React.PropsWithChildren) => {
+export const TabletAndBelow = ({ children }: React.PropsWithChildren) => {
   const device = useDeviceType();
-  const isBelowTablet = device === 'mobile' || device === 'tablet';
-  return <>{isBelowTablet ? children : null}</>;
+  const isTabletAndBelow = device === 'mobile' || device === 'tablet';
+  return <>{isTabletAndBelow ? children : null}</>;
 };

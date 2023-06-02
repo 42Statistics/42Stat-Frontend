@@ -1,5 +1,5 @@
 import { AccentH3MediumText, Center } from '@components/common';
-import { DashboardContent } from '@components/templates/Dashboard';
+import { DashboardContent } from '@components/templates/DashboardContent';
 import { Link, useParams } from 'react-router-dom';
 
 export const EvalLogSearchLink = () => {

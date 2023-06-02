@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import type { MobileDashboardProps } from '@utils/types/Dashboard';
 import { DashboardItem } from './DashboardItem';
-import { DashboardItemWrapper } from './DashboardItemWrapper';
 import { MobileDashboardRow } from './MobileDashboardRow';
 
 export const MobileDashboard = ({ rows, contents }: MobileDashboardProps) => {
@@ -10,18 +9,13 @@ export const MobileDashboard = ({ rows, contents }: MobileDashboardProps) => {
       {rows.map(({ row, col, items }, rowIdx) => (
         <MobileDashboardRow key={rowIdx} row={row} col={col}>
           {items.map(({ row, col, rowSpan, colSpan, elementId }, itemIdx) => (
-            <DashboardItemWrapper
+            <DashboardItem
               key={itemIdx}
               row={row}
               col={col}
               rowSpan={rowSpan}
               colSpan={colSpan}
-              element={
-                <DashboardItem
-                  id={contents[elementId].id}
-                  content={contents[elementId].content}
-                />
-              }
+              content={contents[elementId].content}
             />
           ))}
         </MobileDashboardRow>

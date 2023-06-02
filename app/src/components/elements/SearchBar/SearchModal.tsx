@@ -3,6 +3,7 @@ import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { ModalType } from '@utils/types/Modal';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { MobileSearchInput } from './MobileSearchInput';
 import { MobileSearchResult } from './MobileSearchResult';
 import { useSearchBar } from './hooks';
@@ -16,11 +17,11 @@ export const SearchModal = ({ isOpen, toggle }: ModalType) => {
     searchProject,
     users,
     projects,
-    handleUserSubmit,
-    handleProjectSubmit,
+    resetInput,
   } = useSearchBar();
 
   const theme = useTheme();
+  const navigate = useNavigate();
   const isPreviewDisplaying =
     debouncedInput !== '' && (!!users.length || !!projects.length);
 
@@ -33,14 +34,16 @@ export const SearchModal = ({ isOpen, toggle }: ModalType) => {
     });
   }, [debouncedInput, searchUser, searchProject]);
 
-  const handleUserSubmitWithToggle = (name: string) => {
+  const handleUserSubmit = (name: string) => {
     toggle();
-    handleUserSubmit(name);
+    resetInput();
+    navigate(`/profile/${name}`);
   };
 
-  const handleProjectSubmitWithToggle = (name: string) => {
+  const handleProjectSubmit = (name: string) => {
     toggle();
-    handleProjectSubmit(name);
+    resetInput();
+    navigate(`/project/${name}`);
   };
 
   const handleClickSearchBtn = () => {
@@ -67,8 +70,8 @@ export const SearchModal = ({ isOpen, toggle }: ModalType) => {
           <MobileSearchResult
             users={users}
             projects={projects}
-            onUserSubmit={handleUserSubmitWithToggle}
-            onProjectSubmit={handleProjectSubmitWithToggle}
+            onUserSubmit={handleUserSubmit}
+            onProjectSubmit={handleProjectSubmit}
           />
         ) : (
           <VStack w="100%" h="10rem">
@@ -84,6 +87,6 @@ export const SearchModal = ({ isOpen, toggle }: ModalType) => {
 const SearchModalLayout = styled(VStack)`
   width: 100vw;
   height: 100vh;
-  padding: 4rem;
+  padding: 6rem 2rem 0 2rem;
   gap: 4rem;
 `;

@@ -3,7 +3,6 @@ import { useLazyQuery } from '@apollo/client';
 import { isDefined } from '@utils/isDefined';
 import { useDebounce } from '@utils/useDebounce';
 import { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 export const FIND_USER_PREVIEW = gql(/* GraphQL */ `
   query FindUserPreview($login: String!) {
@@ -29,7 +28,6 @@ export const useSearchBar = () => {
   const [input, setInput] = useState<string>('');
   const debouncedInput = useDebounce(input, 100);
   const inputRef = useRef<HTMLInputElement>(null);
-  const navigate = useNavigate();
 
   const [
     searchUser,
@@ -45,20 +43,11 @@ export const useSearchBar = () => {
     ? projectData.findProjectPreview.filter(isDefined)
     : [];
 
-  const handleUserSubmit = (name: string) => {
+  const resetInput = () => {
     if (inputRef?.current) {
       inputRef.current.value = '';
     }
     setInput('');
-    navigate('/profile/' + name);
-  };
-
-  const handleProjectSubmit = (name: string) => {
-    if (inputRef?.current) {
-      inputRef.current.value = '';
-    }
-    setInput('');
-    navigate('/project/' + name);
   };
 
   return {
@@ -74,7 +63,6 @@ export const useSearchBar = () => {
     projects,
     projectLoading,
     projectError,
-    handleUserSubmit,
-    handleProjectSubmit,
+    resetInput,
   };
 };

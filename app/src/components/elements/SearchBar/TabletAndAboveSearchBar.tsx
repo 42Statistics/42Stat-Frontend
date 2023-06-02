@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { isEnterKeyReleased } from '@utils/isEnterKeyReleased';
 import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { TabletAndAboveSearchInput } from './TabletAndAboveSearchInput';
 import { TabletAndAboveSearchResult } from './TabletAndAboveSearchResult';
 import { useSearchBar } from './hooks';
@@ -15,13 +16,24 @@ export const TabletAndAboveSearchBar = () => {
     searchProject,
     users,
     projects,
-    handleUserSubmit,
-    handleProjectSubmit,
+    resetInput,
   } = useSearchBar();
 
   const [isFocused, setIsFocused] = useState<boolean>(false);
+  const location = useLocation();
+  const navigate = useNavigate();
   const isPreviewDisplaying =
     debouncedInput !== '' && (!!users.length || !!projects.length);
+
+  const handleUserSubmit = (name: string) => {
+    resetInput();
+    navigate(`/profile/${name}`);
+  };
+
+  const handleProjectSubmit = (name: string) => {
+    resetInput();
+    navigate(`/project/${name}`);
+  };
 
   useEffect(() => {
     searchUser({
@@ -31,6 +43,10 @@ export const TabletAndAboveSearchBar = () => {
       variables: { name: debouncedInput },
     });
   }, [debouncedInput, searchUser, searchProject]);
+
+  useEffect(() => {
+    resetInput();
+  }, [location.pathname]); // FIXME: resetInput을 종속성 배열에 넣으면 매 input이 변할 때마다 resetInput이 호출됨
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (!isEnterKeyReleased(e)) {

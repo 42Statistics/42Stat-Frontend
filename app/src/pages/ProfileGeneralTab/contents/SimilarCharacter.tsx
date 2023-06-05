@@ -1,5 +1,11 @@
-import { H3Text, Image, VStack } from '@/components/common';
+import { gql } from '@/__generated__';
+import { H3Text, Image, Loader, VStack } from '@/components/common';
+import {
+  ApolloBadRequest,
+  ApolloNotFound,
+} from '@/components/elements/DashboardContentView';
 import { DashboardContent } from '@/components/templates/Dashboard';
+import { useQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -11,7 +17,7 @@ import { useParams } from 'react-router-dom';
  * 인덱스 값에 변경이 생길경우 getX getY값의 출력범위를 조정해야함
  */
 const pokemonArray = [
-  ['Pikachu', 'Togepi', 'abra', 'Espeon', 'Lugia', 'Mew', 'Mewtwo'],
+  ['starting', 'Togepi', 'abra', 'Espeon', 'Lugia', 'Mew', 'Mewtwo'],
   ['Geodude', 'Eevee', 'Marill', 'Raichu', 'Jolteon', 'Ampharos', 'Zapdos'],
   ['Onix', 'Dratini', 'Lapras', 'Haunter', 'Gengar', 'Mimikyu', 'Darkrai'],
   [
@@ -52,6 +58,18 @@ const pokemonArray = [
   ],
 ];
 
+const GET_COALITION = gql(/* GraphQL */ `
+  query getCoalition($login: String!) {
+    getPersonGeneralPage(login: $login) {
+      userProfile {
+        coalition {
+          name
+        }
+      }
+    }
+  }
+`);
+
 export const SimilarCharacter = () => {
   const { username } = useParams() as { username: string };
 
@@ -63,12 +81,57 @@ export const SimilarCharacter = () => {
   );
   const [pokeName, setPokeName] = useState('unown');
 
+  const { loading, error, data } = useQuery(GET_COALITION, {
+    variables: { login: username },
+  });
+
+  /**
+   *재능값을 구하는 구하는 로직
+   * @returns 0~6 사이의 재능 값
+   */
+  const getX = () => {
+    return 1;
+  };
+
+  /**
+   *노력값을 구하는 로직
+   * @returns 0~6 사이의 노력 값
+   */
+  const getY = () => {
+    return 2;
+  };
+
   useEffect(() => {
     // 인덱싱을 위해 반올림 처리
     const y = Math.round(getY());
     const x = Math.round(getX());
-    const fetchURL =
-      'https://pokeapi.co/api/v2/pokemon/' + pokemonArray[y][x].toLowerCase();
+    let queryName = pokemonArray[y][x].toLowerCase();
+
+    // 스타팅 일 경우 건곤감리에 따라 다른 포켓몬 설정
+    if (data) {
+      const { name: coalition } =
+        data.getPersonGeneralPage.userProfile.coalition;
+      if (queryName === 'starting') {
+        switch (coalition) {
+          case 'Gun':
+            queryName = 'Pikachu';
+            break;
+          case 'Gon':
+            queryName = 'Bulbasaur';
+            break;
+          case 'Gam':
+            queryName = 'Squirtle';
+            break;
+          case 'Lee':
+            queryName = 'Charmander';
+            break;
+          default:
+            queryName = 'unown';
+        }
+      }
+    }
+
+    const fetchURL = 'https://pokeapi.co/api/v2/pokemon/' + queryName;
 
     fetch(fetchURL)
       .then((response) => response.json())
@@ -90,23 +153,26 @@ export const SimilarCharacter = () => {
       .catch((error) => {
         console.log('데이터를 가져오는 중에 오류가 발생했습니다:', error);
       });
-  }, [pokeName, username]);
+  }, [pokeName, username, data]);
 
-  /**
-   *재능값을 구하는 구하는 로직
-   * @returns 0~6 사이의 재능 값
-   */
-  const getX = () => {
-    return 1;
-  };
-
-  /**
-   *노력값을 구하는 로직
-   * @returns 0~6 사이의 노력 값
-   */
-  const getY = () => {
-    return 2;
-  };
+  if (loading)
+    return (
+      <DashboardContent title={title}>
+        <Loader />
+      </DashboardContent>
+    );
+  if (error)
+    return (
+      <DashboardContent title={title}>
+        <ApolloBadRequest msg={error.message} />
+      </DashboardContent>
+    );
+  if (!data)
+    return (
+      <DashboardContent title={title}>
+        <ApolloNotFound />
+      </DashboardContent>
+    );
 
   return (
     <DashboardContent title={title} description={description}>

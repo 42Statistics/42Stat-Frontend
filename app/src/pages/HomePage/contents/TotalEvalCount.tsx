@@ -1,12 +1,12 @@
 import { gql } from '@/__generated__';
-import { Loader } from '@/components/common';
+import { useQuery } from '@apollo/client';
+import { Loader } from '@components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
-} from '@/components/elements/DashboardContentView';
-import { NumberDefault } from '@/components/elements/DashboardContentView/Text';
-import { DashboardContent } from '@/components/templates/Dashboard';
-import { useQuery } from '@apollo/client';
+} from '@components/elements/DashboardContentView';
+import { NumberDefault } from '@components/elements/DashboardContentView/Text';
+import { DashboardContent } from '@components/templates/DashboardContent';
 
 const GET_TOTAL_EVAL_COUNT = gql(/* GraphQL */ `
   query getTotalEvalCount {

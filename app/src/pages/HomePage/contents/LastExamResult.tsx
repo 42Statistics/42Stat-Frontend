@@ -1,12 +1,12 @@
 import { gql } from '@/__generated__';
-import { Loader } from '@/components/common';
-import { BarChart } from '@/components/elements/Chart';
+import { useQuery } from '@apollo/client';
+import { Loader } from '@components/common';
+import { BarChart } from '@components/elements/Chart';
 import {
   ApolloBadRequest,
   ApolloNotFound,
-} from '@/components/elements/DashboardContentView';
-import { DashboardContent } from '@/components/templates/Dashboard';
-import { useQuery } from '@apollo/client';
+} from '@components/elements/DashboardContentView';
+import { DashboardContent } from '@components/templates/DashboardContent';
 import dayjs from 'dayjs';
 
 const GET_LAST_EXAM_RESULT = gql(/* GraphQL */ `

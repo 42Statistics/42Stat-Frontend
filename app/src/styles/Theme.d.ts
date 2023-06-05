@@ -44,9 +44,18 @@ type Fonts = {
   };
 };
 
+type ZIndex = {
+  searchResult: number;
+  absoluteButton: number;
+  overlay: number;
+  navBar: number;
+  modal: number;
+};
+
 declare module '@emotion/react' {
   export interface Theme {
     colors: Colors;
     fonts: Fonts;
+    zIndex: ZIndex;
   }
 }

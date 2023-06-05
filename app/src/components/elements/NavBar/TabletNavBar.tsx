@@ -1,6 +1,6 @@
-import { Avatar, Clickable, Overlay, VStack } from '@/components/common';
-import { isNavBarOpenAtom } from '@/utils/atoms/isNavBarOpenAtom';
-import { userAtom } from '@/utils/atoms/userAtom';
+import { isNavBarOpenAtom } from '@atoms/isNavBarOpenAtom';
+import { userAtom } from '@atoms/userAtom';
+import { Avatar, Clickable, Overlay, VStack } from '@components/common';
 import styled from '@emotion/styled';
 import { GiHamburgerMenu } from '@react-icons/all-files/gi/GiHamburgerMenu';
 import { useAtom, useAtomValue } from 'jotai';
@@ -52,7 +52,6 @@ const TabletNavBarLayout = styled.div`
   height: 100%;
   padding: 3rem 1rem;
   background-color: ${({ theme }) => theme.colors.mono.white};
-  z-index: 100;
 `;
 
 const OpenDesktopNavBarLayout = styled(DesktopNavBarLayout)<{
@@ -61,4 +60,5 @@ const OpenDesktopNavBarLayout = styled(DesktopNavBarLayout)<{
   box-shadow: none;
   transform: ${({ isOpen }) => !isOpen && 'translateX(-100%)'};
   transition: all 0.5s;
+  z-index: ${({ theme }) => theme.zIndex.navBar};
 `;

@@ -1,29 +1,22 @@
 import { gql } from '@/__generated__';
 import { EvalLog } from '@/__generated__/graphql';
-import {
-  Center,
-  Clickable,
-  Loader,
-  PrimaryBoldText,
-  Text,
-  VStack,
-} from '@/components/common';
-import { isDefined } from '@/utils/isDefined';
-import { useIntersectionObserver } from '@/utils/useIntersectionObserver';
 import { useLazyQuery } from '@apollo/client';
-import { useTheme } from '@emotion/react';
-import styled from '@emotion/styled';
-import { MdSearch } from '@react-icons/all-files/md/MdSearch';
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { Helmet } from 'react-helmet-async';
+import { VStack } from '@components/common';
+import { Seo } from '@components/elements/Seo';
+import { withHead } from '@hoc/withHead';
+import { isDefined } from '@utils/isDefined';
+import { useInfiniteScroll } from '@utils/useInfiniteScroll';
+import { useCallback, useEffect, useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { useSearchParams } from 'react-router-dom';
-import { EvalLogItem } from './EvalLogItem';
+import { EvalLogSearchAbsoluteBtn } from './EvalLogSearchAbsoluteBtn';
+import { EvalLogSearchDetail } from './EvalLogSearchDetail';
 import { EvalLogSearchModal } from './EvalLogSearchModal';
+import { EvalLogSearchTitle } from './EvalLogSearchTitle';
 
 export type EvalLogSearchForm = {
   projectName: string;
-  outstandingOnly: 'all' | 'outstanding';
+  outstandingOnly: boolean;
   corrector: string;
   corrected: string;
 };
@@ -86,85 +79,63 @@ const GET_EVAL_LOGS = gql(/* GraphQL */ `
   }
 `);
 
-export const EvalLogSearchPage = () => {
+const EvalLogSearchPage = () => {
   const RESULT_PER_PAGE = 10;
+  const [end, setEnd] = useState<boolean>(false);
+  const [search, { data, loading, error }] = useLazyQuery(GET_EVAL_LOGS);
   const [page, setPage] = useState<number>(1);
-  const [search, { loading, error, data }] = useLazyQuery(GET_EVAL_LOGS);
-  const theme = useTheme();
   const [searchParams] = useSearchParams();
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const toggleModal = useCallback(() => setIsModalOpen((cur) => !cur), []);
-
   const [form, setForm] = useState<EvalLogSearchForm>({
     projectName: searchParams.get('projectName') ?? '',
-    outstandingOnly:
-      searchParams.get('outstandingOnly') === 'outstanding'
-        ? 'outstanding'
-        : 'all',
+    outstandingOnly: searchParams.get('outstandingOnly') === 'true',
     corrector: searchParams.get('corrector') ?? '',
     corrected: searchParams.get('corrected') ?? '',
   });
-
   const [evalLogs, setEvalLogs] = useState<EvalLog[]>([]);
-  const ref = useRef<HTMLDivElement>(null);
-  const entry = useIntersectionObserver(ref, { threshold: 0.5 });
-  const isVisible = !!entry?.isIntersecting;
+
+  const onSubmit: SubmitHandler<EvalLogSearchForm> = (newForm) => {
+    setEvalLogs([]);
+    setForm(newForm);
+    setPage(1);
+    setEnd(false);
+    toggleModal();
+  };
+
+  const { ref, isVisible } = useInfiniteScroll();
+
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const toggleModal = useCallback(() => setIsModalOpen((cur) => !cur), []);
 
   useEffect(() => {
     if (!data) {
+      return;
+    }
+    if (data.getEvalLogs.nodes.length === 0) {
+      setEnd(true);
       return;
     }
     const { nodes } = data.getEvalLogs;
     setEvalLogs((cur) => [...cur, ...nodes.filter(isDefined)]);
   }, [data]);
 
-  const onSubmit: SubmitHandler<EvalLogSearchForm> = (data) => {
-    if (data === form) {
-      return;
-    }
-    setEvalLogs([]);
-    setForm(data);
-    setPage(1);
-    toggleModal();
-  };
-
   useEffect(() => {
-    const fetch = () => {
-      search({
-        variables: {
-          pageSize: RESULT_PER_PAGE,
-          pageNumber: page,
-          ...form,
-          outstandingOnly: form.outstandingOnly === 'outstanding',
-        },
-      });
-      setPage((cur) => cur + 1);
-    };
-
-    if (!isVisible) {
+    if (!isVisible || loading) {
       return;
     }
-    if (loading) {
-      return;
-    }
-    fetch();
+    search({
+      variables: {
+        pageSize: RESULT_PER_PAGE,
+        pageNumber: page,
+        ...form,
+      },
+    });
+    setPage((cur) => cur + 1);
   }, [isVisible, loading, form, page, search]);
 
+  // TODO: Headless Modal
   return (
     <>
-      <Helmet>
-        <title>평가로그 검색기 | 42Stat</title>
-      </Helmet>
-
-      {/* TODO: Headless Modal 제작하기 */}
-      <Clickable
-        onClick={toggleModal}
-        element={
-          <SearchIconLayout>
-            <MdSearch color={theme.colors.mono.white} size="20px" />
-          </SearchIconLayout>
-        }
-      />
+      <EvalLogSearchAbsoluteBtn toggleModal={toggleModal} />
       <EvalLogSearchModal
         isOpen={isModalOpen}
         toggle={toggleModal}
@@ -172,41 +143,21 @@ export const EvalLogSearchPage = () => {
         onSubmit={onSubmit}
       />
       <VStack w="100%" spacing="2rem">
-        <VStack w="100%" align="start">
-          <PrimaryBoldText selectable>{`${
-            form.corrector === '' ? 'Anyone' : form.corrector
-          } → ${form.corrected === '' ? 'Anyone' : form.corrected} / ${
-            form.projectName === '' ? '모든 서브젝트' : form.projectName
-          } / ${
-            form.outstandingOnly === 'outstanding'
-              ? 'Outstanding만'
-              : '모든 평가'
-          } / 최신순`}</PrimaryBoldText>
-          <Text color={theme.colors.mono.gray300} selectable>
-            검색결과 32,801건
-          </Text>
-        </VStack>
-        <VStack as="ul" w="100%" spacing="2rem">
-          {evalLogs.map((evalLog, idx) => (
-            <EvalLogItem key={idx} element={evalLog} />
-          ))}
-          <Center w="100%" h="10rem" ref={ref}>
-            {loading && <Loader />}
-          </Center>
-        </VStack>
+        <EvalLogSearchTitle form={form} />
+        <EvalLogSearchDetail
+          evalLogs={evalLogs}
+          end={end}
+          loading={loading}
+          error={error}
+          infiniteScrollRef={ref}
+        />
       </VStack>
     </>
   );
 };
 
-const SearchIconLayout = styled.div`
-  position: fixed;
-  bottom: 8rem;
-  right: 5rem;
-  border-radius: 999px;
-  padding: 1.5rem;
-  background-color: ${({ theme }) => theme.colors.primary.default};
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  z-index: 100;
-  cursor: pointer;
-`;
+const Head = () => {
+  return <Seo title="평가로그 검색기" />;
+};
+
+export default withHead(EvalLogSearchPage, Head);

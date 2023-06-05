@@ -1,5 +1,4 @@
-import { HStack, Text } from '@/components/common';
-import { useTheme } from '@emotion/react';
+import { HStack, Text } from '@components/common';
 import styled from '@emotion/styled';
 import { useLocation, useNavigate } from 'react-router-dom';
 import type { NavRoute } from './hooks';
@@ -11,19 +10,14 @@ export type NavItemProps = {
 export const NavItem = ({ route }: NavItemProps) => {
   const location = useLocation();
   const isFocused = location.pathname === route.path;
-  const NavItemIcon = route.icon;
-  const NavItemIconFocused = route.iconFocused;
+  const NavItemIcon = !isFocused ? route.icon : route.iconFocused;
   const navigate = useNavigate();
 
   // Link를 NavItemLayout 안에 넣으면 padding 부분을 눌렀을 때 작동하지 않아서 navigate으로 대체
   return (
     <NavItemLayout isFocused={isFocused} onClick={() => navigate(route.path)}>
       <HStack spacing="1.5rem" justify="start">
-        {!isFocused ? (
-          <NavItemIcon size="16px" />
-        ) : (
-          <NavItemIconFocused size="16px" />
-        )}
+        <NavItemIcon size="16px" />
         <Text>{route.text}</Text>
       </HStack>
     </NavItemLayout>

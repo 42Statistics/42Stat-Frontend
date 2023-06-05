@@ -1,7 +1,7 @@
-import { DashboardItemWrapper } from '@/components/templates/Dashboard/DashboardItemWrapper';
-import { MobileDashboardLayout } from '@/components/templates/Dashboard/MobileDashboard';
-import { MobileDashboardRow } from '@/components/templates/Dashboard/MobileDashboardRow';
-import type { MobileDashboardProps } from '@/utils/types/Dashboard';
+import { DashboardItem } from '@components/templates/Dashboard/DashboardItem';
+import { MobileDashboardLayout } from '@components/templates/Dashboard/MobileDashboard';
+import { MobileDashboardRow } from '@components/templates/Dashboard/MobileDashboardRow';
+import type { MobileDashboardProps } from '@utils/types/Dashboard';
 import { DashboardSkeletonItem } from './DashboardSkeletonItem';
 
 type MobileDashboardSkeletonProps = Omit<MobileDashboardProps, 'contents'>;
@@ -14,13 +14,13 @@ export const MobileDashboardSkeleton = ({
       {rows.map(({ row, col, items }, rowIdx) => (
         <MobileDashboardRow key={rowIdx} row={row} col={col}>
           {items.map(({ row, col, rowSpan, colSpan }, itemIdx) => (
-            <DashboardItemWrapper
+            <DashboardItem
               key={itemIdx}
               row={row}
               col={col}
               rowSpan={rowSpan}
               colSpan={colSpan}
-              element={<DashboardSkeletonItem />}
+              content={DashboardSkeletonItem}
             />
           ))}
         </MobileDashboardRow>

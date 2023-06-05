@@ -1,138 +1,61 @@
-import { ModalType } from '@/utils/types/Modal';
 import styled from '@emotion/styled';
-import { rgba } from 'emotion-rgba';
-import { Input } from './Input';
-
-export const ModalContainer = styled.div`
-  // Modal을 구현하는데 전체적으로 필요한 CSS를 구현
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-`;
-
-export const ModalBackdrop = styled.div`
-  // Modal이 떴을 때의 배경을 깔아주는 CSS를 구현
-  z-index: 500; //위치지정 요소
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.4);
-  border-radius: 10px;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-`;
+import type { ModalType } from '@utils/types/Modal';
+import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
+import { Center } from './Center';
+import { Overlay } from './Overlay';
 
 export const ModalView = styled.div`
-  // Modal창 CSS를 구현합니다.
-  padding: 4rem;
   display: flex;
-  align-items: center;
-  flex-direction: column;
+  padding: 4rem;
   border-radius: 2rem;
-  width: 500px;
-  heigth: 200px;
-  background-color: #ffffff;
-  > div.desc {
-    margin: 50px;
-    font-size: 20px;
-    color: var(--coz-purple-600);
-  }
+  background-color: ${({ theme }) => theme.colors.mono.white};
 `;
 
 type ModalProps = ModalType & React.PropsWithChildren;
 
+// https://velog.io/@sunohvoiin/ReactCSS-%EB%AA%A8%EB%8B%AC%EC%B0%BD%EC%9D%B4-%EC%97%B4%EB%A0%A4%EC%9E%88%EC%9D%84-%EB%95%8C-body-%EC%8A%A4%ED%81%AC%EB%A1%A4-%EB%B0%A9%EC%A7%80%ED%95%98%EA%B8%B0
+const preventScroll = () => {
+  const currentScrollY = window.scrollY;
+  document.body.style.position = 'fixed';
+  document.body.style.width = '100%';
+  document.body.style.top = `-${currentScrollY}px`; // 현재 스크롤 위치
+  document.body.style.overflowY = 'scroll';
+  return currentScrollY;
+};
+
+const allowScroll = (prevScrollY: number) => {
+  document.body.style.position = '';
+  document.body.style.width = '';
+  document.body.style.top = '';
+  document.body.style.overflowY = '';
+  window.scrollTo(0, prevScrollY);
+};
+
 export const Modal = ({ isOpen, toggle, children }: ModalProps) => {
-  const openModalHandler = () => {
-    toggle();
-  };
+  useEffect(() => {
+    if (isOpen) {
+      const prevScrollY = preventScroll();
+      return () => allowScroll(prevScrollY);
+    }
+  }, [isOpen]);
+
   return (
     <>
-      <ModalContainer>
-        {isOpen ? (
-          <ModalBackdrop onClick={openModalHandler}>
-            {/* //event 버블링을 막는 메소드 */}
-            <ModalView role="dialog" onClick={(e) => e.stopPropagation()}>
-              {children}
-            </ModalView>
-          </ModalBackdrop>
-        ) : null}
-      </ModalContainer>
+      {isOpen ? (
+        <>
+          {createPortal(
+            <Overlay onClick={toggle}>
+              <Center w="100%" h="100%">
+                <ModalView role="dialog" onClick={(e) => e.stopPropagation()}>
+                  {children}
+                </ModalView>
+              </Center>
+            </Overlay>,
+            document.getElementById('modal') as HTMLElement,
+          )}
+        </>
+      ) : null}
     </>
   );
 };
-
-const EvalLogSearchInput = styled(Input)`
-  all: unset;
-  padding: 0.5rem 1.5rem;
-  border-radius: 2rem;
-
-  box-shadow: ${({ theme }) =>
-    `0 0.4rem 0.4rem ${rgba(theme.colors.mono.black, 0.1)}`};
-
-  :hover {
-    box-shadow: ${({ theme }) =>
-      `0 0.4rem 0.4rem ${rgba(theme.colors.mono.black, 0.25)}`};
-  }
-
-  transition: all 0.2s;
-  :hover,
-  :focus {
-    background-color: ${({ theme }) => theme.colors.mono.white};
-    color: ${({ theme }) => theme.colors.mono.black};
-  }
-`;
-
-/**
- * 
- * <form onSubmit={handleSubmit(onSubmit)}>
-                <VStack as="ul" w="100%" spacing="2rem">
-                  <HStack
-                    w="100%"
-                    as="li"
-                    justify="space-between"
-                    spacing="3rem"
-                  >
-                    <Text>과제명</Text>
-                    <EvalLogSearchInput {...register('projectName')} />
-                  </HStack>
-                  <HStack w="100%" as="li" justify="space-between">
-                    <Text>From</Text>
-                    <EvalLogSearchInput {...register('corrector')} />
-                  </HStack>
-                  <HStack w="100%" as="li" justify="space-between">
-                    <Text>To</Text>
-                    <EvalLogSearchInput {...register('corrected')} />
-                  </HStack>
-                  <HStack w="100%" as="li" justify="space-between">
-                    <Text>플래그</Text>
-                    <HStack spacing="2rem">
-                      <HStack spacing="1rem">
-                        <input
-                          type="radio"
-                          {...register('outstandingOnly')}
-                          value="all"
-                          defaultChecked={form.outstandingOnly === 'all'}
-                        />
-                        <Text>전체</Text>
-                      </HStack>
-                      <HStack spacing="1rem">
-                        <input
-                          type="radio"
-                          {...register('outstandingOnly')}
-                          value="outstanding"
-                          defaultChecked={
-                            form.outstandingOnly === 'outstanding'
-                          }
-                        />
-                        <Text>Outstanding</Text>
-                      </HStack>
-                    </HStack>
-                  </HStack>
-                  <Button type="submit" text="검색하기" />
-                </VStack>
-              </form>
- */

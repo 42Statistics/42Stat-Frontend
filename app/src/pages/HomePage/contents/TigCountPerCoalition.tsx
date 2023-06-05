@@ -1,7 +1,7 @@
-import { Center, H3Text, Text, VStack } from '@/components/common';
-import { DashboardContent } from '@/components/templates/Dashboard';
-import { numberWithUnitFormatter } from '@/utils/formatters';
+import { Center, H3Text, Text, VStack } from '@components/common';
+import { DashboardContent } from '@components/templates/DashboardContent';
 import styled from '@emotion/styled';
+import { numberWithUnitFormatter } from '@utils/formatters';
 import dayjs from 'dayjs';
 import { capitalize } from 'lodash-es';
 

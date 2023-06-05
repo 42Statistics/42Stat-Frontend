@@ -1,3 +1,4 @@
+
 import { gql } from '@/__generated__';
 import { H3Text, Image, Loader, VStack } from '@/components/common';
 import {
@@ -69,7 +70,7 @@ const GET_COALITION = gql(/* GraphQL */ `
     }
   }
 `);
-
+        
 export const SimilarCharacter = () => {
   const { username } = useParams() as { username: string };
 

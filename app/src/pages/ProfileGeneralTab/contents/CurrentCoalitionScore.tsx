@@ -1,11 +1,11 @@
 import { gql } from '@/__generated__';
-import { H3Text, HStack, Image, Loader, Text } from '@/components/common';
+import { useQuery } from '@apollo/client';
+import { H3Text, HStack, Image, Loader, Text } from '@components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
-} from '@/components/elements/DashboardContentView';
-import { DashboardContent } from '@/components/templates/Dashboard';
-import { useQuery } from '@apollo/client';
+} from '@components/elements/DashboardContentView';
+import { DashboardContent } from '@components/templates/DashboardContent';
 import styled from '@emotion/styled';
 import { useParams } from 'react-router-dom';
 
@@ -55,7 +55,7 @@ export const CurrentCoalitionScore = () => {
   const { coalition, scoreInfo } = data.getPersonGeneralPage.userProfile;
   return (
     <DashboardContent title={title}>
-      <HStack spacing="1rem" style={{ marginTop: '1rem' }}>
+      <HStack h="100%" spacing="1rem">
         <H3Text>{coalition.score.toLocaleString()}</H3Text>
         <HStack spacing="0.5rem">
           {coalition.imageUrl && coalition.color && (

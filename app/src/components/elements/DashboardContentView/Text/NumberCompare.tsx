@@ -1,7 +1,8 @@
-import { H3Text, HStack, Text } from '@/components/common';
+import { H3Text, HStack, Text } from '@components/common';
 import { useTheme } from '@emotion/react';
 import { BsDash } from '@react-icons/all-files/bs/BsDash';
 import { BsTriangleFill } from '@react-icons/all-files/bs/BsTriangleFill';
+
 type NumberCompareProps = {
   curr: number;
   last: number;

@@ -1,4 +1,4 @@
-import { H3Text, HStack } from '@/components/common';
+import { H3Text, HStack } from '@components/common';
 import { useTheme } from '@emotion/react';
 
 type TextDefaultProps = {

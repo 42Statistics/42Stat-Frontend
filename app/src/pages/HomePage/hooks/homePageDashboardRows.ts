@@ -2,7 +2,7 @@ import type {
   DesktopDashboardRowType,
   MobileDashboardRowType,
   TabletDashboardRowType,
-} from '@/utils/types/Dashboard';
+} from '@utils/types/Dashboard';
 
 export const homePageDesktopDashboardRows: DesktopDashboardRowType[] = [
   {

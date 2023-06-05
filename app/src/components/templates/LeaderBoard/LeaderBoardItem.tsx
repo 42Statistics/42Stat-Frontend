@@ -6,12 +6,12 @@ import {
   HStack,
   MediumText,
   Spacer,
-} from '@/components/common';
-import { numberWithUnitFormatter } from '@/utils/formatters';
-import { AboveTablet, Mobile } from '@/utils/responsive/Device';
-import type { RankUserItemType } from '@/utils/types/Rank';
+} from '@components/common';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { numberWithUnitFormatter } from '@utils/formatters';
+import { TabletAndAbove, Mobile } from '@utils/responsive/Device';
+import type { RankUserItemType } from '@utils/types/Rank';
 import { Link } from 'react-router-dom';
 
 type LeaderBoardItemProps = {
@@ -28,8 +28,8 @@ export const LeaderBoardItem = ({ rank, item, unit }: LeaderBoardItemProps) => {
 
   return (
     <>
-      <AboveTablet>
-        <AboveTabletLeaderBoardItemLayout>
+      <TabletAndAbove>
+        <TabletAndAboveLeaderBoardItemLayout>
           <HStack w="100%" spacing="4rem">
             <H2BoldText color={color}>{rank}</H2BoldText>
             <Avatar size="3.5rem" imgUrl={imgUrl} />
@@ -41,8 +41,8 @@ export const LeaderBoardItem = ({ rank, item, unit }: LeaderBoardItemProps) => {
               {numberWithUnitFormatter(value, unit)}
             </H3MediumText>
           </HStack>
-        </AboveTabletLeaderBoardItemLayout>
-      </AboveTablet>
+        </TabletAndAboveLeaderBoardItemLayout>
+      </TabletAndAbove>
       <Mobile>
         <MobileLeaderBoardItemLayout>
           <HStack w="100%" spacing="3rem">
@@ -60,7 +60,7 @@ export const LeaderBoardItem = ({ rank, item, unit }: LeaderBoardItemProps) => {
   );
 };
 
-export const AboveTabletLeaderBoardItemLayout = styled.li`
+export const TabletAndAboveLeaderBoardItemLayout = styled.li`
   width: 100%;
   padding: 1rem 5rem;
   border-radius: 1rem;

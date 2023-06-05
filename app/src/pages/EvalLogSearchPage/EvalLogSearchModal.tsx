@@ -1,7 +1,6 @@
-import { Button, HStack, Input, Text, VStack } from '@/components/common';
-import { Modal } from '@/components/common/Modal';
-import type { ModalType } from '@/utils/types/Modal';
+import { Button, HStack, Input, Modal, Text, VStack } from '@components/common';
 import styled from '@emotion/styled';
+import type { ModalType } from '@utils/types/Modal';
 import { rgba } from 'emotion-rgba';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { EvalLogSearchForm } from './EvalLogSearchPage';
@@ -17,7 +16,7 @@ export const EvalLogSearchModal = ({
   form,
   onSubmit,
 }: EvalLogSearchModalProps) => {
-  const { register, handleSubmit } = useForm<EvalLogSearchForm>({
+  const { register, handleSubmit, setValue } = useForm<EvalLogSearchForm>({
     defaultValues: form,
   });
 
@@ -43,18 +42,19 @@ export const EvalLogSearchModal = ({
               <HStack spacing="1rem">
                 <input
                   type="radio"
-                  {...register('outstandingOnly')}
-                  value="all"
-                  defaultChecked={form.outstandingOnly === 'all'}
+                  name="outstandingOnly"
+                  onChange={() => setValue('outstandingOnly', false)}
+                  defaultChecked={!form.outstandingOnly}
                 />
                 <Text>전체</Text>
               </HStack>
               <HStack spacing="1rem">
                 <input
                   type="radio"
-                  {...register('outstandingOnly')}
-                  value="outstanding"
-                  defaultChecked={form.outstandingOnly === 'outstanding'}
+                  name="outstandingOnly"
+                  onChange={() => setValue('outstandingOnly', true)}
+                  value="true"
+                  defaultChecked={form.outstandingOnly}
                 />
                 <Text>Outstanding</Text>
               </HStack>
@@ -66,18 +66,6 @@ export const EvalLogSearchModal = ({
     </Modal>
   );
 };
-
-const EvalLogSearchModalLayout = styled(Modal)`
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.25);
-`;
-
-const EvalLogSearchModalContent = styled.div`
-  padding: 4rem;
-  background-color: ${({ theme }) => theme.colors.mono.white};
-  border-radius: 2rem;
-`;
 
 const EvalLogSearchInput = styled(Input)`
   all: unset;

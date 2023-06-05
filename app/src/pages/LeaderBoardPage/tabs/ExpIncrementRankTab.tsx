@@ -1,20 +1,15 @@
 import { gql } from '@/__generated__';
-import {
-  HStack,
-  Loader,
-  SegmentedControl,
-  Spacer,
-  VStack,
-} from '@/components/common';
+import { useQuery } from '@apollo/client';
+import { HStack, SegmentedControl, Spacer, VStack } from '@components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
-} from '@/components/elements/DashboardContentView';
-import { LeaderBoard } from '@/components/templates/LeaderBoard';
-import { LeaderBoardItem } from '@/components/templates/LeaderBoard/LeaderBoardItem';
-import type { RankUserItemType } from '@/utils/types/Rank';
-import { useSegmentedControl } from '@/utils/useSegmentedControl';
-import { useQuery } from '@apollo/client';
+} from '@components/elements/DashboardContentView';
+import { LeaderBoard } from '@components/templates/LeaderBoard';
+import { LeaderBoardItem } from '@components/templates/LeaderBoard/LeaderBoardItem';
+import type { RankUserItemType } from '@utils/types/Rank';
+import { useSegmentedControl } from '@utils/useSegmentedControl';
+import { LeaderBoardTabSkeleton } from '@pages/PageSkeletons/LeaderBoardTabSkeleton';
 
 // 임시
 const GET_MONTHLY_EXP_INCREMENT_RANK = gql(/* GraphQL */ `
@@ -46,7 +41,7 @@ export const ExpIncrementRankTab = () => {
   ];
   const { controlRef, segments } = useSegmentedControl(options);
 
-  if (loading) return <Loader />;
+  if (loading) return <LeaderBoardTabSkeleton />;
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 

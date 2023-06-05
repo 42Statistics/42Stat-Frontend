@@ -1,5 +1,5 @@
-import { NumberDefault } from '@/components/elements/DashboardContentView/Text';
-import { DashboardContent } from '@/components/templates/Dashboard';
+import { NumberDefault } from '@components/elements/DashboardContentView/Text';
+import { DashboardContent } from '@components/templates/DashboardContent';
 import dayjs from 'dayjs';
 
 export const CurrWeekAverageEvalCount = () => {

@@ -1,4 +1,5 @@
 import { gql } from '@/__generated__';
+import { useQuery } from '@apollo/client';
 import {
   Avatar,
   HStack,
@@ -9,16 +10,15 @@ import {
   WhiteH3BoldText,
   WhiteMediumText,
   WhiteText,
-} from '@/components/common';
+} from '@components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
-} from '@/components/elements/DashboardContentView';
-import { getTitleWithLogin } from '@/utils/getTitleWithLogin';
-import { BelowTablet, Desktop } from '@/utils/responsive/Device';
-import { titleCase } from '@/utils/titleCase';
-import { useQuery } from '@apollo/client';
+} from '@components/elements/DashboardContentView';
 import styled from '@emotion/styled';
+import { getTitleWithLogin } from '@utils/getTitleWithLogin';
+import { TabletAndBelow, Desktop } from '@utils/responsive/Device';
+import { titleCase } from '@utils/titleCase';
 import { truncate } from 'lodash-es';
 import { useParams } from 'react-router-dom';
 
@@ -79,11 +79,11 @@ export const UserProfile = () => {
           </WhiteMediumText>
           <HStack align="baseline">
             <WhiteText>lv.</WhiteText>
-            <WhiteH3BoldText>{level}</WhiteH3BoldText>
+            <WhiteH3BoldText>{level.toFixed(2)}</WhiteH3BoldText>
           </HStack>
         </HStack>
       </Desktop>
-      <BelowTablet>
+      <TabletAndBelow>
         <VStack h="100%" spacing="2rem">
           <Avatar size="6rem" imgUrl={imgUrl} />
           <VStack>
@@ -95,10 +95,10 @@ export const UserProfile = () => {
           </WhiteMediumText>
           <HStack align="baseline">
             <WhiteCaptionText>lv.</WhiteCaptionText>
-            <WhiteH3BoldText>{level}</WhiteH3BoldText>
+            <WhiteH3BoldText>{level.toFixed(2)}</WhiteH3BoldText>
           </HStack>
         </VStack>
-      </BelowTablet>
+      </TabletAndBelow>
     </UserProfileLayout>
   );
 };

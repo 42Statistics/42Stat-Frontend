@@ -1,14 +1,14 @@
 import { gql } from '@/__generated__';
-import { Loader } from '@/components/common';
-import { DonutChart } from '@/components/elements/Chart';
+import { useQuery } from '@apollo/client';
+import { Loader } from '@components/common';
+import { DonutChart } from '@components/elements/Chart';
 import {
   ApolloBadRequest,
   ApolloNotFound,
-} from '@/components/elements/DashboardContentView';
-import { DashboardContent } from '@/components/templates/Dashboard';
-import { numberWithUnitFormatter } from '@/utils/formatters';
-import { useQuery } from '@apollo/client';
+} from '@components/elements/DashboardContentView';
+import { DashboardContent } from '@components/templates/DashboardContent';
 import { useTheme } from '@emotion/react';
+import { numberWithUnitFormatter } from '@utils/formatters';
 
 const GET_BLACKHOLED_COUNT_PER_CIRCLES = gql(/* GraphQL */ `
   query getBlackholedCountPerCircles {

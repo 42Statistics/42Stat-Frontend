@@ -1,5 +1,4 @@
-import { ROUTES } from '@/routes/ROUTES';
-import { userAtom } from '@/utils/atoms/userAtom';
+import { userAtom } from '@atoms/userAtom';
 import { IconType } from '@react-icons/all-files';
 import { MdPerson } from '@react-icons/all-files/md/MdPerson';
 import { MdPersonOutline } from '@react-icons/all-files/md/MdPersonOutline';
@@ -11,6 +10,7 @@ import { RiHome2Fill } from '@react-icons/all-files/ri/RiHome2Fill';
 import { RiHome2Line } from '@react-icons/all-files/ri/RiHome2Line';
 import { RiLogoutBoxRFill } from '@react-icons/all-files/ri/RiLogoutBoxRFill';
 import { RiLogoutBoxRLine } from '@react-icons/all-files/ri/RiLogoutBoxRLine';
+import { ROUTES } from '@routes/ROUTES';
 import { useAtomValue } from 'jotai';
 
 export type NavRoute = {

@@ -1,11 +1,17 @@
 import { gql } from '@/__generated__';
-import { Center, H2BoldText, Loader } from '@/components/common';
+import { useQuery } from '@apollo/client';
+import {
+  SmileyCheekySvg,
+  SmileySadSvg,
+  SmileyShockSvg,
+  SmileySmile1Svg,
+} from '@assets/blackhole';
+import { H2BoldText, HStack, Loader } from '@components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
-} from '@/components/elements/DashboardContentView';
-import { DashboardContent } from '@/components/templates/Dashboard';
-import { useQuery } from '@apollo/client';
+} from '@components/elements/DashboardContentView';
+import { DashboardContent } from '@components/templates/DashboardContent';
 import { useTheme } from '@emotion/react';
 import { useParams } from 'react-router-dom';
 
@@ -55,40 +61,53 @@ export const BlackholedAt = () => {
     : 0; // TODO: days left 로직 검증
 
   const getColorAndText = (isFree: boolean, daysLeft: number) => {
-    if (isFree) return { color: theme.colors.mono.black, text: '🚀' }; // 반드시 Member일 때만 blackholedAt === null
+    if (isFree)
+      return {
+        color: theme.colors.mono.black,
+        Svg: SmileyCheekySvg,
+        text: 'Never',
+      }; // 반드시 Member일 때만 blackholedAt === null
     if (daysLeft >= 365)
       return {
         color: '#3db618',
-        text: `🥱 ${daysLeft.toLocaleString()} days left`,
+        Svg: SmileySmile1Svg, // 다른 Svg로 변경
+        text: `${daysLeft.toLocaleString()} days left`,
       };
     if (daysLeft >= 100)
       return {
         color: '#3db618',
-        text: `😄 ${daysLeft.toLocaleString()} days left`,
+        Svg: SmileySmile1Svg,
+        text: `${daysLeft.toLocaleString()} days left`,
       };
     if (daysLeft >= 15)
       return {
         color: '#d7a900',
-        text: `🙁 ${daysLeft.toLocaleString()} days left`,
+        Svg: SmileyShockSvg,
+        text: `${daysLeft.toLocaleString()} days left`,
       };
-    if (daysLeft >= 0)
+    if (daysLeft > 0)
       return {
         color: '#ff0303',
-        text: `😫 ${daysLeft.toLocaleString()} days left`,
+        Svg: SmileySadSvg,
+        text: `${daysLeft.toLocaleString()} days left`,
       };
+    if (daysLeft === 0)
+      return { color: '#ff0303', Svg: SmileySadSvg, text: 'a few hours left' };
     return {
       color: theme.colors.mono.black,
+      Svg: null,
       text: 'Absorbed by Black Hole',
     };
   };
 
-  const { color, text } = getColorAndText(blackholedAt === null, daysLeft);
+  const { color, Svg, text } = getColorAndText(blackholedAt === null, daysLeft);
 
   return (
     <DashboardContent title={title}>
-      <Center w="100%" h="100%">
+      <HStack w="100%" h="100%" spacing="1rem">
+        {Svg && <Svg width="24px" stroke={color} />}
         <H2BoldText color={color}>{text}</H2BoldText>
-      </Center>
+      </HStack>
     </DashboardContent>
   );
 };

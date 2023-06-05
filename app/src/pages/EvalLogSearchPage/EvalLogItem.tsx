@@ -6,11 +6,11 @@ import {
   Spacer,
   Text,
   VStack,
-} from '@/components/common';
-import { Label } from '@/components/common/Label';
-import { snakeCaseFormatter } from '@/utils/formatters';
+} from '@components/common';
+import { Label } from '@components/common/Label';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { snakeCaseFormatter } from '@utils/formatters';
 import dayjs from 'dayjs';
 import { rgba } from 'emotion-rgba';
 import { Link } from 'react-router-dom';
@@ -31,11 +31,11 @@ export const EvalLogItem = ({ element }: { element: EvalLog }) => {
           <PrimaryBoldText selectable>
             {header.teamPreview.name}
           </PrimaryBoldText>
-          <Text selectable>을&nbsp;</Text>
-          <BoldText selectable>
-            {dayjs(header.beginAt).format('YYYY-MM-DD HH:mm')}
-          </BoldText>
-          <Text selectable>에 평가하였습니다</Text>
+          <Text selectable>
+            을&nbsp;
+            <strong>{dayjs(header.beginAt).format('YYYY-MM-DD HH:mm')}</strong>
+            에 평가하였습니다
+          </Text>
           <Spacer />
           <HStack spacing="1rem">
             <BoldText>{header.projectPreview.name}</BoldText>

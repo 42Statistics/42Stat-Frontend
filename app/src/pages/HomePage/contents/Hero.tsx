@@ -1,5 +1,5 @@
-import { VStack, WhiteH2BoldText, WhiteText } from '@/components/common';
-import { userAtom } from '@/utils/atoms/userAtom';
+import { userAtom } from '@atoms/userAtom';
+import { VStack, WhiteH2BoldText, WhiteText } from '@components/common';
 import styled from '@emotion/styled';
 import { useAtomValue } from 'jotai';
 

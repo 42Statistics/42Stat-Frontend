@@ -1,7 +1,7 @@
-import { VStack } from '@/components/common';
-import { AppLogoTitleButton } from '@/components/elements/AppLogoTitle';
-import { AboveTabletUserSearchBar } from '@/components/elements/UserSearchBar/AboveTabletUserSearchBar';
-import { userAtom } from '@/utils/atoms/userAtom';
+import { userAtom } from '@atoms/userAtom';
+import { VStack } from '@components/common';
+import { AppLogoTitleButton } from '@components/elements/AppLogoTitle';
+import { TabletAndAboveSearchBar } from '@components/elements/SearchBar/TabletAndAboveSearchBar';
 import { useAtomValue } from 'jotai';
 import { Link } from 'react-router-dom';
 import { NavMenu } from './NavMenu';
@@ -16,7 +16,7 @@ export const NavBar = () => {
       <Link to={`/profile/${user.login}`}>
         <NavProfile imgUrl={user.imgUrl} name={user.name} login={user.login} />
       </Link>
-      <AboveTabletUserSearchBar />
+      <TabletAndAboveSearchBar />
       <NavMenu />
     </VStack>
   );

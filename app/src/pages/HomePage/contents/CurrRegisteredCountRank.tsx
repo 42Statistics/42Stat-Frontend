@@ -1,19 +1,20 @@
 import { gql } from '@/__generated__';
-import { Loader } from '@/components/common';
+import { useQuery } from '@apollo/client';
+import { Loader } from '@components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
-} from '@/components/elements/DashboardContentView';
-import { Rank } from '@/components/elements/DashboardContentView/Rank';
-import { DashboardContent } from '@/components/templates/Dashboard';
-import type { RankItemType } from '@/utils/types/Rank';
-import { useQuery } from '@apollo/client';
+} from '@components/elements/DashboardContentView';
+import { Rank } from '@components/elements/DashboardContentView/Rank';
+import { DashboardContent } from '@components/templates/DashboardContent';
+import type { RankItemType } from '@utils/types/Rank';
 
 const GET_CURR_REGISTERED_COUNT_RANK = gql(/* GraphQL */ `
   query GetCurrRegisteredCountRank {
     getHomePage {
       currRegisteredCountRank {
         projectPreview {
+          id
           name
         }
         value
@@ -49,8 +50,8 @@ export const CurrRegisteredCountRank = () => {
   const unit = '명';
 
   const rankList: RankItemType[] = currRegisteredCountRank.map(
-    ({ projectPreview, value }, idx) => ({
-      id: idx, // FIXME: projectPreivew.id로 수정
+    ({ projectPreview, value }) => ({
+      id: projectPreview.id,
       name: projectPreview.name,
       value: value,
     }),

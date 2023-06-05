@@ -23,7 +23,7 @@ const colors = {
 
 const fonts = {
   size: {
-    h1: '2.8rem',
+    h1: '2.4rem',
     h2: '2.0rem',
     h3: '1.6rem',
     body: '1.4rem',
@@ -42,7 +42,16 @@ const fonts = {
   },
 };
 
+const zIndex = {
+  searchResult: 100,
+  absoluteButton: 200,
+  overlay: 300,
+  navBar: 400,
+  modal: 500,
+};
+
 export const defaultTheme = {
   colors,
   fonts,
+  zIndex,
 };

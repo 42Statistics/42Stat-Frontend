@@ -40,6 +40,12 @@ dependencies:
   jotai:
     specifier: ^2.0.3
     version: 2.0.3(react@18.2.0)
+  jotai-utils:
+    specifier: ^0.0.0
+    version: 0.0.0
+  ky:
+    specifier: ^0.33.3
+    version: 0.33.3
   lodash-es:
     specifier: ^4.17.21
     version: 4.17.21
@@ -64,9 +70,9 @@ dependencies:
   react-hook-form:
     specifier: ^7.43.9
     version: 7.43.9(react@18.2.0)
-  react-modal:
-    specifier: ^3.16.1
-    version: 3.16.1(react-dom@18.2.0)(react@18.2.0)
+  react-jwt:
+    specifier: ^1.1.8
+    version: 1.1.8(react@18.2.0)
   react-responsive:
     specifier: ^9.0.2
     version: 9.0.2(react@18.2.0)
@@ -111,9 +117,6 @@ devDependencies:
   '@types/react-dom':
     specifier: ^18.0.11
     version: 18.0.11
-  '@types/react-modal':
-    specifier: ^3.16.0
-    version: 3.16.0
   '@types/react-responsive':
     specifier: ^8.0.5
     version: 8.0.5
@@ -1921,12 +1924,6 @@ packages:
       '@types/react': 18.0.28
     dev: true
 
-  /@types/react-modal@3.16.0:
-    resolution: {integrity: sha512-iphdqXAyUfByLbxJn5j6d+yh93dbMgshqGP0IuBeaKbZXx0aO+OXsvEkt6QctRdxjeM9/bR+Gp3h9F9djVWTQQ==}
-    dependencies:
-      '@types/react': 18.0.28
-    dev: true
-
   /@types/react-responsive@8.0.5:
     resolution: {integrity: sha512-k3gQJgI87oP5IrVZe//3LKJFnAeFaqqWmmtl5eoYL2H3HqFcIhUaE30kRK1CsW3DHdojZxcVj4ZNc2ClsEu2PA==}
     dependencies:
@@ -3078,10 +3075,6 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /exenv@1.2.2:
-    resolution: {integrity: sha512-Z+ktTxTwv9ILfgKCk32OX3n/doe+OcLTRtqK9pcL+JsP3J1/VW8Uvl4ZjLlKqeW4rzK4oesDOGMEMRIZqtP4Iw==}
-    dev: false
-
   /external-editor@3.1.0:
     resolution: {integrity: sha512-hMQ4CX1p1izmuLYyZqLMO/qGNw10wSv9QDCPfzXfyFrOaCSSoRfqE1Kf1s5an66J5JZC62NewG+mK49jOCtQew==}
     engines: {node: '>=4'}
@@ -3823,6 +3816,10 @@ packages:
     resolution: {integrity: sha512-MSJQC5vXco5Br38mzaQKiq9mwt7lwj2eXpgpRyQYNHYt2lq1PjkWa7DLXX0WVcQLE9HhMh3jPiufS7fhJf+CLQ==}
     dev: true
 
+  /jotai-utils@0.0.0:
+    resolution: {integrity: sha512-z/gS7iuWWwXY/JnvsYmcDpcFLnDsJVqkIFJ66h060LY5+cte8S7SDKEVEFPcoM6UQjyy3mj6eEKjcxb1+7OqZw==}
+    dev: false
+
   /jotai@2.0.3(react@18.2.0):
     resolution: {integrity: sha512-MMjhSPAL3RoeZD9WbObufRT2quThEAEknHHridf2ma8Ml7ZVQmUiHk0ssdbR3F0h3kcwhYqSGJ59OjhPge7RRg==}
     engines: {node: '>=12.20.0'}
@@ -3907,6 +3904,11 @@ packages:
       array-includes: 3.1.6
       object.assign: 4.1.4
     dev: true
+
+  /ky@0.33.3:
+    resolution: {integrity: sha512-CasD9OCEQSFIam2U8efFK81Yeg8vNMTBUqtMOHlrcWQHqUX3HeCl9Dr31u4toV7emlH8Mymk5+9p0lL6mKb/Xw==}
+    engines: {node: '>=14.16'}
+    dev: false
 
   /levn@0.4.1:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}
@@ -4543,23 +4545,15 @@ packages:
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
-  /react-lifecycles-compat@3.0.4:
-    resolution: {integrity: sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==}
-    dev: false
-
-  /react-modal@3.16.1(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-VStHgI3BVcGo7OXczvnJN7yT2TWHJPDXZWyI/a0ssFNhGZWsPmB8cF0z33ewDXq4VfYMO1vXgiv/g8Nj9NDyWg==}
-    engines: {node: '>=8'}
+  /react-jwt@1.1.8(react@18.2.0):
+    resolution: {integrity: sha512-e6OPgkQutK8oZpAt7mPi2PcRVpev1c1JxvFwgLyGijVRznqNLWnYgMuW00THdzWPh6m7hzqhimz3UY7VfY1sEw==}
+    engines: {node: '>=10'}
     peerDependencies:
-      react: ^0.14.0 || ^15.0.0 || ^16 || ^17 || ^18
-      react-dom: ^0.14.0 || ^15.0.0 || ^16 || ^17 || ^18
+      react: ^16.0.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      exenv: 1.2.2
-      prop-types: 15.8.1
       react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      react-lifecycles-compat: 3.0.4
-      warning: 4.0.3
+    optionalDependencies:
+      fsevents: 2.3.2
     dev: false
 
   /react-refresh@0.14.0:
@@ -5328,12 +5322,6 @@ packages:
       rollup: 3.19.0
     optionalDependencies:
       fsevents: 2.3.2
-
-  /warning@4.0.3:
-    resolution: {integrity: sha512-rpJyN222KWIvHJ/F53XSZv0Zl/accqHR8et1kpaMTD/fLCRxtV8iX8czMzY7sVZupTI3zcUTg8eycS2kNF9l6w==}
-    dependencies:
-      loose-envify: 1.4.0
-    dev: false
 
   /wcwidth@1.0.1:
     resolution: {integrity: sha512-XHPEwS0q6TaxcvG85+8EYkbiCux2XtWG2mkc47Ng2A77BQu9+DqIOJldST4HgPkuea7dvKSj5VgX3P1d4rW8Tg==}

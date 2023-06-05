@@ -82,4 +82,5 @@ const ButtonViewLayout = styled.div<ButtonViewLayoutProps>`
   font-weight: ${({ theme }) => theme.fonts.weight.bold};
   font-size: ${({ fontSize }) => fontSize};
   padding: ${({ padding }) => padding};
+  user-select: none;
 `;

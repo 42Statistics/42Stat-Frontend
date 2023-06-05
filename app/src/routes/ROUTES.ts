@@ -1,8 +1,10 @@
 export const ROUTES = {
   ROOT: '/',
+  FTOAUTH: '/ftoauth',
   PROFILE: '/profile/:username',
   PROJECT: '/project/:projectName',
   LEADERBOARD: '/leaderboard',
   EVALLOG: '/evallog',
-  LOGOUT: '/auth/logout',
+  LOGIN: '/login',
+  LOGOUT: '/logout',
 };

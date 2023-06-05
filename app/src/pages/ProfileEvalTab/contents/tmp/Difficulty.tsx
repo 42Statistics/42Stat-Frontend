@@ -1,4 +1,4 @@
-import { DashboardContent } from '@/components/templates/Dashboard';
+import { DashboardContent } from '@components/templates/DashboardContent';
 
 export const Difficulty = () => {
   const title = '이 유저를 평가자로 만난다면?';

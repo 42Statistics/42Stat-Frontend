@@ -1,13 +1,13 @@
 import { gql } from '@/__generated__';
-import { H3Text, Loader, Text, VStack } from '@/components/common';
+import { useQuery } from '@apollo/client';
+import { H3Text, Loader, Text, VStack } from '@components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
-} from '@/components/elements/DashboardContentView';
-import { DashboardContent } from '@/components/templates/Dashboard';
-import { percentFormatter } from '@/utils/formatters/percentFormatter';
-import { useQuery } from '@apollo/client';
+} from '@components/elements/DashboardContentView';
+import { DashboardContent } from '@components/templates/DashboardContent';
 import styled from '@emotion/styled';
+import { percentFormatter } from '@utils/formatters/percentFormatter';
 import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
 

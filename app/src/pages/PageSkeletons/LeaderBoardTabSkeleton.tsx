@@ -7,8 +7,8 @@ export const LeaderBoardTabSkeleton = () => {
       <SegmentedControlSkeleton />
       <Skeleton style={{ height: '65px' }} />
       <VStack w="100%" spacing="1rem">
-        {Array.from(Array(50)).map((val) => (
-          <Skeleton key={val} style={{ height: '65px' }} />
+        {Array.from({ length: 50 }, (x) => x).map((_, idx) => (
+          <Skeleton key={idx} style={{ height: '65px' }} />
         ))}
       </VStack>
     </VStack>

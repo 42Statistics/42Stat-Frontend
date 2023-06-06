@@ -1,11 +1,10 @@
-
 import { gql } from '@/__generated__';
 import { H3Text, Image, Loader, VStack } from '@/components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@/components/elements/DashboardContentView';
-import { DashboardContent } from '@/components/templates/Dashboard';
+import { DashboardContent } from '@/components/templates/DashboardContent';
 import { useQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -70,7 +69,7 @@ const GET_COALITION = gql(/* GraphQL */ `
     }
   }
 `);
-        
+
 export const SimilarCharacter = () => {
   const { username } = useParams() as { username: string };
 

@@ -21,7 +21,7 @@ const GET_USER_COUNT_PER_LEVELS = gql(/* GraphQL */ `
 `);
 
 export const UserCountPerLevels = () => {
-  const title = '레벨 분포';
+  const title = '여행 중인 유저 레벨 분포';
   const { loading, error, data } = useQuery(GET_USER_COUNT_PER_LEVELS);
   if (loading)
     return (

@@ -7,7 +7,7 @@ import {
   CurrentCorrectionPoint,
   DestinyUsers,
   EvalLogSearchLink,
-  LatestFeedback,
+  LatestComment,
   MonthlyEvalCount,
   TotalEvalCount,
   TotalEvalTime,
@@ -52,7 +52,7 @@ export const profileEvalTabDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 9,
-    content: LatestFeedback,
+    content: LatestComment,
   },
   {
     id: 10,

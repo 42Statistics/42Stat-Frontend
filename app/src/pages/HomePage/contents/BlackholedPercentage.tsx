@@ -4,14 +4,13 @@ import { useTheme } from '@emotion/react';
 
 export const BlackholedPercentage = () => {
   const title = '블랙홀 유저 비율';
-  const description = '비활성화 Member는 Survived에 포함';
 
   const { blackholedPercentage } = { blackholedPercentage: 72.42 };
 
   return (
-    <DashboardContent title={title} description={description}>
+    <DashboardContent title={title}>
       <BlackholedPercentageChart
-        labels={['Blackholed', 'Survived']}
+        labels={['Blackholed', '여행 중']}
         series={[blackholedPercentage, 100 - blackholedPercentage]}
       />
     </DashboardContent>

@@ -4,7 +4,7 @@ import { useTheme } from '@emotion/react';
 
 export const MemberPercentage = () => {
   const title = 'Member 비율';
-  const description = '비활성화 유저도 직전 상태로 포함';
+  const description = '블랙홀 유저 포함';
 
   const { memberPercentage } = { memberPercentage: 4.242 };
 

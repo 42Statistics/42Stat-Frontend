@@ -21,7 +21,7 @@ const GET_ACTIVE_USER_COUNT_RECORD = gql(/* GraphQL */ `
 `);
 
 export const ActiveUserCountRecords = () => {
-  const title = '활성화 유저 수 추이';
+  const title = '여행 중인 유저 수 추이';
   const { loading, error, data } = useQuery(GET_ACTIVE_USER_COUNT_RECORD);
   if (loading)
     return (

@@ -11,7 +11,7 @@ import { numberWithUnitFormatter } from '@utils/formatters';
 
 const GET_ACTIVE_USER_COUNT_RECORD = gql(/* GraphQL */ `
   query getActiveUserCountRecord {
-    getTotalPage {
+    getHomeUser {
       activeUserCountRecords {
         at
         value
@@ -42,7 +42,7 @@ export const ActiveUserCountRecords = () => {
       </DashboardContent>
     );
 
-  const { activeUserCountRecords } = data.getTotalPage;
+  const { activeUserCountRecords } = data.getHomeUser;
   const seriesData = activeUserCountRecords.map(({ at, value }) => ({
     x: at,
     y: value,

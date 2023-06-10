@@ -12,8 +12,8 @@ import { numberWithUnitFormatter } from '@utils/formatters';
 
 const GET_BLACKHOLED_COUNT_PER_CIRCLES = gql(/* GraphQL */ `
   query getBlackholedCountPerCircles {
-    getTotalPage {
-      blackholedCountPerCircles {
+    getHomeUser {
+      blackholedCountPerCircle {
         circle
         value
       }
@@ -43,7 +43,7 @@ export const BlackholedCountPerCircles = () => {
       </DashboardContent>
     );
 
-  const { blackholedCountPerCircles } = data.getTotalPage;
+  const { blackholedCountPerCircles } = data.getHomeUser;
 
   const labels = blackholedCountPerCircles.map(({ circle }) => `${circle}서클`);
   const series = blackholedCountPerCircles.map(({ value }) => value);

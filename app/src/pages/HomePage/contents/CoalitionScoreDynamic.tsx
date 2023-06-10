@@ -12,8 +12,8 @@ import { isDefined } from '@utils/isDefined';
 
 export const GET_COALITION_SCORE_RECORD = gql(/* GraphQL */ `
   query getCoalitionScoreRecord {
-    getTotalPage {
-      scoreRecords {
+    getHomeCoalition {
+      scoreRecordsPerCoalition {
         coalition {
           id
           name
@@ -55,7 +55,7 @@ export const CoalitionScoreDynamic = () => {
       </DashboardContent>
     );
 
-  const { scoreRecords } = data.getTotalPage;
+  const { scoreRecords } = data.getHomeCoalition;
 
   const colorList: string[] = [];
   const series = scoreRecords.map(({ coalition, records }) => {

@@ -7,13 +7,13 @@ import {
 } from '@components/elements/DashboardContentView';
 import { RankUser } from '@components/elements/DashboardContentView/Rank';
 import { DashboardContent } from '@components/templates/DashboardContent';
-import { TabletAndAbove, Mobile } from '@utils/responsive/Device';
+import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
 import type { RankUserItemType } from '@utils/types/Rank';
 
 const GET_WALLET_RANK = gql(/* GraphQL */ `
   query getWalletRank($limit: Int!) {
-    getTotalPage {
-      walletRanks(limit: $limit) {
+    getHomeUser {
+      walletRanking(limit: $limit) {
         userPreview {
           id
           login
@@ -49,7 +49,7 @@ export const WalletRanks = () => {
       </DashboardContent>
     );
 
-  const { walletRanks } = data.getTotalPage;
+  const { walletRanks } = data.getHomeUser;
   const unit = '₳';
 
   const rankList: RankUserItemType[] = walletRanks.map(

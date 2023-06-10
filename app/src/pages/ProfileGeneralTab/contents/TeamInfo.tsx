@@ -16,16 +16,23 @@ import { useParams } from 'react-router-dom';
 
 const GET_TEAM_INFO = gql(/* GraphQL */ `
   query getTeamInfo($login: String!) {
-    getPersonGeneralPage(login: $login) {
+    getPersonalGeneralPage(login: $login) {
       teamInfo {
+        lastRegistered
+        lastPassed
         teams {
           id
           name
           occurrence
-          closedAt
-          firstCreatedAt
-          finalMark
+          projectPreview {
+            id
+            name
+            url
+          }
+          status
+          lastEventTime
           isValidated
+          finalMark
         }
       }
     }
@@ -44,7 +51,7 @@ export const TeamInfo = () => {
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 
-  const { teams } = data.getPersonGeneralPage.teamInfo;
+  const { teams } = data.getPersonalGeneralPage.teamInfo;
 
   return (
     <TeamInfoLayout>
@@ -84,10 +91,11 @@ export const TeamInfo = () => {
                   id,
                   name,
                   occurrence,
-                  closedAt,
-                  firstCreatedAt,
-                  finalMark,
+                  projectPreview,
+                  status,
+                  lastEventTime,
                   isValidated,
+                  finalMark,
                 }) => {
                   return (
                     <tr key={id}>
@@ -102,10 +110,10 @@ export const TeamInfo = () => {
                       </td>
                       <td>
                         <Text>
-                          {closedAt != null
+                          {lastEventTime != null
                             ? `${getDayDiff(
                                 new Date(),
-                                new Date(closedAt),
+                                new Date(lastEventTime),
                               )}일 전`
                             : '-'}
                         </Text>

@@ -11,8 +11,8 @@ import { numberWithUnitFormatter } from '@utils/formatters';
 
 const GET_AVERAGE_CIRCLE_DURATION = gql(/* GraphQL */ `
   query getAverageCircleDuration {
-    getTotalPage {
-      averageCircleDurations {
+    getHomeUser {
+      averageDurationPerCircle {
         circle
         value
       }
@@ -43,7 +43,7 @@ export const AverageCircleDurations = () => {
       </DashboardContent>
     );
 
-  const { averageCircleDurations } = data.getTotalPage;
+  const { averageCircleDurations } = data.getHomeUser;
 
   const categories = averageCircleDurations.map(({ circle }) => String(circle));
   const seriesData = averageCircleDurations.map(({ value }) => value);

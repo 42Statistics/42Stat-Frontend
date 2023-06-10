@@ -11,16 +11,20 @@ import dayjs from 'dayjs';
 
 const GET_CURR_MONTH_BLACKHOLED_COUNT = gql(/* GraphQL */ `
   query GetCurrMonthBlackholedCount {
-    getHomePage {
-      currMonthBlackholedCount {
+    getHomeUser {
+      currMonthBlackholedCount: blackholedCountByDateTemplate(
+        dateTemplate: CURR_WEEK
+      ) {
         data
-        from
-        to
+        start
+        end
       }
-      lastMonthBlackholedCount {
+      lastMonthBlackholedCount: blackholedCountByDateTemplate(
+        dateTemplate: LAST_WEEK
+      ) {
         data
-        from
-        to
+        start
+        end
       }
     }
   }
@@ -49,10 +53,10 @@ export const CurrMonthBlackholedCount = () => {
     );
 
   const { currMonthBlackholedCount, lastMonthBlackholedCount } =
-    data.getHomePage;
-  const { from, to } = currMonthBlackholedCount;
+    data.getHomeUser;
+  const { start, end } = currMonthBlackholedCount;
 
-  const description = `${dayjs(from).format('YYYY년 M월')}`;
+  const description = `${dayjs(start).format('YYYY년 M월')}`;
   const unit = '명';
 
   return (

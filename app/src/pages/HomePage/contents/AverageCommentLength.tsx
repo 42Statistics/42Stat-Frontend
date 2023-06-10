@@ -10,7 +10,7 @@ import { DashboardContent } from '@components/templates/DashboardContent';
 
 const GET_AVERAGE_COMMENT_LENGTH = gql(/* GraphQL */ `
   query getAverageCommentLength {
-    getTotalPage {
+    getHomeEval {
       averageCommentLength
     }
   }
@@ -38,7 +38,7 @@ export const AverageCommentLength = () => {
       </DashboardContent>
     );
 
-  const { averageCommentLength } = data.getTotalPage;
+  const { averageCommentLength } = data.getHomeEval;
   const unit = '자';
 
   return (

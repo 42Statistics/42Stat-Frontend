@@ -13,15 +13,15 @@ import { useParams } from 'react-router-dom';
 const GET_MONTHLY_EVAL_COUNT = gql(/* GraphQL */ `
   query getMonthlyEvalCount($login: String!) {
     getPersonalEvalPage(login: $login) {
-      currMonthCount {
+      currMonthCount: countByDateTemplate(dateTemplate: CURR_WEEK) {
         data
-        from
-        to
+        start
+        end
       }
-      lastMonthCount {
+      lastMonthCount: countByDateTemplate(dateTemplate: LAST_WEEK) {
         data
-        from
-        to
+        start
+        end
       }
     }
   }
@@ -54,8 +54,8 @@ export const MonthlyEvalCount = () => {
     );
 
   const { currMonthCount, lastMonthCount } = data.getPersonalEvalPage;
-  const { from, to } = currMonthCount;
-  const description = `${dayjs(from).format('YYYY년 M월')}`;
+  const { start, end } = currMonthCount;
+  const description = `${dayjs(start).format('YYYY년 M월')}`;
 
   return (
     <DashboardContent title={title} description={description}>

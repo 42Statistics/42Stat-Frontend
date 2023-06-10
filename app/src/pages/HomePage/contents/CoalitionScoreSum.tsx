@@ -9,8 +9,8 @@ import { millionFormatter } from '@utils/formatters';
 
 export const GET_COALITION_TOTAL_SCORES = gql(/* GraphQL */ `
   query getCoalitionTotalScores {
-    getTotalPage {
-      totalScores {
+    getHomeCoalition {
+      totalScoresPerCoalition {
         coalition {
           id
           name
@@ -48,7 +48,7 @@ export const CoalitionScoreSum = () => {
       </DashboardContent>
     );
 
-  const { totalScores } = data.getTotalPage;
+  const { totalScores } = data.getHomeCoalition;
 
   const categories: string[] = [];
   const seriesData: number[] = [];

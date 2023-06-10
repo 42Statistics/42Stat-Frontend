@@ -13,18 +13,17 @@ import { useParams } from 'react-router-dom';
 
 const GET_PREFERRED_TIME = gql(/* GraphQL */ `
   query getPrefferedTime($login: String!) {
-    getPersonGeneralPage(login: $login) {
-      logtimeInfo {
+    getPersonalGeneralPage(login: $login) {
+      preferredTimeByDateTemplate(dateTemplate: CURR_MONTH) {
         data {
-          preferredTime {
-            morning
-            daytime
-            evening
-            night
-          }
+          total
+          morning
+          daytime
+          evening
+          night
         }
-        from
-        to
+        start
+        end
       }
     }
   }
@@ -56,12 +55,11 @@ export const PrefferedTime = () => {
       </DashboardContent>
     );
 
-  const { morning, daytime, evening, night } =
-    data.getPersonGeneralPage.logtimeInfo.data.preferredTime;
-  const { from, to } = data.getPersonGeneralPage.logtimeInfo;
-  const description = `${dayjs(from).format('YYYY년 M월')}`;
+  const { total, morning, daytime, evening, night } =
+    data.getPersonalGeneralPage.data;
+  const { start, end } = data.getPersonalGeneralPage;
+  const description = `${dayjs(start).format('YYYY년 M월')}`;
 
-  const total = morning + daytime + evening + night;
   const max = Math.max(morning, daytime, evening, night);
 
   return (

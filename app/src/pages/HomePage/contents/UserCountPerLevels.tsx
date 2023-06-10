@@ -11,8 +11,8 @@ import { numberWithUnitFormatter } from '@utils/formatters';
 
 const GET_USER_COUNT_PER_LEVELS = gql(/* GraphQL */ `
   query getUserCountPerLevels {
-    getTotalPage {
-      userCountPerLevels {
+    getHomeUser {
+      userCountPerLevel {
         userCount
         level
       }
@@ -42,7 +42,7 @@ export const UserCountPerLevels = () => {
       </DashboardContent>
     );
 
-  const { userCountPerLevels } = data.getTotalPage;
+  const { userCountPerLevels } = data.getHomeUser;
 
   const categories = userCountPerLevels.map(({ level }) => level);
   const seriesData = userCountPerLevels.map(({ userCount }) => userCount);

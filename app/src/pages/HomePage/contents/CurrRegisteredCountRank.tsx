@@ -11,8 +11,8 @@ import type { RankItemType } from '@utils/types/Rank';
 
 const GET_CURR_REGISTERED_COUNT_RANK = gql(/* GraphQL */ `
   query GetCurrRegisteredCountRank {
-    getHomePage {
-      currRegisteredCountRank {
+    getHomeTeam {
+      currRegisteredCountRanking {
         projectPreview {
           id
           name
@@ -46,7 +46,7 @@ export const CurrRegisteredCountRank = () => {
       </DashboardContent>
     );
 
-  const { currRegisteredCountRank } = data.getHomePage;
+  const { currRegisteredCountRank } = data.getHomeTeam;
   const unit = '명';
 
   const rankList: RankItemType[] = currRegisteredCountRank.map(

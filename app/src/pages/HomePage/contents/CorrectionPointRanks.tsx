@@ -7,13 +7,13 @@ import {
 } from '@components/elements/DashboardContentView';
 import { RankUser } from '@components/elements/DashboardContentView/Rank';
 import { DashboardContent } from '@components/templates/DashboardContent';
-import { TabletAndAbove, Mobile } from '@utils/responsive/Device';
+import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
 import type { RankUserItemType } from '@utils/types/Rank';
 
 const GET_CORRECTION_POINT_RANK = gql(/* GraphQL */ `
   query getCorrectionPointRank($limit: Int!) {
-    getTotalPage {
-      correctionPointRanks(limit: $limit) {
+    getHomeUser {
+      correctionPointRanking(limit: $limit) {
         userPreview {
           id
           login
@@ -49,7 +49,7 @@ export const CorrectionPointRanks = () => {
       </DashboardContent>
     );
 
-  const { correctionPointRanks } = data.getTotalPage;
+  const { correctionPointRanks } = data.getHomeUser;
 
   const unit = '개';
 

@@ -12,15 +12,11 @@ import { useParams } from 'react-router-dom';
 
 const GET_LEVEL_GRAPH = gql(/* GraphQL */ `
   query getLevelGraph($login: String!) {
-    getPersonGeneralPage(login: $login) {
-      levelGraphs {
-        data {
-          date
-          userLevel
-          averageLevel
-        }
-        from
-        to
+    getPersonalGeneralPage(login: $login) {
+      levelRecords {
+        after
+        userLevel
+        averageLevel
       }
     }
   }
@@ -53,17 +49,21 @@ export const LevelGraph = () => {
       </DashboardContent>
     );
 
-  const { levelGraphs } = data.getPersonGeneralPage;
+  const { levelRecords } = data.getPersonalGeneralPage;
   const [from, to] = [levelGraphs.from, levelGraphs.to];
 
-  const userLevelSeries = levelGraphs.data.map(({ date, userLevel }) => ({
-    x: date,
-    y: userLevel,
-  }));
-  const averageLevelSeries = levelGraphs.data.map(({ date, averageLevel }) => ({
-    x: date,
-    y: averageLevel,
-  }));
+  const userLevelSeries = levelRecords.map(
+    ({ after, userLevel, averageLevel }) => ({
+      x: after,
+      y: userLevel,
+    }),
+  );
+  const averageLevelSeries = levelRecords.map(
+    ({ after, userLevel, averageLevel }) => ({
+      x: after,
+      y: averageLevel,
+    }),
+  );
   const series = [
     {
       name: '유저', // TODO: user login 가져오기

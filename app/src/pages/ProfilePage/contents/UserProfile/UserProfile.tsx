@@ -17,19 +17,20 @@ import {
 } from '@components/elements/DashboardContentView';
 import styled from '@emotion/styled';
 import { getTitleWithLogin } from '@utils/getTitleWithLogin';
-import { TabletAndBelow, Desktop } from '@utils/responsive/Device';
+import { Desktop, TabletAndBelow } from '@utils/responsive/Device';
 import { titleCase } from '@utils/titleCase';
 import { truncate } from 'lodash-es';
 import { useParams } from 'react-router-dom';
 
 const GET_USER_PROFILE = gql(/* GraphQL */ `
   query GetUserProfile($login: String!) {
-    getPersonGeneralPage(login: $login) {
+    getPersonalGeneralPage(login: $login) {
       userProfile {
         id
         login
+        imgUrl
         grade
-        name
+        displayname
         coalition {
           id
           name
@@ -40,11 +41,12 @@ const GET_USER_PROFILE = gql(/* GraphQL */ `
           score
           userId
         }
-        imgUrl
         titles {
-          id
+          titleId
           name
-          isSelected
+          selected
+          createdAt
+          updatedAt
         }
         level
       }
@@ -63,8 +65,8 @@ export const UserProfile = () => {
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 
-  const { name, login, imgUrl, titles, coalition, grade, level } =
-    data.getPersonGeneralPage.userProfile;
+  const { id, login, imgUrl, titles, coalition, grade, level, displayname } =
+    data.getPersonalGeneralPage.userProfile;
   const titleWithLogin = getTitleWithLogin(titles, login);
 
   return (
@@ -73,7 +75,7 @@ export const UserProfile = () => {
         <HStack h="100%" spacing="4rem">
           <Avatar size="6rem" imgUrl={imgUrl} />
           <WhiteH3BoldText>{titleCase(grade)}</WhiteH3BoldText>
-          <WhiteH3BoldText>{titleCase(name)}</WhiteH3BoldText>
+          <WhiteH3BoldText>{titleCase(displayname)}</WhiteH3BoldText>
           <WhiteMediumText>
             {truncate(titleWithLogin, { length: 52 })}
           </WhiteMediumText>

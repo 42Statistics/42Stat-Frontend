@@ -11,16 +11,16 @@ import { useParams } from 'react-router-dom';
 
 const GET_CURRENT_COALITION_SCORE = gql(/* GraphQL */ `
   query getCurrentCoalitionScore($login: String!) {
-    getPersonGeneralPage(login: $login) {
+    getPersonalGeneralPage(login: $login) {
       userProfile {
         coalition {
           score
           imageUrl
           color
         }
-        scoreInfo {
-          rankInCoalition
-        }
+      }
+      scoreInfo {
+        rankInCoalition
       }
     }
   }
@@ -52,7 +52,8 @@ export const CurrentCoalitionScore = () => {
       </DashboardContent>
     );
 
-  const { coalition, scoreInfo } = data.getPersonGeneralPage.userProfile;
+  const { userProfile, scoreInfo } = data.getPersonalGeneralPage;
+  const { coalition } = userProfile;
   return (
     <DashboardContent title={title}>
       <HStack h="100%" spacing="1rem">

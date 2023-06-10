@@ -28,17 +28,23 @@ import { Link, useParams } from 'react-router-dom';
 
 const GET_PROJECT_INFO = gql(/* GraphQL */ `
   query GetProjectInfo($projectName: String!) {
-    getTotalPage {
-      projectInfo(projectName: $projectName) {
-        id
-        name
-        skills
-        averageDurationTime
-        averagePassFinalmark
-        totalCloseCount
-        currRegisteredCount
-        passPercentage
+    getProjectInfo(projectName: $projectName) {
+      id
+      name
+      skills
+      keywords
+      description
+      minUserCount
+      maxUserCount
+      duration
+      difficulty
+      currRegisteredTeamCount
+      closedTeamCount
+      averagePassFinalMark
+      evalInfo {
         totalEvalCount
+        passCount
+        failCount
       }
     }
   }
@@ -56,22 +62,22 @@ const ProjectPage = () => {
   if (!data) return <ApolloNotFound />;
 
   const {
+    id,
     name,
-    averagePassFinalmark,
-    totalCloseCount,
-    currRegisteredCount,
-    passPercentage,
-  } = data.getTotalPage.projectInfo;
+    skills,
+    keywords,
+    description,
+    minUserCount,
+    maxUserCount,
+    duration,
+    difficulty,
+    currRegisteredTeamCount,
+    closedTeamCount,
+    averagePassFinalMark,
+    evalInfo,
+  } = data.getProjectInfo;
 
-  const keywords = [
-    'Sorting algorithms',
-    'Battery concept and handling elements',
-    'Algorithm implementation',
-  ];
-  const skills = ['Unix', 'Rigor', 'Algorithms & AI', 'Imperative programming'];
-  const description =
-    'This project is your very first project as a student at 42. You will need to recode a few functions of the C standard library as well as some functions that you will use during your whole cursus.';
-
+  const passPercentage = (evalInfo.passCount / evalInfo.totalEvalCount) * 100;
   return (
     <ProjectPageLayout>
       <VStack w="100%" spacing="5rem">
@@ -82,11 +88,12 @@ const ProjectPage = () => {
           </BoldText>
         </VStack>
         <VStack spacing="1rem">
-          <Text>Solo / 70 hrs. / 462 XP</Text>
+          {/* <Text>Solo / 70 hrs. / 462 XP</Text> */}
+          <Text>{`${minUserCount}~${maxUserCount}명 / ${duration} hrs. / ${difficulty} XP`}</Text>
           <HStack spacing="1rem">
             <HiUsers size="16px" />
             <Text>
-              {numberWithUnitFormatter(currRegisteredCount, '팀')} 진행 중
+              {numberWithUnitFormatter(currRegisteredTeamCount, '팀')} 진행 중
             </Text>
           </HStack>
         </VStack>
@@ -122,7 +129,7 @@ const ProjectPage = () => {
           <HStack>
             <H3Text selectable>
               지금까지&nbsp;
-              <strong>{numberWithUnitFormatter(totalCloseCount, '팀')}</strong>
+              <strong>{numberWithUnitFormatter(closedTeamCount, '팀')}</strong>
               이 제출했어요
             </H3Text>
           </HStack>
@@ -130,7 +137,7 @@ const ProjectPage = () => {
             <H3Text selectable>
               평균&nbsp;
               <strong>
-                {numberWithUnitFormatter(averagePassFinalmark, '점')}
+                {numberWithUnitFormatter(averagePassFinalMark, '점')}
               </strong>
               으로 통과합니다
             </H3Text>

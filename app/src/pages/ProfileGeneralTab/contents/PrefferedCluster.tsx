@@ -10,15 +10,35 @@ import { DashboardContent } from '@components/templates/DashboardContent';
 import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
 
+/**
+ * @description
+ * 여러 시간단위에 대한 데이터를 얻고싶으면
+ * currMonth: preferredClusterByDateTemplate(dateTemplate: CURR_MONTH) {
+        data {
+          name
+        }
+        start
+        end
+        }
+    }
+  lastMonth: preferredClusterByDateTemplate(dateTemplate: LAST_MONTH) {
+    data {
+      name
+    }
+    start
+    end
+  }
+    등으로 복제해서 사용
+ */
 const GET_PREFERRED_CLUSTER = gql(/* GraphQL */ `
   query getPrefferedCluster($login: String!) {
-    getPersonGeneralPage(login: $login) {
-      logtimeInfo {
+    getPersonalGeneralPage(login: $login) {
+      preferredClusterByDateTemplate(dateTemplate: CURR_MONTH) {
         data {
-          preferredCluster
+          name
         }
-        from
-        to
+        start
+        end
       }
     }
   }
@@ -28,7 +48,11 @@ export const PrefferedCluster = () => {
   const { username } = useParams() as { username: string };
 
   const title = '주 접속 클러스터';
-  const { loading, error, data } = useQuery(GET_PREFERRED_CLUSTER, {
+  const {
+    loading,
+    error,
+    data: queryData,
+  } = useQuery(GET_PREFERRED_CLUSTER, {
     variables: { login: username },
   });
   if (loading)
@@ -43,20 +67,23 @@ export const PrefferedCluster = () => {
         <ApolloBadRequest msg={error.message} />
       </DashboardContent>
     );
-  if (!data)
+  if (!queryData)
     return (
       <DashboardContent title={title}>
         <ApolloNotFound />
       </DashboardContent>
     );
 
-  const { preferredCluster } = data.getPersonGeneralPage.logtimeInfo.data;
-  const { from, to } = data.getPersonGeneralPage.logtimeInfo;
-  const description = `${dayjs(from).format('YYYY년 M월')}`;
+  const { preferredClusterByDateTemplate } = queryData.getPersonalGeneralPage;
+  const { data, start, end } = preferredClusterByDateTemplate;
+
+  const description = `${dayjs(start).format('YYYY년 M월')}`;
 
   return (
     <DashboardContent title={title} description={description}>
-      <TextDefault text={`클러스터 ${preferredCluster.toUpperCase()}`} />
+      <TextDefault
+        text={data.name ? `클러스터 ${data.name.toUpperCase()}` : '-'}
+      />
     </DashboardContent>
   );
 };

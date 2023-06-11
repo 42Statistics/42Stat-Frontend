@@ -50,7 +50,6 @@ export const LevelGraph = () => {
     );
 
   const { levelRecords } = data.getPersonalGeneralPage;
-  const [from, to] = [levelGraphs.from, levelGraphs.to];
 
   const userLevelSeries = levelRecords.map(
     ({ after, userLevel, averageLevel }) => ({

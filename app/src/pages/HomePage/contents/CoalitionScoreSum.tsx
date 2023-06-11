@@ -48,12 +48,12 @@ export const CoalitionScoreSum = () => {
       </DashboardContent>
     );
 
-  const { totalScores } = data.getHomeCoalition;
+  const { totalScoresPerCoalition } = data.getHomeCoalition;
 
   const categories: string[] = [];
   const seriesData: number[] = [];
   const colorList: string[] = [];
-  totalScores.forEach(({ coalition, value }) => {
+  totalScoresPerCoalition.forEach(({ coalition, value }) => {
     categories.push(coalition.name);
     colorList.push(coalition.color ?? 'black');
     seriesData.push(value);

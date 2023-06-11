@@ -100,13 +100,13 @@ export const TeamInfo = () => {
                   return (
                     <tr key={id}>
                       <td>
-                        <Text>{name}</Text>
+                        <Text>{projectPreview.name}</Text>
                       </td>
                       <td>
                         <Text>#{occurrence}</Text>
                       </td>
                       <td>
-                        <Text>Example Team</Text>
+                        <Text>{name}</Text>
                       </td>
                       <td>
                         <Text>

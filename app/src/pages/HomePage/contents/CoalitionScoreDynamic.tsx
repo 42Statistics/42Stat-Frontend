@@ -55,10 +55,10 @@ export const CoalitionScoreDynamic = () => {
       </DashboardContent>
     );
 
-  const { scoreRecords } = data.getHomeCoalition;
+  const { scoreRecordsPerCoalition } = data.getHomeCoalition;
 
   const colorList: string[] = [];
-  const series = scoreRecords.map(({ coalition, records }) => {
+  const series = scoreRecordsPerCoalition.map(({ coalition, records }) => {
     const seriesData = records.filter(isDefined).map(({ at, value }) => ({
       x: at,
       y: value,

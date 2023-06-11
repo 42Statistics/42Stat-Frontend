@@ -49,11 +49,11 @@ export const CorrectionPointRanks = () => {
       </DashboardContent>
     );
 
-  const { correctionPointRanks } = data.getHomeUser;
+  const { correctionPointRanking } = data.getHomeUser;
 
   const unit = '개';
 
-  const rankList: RankUserItemType[] = correctionPointRanks.map(
+  const rankList: RankUserItemType[] = correctionPointRanking.map(
     ({ userPreview, value }) => ({
       id: userPreview.id,
       name: userPreview.login,

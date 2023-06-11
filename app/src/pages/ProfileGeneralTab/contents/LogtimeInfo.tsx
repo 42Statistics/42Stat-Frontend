@@ -60,8 +60,8 @@ export const LogtimeInfo = () => {
   return (
     <DashboardContent title={title} description={description}>
       <NumberCompare
-        curr={currMonthLogtime}
-        last={lastMonthLogtime}
+        curr={currMonthLogtime.data}
+        last={lastMonthLogtime.data}
         unit="시간"
       />
     </DashboardContent>

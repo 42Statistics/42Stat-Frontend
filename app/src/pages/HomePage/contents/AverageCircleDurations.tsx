@@ -43,19 +43,22 @@ export const AverageCircleDurations = () => {
       </DashboardContent>
     );
 
-  const { averageCircleDurations } = data.getHomeUser;
+  const { averageDurationPerCircle } = data.getHomeUser;
 
-  const categories = averageCircleDurations.map(({ circle }) => String(circle));
-  const seriesData = averageCircleDurations.map(({ value }) => value);
+  const categories = averageDurationPerCircle.map(({ circle }) =>
+    String(circle),
+  );
+  const seriesData = averageDurationPerCircle.map(({ value }) => value);
 
   // //X축 범례 최대값 추출 로직
   // const _maxX = Math.max(...Object.values(seriesData));
   // const maxX = Math.ceil(_maxX / 100) * 100;
   // 700으로 하면 마지막 서클의 범례가 왼쪽으로 넘어와서 800으로 고정할게요!
 
-  const seriesLabel = averageCircleDurations.reduce(
+  const seriesLabel = averageDurationPerCircle.reduce(
     (result: number[], { value }, idx) => {
-      const prevValue = idx !== 0 ? averageCircleDurations[idx - 1]?.value : 0;
+      const prevValue =
+        idx !== 0 ? averageDurationPerCircle[idx - 1]?.value : 0;
       result.push(value - prevValue);
       return result;
     },

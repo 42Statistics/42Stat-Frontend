@@ -49,10 +49,10 @@ export const WalletRanks = () => {
       </DashboardContent>
     );
 
-  const { walletRanks } = data.getHomeUser;
+  const { walletRanking } = data.getHomeUser;
   const unit = '₳';
 
-  const rankList: RankUserItemType[] = walletRanks.map(
+  const rankList: RankUserItemType[] = walletRanking.map(
     ({ userPreview, value }) => ({
       id: userPreview.id,
       name: userPreview.login,

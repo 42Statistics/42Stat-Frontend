@@ -33,7 +33,11 @@ export const PrefferedTime = () => {
   const { username } = useParams() as { username: string };
 
   const title = '주 접속 시간대';
-  const { loading, error, data } = useQuery(GET_PREFERRED_TIME, {
+  const {
+    loading,
+    error,
+    data: queryData,
+  } = useQuery(GET_PREFERRED_TIME, {
     variables: { login: username },
   });
   if (loading)
@@ -48,16 +52,17 @@ export const PrefferedTime = () => {
         <ApolloBadRequest msg={error.message} />
       </DashboardContent>
     );
-  if (!data)
+  if (!queryData)
     return (
       <DashboardContent title={title}>
         <ApolloNotFound />
       </DashboardContent>
     );
 
-  const { total, morning, daytime, evening, night } =
-    data.getPersonalGeneralPage.data;
-  const { start, end } = data.getPersonalGeneralPage;
+  const { preferredTimeByDateTemplate } = queryData.getPersonalGeneralPage;
+  const { data, start, end } = preferredTimeByDateTemplate;
+  const { total, morning, daytime, evening, night } = data;
+
   const description = `${dayjs(start).format('YYYY년 M월')}`;
 
   const max = Math.max(morning, daytime, evening, night);
@@ -77,7 +82,7 @@ export const PrefferedTime = () => {
                 </td>
                 <td>
                   <TextMax isMax={max === morning}>
-                    {percentFormatter(morning, total)}
+                    {total ? percentFormatter(morning, total) : '-'}
                   </TextMax>
                 </td>
               </tr>
@@ -87,7 +92,7 @@ export const PrefferedTime = () => {
                 </td>
                 <td>
                   <TextMax isMax={max === morning}>
-                    {percentFormatter(daytime, total)}
+                    {total ? percentFormatter(daytime, total) : '-'}
                   </TextMax>
                 </td>
               </tr>
@@ -97,7 +102,7 @@ export const PrefferedTime = () => {
                 </td>
                 <td>
                   <TextMax isMax={max === morning}>
-                    {percentFormatter(evening, total)}
+                    {total ? percentFormatter(evening, total) : '-'}
                   </TextMax>
                 </td>
               </tr>
@@ -107,7 +112,7 @@ export const PrefferedTime = () => {
                 </td>
                 <td>
                   <TextMax isMax={max === morning}>
-                    {percentFormatter(night, total)}
+                    {total ? percentFormatter(night, total) : '-'}
                   </TextMax>
                 </td>
               </tr>

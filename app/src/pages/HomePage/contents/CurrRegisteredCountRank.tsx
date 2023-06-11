@@ -46,10 +46,10 @@ export const CurrRegisteredCountRank = () => {
       </DashboardContent>
     );
 
-  const { currRegisteredCountRank } = data.getHomeTeam;
+  const { currRegisteredCountRanking } = data.getHomeTeam;
   const unit = '명';
 
-  const rankList: RankItemType[] = currRegisteredCountRank.map(
+  const rankList: RankItemType[] = currRegisteredCountRanking.map(
     ({ projectPreview, value }) => ({
       id: projectPreview.id,
       name: projectPreview.name,

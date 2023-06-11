@@ -43,10 +43,10 @@ export const BlackholedCountPerCircles = () => {
       </DashboardContent>
     );
 
-  const { blackholedCountPerCircles } = data.getHomeUser;
+  const { blackholedCountPerCircle } = data.getHomeUser;
 
-  const labels = blackholedCountPerCircles.map(({ circle }) => `${circle}서클`);
-  const series = blackholedCountPerCircles.map(({ value }) => value);
+  const labels = blackholedCountPerCircle.map(({ circle }) => `${circle}서클`);
+  const series = blackholedCountPerCircle.map(({ value }) => value);
 
   return (
     <DashboardContent title={title}>

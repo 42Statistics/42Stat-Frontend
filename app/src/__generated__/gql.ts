@@ -20,13 +20,16 @@ const documents = {
     "\n  query getAverageCommentLength {\n    getHomeEval {\n      averageCommentLength\n    }\n  }\n": types.GetAverageCommentLengthDocument,
     "\n  query getAverageFeedbackLength {\n    getHomeEval {\n      averageFeedbackLength\n    }\n  }\n": types.GetAverageFeedbackLengthDocument,
     "\n  query getBlackholedCountPerCircles {\n    getHomeUser {\n      blackholedCountPerCircle {\n        circle\n        value\n      }\n    }\n  }\n": types.GetBlackholedCountPerCirclesDocument,
+    "\n  query GetBlackHoledPercentage {\n    getHomeUser {\n      blackholedRate {\n        total\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n": types.GetBlackHoledPercentageDocument,
     "\n  query getCoalitionScoreRecord {\n    getHomeCoalition {\n      scoreRecordsPerCoalition {\n        coalition {\n          id\n          name\n          slug\n          imageUrl\n          coverUrl\n          color\n          score\n          userId\n        }\n        records {\n          at\n          value\n        }\n      }\n    }\n  }\n": types.GetCoalitionScoreRecordDocument,
     "\n  query getCoalitionTotalScores {\n    getHomeCoalition {\n      totalScoresPerCoalition {\n        coalition {\n          id\n          name\n          slug\n          imageUrl\n          coverUrl\n          color\n          userId\n        }\n        value\n      }\n    }\n  }\n": types.GetCoalitionTotalScoresDocument,
     "\n  query getCorrectionPointRank($limit: Int!) {\n    getHomeUser {\n      correctionPointRanking(limit: $limit) {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n": types.GetCorrectionPointRankDocument,
     "\n  query GetCurrMonthBlackholedCount {\n    getHomeUser {\n      currMonthBlackholedCount: blackholedCountByDateTemplate(\n        dateTemplate: CURR_WEEK\n      ) {\n        data\n        start\n        end\n      }\n      lastMonthBlackholedCount: blackholedCountByDateTemplate(\n        dateTemplate: LAST_WEEK\n      ) {\n        data\n        start\n        end\n      }\n    }\n  }\n": types.GetCurrMonthBlackholedCountDocument,
     "\n  query GetCurrRegisteredCountRank {\n    getHomeTeam {\n      currRegisteredCountRanking {\n        projectPreview {\n          id\n          name\n        }\n        value\n      }\n    }\n  }\n": types.GetCurrRegisteredCountRankDocument,
+    "\n  query GetCurrWeekAverageEvalCount {\n    getHomeEval {\n      evalCountByDateTemplate(dateTemplate: CURR_WEEK) {\n        data\n        start\n        end\n      }\n    }\n  }\n": types.GetCurrWeekAverageEvalCountDocument,
     "\n  query GetCurrWeekEvalCount {\n    getHomeEval {\n      currWeekEvalCount: evalCountByDateTemplate(dateTemplate: CURR_WEEK) {\n        data\n        start\n        end\n      }\n      lastWeekEvalCount: evalCountByDateTemplate(dateTemplate: LAST_WEEK) {\n        data\n        start\n        end\n      }\n    }\n  }\n": types.GetCurrWeekEvalCountDocument,
     "\n  query GetLastExamResult {\n    getHomeTeam {\n      lastExamResult {\n        data {\n          rank\n          passCount\n          totalCount\n        }\n        start\n        end\n      }\n    }\n  }\n": types.GetLastExamResultDocument,
+    "\n  query GetMemberPercentage {\n    getHomeUser {\n      memberRate {\n        total\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n": types.GetMemberPercentageDocument,
     "\n  query getTotalEvalCount {\n    getHomeEval {\n      totalEvalCount\n    }\n  }\n": types.GetTotalEvalCountDocument,
     "\n  query getUserCountPerLevels {\n    getHomeUser {\n      userCountPerLevel {\n        userCount\n        level\n      }\n    }\n  }\n": types.GetUserCountPerLevelsDocument,
     "\n  query getWalletRank($limit: Int!) {\n    getHomeUser {\n      walletRanking(limit: $limit) {\n        userPreview {\n          id\n          login\n          imgUrl\n        }\n        value\n      }\n    }\n  }\n": types.GetWalletRankDocument,
@@ -37,6 +40,7 @@ const documents = {
     "\n  query getCurrentCorrectionPoint($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      correctionPoint\n    }\n  }\n": types.GetCurrentCorrectionPointDocument,
     "\n  query getMonthlyEvalCount($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      currMonthCount: countByDateTemplate(dateTemplate: CURR_WEEK) {\n        data\n        start\n        end\n      }\n      lastMonthCount: countByDateTemplate(dateTemplate: LAST_WEEK) {\n        data\n        start\n        end\n      }\n    }\n  }\n": types.GetMonthlyEvalCountDocument,
     "\n  query getPersonalTotalEvalCount($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      totalCount\n    }\n  }\n": types.GetPersonalTotalEvalCountDocument,
+    "\n  query GetTotalEvalTime {\n    getPersonalEvalPage {\n      totalDuration\n    }\n  }\n": types.GetTotalEvalTimeDocument,
     "\n  query getBeginAt($login: String!) {\n    getPersonalGeneralPage(login: $login) {\n      beginAt\n    }\n  }\n": types.GetBeginAtDocument,
     "\n  query getBlackHoledAt($login: String!) {\n    getPersonalGeneralPage(login: $login) {\n      blackholedAt\n    }\n  }\n": types.GetBlackHoledAtDocument,
     "\n  query getCurrentCoalitionScore($login: String!) {\n    getPersonalGeneralPage(login: $login) {\n      userProfile {\n        coalition {\n          score\n          imageUrl\n          color\n        }\n      }\n      scoreInfo {\n        rankInCoalition\n      }\n    }\n  }\n": types.GetCurrentCoalitionScoreDocument,
@@ -98,6 +102,10 @@ export function gql(source: "\n  query getBlackholedCountPerCircles {\n    getHo
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function gql(source: "\n  query GetBlackHoledPercentage {\n    getHomeUser {\n      blackholedRate {\n        total\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetBlackHoledPercentage {\n    getHomeUser {\n      blackholedRate {\n        total\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function gql(source: "\n  query getCoalitionScoreRecord {\n    getHomeCoalition {\n      scoreRecordsPerCoalition {\n        coalition {\n          id\n          name\n          slug\n          imageUrl\n          coverUrl\n          color\n          score\n          userId\n        }\n        records {\n          at\n          value\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query getCoalitionScoreRecord {\n    getHomeCoalition {\n      scoreRecordsPerCoalition {\n        coalition {\n          id\n          name\n          slug\n          imageUrl\n          coverUrl\n          color\n          score\n          userId\n        }\n        records {\n          at\n          value\n        }\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -118,11 +126,19 @@ export function gql(source: "\n  query GetCurrRegisteredCountRank {\n    getHome
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function gql(source: "\n  query GetCurrWeekAverageEvalCount {\n    getHomeEval {\n      evalCountByDateTemplate(dateTemplate: CURR_WEEK) {\n        data\n        start\n        end\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetCurrWeekAverageEvalCount {\n    getHomeEval {\n      evalCountByDateTemplate(dateTemplate: CURR_WEEK) {\n        data\n        start\n        end\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function gql(source: "\n  query GetCurrWeekEvalCount {\n    getHomeEval {\n      currWeekEvalCount: evalCountByDateTemplate(dateTemplate: CURR_WEEK) {\n        data\n        start\n        end\n      }\n      lastWeekEvalCount: evalCountByDateTemplate(dateTemplate: LAST_WEEK) {\n        data\n        start\n        end\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetCurrWeekEvalCount {\n    getHomeEval {\n      currWeekEvalCount: evalCountByDateTemplate(dateTemplate: CURR_WEEK) {\n        data\n        start\n        end\n      }\n      lastWeekEvalCount: evalCountByDateTemplate(dateTemplate: LAST_WEEK) {\n        data\n        start\n        end\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query GetLastExamResult {\n    getHomeTeam {\n      lastExamResult {\n        data {\n          rank\n          passCount\n          totalCount\n        }\n        start\n        end\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetLastExamResult {\n    getHomeTeam {\n      lastExamResult {\n        data {\n          rank\n          passCount\n          totalCount\n        }\n        start\n        end\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query GetMemberPercentage {\n    getHomeUser {\n      memberRate {\n        total\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetMemberPercentage {\n    getHomeUser {\n      memberRate {\n        total\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -163,6 +179,10 @@ export function gql(source: "\n  query getMonthlyEvalCount($login: String!) {\n 
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query getPersonalTotalEvalCount($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      totalCount\n    }\n  }\n"): (typeof documents)["\n  query getPersonalTotalEvalCount($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      totalCount\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query GetTotalEvalTime {\n    getPersonalEvalPage {\n      totalDuration\n    }\n  }\n"): (typeof documents)["\n  query GetTotalEvalTime {\n    getPersonalEvalPage {\n      totalDuration\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

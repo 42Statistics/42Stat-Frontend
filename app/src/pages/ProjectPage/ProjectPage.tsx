@@ -78,6 +78,11 @@ const ProjectPage = () => {
   } = data.getProjectInfo;
 
   const passPercentage = (evalInfo.passCount / evalInfo.totalEvalCount) * 100;
+  const getPeopleRange = (from, to) => {
+    if (from === 1 && to === 1) return 'Solo';
+    else if (from === 2 && to === 2) return '2 Students';
+    return `${minUserCount}~${maxUserCount} Students`;
+  };
   return (
     <ProjectPageLayout>
       <VStack w="100%" spacing="5rem">
@@ -89,7 +94,10 @@ const ProjectPage = () => {
         </VStack>
         <VStack spacing="1rem">
           {/* <Text>Solo / 70 hrs. / 462 XP</Text> */}
-          <Text>{`${minUserCount}~${maxUserCount}명 / ${duration} hrs. / ${difficulty} XP`}</Text>
+          <Text>{`${getPeopleRange(
+            minUserCount,
+            maxUserCount,
+          )} / ${duration} hrs. / ${difficulty} XP`}</Text>
           <HStack spacing="1rem">
             <HiUsers size="16px" />
             <Text>

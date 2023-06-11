@@ -67,6 +67,17 @@ export const PrefferedTime = () => {
 
   const max = Math.max(morning, daytime, evening, night);
 
+  if (total === 0)
+    return (
+      <DashboardContent title={title} description={description}>
+        <VStack w="100%" h="100%">
+          <VStack w="80%" h="100%" spacing="2rem">
+            <H3Text>출석 기록이 없어요 😓</H3Text>
+          </VStack>
+        </VStack>
+      </DashboardContent>
+    );
+
   return (
     <DashboardContent title={title} description={description}>
       <VStack w="100%" h="100%">

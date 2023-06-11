@@ -50,16 +50,24 @@ export const LevelGraph = () => {
     );
 
   const { levelRecords } = data.getPersonalGeneralPage;
+  const today = new Date();
+  const currentYear = today.getFullYear();
+
+  const createDate = (year, monthIndex) => {
+    const month = monthIndex + 1;
+    const date = new Date(year, month - 1, 1);
+    return date;
+  };
 
   const userLevelSeries = levelRecords.map(
-    ({ after, userLevel, averageLevel }) => ({
-      x: after,
+    ({ after, userLevel, averageLevel }, idx) => ({
+      x: createDate(currentYear, idx),
       y: userLevel,
     }),
   );
   const averageLevelSeries = levelRecords.map(
-    ({ after, userLevel, averageLevel }) => ({
-      x: after,
+    ({ after, userLevel, averageLevel }, idx) => ({
+      x: createDate(currentYear, idx),
       y: averageLevel,
     }),
   );

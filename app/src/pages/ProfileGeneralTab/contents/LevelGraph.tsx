@@ -50,24 +50,30 @@ export const LevelGraph = () => {
     );
 
   const { levelRecords } = data.getPersonalGeneralPage;
-  const today = new Date();
-  const currentYear = today.getFullYear();
 
-  const createDate = (year, monthIndex) => {
-    const month = monthIndex + 1;
-    const date = new Date(year, month - 1, 1);
-    return date;
-  };
+  /**
+   * 현재 n 일후이지만 나중에 날자로 변경해야 할 경우 사용
+   */
+  // const today = new Date();
+  // const currentYear = today.getFullYear();
+
+  // const createDate = (year, monthIndex) => {
+  //   const month = monthIndex + 1;
+  //   const date = new Date(year, month - 1, 1);
+  //   return date;
+  // };
 
   const userLevelSeries = levelRecords.map(
     ({ after, userLevel, averageLevel }, idx) => ({
-      x: createDate(currentYear, idx),
+      // x: createDate(currentYear, idx),
+      x: after,
       y: userLevel,
     }),
   );
   const averageLevelSeries = levelRecords.map(
     ({ after, userLevel, averageLevel }, idx) => ({
-      x: createDate(currentYear, idx),
+      // x: createDate(currentYear, idx),
+      x: after,
       y: averageLevel,
     }),
   );
@@ -99,9 +105,10 @@ const LevelGraphChart = ({ series }: LevelGraphChartProps) => {
   const options: ApexCharts.ApexOptions = {
     colors: [theme.colors.primary.default, theme.colors.accent.default],
     xaxis: {
-      type: 'datetime',
+      // type: 'datetime',
       labels: {
-        format: 'yy.MM.',
+        // format: 'yy.MM.',
+        formatter: (value) => `${value}일`,
       },
     },
     yaxis: {
@@ -111,7 +118,8 @@ const LevelGraphChart = ({ series }: LevelGraphChartProps) => {
     },
     tooltip: {
       x: {
-        format: 'yyyy년 M월',
+        // format: 'yyyy년 M월',
+        formatter: (value) => `${(value - 1) * 50}일 후`,
       },
     },
   };

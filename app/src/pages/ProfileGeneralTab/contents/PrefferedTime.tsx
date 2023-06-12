@@ -93,7 +93,7 @@ export const PrefferedTime = () => {
                 </td>
                 <td>
                   <TextMax isMax={max === morning}>
-                    {total ? percentFormatter(morning, total) : '-'}
+                    {percentFormatter(morning, total)}
                   </TextMax>
                 </td>
               </tr>
@@ -103,7 +103,7 @@ export const PrefferedTime = () => {
                 </td>
                 <td>
                   <TextMax isMax={max === morning}>
-                    {total ? percentFormatter(daytime, total) : '-'}
+                    {percentFormatter(daytime, total)}
                   </TextMax>
                 </td>
               </tr>
@@ -113,7 +113,7 @@ export const PrefferedTime = () => {
                 </td>
                 <td>
                   <TextMax isMax={max === morning}>
-                    {total ? percentFormatter(evening, total) : '-'}
+                    {percentFormatter(evening, total)}
                   </TextMax>
                 </td>
               </tr>
@@ -123,7 +123,7 @@ export const PrefferedTime = () => {
                 </td>
                 <td>
                   <TextMax isMax={max === morning}>
-                    {total ? percentFormatter(night, total) : '-'}
+                    {percentFormatter(night, total)}
                   </TextMax>
                 </td>
               </tr>

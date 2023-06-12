@@ -52,12 +52,15 @@ export const BlackholedPercentage = () => {
 
   const { blackholedRate } = queryData.getHomeUser;
   const { total, fields } = blackholedRate;
-  const blackholedPercentage = (fields[0].value / total) * 100;
+  const blackholedNum = fields.find((obj) => obj.key === 'blackholed')?.value;
+  const blackholedPercentage = ((blackholedNum || 0) / total) * 100;
+  const seriesData = fields.map((obj) => obj.value);
+
   return (
     <DashboardContent title={title}>
       <BlackholedPercentageChart
         labels={['Blackholed', '여행 중']}
-        series={[blackholedPercentage, 100 - blackholedPercentage]}
+        series={seriesData}
       />
     </DashboardContent>
   );
@@ -78,7 +81,7 @@ const BlackholedPercentageChart = ({
     colors: [theme.colors.mono.black, theme.colors.primary.light],
     tooltip: {
       y: {
-        formatter: (value) => `${value.toFixed(1)}%`,
+        formatter: (value) => `${value}명`,
       },
       fillSeriesColor: false,
     },

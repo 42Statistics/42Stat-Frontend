@@ -79,9 +79,11 @@ const ProjectPage = () => {
 
   const passPercentage = (evalInfo.passCount / evalInfo.totalEvalCount) * 100;
   const getPeopleRange = (from, to) => {
-    if (from === 1 && to === 1) return 'Solo';
-    else if (from === 2 && to === 2) return '2 Students';
-    return `${minUserCount}~${maxUserCount} Students`;
+    if (from === to) {
+      if (from === 1) return 'Solo';
+      return `${from} Students`;
+    }
+    return `${from} ~ ${to} Students`;
   };
   return (
     <ProjectPageLayout>

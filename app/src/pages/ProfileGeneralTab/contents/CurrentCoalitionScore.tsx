@@ -20,6 +20,7 @@ const GET_CURRENT_COALITION_SCORE = gql(/* GraphQL */ `
         }
       }
       scoreInfo {
+        value
         rankInCoalition
       }
     }
@@ -54,10 +55,11 @@ export const CurrentCoalitionScore = () => {
 
   const { userProfile, scoreInfo } = data.getPersonalGeneralPage;
   const { coalition } = userProfile;
+  const { value } = scoreInfo;
   return (
     <DashboardContent title={title}>
       <HStack h="100%" spacing="1rem">
-        <H3Text>{coalition.score.toLocaleString()}</H3Text>
+        <H3Text>{value.toLocaleString()}</H3Text>
         <HStack spacing="0.5rem">
           {coalition.imageUrl && coalition.color && (
             <StyledCoalitionMark

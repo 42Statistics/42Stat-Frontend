@@ -43,7 +43,7 @@ const documents = {
     "\n  query GetTotalEvalTime {\n    getPersonalEvalPage {\n      totalDuration\n    }\n  }\n": types.GetTotalEvalTimeDocument,
     "\n  query getBeginAt($login: String!) {\n    getPersonalGeneralPage(login: $login) {\n      beginAt\n    }\n  }\n": types.GetBeginAtDocument,
     "\n  query getBlackHoledAt($login: String!) {\n    getPersonalGeneralPage(login: $login) {\n      blackholedAt\n    }\n  }\n": types.GetBlackHoledAtDocument,
-    "\n  query getCurrentCoalitionScore($login: String!) {\n    getPersonalGeneralPage(login: $login) {\n      userProfile {\n        coalition {\n          score\n          imageUrl\n          color\n        }\n      }\n      scoreInfo {\n        rankInCoalition\n      }\n    }\n  }\n": types.GetCurrentCoalitionScoreDocument,
+    "\n  query getCurrentCoalitionScore($login: String!) {\n    getPersonalGeneralPage(login: $login) {\n      userProfile {\n        coalition {\n          score\n          imageUrl\n          color\n        }\n      }\n      scoreInfo {\n        value\n        rankInCoalition\n      }\n    }\n  }\n": types.GetCurrentCoalitionScoreDocument,
     "\n  query getCurrentWallet($login: String!) {\n    getPersonalGeneralPage(login: $login) {\n      wallet\n    }\n  }\n": types.GetCurrentWalletDocument,
     "\n  query getLastPass($login: String!) {\n    getPersonalGeneralPage(login: $login) {\n      teamInfo {\n        lastPassed\n      }\n    }\n  }\n": types.GetLastPassDocument,
     "\n  query getLastRegistered($login: String!) {\n    getPersonalGeneralPage(login: $login) {\n      teamInfo {\n        lastRegistered\n      }\n    }\n  }\n": types.GetLastRegisteredDocument,
@@ -194,7 +194,7 @@ export function gql(source: "\n  query getBlackHoledAt($login: String!) {\n    g
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query getCurrentCoalitionScore($login: String!) {\n    getPersonalGeneralPage(login: $login) {\n      userProfile {\n        coalition {\n          score\n          imageUrl\n          color\n        }\n      }\n      scoreInfo {\n        rankInCoalition\n      }\n    }\n  }\n"): (typeof documents)["\n  query getCurrentCoalitionScore($login: String!) {\n    getPersonalGeneralPage(login: $login) {\n      userProfile {\n        coalition {\n          score\n          imageUrl\n          color\n        }\n      }\n      scoreInfo {\n        rankInCoalition\n      }\n    }\n  }\n"];
+export function gql(source: "\n  query getCurrentCoalitionScore($login: String!) {\n    getPersonalGeneralPage(login: $login) {\n      userProfile {\n        coalition {\n          score\n          imageUrl\n          color\n        }\n      }\n      scoreInfo {\n        value\n        rankInCoalition\n      }\n    }\n  }\n"): (typeof documents)["\n  query getCurrentCoalitionScore($login: String!) {\n    getPersonalGeneralPage(login: $login) {\n      userProfile {\n        coalition {\n          score\n          imageUrl\n          color\n        }\n      }\n      scoreInfo {\n        value\n        rankInCoalition\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

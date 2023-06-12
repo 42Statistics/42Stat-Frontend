@@ -10,7 +10,7 @@ import { DashboardContent } from '@components/templates/DashboardContent';
 
 const GET_AVERAGE_FEEDBACK_LENGTH = gql(/* GraphQL */ `
   query getAverageFeedbackLength {
-    getTotalPage {
+    getHomeEval {
       averageFeedbackLength
     }
   }
@@ -38,7 +38,7 @@ export const AverageFeedbackLength = () => {
       </DashboardContent>
     );
 
-  const { averageFeedbackLength } = data.getTotalPage;
+  const { averageFeedbackLength } = data.getHomeEval;
   const unit = '자';
 
   return (

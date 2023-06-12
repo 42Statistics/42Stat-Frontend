@@ -11,15 +11,15 @@ import dayjs from 'dayjs';
 
 const GET_LAST_EXAM_RESULT = gql(/* GraphQL */ `
   query GetLastExamResult {
-    getHomePage {
+    getHomeTeam {
       lastExamResult {
         data {
           rank
           passCount
           totalCount
         }
-        from
-        to
+        start
+        end
       }
     }
   }
@@ -47,10 +47,10 @@ export const LastExamResult = () => {
       </DashboardContent>
     );
 
-  const { lastExamResult } = data.getHomePage;
-  const { from, to } = lastExamResult;
+  const { lastExamResult } = data.getHomeTeam;
+  const { start, end } = lastExamResult;
 
-  const description = `${dayjs(from).format('YYYY년 M월 D일 H시 m분')}`;
+  const description = `${dayjs(start).format('YYYY년 M월 D일 H시 m분')}`;
 
   const categories = lastExamResult.data.map(({ rank }) => rank);
   const seriesData = lastExamResult.data.map(

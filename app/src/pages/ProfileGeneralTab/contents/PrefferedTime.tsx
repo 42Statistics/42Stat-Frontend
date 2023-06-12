@@ -13,18 +13,17 @@ import { useParams } from 'react-router-dom';
 
 const GET_PREFERRED_TIME = gql(/* GraphQL */ `
   query getPrefferedTime($login: String!) {
-    getPersonGeneralPage(login: $login) {
-      logtimeInfo {
+    getPersonalGeneralPage(login: $login) {
+      preferredTimeByDateTemplate(dateTemplate: CURR_MONTH) {
         data {
-          preferredTime {
-            morning
-            daytime
-            evening
-            night
-          }
+          total
+          morning
+          daytime
+          evening
+          night
         }
-        from
-        to
+        start
+        end
       }
     }
   }
@@ -34,7 +33,11 @@ export const PrefferedTime = () => {
   const { username } = useParams() as { username: string };
 
   const title = '주 접속 시간대';
-  const { loading, error, data } = useQuery(GET_PREFERRED_TIME, {
+  const {
+    loading,
+    error,
+    data: queryData,
+  } = useQuery(GET_PREFERRED_TIME, {
     variables: { login: username },
   });
   if (loading)
@@ -49,20 +52,31 @@ export const PrefferedTime = () => {
         <ApolloBadRequest msg={error.message} />
       </DashboardContent>
     );
-  if (!data)
+  if (!queryData)
     return (
       <DashboardContent title={title}>
         <ApolloNotFound />
       </DashboardContent>
     );
 
-  const { morning, daytime, evening, night } =
-    data.getPersonGeneralPage.logtimeInfo.data.preferredTime;
-  const { from, to } = data.getPersonGeneralPage.logtimeInfo;
-  const description = `${dayjs(from).format('YYYY년 M월')}`;
+  const { preferredTimeByDateTemplate } = queryData.getPersonalGeneralPage;
+  const { data, start, end } = preferredTimeByDateTemplate;
+  const { total, morning, daytime, evening, night } = data;
 
-  const total = morning + daytime + evening + night;
+  const description = `${dayjs(start).format('YYYY년 M월')}`;
+
   const max = Math.max(morning, daytime, evening, night);
+
+  if (total === 0)
+    return (
+      <DashboardContent title={title} description={description}>
+        <VStack w="100%" h="100%">
+          <VStack w="80%" h="100%" spacing="2rem">
+            <H3Text>출석 기록이 없어요 😓</H3Text>
+          </VStack>
+        </VStack>
+      </DashboardContent>
+    );
 
   return (
     <DashboardContent title={title} description={description}>

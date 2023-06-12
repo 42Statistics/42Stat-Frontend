@@ -10,7 +10,7 @@ import { DashboardContent } from '@components/templates/DashboardContent';
 
 const GET_TOTAL_EVAL_COUNT = gql(/* GraphQL */ `
   query getTotalEvalCount {
-    getTotalPage {
+    getHomeEval {
       totalEvalCount
     }
   }
@@ -38,7 +38,7 @@ export const TotalEvalCount = () => {
       </DashboardContent>
     );
 
-  const { totalEvalCount } = data.getTotalPage;
+  const { totalEvalCount } = data.getHomeEval;
   const unit = '회';
 
   return (

@@ -12,15 +12,11 @@ import { useParams } from 'react-router-dom';
 
 const GET_LEVEL_GRAPH = gql(/* GraphQL */ `
   query getLevelGraph($login: String!) {
-    getPersonGeneralPage(login: $login) {
-      levelGraphs {
-        data {
-          date
-          userLevel
-          averageLevel
-        }
-        from
-        to
+    getPersonalGeneralPage(login: $login) {
+      levelRecords {
+        after
+        userLevel
+        averageLevel
       }
     }
   }
@@ -53,17 +49,34 @@ export const LevelGraph = () => {
       </DashboardContent>
     );
 
-  const { levelGraphs } = data.getPersonGeneralPage;
-  const [from, to] = [levelGraphs.from, levelGraphs.to];
+  const { levelRecords } = data.getPersonalGeneralPage;
 
-  const userLevelSeries = levelGraphs.data.map(({ date, userLevel }) => ({
-    x: date,
-    y: userLevel,
-  }));
-  const averageLevelSeries = levelGraphs.data.map(({ date, averageLevel }) => ({
-    x: date,
-    y: averageLevel,
-  }));
+  /**
+   * 현재 n 일후이지만 나중에 날자로 변경해야 할 경우 사용
+   */
+  // const today = new Date();
+  // const currentYear = today.getFullYear();
+
+  // const createDate = (year, monthIndex) => {
+  //   const month = monthIndex + 1;
+  //   const date = new Date(year, month - 1, 1);
+  //   return date;
+  // };
+
+  const userLevelSeries = levelRecords.map(
+    ({ after, userLevel, averageLevel }, idx) => ({
+      // x: createDate(currentYear, idx),
+      x: after,
+      y: userLevel,
+    }),
+  );
+  const averageLevelSeries = levelRecords.map(
+    ({ after, userLevel, averageLevel }, idx) => ({
+      // x: createDate(currentYear, idx),
+      x: after,
+      y: averageLevel,
+    }),
+  );
   const series = [
     {
       name: '유저', // TODO: user login 가져오기
@@ -92,9 +105,10 @@ const LevelGraphChart = ({ series }: LevelGraphChartProps) => {
   const options: ApexCharts.ApexOptions = {
     colors: [theme.colors.primary.default, theme.colors.accent.default],
     xaxis: {
-      type: 'datetime',
+      // type: 'datetime',
       labels: {
-        format: 'yy.MM.',
+        // format: 'yy.MM.',
+        formatter: (value) => `${value}일`,
       },
     },
     yaxis: {
@@ -104,7 +118,8 @@ const LevelGraphChart = ({ series }: LevelGraphChartProps) => {
     },
     tooltip: {
       x: {
-        format: 'yyyy년 M월',
+        // format: 'yyyy년 M월',
+        formatter: (value) => `${(value - 1) * 50}일 후`,
       },
     },
   };

@@ -11,10 +11,8 @@ import { useParams } from 'react-router-dom';
 
 const GET_CURRENT_WALLET = gql(/* GraphQL */ `
   query getCurrentWallet($login: String!) {
-    getPersonGeneralPage(login: $login) {
-      userProfile {
-        wallet
-      }
+    getPersonalGeneralPage(login: $login) {
+      wallet
     }
   }
 `);
@@ -45,7 +43,7 @@ export const CurrentWallet = () => {
       </DashboardContent>
     );
 
-  const { wallet } = data.getPersonGeneralPage.userProfile;
+  const { wallet } = data.getPersonalGeneralPage;
   const unit = '₳';
 
   return (

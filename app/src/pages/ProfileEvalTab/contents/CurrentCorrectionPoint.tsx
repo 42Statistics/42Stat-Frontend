@@ -11,10 +11,8 @@ import { useParams } from 'react-router-dom';
 
 const GET_CURRENT_CORRECTION_POINT = gql(/* GraphQL */ `
   query getCurrentCorrectionPoint($login: String!) {
-    getPersonGeneralPage(login: $login) {
-      userProfile {
-        correctionPoint
-      }
+    getPersonalEvalPage(login: $login) {
+      correctionPoint
     }
   }
 `);
@@ -45,7 +43,7 @@ export const CurrentCorrectionPoint = () => {
       </DashboardContent>
     );
 
-  const { correctionPoint } = data.getPersonGeneralPage.userProfile;
+  const { correctionPoint } = data.getPersonalEvalPage;
   const unit = '개';
 
   return (

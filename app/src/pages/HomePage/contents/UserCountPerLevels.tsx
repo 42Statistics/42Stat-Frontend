@@ -11,8 +11,8 @@ import { numberWithUnitFormatter } from '@utils/formatters';
 
 const GET_USER_COUNT_PER_LEVELS = gql(/* GraphQL */ `
   query getUserCountPerLevels {
-    getTotalPage {
-      userCountPerLevels {
+    getHomeUser {
+      userCountPerLevel {
         userCount
         level
       }
@@ -42,10 +42,10 @@ export const UserCountPerLevels = () => {
       </DashboardContent>
     );
 
-  const { userCountPerLevels } = data.getTotalPage;
+  const { userCountPerLevel } = data.getHomeUser;
 
-  const categories = userCountPerLevels.map(({ level }) => level);
-  const seriesData = userCountPerLevels.map(({ userCount }) => userCount);
+  const categories = userCountPerLevel.map(({ level }) => level);
+  const seriesData = userCountPerLevel.map(({ userCount }) => userCount);
   //Y축 범례 최대값 추출 로직
   const _maxY = Math.max(...Object.values(seriesData));
   const maxY = Math.ceil(_maxY / 100) * 100;

@@ -12,21 +12,16 @@ import { useParams } from 'react-router-dom';
 
 const GET_LOGTIME_INFO = gql(/* GraphQL */ `
   query getLogtimeInfo($login: String!) {
-    getPersonGeneralPage(login: $login) {
-      logtimeInfo {
-        data {
-          currMonthLogtime
-          lastMonthLogtime
-          preferredTime {
-            morning
-            daytime
-            evening
-            night
-          }
-          preferredCluster
-        }
-        from
-        to
+    getPersonalGeneralPage(login: $login) {
+      currMonthLogtime: logtimeByDateTemplate(dateTemplate: CURR_MONTH) {
+        data
+        start
+        end
+      }
+      lastMonthLogtime: logtimeByDateTemplate(dateTemplate: LAST_MONTH) {
+        data
+        start
+        end
       }
     }
   }
@@ -58,16 +53,15 @@ export const LogtimeInfo = () => {
       </DashboardContent>
     );
 
-  const { currMonthLogtime, lastMonthLogtime } =
-    data.getPersonGeneralPage.logtimeInfo.data;
-  const { from, to } = data.getPersonGeneralPage.logtimeInfo;
-  const description = `${dayjs(from).format('YYYY년 M월')}`;
+  const { currMonthLogtime, lastMonthLogtime } = data.getPersonalGeneralPage;
+  const { start, end } = currMonthLogtime;
+  const description = `${dayjs(start).format('YYYY년 M월')}`;
 
   return (
     <DashboardContent title={title} description={description}>
       <NumberCompare
-        curr={currMonthLogtime}
-        last={lastMonthLogtime}
+        curr={currMonthLogtime.data}
+        last={lastMonthLogtime.data}
         unit="시간"
       />
     </DashboardContent>

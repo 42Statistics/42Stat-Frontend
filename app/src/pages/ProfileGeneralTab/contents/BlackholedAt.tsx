@@ -16,11 +16,9 @@ import { useTheme } from '@emotion/react';
 import { useParams } from 'react-router-dom';
 
 const GET_BLACKHOLED_AT = gql(/* GraphQL */ `
-  query getBlackholedAt($login: String!) {
-    getPersonGeneralPage(login: $login) {
-      userProfile {
-        blackholedAt
-      }
+  query getBlackHoledAt($login: String!) {
+    getPersonalGeneralPage(login: $login) {
+      blackholedAt
     }
   }
 `);
@@ -53,7 +51,7 @@ export const BlackholedAt = () => {
       </DashboardContent>
     );
 
-  const { blackholedAt } = data.getPersonGeneralPage.userProfile;
+  const { blackholedAt } = data.getPersonalGeneralPage;
   const daysLeft = blackholedAt
     ? Math.floor(
         (new Date(blackholedAt).getTime() - Date.now()) / 1000 / 60 / 60 / 24,

@@ -54,16 +54,14 @@ export const LogtimeInfo = () => {
     );
 
   const { currMonthLogtime, lastMonthLogtime } = data.getPersonalGeneralPage;
+  const currMonthHours = Math.floor(currMonthLogtime.data / 60);
+  const lastMonthHours = Math.floor(lastMonthLogtime.data / 60);
   const { start, end } = currMonthLogtime;
   const description = `${dayjs(start).format('YYYY년 M월')}`;
 
   return (
     <DashboardContent title={title} description={description}>
-      <NumberCompare
-        curr={currMonthLogtime.data}
-        last={lastMonthLogtime.data}
-        unit="시간"
-      />
+      <NumberCompare curr={currMonthHours} last={lastMonthHours} unit="시간" />
     </DashboardContent>
   );
 };

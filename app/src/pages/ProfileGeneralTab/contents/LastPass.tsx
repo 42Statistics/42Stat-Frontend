@@ -49,7 +49,11 @@ export const LastPass = () => {
 
   return (
     <DashboardContent title={title}>
-      <TextDefault text={lastPassed ?? '-'} />
+      {lastPassed != null ? (
+        <TextDefault text={lastPassed} />
+      ) : (
+        <TextDefault text="과제 제출 기록이 없어요 😓" />
+      )}
     </DashboardContent>
   );
 };

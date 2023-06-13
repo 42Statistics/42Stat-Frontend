@@ -8,6 +8,8 @@ import {
 } from '@components/elements/DashboardContentView';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useTheme } from '@emotion/react';
+import { numberWithUnitFormatter } from '@utils/formatters';
+import { capitalize } from 'lodash-es';
 
 const GET_BLACKHOLED_PERCENTAGE = gql(/* GraphQL */ `
   query GetBlackHoledPercentage {
@@ -50,18 +52,13 @@ export const BlackholedPercentage = () => {
       </DashboardContent>
     );
 
-  const { blackholedRate } = queryData.getHomeUser;
-  const { total, fields } = blackholedRate;
-  const blackholedNum = fields.find((obj) => obj.key === 'blackholed')?.value;
-  const blackholedPercentage = ((blackholedNum || 0) / total) * 100;
-  const seriesData = fields.map((obj) => obj.value);
+  const { total, fields } = queryData.getHomeUser.blackholedRate;
+  const labels = fields.map((field) => capitalize(field.key));
+  const series = fields.map((field) => field.value);
 
   return (
     <DashboardContent title={title}>
-      <BlackholedPercentageChart
-        labels={['Blackholed', '여행 중']}
-        series={seriesData}
-      />
+      <BlackholedPercentageChart labels={labels} series={series} />
     </DashboardContent>
   );
 };
@@ -81,7 +78,7 @@ const BlackholedPercentageChart = ({
     colors: [theme.colors.mono.black, theme.colors.primary.light],
     tooltip: {
       y: {
-        formatter: (value) => `${value}명`,
+        formatter: (value) => numberWithUnitFormatter(value, '명'),
       },
       fillSeriesColor: false,
     },

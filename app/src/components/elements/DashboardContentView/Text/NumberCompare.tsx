@@ -1,7 +1,7 @@
 import { H3Text, HStack, Text } from '@components/common';
 import { useTheme } from '@emotion/react';
-import { BsDash } from '@react-icons/all-files/bs/BsDash';
 import { BsTriangleFill } from '@react-icons/all-files/bs/BsTriangleFill';
+import { NoneDash } from '../NoneDash';
 
 type NumberCompareProps = {
   curr: number;
@@ -39,7 +39,7 @@ export const NumberCompare = ({ curr, last, unit }: NumberCompareProps) => {
             <H3Text color={color}>{Math.abs(diff).toLocaleString()}</H3Text>
           </>
         ) : (
-          <BsDash size="12px" color={theme.colors.mono.black} />
+          <NoneDash />
         )}
       </HStack>
     </HStack>

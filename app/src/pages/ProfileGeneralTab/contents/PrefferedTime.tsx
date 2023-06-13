@@ -65,9 +65,28 @@ export const PrefferedTime = () => {
 
   const description = `${dayjs(start).format('YYYY년 M월')}`;
 
+  const tabelData = [
+    {
+      time: '아침',
+      value: morning,
+    },
+    {
+      time: '낮',
+      value: daytime,
+    },
+    {
+      time: '저녁',
+      value: evening,
+    },
+    {
+      time: '새벽',
+      value: night,
+    },
+  ];
+
   const max = Math.max(morning, daytime, evening, night);
 
-  if (total === 0)
+  if (total === 0) {
     return (
       <DashboardContent title={title} description={description}>
         <VStack w="100%" h="100%">
@@ -77,59 +96,28 @@ export const PrefferedTime = () => {
         </VStack>
       </DashboardContent>
     );
+  }
 
   return (
     <DashboardContent title={title} description={description}>
-      <VStack w="100%" h="100%">
-        <VStack w="80%" h="100%" spacing="2rem">
-          <H3Text>
-            {prefferedTimeTitle(morning, daytime, evening, night)}
-          </H3Text>
-          <PrefferedTimeTable>
-            <tbody>
-              <tr>
+      <VStack w="100%" h="100%" spacing="2rem">
+        <H3Text>{prefferedTimeTitle(morning, daytime, evening, night)}</H3Text>
+        <PrefferedTimeTable>
+          <tbody>
+            {tabelData.map(({ time, value }) => (
+              <tr key={time}>
                 <td>
-                  <H3Text>🌞 아침</H3Text>
+                  <H3Text>{time}</H3Text>
                 </td>
                 <td>
-                  <TextMax isMax={max === morning}>
-                    {percentFormatter(morning, total)}
+                  <TextMax isMax={max === value}>
+                    {percentFormatter(value, total)}
                   </TextMax>
                 </td>
               </tr>
-              <tr>
-                <td>
-                  <H3Text>🌆 낮</H3Text>
-                </td>
-                <td>
-                  <TextMax isMax={max === morning}>
-                    {percentFormatter(daytime, total)}
-                  </TextMax>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <H3Text>🌃 저녁</H3Text>
-                </td>
-                <td>
-                  <TextMax isMax={max === morning}>
-                    {percentFormatter(evening, total)}
-                  </TextMax>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <H3Text>🌙 새벽</H3Text>
-                </td>
-                <td>
-                  <TextMax isMax={max === morning}>
-                    {percentFormatter(night, total)}
-                  </TextMax>
-                </td>
-              </tr>
-            </tbody>
-          </PrefferedTimeTable>
-        </VStack>
+            ))}
+          </tbody>
+        </PrefferedTimeTable>
       </VStack>
     </DashboardContent>
   );

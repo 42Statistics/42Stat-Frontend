@@ -49,7 +49,11 @@ export const LastRegistered = () => {
 
   return (
     <DashboardContent title={title}>
-      <TextDefault text={lastRegistered ?? '-'} />
+      {lastRegistered != null ? (
+        <TextDefault text={lastRegistered} />
+      ) : (
+        <TextDefault text="과제 신청 기록이 없어요 😓" />
+      )}
     </DashboardContent>
   );
 };

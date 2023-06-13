@@ -81,9 +81,11 @@ export const PrefferedCluster = () => {
 
   return (
     <DashboardContent title={title} description={description}>
-      <TextDefault
-        text={data.name ? `클러스터 ${data.name.toUpperCase()}` : '-'}
-      />
+      {data.name != null ? (
+        <TextDefault text={`클러스터 ${data.name.toUpperCase()}`} />
+      ) : (
+        <TextDefault text="출석 기록이 없어요 😓" />
+      )}
     </DashboardContent>
   );
 };

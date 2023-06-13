@@ -8,6 +8,8 @@ import {
 } from '@components/elements/DashboardContentView';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useTheme } from '@emotion/react';
+import { numberWithUnitFormatter } from '@utils/formatters';
+import { capitalize } from 'lodash-es';
 
 const GET_MEMBER_PERCENTAGE = gql(/* GraphQL */ `
   query GetMemberPercentage {
@@ -49,13 +51,12 @@ export const MemberPercentage = () => {
 
   const { memberRate } = queryData.getHomeUser;
   const { total, fields } = memberRate;
-  const memberPercentage = (fields[0].value / total) * 100;
+  const labels = fields.map((field) => capitalize(field.key));
+  const series = fields.map((field) => field.value);
+
   return (
     <DashboardContent title={title} description={description}>
-      <MemberPercentageChart
-        labels={['Member', 'Learner']}
-        series={[memberPercentage, 100 - memberPercentage]}
-      />
+      <MemberPercentageChart labels={labels} series={series} />
     </DashboardContent>
   );
 };
@@ -75,7 +76,7 @@ const MemberPercentageChart = ({
     colors: [theme.colors.accent.default, theme.colors.primary.light],
     tooltip: {
       y: {
-        formatter: (value) => `${value.toFixed(1)}%`,
+        formatter: (value) => numberWithUnitFormatter(value, '명'),
       },
       fillSeriesColor: false,
     },

@@ -9,8 +9,8 @@ import {
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useParams } from 'react-router-dom';
 
-const GET_CURRENT_COALITION_SCORE = gql(/* GraphQL */ `
-  query getCurrentCoalitionScore($login: String!) {
+const GET_COALITION_SCORE_BY_LOGIN = gql(/* GraphQL */ `
+  query GetCoalitionScore($login: String!) {
     getPersonalGeneralPage(login: $login) {
       userProfile {
         coalition {
@@ -32,11 +32,11 @@ const GET_CURRENT_COALITION_SCORE = gql(/* GraphQL */ `
   }
 `);
 
-export const CurrentCoalitionScore = () => {
+export const CoalitionScore = () => {
   const { username } = useParams() as { username: string };
 
   const title = '코알리숑 스코어';
-  const { loading, error, data } = useQuery(GET_CURRENT_COALITION_SCORE, {
+  const { loading, error, data } = useQuery(GET_COALITION_SCORE_BY_LOGIN, {
     variables: { login: username },
   });
   if (loading)

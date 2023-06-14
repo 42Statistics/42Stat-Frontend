@@ -21,7 +21,7 @@ const GET_AVERAGE_EVAL_COUNT_BY_DATE_TEMPLATE = gql(/* GraphQL */ `
     }
   }
 `);
-export const CurrWeekAverageEvalCount = () => {
+export const WeeklyAverageEvalCount = () => {
   const title = '주간 1인당 평가 횟수';
   const { loading, error, data } = useQuery(
     GET_AVERAGE_EVAL_COUNT_BY_DATE_TEMPLATE,

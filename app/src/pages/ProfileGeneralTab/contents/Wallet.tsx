@@ -9,19 +9,19 @@ import { NumberDefault } from '@components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useParams } from 'react-router-dom';
 
-const GET_CURRENT_WALLET = gql(/* GraphQL */ `
-  query getCurrentWallet($login: String!) {
+const GET_WALLET = gql(/* GraphQL */ `
+  query GetWallet($login: String!) {
     getPersonalGeneralPage(login: $login) {
       wallet
     }
   }
 `);
 
-export const CurrentWallet = () => {
+export const Wallet = () => {
   const { username } = useParams() as { username: string };
 
   const title = '보유 월렛';
-  const { loading, error, data } = useQuery(GET_CURRENT_WALLET, {
+  const { loading, error, data } = useQuery(GET_WALLET, {
     variables: { login: username },
   });
   if (loading)

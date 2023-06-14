@@ -32,7 +32,7 @@ const GET_EVAL_COUNT_BY_DATE_TEMPLATE_BY_LOGIN = gql(/* GraphQL */ `
   }
 `);
 
-export const EvalCount = () => {
+export const MonthlyEvalCount = () => {
   const { username } = useParams() as { username: string };
 
   const title = '월간 평가 횟수';

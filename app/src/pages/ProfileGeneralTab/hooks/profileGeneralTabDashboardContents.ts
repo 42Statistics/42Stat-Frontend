@@ -2,8 +2,8 @@ import type { DashboardItemProps } from '@utils/types/Dashboard';
 import {
   BeginAt,
   BlackholedAt,
-  CurrentCoalitionScore,
-  CurrentWallet,
+  CoalitionScore,
+  Wallet,
   LastPass,
   LastRegistered,
   LevelRecords,
@@ -33,7 +33,7 @@ export const profileGeneralTabDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 4,
-    content: CurrentWallet,
+    content: Wallet,
   },
   {
     id: 5,
@@ -41,7 +41,7 @@ export const profileGeneralTabDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 6,
-    content: CurrentCoalitionScore,
+    content: CoalitionScore,
   },
   {
     id: 7,

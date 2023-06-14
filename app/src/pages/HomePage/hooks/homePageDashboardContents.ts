@@ -1,13 +1,13 @@
 import type { DashboardItemProps } from '@utils/types/Dashboard';
 import {
   ScoreRecordsPerCoalition,
-  TigCountPerCoalition,
+  MonthlyTigCountPerCoalition,
   TotalScoresPerCoalition,
 } from '../contents/Coalition';
 import {
   AverageCommentLength,
   AverageFeedbackLength,
-  CurrWeekAverageEvalCount,
+  WeeklyAverageEvalCount,
   TotalEvalCount,
 } from '../contents/Eval';
 import { CurrRegisteredCountRanking, LastExamResult } from '../contents/Team';
@@ -17,8 +17,8 @@ import {
   BlackholedCountPerCircle,
   BlackholedRate,
   CorrectionPointRanking,
-  CurrMonthBlackholedCount,
-  CurrWeekEvalCount,
+  MonthlyBlackholedCount,
+  WeeklyEvalCount,
   Hero,
   MemberRate,
   UserCountPerLevel,
@@ -32,15 +32,15 @@ export const homePageDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 1,
-    content: CurrWeekEvalCount,
+    content: WeeklyEvalCount,
   },
   {
     id: 2,
-    content: CurrMonthBlackholedCount,
+    content: MonthlyBlackholedCount,
   },
   {
     id: 3,
-    content: CurrWeekAverageEvalCount,
+    content: WeeklyAverageEvalCount,
   },
   {
     id: 4,
@@ -104,6 +104,6 @@ export const homePageDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 19,
-    content: TigCountPerCoalition,
+    content: MonthlyTigCountPerCoalition,
   },
 ];

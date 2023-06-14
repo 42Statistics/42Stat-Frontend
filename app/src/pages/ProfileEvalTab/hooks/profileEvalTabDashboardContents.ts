@@ -6,7 +6,7 @@ import {
   AverageFinalMark,
   CorrectionPoint,
   DestinyUsers,
-  EvalCount,
+  MonthlyEvalCount,
   EvalLogSearchLink,
   LastComment,
   TotalEvalCount,
@@ -20,7 +20,7 @@ export const profileEvalTabDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 1,
-    content: EvalCount,
+    content: MonthlyEvalCount,
   },
   {
     id: 2,

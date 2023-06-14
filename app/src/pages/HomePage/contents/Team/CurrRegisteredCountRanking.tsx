@@ -9,8 +9,8 @@ import { Rank } from '@components/elements/DashboardContentView/Rank';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import type { RankItemType } from '@utils/types/Rank';
 
-const GET_CURR_REGISTERED_COUNT_RANK = gql(/* GraphQL */ `
-  query GetCurrRegisteredCountRank {
+const GET_CURR_REGISTERED_COUNT_RANKING = gql(/* GraphQL */ `
+  query GetCurrRegisteredCountRanking {
     getHomeTeam {
       currRegisteredCountRanking {
         projectPreview {
@@ -23,9 +23,9 @@ const GET_CURR_REGISTERED_COUNT_RANK = gql(/* GraphQL */ `
   }
 `);
 
-export const CurrRegisteredCountRank = () => {
+export const CurrRegisteredCountRanking = () => {
   const title = '지금 가장 많은 사람이 참여하는 과제는?';
-  const { loading, error, data } = useQuery(GET_CURR_REGISTERED_COUNT_RANK);
+  const { loading, error, data } = useQuery(GET_CURR_REGISTERED_COUNT_RANKING);
 
   if (loading)
     return (

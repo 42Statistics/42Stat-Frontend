@@ -10,8 +10,8 @@ import { DashboardContent } from '@components/templates/DashboardContent';
 import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
 import type { RankUserItemType } from '@utils/types/Rank';
 
-const GET_WALLET_RANK = gql(/* GraphQL */ `
-  query getWalletRank($limit: Int!) {
+const GET_WALLET_RANKING = gql(/* GraphQL */ `
+  query getWalletRanking($limit: Int!) {
     getHomeUser {
       walletRanking(limit: $limit) {
         userPreview {
@@ -26,9 +26,9 @@ const GET_WALLET_RANK = gql(/* GraphQL */ `
   }
 `);
 
-export const WalletRanks = () => {
+export const WalletRanking = () => {
   const title = '보유 월렛 랭킹';
-  const { loading, error, data } = useQuery(GET_WALLET_RANK, {
+  const { loading, error, data } = useQuery(GET_WALLET_RANKING, {
     variables: { limit: 5 },
   });
   if (loading)

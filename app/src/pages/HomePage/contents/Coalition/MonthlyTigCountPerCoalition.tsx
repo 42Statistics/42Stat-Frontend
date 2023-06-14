@@ -32,8 +32,8 @@ const GET_TIG_COUNT_PER_COALITION = gql(/* GraphQL */ `
   }
 `);
 
-export const TigCountPerCoalition = () => {
-  const title = '이번 달 누적 코알리숑 티그 횟수';
+export const MonthlyTigCountPerCoalition = () => {
+  const title = '월간 누적 코알리숑 티그 횟수';
   const { loading, error, data } = useQuery(GET_TIG_COUNT_PER_COALITION);
   if (loading)
     return (
@@ -70,7 +70,7 @@ export const TigCountPerCoalition = () => {
     <DashboardContent title={title} description={description}>
       <Center w="100%" h="100%">
         <VStack w="80%" h="100%">
-          <TigCountPerCoalitionTable>
+          <MonthlyTigCountPerCoalitionTable>
             <tbody>
               {tableData.map(({ coalition, value }) => (
                 <tr key={coalition.name}>
@@ -88,14 +88,14 @@ export const TigCountPerCoalition = () => {
                 </tr>
               ))}
             </tbody>
-          </TigCountPerCoalitionTable>
+          </MonthlyTigCountPerCoalitionTable>
         </VStack>
       </Center>
     </DashboardContent>
   );
 };
 
-const TigCountPerCoalitionTable = styled.table`
+const MonthlyTigCountPerCoalitionTable = styled.table`
   width: 100%;
   text-align: center;
 

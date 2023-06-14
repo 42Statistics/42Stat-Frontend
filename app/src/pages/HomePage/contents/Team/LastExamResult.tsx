@@ -87,7 +87,6 @@ const LastExamResultChart = ({
       },
     },
     yaxis: {
-      max: 1,
       labels: {
         formatter: (value) => `${(value * 100).toFixed(0)}%`,
       },

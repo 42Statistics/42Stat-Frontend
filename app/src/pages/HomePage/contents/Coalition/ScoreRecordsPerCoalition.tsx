@@ -10,8 +10,8 @@ import { DashboardContent } from '@components/templates/DashboardContent';
 import { numberWithUnitFormatter } from '@utils/formatters';
 import { isDefined } from '@utils/isDefined';
 
-export const GET_COALITION_SCORE_RECORD = gql(/* GraphQL */ `
-  query getCoalitionScoreRecord {
+export const GET_SCORE_RECORDS_PER_COALITION = gql(/* GraphQL */ `
+  query getScoreRecordsPerCoalition {
     getHomeCoalition {
       scoreRecordsPerCoalition {
         coalition {
@@ -33,9 +33,9 @@ export const GET_COALITION_SCORE_RECORD = gql(/* GraphQL */ `
   }
 `);
 
-export const CoalitionScoreDynamic = () => {
+export const ScoreRecordsPerCoalition = () => {
   const title = '역대 코알리숑 스코어 변동 추이';
-  const { loading, error, data } = useQuery(GET_COALITION_SCORE_RECORD);
+  const { loading, error, data } = useQuery(GET_SCORE_RECORDS_PER_COALITION);
   if (loading)
     return (
       <DashboardContent title={title}>
@@ -57,13 +57,13 @@ export const CoalitionScoreDynamic = () => {
 
   const { scoreRecordsPerCoalition } = data.getHomeCoalition;
 
-  const colorList: string[] = [];
+  const colors: string[] = [];
   const series = scoreRecordsPerCoalition.map(({ coalition, records }) => {
     const seriesData = records.filter(isDefined).map(({ at, value }) => ({
       x: at,
       y: value,
     }));
-    colorList.push(coalition.color ?? 'black');
+    colors.push(coalition.color ?? 'black');
     return {
       name: coalition.name,
       data: seriesData,
@@ -72,20 +72,20 @@ export const CoalitionScoreDynamic = () => {
 
   return (
     <DashboardContent title={title}>
-      <CoalitionScoreDynamicChart series={series} colors={colorList} />
+      <ScoreRecordsPerCoalitionChart series={series} colors={colors} />
     </DashboardContent>
   );
 };
 
-type CoalitionScoreDynamicChartProps = {
+type ScoreRecordsPerCoalitionChartProps = {
   series: ApexAxisChartSeries;
   colors: string[];
 };
 
-const CoalitionScoreDynamicChart = ({
+const ScoreRecordsPerCoalitionChart = ({
   series,
   colors,
-}: CoalitionScoreDynamicChartProps) => {
+}: ScoreRecordsPerCoalitionChartProps) => {
   const options: ApexCharts.ApexOptions = {
     xaxis: {
       type: 'datetime',

@@ -9,21 +9,19 @@ import {
 import { NumberCompare } from '@components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import dayjs from 'dayjs';
-import { useParams } from 'react-router-dom';
 
-const GET_EVAL_COUNT_BY_DATE_TEMPLATE_BY_LOGIN = gql(/* GraphQL */ `
-  query getEvalCountByDateTemplateByLogin(
-    $login: String!
+const GET_BLACKHOLED_COUNT_BY_DATE_TEMPLATE = gql(/* GraphQL */ `
+  query GetBlackholedCountByDateTemplate(
     $currDateTemplate: DateTemplate!
     $lastDateTemplate: DateTemplate!
   ) {
-    getPersonalEvalPage(login: $login) {
-      currData: countByDateTemplate(dateTemplate: $currDateTemplate) {
+    getHomeUser {
+      currData: blackholedCountByDateTemplate(dateTemplate: $currDateTemplate) {
         data
         start
         end
       }
-      lastData: countByDateTemplate(dateTemplate: $lastDateTemplate) {
+      lastData: blackholedCountByDateTemplate(dateTemplate: $lastDateTemplate) {
         data
         start
         end
@@ -32,17 +30,14 @@ const GET_EVAL_COUNT_BY_DATE_TEMPLATE_BY_LOGIN = gql(/* GraphQL */ `
   }
 `);
 
-export const MonthlyEvalCount = () => {
-  const { username } = useParams() as { username: string };
-
-  const title = '월간 평가 횟수';
+export const MonthlyBlackholedCount = () => {
+  const title = '월간 누적 블랙홀 인원';
   const { loading, error, data } = useQuery(
-    GET_EVAL_COUNT_BY_DATE_TEMPLATE_BY_LOGIN,
+    GET_BLACKHOLED_COUNT_BY_DATE_TEMPLATE,
     {
       variables: {
-        login: username,
-        currDateTemplate: DateTemplate.CurrMonth,
-        lastDateTemplate: DateTemplate.LastMonth,
+        currDateTemplate: DateTemplate.CurrWeek, // FIXME: CurrMonth로 수정. 현재 에러가 발생함.
+        lastDateTemplate: DateTemplate.LastWeek,
       },
     },
   );
@@ -66,14 +61,20 @@ export const MonthlyEvalCount = () => {
     );
 
   const {
-    currData: { data: currEvalCount, start },
-    lastData: { data: lastEvalCount },
-  } = data.getPersonalEvalPage;
+    currData: { data: currBlackholedCount, start },
+    lastData: { data: lastBlackholedCount },
+  } = data.getHomeUser;
+
   const description = `${dayjs(start).format('YYYY년 M월')}`;
+  const unit = '명';
 
   return (
     <DashboardContent title={title} description={description}>
-      <NumberCompare curr={currEvalCount} last={lastEvalCount} unit="회" />
+      <NumberCompare
+        curr={currBlackholedCount}
+        last={lastBlackholedCount}
+        unit={unit}
+      />
     </DashboardContent>
   );
 };

@@ -7,27 +7,23 @@ import {
 } from '@components/elements/DashboardContentView';
 import { NumberDefault } from '@components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@components/templates/DashboardContent';
-import dayjs from 'dayjs';
+import { useParams } from 'react-router-dom';
 
-const GET_CURRWEEK_AVERAGE_EVAL_COUNT = gql(/* GraphQL */ `
-  query GetCurrWeekAverageEvalCount {
-    getHomeEval {
-      evalCountByDateTemplate(dateTemplate: CURR_WEEK) {
-        data
-        start
-        end
-      }
+const GET_CORRECTION_POINT = gql(/* GraphQL */ `
+  query GetCorrectionPoint($login: String!) {
+    getPersonalEvalPage(login: $login) {
+      correctionPoint
     }
   }
 `);
-export const CurrWeekAverageEvalCount = () => {
-  const title = '주간 1인당 평가 횟수';
-  const {
-    loading,
-    error,
-    data: queryData,
-  } = useQuery(GET_CURRWEEK_AVERAGE_EVAL_COUNT);
 
+export const CorrectionPoint = () => {
+  const { username } = useParams() as { username: string };
+
+  const title = '보유 평가 포인트';
+  const { loading, error, data } = useQuery(GET_CORRECTION_POINT, {
+    variables: { login: username },
+  });
   if (loading)
     return (
       <DashboardContent title={title}>
@@ -40,21 +36,19 @@ export const CurrWeekAverageEvalCount = () => {
         <ApolloBadRequest msg={error.message} />
       </DashboardContent>
     );
-  if (!queryData)
+  if (!data)
     return (
       <DashboardContent title={title}>
         <ApolloNotFound />
       </DashboardContent>
     );
 
-  const { evalCountByDateTemplate } = queryData.getHomeEval;
-  const { data, start, end } = evalCountByDateTemplate;
-  const description = `${dayjs().format('YYYY년 M월 w주')}`;
-  const unit = '회';
+  const { correctionPoint } = data.getPersonalEvalPage;
+  const unit = '개';
 
   return (
-    <DashboardContent title={title} description={description}>
-      <NumberDefault number={data} unit={unit} />
+    <DashboardContent title={title}>
+      <NumberDefault number={correctionPoint} unit={unit} />
     </DashboardContent>
   );
 };

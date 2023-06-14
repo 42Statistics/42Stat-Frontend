@@ -5,10 +5,10 @@ import styled from '@emotion/styled';
 import { withFooter } from '@hoc/withFooter';
 import { withHead } from '@hoc/withHead';
 import {
-  CoalitionScoreRankTab,
-  EvalCountRankTab,
-  ExpIncrementRankTab,
-  LevelRankTab,
+  LeaderboardCoalitionScoreTab,
+  LeaderboardEvalCountTab,
+  LeaderboardExpIncrementTab,
+  LeaderboardLevelTab,
 } from './tabs';
 
 // waterfall 방지를 위해 Tab은 lazy loading 하지 않겠습니다.
@@ -31,22 +31,22 @@ const LeaderBoardPage = () => {
       </TabList>
       <TabPanel>
         <LeaderBoardDetailLayout>
-          <LevelRankTab />
+          <LeaderboardLevelTab />
         </LeaderBoardDetailLayout>
       </TabPanel>
       <TabPanel>
         <LeaderBoardDetailLayout>
-          <ExpIncrementRankTab />
+          <LeaderboardExpIncrementTab />
         </LeaderBoardDetailLayout>
       </TabPanel>
       <TabPanel>
         <LeaderBoardDetailLayout>
-          <CoalitionScoreRankTab />
+          <LeaderboardCoalitionScoreTab />
         </LeaderBoardDetailLayout>
       </TabPanel>
       <TabPanel>
         <LeaderBoardDetailLayout>
-          <EvalCountRankTab />
+          <LeaderboardEvalCountTab />
         </LeaderBoardDetailLayout>
       </TabPanel>
     </Tabs>

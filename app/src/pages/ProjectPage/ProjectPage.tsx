@@ -23,6 +23,7 @@ import { withHead } from '@hoc/withHead';
 import { ProjectPageSkeleton } from '@pages/PageSkeletons/ProjectPageSkeleton';
 import { HiUsers } from '@react-icons/all-files/hi/HiUSers';
 import { numberWithUnitFormatter } from '@utils/formatters';
+import { isDefined } from '@utils/isDefined';
 import { titleCase } from '@utils/titleCase';
 import { Link, useParams } from 'react-router-dom';
 
@@ -78,13 +79,14 @@ const ProjectPage = () => {
   } = data.getProjectInfo;
 
   const passPercentage = (evalInfo.passCount / evalInfo.totalEvalCount) * 100;
-  const getPeopleRange = (from, to) => {
+  const getPeopleRange = (from: number, to: number) => {
     if (from === to) {
       if (from === 1) return 'Solo';
       return `${from} Students`;
     }
     return `${from} ~ ${to} Students`;
   };
+
   return (
     <ProjectPageLayout>
       <VStack w="100%" spacing="5rem">
@@ -95,7 +97,6 @@ const ProjectPage = () => {
           </BoldText>
         </VStack>
         <VStack spacing="1rem">
-          {/* <Text>Solo / 70 hrs. / 462 XP</Text> */}
           <Text>{`${getPeopleRange(
             minUserCount,
             maxUserCount,
@@ -109,7 +110,7 @@ const ProjectPage = () => {
         </VStack>
         <VStack spacing="3rem">
           <HStack spacing="1rem" wrap="wrap">
-            {keywords.map((text) => (
+            {keywords.filter(isDefined).map((text) => (
               <Label
                 key={text}
                 text={titleCase(text)}
@@ -119,7 +120,7 @@ const ProjectPage = () => {
             ))}
           </HStack>
           <HStack spacing="1rem" wrap="wrap">
-            {skills.map((text) => (
+            {skills.filter(isDefined).map((text) => (
               <Label
                 key={text}
                 text={titleCase(text)}

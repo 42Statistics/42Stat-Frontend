@@ -1,7 +1,7 @@
 import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import { Loader } from '@components/common';
-import { AreaChart } from '@components/elements/Chart';
+import { BarChart } from '@components/elements/Chart';
 import {
   ApolloBadRequest,
   ApolloNotFound,
@@ -9,20 +9,20 @@ import {
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { numberWithUnitFormatter } from '@utils/formatters';
 
-const GET_ACTIVE_USER_COUNT_RECORD = gql(/* GraphQL */ `
-  query getActiveUserCountRecord {
+const GET_USER_COUNT_PER_LEVEL = gql(/* GraphQL */ `
+  query getUserCountPerLevel {
     getHomeUser {
-      activeUserCountRecords {
-        at
-        value
+      userCountPerLevel {
+        userCount
+        level
       }
     }
   }
 `);
 
-export const ActiveUserCountRecords = () => {
-  const title = '여행 중인 유저 수 추이';
-  const { loading, error, data } = useQuery(GET_ACTIVE_USER_COUNT_RECORD);
+export const UserCountPerLevel = () => {
+  const title = '여행 중인 유저 레벨 분포';
+  const { loading, error, data } = useQuery(GET_USER_COUNT_PER_LEVEL);
   if (loading)
     return (
       <DashboardContent title={title}>
@@ -42,52 +42,52 @@ export const ActiveUserCountRecords = () => {
       </DashboardContent>
     );
 
-  const { activeUserCountRecords } = data.getHomeUser;
-  const seriesData = activeUserCountRecords.map(({ at, value }) => ({
-    x: at,
-    y: value,
-  }));
+  const { userCountPerLevel } = data.getHomeUser;
+
+  const categories = userCountPerLevel.map(({ level }) => level);
+  const seriesData = userCountPerLevel.map(({ userCount }) => userCount);
+
   const series: ApexAxisChartSeries = [
     {
-      name: '활성화 유저',
+      name: '인원수',
       data: seriesData,
     },
   ];
 
   return (
     <DashboardContent title={title}>
-      <ActiveUserCountRecordsChart series={series} />
+      <UserCountPerLevelChart categories={categories} series={series} />
     </DashboardContent>
   );
 };
 
-type ActiveUserCountRecordsChartProps = {
+type UserCountPerLevelChartProps = {
+  categories: number[];
   series: ApexAxisChartSeries;
 };
 
-const ActiveUserCountRecordsChart = ({
+const UserCountPerLevelChart = ({
+  categories,
   series,
-}: ActiveUserCountRecordsChartProps) => {
+}: UserCountPerLevelChartProps) => {
   const options: ApexCharts.ApexOptions = {
     xaxis: {
-      type: 'datetime',
+      categories,
       labels: {
-        format: 'yy.MM.',
+        formatter: (value) => value,
       },
     },
     yaxis: {
       labels: {
-        formatter: (value) => value.toLocaleString(),
+        formatter: (value) => numberWithUnitFormatter(value, '명'),
       },
     },
     tooltip: {
       x: {
-        format: 'yyyy년 M월',
-      },
-      y: {
-        formatter: (value) => numberWithUnitFormatter(value, '명'),
+        formatter: (value) => `Level ${value}`,
       },
     },
   };
-  return <AreaChart series={series} options={options} />;
+
+  return <BarChart options={options} series={series} />;
 };

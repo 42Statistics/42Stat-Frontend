@@ -1,4 +1,5 @@
 import { gql } from '@/__generated__';
+import { DateTemplate } from '@/__generated__/graphql';
 import { useQuery } from '@apollo/client';
 import { HStack, SegmentedControl, Spacer, VStack } from '@components/common';
 import {
@@ -12,21 +13,20 @@ import { isDefined } from '@utils/isDefined';
 import type { RankUserItemType } from '@utils/types/Rank';
 import { useSegmentedControl } from '@utils/useSegmentedControl';
 
-const GET_LEADERBOARD_LEVEL = gql(/* GraphQL */ `
-  query GetLeaderboardLevel($pageSize: Int!, $pageNumber: Int!) {
-    getLeaderboardLevel {
-      total(pageSize: $pageSize, pageNumber: $pageNumber) {
-        me {
-          userPreview {
-            id
-            login
-            imgUrl
-          }
-          value
-          rank
-        }
-        totalRanking {
-          nodes {
+const GET_LEADERBOARD_COALITION_SCORE = gql(/* GraphQL */ `
+  query GetLeaderboardCoalitionScore(
+    $pageSize: Int!
+    $pageNumber: Int!
+    $dateTemplate: DateTemplate!
+  ) {
+    getLeaderboardScore {
+      byDateTemplate(
+        pageSize: $pageSize
+        pageNumber: $pageNumber
+        dateTemplate: $dateTemplate
+      ) {
+        data {
+          me {
             userPreview {
               id
               login
@@ -35,20 +35,45 @@ const GET_LEADERBOARD_LEVEL = gql(/* GraphQL */ `
             value
             rank
           }
-          totalCount
-          pageSize
-          pageNumber
+          totalRanking {
+            nodes {
+              userPreview {
+                id
+                login
+                imgUrl
+              }
+              value
+              rank
+            }
+            totalCount
+            pageSize
+            pageNumber
+          }
         }
+        start
+        end
       }
     }
   }
 `);
 
-export const LevelRankTab = () => {
-  const { loading, error, data } = useQuery(GET_LEADERBOARD_LEVEL, {
-    variables: { pageSize: 50, pageNumber: 1 },
+export const LeaderboardCoalitionScoreTab = () => {
+  const { loading, error, data } = useQuery(GET_LEADERBOARD_COALITION_SCORE, {
+    variables: {
+      pageSize: 50,
+      pageNumber: 1,
+      dateTemplate: DateTemplate.CurrMonth,
+    },
   });
   const options = [
+    {
+      label: '주간',
+      value: 'weekly',
+    },
+    {
+      label: '월간',
+      value: 'monthly',
+    },
     {
       label: '누적',
       value: 'total',
@@ -60,7 +85,7 @@ export const LevelRankTab = () => {
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 
-  const { me, totalRanking } = data.getLeaderboardLevel.total;
+  const { me, totalRanking } = data.getLeaderboardScore.byDateTemplate.data;
   const unit = '';
 
   const myRank: RankUserItemType | null =

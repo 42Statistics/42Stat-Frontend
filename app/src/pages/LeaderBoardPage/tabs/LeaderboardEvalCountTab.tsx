@@ -57,7 +57,7 @@ const GET_LEADERBOARD_EVAL_COUNT = gql(/* GraphQL */ `
   }
 `);
 
-export const EvalCountRankTab = () => {
+export const LeaderboardEvalCountTab = () => {
   const { loading, error, data } = useQuery(GET_LEADERBOARD_EVAL_COUNT, {
     variables: {
       pageSize: 50,

@@ -9,8 +9,8 @@ import { NumberDefault } from '@components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useParams } from 'react-router-dom';
 
-const GET_PERSONAL_AVERAGE_COMMENT_LENGTH = gql(/* GraphQL */ `
-  query getPersonalAverageCommentLength($login: String!) {
+const GET_AVERAGE_COMMENT_LENGTH_BY_LOGIN = gql(/* GraphQL */ `
+  query GetAverageCommentLengthByLogin($login: String!) {
     getPersonalEvalPage(login: $login) {
       averageCommentLength
     }
@@ -22,7 +22,7 @@ export const AverageCommentLength = () => {
 
   const title = '평균 코멘트 길이';
   const { loading, error, data } = useQuery(
-    GET_PERSONAL_AVERAGE_COMMENT_LENGTH,
+    GET_AVERAGE_COMMENT_LENGTH_BY_LOGIN,
     {
       variables: { login: username },
     },

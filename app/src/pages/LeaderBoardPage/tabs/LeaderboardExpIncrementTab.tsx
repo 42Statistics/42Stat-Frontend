@@ -13,13 +13,13 @@ import { isDefined } from '@utils/isDefined';
 import type { RankUserItemType } from '@utils/types/Rank';
 import { useSegmentedControl } from '@utils/useSegmentedControl';
 
-const GET_LEADERBOARD_SCORE = gql(/* GraphQL */ `
-  query GetLeaderboardScore(
+const GET_LEADERBOARD_EXP_INCREMENT = gql(/* GraphQL */ `
+  query GetLeaderboardExpIncrement(
     $pageSize: Int!
     $pageNumber: Int!
     $dateTemplate: DateTemplate!
   ) {
-    getLeaderboardScore {
+    getLeaderboardExpIncrement {
       byDateTemplate(
         pageSize: $pageSize
         pageNumber: $pageNumber
@@ -57,8 +57,8 @@ const GET_LEADERBOARD_SCORE = gql(/* GraphQL */ `
   }
 `);
 
-export const CoalitionScoreRankTab = () => {
-  const { loading, error, data } = useQuery(GET_LEADERBOARD_SCORE, {
+export const LeaderboardExpIncrementTab = () => {
+  const { loading, error, data } = useQuery(GET_LEADERBOARD_EXP_INCREMENT, {
     variables: {
       pageSize: 50,
       pageNumber: 1,
@@ -74,10 +74,6 @@ export const CoalitionScoreRankTab = () => {
       label: '월간',
       value: 'monthly',
     },
-    {
-      label: '누적',
-      value: 'total',
-    },
   ];
   const { controlRef, segments } = useSegmentedControl(options);
 
@@ -85,8 +81,9 @@ export const CoalitionScoreRankTab = () => {
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 
-  const { me, totalRanking } = data.getLeaderboardScore.byDateTemplate.data;
-  const unit = '';
+  const { me, totalRanking } =
+    data.getLeaderboardExpIncrement.byDateTemplate.data;
+  const unit = 'XP';
 
   const myRank: RankUserItemType | null =
     me != null

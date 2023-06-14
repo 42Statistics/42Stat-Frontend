@@ -1,27 +1,29 @@
 import type { DashboardItemProps } from '@utils/types/Dashboard';
-
 import {
-  ActiveUserCountRecords,
-  AverageCircleDurations,
+  ScoreRecordsPerCoalition,
+  MonthlyTigCountPerCoalition,
+  TotalScoresPerCoalition,
+} from '../contents/Coalition';
+import {
   AverageCommentLength,
   AverageFeedbackLength,
-  BlackholedCountPerCircles,
-  BlackholedPercentage,
-  CoalitionScoreDynamic,
-  CoalitionScoreSum,
-  CorrectionPointRanks,
-  CurrMonthBlackholedCount,
-  CurrRegisteredCountRank,
-  CurrWeekAverageEvalCount,
-  CurrWeekEvalCount,
-  Hero,
-  LastExamResult,
-  MemberPercentage,
-  TigCountPerCoalition,
+  WeeklyAverageEvalCount,
   TotalEvalCount,
-  UserCountPerLevels,
-  WalletRanks,
-} from '../contents';
+} from '../contents/Eval';
+import { CurrRegisteredCountRanking, LastExamResult } from '../contents/Team';
+import {
+  ActiveUserCountRecords,
+  AverageDurationPerCircle,
+  BlackholedCountPerCircle,
+  BlackholedRate,
+  CorrectionPointRanking,
+  MonthlyBlackholedCount,
+  WeeklyEvalCount,
+  Hero,
+  MemberRate,
+  UserCountPerLevel,
+  WalletRanking,
+} from '../contents/User';
 
 export const homePageDashboardContents: DashboardItemProps[] = [
   {
@@ -30,15 +32,15 @@ export const homePageDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 1,
-    content: CurrWeekEvalCount,
+    content: WeeklyEvalCount,
   },
   {
     id: 2,
-    content: CurrMonthBlackholedCount,
+    content: MonthlyBlackholedCount,
   },
   {
     id: 3,
-    content: CurrWeekAverageEvalCount,
+    content: WeeklyAverageEvalCount,
   },
   {
     id: 4,
@@ -46,7 +48,7 @@ export const homePageDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 5,
-    content: CurrRegisteredCountRank,
+    content: CurrRegisteredCountRanking,
   },
   {
     id: 6,
@@ -62,31 +64,31 @@ export const homePageDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 9,
-    content: UserCountPerLevels,
+    content: UserCountPerLevel,
   },
   {
     id: 10,
-    content: MemberPercentage,
+    content: MemberRate,
   },
   {
     id: 11,
-    content: BlackholedPercentage,
+    content: BlackholedRate,
   },
   {
     id: 12,
-    content: BlackholedCountPerCircles,
+    content: BlackholedCountPerCircle,
   },
   {
     id: 13,
-    content: AverageCircleDurations,
+    content: AverageDurationPerCircle,
   },
   {
     id: 14,
-    content: CorrectionPointRanks,
+    content: CorrectionPointRanking,
   },
   {
     id: 15,
-    content: WalletRanks,
+    content: WalletRanking,
   },
   {
     id: 16,
@@ -94,14 +96,14 @@ export const homePageDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 17,
-    content: CoalitionScoreDynamic,
+    content: ScoreRecordsPerCoalition,
   },
   {
     id: 18,
-    content: CoalitionScoreSum,
+    content: TotalScoresPerCoalition,
   },
   {
     id: 19,
-    content: TigCountPerCoalition,
+    content: MonthlyTigCountPerCoalition,
   },
 ];

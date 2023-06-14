@@ -10,8 +10,8 @@ import { DashboardContent } from '@components/templates/DashboardContent';
 import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
 import type { RankUserItemType } from '@utils/types/Rank';
 
-const GET_CORRECTION_POINT_RANK = gql(/* GraphQL */ `
-  query getCorrectionPointRank($limit: Int!) {
+const GET_CORRECTION_POINT_RANKING = gql(/* GraphQL */ `
+  query getCorrectionPointRanking($limit: Int!) {
     getHomeUser {
       correctionPointRanking(limit: $limit) {
         userPreview {
@@ -26,9 +26,9 @@ const GET_CORRECTION_POINT_RANK = gql(/* GraphQL */ `
   }
 `);
 
-export const CorrectionPointRanks = () => {
+export const CorrectionPointRanking = () => {
   const title = '보유 평가 포인트 랭킹';
-  const { loading, error, data } = useQuery(GET_CORRECTION_POINT_RANK, {
+  const { loading, error, data } = useQuery(GET_CORRECTION_POINT_RANKING, {
     variables: { limit: 5 },
   });
   if (loading)

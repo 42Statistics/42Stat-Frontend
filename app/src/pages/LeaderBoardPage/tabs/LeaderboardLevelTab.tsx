@@ -1,5 +1,4 @@
 import { gql } from '@/__generated__';
-import { DateTemplate } from '@/__generated__/graphql';
 import { useQuery } from '@apollo/client';
 import { HStack, SegmentedControl, Spacer, VStack } from '@components/common';
 import {
@@ -13,20 +12,21 @@ import { isDefined } from '@utils/isDefined';
 import type { RankUserItemType } from '@utils/types/Rank';
 import { useSegmentedControl } from '@utils/useSegmentedControl';
 
-const GET_LEADERBOARD_EXP_INCREMENT = gql(/* GraphQL */ `
-  query GetLeaderboardExpIncrement(
-    $pageSize: Int!
-    $pageNumber: Int!
-    $dateTemplate: DateTemplate!
-  ) {
-    getLeaderboardExpIncrement {
-      byDateTemplate(
-        pageSize: $pageSize
-        pageNumber: $pageNumber
-        dateTemplate: $dateTemplate
-      ) {
-        data {
-          me {
+const GET_LEADERBOARD_LEVEL = gql(/* GraphQL */ `
+  query GetLeaderboardLevel($pageSize: Int!, $pageNumber: Int!) {
+    getLeaderboardLevel {
+      total(pageSize: $pageSize, pageNumber: $pageNumber) {
+        me {
+          userPreview {
+            id
+            login
+            imgUrl
+          }
+          value
+          rank
+        }
+        totalRanking {
+          nodes {
             userPreview {
               id
               login
@@ -35,44 +35,23 @@ const GET_LEADERBOARD_EXP_INCREMENT = gql(/* GraphQL */ `
             value
             rank
           }
-          totalRanking {
-            nodes {
-              userPreview {
-                id
-                login
-                imgUrl
-              }
-              value
-              rank
-            }
-            totalCount
-            pageSize
-            pageNumber
-          }
+          totalCount
+          pageSize
+          pageNumber
         }
-        start
-        end
       }
     }
   }
 `);
 
-export const ExpIncrementRankTab = () => {
-  const { loading, error, data } = useQuery(GET_LEADERBOARD_EXP_INCREMENT, {
-    variables: {
-      pageSize: 50,
-      pageNumber: 1,
-      dateTemplate: DateTemplate.CurrMonth,
-    },
+export const LeaderboardLevelTab = () => {
+  const { loading, error, data } = useQuery(GET_LEADERBOARD_LEVEL, {
+    variables: { pageSize: 50, pageNumber: 1 },
   });
   const options = [
     {
-      label: '주간',
-      value: 'weekly',
-    },
-    {
-      label: '월간',
-      value: 'monthly',
+      label: '누적',
+      value: 'total',
     },
   ];
   const { controlRef, segments } = useSegmentedControl(options);
@@ -81,9 +60,8 @@ export const ExpIncrementRankTab = () => {
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 
-  const { me, totalRanking } =
-    data.getLeaderboardExpIncrement.byDateTemplate.data;
-  const unit = 'XP';
+  const { me, totalRanking } = data.getLeaderboardLevel.total;
+  const unit = '';
 
   const myRank: RankUserItemType | null =
     me != null

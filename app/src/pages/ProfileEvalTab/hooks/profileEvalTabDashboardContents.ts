@@ -4,11 +4,11 @@ import {
   AverageDuration,
   AverageFeedbackLength,
   AverageFinalMark,
-  CurrentCorrectionPoint,
+  CorrectionPoint,
   DestinyUsers,
-  EvalLogSearchLink,
-  LatestComment,
   MonthlyEvalCount,
+  EvalLogSearchLink,
+  LastComment,
   TotalEvalCount,
   TotalEvalTime,
 } from '../contents';
@@ -16,7 +16,7 @@ import {
 export const profileEvalTabDashboardContents: DashboardItemProps[] = [
   {
     id: 0,
-    content: CurrentCorrectionPoint,
+    content: CorrectionPoint,
   },
   {
     id: 1,
@@ -52,7 +52,7 @@ export const profileEvalTabDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 9,
-    content: LatestComment,
+    content: LastComment,
   },
   {
     id: 10,

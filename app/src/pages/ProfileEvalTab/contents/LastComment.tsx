@@ -17,7 +17,7 @@ const GET_LAST_COMMENT = gql(/* GraphQL */ `
   }
 `);
 
-export const LatestComment = () => {
+export const LastComment = () => {
   const { username } = useParams() as { username: string };
 
   const title = '최근 쓴 코멘트';

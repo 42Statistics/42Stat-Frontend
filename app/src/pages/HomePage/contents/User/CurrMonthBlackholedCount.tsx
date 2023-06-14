@@ -12,16 +12,16 @@ import dayjs from 'dayjs';
 
 const GET_BLACKHOLED_COUNT_BY_DATE_TEMPLATE = gql(/* GraphQL */ `
   query GetBlackholedCountByDateTemplate(
-    $curr: DateTemplate!
-    $last: DateTemplate!
+    $currDateTemplate: DateTemplate!
+    $lastDateTemplate: DateTemplate!
   ) {
     getHomeUser {
-      curr: blackholedCountByDateTemplate(dateTemplate: $curr) {
+      currData: blackholedCountByDateTemplate(dateTemplate: $currDateTemplate) {
         data
         start
         end
       }
-      last: blackholedCountByDateTemplate(dateTemplate: $last) {
+      lastData: blackholedCountByDateTemplate(dateTemplate: $lastDateTemplate) {
         data
         start
         end
@@ -36,8 +36,8 @@ export const CurrMonthBlackholedCount = () => {
     GET_BLACKHOLED_COUNT_BY_DATE_TEMPLATE,
     {
       variables: {
-        curr: DateTemplate.CurrWeek, // FIXME: CurrMonth로 수정. 현재 에러가 발생함.
-        last: DateTemplate.LastWeek,
+        currDateTemplate: DateTemplate.CurrWeek, // FIXME: CurrMonth로 수정. 현재 에러가 발생함.
+        lastDateTemplate: DateTemplate.LastWeek,
       },
     },
   );
@@ -61,8 +61,8 @@ export const CurrMonthBlackholedCount = () => {
     );
 
   const {
-    curr: { data: currData, start },
-    last: { data: lastData },
+    currData: { data: currBlackholedcount, start },
+    lastData: { data: lastBlackholedCount },
   } = data.getHomeUser;
 
   const description = `${dayjs(start).format('YYYY년 M월')}`;
@@ -70,7 +70,11 @@ export const CurrMonthBlackholedCount = () => {
 
   return (
     <DashboardContent title={title} description={description}>
-      <NumberCompare curr={currData} last={lastData} unit={unit} />
+      <NumberCompare
+        curr={currBlackholedcount}
+        last={lastBlackholedCount}
+        unit={unit}
+      />
     </DashboardContent>
   );
 };

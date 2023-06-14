@@ -11,14 +11,17 @@ import { DashboardContent } from '@components/templates/DashboardContent';
 import dayjs from 'dayjs';
 
 const GET_EVAL_COUNT_BY_DATE_TEMPLATE = gql(/* GraphQL */ `
-  query GetEvalCountByDateTemplate($curr: DateTemplate!, $last: DateTemplate!) {
+  query GetEvalCountByDateTemplate(
+    $currDateTemplate: DateTemplate!
+    $lastDateTemplate: DateTemplate!
+  ) {
     getHomeEval {
-      curr: evalCountByDateTemplate(dateTemplate: $curr) {
+      currData: evalCountByDateTemplate(dateTemplate: $currDateTemplate) {
         data
         start
         end
       }
-      last: evalCountByDateTemplate(dateTemplate: $last) {
+      lastData: evalCountByDateTemplate(dateTemplate: $lastDateTemplate) {
         data
         start
         end
@@ -31,8 +34,8 @@ export const CurrWeekEvalCount = () => {
   const title = '주간 총 평가 횟수';
   const { loading, error, data } = useQuery(GET_EVAL_COUNT_BY_DATE_TEMPLATE, {
     variables: {
-      curr: DateTemplate.CurrWeek,
-      last: DateTemplate.LastWeek,
+      currDateTemplate: DateTemplate.CurrWeek,
+      lastDateTemplate: DateTemplate.LastWeek,
     },
   });
   if (loading)
@@ -55,8 +58,8 @@ export const CurrWeekEvalCount = () => {
     );
 
   const {
-    curr: { data: currData, start },
-    last: { data: lastData },
+    currData: { data: currEvalCount, start },
+    lastData: { data: lastEvalCount },
   } = data.getHomeEval;
 
   const description = `${dayjs(start).format('YYYY년 M월 w주')}`;
@@ -64,7 +67,7 @@ export const CurrWeekEvalCount = () => {
 
   return (
     <DashboardContent title={title} description={description}>
-      <NumberCompare curr={currData} last={lastData} unit={unit} />
+      <NumberCompare curr={currEvalCount} last={lastEvalCount} unit={unit} />
     </DashboardContent>
   );
 };

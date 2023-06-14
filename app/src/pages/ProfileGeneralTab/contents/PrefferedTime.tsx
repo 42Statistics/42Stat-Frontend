@@ -65,7 +65,7 @@ export const PrefferedTime = () => {
 
   const description = `${dayjs(start).format('YYYY년 M월')}`;
 
-  const tabelData = [
+  const tableData = [
     {
       time: '아침',
       value: morning,
@@ -102,7 +102,7 @@ export const PrefferedTime = () => {
         <H3Text>{prefferedTimeTitle(morning, daytime, evening, night)}</H3Text>
         <PrefferedTimeTable>
           <tbody>
-            {tabelData.map(({ time, value }) => (
+            {tableData.map(({ time, value }) => (
               <tr key={time}>
                 <td>
                   <H3Text>{time}</H3Text>

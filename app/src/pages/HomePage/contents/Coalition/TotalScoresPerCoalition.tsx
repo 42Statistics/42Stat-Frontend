@@ -101,8 +101,7 @@ const TotalScoresPerCoalitionChart = ({
       categories,
     },
     yaxis: {
-      min: 2200000,
-      max: 2900000,
+      min: 2500000,
       labels: {
         formatter: (value) => millionFormatter(value),
       },

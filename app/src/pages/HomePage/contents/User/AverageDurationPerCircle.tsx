@@ -98,7 +98,6 @@ const AverageDurationPerCircleChart = ({
     xaxis: {
       categories,
       tickAmount: 4,
-      max: 800,
       labels: {
         formatter: (value) => numberWithUnitFormatter(parseInt(value), '일'),
       },

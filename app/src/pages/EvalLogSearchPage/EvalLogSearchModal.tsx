@@ -1,13 +1,20 @@
-import { Button, HStack, Input, Modal, Text, VStack } from '@components/common';
+import {
+  Button,
+  HStack,
+  Input,
+  Modal,
+  Select,
+  Text,
+  VStack,
+} from '@components/common';
 import styled from '@emotion/styled';
 import type { ModalType } from '@utils/types/Modal';
-import { rgba } from 'emotion-rgba';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { EvalLogSearchForm } from './EvalLogSearchPage';
+import { EvalLogSearchFormData } from './EvalLogSearchPage';
 
 type EvalLogSearchModalProps = ModalType & {
-  form: EvalLogSearchForm;
-  onSubmit: SubmitHandler<EvalLogSearchForm>;
+  form: EvalLogSearchFormData;
+  onSubmit: SubmitHandler<EvalLogSearchFormData>;
 };
 
 export const EvalLogSearchModal = ({
@@ -16,50 +23,42 @@ export const EvalLogSearchModal = ({
   form,
   onSubmit,
 }: EvalLogSearchModalProps) => {
-  const { register, handleSubmit, setValue } = useForm<EvalLogSearchForm>({
+  const { register, handleSubmit } = useForm<EvalLogSearchFormData>({
     defaultValues: form,
   });
 
   return (
     <Modal isOpen={isOpen} toggle={toggle}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <VStack as="ul" w="100%" spacing="2rem">
-          <HStack w="100%" as="li" justify="space-between" spacing="3rem">
-            <Text>과제명</Text>
-            <EvalLogSearchInput {...register('projectName')} />
-          </HStack>
-          <HStack w="100%" as="li" justify="space-between">
-            <Text>From</Text>
-            <EvalLogSearchInput {...register('corrector')} />
-          </HStack>
-          <HStack w="100%" as="li" justify="space-between">
-            <Text>To</Text>
-            <EvalLogSearchInput {...register('corrected')} />
-          </HStack>
-          <HStack w="100%" as="li" justify="space-between">
-            <Text>플래그</Text>
-            <HStack spacing="2rem">
-              <HStack spacing="1rem">
-                <input
-                  type="radio"
-                  name="outstandingOnly"
-                  onChange={() => setValue('outstandingOnly', false)}
-                  defaultChecked={!form.outstandingOnly}
-                />
-                <Text>전체</Text>
-              </HStack>
-              <HStack spacing="1rem">
-                <input
-                  type="radio"
-                  name="outstandingOnly"
-                  onChange={() => setValue('outstandingOnly', true)}
-                  value="true"
-                  defaultChecked={form.outstandingOnly}
-                />
-                <Text>Outstanding</Text>
-              </HStack>
+        <VStack spacing="6rem">
+          <VStack as="ul" w="100%" spacing="3rem">
+            <HStack as="li" spacing="3rem">
+              <Text>과제명</Text>
+              <EvalLogSearchInput {...register('projectName')} />
             </HStack>
-          </HStack>
+            <HStack as="li" spacing="3rem">
+              <Text>From</Text>
+              <EvalLogSearchInput {...register('corrector')} />
+            </HStack>
+            <HStack as="li" spacing="3rem">
+              <Text>To</Text>
+              <EvalLogSearchInput {...register('corrected')} />
+            </HStack>
+            <HStack as="li" spacing="3rem">
+              <Text>플래그</Text>
+              <Select {...register('flag')} style={{ width: '150px' }}>
+                <option value="all">전체</option>
+                <option value="outstandingOnly">Outstanding만</option>
+              </Select>
+            </HStack>
+            <HStack as="li" spacing="3rem">
+              <Text>정렬</Text>
+              <Select {...register('sortOrder')} style={{ width: '150px' }}>
+                <option value="desc">최신순</option>
+                <option value="asc">오래된순</option>
+              </Select>
+            </HStack>
+          </VStack>
           <Button type="submit" text="검색하기" />
         </VStack>
       </form>
@@ -69,21 +68,9 @@ export const EvalLogSearchModal = ({
 
 const EvalLogSearchInput = styled(Input)`
   all: unset;
-  padding: 0.5rem 1.5rem;
-  border-radius: 2rem;
-
-  box-shadow: ${({ theme }) =>
-    `0 0.4rem 0.4rem ${rgba(theme.colors.mono.black, 0.1)}`};
-
-  :hover {
-    box-shadow: ${({ theme }) =>
-      `0 0.4rem 0.4rem ${rgba(theme.colors.mono.black, 0.25)}`};
-  }
-
-  transition: all 0.2s;
-  :hover,
-  :focus {
-    background-color: ${({ theme }) => theme.colors.mono.white};
-    color: ${({ theme }) => theme.colors.mono.black};
-  }
+  width: 150px;
+  padding: 1rem 2rem;
+  border-radius: 20px;
+  background: #f9f9f9;
+  box-shadow: 6px 6px 13px #d2d2d2, -6px -6px 13px #ffffff;
 `;

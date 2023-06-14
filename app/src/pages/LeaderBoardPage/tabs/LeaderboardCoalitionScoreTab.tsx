@@ -2,6 +2,7 @@ import { gql } from '@/__generated__';
 import { DateTemplate } from '@/__generated__/graphql';
 import { useLazyQuery } from '@apollo/client';
 import { HStack, SegmentedControl, Spacer, VStack } from '@components/common';
+import { PageBtnList } from '@components/elements/PageBtnList';
 import { useSegmentedControl } from '@utils/useSegmentedControl';
 import { useEffect, useState } from 'react';
 import { LeaderboardCoalitionScoreTabResult } from './LeaderboardCoalitionScoreTabResult';
@@ -51,7 +52,10 @@ const GET_LEADERBOARD_COALITION_SCORE = gql(/* GraphQL */ `
 `);
 
 export const LeaderboardCoalitionScoreTab = () => {
+  const SIZE_PER_PAGE = 50;
   const [search, result] = useLazyQuery(GET_LEADERBOARD_COALITION_SCORE);
+  const [pageNumber, setPageNumber] = useState<number>(1);
+  const [totalPage, setTotalPage] = useState<number>(0);
   const [dateTemplate, setDateTemplate] = useState<DateTemplate>(
     DateTemplate.CurrWeek,
   );
@@ -72,16 +76,6 @@ export const LeaderboardCoalitionScoreTab = () => {
   ];
   const { controlRef, segments } = useSegmentedControl(options);
 
-  useEffect(() => {
-    search({
-      variables: {
-        pageSize: 50,
-        pageNumber: 1,
-        dateTemplate,
-      },
-    });
-  }, [dateTemplate, search]);
-
   const handleSegmentedControlChange = (value: string) => {
     if (value === 'weekly') {
       setDateTemplate(DateTemplate.CurrWeek);
@@ -92,17 +86,46 @@ export const LeaderboardCoalitionScoreTab = () => {
     }
   };
 
+  useEffect(() => {
+    if (result.loading) {
+      return;
+    }
+    setTotalPage(
+      result.data?.getLeaderboardScore.byDateTemplate.data.totalRanking
+        .totalCount ?? 0,
+    );
+  }, [result]);
+
+  useEffect(() => {
+    search({
+      variables: {
+        pageSize: SIZE_PER_PAGE,
+        pageNumber,
+        dateTemplate,
+      },
+    });
+  }, [dateTemplate, pageNumber, search]);
+
+  useEffect(() => {
+    setPageNumber(1);
+  }, [dateTemplate]);
+
   return (
     <VStack w="100%" spacing="2rem">
       <HStack w="100%">
         <SegmentedControl
-          callback={console.log}
+          callback={handleSegmentedControlChange}
           controlRef={controlRef}
           segments={segments}
         />
         <Spacer />
       </HStack>
       <LeaderboardCoalitionScoreTabResult result={result} />
+      <PageBtnList
+        currPageNumber={pageNumber}
+        setPageNumber={setPageNumber}
+        totalPageNumber={Math.ceil(totalPage / SIZE_PER_PAGE)}
+      />
     </VStack>
   );
 };

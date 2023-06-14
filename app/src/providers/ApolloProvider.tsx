@@ -1,25 +1,5 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 
-// const client = new ApolloClient({
-//   uri: import.meta.env.VITE_BACKEND_GRAPHQL_ENDPOINT,
-//   cache: new InMemoryCache({
-//     typePolicies: {
-//       Home: {
-//         merge: true,
-//       },
-//       Total: {
-//         merge: true,
-//       },
-//       PersonalGeneral: {
-//         merge: true,
-//       },
-//       PersonalEval: {
-//         merge: true,
-//       },
-//     },
-//   }),
-// });
-
 /**
  * @description
  * 쿼리 바뀌었을때 이부분 안건드리면 기존에 있던캐시정보에 바뀐 쿼리정보 병합하려고해서 에러발생
@@ -51,6 +31,24 @@ const client = new ApolloClient({
             merge: true,
           },
           getPersonalEvalPage: {
+            merge: true,
+          },
+          getProjectInfo: {
+            merge: true,
+          },
+          getLeaderboardEval: {
+            merge: true,
+          },
+          getLeaderboardExpIncrement: {
+            merge: true,
+          },
+          getLeaderboardEvalCount: {
+            merge: true,
+          },
+          getLeaderboardScore: {
+            merge: true,
+          },
+          getEvalLogs: {
             merge: true,
           },
         },

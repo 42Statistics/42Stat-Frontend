@@ -29,7 +29,7 @@ export const LeaderboardLevelTabResult = ({
   if (!data) return <ApolloNotFound />;
 
   const { me, totalRanking } = data.getLeaderboardLevel.total;
-  const unit = 'XP';
+  const unit = '';
 
   const myRank: RankUserItemType | null =
     me != null

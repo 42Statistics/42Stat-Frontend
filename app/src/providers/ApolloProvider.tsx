@@ -36,7 +36,7 @@ const client = new ApolloClient({
           getProjectInfo: {
             merge: true,
           },
-          getLeaderboardEval: {
+          getLeaderboardLevel: {
             merge: true,
           },
           getLeaderboardExpIncrement: {

@@ -29,7 +29,7 @@ export const LeaderboardEvalCountTabResult = ({
   if (!data) return <ApolloNotFound />;
 
   const { me, totalRanking } = data.getLeaderboardEvalCount.byDateTemplate.data;
-  const unit = 'XP';
+  const unit = '회';
 
   const myRank: RankUserItemType | null =
     me != null

@@ -29,7 +29,7 @@ export const LeaderboardCoalitionScoreTabResult = ({
   if (!data) return <ApolloNotFound />;
 
   const { me, totalRanking } = data.getLeaderboardScore.byDateTemplate.data;
-  const unit = 'XP';
+  const unit = '';
 
   const myRank: RankUserItemType | null =
     me != null

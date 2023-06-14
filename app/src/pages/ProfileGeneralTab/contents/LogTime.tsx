@@ -1,4 +1,5 @@
 import { gql } from '@/__generated__';
+import { DateTemplate } from '@/__generated__/graphql';
 import { useQuery } from '@apollo/client';
 import { Loader } from '@components/common';
 import {
@@ -10,15 +11,19 @@ import { DashboardContent } from '@components/templates/DashboardContent';
 import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
 
-const GET_LOGTIME_INFO = gql(/* GraphQL */ `
-  query getLogtimeInfo($login: String!) {
+const GET_LOGTIME_BY_DATE_TEMPLATE = gql(/* GraphQL */ `
+  query getLogtimeByDateTemplate(
+    $login: String!
+    $currDateTemplate: DateTemplate!
+    $lastDateTemplate: DateTemplate!
+  ) {
     getPersonalGeneralPage(login: $login) {
-      currMonthLogtime: logtimeByDateTemplate(dateTemplate: CURR_MONTH) {
+      currData: logtimeByDateTemplate(dateTemplate: $currDateTemplate) {
         data
         start
         end
       }
-      lastMonthLogtime: logtimeByDateTemplate(dateTemplate: LAST_MONTH) {
+      lastData: logtimeByDateTemplate(dateTemplate: $lastDateTemplate) {
         data
         start
         end
@@ -27,12 +32,16 @@ const GET_LOGTIME_INFO = gql(/* GraphQL */ `
   }
 `);
 
-export const LogtimeInfo = () => {
+export const LogTime = () => {
   const { username } = useParams() as { username: string };
 
   const title = '월간 출석 시간';
-  const { loading, error, data } = useQuery(GET_LOGTIME_INFO, {
-    variables: { login: username },
+  const { loading, error, data } = useQuery(GET_LOGTIME_BY_DATE_TEMPLATE, {
+    variables: {
+      login: username,
+      currDateTemplate: DateTemplate.CurrMonth,
+      lastDateTemplate: DateTemplate.LastMonth,
+    },
   });
   if (loading)
     return (
@@ -53,15 +62,21 @@ export const LogtimeInfo = () => {
       </DashboardContent>
     );
 
-  const { currMonthLogtime, lastMonthLogtime } = data.getPersonalGeneralPage;
-  const currMonthHours = Math.floor(currMonthLogtime.data / 60);
-  const lastMonthHours = Math.floor(lastMonthLogtime.data / 60);
-  const { start, end } = currMonthLogtime;
+  const {
+    currData: { data: CurrLogTime, start },
+    lastData: { data: LastLogTime },
+  } = data.getPersonalGeneralPage;
+  const currLogTimeByHours = Math.floor(CurrLogTime / 60);
+  const lastLogTimeByHours = Math.floor(LastLogTime / 60);
   const description = `${dayjs(start).format('YYYY년 M월')}`;
 
   return (
     <DashboardContent title={title} description={description}>
-      <NumberCompare curr={currMonthHours} last={lastMonthHours} unit="시간" />
+      <NumberCompare
+        curr={currLogTimeByHours}
+        last={lastLogTimeByHours}
+        unit="시간"
+      />
     </DashboardContent>
   );
 };

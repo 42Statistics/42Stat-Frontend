@@ -1,13 +1,12 @@
 import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
-import { H3Text, HStack, Image, Loader, Text } from '@components/common';
+import { H3Text, HStack, Loader, Text } from '@components/common';
 import { CoalitionMark } from '@components/elements/CoalitionMark';
 import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@components/elements/DashboardContentView';
 import { DashboardContent } from '@components/templates/DashboardContent';
-import styled from '@emotion/styled';
 import { useParams } from 'react-router-dom';
 
 const GET_CURRENT_COALITION_SCORE = gql(/* GraphQL */ `
@@ -79,10 +78,3 @@ export const CurrentCoalitionScore = () => {
     </DashboardContent>
   );
 };
-
-const StyledCoalitionMark = styled(Image)<{ size?: string }>`
-  width: ${({ size = '2.2rem' }) => size};
-  height: ${({ size = '2.4rem' }) => size};
-  object-fit: cover;
-  border-radius: 50%;
-`;

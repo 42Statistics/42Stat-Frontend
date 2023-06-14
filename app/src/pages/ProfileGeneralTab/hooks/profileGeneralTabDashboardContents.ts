@@ -6,8 +6,8 @@ import {
   CurrentWallet,
   LastPass,
   LastRegistered,
-  LevelGraph,
-  LogtimeInfo,
+  LevelRecords,
+  LogTime,
   PrefferedCluster,
   PrefferedTime,
   SimilarCharacter,
@@ -25,7 +25,7 @@ export const profileGeneralTabDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 2,
-    content: LogtimeInfo,
+    content: LogTime,
   },
   {
     id: 3,
@@ -49,7 +49,7 @@ export const profileGeneralTabDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 8,
-    content: LevelGraph,
+    content: LevelRecords,
   },
   {
     id: 9,

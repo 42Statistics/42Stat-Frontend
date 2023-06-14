@@ -1,4 +1,5 @@
 import { gql } from '@/__generated__';
+import { DateTemplate } from '@/__generated__/graphql';
 import { useQuery } from '@apollo/client';
 import { H3Text, Loader, Text, VStack } from '@components/common';
 import {
@@ -11,10 +12,10 @@ import { percentFormatter } from '@utils/formatters/percentFormatter';
 import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
 
-const GET_PREFERRED_TIME = gql(/* GraphQL */ `
-  query getPrefferedTime($login: String!) {
+const GET_PREFERRED_TIME_BY_DATE_TEMPLATE = gql(/* GraphQL */ `
+  query getPrefferedTime($login: String!, $dateTemplate: DateTemplate!) {
     getPersonalGeneralPage(login: $login) {
-      preferredTimeByDateTemplate(dateTemplate: CURR_MONTH) {
+      preferredTimeByDateTemplate(dateTemplate: $dateTemplate) {
         data {
           total
           morning
@@ -37,8 +38,8 @@ export const PrefferedTime = () => {
     loading,
     error,
     data: queryData,
-  } = useQuery(GET_PREFERRED_TIME, {
-    variables: { login: username },
+  } = useQuery(GET_PREFERRED_TIME_BY_DATE_TEMPLATE, {
+    variables: { login: username, dateTemplate: DateTemplate.CurrMonth },
   });
   if (loading)
     return (

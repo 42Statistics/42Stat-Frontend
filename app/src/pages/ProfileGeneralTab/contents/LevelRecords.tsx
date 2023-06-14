@@ -10,8 +10,8 @@ import { DashboardContent } from '@components/templates/DashboardContent';
 import { useTheme } from '@emotion/react';
 import { useParams } from 'react-router-dom';
 
-const GET_LEVEL_GRAPH = gql(/* GraphQL */ `
-  query getLevelGraph($login: String!) {
+const GET_LEVEL_RECORDS = gql(/* GraphQL */ `
+  query getLevelRecords($login: String!) {
     getPersonalGeneralPage(login: $login) {
       levelRecords {
         after
@@ -22,12 +22,12 @@ const GET_LEVEL_GRAPH = gql(/* GraphQL */ `
   }
 `);
 
-export const LevelGraph = () => {
+export const LevelRecords = () => {
   const { username } = useParams() as { username: string };
 
   const title = '레벨 증가 그래프';
   const description = `현재일로부터 1년`;
-  const { loading, error, data } = useQuery(GET_LEVEL_GRAPH, {
+  const { loading, error, data } = useQuery(GET_LEVEL_RECORDS, {
     variables: { login: username },
   });
   if (loading)
@@ -90,16 +90,16 @@ export const LevelGraph = () => {
 
   return (
     <DashboardContent title={title} description={description}>
-      <LevelGraphChart series={series} />
+      <LevelRecordsChart series={series} />
     </DashboardContent>
   );
 };
 
-type LevelGraphChartProps = {
+type LevelRecordsChartProps = {
   series: ApexAxisChartSeries;
 };
 
-const LevelGraphChart = ({ series }: LevelGraphChartProps) => {
+const LevelRecordsChart = ({ series }: LevelRecordsChartProps) => {
   const theme = useTheme();
 
   const options: ApexCharts.ApexOptions = {

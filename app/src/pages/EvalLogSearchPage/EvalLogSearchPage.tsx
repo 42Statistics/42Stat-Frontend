@@ -14,11 +14,12 @@ import { EvalLogSearchDetail } from './EvalLogSearchDetail';
 import { EvalLogSearchModal } from './EvalLogSearchModal';
 import { EvalLogSearchTitle } from './EvalLogSearchTitle';
 
-export type EvalLogSearchForm = {
+export type EvalLogSearchFormData = {
   projectName: string;
-  outstandingOnly: boolean;
+  flag: 'all' | 'outstanding';
   corrector: string;
   corrected: string;
+  sortOrder: 'asc' | 'desc';
 };
 
 //TODO: 실제로는 안쓰는 필드들은 받아오지 않게 나중에 완성하고 수정필요
@@ -91,21 +92,21 @@ const EvalLogSearchPage = () => {
   const RESULT_PER_PAGE = 10;
   const [end, setEnd] = useState<boolean>(false);
   const [search, { data, loading, error }] = useLazyQuery(GET_EVAL_LOGS);
-  const [page, setPage] = useState<number>(1);
   const [searchParams] = useSearchParams();
-  const [form, setForm] = useState<EvalLogSearchForm>({
+  const [form, setForm] = useState<EvalLogSearchFormData>({
     projectName: searchParams.get('projectName') ?? '',
-    outstandingOnly: searchParams.get('outstandingOnly') === 'true',
+    flag: searchParams.get('flag') === 'outstanding' ? 'outstanding' : 'all',
     corrector: searchParams.get('corrector') ?? '',
     corrected: searchParams.get('corrected') ?? '',
+    sortOrder: searchParams.get('sortOrder') === 'asc' ? 'asc' : 'desc',
   });
   const [evalLogEdges, setEvalLogEdges] = useState<EvalLogEdge[]>([]);
   const [endCursor, setEndCursor] = useState<string>('');
 
-  const onSubmit: SubmitHandler<EvalLogSearchForm> = (newForm) => {
+  const onSubmit: SubmitHandler<EvalLogSearchFormData> = (newForm) => {
     setEvalLogEdges([]);
     setForm(newForm);
-    setPage(1);
+    setEndCursor('');
     setEnd(false);
     toggleModal();
   };
@@ -136,12 +137,17 @@ const EvalLogSearchPage = () => {
       variables: {
         after: endCursor,
         first: RESULT_PER_PAGE,
-        sortOrder: EvalLogSortOrder.BeginAtDesc, // TODO: 최신순/오래된순 버튼 만들면 수정
-        ...form,
+        projectName: form.projectName,
+        outstandingOnly: form.flag === 'outstanding',
+        corrector: form.corrector,
+        corrected: form.corrected,
+        sortOrder:
+          form.sortOrder === 'desc'
+            ? EvalLogSortOrder.BeginAtDesc
+            : EvalLogSortOrder.BeginAtAsc,
       },
     });
-    setPage((cur) => cur + 1);
-  }, [isVisible, loading, form, page, search]);
+  }, [isVisible, loading, form, search, endCursor]);
 
   // TODO: Headless Modal
   return (
@@ -154,7 +160,10 @@ const EvalLogSearchPage = () => {
         onSubmit={onSubmit}
       />
       <VStack w="100%" spacing="2rem">
-        <EvalLogSearchTitle form={form} />
+        <EvalLogSearchTitle
+          form={form}
+          totalCount={data?.getEvalLogs.pageInfo?.totalCount}
+        />
         <EvalLogSearchDetail
           evalLogEdges={evalLogEdges}
           end={end}

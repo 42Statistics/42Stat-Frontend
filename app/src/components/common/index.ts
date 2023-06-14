@@ -11,6 +11,7 @@ export * from './Modal';
 export * from './Overlay';
 export * from './Scroll';
 export * from './SegmentedControl';
+export * from './Select';
 export * from './Skeleton';
 export * from './Spacer';
 export * from './Spinner';

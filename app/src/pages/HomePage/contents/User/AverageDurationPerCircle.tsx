@@ -9,8 +9,8 @@ import {
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { numberWithUnitFormatter } from '@utils/formatters';
 
-const GET_AVERAGE_CIRCLE_DURATION = gql(/* GraphQL */ `
-  query getAverageCircleDuration {
+const GET_AVERAGE_DURATION_PER_CIRCLE = gql(/* GraphQL */ `
+  query getAverageDurationPerCircle {
     getHomeUser {
       averageDurationPerCircle {
         circle
@@ -20,10 +20,10 @@ const GET_AVERAGE_CIRCLE_DURATION = gql(/* GraphQL */ `
   }
 `);
 
-export const AverageCircleDurations = () => {
+export const AverageDurationPerCircle = () => {
   const title = 'N서클 통과할 때까지의 누적 기간';
   const description = '본과정 시작일 기준';
-  const { loading, error, data } = useQuery(GET_AVERAGE_CIRCLE_DURATION);
+  const { loading, error, data } = useQuery(GET_AVERAGE_DURATION_PER_CIRCLE);
   if (loading)
     return (
       <DashboardContent title={title} description={description}>
@@ -74,7 +74,7 @@ export const AverageCircleDurations = () => {
 
   return (
     <DashboardContent title={title} description={description}>
-      <AverageCircleDurationsChart
+      <AverageDurationPerCircleChart
         categories={categories}
         series={series}
         seriesLabel={seriesLabel}
@@ -83,17 +83,17 @@ export const AverageCircleDurations = () => {
   );
 };
 
-type AverageCircleDurationsChartProps = {
+type AverageDurationPerCircleChartProps = {
   categories: string[];
   series: ApexAxisChartSeries;
   seriesLabel: number[];
 };
 
-const AverageCircleDurationsChart = ({
+const AverageDurationPerCircleChart = ({
   categories,
   series,
   seriesLabel,
-}: AverageCircleDurationsChartProps) => {
+}: AverageDurationPerCircleChartProps) => {
   const options: ApexCharts.ApexOptions = {
     xaxis: {
       categories,

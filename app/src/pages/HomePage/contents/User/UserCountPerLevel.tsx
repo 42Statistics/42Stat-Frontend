@@ -9,8 +9,8 @@ import {
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { numberWithUnitFormatter } from '@utils/formatters';
 
-const GET_USER_COUNT_PER_LEVELS = gql(/* GraphQL */ `
-  query getUserCountPerLevels {
+const GET_USER_COUNT_PER_LEVEL = gql(/* GraphQL */ `
+  query getUserCountPerLevel {
     getHomeUser {
       userCountPerLevel {
         userCount
@@ -20,9 +20,9 @@ const GET_USER_COUNT_PER_LEVELS = gql(/* GraphQL */ `
   }
 `);
 
-export const UserCountPerLevels = () => {
+export const UserCountPerLevel = () => {
   const title = '여행 중인 유저 레벨 분포';
-  const { loading, error, data } = useQuery(GET_USER_COUNT_PER_LEVELS);
+  const { loading, error, data } = useQuery(GET_USER_COUNT_PER_LEVEL);
   if (loading)
     return (
       <DashboardContent title={title}>
@@ -46,9 +46,6 @@ export const UserCountPerLevels = () => {
 
   const categories = userCountPerLevel.map(({ level }) => level);
   const seriesData = userCountPerLevel.map(({ userCount }) => userCount);
-  //Y축 범례 최대값 추출 로직
-  const _maxY = Math.max(...Object.values(seriesData));
-  const maxY = Math.ceil(_maxY / 100) * 100;
 
   const series: ApexAxisChartSeries = [
     {
@@ -59,26 +56,20 @@ export const UserCountPerLevels = () => {
 
   return (
     <DashboardContent title={title}>
-      <UserCountPerLevelsChart
-        categories={categories}
-        series={series}
-        maxY={maxY}
-      />
+      <UserCountPerLevelChart categories={categories} series={series} />
     </DashboardContent>
   );
 };
 
-type UserCountPerLevelsChartProps = {
+type UserCountPerLevelChartProps = {
   categories: number[];
   series: ApexAxisChartSeries;
-  maxY: number;
 };
 
-const UserCountPerLevelsChart = ({
+const UserCountPerLevelChart = ({
   categories,
   series,
-  maxY,
-}: UserCountPerLevelsChartProps) => {
+}: UserCountPerLevelChartProps) => {
   const options: ApexCharts.ApexOptions = {
     xaxis: {
       categories,
@@ -87,7 +78,6 @@ const UserCountPerLevelsChart = ({
       },
     },
     yaxis: {
-      max: maxY,
       labels: {
         formatter: (value) => numberWithUnitFormatter(value, '명'),
       },

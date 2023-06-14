@@ -1,4 +1,5 @@
 import { gql } from '@/__generated__';
+import { DateTemplate } from '@/__generated__/graphql';
 import { useQuery } from '@apollo/client';
 import { Loader } from '@components/common';
 import {
@@ -9,15 +10,15 @@ import { NumberCompare } from '@components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import dayjs from 'dayjs';
 
-const GET_CURR_WEEK_EVAL_COUNT = gql(/* GraphQL */ `
-  query GetCurrWeekEvalCount {
+const GET_EVAL_COUNT_BY_DATE_TEMPLATE = gql(/* GraphQL */ `
+  query GetEvalCountByDateTemplate($curr: DateTemplate!, $last: DateTemplate!) {
     getHomeEval {
-      currWeekEvalCount: evalCountByDateTemplate(dateTemplate: CURR_WEEK) {
+      curr: evalCountByDateTemplate(dateTemplate: $curr) {
         data
         start
         end
       }
-      lastWeekEvalCount: evalCountByDateTemplate(dateTemplate: LAST_WEEK) {
+      last: evalCountByDateTemplate(dateTemplate: $last) {
         data
         start
         end
@@ -28,7 +29,12 @@ const GET_CURR_WEEK_EVAL_COUNT = gql(/* GraphQL */ `
 
 export const CurrWeekEvalCount = () => {
   const title = '주간 총 평가 횟수';
-  const { loading, error, data } = useQuery(GET_CURR_WEEK_EVAL_COUNT);
+  const { loading, error, data } = useQuery(GET_EVAL_COUNT_BY_DATE_TEMPLATE, {
+    variables: {
+      curr: DateTemplate.CurrWeek,
+      last: DateTemplate.LastWeek,
+    },
+  });
   if (loading)
     return (
       <DashboardContent title={title}>
@@ -48,19 +54,17 @@ export const CurrWeekEvalCount = () => {
       </DashboardContent>
     );
 
-  const { currWeekEvalCount, lastWeekEvalCount } = data.getHomeEval;
-  const { start, end } = currWeekEvalCount;
+  const {
+    curr: { data: currData, start },
+    last: { data: lastData },
+  } = data.getHomeEval;
 
   const description = `${dayjs(start).format('YYYY년 M월 w주')}`;
   const unit = '회';
 
   return (
     <DashboardContent title={title} description={description}>
-      <NumberCompare
-        curr={currWeekEvalCount.data}
-        last={lastWeekEvalCount.data}
-        unit={unit}
-      />
+      <NumberCompare curr={currData} last={lastData} unit={unit} />
     </DashboardContent>
   );
 };

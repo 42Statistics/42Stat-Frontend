@@ -9,8 +9,8 @@ import {
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { numberWithUnitFormatter } from '@utils/formatters';
 
-const GET_ACTIVE_USER_COUNT_RECORD = gql(/* GraphQL */ `
-  query getActiveUserCountRecord {
+const GET_ACTIVE_USER_COUNT_RECORDS = gql(/* GraphQL */ `
+  query getActiveUserCountRecords {
     getHomeUser {
       activeUserCountRecords {
         at
@@ -22,7 +22,7 @@ const GET_ACTIVE_USER_COUNT_RECORD = gql(/* GraphQL */ `
 
 export const ActiveUserCountRecords = () => {
   const title = '여행 중인 유저 수 추이';
-  const { loading, error, data } = useQuery(GET_ACTIVE_USER_COUNT_RECORD);
+  const { loading, error, data } = useQuery(GET_ACTIVE_USER_COUNT_RECORDS);
   if (loading)
     return (
       <DashboardContent title={title}>

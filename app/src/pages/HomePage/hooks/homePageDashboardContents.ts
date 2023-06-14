@@ -13,16 +13,16 @@ import {
 import { CurrRegisteredCountRank, LastExamResult } from '../contents/Team';
 import {
   ActiveUserCountRecords,
-  AverageCircleDurations,
-  BlackholedCountPerCircles,
-  BlackholedPercentage,
-  CorrectionPointRanks,
+  AverageDurationPerCircle,
+  BlackholedCountPerCircle,
+  BlackholedRate,
+  CorrectionPointRanking,
   CurrMonthBlackholedCount,
   CurrWeekEvalCount,
   Hero,
-  MemberPercentage,
-  UserCountPerLevels,
-  WalletRanks,
+  MemberRate,
+  UserCountPerLevel,
+  WalletRanking,
 } from '../contents/User';
 
 export const homePageDashboardContents: DashboardItemProps[] = [
@@ -64,31 +64,31 @@ export const homePageDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 9,
-    content: UserCountPerLevels,
+    content: UserCountPerLevel,
   },
   {
     id: 10,
-    content: MemberPercentage,
+    content: MemberRate,
   },
   {
     id: 11,
-    content: BlackholedPercentage,
+    content: BlackholedRate,
   },
   {
     id: 12,
-    content: BlackholedCountPerCircles,
+    content: BlackholedCountPerCircle,
   },
   {
     id: 13,
-    content: AverageCircleDurations,
+    content: AverageDurationPerCircle,
   },
   {
     id: 14,
-    content: CorrectionPointRanks,
+    content: CorrectionPointRanking,
   },
   {
     id: 15,
-    content: WalletRanks,
+    content: WalletRanking,
   },
   {
     id: 16,

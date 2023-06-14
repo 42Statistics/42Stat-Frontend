@@ -11,8 +11,8 @@ import { useTheme } from '@emotion/react';
 import { numberWithUnitFormatter } from '@utils/formatters';
 import { capitalize } from 'lodash-es';
 
-const GET_MEMBER_PERCENTAGE = gql(/* GraphQL */ `
-  query GetMemberPercentage {
+const GET_MEMBER_RATE = gql(/* GraphQL */ `
+  query GetMemberRate {
     getHomeUser {
       memberRate {
         total
@@ -24,11 +24,11 @@ const GET_MEMBER_PERCENTAGE = gql(/* GraphQL */ `
     }
   }
 `);
-export const MemberPercentage = () => {
+export const MemberRate = () => {
   const title = 'Member 비율';
   const description = '블랙홀 유저 포함';
 
-  const { loading, error, data: queryData } = useQuery(GET_MEMBER_PERCENTAGE);
+  const { loading, error, data: queryData } = useQuery(GET_MEMBER_RATE);
 
   if (loading)
     return (
@@ -49,27 +49,23 @@ export const MemberPercentage = () => {
       </DashboardContent>
     );
 
-  const { memberRate } = queryData.getHomeUser;
-  const { total, fields } = memberRate;
+  const { fields } = queryData.getHomeUser.memberRate;
   const labels = fields.map((field) => capitalize(field.key));
   const series = fields.map((field) => field.value);
 
   return (
     <DashboardContent title={title} description={description}>
-      <MemberPercentageChart labels={labels} series={series} />
+      <MemberRateChart labels={labels} series={series} />
     </DashboardContent>
   );
 };
 
-type MemberPercentageChartProps = {
+type MemberRateChartProps = {
   labels: string[];
   series: number[];
 };
 
-const MemberPercentageChart = ({
-  labels,
-  series,
-}: MemberPercentageChartProps) => {
+const MemberRateChart = ({ labels, series }: MemberRateChartProps) => {
   const theme = useTheme();
 
   const options: ApexCharts.ApexOptions = {

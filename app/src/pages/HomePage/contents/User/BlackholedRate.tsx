@@ -11,8 +11,8 @@ import { useTheme } from '@emotion/react';
 import { numberWithUnitFormatter } from '@utils/formatters';
 import { capitalize } from 'lodash-es';
 
-const GET_BLACKHOLED_PERCENTAGE = gql(/* GraphQL */ `
-  query GetBlackHoledPercentage {
+const GET_BLACKHOLED_RATE = gql(/* GraphQL */ `
+  query GetBlackHoledRate {
     getHomeUser {
       blackholedRate {
         total
@@ -25,13 +25,9 @@ const GET_BLACKHOLED_PERCENTAGE = gql(/* GraphQL */ `
   }
 `);
 
-export const BlackholedPercentage = () => {
+export const BlackholedRate = () => {
   const title = '블랙홀 유저 비율';
-  const {
-    loading,
-    error,
-    data: queryData,
-  } = useQuery(GET_BLACKHOLED_PERCENTAGE);
+  const { loading, error, data: queryData } = useQuery(GET_BLACKHOLED_RATE);
 
   if (loading)
     return (
@@ -58,20 +54,17 @@ export const BlackholedPercentage = () => {
 
   return (
     <DashboardContent title={title}>
-      <BlackholedPercentageChart labels={labels} series={series} />
+      <BlackholedRateChart labels={labels} series={series} />
     </DashboardContent>
   );
 };
 
-type BlackholedPercentageChartProps = {
+type BlackholedRateChartProps = {
   labels: string[];
   series: number[];
 };
 
-const BlackholedPercentageChart = ({
-  labels,
-  series,
-}: BlackholedPercentageChartProps) => {
+const BlackholedRateChart = ({ labels, series }: BlackholedRateChartProps) => {
   const theme = useTheme();
 
   const options: ApexCharts.ApexOptions = {

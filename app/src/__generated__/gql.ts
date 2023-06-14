@@ -43,6 +43,7 @@ const documents = {
     "\n  query getPersonalAverageFeedbackLength($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      averageFeedbackLength\n    }\n  }\n": types.GetPersonalAverageFeedbackLengthDocument,
     "\n  query getAverageFinalMark($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      averageFinalMark\n    }\n  }\n": types.GetAverageFinalMarkDocument,
     "\n  query getCurrentCorrectionPoint($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      correctionPoint\n    }\n  }\n": types.GetCurrentCorrectionPointDocument,
+    "\n  query getLatestComment($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      lastComment\n    }\n  }\n": types.GetLatestCommentDocument,
     "\n  query getMonthlyEvalCount($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      currMonthCount: countByDateTemplate(dateTemplate: CURR_WEEK) {\n        data\n        start\n        end\n      }\n      lastMonthCount: countByDateTemplate(dateTemplate: LAST_WEEK) {\n        data\n        start\n        end\n      }\n    }\n  }\n": types.GetMonthlyEvalCountDocument,
     "\n  query getPersonalTotalEvalCount($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      totalCount\n    }\n  }\n": types.GetPersonalTotalEvalCountDocument,
     "\n  query GetTotalEvalTime {\n    getPersonalEvalPage {\n      totalDuration\n    }\n  }\n": types.GetTotalEvalTimeDocument,
@@ -196,6 +197,10 @@ export function gql(source: "\n  query getAverageFinalMark($login: String!) {\n 
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query getCurrentCorrectionPoint($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      correctionPoint\n    }\n  }\n"): (typeof documents)["\n  query getCurrentCorrectionPoint($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      correctionPoint\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query getLatestComment($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      lastComment\n    }\n  }\n"): (typeof documents)["\n  query getLatestComment($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      lastComment\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

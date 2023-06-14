@@ -11,20 +11,14 @@ import type { RankUserItemType } from '@utils/types/Rank';
 import { Link } from 'react-router-dom';
 
 type RankUserItemProps = {
-  rank: number;
   showImg: boolean;
   item: RankUserItemType;
   unit: string;
 };
 
-export const RankUserItem = ({
-  rank,
-  showImg,
-  item,
-  unit,
-}: RankUserItemProps) => {
+export const RankUserItem = ({ showImg, item, unit }: RankUserItemProps) => {
   const theme = useTheme();
-  const { name, value, imgUrl } = item;
+  const { name, value, rank, imgUrl } = item;
   const color =
     rank === 1 ? theme.colors.accent.default : theme.colors.mono.black;
 

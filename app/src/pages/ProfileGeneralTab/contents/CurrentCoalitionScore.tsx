@@ -1,6 +1,7 @@
 import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import { H3Text, HStack, Image, Loader, Text } from '@components/common';
+import { CoalitionMark } from '@components/elements/CoalitionMark';
 import {
   ApolloBadRequest,
   ApolloNotFound,
@@ -14,9 +15,14 @@ const GET_CURRENT_COALITION_SCORE = gql(/* GraphQL */ `
     getPersonalGeneralPage(login: $login) {
       userProfile {
         coalition {
-          score
+          id
+          name
+          slug
           imageUrl
+          coverUrl
           color
+          score
+          userId
         }
       }
       scoreInfo {
@@ -61,13 +67,7 @@ export const CurrentCoalitionScore = () => {
       <HStack h="100%" spacing="1rem">
         <H3Text>{value.toLocaleString()}</H3Text>
         <HStack spacing="0.5rem">
-          {coalition.imageUrl && coalition.color && (
-            <StyledCoalitionMark
-              size="1.8rem"
-              src={coalition.imageUrl}
-              style={{ backgroundColor: coalition.color }}
-            />
-          )}
+          <CoalitionMark coalition={coalition} />
           {scoreInfo?.rankInCoalition && (
             <HStack align="baseline">
               <H3Text>{scoreInfo.rankInCoalition.toLocaleString()}</H3Text>

@@ -1,4 +1,5 @@
 import { gql } from '@/__generated__';
+import { DateTemplate } from '@/__generated__/graphql';
 import { useQuery } from '@apollo/client';
 import { HStack, SegmentedControl, Spacer, VStack } from '@components/common';
 import {
@@ -7,28 +8,63 @@ import {
 } from '@components/elements/DashboardContentView';
 import { LeaderBoard } from '@components/templates/LeaderBoard';
 import { LeaderBoardItem } from '@components/templates/LeaderBoard/LeaderBoardItem';
+import { LeaderBoardTabSkeleton } from '@pages/PageSkeletons/LeaderBoardTabSkeleton';
+import { isDefined } from '@utils/isDefined';
 import type { RankUserItemType } from '@utils/types/Rank';
 import { useSegmentedControl } from '@utils/useSegmentedControl';
-import { LeaderBoardTabSkeleton } from '@pages/PageSkeletons/LeaderBoardTabSkeleton';
 
-// 임시
-const GET_TOTAL_EVAL_COUNT_RANK = gql(/* GraphQL */ `
-  query GetTotalEvalCountRank {
-    getHomePage {
-      totalEvalCountRank {
-        userPreview {
-          id
-          login
-          imgUrl
+const GET_LEADERBOARD_EVAL_COUNT = gql(/* GraphQL */ `
+  query GetLeaderboardEvalCount(
+    $pageSize: Int!
+    $pageNumber: Int!
+    $dateTemplate: DateTemplate!
+  ) {
+    getLeaderboardEvalCount {
+      byDateTemplate(
+        pageSize: $pageSize
+        pageNumber: $pageNumber
+        dateTemplate: $dateTemplate
+      ) {
+        data {
+          me {
+            userPreview {
+              id
+              login
+              imgUrl
+            }
+            value
+            rank
+          }
+          totalRanking {
+            nodes {
+              userPreview {
+                id
+                login
+                imgUrl
+              }
+              value
+              rank
+            }
+            totalCount
+            pageSize
+            pageNumber
+          }
         }
-        value
+        start
+        end
       }
     }
   }
 `);
 
 export const EvalCountRankTab = () => {
-  const { loading, error, data } = useQuery(GET_TOTAL_EVAL_COUNT_RANK);
+  const { loading, error, data } = useQuery(GET_LEADERBOARD_EVAL_COUNT, {
+    variables: {
+      pageSize: 50,
+      pageNumber: 1,
+      dateTemplate: DateTemplate.CurrMonth,
+    },
+  });
   const options = [
     {
       label: '주간',
@@ -49,17 +85,29 @@ export const EvalCountRankTab = () => {
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 
-  const { totalEvalCountRank } = data.getHomePage;
+  const { me, totalRanking } = data.getLeaderboardEvalCount.byDateTemplate.data;
   const unit = '회';
 
-  const rankList: RankUserItemType[] = totalEvalCountRank.map(
-    ({ userPreview, value }) => ({
+  const myRank: RankUserItemType | null =
+    me != null
+      ? {
+          id: me.userPreview.id,
+          name: me.userPreview.login,
+          value: me.value,
+          rank: me.rank,
+          imgUrl: me.userPreview.imgUrl,
+        }
+      : null;
+
+  const rankList: RankUserItemType[] = totalRanking.nodes
+    .filter(isDefined)
+    .map(({ userPreview, value, rank }) => ({
       id: userPreview.id,
       name: userPreview.login,
       value: value,
+      rank: rank,
       imgUrl: userPreview.imgUrl,
-    }),
-  );
+    }));
 
   return (
     <VStack w="100%" spacing="2rem">
@@ -71,7 +119,7 @@ export const EvalCountRankTab = () => {
         />
         <Spacer />
       </HStack>
-      <LeaderBoardItem rank={1} item={rankList[0]} unit={unit} />
+      {myRank && <LeaderBoardItem item={myRank} unit={unit} />}
       <LeaderBoard rankList={rankList} unit={unit} />
     </VStack>
   );

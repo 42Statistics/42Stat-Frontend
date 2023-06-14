@@ -3,6 +3,7 @@ export type RankItemType = {
   id: number;
   name: string;
   value: number;
+  rank: number;
 };
 
 export type RankUserItemType = RankItemType & {

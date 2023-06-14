@@ -1,5 +1,5 @@
 import { gql } from '@/__generated__';
-import { EvalLog } from '@/__generated__/graphql';
+import { EvalLogEdge, EvalLogSortOrder } from '@/__generated__/graphql';
 import { useLazyQuery } from '@apollo/client';
 import { VStack } from '@components/common';
 import { Seo } from '@components/elements/Seo';
@@ -24,57 +24,65 @@ export type EvalLogSearchForm = {
 //TODO: 실제로는 안쓰는 필드들은 받아오지 않게 나중에 완성하고 수정필요
 const GET_EVAL_LOGS = gql(/* GraphQL */ `
   query GetEvalLogs(
-    $pageSize: Int!
-    $pageNumber: Int!
-    $projectName: String!
-    $outstandingOnly: Boolean!
+    $after: String
+    $first: Int!
     $corrector: String
     $corrected: String
+    $projectName: String
+    $outstandingOnly: Boolean
+    $sortOrder: EvalLogSortOrder!
   ) {
     getEvalLogs(
-      pageSize: $pageSize
-      pageNumber: $pageNumber
-      projectName: $projectName
-      outstandingOnly: $outstandingOnly
+      after: $after
+      first: $first
       corrector: $corrector
       corrected: $corrected
+      projectName: $projectName
+      outstandingOnly: $outstandingOnly
+      sortOrder: $sortOrder
     ) {
-      nodes {
-        header {
-          corrector {
-            id
-            login
-            imgUrl
+      edges {
+        cursor
+        node {
+          id
+          header {
+            corrector {
+              id
+              login
+              imgUrl
+            }
+            teamPreview {
+              id
+              name
+              url
+            }
+            beginAt
+            projectPreview {
+              id
+              name
+              url
+            }
+            flag {
+              id
+              name
+              isPositive
+            }
           }
-          teamPreview {
-            id
-            name
-            url
+          correctorReview {
+            mark
+            review
           }
-          beginAt
-          projectPreview {
-            id
-            name
-            url
+          correctedsReview {
+            mark
+            review
           }
-          flag {
-            id
-            name
-            isPositive
-          }
-        }
-        correctorReview {
-          mark
-          review
-        }
-        correctedsReview {
-          mark
-          review
         }
       }
-      totalCount
-      pageSize
-      pageNumber
+      pageInfo {
+        totalCount
+        hasNextPage
+        endCursor
+      }
     }
   }
 `);
@@ -91,10 +99,11 @@ const EvalLogSearchPage = () => {
     corrector: searchParams.get('corrector') ?? '',
     corrected: searchParams.get('corrected') ?? '',
   });
-  const [evalLogs, setEvalLogs] = useState<EvalLog[]>([]);
+  const [evalLogEdges, setEvalLogEdges] = useState<EvalLogEdge[]>([]);
+  const [endCursor, setEndCursor] = useState<string>('');
 
   const onSubmit: SubmitHandler<EvalLogSearchForm> = (newForm) => {
-    setEvalLogs([]);
+    setEvalLogEdges([]);
     setForm(newForm);
     setPage(1);
     setEnd(false);
@@ -110,12 +119,13 @@ const EvalLogSearchPage = () => {
     if (!data) {
       return;
     }
-    if (data.getEvalLogs.nodes.length === 0) {
+
+    const { edges, pageInfo } = data.getEvalLogs;
+    if (pageInfo != null && !pageInfo.hasNextPage) {
       setEnd(true);
-      return;
     }
-    const { nodes } = data.getEvalLogs;
-    setEvalLogs((cur) => [...cur, ...nodes.filter(isDefined)]);
+    setEvalLogEdges((cur) => [...cur, ...edges.filter(isDefined)]);
+    setEndCursor(pageInfo?.endCursor ?? '');
   }, [data]);
 
   useEffect(() => {
@@ -124,8 +134,9 @@ const EvalLogSearchPage = () => {
     }
     search({
       variables: {
-        pageSize: RESULT_PER_PAGE,
-        pageNumber: page,
+        after: endCursor,
+        first: RESULT_PER_PAGE,
+        sortOrder: EvalLogSortOrder.BeginAtDesc, // TODO: 최신순/오래된순 버튼 만들면 수정
         ...form,
       },
     });
@@ -145,7 +156,7 @@ const EvalLogSearchPage = () => {
       <VStack w="100%" spacing="2rem">
         <EvalLogSearchTitle form={form} />
         <EvalLogSearchDetail
-          evalLogs={evalLogs}
+          evalLogEdges={evalLogEdges}
           end={end}
           loading={loading}
           error={error}

@@ -10,19 +10,18 @@ import {
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { numberWithUnitFormatter } from '@utils/formatters';
-import { TabletAndAbove, Mobile } from '@utils/responsive/Device';
+import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
 import type { RankUserItemType } from '@utils/types/Rank';
 import { Link } from 'react-router-dom';
 
 type LeaderBoardItemProps = {
-  rank: number;
   item: RankUserItemType;
   unit: string;
 };
 
-export const LeaderBoardItem = ({ rank, item, unit }: LeaderBoardItemProps) => {
+export const LeaderBoardItem = ({ item, unit }: LeaderBoardItemProps) => {
   const theme = useTheme();
-  const { name, imgUrl, value } = item;
+  const { name, imgUrl, rank, value } = item;
   const color =
     rank <= 3 ? theme.colors.accent.default : theme.colors.mono.black;
 

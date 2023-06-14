@@ -20,6 +20,7 @@ const GET_WALLET_RANK = gql(/* GraphQL */ `
           imgUrl
         }
         value
+        rank
       }
     }
   }
@@ -53,10 +54,11 @@ export const WalletRanks = () => {
   const unit = '₳';
 
   const rankList: RankUserItemType[] = walletRanking.map(
-    ({ userPreview, value }) => ({
+    ({ userPreview, value, rank }) => ({
       id: userPreview.id,
       name: userPreview.login,
       value: value,
+      rank: rank,
       imgUrl: userPreview.imgUrl,
     }),
   );

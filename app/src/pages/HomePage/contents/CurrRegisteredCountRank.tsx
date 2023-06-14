@@ -50,10 +50,11 @@ export const CurrRegisteredCountRank = () => {
   const unit = '명';
 
   const rankList: RankItemType[] = currRegisteredCountRanking.map(
-    ({ projectPreview, value }) => ({
+    ({ projectPreview, value }, idx) => ({
       id: projectPreview.id,
       name: projectPreview.name,
       value: value,
+      rank: idx + 1,
     }),
   );
 

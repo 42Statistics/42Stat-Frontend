@@ -15,11 +15,15 @@ export const TeamInfoTable = ({ teams }: TeamInfoTableProps) => {
 
   return (
     <Table>
-      {heads.map((head, index) => (
-        <th key={index}>
-          <PrimaryText>{head}</PrimaryText>
-        </th>
-      ))}
+      <thead>
+        <tr>
+          {heads.map((head, index) => (
+            <th key={index}>
+              <PrimaryText>{head}</PrimaryText>
+            </th>
+          ))}
+        </tr>
+      </thead>
       <tbody>
         {teams
           .filter(isDefined)

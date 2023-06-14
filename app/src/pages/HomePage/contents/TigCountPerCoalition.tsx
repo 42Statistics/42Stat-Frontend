@@ -1,39 +1,67 @@
-import { Center, H3Text, Text, VStack } from '@components/common';
+import { gql } from '@/__generated__';
+import { useQuery } from '@apollo/client';
+import { Center, H3Text, Loader, Text, VStack } from '@components/common';
+import { CoalitionMark } from '@components/elements/CoalitionMark';
+import {
+  ApolloBadRequest,
+  ApolloNotFound,
+} from '@components/elements/DashboardContentView';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import styled from '@emotion/styled';
 import { numberWithUnitFormatter } from '@utils/formatters';
 import dayjs from 'dayjs';
 import { capitalize } from 'lodash-es';
 
+const GET_TIG_COUNT_PER_COALITION = gql(/* GraphQL */ `
+  query GetTigCountPerCoalition {
+    getHomeCoalition {
+      tigCountPerCoalition {
+        coalition {
+          id
+          name
+          slug
+          imageUrl
+          coverUrl
+          color
+          score
+          userId
+        }
+        value
+      }
+    }
+  }
+`);
+
 export const TigCountPerCoalition = () => {
   const title = '이번 달 누적 코알리숑 티그 횟수';
-  const test = [
-    {
-      coalition: {
-        name: 'gun',
-      },
-      value: 5,
-    },
-    {
-      coalition: {
-        name: 'gon',
-      },
-      value: 10,
-    },
-    {
-      coalition: {
-        name: 'gam',
-      },
-      value: 15,
-    },
-    {
-      coalition: {
-        name: 'lee',
-      },
-      value: 20,
-    },
-  ];
-  const max = Math.max(...test.map((item) => item.value));
+  const { loading, error, data } = useQuery(GET_TIG_COUNT_PER_COALITION);
+  if (loading)
+    return (
+      <DashboardContent title={title}>
+        <Loader />
+      </DashboardContent>
+    );
+  if (error)
+    return (
+      <DashboardContent title={title}>
+        <ApolloBadRequest msg={error.message} />
+      </DashboardContent>
+    );
+  if (!data)
+    return (
+      <DashboardContent title={title}>
+        <ApolloNotFound />
+      </DashboardContent>
+    );
+
+  const { tigCountPerCoalition } = data.getHomeCoalition;
+
+  const tableData = tigCountPerCoalition.map(({ coalition, value }) => ({
+    coalition,
+    value,
+  }));
+
+  const max = Math.max(...tableData.map(({ value }) => value));
 
   const description = `${dayjs().format('YYYY년 M월')}`;
   const unit = '회';
@@ -44,8 +72,11 @@ export const TigCountPerCoalition = () => {
         <VStack w="80%" h="100%">
           <TigCountPerCoalitionTable>
             <tbody>
-              {test.map(({ coalition, value }) => (
+              {tableData.map(({ coalition, value }) => (
                 <tr key={coalition.name}>
+                  <td>
+                    <CoalitionMark coalition={coalition} />
+                  </td>
                   <td>
                     <H3Text>{capitalize(coalition.name)}</H3Text>
                   </td>

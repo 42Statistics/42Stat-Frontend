@@ -9,8 +9,8 @@ import { NumberDefault } from '@components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useParams } from 'react-router-dom';
 
-const GET_PERSONAL_AVERAGE_FEEDBACK_LENGTH = gql(/* GraphQL */ `
-  query getPersonalAverageFeedbackLength($login: String!) {
+const GET_AVERAGE_FEEDBACK_LENGTH_BY_LOGIN = gql(/* GraphQL */ `
+  query GetAverageFeedbackLengthByLogin($login: String!) {
     getPersonalEvalPage(login: $login) {
       averageFeedbackLength
     }
@@ -22,7 +22,7 @@ export const AverageFeedbackLength = () => {
 
   const title = '평균 피드백 길이';
   const { loading, error, data } = useQuery(
-    GET_PERSONAL_AVERAGE_FEEDBACK_LENGTH,
+    GET_AVERAGE_FEEDBACK_LENGTH_BY_LOGIN,
     {
       variables: { login: username },
     },

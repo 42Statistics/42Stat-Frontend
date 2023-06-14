@@ -9,8 +9,8 @@ import { NumberDefault } from '@components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useParams } from 'react-router-dom';
 
-const GET_PERSONAL_TOTAL_EVAL_COUNT = gql(/* GraphQL */ `
-  query getPersonalTotalEvalCount($login: String!) {
+const GET_TOTAL_EVAL_COUNT_BY_LOGIN = gql(/* GraphQL */ `
+  query GetTotalEvalCountByLogin($login: String!) {
     getPersonalEvalPage(login: $login) {
       totalCount
     }
@@ -21,7 +21,7 @@ export const TotalEvalCount = () => {
   const { username } = useParams() as { username: string };
 
   const title = '누적 평가 횟수';
-  const { loading, error, data } = useQuery(GET_PERSONAL_TOTAL_EVAL_COUNT, {
+  const { loading, error, data } = useQuery(GET_TOTAL_EVAL_COUNT_BY_LOGIN, {
     variables: { login: username },
   });
 

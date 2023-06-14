@@ -1,4 +1,5 @@
 import { gql } from '@/__generated__';
+import { DateTemplate } from '@/__generated__/graphql';
 import { useQuery } from '@apollo/client';
 import { Loader } from '@components/common';
 import {
@@ -10,15 +11,19 @@ import { DashboardContent } from '@components/templates/DashboardContent';
 import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
 
-const GET_MONTHLY_EVAL_COUNT = gql(/* GraphQL */ `
-  query getMonthlyEvalCount($login: String!) {
+const GET_EVAL_COUNT_BY_DATE_TEMPLATE_BY_LOGIN = gql(/* GraphQL */ `
+  query getEvalCountByDateTemplateByLogin(
+    $login: String!
+    $currDateTemplate: DateTemplate!
+    $lastDateTemplate: DateTemplate!
+  ) {
     getPersonalEvalPage(login: $login) {
-      currMonthCount: countByDateTemplate(dateTemplate: CURR_WEEK) {
+      currData: countByDateTemplate(dateTemplate: $currDateTemplate) {
         data
         start
         end
       }
-      lastMonthCount: countByDateTemplate(dateTemplate: LAST_WEEK) {
+      lastData: countByDateTemplate(dateTemplate: $lastDateTemplate) {
         data
         start
         end
@@ -27,13 +32,20 @@ const GET_MONTHLY_EVAL_COUNT = gql(/* GraphQL */ `
   }
 `);
 
-export const MonthlyEvalCount = () => {
+export const EvalCount = () => {
   const { username } = useParams() as { username: string };
 
   const title = '월간 평가 횟수';
-  const { loading, error, data } = useQuery(GET_MONTHLY_EVAL_COUNT, {
-    variables: { login: username },
-  });
+  const { loading, error, data } = useQuery(
+    GET_EVAL_COUNT_BY_DATE_TEMPLATE_BY_LOGIN,
+    {
+      variables: {
+        login: username,
+        currDateTemplate: DateTemplate.CurrMonth,
+        lastDateTemplate: DateTemplate.LastMonth,
+      },
+    },
+  );
   if (loading)
     return (
       <DashboardContent title={title}>
@@ -53,17 +65,15 @@ export const MonthlyEvalCount = () => {
       </DashboardContent>
     );
 
-  const { currMonthCount, lastMonthCount } = data.getPersonalEvalPage;
-  const { start, end } = currMonthCount;
+  const {
+    currData: { data: currEvalCount, start },
+    lastData: { data: lastEvalCount },
+  } = data.getPersonalEvalPage;
   const description = `${dayjs(start).format('YYYY년 M월')}`;
 
   return (
     <DashboardContent title={title} description={description}>
-      <NumberCompare
-        curr={currMonthCount.data}
-        last={lastMonthCount.data}
-        unit="회"
-      />
+      <NumberCompare curr={currEvalCount} last={lastEvalCount} unit="회" />
     </DashboardContent>
   );
 };

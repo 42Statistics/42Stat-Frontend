@@ -39,14 +39,14 @@ const documents = {
     "\n  query GetLeaderboardEvalCount(\n    $pageSize: Int!\n    $pageNumber: Int!\n    $dateTemplate: DateTemplate!\n  ) {\n    getLeaderboardEvalCount {\n      byDateTemplate(\n        pageSize: $pageSize\n        pageNumber: $pageNumber\n        dateTemplate: $dateTemplate\n      ) {\n        data {\n          me {\n            userPreview {\n              id\n              login\n              imgUrl\n            }\n            value\n            rank\n          }\n          totalRanking {\n            nodes {\n              userPreview {\n                id\n                login\n                imgUrl\n              }\n              value\n              rank\n            }\n            totalCount\n            pageSize\n            pageNumber\n          }\n        }\n        start\n        end\n      }\n    }\n  }\n": types.GetLeaderboardEvalCountDocument,
     "\n  query GetLeaderboardExpIncrement(\n    $pageSize: Int!\n    $pageNumber: Int!\n    $dateTemplate: DateTemplate!\n  ) {\n    getLeaderboardExpIncrement {\n      byDateTemplate(\n        pageSize: $pageSize\n        pageNumber: $pageNumber\n        dateTemplate: $dateTemplate\n      ) {\n        data {\n          me {\n            userPreview {\n              id\n              login\n              imgUrl\n            }\n            value\n            rank\n          }\n          totalRanking {\n            nodes {\n              userPreview {\n                id\n                login\n                imgUrl\n              }\n              value\n              rank\n            }\n            totalCount\n            pageSize\n            pageNumber\n          }\n        }\n        start\n        end\n      }\n    }\n  }\n": types.GetLeaderboardExpIncrementDocument,
     "\n  query GetLeaderboardLevel($pageSize: Int!, $pageNumber: Int!) {\n    getLeaderboardLevel {\n      total(pageSize: $pageSize, pageNumber: $pageNumber) {\n        me {\n          userPreview {\n            id\n            login\n            imgUrl\n          }\n          value\n          rank\n        }\n        totalRanking {\n          nodes {\n            userPreview {\n              id\n              login\n              imgUrl\n            }\n            value\n            rank\n          }\n          totalCount\n          pageSize\n          pageNumber\n        }\n      }\n    }\n  }\n": types.GetLeaderboardLevelDocument,
-    "\n  query getPersonalAverageCommentLength($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      averageCommentLength\n    }\n  }\n": types.GetPersonalAverageCommentLengthDocument,
+    "\n  query GetAverageCommentLengthByLogin($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      averageCommentLength\n    }\n  }\n": types.GetAverageCommentLengthByLoginDocument,
     "\n  query getAverageDuration($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      averageDuration\n    }\n  }\n": types.GetAverageDurationDocument,
-    "\n  query getPersonalAverageFeedbackLength($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      averageFeedbackLength\n    }\n  }\n": types.GetPersonalAverageFeedbackLengthDocument,
+    "\n  query GetAverageFeedbackLengthByLogin($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      averageFeedbackLength\n    }\n  }\n": types.GetAverageFeedbackLengthByLoginDocument,
     "\n  query getAverageFinalMark($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      averageFinalMark\n    }\n  }\n": types.GetAverageFinalMarkDocument,
-    "\n  query getCurrentCorrectionPoint($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      correctionPoint\n    }\n  }\n": types.GetCurrentCorrectionPointDocument,
+    "\n  query GetCorrectionPoint($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      correctionPoint\n    }\n  }\n": types.GetCorrectionPointDocument,
+    "\n  query getEvalCountByDateTemplateByLogin(\n    $login: String!\n    $currDateTemplate: DateTemplate!\n    $lastDateTemplate: DateTemplate!\n  ) {\n    getPersonalEvalPage(login: $login) {\n      currData: countByDateTemplate(dateTemplate: $currDateTemplate) {\n        data\n        start\n        end\n      }\n      lastData: countByDateTemplate(dateTemplate: $lastDateTemplate) {\n        data\n        start\n        end\n      }\n    }\n  }\n": types.GetEvalCountByDateTemplateByLoginDocument,
     "\n  query getLatestComment($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      lastComment\n    }\n  }\n": types.GetLatestCommentDocument,
-    "\n  query getMonthlyEvalCount($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      currMonthCount: countByDateTemplate(dateTemplate: CURR_WEEK) {\n        data\n        start\n        end\n      }\n      lastMonthCount: countByDateTemplate(dateTemplate: LAST_WEEK) {\n        data\n        start\n        end\n      }\n    }\n  }\n": types.GetMonthlyEvalCountDocument,
-    "\n  query getPersonalTotalEvalCount($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      totalCount\n    }\n  }\n": types.GetPersonalTotalEvalCountDocument,
+    "\n  query GetTotalEvalCountByLogin($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      totalCount\n    }\n  }\n": types.GetTotalEvalCountByLoginDocument,
     "\n  query GetTotalEvalTime {\n    getPersonalEvalPage {\n      totalDuration\n    }\n  }\n": types.GetTotalEvalTimeDocument,
     "\n  query getBeginAt($login: String!) {\n    getPersonalGeneralPage(login: $login) {\n      beginAt\n    }\n  }\n": types.GetBeginAtDocument,
     "\n  query getBlackHoledAt($login: String!) {\n    getPersonalGeneralPage(login: $login) {\n      blackholedAt\n    }\n  }\n": types.GetBlackHoledAtDocument,
@@ -185,7 +185,7 @@ export function gql(source: "\n  query GetLeaderboardLevel($pageSize: Int!, $pag
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query getPersonalAverageCommentLength($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      averageCommentLength\n    }\n  }\n"): (typeof documents)["\n  query getPersonalAverageCommentLength($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      averageCommentLength\n    }\n  }\n"];
+export function gql(source: "\n  query GetAverageCommentLengthByLogin($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      averageCommentLength\n    }\n  }\n"): (typeof documents)["\n  query GetAverageCommentLengthByLogin($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      averageCommentLength\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -193,7 +193,7 @@ export function gql(source: "\n  query getAverageDuration($login: String!) {\n  
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query getPersonalAverageFeedbackLength($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      averageFeedbackLength\n    }\n  }\n"): (typeof documents)["\n  query getPersonalAverageFeedbackLength($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      averageFeedbackLength\n    }\n  }\n"];
+export function gql(source: "\n  query GetAverageFeedbackLengthByLogin($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      averageFeedbackLength\n    }\n  }\n"): (typeof documents)["\n  query GetAverageFeedbackLengthByLogin($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      averageFeedbackLength\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -201,7 +201,11 @@ export function gql(source: "\n  query getAverageFinalMark($login: String!) {\n 
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query getCurrentCorrectionPoint($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      correctionPoint\n    }\n  }\n"): (typeof documents)["\n  query getCurrentCorrectionPoint($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      correctionPoint\n    }\n  }\n"];
+export function gql(source: "\n  query GetCorrectionPoint($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      correctionPoint\n    }\n  }\n"): (typeof documents)["\n  query GetCorrectionPoint($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      correctionPoint\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query getEvalCountByDateTemplateByLogin(\n    $login: String!\n    $currDateTemplate: DateTemplate!\n    $lastDateTemplate: DateTemplate!\n  ) {\n    getPersonalEvalPage(login: $login) {\n      currData: countByDateTemplate(dateTemplate: $currDateTemplate) {\n        data\n        start\n        end\n      }\n      lastData: countByDateTemplate(dateTemplate: $lastDateTemplate) {\n        data\n        start\n        end\n      }\n    }\n  }\n"): (typeof documents)["\n  query getEvalCountByDateTemplateByLogin(\n    $login: String!\n    $currDateTemplate: DateTemplate!\n    $lastDateTemplate: DateTemplate!\n  ) {\n    getPersonalEvalPage(login: $login) {\n      currData: countByDateTemplate(dateTemplate: $currDateTemplate) {\n        data\n        start\n        end\n      }\n      lastData: countByDateTemplate(dateTemplate: $lastDateTemplate) {\n        data\n        start\n        end\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -209,11 +213,7 @@ export function gql(source: "\n  query getLatestComment($login: String!) {\n    
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query getMonthlyEvalCount($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      currMonthCount: countByDateTemplate(dateTemplate: CURR_WEEK) {\n        data\n        start\n        end\n      }\n      lastMonthCount: countByDateTemplate(dateTemplate: LAST_WEEK) {\n        data\n        start\n        end\n      }\n    }\n  }\n"): (typeof documents)["\n  query getMonthlyEvalCount($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      currMonthCount: countByDateTemplate(dateTemplate: CURR_WEEK) {\n        data\n        start\n        end\n      }\n      lastMonthCount: countByDateTemplate(dateTemplate: LAST_WEEK) {\n        data\n        start\n        end\n      }\n    }\n  }\n"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function gql(source: "\n  query getPersonalTotalEvalCount($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      totalCount\n    }\n  }\n"): (typeof documents)["\n  query getPersonalTotalEvalCount($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      totalCount\n    }\n  }\n"];
+export function gql(source: "\n  query GetTotalEvalCountByLogin($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      totalCount\n    }\n  }\n"): (typeof documents)["\n  query GetTotalEvalCountByLogin($login: String!) {\n    getPersonalEvalPage(login: $login) {\n      totalCount\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

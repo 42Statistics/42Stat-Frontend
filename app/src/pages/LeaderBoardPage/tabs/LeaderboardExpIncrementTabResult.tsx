@@ -55,8 +55,8 @@ export const LeaderboardExpIncrementTabResult = ({
 
   return (
     <VStack w="100%" spacing="2rem">
-      {myRank && <LeaderBoardItem item={myRank} unit={unit} />}
-      <LeaderBoard rankList={rankList} unit={unit} />
+      {myRank && <LeaderBoardItem item={myRank} unit={unit} isMe />}
+      <LeaderBoard rankList={rankList} myRank={myRank} unit={unit} />
     </VStack>
   );
 };

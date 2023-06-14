@@ -17,18 +17,29 @@ import { Link } from 'react-router-dom';
 type LeaderBoardItemProps = {
   item: RankUserItemType;
   unit: string;
+  isMe?: boolean;
 };
 
-export const LeaderBoardItem = ({ item, unit }: LeaderBoardItemProps) => {
+export const LeaderBoardItem = ({
+  item,
+  unit,
+  isMe = false,
+}: LeaderBoardItemProps) => {
   const theme = useTheme();
   const { name, imgUrl, rank, value } = item;
-  const color =
-    rank <= 3 ? theme.colors.accent.default : theme.colors.mono.black;
+
+  const getColor = (rank: number, isMe: boolean) => {
+    if (isMe) return theme.colors.mono.white;
+    if (rank <= 3) return theme.colors.accent.default;
+    return theme.colors.mono.black;
+  };
+
+  const color = getColor(rank, isMe);
 
   return (
     <>
       <TabletAndAbove>
-        <TabletAndAboveLeaderBoardItemLayout>
+        <TabletAndAboveLeaderBoardItemLayout isMe={isMe}>
           <HStack w="100%" spacing="4rem">
             <H2BoldText color={color}>{rank}</H2BoldText>
             <Avatar size="3.5rem" imgUrl={imgUrl} />
@@ -43,7 +54,7 @@ export const LeaderBoardItem = ({ item, unit }: LeaderBoardItemProps) => {
         </TabletAndAboveLeaderBoardItemLayout>
       </TabletAndAbove>
       <Mobile>
-        <MobileLeaderBoardItemLayout>
+        <MobileLeaderBoardItemLayout isMe={isMe}>
           <HStack w="100%" spacing="3rem">
             <H3BoldText color={color}>{rank}</H3BoldText>
             <Avatar size="3.5rem" imgUrl={imgUrl} />
@@ -59,14 +70,18 @@ export const LeaderBoardItem = ({ item, unit }: LeaderBoardItemProps) => {
   );
 };
 
-export const TabletAndAboveLeaderBoardItemLayout = styled.li`
+export const TabletAndAboveLeaderBoardItemLayout = styled.li<{ isMe: boolean }>`
   width: 100%;
   padding: 1rem 5rem;
   border-radius: 1rem;
+  background-color: ${({ isMe, theme }) =>
+    isMe && theme.colors.primary.default} !important; // FIXME: !important
 `;
 
-export const MobileLeaderBoardItemLayout = styled.li`
+export const MobileLeaderBoardItemLayout = styled.li<{ isMe: boolean }>`
   width: 100%;
   padding: 0.7rem 2rem;
   border-radius: 1rem;
+  background-color: ${({ isMe, theme }) =>
+    isMe && theme.colors.primary.default} !important; // FIXME: !important
 `;

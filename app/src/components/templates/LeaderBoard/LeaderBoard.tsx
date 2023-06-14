@@ -5,15 +5,21 @@ import { LeaderBoardItem } from './LeaderBoardItem';
 
 type LeaderBoardProps = {
   rankList: RankUserItemType[];
+  myRank: RankUserItemType | null;
   unit: string;
 };
 
-export const LeaderBoard = ({ rankList, unit }: LeaderBoardProps) => {
+export const LeaderBoard = ({ rankList, myRank, unit }: LeaderBoardProps) => {
   return (
     <VStack w="100%" h="100%">
       <LeaderBoardList>
-        {rankList.map((rankItem, idx) => (
-          <LeaderBoardItem key={idx} item={rankItem} unit={unit} />
+        {rankList.map((rankItem) => (
+          <LeaderBoardItem
+            key={rankItem.id}
+            item={rankItem}
+            unit={unit}
+            isMe={myRank !== null && rankItem.id === myRank.id}
+          />
         ))}
       </LeaderBoardList>
     </VStack>

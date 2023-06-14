@@ -1,4 +1,5 @@
 import { gql } from '@/__generated__';
+import { DateTemplate } from '@/__generated__/graphql';
 import { useQuery } from '@apollo/client';
 import { Loader } from '@components/common';
 import {
@@ -9,10 +10,10 @@ import { NumberDefault } from '@components/elements/DashboardContentView/Text';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import dayjs from 'dayjs';
 
-const GET_CURRWEEK_AVERAGE_EVAL_COUNT = gql(/* GraphQL */ `
-  query GetCurrWeekAverageEvalCount {
+const GET_AVERAGE_EVAL_COUNT_BY_DATE_TEMPLATE = gql(/* GraphQL */ `
+  query GetAverageEvalCountByDateTemplate($dateTemplate: DateTemplate!) {
     getHomeEval {
-      evalCountByDateTemplate(dateTemplate: CURR_WEEK) {
+      averageEvalCountByDateTemplate(dateTemplate: $dateTemplate) {
         data
         start
         end
@@ -22,11 +23,14 @@ const GET_CURRWEEK_AVERAGE_EVAL_COUNT = gql(/* GraphQL */ `
 `);
 export const CurrWeekAverageEvalCount = () => {
   const title = '주간 1인당 평가 횟수';
-  const {
-    loading,
-    error,
-    data: queryData,
-  } = useQuery(GET_CURRWEEK_AVERAGE_EVAL_COUNT);
+  const { loading, error, data } = useQuery(
+    GET_AVERAGE_EVAL_COUNT_BY_DATE_TEMPLATE,
+    {
+      variables: {
+        dateTemplate: DateTemplate.CurrWeek,
+      },
+    },
+  );
 
   if (loading)
     return (
@@ -40,21 +44,21 @@ export const CurrWeekAverageEvalCount = () => {
         <ApolloBadRequest msg={error.message} />
       </DashboardContent>
     );
-  if (!queryData)
+  if (!data)
     return (
       <DashboardContent title={title}>
         <ApolloNotFound />
       </DashboardContent>
     );
 
-  const { evalCountByDateTemplate } = queryData.getHomeEval;
-  const { data, start, end } = evalCountByDateTemplate;
-  const description = `${dayjs().format('YYYY년 M월 w주')}`;
+  const { data: currData, start } =
+    data.getHomeEval.averageEvalCountByDateTemplate;
+  const description = `${dayjs(start).format('YYYY년 M월 w주')}`;
   const unit = '회';
 
   return (
     <DashboardContent title={title} description={description}>
-      <NumberDefault number={data} unit={unit} />
+      <NumberDefault number={currData} unit={unit} />
     </DashboardContent>
   );
 };

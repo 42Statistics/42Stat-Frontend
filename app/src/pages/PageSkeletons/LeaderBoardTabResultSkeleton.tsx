@@ -1,10 +1,9 @@
 import { Skeleton, VStack } from '@components/common';
-import styled from '@emotion/styled';
 
-export const LeaderBoardTabSkeleton = () => {
+export const LeaderBoardTabResultSkeleton = () => {
   return (
     <VStack w="100%" spacing="2.5rem" align="start">
-      <SegmentedControlSkeleton />
+      {/* <SegmentedControlSkeleton /> */}
       <Skeleton style={{ height: '65px' }} />
       <VStack w="100%" spacing="1rem">
         {Array.from({ length: 50 }, (x) => x).map((_, idx) => (
@@ -15,8 +14,8 @@ export const LeaderBoardTabSkeleton = () => {
   );
 };
 
-const SegmentedControlSkeleton = styled(Skeleton)`
-  width: 100px;
-  height: 40px;
-  border-radius: 2rem;
-`;
+// const SegmentedControlSkeleton = styled(Skeleton)`
+//   width: 100px;
+//   height: 40px;
+//   border-radius: 2rem;
+// `;

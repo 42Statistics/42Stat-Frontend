@@ -1,17 +1,10 @@
 import { gql } from '@/__generated__';
 import { DateTemplate } from '@/__generated__/graphql';
-import { useQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import { HStack, SegmentedControl, Spacer, VStack } from '@components/common';
-import {
-  ApolloBadRequest,
-  ApolloNotFound,
-} from '@components/elements/DashboardContentView';
-import { LeaderBoard } from '@components/templates/LeaderBoard';
-import { LeaderBoardItem } from '@components/templates/LeaderBoard/LeaderBoardItem';
-import { LeaderBoardTabSkeleton } from '@pages/PageSkeletons/LeaderBoardTabSkeleton';
-import { isDefined } from '@utils/isDefined';
-import type { RankUserItemType } from '@utils/types/Rank';
 import { useSegmentedControl } from '@utils/useSegmentedControl';
+import { useEffect, useState } from 'react';
+import { LeaderboardExpIncrementTabResult } from './LeaderboardExpIncrementTabResult';
 
 const GET_LEADERBOARD_EXP_INCREMENT = gql(/* GraphQL */ `
   query GetLeaderboardExpIncrement(
@@ -58,13 +51,11 @@ const GET_LEADERBOARD_EXP_INCREMENT = gql(/* GraphQL */ `
 `);
 
 export const LeaderboardExpIncrementTab = () => {
-  const { loading, error, data } = useQuery(GET_LEADERBOARD_EXP_INCREMENT, {
-    variables: {
-      pageSize: 50,
-      pageNumber: 1,
-      dateTemplate: DateTemplate.CurrMonth,
-    },
-  });
+  const [search, result] = useLazyQuery(GET_LEADERBOARD_EXP_INCREMENT);
+  const [dateTemplate, setDateTemplate] = useState<DateTemplate>(
+    DateTemplate.CurrWeek,
+  );
+
   const options = [
     {
       label: '주간',
@@ -75,49 +66,38 @@ export const LeaderboardExpIncrementTab = () => {
       value: 'monthly',
     },
   ];
+
   const { controlRef, segments } = useSegmentedControl(options);
 
-  if (loading) return <LeaderBoardTabSkeleton />;
-  if (error) return <ApolloBadRequest msg={error.message} />;
-  if (!data) return <ApolloNotFound />;
+  useEffect(() => {
+    search({
+      variables: {
+        pageSize: 50,
+        pageNumber: 1,
+        dateTemplate,
+      },
+    });
+  }, [dateTemplate, search]);
 
-  const { me, totalRanking } =
-    data.getLeaderboardExpIncrement.byDateTemplate.data;
-  const unit = 'XP';
-
-  const myRank: RankUserItemType | null =
-    me != null
-      ? {
-          id: me.userPreview.id,
-          name: me.userPreview.login,
-          value: me.value,
-          rank: me.rank,
-          imgUrl: me.userPreview.imgUrl,
-        }
-      : null;
-
-  const rankList: RankUserItemType[] = totalRanking.nodes
-    .filter(isDefined)
-    .map(({ userPreview, value, rank }) => ({
-      id: userPreview.id,
-      name: userPreview.login,
-      value: value,
-      rank: rank,
-      imgUrl: userPreview.imgUrl,
-    }));
+  const handleSegmentedControlChange = (value: string) => {
+    if (value === 'weekly') {
+      setDateTemplate(DateTemplate.CurrWeek);
+    } else if (value === 'monthly') {
+      setDateTemplate(DateTemplate.CurrMonth);
+    }
+  };
 
   return (
     <VStack w="100%" spacing="2rem">
       <HStack w="100%">
         <SegmentedControl
-          callback={console.log}
+          callback={handleSegmentedControlChange}
           controlRef={controlRef}
           segments={segments}
         />
         <Spacer />
       </HStack>
-      {myRank && <LeaderBoardItem item={myRank} unit={unit} />}
-      <LeaderBoard rankList={rankList} unit={unit} />
+      <LeaderboardExpIncrementTabResult result={result} />
     </VStack>
   );
 };

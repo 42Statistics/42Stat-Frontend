@@ -1,8 +1,16 @@
 import { PrimaryBoldText, Text, VStack } from '@components/common';
 import { useTheme } from '@emotion/react';
-import { EvalLogSearchForm } from './EvalLogSearchPage';
+import { EvalLogSearchFormData } from './EvalLogSearchPage';
 
-export const EvalLogSearchTitle = ({ form }: { form: EvalLogSearchForm }) => {
+type EvalLogSearchTitleProps = {
+  form: EvalLogSearchFormData;
+  totalCount: number | undefined | null; // FIXME: number 타입만 오도록 수정
+};
+
+export const EvalLogSearchTitle = ({
+  form,
+  totalCount,
+}: EvalLogSearchTitleProps) => {
   const theme = useTheme();
 
   return (
@@ -11,11 +19,11 @@ export const EvalLogSearchTitle = ({ form }: { form: EvalLogSearchForm }) => {
         form.corrector === '' ? 'Anyone' : form.corrector
       } → ${form.corrected === '' ? 'Anyone' : form.corrected} / ${
         form.projectName === '' ? '모든 서브젝트' : form.projectName
-      } / ${
-        !form.outstandingOnly ? '모든 평가' : 'Outstanding만'
-      } / 최신순`}</PrimaryBoldText>
+      } / ${form.flag === 'all' ? '모든 평가' : 'Outstanding만'} / ${
+        form.sortOrder === 'desc' ? '최신 순' : '오래된 순'
+      }`}</PrimaryBoldText>
       <Text color={theme.colors.mono.gray300} selectable>
-        검색결과 32,801건
+        검색결과 {totalCount?.toLocaleString() ?? 0}건
       </Text>
     </VStack>
   );

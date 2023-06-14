@@ -160,7 +160,10 @@ const EvalLogSearchPage = () => {
         onSubmit={onSubmit}
       />
       <VStack w="100%" spacing="2rem">
-        <EvalLogSearchTitle form={form} />
+        <EvalLogSearchTitle
+          form={form}
+          totalCount={data?.getEvalLogs.pageInfo?.totalCount}
+        />
         <EvalLogSearchDetail
           evalLogEdges={evalLogEdges}
           end={end}

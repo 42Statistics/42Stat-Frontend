@@ -1,8 +1,8 @@
 import type { DashboardItemProps } from '@utils/types/Dashboard';
 import {
-  CoalitionScoreDynamic,
-  CoalitionScoreSum,
+  ScoreRecordsPerCoalition,
   TigCountPerCoalition,
+  TotalScoresPerCoalition,
 } from '../contents/Coalition';
 import {
   AverageCommentLength,
@@ -96,11 +96,11 @@ export const homePageDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 17,
-    content: CoalitionScoreDynamic,
+    content: ScoreRecordsPerCoalition,
   },
   {
     id: 18,
-    content: CoalitionScoreSum,
+    content: TotalScoresPerCoalition,
   },
   {
     id: 19,

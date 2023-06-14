@@ -7,8 +7,8 @@ import { ApolloBadRequest } from '@components/elements/DashboardContentView/Apol
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { millionFormatter } from '@utils/formatters';
 
-export const GET_COALITION_TOTAL_SCORES = gql(/* GraphQL */ `
-  query getCoalitionTotalScores {
+export const GET_TOTAL_SCORES_PER_COALITION = gql(/* GraphQL */ `
+  query getTotalScoresPerCoalition {
     getHomeCoalition {
       totalScoresPerCoalition {
         coalition {
@@ -26,9 +26,9 @@ export const GET_COALITION_TOTAL_SCORES = gql(/* GraphQL */ `
   }
 `);
 
-export const CoalitionScoreSum = () => {
+export const TotalScoresPerCoalition = () => {
   const title = '누적 코알리숑 스코어 합산';
-  const { loading, error, data } = useQuery(GET_COALITION_TOTAL_SCORES);
+  const { loading, error, data } = useQuery(GET_TOTAL_SCORES_PER_COALITION);
   if (loading)
     return (
       <DashboardContent title={title}>
@@ -52,14 +52,12 @@ export const CoalitionScoreSum = () => {
 
   const categories: string[] = [];
   const seriesData: number[] = [];
-  const colorList: string[] = [];
+  const colors: string[] = [];
   totalScoresPerCoalition.forEach(({ coalition, value }) => {
     categories.push(coalition.name);
-    colorList.push(coalition.color ?? 'black');
     seriesData.push(value);
+    colors.push(coalition.color ?? 'black');
   });
-  // const categories = totalScores.map(({ coalition }) => coalition.name);
-  // const seriesData = totalScores.map(({ value }) => value);
 
   const series: ApexAxisChartSeries = [
     {
@@ -70,26 +68,26 @@ export const CoalitionScoreSum = () => {
 
   return (
     <DashboardContent title={title}>
-      <CoalitionScoreSumChart
+      <TotalScoresPerCoalitionChart
         categories={categories}
         series={series}
-        colors={colorList}
+        colors={colors}
       />
     </DashboardContent>
   );
 };
 
-type CoalitionScoreSumChartProps = {
+type TotalScoresPerCoalitionChartProps = {
   categories: string[];
   series: ApexAxisChartSeries;
   colors: string[];
 };
 
-const CoalitionScoreSumChart = ({
+const TotalScoresPerCoalitionChart = ({
   categories,
   series,
   colors,
-}: CoalitionScoreSumChartProps) => {
+}: TotalScoresPerCoalitionChartProps) => {
   const options: ApexCharts.ApexOptions = {
     plotOptions: {
       bar: {

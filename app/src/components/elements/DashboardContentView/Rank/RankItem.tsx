@@ -14,9 +14,9 @@ type RankItemProps = {
   unit: string;
 };
 
-export const RankItem = ({ rank, item, unit }: RankItemProps) => {
+export const RankItem = ({ item, unit }: RankItemProps) => {
   const theme = useTheme();
-  const { name, value } = item;
+  const { name, value, rank } = item;
   const color =
     rank === 1 ? theme.colors.accent.default : theme.colors.mono.black;
 

@@ -20,6 +20,7 @@ const GET_CORRECTION_POINT_RANK = gql(/* GraphQL */ `
           imgUrl
         }
         value
+        rank
       }
     }
   }
@@ -54,10 +55,11 @@ export const CorrectionPointRanks = () => {
   const unit = '개';
 
   const rankList: RankUserItemType[] = correctionPointRanking.map(
-    ({ userPreview, value }) => ({
+    ({ userPreview, value, rank }) => ({
       id: userPreview.id,
       name: userPreview.login,
       value: value,
+      rank: rank,
       imgUrl: userPreview.imgUrl,
     }),
   );

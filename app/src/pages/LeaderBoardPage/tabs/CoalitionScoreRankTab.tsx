@@ -1,4 +1,5 @@
 import { gql } from '@/__generated__';
+import { DateTemplate } from '@/__generated__/graphql';
 import { useQuery } from '@apollo/client';
 import { HStack, SegmentedControl, Spacer, VStack } from '@components/common';
 import {
@@ -7,32 +8,63 @@ import {
 } from '@components/elements/DashboardContentView';
 import { LeaderBoard } from '@components/templates/LeaderBoard';
 import { LeaderBoardItem } from '@components/templates/LeaderBoard/LeaderBoardItem';
+import { LeaderBoardTabSkeleton } from '@pages/PageSkeletons/LeaderBoardTabSkeleton';
+import { isDefined } from '@utils/isDefined';
 import type { RankUserItemType } from '@utils/types/Rank';
 import { useSegmentedControl } from '@utils/useSegmentedControl';
-import { LeaderBoardTabSkeleton } from '@pages/PageSkeletons/LeaderBoardTabSkeleton';
 
-// 임시
-const GET_MONTHLY_COALITION_SCORE_RANK = gql(/* GraphQL */ `
-  query GetMonthlyCoalitionScoreRank {
-    getTotalPage {
-      monthlyScoreRanks {
+const GET_LEADERBOARD_SCORE = gql(/* GraphQL */ `
+  query GetLeaderboardScore(
+    $pageSize: Int!
+    $pageNumber: Int!
+    $dateTemplate: DateTemplate!
+  ) {
+    getLeaderboardScore {
+      byDateTemplate(
+        pageSize: $pageSize
+        pageNumber: $pageNumber
+        dateTemplate: $dateTemplate
+      ) {
         data {
-          userPreview {
-            id
-            login
-            imgUrl
+          me {
+            userPreview {
+              id
+              login
+              imgUrl
+            }
+            value
+            rank
           }
-          value
+          totalRanking {
+            nodes {
+              userPreview {
+                id
+                login
+                imgUrl
+              }
+              value
+              rank
+            }
+            totalCount
+            pageSize
+            pageNumber
+          }
         }
-        from
-        to
+        start
+        end
       }
     }
   }
 `);
 
 export const CoalitionScoreRankTab = () => {
-  const { loading, error, data } = useQuery(GET_MONTHLY_COALITION_SCORE_RANK);
+  const { loading, error, data } = useQuery(GET_LEADERBOARD_SCORE, {
+    variables: {
+      pageSize: 50,
+      pageNumber: 1,
+      dateTemplate: DateTemplate.CurrMonth,
+    },
+  });
   const options = [
     {
       label: '주간',
@@ -53,17 +85,29 @@ export const CoalitionScoreRankTab = () => {
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 
-  const { monthlyScoreRanks } = data.getTotalPage;
+  const { me, totalRanking } = data.getLeaderboardScore.byDateTemplate.data;
   const unit = '';
 
-  const rankList: RankUserItemType[] = monthlyScoreRanks.data.map(
-    ({ userPreview, value }) => ({
+  const myRank: RankUserItemType | null =
+    me != null
+      ? {
+          id: me.userPreview.id,
+          name: me.userPreview.login,
+          value: me.value,
+          rank: me.rank,
+          imgUrl: me.userPreview.imgUrl,
+        }
+      : null;
+
+  const rankList: RankUserItemType[] = totalRanking.nodes
+    .filter(isDefined)
+    .map(({ userPreview, value, rank }) => ({
       id: userPreview.id,
       name: userPreview.login,
       value: value,
+      rank: rank,
       imgUrl: userPreview.imgUrl,
-    }),
-  );
+    }));
 
   return (
     <VStack w="100%" spacing="2rem">
@@ -75,7 +119,7 @@ export const CoalitionScoreRankTab = () => {
         />
         <Spacer />
       </HStack>
-      <LeaderBoardItem rank={1} item={rankList[0]} unit={unit} />
+      {myRank && <LeaderBoardItem item={myRank} unit={unit} />}
       <LeaderBoard rankList={rankList} unit={unit} />
     </VStack>
   );

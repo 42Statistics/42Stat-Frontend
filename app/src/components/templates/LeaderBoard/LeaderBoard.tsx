@@ -12,17 +12,9 @@ export const LeaderBoard = ({ rankList, unit }: LeaderBoardProps) => {
   return (
     <VStack w="100%" h="100%">
       <LeaderBoardList>
-        {rankList.map((rankItem, idx) => {
-          const rank = idx + 1;
-          return (
-            <LeaderBoardItem
-              key={idx}
-              rank={rank}
-              item={rankItem}
-              unit={unit}
-            />
-          );
-        })}
+        {rankList.map((rankItem, idx) => (
+          <LeaderBoardItem key={idx} item={rankItem} unit={unit} />
+        ))}
       </LeaderBoardList>
     </VStack>
   );

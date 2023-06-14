@@ -20,7 +20,6 @@ export const RankUser = ({
       {rankList.slice(0, cnt).map((rankItem, idx) => (
         <RankUserItem
           key={rankItem.id}
-          rank={idx + 1}
           item={rankItem}
           showImg={showImg}
           unit={unit}

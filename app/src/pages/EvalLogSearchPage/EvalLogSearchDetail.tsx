@@ -1,4 +1,4 @@
-import { EvalLog } from '@/__generated__/graphql';
+import { EvalLogEdge } from '@/__generated__/graphql';
 import { ApolloError } from '@apollo/client';
 import { Center, Skeleton, Text, VStack } from '@components/common';
 import { ApolloBadRequest } from '@components/elements/DashboardContentView';
@@ -8,7 +8,7 @@ import React from 'react';
 import { EvalLogList } from './EvalLogList';
 
 type EvalLogSearchDetailProps = {
-  evalLogs: EvalLog[];
+  evalLogEdges: EvalLogEdge[];
   end: boolean;
   loading: boolean;
   error: ApolloError | undefined;
@@ -16,7 +16,7 @@ type EvalLogSearchDetailProps = {
 };
 
 export const EvalLogSearchDetail = ({
-  evalLogs,
+  evalLogEdges,
   end,
   loading,
   error,
@@ -34,7 +34,7 @@ export const EvalLogSearchDetail = ({
       </>
     );
   }
-  if (end && evalLogs.length === 0) {
+  if (end && evalLogEdges.length === 0) {
     return (
       <>
         <Center h="20rem">
@@ -44,7 +44,7 @@ export const EvalLogSearchDetail = ({
       </>
     );
   }
-  if (evalLogs.length === 0 && loading) {
+  if (evalLogEdges.length === 0 && loading) {
     return (
       <VStack w="100%" spacing="1.2rem">
         <EvalLogSkeleton />
@@ -57,7 +57,7 @@ export const EvalLogSearchDetail = ({
 
   return (
     <>
-      <EvalLogList evalLogs={evalLogs} />
+      <EvalLogList evalLogEdges={evalLogEdges} />
       {!end ? (
         <VStack w="100%" spacing="1.2rem" ref={infiniteScrollRef}>
           <EvalLogSkeleton />

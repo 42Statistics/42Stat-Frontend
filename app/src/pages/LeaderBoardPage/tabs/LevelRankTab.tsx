@@ -5,29 +5,49 @@ import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@components/elements/DashboardContentView';
-import { LeaderBoardTabSkeleton } from '@pages/PageSkeletons/LeaderBoardTabSkeleton';
 import { LeaderBoard } from '@components/templates/LeaderBoard';
 import { LeaderBoardItem } from '@components/templates/LeaderBoard/LeaderBoardItem';
+import { LeaderBoardTabSkeleton } from '@pages/PageSkeletons/LeaderBoardTabSkeleton';
+import { isDefined } from '@utils/isDefined';
 import type { RankUserItemType } from '@utils/types/Rank';
 import { useSegmentedControl } from '@utils/useSegmentedControl';
 
-const GET_LEVEL_RANK = gql(/* GraphQL */ `
-  query GetLevelRank {
-    getHomePage {
-      levelRank {
-        userPreview {
-          id
-          login
-          imgUrl
+const GET_LEADERBOARD_LEVEL = gql(/* GraphQL */ `
+  query GetLeaderboardLevel($pageSize: Int!, $pageNumber: Int!) {
+    getLeaderboardLevel {
+      total(pageSize: $pageSize, pageNumber: $pageNumber) {
+        me {
+          userPreview {
+            id
+            login
+            imgUrl
+          }
+          value
+          rank
         }
-        value
+        totalRanking {
+          nodes {
+            userPreview {
+              id
+              login
+              imgUrl
+            }
+            value
+            rank
+          }
+          totalCount
+          pageSize
+          pageNumber
+        }
       }
     }
   }
 `);
 
 export const LevelRankTab = () => {
-  const { loading, error, data } = useQuery(GET_LEVEL_RANK);
+  const { loading, error, data } = useQuery(GET_LEADERBOARD_LEVEL, {
+    variables: { pageSize: 50, pageNumber: 1 },
+  });
   const options = [
     {
       label: '누적',
@@ -40,17 +60,29 @@ export const LevelRankTab = () => {
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 
-  const { levelRank } = data.getHomePage;
+  const { me, totalRanking } = data.getLeaderboardLevel.total;
   const unit = '';
 
-  const rankList: RankUserItemType[] = levelRank.map(
-    ({ userPreview, value }) => ({
+  const myRank: RankUserItemType | null =
+    me != null
+      ? {
+          id: me.userPreview.id,
+          name: me.userPreview.login,
+          value: me.value,
+          rank: me.rank,
+          imgUrl: me.userPreview.imgUrl,
+        }
+      : null;
+
+  const rankList: RankUserItemType[] = totalRanking.nodes
+    .filter(isDefined)
+    .map(({ userPreview, value, rank }) => ({
       id: userPreview.id,
       name: userPreview.login,
       value: value,
+      rank: rank,
       imgUrl: userPreview.imgUrl,
-    }),
-  );
+    }));
 
   return (
     <VStack w="100%" spacing="2rem">
@@ -62,7 +94,7 @@ export const LevelRankTab = () => {
         />
         <Spacer />
       </HStack>
-      <LeaderBoardItem rank={1} item={rankList[0]} unit={unit} />
+      {myRank && <LeaderBoardItem item={myRank} unit={unit} />}
       <LeaderBoard rankList={rankList} unit={unit} />
     </VStack>
   );

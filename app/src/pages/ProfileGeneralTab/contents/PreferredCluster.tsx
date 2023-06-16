@@ -28,7 +28,7 @@ const GET_PREFERRED_CLUSTER = gql(/* GraphQL */ `
   }
 `);
 
-export const PrefferedCluster = () => {
+export const PreferredCluster = () => {
   const { username } = useParams() as { username: string };
 
   const title = '주 접속 클러스터';

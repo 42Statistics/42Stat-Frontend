@@ -29,7 +29,7 @@ const GET_PREFERRED_TIME_BY_DATE_TEMPLATE = gql(/* GraphQL */ `
   }
 `);
 
-export const PrefferedTime = () => {
+export const PreferredTime = () => {
   const { username } = useParams() as { username: string };
 
   const title = '주 접속 시간대';
@@ -97,7 +97,7 @@ export const PrefferedTime = () => {
     },
   ];
 
-  const getPrefferedTimeTitle = (): string => {
+  const getPreferredTimeTitle = (): string => {
     const max = Math.max(morning, daytime, evening, night);
 
     if (max === 0) {
@@ -121,7 +121,7 @@ export const PrefferedTime = () => {
   return (
     <DashboardContent title={title} description={description}>
       <VStack w="100%" h="100%" spacing="4rem">
-        <H3Text>{getPrefferedTimeTitle()}</H3Text>
+        <H3Text>{getPreferredTimeTitle()}</H3Text>
         <VStack spacing="1.5rem">
           {tableData.map(({ time, hour, minute }) => (
             <HStack key={time} spacing="2rem">

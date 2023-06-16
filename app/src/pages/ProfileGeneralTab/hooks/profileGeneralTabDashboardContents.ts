@@ -8,8 +8,8 @@ import {
   LastRegistered,
   LevelRecords,
   LogTime,
-  PrefferedCluster,
-  PrefferedTime,
+  PreferredCluster,
+  PreferredTime,
   SimilarCharacter,
   TeamInfo,
 } from '../contents';
@@ -37,7 +37,7 @@ export const profileGeneralTabDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 5,
-    content: PrefferedCluster,
+    content: PreferredCluster,
   },
   {
     id: 6,
@@ -57,7 +57,7 @@ export const profileGeneralTabDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 10,
-    content: PrefferedTime,
+    content: PreferredTime,
   },
   {
     id: 11,

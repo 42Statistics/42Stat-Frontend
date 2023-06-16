@@ -1,14 +1,13 @@
 import { gql } from '@/__generated__';
 import { DateTemplate } from '@/__generated__/graphql';
 import { useQuery } from '@apollo/client';
-import { H3Text, Loader, Text, VStack } from '@components/common';
+import { H3Text, HStack, Loader, Text, VStack } from '@components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@components/elements/DashboardContentView';
+import { ProgressionBar } from '@components/elements/ProgressionBar';
 import { DashboardContent } from '@components/templates/DashboardContent';
-import styled from '@emotion/styled';
-import { percentFormatter } from '@utils/formatters/percentFormatter';
 import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
 
@@ -61,127 +60,82 @@ export const PrefferedTime = () => {
     );
 
   const { preferredTimeByDateTemplate } = queryData.getPersonalGeneralPage;
-  const { data, start, end } = preferredTimeByDateTemplate;
-  const { total, morning, daytime, evening, night } = data;
+  const {
+    data: { morning, daytime, evening, night },
+    start,
+    end,
+  } = preferredTimeByDateTemplate;
 
-  const description = `${dayjs(start).format('YYYY년 M월')}`;
+  const description = `${dayjs(start).format('M월 D일')} ~ ${dayjs(end).format(
+    'M월 D일',
+  )}`;
 
   const tableData = [
     {
       time: '아침',
       value: morning,
+      hour: Math.floor(morning / 60),
+      minute: morning % 60,
     },
     {
       time: '낮',
       value: daytime,
+      hour: Math.floor(daytime / 60),
+      minute: daytime % 60,
     },
     {
       time: '저녁',
       value: evening,
+      hour: Math.floor(evening / 60),
+      minute: evening % 60,
     },
     {
       time: '새벽',
       value: night,
+      hour: Math.floor(night / 60),
+      minute: night % 60,
     },
   ];
 
-  const max = Math.max(morning, daytime, evening, night);
+  const getPrefferedTimeTitle = (): string => {
+    const max = Math.max(morning, daytime, evening, night);
 
-  if (total === 0) {
-    return (
-      <DashboardContent title={title} description={description}>
-        <VStack w="100%" h="100%">
-          <H3Text>출석 기록이 없어요 😓</H3Text>
-        </VStack>
-      </DashboardContent>
-    );
-  }
+    if (max === 0) {
+      return '접속 기록이 없어요 😓';
+    }
+    if (max === morning || morning >= 20 * 60) {
+      return '일찍 일어나는 새 🐤';
+    }
+    if (max === daytime) {
+      return '점심 먹고 들어오는 편 👨‍💻';
+    }
+    if (max === evening) {
+      return '저녁보다 코딩이 맛있어요 🍕';
+    }
+    if (max === night || night >= 20 * 60) {
+      return '새벽반 🌙';
+    }
+    return '';
+  };
 
   return (
     <DashboardContent title={title} description={description}>
-      <VStack w="100%" h="100%" spacing="2rem">
-        <H3Text>{prefferedTimeTitle(morning, daytime, evening, night)}</H3Text>
-        <PrefferedTimeTable>
-          <tbody>
-            {tableData.map(({ time, value }) => (
-              <tr key={time}>
-                <td>
-                  <H3Text>{time}</H3Text>
-                </td>
-                <td>
-                  <TextMax isMax={max === value}>
-                    {percentFormatter(value, total)}
-                  </TextMax>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </PrefferedTimeTable>
+      <VStack w="100%" h="100%" spacing="4rem">
+        <H3Text>{getPrefferedTimeTitle()}</H3Text>
+        <VStack spacing="1.5rem">
+          {tableData.map(({ time, hour, minute }) => (
+            <HStack key={time} spacing="2rem">
+              <HStack w="30px">
+                <H3Text>{time}</H3Text>
+              </HStack>
+              <ProgressionBar rate={hour / 50} />
+              <Text>
+                {hour}시간 {minute}분
+              </Text>
+            </HStack>
+          ))}
+        </VStack>
       </VStack>
     </DashboardContent>
   );
 };
-
-const TextMax = styled(Text)<{ isMax: boolean }>`
-  font-size: ${({ theme }) => theme.fonts.size.h3};
-  color: ${({ theme, isMax }) =>
-    isMax ? theme.colors.accent.default : theme.colors.mono.black};
-`;
-
-const PrefferedTimeTable = styled.table`
-  width: 100%;
-  text-align: center;
-
-  td {
-    padding: 0.6rem;
-    vertical-align: middle;
-  }
-`;
-
-const prefferedTimeTitle = (
-  morning: number,
-  daytime: number,
-  evening: number,
-  night: number,
-): string => {
-  const max = Math.max(morning, daytime, evening, night);
-  if (max === morning) {
-    return '일찍 일어나는 새 🐤';
-  }
-  if (max === daytime) {
-    return '점심 먹고 출근하는 편 👨‍💻';
-  }
-  if (max === evening) {
-    return '저녁보다 코딩이 맛있어요 🍕';
-  }
-  if (max === night) {
-    return '새벽반 🌙';
-  }
-  throw Error('prefferedTimeTitle error');
-};
-
-// type TimeBarProps = {
-//   hour: number;
-// };
-
-// const TimeBar = ({ hour }: TimeBarProps) => {
-//   return (
-//     <TimeBarBackground>
-//       <TimeBarInner hour={hour} />
-//     </TimeBarBackground>
-//   );
-// };
-
-// const TimeBarBackground = styled.div`
-//   width: 100%;
-//   height: 1rem;
-//   background-color: #e5e5e5;
-//   border-radius: 0.5rem;
-// `;
-
-// const TimeBarInner = styled.div<TimeBarProps>`
-//   width: ${({ hour }) => (hour / 200) * 100}%;
-//   height: 1rem;
-//   background-color: ${({ theme }) => theme.colors.accent.default};
-//   border-radius: 0.5rem 0 0 0.5rem;
-// `;

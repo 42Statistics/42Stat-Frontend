@@ -1,16 +1,10 @@
 import { gql } from '@/__generated__';
-import { useQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import { HStack, SegmentedControl, Spacer, VStack } from '@components/common';
-import {
-  ApolloBadRequest,
-  ApolloNotFound,
-} from '@components/elements/DashboardContentView';
-import { LeaderBoard } from '@components/templates/LeaderBoard';
-import { LeaderBoardItem } from '@components/templates/LeaderBoard/LeaderBoardItem';
-import { LeaderBoardTabSkeleton } from '@pages/PageSkeletons/LeaderBoardTabSkeleton';
-import { isDefined } from '@utils/isDefined';
-import type { RankUserItemType } from '@utils/types/Rank';
+import { PageBtnList } from '@components/elements/PageBtnList';
 import { useSegmentedControl } from '@utils/useSegmentedControl';
+import { useEffect, useState } from 'react';
+import { LeaderboardLevelTabResult } from './LeaderboardLevelTabResult';
 
 const GET_LEADERBOARD_LEVEL = gql(/* GraphQL */ `
   query GetLeaderboardLevel($pageSize: Int!, $pageNumber: Int!) {
@@ -45,9 +39,11 @@ const GET_LEADERBOARD_LEVEL = gql(/* GraphQL */ `
 `);
 
 export const LeaderboardLevelTab = () => {
-  const { loading, error, data } = useQuery(GET_LEADERBOARD_LEVEL, {
-    variables: { pageSize: 50, pageNumber: 1 },
-  });
+  const SIZE_PER_PAGE = 50;
+  const [search, result] = useLazyQuery(GET_LEADERBOARD_LEVEL);
+  const [pageNumber, setPageNumber] = useState<number>(1);
+  const [totalPage, setTotalPage] = useState<number>(0);
+
   const options = [
     {
       label: '누적',
@@ -56,46 +52,43 @@ export const LeaderboardLevelTab = () => {
   ];
   const { controlRef, segments } = useSegmentedControl(options);
 
-  if (loading) return <LeaderBoardTabSkeleton />;
-  if (error) return <ApolloBadRequest msg={error.message} />;
-  if (!data) return <ApolloNotFound />;
+  useEffect(() => {
+    if (result.loading) {
+      return;
+    }
+    setTotalPage(
+      result.data?.getLeaderboardLevel.total.totalRanking.totalCount ?? 0,
+    );
+  }, [result]);
 
-  const { me, totalRanking } = data.getLeaderboardLevel.total;
-  const unit = '';
-
-  const myRank: RankUserItemType | null =
-    me != null
-      ? {
-          id: me.userPreview.id,
-          name: me.userPreview.login,
-          value: me.value,
-          rank: me.rank,
-          imgUrl: me.userPreview.imgUrl,
-        }
-      : null;
-
-  const rankList: RankUserItemType[] = totalRanking.nodes
-    .filter(isDefined)
-    .map(({ userPreview, value, rank }) => ({
-      id: userPreview.id,
-      name: userPreview.login,
-      value: value,
-      rank: rank,
-      imgUrl: userPreview.imgUrl,
-    }));
+  useEffect(() => {
+    search({
+      variables: {
+        pageSize: SIZE_PER_PAGE,
+        pageNumber,
+      },
+    });
+    setPageNumber(pageNumber);
+  }, [search, pageNumber]);
 
   return (
     <VStack w="100%" spacing="2rem">
       <HStack w="100%">
         <SegmentedControl
-          callback={console.log}
+          callback={() => {
+            /* pass */
+          }}
           controlRef={controlRef}
           segments={segments}
         />
         <Spacer />
       </HStack>
-      {myRank && <LeaderBoardItem item={myRank} unit={unit} />}
-      <LeaderBoard rankList={rankList} unit={unit} />
+      <LeaderboardLevelTabResult result={result} />
+      <PageBtnList
+        currPageNumber={pageNumber}
+        setPageNumber={setPageNumber}
+        totalPageNumber={Math.ceil(totalPage / SIZE_PER_PAGE)}
+      />
     </VStack>
   );
 };

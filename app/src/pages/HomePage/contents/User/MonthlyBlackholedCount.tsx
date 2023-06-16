@@ -61,11 +61,13 @@ export const MonthlyBlackholedCount = () => {
     );
 
   const {
-    currData: { data: currBlackholedCount, start },
+    currData: { data: currBlackholedCount, start, end },
     lastData: { data: lastBlackholedCount },
   } = data.getHomeUser;
 
-  const description = `${dayjs(start).format('YYYY년 M월')}`;
+  const description = `${dayjs(start).format('M월 D일')} ~ ${dayjs(end).format(
+    'M월 D일',
+  )}`;
   const unit = '명';
 
   return (

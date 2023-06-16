@@ -51,9 +51,14 @@ export const WeeklyAverageEvalCount = () => {
       </DashboardContent>
     );
 
-  const { data: currData, start } =
-    data.getHomeEval.averageEvalCountByDateTemplate;
-  const description = `${dayjs(start).format('YYYY년 M월 w주')}`;
+  const {
+    data: currData,
+    start,
+    end,
+  } = data.getHomeEval.averageEvalCountByDateTemplate;
+  const description = `${dayjs(start).format('M월 D일')} ~ ${dayjs(end).format(
+    'M월 D일',
+  )}`;
   const unit = '회';
 
   return (

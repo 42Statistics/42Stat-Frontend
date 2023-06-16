@@ -58,11 +58,13 @@ export const WeeklyEvalCount = () => {
     );
 
   const {
-    currData: { data: currEvalCount, start },
+    currData: { data: currEvalCount, start, end },
     lastData: { data: lastEvalCount },
   } = data.getHomeEval;
 
-  const description = `${dayjs(start).format('YYYY년 M월 w주')}`;
+  const description = `${dayjs(start).format('M월 D일')} ~ ${dayjs(end).format(
+    'M월 D일',
+  )}`;
   const unit = '회';
 
   return (

@@ -63,7 +63,9 @@ export const MonthlyTigCountPerCoalition = () => {
 
   const max = Math.max(...tableData.map(({ value }) => value));
 
-  const description = `${dayjs().format('YYYY년 M월')}`;
+  const description = `${dayjs().format('M월 D일')} ~ ${dayjs().format(
+    'M월 D일',
+  )}`;
   const unit = '회';
 
   return (

@@ -28,7 +28,7 @@ const GET_PREFERRED_CLUSTER = gql(/* GraphQL */ `
   }
 `);
 
-export const PrefferedCluster = () => {
+export const PreferredCluster = () => {
   const { username } = useParams() as { username: string };
 
   const title = '주 접속 클러스터';
@@ -54,17 +54,22 @@ export const PrefferedCluster = () => {
       </DashboardContent>
     );
 
-  const { data: preferredCluster, start } =
-    data.getPersonalGeneralPage.preferredClusterByDateTemplate;
+  const {
+    data: preferredCluster,
+    start,
+    end,
+  } = data.getPersonalGeneralPage.preferredClusterByDateTemplate;
 
-  const description = `${dayjs(start).format('YYYY년 M월')}`;
+  const description = `${dayjs(start).format('M월 D일')} ~ ${dayjs(end).format(
+    'M월 D일',
+  )}`;
 
   return (
     <DashboardContent title={title} description={description}>
       {preferredCluster.name != null ? (
         <TextDefault text={`클러스터 ${preferredCluster.name.toUpperCase()}`} />
       ) : (
-        <TextDefault text="출석 기록이 없어요 😓" />
+        <TextDefault text="접속 기록이 없어요 😓" />
       )}
     </DashboardContent>
   );

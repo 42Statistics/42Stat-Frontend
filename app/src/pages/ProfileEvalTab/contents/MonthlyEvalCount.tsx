@@ -66,10 +66,12 @@ export const MonthlyEvalCount = () => {
     );
 
   const {
-    currData: { data: currEvalCount, start },
+    currData: { data: currEvalCount, start, end },
     lastData: { data: lastEvalCount },
   } = data.getPersonalEvalPage;
-  const description = `${dayjs(start).format('YYYY년 M월')}`;
+  const description = `${dayjs(start).format('M월 D일')} ~ ${dayjs(end).format(
+    'M월 D일',
+  )}`;
 
   return (
     <DashboardContent title={title} description={description}>

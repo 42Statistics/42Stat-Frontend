@@ -26,7 +26,7 @@ export const LevelRecords = () => {
   const { username } = useParams() as { username: string };
 
   const title = '레벨 증가 그래프';
-  const description = `현재일로부터 1년`;
+  const description = `멤버 평균과 비교`;
   const { loading, error, data } = useQuery(GET_LEVEL_RECORDS, {
     variables: { login: username },
   });
@@ -83,7 +83,7 @@ export const LevelRecords = () => {
       data: userLevelSeries,
     },
     {
-      name: '평균',
+      name: '멤버 평균',
       data: averageLevelSeries,
     },
   ];

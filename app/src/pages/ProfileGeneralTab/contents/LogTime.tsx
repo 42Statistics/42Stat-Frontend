@@ -35,7 +35,7 @@ const GET_LOGTIME_BY_DATE_TEMPLATE = gql(/* GraphQL */ `
 export const LogTime = () => {
   const { username } = useParams() as { username: string };
 
-  const title = '월간 출석 시간';
+  const title = '월간 접속 시간';
   const { loading, error, data } = useQuery(GET_LOGTIME_BY_DATE_TEMPLATE, {
     variables: {
       login: username,
@@ -63,12 +63,14 @@ export const LogTime = () => {
     );
 
   const {
-    currData: { data: CurrLogTime, start },
+    currData: { data: CurrLogTime, start, end },
     lastData: { data: LastLogTime },
   } = data.getPersonalGeneralPage;
   const currLogTimeByHours = Math.floor(CurrLogTime / 60);
   const lastLogTimeByHours = Math.floor(LastLogTime / 60);
-  const description = `${dayjs(start).format('YYYY년 M월')}`;
+  const description = `${dayjs(start).format('M월 D일')} ~ ${dayjs(end).format(
+    'M월 D일',
+  )}`;
 
   return (
     <DashboardContent title={title} description={description}>

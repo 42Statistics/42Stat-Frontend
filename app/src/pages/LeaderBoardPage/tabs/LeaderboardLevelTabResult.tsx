@@ -12,7 +12,7 @@ import { LeaderBoard } from '@components/templates/LeaderBoard';
 import { LeaderBoardItem } from '@components/templates/LeaderBoard/LeaderBoardItem';
 import { LeaderBoardTabResultSkeleton } from '@pages/PageSkeletons/LeaderBoardTabResultSkeleton';
 import { isDefined } from '@utils/isDefined';
-import { RankUserItemType } from '@utils/types/Rank';
+import { RankingUserItemType } from '@utils/types/Ranking';
 
 type LeaderboardLevelTabResultProps = {
   result: QueryResult<
@@ -31,7 +31,7 @@ export const LeaderboardLevelTabResult = ({
   const { me, totalRanking } = data.getLeaderboardLevel.total;
   const unit = '';
 
-  const myRank: RankUserItemType | null =
+  const myRanking: RankingUserItemType | null =
     me != null
       ? {
           id: me.userPreview.id,
@@ -42,7 +42,7 @@ export const LeaderboardLevelTabResult = ({
         }
       : null;
 
-  const rankList: RankUserItemType[] = totalRanking.nodes
+  const list: RankingUserItemType[] = totalRanking.nodes
     .filter(isDefined)
     .map(({ userPreview, value, rank }) => ({
       id: userPreview.id,
@@ -54,8 +54,8 @@ export const LeaderboardLevelTabResult = ({
 
   return (
     <VStack w="100%" spacing="2rem">
-      {myRank && <LeaderBoardItem item={myRank} unit={unit} isMe />}
-      <LeaderBoard rankList={rankList} myRank={myRank} unit={unit} />
+      {myRanking && <LeaderBoardItem item={myRanking} unit={unit} isMe />}
+      <LeaderBoard list={list} me={myRanking} unit={unit} />
     </VStack>
   );
 };

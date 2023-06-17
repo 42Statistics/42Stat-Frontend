@@ -7,16 +7,20 @@ import {
 } from '@components/common';
 import { useTheme } from '@emotion/react';
 import { numberWithUnitFormatter } from '@utils/formatters';
-import type { RankUserItemType } from '@utils/types/Rank';
+import type { RankingUserItemType } from '@utils/types/Ranking';
 import { Link } from 'react-router-dom';
 
-type RankUserItemProps = {
+type RankingUserItemProps = {
   showImg: boolean;
-  item: RankUserItemType;
+  item: RankingUserItemType;
   unit: string;
 };
 
-export const RankUserItem = ({ showImg, item, unit }: RankUserItemProps) => {
+export const RankingUserItem = ({
+  showImg,
+  item,
+  unit,
+}: RankingUserItemProps) => {
   const theme = useTheme();
   const { name, value, rank, imgUrl } = item;
   const color =

@@ -1,24 +1,24 @@
 import { VStack } from '@components/common';
 import styled from '@emotion/styled';
-import type { RankUserItemType } from '@utils/types/Rank';
+import type { RankingUserItemType } from '@utils/types/Ranking';
 import { LeaderBoardItem } from './LeaderBoardItem';
 
 type LeaderBoardProps = {
-  rankList: RankUserItemType[];
-  myRank: RankUserItemType | null;
+  list: RankingUserItemType[];
+  me: RankingUserItemType | null;
   unit: string;
 };
 
-export const LeaderBoard = ({ rankList, myRank, unit }: LeaderBoardProps) => {
+export const LeaderBoard = ({ list, me, unit }: LeaderBoardProps) => {
   return (
     <VStack w="100%" h="100%">
       <LeaderBoardList>
-        {rankList.map((rankItem) => (
+        {list.map((item) => (
           <LeaderBoardItem
-            key={rankItem.id}
-            item={rankItem}
+            key={item.id}
+            item={item}
             unit={unit}
-            isMe={myRank !== null && rankItem.id === myRank.id}
+            isMe={me !== null && item.id === me.id}
           />
         ))}
       </LeaderBoardList>

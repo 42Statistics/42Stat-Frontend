@@ -5,10 +5,10 @@ import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@components/elements/DashboardContentView/Error';
-import { RankUser } from '@components/elements/DashboardContentView/RankUser';
+import { RankingUser } from '@components/elements/DashboardContentView/RankingUser';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
-import type { RankUserItemType } from '@utils/types/Rank';
+import type { RankingUserItemType } from '@utils/types/Ranking';
 
 const GET_WALLET_RANKING = gql(/* GraphQL */ `
   query getWalletRanking($limit: Int!) {
@@ -53,7 +53,7 @@ export const WalletRanking = () => {
   const { walletRanking } = data.getHomeUser;
   const unit = '₳';
 
-  const rankList: RankUserItemType[] = walletRanking.map(
+  const list: RankingUserItemType[] = walletRanking.map(
     ({ userPreview, value, rank }) => ({
       id: userPreview.id,
       name: userPreview.login,
@@ -66,10 +66,10 @@ export const WalletRanking = () => {
   return (
     <DashboardContent title={title}>
       <TabletAndAbove>
-        <RankUser rankList={rankList} cnt={5} unit={unit} />
+        <RankingUser list={list} cnt={5} unit={unit} />
       </TabletAndAbove>
       <Mobile>
-        <RankUser rankList={rankList} cnt={3} unit={unit} />
+        <RankingUser list={list} cnt={3} unit={unit} />
       </Mobile>
     </DashboardContent>
   );

@@ -6,14 +6,14 @@ import {
 } from '@components/common';
 import { useTheme } from '@emotion/react';
 import { numberWithUnitFormatter } from '@utils/formatters';
-import type { RankItemType } from '@utils/types/Rank';
+import type { RankingItemType } from '@utils/types/Ranking';
 
-type RankItemProps = {
-  item: RankItemType;
+type RankingItemProps = {
+  item: RankingItemType;
   unit: string;
 };
 
-export const RankItem = ({ item, unit }: RankItemProps) => {
+export const RankingItem = ({ item, unit }: RankingItemProps) => {
   const theme = useTheme();
   const { name, value, rank } = item;
   const color =

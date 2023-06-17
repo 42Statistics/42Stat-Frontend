@@ -4,7 +4,7 @@ import { H3MediumText, Loader, Scroll, Text, VStack } from '@components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
-} from '@components/elements/DashboardContentView';
+} from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import styled from '@emotion/styled';
 import { useParams } from 'react-router-dom';

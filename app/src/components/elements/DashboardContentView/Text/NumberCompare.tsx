@@ -1,7 +1,7 @@
 import { H3Text, HStack, Text } from '@components/common';
 import { useTheme } from '@emotion/react';
 import { BsTriangleFill } from '@react-icons/all-files/bs/BsTriangleFill';
-import { NoneDash } from '../NoneDash';
+import { NoneDash } from '../Error/NoneDash';
 
 type NumberCompareProps = {
   curr: number;

@@ -5,7 +5,7 @@ import { CoalitionMark } from '@components/elements/CoalitionMark';
 import {
   ApolloBadRequest,
   ApolloNotFound,
-} from '@components/elements/DashboardContentView';
+} from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import styled from '@emotion/styled';
 import { numberWithUnitFormatter } from '@utils/formatters';

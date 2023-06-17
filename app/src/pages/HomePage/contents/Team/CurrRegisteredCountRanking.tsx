@@ -4,7 +4,7 @@ import { Loader } from '@components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
-} from '@components/elements/DashboardContentView';
+} from '@components/elements/DashboardContentView/Error';
 import { Rank } from '@components/elements/DashboardContentView/Rank';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import type { RankItemType } from '@utils/types/Rank';

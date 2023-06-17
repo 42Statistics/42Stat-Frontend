@@ -14,7 +14,7 @@ import {
 import {
   ApolloBadRequest,
   ApolloNotFound,
-} from '@components/elements/DashboardContentView';
+} from '@components/elements/DashboardContentView/Error';
 import styled from '@emotion/styled';
 import { getTitleWithLogin } from '@utils/getTitleWithLogin';
 import { Desktop, TabletAndBelow } from '@utils/responsive/Device';

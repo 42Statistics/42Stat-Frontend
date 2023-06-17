@@ -4,7 +4,7 @@ import { Loader } from '@components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
-} from '@components/elements/DashboardContentView';
+} from '@components/elements/DashboardContentView/Error';
 import styled from '@emotion/styled';
 import { useParams } from 'react-router-dom';
 import { TeamInfoTable } from './TeamInfoTable';

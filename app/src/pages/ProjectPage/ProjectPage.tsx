@@ -14,7 +14,7 @@ import { PieChart } from '@components/elements/Chart';
 import {
   ApolloBadRequest,
   ApolloNotFound,
-} from '@components/elements/DashboardContentView';
+} from '@components/elements/DashboardContentView/Error';
 import { Seo } from '@components/elements/Seo';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';

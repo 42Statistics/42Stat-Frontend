@@ -5,6 +5,7 @@ import { FtOAuthGuard } from '@guards/FtOAuthGuard';
 import { NoFtOAuthGuard } from '@guards/NoFtOAuthGuard';
 import { LandingLayout } from '@layouts/LandingLayout';
 import { MainLayout } from '@layouts/MainLayout';
+import NotFoundPage from '@pages/Error/404';
 import LogoutPage from '@pages/LogoutPage';
 import { HomePageSkeleton } from '@pages/PageSkeletons/HomePageSkeleton';
 import { ProfilePageSkeleton } from '@pages/PageSkeletons/ProfilePageSkeleton';
@@ -21,7 +22,6 @@ const LeaderBoardPage = lazy(() => import('@pages/LeaderBoardPage'));
 const EvalLogSearchPage = lazy(() => import('@pages/EvalLogSearchPage'));
 const ProfilePage = lazy(() => import('@pages/ProfilePage'));
 const ProjectPage = lazy(() => import('@pages/ProjectPage'));
-const NotFoundPage = lazy(() => import('@pages/ErrorPages/404'));
 
 export const AppRoutes = () => {
   const isAuthenticated = useAtomValue(isAuthenticatedAtom);

@@ -2,9 +2,9 @@ import styled from '@emotion/styled';
 import { isEnterKeyReleased } from '@utils/isEnterKeyReleased';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useSearchBar } from '../hooks';
 import { TabletAndAboveSearchInput } from './TabletAndAboveSearchInput';
 import { TabletAndAboveSearchResult } from './TabletAndAboveSearchResult';
-import { useSearchBar } from './hooks';
 
 // TODO: SearchBar 추상화
 export const TabletAndAboveSearchBar = () => {

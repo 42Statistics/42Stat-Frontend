@@ -1,7 +1,7 @@
 import { ProjectPreview, UserPreview } from '@/__generated__/graphql';
 import { VStack } from '@components/common';
-import { ProjectSearchList } from './ProjectSearchList';
-import { UserSearchList } from './UserSearchList';
+import { ProjectSearchList } from '../shared/ProjectSearchList';
+import { UserSearchList } from '../shared/UserSearchList';
 
 type MobileSearchResultProps = {
   users: UserPreview[];

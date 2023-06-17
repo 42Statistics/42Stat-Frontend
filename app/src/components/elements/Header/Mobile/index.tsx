@@ -1,6 +1,6 @@
 import { VStack } from '@components/common';
 import { AppLogoTitleButton } from '@components/elements/AppLogoTitle';
-import { MobileSearchBar } from '@components/elements/SearchBar/MobileSearchBar';
+import { MobileSearchBar } from '@components/elements/SearchBar/Mobile';
 import styled from '@emotion/styled';
 
 export const MobileHeader = () => {

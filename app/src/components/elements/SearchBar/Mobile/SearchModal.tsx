@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MobileSearchInput } from './MobileSearchInput';
 import { MobileSearchResult } from './MobileSearchResult';
-import { useSearchBar } from '../hooks';
+import { useSearchBar } from '../hooks/useSearchBar';
 
 export const SearchModal = ({ isOpen, toggle }: ModalType) => {
   const {

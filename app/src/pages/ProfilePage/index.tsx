@@ -7,7 +7,7 @@ import { withHead } from '@hoc/withHead';
 import ProfileEvalTab from '@pages/ProfileEvalTab';
 import ProfileGeneralTab from '@pages/ProfileGeneralTab';
 import { useParams } from 'react-router-dom';
-import { useProfilePageDashboard } from './hooks';
+import { useProfilePageDashboard } from './hooks/useProfilePageDashboard';
 
 // waterfall 방지를 위해 Tab은 lazy loading 하지 않겠습니다.
 export const ProfilePage = () => {

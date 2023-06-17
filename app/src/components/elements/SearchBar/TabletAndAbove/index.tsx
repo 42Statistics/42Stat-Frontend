@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { isEnterKeyReleased } from '@utils/isEnterKeyReleased';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useSearchBar } from '../hooks';
+import { useSearchBar } from '../hooks/useSearchBar';
 import { TabletAndAboveSearchInput } from './TabletAndAboveSearchInput';
 import { TabletAndAboveSearchResult } from './TabletAndAboveSearchResult';
 

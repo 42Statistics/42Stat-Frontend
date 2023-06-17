@@ -1,6 +1,6 @@
 import { Spacer, VStack } from '@components/common';
 import { TabletNavItem } from './TabletNavItem';
-import { useNavRoutes } from '../hooks';
+import { useNavRoutes } from '../hooks/useNavRoutes';
 
 export const TabletNavMenu = () => {
   const { NAV_ROUTES } = useNavRoutes();

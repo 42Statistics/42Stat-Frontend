@@ -12,6 +12,7 @@ export const NavMenu = () => {
       <NavItem route={NAV_ROUTES.MY_PROFILE} />
       <NavItem route={NAV_ROUTES.LEADERBOARD} />
       <NavItem route={NAV_ROUTES.EVALLOG} />
+      <NavItem route={NAV_ROUTES.PROJECT} />
       <Spacer />
       <NavItem route={NAV_ROUTES.LOGOUT} />
     </VStack>

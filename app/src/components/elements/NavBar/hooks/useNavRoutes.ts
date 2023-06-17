@@ -10,6 +10,8 @@ import { RiHome2Fill } from '@react-icons/all-files/ri/RiHome2Fill';
 import { RiHome2Line } from '@react-icons/all-files/ri/RiHome2Line';
 import { RiLogoutBoxRFill } from '@react-icons/all-files/ri/RiLogoutBoxRFill';
 import { RiLogoutBoxRLine } from '@react-icons/all-files/ri/RiLogoutBoxRLine';
+import { RiStackFill } from '@react-icons/all-files/ri/RiStackFill';
+import { RiStackLine } from '@react-icons/all-files/ri/RiStackLine';
 import { ROUTES } from '@routes/ROUTES';
 import { useAtomValue } from 'jotai';
 
@@ -52,6 +54,13 @@ export const useNavRoutes = () => {
       path: ROUTES.EVALLOG,
       icon: RiArticleLine,
       iconFocused: RiArticleFill,
+    },
+    PROJECT: {
+      text: '프로젝트',
+      abbr: '프로젝트',
+      path: ROUTES.PROJECT_ROOT + '/libft',
+      icon: RiStackLine,
+      iconFocused: RiStackFill,
     },
     LOGOUT: {
       text: '로그아웃',

@@ -1,13 +1,13 @@
 import styled from '@emotion/styled';
-import type { TabletDashboardProps } from '@utils/types/Dashboard';
-import { DashboardItem } from './DashboardItem';
-import { TabletDashboardRow } from './TabletDashboardRow';
+import type { DesktopDashboardProps } from '@utils/types/Dashboard';
+import { DashboardItem } from '../shared/DashboardItem';
+import { DesktopDashboardRow } from './DesktopDashboardRow';
 
-export const TabletDashboard = ({ rows, contents }: TabletDashboardProps) => {
+export const DesktopDashboard = ({ rows, contents }: DesktopDashboardProps) => {
   return (
-    <TabletDashboardLayout>
+    <DesktopDashboardLayout>
       {rows.map(({ row, col, items }, rowIdx) => (
-        <TabletDashboardRow key={rowIdx} row={row} col={col}>
+        <DesktopDashboardRow key={rowIdx} row={row} col={col}>
           {items.map(({ row, col, rowSpan, colSpan, elementId }, itemIdx) => (
             <DashboardItem
               key={itemIdx}
@@ -18,13 +18,13 @@ export const TabletDashboard = ({ rows, contents }: TabletDashboardProps) => {
               content={contents[elementId].content}
             />
           ))}
-        </TabletDashboardRow>
+        </DesktopDashboardRow>
       ))}
-    </TabletDashboardLayout>
+    </DesktopDashboardLayout>
   );
 };
 
-export const TabletDashboardLayout = styled.div`
+export const DesktopDashboardLayout = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;

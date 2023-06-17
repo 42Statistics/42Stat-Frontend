@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import type { MobileDashboardProps } from '@utils/types/Dashboard';
-import { DashboardItem } from './DashboardItem';
+import { DashboardItem } from '../shared/DashboardItem';
 import { MobileDashboardRow } from './MobileDashboardRow';
 
 export const MobileDashboard = ({ rows, contents }: MobileDashboardProps) => {

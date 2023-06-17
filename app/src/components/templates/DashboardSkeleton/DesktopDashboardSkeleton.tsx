@@ -1,6 +1,6 @@
-import { DashboardItem } from '@components/templates/Dashboard/DashboardItem';
-import { DesktopDashboardLayout } from '@components/templates/Dashboard/DesktopDashboard';
-import { DesktopDashboardRow } from '@components/templates/Dashboard/DesktopDashboardRow';
+import { DesktopDashboardLayout } from '@components/templates/Dashboard/Desktop';
+import { DesktopDashboardRow } from '@components/templates/Dashboard/Desktop/DesktopDashboardRow';
+import { DashboardItem } from '@components/templates/Dashboard/shared/DashboardItem';
 import type { DesktopDashboardProps } from '@utils/types/Dashboard';
 import { DashboardSkeletonItem } from './DashboardSkeletonItem';
 

@@ -10,7 +10,7 @@ import {
 import styled from '@emotion/styled';
 import type { ModalType } from '@utils/types/Modal';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { EvalLogSearchFormData } from './EvalLogSearchPage';
+import { EvalLogSearchFormData } from '.';
 
 type EvalLogSearchModalProps = ModalType & {
   form: EvalLogSearchFormData;

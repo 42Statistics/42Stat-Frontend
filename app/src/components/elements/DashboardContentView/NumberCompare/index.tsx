@@ -1,5 +1,4 @@
 import { H3Text, HStack, Text } from '@components/common';
-import { useTheme } from '@emotion/react';
 import { BsTriangleFill } from '@react-icons/all-files/bs/BsTriangleFill';
 import { NoneDash } from '../Error/NoneDash';
 
@@ -22,7 +21,6 @@ const Arrow = ({ direction }: { direction: 'up' | 'down' }) => {
 };
 
 export const NumberCompare = ({ curr, last, unit }: NumberCompareProps) => {
-  const theme = useTheme();
   const diff = curr - last;
   const color = diff > 0 ? '#00C48C' : '#FF3D71';
 

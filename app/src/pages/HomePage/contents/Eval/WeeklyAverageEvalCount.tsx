@@ -6,7 +6,7 @@ import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@components/elements/DashboardContentView/Error';
-import { NumberDefault } from '@components/elements/DashboardContentView/Text';
+import { NumberDefault } from '@components/elements/DashboardContentView/NumberDefault';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import dayjs from 'dayjs';
 

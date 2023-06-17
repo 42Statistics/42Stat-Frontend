@@ -1,4 +1,4 @@
-import { Footer } from '@components/elements/Footer/Footer';
+import { Footer } from '@components/elements/Footer';
 
 export const withFooter = (Component: React.FC) => {
   const WithFooter = () => {

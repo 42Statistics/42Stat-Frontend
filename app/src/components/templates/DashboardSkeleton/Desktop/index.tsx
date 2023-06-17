@@ -2,7 +2,7 @@ import { DesktopDashboardLayout } from '@components/templates/Dashboard/Desktop'
 import { DesktopDashboardRow } from '@components/templates/Dashboard/Desktop/DesktopDashboardRow';
 import { DashboardItem } from '@components/templates/Dashboard/shared/DashboardItem';
 import type { DesktopDashboardProps } from '@utils/types/Dashboard';
-import { DashboardSkeletonItem } from './DashboardSkeletonItem';
+import { DashboardSkeletonItem } from '../shared/DashboardSkeletonItem';
 
 type DesktopDashboardSkeletonProps = Omit<DesktopDashboardProps, 'contents'>;
 

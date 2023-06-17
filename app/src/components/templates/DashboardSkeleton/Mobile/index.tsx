@@ -2,7 +2,7 @@ import { MobileDashboardLayout } from '@components/templates/Dashboard/Mobile';
 import { MobileDashboardRow } from '@components/templates/Dashboard/Mobile/MobileDashboardRow';
 import { DashboardItem } from '@components/templates/Dashboard/shared/DashboardItem';
 import type { MobileDashboardProps } from '@utils/types/Dashboard';
-import { DashboardSkeletonItem } from './DashboardSkeletonItem';
+import { DashboardSkeletonItem } from '../shared/DashboardSkeletonItem';
 
 type MobileDashboardSkeletonProps = Omit<MobileDashboardProps, 'contents'>;
 

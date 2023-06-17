@@ -1,17 +1,10 @@
 import styled from '@emotion/styled';
 
 type ClickableProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  element: React.ReactNode;
+  children: React.ReactNode;
 };
 
-export const Clickable = ({
-  element,
-  ...propsExceptElement
-}: ClickableProps) => {
-  return <StyledClickable {...propsExceptElement}>{element}</StyledClickable>;
-};
-
-const StyledClickable = styled.button`
+export const Clickable = styled.button<ClickableProps>`
   all: unset;
   cursor: ${({ disabled }) => (!disabled ? 'pointer' : 'default')};
 `;

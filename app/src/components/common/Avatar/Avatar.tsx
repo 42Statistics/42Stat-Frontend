@@ -2,16 +2,39 @@ import styled from '@emotion/styled';
 import { useState } from 'react';
 import { Image } from '../Image';
 
-type AvatarProps = React.ImgHTMLAttributes<HTMLImageElement> & {
-  size?: string;
-  imgUrl?: string | null;
+type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+
+type AvatarProps = {
+  size?: AvatarSize;
+  src?: string | null;
 };
 
-export const Avatar = ({ size, imgUrl, ...remainProps }: AvatarProps) => {
+export const Avatar = ({ size = 'md', src }: AvatarProps) => {
   const DEFAULT_AVATAR = '/default-avatar.png';
   const [isLoading, setIsLoading] = useState(true);
 
-  if (imgUrl == null) imgUrl = DEFAULT_AVATAR;
+  const computeWidth = (size: AvatarSize) => {
+    switch (size) {
+      case 'xs':
+        return '2rem';
+      case 'sm':
+        return '2.4rem';
+      case 'md':
+        return '3.2rem';
+      case 'lg':
+        return '4rem';
+      case 'xl':
+        return '6rem';
+      default:
+        return '3.2rem';
+    }
+  };
+
+  const width = computeWidth(size);
+
+  if (src == null) {
+    src = DEFAULT_AVATAR;
+  }
 
   const handleLoad = () => {
     setIsLoading(false);
@@ -24,29 +47,24 @@ export const Avatar = ({ size, imgUrl, ...remainProps }: AvatarProps) => {
 
   return (
     <div style={{ position: 'relative' }}>
-      {isLoading && <Cover size={size} />}
+      {isLoading && <Cover style={{ width, height: width }} />}
       <StyledAvatar
-        size={size}
         onLoad={handleLoad}
         onError={handleError}
-        src={imgUrl}
-        {...remainProps}
+        src={src}
+        style={{ width, height: width }}
       />
     </div>
   );
 };
 
-const Cover = styled.div<{ size?: string; color?: string }>`
+const Cover = styled.div`
   position: absolute;
-  width: ${({ size = '2.4rem' }) => size};
-  height: ${({ size = '2.4rem' }) => size};
-  border-radius: 50%;
-  background-color: ${({ theme, color = theme.colors.mono.gray100 }) => color};
+  border-radius: ${({ theme }) => theme.radius.circle};
+  background-color: ${({ theme }) => theme.colors.mono.gray100};
 `;
 
-const StyledAvatar = styled(Image)<{ size?: string }>`
-  width: ${({ size = '2.4rem' }) => size};
-  height: ${({ size = '2.4rem' }) => size};
+const StyledAvatar = styled(Image)`
   object-fit: cover;
-  border-radius: 50%;
+  border-radius: ${({ theme }) => theme.radius.circle};
 `;

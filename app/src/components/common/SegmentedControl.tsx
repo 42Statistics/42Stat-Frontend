@@ -76,7 +76,7 @@ const ControlsContainer = styled.div`
 const Controls = styled.div<{ ready: boolean }>`
   display: inline-flex;
   justify-content: space-between;
-  border-radius: 2rem;
+  border-radius: ${({ theme }) => theme.radius.md};
   padding: 0.5rem;
   margin: auto;
   overflow: hidden;
@@ -90,7 +90,7 @@ const Controls = styled.div<{ ready: boolean }>`
 
   ::before {
     content: '';
-    border-radius: 2rem;
+    border-radius: ${({ theme }) => theme.radius.md};
     width: var(--highlight-width);
     transform: translateX(var(--highlight-x-pos));
     position: absolute;

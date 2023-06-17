@@ -52,10 +52,18 @@ type ZIndex = {
   modal: number;
 };
 
+type Radius = {
+  xs: string;
+  sm: string;
+  md: string;
+  circle: string;
+};
+
 declare module '@emotion/react' {
   export interface Theme {
     colors: Colors;
     fonts: Fonts;
     zIndex: ZIndex;
+    radius: Radius;
   }
 }

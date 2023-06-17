@@ -29,7 +29,7 @@ export const RankingUserItem = ({
   return (
     <HStack w="70%" spacing="2rem">
       <H2BoldText color={color}>{rank}</H2BoldText>
-      {showImg ? <Avatar size="3rem" imgUrl={imgUrl} /> : null}
+      {showImg ? <Avatar src={imgUrl} /> : null}
       <HStack
         w="100%"
         spacing="1rem"

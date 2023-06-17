@@ -22,7 +22,7 @@ const SpinnerInner = styled.div<SpinnerProps>`
   border: ${({ thickness = '0.2rem' }) => thickness} solid transparent;
   border-top-color: ${({ theme }) => theme.colors.mono.black};
   border-left-color: ${({ theme }) => theme.colors.mono.black};
-  border-radius: 50%;
+  border-radius: ${({ theme }) => theme.radius.circle};
   animation: spin 1s linear infinite;
 
   @keyframes spin {

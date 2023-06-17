@@ -32,7 +32,7 @@ type StyledLabelProps = Omit<LabelProps, 'text' | 'color'>;
 
 const StyledLabel = styled.div<StyledLabelProps>`
   padding: 0.3rem 1.5rem;
-  border-radius: 2rem;
+  border-radius: ${({ theme }) => theme.radius.md};
   background-color: ${({ theme, bgColor = theme.colors.primary.default }) =>
     bgColor};
 `;

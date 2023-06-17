@@ -31,7 +31,7 @@ const FtOAuthPageLayout = styled.div`
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   padding: 10rem 5rem;
-  border-radius: 2rem;
+  border-radius: ${({ theme }) => theme.radius.md};
 `;
 
 export default withHead(FtOAuthPage);

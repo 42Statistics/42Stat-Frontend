@@ -24,12 +24,11 @@ export const TabletNavBar = () => {
     <>
       <TabletNavBarLayout>
         <VStack w="100%" h="100%" spacing="7rem">
-          <Clickable
-            onClick={() => setIsNavBarOpen((cur) => !cur)}
-            element={<GiHamburgerMenu size="18px" />}
-          />
+          <Clickable onClick={() => setIsNavBarOpen((cur) => !cur)}>
+            <GiHamburgerMenu size="18px" />
+          </Clickable>
           <Link to={`/profile/${user.login}`}>
-            <Avatar imgUrl={user.imgUrl} />
+            <Avatar size="sm" src={user.imgUrl} />
           </Link>
           <TabletNavMenu />
         </VStack>

@@ -24,7 +24,7 @@ const ProgressionBarBackground = styled.div`
   width: 80px;
   height: 0.75rem;
   background-color: #e9e9e9;
-  border-radius: 0.5rem;
+  border-radius: ${({ theme }) => theme.radius.sm};
 `;
 
 type ProgressionBarInnerProps = {
@@ -35,5 +35,5 @@ const ProgressionBarInner = styled.div<ProgressionBarInnerProps>`
   width: ${({ rate }) => `${rate * 100}%`};
   height: 100%;
   background-color: ${({ theme }) => theme.colors.accent.default};
-  border-radius: 0.5rem;
+  border-radius: ${({ theme }) => theme.radius.sm};
 `;

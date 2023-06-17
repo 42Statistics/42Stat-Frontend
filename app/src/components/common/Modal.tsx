@@ -8,7 +8,7 @@ import { Overlay } from './Overlay';
 export const ModalView = styled.div`
   display: flex;
   padding: 4rem;
-  border-radius: 2rem;
+  border-radius: ${({ theme }) => theme.radius.md};
   background-color: ${({ theme }) => theme.colors.mono.white};
 `;
 

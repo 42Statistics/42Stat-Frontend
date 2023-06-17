@@ -27,7 +27,7 @@ export const NavItem = ({ route }: NavItemProps) => {
 const NavItemLayout = styled.li<{ isFocused: boolean }>`
   width: 100%;
   padding: 1.2rem 0 1.2rem 2rem;
-  border-radius: 2rem;
+  border-radius: ${({ theme }) => theme.radius.md};
   cursor: pointer;
   box-shadow: ${({ isFocused }) =>
     isFocused && 'inset 7px 7px 7px #f0f0f0, inset -7px -7px 7px #ffffff'};

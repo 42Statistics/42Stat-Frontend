@@ -86,7 +86,6 @@ const Table = styled.table`
   }
 
   tbody tr {
-    border-radius: 1rem;
     transition: all 0.3s;
   }
 

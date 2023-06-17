@@ -12,14 +12,11 @@ export const ProjectSearchItem = ({
   onSubmit,
 }: ProjectSearchItemProps) => {
   return (
-    <Clickable
-      onClick={() => onSubmit(project.name)}
-      element={
-        <HStack w="100%" spacing="1.2rem">
-          <Image src={ft_logo} width="18px" />
-          <Text>{project.name}</Text>
-        </HStack>
-      }
-    />
+    <Clickable onClick={() => onSubmit(project.name)}>
+      <HStack w="100%" spacing="1.2rem">
+        <Image src={ft_logo} width="18px" />
+        <Text>{project.name}</Text>
+      </HStack>
+    </Clickable>
   );
 };

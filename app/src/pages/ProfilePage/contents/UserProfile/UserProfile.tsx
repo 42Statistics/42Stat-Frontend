@@ -73,7 +73,7 @@ export const UserProfile = () => {
     <UserProfileLayout backgroundUrl={coalition.coverUrl}>
       <Desktop>
         <HStack h="100%" spacing="4rem">
-          <Avatar size="6rem" imgUrl={imgUrl} />
+          <Avatar size="xl" src={imgUrl} />
           <WhiteH3BoldText>{titleCase(grade)}</WhiteH3BoldText>
           <WhiteH3BoldText>{titleCase(displayname)}</WhiteH3BoldText>
           <WhiteMediumText>
@@ -87,10 +87,10 @@ export const UserProfile = () => {
       </Desktop>
       <TabletAndBelow>
         <VStack h="100%" spacing="2rem">
-          <Avatar size="6rem" imgUrl={imgUrl} />
+          <Avatar size="xl" src={imgUrl} />
           <VStack>
             <WhiteBoldText>{titleCase(grade)}</WhiteBoldText>
-            <WhiteH1BoldText>{titleCase(name)}</WhiteH1BoldText>
+            <WhiteH1BoldText>{titleCase(displayname)}</WhiteH1BoldText>
           </VStack>
           <WhiteMediumText>
             {truncate(titleWithLogin, { length: 42 })}
@@ -113,7 +113,7 @@ const UserProfileLayout = styled.div<{ backgroundUrl?: string | null }>`
       : 'black'}; // TODO: fallback 시 기존에 있는 코알리숑 background로 대체
   background-size: cover;
   background-position: center;
-  border-radius: 2rem; // FIXME: 왜 background-image 있는 쪽에도 border-radius를 줘야 하지?
+  border-radius: ${({ theme }) => theme.radius.md};
 `;
 
 // TODO: Loader가 아니라 Skeleton으로 이동. 여러 타입의 Skeleton을 적용시킬 수 있도록 변경해야 함
@@ -126,5 +126,5 @@ const UserProfileLoaderLayout = styled.div`
   background-image: url('/coalition-mono.png');
   background-size: cover;
   background-position: center;
-  border-radius: 2rem;
+  border-radius: ${({ theme }) => theme.radius.md};
 `;

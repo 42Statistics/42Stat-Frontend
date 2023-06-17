@@ -29,7 +29,7 @@ type DashboardItemLayoutProps = {
 const DashboardItemLayout = styled.div<DashboardItemLayoutProps>`
   grid-column: ${({ col, colSpan }) => `${col} / span ${colSpan}`};
   grid-row: ${({ row, rowSpan }) => `${row} / span ${rowSpan}`};
-  border-radius: 2rem;
+  border-radius: ${({ theme }) => theme.radius.md};
   background-color: ${({ theme }) => theme.colors.mono.white};
   box-shadow: 10px 10px 10px #eeeeee, -10px -10px 10px #ffffff;
 

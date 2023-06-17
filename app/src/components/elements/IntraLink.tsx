@@ -1,6 +1,6 @@
 import ft_logo from '@assets/42-logo.svg';
-import styled from '@emotion/styled';
 import { Image } from '@components/common';
+import styled from '@emotion/styled';
 
 export const IntraLink = () => {
   return (
@@ -17,7 +17,7 @@ const IntraLinkLayout = styled.div`
   top: 3rem;
   right: 2rem;
   padding: 1.5rem;
-  border-radius: 9999px;
+  border-radius: ${({ theme }) => theme.radius.circle};
   background-color: ${({ theme }) => theme.colors.mono.white};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   z-index: ${({ theme }) => theme.zIndex.absoluteButton};

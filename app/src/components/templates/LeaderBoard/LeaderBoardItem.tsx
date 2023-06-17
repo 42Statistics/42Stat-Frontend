@@ -42,7 +42,7 @@ export const LeaderBoardItem = ({
         <TabletAndAboveLeaderBoardItemLayout isMe={isMe}>
           <HStack w="100%" spacing="4rem">
             <H2BoldText color={color}>{rank}</H2BoldText>
-            <Avatar size="3.5rem" imgUrl={imgUrl} />
+            <Avatar src={imgUrl} />
             <Link to={`/profile/${name}`}>
               <H3MediumText color={color}>{name}</H3MediumText>
             </Link>
@@ -57,7 +57,7 @@ export const LeaderBoardItem = ({
         <MobileLeaderBoardItemLayout isMe={isMe}>
           <HStack w="100%" spacing="3rem">
             <H3BoldText color={color}>{rank}</H3BoldText>
-            <Avatar size="3.5rem" imgUrl={imgUrl} />
+            <Avatar src={imgUrl} />
             <MediumText color={color}>{name}</MediumText>
             <Spacer />
             <MediumText color={color}>
@@ -73,7 +73,7 @@ export const LeaderBoardItem = ({
 export const TabletAndAboveLeaderBoardItemLayout = styled.li<{ isMe: boolean }>`
   width: 100%;
   padding: 1rem 5rem;
-  border-radius: 1rem;
+  border-radius: ${({ theme }) => theme.radius.sm};
   background-color: ${({ isMe, theme }) =>
     isMe && theme.colors.primary.default} !important; // FIXME: !important
 `;
@@ -81,7 +81,7 @@ export const TabletAndAboveLeaderBoardItemLayout = styled.li<{ isMe: boolean }>`
 export const MobileLeaderBoardItemLayout = styled.li<{ isMe: boolean }>`
   width: 100%;
   padding: 0.7rem 2rem;
-  border-radius: 1rem;
+  border-radius: ${({ theme }) => theme.radius.sm};
   background-color: ${({ isMe, theme }) =>
     isMe && theme.colors.primary.default} !important; // FIXME: !important
 `;

@@ -5,7 +5,7 @@ import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@components/elements/DashboardContentView/Error';
-import { Rank } from '@components/elements/DashboardContentView/Rank';
+import { RankDefault } from '@components/elements/DashboardContentView/RankDefault';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import type { RankItemType } from '@utils/types/Rank';
 
@@ -60,7 +60,7 @@ export const CurrRegisteredCountRanking = () => {
 
   return (
     <DashboardContent title={title}>
-      <Rank rankList={rankList} cnt={3} unit={unit} />
+      <RankDefault rankList={rankList} cnt={3} unit={unit} />
     </DashboardContent>
   );
 };

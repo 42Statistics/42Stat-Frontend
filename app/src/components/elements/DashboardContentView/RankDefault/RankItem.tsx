@@ -9,7 +9,6 @@ import { numberWithUnitFormatter } from '@utils/formatters';
 import type { RankItemType } from '@utils/types/Rank';
 
 type RankItemProps = {
-  rank: number;
   item: RankItemType;
   unit: string;
 };

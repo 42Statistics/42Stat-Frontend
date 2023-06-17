@@ -5,7 +5,7 @@ import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@components/elements/DashboardContentView/Error';
-import { RankUser } from '@components/elements/DashboardContentView/Rank';
+import { RankUser } from '@components/elements/DashboardContentView/RankUser';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
 import type { RankUserItemType } from '@utils/types/Rank';

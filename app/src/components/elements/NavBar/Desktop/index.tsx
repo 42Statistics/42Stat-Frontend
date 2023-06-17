@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { NavBar } from './NavBar';
+import { NavBar } from '../shared/NavBar';
 
 export const DesktopNavBar = () => {
   return (

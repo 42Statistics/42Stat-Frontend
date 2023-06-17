@@ -6,8 +6,8 @@ import { GiHamburgerMenu } from '@react-icons/all-files/gi/GiHamburgerMenu';
 import { useAtom, useAtomValue } from 'jotai';
 import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { DesktopNavBarLayout } from './DesktopNavBar';
-import { NavBar } from './NavBar';
+import { DesktopNavBarLayout } from '../Desktop';
+import { NavBar } from '../shared/NavBar';
 import { TabletNavMenu } from './TabletNavMenu';
 
 export const TabletNavBar = () => {

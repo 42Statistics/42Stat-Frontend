@@ -1,7 +1,7 @@
 import { HStack } from '@components/common';
 import styled from '@emotion/styled';
+import { useNavRoutes } from '../hooks';
 import { TabItem } from './TabItem';
-import { useNavRoutes } from './hooks';
 
 export const TabBar = () => {
   const { NAV_ROUTES } = useNavRoutes();

@@ -1,7 +1,7 @@
 import { CaptionText, VStack } from '@components/common';
 import styled from '@emotion/styled';
 import { useLocation, useNavigate } from 'react-router-dom';
-import type { NavItemProps } from '../NavBar/NavItem';
+import type { NavItemProps } from '../shared/NavItem';
 
 export const TabItem = ({ route }: NavItemProps) => {
   const location = useLocation();

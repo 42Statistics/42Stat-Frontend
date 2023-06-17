@@ -34,7 +34,7 @@ export const MobileSearchBar = () => {
 const MobileSearchBarLayout = styled.div`
   position: relative;
   padding: 1rem 2rem;
-  border-radius: 2rem;
+  border-radius: ${({ theme }) => theme.radius.md};
   transition: all 0.2s;
   background-color: ${({ theme }) => theme.colors.mono.white};
 

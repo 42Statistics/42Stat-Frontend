@@ -19,7 +19,7 @@ export const Hero = () => {
 const HeroLayout = styled.div`
   background-image: url('black-space.jpeg');
   background-size: cover;
-  border-radius: 2rem; // FIXME: 왜 background-image 있는 쪽에도 border-radius를 줘야 하지?
+  border-radius: ${({ theme }) => theme.radius.md};
   padding: 0 4rem;
   height: 100%;
 `;

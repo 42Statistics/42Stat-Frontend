@@ -29,5 +29,5 @@ export const CoalitionMark = ({
 
 const StyledCoalitionMark = styled(Image)`
   object-fit: cover;
-  border-radius: 50%;
+  border-radius: ${({ theme }) => theme.radius.circle};
 `;

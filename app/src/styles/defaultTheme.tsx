@@ -50,8 +50,16 @@ const zIndex = {
   modal: 500,
 };
 
+const radius = {
+  xs: '0.5rem',
+  sm: '1rem',
+  md: '2rem',
+  circle: '50%',
+};
+
 export const defaultTheme = {
   colors,
   fonts,
   zIndex,
+  radius,
 };

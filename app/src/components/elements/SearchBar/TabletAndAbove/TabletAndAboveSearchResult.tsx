@@ -36,7 +36,7 @@ const TabletAndAboveSearchResultLayout = styled(VStack)`
   width: 30rem;
   padding: 2.5rem;
   gap: 3rem;
-  border-radius: 2rem;
+  border-radius: ${({ theme }) => theme.radius.md};
   box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.25);
   background-color: ${({ theme }) => theme.colors.mono.white};
   z-index: ${({ theme }) => theme.zIndex.searchResult};

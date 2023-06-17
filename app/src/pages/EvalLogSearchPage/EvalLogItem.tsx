@@ -72,7 +72,7 @@ const EvalLogItemLayout = styled.div`
   width: 100%;
   background-color: ${({ theme }) => theme.colors.mono.white};
   padding: 2.5rem 3.5rem;
-  border-radius: 2rem;
+  border-radius: ${({ theme }) => theme.radius.md};
 
   box-shadow: 10px 10px 10px #eeeeee, -10px -10px 10px #ffffff;
 

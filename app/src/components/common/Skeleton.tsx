@@ -17,6 +17,6 @@ const skeletonBackgroundAnimation = css`
 export const Skeleton = styled.div`
   width: 100%;
   height: 100%;
-  border-radius: 1.4rem;
+  border-radius: ${({ theme }) => theme.radius.md};
   ${skeletonBackgroundAnimation}
 `;

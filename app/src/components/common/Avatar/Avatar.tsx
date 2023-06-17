@@ -60,11 +60,11 @@ export const Avatar = ({ size = 'md', src }: AvatarProps) => {
 
 const Cover = styled.div`
   position: absolute;
-  border-radius: 50%;
+  border-radius: ${({ theme }) => theme.radius.circle};
   background-color: ${({ theme }) => theme.colors.mono.gray100};
 `;
 
 const StyledAvatar = styled(Image)`
   object-fit: cover;
-  border-radius: 50%;
+  border-radius: ${({ theme }) => theme.radius.circle};
 `;

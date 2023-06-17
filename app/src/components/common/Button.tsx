@@ -75,7 +75,7 @@ const ButtonView = ({
 type ButtonViewLayoutProps = Omit<ButtonViewProps, 'text'>;
 
 const ButtonViewLayout = styled.div<ButtonViewLayoutProps>`
-  border-radius: 3rem;
+  border-radius: ${({ theme }) => theme.radius.md};
   background-color: ${({ bgColor }) => bgColor};
   background: ${({ bg }) => bg};
   color: ${({ color }) => color};

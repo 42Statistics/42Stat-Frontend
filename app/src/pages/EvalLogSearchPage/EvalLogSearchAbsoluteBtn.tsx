@@ -26,7 +26,7 @@ const SearchIconLayout = styled.div`
   position: fixed;
   bottom: 8rem;
   right: 5rem;
-  border-radius: 999px;
+  border-radius: ${({ theme }) => theme.radius.circle};
   padding: 1.5rem;
   background-color: ${({ theme }) => theme.colors.primary.default};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);

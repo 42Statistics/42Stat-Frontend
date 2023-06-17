@@ -86,7 +86,7 @@ export const TabletAndAboveSearchBarLayout = styled.div<{
 }>`
   position: relative;
   padding: 1rem 2rem;
-  border-radius: 2rem;
+  border-radius: ${({ theme }) => theme.radius.md};
   transition: all 0.5s;
 
   box-shadow: ${({ isFocused }) =>

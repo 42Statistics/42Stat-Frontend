@@ -39,5 +39,5 @@ export const GoogleLoginBtn = () => {
 const GoogleLoginBtnLayout = styled.div`
   background-color: ${({ theme }) => theme.colors.mono.white};
   padding: 8px 20px 8px 8px;
-  border-radius: 0.7rem;
+  border-radius: ${({ theme }) => theme.radius.xs};
 `;

@@ -73,7 +73,7 @@ export const LeaderBoardItem = ({
 export const TabletAndAboveLeaderBoardItemLayout = styled.li<{ isMe: boolean }>`
   width: 100%;
   padding: 1rem 5rem;
-  border-radius: 1rem;
+  border-radius: ${({ theme }) => theme.radius.sm};
   background-color: ${({ isMe, theme }) =>
     isMe && theme.colors.primary.default} !important; // FIXME: !important
 `;
@@ -81,7 +81,7 @@ export const TabletAndAboveLeaderBoardItemLayout = styled.li<{ isMe: boolean }>`
 export const MobileLeaderBoardItemLayout = styled.li<{ isMe: boolean }>`
   width: 100%;
   padding: 0.7rem 2rem;
-  border-radius: 1rem;
+  border-radius: ${({ theme }) => theme.radius.sm};
   background-color: ${({ isMe, theme }) =>
     isMe && theme.colors.primary.default} !important; // FIXME: !important
 `;

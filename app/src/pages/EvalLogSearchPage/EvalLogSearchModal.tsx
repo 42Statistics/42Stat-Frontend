@@ -70,7 +70,7 @@ const EvalLogSearchInput = styled(Input)`
   all: unset;
   width: 150px;
   padding: 1rem 2rem;
-  border-radius: 20px;
+  border-radius: ${({ theme }) => theme.radius.md};
   background: #f9f9f9;
   box-shadow: 6px 6px 13px #d2d2d2, -6px -6px 13px #ffffff;
 `;

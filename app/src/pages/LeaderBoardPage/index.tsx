@@ -56,7 +56,7 @@ const LeaderBoardPage = () => {
 const LeaderBoardDetailLayout = styled.div`
   ${center}
   padding: 2rem;
-  border-radius: 2rem;
+  border-radius: ${({ theme }) => theme.radius.md};
   background-color: ${({ theme }) => theme.colors.mono.white};
 `;
 

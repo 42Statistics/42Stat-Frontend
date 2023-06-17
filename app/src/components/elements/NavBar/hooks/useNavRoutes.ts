@@ -34,12 +34,19 @@ export const useNavRoutes = () => {
       icon: RiHome2Line,
       iconFocused: RiHome2Fill,
     },
-    MY_PROFILE: {
-      text: '내 정보',
-      abbr: '내 정보',
+    PROFILE: {
+      text: '유저 정보',
+      abbr: '유저',
       path: `/profile/${user.login}`,
       icon: MdPersonOutline,
       iconFocused: MdPerson,
+    },
+    PROJECT: {
+      text: '프로젝트 정보',
+      abbr: '프로젝트',
+      path: ROUTES.PROJECT_ROOT + '/libft',
+      icon: RiStackLine,
+      iconFocused: RiStackFill,
     },
     LEADERBOARD: {
       text: '랭킹',
@@ -54,13 +61,6 @@ export const useNavRoutes = () => {
       path: ROUTES.EVALLOG,
       icon: RiArticleLine,
       iconFocused: RiArticleFill,
-    },
-    PROJECT: {
-      text: '프로젝트',
-      abbr: '프로젝트',
-      path: ROUTES.PROJECT_ROOT + '/libft',
-      icon: RiStackLine,
-      iconFocused: RiStackFill,
     },
     LOGOUT: {
       text: '로그아웃',

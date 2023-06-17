@@ -1,6 +1,6 @@
 import { Spacer, VStack } from '@components/common';
-import { TabletNavItem } from './TabletNavItem';
 import { useNavRoutes } from '../hooks/useNavRoutes';
+import { TabletNavItem } from './TabletNavItem';
 
 export const TabletNavMenu = () => {
   const { NAV_ROUTES } = useNavRoutes();
@@ -8,10 +8,10 @@ export const TabletNavMenu = () => {
   return (
     <VStack as="ul" w="100%" h="100%" spacing="2rem">
       <TabletNavItem route={NAV_ROUTES.HOME} />
-      <TabletNavItem route={NAV_ROUTES.MY_PROFILE} />
+      <TabletNavItem route={NAV_ROUTES.PROFILE} />
+      <TabletNavItem route={NAV_ROUTES.PROJECT} />
       <TabletNavItem route={NAV_ROUTES.LEADERBOARD} />
       <TabletNavItem route={NAV_ROUTES.EVALLOG} />
-      <TabletNavItem route={NAV_ROUTES.PROJECT} />
       <Spacer />
       <TabletNavItem route={NAV_ROUTES.LOGOUT} />
     </VStack>

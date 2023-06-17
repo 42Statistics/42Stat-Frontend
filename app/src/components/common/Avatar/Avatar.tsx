@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
-import { Image } from './Image';
+import { Image } from '../Image';
 
 type AvatarProps = React.ImgHTMLAttributes<HTMLImageElement> & {
   size?: string;

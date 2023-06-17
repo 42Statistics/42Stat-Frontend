@@ -8,7 +8,9 @@
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "plugin:storybook/recommended",
+    "plugin:storybook/recommended"
   ],
   "overrides": [],
   "parser": "@typescript-eslint/parser",
@@ -16,7 +18,11 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react", "react-hooks", "@typescript-eslint"],
+  "plugins": [
+    "react",
+    "react-hooks",
+    "@typescript-eslint"
+  ],
   "rules": {
     "react/react-in-jsx-scope": "off",
     "react/jsx-no-useless-fragment": "off",

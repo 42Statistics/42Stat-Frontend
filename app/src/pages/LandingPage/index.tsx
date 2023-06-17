@@ -72,7 +72,7 @@ const LandingPage = () => {
             ))}
           </Slider>
         </VStack>
-        <Image src={animated_ship} width="200px" />
+        <Image src={animated_ship} alt="우주를 떠다니는 배" width="200px" />
         <VStack spacing="2rem">
           <Link to={ROUTES.LOGIN}>
             <StartButton>지금 시작하기 🚀</StartButton>

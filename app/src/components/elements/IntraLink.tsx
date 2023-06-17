@@ -6,7 +6,11 @@ export const IntraLink = () => {
   return (
     <a target="_blank" rel="noreferrer" href="https://intra.42.fr">
       <IntraLinkLayout>
-        <Image src={ft_logo} width="20px" />
+        <Image
+          src={ft_logo}
+          alt="42 로고. 누르면 42 인트라로 이동한다."
+          width="20px"
+        />
       </IntraLinkLayout>
     </a>
   );

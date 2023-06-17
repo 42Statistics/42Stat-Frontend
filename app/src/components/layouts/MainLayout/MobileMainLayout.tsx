@@ -1,5 +1,5 @@
 import { VStack } from '@components/common';
-import { MobileHeader } from '@components/elements/Header/MobileHeader';
+import { MobileHeader } from '@components/elements/Header/Mobile';
 import { IntraLink } from '@components/elements/IntraLink';
 import { TabBar } from '@components/elements/NavBar/TabBar';
 import { useTheme } from '@emotion/react';

@@ -10,7 +10,9 @@
     "compile": "NODE_TLS_REJECT_UNAUTHORIZED=0 DOTENV_CONFIG_PATH=../env/.env graphql-codegen -r dotenv/config",
     "watch": "DOTENV_CONFIG_PATH=../env/.env graphql-codegen -r dotenv/config -w",
     "lint": "eslint './src/**/*.{ts,tsx}'",
-    "lint:fix": "eslint './src/**/*.{ts,tsx}' --fix"
+    "lint:fix": "eslint './src/**/*.{ts,tsx}' --fix",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@apollo/client": "^3.7.15",
@@ -49,6 +51,13 @@
     "@babel/core": "^7.22.5",
     "@graphql-codegen/cli": "^3.3.1",
     "@graphql-codegen/client-preset": "^2.1.1",
+    "@storybook/addon-essentials": "^7.0.22",
+    "@storybook/addon-interactions": "^7.0.22",
+    "@storybook/addon-links": "^7.0.22",
+    "@storybook/blocks": "^7.0.22",
+    "@storybook/react": "^7.0.22",
+    "@storybook/react-vite": "^7.0.22",
+    "@storybook/testing-library": "^0.0.14-next.2",
     "@types/lodash-es": "^4.17.7",
     "@types/node": "^18.16.17",
     "@types/react": "^18.2.12",
@@ -65,8 +74,11 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-storybook": "^0.6.12",
     "prettier": "^2.8.8",
+    "prop-types": "^15.8.1",
     "rollup-plugin-visualizer": "^5.9.2",
+    "storybook": "^7.0.22",
     "typescript": "^4.9.5",
     "vite": "^4.3.9"
   }

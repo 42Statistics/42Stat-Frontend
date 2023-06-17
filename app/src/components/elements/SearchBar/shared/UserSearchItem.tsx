@@ -13,7 +13,7 @@ export const UserSearchItem = ({ user, onSubmit }: UserSearchItemProps) => {
       onClick={() => onSubmit(user.login)}
       element={
         <HStack spacing="1.2rem">
-          <Avatar size="1.8rem" imgUrl={user.imgUrl} />
+          <Avatar size="xs" src={user.imgUrl} />
           <Text>{user.login}</Text>
         </HStack>
       }

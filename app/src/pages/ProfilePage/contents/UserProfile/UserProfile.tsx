@@ -73,7 +73,7 @@ export const UserProfile = () => {
     <UserProfileLayout backgroundUrl={coalition.coverUrl}>
       <Desktop>
         <HStack h="100%" spacing="4rem">
-          <Avatar size="6rem" imgUrl={imgUrl} />
+          <Avatar size="xl" src={imgUrl} />
           <WhiteH3BoldText>{titleCase(grade)}</WhiteH3BoldText>
           <WhiteH3BoldText>{titleCase(displayname)}</WhiteH3BoldText>
           <WhiteMediumText>
@@ -87,10 +87,10 @@ export const UserProfile = () => {
       </Desktop>
       <TabletAndBelow>
         <VStack h="100%" spacing="2rem">
-          <Avatar size="6rem" imgUrl={imgUrl} />
+          <Avatar size="xl" src={imgUrl} />
           <VStack>
             <WhiteBoldText>{titleCase(grade)}</WhiteBoldText>
-            <WhiteH1BoldText>{titleCase(name)}</WhiteH1BoldText>
+            <WhiteH1BoldText>{titleCase(displayname)}</WhiteH1BoldText>
           </VStack>
           <WhiteMediumText>
             {truncate(titleWithLogin, { length: 42 })}

@@ -29,7 +29,7 @@ export const TabletNavBar = () => {
             element={<GiHamburgerMenu size="18px" />}
           />
           <Link to={`/profile/${user.login}`}>
-            <Avatar imgUrl={user.imgUrl} />
+            <Avatar size="sm" src={user.imgUrl} />
           </Link>
           <TabletNavMenu />
         </VStack>

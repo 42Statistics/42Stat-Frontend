@@ -11,14 +11,42 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Medium: Story = {
   args: {
-    imgUrl: 'https://avatars.githubusercontent.com/u/69245613?v=4',
+    src: 'https://avatars.githubusercontent.com/u/69245613?v=4',
+  },
+};
+
+export const ExtraSmall: Story = {
+  args: {
+    size: 'xs',
+    src: 'https://avatars.githubusercontent.com/u/69245613?v=4',
+  },
+};
+
+export const Small: Story = {
+  args: {
+    size: 'sm',
+    src: 'https://avatars.githubusercontent.com/u/69245613?v=4',
+  },
+};
+
+export const Large: Story = {
+  args: {
+    size: 'lg',
+    src: 'https://avatars.githubusercontent.com/u/69245613?v=4',
+  },
+};
+
+export const ExtraLarge: Story = {
+  args: {
+    size: 'xl',
+    src: 'https://avatars.githubusercontent.com/u/69245613?v=4',
   },
 };
 
 export const Null: Story = {
   args: {
-    imgUrl: null,
+    src: null,
   },
 };

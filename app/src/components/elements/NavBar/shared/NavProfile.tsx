@@ -19,7 +19,7 @@ export const NavProfile = ({ imgUrl, name, login }: NavProfileProps) => {
 
   return (
     <HStack spacing="2rem">
-      <Avatar size="4rem" imgUrl={imgUrl} />
+      <Avatar size="lg" src={imgUrl} />
       <VStack align="start" spacing="0.3rem">
         <H3BoldText>{login}</H3BoldText>
         <CaptionText color={theme.colors.mono.gray300}>

@@ -8,15 +8,11 @@ type UserSearchItemProps = {
 
 export const UserSearchItem = ({ user, onSubmit }: UserSearchItemProps) => {
   return (
-    <Clickable
-      key={user.id}
-      onClick={() => onSubmit(user.login)}
-      element={
-        <HStack spacing="1.2rem">
-          <Avatar size="xs" src={user.imgUrl} />
-          <Text>{user.login}</Text>
-        </HStack>
-      }
-    />
+    <Clickable key={user.id} onClick={() => onSubmit(user.login)}>
+      <HStack spacing="1.2rem">
+        <Avatar size="xs" src={user.imgUrl} />
+        <Text>{user.login}</Text>
+      </HStack>
+    </Clickable>
   );
 };

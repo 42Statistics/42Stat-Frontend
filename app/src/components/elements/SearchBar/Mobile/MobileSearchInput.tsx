@@ -17,7 +17,9 @@ export const MobileSearchInput = ({
 }: MobileSearchInputProps) => {
   return (
     <HStack w="100%" spacing="2rem">
-      <Clickable onClick={toggle} element={<MdArrowBack size="24px" />} />
+      <Clickable onClick={toggle}>
+        <MdArrowBack size="24px" />
+      </Clickable>
       <Input
         ref={inputRef}
         onChange={(e) => setInput(e.target.value)}
@@ -27,10 +29,9 @@ export const MobileSearchInput = ({
         }}
       />
       <Spacer />
-      <Clickable
-        onClick={onClickSearchBtn}
-        element={<MdSearch size="24px" />}
-      />
+      <Clickable onClick={onClickSearchBtn}>
+        <MdSearch size="24px" />
+      </Clickable>
     </HStack>
   );
 };

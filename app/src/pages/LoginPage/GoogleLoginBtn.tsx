@@ -20,19 +20,16 @@ export const GoogleLoginBtn = () => {
   };
 
   return (
-    <Clickable
-      onClick={handleClick}
-      element={
-        <GoogleLoginBtnLayout>
-          <HStack spacing="24px">
-            <Image src={google_logo} width="18px" />
-            <MediumText color="rgba(0, 0, 0, 0.54)">
-              Google 계정으로 로그인
-            </MediumText>
-          </HStack>
-        </GoogleLoginBtnLayout>
-      }
-    />
+    <Clickable onClick={handleClick}>
+      <GoogleLoginBtnLayout>
+        <HStack spacing="24px">
+          <Image src={google_logo} width="18px" />
+          <MediumText color="rgba(0, 0, 0, 0.54)">
+            Google 계정으로 로그인
+          </MediumText>
+        </HStack>
+      </GoogleLoginBtnLayout>
+    </Clickable>
   );
 };
 

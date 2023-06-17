@@ -16,17 +16,14 @@ export const FtOAuthLoginBtn = () => {
     navigate(ROUTES.ROOT);
   };
   return (
-    <Clickable
-      onClick={handleClick}
-      element={
-        <FtOAuthLoginBtnLayout>
-          <HStack spacing="24px">
-            <Image src={ft_logo} width="18px" />
-            <MediumText>42 계정으로 로그인</MediumText>
-          </HStack>
-        </FtOAuthLoginBtnLayout>
-      }
-    />
+    <Clickable onClick={handleClick}>
+      <FtOAuthLoginBtnLayout>
+        <HStack spacing="24px">
+          <Image src={ft_logo} width="18px" />
+          <MediumText>42 계정으로 로그인</MediumText>
+        </HStack>
+      </FtOAuthLoginBtnLayout>
+    </Clickable>
   );
 };
 

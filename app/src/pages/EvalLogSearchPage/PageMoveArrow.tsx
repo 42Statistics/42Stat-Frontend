@@ -17,39 +17,34 @@ export const PageMoveArrow = ({
 
   return (
     <HStack spacing="1rem">
-      <Clickable
-        element={
-          <BsTriangleFill
-            size="12px"
-            css={{ transform: 'rotate(-90deg)' }}
-            color={
-              pageNumber !== 1
-                ? theme.colors.primary.default
-                : theme.colors.mono.gray200
-            }
-          />
-        }
-        onClick={handleDecrease}
-        disabled={pageNumber === 1}
-      />
+      <Clickable onClick={handleDecrease} disabled={pageNumber === 1}>
+        <BsTriangleFill
+          size="12px"
+          css={{ transform: 'rotate(-90deg)' }}
+          color={
+            pageNumber !== 1
+              ? theme.colors.primary.default
+              : theme.colors.mono.gray200
+          }
+        />
+      </Clickable>
       <PrimaryText>
         {pageNumber.toLocaleString()} / {maxPageNumber.toLocaleString()}
       </PrimaryText>
       <Clickable
-        element={
-          <BsTriangleFill
-            size="12px"
-            css={{ transform: 'rotate(90deg)' }}
-            color={
-              pageNumber !== maxPageNumber
-                ? theme.colors.primary.default
-                : theme.colors.mono.gray200
-            }
-          />
-        }
         onClick={handleIncrease}
         disabled={pageNumber === maxPageNumber}
-      />
+      >
+        <BsTriangleFill
+          size="12px"
+          css={{ transform: 'rotate(90deg)' }}
+          color={
+            pageNumber !== maxPageNumber
+              ? theme.colors.primary.default
+              : theme.colors.mono.gray200
+          }
+        />
+      </Clickable>
     </HStack>
   );
 };

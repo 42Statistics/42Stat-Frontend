@@ -1,8 +1,8 @@
 import animated_ship from '@assets/animated-ship.gif';
 import {
-  Button,
   Center,
   Image,
+  StartButton,
   VStack,
   WhiteH1BoldText,
 } from '@components/common';
@@ -75,11 +75,7 @@ const LandingPage = () => {
         <Image src={animated_ship} width="200px" />
         <VStack spacing="2rem">
           <Link to={ROUTES.LOGIN}>
-            <Button
-              size="md"
-              text="지금 시작하기 🚀"
-              bg="linear-gradient(122deg, rgba(34,160,195,1) 0%, rgba(109,45,253,1) 120%)"
-            />
+            <StartButton>지금 시작하기 🚀</StartButton>
           </Link>
         </VStack>
       </VStack>

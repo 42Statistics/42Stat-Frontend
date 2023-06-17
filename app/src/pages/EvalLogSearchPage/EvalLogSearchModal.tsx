@@ -59,7 +59,7 @@ export const EvalLogSearchModal = ({
               </Select>
             </HStack>
           </VStack>
-          <Button type="submit" text="검색하기" />
+          <Button type="submit">검색하기</Button>
         </VStack>
       </form>
     </Modal>

@@ -18,13 +18,10 @@ export const PageBtn = ({
     setPageNumber(pageNumber);
   };
   return (
-    <Clickable
-      onClick={handleClick}
-      element={
-        <H3Text fontWeight={pageNumber === currPageNumber ? 700 : 400}>
-          {pageNumber}
-        </H3Text>
-      }
-    />
+    <Clickable onClick={handleClick}>
+      <H3Text fontWeight={pageNumber === currPageNumber ? 700 : 400}>
+        {pageNumber}
+      </H3Text>
+    </Clickable>
   );
 };

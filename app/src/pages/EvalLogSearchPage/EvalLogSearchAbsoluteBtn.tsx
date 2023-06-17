@@ -11,14 +11,11 @@ export const EvalLogSearchAbsoluteBtn = ({
   const theme = useTheme();
 
   return (
-    <Clickable
-      onClick={toggleModal}
-      element={
-        <SearchIconLayout>
-          <MdSearch color={theme.colors.mono.white} size="20px" />
-        </SearchIconLayout>
-      }
-    />
+    <Clickable onClick={toggleModal}>
+      <SearchIconLayout>
+        <MdSearch color={theme.colors.mono.white} size="20px" />
+      </SearchIconLayout>
+    </Clickable>
   );
 };
 

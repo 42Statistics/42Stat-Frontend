@@ -13,19 +13,16 @@ export const MobileSearchBar = () => {
 
   return (
     <>
-      <Clickable
-        onClick={toggleModal}
-        element={
-          <MobileSearchBarLayout>
-            <HStack spacing="2rem">
-              <MdSearch id="search-icon" size="24px" />
-              <Text color={theme.colors.mono.gray300} css={{ width: '12rem' }}>
-                Search...
-              </Text>
-            </HStack>
-          </MobileSearchBarLayout>
-        }
-      />
+      <Clickable onClick={toggleModal}>
+        <MobileSearchBarLayout>
+          <HStack spacing="2rem">
+            <MdSearch id="search-icon" size="24px" />
+            <Text color={theme.colors.mono.gray300} css={{ width: '12rem' }}>
+              Search...
+            </Text>
+          </HStack>
+        </MobileSearchBarLayout>
+      </Clickable>
       <SearchModal isOpen={isModalOpen} toggle={toggleModal} />
     </>
   );

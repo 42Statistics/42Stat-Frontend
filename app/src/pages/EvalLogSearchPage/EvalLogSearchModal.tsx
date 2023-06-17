@@ -48,7 +48,7 @@ export const EvalLogSearchModal = ({
               <Text>플래그</Text>
               <Select {...register('flag')} style={{ width: '150px' }}>
                 <option value="all">전체</option>
-                <option value="outstandingOnly">Outstanding만</option>
+                <option value="outstanding">Outstanding만</option>
               </Select>
             </HStack>
             <HStack as="li" spacing="3rem">

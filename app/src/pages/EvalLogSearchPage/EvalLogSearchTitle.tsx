@@ -4,7 +4,7 @@ import { EvalLogSearchFormData } from '.';
 
 type EvalLogSearchTitleProps = {
   form: EvalLogSearchFormData;
-  totalCount: number | undefined | null; // FIXME: number 타입만 오도록 수정
+  totalCount: number;
 };
 
 export const EvalLogSearchTitle = ({
@@ -23,7 +23,7 @@ export const EvalLogSearchTitle = ({
         form.sortOrder === 'desc' ? '최신 순' : '오래된 순'
       }`}</PrimaryBoldText>
       <Text color={theme.colors.mono.gray300} selectable>
-        검색결과 {totalCount?.toLocaleString() ?? 0}건
+        검색결과 {totalCount?.toLocaleString()}건
       </Text>
     </VStack>
   );

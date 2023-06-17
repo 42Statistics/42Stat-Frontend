@@ -106,6 +106,20 @@ const EvalLogSearchPage = () => {
   const onSubmit: SubmitHandler<EvalLogSearchFormData> = (newForm) => {
     setEvalLogEdges([]);
     setForm(newForm);
+    search({
+      variables: {
+        after: '',
+        first: RESULT_PER_PAGE,
+        projectName: newForm.projectName,
+        outstandingOnly: newForm.flag === 'outstanding',
+        corrector: newForm.corrector,
+        corrected: newForm.corrected,
+        sortOrder:
+          newForm.sortOrder === 'desc'
+            ? EvalLogSortOrder.BeginAtDesc
+            : EvalLogSortOrder.BeginAtAsc,
+      },
+    });
     setEndCursor('');
     setEnd(false);
     toggleModal();
@@ -125,9 +139,12 @@ const EvalLogSearchPage = () => {
     if (pageInfo != null && !pageInfo.hasNextPage) {
       setEnd(true);
     }
+    if (edges.length > 0 && edges[edges.length - 1]?.cursor === endCursor) {
+      return;
+    }
     setEvalLogEdges((cur) => [...cur, ...edges.filter(isDefined)]);
     setEndCursor(pageInfo?.endCursor ?? '');
-  }, [data]);
+  }, [data, endCursor]);
 
   useEffect(() => {
     if (!isVisible || loading) {
@@ -162,7 +179,7 @@ const EvalLogSearchPage = () => {
       <VStack w="100%" spacing="2rem">
         <EvalLogSearchTitle
           form={form}
-          totalCount={data?.getEvalLogs.pageInfo?.totalCount}
+          totalCount={data?.getEvalLogs.pageInfo?.totalCount ?? 0}
         />
         <EvalLogSearchDetail
           evalLogEdges={evalLogEdges}

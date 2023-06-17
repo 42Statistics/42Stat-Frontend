@@ -1,11 +1,11 @@
 import { gql } from '@/__generated__';
 import { H3Text, Image, Loader, VStack } from '@/components/common';
+import { DashboardContent } from '@/components/templates/DashboardContent';
+import { useQuery } from '@apollo/client';
 import {
   ApolloBadRequest,
   ApolloNotFound,
-} from '@/components/elements/DashboardContentView';
-import { DashboardContent } from '@/components/templates/DashboardContent';
-import { useQuery } from '@apollo/client';
+} from '@components/elements/DashboardContentView/Error';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 

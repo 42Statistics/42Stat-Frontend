@@ -5,8 +5,8 @@ import { Loader } from '@components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
-} from '@components/elements/DashboardContentView';
-import { NumberCompare } from '@components/elements/DashboardContentView/Text';
+} from '@components/elements/DashboardContentView/Error';
+import { NumberCompare } from '@components/elements/DashboardContentView/NumberCompare';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';

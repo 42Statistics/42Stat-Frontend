@@ -4,10 +4,10 @@ import { Loader } from '@components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
-} from '@components/elements/DashboardContentView';
-import { Rank } from '@components/elements/DashboardContentView/Rank';
+} from '@components/elements/DashboardContentView/Error';
+import { RankingDefault } from '@components/elements/DashboardContentView/RankingDefault';
 import { DashboardContent } from '@components/templates/DashboardContent';
-import type { RankItemType } from '@utils/types/Rank';
+import type { RankingItemType } from '@utils/types/Ranking';
 
 const GET_CURR_REGISTERED_COUNT_RANKING = gql(/* GraphQL */ `
   query GetCurrRegisteredCountRanking {
@@ -49,7 +49,7 @@ export const CurrRegisteredCountRanking = () => {
   const { currRegisteredCountRanking } = data.getHomeTeam;
   const unit = '명';
 
-  const rankList: RankItemType[] = currRegisteredCountRanking.map(
+  const list: RankingItemType[] = currRegisteredCountRanking.map(
     ({ projectPreview, value }, idx) => ({
       id: projectPreview.id,
       name: projectPreview.name,
@@ -60,7 +60,7 @@ export const CurrRegisteredCountRanking = () => {
 
   return (
     <DashboardContent title={title}>
-      <Rank rankList={rankList} cnt={3} unit={unit} />
+      <RankingDefault list={list} cnt={3} unit={unit} />
     </DashboardContent>
   );
 };

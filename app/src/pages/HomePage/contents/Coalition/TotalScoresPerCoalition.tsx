@@ -2,8 +2,8 @@ import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import { Loader } from '@components/common';
 import { BarChart } from '@components/elements/Chart';
-import { ApolloNotFound } from '@components/elements/DashboardContentView';
-import { ApolloBadRequest } from '@components/elements/DashboardContentView/ApolloBadRequest';
+import { ApolloNotFound } from '@components/elements/DashboardContentView/Error';
+import { ApolloBadRequest } from '@components/elements/DashboardContentView/Error/ApolloBadRequest';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { millionFormatter } from '@utils/formatters';
 

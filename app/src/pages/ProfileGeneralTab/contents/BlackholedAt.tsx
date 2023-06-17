@@ -10,7 +10,7 @@ import { H2BoldText, HStack, Loader } from '@components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
-} from '@components/elements/DashboardContentView';
+} from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useTheme } from '@emotion/react';
 import { useParams } from 'react-router-dom';

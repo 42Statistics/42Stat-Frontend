@@ -1,6 +1,6 @@
 import { PrimaryBoldText, Text, VStack } from '@components/common';
 import { useTheme } from '@emotion/react';
-import { EvalLogSearchFormData } from './EvalLogSearchPage';
+import { EvalLogSearchFormData } from '.';
 
 type EvalLogSearchTitleProps = {
   form: EvalLogSearchFormData;

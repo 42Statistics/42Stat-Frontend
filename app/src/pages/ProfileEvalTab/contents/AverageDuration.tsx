@@ -4,8 +4,8 @@ import { Loader } from '@components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
-} from '@components/elements/DashboardContentView';
-import { NumberDefault } from '@components/elements/DashboardContentView/Text';
+} from '@components/elements/DashboardContentView/Error';
+import { NumberDefault } from '@components/elements/DashboardContentView/NumberDefault';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useParams } from 'react-router-dom';
 

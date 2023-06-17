@@ -5,7 +5,7 @@ import { BarChart } from '@components/elements/Chart';
 import {
   ApolloBadRequest,
   ApolloNotFound,
-} from '@components/elements/DashboardContentView';
+} from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import dayjs from 'dayjs';
 

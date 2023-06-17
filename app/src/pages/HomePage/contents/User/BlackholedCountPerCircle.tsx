@@ -5,7 +5,7 @@ import { DonutChart } from '@components/elements/Chart';
 import {
   ApolloBadRequest,
   ApolloNotFound,
-} from '@components/elements/DashboardContentView';
+} from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useTheme } from '@emotion/react';
 import { numberWithUnitFormatter } from '@utils/formatters';

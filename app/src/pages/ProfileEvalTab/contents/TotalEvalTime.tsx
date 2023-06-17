@@ -4,8 +4,8 @@ import { Loader } from '@components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
-} from '@components/elements/DashboardContentView';
-import { TextDefault } from '@components/elements/DashboardContentView/Text';
+} from '@components/elements/DashboardContentView/Error';
+import { TextDefault } from '@components/elements/DashboardContentView/TextDefault';
 import { DashboardContent } from '@components/templates/DashboardContent';
 
 const GET_TOTAL_EVAL_TIME = gql(/* GraphQL */ `

@@ -21,7 +21,7 @@ import styled from '@emotion/styled';
 import { withFooter } from '@hoc/withFooter';
 import { withHead } from '@hoc/withHead';
 import { ProjectPageSkeleton } from '@pages/PageSkeletons/ProjectPageSkeleton';
-import { HiUsers } from '@react-icons/all-files/hi/HiUSers';
+import { BsPeopleFill } from '@react-icons/all-files/bs/BsPeopleFill';
 import { numberWithUnitFormatter } from '@utils/formatters';
 import { isDefined } from '@utils/isDefined';
 import { titleCase } from '@utils/titleCase';
@@ -106,7 +106,7 @@ const ProjectPage = () => {
             maxUserCount,
           )} / ${estimateTime} hrs. / ${difficulty} XP`}</Text>
           <HStack spacing="1rem">
-            <HiUsers size="16px" />
+            <BsPeopleFill size="16px" />
             <Text>
               {numberWithUnitFormatter(currRegisteredTeamCount, '팀')} 진행 중
             </Text>

@@ -1,3 +1,5 @@
+import { gql } from '@/__generated__';
+import { useQuery } from '@apollo/client';
 import animated_ship from '@assets/animated-ship.gif';
 import {
   Center,
@@ -10,31 +12,71 @@ import { AppLogoTitle } from '@components/elements/AppLogoTitle';
 import { css, useTheme } from '@emotion/react';
 import { withHead } from '@hoc/withHead';
 import { ROUTES } from '@routes/ROUTES';
+import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css'; // FIXME: import 말고 Styled Components 방식으로 Slick 적용
 import { CountUp } from 'use-count-up';
 
-// const GET_USER = gql(`
-//   query GetUser($id: Int!) {
-//     user(id: $id) {
-//       id
-//       login
-//     }
-//   }
-// `);
+const GET_LANDING = gql(/* GraphQL */ `
+  query GetLanding {
+    getLanding {
+      daysAfterBeginAt
+      aliveCount
+      blackholedCount
+      memberCount
+      evalCount
+      trendingProject {
+        projectPreview {
+          id
+          name
+          url
+        }
+        rank
+        value
+      }
+    }
+  }
+`);
 
 const LandingPage = () => {
-  // TODO: 리더보드 만든 이후 BE 쿼리 위치 정착되면 기준일 HomePage 단에서 전체 다 받아서 description에 주입
-  // const { data, loading, error } = useQuery(GET_HOME_PAGE_DESCRIPTION_DATE);
-
+  const { loading, error, data } = useQuery(GET_LANDING);
+  const [strs, setStrs] = useState<string[]>([]);
   const theme = useTheme();
-  const textList = [
-    '지난주 블랙홀을 마주한 18명',
-    '지금까지 블랙홀을 마주한 610명',
-    'PUSH_SWAP과 싸우는 32명',
-  ];
+
+  useEffect(() => {
+    if (!data) {
+      return;
+    }
+    const {
+      blackholedCount,
+      memberCount,
+      evalCount,
+      trendingProject: {
+        projectPreview: { name: trendingProjectName },
+        value,
+      },
+    } = data.getLanding;
+    setStrs([
+      `지금까지 블랙홀을 마주한 ${blackholedCount.toLocaleString()}명`,
+      `${trendingProjectName}과 싸우는 ${value.toLocaleString()}명`,
+      `자기만의 여행을 시작한 ${memberCount.toLocaleString()}명`,
+      `${evalCount.toLocaleString()}번째 평가가 지금 진행 중`,
+    ]);
+  }, [data]);
+
+  if (loading) {
+    return <div>loading...</div>; // TODO: UI 수정
+  }
+  if (error) {
+    return <div>error...</div>; // TODO: UI 수정. 에러 발생 시에도 다른 문자열로 대체하여 랜딩페이지 보여주기
+  }
+  if (!data) {
+    return <div>no data...</div>; // TODO: UI 수정
+  }
+
+  const { daysAfterBeginAt, aliveCount } = data.getLanding;
 
   return (
     <>
@@ -45,14 +87,15 @@ const LandingPage = () => {
         <a href="/">
           <AppLogoTitle size="md" color={theme.colors.mono.white} />
         </a>
-        <VStack>
+        <VStack spacing="1rem">
           <WhiteH1BoldText>
-            은하수를 여행한지 {<CountUp isCounting end={982} duration={3.5} />}
+            은하수를 여행한지{' '}
+            {<CountUp isCounting end={daysAfterBeginAt} duration={3.5} />}
             일째
           </WhiteH1BoldText>
           <WhiteH1BoldText>
-            {<CountUp isCounting end={810} duration={3.5} />}명의 히치하이커와
-            함께 여행중
+            {<CountUp isCounting end={aliveCount} duration={3.5} />}
+            명의 히치하이커와 함께 여행중
           </WhiteH1BoldText>
           <Slider
             arrows={false}
@@ -65,9 +108,9 @@ const LandingPage = () => {
             vertical
             css={SliderCenterStyle}
           >
-            {textList.map((text, index) => (
+            {strs.map((str, index) => (
               <Center w="100%" key={index}>
-                <WhiteH1BoldText>{text}</WhiteH1BoldText>
+                <WhiteH1BoldText>{str}</WhiteH1BoldText>
               </Center>
             ))}
           </Slider>

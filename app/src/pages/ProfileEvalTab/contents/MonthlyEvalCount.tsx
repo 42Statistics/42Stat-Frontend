@@ -17,7 +17,7 @@ const GET_EVAL_COUNT_BY_DATE_TEMPLATE_BY_LOGIN = gql(/* GraphQL */ `
     $currDateTemplate: DateTemplate!
     $lastDateTemplate: DateTemplate!
   ) {
-    getPersonalEvalPage(login: $login) {
+    getPersonalEval(login: $login) {
       currData: countByDateTemplate(dateTemplate: $currDateTemplate) {
         data
         start
@@ -68,7 +68,7 @@ export const MonthlyEvalCount = () => {
   const {
     currData: { data: currEvalCount, start, end },
     lastData: { data: lastEvalCount },
-  } = data.getPersonalEvalPage;
+  } = data.getPersonalEval;
   const description = `${dayjs(start).format('M월 D일')} ~ ${dayjs(end).format(
     'M월 D일',
   )}`;

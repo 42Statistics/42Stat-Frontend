@@ -16,6 +16,7 @@ import { rgba } from 'emotion-rgba';
 import { Link } from 'react-router-dom';
 
 export const EvalLogItem = ({ element }: { element: EvalLog }) => {
+  const theme = useTheme();
   const { header, correctorReview, correctedsReview } = element;
 
   return (
@@ -56,10 +57,20 @@ export const EvalLogItem = ({ element }: { element: EvalLog }) => {
           </HStack>
           <HStack w="100%" justify="start">
             <HStack w="10rem">
-              <CorrectedsReviewLabel number={correctedsReview.mark} />
+              {correctedsReview ? (
+                <CorrectedsReviewLabel number={correctedsReview.mark} />
+              ) : (
+                <CorrectedsReviewLabel isAbsorbed />
+              )}
             </HStack>
             <div style={{ width: '100%' }}>
-              <Text selectable>{correctedsReview.review}</Text>
+              {correctedsReview ? (
+                <Text selectable>{correctedsReview.review}</Text>
+              ) : (
+                <Text color={theme.colors.mono.gray300} selectable>
+                  피드백을 작성하기 전에 블랙홀에 빠졌습니다
+                </Text>
+              )}
             </div>
           </HStack>
         </VStack>
@@ -103,22 +114,32 @@ const CorrectorReviewLabel = ({ number }: { number: number }) => {
   );
 };
 
-const CorrectedsReviewLabel = ({ number }: { number: number }) => {
-  const getCorrectorReviewLabelColor = (number: number) => {
+const CorrectedsReviewLabel = ({
+  number = 0,
+  isAbsorbed = false,
+}: {
+  number?: number; // isAbsorbed일 때만 undefined 가능
+  isAbsorbed?: boolean;
+}) => {
+  const getCorrectorReviewLabelColor = (
+    number: number,
+    isAbsorbed: boolean,
+  ) => {
+    if (isAbsorbed) return theme.colors.mono.gray300;
     if (number >= 5) return theme.colors.semantic.pass;
     if (number >= 3) return theme.colors.semantic.warning;
     return theme.colors.semantic.fail;
   };
 
   const theme = useTheme();
-  const color = getCorrectorReviewLabelColor(number);
+  const color = getCorrectorReviewLabelColor(number, isAbsorbed);
 
   return (
     <Label
       color={color}
       bgColor={rgba(color, 0.15)}
       fontWeight={theme.fonts.weight.medium}
-      text={`${number} / 5`}
+      text={`${!isAbsorbed ? number : '-'} / 5`}
     />
   );
 };

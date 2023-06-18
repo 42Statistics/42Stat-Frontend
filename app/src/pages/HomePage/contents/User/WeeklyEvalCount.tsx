@@ -10,8 +10,8 @@ import { NumberCompare } from '@components/elements/DashboardContentView/NumberC
 import { DashboardContent } from '@components/templates/DashboardContent';
 import dayjs from 'dayjs';
 
-const GET_EVAL_COUNT_BY_DATE_TEMPLATE = gql(/* GraphQL */ `
-  query GetEvalCountByDateTemplate(
+const GET_CURR_LAST_EVAL_COUNT_BY_DATE_TEMPLATE = gql(/* GraphQL */ `
+  query GetCurrLastEvalCountByDateTemplate(
     $currDateTemplate: DateTemplate!
     $lastDateTemplate: DateTemplate!
   ) {
@@ -32,12 +32,15 @@ const GET_EVAL_COUNT_BY_DATE_TEMPLATE = gql(/* GraphQL */ `
 
 export const WeeklyEvalCount = () => {
   const title = '주간 총 평가 횟수';
-  const { loading, error, data } = useQuery(GET_EVAL_COUNT_BY_DATE_TEMPLATE, {
-    variables: {
-      currDateTemplate: DateTemplate.CurrWeek,
-      lastDateTemplate: DateTemplate.LastWeek,
+  const { loading, error, data } = useQuery(
+    GET_CURR_LAST_EVAL_COUNT_BY_DATE_TEMPLATE,
+    {
+      variables: {
+        currDateTemplate: DateTemplate.CurrWeek,
+        lastDateTemplate: DateTemplate.LastWeek,
+      },
     },
-  });
+  );
   if (loading)
     return (
       <DashboardContent title={title}>

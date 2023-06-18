@@ -11,7 +11,7 @@ import { useParams } from 'react-router-dom';
 
 const GET_AVERAGE_DURATION = gql(/* GraphQL */ `
   query getAverageDuration($login: String!) {
-    getPersonalEvalPage(login: $login) {
+    getPersonalEval(login: $login) {
       averageDuration
     }
   }
@@ -44,7 +44,7 @@ export const AverageDuration = () => {
       </DashboardContent>
     );
 
-  const { averageDuration } = data.getPersonalEvalPage;
+  const { averageDuration } = data.getPersonalEval;
   const unit = '분';
 
   return (

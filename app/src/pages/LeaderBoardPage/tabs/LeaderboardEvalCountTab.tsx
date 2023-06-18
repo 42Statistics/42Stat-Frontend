@@ -82,7 +82,7 @@ export const LeaderboardEvalCountTab = () => {
     } else if (value === 'monthly') {
       setDateTemplate(DateTemplate.CurrMonth);
     } else if (value === 'total') {
-      /* FIXME: DateTemplate.Total 지원되면 수정 */
+      setDateTemplate(DateTemplate.Total);
     }
   };
 

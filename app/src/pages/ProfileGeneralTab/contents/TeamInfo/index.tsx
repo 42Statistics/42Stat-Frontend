@@ -11,7 +11,7 @@ import { TeamInfoTable } from './TeamInfoTable';
 
 const GET_TEAM_INFO = gql(/* GraphQL */ `
   query getTeamInfo($login: String!) {
-    getPersonalGeneralPage(login: $login) {
+    getPersonalGeneral(login: $login) {
       teamInfo {
         lastRegistered
         lastPassed
@@ -45,7 +45,7 @@ export const TeamInfo = () => {
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 
-  const { teams } = data.getPersonalGeneralPage.teamInfo;
+  const { teams } = data.getPersonalGeneral.teamInfo;
 
   return (
     <TeamInfoLayout>

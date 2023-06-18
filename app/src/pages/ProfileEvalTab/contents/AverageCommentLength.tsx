@@ -11,7 +11,7 @@ import { useParams } from 'react-router-dom';
 
 const GET_AVERAGE_COMMENT_LENGTH_BY_LOGIN = gql(/* GraphQL */ `
   query GetAverageCommentLengthByLogin($login: String!) {
-    getPersonalEvalPage(login: $login) {
+    getPersonalEval(login: $login) {
       averageCommentLength
     }
   }
@@ -46,7 +46,7 @@ export const AverageCommentLength = () => {
       </DashboardContent>
     );
 
-  const { averageCommentLength } = data.getPersonalEvalPage;
+  const { averageCommentLength } = data.getPersonalEval;
   const unit = '자';
 
   return (

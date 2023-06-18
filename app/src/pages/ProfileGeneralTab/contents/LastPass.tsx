@@ -11,7 +11,7 @@ import { useParams } from 'react-router-dom';
 
 const GET_LAST_PASS = gql(/* GraphQL */ `
   query getLastPass($login: String!) {
-    getPersonalGeneralPage(login: $login) {
+    getPersonalGeneral(login: $login) {
       teamInfo {
         lastPassed
       }
@@ -45,7 +45,7 @@ export const LastPass = () => {
       </DashboardContent>
     );
 
-  const { lastPassed } = data.getPersonalGeneralPage.teamInfo;
+  const { lastPassed } = data.getPersonalGeneral.teamInfo;
 
   return (
     <DashboardContent title={title}>

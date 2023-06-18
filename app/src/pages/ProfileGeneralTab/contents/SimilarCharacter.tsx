@@ -60,7 +60,7 @@ const pokemonArray = [
 
 const GET_COALITION = gql(/* GraphQL */ `
   query getCoalition($login: String!) {
-    getPersonalGeneralPage(login: $login) {
+    getPersonalGeneral(login: $login) {
       userProfile {
         coalition {
           name
@@ -109,8 +109,7 @@ export const SimilarCharacter = () => {
 
     // 스타팅 일 경우 건곤감리에 따라 다른 포켓몬 설정
     if (data) {
-      const { name: coalition } =
-        data.getPersonalGeneralPage.userProfile.coalition;
+      const { name: coalition } = data.getPersonalGeneral.userProfile.coalition;
       if (queryName === 'starting') {
         switch (coalition) {
           case 'Gun':
@@ -177,7 +176,11 @@ export const SimilarCharacter = () => {
   return (
     <DashboardContent title={title} description={description}>
       <VStack h="100%" spacing="3rem">
-        <Image width="200px" alt="이 유저와 성향이 비슷한 포켓몬" src={pokeImg} />
+        <Image
+          width="200px"
+          alt="이 유저와 성향이 비슷한 포켓몬"
+          src={pokeImg}
+        />
         <H3Text>{pokeName}</H3Text>
       </VStack>
     </DashboardContent>

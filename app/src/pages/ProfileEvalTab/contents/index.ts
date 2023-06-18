@@ -5,7 +5,7 @@ export * from './AverageFinalMark';
 export * from './CorrectionPoint';
 export * from './DestinyUsers';
 export * from './EvalLogSearchLink';
-export * from './LastComment';
+export * from './RecentComment';
 export * from './MonthlyEvalCount';
 export * from './TotalEvalCount';
 export * from './TotalEvalTime';

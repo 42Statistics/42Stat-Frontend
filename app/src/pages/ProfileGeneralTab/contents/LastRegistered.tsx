@@ -11,7 +11,7 @@ import { useParams } from 'react-router-dom';
 
 const GET_LAST_REGISTERED = gql(/* GraphQL */ `
   query getLastRegistered($login: String!) {
-    getPersonalGeneralPage(login: $login) {
+    getPersonalGeneral(login: $login) {
       teamInfo {
         lastRegistered
       }
@@ -45,7 +45,7 @@ export const LastRegistered = () => {
       </DashboardContent>
     );
 
-  const { lastRegistered } = data.getPersonalGeneralPage.teamInfo;
+  const { lastRegistered } = data.getPersonalGeneral.teamInfo;
 
   return (
     <DashboardContent title={title}>

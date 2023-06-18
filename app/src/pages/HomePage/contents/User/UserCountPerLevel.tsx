@@ -13,7 +13,7 @@ const GET_USER_COUNT_PER_LEVEL = gql(/* GraphQL */ `
   query getUserCountPerLevel {
     getHomeUser {
       userCountPerLevel {
-        userCount
+        value
         level
       }
     }
@@ -45,7 +45,7 @@ export const UserCountPerLevel = () => {
   const { userCountPerLevel } = data.getHomeUser;
 
   const categories = userCountPerLevel.map(({ level }) => level);
-  const seriesData = userCountPerLevel.map(({ userCount }) => userCount);
+  const seriesData = userCountPerLevel.map(({ value }) => value);
 
   const series: ApexAxisChartSeries = [
     {

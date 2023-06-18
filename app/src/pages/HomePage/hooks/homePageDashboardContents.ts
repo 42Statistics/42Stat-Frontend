@@ -1,28 +1,28 @@
 import type { DashboardItemProps } from '@utils/types/Dashboard';
 import {
-  ScoreRecordsPerCoalition,
   MonthlyTigCountPerCoalition,
+  ScoreRecordsPerCoalition,
   TotalScoresPerCoalition,
 } from '../contents/Coalition';
 import {
   AverageCommentLength,
   AverageFeedbackLength,
-  WeeklyAverageEvalCount,
   TotalEvalCount,
+  WeeklyAverageEvalCount,
 } from '../contents/Eval';
 import { CurrRegisteredCountRanking, LastExamResult } from '../contents/Team';
 import {
-  ActiveUserCountRecords,
+  AliveUserCountRecords,
   AverageDurationPerCircle,
   BlackholedCountPerCircle,
   BlackholedRate,
   CorrectionPointRanking,
-  MonthlyBlackholedCount,
-  WeeklyEvalCount,
   Hero,
   MemberRate,
+  MonthlyBlackholedCount,
   UserCountPerLevel,
   WalletRanking,
+  WeeklyEvalCount,
 } from '../contents/User';
 
 export const homePageDashboardContents: DashboardItemProps[] = [
@@ -60,7 +60,7 @@ export const homePageDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 8,
-    content: ActiveUserCountRecords,
+    content: AliveUserCountRecords,
   },
   {
     id: 9,

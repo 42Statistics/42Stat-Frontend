@@ -6,6 +6,7 @@ import { Seo } from '@components/elements/Seo';
 import { withHead } from '@hoc/withHead';
 import { isDefined } from '@utils/isDefined';
 import { useInfiniteScroll } from '@utils/useInfiniteScroll';
+import { isEqual } from 'lodash-es';
 import { useCallback, useEffect, useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { useSearchParams } from 'react-router-dom';
@@ -104,6 +105,10 @@ const EvalLogSearchPage = () => {
   const [endCursor, setEndCursor] = useState<string>('');
 
   const onSubmit: SubmitHandler<EvalLogSearchFormData> = (newForm) => {
+    if (isEqual(newForm, form)) {
+      toggleModal();
+      return;
+    }
     setEvalLogEdges([]);
     setForm(newForm);
     search({

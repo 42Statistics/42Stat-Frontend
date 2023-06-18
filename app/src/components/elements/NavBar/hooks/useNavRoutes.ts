@@ -35,8 +35,8 @@ export const useNavRoutes = () => {
       iconFocused: RiHome2Fill,
     },
     PROFILE: {
-      text: '유저 정보',
-      abbr: '유저',
+      text: '내 정보',
+      abbr: '내 정보',
       path: `/profile/${user.login}`,
       icon: MdPersonOutline,
       iconFocused: MdPerson,

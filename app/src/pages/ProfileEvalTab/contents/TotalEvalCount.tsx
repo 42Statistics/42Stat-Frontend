@@ -11,7 +11,7 @@ import { useParams } from 'react-router-dom';
 
 const GET_TOTAL_EVAL_COUNT_BY_LOGIN = gql(/* GraphQL */ `
   query GetTotalEvalCountByLogin($login: String!) {
-    getPersonalEvalPage(login: $login) {
+    getPersonalEval(login: $login) {
       totalCount
     }
   }
@@ -44,7 +44,7 @@ export const TotalEvalCount = () => {
       </DashboardContent>
     );
 
-  const { totalCount } = data.getPersonalEvalPage;
+  const { totalCount } = data.getPersonalEval;
   const unit = '회';
 
   return (

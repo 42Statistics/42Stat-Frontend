@@ -17,7 +17,7 @@ import { useParams } from 'react-router-dom';
 
 const GET_BLACKHOLED_AT = gql(/* GraphQL */ `
   query getBlackHoledAt($login: String!) {
-    getPersonalGeneralPage(login: $login) {
+    getPersonalGeneral(login: $login) {
       blackholedAt
     }
   }
@@ -51,7 +51,7 @@ export const BlackholedAt = () => {
       </DashboardContent>
     );
 
-  const { blackholedAt } = data.getPersonalGeneralPage;
+  const { blackholedAt } = data.getPersonalGeneral;
   const daysLeft = blackholedAt
     ? Math.floor(
         (new Date(blackholedAt).getTime() - Date.now()) / 1000 / 60 / 60 / 24,

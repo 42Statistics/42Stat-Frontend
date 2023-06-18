@@ -1,4 +1,4 @@
-export * from './ActiveUserCountRecords';
+export * from './AliveUserCountRecords';
 export * from './AverageDurationPerCircle';
 export * from './BlackholedCountPerCircle';
 export * from './BlackholedRate';

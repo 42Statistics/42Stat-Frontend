@@ -9,19 +9,19 @@ import { DashboardContent } from '@components/templates/DashboardContent';
 import styled from '@emotion/styled';
 import { useParams } from 'react-router-dom';
 
-const GET_LAST_COMMENT = gql(/* GraphQL */ `
-  query getLatestComment($login: String!) {
-    getPersonalEvalPage(login: $login) {
-      lastComment
+const GET_RECENT_COMMENT = gql(/* GraphQL */ `
+  query getRecentComment($login: String!) {
+    getPersonalEval(login: $login) {
+      recentComment
     }
   }
 `);
 
-export const LastComment = () => {
+export const RecentComment = () => {
   const { username } = useParams() as { username: string };
 
   const title = '최근 쓴 코멘트';
-  const { loading, error, data } = useQuery(GET_LAST_COMMENT, {
+  const { loading, error, data } = useQuery(GET_RECENT_COMMENT, {
     variables: { login: username },
   });
   if (loading)
@@ -43,7 +43,7 @@ export const LastComment = () => {
       </DashboardContent>
     );
 
-  const { lastComment } = data.getPersonalEvalPage;
+  const { recentComment } = data.getPersonalEval; // FIXME: null일 수 있음.
 
   // 내부에서 overflow가 발생하는 경우, div w='100%' h='100%'으로 밖을 감싸면 비정상적으로 작동함
   return (
@@ -53,7 +53,7 @@ export const LastComment = () => {
           {title && <H3MediumText>{title}</H3MediumText>}
         </VStack>
         <Scroll>
-          <Text selectable>{lastComment}</Text>
+          <Text selectable>{recentComment}</Text>
         </Scroll>
       </VStack>
     </DashboardContentLayout>

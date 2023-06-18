@@ -1,4 +1,5 @@
 import { gql } from '@/__generated__';
+import { DateTemplate } from '@/__generated__/graphql';
 import { useQuery } from '@apollo/client';
 import { Center, H3Text, Loader, Text, VStack } from '@components/common';
 import { CoalitionMark } from '@components/elements/CoalitionMark';
@@ -12,21 +13,25 @@ import { numberWithUnitFormatter } from '@utils/formatters';
 import dayjs from 'dayjs';
 import { capitalize } from 'lodash-es';
 
-const GET_TIG_COUNT_PER_COALITION = gql(/* GraphQL */ `
-  query GetTigCountPerCoalition {
+const GET_TIG_COUNT_PER_COALITION_BY_DATE_TEMPLATE = gql(/* GraphQL */ `
+  query GetTigCountPerCoalitionByDateTemplate($dateTemplate: DateTemplate!) {
     getHomeCoalition {
-      tigCountPerCoalition {
-        coalition {
-          id
-          name
-          slug
-          imageUrl
-          coverUrl
-          color
-          score
-          userId
+      tigCountPerCoalitionByDateTemplate(dateTemplate: $dateTemplate) {
+        data {
+          coalition {
+            id
+            name
+            slug
+            imageUrl
+            coverUrl
+            color
+            score
+            userId
+          }
+          value
         }
-        value
+        start
+        end
       }
     }
   }
@@ -34,7 +39,12 @@ const GET_TIG_COUNT_PER_COALITION = gql(/* GraphQL */ `
 
 export const MonthlyTigCountPerCoalition = () => {
   const title = '월간 누적 코알리숑 티그 횟수';
-  const { loading, error, data } = useQuery(GET_TIG_COUNT_PER_COALITION);
+  const { loading, error, data } = useQuery(
+    GET_TIG_COUNT_PER_COALITION_BY_DATE_TEMPLATE,
+    {
+      variables: { dateTemplate: DateTemplate.CurrMonth },
+    },
+  );
   if (loading)
     return (
       <DashboardContent title={title}>
@@ -54,16 +64,20 @@ export const MonthlyTigCountPerCoalition = () => {
       </DashboardContent>
     );
 
-  const { tigCountPerCoalition } = data.getHomeCoalition;
+  const {
+    data: queryData,
+    start,
+    end,
+  } = data.getHomeCoalition.tigCountPerCoalitionByDateTemplate;
 
-  const tableData = tigCountPerCoalition.map(({ coalition, value }) => ({
+  const tableData = queryData.map(({ coalition, value }) => ({
     coalition,
     value,
   }));
 
   const max = Math.max(...tableData.map(({ value }) => value));
 
-  const description = `${dayjs().format('M월 D일')} ~ ${dayjs().format(
+  const description = `${dayjs(start).format('M월 D일')} ~ ${dayjs(end).format(
     'M월 D일',
   )}`;
   const unit = '회';

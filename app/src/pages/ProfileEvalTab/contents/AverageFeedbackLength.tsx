@@ -11,7 +11,7 @@ import { useParams } from 'react-router-dom';
 
 const GET_AVERAGE_FEEDBACK_LENGTH_BY_LOGIN = gql(/* GraphQL */ `
   query GetAverageFeedbackLengthByLogin($login: String!) {
-    getPersonalEvalPage(login: $login) {
+    getPersonalEval(login: $login) {
       averageFeedbackLength
     }
   }
@@ -46,7 +46,7 @@ export const AverageFeedbackLength = () => {
       </DashboardContent>
     );
 
-  const { averageFeedbackLength } = data.getPersonalEvalPage;
+  const { averageFeedbackLength } = data.getPersonalEval;
   const unit = '자';
 
   return (

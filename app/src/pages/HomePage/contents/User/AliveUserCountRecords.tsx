@@ -9,10 +9,10 @@ import {
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { numberWithUnitFormatter } from '@utils/formatters';
 
-const GET_ACTIVE_USER_COUNT_RECORDS = gql(/* GraphQL */ `
-  query getActiveUserCountRecords {
+const GET_ALIVE_USER_COUNT_RECORDS = gql(/* GraphQL */ `
+  query GetAliveUserCountRecords {
     getHomeUser {
-      activeUserCountRecords {
+      aliveUserCountRecords {
         at
         value
       }
@@ -20,9 +20,9 @@ const GET_ACTIVE_USER_COUNT_RECORDS = gql(/* GraphQL */ `
   }
 `);
 
-export const ActiveUserCountRecords = () => {
+export const AliveUserCountRecords = () => {
   const title = '여행 중인 유저 수 추이';
-  const { loading, error, data } = useQuery(GET_ACTIVE_USER_COUNT_RECORDS);
+  const { loading, error, data } = useQuery(GET_ALIVE_USER_COUNT_RECORDS);
   if (loading)
     return (
       <DashboardContent title={title}>
@@ -42,14 +42,14 @@ export const ActiveUserCountRecords = () => {
       </DashboardContent>
     );
 
-  const { activeUserCountRecords } = data.getHomeUser;
-  const seriesData = activeUserCountRecords.map(({ at, value }) => ({
+  const { aliveUserCountRecords } = data.getHomeUser;
+  const seriesData = aliveUserCountRecords.map(({ at, value }) => ({
     x: at,
     y: value,
   }));
   const series: ApexAxisChartSeries = [
     {
-      name: '활성화 유저',
+      name: '여행 중인 유저',
       data: seriesData,
     },
   ];

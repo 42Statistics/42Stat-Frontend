@@ -16,7 +16,9 @@ const GET_CURR_REGISTERED_COUNT_RANKING = gql(/* GraphQL */ `
         projectPreview {
           id
           name
+          url
         }
+        rank
         value
       }
     }
@@ -50,11 +52,11 @@ export const CurrRegisteredCountRanking = () => {
   const unit = '명';
 
   const list: RankingItemType[] = currRegisteredCountRanking.map(
-    ({ projectPreview, value }, idx) => ({
+    ({ projectPreview, value, rank }) => ({
       id: projectPreview.id,
       name: projectPreview.name,
       value: value,
-      rank: idx + 1,
+      rank: rank,
     }),
   );
 

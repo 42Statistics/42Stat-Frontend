@@ -32,20 +32,22 @@ const GET_PROJECT_INFO = gql(/* GraphQL */ `
     getProjectInfo(projectName: $projectName) {
       id
       name
+      objectives
       skills
-      keywords
       description
       minUserCount
       maxUserCount
-      duration
+      estimateTime
       difficulty
       currRegisteredTeamCount
       closedTeamCount
       averagePassFinalMark
-      evalInfo {
-        totalEvalCount
-        passCount
-        failCount
+      validatedRate {
+        total
+        fields {
+          key
+          value
+        }
       }
     }
   }
@@ -65,20 +67,22 @@ const ProjectPage = () => {
   const {
     id,
     name,
+    objectives,
     skills,
-    keywords,
     description,
     minUserCount,
     maxUserCount,
-    duration,
+    estimateTime,
     difficulty,
     currRegisteredTeamCount,
     closedTeamCount,
     averagePassFinalMark,
-    evalInfo,
+    validatedRate,
   } = data.getProjectInfo;
 
-  const passPercentage = (evalInfo.passCount / evalInfo.totalEvalCount) * 100;
+  const labels = validatedRate.fields.map(({ key }) => key);
+  const series = validatedRate.fields.map(({ value }) => value);
+
   const getPeopleRange = (from: number, to: number) => {
     if (from === to) {
       if (from === 1) return 'Solo';
@@ -100,7 +104,7 @@ const ProjectPage = () => {
           <Text>{`${getPeopleRange(
             minUserCount,
             maxUserCount,
-          )} / ${duration} hrs. / ${difficulty} XP`}</Text>
+          )} / ${estimateTime} hrs. / ${difficulty} XP`}</Text>
           <HStack spacing="1rem">
             <HiUsers size="16px" />
             <Text>
@@ -110,7 +114,7 @@ const ProjectPage = () => {
         </VStack>
         <VStack spacing="3rem">
           <HStack spacing="1rem" wrap="wrap">
-            {keywords.filter(isDefined).map((text) => (
+            {objectives.filter(isDefined).map((text) => (
               <Label
                 key={text}
                 text={titleCase(text)}
@@ -158,10 +162,7 @@ const ProjectPage = () => {
           <AccentText>Past Evaluations</AccentText>
         </Link>
         <div style={{ width: '26rem', height: '26rem' }}>
-          <ProjectResultPercentageChart
-            labels={['Pass', 'Fail']}
-            series={[passPercentage, 100 - passPercentage]}
-          />
+          <ProjectResultPercentageChart labels={labels} series={series} />
         </div>
       </VStack>
     </ProjectPageLayout>

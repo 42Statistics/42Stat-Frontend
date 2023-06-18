@@ -24,7 +24,7 @@ import { useParams } from 'react-router-dom';
 
 const GET_USER_PROFILE = gql(/* GraphQL */ `
   query GetUserProfile($login: String!) {
-    getPersonalGeneralPage(login: $login) {
+    getPersonalGeneral(login: $login) {
       userProfile {
         id
         login
@@ -66,7 +66,7 @@ export const UserProfile = () => {
   if (!data) return <ApolloNotFound />;
 
   const { id, login, imgUrl, titles, coalition, grade, level, displayname } =
-    data.getPersonalGeneralPage.userProfile;
+    data.getPersonalGeneral.userProfile;
   const titleWithLogin = getTitleWithLogin(titles, login);
 
   return (

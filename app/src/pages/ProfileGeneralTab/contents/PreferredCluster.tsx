@@ -16,7 +16,7 @@ const GET_PREFERRED_CLUSTER = gql(/* GraphQL */ `
     $login: String!
     $dateTemplate: DateTemplate!
   ) {
-    getPersonalGeneralPage(login: $login) {
+    getPersonalGeneral(login: $login) {
       preferredClusterByDateTemplate(dateTemplate: $dateTemplate) {
         data {
           name
@@ -58,7 +58,7 @@ export const PreferredCluster = () => {
     data: preferredCluster,
     start,
     end,
-  } = data.getPersonalGeneralPage.preferredClusterByDateTemplate;
+  } = data.getPersonalGeneral.preferredClusterByDateTemplate;
 
   const description = `${dayjs(start).format('M월 D일')} ~ ${dayjs(end).format(
     'M월 D일',

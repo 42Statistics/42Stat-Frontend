@@ -11,7 +11,7 @@ import { useParams } from 'react-router-dom';
 
 const GET_AVERAGE_FINAL_MARK = gql(/* GraphQL */ `
   query getAverageFinalMark($login: String!) {
-    getPersonalEvalPage(login: $login) {
+    getPersonalEval(login: $login) {
       averageFinalMark
     }
   }
@@ -44,7 +44,7 @@ export const AverageFinalMark = () => {
       </DashboardContent>
     );
 
-  const { averageFinalMark } = data.getPersonalEvalPage;
+  const { averageFinalMark } = data.getPersonalEval;
   const unit = '점';
 
   return (

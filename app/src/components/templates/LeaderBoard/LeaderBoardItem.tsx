@@ -41,7 +41,9 @@ export const LeaderBoardItem = ({
       <TabletAndAbove>
         <TabletAndAboveLeaderBoardItemLayout isMe={isMe}>
           <HStack w="100%" spacing="4rem">
-            <H2BoldText color={color}>{rank}</H2BoldText>
+            <HStack w="5rem">
+              <H2BoldText color={color}>{rank}</H2BoldText>
+            </HStack>
             <Avatar src={imgUrl} />
             <Link to={`/profile/${name}`}>
               <H3MediumText color={color}>{name}</H3MediumText>
@@ -56,7 +58,9 @@ export const LeaderBoardItem = ({
       <Mobile>
         <MobileLeaderBoardItemLayout isMe={isMe}>
           <HStack w="100%" spacing="3rem">
-            <H3BoldText color={color}>{rank}</H3BoldText>
+            <HStack w="4rem">
+              <H3BoldText color={color}>{rank}</H3BoldText>
+            </HStack>
             <Avatar src={imgUrl} />
             <MediumText color={color}>{name}</MediumText>
             <Spacer />

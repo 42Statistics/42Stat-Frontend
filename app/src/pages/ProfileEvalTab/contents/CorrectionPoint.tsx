@@ -11,7 +11,7 @@ import { useParams } from 'react-router-dom';
 
 const GET_CORRECTION_POINT = gql(/* GraphQL */ `
   query GetCorrectionPoint($login: String!) {
-    getPersonalEvalPage(login: $login) {
+    getPersonalEval(login: $login) {
       correctionPoint
     }
   }
@@ -43,7 +43,7 @@ export const CorrectionPoint = () => {
       </DashboardContent>
     );
 
-  const { correctionPoint } = data.getPersonalEvalPage;
+  const { correctionPoint } = data.getPersonalEval;
   const unit = '개';
 
   return (

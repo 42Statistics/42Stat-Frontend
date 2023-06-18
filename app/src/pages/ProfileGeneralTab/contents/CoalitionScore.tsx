@@ -11,7 +11,7 @@ import { useParams } from 'react-router-dom';
 
 const GET_COALITION_SCORE_BY_LOGIN = gql(/* GraphQL */ `
   query GetCoalitionScore($login: String!) {
-    getPersonalGeneralPage(login: $login) {
+    getPersonalGeneral(login: $login) {
       userProfile {
         coalition {
           id
@@ -58,7 +58,7 @@ export const CoalitionScore = () => {
       </DashboardContent>
     );
 
-  const { userProfile, scoreInfo } = data.getPersonalGeneralPage;
+  const { userProfile, scoreInfo } = data.getPersonalGeneral;
   const { coalition } = userProfile;
   const { value } = scoreInfo;
   return (

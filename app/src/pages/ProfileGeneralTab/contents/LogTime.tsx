@@ -17,7 +17,7 @@ const GET_LOGTIME_BY_DATE_TEMPLATE = gql(/* GraphQL */ `
     $currDateTemplate: DateTemplate!
     $lastDateTemplate: DateTemplate!
   ) {
-    getPersonalGeneralPage(login: $login) {
+    getPersonalGeneral(login: $login) {
       currData: logtimeByDateTemplate(dateTemplate: $currDateTemplate) {
         data
         start
@@ -65,7 +65,7 @@ export const LogTime = () => {
   const {
     currData: { data: CurrLogTime, start, end },
     lastData: { data: LastLogTime },
-  } = data.getPersonalGeneralPage;
+  } = data.getPersonalGeneral;
   const currLogTimeByHours = Math.floor(CurrLogTime / 60);
   const lastLogTimeByHours = Math.floor(LastLogTime / 60);
   const description = `${dayjs(start).format('M월 D일')} ~ ${dayjs(end).format(

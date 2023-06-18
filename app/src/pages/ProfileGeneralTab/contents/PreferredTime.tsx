@@ -13,7 +13,7 @@ import { useParams } from 'react-router-dom';
 
 const GET_PREFERRED_TIME_BY_DATE_TEMPLATE = gql(/* GraphQL */ `
   query getPrefferedTime($login: String!, $dateTemplate: DateTemplate!) {
-    getPersonalGeneralPage(login: $login) {
+    getPersonalGeneral(login: $login) {
       preferredTimeByDateTemplate(dateTemplate: $dateTemplate) {
         data {
           total
@@ -59,7 +59,7 @@ export const PreferredTime = () => {
       </DashboardContent>
     );
 
-  const { preferredTimeByDateTemplate } = queryData.getPersonalGeneralPage;
+  const { preferredTimeByDateTemplate } = queryData.getPersonalGeneral;
   const {
     data: { morning, daytime, evening, night },
     start,

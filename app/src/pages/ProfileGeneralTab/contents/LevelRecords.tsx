@@ -8,15 +8,19 @@ import {
 } from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useTheme } from '@emotion/react';
+import { isDefined } from '@utils/isDefined';
 import { useParams } from 'react-router-dom';
 
-const GET_LEVEL_RECORDS = gql(/* GraphQL */ `
-  query getLevelRecords($login: String!) {
-    getPersonalGeneralPage(login: $login) {
-      levelRecords {
-        after
-        userLevel
-        averageLevel
+const GET_USER_LEVEL_RECORDS = gql(/* GraphQL */ `
+  query GetUserLevelRecords($login: String!) {
+    getPersonalGeneral(login: $login) {
+      userLevelRecords {
+        monthsPassed
+        level
+      }
+      memberLevelRecords {
+        monthsPassed
+        level
       }
     }
   }
@@ -27,7 +31,7 @@ export const LevelRecords = () => {
 
   const title = '레벨 증가 그래프';
   const description = `멤버 평균과 비교`;
-  const { loading, error, data } = useQuery(GET_LEVEL_RECORDS, {
+  const { loading, error, data } = useQuery(GET_USER_LEVEL_RECORDS, {
     variables: { login: username },
   });
   if (loading)
@@ -49,7 +53,7 @@ export const LevelRecords = () => {
       </DashboardContent>
     );
 
-  const { levelRecords } = data.getPersonalGeneralPage;
+  const { userLevelRecords, memberLevelRecords } = data.getPersonalGeneral;
 
   /**
    * 현재 n 일후이지만 나중에 날자로 변경해야 할 경우 사용
@@ -63,28 +67,26 @@ export const LevelRecords = () => {
   //   return date;
   // };
 
-  const userLevelSeries = levelRecords.map(
-    ({ after, userLevel, averageLevel }, idx) => ({
-      // x: createDate(currentYear, idx),
-      x: after,
-      y: userLevel,
-    }),
-  );
-  const averageLevelSeries = levelRecords.map(
-    ({ after, userLevel, averageLevel }, idx) => ({
-      // x: createDate(currentYear, idx),
-      x: after,
-      y: averageLevel,
+  const userLevelSeries = userLevelRecords
+    .filter(isDefined) // 왜 얘는 isDefined가 있어야 돼?
+    .map(({ monthsPassed, level }) => ({
+      x: monthsPassed,
+      y: level,
+    }));
+  const memberLevelSeries = memberLevelRecords.map(
+    ({ monthsPassed, level }) => ({
+      x: monthsPassed,
+      y: level,
     }),
   );
   const series = [
     {
-      name: '유저', // TODO: user login 가져오기
+      name: username,
       data: userLevelSeries,
     },
     {
       name: '멤버 평균',
-      data: averageLevelSeries,
+      data: memberLevelSeries,
     },
   ];
 
@@ -108,7 +110,7 @@ const LevelRecordsChart = ({ series }: LevelRecordsChartProps) => {
       // type: 'datetime',
       labels: {
         // format: 'yy.MM.',
-        formatter: (value) => `${value}일`,
+        formatter: (value) => `${value}개월`,
       },
     },
     yaxis: {
@@ -119,7 +121,7 @@ const LevelRecordsChart = ({ series }: LevelRecordsChartProps) => {
     tooltip: {
       x: {
         // format: 'yyyy년 M월',
-        formatter: (value) => `${(value - 1) * 50}일 후`,
+        formatter: (value) => `${value}개월`,
       },
     },
   };

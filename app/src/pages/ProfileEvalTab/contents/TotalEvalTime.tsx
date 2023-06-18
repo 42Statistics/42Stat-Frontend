@@ -10,7 +10,7 @@ import { DashboardContent } from '@components/templates/DashboardContent';
 
 const GET_TOTAL_EVAL_TIME = gql(/* GraphQL */ `
   query GetTotalEvalTime {
-    getPersonalEvalPage {
+    getPersonalEval {
       totalDuration
     }
   }
@@ -40,7 +40,7 @@ export const TotalEvalTime = () => {
       </DashboardContent>
     );
 
-  const { totalDuration } = queryData.getPersonalEvalPage;
+  const { totalDuration } = queryData.getPersonalEval;
 
   return (
     <DashboardContent title={title}>

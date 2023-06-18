@@ -11,7 +11,7 @@ import { useParams } from 'react-router-dom';
 
 const GET_BEGIN_AT = gql(/* GraphQL */ `
   query getBeginAt($login: String!) {
-    getPersonalGeneralPage(login: $login) {
+    getPersonalGeneral(login: $login) {
       beginAt
     }
   }
@@ -43,7 +43,7 @@ export const BeginAt = () => {
       </DashboardContent>
     );
 
-  const { beginAt } = data.getPersonalGeneralPage;
+  const { beginAt } = data.getPersonalGeneral;
   const daysFromBegin = Math.floor(
     (Date.now() - new Date(beginAt).getTime()) / 1000 / 60 / 60 / 24,
   );

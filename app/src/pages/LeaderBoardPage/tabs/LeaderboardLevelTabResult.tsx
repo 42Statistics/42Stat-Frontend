@@ -28,7 +28,7 @@ export const LeaderboardLevelTabResult = ({
   if (error) return <ApolloBadRequest msg={error.message} />;
   if (!data) return <ApolloNotFound />;
 
-  const { me, totalRanking } = data.getLeaderboardLevel.total;
+  const { me, totalRanking } = data.getLeaderboardLevel.byDateTemplate.data;
   const unit = '';
 
   const myRanking: RankingUserItemType | null =

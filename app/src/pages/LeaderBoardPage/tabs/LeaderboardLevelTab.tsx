@@ -1,4 +1,5 @@
 import { gql } from '@/__generated__';
+import { DateTemplate } from '@/__generated__/graphql';
 import { useLazyQuery } from '@apollo/client';
 import { HStack, SegmentedControl, Spacer, VStack } from '@components/common';
 import { PageBtnList } from '@components/elements/PageBtnList';
@@ -7,20 +8,19 @@ import { useEffect, useState } from 'react';
 import { LeaderboardLevelTabResult } from './LeaderboardLevelTabResult';
 
 const GET_LEADERBOARD_LEVEL = gql(/* GraphQL */ `
-  query GetLeaderboardLevel($pageSize: Int!, $pageNumber: Int!) {
+  query GetLeaderboardLevel(
+    $pageSize: Int!
+    $pageNumber: Int!
+    $dateTemplate: DateTemplate!
+  ) {
     getLeaderboardLevel {
-      total(pageSize: $pageSize, pageNumber: $pageNumber) {
-        me {
-          userPreview {
-            id
-            login
-            imgUrl
-          }
-          value
-          rank
-        }
-        totalRanking {
-          nodes {
+      byDateTemplate(
+        pageSize: $pageSize
+        pageNumber: $pageNumber
+        dateTemplate: $dateTemplate
+      ) {
+        data {
+          me {
             userPreview {
               id
               login
@@ -29,10 +29,23 @@ const GET_LEADERBOARD_LEVEL = gql(/* GraphQL */ `
             value
             rank
           }
-          totalCount
-          pageSize
-          pageNumber
+          totalRanking {
+            nodes {
+              userPreview {
+                id
+                login
+                imgUrl
+              }
+              value
+              rank
+            }
+            totalCount
+            pageSize
+            pageNumber
+          }
         }
+        start
+        end
       }
     }
   }
@@ -43,7 +56,9 @@ export const LeaderboardLevelTab = () => {
   const [search, result] = useLazyQuery(GET_LEADERBOARD_LEVEL);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<number>(0);
-
+  const [dateTemplate, setDateTemplate] = useState<DateTemplate>(
+    DateTemplate.Total,
+  );
   const options = [
     {
       label: '누적',
@@ -57,7 +72,8 @@ export const LeaderboardLevelTab = () => {
       return;
     }
     setTotalPage(
-      result.data?.getLeaderboardLevel.total.totalRanking.totalCount ?? 0,
+      result.data?.getLeaderboardLevel.byDateTemplate.data.totalRanking
+        .totalCount ?? 0,
     );
   }, [result]);
 
@@ -66,10 +82,11 @@ export const LeaderboardLevelTab = () => {
       variables: {
         pageSize: SIZE_PER_PAGE,
         pageNumber,
+        dateTemplate,
       },
     });
     setPageNumber(pageNumber);
-  }, [search, pageNumber]);
+  }, [dateTemplate, search, pageNumber]);
 
   return (
     <VStack w="100%" spacing="2rem">

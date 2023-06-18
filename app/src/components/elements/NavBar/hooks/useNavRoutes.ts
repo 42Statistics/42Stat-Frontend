@@ -42,9 +42,9 @@ export const useNavRoutes = () => {
       iconFocused: MdPerson,
     },
     PROJECT: {
-      text: '프로젝트 정보',
+      text: '프로젝트 목록',
       abbr: '프로젝트',
-      path: ROUTES.PROJECT_ROOT + '/libft',
+      path: ROUTES.PROJECT,
       icon: RiStackLine,
       iconFocused: RiStackFill,
     },

@@ -19,7 +19,7 @@ export const FtOAuthLoginBtn = () => {
     <Clickable onClick={handleClick}>
       <FtOAuthLoginBtnLayout>
         <HStack spacing="24px">
-          <Image src={ft_logo} width="18px" />
+          <Image src={ft_logo} alt="42 로고" width="18px" />
           <MediumText>42 계정으로 로그인</MediumText>
         </HStack>
       </FtOAuthLoginBtnLayout>

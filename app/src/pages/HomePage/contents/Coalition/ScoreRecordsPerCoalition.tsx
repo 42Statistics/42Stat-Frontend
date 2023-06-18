@@ -87,6 +87,9 @@ const ScoreRecordsPerCoalitionChart = ({
   colors,
 }: ScoreRecordsPerCoalitionChartProps) => {
   const options: ApexCharts.ApexOptions = {
+    chart: {
+      width: '100%',
+    },
     xaxis: {
       type: 'datetime',
       labels: {

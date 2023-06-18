@@ -10,6 +10,8 @@ import { RiHome2Fill } from '@react-icons/all-files/ri/RiHome2Fill';
 import { RiHome2Line } from '@react-icons/all-files/ri/RiHome2Line';
 import { RiLogoutBoxRFill } from '@react-icons/all-files/ri/RiLogoutBoxRFill';
 import { RiLogoutBoxRLine } from '@react-icons/all-files/ri/RiLogoutBoxRLine';
+import { RiStackFill } from '@react-icons/all-files/ri/RiStackFill';
+import { RiStackLine } from '@react-icons/all-files/ri/RiStackLine';
 import { ROUTES } from '@routes/ROUTES';
 import { useAtomValue } from 'jotai';
 
@@ -32,12 +34,19 @@ export const useNavRoutes = () => {
       icon: RiHome2Line,
       iconFocused: RiHome2Fill,
     },
-    MY_PROFILE: {
+    PROFILE: {
       text: '내 정보',
       abbr: '내 정보',
       path: `/profile/${user.login}`,
       icon: MdPersonOutline,
       iconFocused: MdPerson,
+    },
+    PROJECT: {
+      text: '프로젝트 목록',
+      abbr: '프로젝트',
+      path: ROUTES.PROJECT,
+      icon: RiStackLine,
+      iconFocused: RiStackFill,
     },
     LEADERBOARD: {
       text: '랭킹',

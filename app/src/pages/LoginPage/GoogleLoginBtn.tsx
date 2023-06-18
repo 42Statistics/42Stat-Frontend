@@ -23,7 +23,7 @@ export const GoogleLoginBtn = () => {
     <Clickable onClick={handleClick}>
       <GoogleLoginBtnLayout>
         <HStack spacing="24px">
-          <Image src={google_logo} width="18px" />
+          <Image src={google_logo} alt="구글 로고" width="18px" />
           <MediumText color="rgba(0, 0, 0, 0.54)">
             Google 계정으로 로그인
           </MediumText>

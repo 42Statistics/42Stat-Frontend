@@ -177,7 +177,7 @@ export const SimilarCharacter = () => {
   return (
     <DashboardContent title={title} description={description}>
       <VStack h="100%" spacing="3rem">
-        <Image width="200px" src={pokeImg} />
+        <Image width="200px" alt="이 유저와 성향이 비슷한 포켓몬" src={pokeImg} />
         <H3Text>{pokeName}</H3Text>
       </VStack>
     </DashboardContent>

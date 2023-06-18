@@ -3,6 +3,7 @@ import { PrimaryText, Text } from '@components/common';
 import styled from '@emotion/styled';
 import { isDefined } from '@utils/isDefined';
 import { rgba } from 'emotion-rgba';
+import { truncate } from 'lodash-es';
 import { DateDiffWithStatus } from './DateDiffWithStatus';
 import { ResultWithStatus } from './ResultWithStatus';
 
@@ -47,7 +48,7 @@ export const TeamInfoTable = ({ teams }: TeamInfoTableProps) => {
                   <Text>{occurrence + 1}</Text>
                 </td>
                 <td>
-                  <Text>{name}</Text>
+                  <Text>{truncate(name, { length: 42 })}</Text>
                 </td>
                 <td>
                   <DateDiffWithStatus

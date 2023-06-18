@@ -9,7 +9,7 @@ export const getTitleWithLogin = (
   for (const title of titles) {
     if (title == undefined) continue;
 
-    if (title.isSelected && title.name.includes(TARGET)) {
+    if (title.selected && title.name.includes(TARGET)) {
       return title.name.replace(TARGET, login);
     }
   }

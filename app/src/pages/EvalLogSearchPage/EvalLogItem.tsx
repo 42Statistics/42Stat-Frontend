@@ -68,7 +68,7 @@ export const EvalLogItem = ({ element }: { element: EvalLog }) => {
                 <Text selectable>{correctedsReview.review}</Text>
               ) : (
                 <Text color={theme.colors.mono.gray300} selectable>
-                  피드백을 작성하기 전에 블랙홀에 빠졌습니다
+                  아직 피드백을 작성하지 않았습니다
                 </Text>
               )}
             </div>

@@ -152,7 +152,9 @@ export const AppRoutes = () => {
         </Route>
         <Route path={ROUTES.LOGOUT} element={<LogoutPage />} />
       </Route>
-      <Route path="*" element={<NotFoundPage />} />
+      <Route element={<LandingLayout />}>
+        <Route path="*" element={<NotFoundPage />} />
+      </Route>
     </Routes>
   );
 };

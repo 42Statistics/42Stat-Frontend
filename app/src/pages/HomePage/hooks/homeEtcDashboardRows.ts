@@ -20,6 +20,34 @@ export const homeEtcDesktopDashboardRows: DesktopDashboardRowType[] = [
   },
 ];
 
-export const homeEtcTabletDashboardRows: TabletDashboardRowType[] = [];
+export const homeEtcTabletDashboardRows: TabletDashboardRowType[] = [
+  {
+    row: 2,
+    col: 2,
+    items: [
+      {
+        row: 1,
+        col: 1,
+        rowSpan: 2,
+        colSpan: 1,
+        elementId: 16,
+      },
+    ],
+  },
+];
 
-export const homeEtcMobileDashboardRows: MobileDashboardRowType[] = [];
+export const homeEtcMobileDashboardRows: MobileDashboardRowType[] = [
+  {
+    row: 2,
+    col: 1,
+    items: [
+      {
+        row: 1,
+        col: 1,
+        rowSpan: 2,
+        colSpan: 1,
+        elementId: 16,
+      },
+    ],
+  },
+];

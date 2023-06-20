@@ -1,11 +1,6 @@
 import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import { Loader, VStack, WhiteH2BoldText, WhiteText } from '@components/common';
-import {
-  ApolloBadRequest,
-  ApolloNotFound,
-} from '@components/elements/DashboardContentView/Error';
-import { DashboardContent } from '@components/templates/DashboardContent';
 import styled from '@emotion/styled';
 import { getDailyProgrammingQuote } from '@utils/getDailyProgrammingQuote';
 import { getDayDiff } from '@utils/getDayDiff';
@@ -46,18 +41,15 @@ export const Hero = () => {
         <Loader />
       </HeroLayout>
     );
-  if (error)
+  if (error || !data)
     return (
-      <DashboardContent>
-        <ApolloBadRequest msg={error.message} />
-      </DashboardContent>
-    ); // TODO: UI 수정
-  if (!data)
-    return (
-      <DashboardContent>
-        <ApolloNotFound />
-      </DashboardContent>
-    ); // TODO: UI 수정
+      <HeroLayout>
+        <VStack h="100%" align="start" spacing="1rem">
+          <WhiteH2BoldText>42Stat에 오신 것을 환영합니다 👋</WhiteH2BoldText>
+          <WhiteText>오늘의 명언 | {getDailyProgrammingQuote()}</WhiteText>
+        </VStack>
+      </HeroLayout>
+    );
 
   const {
     userPreview,

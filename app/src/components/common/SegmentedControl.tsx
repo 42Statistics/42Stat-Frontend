@@ -82,7 +82,7 @@ const Controls = styled.div<{ ready: boolean }>`
   overflow: hidden;
   position: relative;
   transition: box-shadow 0.4s;
-  box-shadow: 8px 8px 10px #eeeeee, -8px -8px 10px #ffffff;
+  box-shadow: 8px 8px 10px #f2f2f2, -8px -8px 10px #ffffff;
 
   :hover {
     box-shadow: 8px 8px 10px #dddddd, -8px -8px 10px #ffffff;

@@ -47,6 +47,82 @@ export const homeCircleDesktopDashboardRows: DesktopDashboardRowType[] = [
   },
 ];
 
-export const homeCircleTabletDashboardRows: TabletDashboardRowType[] = [];
+export const homeCircleTabletDashboardRows: TabletDashboardRowType[] = [
+  {
+    row: 2,
+    col: 2,
+    items: [
+      {
+        row: 1,
+        col: 1,
+        rowSpan: 2,
+        colSpan: 1,
+        elementId: 13,
+      },
+      {
+        row: 1,
+        col: 2,
+        rowSpan: 2,
+        colSpan: 1,
+        elementId: 12,
+      },
+    ],
+  },
+  {
+    row: 2,
+    col: 2,
+    items: [
+      {
+        row: 1,
+        col: 1,
+        rowSpan: 2,
+        colSpan: 1,
+        elementId: 11,
+      },
+      {
+        row: 1,
+        col: 2,
+        rowSpan: 2,
+        colSpan: 1,
+        elementId: 10,
+      },
+    ],
+  },
+];
 
-export const homeCircleMobileDashboardRows: MobileDashboardRowType[] = [];
+export const homeCircleMobileDashboardRows: MobileDashboardRowType[] = [
+  {
+    row: 8,
+    col: 1,
+    items: [
+      {
+        row: 1,
+        col: 1,
+        rowSpan: 2,
+        colSpan: 1,
+        elementId: 13,
+      },
+      {
+        row: 3,
+        col: 1,
+        rowSpan: 2,
+        colSpan: 1,
+        elementId: 12,
+      },
+      {
+        row: 5,
+        col: 1,
+        rowSpan: 2,
+        colSpan: 1,
+        elementId: 11,
+      },
+      {
+        row: 7,
+        col: 1,
+        rowSpan: 2,
+        colSpan: 1,
+        elementId: 10,
+      },
+    ],
+  },
+];

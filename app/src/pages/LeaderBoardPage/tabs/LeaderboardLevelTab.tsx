@@ -89,7 +89,7 @@ export const LeaderboardLevelTab = () => {
   }, [dateTemplate, search, pageNumber]);
 
   return (
-    <VStack w="100%" spacing="2rem">
+    <VStack w="100%" spacing="4rem">
       <HStack w="100%">
         <SegmentedControl
           callback={() => {

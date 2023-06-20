@@ -28,7 +28,6 @@ export const TeamInfoTable = ({ teams }: TeamInfoTableProps) => {
       <tbody>
         {teams
           .filter(isDefined)
-          .reverse()
           .map(
             ({
               id,

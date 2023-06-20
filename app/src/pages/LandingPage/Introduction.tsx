@@ -54,19 +54,21 @@ export const Introduction = () => {
   }, [data]);
 
   if (loading) {
-    return <div>loading...</div>; // TODO: UI 수정
+    return <VStack h="10rem"></VStack>;
   }
-  if (error) {
-    return <div>error...</div>; // TODO: UI 수정. 에러 발생 시에도 다른 문자열로 대체하여 랜딩페이지 보여주기
-  }
-  if (!data) {
-    return <div>no data...</div>; // TODO: UI 수정
+
+  if (error || !data) {
+    return (
+      <VStack h="10rem" spacing="1rem">
+        <WhiteH1BoldText>{/* TODO: 에러 시 대체 텍스트 */}</WhiteH1BoldText>
+      </VStack>
+    );
   }
 
   const { daysAfterBeginAt, aliveCount } = data.getLanding;
 
   return (
-    <VStack spacing="1rem">
+    <VStack h="10rem" spacing="1rem">
       <WhiteH1BoldText>
         은하수를 여행한지{' '}
         {<CountUp isCounting end={daysAfterBeginAt} duration={3.5} />}

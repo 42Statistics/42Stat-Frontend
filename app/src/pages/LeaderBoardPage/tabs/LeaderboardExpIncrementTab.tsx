@@ -106,7 +106,7 @@ export const LeaderboardExpIncrementTab = () => {
   }, [dateTemplate]);
 
   return (
-    <VStack w="100%" spacing="2rem">
+    <VStack w="100%" spacing="4rem">
       <HStack w="100%">
         <SegmentedControl
           callback={handleSegmentedControlChange}

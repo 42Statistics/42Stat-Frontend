@@ -15,7 +15,7 @@ export const Button = styled(Clickable)<ButtonProps>`
   color: ${({ theme }) => theme.colors.mono.white};
   font-weight: ${({ theme }) => theme.fonts.weight.medium};
   font-size: ${({ theme }) => theme.fonts.size.body};
-  padding: 1rem 2rem;
+  padding: 1rem 2.2rem;
   user-select: none;
   transition: all 0.15s ease-in-out;
 

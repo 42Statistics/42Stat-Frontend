@@ -16,5 +16,4 @@ export * from './Skeleton';
 export * from './Spacer';
 export * from './Spinner';
 export * from './Stack';
-export * from './StyledInfoTable';
 export * from './Text';

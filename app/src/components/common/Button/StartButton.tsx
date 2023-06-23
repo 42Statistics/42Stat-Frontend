@@ -19,11 +19,11 @@ export const StartButton = styled(Clickable)<StartButtonProps>`
   font-size: ${({ theme }) => theme.fonts.size.h3};
   padding: 1.2rem 2.4rem;
   user-select: none;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.15s ease-in-out;
 
   &:hover {
     background-color: ${({ theme }) => rgba(theme.colors.primary.default, 0.9)};
-    transform: translateY(-1px);
+    transform: translateY(-1.5px);
   }
 
   &:active {

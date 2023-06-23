@@ -117,19 +117,18 @@ const ProjectPage = () => {
             {objectives.filter(isDefined).map((text) => (
               <Label
                 key={text}
-                text={titleCase(text)}
-                bgColor={theme.colors.accent.default}
+                backgroundColor={theme.colors.accent.default}
                 fontWeight={theme.fonts.weight.medium}
-              />
+              >
+                {titleCase(text)}
+              </Label>
             ))}
           </HStack>
           <HStack spacing="1rem" wrap="wrap">
             {skills.filter(isDefined).map((text) => (
-              <Label
-                key={text}
-                text={titleCase(text)}
-                fontWeight={theme.fonts.weight.medium}
-              />
+              <Label key={text} fontWeight={theme.fonts.weight.medium}>
+                {titleCase(text)}
+              </Label>
             ))}
           </HStack>
         </VStack>

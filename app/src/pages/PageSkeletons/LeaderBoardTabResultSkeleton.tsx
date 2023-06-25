@@ -1,17 +1,21 @@
-import { Skeleton, VStack } from '@components/common';
+import { Divider, Skeleton, VStack } from '@components/common';
 
 export const LeaderBoardTabResultSkeleton = () => {
   return (
-    <VStack w="100%" spacing="2.5rem" align="start">
-      {/* <SegmentedControlSkeleton /> */}
-      <Skeleton style={{ height: '65px' }} />
+    <VStack w="100%" spacing="5rem">
+      <LeaderBoardItemSkeleteon />
+      <Divider />
       <VStack w="100%" spacing="1rem">
         {Array.from({ length: 50 }, (x) => x).map((_, idx) => (
-          <Skeleton key={idx} style={{ height: '65px' }} />
+          <LeaderBoardItemSkeleteon key={idx} />
         ))}
       </VStack>
     </VStack>
   );
+};
+
+const LeaderBoardItemSkeleteon = () => {
+  return <Skeleton style={{ height: '50px' }} />;
 };
 
 // const SegmentedControlSkeleton = styled(Skeleton)`

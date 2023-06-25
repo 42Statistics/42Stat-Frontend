@@ -10,7 +10,6 @@ type EvalLogLabelProps = {
   size?: EvalLogLabelSize;
   type: EvalLogLabelType;
   fontWeight?: number;
-  backgroundColor?: string;
   children: string;
 };
 

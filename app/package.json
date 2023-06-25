@@ -43,7 +43,6 @@
     "react-router-dom": "^6.12.1",
     "react-slick": "^0.29.0",
     "react-spinners": "^0.13.8",
-    "react-tabs": "^6.0.1",
     "slick-carousel": "^1.8.1",
     "use-count-up": "^3.0.1"
   },

@@ -1,7 +1,7 @@
 import {
   Avatar,
+  BoldText,
   H2MediumText,
-  H3BoldText,
   H3MediumText,
   HStack,
   MediumText,
@@ -58,10 +58,10 @@ export const LeaderBoardItem = ({
       <Mobile>
         <MobileLeaderBoardItemLayout isMe={isMe}>
           <HStack w="100%" spacing="3rem">
-            <HStack w="4rem">
-              <H3BoldText color={color}>{rank}</H3BoldText>
+            <HStack w="2rem">
+              <BoldText color={color}>{rank}</BoldText>
             </HStack>
-            <Avatar src={imgUrl} />
+            <Avatar size="sm" src={imgUrl} />
             <MediumText color={color}>{name}</MediumText>
             <Spacer />
             <MediumText color={color}>

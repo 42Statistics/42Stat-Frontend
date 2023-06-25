@@ -1,7 +1,6 @@
-import { Clickable, H3Text, HStack, Spacer, VStack } from '@components/common';
+import { Clickable, HStack, Text } from '@components/common';
 import { IoIosArrowBack } from '@react-icons/all-files/io/IoIosArrowBack';
 import { IoIosArrowForward } from '@react-icons/all-files/io/IoIosArrowForward';
-import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
 import { PageBtn } from './PageBtn';
 
 type PageBtnListProps = {
@@ -42,80 +41,35 @@ export const PageBtnList = ({
   };
 
   return (
-    <>
-      <TabletAndAbove>
-        <HStack h="8rem" spacing="6rem">
-          <Clickable
-            onClick={handleClickStartBtn}
-            disabled={currPageNumber === 1}
-          >
-            <H3Text>처음으로</H3Text>
-          </Clickable>
-          <HStack spacing="2rem">
-            <Clickable onClick={handleClickBackBtn} disabled={start === 1}>
-              <IoIosArrowBack />
-            </Clickable>
-            {pageNumberList.map((pageNumber) => (
-              <PageBtn
-                key={pageNumber}
-                currPageNumber={currPageNumber}
-                pageNumber={pageNumber}
-                setPageNumber={setPageNumber}
-              />
-            ))}
-            <Clickable
-              onClick={handleClickForwardBtn}
-              disabled={pageNumberList.includes(totalPageNumber)}
-            >
-              <IoIosArrowForward />
-            </Clickable>
-          </HStack>
-          <Clickable
-            onClick={handleClickEndBtn}
-            disabled={currPageNumber === totalPageNumber}
-          >
-            <H3Text>끝으로</H3Text>
-          </Clickable>
-        </HStack>
-      </TabletAndAbove>
-      <Mobile>
-        <VStack w="100%" h="10rem" spacing="1.4rem">
-          <HStack spacing="2rem">
-            <Clickable onClick={handleClickBackBtn} disabled={start === 1}>
-              <IoIosArrowBack />
-            </Clickable>
-            {pageNumberList.map((pageNumber) => (
-              <PageBtn
-                key={pageNumber}
-                currPageNumber={currPageNumber}
-                pageNumber={pageNumber}
-                setPageNumber={setPageNumber}
-              />
-            ))}
-            <Clickable
-              onClick={handleClickForwardBtn}
-              disabled={pageNumberList.includes(totalPageNumber)}
-            >
-              <IoIosArrowForward />
-            </Clickable>
-          </HStack>
-          <HStack w="100%">
-            <Clickable
-              onClick={handleClickStartBtn}
-              disabled={currPageNumber === 1}
-            >
-              <H3Text>처음으로</H3Text>
-            </Clickable>
-            <Spacer />
-            <Clickable
-              onClick={handleClickEndBtn}
-              disabled={currPageNumber === totalPageNumber}
-            >
-              <H3Text>끝으로</H3Text>
-            </Clickable>
-          </HStack>
-        </VStack>
-      </Mobile>
-    </>
+    <HStack h="8rem" spacing="6rem">
+      <Clickable onClick={handleClickStartBtn} disabled={currPageNumber === 1}>
+        <Text>처음으로</Text>
+      </Clickable>
+      <HStack spacing="1.4rem">
+        <Clickable onClick={handleClickBackBtn} disabled={start === 1}>
+          <IoIosArrowBack />
+        </Clickable>
+        {pageNumberList.map((pageNumber) => (
+          <PageBtn
+            key={pageNumber}
+            currPageNumber={currPageNumber}
+            pageNumber={pageNumber}
+            setPageNumber={setPageNumber}
+          />
+        ))}
+        <Clickable
+          onClick={handleClickForwardBtn}
+          disabled={pageNumberList.includes(totalPageNumber)}
+        >
+          <IoIosArrowForward />
+        </Clickable>
+      </HStack>
+      <Clickable
+        onClick={handleClickEndBtn}
+        disabled={currPageNumber === totalPageNumber}
+      >
+        <Text>끝으로</Text>
+      </Clickable>
+    </HStack>
   );
 };

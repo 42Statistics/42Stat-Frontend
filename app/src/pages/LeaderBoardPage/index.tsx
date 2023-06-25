@@ -1,7 +1,6 @@
-import { VStack, center } from '@components/common';
+import { VStack } from '@components/common';
 import { Tab, TabPanel, Tabs } from '@components/common/Tab';
 import { Seo } from '@components/elements/Seo';
-import styled from '@emotion/styled';
 import { withFooter } from '@hoc/withFooter';
 import { withHead } from '@hoc/withHead';
 import { ROUTES } from '@routes/ROUTES';
@@ -95,35 +94,20 @@ const LeaderBoardPage = () => {
         </Tab>
       </Tabs>
       <TabPanel show={selectedTab === 'Level'}>
-        <LeaderBoardDetailLayout>
-          <LeaderboardLevelTab />
-        </LeaderBoardDetailLayout>
+        <LeaderboardLevelTab />
       </TabPanel>
       <TabPanel show={selectedTab === 'ExpIncrement'}>
-        <LeaderBoardDetailLayout>
-          <LeaderboardExpIncrementTab />
-        </LeaderBoardDetailLayout>
+        <LeaderboardExpIncrementTab />
       </TabPanel>
       <TabPanel show={selectedTab === 'CoalitionScore'}>
-        <LeaderBoardDetailLayout>
-          <LeaderboardCoalitionScoreTab />
-        </LeaderBoardDetailLayout>
+        <LeaderboardCoalitionScoreTab />
       </TabPanel>
       <TabPanel show={selectedTab === 'EvalCount'}>
-        <LeaderBoardDetailLayout>
-          <LeaderboardEvalCountTab />
-        </LeaderBoardDetailLayout>
+        <LeaderboardEvalCountTab />
       </TabPanel>
     </VStack>
   );
 };
-
-const LeaderBoardDetailLayout = styled.div`
-  ${center}
-  padding: 2rem;
-  border-radius: ${({ theme }) => theme.radius.md};
-  background-color: ${({ theme }) => theme.colors.mono.white};
-`;
 
 const Head = () => {
   return <Seo title="랭킹" />;

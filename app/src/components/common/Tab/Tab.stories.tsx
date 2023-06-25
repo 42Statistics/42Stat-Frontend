@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Tab, TabList } from '.';
-import { Text } from '../Text';
+import { Tab } from '.';
 
 const meta = {
   title: 'Common/Tab/Tab',
@@ -14,21 +13,21 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  render: () => (
-    <TabList>
-      <Tab>
-        <Text>일반</Text>
-      </Tab>
-    </TabList>
-  ),
+  args: {
+    selected: false,
+    onClick: () => {
+      /* pass */
+    },
+    children: '일반',
+  },
 };
 
 export const Selected: Story = {
-  render: () => (
-    <TabList>
-      <Tab selected>
-        <Text>일반</Text>
-      </Tab>
-    </TabList>
-  ),
+  args: {
+    selected: true,
+    onClick: () => {
+      /* pass */
+    },
+    children: '일반',
+  },
 };

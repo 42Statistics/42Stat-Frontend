@@ -1,7 +1,7 @@
 import { gql } from '@/__generated__';
 import { DateTemplate } from '@/__generated__/graphql';
 import { useLazyQuery } from '@apollo/client';
-import { HStack, SegmentedControl, Spacer, VStack } from '@components/common';
+import { HStack, SegmentedControl, VStack } from '@components/common';
 import { PageBtnList } from '@components/elements/PageBtnList';
 import { useSegmentedControl } from '@utils/useSegmentedControl';
 import { useEffect, useState } from 'react';
@@ -113,7 +113,6 @@ export const LeaderboardExpIncrementTab = () => {
           controlRef={controlRef}
           segments={segments}
         />
-        <Spacer />
       </HStack>
       <LeaderboardExpIncrementTabResult result={result} />
       <PageBtnList

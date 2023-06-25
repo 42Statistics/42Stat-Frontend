@@ -1,6 +1,6 @@
 import {
   Avatar,
-  H2BoldText,
+  H2MediumText,
   H3BoldText,
   H3MediumText,
   HStack,
@@ -42,7 +42,7 @@ export const LeaderBoardItem = ({
         <TabletAndAboveLeaderBoardItemLayout isMe={isMe}>
           <HStack w="100%" spacing="4rem">
             <HStack w="5rem">
-              <H2BoldText color={color}>{rank}</H2BoldText>
+              <H2MediumText color={color}>{rank}</H2MediumText>
             </HStack>
             <Avatar src={imgUrl} />
             <Link to={`/profile/${name}`}>
@@ -76,16 +76,16 @@ export const LeaderBoardItem = ({
 
 export const TabletAndAboveLeaderBoardItemLayout = styled.li<{ isMe: boolean }>`
   width: 100%;
-  padding: 1rem 5rem;
-  border-radius: ${({ theme }) => theme.radius.sm};
+  padding: 0.8rem 5rem;
+  border-radius: ${({ theme }) => theme.radius.xs};
   background-color: ${({ isMe, theme }) =>
     isMe && theme.colors.primary.default} !important; // FIXME: !important
 `;
 
 export const MobileLeaderBoardItemLayout = styled.li<{ isMe: boolean }>`
   width: 100%;
-  padding: 0.7rem 2rem;
-  border-radius: ${({ theme }) => theme.radius.sm};
+  padding: 0.5rem 2rem;
+  border-radius: ${({ theme }) => theme.radius.xs};
   background-color: ${({ isMe, theme }) =>
     isMe && theme.colors.primary.default} !important; // FIXME: !important
 `;

@@ -1,4 +1,4 @@
-import { center } from '@components/common';
+import { VStack, center } from '@components/common';
 import { Tab, TabPanel, Tabs } from '@components/common/Tab';
 import { Seo } from '@components/elements/Seo';
 import styled from '@emotion/styled';
@@ -55,7 +55,7 @@ const LeaderBoardPage = () => {
   }, []);
 
   return (
-    <>
+    <VStack w="100%" spacing="5rem">
       <Tabs>
         <Tab
           selected={selectedTab === 'Level'}
@@ -114,7 +114,7 @@ const LeaderBoardPage = () => {
           <LeaderboardEvalCountTab />
         </LeaderBoardDetailLayout>
       </TabPanel>
-    </>
+    </VStack>
   );
 };
 

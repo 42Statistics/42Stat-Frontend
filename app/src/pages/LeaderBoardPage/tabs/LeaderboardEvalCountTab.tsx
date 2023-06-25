@@ -114,7 +114,6 @@ export const LeaderboardEvalCountTab = () => {
           controlRef={controlRef}
           segments={segments}
         />
-        <Spacer />
       </HStack>
       <LeaderboardEvalCountTabResult result={result} />
       <PageBtnList

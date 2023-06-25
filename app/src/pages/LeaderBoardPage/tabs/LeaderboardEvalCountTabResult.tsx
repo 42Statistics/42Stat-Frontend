@@ -3,7 +3,7 @@ import {
   GetLeaderboardEvalCountQueryVariables,
 } from '@/__generated__/graphql';
 import { QueryResult } from '@apollo/client';
-import { VStack } from '@components/common';
+import { Divider, VStack } from '@components/common';
 import {
   ApolloBadRequest,
   ApolloNotFound,
@@ -53,8 +53,9 @@ export const LeaderboardEvalCountTabResult = ({
     }));
 
   return (
-    <VStack w="100%" spacing="2rem">
+    <VStack w="100%" spacing="5rem">
       {myRanking && <LeaderBoardItem item={myRanking} unit={unit} isMe />}
+      <Divider />
       <LeaderBoard list={list} me={myRanking} unit={unit} />
     </VStack>
   );

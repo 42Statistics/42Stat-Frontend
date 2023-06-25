@@ -23,7 +23,7 @@ const documents = {
     "\n  query getAverageFeedbackLength {\n    getHomeEval {\n      averageFeedbackLength\n    }\n  }\n": types.GetAverageFeedbackLengthDocument,
     "\n  query GetEvalCountByDateTemplate($dateTemplate: DateTemplate!) {\n    getHomeEval {\n      evalCountByDateTemplate(dateTemplate: $dateTemplate) {\n        data\n        start\n        end\n      }\n    }\n  }\n": types.GetEvalCountByDateTemplateDocument,
     "\n  query GetAverageEvalCountByDateTemplate($dateTemplate: DateTemplate!) {\n    getHomeEval {\n      averageEvalCountByDateTemplate(dateTemplate: $dateTemplate) {\n        data\n        start\n        end\n      }\n    }\n  }\n": types.GetAverageEvalCountByDateTemplateDocument,
-    "\n  query GetCurrRegisteredCountRanking {\n    getHomeTeam {\n      currRegisteredCountRanking {\n        projectPreview {\n          id\n          name\n          url\n        }\n        rank\n        value\n      }\n    }\n  }\n": types.GetCurrRegisteredCountRankingDocument,
+    "\n  query GetCurrRegisteredCountRanking {\n    getHomeTeam {\n      currRegisteredCountRanking(limit: 5) {\n        projectPreview {\n          id\n          name\n          url\n        }\n        rank\n        value\n      }\n    }\n  }\n": types.GetCurrRegisteredCountRankingDocument,
     "\n  query GetLastExamResult {\n    getHomeTeam {\n      lastExamResult {\n        data {\n          rank\n          passCount\n          totalCount\n        }\n        start\n        end\n      }\n    }\n  }\n": types.GetLastExamResultDocument,
     "\n  query GetAliveUserCountRecords {\n    getHomeUser {\n      aliveUserCountRecords {\n        at\n        value\n      }\n    }\n  }\n": types.GetAliveUserCountRecordsDocument,
     "\n  query getAverageDurationPerCircle {\n    getHomeUser {\n      averageDurationPerCircle {\n        circle\n        value\n      }\n    }\n  }\n": types.GetAverageDurationPerCircleDocument,
@@ -123,7 +123,7 @@ export function gql(source: "\n  query GetAverageEvalCountByDateTemplate($dateTe
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query GetCurrRegisteredCountRanking {\n    getHomeTeam {\n      currRegisteredCountRanking {\n        projectPreview {\n          id\n          name\n          url\n        }\n        rank\n        value\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetCurrRegisteredCountRanking {\n    getHomeTeam {\n      currRegisteredCountRanking {\n        projectPreview {\n          id\n          name\n          url\n        }\n        rank\n        value\n      }\n    }\n  }\n"];
+export function gql(source: "\n  query GetCurrRegisteredCountRanking {\n    getHomeTeam {\n      currRegisteredCountRanking(limit: 5) {\n        projectPreview {\n          id\n          name\n          url\n        }\n        rank\n        value\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetCurrRegisteredCountRanking {\n    getHomeTeam {\n      currRegisteredCountRanking(limit: 5) {\n        projectPreview {\n          id\n          name\n          url\n        }\n        rank\n        value\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

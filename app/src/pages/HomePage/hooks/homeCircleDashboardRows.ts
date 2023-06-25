@@ -43,6 +43,13 @@ export const homeCircleDesktopDashboardRows: DesktopDashboardRowType[] = [
         colSpan: 1,
         elementId: 10,
       },
+      {
+        row: 1,
+        col: 2,
+        rowSpan: 2,
+        colSpan: 1,
+        elementId: 16,
+      },
     ],
   },
 ];
@@ -88,11 +95,24 @@ export const homeCircleTabletDashboardRows: TabletDashboardRowType[] = [
       },
     ],
   },
+  {
+    row: 2,
+    col: 2,
+    items: [
+      {
+        row: 1,
+        col: 1,
+        rowSpan: 2,
+        colSpan: 1,
+        elementId: 16,
+      },
+    ],
+  },
 ];
 
 export const homeCircleMobileDashboardRows: MobileDashboardRowType[] = [
   {
-    row: 8,
+    row: 10,
     col: 1,
     items: [
       {
@@ -122,6 +142,13 @@ export const homeCircleMobileDashboardRows: MobileDashboardRowType[] = [
         rowSpan: 2,
         colSpan: 1,
         elementId: 10,
+      },
+      {
+        row: 9,
+        col: 1,
+        rowSpan: 2,
+        colSpan: 1,
+        elementId: 16,
       },
     ],
   },

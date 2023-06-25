@@ -36,8 +36,8 @@ export const MonthlyBlackholedCount = () => {
     GET_BLACKHOLED_COUNT_BY_DATE_TEMPLATE,
     {
       variables: {
-        currDateTemplate: DateTemplate.CurrWeek, // FIXME: CurrMonth로 수정. 현재 에러가 발생함.
-        lastDateTemplate: DateTemplate.LastWeek,
+        currDateTemplate: DateTemplate.CurrMonth,
+        lastDateTemplate: DateTemplate.LastMonth,
       },
     },
   );

@@ -60,6 +60,7 @@ type StyledLabelProps = {
 };
 
 export const StyledLabel = styled.div<StyledLabelProps>`
+  display: inline-block;
   padding: ${({ padding }) => padding};
   background-color: ${({ backgroundColor }) => backgroundColor};
   border-radius: ${({ theme }) => theme.radius.md};

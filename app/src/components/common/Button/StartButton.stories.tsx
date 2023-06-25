@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { StartButton } from './StartButton';
 
 const meta = {
-  title: 'Common/StartButton',
+  title: 'Common/Button/StartButton',
   component: StartButton,
   tags: ['autodocs'],
 } satisfies Meta<typeof StartButton>;
@@ -13,7 +13,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    children: '👺 지금 시작 안하기',
+    children: '🚀 지금 시작하기',
     onClick: () => {
       /* pass */
     },

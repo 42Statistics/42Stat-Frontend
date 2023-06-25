@@ -107,9 +107,8 @@ const LevelRecordsChart = ({ series }: LevelRecordsChartProps) => {
   const options: ApexCharts.ApexOptions = {
     colors: [theme.colors.primary.default, theme.colors.accent.default],
     xaxis: {
-      // type: 'datetime',
+      tickAmount: 8,
       labels: {
-        // format: 'yy.MM.',
         formatter: (value) => `${value}개월`,
       },
     },
@@ -120,8 +119,7 @@ const LevelRecordsChart = ({ series }: LevelRecordsChartProps) => {
     },
     tooltip: {
       x: {
-        // format: 'yyyy년 M월',
-        formatter: (value) => `${value}개월`,
+        formatter: (value) => `${value}개월 차`,
       },
     },
   };

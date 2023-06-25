@@ -1,5 +1,6 @@
 import {
   Button,
+  Center,
   HStack,
   Input,
   Modal,
@@ -33,26 +34,36 @@ export const EvalLogSearchModal = ({
         <VStack spacing="6rem">
           <VStack as="ul" w="100%" spacing="3rem">
             <HStack as="li" spacing="3rem">
-              <Text>과제명</Text>
+              <Center w="5rem">
+                <Text>과제명</Text>
+              </Center>
               <EvalLogSearchInput {...register('projectName')} />
             </HStack>
             <HStack as="li" spacing="3rem">
-              <Text>From</Text>
+              <Center w="5rem">
+                <Text>From</Text>
+              </Center>
               <EvalLogSearchInput {...register('corrector')} />
             </HStack>
             <HStack as="li" spacing="3rem">
-              <Text>To</Text>
+              <Center w="5rem">
+                <Text>To</Text>
+              </Center>
               <EvalLogSearchInput {...register('corrected')} />
             </HStack>
             <HStack as="li" spacing="3rem">
-              <Text>플래그</Text>
+              <Center w="5rem">
+                <Text>플래그</Text>
+              </Center>
               <Select {...register('flag')} style={{ width: '150px' }}>
                 <option value="all">전체</option>
                 <option value="outstanding">Outstanding만</option>
               </Select>
             </HStack>
             <HStack as="li" spacing="3rem">
-              <Text>정렬</Text>
+              <Center w="5rem">
+                <Text>정렬</Text>
+              </Center>
               <Select {...register('sortOrder')} style={{ width: '150px' }}>
                 <option value="desc">최신순</option>
                 <option value="asc">오래된순</option>

@@ -1,27 +1,38 @@
 import styled from '@emotion/styled';
-import { ReactTabsFunctionComponent, Tab, TabProps } from 'react-tabs';
+import { rgba } from 'emotion-rgba';
+import { Text } from '../Text';
 
-const CustomTab: ReactTabsFunctionComponent<TabProps> = (props) => (
-  <StyledTab {...props} />
-);
+type TabProps = {
+  selected: boolean;
+  onClick: () => void;
+  children: string;
+};
 
-CustomTab.tabsRole = 'Tab';
+export const Tab = ({ selected, onClick, children }: TabProps) => {
+  return (
+    <StyledTab onClick={onClick} selected={selected}>
+      <Text>{children}</Text>
+    </StyledTab>
+  );
+};
 
-const StyledTab = styled(Tab)`
-  all: unset;
+type StyledTabProps = {
+  selected: boolean;
+};
+
+const StyledTab = styled.div<StyledTabProps>`
+  display: inline-block;
   padding: 1.4rem 2rem;
-  color: ${({ theme, selected }) =>
-    !selected ? theme.colors.mono.black : theme.colors.primary.default};
+  cursor: pointer;
+  transition: background-color 0.3s;
+
   border-bottom: ${({ theme, selected }) =>
     selected && `3px solid ${theme.colors.primary.default}`};
-  background-color: transparent;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: color 0.2s;
+
+  color: ${({ theme, selected }) => selected && theme.colors.primary.default};
+  font-weight: ${({ theme, selected }) => selected && theme.fonts.weight.bold};
 
   &:hover {
-    color: ${({ theme }) => theme.colors.primary.default};
+    background-color: ${({ theme }) => rgba(theme.colors.mono.gray200, 0.1)};
   }
 `;
-
-export { CustomTab as Tab };

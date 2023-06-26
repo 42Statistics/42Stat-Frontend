@@ -1,2 +1,2 @@
 export * from './CurrRegisteredCountRanking';
-export * from './LastExamResult';
+export * from './RecentExamResult';

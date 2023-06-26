@@ -9,17 +9,30 @@ import {
 import { DashboardContent } from '@components/templates/DashboardContent';
 import dayjs from 'dayjs';
 
-const GET_LAST_EXAM_RESULT = gql(/* GraphQL */ `
-  query GetLastExamResult {
+const GET_RECENT_EXAM_RESULT = gql(/* GraphQL */ `
+  query GetRecentExamResult($after: Int!) {
     getHomeTeam {
-      lastExamResult {
-        data {
-          rank
-          passCount
-          totalCount
-        }
+      recentExamResult(after: $after) {
         start
         end
+        data {
+          resultPerRank {
+            rank
+            rate {
+              total
+              fields {
+                key
+                value
+              }
+            }
+          }
+          beginAt
+          endAt
+          location
+          maxPeople
+          name
+          nbrSubscribers
+        }
       }
     }
   }
@@ -27,7 +40,11 @@ const GET_LAST_EXAM_RESULT = gql(/* GraphQL */ `
 
 export const LastExamResult = () => {
   const title = '직전 회차 시험 Rank 별 통과율';
-  const { loading, error, data } = useQuery(GET_LAST_EXAM_RESULT);
+  const { loading, error, data } = useQuery(GET_RECENT_EXAM_RESULT, {
+    variables: {
+      after: 1,
+    },
+  });
   if (loading)
     return (
       <DashboardContent title={title}>
@@ -47,25 +64,42 @@ export const LastExamResult = () => {
       </DashboardContent>
     );
 
-  const { lastExamResult } = data.getHomeTeam;
-  const { start, end } = lastExamResult;
+  const { recentExamResult } = data.getHomeTeam;
+  const { beginAt, location, resultPerRank } = recentExamResult.data;
 
-  const description = `${dayjs(start).format('YYYY년 M월 D일 H시 m분')}`;
+  const description = `${dayjs(beginAt).format(
+    'YYYY년 M월 D일 H시 m분',
+  )} / ${location}`;
 
-  const categories = lastExamResult.data.map(({ rank }) => rank);
-  const seriesData = lastExamResult.data.map(
-    ({ passCount, totalCount }) => passCount / totalCount,
-  );
+  const categories = resultPerRank.map(({ rank }) => rank);
+  const totalSeriesData = resultPerRank.map(({ rate: { total } }) => total);
+  const passSeriesData = resultPerRank.map(({ rate: { fields } }) => {
+    const pass = fields.find(({ key }) => key === 'pass');
+    return pass ? pass.value : 0;
+  });
+  const seriesLabel = totalSeriesData.map((total, index) => {
+    const pass = passSeriesData[index];
+    return { pass, total };
+  });
+  const seriesData = totalSeriesData.map((total, index) => {
+    const pass = passSeriesData[index];
+    return total === 0 ? 0 : pass / total;
+  });
+
   const series: ApexAxisChartSeries = [
     {
-      name: 'Exam 통과율',
+      name: '통과율',
       data: seriesData,
     },
   ];
 
   return (
     <DashboardContent title={title} description={description}>
-      <LastExamResultChart categories={categories} series={series} />
+      <LastExamResultChart
+        categories={categories}
+        series={series}
+        seriesLabel={seriesLabel}
+      />
     </DashboardContent>
   );
 };
@@ -73,11 +107,13 @@ export const LastExamResult = () => {
 type LastExamResultChartProps = {
   categories: number[];
   series: ApexAxisChartSeries;
+  seriesLabel: { pass: number; total: number }[];
 };
 
 const LastExamResultChart = ({
   categories,
   series,
+  seriesLabel,
 }: LastExamResultChartProps) => {
   const options: ApexCharts.ApexOptions = {
     xaxis: {
@@ -87,13 +123,17 @@ const LastExamResultChart = ({
       },
     },
     yaxis: {
+      max: 1,
       labels: {
         formatter: (value) => `${(value * 100).toFixed(0)}%`,
       },
     },
     tooltip: {
       y: {
-        formatter: (value) => `${(value * 100).toFixed(1)}%`,
+        formatter: (value, { dataPointIndex }) =>
+          `${(value * 100).toFixed(1)}% (${seriesLabel[dataPointIndex].pass}/${
+            seriesLabel[dataPointIndex].total
+          })`,
       },
     },
     dataLabels: {

@@ -18,6 +18,28 @@ export type Scalars = {
   URL: string;
 };
 
+export type Character = {
+  __typename?: 'Character';
+  effort: CharacterEffort;
+  talent: CharacterTalent;
+};
+
+export type CharacterEffort = {
+  __typename?: 'CharacterEffort';
+  evalCountRank: UserRank;
+  examTryCount: Scalars['Int'];
+  logtimeRank: UserRank;
+  projectTryCount: Scalars['Int'];
+};
+
+export type CharacterTalent = {
+  __typename?: 'CharacterTalent';
+  examOneshotRate: Rate;
+  levelRank: UserRank;
+  outstandingRate: Rate;
+  projectOneshotRate: Rate;
+};
+
 export type Coalition = {
   __typename?: 'Coalition';
   color?: Maybe<Scalars['String']>;
@@ -89,14 +111,18 @@ export type EvalReview = {
 
 export type ExamResult = {
   __typename?: 'ExamResult';
-  passCount: Scalars['Int'];
-  rank: Scalars['Int'];
-  totalCount: Scalars['Int'];
+  beginAt: Scalars['DateTime'];
+  endAt: Scalars['DateTime'];
+  location: Scalars['String'];
+  maxPeople: Scalars['Int'];
+  name: Scalars['String'];
+  nbrSubscribers: Scalars['Int'];
+  resultPerRank: Array<ResultPerRank>;
 };
 
 export type ExamResultDateRanged = {
   __typename?: 'ExamResultDateRanged';
-  data: Array<ExamResult>;
+  data: ExamResult;
   end: Scalars['DateTime'];
   start: Scalars['DateTime'];
 };
@@ -148,13 +174,17 @@ export type HomeEvalEvalCountByDateTemplateArgs = {
 export type HomeTeam = {
   __typename?: 'HomeTeam';
   currRegisteredCountRanking: Array<ProjectRank>;
-  /** HOME 직전 회차 시험 Rank별 통과율 */
-  lastExamResult: ExamResultDateRanged;
+  recentExamResult: ExamResultDateRanged;
 };
 
 
 export type HomeTeamCurrRegisteredCountRankingArgs = {
   limit?: Scalars['Int'];
+};
+
+
+export type HomeTeamRecentExamResultArgs = {
+  after?: Scalars['Int'];
 };
 
 export type HomeUser = {
@@ -341,6 +371,7 @@ export type PersonalGeneral = {
   __typename?: 'PersonalGeneral';
   beginAt: Scalars['DateTime'];
   blackholedAt?: Maybe<Scalars['DateTime']>;
+  character?: Maybe<Character>;
   logtimeByDateTemplate: IntDateRanged;
   memberLevelRecords: Array<LevelRecord>;
   preferredClusterByDateTemplate: PreferredClusterDateRanged;
@@ -406,7 +437,7 @@ export type ProjectInfo = {
   closedTeamCount: Scalars['Int'];
   currRegisteredTeamCount: Scalars['Int'];
   description: Scalars['String'];
-  difficulty: Scalars['Int'];
+  difficulty?: Maybe<Scalars['Int']>;
   estimateTime?: Maybe<Scalars['String']>;
   id: Scalars['Int'];
   maxUserCount: Scalars['Int'];
@@ -494,6 +525,12 @@ export type Rate = {
   __typename?: 'Rate';
   fields: Array<Pair>;
   total: Scalars['Int'];
+};
+
+export type ResultPerRank = {
+  __typename?: 'ResultPerRank';
+  rank: Scalars['Int'];
+  rate: Rate;
 };
 
 export type ScoreRecordPerCoalition = {
@@ -664,10 +701,12 @@ export type GetCurrRegisteredCountRankingQueryVariables = Exact<{ [key: string]:
 
 export type GetCurrRegisteredCountRankingQuery = { __typename?: 'Query', getHomeTeam: { __typename?: 'HomeTeam', currRegisteredCountRanking: Array<{ __typename?: 'ProjectRank', rank: number, value: number, projectPreview: { __typename?: 'ProjectPreview', id: number, name: string, url: string } }> } };
 
-export type GetLastExamResultQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetRecentExamResultQueryVariables = Exact<{
+  after: Scalars['Int'];
+}>;
 
 
-export type GetLastExamResultQuery = { __typename?: 'Query', getHomeTeam: { __typename?: 'HomeTeam', lastExamResult: { __typename?: 'ExamResultDateRanged', start: string, end: string, data: Array<{ __typename?: 'ExamResult', rank: number, passCount: number, totalCount: number }> } } };
+export type GetRecentExamResultQuery = { __typename?: 'Query', getHomeTeam: { __typename?: 'HomeTeam', recentExamResult: { __typename?: 'ExamResultDateRanged', start: string, end: string, data: { __typename?: 'ExamResult', beginAt: string, endAt: string, location: string, maxPeople: number, name: string, nbrSubscribers: number, resultPerRank: Array<{ __typename?: 'ResultPerRank', rank: number, rate: { __typename?: 'Rate', total: number, fields: Array<{ __typename?: 'Pair', key: string, value: number }> } }> } } } };
 
 export type GetAliveUserCountRecordsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -938,7 +977,7 @@ export type GetProjectInfoQueryVariables = Exact<{
 }>;
 
 
-export type GetProjectInfoQuery = { __typename?: 'Query', getProjectInfo: { __typename?: 'ProjectInfo', id: number, name: string, objectives: Array<string | null>, skills: Array<string | null>, description: string, minUserCount: number, maxUserCount: number, estimateTime?: string | null, difficulty: number, currRegisteredTeamCount: number, closedTeamCount: number, averagePassFinalMark: number, validatedRate: { __typename?: 'Rate', total: number, fields: Array<{ __typename?: 'Pair', key: string, value: number }> } } };
+export type GetProjectInfoQuery = { __typename?: 'Query', getProjectInfo: { __typename?: 'ProjectInfo', id: number, name: string, objectives: Array<string | null>, skills: Array<string | null>, description: string, minUserCount: number, maxUserCount: number, estimateTime?: string | null, difficulty?: number | null, currRegisteredTeamCount: number, closedTeamCount: number, averagePassFinalMark: number, validatedRate: { __typename?: 'Rate', total: number, fields: Array<{ __typename?: 'Pair', key: string, value: number }> } } };
 
 
 export const FindUserPreviewDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"FindUserPreview"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"login"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"findUserPreview"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"login"},"value":{"kind":"Variable","name":{"kind":"Name","value":"login"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"login"}},{"kind":"Field","name":{"kind":"Name","value":"imgUrl"}}]}}]}}]} as unknown as DocumentNode<FindUserPreviewQuery, FindUserPreviewQueryVariables>;
@@ -952,7 +991,7 @@ export const GetAverageFeedbackLengthDocument = {"kind":"Document","definitions"
 export const GetEvalCountByDateTemplateDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetEvalCountByDateTemplate"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dateTemplate"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"DateTemplate"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getHomeEval"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"evalCountByDateTemplate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"dateTemplate"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dateTemplate"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"}},{"kind":"Field","name":{"kind":"Name","value":"start"}},{"kind":"Field","name":{"kind":"Name","value":"end"}}]}}]}}]}}]} as unknown as DocumentNode<GetEvalCountByDateTemplateQuery, GetEvalCountByDateTemplateQueryVariables>;
 export const GetAverageEvalCountByDateTemplateDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetAverageEvalCountByDateTemplate"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dateTemplate"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"DateTemplate"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getHomeEval"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"averageEvalCountByDateTemplate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"dateTemplate"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dateTemplate"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"}},{"kind":"Field","name":{"kind":"Name","value":"start"}},{"kind":"Field","name":{"kind":"Name","value":"end"}}]}}]}}]}}]} as unknown as DocumentNode<GetAverageEvalCountByDateTemplateQuery, GetAverageEvalCountByDateTemplateQueryVariables>;
 export const GetCurrRegisteredCountRankingDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCurrRegisteredCountRanking"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getHomeTeam"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"currRegisteredCountRanking"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"5"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"projectPreview"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"rank"}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]}}]} as unknown as DocumentNode<GetCurrRegisteredCountRankingQuery, GetCurrRegisteredCountRankingQueryVariables>;
-export const GetLastExamResultDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetLastExamResult"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getHomeTeam"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lastExamResult"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rank"}},{"kind":"Field","name":{"kind":"Name","value":"passCount"}},{"kind":"Field","name":{"kind":"Name","value":"totalCount"}}]}},{"kind":"Field","name":{"kind":"Name","value":"start"}},{"kind":"Field","name":{"kind":"Name","value":"end"}}]}}]}}]}}]} as unknown as DocumentNode<GetLastExamResultQuery, GetLastExamResultQueryVariables>;
+export const GetRecentExamResultDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetRecentExamResult"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"after"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getHomeTeam"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"recentExamResult"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"after"},"value":{"kind":"Variable","name":{"kind":"Name","value":"after"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"start"}},{"kind":"Field","name":{"kind":"Name","value":"end"}},{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"resultPerRank"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rank"}},{"kind":"Field","name":{"kind":"Name","value":"rate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"total"}},{"kind":"Field","name":{"kind":"Name","value":"fields"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"key"}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"beginAt"}},{"kind":"Field","name":{"kind":"Name","value":"endAt"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"maxPeople"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"nbrSubscribers"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetRecentExamResultQuery, GetRecentExamResultQueryVariables>;
 export const GetAliveUserCountRecordsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetAliveUserCountRecords"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getHomeUser"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aliveUserCountRecords"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"at"}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]}}]} as unknown as DocumentNode<GetAliveUserCountRecordsQuery, GetAliveUserCountRecordsQueryVariables>;
 export const GetAverageDurationPerCircleDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getAverageDurationPerCircle"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getHomeUser"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"averageDurationPerCircle"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"circle"}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]}}]} as unknown as DocumentNode<GetAverageDurationPerCircleQuery, GetAverageDurationPerCircleQueryVariables>;
 export const GetBlackholedCountPerCircleDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getBlackholedCountPerCircle"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getHomeUser"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blackholedCountPerCircle"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"circle"}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]}}]} as unknown as DocumentNode<GetBlackholedCountPerCircleQuery, GetBlackholedCountPerCircleQueryVariables>;

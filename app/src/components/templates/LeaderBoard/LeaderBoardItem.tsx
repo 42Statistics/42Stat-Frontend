@@ -18,12 +18,14 @@ type LeaderBoardItemProps = {
   item: RankingUserItemType;
   unit: string;
   isMe?: boolean;
+  fixedNumber?: number;
 };
 
 export const LeaderBoardItem = ({
   item,
   unit,
   isMe = false,
+  fixedNumber,
 }: LeaderBoardItemProps) => {
   const theme = useTheme();
   const { name, imgUrl, rank, value } = item;
@@ -50,7 +52,9 @@ export const LeaderBoardItem = ({
             </Link>
             <Spacer />
             <H3MediumText color={color}>
-              {numberWithUnitFormatter(value, unit)}
+              {fixedNumber === undefined
+                ? numberWithUnitFormatter(value, unit)
+                : `${value.toFixed(2)}${unit}`}
             </H3MediumText>
           </HStack>
         </TabletAndAboveLeaderBoardItemLayout>

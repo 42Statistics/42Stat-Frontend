@@ -54,9 +54,11 @@ export const LeaderboardLevelTabResult = ({
 
   return (
     <VStack w="100%" spacing="5rem">
-      {myRanking && <LeaderBoardItem item={myRanking} unit={unit} isMe />}
+      {myRanking && (
+        <LeaderBoardItem item={myRanking} unit={unit} fixedNumber={2} isMe />
+      )}
       <Divider />
-      <LeaderBoard list={list} me={myRanking} unit={unit} />
+      <LeaderBoard list={list} me={myRanking} unit={unit} fixedNumber={2} />
     </VStack>
   );
 };

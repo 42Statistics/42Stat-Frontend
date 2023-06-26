@@ -7,9 +7,15 @@ type LeaderBoardProps = {
   list: RankingUserItemType[];
   me: RankingUserItemType | null;
   unit: string;
+  fixedNumber?: number;
 };
 
-export const LeaderBoard = ({ list, me, unit }: LeaderBoardProps) => {
+export const LeaderBoard = ({
+  list,
+  me,
+  unit,
+  fixedNumber,
+}: LeaderBoardProps) => {
   return (
     <VStack w="100%" h="100%">
       <LeaderBoardList>
@@ -18,6 +24,7 @@ export const LeaderBoard = ({ list, me, unit }: LeaderBoardProps) => {
             key={item.id}
             item={item}
             unit={unit}
+            fixedNumber={fixedNumber}
             isMe={me !== null && item.id === me.id}
           />
         ))}

@@ -2,8 +2,8 @@ import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import { Loader, VStack, WhiteH2BoldText, WhiteText } from '@components/common';
 import styled from '@emotion/styled';
-import { getDailyProgrammingQuote } from '@utils/getDailyProgrammingQuote';
 import { getDayDiff } from '@utils/getDayDiff';
+import { getDailyProgrammingQuote } from './getDailyProgrammingQuote';
 
 const GET_MY_INFO = gql(/* GraphQL */ `
   query GetMyInfo {
@@ -46,7 +46,7 @@ export const Hero = () => {
       <HeroLayout>
         <VStack h="100%" align="start" spacing="1rem">
           <WhiteH2BoldText>42Stat에 오신 것을 환영합니다 👋</WhiteH2BoldText>
-          <WhiteText>오늘의 명언 | {getDailyProgrammingQuote()}</WhiteText>
+          <WhiteText>{getDailyProgrammingQuote()}</WhiteText>
         </VStack>
       </HeroLayout>
     );
@@ -102,7 +102,7 @@ export const Hero = () => {
         return `대단해요! 주간 평가 횟수 랭킹 ${scoreRank}위를 차지했어요 🏅`;
       }
     }
-    return `오늘의 명언 | ${getDailyProgrammingQuote()}`;
+    return `${getDailyProgrammingQuote()}`;
   };
 
   return (

@@ -6,12 +6,13 @@ import { withFooter } from '@hoc/withFooter';
 import { withHead } from '@hoc/withHead';
 import ProfileEvalTab from '@pages/ProfileEvalTab';
 import ProfileGeneralTab from '@pages/ProfileGeneralTab';
+import ProfileRivalTab from '@pages/ProfileRivalTab';
 import { history } from '@utils/history';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useProfilePageDashboard } from './hooks/useProfilePageDashboard';
 
-type ProfileTabNames = 'General' | 'Eval';
+type ProfileTabNames = 'General' | 'Eval' | 'Rival';
 
 // waterfall 방지를 위해 Tab은 lazy loading 하지 않겠습니다.
 export const ProfilePage = () => {
@@ -21,6 +22,8 @@ export const ProfilePage = () => {
         return 'General';
       case 'eval':
         return 'Eval';
+      case 'rival':
+        return 'Rival';
       default:
         return 'General';
     }
@@ -65,12 +68,24 @@ export const ProfilePage = () => {
         >
           평가
         </Tab>
+        <Tab
+          selected={selectedTab === 'Rival'}
+          onClick={() => {
+            setSelectedTab('Rival');
+            navigate(`/profile/${username}?tab=rival`);
+          }}
+        >
+          라이벌
+        </Tab>
       </Tabs>
       <TabPanel show={selectedTab === 'General'}>
         <ProfileGeneralTab />
       </TabPanel>
       <TabPanel show={selectedTab === 'Eval'}>
         <ProfileEvalTab />
+      </TabPanel>
+      <TabPanel show={selectedTab === 'Rival'}>
+        <ProfileRivalTab />
       </TabPanel>
     </VStack>
   );

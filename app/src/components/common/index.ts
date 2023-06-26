@@ -13,6 +13,5 @@ export * from './SegmentedControl';
 export * from './Select';
 export * from './Skeleton';
 export * from './Spacer';
-export * from './Spinner';
 export * from './Stack';
 export * from './Text';

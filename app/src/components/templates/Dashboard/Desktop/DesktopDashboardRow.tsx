@@ -28,8 +28,8 @@ const DesktopDashboardRowLayout = styled.div<DesktopDashboardRowLayoutProps>`
   grid-template-columns: ${({ col }) => `repeat(${col}, 1fr)`};
   grid-template-rows: ${({ row, col }) =>
     `repeat(${row}, ${getHeightByCol(col)})`};
-  column-gap: 2rem;
-  row-gap: 2rem;
+  column-gap: 2.4rem;
+  row-gap: 2.4rem;
   width: 100%;
 `;
 

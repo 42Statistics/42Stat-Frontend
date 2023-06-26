@@ -3,12 +3,12 @@ import {
   Center,
   HStack,
   Input,
+  InputLayout,
   Modal,
   Select,
   Text,
   VStack,
 } from '@components/common';
-import styled from '@emotion/styled';
 import type { ModalType } from '@utils/types/Modal';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { EvalLogSearchFormData } from '.';
@@ -37,19 +37,25 @@ export const EvalLogSearchModal = ({
               <Center w="5rem">
                 <Text>과제명</Text>
               </Center>
-              <EvalLogSearchInput {...register('projectName')} />
+              <InputLayout>
+                <Input {...register('projectName')} />
+              </InputLayout>
             </HStack>
             <HStack as="li" spacing="3rem">
               <Center w="5rem">
                 <Text>From</Text>
               </Center>
-              <EvalLogSearchInput {...register('corrector')} />
+              <InputLayout>
+                <Input {...register('corrector')} />
+              </InputLayout>
             </HStack>
             <HStack as="li" spacing="3rem">
               <Center w="5rem">
                 <Text>To</Text>
               </Center>
-              <EvalLogSearchInput {...register('corrected')} />
+              <InputLayout>
+                <Input {...register('corrected')} />
+              </InputLayout>
             </HStack>
             <HStack as="li" spacing="3rem">
               <Center w="5rem">
@@ -76,12 +82,3 @@ export const EvalLogSearchModal = ({
     </Modal>
   );
 };
-
-const EvalLogSearchInput = styled(Input)`
-  all: unset;
-  width: 150px;
-  padding: 1rem 2rem;
-  border-radius: ${({ theme }) => theme.radius.md};
-  background: #f9f9f9;
-  box-shadow: 6px 6px 13px #d2d2d2, -6px -6px 13px #ffffff;
-`;

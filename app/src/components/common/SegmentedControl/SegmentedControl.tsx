@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { useEffect, useRef, useState } from 'react';
-import { Input } from './Input';
+import { Input } from '../Input';
 
 export type SegmentType = {
   label: string;
@@ -78,7 +78,6 @@ const Controls = styled.div<{ ready: boolean }>`
   justify-content: space-between;
   border-radius: ${({ theme }) => theme.radius.md};
   padding: 0.5rem;
-  margin: auto;
   overflow: hidden;
   position: relative;
   transition: box-shadow 0.4s;

@@ -1,8 +1,8 @@
 import { gql } from '@/__generated__';
 import { DateTemplate } from '@/__generated__/graphql';
 import { useLazyQuery } from '@apollo/client';
-import { HStack, SegmentedControl, Spacer, VStack } from '@components/common';
-import { PageBtnList } from '@components/elements/PageBtnList';
+import { HStack, SegmentedControl, VStack } from '@components/common';
+import { PageButtonList } from '@components/elements/PageButtonList';
 import { useSegmentedControl } from '@utils/useSegmentedControl';
 import { useEffect, useState } from 'react';
 import { LeaderboardEvalCountTabResult } from './LeaderboardEvalCountTabResult';
@@ -116,7 +116,7 @@ export const LeaderboardEvalCountTab = () => {
         />
       </HStack>
       <LeaderboardEvalCountTabResult result={result} />
-      <PageBtnList
+      <PageButtonList
         currPageNumber={pageNumber}
         setPageNumber={setPageNumber}
         totalPageNumber={Math.ceil(totalPage / SIZE_PER_PAGE)}

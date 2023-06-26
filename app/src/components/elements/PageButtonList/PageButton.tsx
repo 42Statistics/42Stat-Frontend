@@ -1,17 +1,17 @@
 import { Center, Clickable, Text } from '@components/common';
 import { useTheme } from '@emotion/react';
 
-type PageBtnProps = {
+type PageButtonProps = {
   currPageNumber: number;
   pageNumber: number;
   setPageNumber: React.Dispatch<React.SetStateAction<number>>;
 };
 
-export const PageBtn = ({
+export const PageButton = ({
   currPageNumber,
   pageNumber,
   setPageNumber,
-}: PageBtnProps) => {
+}: PageButtonProps) => {
   const theme = useTheme();
 
   const handleClick = () => {
@@ -22,7 +22,7 @@ export const PageBtn = ({
   };
   return (
     <Clickable onClick={handleClick}>
-      <Center w="1.2rem">
+      <Center w="1.4rem">
         <Text
           color={
             pageNumber !== currPageNumber

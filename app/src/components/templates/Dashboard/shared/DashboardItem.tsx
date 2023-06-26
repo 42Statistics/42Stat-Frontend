@@ -31,12 +31,12 @@ const DashboardItemLayout = styled.div<DashboardItemLayoutProps>`
   grid-row: ${({ row, rowSpan }) => `${row} / span ${rowSpan}`};
   border-radius: ${({ theme }) => theme.radius.md};
   background-color: ${({ theme }) => theme.colors.mono.white};
-  box-shadow: 10px 10px 10px #eeeeee, -10px -10px 10px #ffffff;
+  box-shadow: 10px 10px 10px #e8e8e8, -10px -10px 10px #ffffff;
 
   transition: all 0.3s;
   :hover {
     transform: scale(100.5%);
-    box-shadow: 10px 10px 10px #dddddd, -10px -10px 10px #ffffff;
+    box-shadow: 10px 10px 10px #d2d2d2, -10px -10px 10px #ffffff;
   }
   /* :active {
     box-shadow: inset 10px 10px 10px #f2f2f2, inset -10px -10px 10px #ffffff;

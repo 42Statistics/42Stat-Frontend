@@ -1,5 +1,5 @@
 import { PulseLoader } from 'react-spinners';
-import { Center } from './Center';
+import { Center } from './Stack';
 
 export const Loader = () => {
   return (

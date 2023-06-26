@@ -14,11 +14,7 @@ export const ProjectSearchItem = ({
   return (
     <Clickable onClick={() => onSubmit(project.name)}>
       <HStack w="100%" spacing="1.2rem">
-        <Image
-          src={ft_logo}
-          alt="42 로고"
-          width="18px"
-        />
+        <Image src={ft_logo} alt="42 로고" width="18px" />
         <Text>{project.name}</Text>
       </HStack>
     </Clickable>

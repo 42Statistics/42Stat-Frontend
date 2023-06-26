@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Center } from './Center';
+import { Center } from './Stack';
 
 type SpinnerProps = Partial<{
   size: string;

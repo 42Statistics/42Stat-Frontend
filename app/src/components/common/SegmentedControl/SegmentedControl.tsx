@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { useEffect, useRef, useState } from 'react';
-import { Input } from '../Input';
+import { Input } from '../Input/Input';
 
 export type SegmentType = {
   label: string;

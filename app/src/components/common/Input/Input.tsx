@@ -4,16 +4,15 @@ import { HStack } from '../Stack';
 import { Writable } from './Writable';
 
 type InputProps = {
-  ref: React.Ref<HTMLInputElement>;
   leftElement?: React.ReactNode;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 export const Input = forwardRef(
-  ({ ref, leftElement, ...props }: InputProps) => {
+  (props: InputProps, ref: React.Ref<HTMLInputElement>) => {
     return (
       <Layout>
         <HStack spacing="2rem">
-          {leftElement != null && leftElement}
+          {props.leftElement != null && props.leftElement}
           <Writable {...props} ref={ref} />
         </HStack>
       </Layout>

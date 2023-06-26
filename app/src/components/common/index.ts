@@ -7,7 +7,6 @@ export * from './Image';
 export * from './Input';
 export * from './Loader';
 export * from './Modal';
-export * from './Overlay';
 export * from './Scroll';
 export * from './SegmentedControl';
 export * from './Select';

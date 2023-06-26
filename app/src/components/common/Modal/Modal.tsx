@@ -2,8 +2,8 @@ import styled from '@emotion/styled';
 import type { ModalType } from '@utils/types/Modal';
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import { Center } from '../Stack';
 import { Overlay } from './Overlay';
-import { Center } from './Stack';
 
 export const ModalView = styled.div`
   display: flex;

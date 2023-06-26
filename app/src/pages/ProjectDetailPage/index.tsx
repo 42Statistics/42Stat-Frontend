@@ -86,9 +86,9 @@ const ProjectPage = () => {
   const getPeopleRange = (from: number, to: number) => {
     if (from === to) {
       if (from === 1) return 'Solo';
-      return `${from} Students`;
+      return `${from} students`;
     }
-    return `${from} ~ ${to} Students`;
+    return `${from} ~ ${to} students`;
   };
 
   return (
@@ -104,7 +104,9 @@ const ProjectPage = () => {
           <Text>{`${getPeopleRange(
             minUserCount,
             maxUserCount,
-          )} / ${estimateTime} hrs. / ${difficulty} XP`}</Text>
+          )} / ${estimateTime} / ${
+            difficulty?.toLocaleString() ?? '0'
+          } XP`}</Text>
           <HStack spacing="1rem">
             <BsPeopleFill size="16px" />
             <Text>

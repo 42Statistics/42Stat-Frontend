@@ -20,7 +20,7 @@ export const RankingItem = ({ item, unit }: RankingItemProps) => {
     rank === 1 ? theme.colors.accent.default : theme.colors.mono.black;
 
   return (
-    <HStack w="70%" spacing="2rem">
+    <HStack w="80%" spacing="2rem">
       <H2BoldText color={color}>{rank}</H2BoldText>
       <HStack
         w="100%"

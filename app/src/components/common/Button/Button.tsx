@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Clickable } from '../Clickable';
+import { Clickable } from './Clickable';
 
 type ButtonSize = 'md';
 

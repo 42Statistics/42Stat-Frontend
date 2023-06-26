@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { rgba } from 'emotion-rgba';
-import { Clickable } from '../Clickable';
+import { Clickable } from './Clickable';
 
 type StartButtonProps = {
   children: string;

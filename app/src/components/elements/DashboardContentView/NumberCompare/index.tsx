@@ -1,23 +1,11 @@
 import { H3Text, HStack, Text } from '@components/common';
-import { BsTriangleFill } from '@react-icons/all-files/bs/BsTriangleFill';
 import { NoneDash } from '../Error/NoneDash';
+import { Arrow } from './Arrow';
 
 type NumberCompareProps = {
   curr: number;
   last: number;
   unit: string;
-};
-
-const Arrow = ({ direction }: { direction: 'up' | 'down' }) => {
-  return (
-    <BsTriangleFill
-      size="12px"
-      color={direction === 'up' ? '#00C48C' : '#FF3D71'}
-      style={{
-        transform: direction === 'up' ? 'rotate(0deg)' : 'rotate(180deg)',
-      }}
-    />
-  );
 };
 
 export const NumberCompare = ({ curr, last, unit }: NumberCompareProps) => {

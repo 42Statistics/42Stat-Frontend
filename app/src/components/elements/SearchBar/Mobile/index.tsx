@@ -1,6 +1,4 @@
-import { Clickable, HStack, Text } from '@components/common';
-import { useTheme } from '@emotion/react';
-import styled from '@emotion/styled';
+import { Clickable, Input } from '@components/common';
 import { MdSearch } from '@react-icons/all-files/md/MdSearch';
 import { useCallback, useState } from 'react';
 import { SearchModal } from './SearchModal';
@@ -9,31 +7,16 @@ import { SearchModal } from './SearchModal';
 export const MobileSearchBar = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const toggleModal = useCallback(() => setIsModalOpen((cur) => !cur), []);
-  const theme = useTheme();
 
   return (
     <>
       <Clickable onClick={toggleModal}>
-        <MobileSearchBarLayout>
-          <HStack spacing="2rem">
-            <MdSearch id="search-icon" size="24px" />
-            <Text color={theme.colors.mono.gray300} css={{ width: '12rem' }}>
-              Search...
-            </Text>
-          </HStack>
-        </MobileSearchBarLayout>
+        <Input
+          leftElement={<MdSearch id="search-icon" size="24px" />}
+          placeholder="Search..."
+        />
       </Clickable>
       <SearchModal isOpen={isModalOpen} toggle={toggleModal} />
     </>
   );
 };
-
-const MobileSearchBarLayout = styled.div`
-  position: relative;
-  padding: 1rem 2rem;
-  border-radius: ${({ theme }) => theme.radius.md};
-  transition: all 0.2s;
-  background-color: ${({ theme }) => theme.colors.mono.white};
-
-  box-shadow: 8px 8px 10px #d8d8d8, -8px -8px 10px #ffffff;
-`;

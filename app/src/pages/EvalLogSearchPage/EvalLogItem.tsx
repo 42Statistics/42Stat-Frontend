@@ -7,12 +7,11 @@ import {
   Text,
   VStack,
 } from '@components/common';
-import { Label } from '@components/common/Label';
+import { EvalLogLabel, EvalLogLabelType } from '@components/common/Label';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { snakeCaseFormatter } from '@utils/formatters';
 import dayjs from 'dayjs';
-import { rgba } from 'emotion-rgba';
 import { Link } from 'react-router-dom';
 
 export const EvalLogItem = ({ element }: { element: EvalLog }) => {
@@ -60,7 +59,7 @@ export const EvalLogItem = ({ element }: { element: EvalLog }) => {
               {correctedsReview ? (
                 <CorrectedsReviewLabel number={correctedsReview.mark} />
               ) : (
-                <CorrectedsReviewLabel isAbsorbed />
+                <CorrectedsReviewLabel isNone />
               )}
             </HStack>
             <div style={{ width: '100%' }}>
@@ -95,52 +94,37 @@ const EvalLogItemLayout = styled.div`
 `;
 
 const CorrectorReviewLabel = ({ number }: { number: number }) => {
-  const getCorrectorReviewLabelColor = (number: number) => {
-    if (number >= 100) return theme.colors.semantic.pass;
-    if (number >= 80) return theme.colors.semantic.warning;
-    return theme.colors.semantic.fail;
+  const computeType = (number: number): EvalLogLabelType => {
+    if (number >= 100) return 'positive';
+    if (number >= 80) return 'neutral';
+    return 'negative';
   };
 
-  const theme = useTheme();
-  const color = getCorrectorReviewLabelColor(number);
+  const type = computeType(number);
 
-  return (
-    <Label
-      color={color}
-      bgColor={rgba(color, 0.15)}
-      fontWeight={theme.fonts.weight.medium}
-      text={`${number}%`}
-    />
-  );
+  return <EvalLogLabel type={type}>{`${String(number)}%`}</EvalLogLabel>;
 };
 
 const CorrectedsReviewLabel = ({
   number = 0,
-  isAbsorbed = false,
+  isNone = false,
 }: {
-  number?: number; // isAbsorbed일 때만 undefined 가능
-  isAbsorbed?: boolean;
+  number?: number; // isNone일 때만 undefined 가능
+  isNone?: boolean;
 }) => {
-  const getCorrectorReviewLabelColor = (
-    number: number,
-    isAbsorbed: boolean,
-  ) => {
-    if (isAbsorbed) return theme.colors.mono.gray300;
-    if (number >= 5) return theme.colors.semantic.pass;
-    if (number >= 3) return theme.colors.semantic.warning;
-    return theme.colors.semantic.fail;
+  const computeType = (number: number, isNone: boolean): EvalLogLabelType => {
+    if (isNone) return 'none';
+    if (number >= 5) return 'positive';
+    if (number >= 3) return 'neutral';
+    return 'negative';
   };
 
-  const theme = useTheme();
-  const color = getCorrectorReviewLabelColor(number, isAbsorbed);
+  const type = computeType(number, isNone);
 
   return (
-    <Label
-      color={color}
-      bgColor={rgba(color, 0.15)}
-      fontWeight={theme.fonts.weight.medium}
-      text={`${!isAbsorbed ? number : '-'} / 5`}
-    />
+    <EvalLogLabel type={type}>
+      {!isNone ? `${String(number)} / 5` : '- / 5'}
+    </EvalLogLabel>
   );
 };
 
@@ -151,16 +135,11 @@ type FlagLabelProps = {
 
 const FlagLabel = ({ name, isPositive }: FlagLabelProps) => {
   const theme = useTheme();
-  const color = isPositive
-    ? theme.colors.semantic.pass
-    : theme.colors.semantic.fail;
+  const type: EvalLogLabelType = isPositive ? 'positive' : 'negative';
 
   return (
-    <Label
-      color={color}
-      bgColor={rgba(color, 0.15)}
-      fontWeight={theme.fonts.weight.bold}
-      text={snakeCaseFormatter(name)}
-    />
+    <EvalLogLabel type={type} fontWeight={theme.fonts.weight.bold}>
+      {snakeCaseFormatter(name)}
+    </EvalLogLabel>
   );
 };

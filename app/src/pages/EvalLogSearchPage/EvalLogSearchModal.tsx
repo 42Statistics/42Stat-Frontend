@@ -1,5 +1,6 @@
 import {
   Button,
+  Center,
   HStack,
   Input,
   Modal,
@@ -7,7 +8,6 @@ import {
   Text,
   VStack,
 } from '@components/common';
-import styled from '@emotion/styled';
 import type { ModalType } from '@utils/types/Modal';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { EvalLogSearchFormData } from '.';
@@ -33,26 +33,36 @@ export const EvalLogSearchModal = ({
         <VStack spacing="6rem">
           <VStack as="ul" w="100%" spacing="3rem">
             <HStack as="li" spacing="3rem">
-              <Text>과제명</Text>
-              <EvalLogSearchInput {...register('projectName')} />
+              <Center w="5rem">
+                <Text>과제명</Text>
+              </Center>
+              <Input {...register('projectName')} />
             </HStack>
             <HStack as="li" spacing="3rem">
-              <Text>From</Text>
-              <EvalLogSearchInput {...register('corrector')} />
+              <Center w="5rem">
+                <Text>From</Text>
+              </Center>
+              <Input {...register('corrector')} />
             </HStack>
             <HStack as="li" spacing="3rem">
-              <Text>To</Text>
-              <EvalLogSearchInput {...register('corrected')} />
+              <Center w="5rem">
+                <Text>To</Text>
+              </Center>
+              <Input {...register('corrected')} />
             </HStack>
             <HStack as="li" spacing="3rem">
-              <Text>플래그</Text>
+              <Center w="5rem">
+                <Text>플래그</Text>
+              </Center>
               <Select {...register('flag')} style={{ width: '150px' }}>
                 <option value="all">전체</option>
                 <option value="outstanding">Outstanding만</option>
               </Select>
             </HStack>
             <HStack as="li" spacing="3rem">
-              <Text>정렬</Text>
+              <Center w="5rem">
+                <Text>정렬</Text>
+              </Center>
               <Select {...register('sortOrder')} style={{ width: '150px' }}>
                 <option value="desc">최신순</option>
                 <option value="asc">오래된순</option>
@@ -65,12 +75,3 @@ export const EvalLogSearchModal = ({
     </Modal>
   );
 };
-
-const EvalLogSearchInput = styled(Input)`
-  all: unset;
-  width: 150px;
-  padding: 1rem 2rem;
-  border-radius: ${({ theme }) => theme.radius.md};
-  background: #f9f9f9;
-  box-shadow: 6px 6px 13px #d2d2d2, -6px -6px 13px #ffffff;
-`;

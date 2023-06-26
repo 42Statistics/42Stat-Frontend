@@ -7,12 +7,13 @@ import {
 } from '@components/elements/DashboardContentView/Error';
 import { RankingDefault } from '@components/elements/DashboardContentView/RankingDefault';
 import { DashboardContent } from '@components/templates/DashboardContent';
+import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
 import type { RankingItemType } from '@utils/types/Ranking';
 
 const GET_CURR_REGISTERED_COUNT_RANKING = gql(/* GraphQL */ `
   query GetCurrRegisteredCountRanking {
     getHomeTeam {
-      currRegisteredCountRanking {
+      currRegisteredCountRanking(limit: 5) {
         projectPreview {
           id
           name
@@ -62,7 +63,12 @@ export const CurrRegisteredCountRanking = () => {
 
   return (
     <DashboardContent title={title}>
-      <RankingDefault list={list} cnt={3} unit={unit} />
+      <TabletAndAbove>
+        <RankingDefault list={list} cnt={5} unit={unit} />
+      </TabletAndAbove>
+      <Mobile>
+        <RankingDefault list={list} cnt={3} unit={unit} />
+      </Mobile>
     </DashboardContent>
   );
 };

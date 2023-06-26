@@ -30,11 +30,11 @@ const LeaderBoardList = styled.ul`
   width: 100%;
   height: 100%;
 
-  & li:nth-of-type(odd) {
+  & li:nth-of-type(even) {
     background-color: ${({ theme }) => theme.colors.mono.white};
   }
 
-  & li:nth-of-type(even) {
-    background-color: #eeeeee;
+  & li:nth-of-type(odd) {
+    background-color: #f0f0f0;
   }
 `;

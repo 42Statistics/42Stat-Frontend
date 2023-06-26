@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { isEnterKeyReleased } from '@utils/isEnterKeyReleased';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useSearchBar } from '../hooks/useSearchBar';
 import { TabletAndAboveSearchInput } from './TabletAndAboveSearchInput';
@@ -19,7 +19,6 @@ export const TabletAndAboveSearchBar = () => {
     resetInput,
   } = useSearchBar();
 
-  const [isFocused, setIsFocused] = useState<boolean>(false);
   const location = useLocation();
   const navigate = useNavigate();
   const isPreviewDisplaying =
@@ -62,12 +61,11 @@ export const TabletAndAboveSearchBar = () => {
   };
 
   return (
-    <TabletAndAboveSearchBarLayout isFocused={isFocused}>
+    <Layout>
       <TabletAndAboveSearchInput
         inputRef={inputRef}
         setInput={setInput}
         onKeyDown={handleKeyDown}
-        setIsFocused={setIsFocused}
       />
       {isPreviewDisplaying && (
         <TabletAndAboveSearchResult
@@ -77,24 +75,10 @@ export const TabletAndAboveSearchBar = () => {
           onProjectSubmit={handleProjectSubmit}
         />
       )}
-    </TabletAndAboveSearchBarLayout>
+    </Layout>
   );
 };
 
-export const TabletAndAboveSearchBarLayout = styled.div<{
-  isFocused: boolean;
-}>`
+const Layout = styled.div`
   position: relative;
-  padding: 1rem 2rem;
-  border-radius: ${({ theme }) => theme.radius.md};
-  transition: all 0.5s;
-
-  box-shadow: ${({ isFocused }) =>
-    !isFocused
-      ? '8px 8px 10px #eeeeee, -8px -8px 10px #ffffff'
-      : '8px 8px 10px #dddddd, -8px -8px 10px #ffffff'};
-
-  :hover {
-    box-shadow: 8px 8px 10px #dddddd, -8px -8px 10px #ffffff;
-  }
 `;

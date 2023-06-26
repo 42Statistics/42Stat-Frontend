@@ -1,7 +1,7 @@
 import {
   Avatar,
-  H2BoldText,
-  H3BoldText,
+  BoldText,
+  H2MediumText,
   H3MediumText,
   HStack,
   MediumText,
@@ -42,7 +42,7 @@ export const LeaderBoardItem = ({
         <TabletAndAboveLeaderBoardItemLayout isMe={isMe}>
           <HStack w="100%" spacing="4rem">
             <HStack w="5rem">
-              <H2BoldText color={color}>{rank}</H2BoldText>
+              <H2MediumText color={color}>{rank}</H2MediumText>
             </HStack>
             <Avatar src={imgUrl} />
             <Link to={`/profile/${name}`}>
@@ -58,10 +58,10 @@ export const LeaderBoardItem = ({
       <Mobile>
         <MobileLeaderBoardItemLayout isMe={isMe}>
           <HStack w="100%" spacing="3rem">
-            <HStack w="4rem">
-              <H3BoldText color={color}>{rank}</H3BoldText>
+            <HStack w="2rem">
+              <BoldText color={color}>{rank}</BoldText>
             </HStack>
-            <Avatar src={imgUrl} />
+            <Avatar size="sm" src={imgUrl} />
             <MediumText color={color}>{name}</MediumText>
             <Spacer />
             <MediumText color={color}>
@@ -76,7 +76,7 @@ export const LeaderBoardItem = ({
 
 export const TabletAndAboveLeaderBoardItemLayout = styled.li<{ isMe: boolean }>`
   width: 100%;
-  padding: 1rem 5rem;
+  padding: 0.8rem 5rem;
   border-radius: ${({ theme }) => theme.radius.sm};
   background-color: ${({ isMe, theme }) =>
     isMe && theme.colors.primary.default} !important; // FIXME: !important
@@ -84,7 +84,7 @@ export const TabletAndAboveLeaderBoardItemLayout = styled.li<{ isMe: boolean }>`
 
 export const MobileLeaderBoardItemLayout = styled.li<{ isMe: boolean }>`
   width: 100%;
-  padding: 0.7rem 2rem;
+  padding: 0.5rem 2rem;
   border-radius: ${({ theme }) => theme.radius.sm};
   background-color: ${({ isMe, theme }) =>
     isMe && theme.colors.primary.default} !important; // FIXME: !important

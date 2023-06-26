@@ -2,7 +2,6 @@ import { H2BoldText, VStack } from '@components/common';
 import { DashboardSkeleton } from '@components/templates/DashboardSkeleton';
 import { useHomeCircleDashboardSkeleton } from './hooks/useHomeCircleDashboardSkeleton';
 import { useHomeCoalitionDashboardSkeleton } from './hooks/useHomeCoalitionDashboardSkeleton';
-import { useHomeEtcDashboardSkeleton } from './hooks/useHomeEtcDashboardSkeleton';
 import { useHomeHeroDashboardSkeleton } from './hooks/useHomeHeroDashboardSkeleton';
 import { useHomeRecordDashboardSkeleton } from './hooks/useHomeRecordDashboardSkeleton';
 import { useHomeStatusDashboardSkeleton } from './hooks/useHomeStatusDashboardSkeleton';
@@ -26,10 +25,6 @@ export const HomePageSkeleton = () => {
       <VStack w="100%" align="start" spacing="2rem">
         <H2BoldText>🥊 코알리숑 비교</H2BoldText>
         <DashboardSkeleton {...useHomeCoalitionDashboardSkeleton()} />
-      </VStack>
-      <VStack w="100%" align="start" spacing="2rem">
-        <H2BoldText>기타</H2BoldText>
-        <DashboardSkeleton {...useHomeEtcDashboardSkeleton()} />
       </VStack>
     </VStack>
   );

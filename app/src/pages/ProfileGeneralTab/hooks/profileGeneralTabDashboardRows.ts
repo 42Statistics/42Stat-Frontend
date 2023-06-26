@@ -235,7 +235,7 @@ export const profileGeneralTabTabletDashboardRows: TabletDashboardRowType[] = [
 
 export const profileGeneralTabMobileDashboardRows: MobileDashboardRowType[] = [
   {
-    row: 17,
+    row: 18,
     col: 1,
     items: [
       {
@@ -297,26 +297,26 @@ export const profileGeneralTabMobileDashboardRows: MobileDashboardRowType[] = [
       {
         row: 9,
         col: 1,
-        rowSpan: 2,
+        rowSpan: 3,
         colSpan: 1,
         elementId: 8,
       },
       {
-        row: 11,
+        row: 12,
         col: 1,
         rowSpan: 2,
         colSpan: 1,
         elementId: 9,
       },
       {
-        row: 13,
+        row: 14,
         col: 1,
         rowSpan: 2,
         colSpan: 1,
         elementId: 10,
       },
       {
-        row: 15,
+        row: 16,
         col: 1,
         rowSpan: 3,
         colSpan: 1,

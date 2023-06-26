@@ -5,7 +5,6 @@ import { withFooter } from '@hoc/withFooter';
 import { withHead } from '@hoc/withHead';
 import { useHomeCircleDashboard } from './hooks/useHomeCircleDashboard';
 import { useHomeCoalitionDashboard } from './hooks/useHomeCoalitionDashboard';
-import { useHomeEtcDashboard } from './hooks/useHomeEtcDashboard';
 import { useHomeHeroDashboard } from './hooks/useHomeHeroDashboard';
 import { useHomeRecordDashboard } from './hooks/useHomeRecordDashboard';
 import { useHomeStatusDashboard } from './hooks/useHomeStatusDashboard';
@@ -29,10 +28,6 @@ const HomePage = () => {
       <VStack w="100%" align="start" spacing="2rem">
         <H2BoldText>🥊 코알리숑 비교</H2BoldText>
         <Dashboard {...useHomeCoalitionDashboard()} />
-      </VStack>
-      <VStack w="100%" align="start" spacing="2rem">
-        <H2BoldText>기타</H2BoldText>
-        <Dashboard {...useHomeEtcDashboard()} />
       </VStack>
     </VStack>
   );

@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
-import { rgba } from 'emotion-rgba';
-import { Clickable } from '../Clickable';
+import { Clickable } from './Clickable';
 
 type ButtonSize = 'md';
 
@@ -14,19 +13,17 @@ export const Button = styled(Clickable)<ButtonProps>`
   border-radius: ${({ theme }) => theme.radius.md};
   background-color: ${({ theme }) => theme.colors.primary.default};
   color: ${({ theme }) => theme.colors.mono.white};
-  font-weight: ${({ theme }) => theme.fonts.weight.bold};
+  font-weight: ${({ theme }) => theme.fonts.weight.medium};
   font-size: ${({ theme }) => theme.fonts.size.body};
-  padding: 0.8rem 1.6rem;
+  padding: 1rem 2.2rem;
   user-select: none;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.15s ease-in-out;
 
   &:hover {
-    background-color: ${({ theme }) => rgba(theme.colors.primary.default, 0.9)};
-    transform: translateY(-1px);
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 5px 15px;
   }
 
   &:active {
-    background-color: ${({ theme }) => theme.colors.primary.default};
-    transform: translateY(0px);
+    box-shadow: none;
   }
 `;

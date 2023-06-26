@@ -10,55 +10,6 @@ import {
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-/**
- * 포켓몬 배열
- * @description
- * 현재 7x7
- * Y x X 형태의 배열
- * 인덱스 값에 변경이 생길경우 getX getY값의 출력범위를 조정해야함
- */
-const pokemonArray = [
-  ['starting', 'Togepi', 'abra', 'Espeon', 'Lugia', 'Mew', 'Mewtwo'],
-  ['Geodude', 'Eevee', 'Marill', 'Raichu', 'Jolteon', 'Ampharos', 'Zapdos'],
-  ['Onix', 'Dratini', 'Lapras', 'Haunter', 'Gengar', 'Mimikyu', 'Darkrai'],
-  [
-    'Steelix',
-    'Lucario',
-    'Happiny',
-    'Lapras',
-    'Dragonair',
-    'Gyarados',
-    'Kyogre',
-  ],
-  [
-    'Golem',
-    'Snorlax',
-    'Arcanine',
-    'Leafeon',
-    'Togekiss',
-    'Greninja',
-    'Articuno',
-  ],
-  [
-    'Tyranitar',
-    'Lucario',
-    'Charizard',
-    'Sylveon',
-    'Dragonite',
-    'Salamence',
-    'Solgaleo',
-  ],
-  [
-    'Regigigas',
-    'Zacian',
-    'Moltres',
-    'Shaymin',
-    'Jirachi',
-    'Rayquaza',
-    'Arceus',
-  ],
-];
-
 const GET_CHARACTER = gql(/* GraphQL */ `
   query GetCharacter {
     getPersonalGeneral {
@@ -110,7 +61,7 @@ const GET_CHARACTER = gql(/* GraphQL */ `
   }
 `);
 
-export const SimilarCharacter = () => {
+export const Character = () => {
   const { username } = useParams() as { username: string };
 
   const title = '이 유저를 캐릭터로 표현한다면?';

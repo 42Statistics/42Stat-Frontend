@@ -2,16 +2,16 @@ import type { DashboardItemProps } from '@utils/types/Dashboard';
 import {
   BeginAt,
   BlackholedAt,
+  Character,
   CoalitionScore,
-  Wallet,
   LastPass,
   LastRegistered,
   LevelRecords,
   LogTime,
   PreferredCluster,
   PreferredTime,
-  SimilarCharacter,
   TeamInfo,
+  Wallet,
 } from '../contents';
 
 export const profileGeneralTabDashboardContents: DashboardItemProps[] = [
@@ -53,7 +53,7 @@ export const profileGeneralTabDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 9,
-    content: SimilarCharacter,
+    content: Character,
   },
   {
     id: 10,

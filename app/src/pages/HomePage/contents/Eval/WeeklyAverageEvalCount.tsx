@@ -63,7 +63,7 @@ export const WeeklyAverageEvalCount = () => {
 
   return (
     <DashboardContent title={title} description={description}>
-      <NumberDefault number={currData} unit={unit} />
+      <NumberDefault number={currData} unit={unit} fixedNumber={2} />
     </DashboardContent>
   );
 };

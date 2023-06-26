@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { useEffect, useRef, useState } from 'react';
-import { Input } from '../Input/Input';
+import { Writable } from '../Input';
 
 export type SegmentType = {
   label: string;
@@ -111,7 +111,7 @@ const Segment = styled.div<{ active: boolean }>`
   z-index: 1;
 `;
 
-const SegmentInput = styled(Input)`
+const SegmentInput = styled(Writable)`
   opacity: 0;
   margin: 0;
   top: 0;

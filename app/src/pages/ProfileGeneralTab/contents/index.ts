@@ -8,5 +8,5 @@ export * from './LevelRecords';
 export * from './LogTime';
 export * from './PreferredCluster';
 export * from './PreferredTime';
-export * from './SimilarCharacter';
+export * from './Character';
 export * from './TeamInfo';

@@ -10,7 +10,7 @@ import {
   TotalEvalCount,
   WeeklyAverageEvalCount,
 } from '../contents/Eval';
-import { CurrRegisteredCountRanking, LastExamResult } from '../contents/Team';
+import { CurrRegisteredCountRanking, RecentExamResult } from '../contents/Team';
 import {
   AliveUserCountRecords,
   AverageDurationPerCircle,
@@ -92,7 +92,7 @@ export const homePageDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 16,
-    content: LastExamResult,
+    content: RecentExamResult,
   },
   {
     id: 17,

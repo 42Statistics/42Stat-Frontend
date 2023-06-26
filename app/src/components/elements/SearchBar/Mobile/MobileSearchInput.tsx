@@ -1,4 +1,4 @@
-import { Clickable, HStack, Input, Spacer } from '@components/common';
+import { Clickable, HStack, Spacer, Writable } from '@components/common';
 import { MdArrowBack } from '@react-icons/all-files/md/MdArrowBack';
 import { MdSearch } from '@react-icons/all-files/md/MdSearch';
 
@@ -20,7 +20,7 @@ export const MobileSearchInput = ({
       <Clickable onClick={toggle}>
         <MdArrowBack size="24px" />
       </Clickable>
-      <Input
+      <Writable
         ref={inputRef}
         onChange={(e) => setInput(e.target.value)}
         placeholder="유저명 또는 프로젝트명 검색"

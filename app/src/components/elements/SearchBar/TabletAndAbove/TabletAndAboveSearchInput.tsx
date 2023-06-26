@@ -1,5 +1,4 @@
-import { HStack, Input } from '@components/common';
-import { InputLayout } from '@components/common/Input';
+import { Input } from '@components/common';
 import { MdSearch } from '@react-icons/all-files/md/MdSearch';
 
 type TabletAndAboveSearchInputProps = {
@@ -14,16 +13,12 @@ export const TabletAndAboveSearchInput = ({
   onKeyDown,
 }: TabletAndAboveSearchInputProps) => {
   return (
-    <InputLayout>
-      <HStack spacing="2rem">
-        <MdSearch id="search-icon" size="24px" />
-        <Input
-          ref={inputRef}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={onKeyDown}
-          placeholder="Search..."
-        />
-      </HStack>
-    </InputLayout>
+    <Input
+      ref={inputRef}
+      onChange={(e) => setInput(e.target.value)}
+      onKeyDown={onKeyDown}
+      placeholder="Search..."
+      leftElement={<MdSearch id="search-icon" size="24px" />}
+    />
   );
 };

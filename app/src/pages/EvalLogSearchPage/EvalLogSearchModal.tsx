@@ -3,7 +3,6 @@ import {
   Center,
   HStack,
   Input,
-  InputLayout,
   Modal,
   Select,
   Text,
@@ -37,25 +36,19 @@ export const EvalLogSearchModal = ({
               <Center w="5rem">
                 <Text>과제명</Text>
               </Center>
-              <InputLayout>
-                <Input {...register('projectName')} />
-              </InputLayout>
+              <Input {...register('projectName')} />
             </HStack>
             <HStack as="li" spacing="3rem">
               <Center w="5rem">
                 <Text>From</Text>
               </Center>
-              <InputLayout>
-                <Input {...register('corrector')} />
-              </InputLayout>
+              <Input {...register('corrector')} />
             </HStack>
             <HStack as="li" spacing="3rem">
               <Center w="5rem">
                 <Text>To</Text>
               </Center>
-              <InputLayout>
-                <Input {...register('corrected')} />
-              </InputLayout>
+              <Input {...register('corrected')} />
             </HStack>
             <HStack as="li" spacing="3rem">
               <Center w="5rem">

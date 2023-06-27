@@ -27,7 +27,7 @@ const GET_BLACKHOLED_RATE = gql(/* GraphQL */ `
 
 export const BlackholedRate = () => {
   const title = '블랙홀 유저 비율';
-  const { loading, error, data: queryData } = useQuery(GET_BLACKHOLED_RATE);
+  const { loading, error, data } = useQuery(GET_BLACKHOLED_RATE);
 
   if (loading)
     return (
@@ -41,14 +41,14 @@ export const BlackholedRate = () => {
         <ApolloBadRequest msg={error.message} />
       </DashboardContent>
     );
-  if (!queryData)
+  if (!data)
     return (
       <DashboardContent title={title}>
         <ApolloNotFound />
       </DashboardContent>
     );
 
-  const { total, fields } = queryData.getHomeUser.blackholedRate;
+  const { total, fields } = data.getHomeUser.blackholedRate;
   const labels = fields.map((field) => capitalize(field.key));
   const series = fields.map((field) => field.value);
 

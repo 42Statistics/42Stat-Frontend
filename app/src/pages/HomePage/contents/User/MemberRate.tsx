@@ -28,7 +28,7 @@ export const MemberRate = () => {
   const title = 'Member 비율';
   const description = '블랙홀 유저 포함';
 
-  const { loading, error, data: queryData } = useQuery(GET_MEMBER_RATE);
+  const { loading, error, data } = useQuery(GET_MEMBER_RATE);
 
   if (loading)
     return (
@@ -42,14 +42,14 @@ export const MemberRate = () => {
         <ApolloBadRequest msg={error.message} />
       </DashboardContent>
     );
-  if (!queryData)
+  if (!data)
     return (
       <DashboardContent title={title}>
         <ApolloNotFound />
       </DashboardContent>
     );
 
-  const { fields } = queryData.getHomeUser.memberRate;
+  const { fields } = data.getHomeUser.memberRate;
   const labels = fields.map((field) => capitalize(field.key));
   const series = fields.map((field) => field.value);
 

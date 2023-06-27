@@ -39,12 +39,13 @@ const GET_TIG_COUNT_PER_COALITION_BY_DATE_TEMPLATE = gql(/* GraphQL */ `
 
 export const MonthlyTigCountPerCoalition = () => {
   const title = '월간 누적 코알리숑 티그 횟수';
-  const { loading, error, data } = useQuery(
-    GET_TIG_COUNT_PER_COALITION_BY_DATE_TEMPLATE,
-    {
-      variables: { dateTemplate: DateTemplate.CurrMonth },
-    },
-  );
+  const {
+    loading,
+    error,
+    data: queryData,
+  } = useQuery(GET_TIG_COUNT_PER_COALITION_BY_DATE_TEMPLATE, {
+    variables: { dateTemplate: DateTemplate.CurrMonth },
+  });
   if (loading)
     return (
       <DashboardContent title={title}>
@@ -57,20 +58,17 @@ export const MonthlyTigCountPerCoalition = () => {
         <ApolloBadRequest msg={error.message} />
       </DashboardContent>
     );
-  if (!data)
+  if (!queryData)
     return (
       <DashboardContent title={title}>
         <ApolloNotFound />
       </DashboardContent>
     );
 
-  const {
-    data: queryData,
-    start,
-    end,
-  } = data.getHomeCoalition.tigCountPerCoalitionByDateTemplate;
+  const { data, start, end } =
+    queryData.getHomeCoalition.tigCountPerCoalitionByDateTemplate;
 
-  const tableData = queryData.map(({ coalition, value }) => ({
+  const tableData = data.map(({ coalition, value }) => ({
     coalition,
     value,
   }));

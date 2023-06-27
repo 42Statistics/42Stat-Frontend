@@ -9,8 +9,8 @@ import {
   EvalLogSearchLink,
   MonthlyEvalCount,
   RecentComment,
+  TotalDuration,
   TotalEvalCount,
-  TotalEvalTime,
 } from '../contents';
 
 export const profileEvalTabDashboardContents: DashboardItemProps[] = [
@@ -28,7 +28,7 @@ export const profileEvalTabDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 3,
-    content: TotalEvalTime,
+    content: TotalDuration,
   },
   {
     id: 4,

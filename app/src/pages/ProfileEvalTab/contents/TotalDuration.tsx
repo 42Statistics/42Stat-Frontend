@@ -8,18 +8,18 @@ import {
 import { TextDefault } from '@components/elements/DashboardContentView/TextDefault';
 import { DashboardContent } from '@components/templates/DashboardContent';
 
-const GET_TOTAL_EVAL_TIME = gql(/* GraphQL */ `
-  query GetTotalEvalTime {
+const GET_TOTAL_DURATION = gql(/* GraphQL */ `
+  query GetTotalDuration {
     getPersonalEval {
       totalDuration
     }
   }
 `);
 
-export const TotalEvalTime = () => {
+export const TotalDuration = () => {
   const title = '누적 평가 시간';
 
-  const { loading, error, data: queryData } = useQuery(GET_TOTAL_EVAL_TIME);
+  const { loading, error, data } = useQuery(GET_TOTAL_DURATION);
 
   if (loading)
     return (
@@ -33,14 +33,14 @@ export const TotalEvalTime = () => {
         <ApolloBadRequest msg={error.message} />
       </DashboardContent>
     );
-  if (!queryData)
+  if (!data)
     return (
       <DashboardContent title={title}>
         <ApolloNotFound />
       </DashboardContent>
     );
 
-  const { totalDuration } = queryData.getPersonalEval;
+  const { totalDuration } = data.getPersonalEval;
 
   return (
     <DashboardContent title={title}>

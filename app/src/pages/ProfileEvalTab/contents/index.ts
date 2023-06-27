@@ -8,4 +8,4 @@ export * from './EvalLogSearchLink';
 export * from './RecentComment';
 export * from './MonthlyEvalCount';
 export * from './TotalEvalCount';
-export * from './TotalEvalTime';
+export * from './TotalDuration';

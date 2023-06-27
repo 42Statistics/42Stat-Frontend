@@ -7,19 +7,23 @@ import {
 } from '@components/elements/DashboardContentView/Error';
 import { TextDefault } from '@components/elements/DashboardContentView/TextDefault';
 import { DashboardContent } from '@components/templates/DashboardContent';
+import { useParams } from 'react-router-dom';
 
 const GET_TOTAL_EVAL_TIME = gql(/* GraphQL */ `
-  query GetTotalEvalTime {
-    getPersonalEval {
+  query GetTotalEvalTime($login: String!) {
+    getPersonalEval(login: $login) {
       totalDuration
     }
   }
 `);
 
 export const TotalEvalTime = () => {
-  const title = '누적 평가 시간';
+  const { username } = useParams() as { username: string };
 
-  const { loading, error, data: queryData } = useQuery(GET_TOTAL_EVAL_TIME);
+  const title = '누적 평가 시간';
+  const { loading, error, data } = useQuery(GET_TOTAL_EVAL_TIME, {
+    variables: { login: username },
+  });
 
   if (loading)
     return (
@@ -33,14 +37,14 @@ export const TotalEvalTime = () => {
         <ApolloBadRequest msg={error.message} />
       </DashboardContent>
     );
-  if (!queryData)
+  if (!data)
     return (
       <DashboardContent title={title}>
         <ApolloNotFound />
       </DashboardContent>
     );
 
-  const { totalDuration } = queryData.getPersonalEval;
+  const { totalDuration } = data.getPersonalEval;
 
   return (
     <DashboardContent title={title}>

@@ -7,19 +7,24 @@ import {
 } from '@components/elements/DashboardContentView/Error';
 import { TextDefault } from '@components/elements/DashboardContentView/TextDefault';
 import { DashboardContent } from '@components/templates/DashboardContent';
+import { useParams } from 'react-router-dom';
 
 const GET_TOTAL_DURATION = gql(/* GraphQL */ `
-  query GetTotalDuration {
-    getPersonalEval {
+  query GetTotalDuration($login: String!) {
+    getPersonalEval(login: $login) {
       totalDuration
     }
   }
 `);
 
 export const TotalDuration = () => {
+  const { username } = useParams() as { username: string };
+
   const title = '누적 평가 시간';
 
-  const { loading, error, data } = useQuery(GET_TOTAL_DURATION);
+  const { loading, error, data } = useQuery(GET_TOTAL_DURATION, {
+    variables: { login: username },
+  });
 
   if (loading)
     return (

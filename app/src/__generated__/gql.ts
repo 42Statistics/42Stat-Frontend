@@ -48,7 +48,7 @@ const documents = {
     "\n  query GetCorrectionPoint($login: String!) {\n    getPersonalEval(login: $login) {\n      correctionPoint\n    }\n  }\n": types.GetCorrectionPointDocument,
     "\n  query getEvalCountByDateTemplateByLogin(\n    $login: String!\n    $currDateTemplate: DateTemplate!\n    $lastDateTemplate: DateTemplate!\n  ) {\n    getPersonalEval(login: $login) {\n      currData: countByDateTemplate(dateTemplate: $currDateTemplate) {\n        data\n        start\n        end\n      }\n      lastData: countByDateTemplate(dateTemplate: $lastDateTemplate) {\n        data\n        start\n        end\n      }\n    }\n  }\n": types.GetEvalCountByDateTemplateByLoginDocument,
     "\n  query getRecentComment($login: String!) {\n    getPersonalEval(login: $login) {\n      recentComment\n    }\n  }\n": types.GetRecentCommentDocument,
-    "\n  query GetTotalDuration {\n    getPersonalEval {\n      totalDuration\n    }\n  }\n": types.GetTotalDurationDocument,
+    "\n  query GetTotalDuration($login: String!) {\n    getPersonalEval(login: $login) {\n      totalDuration\n    }\n  }\n": types.GetTotalDurationDocument,
     "\n  query GetTotalEvalCountByLogin($login: String!) {\n    getPersonalEval(login: $login) {\n      totalCount\n    }\n  }\n": types.GetTotalEvalCountByLoginDocument,
     "\n  query getBeginAt($login: String!) {\n    getPersonalGeneral(login: $login) {\n      beginAt\n    }\n  }\n": types.GetBeginAtDocument,
     "\n  query getBlackHoledAt($login: String!) {\n    getPersonalGeneral(login: $login) {\n      blackholedAt\n    }\n  }\n": types.GetBlackHoledAtDocument,
@@ -223,7 +223,7 @@ export function gql(source: "\n  query getRecentComment($login: String!) {\n    
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query GetTotalDuration {\n    getPersonalEval {\n      totalDuration\n    }\n  }\n"): (typeof documents)["\n  query GetTotalDuration {\n    getPersonalEval {\n      totalDuration\n    }\n  }\n"];
+export function gql(source: "\n  query GetTotalDuration($login: String!) {\n    getPersonalEval(login: $login) {\n      totalDuration\n    }\n  }\n"): (typeof documents)["\n  query GetTotalDuration($login: String!) {\n    getPersonalEval(login: $login) {\n      totalDuration\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

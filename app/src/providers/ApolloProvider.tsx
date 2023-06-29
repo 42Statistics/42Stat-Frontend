@@ -27,10 +27,10 @@ const client = new ApolloClient({
           getHomeTeam: {
             merge: true,
           },
-          getPersonalGeneralPage: {
+          getPersonalGeneral: {
             merge: true,
           },
-          getPersonalEvalPage: {
+          getPersonalEval: {
             merge: true,
           },
           getProjectInfo: {

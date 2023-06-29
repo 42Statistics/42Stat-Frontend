@@ -2,15 +2,15 @@ import { AccentH3BoldText, Center } from '@components/common';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { Link, useParams } from 'react-router-dom';
 
-export const EvalLogSearchLink = () => {
-  const { username } = useParams() as { username: string };
-  const title = '이 유저의 이전 평가가 궁금하다면?';
+export const PastEvaluationLink = () => {
+  const { projectName } = useParams() as { projectName: string };
+  const title = '지난 평가 보기';
 
   return (
     <DashboardContent title={title}>
       <Center w="100%" h="100%">
-        <Link to={`/evallog?corrector=${username}`}>
-          <AccentH3BoldText>바로가기</AccentH3BoldText>
+        <Link to={`/evallog?projectName=${projectName}`}>
+          <AccentH3BoldText>Past Evaluations</AccentH3BoldText>
         </Link>
       </Center>
     </DashboardContent>

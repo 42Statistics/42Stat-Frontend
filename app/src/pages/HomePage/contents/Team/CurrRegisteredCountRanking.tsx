@@ -6,7 +6,7 @@ import {
   ApolloBadRequest,
   ApolloNotFound,
 } from '@components/elements/DashboardContentView/Error';
-import { RankingDefault } from '@components/elements/DashboardContentView/RankingDefault';
+import { RankingProject } from '@components/elements/DashboardContentView/RankingProject';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
 
@@ -64,10 +64,10 @@ export const CurrRegisteredCountRanking = () => {
   return (
     <DashboardContent title={title}>
       <TabletAndAbove>
-        <RankingDefault list={list} cnt={5} unit={unit} />
+        <RankingProject list={list} cnt={5} unit={unit} />
       </TabletAndAbove>
       <Mobile>
-        <RankingDefault list={list} cnt={3} unit={unit} />
+        <RankingProject list={list} cnt={3} unit={unit} />
       </Mobile>
     </DashboardContent>
   );

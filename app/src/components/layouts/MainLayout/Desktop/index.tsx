@@ -1,22 +1,18 @@
 import { HStack, VStack } from '@components/common';
-import { IntraLink } from '@components/elements/IntraLink';
 import { DesktopNavBar } from '@components/elements/NavBar/Desktop';
 import styled from '@emotion/styled';
 import { Outlet } from 'react-router-dom';
 
 export const DesktopMainLayout = () => {
   return (
-    <>
-      <IntraLink />
-      <HStack>
-        <DesktopNavBar />
-        <DesktopMainPageLayout>
-          <VStack w="100%">
-            <Outlet />
-          </VStack>
-        </DesktopMainPageLayout>
-      </HStack>
-    </>
+    <HStack>
+      <DesktopNavBar />
+      <DesktopMainPageLayout>
+        <VStack w="100%">
+          <Outlet />
+        </VStack>
+      </DesktopMainPageLayout>
+    </HStack>
   );
 };
 

@@ -1,22 +1,18 @@
 import { HStack, VStack } from '@components/common';
-import { IntraLink } from '@components/elements/IntraLink';
 import { TabletNavBar } from '@components/elements/NavBar/Tablet';
 import styled from '@emotion/styled';
 import { Outlet } from 'react-router-dom';
 
 export const TabletMainLayout = () => {
   return (
-    <>
-      <IntraLink />
-      <HStack>
-        <TabletNavBar />
-        <TabletMainPageLayout>
-          <VStack w="100%">
-            <Outlet />
-          </VStack>
-        </TabletMainPageLayout>
-      </HStack>
-    </>
+    <HStack>
+      <TabletNavBar />
+      <TabletMainPageLayout>
+        <VStack w="100%">
+          <Outlet />
+        </VStack>
+      </TabletMainPageLayout>
+    </HStack>
   );
 };
 

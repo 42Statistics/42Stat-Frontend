@@ -11,6 +11,10 @@ export default defineConfig({
     host: 'frontend',
     port: 8080,
   },
+  preview: {
+    host: 'localhost',
+    port: 8080,
+  },
   resolve: {
     alias: [
       {

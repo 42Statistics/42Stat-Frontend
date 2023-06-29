@@ -14,7 +14,7 @@ services:
       - '8080:8080'
     entrypoint: sh /tmp/entry.sh
     env_file:
-      - env/.env
+      - env/.env.development
 
 volumes:
   frontend-app:

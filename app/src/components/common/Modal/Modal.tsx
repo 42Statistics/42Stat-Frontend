@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import type { ModalType } from '@utils/types/Modal';
+import type { ModalType } from '@/types/Modal';
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { Center } from '../Stack';

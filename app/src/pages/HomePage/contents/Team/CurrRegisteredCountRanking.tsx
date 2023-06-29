@@ -1,4 +1,5 @@
 import { gql } from '@/__generated__';
+import type { RankingItemType } from '@/types/Ranking';
 import { useQuery } from '@apollo/client';
 import { Loader } from '@components/common';
 import {
@@ -8,7 +9,6 @@ import {
 import { RankingDefault } from '@components/elements/DashboardContentView/RankingDefault';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
-import type { RankingItemType } from '@utils/types/Ranking';
 
 const GET_CURR_REGISTERED_COUNT_RANKING = gql(/* GraphQL */ `
   query GetCurrRegisteredCountRanking {

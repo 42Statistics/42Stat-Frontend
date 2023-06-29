@@ -7,7 +7,7 @@ import {
 } from '@components/common';
 import { useTheme } from '@emotion/react';
 import { numberWithUnitFormatter } from '@utils/formatters';
-import type { RankingUserItemType } from '@utils/types/Ranking';
+import type { RankingUserItemType } from '@/types/Ranking';
 import { Link } from 'react-router-dom';
 
 type RankingUserItemProps = {

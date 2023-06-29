@@ -8,7 +8,7 @@ import {
   Text,
   VStack,
 } from '@components/common';
-import type { ModalType } from '@utils/types/Modal';
+import type { ModalType } from '@/types/Modal';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { EvalLogSearchFormData } from '.';
 

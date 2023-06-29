@@ -2,6 +2,7 @@ import {
   GetLeaderboardEvalCountQuery,
   GetLeaderboardEvalCountQueryVariables,
 } from '@/__generated__/graphql';
+import { RankingUserItemType } from '@/types/Ranking';
 import { QueryResult } from '@apollo/client';
 import { Divider, VStack } from '@components/common';
 import {
@@ -12,7 +13,6 @@ import { LeaderBoard } from '@components/templates/LeaderBoard';
 import { LeaderBoardItem } from '@components/templates/LeaderBoard/LeaderBoardItem';
 import { LeaderBoardTabResultSkeleton } from '@pages/PageSkeletons/LeaderBoardTabResultSkeleton';
 import { isDefined } from '@utils/isDefined';
-import { RankingUserItemType } from '@utils/types/Ranking';
 
 type LeaderboardEvalCountTabResultProps = {
   result: QueryResult<

@@ -1,6 +1,6 @@
 import { VStack } from '@components/common';
 import styled from '@emotion/styled';
-import type { RankingUserItemType } from '@utils/types/Ranking';
+import type { RankingUserItemType } from '@/types/Ranking';
 import { LeaderBoardItem } from './LeaderBoardItem';
 
 type LeaderBoardProps = {

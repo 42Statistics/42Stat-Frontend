@@ -1,7 +1,7 @@
 import { Modal, Spacer, Text, VStack } from '@components/common';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { ModalType } from '@utils/types/Modal';
+import { ModalType } from '@/types/Modal';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MobileSearchInput } from './MobileSearchInput';

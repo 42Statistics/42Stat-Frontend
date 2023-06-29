@@ -11,7 +11,6 @@ export const TabBar = () => {
       <HStack as="ul" w="100%" justify="space-around">
         <TabItem route={NAV_ROUTES.HOME} />
         <TabItem route={NAV_ROUTES.PROFILE} />
-        <TabItem route={NAV_ROUTES.PROJECT} />
         <TabItem route={NAV_ROUTES.LEADERBOARD} />
         <TabItem route={NAV_ROUTES.EVALLOG} />
         <TabItem route={NAV_ROUTES.LOGOUT} />

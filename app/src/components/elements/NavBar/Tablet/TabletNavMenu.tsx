@@ -9,7 +9,6 @@ export const TabletNavMenu = () => {
     <VStack as="ul" w="100%" h="100%" spacing="2rem">
       <TabletNavItem route={NAV_ROUTES.HOME} />
       <TabletNavItem route={NAV_ROUTES.PROFILE} />
-      <TabletNavItem route={NAV_ROUTES.PROJECT} />
       <TabletNavItem route={NAV_ROUTES.LEADERBOARD} />
       <TabletNavItem route={NAV_ROUTES.EVALLOG} />
       <Spacer />

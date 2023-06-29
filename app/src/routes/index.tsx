@@ -21,7 +21,6 @@ const FtOAuthPage = lazy(() => import('@pages/FtOAuthPage'));
 const LeaderBoardPage = lazy(() => import('@pages/LeaderBoardPage'));
 const EvalLogSearchPage = lazy(() => import('@pages/EvalLogSearchPage'));
 const ProfilePage = lazy(() => import('@pages/ProfilePage'));
-const ProjectPage = lazy(() => import('@pages/ProjectPage'));
 const ProjectDetailPage = lazy(() => import('@pages/ProjectDetailPage'));
 
 export const AppRoutes = () => {
@@ -117,20 +116,6 @@ export const AppRoutes = () => {
                   }
                 >
                   <EvalLogSearchPage />
-                </Suspense>
-              }
-            />
-            <Route
-              path={ROUTES.PROJECT}
-              element={
-                <Suspense
-                  fallback={
-                    <DeferredComponent>
-                      <></>
-                    </DeferredComponent>
-                  }
-                >
-                  <ProjectPage />
                 </Suspense>
               }
             />

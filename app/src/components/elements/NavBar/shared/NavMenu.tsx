@@ -10,7 +10,6 @@ export const NavMenu = () => {
     <VStack as="ul" w="100%" h="100%" spacing="2rem">
       <NavItem route={NAV_ROUTES.HOME} />
       <NavItem route={NAV_ROUTES.PROFILE} />
-      <NavItem route={NAV_ROUTES.PROJECT} />
       <NavItem route={NAV_ROUTES.LEADERBOARD} />
       <NavItem route={NAV_ROUTES.EVALLOG} />
       <Spacer />

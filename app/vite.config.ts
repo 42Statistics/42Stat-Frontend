@@ -55,7 +55,7 @@ export default defineConfig({
       },
       {
         find: '@atoms',
-        replacement: path.resolve(__dirname, 'src/utils/atoms'),
+        replacement: path.resolve(__dirname, 'src/utils/jotai/atoms'),
       },
       {
         find: '@utils',

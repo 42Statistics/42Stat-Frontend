@@ -11,7 +11,7 @@ import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
 import type { RankingUserItemType } from '@utils/types/Ranking';
 
 const GET_WALLET_RANKING = gql(/* GraphQL */ `
-  query getWalletRanking($limit: Int!) {
+  query GetWalletRanking($limit: Int!) {
     getHomeUser {
       walletRanking(limit: $limit) {
         userPreview {

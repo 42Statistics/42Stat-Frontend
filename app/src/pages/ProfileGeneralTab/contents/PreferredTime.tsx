@@ -11,8 +11,11 @@ import { DashboardContent } from '@components/templates/DashboardContent';
 import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
 
-const GET_PREFERRED_TIME_BY_DATE_TEMPLATE = gql(/* GraphQL */ `
-  query getPrefferedTime($login: String!, $dateTemplate: DateTemplate!) {
+const GET_PREFERRED_TIME_BY_DATE_TEMPLATE_BY_LOGIN = gql(/* GraphQL */ `
+  query GetPrefferedTimeByDateTemplateByLogin(
+    $login: String!
+    $dateTemplate: DateTemplate!
+  ) {
     getPersonalGeneral(login: $login) {
       preferredTimeByDateTemplate(dateTemplate: $dateTemplate) {
         data {
@@ -37,7 +40,7 @@ export const PreferredTime = () => {
     loading,
     error,
     data: queryData,
-  } = useQuery(GET_PREFERRED_TIME_BY_DATE_TEMPLATE, {
+  } = useQuery(GET_PREFERRED_TIME_BY_DATE_TEMPLATE_BY_LOGIN, {
     variables: { login: username, dateTemplate: DateTemplate.CurrMonth },
   });
   if (loading)

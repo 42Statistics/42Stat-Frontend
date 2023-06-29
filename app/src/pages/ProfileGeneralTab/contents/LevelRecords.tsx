@@ -11,8 +11,8 @@ import { useTheme } from '@emotion/react';
 import { isDefined } from '@utils/isDefined';
 import { useParams } from 'react-router-dom';
 
-const GET_USER_LEVEL_RECORDS = gql(/* GraphQL */ `
-  query GetUserLevelRecords($login: String!) {
+const GET_LEVEL_RECORDS_BY_LOGIN = gql(/* GraphQL */ `
+  query GetLevelRecordsByLogin($login: String!) {
     getPersonalGeneral(login: $login) {
       userLevelRecords {
         monthsPassed
@@ -31,7 +31,7 @@ export const LevelRecords = () => {
 
   const title = '레벨 증가 그래프';
   const description = `멤버 평균과 비교`;
-  const { loading, error, data } = useQuery(GET_USER_LEVEL_RECORDS, {
+  const { loading, error, data } = useQuery(GET_LEVEL_RECORDS_BY_LOGIN, {
     variables: { login: username },
   });
   if (loading)

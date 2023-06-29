@@ -12,7 +12,7 @@ import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
 
 const GET_EVAL_COUNT_BY_DATE_TEMPLATE_BY_LOGIN = gql(/* GraphQL */ `
-  query getEvalCountByDateTemplateByLogin(
+  query GetEvalCountByDateTemplateByLogin(
     $login: String!
     $currDateTemplate: DateTemplate!
     $lastDateTemplate: DateTemplate!

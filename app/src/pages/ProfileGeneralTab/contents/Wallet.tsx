@@ -9,8 +9,8 @@ import { NumberDefault } from '@components/elements/DashboardContentView/NumberD
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useParams } from 'react-router-dom';
 
-const GET_WALLET = gql(/* GraphQL */ `
-  query GetWallet($login: String!) {
+const GET_WALLET_BY_LOGIN = gql(/* GraphQL */ `
+  query GetWalletByLogin($login: String!) {
     getPersonalGeneral(login: $login) {
       wallet
     }
@@ -21,7 +21,7 @@ export const Wallet = () => {
   const { username } = useParams() as { username: string };
 
   const title = '보유 월렛';
-  const { loading, error, data } = useQuery(GET_WALLET, {
+  const { loading, error, data } = useQuery(GET_WALLET_BY_LOGIN, {
     variables: { login: username },
   });
   if (loading)

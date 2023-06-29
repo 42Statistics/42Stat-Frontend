@@ -11,7 +11,7 @@ import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
 import type { RankingUserItemType } from '@utils/types/Ranking';
 
 const GET_CORRECTION_POINT_RANKING = gql(/* GraphQL */ `
-  query getCorrectionPointRanking($limit: Int!) {
+  query GetCorrectionPointRanking($limit: Int!) {
     getHomeUser {
       correctionPointRanking(limit: $limit) {
         userPreview {

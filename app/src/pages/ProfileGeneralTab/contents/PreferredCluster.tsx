@@ -11,8 +11,8 @@ import { DashboardContent } from '@components/templates/DashboardContent';
 import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
 
-const GET_PREFERRED_CLUSTER = gql(/* GraphQL */ `
-  query GetPreferredClusterByDateTemplate(
+const GET_PREFERRED_CLUSTER_BY_DATE_TEMPLATE_BY_LOGIN = gql(/* GraphQL */ `
+  query GetPreferredClusterByDateTemplateByLogin(
     $login: String!
     $dateTemplate: DateTemplate!
   ) {
@@ -32,9 +32,12 @@ export const PreferredCluster = () => {
   const { username } = useParams() as { username: string };
 
   const title = '주 접속 클러스터';
-  const { loading, error, data } = useQuery(GET_PREFERRED_CLUSTER, {
-    variables: { login: username, dateTemplate: DateTemplate.CurrMonth },
-  });
+  const { loading, error, data } = useQuery(
+    GET_PREFERRED_CLUSTER_BY_DATE_TEMPLATE_BY_LOGIN,
+    {
+      variables: { login: username, dateTemplate: DateTemplate.CurrMonth },
+    },
+  );
   if (loading)
     return (
       <DashboardContent title={title}>

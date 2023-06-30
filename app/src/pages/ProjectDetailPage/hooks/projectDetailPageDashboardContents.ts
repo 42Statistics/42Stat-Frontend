@@ -1,12 +1,12 @@
 import {
   AveragePassFinalMark,
-  Circle,
   ClosedTeamCount,
   CurrRegisteredTeamCount,
   Difficulty,
   EstimateTime,
   Objectives,
   PastEvaluationLink,
+  ProjectUrl,
   Skills,
   UserCount,
   ValidatedRate,
@@ -15,19 +15,19 @@ import {
 export const projectDetailPageDashboardContents = [
   {
     id: 0,
-    content: Circle,
-  },
-  {
-    id: 1,
     content: UserCount,
   },
   {
-    id: 2,
+    id: 1,
     content: EstimateTime,
   },
   {
-    id: 3,
+    id: 2,
     content: Difficulty,
+  },
+  {
+    id: 3,
+    content: ProjectUrl,
   },
   {
     id: 4,

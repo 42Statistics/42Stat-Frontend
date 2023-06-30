@@ -63,7 +63,7 @@ const documents = {
     "\n  query GetTeamInfoByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      teamInfo {\n        lastRegistered\n        lastPassed\n        teams {\n          id\n          name\n          occurrence\n          projectPreview {\n            id\n            name\n            url\n          }\n          status\n          lastEventTime\n          isValidated\n          finalMark\n        }\n      }\n    }\n  }\n": types.GetTeamInfoByLoginDocument,
     "\n  query GetWalletByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      wallet\n    }\n  }\n": types.GetWalletByLoginDocument,
     "\n  query GetUserProfile($login: String!) {\n    getPersonalGeneral(login: $login) {\n      userProfile {\n        id\n        login\n        imgUrl\n        grade\n        displayname\n        coalition {\n          id\n          name\n          slug\n          imageUrl\n          coverUrl\n          color\n          score\n          userId\n        }\n        titles {\n          titleId\n          name\n          selected\n          createdAt\n          updatedAt\n        }\n        level\n      }\n    }\n  }\n": types.GetUserProfileDocument,
-    "\n  query GetProjectNameAndDescriptionByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      name\n      description\n    }\n  }\n": types.GetProjectNameAndDescriptionByProjectNameDocument,
+    "\n  query GetProjectIntroductionByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      name\n      description\n    }\n  }\n": types.GetProjectIntroductionByProjectNameDocument,
     "\n  query GetAveragePassFinalMarkByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      averagePassFinalMark\n    }\n  }\n": types.GetAveragePassFinalMarkByProjectNameDocument,
     "\n  query GetClosedTeamCountByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      closedTeamCount\n    }\n  }\n": types.GetClosedTeamCountByProjectNameDocument,
     "\n  query GetCurrRegisteredTeamCountByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      currRegisteredTeamCount\n    }\n  }\n": types.GetCurrRegisteredTeamCountByProjectNameDocument,
@@ -73,7 +73,6 @@ const documents = {
     "\n  query GetSkillsByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      skills\n    }\n  }\n": types.GetSkillsByProjectNameDocument,
     "\n  query GetUserCountByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      minUserCount\n      maxUserCount\n    }\n  }\n": types.GetUserCountByProjectNameDocument,
     "\n  query GetValidatedRateByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      validatedRate {\n        total\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n": types.GetValidatedRateByProjectNameDocument,
-    "\n  query GetProjectInfo($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      id\n      name\n      objectives\n      skills\n      description\n      minUserCount\n      maxUserCount\n      estimateTime\n      difficulty\n      currRegisteredTeamCount\n      closedTeamCount\n      averagePassFinalMark\n      validatedRate {\n        total\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n": types.GetProjectInfoDocument,
 };
 
 /**
@@ -293,7 +292,7 @@ export function gql(source: "\n  query GetUserProfile($login: String!) {\n    ge
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query GetProjectNameAndDescriptionByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      name\n      description\n    }\n  }\n"): (typeof documents)["\n  query GetProjectNameAndDescriptionByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      name\n      description\n    }\n  }\n"];
+export function gql(source: "\n  query GetProjectIntroductionByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      name\n      description\n    }\n  }\n"): (typeof documents)["\n  query GetProjectIntroductionByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      name\n      description\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -330,10 +329,6 @@ export function gql(source: "\n  query GetUserCountByProjectName($projectName: S
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query GetValidatedRateByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      validatedRate {\n        total\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetValidatedRateByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      validatedRate {\n        total\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function gql(source: "\n  query GetProjectInfo($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      id\n      name\n      objectives\n      skills\n      description\n      minUserCount\n      maxUserCount\n      estimateTime\n      difficulty\n      currRegisteredTeamCount\n      closedTeamCount\n      averagePassFinalMark\n      validatedRate {\n        total\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetProjectInfo($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      id\n      name\n      objectives\n      skills\n      description\n      minUserCount\n      maxUserCount\n      estimateTime\n      difficulty\n      currRegisteredTeamCount\n      closedTeamCount\n      averagePassFinalMark\n      validatedRate {\n        total\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

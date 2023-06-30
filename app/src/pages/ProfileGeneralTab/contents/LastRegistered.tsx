@@ -6,6 +6,7 @@ import {
   ApolloNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { TextDefault } from '@components/elements/DashboardContentView/TextDefault';
+import { TextProject } from '@components/elements/DashboardContentView/TextProject';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useParams } from 'react-router-dom';
 
@@ -50,7 +51,7 @@ export const LastRegistered = () => {
   return (
     <DashboardContent title={title}>
       {lastRegistered != null ? (
-        <TextDefault text={lastRegistered} />
+        <TextProject text={lastRegistered} />
       ) : (
         <TextDefault text="과제 신청 기록이 없어요 😓" />
       )}

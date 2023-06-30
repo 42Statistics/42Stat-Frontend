@@ -6,6 +6,7 @@ import {
   ApolloNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { TextDefault } from '@components/elements/DashboardContentView/TextDefault';
+import { TextProject } from '@components/elements/DashboardContentView/TextProject';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useParams } from 'react-router-dom';
 
@@ -50,7 +51,7 @@ export const LastPass = () => {
   return (
     <DashboardContent title={title}>
       {lastPassed != null ? (
-        <TextDefault text={lastPassed} />
+        <TextProject text={lastPassed} />
       ) : (
         <TextDefault text="과제 제출 기록이 없어요 😓" />
       )}

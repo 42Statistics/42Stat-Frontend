@@ -1,11 +1,11 @@
+import type { RankingItemType } from '@/types/Ranking';
 import { VStack } from '@components/common';
 import styled from '@emotion/styled';
-import type { RankingUserItemType } from '@/types/Ranking';
 import { LeaderBoardItem } from './LeaderBoardItem';
 
 type LeaderBoardProps = {
-  list: RankingUserItemType[];
-  me: RankingUserItemType | null;
+  list: RankingItemType[];
+  me: RankingItemType | null;
   unit: string;
   fixedNumber?: number;
 };

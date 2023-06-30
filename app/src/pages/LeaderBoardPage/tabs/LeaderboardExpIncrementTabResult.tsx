@@ -2,7 +2,6 @@ import {
   GetLeaderboardExpIncrementQuery,
   GetLeaderboardExpIncrementQueryVariables,
 } from '@/__generated__/graphql';
-import { RankingUserItemType } from '@/types/Ranking';
 import { QueryResult } from '@apollo/client';
 import { Divider, VStack } from '@components/common';
 import { ApolloErrorView } from '@components/elements/ApolloErrorView';
@@ -30,7 +29,7 @@ export const LeaderboardExpIncrementTabResult = ({
     data.getLeaderboardExpIncrement.byDateTemplate.data;
   const unit = 'XP';
 
-  const myRanking: RankingUserItemType | null =
+  const myRanking =
     me != null
       ? {
           id: me.userPreview.id,
@@ -41,7 +40,7 @@ export const LeaderboardExpIncrementTabResult = ({
         }
       : null;
 
-  const list: RankingUserItemType[] = totalRanking.nodes
+  const list = totalRanking.nodes
     .filter(isDefined)
     .map(({ userPreview, value, rank }) => ({
       id: userPreview.id,

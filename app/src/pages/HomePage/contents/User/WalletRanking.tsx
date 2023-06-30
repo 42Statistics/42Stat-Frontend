@@ -1,13 +1,13 @@
 import { gql } from '@/__generated__';
-import type { RankingUserItemType } from '@/types/Ranking';
 import { useQuery } from '@apollo/client';
 import {
   DashboardContentBadRequest,
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
-import { RankingUser } from '@components/elements/DashboardContentView/RankingUser';
+import { Ranking } from '@components/elements/DashboardContentView/Ranking';
 import { DashboardContent } from '@components/templates/DashboardContent';
+import { ROUTES } from '@routes/ROUTES';
 import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
 
 const GET_WALLET_RANKING = gql(/* GraphQL */ `
@@ -38,23 +38,22 @@ export const WalletRanking = () => {
   const { walletRanking } = data.getHomeUser;
   const unit = '₳';
 
-  const list: RankingUserItemType[] = walletRanking.map(
-    ({ userPreview, value, rank }) => ({
-      id: userPreview.id,
-      name: userPreview.login,
-      value: value,
-      rank: rank,
-      imgUrl: userPreview.imgUrl,
-    }),
-  );
+  const list = walletRanking.map(({ userPreview, value, rank }) => ({
+    id: userPreview.id,
+    name: userPreview.login,
+    value: value,
+    rank: rank,
+    imgUrl: userPreview.imgUrl,
+    link: `${ROUTES.PROFILE_ROOT}/${userPreview.login}`,
+  }));
 
   return (
     <DashboardContent title={title}>
       <TabletAndAbove>
-        <RankingUser list={list} cnt={5} unit={unit} />
+        <Ranking list={list} cnt={5} unit={unit} />
       </TabletAndAbove>
       <Mobile>
-        <RankingUser list={list} cnt={3} unit={unit} />
+        <Ranking list={list} cnt={3} unit={unit} />
       </Mobile>
     </DashboardContent>
   );

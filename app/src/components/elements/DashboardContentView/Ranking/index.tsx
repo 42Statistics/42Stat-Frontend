@@ -1,18 +1,18 @@
 import type { RankingItemType } from '@/types/Ranking';
 import { VStack } from '@components/common';
-import { RankingProjectItem } from './RankingProjectItem';
+import { RankingItem } from './RankingItem';
 
-type RankingProjectProps = {
+type RankingProps = {
   list: RankingItemType[];
   cnt: number;
   unit: string;
 };
 
-export const RankingProject = ({ list, cnt, unit }: RankingProjectProps) => {
+export const Ranking = ({ list, cnt, unit }: RankingProps) => {
   return (
     <VStack w="100%" h="100%" spacing="2rem">
       {list.slice(0, cnt).map((item) => (
-        <RankingProjectItem key={item.id} item={item} unit={unit} />
+        <RankingItem key={item.id} item={item} unit={unit} />
       ))}
     </VStack>
   );

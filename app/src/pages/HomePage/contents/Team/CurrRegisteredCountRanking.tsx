@@ -6,8 +6,9 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
-import { RankingProject } from '@components/elements/DashboardContentView/RankingProject';
+import { Ranking } from '@components/elements/DashboardContentView/Ranking';
 import { DashboardContent } from '@components/templates/DashboardContent';
+import { ROUTES } from '@routes/ROUTES';
 import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
 
 const GET_CURR_REGISTERED_COUNT_RANKING = gql(/* GraphQL */ `
@@ -42,16 +43,17 @@ export const CurrRegisteredCountRanking = () => {
       name: projectPreview.name,
       value: value,
       rank: rank,
+      link: `${ROUTES.PROJECT_ROOT}/${projectPreview.name}`,
     }),
   );
 
   return (
     <DashboardContent title={title}>
       <TabletAndAbove>
-        <RankingProject list={list} cnt={5} unit={unit} />
+        <Ranking list={list} cnt={5} unit={unit} />
       </TabletAndAbove>
       <Mobile>
-        <RankingProject list={list} cnt={3} unit={unit} />
+        <Ranking list={list} cnt={3} unit={unit} />
       </Mobile>
     </DashboardContent>
   );

@@ -2,7 +2,6 @@ import {
   GetLeaderboardEvalCountQuery,
   GetLeaderboardEvalCountQueryVariables,
 } from '@/__generated__/graphql';
-import { RankingUserItemType } from '@/types/Ranking';
 import { QueryResult } from '@apollo/client';
 import { Divider, VStack } from '@components/common';
 import { ApolloErrorView } from '@components/elements/ApolloErrorView';
@@ -29,7 +28,7 @@ export const LeaderboardEvalCountTabResult = ({
   const { me, totalRanking } = data.getLeaderboardEvalCount.byDateTemplate.data;
   const unit = '회';
 
-  const myRanking: RankingUserItemType | null =
+  const myRanking =
     me != null
       ? {
           id: me.userPreview.id,
@@ -40,7 +39,7 @@ export const LeaderboardEvalCountTabResult = ({
         }
       : null;
 
-  const list: RankingUserItemType[] = totalRanking.nodes
+  const list = totalRanking.nodes
     .filter(isDefined)
     .map(({ userPreview, value, rank }) => ({
       id: userPreview.id,

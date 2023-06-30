@@ -1,4 +1,4 @@
-import { AccentH3MediumText, Center } from '@components/common';
+import { AccentH3BoldText, Center } from '@components/common';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { Link, useParams } from 'react-router-dom';
 
@@ -10,7 +10,7 @@ export const EvalLogSearchLink = () => {
     <DashboardContent title={title}>
       <Center w="100%" h="100%">
         <Link to={`/evallog?corrector=${username}`}>
-          <AccentH3MediumText>바로가기</AccentH3MediumText>
+          <AccentH3BoldText>바로가기</AccentH3BoldText>
         </Link>
       </Center>
     </DashboardContent>

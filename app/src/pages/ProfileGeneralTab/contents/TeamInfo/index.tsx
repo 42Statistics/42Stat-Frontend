@@ -9,8 +9,8 @@ import styled from '@emotion/styled';
 import { useParams } from 'react-router-dom';
 import { TeamInfoTable } from './TeamInfoTable';
 
-const GET_TEAM_INFO = gql(/* GraphQL */ `
-  query getTeamInfo($login: String!) {
+const GET_TEAM_INFO_BY_LOGIN = gql(/* GraphQL */ `
+  query GetTeamInfoByLogin($login: String!) {
     getPersonalGeneral(login: $login) {
       teamInfo {
         lastRegistered
@@ -37,7 +37,7 @@ const GET_TEAM_INFO = gql(/* GraphQL */ `
 export const TeamInfo = () => {
   const { username } = useParams() as { username: string };
 
-  const { loading, error, data } = useQuery(GET_TEAM_INFO, {
+  const { loading, error, data } = useQuery(GET_TEAM_INFO_BY_LOGIN, {
     variables: { login: username },
   });
 

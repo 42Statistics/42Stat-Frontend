@@ -13,8 +13,6 @@ services:
     ports:
       - '8080:8080'
     entrypoint: sh /tmp/entry.prod.sh
-    env_file:
-      - env/.env.production
 
 volumes:
   frontend-app:

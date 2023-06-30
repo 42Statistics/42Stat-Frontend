@@ -9,8 +9,8 @@ import { DashboardContent } from '@components/templates/DashboardContent';
 import styled from '@emotion/styled';
 import { useParams } from 'react-router-dom';
 
-const GET_RECENT_COMMENT = gql(/* GraphQL */ `
-  query getRecentComment($login: String!) {
+const GET_RECENT_COMMENT_BY_LOGIN = gql(/* GraphQL */ `
+  query GetRecentCommentByLogin($login: String!) {
     getPersonalEval(login: $login) {
       recentComment
     }
@@ -21,7 +21,7 @@ export const RecentComment = () => {
   const { username } = useParams() as { username: string };
 
   const title = '최근 쓴 코멘트';
-  const { loading, error, data } = useQuery(GET_RECENT_COMMENT, {
+  const { loading, error, data } = useQuery(GET_RECENT_COMMENT_BY_LOGIN, {
     variables: { login: username },
   });
   if (loading)

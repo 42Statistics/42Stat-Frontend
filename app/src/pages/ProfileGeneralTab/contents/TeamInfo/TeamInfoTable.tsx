@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import { isDefined } from '@utils/isDefined';
 import { rgba } from 'emotion-rgba';
 import { truncate } from 'lodash-es';
+import { Link } from 'react-router-dom';
 import { DateDiffWithStatus } from './DateDiffWithStatus';
 import { ResultWithStatus } from './ResultWithStatus';
 
@@ -41,7 +42,9 @@ export const TeamInfoTable = ({ teams }: TeamInfoTableProps) => {
             }) => (
               <tr key={id}>
                 <td>
-                  <Text>{projectPreview.name}</Text>
+                  <Link to={`/project/${projectPreview.name}`}>
+                    <Text>{projectPreview.name}</Text>
+                  </Link>
                 </td>
                 <td>
                   <Text>{occurrence + 1}</Text>

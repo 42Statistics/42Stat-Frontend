@@ -11,7 +11,7 @@ import { useTheme } from '@emotion/react';
 import { numberWithUnitFormatter } from '@utils/formatters';
 
 const GET_BLACKHOLED_COUNT_PER_CIRCLE = gql(/* GraphQL */ `
-  query getBlackholedCountPerCircle {
+  query GetBlackholedCountPerCircle {
     getHomeUser {
       blackholedCountPerCircle {
         circle

@@ -10,7 +10,7 @@ import { DashboardContent } from '@components/templates/DashboardContent';
 import { numberWithUnitFormatter } from '@utils/formatters';
 
 const GET_USER_COUNT_PER_LEVEL = gql(/* GraphQL */ `
-  query getUserCountPerLevel {
+  query GetUserCountPerLevel {
     getHomeUser {
       userCountPerLevel {
         value

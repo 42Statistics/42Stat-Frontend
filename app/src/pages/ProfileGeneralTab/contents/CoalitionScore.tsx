@@ -10,7 +10,7 @@ import { DashboardContent } from '@components/templates/DashboardContent';
 import { useParams } from 'react-router-dom';
 
 const GET_COALITION_SCORE_BY_LOGIN = gql(/* GraphQL */ `
-  query GetCoalitionScore($login: String!) {
+  query GetCoalitionScoreByLogin($login: String!) {
     getPersonalGeneral(login: $login) {
       userProfile {
         coalition {

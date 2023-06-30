@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import type { StackProps } from '@utils/types/StackProps';
+import type { StackProps } from '@/types/StackProps';
 
 export const hstack = css`
   display: flex;

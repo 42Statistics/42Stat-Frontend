@@ -11,7 +11,7 @@
       "@providers/*": ["src/providers/*"],
       "@routes/*": ["src/routes/*"],
       "@styles/*": ["src/styles/*"],
-      "@atoms/*": ["src/utils/atoms/*"],
+      "@atoms/*": ["src/utils/jotai/atoms/*"],
       "@utils/*": ["src/utils/*"],
       "@/*": ["src/*"]
     }

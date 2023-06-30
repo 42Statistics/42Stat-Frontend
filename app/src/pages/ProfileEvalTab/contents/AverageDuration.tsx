@@ -9,8 +9,8 @@ import { NumberDefault } from '@components/elements/DashboardContentView/NumberD
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useParams } from 'react-router-dom';
 
-const GET_AVERAGE_DURATION = gql(/* GraphQL */ `
-  query getAverageDuration($login: String!) {
+const GET_AVERAGE_DURATION_BY_LOGIN = gql(/* GraphQL */ `
+  query GetAverageDurationByLogin($login: String!) {
     getPersonalEval(login: $login) {
       averageDuration
     }
@@ -22,7 +22,7 @@ export const AverageDuration = () => {
 
   const title = '평균 평가 시간';
   const description = '평가자일 때';
-  const { loading, error, data } = useQuery(GET_AVERAGE_DURATION, {
+  const { loading, error, data } = useQuery(GET_AVERAGE_DURATION_BY_LOGIN, {
     variables: { login: username },
   });
   if (loading)

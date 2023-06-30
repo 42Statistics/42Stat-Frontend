@@ -1,3 +1,4 @@
+import type { RankingUserItemType } from '@/types/Ranking';
 import {
   Avatar,
   BoldText,
@@ -11,7 +12,6 @@ import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { numberWithUnitFormatter } from '@utils/formatters';
 import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
-import type { RankingUserItemType } from '@utils/types/Ranking';
 import { Link } from 'react-router-dom';
 
 type LeaderBoardItemProps = {

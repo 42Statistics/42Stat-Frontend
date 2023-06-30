@@ -9,7 +9,7 @@ import { NumberDefault } from '@components/elements/DashboardContentView/NumberD
 import { DashboardContent } from '@components/templates/DashboardContent';
 
 const GET_AVERAGE_FEEDBACK_LENGTH = gql(/* GraphQL */ `
-  query getAverageFeedbackLength {
+  query GetAverageFeedbackLength {
     getHomeEval {
       averageFeedbackLength
     }

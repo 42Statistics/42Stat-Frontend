@@ -6,7 +6,7 @@ import {
 } from '@components/common';
 import { useTheme } from '@emotion/react';
 import { numberWithUnitFormatter } from '@utils/formatters';
-import type { RankingItemType } from '@utils/types/Ranking';
+import type { RankingItemType } from '@/types/Ranking';
 
 type RankingItemProps = {
   item: RankingItemType;

@@ -9,8 +9,8 @@ import { TextDefault } from '@components/elements/DashboardContentView/TextDefau
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useParams } from 'react-router-dom';
 
-const GET_LAST_REGISTERED = gql(/* GraphQL */ `
-  query getLastRegistered($login: String!) {
+const GET_LAST_REGISTERED_BY_LOGIN = gql(/* GraphQL */ `
+  query GetLastRegisteredByLogin($login: String!) {
     getPersonalGeneral(login: $login) {
       teamInfo {
         lastRegistered
@@ -23,7 +23,7 @@ export const LastRegistered = () => {
   const { username } = useParams() as { username: string };
 
   const title = '최근 신청한 과제';
-  const { loading, error, data } = useQuery(GET_LAST_REGISTERED, {
+  const { loading, error, data } = useQuery(GET_LAST_REGISTERED_BY_LOGIN, {
     variables: { login: username },
   });
   if (loading)

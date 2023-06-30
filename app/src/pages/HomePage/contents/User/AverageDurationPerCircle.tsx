@@ -10,7 +10,7 @@ import { DashboardContent } from '@components/templates/DashboardContent';
 import { numberWithUnitFormatter } from '@utils/formatters';
 
 const GET_AVERAGE_DURATION_PER_CIRCLE = gql(/* GraphQL */ `
-  query getAverageDurationPerCircle {
+  query GetAverageDurationPerCircle {
     getHomeUser {
       averageDurationPerCircle {
         circle

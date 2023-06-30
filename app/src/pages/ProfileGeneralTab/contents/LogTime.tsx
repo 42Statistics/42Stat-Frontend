@@ -12,7 +12,7 @@ import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
 
 const GET_LOGTIME_BY_DATE_TEMPLATE = gql(/* GraphQL */ `
-  query getLogtimeByDateTemplate(
+  query GetLogtimeByDateTemplate(
     $login: String!
     $currDateTemplate: DateTemplate!
     $lastDateTemplate: DateTemplate!

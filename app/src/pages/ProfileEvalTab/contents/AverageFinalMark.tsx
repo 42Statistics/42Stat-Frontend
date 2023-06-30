@@ -9,8 +9,8 @@ import { NumberDefault } from '@components/elements/DashboardContentView/NumberD
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useParams } from 'react-router-dom';
 
-const GET_AVERAGE_FINAL_MARK = gql(/* GraphQL */ `
-  query getAverageFinalMark($login: String!) {
+const GET_AVERAGE_FINAL_MARK_BY_LOGIN = gql(/* GraphQL */ `
+  query GetAverageFinalMarkByLogin($login: String!) {
     getPersonalEval(login: $login) {
       averageFinalMark
     }
@@ -22,7 +22,7 @@ export const AverageFinalMark = () => {
 
   const title = '평균 평가 점수';
   const description = '평가자일 때';
-  const { loading, error, data } = useQuery(GET_AVERAGE_FINAL_MARK, {
+  const { loading, error, data } = useQuery(GET_AVERAGE_FINAL_MARK_BY_LOGIN, {
     variables: { login: username },
   });
   if (loading)

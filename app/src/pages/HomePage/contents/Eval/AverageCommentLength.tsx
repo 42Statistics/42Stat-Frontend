@@ -9,7 +9,7 @@ import { NumberDefault } from '@components/elements/DashboardContentView/NumberD
 import { DashboardContent } from '@components/templates/DashboardContent';
 
 const GET_AVERAGE_COMMENT_LENGTH = gql(/* GraphQL */ `
-  query getAverageCommentLength {
+  query GetAverageCommentLength {
     getHomeEval {
       averageCommentLength
     }

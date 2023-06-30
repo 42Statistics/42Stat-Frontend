@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import type { DesktopDashboardColSize } from '@utils/types/Dashboard';
+import type { DesktopDashboardColSize } from '@/types/Dashboard';
 
 type DesktopDashboardRowProps = {
   row: number;

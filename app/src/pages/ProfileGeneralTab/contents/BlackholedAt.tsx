@@ -15,8 +15,8 @@ import { DashboardContent } from '@components/templates/DashboardContent';
 import { useTheme } from '@emotion/react';
 import { useParams } from 'react-router-dom';
 
-const GET_BLACKHOLED_AT = gql(/* GraphQL */ `
-  query getBlackHoledAt($login: String!) {
+const GET_BLACKHOLED_AT_BY_LOGIN = gql(/* GraphQL */ `
+  query GetBlackHoledAtByLogin($login: String!) {
     getPersonalGeneral(login: $login) {
       blackholedAt
     }
@@ -29,7 +29,7 @@ export const BlackholedAt = () => {
   const theme = useTheme();
 
   const title = 'Black Hole Absorption';
-  const { loading, error, data } = useQuery(GET_BLACKHOLED_AT, {
+  const { loading, error, data } = useQuery(GET_BLACKHOLED_AT_BY_LOGIN, {
     variables: { login: username },
   });
   if (loading)

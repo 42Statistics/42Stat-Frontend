@@ -11,7 +11,7 @@ import { numberWithUnitFormatter } from '@utils/formatters';
 import { isDefined } from '@utils/isDefined';
 
 export const GET_SCORE_RECORDS_PER_COALITION = gql(/* GraphQL */ `
-  query getScoreRecordsPerCoalition {
+  query GetScoreRecordsPerCoalition {
     getHomeCoalition {
       scoreRecordsPerCoalition {
         coalition {
@@ -93,6 +93,7 @@ const ScoreRecordsPerCoalitionChart = ({
     xaxis: {
       type: 'datetime',
       labels: {
+        datetimeUTC: false,
         format: 'yy.MM.',
       },
     },

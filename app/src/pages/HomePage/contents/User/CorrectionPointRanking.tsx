@@ -1,4 +1,5 @@
 import { gql } from '@/__generated__';
+import type { RankingUserItemType } from '@/types/Ranking';
 import { useQuery } from '@apollo/client';
 import { Loader } from '@components/common';
 import {
@@ -8,10 +9,9 @@ import {
 import { RankingUser } from '@components/elements/DashboardContentView/RankingUser';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
-import type { RankingUserItemType } from '@utils/types/Ranking';
 
 const GET_CORRECTION_POINT_RANKING = gql(/* GraphQL */ `
-  query getCorrectionPointRanking($limit: Int!) {
+  query GetCorrectionPointRanking($limit: Int!) {
     getHomeUser {
       correctionPointRanking(limit: $limit) {
         userPreview {

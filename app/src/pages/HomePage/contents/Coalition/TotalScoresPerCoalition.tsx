@@ -8,7 +8,7 @@ import { DashboardContent } from '@components/templates/DashboardContent';
 import { millionFormatter } from '@utils/formatters';
 
 export const GET_TOTAL_SCORES_PER_COALITION = gql(/* GraphQL */ `
-  query getTotalScoresPerCoalition {
+  query GetTotalScoresPerCoalition {
     getHomeCoalition {
       totalScoresPerCoalition {
         coalition {

@@ -9,8 +9,8 @@ import { TextDefault } from '@components/elements/DashboardContentView/TextDefau
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useParams } from 'react-router-dom';
 
-const GET_LAST_PASS = gql(/* GraphQL */ `
-  query getLastPass($login: String!) {
+const GET_LAST_PASSED_BY_LOGIN = gql(/* GraphQL */ `
+  query GetLastPassedByLogin($login: String!) {
     getPersonalGeneral(login: $login) {
       teamInfo {
         lastPassed
@@ -23,7 +23,7 @@ export const LastPass = () => {
   const { username } = useParams() as { username: string };
 
   const title = '최근 통과한 과제';
-  const { loading, error, data } = useQuery(GET_LAST_PASS, {
+  const { loading, error, data } = useQuery(GET_LAST_PASSED_BY_LOGIN, {
     variables: { login: username },
   });
   if (loading)

@@ -1,28 +1,30 @@
-import { gql } from '@/__generated__';
-import { useQuery } from '@apollo/client';
+import { projectDetailPageQueryAtom } from '@atoms/projectDetailPageQueryAtom';
 import { BoldText, Divider, HStack, Text, VStack } from '@components/common';
 import styled from '@emotion/styled';
 import { ProjectIntroductionSkeleton } from '@pages/PageSkeletons/ProjectIntroductionSkeleton';
 import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
-import { useParams } from 'react-router-dom';
+import { useAtomValue } from 'jotai';
 
-const GET_PROJECT_INTRODUCTION_BY_PROJECT_NAME = gql(/* GraphQL */ `
-  query GetProjectIntroductionByProjectName($projectName: String!) {
-    getProjectInfo(projectName: $projectName) {
-      name
-      description
-    }
-  }
-`);
+// const GET_PROJECT_INTRODUCTION_BY_PROJECT_NAME = gql(/* GraphQL */ `
+//   query GetProjectIntroductionByProjectName($projectName: String!) {
+//     getProjectInfo(projectName: $projectName) {
+//       name
+//       description
+//     }
+//   }
+// `);
 
 export const ProjectIntroduction = () => {
-  const { projectName } = useParams() as { projectName: string };
-  const { loading, error, data } = useQuery(
-    GET_PROJECT_INTRODUCTION_BY_PROJECT_NAME,
-    {
-      variables: { projectName },
-    },
-  );
+  // const { projectName } = useParams() as { projectName: string };
+  // const { loading, error, data } = useQuery(
+  //   GET_PROJECT_INTRODUCTION_BY_PROJECT_NAME,
+  //   {
+  //     variables: { projectName },
+  //   },
+  // );
+
+  const projectDetailPageQuery = useAtomValue(projectDetailPageQueryAtom);
+  const { loading, error, data } = projectDetailPageQuery;
 
   if (loading) return <ProjectIntroductionSkeleton />;
   if (error) return <></>;

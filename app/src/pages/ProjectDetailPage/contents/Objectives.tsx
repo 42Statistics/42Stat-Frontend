@@ -1,6 +1,6 @@
 import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
-import { Loader, VStack } from '@components/common';
+import { Center, H3Text, Loader, VStack } from '@components/common';
 import { Label } from '@components/common/Label';
 import {
   ApolloBadRequest,
@@ -49,6 +49,17 @@ export const Objectives = () => {
     );
 
   const { objectives } = data.getProjectInfo;
+  const objectivesCount = objectives.filter(isDefined).length;
+
+  if (objectivesCount === 0) {
+    return (
+      <DashboardContent title={title}>
+        <Center w="100%" h="100%">
+          <H3Text>키워드가 없는 과제입니다 😐</H3Text>
+        </Center>
+      </DashboardContent>
+    );
+  }
 
   return (
     <DashboardContent title={title}>

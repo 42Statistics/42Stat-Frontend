@@ -1,6 +1,6 @@
 import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
-import { Loader, VStack } from '@components/common';
+import { Center, H3Text, Loader, VStack } from '@components/common';
 import { Label } from '@components/common/Label';
 import {
   ApolloBadRequest,
@@ -49,6 +49,17 @@ export const Skills = () => {
     );
 
   const { skills } = data.getProjectInfo;
+
+  const skillsCount = skills.filter(isDefined).length;
+  if (skillsCount === 0) {
+    return (
+      <DashboardContent title={title}>
+        <Center w="100%" h="100%">
+          <H3Text>스킬이 없는 과제입니다 😐</H3Text>
+        </Center>
+      </DashboardContent>
+    );
+  }
 
   return (
     <DashboardContent title={title}>

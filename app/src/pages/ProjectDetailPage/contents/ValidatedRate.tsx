@@ -1,6 +1,6 @@
 import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
-import { Loader } from '@components/common';
+import { Center, H3Text, Loader } from '@components/common';
 import { PieChart } from '@components/elements/Chart';
 import {
   ApolloBadRequest,
@@ -58,6 +58,16 @@ export const ValidatedRate = () => {
   const { validatedRate } = data.getProjectInfo;
   const labels = validatedRate.fields.map(({ key }) => key);
   const series = validatedRate.fields.map(({ value }) => value);
+
+  if (validatedRate.total === 0) {
+    return (
+      <DashboardContent title={title}>
+        <Center w="100%" h="100%">
+          <H3Text>제출 기록이 없어요 😐</H3Text>
+        </Center>
+      </DashboardContent>
+    );
+  }
 
   return (
     <DashboardContent title={title}>

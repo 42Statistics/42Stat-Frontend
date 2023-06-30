@@ -5,8 +5,8 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
-import { TextDefault } from '@components/elements/DashboardContentView/TextDefault';
-import { TextProject } from '@components/elements/DashboardContentView/TextProject';
+import { TextDefault } from '@components/elements/DashboardContentView/Text/TextDefault';
+import { TextProject } from '@components/elements/DashboardContentView/Text/TextProject';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useParams } from 'react-router-dom';
 
@@ -36,7 +36,7 @@ export const LastPass = () => {
   return (
     <DashboardContent title={title}>
       {lastPassed != null ? (
-        <TextProject text={lastPassed} />
+        <TextProject projectName={lastPassed} />
       ) : (
         <TextDefault text="과제 제출 기록이 없어요 😓" />
       )}

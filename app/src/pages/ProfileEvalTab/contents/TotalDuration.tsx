@@ -5,7 +5,7 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
-import { TextDefault } from '@components/elements/DashboardContentView/TextDefault';
+import { TextDefault } from '@components/elements/DashboardContentView/Text/TextDefault';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useParams } from 'react-router-dom';
 

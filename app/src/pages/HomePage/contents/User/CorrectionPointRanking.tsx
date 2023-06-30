@@ -5,9 +5,8 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
-import { Ranking } from '@components/elements/DashboardContentView/Ranking';
+import { RankingUser } from '@components/elements/DashboardContentView/Ranking/RankingUser';
 import { DashboardContent } from '@components/templates/DashboardContent';
-import { ROUTES } from '@routes/ROUTES';
 import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
 
 const GET_CORRECTION_POINT_RANKING = gql(/* GraphQL */ `
@@ -45,16 +44,15 @@ export const CorrectionPointRanking = () => {
     value: value,
     rank: rank,
     imgUrl: userPreview.imgUrl,
-    link: `${ROUTES.PROFILE_ROOT}/${userPreview.login}`,
   }));
 
   return (
     <DashboardContent title={title}>
       <TabletAndAbove>
-        <Ranking list={list} cnt={5} unit={unit} />
+        <RankingUser list={list} cnt={5} unit={unit} />
       </TabletAndAbove>
       <Mobile>
-        <Ranking list={list} cnt={3} unit={unit} />
+        <RankingUser list={list} cnt={3} unit={unit} />
       </Mobile>
     </DashboardContent>
   );

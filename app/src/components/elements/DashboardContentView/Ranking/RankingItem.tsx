@@ -12,12 +12,13 @@ import { Link } from 'react-router-dom';
 
 type RankingItemProps = {
   item: RankingItemType | RankingUserItemType;
+  link?: string;
   unit: string;
 };
 
-export const RankingItem = ({ item, unit }: RankingItemProps) => {
+export const RankingItem = ({ item, link, unit }: RankingItemProps) => {
   const theme = useTheme();
-  const { name, value, rank, link } = item;
+  const { name, value, rank } = item;
   const color =
     rank === 1 ? theme.colors.accent.default : theme.colors.mono.black;
 

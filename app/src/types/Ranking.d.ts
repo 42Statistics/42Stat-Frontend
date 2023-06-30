@@ -3,7 +3,6 @@ export type RankingItemType = {
   name: string;
   value: number;
   rank: number;
-  link?: string;
 };
 
 export type RankingUserItemType = RankingItemType & {

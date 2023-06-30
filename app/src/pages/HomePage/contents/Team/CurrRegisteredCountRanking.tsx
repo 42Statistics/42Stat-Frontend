@@ -1,10 +1,10 @@
 import { gql } from '@/__generated__';
 import type { RankingItemType } from '@/types/Ranking';
 import { useQuery } from '@apollo/client';
-import { Loader } from '@components/common';
 import {
-  ApolloBadRequest,
-  ApolloNotFound,
+  DashboardContentBadRequest,
+  DashboardContentLoading,
+  DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { RankingProject } from '@components/elements/DashboardContentView/RankingProject';
 import { DashboardContent } from '@components/templates/DashboardContent';
@@ -29,25 +29,9 @@ const GET_CURR_REGISTERED_COUNT_RANKING = gql(/* GraphQL */ `
 export const CurrRegisteredCountRanking = () => {
   const title = '지금 가장 많은 사람이 참여하는 과제는?';
   const { loading, error, data } = useQuery(GET_CURR_REGISTERED_COUNT_RANKING);
-
-  if (loading)
-    return (
-      <DashboardContent title={title}>
-        <Loader />
-      </DashboardContent>
-    );
-  if (error)
-    return (
-      <DashboardContent title={title}>
-        <ApolloBadRequest msg={error.message} />
-      </DashboardContent>
-    );
-  if (!data)
-    return (
-      <DashboardContent title={title}>
-        <ApolloNotFound />
-      </DashboardContent>
-    );
+  if (loading) return <DashboardContentLoading />;
+  if (error) return <DashboardContentBadRequest message={error.message} />;
+  if (!data) return <DashboardContentNotFound />;
 
   const { currRegisteredCountRanking } = data.getHomeTeam;
   const unit = '명';

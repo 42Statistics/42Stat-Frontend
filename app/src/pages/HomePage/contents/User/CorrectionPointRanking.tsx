@@ -1,10 +1,10 @@
 import { gql } from '@/__generated__';
 import type { RankingUserItemType } from '@/types/Ranking';
 import { useQuery } from '@apollo/client';
-import { Loader } from '@components/common';
 import {
-  ApolloBadRequest,
-  ApolloNotFound,
+  DashboardContentBadRequest,
+  DashboardContentLoading,
+  DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { RankingUser } from '@components/elements/DashboardContentView/RankingUser';
 import { DashboardContent } from '@components/templates/DashboardContent';
@@ -31,24 +31,9 @@ export const CorrectionPointRanking = () => {
   const { loading, error, data } = useQuery(GET_CORRECTION_POINT_RANKING, {
     variables: { limit: 5 },
   });
-  if (loading)
-    return (
-      <DashboardContent title={title}>
-        <Loader />
-      </DashboardContent>
-    );
-  if (error)
-    return (
-      <DashboardContent title={title}>
-        <ApolloBadRequest msg={error.message} />
-      </DashboardContent>
-    );
-  if (!data)
-    return (
-      <DashboardContent title={title}>
-        <ApolloNotFound />
-      </DashboardContent>
-    );
+  if (loading) return <DashboardContentLoading />;
+  if (error) return <DashboardContentBadRequest message={error.message} />;
+  if (!data) return <DashboardContentNotFound />;
 
   const { correctionPointRanking } = data.getHomeUser;
 

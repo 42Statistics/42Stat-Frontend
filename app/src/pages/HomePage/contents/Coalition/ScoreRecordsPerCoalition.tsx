@@ -1,10 +1,10 @@
 import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
-import { Loader } from '@components/common';
 import { LineChart } from '@components/elements/Chart';
 import {
-  ApolloBadRequest,
-  ApolloNotFound,
+  DashboardContentBadRequest,
+  DashboardContentLoading,
+  DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { numberWithUnitFormatter } from '@utils/formatters';
@@ -36,24 +36,9 @@ export const GET_SCORE_RECORDS_PER_COALITION = gql(/* GraphQL */ `
 export const ScoreRecordsPerCoalition = () => {
   const title = '역대 코알리숑 스코어 변동 추이';
   const { loading, error, data } = useQuery(GET_SCORE_RECORDS_PER_COALITION);
-  if (loading)
-    return (
-      <DashboardContent title={title}>
-        <Loader />
-      </DashboardContent>
-    );
-  if (error)
-    return (
-      <DashboardContent title={title}>
-        <ApolloBadRequest msg={error.message} />
-      </DashboardContent>
-    );
-  if (!data)
-    return (
-      <DashboardContent title={title}>
-        <ApolloNotFound />
-      </DashboardContent>
-    );
+  if (loading) return <DashboardContentLoading />;
+  if (error) return <DashboardContentBadRequest message={error.message} />;
+  if (!data) return <DashboardContentNotFound />;
 
   const { scoreRecordsPerCoalition } = data.getHomeCoalition;
 

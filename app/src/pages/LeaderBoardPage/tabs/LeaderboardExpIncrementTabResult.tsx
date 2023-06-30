@@ -5,10 +5,7 @@ import {
 import { RankingUserItemType } from '@/types/Ranking';
 import { QueryResult } from '@apollo/client';
 import { Divider, VStack } from '@components/common';
-import {
-  ApolloBadRequest,
-  ApolloNotFound,
-} from '@components/elements/DashboardContentView/Error';
+import { ApolloErrorView } from '@components/elements/ApolloErrorView';
 import { LeaderBoard } from '@components/templates/LeaderBoard';
 import { LeaderBoardItem } from '@components/templates/LeaderBoard/LeaderBoardItem';
 import { LeaderBoardTabResultSkeleton } from '@pages/PageSkeletons/LeaderBoardTabResultSkeleton';
@@ -25,8 +22,7 @@ export const LeaderboardExpIncrementTabResult = ({
   result: { data, loading, error },
 }: LeaderboardExpIncrementTabResultProps) => {
   if (loading) return <LeaderBoardTabResultSkeleton />;
-  if (error) return <ApolloBadRequest msg={error.message} />;
-  if (!data) return <ApolloNotFound />;
+  if (error || !data) return <ApolloErrorView message={error?.message} />;
 
   const { me, totalRanking } =
     data.getLeaderboardExpIncrement.byDateTemplate.data;

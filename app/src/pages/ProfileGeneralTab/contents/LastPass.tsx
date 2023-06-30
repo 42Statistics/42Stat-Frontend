@@ -1,9 +1,9 @@
 import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
-import { Loader } from '@components/common';
 import {
-  ApolloBadRequest,
-  ApolloNotFound,
+  DashboardContentBadRequest,
+  DashboardContentLoading,
+  DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { TextDefault } from '@components/elements/DashboardContentView/TextDefault';
 import { TextProject } from '@components/elements/DashboardContentView/TextProject';
@@ -27,24 +27,9 @@ export const LastPass = () => {
   const { loading, error, data } = useQuery(GET_LAST_PASSED_BY_LOGIN, {
     variables: { login: username },
   });
-  if (loading)
-    return (
-      <DashboardContent title={title}>
-        <Loader />
-      </DashboardContent>
-    );
-  if (error)
-    return (
-      <DashboardContent title={title}>
-        <ApolloBadRequest msg={error.message} />
-      </DashboardContent>
-    );
-  if (!data)
-    return (
-      <DashboardContent title={title}>
-        <ApolloNotFound />
-      </DashboardContent>
-    );
+  if (loading) return <DashboardContentLoading />;
+  if (error) return <DashboardContentBadRequest message={error.message} />;
+  if (!data) return <DashboardContentNotFound />;
 
   const { lastPassed } = data.getPersonalGeneral.teamInfo;
 

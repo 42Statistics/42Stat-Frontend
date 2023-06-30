@@ -1,7 +1,7 @@
 import { EvalLogEdge } from '@/__generated__/graphql';
 import { ApolloError } from '@apollo/client';
 import { Center, Skeleton, Text, VStack } from '@components/common';
-import { ApolloBadRequest } from '@components/elements/DashboardContentView/Error';
+import { ApolloErrorView } from '@components/elements/ApolloErrorView';
 import { Footer } from '@components/elements/Footer';
 import { useTheme } from '@emotion/react';
 import React from 'react';
@@ -28,7 +28,7 @@ export const EvalLogSearchDetail = ({
     return (
       <>
         <Center h="20rem">
-          <ApolloBadRequest msg={error.message} />
+          <ApolloErrorView message={error.message} />
         </Center>
         <Footer />
       </>

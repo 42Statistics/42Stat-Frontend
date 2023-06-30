@@ -4,7 +4,7 @@ import { CaptionText, H3MediumText, VStack } from '@components/common';
 import styled from '@emotion/styled';
 
 // Content를 div로 감싸야 하는 이유 : ApexChart의 부모 요소가 Flex인 경우 width: 100%가 적용되지 않음
-type DashboardContentProps = React.PropsWithChildren & {
+export type DashboardContentProps = React.PropsWithChildren & {
   title?: string;
   description?: string;
 };

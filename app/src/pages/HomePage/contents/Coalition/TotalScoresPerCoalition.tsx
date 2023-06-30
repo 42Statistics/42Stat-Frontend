@@ -1,9 +1,11 @@
 import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
-import { Loader } from '@components/common';
 import { BarChart } from '@components/elements/Chart';
-import { ApolloNotFound } from '@components/elements/DashboardContentView/Error';
-import { ApolloBadRequest } from '@components/elements/DashboardContentView/Error/ApolloBadRequest';
+import {
+  DashboardContentBadRequest,
+  DashboardContentLoading,
+  DashboardContentNotFound,
+} from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { millionFormatter } from '@utils/formatters';
 
@@ -29,24 +31,9 @@ export const GET_TOTAL_SCORES_PER_COALITION = gql(/* GraphQL */ `
 export const TotalScoresPerCoalition = () => {
   const title = '누적 코알리숑 스코어 합산';
   const { loading, error, data } = useQuery(GET_TOTAL_SCORES_PER_COALITION);
-  if (loading)
-    return (
-      <DashboardContent title={title}>
-        <Loader />
-      </DashboardContent>
-    );
-  if (error)
-    return (
-      <DashboardContent title={title}>
-        <ApolloBadRequest msg={error.message} />
-      </DashboardContent>
-    );
-  if (!data)
-    return (
-      <DashboardContent title={title}>
-        <ApolloNotFound />
-      </DashboardContent>
-    );
+  if (loading) return <DashboardContentLoading />;
+  if (error) return <DashboardContentBadRequest message={error.message} />;
+  if (!data) return <DashboardContentNotFound />;
 
   const { totalScoresPerCoalition } = data.getHomeCoalition;
 

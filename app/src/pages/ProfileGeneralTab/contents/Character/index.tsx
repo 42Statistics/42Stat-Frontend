@@ -1,11 +1,12 @@
 import { gql } from '@/__generated__';
 import marvin from '@/assets/marvin-depressed.gif';
-import { H3Text, Image, Loader, VStack } from '@/components/common';
+import { H3Text, Image, VStack } from '@/components/common';
 import { DashboardContent } from '@/components/templates/DashboardContent';
 import { useQuery } from '@apollo/client';
 import {
-  ApolloBadRequest,
-  ApolloNotFound,
+  DashboardContentBadRequest,
+  DashboardContentLoading,
+  DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -144,24 +145,9 @@ export const Character = () => {
   //     });
   // }, [pokeName, username, data]);
 
-  if (loading)
-    return (
-      <DashboardContent title={title}>
-        <Loader />
-      </DashboardContent>
-    );
-  if (error)
-    return (
-      <DashboardContent title={title}>
-        <ApolloBadRequest msg={error.message} />
-      </DashboardContent>
-    );
-  if (!data)
-    return (
-      <DashboardContent title={title}>
-        <ApolloNotFound />
-      </DashboardContent>
-    );
+  if (loading) return <DashboardContentLoading />;
+  if (error) return <DashboardContentBadRequest message={error.message} />;
+  if (!data) return <DashboardContentNotFound />;
 
   return (
     <DashboardContent title={title} description={description}>

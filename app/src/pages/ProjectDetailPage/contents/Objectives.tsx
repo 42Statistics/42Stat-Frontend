@@ -1,6 +1,6 @@
 import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
-import { Center, H3Text, VStack } from '@components/common';
+import { H3Text, VStack } from '@components/common';
 import { Label } from '@components/common/Label';
 import {
   DashboardContentBadRequest,
@@ -39,16 +39,14 @@ export const Objectives = () => {
   if (objectivesCount === 0) {
     return (
       <DashboardContent title={title}>
-        <Center w="100%" h="100%">
-          <H3Text>키워드가 없는 과제입니다 😐</H3Text>
-        </Center>
+        <H3Text>키워드가 없는 과제입니다 😐</H3Text>
       </DashboardContent>
     );
   }
 
   return (
     <DashboardContent title={title}>
-      <VStack h="100%" spacing="1rem">
+      <VStack spacing="1rem">
         {objectives
           .filter(isDefined)
           .sort(isShortString)

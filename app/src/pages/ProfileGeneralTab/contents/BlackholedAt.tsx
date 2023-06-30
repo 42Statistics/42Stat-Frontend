@@ -88,7 +88,7 @@ export const BlackholedAt = () => {
 
   return (
     <DashboardContent title={title}>
-      <HStack w="100%" h="100%" spacing="1rem">
+      <HStack spacing="1rem">
         {Svg && <Svg width="24px" stroke={color} />}
         <H2BoldText color={color}>{text}</H2BoldText>
       </HStack>

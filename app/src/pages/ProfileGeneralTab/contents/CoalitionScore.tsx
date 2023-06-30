@@ -49,7 +49,7 @@ export const CoalitionScore = () => {
   const { value } = scoreInfo;
   return (
     <DashboardContent title={title}>
-      <HStack h="100%" spacing="1rem">
+      <HStack spacing="1rem">
         <H3Text>{value.toLocaleString()}</H3Text>
         <HStack spacing="0.5rem">
           <CoalitionMark coalition={coalition} />

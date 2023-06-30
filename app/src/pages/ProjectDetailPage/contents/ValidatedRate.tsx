@@ -1,6 +1,6 @@
 import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
-import { Center, H3Text } from '@components/common';
+import { H3Text } from '@components/common';
 import { PieChart } from '@components/elements/Chart';
 import {
   DashboardContentBadRequest,
@@ -47,9 +47,7 @@ export const ValidatedRate = () => {
   if (validatedRate.total === 0) {
     return (
       <DashboardContent title={title}>
-        <Center w="100%" h="100%">
-          <H3Text>제출 기록이 없어요 😐</H3Text>
-        </Center>
+        <H3Text>제출 기록이 없어요 😐</H3Text>
       </DashboardContent>
     );
   }

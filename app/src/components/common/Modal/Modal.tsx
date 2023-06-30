@@ -1,9 +1,8 @@
-import styled from '@emotion/styled';
 import type { ModalType } from '@/types/Modal';
+import { Center, Overlay } from '@components/common';
+import styled from '@emotion/styled';
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { Center } from '../Stack';
-import { Overlay } from './Overlay';
 
 export const ModalView = styled.div`
   display: flex;
@@ -46,7 +45,7 @@ export const Modal = ({ isOpen, toggle, children }: ModalProps) => {
         <>
           {createPortal(
             <Overlay onClick={toggle}>
-              <Center w="100%" h="100%">
+              <Center>
                 <ModalView role="dialog" onClick={(e) => e.stopPropagation()}>
                   {children}
                 </ModalView>

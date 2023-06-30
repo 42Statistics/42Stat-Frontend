@@ -90,7 +90,7 @@ export const Introduction = () => {
         css={SliderCenterStyle}
       >
         {strs.map((str, index) => (
-          <Center w="100%" key={index}>
+          <Center key={index}>
             <WhiteH1BoldText>{str}</WhiteH1BoldText>
           </Center>
         ))}

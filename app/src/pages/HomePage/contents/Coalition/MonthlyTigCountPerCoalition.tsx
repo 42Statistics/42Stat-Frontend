@@ -70,7 +70,7 @@ export const MonthlyTigCountPerCoalition = () => {
 
   return (
     <DashboardContent title={title} description={description}>
-      <Center w="100%" h="100%">
+      <Center>
         <VStack w="80%" h="100%">
           <MonthlyTigCountPerCoalitionTable>
             <tbody>

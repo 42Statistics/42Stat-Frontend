@@ -36,7 +36,7 @@ export const BeginAt = () => {
 
   return (
     <DashboardContent title={title}>
-      <HStack w="100%" h="100%" spacing="1rem">
+      <HStack spacing="1rem">
         <H3Text>{dayjs(beginAt).format('YYYY. MM. DD.')}</H3Text>
         <Text>D+{daysFromBegin}</Text>
       </HStack>

@@ -108,7 +108,7 @@ export const PreferredTime = () => {
 
   return (
     <DashboardContent title={title} description={description}>
-      <VStack w="100%" h="100%" spacing="4rem">
+      <VStack spacing="4rem">
         <H3Text>{getPreferredTimeTitle()}</H3Text>
         <VStack spacing="1.5rem">
           {tableData.map(({ time, hour, minute }) => (

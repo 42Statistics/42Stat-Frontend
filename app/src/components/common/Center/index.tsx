@@ -14,6 +14,6 @@ export const center = css`
 
 export const Center = styled.div<CenterProps>`
   ${center}
-  width: ${({ w = 'auto' }) => w};
-  height: ${({ h = 'auto' }) => h};
+  width: ${({ w = '100%' }) => w};
+  height: ${({ h = '100%' }) => h};
 `;

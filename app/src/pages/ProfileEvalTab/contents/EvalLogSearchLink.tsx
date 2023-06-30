@@ -9,7 +9,7 @@ export const EvalLogSearchLink = () => {
 
   return (
     <DashboardContent title={title}>
-      <Center w="100%" h="100%">
+      <Center>
         <Link to={`${ROUTES.EVALLOG}?corrector=${username}`}>
           <AccentH3BoldText>바로가기</AccentH3BoldText>
         </Link>

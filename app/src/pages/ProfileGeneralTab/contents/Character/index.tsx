@@ -151,7 +151,7 @@ export const Character = () => {
 
   return (
     <DashboardContent title={title} description={description}>
-      <VStack h="100%" spacing="3rem">
+      <VStack spacing="3rem">
         <Image width="200px" src={marvin} />
         <H3Text>{character}</H3Text>
       </VStack>

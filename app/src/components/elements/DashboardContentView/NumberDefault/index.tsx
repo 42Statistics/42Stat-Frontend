@@ -12,15 +12,13 @@ export const NumberDefault = ({
   fixedNumber,
 }: NumberDefaultProps) => {
   return (
-    <HStack h="100%">
-      <HStack align="baseline">
-        <H3Text>
-          {fixedNumber === undefined
-            ? number.toLocaleString()
-            : number.toFixed(2)}
-        </H3Text>
-        <Text>{unit}</Text>
-      </HStack>
+    <HStack align="baseline">
+      <H3Text>
+        {fixedNumber === undefined
+          ? number.toLocaleString()
+          : number.toFixed(2)}
+      </H3Text>
+      <Text>{unit}</Text>
     </HStack>
   );
 };

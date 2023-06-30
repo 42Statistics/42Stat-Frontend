@@ -1,12 +1,13 @@
+import { ModalType } from '@/types/Modal';
 import { Modal, Spacer, Text, VStack } from '@components/common';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { ModalType } from '@/types/Modal';
+import { ROUTES } from '@routes/ROUTES';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSearchBar } from '../hooks/useSearchBar';
 import { MobileSearchInput } from './MobileSearchInput';
 import { MobileSearchResult } from './MobileSearchResult';
-import { useSearchBar } from '../hooks/useSearchBar';
 
 export const SearchModal = ({ isOpen, toggle }: ModalType) => {
   const {
@@ -37,13 +38,13 @@ export const SearchModal = ({ isOpen, toggle }: ModalType) => {
   const handleUserSubmit = (name: string) => {
     toggle();
     resetInput();
-    navigate(`/profile/${name}`);
+    navigate(`${ROUTES.PROFILE_ROOT}/${name}`);
   };
 
   const handleProjectSubmit = (name: string) => {
     toggle();
     resetInput();
-    navigate(`/project/${name}`);
+    navigate(`${ROUTES.PROJECT_ROOT}/${name}`);
   };
 
   const handleClickSearchBtn = () => {

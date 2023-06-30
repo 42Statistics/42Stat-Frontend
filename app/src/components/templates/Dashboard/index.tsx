@@ -12,7 +12,7 @@ export const Dashboard = ({
   contents,
 }: DashboardProps) => {
   return (
-    <Center w="100%">
+    <Center>
       <Desktop>
         <DesktopDashboard rows={desktopRows} contents={contents} />
       </Desktop>

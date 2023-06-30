@@ -1,16 +1,16 @@
 import { AccentH3BoldText } from '@components/common';
 import { DashboardContent } from '@components/templates/DashboardContent';
-import { ROUTES } from '@routes/ROUTES';
 import { Link, useParams } from 'react-router-dom';
 
-export const PastEvaluationLink = () => {
+export const ProjectUrl = () => {
   const { projectName } = useParams() as { projectName: string };
-  const title = '지난 평가 보기';
+  const title = 'Intra 프로젝트 링크';
+  const link = '';
 
   return (
     <DashboardContent title={title}>
-      <Link to={`${ROUTES.EVALLOG}?projectName=${projectName}`}>
-        <AccentH3BoldText>Past Evaluations</AccentH3BoldText>
+      <Link to={link}>
+        <AccentH3BoldText>바로가기</AccentH3BoldText>
       </Link>
     </DashboardContent>
   );

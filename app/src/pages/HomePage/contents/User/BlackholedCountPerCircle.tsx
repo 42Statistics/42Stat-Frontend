@@ -1,10 +1,10 @@
 import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
-import { Loader } from '@components/common';
 import { DonutChart } from '@components/elements/Chart';
 import {
-  ApolloBadRequest,
-  ApolloNotFound,
+  DashboardContentBadRequest,
+  DashboardContentLoading,
+  DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useTheme } from '@emotion/react';
@@ -24,24 +24,9 @@ const GET_BLACKHOLED_COUNT_PER_CIRCLE = gql(/* GraphQL */ `
 export const BlackholedCountPerCircle = () => {
   const title = '언제 블랙홀에 많이 빠질까?';
   const { loading, error, data } = useQuery(GET_BLACKHOLED_COUNT_PER_CIRCLE);
-  if (loading)
-    return (
-      <DashboardContent title={title}>
-        <Loader />
-      </DashboardContent>
-    );
-  if (error)
-    return (
-      <DashboardContent title={title}>
-        <ApolloBadRequest msg={error.message} />
-      </DashboardContent>
-    );
-  if (!data)
-    return (
-      <DashboardContent title={title}>
-        <ApolloNotFound />
-      </DashboardContent>
-    );
+  if (loading) return <DashboardContentLoading />;
+  if (error) return <DashboardContentBadRequest message={error.message} />;
+  if (!data) return <DashboardContentNotFound />;
 
   const { blackholedCountPerCircle } = data.getHomeUser;
 
@@ -49,7 +34,7 @@ export const BlackholedCountPerCircle = () => {
   const series = blackholedCountPerCircle.map(({ value }) => value);
 
   return (
-    <DashboardContent title={title}>
+    <DashboardContent title={title} isApexChart>
       <BlackholedCountPerCircleChart labels={labels} series={series} />
     </DashboardContent>
   );

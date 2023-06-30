@@ -1,6 +1,7 @@
 import { UserTeam } from '@/__generated__/graphql';
 import { PrimaryText, Text } from '@components/common';
 import styled from '@emotion/styled';
+import { ROUTES } from '@routes/ROUTES';
 import { isDefined } from '@utils/isDefined';
 import { rgba } from 'emotion-rgba';
 import { truncate } from 'lodash-es';
@@ -42,7 +43,7 @@ export const TeamInfoTable = ({ teams }: TeamInfoTableProps) => {
             }) => (
               <tr key={id}>
                 <td>
-                  <Link to={`/project/${projectPreview.name}`}>
+                  <Link to={`${ROUTES.PROJECT_ROOT}/${projectPreview.name}`}>
                     <Text>{projectPreview.name}</Text>
                   </Link>
                 </td>

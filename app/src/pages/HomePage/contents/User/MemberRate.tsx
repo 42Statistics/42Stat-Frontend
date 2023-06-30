@@ -1,10 +1,10 @@
 import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
-import { Loader } from '@components/common';
 import { PieChart } from '@components/elements/Chart';
 import {
-  ApolloBadRequest,
-  ApolloNotFound,
+  DashboardContentBadRequest,
+  DashboardContentLoading,
+  DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useTheme } from '@emotion/react';
@@ -29,32 +29,16 @@ export const MemberRate = () => {
   const description = '블랙홀 유저 포함';
 
   const { loading, error, data } = useQuery(GET_MEMBER_RATE);
-
-  if (loading)
-    return (
-      <DashboardContent title={title}>
-        <Loader />
-      </DashboardContent>
-    );
-  if (error)
-    return (
-      <DashboardContent title={title}>
-        <ApolloBadRequest msg={error.message} />
-      </DashboardContent>
-    );
-  if (!data)
-    return (
-      <DashboardContent title={title}>
-        <ApolloNotFound />
-      </DashboardContent>
-    );
+  if (loading) return <DashboardContentLoading />;
+  if (error) return <DashboardContentBadRequest message={error.message} />;
+  if (!data) return <DashboardContentNotFound />;
 
   const { fields } = data.getHomeUser.memberRate;
   const labels = fields.map((field) => capitalize(field.key));
   const series = fields.map((field) => field.value);
 
   return (
-    <DashboardContent title={title} description={description}>
+    <DashboardContent title={title} description={description} isApexChart>
       <MemberRateChart labels={labels} series={series} />
     </DashboardContent>
   );

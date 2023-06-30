@@ -1,10 +1,10 @@
 import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
-import { Loader } from '@components/common';
 import { LineChart } from '@components/elements/Chart';
 import {
-  ApolloBadRequest,
-  ApolloNotFound,
+  DashboardContentBadRequest,
+  DashboardContentLoading,
+  DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useTheme } from '@emotion/react';
@@ -34,41 +34,14 @@ export const LevelRecords = () => {
   const { loading, error, data } = useQuery(GET_LEVEL_RECORDS_BY_LOGIN, {
     variables: { login: username },
   });
-  if (loading)
-    return (
-      <DashboardContent title={title} description={description}>
-        <Loader />
-      </DashboardContent>
-    );
-  if (error)
-    return (
-      <DashboardContent title={title} description={description}>
-        <ApolloBadRequest msg={error.message} />
-      </DashboardContent>
-    );
-  if (!data)
-    return (
-      <DashboardContent title={title} description={description}>
-        <ApolloNotFound />
-      </DashboardContent>
-    );
+  if (loading) return <DashboardContentLoading />;
+  if (error) return <DashboardContentBadRequest message={error.message} />;
+  if (!data) return <DashboardContentNotFound />;
 
   const { userLevelRecords, memberLevelRecords } = data.getPersonalGeneral;
 
-  /**
-   * 현재 n 일후이지만 나중에 날자로 변경해야 할 경우 사용
-   */
-  // const today = new Date();
-  // const currentYear = today.getFullYear();
-
-  // const createDate = (year, monthIndex) => {
-  //   const month = monthIndex + 1;
-  //   const date = new Date(year, month - 1, 1);
-  //   return date;
-  // };
-
   const userLevelSeries = userLevelRecords
-    .filter(isDefined) // 왜 얘는 isDefined가 있어야 돼?
+    .filter(isDefined)
     .map(({ monthsPassed, level }) => ({
       x: monthsPassed,
       y: level,
@@ -91,7 +64,7 @@ export const LevelRecords = () => {
   ];
 
   return (
-    <DashboardContent title={title} description={description}>
+    <DashboardContent title={title} description={description} isApexChart>
       <LevelRecordsChart series={series} />
     </DashboardContent>
   );

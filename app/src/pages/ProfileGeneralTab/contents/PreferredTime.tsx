@@ -1,10 +1,11 @@
 import { gql } from '@/__generated__';
 import { DateTemplate } from '@/__generated__/graphql';
 import { useQuery } from '@apollo/client';
-import { H3Text, HStack, Loader, Text, VStack } from '@components/common';
+import { H3Text, HStack, Text, VStack } from '@components/common';
 import {
-  ApolloBadRequest,
-  ApolloNotFound,
+  DashboardContentBadRequest,
+  DashboardContentLoading,
+  DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { ProgressionBar } from '@components/elements/ProgressionBar';
 import { DashboardContent } from '@components/templates/DashboardContent';
@@ -36,33 +37,17 @@ export const PreferredTime = () => {
   const { username } = useParams() as { username: string };
 
   const title = '주 접속 시간대';
-  const {
-    loading,
-    error,
-    data: queryData,
-  } = useQuery(GET_PREFERRED_TIME_BY_DATE_TEMPLATE_BY_LOGIN, {
-    variables: { login: username, dateTemplate: DateTemplate.CurrMonth },
-  });
-  if (loading)
-    return (
-      <DashboardContent title={title}>
-        <Loader />
-      </DashboardContent>
-    );
-  if (error)
-    return (
-      <DashboardContent title={title}>
-        <ApolloBadRequest msg={error.message} />
-      </DashboardContent>
-    );
-  if (!queryData)
-    return (
-      <DashboardContent title={title}>
-        <ApolloNotFound />
-      </DashboardContent>
-    );
+  const { loading, error, data } = useQuery(
+    GET_PREFERRED_TIME_BY_DATE_TEMPLATE_BY_LOGIN,
+    {
+      variables: { login: username, dateTemplate: DateTemplate.CurrMonth },
+    },
+  );
+  if (loading) return <DashboardContentLoading />;
+  if (error) return <DashboardContentBadRequest message={error.message} />;
+  if (!data) return <DashboardContentNotFound />;
 
-  const { preferredTimeByDateTemplate } = queryData.getPersonalGeneral;
+  const { preferredTimeByDateTemplate } = data.getPersonalGeneral;
   const {
     data: { morning, daytime, evening, night },
     start,
@@ -123,7 +108,7 @@ export const PreferredTime = () => {
 
   return (
     <DashboardContent title={title} description={description}>
-      <VStack w="100%" h="100%" spacing="4rem">
+      <VStack spacing="4rem">
         <H3Text>{getPreferredTimeTitle()}</H3Text>
         <VStack spacing="1.5rem">
           {tableData.map(({ time, hour, minute }) => (

@@ -6,8 +6,8 @@ import { ProjectIntroductionSkeleton } from '@pages/PageSkeletons/ProjectIntrodu
 import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
 import { useParams } from 'react-router-dom';
 
-const GET_PROJECT_NAME_AND_DESCRIPTION_BY_PROJECT_NAME = gql(/* GraphQL */ `
-  query GetProjectNameAndDescriptionByProjectName($projectName: String!) {
+const GET_PROJECT_INTRODUCTION_BY_PROJECT_NAME = gql(/* GraphQL */ `
+  query GetProjectIntroductionByProjectName($projectName: String!) {
     getProjectInfo(projectName: $projectName) {
       name
       description
@@ -18,7 +18,7 @@ const GET_PROJECT_NAME_AND_DESCRIPTION_BY_PROJECT_NAME = gql(/* GraphQL */ `
 export const ProjectIntroduction = () => {
   const { projectName } = useParams() as { projectName: string };
   const { loading, error, data } = useQuery(
-    GET_PROJECT_NAME_AND_DESCRIPTION_BY_PROJECT_NAME,
+    GET_PROJECT_INTRODUCTION_BY_PROJECT_NAME,
     {
       variables: { projectName },
     },
@@ -29,6 +29,7 @@ export const ProjectIntroduction = () => {
   if (!data) return <></>;
 
   const { name, description } = data.getProjectInfo;
+  const circle = 3;
 
   return (
     <Layout>
@@ -36,19 +37,22 @@ export const ProjectIntroduction = () => {
         <Divider
           orientation="vertical"
           thickness="3px"
-          style={{ height: '150px' }}
+          style={{ height: '200px' }}
         />
         <VStack align="start" w="100%" spacing="2rem">
-          <TabletAndAbove>
-            <BoldText fontSize="4rem" selectable>
-              {name}
-            </BoldText>
-          </TabletAndAbove>
-          <Mobile>
-            <BoldText fontSize="3rem" selectable>
-              {name}
-            </BoldText>
-          </Mobile>
+          <VStack align="start">
+            <Text selectable>{circle}서클</Text>
+            <TabletAndAbove>
+              <BoldText fontSize="4rem" selectable>
+                {name}
+              </BoldText>
+            </TabletAndAbove>
+            <Mobile>
+              <BoldText fontSize="3rem" selectable>
+                {name}
+              </BoldText>
+            </Mobile>
+          </VStack>
           {description !== '' && (
             <div style={{ maxWidth: '600px' }}>
               <Text selectable>{description}</Text>

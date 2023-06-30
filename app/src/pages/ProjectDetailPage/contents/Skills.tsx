@@ -1,10 +1,11 @@
 import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
-import { Center, H3Text, Loader, VStack } from '@components/common';
+import { H3Text, VStack } from '@components/common';
 import { Label } from '@components/common/Label';
 import {
-  ApolloBadRequest,
-  ApolloNotFound,
+  DashboardContentBadRequest,
+  DashboardContentLoading,
+  DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useTheme } from '@emotion/react';
@@ -28,25 +29,9 @@ export const Skills = () => {
   const { loading, error, data } = useQuery(GET_SKILLS_BY_PROJECT_NAME, {
     variables: { projectName },
   });
-
-  if (loading)
-    return (
-      <DashboardContent title={title}>
-        <Loader />
-      </DashboardContent>
-    );
-  if (error)
-    return (
-      <DashboardContent title={title}>
-        <ApolloBadRequest msg={error.message} />
-      </DashboardContent>
-    );
-  if (!data)
-    return (
-      <DashboardContent title={title}>
-        <ApolloNotFound />
-      </DashboardContent>
-    );
+  if (loading) return <DashboardContentLoading />;
+  if (error) return <DashboardContentBadRequest message={error.message} />;
+  if (!data) return <DashboardContentNotFound />;
 
   const { skills } = data.getProjectInfo;
 
@@ -54,16 +39,14 @@ export const Skills = () => {
   if (skillsCount === 0) {
     return (
       <DashboardContent title={title}>
-        <Center w="100%" h="100%">
-          <H3Text>스킬이 없는 과제입니다 😐</H3Text>
-        </Center>
+        <H3Text>스킬이 없는 과제입니다 😐</H3Text>
       </DashboardContent>
     );
   }
 
   return (
     <DashboardContent title={title}>
-      <VStack h="100%" spacing="1rem">
+      <VStack spacing="1rem">
         {skills
           .filter(isDefined)
           .sort(isShortString)

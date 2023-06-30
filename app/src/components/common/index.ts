@@ -1,5 +1,6 @@
 export * from './Avatar';
 export * from './Button';
+export * from './Center';
 export * from './DeferredComponent';
 export * from './Divider';
 export * from './Image';

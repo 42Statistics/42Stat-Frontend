@@ -7,6 +7,7 @@ import { withHead } from '@hoc/withHead';
 import ProfileEvalTab from '@pages/ProfileEvalTab';
 import ProfileGeneralTab from '@pages/ProfileGeneralTab';
 import ProfileRivalTab from '@pages/ProfileRivalTab';
+import { ROUTES } from '@routes/ROUTES';
 import { history } from '@utils/history';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
@@ -54,7 +55,7 @@ export const ProfilePage = () => {
           selected={selectedTab === 'General'}
           onClick={() => {
             setSelectedTab('General');
-            navigate(`/profile/${username}?tab=general`);
+            navigate(`${ROUTES.PROFILE_ROOT}/${username}?tab=general`);
           }}
         >
           일반
@@ -63,7 +64,7 @@ export const ProfilePage = () => {
           selected={selectedTab === 'Eval'}
           onClick={() => {
             setSelectedTab('Eval');
-            navigate(`/profile/${username}?tab=eval`);
+            navigate(`${ROUTES.PROFILE_ROOT}/${username}?tab=eval`);
           }}
         >
           평가
@@ -72,7 +73,7 @@ export const ProfilePage = () => {
           selected={selectedTab === 'Rival'}
           onClick={() => {
             setSelectedTab('Rival');
-            navigate(`/profile/${username}?tab=rival`);
+            navigate(`${ROUTES.PROFILE_ROOT}/${username}?tab=rival`);
           }}
         >
           라이벌

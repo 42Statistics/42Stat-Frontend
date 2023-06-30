@@ -1,10 +1,10 @@
 import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
-import { Loader } from '@components/common';
 import { BarChart } from '@components/elements/Chart';
 import {
-  ApolloBadRequest,
-  ApolloNotFound,
+  DashboardContentBadRequest,
+  DashboardContentLoading,
+  DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { numberWithUnitFormatter } from '@utils/formatters';
@@ -23,24 +23,9 @@ const GET_USER_COUNT_PER_LEVEL = gql(/* GraphQL */ `
 export const UserCountPerLevel = () => {
   const title = '여행 중인 유저 레벨 분포';
   const { loading, error, data } = useQuery(GET_USER_COUNT_PER_LEVEL);
-  if (loading)
-    return (
-      <DashboardContent title={title}>
-        <Loader />
-      </DashboardContent>
-    );
-  if (error)
-    return (
-      <DashboardContent title={title}>
-        <ApolloBadRequest msg={error.message} />
-      </DashboardContent>
-    );
-  if (!data)
-    return (
-      <DashboardContent title={title}>
-        <ApolloNotFound />
-      </DashboardContent>
-    );
+  if (loading) return <DashboardContentLoading />;
+  if (error) return <DashboardContentBadRequest message={error.message} />;
+  if (!data) return <DashboardContentNotFound />;
 
   const { userCountPerLevel } = data.getHomeUser;
 
@@ -55,7 +40,7 @@ export const UserCountPerLevel = () => {
   ];
 
   return (
-    <DashboardContent title={title}>
+    <DashboardContent title={title} isApexChart>
       <UserCountPerLevelChart categories={categories} series={series} />
     </DashboardContent>
   );

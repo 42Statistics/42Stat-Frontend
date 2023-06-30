@@ -13,7 +13,7 @@ export const NumberCompare = ({ curr, last, unit }: NumberCompareProps) => {
   const color = diff > 0 ? '#00C48C' : '#FF3D71';
 
   return (
-    <HStack h="100%" spacing="2rem">
+    <HStack spacing="2rem">
       <HStack align="baseline">
         <H3Text>{curr.toLocaleString()}</H3Text>
         <Text>{unit}</Text>

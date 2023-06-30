@@ -13,7 +13,7 @@ export const DashboardSkeleton = ({
   mobileRows,
 }: DashboardSkeletonProps) => {
   return (
-    <Center w="100%">
+    <Center>
       <Desktop>
         <DesktopDashboardSkeleton rows={desktopRows} />
       </Desktop>

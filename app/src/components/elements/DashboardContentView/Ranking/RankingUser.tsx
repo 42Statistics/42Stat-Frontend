@@ -1,27 +1,22 @@
+import { RankingUserItemType } from '@/types/Ranking';
 import { VStack } from '@components/common';
-import type { RankingUserItemType } from '@/types/Ranking';
-import { RankingUserItem } from './RankingUserItem';
+import { ROUTES } from '@routes/ROUTES';
+import { RankingItem } from './RankingItem';
 
 type RankingUserProps = {
   list: RankingUserItemType[];
-  showImg?: boolean;
   cnt: number;
   unit: string;
 };
 
-export const RankingUser = ({
-  list,
-  showImg = true,
-  cnt,
-  unit,
-}: RankingUserProps) => {
+export const RankingUser = ({ list, cnt, unit }: RankingUserProps) => {
   return (
     <VStack w="100%" h="100%" spacing="2rem">
       {list.slice(0, cnt).map((item) => (
-        <RankingUserItem
+        <RankingItem
           key={item.id}
           item={item}
-          showImg={showImg}
+          link={`${ROUTES.PROFILE_ROOT}/${item.name}`}
           unit={unit}
         />
       ))}

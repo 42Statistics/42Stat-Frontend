@@ -12,8 +12,8 @@ import {
   WhiteText,
 } from '@components/common';
 import {
-  ApolloBadRequest,
-  ApolloNotFound,
+  DashboardContentBadRequest,
+  DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import styled from '@emotion/styled';
 import { getTitleWithLogin } from '@utils/getTitleWithLogin';
@@ -62,8 +62,8 @@ export const UserProfile = () => {
   });
 
   if (loading) return <UserProfileLoader />;
-  if (error) return <ApolloBadRequest msg={error.message} />;
-  if (!data) return <ApolloNotFound />;
+  if (error) return <DashboardContentBadRequest message={error.message} />; // TODO: UI
+  if (!data) return <DashboardContentNotFound />; // TODO: UI
 
   const { id, login, imgUrl, titles, coalition, grade, level, displayname } =
     data.getPersonalGeneral.userProfile;

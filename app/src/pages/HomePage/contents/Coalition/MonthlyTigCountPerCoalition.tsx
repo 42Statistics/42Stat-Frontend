@@ -1,11 +1,12 @@
 import { gql } from '@/__generated__';
 import { DateTemplate } from '@/__generated__/graphql';
 import { useQuery } from '@apollo/client';
-import { Center, H3Text, Loader, Text, VStack } from '@components/common';
+import { Center, H3Text, Text, VStack } from '@components/common';
 import { CoalitionMark } from '@components/elements/CoalitionMark';
 import {
-  ApolloBadRequest,
-  ApolloNotFound,
+  DashboardContentBadRequest,
+  DashboardContentLoading,
+  DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import styled from '@emotion/styled';
@@ -39,36 +40,23 @@ const GET_TIG_COUNT_PER_COALITION_BY_DATE_TEMPLATE = gql(/* GraphQL */ `
 
 export const MonthlyTigCountPerCoalition = () => {
   const title = '월간 누적 코알리숑 티그 횟수';
+  const { loading, error, data } = useQuery(
+    GET_TIG_COUNT_PER_COALITION_BY_DATE_TEMPLATE,
+    {
+      variables: { dateTemplate: DateTemplate.CurrMonth },
+    },
+  );
+  if (loading) return <DashboardContentLoading />;
+  if (error) return <DashboardContentBadRequest message={error.message} />;
+  if (!data) return <DashboardContentNotFound />;
+
   const {
-    loading,
-    error,
-    data: queryData,
-  } = useQuery(GET_TIG_COUNT_PER_COALITION_BY_DATE_TEMPLATE, {
-    variables: { dateTemplate: DateTemplate.CurrMonth },
-  });
-  if (loading)
-    return (
-      <DashboardContent title={title}>
-        <Loader />
-      </DashboardContent>
-    );
-  if (error)
-    return (
-      <DashboardContent title={title}>
-        <ApolloBadRequest msg={error.message} />
-      </DashboardContent>
-    );
-  if (!queryData)
-    return (
-      <DashboardContent title={title}>
-        <ApolloNotFound />
-      </DashboardContent>
-    );
+    data: tableRawData,
+    start,
+    end,
+  } = data.getHomeCoalition.tigCountPerCoalitionByDateTemplate;
 
-  const { data, start, end } =
-    queryData.getHomeCoalition.tigCountPerCoalitionByDateTemplate;
-
-  const tableData = data.map(({ coalition, value }) => ({
+  const tableData = tableRawData.map(({ coalition, value }) => ({
     coalition,
     value,
   }));
@@ -82,7 +70,7 @@ export const MonthlyTigCountPerCoalition = () => {
 
   return (
     <DashboardContent title={title} description={description}>
-      <Center w="100%" h="100%">
+      <Center>
         <VStack w="80%" h="100%">
           <MonthlyTigCountPerCoalitionTable>
             <tbody>

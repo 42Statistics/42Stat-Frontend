@@ -1,11 +1,12 @@
 import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
-import { Loader } from '@components/common';
 import {
-  ApolloBadRequest,
-  ApolloNotFound,
+  DashboardContentBadRequest,
+  DashboardContentLoading,
+  DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
-import { TextDefault } from '@components/elements/DashboardContentView/TextDefault';
+import { TextDefault } from '@components/elements/DashboardContentView/Text/TextDefault';
+import { TextProject } from '@components/elements/DashboardContentView/Text/TextProject';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useParams } from 'react-router-dom';
 
@@ -26,31 +27,16 @@ export const LastRegistered = () => {
   const { loading, error, data } = useQuery(GET_LAST_REGISTERED_BY_LOGIN, {
     variables: { login: username },
   });
-  if (loading)
-    return (
-      <DashboardContent title={title}>
-        <Loader />
-      </DashboardContent>
-    );
-  if (error)
-    return (
-      <DashboardContent title={title}>
-        <ApolloBadRequest msg={error.message} />
-      </DashboardContent>
-    );
-  if (!data)
-    return (
-      <DashboardContent title={title}>
-        <ApolloNotFound />
-      </DashboardContent>
-    );
+  if (loading) return <DashboardContentLoading />;
+  if (error) return <DashboardContentBadRequest message={error.message} />;
+  if (!data) return <DashboardContentNotFound />;
 
   const { lastRegistered } = data.getPersonalGeneral.teamInfo;
 
   return (
     <DashboardContent title={title}>
       {lastRegistered != null ? (
-        <TextDefault text={lastRegistered} />
+        <TextProject projectName={lastRegistered} />
       ) : (
         <TextDefault text="과제 신청 기록이 없어요 😓" />
       )}

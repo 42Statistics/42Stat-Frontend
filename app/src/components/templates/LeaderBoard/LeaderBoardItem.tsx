@@ -10,6 +10,7 @@ import {
 } from '@components/common';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { ROUTES } from '@routes/ROUTES';
 import { numberWithUnitFormatter } from '@utils/formatters';
 import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
 import { Link } from 'react-router-dom';
@@ -47,7 +48,7 @@ export const LeaderBoardItem = ({
               <H2MediumText color={color}>{rank}</H2MediumText>
             </HStack>
             <Avatar src={imgUrl} />
-            <Link to={`/profile/${name}`}>
+            <Link to={`${ROUTES.PROFILE_ROOT}/${name}`}>
               <H3MediumText color={color}>{name}</H3MediumText>
             </Link>
             <Spacer />

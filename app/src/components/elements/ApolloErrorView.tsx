@@ -2,12 +2,19 @@ import { HStack, Text } from '@components/common';
 import { useTheme } from '@emotion/react';
 import { MdErrorOutline } from '@react-icons/all-files/md/MdErrorOutline';
 
-export const ApolloNotFound = () => {
+export type ApolloErrorViewProps = {
+  message?: string;
+};
+
+export const ApolloErrorView = ({
+  message = 'Not Found',
+}: ApolloErrorViewProps) => {
   const theme = useTheme();
+
   return (
-    <HStack w="100%" h="100%" spacing="1rem">
+    <HStack spacing="1rem">
       <MdErrorOutline size="20px" fill={theme.colors.semantic.fail} />
-      <Text>Not Found</Text>
+      <Text color={theme.colors.mono.gray300}>{message}</Text>
     </HStack>
   );
 };

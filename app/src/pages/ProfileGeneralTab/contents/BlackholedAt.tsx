@@ -6,10 +6,11 @@ import {
   SmileyShockSvg,
   SmileySmile1Svg,
 } from '@assets/blackhole';
-import { H2BoldText, HStack, Loader } from '@components/common';
+import { H2BoldText, HStack } from '@components/common';
 import {
-  ApolloBadRequest,
-  ApolloNotFound,
+  DashboardContentBadRequest,
+  DashboardContentLoading,
+  DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useTheme } from '@emotion/react';
@@ -32,24 +33,9 @@ export const BlackholedAt = () => {
   const { loading, error, data } = useQuery(GET_BLACKHOLED_AT_BY_LOGIN, {
     variables: { login: username },
   });
-  if (loading)
-    return (
-      <DashboardContent title={title}>
-        <Loader />
-      </DashboardContent>
-    );
-  if (error)
-    return (
-      <DashboardContent title={title}>
-        <ApolloBadRequest msg={error.message} />
-      </DashboardContent>
-    );
-  if (!data)
-    return (
-      <DashboardContent title={title}>
-        <ApolloNotFound />
-      </DashboardContent>
-    );
+  if (loading) return <DashboardContentLoading />;
+  if (error) return <DashboardContentBadRequest message={error.message} />;
+  if (!data) return <DashboardContentNotFound />;
 
   const { blackholedAt } = data.getPersonalGeneral;
   const daysLeft = blackholedAt
@@ -102,7 +88,7 @@ export const BlackholedAt = () => {
 
   return (
     <DashboardContent title={title}>
-      <HStack w="100%" h="100%" spacing="1rem">
+      <HStack spacing="1rem">
         {Svg && <Svg width="24px" stroke={color} />}
         <H2BoldText color={color}>{text}</H2BoldText>
       </HStack>

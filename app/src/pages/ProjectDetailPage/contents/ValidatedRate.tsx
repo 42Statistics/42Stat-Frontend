@@ -1,10 +1,11 @@
 import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
-import { Center, H3Text, Loader } from '@components/common';
+import { H3Text } from '@components/common';
 import { PieChart } from '@components/elements/Chart';
 import {
-  ApolloBadRequest,
-  ApolloNotFound,
+  DashboardContentBadRequest,
+  DashboardContentLoading,
+  DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useTheme } from '@emotion/react';
@@ -35,25 +36,9 @@ export const ValidatedRate = () => {
       variables: { projectName },
     },
   );
-
-  if (loading)
-    return (
-      <DashboardContent title={title}>
-        <Loader />
-      </DashboardContent>
-    );
-  if (error)
-    return (
-      <DashboardContent title={title}>
-        <ApolloBadRequest msg={error.message} />
-      </DashboardContent>
-    );
-  if (!data)
-    return (
-      <DashboardContent title={title}>
-        <ApolloNotFound />
-      </DashboardContent>
-    );
+  if (loading) return <DashboardContentLoading />;
+  if (error) return <DashboardContentBadRequest message={error.message} />;
+  if (!data) return <DashboardContentNotFound />;
 
   const { validatedRate } = data.getProjectInfo;
   const labels = validatedRate.fields.map(({ key }) => key);
@@ -62,9 +47,7 @@ export const ValidatedRate = () => {
   if (validatedRate.total === 0) {
     return (
       <DashboardContent title={title}>
-        <Center w="100%" h="100%">
-          <H3Text>제출 기록이 없어요 😐</H3Text>
-        </Center>
+        <H3Text>제출 기록이 없어요 😐</H3Text>
       </DashboardContent>
     );
   }

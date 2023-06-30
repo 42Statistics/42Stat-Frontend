@@ -1,4 +1,4 @@
-import { ApolloErrorView } from '@components/elements/ApolloErrorView';
+import { ApolloNotFoundView } from '@components/elements/ApolloNotFoundView';
 import {
   DashboardContent,
   DashboardContentProps,
@@ -11,7 +11,7 @@ export const DashboardContentNotFound = ({
 }: DashboardContentNotFoundProps) => {
   return (
     <DashboardContent {...props}>
-      <ApolloErrorView message="Not Found" />
+      <ApolloNotFoundView />
     </DashboardContent>
   );
 };

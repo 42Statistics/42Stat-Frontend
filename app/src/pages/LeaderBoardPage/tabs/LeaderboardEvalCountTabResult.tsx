@@ -6,6 +6,7 @@ import { RankingUserItemType } from '@/types/Ranking';
 import { QueryResult } from '@apollo/client';
 import { Divider, VStack } from '@components/common';
 import { ApolloErrorView } from '@components/elements/ApolloErrorView';
+import { ApolloNotFoundView } from '@components/elements/ApolloNotFoundView';
 import { LeaderBoard } from '@components/templates/LeaderBoard';
 import { LeaderBoardItem } from '@components/templates/LeaderBoard/LeaderBoardItem';
 import { LeaderBoardTabResultSkeleton } from '@pages/PageSkeletons/LeaderBoardTabResultSkeleton';
@@ -22,7 +23,8 @@ export const LeaderboardEvalCountTabResult = ({
   result: { data, loading, error },
 }: LeaderboardEvalCountTabResultProps) => {
   if (loading) return <LeaderBoardTabResultSkeleton />;
-  if (error || !data) return <ApolloErrorView message={error?.message} />;
+  if (error) return <ApolloErrorView message={error.message} />;
+  if (!data) return <ApolloNotFoundView />;
 
   const { me, totalRanking } = data.getLeaderboardEvalCount.byDateTemplate.data;
   const unit = '회';

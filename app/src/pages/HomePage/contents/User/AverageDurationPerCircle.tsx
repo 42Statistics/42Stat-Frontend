@@ -53,7 +53,7 @@ export const AverageDurationPerCircle = () => {
   ];
 
   return (
-    <DashboardContent title={title} description={description}>
+    <DashboardContent title={title} description={description} isApexChart>
       <AverageDurationPerCircleChart
         categories={categories}
         series={series}

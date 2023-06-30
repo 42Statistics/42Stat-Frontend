@@ -64,7 +64,7 @@ export const LevelRecords = () => {
   ];
 
   return (
-    <DashboardContent title={title} description={description}>
+    <DashboardContent title={title} description={description} isApexChart>
       <LevelRecordsChart series={series} />
     </DashboardContent>
   );

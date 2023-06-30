@@ -34,7 +34,7 @@ export const BlackholedCountPerCircle = () => {
   const series = blackholedCountPerCircle.map(({ value }) => value);
 
   return (
-    <DashboardContent title={title}>
+    <DashboardContent title={title} isApexChart>
       <BlackholedCountPerCircleChart labels={labels} series={series} />
     </DashboardContent>
   );

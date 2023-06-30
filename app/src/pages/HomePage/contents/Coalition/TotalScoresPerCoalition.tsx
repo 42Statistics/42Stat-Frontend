@@ -54,7 +54,7 @@ export const TotalScoresPerCoalition = () => {
   ];
 
   return (
-    <DashboardContent title={title}>
+    <DashboardContent title={title} isApexChart>
       <TotalScoresPerCoalitionChart
         categories={categories}
         series={series}

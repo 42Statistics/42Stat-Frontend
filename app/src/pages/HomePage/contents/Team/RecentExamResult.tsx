@@ -79,7 +79,7 @@ export const RecentExamResult = () => {
   ];
 
   return (
-    <DashboardContent title={title} description={description}>
+    <DashboardContent title={title} description={description} isApexChart>
       <LastExamResultChart
         categories={categories}
         series={series}

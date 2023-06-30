@@ -9,7 +9,7 @@ import { useProjectDetailPageDashboard } from './hooks/useProjectDetailPageDashb
 
 const ProjectDetailPage = () => {
   return (
-    <VStack w="100%" spacing="8rem">
+    <VStack w="100%" spacing="4rem">
       <ProjectIntroduction />
       <Dashboard {...useProjectDetailPageDashboard()} />
     </VStack>

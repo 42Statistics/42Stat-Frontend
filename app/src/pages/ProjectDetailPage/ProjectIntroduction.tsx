@@ -1,7 +1,8 @@
 import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
-import { BoldText, Text, VStack } from '@components/common';
+import { BoldText, Divider, HStack, Text, VStack } from '@components/common';
 import styled from '@emotion/styled';
+import { ProjectIntroductionSkeleton } from '@pages/PageSkeletons/ProjectIntroductionSkeleton';
 import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
 import { useParams } from 'react-router-dom';
 
@@ -23,7 +24,7 @@ export const ProjectIntroduction = () => {
     },
   );
 
-  if (loading) return <></>;
+  if (loading) return <ProjectIntroductionSkeleton />;
   if (error) return <></>;
   if (!data) return <></>;
 
@@ -31,23 +32,30 @@ export const ProjectIntroduction = () => {
 
   return (
     <Layout>
-      <VStack w="100%" spacing="2rem">
-        <TabletAndAbove>
-          <BoldText fontSize="4rem" selectable>
-            {name}
-          </BoldText>
-        </TabletAndAbove>
-        <Mobile>
-          <BoldText fontSize="3rem" selectable>
-            {name}
-          </BoldText>
-        </Mobile>
-        <div style={{ maxWidth: '600px' }}>
-          <Text selectable style={{ textAlign: 'center' }}>
-            {description}
-          </Text>
-        </div>
-      </VStack>
+      <HStack w="100%" spacing="4rem">
+        <Divider
+          orientation="vertical"
+          thickness="3px"
+          style={{ height: '150px' }}
+        />
+        <VStack align="start" w="100%" spacing="2rem">
+          <TabletAndAbove>
+            <BoldText fontSize="4rem" selectable>
+              {name}
+            </BoldText>
+          </TabletAndAbove>
+          <Mobile>
+            <BoldText fontSize="3rem" selectable>
+              {name}
+            </BoldText>
+          </Mobile>
+          {description !== '' && (
+            <div style={{ maxWidth: '600px' }}>
+              <Text selectable>{description}</Text>
+            </div>
+          )}
+        </VStack>
+      </HStack>
     </Layout>
   );
 };

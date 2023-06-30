@@ -12,16 +12,11 @@ import { numberWithUnitFormatter } from '@utils/formatters';
 import { Link } from 'react-router-dom';
 
 type RankingUserItemProps = {
-  showImg: boolean;
   item: RankingUserItemType;
   unit: string;
 };
 
-export const RankingUserItem = ({
-  showImg,
-  item,
-  unit,
-}: RankingUserItemProps) => {
+export const RankingUserItem = ({ item, unit }: RankingUserItemProps) => {
   const theme = useTheme();
   const { name, value, rank, imgUrl } = item;
   const color =
@@ -30,7 +25,7 @@ export const RankingUserItem = ({
   return (
     <HStack w="80%" spacing="2rem">
       <H2BoldText color={color}>{rank}</H2BoldText>
-      {showImg ? <Avatar src={imgUrl} /> : null}
+      <Avatar src={imgUrl} />
       <HStack
         w="100%"
         spacing="1rem"

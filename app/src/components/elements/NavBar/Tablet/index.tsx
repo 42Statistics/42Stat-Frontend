@@ -3,6 +3,7 @@ import { userAtom } from '@atoms/userAtom';
 import { Avatar, Clickable, Overlay, VStack } from '@components/common';
 import styled from '@emotion/styled';
 import { GiHamburgerMenu } from '@react-icons/all-files/gi/GiHamburgerMenu';
+import { ROUTES } from '@routes/ROUTES';
 import { useAtom, useAtomValue } from 'jotai';
 import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
@@ -27,7 +28,7 @@ export const TabletNavBar = () => {
           <Clickable onClick={() => setIsNavBarOpen((cur) => !cur)}>
             <GiHamburgerMenu size="18px" />
           </Clickable>
-          <Link to={`/profile/${user.login}`}>
+          <Link to={`${ROUTES.PROFILE_ROOT}/${user.login}`}>
             <Avatar size="sm" src={user.imgUrl} />
           </Link>
           <TabletNavMenu />

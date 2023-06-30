@@ -1,5 +1,6 @@
 import { AccentH3BoldText, Center } from '@components/common';
 import { DashboardContent } from '@components/templates/DashboardContent';
+import { ROUTES } from '@routes/ROUTES';
 import { Link, useParams } from 'react-router-dom';
 
 export const EvalLogSearchLink = () => {
@@ -9,7 +10,7 @@ export const EvalLogSearchLink = () => {
   return (
     <DashboardContent title={title}>
       <Center w="100%" h="100%">
-        <Link to={`/evallog?corrector=${username}`}>
+        <Link to={`${ROUTES.EVALLOG}?corrector=${username}`}>
           <AccentH3BoldText>바로가기</AccentH3BoldText>
         </Link>
       </Center>

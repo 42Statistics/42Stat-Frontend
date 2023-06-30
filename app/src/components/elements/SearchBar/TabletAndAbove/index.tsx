@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { ROUTES } from '@routes/ROUTES';
 import { isEnterKeyReleased } from '@utils/isEnterKeyReleased';
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -26,12 +27,12 @@ export const TabletAndAboveSearchBar = () => {
 
   const handleUserSubmit = (name: string) => {
     resetInput();
-    navigate(`/profile/${name}`);
+    navigate(`${ROUTES.PROFILE_ROOT}/${name}`);
   };
 
   const handleProjectSubmit = (name: string) => {
     resetInput();
-    navigate(`/project/${name}`);
+    navigate(`${ROUTES.PROJECT_ROOT}/${name}`);
   };
 
   useEffect(() => {

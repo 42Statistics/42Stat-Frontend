@@ -10,6 +10,7 @@ import {
 import { EvalLogLabel, EvalLogLabelType } from '@components/common/Label';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { ROUTES } from '@routes/ROUTES';
 import { snakeCaseFormatter } from '@utils/formatters';
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
@@ -22,7 +23,7 @@ export const EvalLogItem = ({ element }: { element: EvalLog }) => {
     <EvalLogItemLayout>
       <VStack w="100%" align="start" spacing="2rem">
         <HStack w="100%" justify="start" wrap="wrap">
-          <Link to={`/profile/${header.corrector.login}`}>
+          <Link to={`${ROUTES.PROFILE_ROOT}/${header.corrector.login}`}>
             <PrimaryBoldText selectable>
               {header.corrector.login}
             </PrimaryBoldText>

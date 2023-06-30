@@ -1,3 +1,4 @@
+import type { RankingUserItemType } from '@/types/Ranking';
 import {
   Avatar,
   H2BoldText,
@@ -6,8 +7,8 @@ import {
   MediumText,
 } from '@components/common';
 import { useTheme } from '@emotion/react';
+import { ROUTES } from '@routes/ROUTES';
 import { numberWithUnitFormatter } from '@utils/formatters';
-import type { RankingUserItemType } from '@/types/Ranking';
 import { Link } from 'react-router-dom';
 
 type RankingUserItemProps = {
@@ -37,7 +38,7 @@ export const RankingUserItem = ({
         justify="start"
         wrap="wrap"
       >
-        <Link to={`/profile/${name}`}>
+        <Link to={`${ROUTES.PROFILE_ROOT}/${name}`}>
           <H3MediumText color={color}>{name}</H3MediumText>
         </Link>
         <MediumText color={color}>

@@ -8,6 +8,7 @@ import {
 } from '@components/common';
 import { Seo } from '@components/elements/Seo';
 import { withHead } from '@hoc/withHead';
+import { ROUTES } from '@routes/ROUTES';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 
@@ -29,7 +30,7 @@ export const InternalServerErrorPage = () => {
           width="100px"
           src="https://data1.pokemonkorea.co.kr/newdata/pokedex/full/039301.png"
         />
-        <Link to="/">
+        <Link to={ROUTES.ROOT}>
           <Text>홈으로 돌아가기</Text>
         </Link>
       </VStack>

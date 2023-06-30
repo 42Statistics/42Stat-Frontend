@@ -6,6 +6,7 @@ import {
   MediumText,
 } from '@components/common';
 import { useTheme } from '@emotion/react';
+import { ROUTES } from '@routes/ROUTES';
 import { numberWithUnitFormatter } from '@utils/formatters';
 import { Link } from 'react-router-dom';
 
@@ -30,7 +31,7 @@ export const RankingProjectItem = ({ item, unit }: RankingProjectItemProps) => {
         justify="start"
         wrap="wrap"
       >
-        <Link to={`/project/${name}`}>
+        <Link to={`${ROUTES.PROJECT_ROOT}/${name}`}>
           <H3MediumText color={color}>{name}</H3MediumText>
         </Link>
         <MediumText color={color}>

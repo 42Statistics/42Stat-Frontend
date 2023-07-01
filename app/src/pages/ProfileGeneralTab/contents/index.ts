@@ -2,7 +2,7 @@ export * from './BeginAt';
 export * from './BlackholedAt';
 export * from './CoalitionScore';
 export * from './Wallet';
-export * from './LastPass';
+export * from './LastPassed';
 export * from './LastRegistered';
 export * from './LevelRecords';
 export * from './LogTime';

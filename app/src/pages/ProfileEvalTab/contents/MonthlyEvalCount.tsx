@@ -57,10 +57,11 @@ export const MonthlyEvalCount = () => {
   const description = `${dayjs(start).format('M월 D일')} ~ ${dayjs(end).format(
     'M월 D일',
   )}`;
+  const unit = '회';
 
   return (
     <DashboardContent title={title} description={description}>
-      <NumberCompare curr={currEvalCount} last={lastEvalCount} unit="회" />
+      <NumberCompare curr={currEvalCount} last={lastEvalCount} unit={unit} />
     </DashboardContent>
   );
 };

@@ -1,4 +1,3 @@
-import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import { PieChart } from '@components/elements/Chart';
 import {
@@ -8,27 +7,15 @@ import {
 } from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useTheme } from '@emotion/react';
+import { GET_HOME } from '@pages/HomePage/GET_HOME';
 import { numberWithUnitFormatter } from '@utils/formatters';
 import { capitalize } from 'lodash-es';
 
-const GET_MEMBER_RATE = gql(/* GraphQL */ `
-  query GetMemberRate {
-    getHomeUser {
-      memberRate {
-        total
-        fields {
-          key
-          value
-        }
-      }
-    }
-  }
-`);
 export const MemberRate = () => {
   const title = 'Member 비율';
   const description = '블랙홀 유저 포함';
 
-  const { loading, error, data } = useQuery(GET_MEMBER_RATE);
+  const { loading, error, data } = useQuery(GET_HOME);
   if (loading) return <DashboardContentLoading />;
   if (error) return <DashboardContentBadRequest message={error.message} />;
   if (!data) return <DashboardContentNotFound />;

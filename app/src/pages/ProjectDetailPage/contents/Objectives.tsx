@@ -1,4 +1,3 @@
-import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import { H3Text, VStack } from '@components/common';
 import { Label } from '@components/common/Label';
@@ -12,21 +11,14 @@ import { useTheme } from '@emotion/react';
 import { isDefined } from '@utils/isDefined';
 import { isShortString } from '@utils/isShortString';
 import { useParams } from 'react-router-dom';
-
-const GET_OBJECTIVES_BY_PROJECT_NAME = gql(/* GraphQL */ `
-  query GetObjectivesByProjectName($projectName: String!) {
-    getProjectInfo(projectName: $projectName) {
-      objectives
-    }
-  }
-`);
+import { GET_PROJECT_INFO_BY_PROJECT_NAME } from '../GET_PROJECT_INFO_BY_PROJECT_NAME';
 
 export const Objectives = () => {
   const theme = useTheme();
   const { projectName } = useParams() as { projectName: string };
 
   const title = '키워드';
-  const { loading, error, data } = useQuery(GET_OBJECTIVES_BY_PROJECT_NAME, {
+  const { loading, error, data } = useQuery(GET_PROJECT_INFO_BY_PROJECT_NAME, {
     variables: { projectName },
   });
   if (loading) return <DashboardContentLoading />;

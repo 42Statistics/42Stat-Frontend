@@ -9,7 +9,9 @@ import {
   AverageFeedbackLength,
   TotalEvalCount,
   WeeklyAverageEvalCount,
+  WeeklyEvalCount,
 } from '../contents/Eval';
+import { Hero } from '../contents/MyInfo/Hero';
 import { CurrRegisteredCountRanking, RecentExamResult } from '../contents/Team';
 import {
   AliveUserCountRecords,
@@ -17,12 +19,10 @@ import {
   BlackholedCountPerCircle,
   BlackholedRate,
   CorrectionPointRanking,
-  Hero,
   MemberRate,
   MonthlyBlackholedCount,
   UserCountPerLevel,
   WalletRanking,
-  WeeklyEvalCount,
 } from '../contents/User';
 
 export const homePageDashboardContents: DashboardItemProps[] = [

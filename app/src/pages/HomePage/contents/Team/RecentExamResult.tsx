@@ -1,4 +1,3 @@
-import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import { BarChart } from '@components/elements/Chart';
 import {
@@ -7,44 +6,12 @@ import {
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
+import { GET_HOME } from '@pages/HomePage/GET_HOME';
 import dayjs from 'dayjs';
-
-const GET_RECENT_EXAM_RESULT = gql(/* GraphQL */ `
-  query GetRecentExamResult($after: Int!) {
-    getHomeTeam {
-      recentExamResult(after: $after) {
-        start
-        end
-        data {
-          resultPerRank {
-            rank
-            rate {
-              total
-              fields {
-                key
-                value
-              }
-            }
-          }
-          beginAt
-          endAt
-          location
-          maxPeople
-          name
-          nbrSubscribers
-        }
-      }
-    }
-  }
-`);
 
 export const RecentExamResult = () => {
   const title = '직전 회차 시험 Rank 별 통과율';
-  const { loading, error, data } = useQuery(GET_RECENT_EXAM_RESULT, {
-    variables: {
-      after: 1,
-    },
-  });
+  const { loading, error, data } = useQuery(GET_HOME);
   if (loading) return <DashboardContentLoading />;
   if (error) return <DashboardContentBadRequest message={error.message} />;
   if (!data) return <DashboardContentNotFound />;

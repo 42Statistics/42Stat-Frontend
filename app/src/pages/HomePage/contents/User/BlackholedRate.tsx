@@ -8,26 +8,13 @@ import {
 } from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useTheme } from '@emotion/react';
+import { GET_HOME } from '@pages/HomePage/GET_HOME';
 import { numberWithUnitFormatter } from '@utils/formatters';
 import { capitalize } from 'lodash-es';
 
-const GET_BLACKHOLED_RATE = gql(/* GraphQL */ `
-  query GetBlackHoledRate {
-    getHomeUser {
-      blackholedRate {
-        total
-        fields {
-          key
-          value
-        }
-      }
-    }
-  }
-`);
-
 export const BlackholedRate = () => {
   const title = '블랙홀 유저 비율';
-  const { loading, error, data } = useQuery(GET_BLACKHOLED_RATE);
+  const { loading, error, data } = useQuery(GET_HOME);
   if (loading) return <DashboardContentLoading />;
   if (error) return <DashboardContentBadRequest message={error.message} />;
   if (!data) return <DashboardContentNotFound />;

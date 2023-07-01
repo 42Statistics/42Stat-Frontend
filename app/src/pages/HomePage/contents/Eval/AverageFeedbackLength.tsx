@@ -1,4 +1,3 @@
-import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import {
   DashboardContentBadRequest,
@@ -7,18 +6,11 @@ import {
 } from '@components/elements/DashboardContentView/Error';
 import { NumberDefault } from '@components/elements/DashboardContentView/NumberDefault';
 import { DashboardContent } from '@components/templates/DashboardContent';
-
-const GET_AVERAGE_FEEDBACK_LENGTH = gql(/* GraphQL */ `
-  query GetAverageFeedbackLength {
-    getHomeEval {
-      averageFeedbackLength
-    }
-  }
-`);
+import { GET_HOME } from '@pages/HomePage/GET_HOME';
 
 export const AverageFeedbackLength = () => {
   const title = '평균 피드백 길이';
-  const { loading, error, data } = useQuery(GET_AVERAGE_FEEDBACK_LENGTH);
+  const { loading, error, data } = useQuery(GET_HOME);
   if (loading) return <DashboardContentLoading />;
   if (error) return <DashboardContentBadRequest message={error.message} />;
   if (!data) return <DashboardContentNotFound />;

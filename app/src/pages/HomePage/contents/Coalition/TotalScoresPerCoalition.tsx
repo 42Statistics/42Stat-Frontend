@@ -1,4 +1,3 @@
-import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import { BarChart } from '@components/elements/Chart';
 import {
@@ -7,30 +6,12 @@ import {
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
+import { GET_HOME } from '@pages/HomePage/GET_HOME';
 import { millionFormatter } from '@utils/formatters';
-
-export const GET_TOTAL_SCORES_PER_COALITION = gql(/* GraphQL */ `
-  query GetTotalScoresPerCoalition {
-    getHomeCoalition {
-      totalScoresPerCoalition {
-        coalition {
-          id
-          name
-          slug
-          imageUrl
-          coverUrl
-          color
-          userId
-        }
-        value
-      }
-    }
-  }
-`);
 
 export const TotalScoresPerCoalition = () => {
   const title = '누적 코알리숑 스코어 합산';
-  const { loading, error, data } = useQuery(GET_TOTAL_SCORES_PER_COALITION);
+  const { loading, error, data } = useQuery(GET_HOME);
   if (loading) return <DashboardContentLoading />;
   if (error) return <DashboardContentBadRequest message={error.message} />;
   if (!data) return <DashboardContentNotFound />;

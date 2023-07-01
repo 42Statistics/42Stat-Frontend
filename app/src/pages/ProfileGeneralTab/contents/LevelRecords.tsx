@@ -1,4 +1,3 @@
-import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import { LineChart } from '@components/elements/Chart';
 import {
@@ -10,28 +9,14 @@ import { DashboardContent } from '@components/templates/DashboardContent';
 import { useTheme } from '@emotion/react';
 import { isDefined } from '@utils/isDefined';
 import { useParams } from 'react-router-dom';
-
-const GET_LEVEL_RECORDS_BY_LOGIN = gql(/* GraphQL */ `
-  query GetLevelRecordsByLogin($login: String!) {
-    getPersonalGeneral(login: $login) {
-      userLevelRecords {
-        monthsPassed
-        level
-      }
-      memberLevelRecords {
-        monthsPassed
-        level
-      }
-    }
-  }
-`);
+import { GET_PERSONAL_GENERAL_BY_LOGIN } from '../GET_PERSONAL_GENERAL_BY_LOGIN';
 
 export const LevelRecords = () => {
   const { username } = useParams() as { username: string };
 
   const title = '레벨 증가 그래프';
   const description = `멤버 평균과 비교`;
-  const { loading, error, data } = useQuery(GET_LEVEL_RECORDS_BY_LOGIN, {
+  const { loading, error, data } = useQuery(GET_PERSONAL_GENERAL_BY_LOGIN, {
     variables: { login: username },
   });
   if (loading) return <DashboardContentLoading />;

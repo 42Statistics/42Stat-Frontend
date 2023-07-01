@@ -1,5 +1,11 @@
 import { useQuery } from '@apollo/client';
-import { Loader, VStack, WhiteH2BoldText, WhiteText } from '@components/common';
+import {
+  Center,
+  Loader,
+  VStack,
+  WhiteH2BoldText,
+  WhiteText,
+} from '@components/common';
 import styled from '@emotion/styled';
 import { GET_HOME } from '@pages/HomePage/GET_HOME';
 import { getDayDiff } from '@utils/getDayDiff';
@@ -12,7 +18,9 @@ export const Hero = () => {
   if (loading)
     return (
       <HeroLayout>
-        <Loader />
+        <Center>
+          <Loader />
+        </Center>
       </HeroLayout>
     );
   if (error || !data)

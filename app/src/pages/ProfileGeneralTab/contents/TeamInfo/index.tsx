@@ -1,4 +1,3 @@
-import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import {
   DashboardContentBadRequest,
@@ -6,38 +5,14 @@ import {
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import styled from '@emotion/styled';
+import { GET_PERSONAL_GENERAL_BY_LOGIN } from '@pages/ProfileGeneralTab/GET_PERSONAL_GENERAL_BY_LOGIN';
 import { useParams } from 'react-router-dom';
 import { TeamInfoTable } from './TeamInfoTable';
-
-const GET_TEAM_INFO_BY_LOGIN = gql(/* GraphQL */ `
-  query GetTeamInfoByLogin($login: String!) {
-    getPersonalGeneral(login: $login) {
-      teamInfo {
-        lastRegistered
-        lastPassed
-        teams {
-          id
-          name
-          occurrence
-          projectPreview {
-            id
-            name
-            url
-          }
-          status
-          lastEventTime
-          isValidated
-          finalMark
-        }
-      }
-    }
-  }
-`);
 
 export const TeamInfo = () => {
   const { username } = useParams() as { username: string };
 
-  const { loading, error, data } = useQuery(GET_TEAM_INFO_BY_LOGIN, {
+  const { loading, error, data } = useQuery(GET_PERSONAL_GENERAL_BY_LOGIN, {
     variables: { login: username },
   });
 

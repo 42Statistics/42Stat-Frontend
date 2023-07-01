@@ -1,4 +1,3 @@
-import { gql } from '@/__generated__';
 import marvin from '@/assets/marvin-depressed.gif';
 import { H3Text, Image, VStack } from '@/components/common';
 import { DashboardContent } from '@/components/templates/DashboardContent';
@@ -8,59 +7,9 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
+import { GET_PERSONAL_GENERAL_BY_LOGIN } from '@pages/ProfileGeneralTab/GET_PERSONAL_GENERAL_BY_LOGIN';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-
-const GET_CHARACTER = gql(/* GraphQL */ `
-  query GetCharacter {
-    getPersonalGeneral {
-      character {
-        effort {
-          logtimeRank {
-            rank
-            value
-            userPreview {
-              id
-            }
-          }
-          evalCountRank {
-            rank
-            value
-          }
-          examTryCount
-          projectTryCount
-        }
-        talent {
-          levelRank {
-            rank
-            value
-          }
-          examOneshotRate {
-            total
-            fields {
-              key
-              value
-            }
-          }
-          projectOneshotRate {
-            total
-            fields {
-              key
-              value
-            }
-          }
-          outstandingRate {
-            total
-            fields {
-              key
-              value
-            }
-          }
-        }
-      }
-    }
-  }
-`);
 
 export const Character = () => {
   const { username } = useParams() as { username: string };
@@ -69,7 +18,9 @@ export const Character = () => {
   const description = '과제 점수, 레벨 증가, 접속 시간, 평가 횟수 기준';
   const [character, setCharacter] = useState<string>('마빈');
 
-  const { loading, error, data } = useQuery(GET_CHARACTER);
+  const { loading, error, data } = useQuery(GET_PERSONAL_GENERAL_BY_LOGIN, {
+    variables: { login: username },
+  });
 
   // const [pokeImg, setPokeImg] = useState(
   //   'https://data1.pokemonkorea.co.kr/newdata/pokedex/full/006601.png',

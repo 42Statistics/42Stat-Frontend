@@ -1,4 +1,3 @@
-import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import {
   DashboardContentBadRequest,
@@ -10,19 +9,13 @@ import { NumberDefault } from '@components/elements/DashboardContentView/NumberD
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useParams } from 'react-router-dom';
 
-const GET_DIFFICULTY_BY_PROJECT_NAME = gql(/* GraphQL */ `
-  query GetDifficultyByProjectName($projectName: String!) {
-    getProjectInfo(projectName: $projectName) {
-      difficulty
-    }
-  }
-`);
+import { GET_PROJECT_INFO_BY_PROJECT_NAME } from '../GET_PROJECT_INFO_BY_PROJECT_NAME';
 
 export const Difficulty = () => {
   const { projectName } = useParams() as { projectName: string };
 
   const title = '경험치';
-  const { loading, error, data } = useQuery(GET_DIFFICULTY_BY_PROJECT_NAME, {
+  const { loading, error, data } = useQuery(GET_PROJECT_INFO_BY_PROJECT_NAME, {
     variables: { projectName },
   });
   if (loading) return <DashboardContentLoading />;

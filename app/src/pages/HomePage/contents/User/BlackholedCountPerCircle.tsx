@@ -1,4 +1,3 @@
-import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import { DonutChart } from '@components/elements/Chart';
 import {
@@ -8,22 +7,12 @@ import {
 } from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useTheme } from '@emotion/react';
+import { GET_HOME } from '@pages/HomePage/GET_HOME';
 import { numberWithUnitFormatter } from '@utils/formatters';
-
-const GET_BLACKHOLED_COUNT_PER_CIRCLE = gql(/* GraphQL */ `
-  query GetBlackholedCountPerCircle {
-    getHomeUser {
-      blackholedCountPerCircle {
-        circle
-        value
-      }
-    }
-  }
-`);
 
 export const BlackholedCountPerCircle = () => {
   const title = '언제 블랙홀에 많이 빠질까?';
-  const { loading, error, data } = useQuery(GET_BLACKHOLED_COUNT_PER_CIRCLE);
+  const { loading, error, data } = useQuery(GET_HOME);
   if (loading) return <DashboardContentLoading />;
   if (error) return <DashboardContentBadRequest message={error.message} />;
   if (!data) return <DashboardContentNotFound />;

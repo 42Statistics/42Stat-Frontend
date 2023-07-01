@@ -4,7 +4,7 @@ import {
   BlackholedAt,
   Character,
   CoalitionScore,
-  LastPass,
+  LastPassed,
   LastRegistered,
   LevelRecords,
   LogTime,
@@ -21,7 +21,7 @@ export const profileGeneralTabDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 1,
-    content: LastPass,
+    content: LastPassed,
   },
   {
     id: 2,

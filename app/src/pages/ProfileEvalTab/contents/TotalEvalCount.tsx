@@ -1,4 +1,3 @@
-import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import {
   DashboardContentBadRequest,
@@ -8,20 +7,13 @@ import {
 import { NumberDefault } from '@components/elements/DashboardContentView/NumberDefault';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useParams } from 'react-router-dom';
-
-const GET_TOTAL_EVAL_COUNT_BY_LOGIN = gql(/* GraphQL */ `
-  query GetTotalEvalCountByLogin($login: String!) {
-    getPersonalEval(login: $login) {
-      totalCount
-    }
-  }
-`);
+import { GET_PERSONAL_EVAL_BY_LOGIN } from '../GET_PERSONAL_EVAL_BY_LOGIN';
 
 export const TotalEvalCount = () => {
   const { username } = useParams() as { username: string };
 
   const title = '누적 평가 횟수';
-  const { loading, error, data } = useQuery(GET_TOTAL_EVAL_COUNT_BY_LOGIN, {
+  const { loading, error, data } = useQuery(GET_PERSONAL_EVAL_BY_LOGIN, {
     variables: { login: username },
   });
   if (loading) return <DashboardContentLoading />;

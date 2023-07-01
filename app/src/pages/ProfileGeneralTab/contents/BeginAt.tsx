@@ -1,4 +1,3 @@
-import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import { H3Text, HStack, Text } from '@components/common';
 import {
@@ -9,20 +8,13 @@ import {
 import { DashboardContent } from '@components/templates/DashboardContent';
 import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
-
-const GET_BEGIN_AT_BY_LOGIN = gql(/* GraphQL */ `
-  query GetBeginAtByLogin($login: String!) {
-    getPersonalGeneral(login: $login) {
-      beginAt
-    }
-  }
-`);
+import { GET_PERSONAL_GENERAL_BY_LOGIN } from '../GET_PERSONAL_GENERAL_BY_LOGIN';
 
 export const BeginAt = () => {
   const { username } = useParams() as { username: string };
 
   const title = '본과정 시작일';
-  const { loading, error, data } = useQuery(GET_BEGIN_AT_BY_LOGIN, {
+  const { loading, error, data } = useQuery(GET_PERSONAL_GENERAL_BY_LOGIN, {
     variables: { login: username },
   });
   if (loading) return <DashboardContentLoading />;

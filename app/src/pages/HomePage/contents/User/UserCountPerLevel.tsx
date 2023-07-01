@@ -1,4 +1,3 @@
-import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import { BarChart } from '@components/elements/Chart';
 import {
@@ -7,22 +6,12 @@ import {
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
+import { GET_HOME } from '@pages/HomePage/GET_HOME';
 import { numberWithUnitFormatter } from '@utils/formatters';
-
-const GET_USER_COUNT_PER_LEVEL = gql(/* GraphQL */ `
-  query GetUserCountPerLevel {
-    getHomeUser {
-      userCountPerLevel {
-        value
-        level
-      }
-    }
-  }
-`);
 
 export const UserCountPerLevel = () => {
   const title = '여행 중인 유저 레벨 분포';
-  const { loading, error, data } = useQuery(GET_USER_COUNT_PER_LEVEL);
+  const { loading, error, data } = useQuery(GET_HOME);
   if (loading) return <DashboardContentLoading />;
   if (error) return <DashboardContentBadRequest message={error.message} />;
   if (!data) return <DashboardContentNotFound />;

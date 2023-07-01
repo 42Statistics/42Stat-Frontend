@@ -1,40 +1,14 @@
-import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import { Loader, VStack, WhiteH2BoldText, WhiteText } from '@components/common';
 import styled from '@emotion/styled';
+import { GET_HOME } from '@pages/HomePage/GET_HOME';
 import { getDayDiff } from '@utils/getDayDiff';
 import { getDailyProgrammingQuote } from './getDailyProgrammingQuote';
-
-const GET_MY_INFO = gql(/* GraphQL */ `
-  query GetMyInfo {
-    getMyInfo {
-      userPreview {
-        id
-        login
-        imgUrl
-      }
-      recentValidatedTeam {
-        status
-        lastEventTime
-        projectPreview {
-          id
-          name
-          url
-        }
-      }
-      isNewMember
-      blackholedAt
-      experienceRank
-      scoreRank
-      evalCountRank
-    }
-  }
-`);
 
 export const Hero = () => {
   // const user = useAtomValue(userAtom);
 
-  const { loading, error, data } = useQuery(GET_MY_INFO);
+  const { loading, error, data } = useQuery(GET_HOME);
   if (loading)
     return (
       <HeroLayout>

@@ -4,6 +4,7 @@ export const GET_PERSONAL_EVAL_BY_LOGIN = gql(/* GraphQL */ `
   query GetPersonalEvalByLogin($login: String!) {
     getPersonalEval(login: $login) {
       correctionPoint
+      totalCount
       totalDuration
       averageDuration
       averageFinalMark

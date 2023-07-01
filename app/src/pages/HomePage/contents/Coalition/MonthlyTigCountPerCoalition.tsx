@@ -83,7 +83,7 @@ export const MonthlyTigCountPerCoalition = () => {
                     <H3Text>{capitalize(coalition.name)}</H3Text>
                   </td>
                   <td>
-                    <TextMax isMax={max === value}>
+                    <TextMax isMax={max > 0 && max === value}>
                       {numberWithUnitFormatter(value, unit)}
                     </TextMax>
                   </td>

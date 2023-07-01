@@ -34,6 +34,9 @@ dependencies:
   emotion-rgba:
     specifier: ^0.0.11
     version: 0.0.11
+  facepaint:
+    specifier: ^1.2.1
+    version: 1.2.1
   graphql:
     specifier: ^16.6.0
     version: 16.6.0
@@ -129,6 +132,9 @@ devDependencies:
   '@storybook/testing-library':
     specifier: ^0.0.14-next.2
     version: 0.0.14-next.2
+  '@types/facepaint':
+    specifier: ^1.2.2
+    version: 1.2.2
   '@types/lodash-es':
     specifier: ^4.17.7
     version: 4.17.7
@@ -5046,6 +5052,10 @@ packages:
       '@types/serve-static': 1.15.1
     dev: true
 
+  /@types/facepaint@1.2.2:
+    resolution: {integrity: sha512-Xl9tAINsQL1s0TdXG5IiG75kZrxem5esbnKJF5gQgFel92OdS5zLtFYnbBw6fBruCMPYJQ9mK5pVmSsMl3Puug==}
+    dev: true
+
   /@types/find-cache-dir@3.2.1:
     resolution: {integrity: sha512-frsJrz2t/CeGifcu/6uRo4b+SzAwT4NYCVPu1GN8IB9XTzrpPkGuV0tmh9mN+/L0PklAlsC3u5Fxt0ju00LXIw==}
     dev: true
@@ -7312,6 +7322,10 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /facepaint@1.2.1:
+    resolution: {integrity: sha512-oNvBekbhsm/0PNSOWca5raHNAi6dG960Bx6LJgxDPNF59WpuspgQ17bN5MKwOr7JcFdQYc7StW3VZ28DBZLavQ==}
+    dev: false
 
   /fast-decode-uri-component@1.0.1:
     resolution: {integrity: sha512-WKgKWg5eUxvRZGwW8FvfbaH7AXSh2cL+3j5fMGzUMCxWBJ3dV3a7Wz8y2f/uQ0e3B6WmodD3oS54jTQ9HVTIIg==}

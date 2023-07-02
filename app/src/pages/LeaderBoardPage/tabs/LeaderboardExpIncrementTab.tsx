@@ -2,10 +2,10 @@ import { gql } from '@/__generated__';
 import { DateTemplate } from '@/__generated__/graphql';
 import { useLazyQuery } from '@apollo/client';
 import { HStack, SegmentedControl, VStack } from '@components/common';
-import { PageButtonList } from '@components/elements/PageButtonList';
 import { useSegmentedControl } from '@utils/useSegmentedControl';
 import { useEffect, useState } from 'react';
 import { LeaderboardExpIncrementTabResult } from './LeaderboardExpIncrementTabResult';
+import { LeaderboardPageButtonList } from './LeaderboardPageButtonList';
 
 const GET_LEADERBOARD_EXP_INCREMENT = gql(/* GraphQL */ `
   query GetLeaderboardExpIncrement(
@@ -115,7 +115,7 @@ export const LeaderboardExpIncrementTab = () => {
         />
       </HStack>
       <LeaderboardExpIncrementTabResult result={result} />
-      <PageButtonList
+      <LeaderboardPageButtonList
         currPageNumber={pageNumber}
         setPageNumber={setPageNumber}
         totalPageNumber={Math.ceil(totalPage / SIZE_PER_PAGE)}

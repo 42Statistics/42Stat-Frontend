@@ -1,5 +1,6 @@
 import { Clickable, HStack, Text } from '@components/common';
 import { useTheme } from '@emotion/react';
+import styled from '@emotion/styled';
 import { IoIosArrowBack } from '@react-icons/all-files/io/IoIosArrowBack';
 import { IoIosArrowForward } from '@react-icons/all-files/io/IoIosArrowForward';
 import { PageButton } from './PageButton';
@@ -8,16 +9,18 @@ type PageButtonListProps = {
   currPageNumber: number;
   setPageNumber: React.Dispatch<React.SetStateAction<number>>;
   totalPageNumber: number;
+  pagePerRow?: number;
 };
 
 export const PageButtonList = ({
   currPageNumber,
   setPageNumber,
   totalPageNumber,
+  pagePerRow = 10,
 }: PageButtonListProps) => {
   const theme = useTheme();
-  const start = Math.floor((currPageNumber - 1) / 10) * 10 + 1;
-  const end = Math.min(start + 9, totalPageNumber);
+  const start = Math.floor((currPageNumber - 1) / pagePerRow) * pagePerRow + 1;
+  const end = Math.min(start + pagePerRow - 1, totalPageNumber);
   const pageNumberList = Array.from(
     { length: end - start + 1 },
     (_, i) => start + i,
@@ -32,7 +35,7 @@ export const PageButtonList = ({
     if (currPageNumber === 1) {
       return;
     }
-    setPageNumber(start - 10);
+    setPageNumber(start - pagePerRow);
   };
 
   const handleClickForwardButton = () => {
@@ -48,7 +51,7 @@ export const PageButtonList = ({
   };
 
   return (
-    <HStack h="8rem" spacing="4rem">
+    <Layout>
       <Clickable
         onClick={handleClickStartButton}
         disabled={isStartButtonDisabled}
@@ -60,7 +63,7 @@ export const PageButtonList = ({
               : theme.colors.mono.black
           }
         >
-          처음으로
+          처음
         </Text>
       </Clickable>
       <HStack spacing="1.4rem">
@@ -105,9 +108,13 @@ export const PageButtonList = ({
               : theme.colors.mono.black
           }
         >
-          끝으로
+          끝
         </Text>
       </Clickable>
-    </HStack>
+    </Layout>
   );
 };
+
+const Layout = styled(HStack)`
+  gap: 2rem;
+`;

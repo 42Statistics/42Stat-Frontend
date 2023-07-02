@@ -11,10 +11,10 @@ export const TextDefault = ({ text, link }: TextDefaultProps) => {
     <>
       {link !== undefined ? (
         <Link to={link}>
-          <H3Text>{text}</H3Text>
+          <H3Text style={{ textAlign: 'center' }}>{text}</H3Text>
         </Link>
       ) : (
-        <H3Text>{text}</H3Text>
+        <H3Text style={{ textAlign: 'center' }}>{text}</H3Text>
       )}
     </>
   );

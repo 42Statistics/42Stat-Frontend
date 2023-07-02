@@ -1,12 +1,11 @@
 import { isNavBarOpenAtom } from '@atoms/isNavBarOpenAtom';
 import { userAtom } from '@atoms/userAtom';
-import { Avatar, Clickable, Overlay, VStack } from '@components/common';
+import { Avatar, Clickable, Overlay, Spacer, VStack } from '@components/common';
 import styled from '@emotion/styled';
 import { GiHamburgerMenu } from '@react-icons/all-files/gi/GiHamburgerMenu';
-import { ROUTES } from '@routes/ROUTES';
 import { useAtom, useAtomValue } from 'jotai';
 import { useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { DesktopNavBarLayout } from '../Desktop';
 import { NavBar } from '../shared/NavBar';
 import { TabletNavMenu } from './TabletNavMenu';
@@ -24,14 +23,14 @@ export const TabletNavBar = () => {
   return (
     <>
       <TabletNavBarLayout>
-        <VStack w="100%" h="100%" spacing="7rem">
+        <VStack w="100%" h="100%" spacing="4rem">
           <Clickable onClick={() => setIsNavBarOpen((cur) => !cur)}>
             <GiHamburgerMenu size="18px" />
           </Clickable>
-          <Link to={`${ROUTES.PROFILE_ROOT}/${user.login}`}>
-            <Avatar size="sm" src={user.imgUrl} />
-          </Link>
+          <div style={{ height: '7rem' }}></div>
           <TabletNavMenu />
+          <Spacer />
+          <Avatar size="sm" src={user.imgUrl} />
         </VStack>
       </TabletNavBarLayout>
       {isNavBarOpen && (

@@ -63,7 +63,7 @@ const LeaderBoardPage = () => {
             navigate(ROUTES.LEADERBOARD + '?tab=level');
           }}
         >
-          레벨 랭킹
+          레벨
         </Tab>
         <Tab
           selected={selectedTab === 'ExpIncrement'}

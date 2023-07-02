@@ -1,8 +1,11 @@
 import { DashboardContent } from '@components/templates/DashboardContent';
+import { useParams } from 'react-router-dom';
 
 export const DestinyUsers = () => {
-  const title = '운명의 장난 스코어';
-  const description = '평가에서 가장 자주 마주친 유저 랭킹';
+  const { username } = useParams() as { username: string };
+
+  const title = '인연 스코어';
+  const description = `${username}의 여행 동반자들`;
 
   return (
     <DashboardContent

@@ -26,7 +26,7 @@ export const FIND_PROJECT_PREVIEW = gql(/* GraphQL */ `
 
 export const useSearchBar = () => {
   const [input, setInput] = useState<string>('');
-  const debouncedInput = useDebounce(input, 100);
+  const debouncedInput = useDebounce(input, 250);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [

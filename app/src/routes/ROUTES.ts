@@ -9,4 +9,4 @@ export const ROUTES = {
   EVALLOG: '/evallog',
   LOGIN: '/login',
   LOGOUT: '/logout',
-};
+} as const;

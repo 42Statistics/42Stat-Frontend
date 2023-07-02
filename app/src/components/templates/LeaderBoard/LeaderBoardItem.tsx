@@ -13,6 +13,7 @@ import styled from '@emotion/styled';
 import { ROUTES } from '@routes/ROUTES';
 import { numberWithUnitFormatter } from '@utils/formatters';
 import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
+import { mq } from '@utils/responsive/mq';
 import { Link } from 'react-router-dom';
 
 type LeaderBoardItemProps = {
@@ -40,56 +41,46 @@ export const LeaderBoardItem = ({
   const color = getColor(rank, isMe);
 
   return (
-    <>
+    <Layout isMe={isMe}>
       <TabletAndAbove>
-        <TabletAndAboveLeaderBoardItemLayout isMe={isMe}>
-          <HStack w="100%" spacing="4rem">
-            <HStack w="5rem">
-              <H2MediumText color={color}>{rank}</H2MediumText>
-            </HStack>
-            <Avatar src={imgUrl} />
-            <Link to={`${ROUTES.PROFILE_ROOT}/${name}`}>
-              <H3MediumText color={color}>{name}</H3MediumText>
-            </Link>
-            <Spacer />
-            <H3MediumText color={color}>
-              {fixedNumber === undefined
-                ? numberWithUnitFormatter(value, unit)
-                : `${value.toFixed(2)}${unit}`}
-            </H3MediumText>
+        <HStack w="100%" spacing="4rem">
+          <HStack w="5rem">
+            <H2MediumText color={color}>{rank}</H2MediumText>
           </HStack>
-        </TabletAndAboveLeaderBoardItemLayout>
+          <Avatar src={imgUrl} />
+          <Link to={`${ROUTES.PROFILE_ROOT}/${name}`}>
+            <H3MediumText color={color}>{name}</H3MediumText>
+          </Link>
+          <Spacer />
+          <H3MediumText color={color}>
+            {fixedNumber === undefined
+              ? numberWithUnitFormatter(value, unit)
+              : `${value.toFixed(2)}${unit}`}
+          </H3MediumText>
+        </HStack>
       </TabletAndAbove>
       <Mobile>
-        <MobileLeaderBoardItemLayout isMe={isMe}>
-          <HStack w="100%" spacing="3rem">
-            <HStack w="2rem">
-              <BoldText color={color}>{rank}</BoldText>
-            </HStack>
-            <Avatar size="sm" src={imgUrl} />
-            <MediumText color={color}>{name}</MediumText>
-            <Spacer />
-            <MediumText color={color}>
-              {numberWithUnitFormatter(value, unit)}
-            </MediumText>
+        <HStack w="100%" spacing="3rem">
+          <HStack w="2rem">
+            <BoldText color={color}>{rank}</BoldText>
           </HStack>
-        </MobileLeaderBoardItemLayout>
+          <Avatar size="sm" src={imgUrl} />
+          <MediumText color={color}>{name}</MediumText>
+          <Spacer />
+          <MediumText color={color}>
+            {numberWithUnitFormatter(value, unit)}
+          </MediumText>
+        </HStack>
       </Mobile>
-    </>
+    </Layout>
   );
 };
 
-export const TabletAndAboveLeaderBoardItemLayout = styled.li<{ isMe: boolean }>`
+export const Layout = styled.li<{ isMe: boolean }>`
   width: 100%;
-  padding: 0.8rem 5rem;
-  border-radius: ${({ theme }) => theme.radius.sm};
-  background-color: ${({ isMe, theme }) =>
-    isMe && theme.colors.primary.default} !important; // FIXME: !important
-`;
-
-export const MobileLeaderBoardItemLayout = styled.li<{ isMe: boolean }>`
-  width: 100%;
-  padding: 0.5rem 2rem;
+  ${mq({
+    padding: ['0.8rem 2rem', '0.8rem 5rem', '0.8rem 5rem'],
+  })}
   border-radius: ${({ theme }) => theme.radius.sm};
   background-color: ${({ isMe, theme }) =>
     isMe && theme.colors.primary.default} !important; // FIXME: !important

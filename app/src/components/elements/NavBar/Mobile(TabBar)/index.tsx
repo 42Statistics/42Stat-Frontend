@@ -1,10 +1,13 @@
-import { HStack } from '@components/common';
+import { userAtom } from '@atoms/userAtom';
+import { Avatar, HStack } from '@components/common';
 import styled from '@emotion/styled';
+import { useAtomValue } from 'jotai';
 import { useNavRoutes } from '../hooks/useNavRoutes';
 import { TabItem } from './TabItem';
 
 export const TabBar = () => {
   const { NAV_ROUTES } = useNavRoutes();
+  const user = useAtomValue(userAtom);
 
   return (
     <TabBarLayout>
@@ -13,7 +16,7 @@ export const TabBar = () => {
         <TabItem route={NAV_ROUTES.PROFILE} />
         <TabItem route={NAV_ROUTES.LEADERBOARD} />
         <TabItem route={NAV_ROUTES.EVALLOG} />
-        <TabItem route={NAV_ROUTES.LOGOUT} />
+        <Avatar size="sm" src={user.imgUrl} />
       </HStack>
     </TabBarLayout>
   );
@@ -24,6 +27,6 @@ const TabBarLayout = styled.nav`
   bottom: 0;
   width: 100%;
   height: 6rem;
-  padding: 1.4rem 2rem;
+  padding: 1.4rem 2rem 6rem 2rem;
   background-color: ${({ theme }) => theme.colors.mono.white};
 `;

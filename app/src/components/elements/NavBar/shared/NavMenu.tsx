@@ -1,4 +1,4 @@
-import { Spacer, VStack } from '@components/common';
+import { VStack } from '@components/common';
 import { useNavRoutes } from '../hooks/useNavRoutes';
 import { NavItem } from './NavItem';
 
@@ -7,13 +7,11 @@ export const NavMenu = () => {
   const { NAV_ROUTES } = useNavRoutes();
 
   return (
-    <VStack as="ul" w="100%" h="100%" spacing="2rem">
+    <VStack as="ul" w="100%" spacing="2rem">
       <NavItem route={NAV_ROUTES.HOME} />
       <NavItem route={NAV_ROUTES.PROFILE} />
       <NavItem route={NAV_ROUTES.LEADERBOARD} />
       <NavItem route={NAV_ROUTES.EVALLOG} />
-      <Spacer />
-      <NavItem route={NAV_ROUTES.LOGOUT} />
     </VStack>
   );
 };

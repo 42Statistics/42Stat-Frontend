@@ -6,6 +6,8 @@ import {
   WhiteH2BoldText,
   WhiteText,
 } from '@components/common';
+import { ApolloErrorView } from '@components/elements/ApolloErrorView';
+import { ApolloNotFoundView } from '@components/elements/ApolloNotFoundView';
 import styled from '@emotion/styled';
 import { GET_HOME } from '@pages/HomePage/GET_HOME';
 import { getDayDiff } from '@utils/getDayDiff';
@@ -17,20 +19,21 @@ export const Hero = () => {
   const { loading, error, data } = useQuery(GET_HOME);
   if (loading)
     return (
-      <HeroLayout>
-        <Center>
-          <Loader />
-        </Center>
-      </HeroLayout>
+      <Layout>
+        <Loader />
+      </Layout>
     );
-  if (error || !data)
+  if (error)
     return (
-      <HeroLayout>
-        <VStack h="100%" align="start" spacing="1rem">
-          <WhiteH2BoldText>42Stat에 오신 것을 환영합니다 👋</WhiteH2BoldText>
-          <WhiteText>{getDailyProgrammingQuote()}</WhiteText>
-        </VStack>
-      </HeroLayout>
+      <Layout>
+        <ApolloErrorView message={error.message} />
+      </Layout>
+    );
+  if (!data)
+    return (
+      <Layout>
+        <ApolloNotFoundView />
+      </Layout>
     );
 
   const {
@@ -88,16 +91,16 @@ export const Hero = () => {
   };
 
   return (
-    <HeroLayout>
-      <VStack h="100%" align="start" spacing="1rem">
+    <Layout>
+      <VStack w="100%" h="100%" align="start" spacing="1rem">
         <WhiteH2BoldText>반가워요, {userPreview.login} 👋</WhiteH2BoldText>
         <WhiteText>{getIndividualizedMessage()}</WhiteText>
       </VStack>
-    </HeroLayout>
+    </Layout>
   );
 };
 
-const HeroLayout = styled.div`
+const Layout = styled(Center)`
   background-image: url('black-space.jpeg');
   background-size: cover;
   border-radius: ${({ theme }) => theme.radius.md};

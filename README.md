@@ -3,7 +3,7 @@
 ![42Stat Logo](./logo.svg)
 
 42Stat은 42서울의 교육생들을 위한 통계 서비스입니다.  
-Intra에 흩어져 있는 데이터를 모아 보여주는 일을 수행하고 있습니다.
+Intra에 흩어져 있는 데이터를 모아 보여주는 일을 수행하고 있습니다.  
 <https://stat.42seoul.kr>
 
 ## Tech Stack

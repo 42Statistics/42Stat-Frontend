@@ -50,14 +50,20 @@ export const Character = () => {
     const evalCountPercentile = 1 - evalCountRank.rank / TOTAL;
     const levelPercentile = 1 - levelRank.rank / TOTAL;
     const examOneshotRateValue =
-      (examOneshotRate.fields.find((field) => field.key === 'oneShot')?.value ??
-        0) / examOneshotRate.total;
+      examOneshotRate.total > 0
+        ? (examOneshotRate.fields.find((field) => field.key === 'oneShot')
+            ?.value ?? 0) / examOneshotRate.total
+        : 0;
     const projectOneshotRateValue =
-      (projectOneshotRate.fields.find((field) => field.key === 'oneShot')
-        ?.value ?? 0) / projectOneshotRate.total;
+      projectOneshotRate.total > 0
+        ? (projectOneshotRate.fields.find((field) => field.key === 'oneShot')
+            ?.value ?? 0) / projectOneshotRate.total
+        : 0;
     const outstandingRateValue =
-      (outstandingRate.fields.find((field) => field.key === 'outstanding')
-        ?.value ?? 0) / outstandingRate.total;
+      outstandingRate.total > 0
+        ? (outstandingRate.fields.find((field) => field.key === 'outstanding')
+            ?.value ?? 0) / outstandingRate.total
+        : 0;
 
     // TODO: 분명 수치가 부정확할 듯하다
     // Percentile 잴 때 0 수치들은 빼고 재야 한다

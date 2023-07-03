@@ -10,7 +10,7 @@ import { useInfiniteScroll } from '@utils/useInfiniteScroll';
 import { isEqual } from 'lodash-es';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { EvalLogSearchModal } from './EvalLogSearchModal/EvalLogSearchModal';
+import { EvalLogSearchDialog } from './EvalLogSearchDialog';
 import { EvalLogSearchResult } from './EvalLogSearchResult';
 import { EvalLogSearchTitle } from './EvalLogSearchTitle';
 
@@ -171,7 +171,7 @@ const EvalLogSearchPage = () => {
           infiniteScrollRef={ref}
         />
       </VStack>
-      <EvalLogSearchModal form={evalLogSearchForm} onSubmit={onSubmit} />
+      <EvalLogSearchDialog form={evalLogSearchForm} onSubmit={onSubmit} />
     </>
   );
 };

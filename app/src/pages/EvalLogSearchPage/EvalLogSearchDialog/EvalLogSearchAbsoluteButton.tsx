@@ -14,14 +14,14 @@ export const EvalLogSearchAbsoluteButton = ({
 
   return (
     <Clickable onClick={onClick}>
-      <SearchIconLayout>
+      <Layout>
         <MdSearch color={theme.colors.mono.white} size="20px" />
-      </SearchIconLayout>
+      </Layout>
     </Clickable>
   );
 };
 
-const SearchIconLayout = styled.div`
+const Layout = styled.div`
   position: fixed;
   bottom: 8rem;
   right: 5rem;
@@ -31,4 +31,9 @@ const SearchIconLayout = styled.div`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   z-index: ${({ theme }) => theme.zIndex.absoluteButton};
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
 `;

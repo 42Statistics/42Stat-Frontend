@@ -2,9 +2,9 @@ import type { EvalLogSearchModel } from '@/types/EvalLogSearchModel';
 import { Button, Input, Select } from '@components/common';
 import styled from '@emotion/styled';
 import { useForm } from 'react-hook-form';
-import type { EvalLogSearchModalProps } from './EvalLogSearchModal';
+import type { EvalLogSearchDialogProps } from '.';
 
-type EvalLogSearchModalViewProps = EvalLogSearchModalProps;
+type EvalLogSearchModalViewProps = EvalLogSearchDialogProps;
 
 export const EvalLogSearchForm = ({
   form,

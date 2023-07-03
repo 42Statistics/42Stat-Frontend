@@ -1,6 +1,6 @@
 import { TeamStatus } from '@/__generated__/graphql';
 import { Text } from '@components/common';
-import { getDayDiff } from '@utils/getDayDiff';
+import { getDateDiff } from '@utils/getDateDiff';
 
 type DateDiffWithStatusProps = {
   date: Date;
@@ -11,8 +11,7 @@ export const DateDiffWithStatus = ({
   date,
   status,
 }: DateDiffWithStatusProps) => {
-  const now = new Date();
-  const diff = getDayDiff(now, date);
+  const diff = Math.abs(getDateDiff(date));
 
   if (status === TeamStatus.Registered) {
     return <Text>{`${diff}일 전 등록`}</Text>;

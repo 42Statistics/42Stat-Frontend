@@ -22,14 +22,11 @@ export const TotalDuration = () => {
   if (!data) return <DashboardContentNotFound />;
 
   const { totalDuration } = data.getPersonalEval;
+  const [hour, minute] = [Math.floor(totalDuration / 60), totalDuration % 60];
 
   return (
     <DashboardContent title={title}>
-      <TextDefault
-        text={`${Math.floor(totalDuration / 60).toLocaleString()}시간 ${
-          totalDuration % 60
-        }분`}
-      />
+      <TextDefault text={`${hour}시간 ${minute}분`} />
     </DashboardContent>
   );
 };

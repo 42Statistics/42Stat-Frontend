@@ -10,7 +10,7 @@ import { ApolloErrorView } from '@components/elements/ApolloErrorView';
 import { ApolloNotFoundView } from '@components/elements/ApolloNotFoundView';
 import styled from '@emotion/styled';
 import { GET_HOME } from '@pages/HomePage/GET_HOME';
-import { getDayDiff } from '@utils/getDayDiff';
+import { getDateDiff } from '@utils/getDateDiff';
 import { getDailyProgrammingQuote } from './getDailyProgrammingQuote';
 
 export const Hero = () => {
@@ -54,16 +54,16 @@ export const Hero = () => {
       recentValidatedTeam != null &&
       recentValidatedTeam.lastEventTime != null
     ) {
-      const diff = getDayDiff(
-        new Date(recentValidatedTeam.lastEventTime),
+      const diff = getDateDiff(
         new Date(),
+        new Date(recentValidatedTeam.lastEventTime),
       );
       if (diff <= 2) {
         return `${diff}일 전에 ${recentValidatedTeam.projectPreview.name}를 통과하셨네요! 축하드려요 🎉`;
       }
     }
     if (blackholedAt != null) {
-      const diff = getDayDiff(new Date(), new Date(blackholedAt));
+      const diff = Math.abs(getDateDiff(new Date(blackholedAt)));
       if (diff <= 7) {
         return "DON'T PANIC! You can do it 💙";
       }
@@ -87,7 +87,7 @@ export const Hero = () => {
         return `대단해요! 주간 평가 횟수 랭킹 ${scoreRank}위를 차지했어요 🏅`;
       }
     }
-    return `${getDailyProgrammingQuote()}`;
+    return getDailyProgrammingQuote();
   };
 
   return (

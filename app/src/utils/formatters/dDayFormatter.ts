@@ -5,5 +5,5 @@ export const dDayFormatter = (value: number) => {
   if (value > 0) {
     return `D+${value}`;
   }
-  return `D${value}`;
+  return `D-${Math.abs(value)}`;
 };

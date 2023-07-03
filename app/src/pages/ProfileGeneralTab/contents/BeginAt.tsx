@@ -6,6 +6,8 @@ import {
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
+import { dDayFormatter } from '@utils/formatters';
+import { getDateDiff } from '@utils/getDateDiff';
 import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
 import { GET_PERSONAL_GENERAL_BY_LOGIN } from '../GET_PERSONAL_GENERAL_BY_LOGIN';
@@ -22,15 +24,13 @@ export const BeginAt = () => {
   if (!data) return <DashboardContentNotFound />;
 
   const { beginAt } = data.getPersonalGeneral;
-  const daysFromBegin = Math.floor(
-    (Date.now() - new Date(beginAt).getTime()) / 1000 / 60 / 60 / 24,
-  );
+  const diff = getDateDiff(new Date(), new Date(beginAt));
 
   return (
     <DashboardContent title={title}>
       <HStack spacing="1rem">
         <H3Text>{dayjs(beginAt).format('YYYY. MM. DD.')}</H3Text>
-        <Text>D+{daysFromBegin}</Text>
+        <Text>{dDayFormatter(diff)}</Text>
       </HStack>
     </DashboardContent>
   );

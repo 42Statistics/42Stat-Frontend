@@ -4,15 +4,15 @@ import { Modal } from '@components/common';
 import { EvalLogSearchAbsoluteButton } from './EvalLogSearchAbsoluteButton';
 import { EvalLogSearchForm } from './EvalLogSearchForm';
 
-export type EvalLogSearchModalProps = {
+export type EvalLogSearchDialogProps = {
   form: EvalLogSearchModel;
   onSubmit: (data: EvalLogSearchModel) => void;
 };
 
-export const EvalLogSearchModal = ({
+export const EvalLogSearchDialog = ({
   form,
   onSubmit,
-}: EvalLogSearchModalProps) => {
+}: EvalLogSearchDialogProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const onSubmitWrapper = (form: EvalLogSearchModel) => {

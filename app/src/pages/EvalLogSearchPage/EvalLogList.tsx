@@ -2,13 +2,13 @@ import { EvalLogEdge } from '@/__generated__/graphql';
 import { VStack } from '@components/common';
 import { EvalLogItem } from './EvalLogItem';
 
-export const EvalLogList = ({
-  evalLogEdges,
-}: {
+type EvalLogListProps = {
   evalLogEdges: EvalLogEdge[];
-}) => {
+};
+
+export const EvalLogList = ({ evalLogEdges }: EvalLogListProps) => {
   return (
-    <VStack as="ul" w="100%" h="100%" spacing="2rem">
+    <VStack as="ul" w="100%" spacing="2rem">
       {evalLogEdges.map(({ node }) => (
         <EvalLogItem key={node.id} element={node} />
       ))}

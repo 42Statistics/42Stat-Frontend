@@ -1,9 +1,9 @@
+import type { EvalLogSearchModel } from '@/types/EvalLogSearchModel';
 import { PrimaryBoldText, Text, VStack } from '@components/common';
 import { useTheme } from '@emotion/react';
-import { EvalLogSearchFormData } from '.';
 
 type EvalLogSearchTitleProps = {
-  form: EvalLogSearchFormData;
+  form: EvalLogSearchModel;
   totalCount: number;
 };
 
@@ -14,7 +14,7 @@ export const EvalLogSearchTitle = ({
   const theme = useTheme();
 
   return (
-    <VStack w="100%" align="start">
+    <VStack align="start">
       <PrimaryBoldText selectable>{`${
         form.corrector === '' ? 'Anyone' : form.corrector
       } → ${form.corrected === '' ? 'Anyone' : form.corrected} / ${

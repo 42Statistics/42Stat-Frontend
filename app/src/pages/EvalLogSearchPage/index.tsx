@@ -1,6 +1,5 @@
 import { gql } from '@/__generated__';
 import { EvalLogEdge, EvalLogSortOrder } from '@/__generated__/graphql';
-import { useDisclosure } from '@/hooks/useDisclosure';
 import type { EvalLogSearchModel } from '@/types/EvalLogSearchModel';
 import { useLazyQuery } from '@apollo/client';
 import { VStack } from '@components/common';
@@ -10,11 +9,9 @@ import { isDefined } from '@utils/isDefined';
 import { useInfiniteScroll } from '@utils/useInfiniteScroll';
 import { isEqual } from 'lodash-es';
 import { useEffect, useState } from 'react';
-import { SubmitHandler } from 'react-hook-form';
 import { useSearchParams } from 'react-router-dom';
-import { EvalLogSearchAbsoluteButton } from './EvalLogSearchAbsoluteButton';
-import { EvalLogSearchDetail } from './EvalLogSearchDetail';
 import { EvalLogSearchModal } from './EvalLogSearchModal';
+import { EvalLogSearchResult } from './EvalLogSearchResult';
 import { EvalLogSearchTitle } from './EvalLogSearchTitle';
 
 const GET_EVAL_LOGS = gql(/* GraphQL */ `
@@ -83,55 +80,51 @@ const GET_EVAL_LOGS = gql(/* GraphQL */ `
 `);
 
 const EvalLogSearchPage = () => {
-  const RESULT_PER_PAGE = 10;
-  const [end, setEnd] = useState<boolean>(false);
-  const [search, { data, loading, error }] = useLazyQuery(GET_EVAL_LOGS);
   const [searchParams] = useSearchParams();
-  const [form, setForm] = useState<EvalLogSearchModel>({
-    projectName: searchParams.get('projectName') ?? '',
-    flag: searchParams.get('flag') === 'outstanding' ? 'outstanding' : 'all',
-    corrector: searchParams.get('corrector') ?? '',
-    corrected: searchParams.get('corrected') ?? '',
-    sortOrder: searchParams.get('sortOrder') === 'asc' ? 'asc' : 'desc',
-  });
+  const [evalLogSearchForm, setEvalLogSearchForm] =
+    useState<EvalLogSearchModel>({
+      projectName: searchParams.get('projectName') ?? '',
+      flag: searchParams.get('flag') === 'outstanding' ? 'outstanding' : 'all',
+      corrector: searchParams.get('corrector') ?? '',
+      corrected: searchParams.get('corrected') ?? '',
+      sortOrder: searchParams.get('sortOrder') === 'asc' ? 'asc' : 'desc',
+    });
+
+  const RESULT_PER_PAGE = 10;
+  const [search, { loading, error, data }] = useLazyQuery(GET_EVAL_LOGS);
   const [evalLogEdges, setEvalLogEdges] = useState<EvalLogEdge[]>([]);
   const [endCursor, setEndCursor] = useState<string>('');
+  const [end, setEnd] = useState<boolean>(false);
+  const { ref, isVisible } = useInfiniteScroll();
 
-  const onSubmit: SubmitHandler<EvalLogSearchModel> = (newForm) => {
-    if (isEqual(newForm, form)) {
-      onClose();
+  const onSubmit = (form: EvalLogSearchModel) => {
+    if (isEqual(form, evalLogSearchForm)) {
       return;
     }
     setEvalLogEdges([]);
-    setForm(newForm);
+    setEvalLogSearchForm(form);
     search({
       variables: {
         after: '',
         first: RESULT_PER_PAGE,
-        projectName: newForm.projectName,
-        outstandingOnly: newForm.flag === 'outstanding',
-        corrector: newForm.corrector,
-        corrected: newForm.corrected,
+        projectName: form.projectName,
+        outstandingOnly: form.flag === 'outstanding',
+        corrector: form.corrector,
+        corrected: form.corrected,
         sortOrder:
-          newForm.sortOrder === 'desc'
+          form.sortOrder === 'desc'
             ? EvalLogSortOrder.BeginAtDesc
             : EvalLogSortOrder.BeginAtAsc,
       },
     });
     setEndCursor('');
     setEnd(false);
-    onClose();
   };
-
-  const { ref, isVisible } = useInfiniteScroll();
-
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
     if (!data) {
       return;
     }
-
     const { edges, pageInfo } = data.getEvalLogs;
     if (pageInfo != null && !pageInfo.hasNextPage) {
       setEnd(true);
@@ -151,34 +144,26 @@ const EvalLogSearchPage = () => {
       variables: {
         after: endCursor,
         first: RESULT_PER_PAGE,
-        projectName: form.projectName,
-        outstandingOnly: form.flag === 'outstanding',
-        corrector: form.corrector,
-        corrected: form.corrected,
+        projectName: evalLogSearchForm.projectName,
+        outstandingOnly: evalLogSearchForm.flag === 'outstanding',
+        corrector: evalLogSearchForm.corrector,
+        corrected: evalLogSearchForm.corrected,
         sortOrder:
-          form.sortOrder === 'desc'
+          evalLogSearchForm.sortOrder === 'desc'
             ? EvalLogSortOrder.BeginAtDesc
             : EvalLogSortOrder.BeginAtAsc,
       },
     });
-  }, [isVisible, loading, form, search, endCursor]);
+  }, [isVisible, loading, evalLogSearchForm, search, endCursor]);
 
-  // TODO: Headless Modal
   return (
     <>
-      <EvalLogSearchAbsoluteButton onClick={onOpen} />
-      <EvalLogSearchModal
-        isOpen={isOpen}
-        onClose={onClose}
-        form={form}
-        onSubmit={onSubmit}
-      />
-      <VStack w="100%" spacing="2rem">
+      <VStack w="100%" align="start" spacing="2rem">
         <EvalLogSearchTitle
-          form={form}
+          form={evalLogSearchForm}
           totalCount={data?.getEvalLogs.pageInfo?.totalCount ?? 0}
         />
-        <EvalLogSearchDetail
+        <EvalLogSearchResult
           evalLogEdges={evalLogEdges}
           end={end}
           loading={loading}
@@ -186,6 +171,7 @@ const EvalLogSearchPage = () => {
           infiniteScrollRef={ref}
         />
       </VStack>
+      <EvalLogSearchModal form={evalLogSearchForm} onSubmit={onSubmit} />
     </>
   );
 };

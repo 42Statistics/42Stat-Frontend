@@ -7,7 +7,7 @@ import { useTheme } from '@emotion/react';
 import React from 'react';
 import { EvalLogList } from './EvalLogList';
 
-type EvalLogSearchDetailProps = {
+type EvalLogSearchResultProps = {
   evalLogEdges: EvalLogEdge[];
   end: boolean;
   loading: boolean;
@@ -15,13 +15,13 @@ type EvalLogSearchDetailProps = {
   infiniteScrollRef: React.MutableRefObject<HTMLDivElement | null>;
 };
 
-export const EvalLogSearchDetail = ({
+export const EvalLogSearchResult = ({
   evalLogEdges,
   end,
   loading,
   error,
   infiniteScrollRef,
-}: EvalLogSearchDetailProps) => {
+}: EvalLogSearchResultProps) => {
   const theme = useTheme();
 
   if (error) {

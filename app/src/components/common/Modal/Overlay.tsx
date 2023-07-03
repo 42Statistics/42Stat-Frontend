@@ -5,10 +5,10 @@ type OverlayProps = {
 } & React.PropsWithChildren;
 
 export const Overlay = ({ onClick, children }: OverlayProps) => {
-  return <OverlayLayout onClick={onClick}>{children}</OverlayLayout>;
+  return <StyledOverlay onClick={onClick}>{children}</StyledOverlay>;
 };
 
-const OverlayLayout = styled.div`
+const StyledOverlay = styled.div`
   position: fixed;
   top: 0;
   left: 0;

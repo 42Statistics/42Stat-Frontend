@@ -1,15 +1,6 @@
 import type { ModalType } from '@/types/Modal';
-import { Center, Overlay } from '@components/common';
-import styled from '@emotion/styled';
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
-
-export const ModalView = styled.div`
-  display: flex;
-  padding: 4rem;
-  border-radius: ${({ theme }) => theme.radius.md};
-  background-color: ${({ theme }) => theme.colors.mono.white};
-`;
 
 type ModalProps = ModalType & React.PropsWithChildren;
 
@@ -31,7 +22,7 @@ const allowScroll = (prevScrollY: number) => {
   window.scrollTo(0, prevScrollY);
 };
 
-export const Modal = ({ isOpen, onClose, children }: ModalProps) => {
+export const Modal = ({ isOpen, children }: ModalProps) => {
   useEffect(() => {
     if (isOpen) {
       const prevScrollY = preventScroll();
@@ -44,13 +35,7 @@ export const Modal = ({ isOpen, onClose, children }: ModalProps) => {
       {isOpen ? (
         <>
           {createPortal(
-            <Overlay onClick={onClose}>
-              <Center>
-                <ModalView role="dialog" onClick={(e) => e.stopPropagation()}>
-                  {children}
-                </ModalView>
-              </Center>
-            </Overlay>,
+            children,
             document.getElementById('modal') as HTMLElement,
           )}
         </>

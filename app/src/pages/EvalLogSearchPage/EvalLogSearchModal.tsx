@@ -1,77 +1,31 @@
+import { useDisclosure } from '@/hooks/useDisclosure';
 import type { EvalLogSearchModel } from '@/types/EvalLogSearchModel';
-import type { ModalType } from '@/types/Modal';
-import {
-  Button,
-  Center,
-  HStack,
-  Input,
-  Modal,
-  Select,
-  Text,
-  VStack,
-} from '@components/common';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { Modal } from '@components/common';
+import { EvalLogSearchAbsoluteButton } from './EvalLogSearchAbsoluteButton';
+import { EvalLogSearchForm } from './EvalLogSearchForm';
 
-type EvalLogSearchModalProps = ModalType & {
+export type EvalLogSearchModalProps = {
   form: EvalLogSearchModel;
-  onSubmit: SubmitHandler<EvalLogSearchModel>;
+  onSubmit: (data: EvalLogSearchModel) => void;
 };
 
 export const EvalLogSearchModal = ({
-  isOpen,
-  onClose,
   form,
   onSubmit,
 }: EvalLogSearchModalProps) => {
-  const { register, handleSubmit } = useForm<EvalLogSearchModel>({
-    defaultValues: form,
-  });
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const onSubmitWrapper = (form: EvalLogSearchModel) => {
+    onSubmit(form);
+    onClose();
+  };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <VStack spacing="6rem">
-          <VStack as="ul" w="100%" spacing="3rem">
-            <HStack as="li" spacing="3rem">
-              <Center w="5rem">
-                <Text>과제명</Text>
-              </Center>
-              <Input {...register('projectName')} />
-            </HStack>
-            <HStack as="li" spacing="3rem">
-              <Center w="5rem">
-                <Text>From</Text>
-              </Center>
-              <Input {...register('corrector')} />
-            </HStack>
-            <HStack as="li" spacing="3rem">
-              <Center w="5rem">
-                <Text>To</Text>
-              </Center>
-              <Input {...register('corrected')} />
-            </HStack>
-            <HStack as="li" spacing="3rem">
-              <Center w="5rem">
-                <Text>플래그</Text>
-              </Center>
-              <Select {...register('flag')} style={{ width: '150px' }}>
-                <option value="all">전체</option>
-                <option value="outstanding">Outstanding만</option>
-              </Select>
-            </HStack>
-            <HStack as="li" spacing="3rem">
-              <Center w="5rem">
-                <Text>정렬</Text>
-              </Center>
-              <Select {...register('sortOrder')} style={{ width: '150px' }}>
-                <option value="desc">최신순</option>
-                <option value="asc">오래된순</option>
-              </Select>
-            </HStack>
-          </VStack>
-          <Button type="submit">검색하기</Button>
-        </VStack>
-      </form>
-    </Modal>
+    <>
+      <EvalLogSearchAbsoluteButton onClick={onOpen} />
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <EvalLogSearchForm form={form} onSubmit={onSubmitWrapper} />
+      </Modal>
+    </>
   );
 };

@@ -9,7 +9,7 @@ import { useSearchBar } from '../hooks/useSearchBar';
 import { MobileSearchInput } from './MobileSearchInput';
 import { MobileSearchResult } from './MobileSearchResult';
 
-export const SearchModal = ({ isOpen, toggle }: ModalType) => {
+export const SearchModal = ({ isOpen, onClose }: ModalType) => {
   const {
     setInput,
     debouncedInput,
@@ -36,19 +36,19 @@ export const SearchModal = ({ isOpen, toggle }: ModalType) => {
   }, [debouncedInput, searchUser, searchProject]);
 
   const handleUserSubmit = (name: string) => {
-    toggle();
+    onClose();
     resetInput();
     navigate(`${ROUTES.PROFILE_ROOT}/${name}`);
   };
 
   const handleProjectSubmit = (name: string) => {
-    toggle();
+    onClose();
     resetInput();
     navigate(`${ROUTES.PROJECT_ROOT}/${name}`);
   };
 
   const handleClickSearchBtn = () => {
-    toggle();
+    onClose();
     if (users.length === 0) {
       if (projects.length === 0) {
         return;
@@ -59,12 +59,12 @@ export const SearchModal = ({ isOpen, toggle }: ModalType) => {
   };
 
   return (
-    <Modal isOpen={isOpen} toggle={toggle}>
+    <Modal isOpen={isOpen} onClose={onClose}>
       <SearchModalLayout>
         <MobileSearchInput
           inputRef={inputRef}
           setInput={setInput}
-          toggle={toggle}
+          onClose={onClose}
           onClickSearchBtn={handleClickSearchBtn}
         />
         {isPreviewDisplaying ? (

@@ -1,5 +1,7 @@
 import { gql } from '@/__generated__';
 import { EvalLogEdge, EvalLogSortOrder } from '@/__generated__/graphql';
+import { useDisclosure } from '@/hooks/useDisclosure';
+import type { EvalLogSearchModel } from '@/types/EvalLogSearchModel';
 import { useLazyQuery } from '@apollo/client';
 import { VStack } from '@components/common';
 import { Seo } from '@components/elements/Seo';
@@ -7,23 +9,14 @@ import { withHead } from '@hoc/withHead';
 import { isDefined } from '@utils/isDefined';
 import { useInfiniteScroll } from '@utils/useInfiniteScroll';
 import { isEqual } from 'lodash-es';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { useSearchParams } from 'react-router-dom';
-import { EvalLogSearchAbsoluteBtn } from './EvalLogSearchAbsoluteBtn';
+import { EvalLogSearchAbsoluteButton } from './EvalLogSearchAbsoluteButton';
 import { EvalLogSearchDetail } from './EvalLogSearchDetail';
 import { EvalLogSearchModal } from './EvalLogSearchModal';
 import { EvalLogSearchTitle } from './EvalLogSearchTitle';
 
-export type EvalLogSearchFormData = {
-  projectName: string;
-  flag: 'all' | 'outstanding';
-  corrector: string;
-  corrected: string;
-  sortOrder: 'asc' | 'desc';
-};
-
-//TODO: 실제로는 안쓰는 필드들은 받아오지 않게 나중에 완성하고 수정필요
 const GET_EVAL_LOGS = gql(/* GraphQL */ `
   query GetEvalLogs(
     $after: String
@@ -94,7 +87,7 @@ const EvalLogSearchPage = () => {
   const [end, setEnd] = useState<boolean>(false);
   const [search, { data, loading, error }] = useLazyQuery(GET_EVAL_LOGS);
   const [searchParams] = useSearchParams();
-  const [form, setForm] = useState<EvalLogSearchFormData>({
+  const [form, setForm] = useState<EvalLogSearchModel>({
     projectName: searchParams.get('projectName') ?? '',
     flag: searchParams.get('flag') === 'outstanding' ? 'outstanding' : 'all',
     corrector: searchParams.get('corrector') ?? '',
@@ -104,9 +97,9 @@ const EvalLogSearchPage = () => {
   const [evalLogEdges, setEvalLogEdges] = useState<EvalLogEdge[]>([]);
   const [endCursor, setEndCursor] = useState<string>('');
 
-  const onSubmit: SubmitHandler<EvalLogSearchFormData> = (newForm) => {
+  const onSubmit: SubmitHandler<EvalLogSearchModel> = (newForm) => {
     if (isEqual(newForm, form)) {
-      toggleModal();
+      onClose();
       return;
     }
     setEvalLogEdges([]);
@@ -127,13 +120,12 @@ const EvalLogSearchPage = () => {
     });
     setEndCursor('');
     setEnd(false);
-    toggleModal();
+    onClose();
   };
 
   const { ref, isVisible } = useInfiniteScroll();
 
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const toggleModal = useCallback(() => setIsModalOpen((cur) => !cur), []);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
     if (!data) {
@@ -174,10 +166,10 @@ const EvalLogSearchPage = () => {
   // TODO: Headless Modal
   return (
     <>
-      <EvalLogSearchAbsoluteBtn toggleModal={toggleModal} />
+      <EvalLogSearchAbsoluteButton onClick={onOpen} />
       <EvalLogSearchModal
-        isOpen={isModalOpen}
-        toggle={toggleModal}
+        isOpen={isOpen}
+        onClose={onClose}
         form={form}
         onSubmit={onSubmit}
       />

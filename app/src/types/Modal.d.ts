@@ -1,4 +1,4 @@
 export type ModalType = {
   isOpen: boolean;
-  toggle: () => void;
+  onClose: () => void;
 };

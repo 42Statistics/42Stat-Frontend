@@ -3,15 +3,17 @@ import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { MdSearch } from '@react-icons/all-files/md/MdSearch';
 
-export const EvalLogSearchAbsoluteBtn = ({
-  toggleModal,
-}: {
-  toggleModal: () => void;
-}) => {
+type EvalLogSearchAbsoluteButtonProps = {
+  onClick: () => void;
+};
+
+export const EvalLogSearchAbsoluteButton = ({
+  onClick,
+}: EvalLogSearchAbsoluteButtonProps) => {
   const theme = useTheme();
 
   return (
-    <Clickable onClick={toggleModal}>
+    <Clickable onClick={onClick}>
       <SearchIconLayout>
         <MdSearch color={theme.colors.mono.white} size="20px" />
       </SearchIconLayout>

@@ -2,7 +2,7 @@ import { gql } from '@/__generated__';
 import { DateTemplate } from '@/__generated__/graphql';
 import { useLazyQuery } from '@apollo/client';
 import { HStack, SegmentedControl, VStack } from '@components/common';
-import { useSegmentedControl } from '@utils/useSegmentedControl';
+import { useSegmentedControl } from '@/hooks/useSegmentedControl';
 import { useEffect, useState } from 'react';
 import { LeaderboardCoalitionScoreTabResult } from './LeaderboardCoalitionScoreTabResult';
 import { LeaderboardPageButtonList } from './LeaderboardPageButtonList';

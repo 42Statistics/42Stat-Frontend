@@ -1,12 +1,12 @@
 import { gql } from '@/__generated__';
 import { EvalLogEdge, EvalLogSortOrder } from '@/__generated__/graphql';
+import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';
 import type { EvalLogSearchModel } from '@/types/EvalLogSearchModel';
 import { useLazyQuery } from '@apollo/client';
 import { VStack } from '@components/common';
 import { Seo } from '@components/elements/Seo';
 import { withHead } from '@hoc/withHead';
 import { isDefined } from '@utils/isDefined';
-import { useInfiniteScroll } from '@utils/useInfiniteScroll';
 import { isEqual } from 'lodash-es';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';

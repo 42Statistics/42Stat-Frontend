@@ -1,8 +1,8 @@
 import { useDisclosure } from '@/hooks/useDisclosure';
 import type { EvalLogSearchModel } from '@/types/EvalLogSearchModel';
-import { Modal } from '@components/common';
+import { Dialog } from '@components/common/Dialog';
 import { EvalLogSearchAbsoluteButton } from './EvalLogSearchAbsoluteButton';
-import { EvalLogSearchForm } from './EvalLogSearchForm';
+import { EvalLogSearchDialogView } from './EvalLogSearchDialogView';
 
 export type EvalLogSearchDialogProps = {
   form: EvalLogSearchModel;
@@ -23,9 +23,9 @@ export const EvalLogSearchDialog = ({
   return (
     <>
       <EvalLogSearchAbsoluteButton onClick={onOpen} />
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <EvalLogSearchForm form={form} onSubmit={onSubmitWrapper} />
-      </Modal>
+      <Dialog isOpen={isOpen} onClose={onClose}>
+        <EvalLogSearchDialogView form={form} onSubmit={onSubmitWrapper} />
+      </Dialog>
     </>
   );
 };

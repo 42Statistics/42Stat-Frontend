@@ -1,6 +1,6 @@
-import marvin from '@/assets/marvin-depressed.gif';
 import { H3Text, Image, VStack } from '@/components/common';
 import { DashboardContent } from '@/components/templates/DashboardContent';
+import { getPokemonImageUrl } from '@/services/pokeapi/getPokemonImageUrl';
 import { useQuery } from '@apollo/client';
 import {
   DashboardContentBadRequest,
@@ -8,104 +8,105 @@ import {
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { GET_PERSONAL_GENERAL_BY_LOGIN } from '@pages/ProfileGeneralTab/GET_PERSONAL_GENERAL_BY_LOGIN';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { POKEMON, PokemonStoreItem } from './preset/POKEMON';
+
+type CharacterType = {
+  name: string; // Korean
+  imageUrl: string;
+};
 
 export const Character = () => {
   const { username } = useParams() as { username: string };
 
+  const [pokemonStoreItem, setPokemonStoreItem] =
+    useState<PokemonStoreItem | null>(null);
+  const [character, setCharacter] = useState<CharacterType | null>(null);
   const title = '이 유저를 캐릭터로 표현한다면?';
   const description = '과제 점수, 레벨 증가, 접속 시간, 평가 횟수 기준';
-  const [character, setCharacter] = useState<string>('마빈');
 
   const { loading, error, data } = useQuery(GET_PERSONAL_GENERAL_BY_LOGIN, {
     variables: { login: username },
   });
 
-  // const [pokeImg, setPokeImg] = useState(
-  //   'https://data1.pokemonkorea.co.kr/newdata/pokedex/full/006601.png',
-  // );
-  // const [pokeName, setPokeName] = useState('unown');
+  useEffect(() => {
+    if (!data || !data.getPersonalGeneral.character) {
+      return;
+    }
+    const {
+      effort: { logtimeRank, evalCountRank },
+      talent: {
+        levelRank,
+        examOneshotRate,
+        projectOneshotRate,
+        outstandingRate,
+      },
+    } = data.getPersonalGeneral.character;
 
-  // /**
-  //  *재능값을 구하는 구하는 로직
-  //  * @returns 0~6 사이의 재능 값
-  //  */
-  // const getX = () => {
-  //   return 1;
-  // };
+    const TOTAL = 2350;
 
-  // /**
-  //  *노력값을 구하는 로직
-  //  * @returns 0~6 사이의 노력 값
-  //  */
-  // const getY = () => {
-  //   return 2;
-  // };
+    const logtimePercentile = 1 - logtimeRank.rank / TOTAL;
+    const evalCountPercentile = 1 - evalCountRank.rank / TOTAL;
+    const levelPercentile = 1 - levelRank.rank / TOTAL;
+    const examOneshotRateValue =
+      (examOneshotRate.fields.find((field) => field.key === 'oneShot')?.value ??
+        0) / examOneshotRate.total;
+    const projectOneshotRateValue =
+      (projectOneshotRate.fields.find((field) => field.key === 'oneShot')
+        ?.value ?? 0) / projectOneshotRate.total;
+    const outstandingRateValue =
+      (outstandingRate.fields.find((field) => field.key === 'outstanding')
+        ?.value ?? 0) / outstandingRate.total;
 
-  // useEffect(() => {
-  //   // 인덱싱을 위해 반올림 처리
-  //   const y = Math.round(getY());
-  //   const x = Math.round(getX());
-  //   let queryName = pokemonArray[y][x].toLowerCase();
+    // TODO: 분명 수치가 부정확할 듯하다
+    // Percentile 잴 때 0 수치들은 빼고 재야 한다
+    // 재능 지표에 동일 기수 대비 얼마나 빠른지에 대한 수치가 포함되어야 한다
+    // 지표를 여러개 가져다 놓고, 지표에 따른 유저 분포를 보면서 튜닝해야 할듯
+    const effortPoint =
+      levelPercentile * 0.3 +
+      logtimePercentile * 0.4 +
+      evalCountPercentile * 0.3;
+    const talentPoint =
+      levelPercentile * 0.3 +
+      examOneshotRateValue * 0.2 +
+      projectOneshotRateValue * 0.3 +
+      outstandingRateValue * 0.2;
 
-  //   // 스타팅 일 경우 건곤감리에 따라 다른 포켓몬 설정
-  //   if (data) {
-  //     const { name: coalition } = data.getPersonalGeneral.userProfile.coalition;
-  //     if (queryName === 'starting') {
-  //       switch (coalition) {
-  //         case 'Gun':
-  //           queryName = 'Pikachu';
-  //           break;
-  //         case 'Gon':
-  //           queryName = 'Bulbasaur';
-  //           break;
-  //         case 'Gam':
-  //           queryName = 'Squirtle';
-  //           break;
-  //         case 'Lee':
-  //           queryName = 'Charmander';
-  //           break;
-  //         default:
-  //           queryName = 'unown';
-  //       }
-  //     }
-  //   }
+    const effortIndex = Math.round(effortPoint * (POKEMON.length - 1));
+    const talentIndex = Math.round(talentPoint * (POKEMON[0].length - 1));
 
-  //   const fetchURL = 'https://pokeapi.co/api/v2/pokemon/' + queryName;
+    setPokemonStoreItem(POKEMON[effortIndex][talentIndex]);
+  }, [data]);
 
-  //   fetch(fetchURL)
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       const tmp = data.sprites.other['official-artwork'];
-  //       const name = data.name;
-  //       const { front_default, front_shiny } = tmp;
-  //       /**
-  //        * username 첫글자가 포켓몬 이름에 포함되어있으면 이로치
-  //        */
-  //       if (pokeName.includes(username[0])) {
-  //         setPokeImg(front_shiny);
-  //         setPokeName('✨' + name + '✨');
-  //       } else {
-  //         setPokeImg(front_default);
-  //         setPokeName(name);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log('데이터를 가져오는 중에 오류가 발생했습니다:', error);
-  //     });
-  // }, [pokeName, username, data]);
+  useEffect(() => {
+    const fetchCharacterImageUrl = async () => {
+      if (pokemonStoreItem === null) {
+        return;
+      }
+      const pokemonImageUrl = await getPokemonImageUrl(pokemonStoreItem.name);
+      setCharacter({
+        name: pokemonStoreItem.korean,
+        imageUrl: pokemonImageUrl,
+      });
+    };
+    fetchCharacterImageUrl();
+  }, [pokemonStoreItem]);
 
   if (loading) return <DashboardContentLoading />;
   if (error) return <DashboardContentBadRequest message={error.message} />;
-  if (!data) return <DashboardContentNotFound />;
+  // TODO: character === undefined 가능성 문의
+  if (!data || !data.getPersonalGeneral.character)
+    return <DashboardContentNotFound />;
 
   return (
     <DashboardContent title={title} description={description}>
-      <VStack spacing="3rem">
-        <Image width="200px" src={marvin} />
-        <H3Text>{character}</H3Text>
-      </VStack>
+      {character !== null && (
+        <VStack spacing="3rem">
+          <Image width="50%" src={character.imageUrl} />
+          <H3Text>{character.name}</H3Text>
+        </VStack>
+      )}
     </DashboardContent>
   );
 };

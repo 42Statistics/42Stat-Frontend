@@ -4,18 +4,18 @@ import styled from '@emotion/styled';
 import { useForm } from 'react-hook-form';
 import type { EvalLogSearchDialogProps } from '.';
 
-type EvalLogSearchModalViewProps = EvalLogSearchDialogProps;
+type EvalLogSearchDialogViewProps = EvalLogSearchDialogProps;
 
-export const EvalLogSearchForm = ({
+export const EvalLogSearchDialogView = ({
   form,
   onSubmit,
-}: EvalLogSearchModalViewProps) => {
+}: EvalLogSearchDialogViewProps) => {
   const { register, handleSubmit } = useForm<EvalLogSearchModel>({
     defaultValues: form,
   });
 
   return (
-    <StyledEvalLogSearchForm onSubmit={handleSubmit(onSubmit)}>
+    <EvalLogSearchForm onSubmit={handleSubmit(onSubmit)}>
       <ul>
         <li>
           <label htmlFor="projectName">과제명</label>
@@ -45,11 +45,11 @@ export const EvalLogSearchForm = ({
         </li>
       </ul>
       <Button type="submit">검색하기</Button>
-    </StyledEvalLogSearchForm>
+    </EvalLogSearchForm>
   );
 };
 
-const StyledEvalLogSearchForm = styled.form`
+const EvalLogSearchForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;

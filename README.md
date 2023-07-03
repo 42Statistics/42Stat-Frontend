@@ -1,9 +1,10 @@
-# 42Stat Frontend 🚀
+# 42Stat Frontend
 
-![42Stat Logo](./logo.svg)
+안녕하세요, 42Stat입니다.
 
 42Stat은 42서울의 교육생들을 위한 통계 서비스입니다.  
-Intra에 흩어져 있는 데이터를 모아 보여주는 일을 수행하고 있습니다.  
+Intra에 흩어져 있는 데이터를 모아 보여주는 일을 수행하고 있습니다.
+
 <https://stat.42seoul.kr>
 
 ## Tech Stack
@@ -17,6 +18,5 @@ Intra에 흩어져 있는 데이터를 모아 보여주는 일을 수행하고 �
 - **Vite**
 - **Pnpm**
 - **Prettier** & **Eslint**
-- **Docker Compose**
 - **Github Actions**
 - 자세한 내용은 `package.json`을 참고해주세요.

@@ -1,22 +1,22 @@
+import { useDisclosure } from '@/hooks/useDisclosure';
 import { Clickable, Input } from '@components/common';
 import { MdSearch } from '@react-icons/all-files/md/MdSearch';
-import { useCallback, useState } from 'react';
 import { SearchModal } from './SearchModal';
 
 // TODO: SearchBar 추상화
 export const MobileSearchBar = () => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const toggleModal = useCallback(() => setIsModalOpen((cur) => !cur), []);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <>
-      <Clickable onClick={toggleModal}>
+      <Clickable onClick={onOpen}>
         <Input
           leftElement={<MdSearch id="search-icon" size="24px" />}
           placeholder="Search..."
+          disabled
         />
       </Clickable>
-      <SearchModal isOpen={isModalOpen} toggle={toggleModal} />
+      <SearchModal isOpen={isOpen} onClose={onClose} />
     </>
   );
 };

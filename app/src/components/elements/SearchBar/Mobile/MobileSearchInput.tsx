@@ -5,19 +5,19 @@ import { MdSearch } from '@react-icons/all-files/md/MdSearch';
 type MobileSearchInputProps = {
   inputRef: React.RefObject<HTMLInputElement>;
   setInput: (input: string) => void;
-  toggle: () => void;
+  onClose: () => void;
   onClickSearchBtn: () => void;
 };
 
 export const MobileSearchInput = ({
   inputRef,
   setInput,
-  toggle,
+  onClose,
   onClickSearchBtn,
 }: MobileSearchInputProps) => {
   return (
     <HStack w="100%" spacing="2rem">
-      <Clickable onClick={toggle}>
+      <Clickable onClick={onClose}>
         <MdArrowBack size="24px" />
       </Clickable>
       <Writable

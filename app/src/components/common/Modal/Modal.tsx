@@ -31,7 +31,7 @@ const allowScroll = (prevScrollY: number) => {
   window.scrollTo(0, prevScrollY);
 };
 
-export const Modal = ({ isOpen, toggle, children }: ModalProps) => {
+export const Modal = ({ isOpen, onClose, children }: ModalProps) => {
   useEffect(() => {
     if (isOpen) {
       const prevScrollY = preventScroll();
@@ -44,7 +44,7 @@ export const Modal = ({ isOpen, toggle, children }: ModalProps) => {
       {isOpen ? (
         <>
           {createPortal(
-            <Overlay onClick={toggle}>
+            <Overlay onClick={onClose}>
               <Center>
                 <ModalView role="dialog" onClick={(e) => e.stopPropagation()}>
                   {children}

@@ -1,3 +1,5 @@
+import type { EvalLogSearchModel } from '@/types/EvalLogSearchModel';
+import type { ModalType } from '@/types/Modal';
 import {
   Button,
   Center,
@@ -8,27 +10,25 @@ import {
   Text,
   VStack,
 } from '@components/common';
-import type { ModalType } from '@/types/Modal';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { EvalLogSearchFormData } from '.';
 
 type EvalLogSearchModalProps = ModalType & {
-  form: EvalLogSearchFormData;
-  onSubmit: SubmitHandler<EvalLogSearchFormData>;
+  form: EvalLogSearchModel;
+  onSubmit: SubmitHandler<EvalLogSearchModel>;
 };
 
 export const EvalLogSearchModal = ({
   isOpen,
-  toggle,
+  onClose,
   form,
   onSubmit,
 }: EvalLogSearchModalProps) => {
-  const { register, handleSubmit } = useForm<EvalLogSearchFormData>({
+  const { register, handleSubmit } = useForm<EvalLogSearchModel>({
     defaultValues: form,
   });
 
   return (
-    <Modal isOpen={isOpen} toggle={toggle}>
+    <Modal isOpen={isOpen} onClose={onClose}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <VStack spacing="6rem">
           <VStack as="ul" w="100%" spacing="3rem">

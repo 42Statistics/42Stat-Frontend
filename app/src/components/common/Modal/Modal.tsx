@@ -1,4 +1,5 @@
 import type { ModalType } from '@/types/Modal';
+import styled from '@emotion/styled';
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
@@ -35,7 +36,7 @@ export const Modal = ({ isOpen, children }: ModalProps) => {
       {isOpen ? (
         <>
           {createPortal(
-            children,
+            <Layout>{children}</Layout>,
             document.getElementById('modal') as HTMLElement,
           )}
         </>
@@ -43,3 +44,12 @@ export const Modal = ({ isOpen, children }: ModalProps) => {
     </>
   );
 };
+
+const Layout = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: ${({ theme }) => theme.zIndex.modal};
+`;

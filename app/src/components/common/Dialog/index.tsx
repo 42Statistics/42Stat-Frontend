@@ -12,7 +12,7 @@ export const Dialog = ({ isOpen, onClose, children }: DialogProps) => {
     <Modal isOpen={isOpen}>
       <Overlay onClick={onClose}>
         <Center>
-          <Layout>{children}</Layout>
+          <Layout onClick={(e) => e.stopPropagation()}>{children}</Layout>
         </Center>
       </Overlay>
     </Modal>

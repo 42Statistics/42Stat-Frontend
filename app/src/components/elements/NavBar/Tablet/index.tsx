@@ -1,49 +1,27 @@
-import { isNavBarOpenAtom } from '@atoms/isNavBarOpenAtom';
 import { userAtom } from '@atoms/userAtom';
-import { Avatar, Clickable, Overlay, Spacer, VStack } from '@components/common';
+import { Avatar, Spacer, VStack } from '@components/common';
 import styled from '@emotion/styled';
-import { GiHamburgerMenu } from '@react-icons/all-files/gi/GiHamburgerMenu';
-import { useAtom, useAtomValue } from 'jotai';
-import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { DesktopNavBarLayout } from '../Desktop';
-import { NavBar } from '../shared/NavBar';
+import { useAtomValue } from 'jotai';
+import { TabletNavDrawer } from './TabletNavDrawer';
 import { TabletNavMenu } from './TabletNavMenu';
 
 export const TabletNavBar = () => {
-  const location = useLocation();
   const user = useAtomValue(userAtom);
-  const [isNavBarOpen, setIsNavBarOpen] = useAtom(isNavBarOpenAtom);
-
-  useEffect(() => {
-    setIsNavBarOpen(false);
-    return () => setIsNavBarOpen(false);
-  }, [location.pathname, setIsNavBarOpen]);
 
   return (
-    <>
-      <TabletNavBarLayout>
-        <VStack w="100%" h="100%" spacing="4rem">
-          <Clickable onClick={() => setIsNavBarOpen((cur) => !cur)}>
-            <GiHamburgerMenu size="18px" />
-          </Clickable>
-          <div style={{ height: '7rem' }}></div>
-          <TabletNavMenu />
-          <Spacer />
-          <Avatar size="sm" src={user.imgUrl} />
-        </VStack>
-      </TabletNavBarLayout>
-      {isNavBarOpen && (
-        <Overlay onClick={() => setIsNavBarOpen((cur) => !cur)} />
-      )}
-      <OpenDesktopNavBarLayout isOpen={isNavBarOpen}>
-        <NavBar />
-      </OpenDesktopNavBarLayout>
-    </>
+    <Layout>
+      <VStack w="100%" h="100%" spacing="4rem">
+        <TabletNavDrawer />
+        <SearchBarBlank />
+        <TabletNavMenu />
+        <Spacer />
+        <Avatar size="sm" src={user.imgUrl} />
+      </VStack>
+    </Layout>
   );
 };
 
-const TabletNavBarLayout = styled.div`
+const Layout = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -53,11 +31,6 @@ const TabletNavBarLayout = styled.div`
   background-color: ${({ theme }) => theme.colors.mono.white};
 `;
 
-const OpenDesktopNavBarLayout = styled(DesktopNavBarLayout)<{
-  isOpen: boolean;
-}>`
-  box-shadow: none;
-  transform: ${({ isOpen }) => !isOpen && 'translateX(-100%)'};
-  transition: all 0.5s;
-  z-index: ${({ theme }) => theme.zIndex.navBar};
+const SearchBarBlank = styled.div`
+  height: 7rem;
 `;

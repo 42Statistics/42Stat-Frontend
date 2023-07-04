@@ -31,25 +31,22 @@ export const Modal = ({ isOpen, children }: ModalProps) => {
     }
   }, [isOpen]);
 
-  return (
-    <>
-      {isOpen ? (
-        <>
-          {createPortal(
-            <Layout>{children}</Layout>,
-            document.getElementById('modal') as HTMLElement,
-          )}
-        </>
-      ) : null}
-    </>
+  return createPortal(
+    <Layout isOpen={isOpen}>{children}</Layout>,
+    document.getElementById('modal') as HTMLElement,
   );
 };
 
-const Layout = styled.div`
-  position: fixed;
+type LayoutProps = {
+  isOpen: boolean;
+};
+
+const Layout = styled.div<LayoutProps>`
+  position: ${({ isOpen }) => (isOpen ? 'fixed' : 'none')};
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   z-index: ${({ theme }) => theme.zIndex.modal};
+  transition: all 0.5s;
 `;

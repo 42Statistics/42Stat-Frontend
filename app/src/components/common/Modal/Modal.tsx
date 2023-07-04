@@ -43,12 +43,14 @@ type LayoutProps = {
   isOpen: boolean;
 };
 
+// FIXME: Modal !isOpen일 때도 컴포넌트가 남아있어야 애니메이션이 되는데, 그렇게 하면 모달 생성 및 삭제 자체가 부자연스러워짐.
+// 현재는 Drawer의 애니메이션이 작동하지 않음.
 const Layout = styled.div<LayoutProps>`
-  position: ${({ isOpen }) => (isOpen ? 'fixed' : 'none')};
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  display: ${({ isOpen }) => !isOpen && 'none'};
   z-index: ${({ theme }) => theme.zIndex.modal};
-  transition: all 0.5s;
 `;

@@ -5,15 +5,20 @@ import { Writable } from './Writable';
 
 type InputProps = {
   leftElement?: React.ReactNode;
+  rightElement?: React.ReactNode;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 export const Input = forwardRef(
-  (props: InputProps, ref: React.Ref<HTMLInputElement>) => {
+  (
+    { leftElement, rightElement, ...props }: InputProps,
+    ref: React.Ref<HTMLInputElement>,
+  ) => {
     return (
       <Layout>
         <HStack spacing="2rem">
-          {props.leftElement != null && props.leftElement}
+          {leftElement != null && leftElement}
           <Writable {...props} ref={ref} />
+          {rightElement != null && rightElement}
         </HStack>
       </Layout>
     );

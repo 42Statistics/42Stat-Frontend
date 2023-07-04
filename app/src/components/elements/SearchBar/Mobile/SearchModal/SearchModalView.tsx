@@ -1,15 +1,19 @@
-import { ModalType } from '@/types/Modal';
-import { Modal, Spacer, Text, VStack } from '@components/common';
-import { useTheme } from '@emotion/react';
+import { Clickable, HStack } from '@components/common';
 import styled from '@emotion/styled';
+import { MdArrowBack } from '@react-icons/all-files/md/MdArrowBack';
+import { MdSearch } from '@react-icons/all-files/md/MdSearch';
 import { ROUTES } from '@routes/ROUTES';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSearchBar } from '../hooks/useSearchBar';
+import { useSearchBar } from '../../hooks/useSearchBar';
+import { MobileSearchResult } from '../MobileSearchResult';
 import { MobileSearchInput } from './MobileSearchInput';
-import { MobileSearchResult } from './MobileSearchResult';
 
-export const SearchModal = ({ isOpen, onClose }: ModalType) => {
+type SearchModalViewProps = {
+  onClose: () => void;
+};
+
+export const SearchModalView = ({ onClose }: SearchModalViewProps) => {
   const {
     setInput,
     debouncedInput,
@@ -21,7 +25,6 @@ export const SearchModal = ({ isOpen, onClose }: ModalType) => {
     resetInput,
   } = useSearchBar();
 
-  const theme = useTheme();
   const navigate = useNavigate();
   const isPreviewDisplaying =
     debouncedInput !== '' && (!!users.length || !!projects.length);
@@ -47,7 +50,7 @@ export const SearchModal = ({ isOpen, onClose }: ModalType) => {
     navigate(`${ROUTES.PROJECT_ROOT}/${name}`);
   };
 
-  const handleClickSearchBtn = () => {
+  const handleClickSearchButton = () => {
     onClose();
     if (users.length === 0) {
       if (projects.length === 0) {
@@ -59,35 +62,36 @@ export const SearchModal = ({ isOpen, onClose }: ModalType) => {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
-      <SearchModalLayout>
+    <Layout>
+      <HStack w="100%" spacing="2rem">
+        <Clickable onClick={onClose}>
+          <MdArrowBack size="24px" />
+        </Clickable>
         <MobileSearchInput
           inputRef={inputRef}
-          setInput={setInput}
-          onClose={onClose}
-          onClickSearchBtn={handleClickSearchBtn}
+          onChange={(e) => setInput(e.target.value)}
         />
-        {isPreviewDisplaying ? (
-          <MobileSearchResult
-            users={users}
-            projects={projects}
-            onUserSubmit={handleUserSubmit}
-            onProjectSubmit={handleProjectSubmit}
-          />
-        ) : (
-          <VStack w="100%" h="10rem">
-            <Text color={theme.colors.mono.gray300}>검색어를 입력해주세요</Text>
-          </VStack>
-        )}
-        <Spacer />
-      </SearchModalLayout>
-    </Modal>
+        <Clickable onClick={handleClickSearchButton}>
+          <MdSearch size="24px" />
+        </Clickable>
+      </HStack>
+      <MobileSearchResult
+        users={users}
+        projects={projects}
+        onUserSubmit={handleUserSubmit}
+        onProjectSubmit={handleProjectSubmit}
+        isPreviewDisplaying={isPreviewDisplaying}
+      />
+    </Layout>
   );
 };
 
-const SearchModalLayout = styled(VStack)`
+const Layout = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
   width: 100vw;
   height: 100vh;
   padding: 6rem 2rem 0 2rem;
-  gap: 4rem;
+  background-color: ${({ theme }) => theme.colors.mono.white};
 `;

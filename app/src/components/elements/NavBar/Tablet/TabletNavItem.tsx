@@ -1,7 +1,7 @@
 import { CaptionText, VStack } from '@components/common';
 import styled from '@emotion/styled';
 import { useLocation, useNavigate } from 'react-router-dom';
-import type { NavItemProps } from '../shared/NavItem';
+import { NavItemProps } from '../shared/NavItem';
 
 export const TabletNavItem = ({ route }: NavItemProps) => {
   const location = useLocation();
@@ -26,6 +26,17 @@ export const TabletNavItem = ({ route }: NavItemProps) => {
 const TabletNavItemLayout = styled.li<{ isFocused: boolean }>`
   width: 100%;
   padding: 1rem 0;
+  border-radius: ${({ theme }) => theme.radius.md};
   cursor: pointer;
-  transition: background-color 0.2s;
+  box-shadow: ${({ isFocused }) =>
+    isFocused && 'inset 4px 4px 4px #f0f0f0, inset -4px -4px 4px #ffffff'};
+  transition: all 0.4s;
+
+  &:hover {
+    box-shadow: ${({ isFocused }) =>
+      !isFocused && '4px 4px 4px #e9e9e9, -4px -4px 4px #ffffff'};
+  }
+  &:active {
+    box-shadow: inset 4px 4px 4px #f0f0f0, inset -4px -4px 4px #ffffff;
+  }
 `;

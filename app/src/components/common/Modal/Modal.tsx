@@ -2,6 +2,7 @@ import type { ModalType } from '@/types/Modal';
 import styled from '@emotion/styled';
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import { Portal } from './Portal';
 
 type ModalProps = ModalType & React.PropsWithChildren;
 
@@ -31,9 +32,10 @@ export const Modal = ({ isOpen, children }: ModalProps) => {
     }
   }, [isOpen]);
 
-  return createPortal(
-    <Layout isOpen={isOpen}>{children}</Layout>,
-    document.getElementById('modal') as HTMLElement,
+  return (
+    <Portal>
+      <Layout isOpen={isOpen}>{children}</Layout>
+    </Portal>
   );
 };
 

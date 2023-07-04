@@ -1,8 +1,7 @@
 import { ProjectPreview, UserPreview } from '@/__generated__/graphql';
-import { VStack } from '@components/common';
 import styled from '@emotion/styled';
-import { ProjectSearchList } from '../shared/ProjectSearchList';
-import { UserSearchList } from '../shared/UserSearchList';
+import { ProjectSearchResult } from './ProjectSearchResult';
+import { UserSearchResult } from './UserSearchResult';
 
 type TabletAndAboveSearchResultProps = {
   users: UserPreview[];
@@ -18,18 +17,20 @@ export const TabletAndAboveSearchResult = ({
   onProjectSubmit,
 }: TabletAndAboveSearchResultProps) => {
   return (
-    <TabletAndAboveSearchResultLayout>
+    <Layout>
       {!!users.length && (
-        <UserSearchList users={users} onSubmit={onUserSubmit} />
+        <UserSearchResult users={users} onSubmit={onUserSubmit} />
       )}
       {!!projects.length && (
-        <ProjectSearchList projects={projects} onSubmit={onProjectSubmit} />
+        <ProjectSearchResult projects={projects} onSubmit={onProjectSubmit} />
       )}
-    </TabletAndAboveSearchResultLayout>
+    </Layout>
   );
 };
 
-const TabletAndAboveSearchResultLayout = styled(VStack)`
+const Layout = styled.div`
+  display: flex;
+  flex-direction: column;
   position: absolute;
   top: 6rem;
   left: 0;

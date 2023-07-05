@@ -1,11 +1,11 @@
 import { userAtom } from '@atoms/userAtom';
 import { Center, Spacer, VStack } from '@components/common';
 import { AppLogoTitleButton } from '@components/elements/AppLogoTitle';
+import { DesktopNavProfile } from '@components/elements/NavProfile/Desktop';
 import { TabletAndAboveSearchBar } from '@components/elements/SearchBar/TabletAndAbove';
-import { useAtomValue } from 'jotai';
-import { NavMenu } from './NavMenu';
-import { NavProfile } from './NavProfile';
 import styled from '@emotion/styled';
+import { useAtomValue } from 'jotai';
+import { DesktopNavMenu } from './DesktopNavMenu';
 
 type DesktopNavBarProps = {
   fixed?: boolean;
@@ -21,9 +21,13 @@ export const DesktopNavBar = ({ fixed = true }: DesktopNavBarProps) => {
           <AppLogoTitleButton />
         </Center>
         <TabletAndAboveSearchBar />
-        <NavMenu />
+        <DesktopNavMenu />
         <Spacer />
-        <NavProfile imgUrl={user.imgUrl} name={user.name} login={user.login} />
+        <DesktopNavProfile
+          imgUrl={user.imgUrl}
+          name={user.name}
+          login={user.login}
+        />
       </VStack>
     </Layout>
   );

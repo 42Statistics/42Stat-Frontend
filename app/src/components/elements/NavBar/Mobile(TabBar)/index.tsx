@@ -1,5 +1,6 @@
 import { userAtom } from '@atoms/userAtom';
-import { Avatar, HStack } from '@components/common';
+import { HStack } from '@components/common';
+import { MobileNavProfile } from '@components/elements/NavProfile/Mobile';
 import styled from '@emotion/styled';
 import { useAtomValue } from 'jotai';
 import { useNavRoutes } from '../hooks/useNavRoutes';
@@ -16,7 +17,7 @@ export const TabBar = () => {
         <TabItem route={NAV_ROUTES.PROFILE} />
         <TabItem route={NAV_ROUTES.LEADERBOARD} />
         <TabItem route={NAV_ROUTES.EVALLOG} />
-        <Avatar size="sm" src={user.imgUrl} />
+        <MobileNavProfile imgUrl={user.imgUrl} />
       </HStack>
     </TabBarLayout>
   );

@@ -1,5 +1,6 @@
 import { userAtom } from '@atoms/userAtom';
-import { Avatar, Spacer, VStack } from '@components/common';
+import { Spacer, VStack } from '@components/common';
+import { TabletNavProfile } from '@components/elements/NavProfile/Tablet';
 import styled from '@emotion/styled';
 import { useAtomValue } from 'jotai';
 import { TabletNavDrawer } from './TabletNavDrawer';
@@ -15,7 +16,7 @@ export const TabletNavBar = () => {
         <SearchBarBlank />
         <TabletNavMenu />
         <Spacer />
-        <Avatar size="sm" src={user.imgUrl} />
+        <TabletNavProfile imgUrl={user.imgUrl} />
       </VStack>
     </Layout>
   );

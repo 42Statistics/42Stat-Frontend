@@ -15,16 +15,20 @@ export const NavItem = ({ route }: NavItemProps) => {
 
   // Link를 NavItemLayout 안에 넣으면 padding 부분을 눌렀을 때 작동하지 않아서 navigate으로 대체
   return (
-    <NavItemLayout isFocused={isFocused} onClick={() => navigate(route.path)}>
+    <Layout isFocused={isFocused} onClick={() => navigate(route.path)}>
       <HStack spacing="1.5rem" justify="start">
         <NavItemIcon size="16px" />
         <Text>{route.text}</Text>
       </HStack>
-    </NavItemLayout>
+    </Layout>
   );
 };
 
-const NavItemLayout = styled.li<{ isFocused: boolean }>`
+type LayoutProps = {
+  isFocused: boolean;
+};
+
+const Layout = styled.li<LayoutProps>`
   width: 100%;
   padding: 1.2rem 0 1.2rem 2rem;
   border-radius: ${({ theme }) => theme.radius.md};

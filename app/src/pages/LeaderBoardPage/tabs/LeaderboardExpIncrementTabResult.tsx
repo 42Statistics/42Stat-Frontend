@@ -3,7 +3,7 @@ import {
   GetLeaderboardExpIncrementQueryVariables,
 } from '@/__generated__/graphql';
 import { QueryResult } from '@apollo/client';
-import { Divider, VStack } from '@components/common';
+import { VStack } from '@components/common';
 import { ApolloErrorView } from '@components/elements/ApolloErrorView';
 import { ApolloNotFoundView } from '@components/elements/ApolloNotFoundView';
 import { LeaderBoard } from '@components/templates/LeaderBoard';
@@ -51,9 +51,8 @@ export const LeaderboardExpIncrementTabResult = ({
     }));
 
   return (
-    <VStack w="100%" spacing="5rem">
+    <VStack w="100%" spacing="6rem">
       {myRanking && <LeaderBoardItem item={myRanking} unit={unit} isMe />}
-      <Divider />
       <LeaderBoard list={list} me={myRanking} unit={unit} />
     </VStack>
   );

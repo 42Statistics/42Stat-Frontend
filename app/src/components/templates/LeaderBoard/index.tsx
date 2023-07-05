@@ -1,5 +1,5 @@
 import type { RankingItemType } from '@/types/Ranking';
-import { VStack } from '@components/common';
+import { Divider } from '@components/common';
 import styled from '@emotion/styled';
 import { LeaderBoardItem } from './LeaderBoardItem';
 
@@ -17,9 +17,9 @@ export const LeaderBoard = ({
   fixedNumber,
 }: LeaderBoardProps) => {
   return (
-    <VStack w="100%" h="100%">
-      <LeaderBoardList>
-        {list.map((item) => (
+    <LeaderBoardList>
+      {list.map((item, idx) => (
+        <>
           <LeaderBoardItem
             key={item.id}
             item={item}
@@ -27,21 +27,18 @@ export const LeaderBoard = ({
             fixedNumber={fixedNumber}
             isMe={me !== null && item.id === me.id}
           />
-        ))}
-      </LeaderBoardList>
-    </VStack>
+          {idx !== list.length - 1 && <Divider style={{ width: '100%' }} />}
+        </>
+      ))}
+    </LeaderBoardList>
   );
 };
 
 const LeaderBoardList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
   width: 100%;
   height: 100%;
-
-  & li:nth-of-type(even) {
-    background-color: ${({ theme }) => theme.colors.mono.white};
-  }
-
-  & li:nth-of-type(odd) {
-    background-color: #f0f0f0;
-  }
 `;

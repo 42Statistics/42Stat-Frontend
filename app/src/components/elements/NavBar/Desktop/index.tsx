@@ -48,4 +48,5 @@ const Layout = styled.nav<LayoutProps>`
   height: 100%;
   padding: 3rem;
   background-color: ${({ theme }) => theme.colors.mono.white};
+  user-select: none;
 `;

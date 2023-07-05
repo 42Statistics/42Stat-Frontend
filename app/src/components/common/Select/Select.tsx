@@ -6,4 +6,5 @@ export const Select = styled.select`
   border-radius: ${({ theme }) => theme.radius.md};
   background: url('/down-arrow.svg') no-repeat right 2rem center #f9f9f9;
   box-shadow: 6px 6px 13px #d2d2d2, -6px -6px 13px #ffffff;
+  user-select: none;
 `;

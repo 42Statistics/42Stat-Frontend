@@ -71,6 +71,7 @@ const ControlsContainer = styled.div`
   --highlight-width: auto;
   --highlight-x-pos: 0;
   display: flex;
+  user-select: none;
 `;
 
 type ControlsProps = {

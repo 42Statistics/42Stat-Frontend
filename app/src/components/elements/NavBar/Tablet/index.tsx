@@ -30,6 +30,7 @@ const Layout = styled.div`
   height: 100%;
   padding: 3rem 1rem;
   background-color: ${({ theme }) => theme.colors.mono.white};
+  user-select: none;
 `;
 
 const SearchBarBlank = styled.div`

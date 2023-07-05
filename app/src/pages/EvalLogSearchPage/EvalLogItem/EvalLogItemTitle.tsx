@@ -20,11 +20,11 @@ export const EvalLogItemTitle = ({ header }: EvalLogItemTitleProps) => {
   return (
     <HStack w="100%" justify="start" wrap="wrap">
       <Link to={`${ROUTES.PROFILE_ROOT}/${corrector.login}`}>
-        <PrimaryBoldText selectable>{corrector.login}</PrimaryBoldText>
+        <PrimaryBoldText>{corrector.login}</PrimaryBoldText>
       </Link>
-      <Text selectable>님이&nbsp;</Text>
-      <PrimaryBoldText selectable>{teamPreview.name}</PrimaryBoldText>
-      <Text selectable>
+      <Text>님이&nbsp;</Text>
+      <PrimaryBoldText>{teamPreview.name}</PrimaryBoldText>
+      <Text>
         을&nbsp;
         <strong>{dayjs(beginAt).format('YYYY-MM-DD HH:mm')}</strong>에
         평가하였습니다

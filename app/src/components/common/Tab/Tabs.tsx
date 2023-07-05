@@ -12,4 +12,5 @@ const Layout = styled.div`
   white-space: nowrap;
   overflow-x: auto; // 모바일에서는 탭을 가로 스크롤하도록 (더 좋은 방식이 있을지 고민 필요)
   border-bottom: ${({ theme }) => `1px solid ${theme.colors.mono.gray200}`};
+  user-select: none;
 `;

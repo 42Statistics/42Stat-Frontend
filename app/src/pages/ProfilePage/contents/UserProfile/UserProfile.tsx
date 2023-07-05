@@ -118,6 +118,7 @@ const Layout = styled.div<LayoutProps>`
   background-size: cover;
   background-position: center;
   border-radius: ${({ theme }) => theme.radius.md};
+  user-select: none;
 `;
 
 // TODO: Loader가 아니라 Skeleton으로 이동. 여러 타입의 Skeleton을 적용시킬 수 있도록 변경해야 함

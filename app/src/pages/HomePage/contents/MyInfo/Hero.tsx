@@ -106,4 +106,5 @@ const Layout = styled(Center)`
   border-radius: ${({ theme }) => theme.radius.md};
   padding: 0 4rem;
   height: 100%;
+  user-select: none;
 `;

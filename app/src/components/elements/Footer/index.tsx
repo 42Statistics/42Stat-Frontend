@@ -10,9 +10,7 @@ export const Footer = () => {
   return (
     <Layout>
       <HStack spacing="1rem">
-        <Text color={theme.colors.mono.gray300} selectable>
-          ©2023. 42Stat
-        </Text>
+        <Text color={theme.colors.mono.gray300}>©2023. 42Stat</Text>
         <Link
           to="https://github.com/orgs/42Statistics/repositories"
           target="_blank"

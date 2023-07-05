@@ -4,7 +4,7 @@ type TextProps = Partial<{
   fontSize: string;
   fontWeight: number;
   color: string;
-  selectable?: boolean;
+  preventSelect?: boolean;
 }>;
 
 export const Text = styled.p<TextProps>`
@@ -12,8 +12,7 @@ export const Text = styled.p<TextProps>`
   font-weight: ${({ fontWeight }) => fontWeight};
   color: ${({ color }) => color};
   line-height: 1.5;
-  user-select: ${({ selectable = false }) =>
-    selectable ? 'auto' : 'none'}; // 텍스트 드래그 제한
+  user-select: ${({ preventSelect }) => preventSelect && 'none'};
 `;
 
 export const H1ThinText = styled(Text)`

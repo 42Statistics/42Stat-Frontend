@@ -29,21 +29,17 @@ export const ProjectIntroduction = () => {
         />
         <VStack align="start" w="100%" spacing="2rem">
           <VStack align="start">
-            <Text selectable>{circle}서클</Text>
+            <Text>{circle}서클</Text>
             <TabletAndAbove>
-              <BoldText fontSize="4rem" selectable>
-                {name}
-              </BoldText>
+              <BoldText fontSize="4rem">{name}</BoldText>
             </TabletAndAbove>
             <Mobile>
-              <BoldText fontSize="3rem" selectable>
-                {name}
-              </BoldText>
+              <BoldText fontSize="3rem">{name}</BoldText>
             </Mobile>
           </VStack>
           {description !== '' && (
             <div style={{ maxWidth: '600px' }}>
-              <Text selectable>{description}</Text>
+              <Text>{description}</Text>
             </div>
           )}
         </VStack>

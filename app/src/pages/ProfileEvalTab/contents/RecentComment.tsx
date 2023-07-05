@@ -30,7 +30,7 @@ export const RecentComment = () => {
           {title && <H3MediumText>{title}</H3MediumText>}
         </VStack>
         <Scroll>
-          <Text selectable>{recentComment}</Text>
+          <Text>{recentComment}</Text>
         </Scroll>
       </VStack>
     </DashboardContentLayout>

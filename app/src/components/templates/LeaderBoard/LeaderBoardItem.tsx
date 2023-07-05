@@ -88,4 +88,5 @@ const Layout = styled.li<LayoutProps>`
   border-radius: ${({ theme }) => theme.radius.sm};
   background-color: ${({ isMe, theme }) =>
     isMe && theme.colors.primary.default} !important; // FIXME: !important
+  user-select: ${({ isMe }) => isMe && 'none'};
 `;

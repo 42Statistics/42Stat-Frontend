@@ -1,5 +1,5 @@
 import { userAtom } from '@atoms/userAtom';
-import { Center, Spacer, VStack } from '@components/common';
+import { VStack } from '@components/common';
 import { AppLogoTitleButton } from '@components/elements/AppLogoTitle';
 import { DesktopNavProfile } from '@components/elements/NavProfile/Desktop';
 import { TabletAndAboveSearchBar } from '@components/elements/SearchBar/TabletAndAbove';
@@ -17,17 +17,14 @@ export const DesktopNavBar = ({ fixed = true }: DesktopNavBarProps) => {
   return (
     <Layout fixed={fixed}>
       <VStack w="100%" h="100%" spacing="4rem">
-        <Center h="6rem">
-          <AppLogoTitleButton />
-        </Center>
-        <TabletAndAboveSearchBar />
-        <DesktopNavMenu />
-        <Spacer />
+        <AppLogoTitleButton />
         <DesktopNavProfile
           imgUrl={user.imgUrl}
           name={user.name}
           login={user.login}
         />
+        <TabletAndAboveSearchBar />
+        <DesktopNavMenu />
       </VStack>
     </Layout>
   );

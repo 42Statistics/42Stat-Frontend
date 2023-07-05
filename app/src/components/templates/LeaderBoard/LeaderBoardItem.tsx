@@ -2,7 +2,6 @@ import type { RankingUserItemType } from '@/types/Ranking';
 import {
   Avatar,
   BoldText,
-  H2MediumText,
   H3MediumText,
   HStack,
   MediumText,
@@ -32,31 +31,25 @@ export const LeaderBoardItem = ({
   const theme = useTheme();
   const { name, imgUrl, rank, value } = item;
 
-  const getColor = (rank: number, isMe: boolean) => {
-    if (isMe) return theme.colors.mono.white;
-    if (rank <= 3) return theme.colors.accent.default;
-    return theme.colors.mono.black;
-  };
-
-  const color = getColor(rank, isMe);
+  const color = isMe ? theme.colors.mono.white : theme.colors.mono.black;
 
   return (
     <Layout isMe={isMe}>
       <TabletAndAbove>
         <HStack w="100%" spacing="4rem">
           <HStack w="5rem">
-            <H2MediumText color={color}>{rank}</H2MediumText>
+            <H3MediumText color={color}>{rank}</H3MediumText>
           </HStack>
           <Avatar src={imgUrl} />
           <Link to={`${ROUTES.PROFILE_ROOT}/${name}`}>
             <H3MediumText color={color}>{name}</H3MediumText>
           </Link>
           <Spacer />
-          <H3MediumText color={color}>
+          <MediumText color={color}>
             {fixedNumber === undefined
               ? numberWithUnitFormatter(value, unit)
               : `${value.toFixed(2)}${unit}`}
-          </H3MediumText>
+          </MediumText>
         </HStack>
       </TabletAndAbove>
       <Mobile>
@@ -83,10 +76,16 @@ type LayoutProps = {
 const Layout = styled.li<LayoutProps>`
   width: 100%;
   ${mq({
-    padding: ['0.8rem 2rem', '0.8rem 5rem', '0.8rem 5rem'],
+    padding: ['0.5rem 2rem', '0.5rem 5rem', '0.5rem 5rem'],
   })}
   border-radius: ${({ theme }) => theme.radius.sm};
   background-color: ${({ isMe, theme }) =>
     isMe && theme.colors.primary.default} !important; // FIXME: !important
   user-select: ${({ isMe }) => isMe && 'none'};
+  transition: all 0.3s;
+
+  &:hover {
+    transform: scale(1.01);
+    box-shadow: 10px 10px 10px #dddddd, -10px -10px 10px #ffffff;
+  }
 `;

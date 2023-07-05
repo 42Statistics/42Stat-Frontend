@@ -1,8 +1,8 @@
 import { gql } from '@/__generated__';
 import { DateTemplate } from '@/__generated__/graphql';
-import { useLazyQuery } from '@apollo/client';
-import { HStack, SegmentedControl, VStack } from '@components/common';
 import { useSegmentedControl } from '@/hooks/useSegmentedControl';
+import { useLazyQuery } from '@apollo/client';
+import { SegmentedControl, VStack } from '@components/common';
 import { useEffect, useState } from 'react';
 import { LeaderboardEvalCountTabResult } from './LeaderboardEvalCountTabResult';
 import { LeaderboardPageButtonList } from './LeaderboardPageButtonList';
@@ -107,14 +107,12 @@ export const LeaderboardEvalCountTab = () => {
   }, [dateTemplate, pageNumber, search]);
 
   return (
-    <VStack w="100%" spacing="4rem">
-      <HStack w="100%">
-        <SegmentedControl
-          callback={handleSegmentedControlChange}
-          controlRef={controlRef}
-          segments={segments}
-        />
-      </HStack>
+    <VStack w="100%" spacing="6rem">
+      <SegmentedControl
+        callback={handleSegmentedControlChange}
+        controlRef={controlRef}
+        segments={segments}
+      />
       <LeaderboardEvalCountTabResult result={result} />
       <LeaderboardPageButtonList
         currPageNumber={pageNumber}

@@ -76,7 +76,7 @@ type LayoutProps = {
 const Layout = styled.li<LayoutProps>`
   width: 100%;
   ${mq({
-    padding: ['0.5rem 2rem', '0.5rem 5rem', '0.5rem 5rem'],
+    padding: ['0.5rem 2rem', '0.5rem 5rem'],
   })}
   border-radius: ${({ theme }) => theme.radius.sm};
   background-color: ${({ isMe, theme }) =>

@@ -12,15 +12,14 @@ type DrawerProps = ModalType & {
 export const Drawer = ({ anchor, isOpen, onClose, children }: DrawerProps) => {
   return (
     <Modal isOpen={isOpen}>
-      <Overlay onClick={onClose}>
-        <Layout
-          isOpen={isOpen}
-          anchor={anchor}
-          onClick={(e) => e.stopPropagation()}
-        >
-          {children}
-        </Layout>
-      </Overlay>
+      <Overlay onClick={onClose} />
+      <Layout
+        isOpen={isOpen}
+        anchor={anchor}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {children}
+      </Layout>
     </Modal>
   );
 };
@@ -43,4 +42,5 @@ const Layout = styled.div<LayoutProps>`
       (anchor === 'top' && 'translateY(-100%)') ||
       (anchor === 'bottom' && 'translateY(100%)'))};
   transition: all 0.4s;
+  z-index: ${({ theme }) => theme.zIndex.modal};
 `;

@@ -87,6 +87,9 @@ export const SearchModalView = ({ onClose }: SearchModalViewProps) => {
 };
 
 const Layout = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
   display: flex;
   flex-direction: column;
   gap: 4rem;

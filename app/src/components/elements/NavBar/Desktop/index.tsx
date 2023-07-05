@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { NavBar } from '../shared/NavBar';
+import { NavBar } from './NavBar';
 
 type DesktopNavBarProps = {
   fixed?: boolean;

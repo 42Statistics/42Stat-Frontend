@@ -11,7 +11,7 @@ export const ProjectSearchResult = (props: ProjectSearchResultProps) => {
   return (
     <VStack w="100%" align="start" spacing="1.2rem">
       <BoldText>프로젝트</BoldText>
-      <Divider style={{ width: '100%' }} />
+      <Divider />
       <ProjectSearchList {...props} />
     </VStack>
   );

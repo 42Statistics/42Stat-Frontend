@@ -11,7 +11,7 @@ export const MobileUserSearchResult = (props: MobileUserSearchResultProps) => {
   return (
     <VStack w="100%" align="start" spacing="1.6rem">
       <H3BoldText>유저</H3BoldText>
-      <Divider style={{ width: '100%' }} />
+      <Divider />
       <MobileUserSearchList {...props} />
     </VStack>
   );

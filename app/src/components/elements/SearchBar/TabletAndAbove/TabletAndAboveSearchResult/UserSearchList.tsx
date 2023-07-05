@@ -6,7 +6,7 @@ type UserSearchListProps = UserSearchResultProps;
 
 export const UserSearchList = ({ users, onSubmit }: UserSearchListProps) => {
   return (
-    <VStack w="100%" align="start" spacing="1.2rem">
+    <VStack w="100%" align="start">
       {users.slice(0, 4).map((user) => (
         <UserSearchItem key={user.id} user={user} onSubmit={onSubmit} />
       ))}

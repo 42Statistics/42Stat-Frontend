@@ -9,7 +9,7 @@ export const ProjectSearchList = ({
   onSubmit,
 }: ProjectSearchListProps) => {
   return (
-    <VStack w="100%" align="start" spacing="1.2rem">
+    <VStack w="100%" align="start">
       {projects.slice(0, 4).map((project) => (
         <ProjectSearchItem
           key={project.id}

@@ -14,6 +14,7 @@ export const MobileSearchBar = () => {
           leftElement={<MdSearch id="search-icon" size="24px" />}
           placeholder="Search..."
           disabled
+          style={{ width: '120px' }}
         />
       </Clickable>
       <SearchModal isOpen={isOpen} onClose={onClose} />

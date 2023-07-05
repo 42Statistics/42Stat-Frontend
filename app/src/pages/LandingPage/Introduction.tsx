@@ -1,6 +1,6 @@
 import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
-import { Center, VStack, WhiteH1BoldText } from '@components/common';
+import { Center, VStack, WhiteH2BoldText } from '@components/common';
 import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
 import Slider from 'react-slick';
@@ -28,56 +28,75 @@ const GET_LANDING = gql(/* GraphQL */ `
   }
 `);
 
+type IntroData = {
+  daysAfterBeginAt: number;
+  aliveCount: number;
+  blackholedCount: number;
+  memberCount: number;
+  evalCount: number;
+  trendingProjectName: string;
+  trendingProjectValue: number;
+};
+
 export const Introduction = () => {
-  const { loading, error, data } = useQuery(GET_LANDING);
-  const [strs, setStrs] = useState<string[]>([]);
+  const { data } = useQuery(GET_LANDING);
+
+  const [introData, setIntroData] = useState<IntroData>({
+    daysAfterBeginAt: 1262,
+    aliveCount: 1030,
+    blackholedCount: 1326,
+    memberCount: 244,
+    evalCount: 82703,
+    trendingProjectName: 'Born2beroot',
+    trendingProjectValue: 76,
+  });
+
+  const strs = [
+    `지금까지 블랙홀을 마주한 ${introData.blackholedCount.toLocaleString()}명`,
+    `${
+      introData.trendingProjectName
+    }과 싸우는 ${introData.trendingProjectValue.toLocaleString()}명`,
+    `본격적인 여행을 시작한 ${introData.memberCount.toLocaleString()}명`,
+    `${introData.evalCount.toLocaleString()}번째 평가가 지금 진행 중`,
+  ];
 
   useEffect(() => {
     if (!data) {
       return;
     }
     const {
+      daysAfterBeginAt,
+      aliveCount,
       blackholedCount,
       memberCount,
       evalCount,
       trendingProject: {
         projectPreview: { name: trendingProjectName },
-        value,
+        value: trendingProjectValue,
       },
     } = data.getLanding;
-    setStrs([
-      `지금까지 블랙홀을 마주한 ${blackholedCount.toLocaleString()}명`,
-      `${trendingProjectName}과 싸우는 ${value.toLocaleString()}명`,
-      `자기만의 여행을 시작한 ${memberCount.toLocaleString()}명`,
-      `${evalCount.toLocaleString()}번째 평가가 지금 진행 중`,
-    ]);
+    setIntroData({
+      daysAfterBeginAt,
+      aliveCount,
+      blackholedCount,
+      memberCount,
+      evalCount,
+      trendingProjectName,
+      trendingProjectValue,
+    });
   }, [data]);
-
-  if (loading) {
-    return <VStack h="10rem"></VStack>;
-  }
-
-  if (error || !data) {
-    return (
-      <VStack h="10rem" spacing="1rem">
-        <WhiteH1BoldText>{/* TODO: 에러 시 대체 텍스트 */}</WhiteH1BoldText>
-      </VStack>
-    );
-  }
-
-  const { daysAfterBeginAt, aliveCount } = data.getLanding;
 
   return (
     <VStack h="10rem" spacing="1rem">
-      <WhiteH1BoldText>
+      <WhiteH2BoldText>
         은하수를 여행한지{' '}
-        {<CountUp isCounting end={daysAfterBeginAt} duration={3.5} />}
+        {<CountUp isCounting end={introData.daysAfterBeginAt} duration={3.5} />}
         일째
-      </WhiteH1BoldText>
-      <WhiteH1BoldText>
-        {<CountUp isCounting end={aliveCount} duration={3.5} />}
+      </WhiteH2BoldText>
+      <WhiteH2BoldText>
+        {<CountUp isCounting end={introData.aliveCount} duration={3.5} />}
         명의 히치하이커와 함께 여행중
-      </WhiteH1BoldText>
+      </WhiteH2BoldText>
       <Slider
         arrows={false}
         infinite
@@ -91,7 +110,7 @@ export const Introduction = () => {
       >
         {strs.map((str, index) => (
           <Center key={index}>
-            <WhiteH1BoldText>{str}</WhiteH1BoldText>
+            <WhiteH2BoldText>{str}</WhiteH2BoldText>
           </Center>
         ))}
       </Slider>

@@ -14,7 +14,7 @@ const LandingPage = () => {
   return (
     <VStack h="100%" spacing="10rem">
       <a href="/">
-        <AppLogoTitle size="md" color={theme.colors.mono.white} />
+        <AppLogoTitle size="sm" color={theme.colors.mono.white} />
       </a>
       <Introduction />
       <Image src={animated_ship} alt="우주를 떠다니는 배" width="200px" />

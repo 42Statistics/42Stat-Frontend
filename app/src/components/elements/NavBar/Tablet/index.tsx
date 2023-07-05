@@ -1,5 +1,5 @@
 import { userAtom } from '@atoms/userAtom';
-import { Spacer, VStack } from '@components/common';
+import { Center, VStack } from '@components/common';
 import { TabletNavProfile } from '@components/elements/NavProfile/Tablet';
 import styled from '@emotion/styled';
 import { useAtomValue } from 'jotai';
@@ -13,10 +13,10 @@ export const TabletNavBar = () => {
     <Layout>
       <VStack w="100%" h="100%" spacing="4rem">
         <TabletNavDrawer />
-        <SearchBarBlank />
+        <Center h="15rem">
+          <TabletNavProfile imgUrl={user.imgUrl} />
+        </Center>
         <TabletNavMenu />
-        <Spacer />
-        <TabletNavProfile imgUrl={user.imgUrl} />
       </VStack>
     </Layout>
   );
@@ -31,8 +31,4 @@ const Layout = styled.div`
   padding: 3rem 1rem;
   background-color: ${({ theme }) => theme.colors.mono.white};
   user-select: none;
-`;
-
-const SearchBarBlank = styled.div`
-  height: 7rem;
 `;

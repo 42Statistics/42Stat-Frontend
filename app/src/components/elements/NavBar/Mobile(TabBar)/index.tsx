@@ -1,14 +1,10 @@
-import { userAtom } from '@atoms/userAtom';
 import { HStack } from '@components/common';
-import { MobileNavProfile } from '@components/elements/NavProfile/Mobile';
 import styled from '@emotion/styled';
-import { useAtomValue } from 'jotai';
 import { useNavRoutes } from '../hooks/useNavRoutes';
 import { TabItem } from './TabItem';
 
 export const TabBar = () => {
   const { NAV_ROUTES } = useNavRoutes();
-  const user = useAtomValue(userAtom);
 
   return (
     <Layout>
@@ -17,7 +13,7 @@ export const TabBar = () => {
         <TabItem route={NAV_ROUTES.PROFILE} />
         <TabItem route={NAV_ROUTES.LEADERBOARD} />
         <TabItem route={NAV_ROUTES.EVALLOG} />
-        <MobileNavProfile imgUrl={user.imgUrl} />
+        <TabItem route={NAV_ROUTES.SETTING} />
       </HStack>
     </Layout>
   );

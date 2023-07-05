@@ -8,8 +8,8 @@ import { RiBarChart2Fill } from '@react-icons/all-files/ri/RiBarChart2Fill';
 import { RiBarChart2Line } from '@react-icons/all-files/ri/RiBarChart2Line';
 import { RiHome2Fill } from '@react-icons/all-files/ri/RiHome2Fill';
 import { RiHome2Line } from '@react-icons/all-files/ri/RiHome2Line';
-import { RiLogoutBoxRFill } from '@react-icons/all-files/ri/RiLogoutBoxRFill';
-import { RiLogoutBoxRLine } from '@react-icons/all-files/ri/RiLogoutBoxRLine';
+import { RiSettings3Fill } from '@react-icons/all-files/ri/RiSettings3Fill';
+import { RiSettings3Line } from '@react-icons/all-files/ri/RiSettings3Line';
 import { ROUTES } from '@routes/ROUTES';
 import { useAtomValue } from 'jotai';
 
@@ -53,14 +53,14 @@ export const useNavRoutes = () => {
       icon: RiArticleLine,
       iconFocused: RiArticleFill,
     },
-    LOGOUT: {
-      text: '로그아웃',
-      abbr: '로그아웃',
-      path: ROUTES.LOGOUT,
-      icon: RiLogoutBoxRLine,
-      iconFocused: RiLogoutBoxRFill,
+    SETTING: {
+      text: '설정',
+      abbr: '설정',
+      path: ROUTES.SETTING,
+      icon: RiSettings3Line,
+      iconFocused: RiSettings3Fill,
     },
-  };
+  } as const;
 
   return { NAV_ROUTES };
 };

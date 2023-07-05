@@ -107,7 +107,11 @@ const MonthlyTigCountPerCoalitionTable = styled.table`
   }
 `;
 
-const TextMax = styled(Text)<{ isMax: boolean }>`
+type TextMaxProps = {
+  isMax: boolean;
+};
+
+const TextMax = styled(Text)<TextMaxProps>`
   font-size: ${({ theme }) => theme.fonts.size.h3};
   color: ${({ theme, isMax }) =>
     isMax ? theme.colors.accent.default : theme.colors.mono.black};

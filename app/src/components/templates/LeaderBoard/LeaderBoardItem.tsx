@@ -76,7 +76,11 @@ export const LeaderBoardItem = ({
   );
 };
 
-export const Layout = styled.li<{ isMe: boolean }>`
+type LayoutProps = {
+  isMe: boolean;
+};
+
+const Layout = styled.li<LayoutProps>`
   width: 100%;
   ${mq({
     padding: ['0.8rem 2rem', '0.8rem 5rem', '0.8rem 5rem'],

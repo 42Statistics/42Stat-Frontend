@@ -5,15 +5,15 @@ import styled from '@emotion/styled';
 
 export const MobileHeader = () => {
   return (
-    <MobileHeaderLayout>
+    <Layout>
       <VStack spacing="4rem">
         <AppLogoTitleButton />
         <MobileSearchBar />
       </VStack>
-    </MobileHeaderLayout>
+    </Layout>
   );
 };
 
-const MobileHeaderLayout = styled.header`
+const Layout = styled.header`
   padding: 5rem 0;
 `;

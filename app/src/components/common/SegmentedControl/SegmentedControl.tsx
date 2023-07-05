@@ -73,7 +73,11 @@ const ControlsContainer = styled.div`
   display: flex;
 `;
 
-const Controls = styled.div<{ ready: boolean }>`
+type ControlsProps = {
+  ready: boolean;
+};
+
+const Controls = styled.div<ControlsProps>`
   display: inline-flex;
   justify-content: space-between;
   border-radius: ${({ theme }) => theme.radius.md};
@@ -104,7 +108,11 @@ const Controls = styled.div<{ ready: boolean }>`
   }
 `;
 
-const Segment = styled.div<{ active: boolean }>`
+type SegmentProps = {
+  active: boolean;
+};
+
+const Segment = styled.div<SegmentProps>`
   padding: 0.8rem 2.7rem;
   position: relative;
   text-align: center;
@@ -124,7 +132,11 @@ const SegmentInput = styled(Writable)`
   height: 100%;
 `;
 
-const SegmentLabel = styled.label<{ active: boolean }>`
+type SegmentLabelProps = {
+  active: boolean;
+};
+
+const SegmentLabel = styled.label<SegmentLabelProps>`
   cursor: pointer;
   display: block;
   font-weight: medium;

@@ -70,7 +70,7 @@ export const UserProfile = () => {
   const titleWithLogin = getTitleWithLogin(titles, login);
 
   return (
-    <UserProfileLayout backgroundUrl={coalition.coverUrl}>
+    <Layout backgroundUrl={coalition.coverUrl}>
       <Desktop>
         <HStack h="100%" spacing="4rem">
           <Avatar size="xl" src={imgUrl} />
@@ -101,11 +101,15 @@ export const UserProfile = () => {
           </HStack>
         </VStack>
       </TabletAndBelow>
-    </UserProfileLayout>
+    </Layout>
   );
 };
 
-const UserProfileLayout = styled.div<{ backgroundUrl?: string | null }>`
+type LayoutProps = {
+  backgroundUrl?: string | null;
+};
+
+const Layout = styled.div<LayoutProps>`
   height: 100%;
   background-image: ${({ backgroundUrl }) =>
     backgroundUrl != null

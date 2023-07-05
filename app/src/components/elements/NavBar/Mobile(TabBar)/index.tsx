@@ -11,7 +11,7 @@ export const TabBar = () => {
   const user = useAtomValue(userAtom);
 
   return (
-    <TabBarLayout>
+    <Layout>
       <HStack as="ul" w="100%" justify="space-around">
         <TabItem route={NAV_ROUTES.HOME} />
         <TabItem route={NAV_ROUTES.PROFILE} />
@@ -19,11 +19,11 @@ export const TabBar = () => {
         <TabItem route={NAV_ROUTES.EVALLOG} />
         <MobileNavProfile imgUrl={user.imgUrl} />
       </HStack>
-    </TabBarLayout>
+    </Layout>
   );
 };
 
-const TabBarLayout = styled.nav`
+const Layout = styled.nav`
   position: fixed;
   bottom: 0;
   width: 100%;

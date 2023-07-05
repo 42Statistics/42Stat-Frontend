@@ -14,13 +14,13 @@ export const ProgressionBar = ({ rate }: ProgressionBarProps) => {
   const newRate = refineRate(rate);
 
   return (
-    <ProgressionBarBackground>
+    <Layout>
       <ProgressionBarInner rate={newRate} />
-    </ProgressionBarBackground>
+    </Layout>
   );
 };
 
-const ProgressionBarBackground = styled.div`
+const Layout = styled.div`
   width: 80px;
   height: 0.75rem;
   background-color: #e9e9e9;

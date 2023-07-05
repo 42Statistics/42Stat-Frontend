@@ -1,9 +1,11 @@
 import { CaptionText, VStack } from '@components/common';
 import styled from '@emotion/styled';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { NavItemProps } from '../shared/NavItem';
+import type { NavItemProps } from '../Desktop/DesktopNavItem';
 
-export const TabletNavItem = ({ route }: NavItemProps) => {
+type TabletNavItemProps = NavItemProps;
+
+export const TabletNavItem = ({ route }: TabletNavItemProps) => {
   const location = useLocation();
   const isFocused = location.pathname === route.path;
   const NavItemIcon = !isFocused ? route.icon : route.iconFocused;
@@ -11,19 +13,20 @@ export const TabletNavItem = ({ route }: NavItemProps) => {
 
   // Link를 NavItemLayout 안에 넣으면 padding 부분을 눌렀을 때 작동하지 않아서 navigate으로 대체
   return (
-    <TabletNavItemLayout
-      isFocused={isFocused}
-      onClick={() => navigate(route.path)}
-    >
+    <Layout isFocused={isFocused} onClick={() => navigate(route.path)}>
       <VStack>
         <NavItemIcon size="20px" />
         <CaptionText>{route.abbr}</CaptionText>
       </VStack>
-    </TabletNavItemLayout>
+    </Layout>
   );
 };
 
-const TabletNavItemLayout = styled.li<{ isFocused: boolean }>`
+type LayoutProps = {
+  isFocused: boolean;
+};
+
+const Layout = styled.li<LayoutProps>`
   width: 100%;
   padding: 1rem 0;
   border-radius: ${({ theme }) => theme.radius.md};

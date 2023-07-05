@@ -14,7 +14,7 @@ export const DashboardContent = ({
   isApexChart = false,
 }: DashboardContentProps) => {
   return (
-    <DashboardContentLayout>
+    <Layout>
       <VStack w="100%" h="100%" spacing="2rem" align="start">
         <VStack w="100%" align="start">
           {title && <H3MediumText>{title}</H3MediumText>}
@@ -26,11 +26,11 @@ export const DashboardContent = ({
           <div style={{ width: '100%', height: '100%' }}>{children}</div> // ApexChart의 부모 요소가 Flex인 경우 width: 100%가 적용되지 않는 버그
         )}
       </VStack>
-    </DashboardContentLayout>
+    </Layout>
   );
 };
 
-const DashboardContentLayout = styled.div`
+const Layout = styled.div`
   width: 100%;
   height: 100%;
   padding: 2rem;

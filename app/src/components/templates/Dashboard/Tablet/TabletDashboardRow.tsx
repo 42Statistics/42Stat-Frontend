@@ -1,5 +1,5 @@
-import styled from '@emotion/styled';
 import type { TabletDashboardColSize } from '@/types/Dashboard';
+import styled from '@emotion/styled';
 
 type TabletDashboardRowProps = {
   row: number;
@@ -11,19 +11,15 @@ export const TabletDashboardRow = ({
   children,
   ...propsExceptChildren
 }: TabletDashboardRowProps) => {
-  return (
-    <TabletDashboardRowLayout {...propsExceptChildren}>
-      {children}
-    </TabletDashboardRowLayout>
-  );
+  return <Layout {...propsExceptChildren}>{children}</Layout>;
 };
 
-type TabletDashboardRowLayoutProps = {
+type LayoutProps = {
   row: number;
   col: TabletDashboardColSize;
 };
 
-const TabletDashboardRowLayout = styled.div<TabletDashboardRowLayoutProps>`
+const Layout = styled.div<LayoutProps>`
   display: grid;
   grid-template-columns: ${({ col }) => `repeat(${col}, 1fr)`};
   grid-template-rows: ${({ row, col }) =>

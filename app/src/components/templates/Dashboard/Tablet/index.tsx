@@ -1,5 +1,5 @@
-import styled from '@emotion/styled';
 import type { TabletDashboardProps } from '@/types/Dashboard';
+import styled from '@emotion/styled';
 import { DashboardItem } from '../shared/DashboardItem';
 import { TabletDashboardRow } from './TabletDashboardRow';
 

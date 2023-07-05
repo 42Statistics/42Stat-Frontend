@@ -10,17 +10,17 @@ type TabProps = {
 
 export const Tab = ({ selected, onClick, children }: TabProps) => {
   return (
-    <StyledTab onClick={onClick} selected={selected}>
+    <Layout onClick={onClick} selected={selected}>
       <Text>{children}</Text>
-    </StyledTab>
+    </Layout>
   );
 };
 
-type StyledTabProps = {
+type LayoutProps = {
   selected: boolean;
 };
 
-const StyledTab = styled.div<StyledTabProps>`
+const Layout = styled.div<LayoutProps>`
   display: inline-block;
   padding: 1.4rem 2rem;
   cursor: pointer;

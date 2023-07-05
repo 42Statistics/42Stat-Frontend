@@ -9,16 +9,16 @@ export const LandingLayout = () => {
       <Helmet>
         <meta name="theme-color" content="#212222" />
       </Helmet>
-      <LandingPageLayout>
+      <Layout>
         <Center h="100vh">
           <Outlet />
         </Center>
-      </LandingPageLayout>
+      </Layout>
     </>
   );
 };
 
-const LandingPageLayout = styled.main`
+const Layout = styled.main`
   background: url('/black-space.jpeg'),
     linear-gradient(142deg, #212222 0%, #000000 100%); // fallback gradient for UX
   background-size: cover;

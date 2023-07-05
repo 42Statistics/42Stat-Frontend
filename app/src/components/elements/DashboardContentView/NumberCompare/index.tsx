@@ -18,16 +18,14 @@ export const NumberCompare = ({ curr, last, unit }: NumberCompareProps) => {
         <H3Text>{curr.toLocaleString()}</H3Text>
         <Text>{unit}</Text>
       </HStack>
-      <HStack spacing="0.5rem">
-        {diff !== 0 ? (
-          <>
-            <Arrow direction={diff > 0 ? 'up' : 'down'} />
-            <H3Text color={color}>{Math.abs(diff).toLocaleString()}</H3Text>
-          </>
-        ) : (
-          <NoneDash />
-        )}
-      </HStack>
+      {diff !== 0 ? (
+        <HStack spacing="0.5rem">
+          <Arrow direction={diff > 0 ? 'up' : 'down'} />
+          <H3Text color={color}>{Math.abs(diff).toLocaleString()}</H3Text>
+        </HStack>
+      ) : (
+        <NoneDash />
+      )}
     </HStack>
   );
 };

@@ -1,17 +1,11 @@
-import { css } from '@emotion/react';
-import styled from '@emotion/styled';
 import type { StackProps } from '@/types/StackProps';
-
-export const hstack = css`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+import styled from '@emotion/styled';
 
 export const HStack = styled.div<StackProps>`
-  ${hstack}
-  align-items: ${({ align }) => align};
-  justify-content: ${({ justify }) => justify};
+  display: flex;
+  justify-content: center;
+  align-items: ${({ align = 'center' }) => align};
+  justify-content: ${({ justify = 'center' }) => justify};
   gap: ${({ spacing = '0' }) => spacing};
   flex-wrap: ${({ wrap = 'nowrap' }) => wrap};
   width: ${({ w = 'auto' }) => w};

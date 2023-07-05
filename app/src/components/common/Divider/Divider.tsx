@@ -8,9 +8,9 @@ type DividerProps = Partial<{
 
 export const Divider = styled.div<DividerProps>`
   width: ${({ orientation = 'horizontal' }) =>
-    orientation === 'horizontal' ? '80%' : 'auto'};
+    orientation === 'horizontal' ? '100%' : 'auto'};
   height: ${({ orientation = 'horizontal' }) =>
-    orientation === 'vertical' ? '80%' : 'auto'};
+    orientation === 'vertical' ? '100%' : 'auto'};
   border-top: ${({
     orientation = 'horizontal',
     theme,

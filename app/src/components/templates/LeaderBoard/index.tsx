@@ -27,7 +27,7 @@ export const LeaderBoard = ({
             fixedNumber={fixedNumber}
             isMe={me !== null && item.id === me.id}
           />
-          {idx !== list.length - 1 && <Divider style={{ width: '100%' }} />}
+          {idx !== list.length - 1 && <Divider />}
         </>
       ))}
     </LeaderBoardList>

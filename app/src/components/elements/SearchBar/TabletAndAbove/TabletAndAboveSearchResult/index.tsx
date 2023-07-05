@@ -33,12 +33,12 @@ const Layout = styled.div`
   flex-direction: column;
   position: absolute;
   top: 6rem;
-  left: 0;
+  left: 1rem;
   width: 30rem;
   padding: 2.5rem;
   gap: 3rem;
   border-radius: ${({ theme }) => theme.radius.md};
-  box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 4px 8px #ccc;
   background-color: ${({ theme }) => theme.colors.mono.white};
   z-index: ${({ theme }) => theme.zIndex.searchResult};
 `;

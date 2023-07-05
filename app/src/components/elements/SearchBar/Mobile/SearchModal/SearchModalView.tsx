@@ -95,6 +95,6 @@ const Layout = styled.div`
   gap: 4rem;
   width: 100vw;
   height: 100vh;
-  padding: 6rem 2rem 0 2rem;
+  padding: 3rem;
   background-color: ${({ theme }) => theme.colors.mono.white};
 `;

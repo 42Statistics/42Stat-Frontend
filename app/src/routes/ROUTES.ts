@@ -9,4 +9,5 @@ export const ROUTES = {
   EVALLOG: '/evallog',
   LOGIN: '/login',
   LOGOUT: '/logout',
+  SETTING: '/setting',
 } as const;

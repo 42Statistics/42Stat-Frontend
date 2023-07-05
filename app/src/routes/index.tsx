@@ -22,6 +22,7 @@ const LeaderBoardPage = lazy(() => import('@pages/LeaderBoardPage'));
 const EvalLogSearchPage = lazy(() => import('@pages/EvalLogSearchPage'));
 const ProfilePage = lazy(() => import('@pages/ProfilePage'));
 const ProjectDetailPage = lazy(() => import('@pages/ProjectDetailPage'));
+const SettingPage = lazy(() => import('@pages/SettingPage'));
 
 export const AppRoutes = () => {
   const isAuthenticated = useAtomValue(isAuthenticatedAtom);
@@ -130,6 +131,20 @@ export const AppRoutes = () => {
                   }
                 >
                   <ProjectDetailPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path={ROUTES.SETTING}
+              element={
+                <Suspense
+                  fallback={
+                    <DeferredComponent>
+                      <></>
+                    </DeferredComponent>
+                  }
+                >
+                  <SettingPage />
                 </Suspense>
               }
             />

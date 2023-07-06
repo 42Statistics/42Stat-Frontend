@@ -1,10 +1,8 @@
 import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
-import { Center, VStack, WhiteH2BoldText } from '@components/common';
-import { css } from '@emotion/react';
+import { VStack, WhiteH2BoldText } from '@components/common';
+import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css'; // FIXME: import 말고 Styled Components 방식으로 Slick 적용
 import { CountUp } from 'use-count-up';
 
 const GET_LANDING = gql(/* GraphQL */ `
@@ -86,43 +84,34 @@ export const Introduction = () => {
     });
   }, [data]);
 
+  // TODO: text slider 구현
   return (
-    <VStack h="10rem" spacing="1rem">
-      <WhiteH2BoldText>
-        은하수를 여행한지{' '}
-        {<CountUp isCounting end={introData.daysAfterBeginAt} duration={3.5} />}
-        일째
-      </WhiteH2BoldText>
-      <WhiteH2BoldText>
-        {<CountUp isCounting end={introData.aliveCount} duration={3.5} />}
-        명의 히치하이커와 함께 여행중
-      </WhiteH2BoldText>
-      <Slider
-        arrows={false}
-        infinite
-        speed={1000}
-        slidesToShow={1}
-        slidesToScroll={1}
-        autoplay
-        autoplaySpeed={3000}
-        vertical
-        css={SliderCenterStyle}
-      >
-        {strs.map((str, index) => (
-          <Center key={index}>
-            <WhiteH2BoldText>{str}</WhiteH2BoldText>
-          </Center>
-        ))}
-      </Slider>
-    </VStack>
+    <Layout>
+      <VStack align="start" spacing="1rem">
+        <WhiteH2BoldText>
+          은하수를 여행한지{' '}
+          {
+            <CountUp
+              isCounting
+              end={introData.daysAfterBeginAt}
+              duration={3.5}
+            />
+          }
+          일째
+        </WhiteH2BoldText>
+        <WhiteH2BoldText>
+          {<CountUp isCounting end={introData.aliveCount} duration={3.5} />}
+          명의 히치하이커와 함께 여행중
+        </WhiteH2BoldText>
+        <WhiteH2BoldText>{strs[0]}</WhiteH2BoldText>
+        {/* {strs.map((str, index) => (
+        <WhiteH2BoldText key={index}>{str}</WhiteH2BoldText>
+      ))} */}
+      </VStack>
+    </Layout>
   );
 };
 
-// Slider 가운데 정렬을 위해 필요한 스타일
-const SliderCenterStyle = css`
-  .slick-track .slick-slide {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+const Layout = styled.div`
+  width: 30rem;
 `;

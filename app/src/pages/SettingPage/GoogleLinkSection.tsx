@@ -14,6 +14,7 @@ import {
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { BsArrowLeftRight } from '@react-icons/all-files/bs/BsArrowLeftRight';
+import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
 import { mq } from '@utils/responsive/mq';
 import { useState } from 'react';
 
@@ -39,20 +40,37 @@ export const GoogleLinkSection = () => {
           <Switch checked={isLinked} onChange={toggleIsLinked} />
         </GoogleLinkTitle>
         <Divider />
-        <GoogleLinkStatusBox>
-          <HStack spacing="2rem">
-            <Image src={ft_logo} style={{ width: '24px' }} />
-            <MediumText>yopark</MediumText>
+        <TabletAndAbove>
+          <HStack w="100%" justify="center" spacing="3rem">
+            <HStack spacing="2rem">
+              <Image src={ft_logo} style={{ width: '24px' }} />
+              <MediumText>yopark</MediumText>
+            </HStack>
+            <BsArrowLeftRight />
+            <HStack spacing="2rem">
+              <Image src={google_logo} style={{ width: '24px' }} />
+              <MediumText>yopark.dev@gmail.com</MediumText>
+            </HStack>
+            <Text color={theme.colors.mono.gray300}>
+              2023. 07. 06. 01:49 연동됨
+            </Text>
           </HStack>
-          <BsArrowLeftRight />
-          <HStack spacing="2rem">
-            <Image src={google_logo} style={{ width: '24px' }} />
-            <MediumText>yopark.dev@gmail.com</MediumText>
-          </HStack>
-          <Text color={theme.colors.mono.gray300}>
-            2023. 07. 06. 01:49 연동됨
-          </Text>
-        </GoogleLinkStatusBox>
+        </TabletAndAbove>
+        <Mobile>
+          <VStack align="start" spacing="3rem">
+            <HStack spacing="2rem">
+              <Image src={ft_logo} style={{ width: '24px' }} />
+              <MediumText>yopark</MediumText>
+            </HStack>
+            <HStack spacing="2rem">
+              <Image src={google_logo} style={{ width: '24px' }} />
+              <MediumText>yopark.dev@gmail.com</MediumText>
+            </HStack>
+            <Text color={theme.colors.mono.gray300}>
+              2023. 07. 06. 01:49 연동됨
+            </Text>
+          </VStack>
+        </Mobile>
       </VStack>
     </Layout>
   );
@@ -78,15 +96,4 @@ const GoogleLinkTitle = styled.div`
     flexDirection: ['column', 'row'],
     gap: ['1rem', 0],
   })}
-`;
-
-const GoogleLinkStatusBox = styled.div`
-  width: 100%;
-  display: flex;
-  ${mq({
-    flexDirection: ['column', 'row'],
-  })}
-  align-items: center;
-  justify-content: center;
-  gap: 3rem;
 `;

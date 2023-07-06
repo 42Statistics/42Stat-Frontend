@@ -1,20 +1,15 @@
-import { isAuthenticatedAtom } from '@atoms/isAuthenticatedAtom';
-import { needFtOAuthAtom } from '@atoms/needFtOAuthAtom';
 import { withHead } from '@components/hoc/withHead';
-import { useSetAtom } from 'jotai';
-import { RESET } from 'jotai/utils';
+import { ROUTES } from '@routes/ROUTES';
 import { useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
 
 const LogoutPage = () => {
-  const setIsAuthenticated = useSetAtom(isAuthenticatedAtom);
-  const setNeedFtOAuth = useSetAtom(needFtOAuthAtom);
-
   useEffect(() => {
-    setIsAuthenticated(RESET);
-    setNeedFtOAuth(RESET);
-  }, [setIsAuthenticated, setNeedFtOAuth]);
+    localStorage.removeItem('ftoauth');
+    localStorage.removeItem('googleauth');
+  }, []);
 
-  return <></>;
+  return <Navigate to={ROUTES.ROOT} />;
 };
 
 export default withHead(LogoutPage);

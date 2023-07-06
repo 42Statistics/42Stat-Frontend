@@ -1,30 +1,27 @@
+import { unlinkGoogle } from '@/services/link';
 import ft_logo from '@assets/42-logo.svg';
 import google_logo from '@assets/google-logo.svg';
 import {
+  Clickable,
   Divider,
   H2BoldText,
   HStack,
   Image,
   MediumText,
   Spacer,
-  Switch,
   Text,
   VStack,
 } from '@components/common';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { BsArrowLeftRight } from '@react-icons/all-files/bs/BsArrowLeftRight';
-import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
+import { IoTrashOutline } from '@react-icons/all-files/io5/IoTrashOutline';
+import { Desktop, TabletAndBelow } from '@utils/responsive/Device';
 import { mq } from '@utils/responsive/mq';
-import { useState } from 'react';
 
 export const GoogleLinkSection = () => {
   const theme = useTheme();
-  const [isLinked, setIsLinked] = useState<boolean>(true);
-
-  const toggleIsLinked = () => {
-    setIsLinked((isLinked) => !isLinked);
-  };
+  const isLinkedGoogle = localStorage.getItem('isGoogleLinked') === 'true';
 
   return (
     <Layout>
@@ -37,10 +34,9 @@ export const GoogleLinkSection = () => {
             </Text>
           </VStack>
           <Spacer />
-          <Switch checked={isLinked} onChange={toggleIsLinked} />
         </GoogleLinkTitle>
         <Divider />
-        <TabletAndAbove>
+        <Desktop>
           <HStack w="100%" justify="center" spacing="3rem">
             <HStack spacing="2rem">
               <Image src={ft_logo} style={{ width: '24px' }} />
@@ -54,23 +50,31 @@ export const GoogleLinkSection = () => {
             <Text color={theme.colors.mono.gray300}>
               2023. 07. 06. 01:49 연동됨
             </Text>
+            <Clickable onClick={unlinkGoogle}>
+              <IoTrashOutline size="20px" />
+            </Clickable>
           </HStack>
-        </TabletAndAbove>
-        <Mobile>
+        </Desktop>
+        <TabletAndBelow>
           <VStack align="start" spacing="3rem">
             <HStack spacing="2rem">
               <Image src={ft_logo} style={{ width: '24px' }} />
               <MediumText>yopark</MediumText>
             </HStack>
             <HStack spacing="2rem">
-              <Image src={google_logo} style={{ width: '24px' }} />
-              <MediumText>yopark.dev@gmail.com</MediumText>
+              <HStack spacing="2rem">
+                <Image src={google_logo} style={{ width: '24px' }} />
+                <MediumText>yopark.dev@gmail.com</MediumText>
+              </HStack>
+              <Clickable onClick={unlinkGoogle}>
+                <IoTrashOutline size="20px" />
+              </Clickable>
             </HStack>
             <Text color={theme.colors.mono.gray300}>
               2023. 07. 06. 01:49 연동됨
             </Text>
           </VStack>
-        </Mobile>
+        </TabletAndBelow>
       </VStack>
     </Layout>
   );

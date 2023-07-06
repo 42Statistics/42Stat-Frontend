@@ -1,5 +1,6 @@
 export const ROUTES = {
   ROOT: '/',
+  HOME: '/home',
   FTOAUTH: '/ftoauth',
   PROFILE_ROOT: '/profile',
   PROFILE: '/profile/:username',
@@ -7,7 +8,6 @@ export const ROUTES = {
   PROJECT_DETAIL: '/project/:projectName',
   LEADERBOARD: '/leaderboard',
   EVALLOG: '/evallog',
-  LOGIN: '/login',
   LOGOUT: '/logout',
   SETTING: '/setting',
 } as const;

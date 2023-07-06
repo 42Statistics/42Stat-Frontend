@@ -28,7 +28,7 @@ export const useNavRoutes = () => {
     HOME: {
       text: '홈',
       abbr: '홈',
-      path: ROUTES.ROOT,
+      path: ROUTES.HOME,
       icon: RiHome2Line,
       iconFocused: RiHome2Fill,
     },

@@ -1,6 +1,9 @@
 import { Divider, HStack, VStack } from '@components/common';
-import { FtLoginButton, GoogleLoginButton } from '@components/common/Button';
 import { AppLogoTitle } from '@components/elements/AppLogoTitle';
+import {
+  FtLoginButton,
+  GoogleLoginButton,
+} from '@components/elements/LoginButton';
 import { keyframes, useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { withHead } from '@hoc/withHead';

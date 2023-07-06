@@ -84,8 +84,10 @@ const Layout = styled.li<LayoutProps>`
   user-select: ${({ isMe }) => isMe && 'none'};
   transition: all 0.3s;
 
-  &:hover {
-    transform: scale(1.01);
-    box-shadow: 10px 10px 10px #dddddd, -10px -10px 10px #ffffff;
-  }
+  ${mq({
+    '&:hover': {
+      transform: ['none', 'scale(1.01)'],
+      boxShadow: ['none', '10px 10px 10px #dddddd, -10px -10px 10px #ffffff'],
+    },
+  })}
 `;

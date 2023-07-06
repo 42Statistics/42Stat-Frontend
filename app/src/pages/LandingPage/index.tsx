@@ -13,31 +13,25 @@ const LandingPage = () => {
   const theme = useTheme();
 
   return (
-    <Layout>
-      <VStack spacing="10rem">
-        <HStack spacing="2rem" h="25rem">
-          <Divider color={theme.colors.mono.white} orientation="vertical" />
-          <Title>
-            <VStack align="start" spacing="6rem">
-              <a href="/">
-                <AppLogoTitle size="sm" color={theme.colors.mono.white} />
-              </a>
-              <Introduction />
-            </VStack>
-          </Title>
-        </HStack>
-        <VStack spacing="2rem">
-          <FtLoginButton />
-          <GoogleLoginButton />
-        </VStack>
+    <VStack spacing="10rem">
+      <HStack spacing="2rem" h="25rem">
+        <Divider color={theme.colors.mono.white} orientation="vertical" />
+        <Title>
+          <VStack align="start" spacing="6rem">
+            <a href="/">
+              <AppLogoTitle size="sm" color={theme.colors.mono.white} />
+            </a>
+            <Introduction />
+          </VStack>
+        </Title>
+      </HStack>
+      <VStack spacing="2rem">
+        <FtLoginButton />
+        <GoogleLoginButton />
       </VStack>
-    </Layout>
+    </VStack>
   );
 };
-
-const Layout = styled.div`
-  user-select: none;
-`;
 
 const siledInFromLeft = keyframes`
     0% {

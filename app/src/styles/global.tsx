@@ -67,19 +67,5 @@ export const global = () => css`
 
   body {
     font-size: 1.4rem;
-    background-color: #f9f9f9; // body가 아닌 다른 곳에 넣으면 스크롤 시 흰색이 보임
-  }
-
-  strong {
-    font-weight: bold; // 글 쓸 때 필요함
-  }
-
-  ::moz-selection {
-    /* moz-는 firefox에서 사용하는 속성 */
-    background: #e5f6e4;
-  }
-
-  ::selection {
-    background: #e5f6e4;
   }
 `;

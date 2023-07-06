@@ -1,34 +1,42 @@
 import ft_logo from '@assets/42-logo.svg';
-import { needFtOAuthAtom } from '@atoms/needFtOAuthAtom';
 import { Clickable, HStack, Image, MediumText } from '@components/common';
+import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { ROUTES } from '@routes/ROUTES';
-import { useSetAtom } from 'jotai';
+import { rgba } from 'emotion-rgba';
 import { useNavigate } from 'react-router-dom';
 
-export const FtOAuthLoginBtn = () => {
+export const FtLoginButton = () => {
+  const theme = useTheme();
   const navigate = useNavigate();
-  const setIsNeedFtOAuth = useSetAtom(needFtOAuthAtom);
 
   const handleClick = () => {
     // FIXME: 실제 로직으로 교체
-    setIsNeedFtOAuth(false);
-    navigate(ROUTES.ROOT);
+    localStorage.setItem('ftoauth', 'true');
+    navigate(ROUTES.HOME);
   };
   return (
     <Clickable onClick={handleClick}>
-      <FtOAuthLoginBtnLayout>
+      <Layout>
         <HStack spacing="24px">
           <Image src={ft_logo} alt="42 로고" width="18px" />
-          <MediumText>42 계정으로 로그인</MediumText>
+          <MediumText color={rgba(theme.colors.mono.black, 0.75)}>
+            42 계정으로 로그인
+          </MediumText>
         </HStack>
-      </FtOAuthLoginBtnLayout>
+      </Layout>
     </Clickable>
   );
 };
 
-const FtOAuthLoginBtnLayout = styled.div`
+const Layout = styled.div`
+  width: 24rem;
   background-color: ${({ theme }) => theme.colors.mono.white};
   padding: 8px 20px 8px 8px;
   border-radius: ${({ theme }) => theme.radius.xs};
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: ${({ theme }) => rgba(theme.colors.mono.white, 0.8)};
+  }
 `;

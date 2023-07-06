@@ -1,6 +1,6 @@
 import { VStack, WhiteText } from '@components/common';
-import { FtLoginButton } from '@components/common/Button';
 import { AppLogoTitle } from '@components/elements/AppLogoTitle';
+import { FtLoginButton } from '@components/elements/LoginButton';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { withHead } from '@hoc/withHead';

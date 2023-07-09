@@ -20,7 +20,7 @@ export const DesktopNavBar = ({ fixed = true }: DesktopNavBarProps) => {
         <AppLogoTitleButton />
         <DesktopNavProfile
           imgUrl={user.imgUrl}
-          name={user.name}
+          name={user.displayname}
           login={user.login}
         />
         <TabletAndAboveSearchBar />

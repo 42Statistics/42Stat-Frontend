@@ -14,7 +14,7 @@ import { useAtomValue } from 'jotai';
 import { Link } from 'react-router-dom';
 
 type DesktopNavProfileProps = {
-  imgUrl: string;
+  imgUrl: string | null | undefined;
   name: string;
   login: string;
 };

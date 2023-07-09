@@ -1,4 +1,29 @@
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import {
+  ApolloClient,
+  ApolloLink,
+  ApolloProvider,
+  HttpLink,
+  InMemoryCache,
+  concat,
+} from '@apollo/client';
+import { getAccessToken } from '@utils/storage/accessToken';
+
+const httpLink = new HttpLink({
+  uri: import.meta.env.VITE_BACKEND_GRAPHQL_ENDPOINT,
+});
+
+const authMiddleWare = new ApolloLink((operation, forward) => {
+  const accessToken = getAccessToken();
+  if (accessToken === null) {
+    return forward(operation);
+  }
+  operation.setContext({
+    headers: {
+      authorization: `Bearer ${getAccessToken()}`,
+    },
+  });
+  return forward(operation);
+});
 
 /**
  * @description
@@ -10,7 +35,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
  *  https://go.apollo.dev/c/generating-unique-identifiers
  */
 const client = new ApolloClient({
-  uri: import.meta.env.VITE_BACKEND_GRAPHQL_ENDPOINT,
+  link: concat(authMiddleWare, httpLink),
   cache: new InMemoryCache({
     typePolicies: {
       Query: {

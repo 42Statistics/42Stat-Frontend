@@ -19,9 +19,6 @@ dependencies:
   '@react-icons/all-files':
     specifier: ^4.1.0
     version: 4.1.0(react@18.2.0)
-  '@react-oauth/google':
-    specifier: ^0.8.1
-    version: 0.8.1(react-dom@18.2.0)(react@18.2.0)
   '@vitejs/plugin-basic-ssl':
     specifier: ^1.0.1
     version: 1.0.1(vite@4.3.9)
@@ -129,6 +126,9 @@ devDependencies:
   '@types/facepaint':
     specifier: ^1.2.2
     version: 1.2.2
+  '@types/google.accounts':
+    specifier: ^0.0.7
+    version: 0.0.7
   '@types/lodash-es':
     specifier: ^4.17.7
     version: 4.17.7
@@ -3853,16 +3853,6 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@react-oauth/google@0.8.1(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-pPzZ9ScbTq3FaRU3/uC0d50FgWSGCBBYnW3+aocV1A6YzOMKqyBi5KLCBjh4Gy/yhkHBlKdlN0RIRWapaAGj5g==}
-    peerDependencies:
-      react: '>=16.8.0'
-      react-dom: '>=16.8.0'
-    dependencies:
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-    dev: false
-
   /@remix-run/router@1.6.3:
     resolution: {integrity: sha512-EXJysQ7J3veRECd0kZFQwYYd5sJMcq2O/m60zu1W2l3oVQ9xtub8jTOtYRE0+M2iomyG/W3Ps7+vp2kna0C27Q==}
     engines: {node: '>=14'}
@@ -5066,6 +5056,10 @@ packages:
     dependencies:
       '@types/minimatch': 5.1.2
       '@types/node': 18.16.17
+    dev: true
+
+  /@types/google.accounts@0.0.7:
+    resolution: {integrity: sha512-AAA2+/s/Oa9ETgaWY6JM2P3h8RiQ1FkdyI7QYKMY3hbIkwGbjEBLX0L6FpazVxHnq68ruDyl8Fi5v0tEwSyfeg==}
     dev: true
 
   /@types/graceful-fs@4.1.6:

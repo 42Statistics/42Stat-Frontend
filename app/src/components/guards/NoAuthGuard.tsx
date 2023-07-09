@@ -1,8 +1,11 @@
+import { useAuth } from '@/hooks/useAuth';
 import { ROUTES } from '@routes/ROUTES';
 import { Navigate, Outlet } from 'react-router-dom';
 
 export const NoAuthGuard = () => {
-  const ftoauth = localStorage.getItem('ftoauth');
+  const { auth, loading } = useAuth();
 
-  return ftoauth !== 'true' ? <Outlet /> : <Navigate to={ROUTES.HOME} />;
+  if (loading) return null;
+
+  return auth ? <Navigate to={ROUTES.HOME} /> : <Outlet />;
 };

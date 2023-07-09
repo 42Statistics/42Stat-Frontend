@@ -1,6 +1,7 @@
 import type { RankingItemType } from '@/types/Ranking';
 import { Divider } from '@components/common';
 import styled from '@emotion/styled';
+import { Fragment } from 'react';
 import { LeaderBoardItem } from './LeaderBoardItem';
 
 type LeaderBoardProps = {
@@ -19,16 +20,15 @@ export const LeaderBoard = ({
   return (
     <LeaderBoardList>
       {list.map((item, idx) => (
-        <>
+        <Fragment key={item.id}>
           <LeaderBoardItem
-            key={item.id}
             item={item}
             unit={unit}
             fixedNumber={fixedNumber}
             isMe={me !== null && item.id === me.id}
           />
           {idx !== list.length - 1 && <Divider />}
-        </>
+        </Fragment>
       ))}
     </LeaderBoardList>
   );

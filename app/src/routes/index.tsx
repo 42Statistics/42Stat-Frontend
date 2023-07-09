@@ -5,7 +5,7 @@ import { LandingLayout } from '@layouts/LandingLayout';
 import { MainLayout } from '@layouts/MainLayout';
 import NotFoundPage from '@pages/Error/404';
 import FtOAuthPage from '@pages/FtOAuthPage';
-import LogoutPage from '@pages/LogoutPage';
+import FtOAuthRedirectPage from '@pages/FtOAuthRedirectPage';
 import { HomePageSkeleton } from '@pages/PageSkeletons/HomePageSkeleton';
 import { ProfilePageSkeleton } from '@pages/PageSkeletons/ProfilePageSkeleton';
 import SettingPage from '@pages/SettingPage';
@@ -36,7 +36,11 @@ export const AppRoutes = () => {
         </Route>
       </Route>
       <Route element={<LandingLayout />}>
-        <Route path={ROUTES.FTOAUTH} element={<FtOAuthPage />} />
+        <Route path={ROUTES.FT_OAUTH} element={<FtOAuthPage />} />
+        <Route
+          path={ROUTES.FT_OAUTH_REDIRECT}
+          element={<FtOAuthRedirectPage />}
+        />
       </Route>
       <Route element={<AuthGuard />}>
         <Route element={<MainLayout />}>
@@ -112,7 +116,6 @@ export const AppRoutes = () => {
           />
           <Route path={ROUTES.SETTING} element={<SettingPage />} />
         </Route>
-        <Route path={ROUTES.LOGOUT} element={<LogoutPage />} />
       </Route>
       <Route element={<LandingLayout />}>
         <Route path="*" element={<NotFoundPage />} />

@@ -7,13 +7,20 @@ type LoginButtonProps = {
   logo: React.ReactNode;
   text: string;
   onClick: () => void;
+  disabled?: boolean;
 };
 
-export const LoginButton = ({ logo, text, onClick }: LoginButtonProps) => {
+// TODO: disabled 상태일 때 디자인
+export const LoginButton = ({
+  logo,
+  text,
+  onClick,
+  disabled = false,
+}: LoginButtonProps) => {
   const theme = useTheme();
 
   return (
-    <Clickable onClick={onClick}>
+    <Clickable onClick={onClick} disabled={disabled}>
       <Layout>
         <Center w="40px">{logo}</Center>
         <HStack w="100%">
@@ -37,6 +44,6 @@ const Layout = styled.div`
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: ${({ theme }) => rgba(theme.colors.mono.white, 0.8)};
+    background-color: ${({ theme }) => rgba(theme.colors.mono.white, 0.9)};
   }
 `;

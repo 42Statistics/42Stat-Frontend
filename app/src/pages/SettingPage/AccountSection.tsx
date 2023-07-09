@@ -1,5 +1,4 @@
 import {
-  Button,
   Divider,
   H2BoldText,
   HStack,
@@ -7,13 +6,11 @@ import {
   VStack,
 } from '@components/common';
 import styled from '@emotion/styled';
-import { ROUTES } from '@routes/ROUTES';
 import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
-import { useNavigate } from 'react-router-dom';
+import { DeleteAccountButton } from './DeleteAccountButton';
+import { LogoutButton } from './LogoutButton';
 
 export const AccountSection = () => {
-  const navigate = useNavigate();
-
   return (
     <Layout>
       <TabletAndAbove>
@@ -21,8 +18,8 @@ export const AccountSection = () => {
           <H2BoldText>계정 관리</H2BoldText>
           <Spacer />
           <HStack spacing="2rem">
-            <Button onClick={() => navigate(ROUTES.LOGOUT)}>로그아웃</Button>
-            <Button>계정 삭제</Button>
+            <LogoutButton />
+            <DeleteAccountButton />
           </HStack>
         </HStack>
       </TabletAndAbove>
@@ -31,8 +28,8 @@ export const AccountSection = () => {
           <H2BoldText>계정 관리</H2BoldText>
           <Divider />
           <HStack spacing="2rem">
-            <Button onClick={() => navigate(ROUTES.LOGOUT)}>로그아웃</Button>
-            <Button>계정 삭제</Button>
+            <LogoutButton />
+            <DeleteAccountButton />
           </HStack>
         </VStack>
       </Mobile>

@@ -3,7 +3,6 @@ import { useMutation } from '@apollo/client';
 import { Button } from '@components/common';
 import { ROUTES } from '@routes/ROUTES';
 import { removeAccessToken } from '@utils/storage/accessToken';
-import { removeGoogleCredential } from '@utils/storage/googleCredential';
 import { removeRefreshToken } from '@utils/storage/refreshToken';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -29,7 +28,6 @@ export const LogoutButton = () => {
     if (data.logout) {
       removeAccessToken();
       removeRefreshToken();
-      removeGoogleCredential();
       navigate(ROUTES.ROOT);
     } else {
       alert('로그아웃에 실패했습니다.'); // TODO: UI

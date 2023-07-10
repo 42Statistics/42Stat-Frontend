@@ -8,7 +8,10 @@ import { Image } from '@components/common';
 import { ROUTES } from '@routes/ROUTES';
 import { createFakeGoogleWrapper } from '@utils/createFakeGoogleWrapper';
 import { setAccessToken } from '@utils/storage/accessToken';
-import { setGoogleCredential } from '@utils/storage/googleCredential';
+import {
+  removeGoogleCredential,
+  setGoogleCredential,
+} from '@utils/storage/googleCredential';
 import { setRefreshToken } from '@utils/storage/refreshToken';
 import { useSetAtom } from 'jotai';
 import { useEffect } from 'react';
@@ -83,6 +86,7 @@ export const GoogleLoginButton = () => {
       const { id, login, imgUrl, displayname } = userPreview;
       setAccessToken(accessToken);
       setRefreshToken(refreshToken);
+      removeGoogleCredential();
       setUser({
         id,
         login,

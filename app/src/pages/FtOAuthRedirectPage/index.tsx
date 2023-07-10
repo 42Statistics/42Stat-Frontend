@@ -4,7 +4,10 @@ import { userAtom } from '@atoms/userAtom';
 import { Center, Loader } from '@components/common';
 import { ROUTES } from '@routes/ROUTES';
 import { setAccessToken } from '@utils/storage/accessToken';
-import { getGoogleCredential } from '@utils/storage/googleCredential';
+import {
+  getGoogleCredential,
+  removeGoogleCredential,
+} from '@utils/storage/googleCredential';
 import { setRefreshToken } from '@utils/storage/refreshToken';
 import { useSetAtom } from 'jotai';
 import { useEffect, useState } from 'react';
@@ -93,6 +96,7 @@ const FtOAuthRedirectPage = () => {
       setUser({ id, login, imgUrl, displayname });
       setAccessToken(accessToken);
       setRefreshToken(refreshToken);
+      removeGoogleCredential();
       navigate(ROUTES.HOME);
     }
   }, [data, loading, error, navigate, setUser]);

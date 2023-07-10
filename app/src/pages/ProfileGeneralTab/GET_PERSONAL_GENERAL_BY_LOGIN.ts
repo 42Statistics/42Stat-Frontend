@@ -12,7 +12,6 @@ export const GET_PERSONAL_GENERAL_BY_LOGIN = gql(/* GraphQL */ `
       ...coalitionScoreFragment
       blackholedAt
       ...levelRecordsFragment
-      ...characterFragment
       ...teamInfoFragment
     }
   }
@@ -41,7 +40,11 @@ export const GET_PERSONAL_GENERAL_BY_LOGIN = gql(/* GraphQL */ `
       monthsPassed
       level
     }
-    memberLevelRecords {
+    promoLevelRecords {
+      monthsPassed
+      level
+    }
+    promoMemberLevelRecords {
       monthsPassed
       level
     }

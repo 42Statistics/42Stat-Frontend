@@ -16,8 +16,8 @@ import { useNavigate } from 'react-router-dom';
 import { LoginButton } from './LoginButton';
 
 const LOGIN_GOOGLE = gql(/* GraphQL */ `
-  mutation LoginGoogle($google: GoogleLoginInput!) {
-    login(google: $google) {
+  mutation LoginGoogle($google: GoogleLoginInput) {
+    login(loginInput: { google: $google }) {
       __typename
       ... on UnauthorizedType {
         status

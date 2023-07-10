@@ -12,7 +12,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const LOGIN_FT = gql(/* GraphQL */ `
   mutation LoginFt($code: String!, $google: GoogleLoginInput) {
-    login(code: $code, google: $google) {
+    login(loginInput: { code: $code, google: $google }) {
       __typename
       ... on UnauthorizedType {
         status

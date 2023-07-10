@@ -23,7 +23,8 @@ export const LevelRecords = () => {
   if (error) return <DashboardContentBadRequest message={error.message} />;
   if (!data) return <DashboardContentNotFound />;
 
-  const { userLevelRecords, memberLevelRecords } = data.getPersonalGeneral;
+  const { userLevelRecords, promoLevelRecords, promoMemberLevelRecords } =
+    data.getPersonalGeneral;
 
   const userLevelSeries = userLevelRecords
     .filter(isDefined)
@@ -31,20 +32,29 @@ export const LevelRecords = () => {
       x: monthsPassed,
       y: level,
     }));
-  const memberLevelSeries = memberLevelRecords.map(
+  const promoLevelSeries = promoLevelRecords.map(({ monthsPassed, level }) => ({
+    x: monthsPassed,
+    y: level,
+  }));
+  const promoMemberLevelSeries = promoMemberLevelRecords.map(
     ({ monthsPassed, level }) => ({
       x: monthsPassed,
       y: level,
     }),
   );
+
   const series = [
     {
       name: username,
       data: userLevelSeries,
     },
     {
-      name: '멤버 평균',
-      data: memberLevelSeries,
+      name: '동일 기수 평균',
+      data: promoLevelSeries,
+    },
+    {
+      name: '동일 기수 중 멤버 평균',
+      data: promoMemberLevelSeries,
     },
   ];
 
@@ -63,9 +73,14 @@ const LevelRecordsChart = ({ series }: LevelRecordsChartProps) => {
   const theme = useTheme();
 
   const options: ApexCharts.ApexOptions = {
-    colors: [theme.colors.primary.default, theme.colors.accent.default],
+    colors: [
+      theme.colors.primary.default,
+      theme.colors.mono.gray300,
+      theme.colors.accent.default,
+    ],
     xaxis: {
-      tickAmount: 8,
+      max: 24,
+      tickAmount: 24,
       labels: {
         formatter: (value) => `${value}개월`,
       },

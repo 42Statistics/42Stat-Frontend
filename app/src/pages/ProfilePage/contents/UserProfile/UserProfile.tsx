@@ -22,8 +22,8 @@ import { titleCase } from '@utils/titleCase';
 import { truncate } from 'lodash-es';
 import { useParams } from 'react-router-dom';
 
-const GET_USER_PROFILE = gql(/* GraphQL */ `
-  query GetUserProfile($login: String!) {
+export const GET_USER_PROFILE_BY_LOGIN = gql(/* GraphQL */ `
+  query GetUserProfileByLogin($login: String!) {
     getPersonalGeneral(login: $login) {
       userProfile {
         id
@@ -57,7 +57,7 @@ const GET_USER_PROFILE = gql(/* GraphQL */ `
 export const UserProfile = () => {
   const { username } = useParams() as { username: string };
 
-  const { loading, error, data } = useQuery(GET_USER_PROFILE, {
+  const { loading, error, data } = useQuery(GET_USER_PROFILE_BY_LOGIN, {
     variables: { login: username },
   });
 

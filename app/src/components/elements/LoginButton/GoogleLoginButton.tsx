@@ -82,20 +82,13 @@ export const GoogleLoginButton = () => {
         navigate(ROUTES.FT_OAUTH);
       }
     } else {
-      const { accessToken, refreshToken, userPreview } = data.login;
-      const { id, login, imgUrl, displayname } = userPreview;
+      const { accessToken, refreshToken } = data.login;
       setAccessToken(accessToken);
       setRefreshToken(refreshToken);
       removeGoogleCredential();
-      setUser({
-        id,
-        login,
-        imgUrl,
-        displayname,
-      });
       navigate(ROUTES.HOME);
     }
-  }, [data, loading, error, setUser, navigate]);
+  }, [data, loading, error, navigate]);
 
   if (status !== 'ready')
     return (

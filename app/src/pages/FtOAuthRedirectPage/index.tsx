@@ -91,9 +91,7 @@ const FtOAuthRedirectPage = () => {
       console.log(data.login.message);
       navigate(ROUTES.ROOT);
     } else {
-      const { accessToken, refreshToken, userPreview } = data.login;
-      const { id, login, imgUrl, displayname } = userPreview;
-      setUser({ id, login, imgUrl, displayname });
+      const { accessToken, refreshToken } = data.login;
       setAccessToken(accessToken);
       setRefreshToken(refreshToken);
       removeGoogleCredential();

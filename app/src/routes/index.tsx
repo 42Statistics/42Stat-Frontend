@@ -1,6 +1,7 @@
 import { DeferredComponent } from '@components/common';
 import { AuthGuard } from '@guards/AuthGuard';
 import { NoAuthGuard } from '@guards/NoAuthGuard';
+import { UserMiddleware } from '@guards/UserMiddleware';
 import { LandingLayout } from '@layouts/LandingLayout';
 import { MainLayout } from '@layouts/MainLayout';
 import NotFoundPage from '@pages/Error/404';
@@ -43,78 +44,80 @@ export const AppRoutes = () => {
         />
       </Route>
       <Route element={<AuthGuard />}>
-        <Route element={<MainLayout />}>
-          <Route
-            path={ROUTES.HOME}
-            element={
-              <Suspense
-                fallback={
-                  <DeferredComponent>
-                    <HomePageSkeleton />
-                  </DeferredComponent>
-                }
-              >
-                <HomePage />
-              </Suspense>
-            }
-          />
-          <Route
-            path={ROUTES.PROFILE}
-            element={
-              <Suspense
-                fallback={
-                  <DeferredComponent>
-                    <ProfilePageSkeleton />
-                  </DeferredComponent>
-                }
-              >
-                <ProfilePage />
-              </Suspense>
-            }
-          />
-          <Route
-            path={ROUTES.LEADERBOARD}
-            element={
-              <Suspense
-                fallback={
-                  <DeferredComponent>
-                    <></>
-                  </DeferredComponent>
-                }
-              >
-                <LeaderBoardPage />
-              </Suspense>
-            }
-          />
-          <Route
-            path={ROUTES.EVALLOG}
-            element={
-              <Suspense
-                fallback={
-                  <DeferredComponent>
-                    <></>
-                  </DeferredComponent>
-                }
-              >
-                <EvalLogSearchPage />
-              </Suspense>
-            }
-          />
-          <Route
-            path={ROUTES.PROJECT_DETAIL}
-            element={
-              <Suspense
-                fallback={
-                  <DeferredComponent>
-                    <></>
-                  </DeferredComponent>
-                }
-              >
-                <ProjectDetailPage />
-              </Suspense>
-            }
-          />
-          <Route path={ROUTES.SETTING} element={<SettingPage />} />
+        <Route element={<UserMiddleware />}>
+          <Route element={<MainLayout />}>
+            <Route
+              path={ROUTES.HOME}
+              element={
+                <Suspense
+                  fallback={
+                    <DeferredComponent>
+                      <HomePageSkeleton />
+                    </DeferredComponent>
+                  }
+                >
+                  <HomePage />
+                </Suspense>
+              }
+            />
+            <Route
+              path={ROUTES.PROFILE}
+              element={
+                <Suspense
+                  fallback={
+                    <DeferredComponent>
+                      <ProfilePageSkeleton />
+                    </DeferredComponent>
+                  }
+                >
+                  <ProfilePage />
+                </Suspense>
+              }
+            />
+            <Route
+              path={ROUTES.LEADERBOARD}
+              element={
+                <Suspense
+                  fallback={
+                    <DeferredComponent>
+                      <></>
+                    </DeferredComponent>
+                  }
+                >
+                  <LeaderBoardPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path={ROUTES.EVALLOG}
+              element={
+                <Suspense
+                  fallback={
+                    <DeferredComponent>
+                      <></>
+                    </DeferredComponent>
+                  }
+                >
+                  <EvalLogSearchPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path={ROUTES.PROJECT_DETAIL}
+              element={
+                <Suspense
+                  fallback={
+                    <DeferredComponent>
+                      <></>
+                    </DeferredComponent>
+                  }
+                >
+                  <ProjectDetailPage />
+                </Suspense>
+              }
+            />
+            <Route path={ROUTES.SETTING} element={<SettingPage />} />
+          </Route>
         </Route>
       </Route>
       <Route element={<LandingLayout />}>

@@ -19,7 +19,7 @@ import { UnlinkGoogleButton } from './UnlinkGoogleButton';
 
 export const LinkGoogleSection = () => {
   const theme = useTheme();
-  const { data } = useQuery(GET_SETTING);
+  const { data, refetch } = useQuery(GET_SETTING);
 
   const { userLogin, googleEmail, linkedAt } = data?.getSetting ?? {};
   const isLinked = googleEmail != null && linkedAt != null;
@@ -44,13 +44,13 @@ export const LinkGoogleSection = () => {
             {data && !isLinked && (
               <>
                 <MediumText>연동된 계정 없음</MediumText>
-                <LinkGoogleButton />
+                <LinkGoogleButton onSuccess={refetch} />
               </>
             )}
             {data && isLinked && (
               <>
                 <MediumText>{googleEmail}</MediumText>
-                <UnlinkGoogleButton />
+                <UnlinkGoogleButton onSuccess={refetch} />
                 <Text color={theme.colors.mono.gray300}>
                   {dayjs(new Date(linkedAt)).format('YYYY-MM-DD HH:mm:ss')}{' '}
                   연동됨

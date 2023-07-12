@@ -2,8 +2,8 @@ import { H1BoldText, VStack } from '@components/common';
 import { Seo } from '@components/elements/Seo';
 import { withFooter } from '@hoc/withFooter';
 import { withHead } from '@hoc/withHead';
-import { AccountSection } from './components/AccountSection';
-import { LinkGoogleSection } from './components/LinkGoogleSection';
+import { AccountSection } from './sections/AccountSection';
+import { LinkGoogleSection } from './sections/LinkGoogleSection';
 
 const SettingPage = () => {
   return (

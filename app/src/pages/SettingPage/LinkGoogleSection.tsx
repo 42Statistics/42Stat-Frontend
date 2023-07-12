@@ -21,8 +21,8 @@ export const LinkGoogleSection = () => {
   const theme = useTheme();
   const { data } = useQuery(GET_SETTING);
 
-  const { userLogin, googleEmail, linkedTime } = data?.getSetting ?? {};
-  const isLinked = googleEmail != null && linkedTime != null;
+  const { userLogin, googleEmail, linkedAt } = data?.getSetting ?? {};
+  const isLinked = googleEmail != null && linkedAt != null;
 
   return (
     <Layout>
@@ -52,7 +52,7 @@ export const LinkGoogleSection = () => {
                 <MediumText>{googleEmail}</MediumText>
                 <UnlinkGoogleButton />
                 <Text color={theme.colors.mono.gray300}>
-                  {dayjs(new Date(linkedTime)).format('YYYY-MM-DD HH:mm:ss')}{' '}
+                  {dayjs(new Date(linkedAt)).format('YYYY-MM-DD HH:mm:ss')}{' '}
                   연동됨
                 </Text>
               </>

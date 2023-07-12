@@ -38,12 +38,12 @@ const documents = {
     "\n  query GetPrefferedTimeByDateTemplateByLogin(\n    $login: String!\n    $dateTemplate: DateTemplate!\n  ) {\n    getPersonalGeneral(login: $login) {\n      preferredTimeByDateTemplate(dateTemplate: $dateTemplate) {\n        data {\n          total\n          morning\n          daytime\n          evening\n          night\n        }\n        start\n        end\n      }\n    }\n  }\n": types.GetPrefferedTimeByDateTemplateByLoginDocument,
     "\n  query GetUserProfileByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      userProfile {\n        id\n        login\n        imgUrl\n        grade\n        displayname\n        coalition {\n          id\n          name\n          slug\n          imageUrl\n          coverUrl\n          color\n          score\n          userId\n        }\n        titles {\n          titleId\n          name\n          selected\n          createdAt\n          updatedAt\n        }\n        level\n      }\n    }\n  }\n": types.GetUserProfileByLoginDocument,
     "\n  query GetProjectInfoByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      name\n      description\n      minUserCount\n      maxUserCount\n      estimateTime\n      difficulty\n      currRegisteredTeamCount\n      closedTeamCount\n      averagePassFinalMark\n      objectives\n      skills\n      ...validatedRateFragment\n    }\n  }\n\n  fragment validatedRateFragment on ProjectInfo {\n    validatedRate {\n      total\n      fields {\n        key\n        value\n      }\n    }\n  }\n": types.GetProjectInfoByProjectNameDocument,
-    "\n  mutation DeleteAccount {\n    deleteAccount\n  }\n": types.DeleteAccountDocument,
     "\n  query GetSetting {\n    getSetting {\n      userLogin\n      googleEmail\n      linkedAt\n    }\n  }\n": types.GetSettingDocument,
-    "\n  mutation LinkGoogle($google: GoogleLoginInput!) {\n    linkGoogle(google: $google)\n  }\n": types.LinkGoogleDocument,
-    "\n  mutation UnlinkGoogle {\n    unlinkGoogle\n  }\n": types.UnlinkGoogleDocument,
+    "\n  mutation DeleteAccount {\n    deleteAccount\n  }\n": types.DeleteAccountDocument,
     "\n  mutation GetNewAccessToken($refreshToken: String!) {\n    refreshToken(refreshToken: $refreshToken) {\n      __typename\n      ... on Success {\n        message\n        accessToken\n        refreshToken\n        userId\n      }\n      ... on NoAssociated {\n        message\n      }\n    }\n  }\n": types.GetNewAccessTokenDocument,
     "\n  mutation Logout {\n    logout\n  }\n": types.LogoutDocument,
+    "\n  mutation LinkGoogle($google: GoogleLoginInput!) {\n    linkGoogle(google: $google)\n  }\n": types.LinkGoogleDocument,
+    "\n  mutation UnlinkGoogle {\n    unlinkGoogle\n  }\n": types.UnlinkGoogleDocument,
 };
 
 /**
@@ -163,19 +163,11 @@ export function gql(source: "\n  query GetProjectInfoByProjectName($projectName:
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  mutation DeleteAccount {\n    deleteAccount\n  }\n"): (typeof documents)["\n  mutation DeleteAccount {\n    deleteAccount\n  }\n"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
 export function gql(source: "\n  query GetSetting {\n    getSetting {\n      userLogin\n      googleEmail\n      linkedAt\n    }\n  }\n"): (typeof documents)["\n  query GetSetting {\n    getSetting {\n      userLogin\n      googleEmail\n      linkedAt\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  mutation LinkGoogle($google: GoogleLoginInput!) {\n    linkGoogle(google: $google)\n  }\n"): (typeof documents)["\n  mutation LinkGoogle($google: GoogleLoginInput!) {\n    linkGoogle(google: $google)\n  }\n"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function gql(source: "\n  mutation UnlinkGoogle {\n    unlinkGoogle\n  }\n"): (typeof documents)["\n  mutation UnlinkGoogle {\n    unlinkGoogle\n  }\n"];
+export function gql(source: "\n  mutation DeleteAccount {\n    deleteAccount\n  }\n"): (typeof documents)["\n  mutation DeleteAccount {\n    deleteAccount\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -184,6 +176,14 @@ export function gql(source: "\n  mutation GetNewAccessToken($refreshToken: Strin
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  mutation Logout {\n    logout\n  }\n"): (typeof documents)["\n  mutation Logout {\n    logout\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation LinkGoogle($google: GoogleLoginInput!) {\n    linkGoogle(google: $google)\n  }\n"): (typeof documents)["\n  mutation LinkGoogle($google: GoogleLoginInput!) {\n    linkGoogle(google: $google)\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation UnlinkGoogle {\n    unlinkGoogle\n  }\n"): (typeof documents)["\n  mutation UnlinkGoogle {\n    unlinkGoogle\n  }\n"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

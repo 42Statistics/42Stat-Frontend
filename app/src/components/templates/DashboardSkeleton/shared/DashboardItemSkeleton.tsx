@@ -1,15 +1,15 @@
 import { Skeleton } from '@components/common';
 import styled from '@emotion/styled';
 
-export const DashboardSkeletonItem = () => {
+export const DashboardItemSkeleton = () => {
   return (
-    <DashboardSkeletonItemLayout>
+    <Layout>
       <Skeleton />
-    </DashboardSkeletonItemLayout>
+    </Layout>
   );
 };
 
-const DashboardSkeletonItemLayout = styled.div`
+const Layout = styled.div`
   width: 100%;
   height: 100%;
   padding: 0.2rem;

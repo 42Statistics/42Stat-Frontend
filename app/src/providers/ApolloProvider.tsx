@@ -1,28 +1,70 @@
+import { getNewAccessToken } from '@/services/auth/getNewAccessToken';
 import {
   ApolloClient,
   ApolloLink,
   ApolloProvider,
   HttpLink,
   InMemoryCache,
-  concat,
+  from,
+  fromPromise,
 } from '@apollo/client';
+import { onError } from '@apollo/client/link/error';
+import { ROUTES } from '@routes/ROUTES';
 import { getAccessToken } from '@utils/storage/accessToken';
+import { clearStorage } from '@utils/storage/clearStorage';
+import { getRefreshToken } from '@utils/storage/refreshToken';
 
 const httpLink = new HttpLink({
   uri: import.meta.env.VITE_BACKEND_GRAPHQL_ENDPOINT,
 });
 
 const authMiddleWare = new ApolloLink((operation, forward) => {
+  if (operation.operationName === 'getLanding') {
+    return forward(operation);
+  }
   const accessToken = getAccessToken();
   if (accessToken === null) {
     return forward(operation);
   }
   operation.setContext({
     headers: {
-      authorization: `Bearer ${getAccessToken()}`,
+      ...operation.getContext().headers,
+      authorization: `Bearer ${accessToken}`,
     },
   });
   return forward(operation);
+});
+
+const refreshLink = onError(({ graphQLErrors, operation, forward }) => {
+  if (graphQLErrors) {
+    // forEach 내부에서 async await 사용하면 안됨 -> for ~ of
+    for (const { extensions } of graphQLErrors) {
+      if (extensions?.status === 401) {
+        return fromPromise(getNewAccessToken(getRefreshToken() ?? '')).flatMap(
+          (accessToken) => {
+            operation.setContext({
+              headers: {
+                ...operation.getContext().headers,
+                authorization: `Bearer ${accessToken}`,
+              },
+            });
+            return forward(operation);
+          },
+        );
+      }
+    }
+  }
+});
+
+const resetLink = onError(({ graphQLErrors }) => {
+  if (graphQLErrors) {
+    graphQLErrors.forEach(({ extensions }) => {
+      if (extensions?.status === 400) {
+        clearStorage();
+        window.location.href = ROUTES.ROOT;
+      }
+    });
+  }
 });
 
 /**
@@ -34,8 +76,9 @@ const authMiddleWare = new ApolloLink((operation, forward) => {
  *  https://go.apollo.dev/c/merging-non-normalized-objects
  *  https://go.apollo.dev/c/generating-unique-identifiers
  */
-const client = new ApolloClient({
-  link: concat(authMiddleWare, httpLink),
+
+export const client = new ApolloClient({
+  link: from([authMiddleWare, refreshLink, resetLink, httpLink]),
   cache: new InMemoryCache({
     typePolicies: {
       Query: {

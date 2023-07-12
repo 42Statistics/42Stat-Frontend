@@ -1,21 +1,33 @@
+import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import ft_logo from '@assets/42-logo.svg';
 import google_logo from '@assets/google-logo.svg';
 import {
   Divider,
   H2BoldText,
+  H3MediumText,
   HStack,
   Image,
-  MediumText,
+  Spacer,
   Text,
   VStack,
 } from '@components/common';
 import { useTheme } from '@emotion/react';
 import { NeumorphismSection } from '@styles/custom/NeumorphismSection';
 import dayjs from 'dayjs';
-import { GET_SETTING } from '../../GET_SETTING';
 import { LinkGoogleButton } from './LinkGoogleButton';
+import { LinkLabel } from './LinkLabel';
 import { UnlinkGoogleButton } from './UnlinkGoogleButton';
+
+export const GET_SETTING = gql(/* GraphQL */ `
+  query GetSetting {
+    getSetting {
+      userLogin
+      googleEmail
+      linkedAt
+    }
+  }
+`);
 
 export const LinkGoogleSection = () => {
   const theme = useTheme();
@@ -28,35 +40,46 @@ export const LinkGoogleSection = () => {
     <NeumorphismSection>
       <VStack align="start" spacing="4rem">
         <VStack align="start" spacing="0.5rem">
-          <H2BoldText>구글 계정 연동</H2BoldText>
+          <H2BoldText>계정 연동</H2BoldText>
           <Text color={theme.colors.mono.gray300}>
-            1회 연동하면 42 인증 대신 구글 로그인을 사용할 수 있습니다.
+            42 인증을 거치지 않고 로그인할 수 있어요.
           </Text>
         </VStack>
         <Divider />
-        <VStack align="start" spacing="3rem">
-          <HStack spacing="2rem">
-            <Image src={ft_logo} style={{ width: '24px' }} />
-            {data && userLogin && <MediumText>{userLogin}</MediumText>}
+        <VStack w="100%" align="start" spacing="3rem">
+          <HStack w="100%" spacing="2rem" wrap="wrap">
+            <H3MediumText>42 계정</H3MediumText>
+            <Spacer />
+            <LinkLabel
+              left={<Image src={ft_logo} style={{ width: '24px' }} />}
+              text={userLogin ?? ''}
+            />
           </HStack>
-          <HStack justify="start" spacing="2rem" wrap="wrap">
-            <Image src={google_logo} style={{ width: '24px' }} />
-            {data && !isLinked && (
-              <>
-                <MediumText>연동된 계정 없음</MediumText>
-                <LinkGoogleButton onSuccess={refetch} />
-              </>
-            )}
-            {data && isLinked && (
-              <>
-                <MediumText>{googleEmail}</MediumText>
-                <UnlinkGoogleButton onSuccess={refetch} />
-                <Text color={theme.colors.mono.gray300}>
+          <HStack w="100%" spacing="2rem" wrap="wrap">
+            <H3MediumText>구글 계정</H3MediumText>
+            <Spacer />
+            <VStack align="end" spacing="1rem">
+              <LinkLabel
+                left={<Image src={google_logo} style={{ width: '24px' }} />}
+                text={isLinked ? googleEmail : '연동된 계정 없음'}
+                right={
+                  isLinked ? (
+                    <UnlinkGoogleButton onSuccess={refetch} />
+                  ) : (
+                    <LinkGoogleButton onSuccess={refetch} />
+                  )
+                }
+              />
+              {isLinked && (
+                <Text
+                  color={theme.colors.mono.gray300}
+                  style={{ marginRight: '2rem' }}
+                >
                   {dayjs(new Date(linkedAt)).format('YYYY-MM-DD HH:mm:ss')}{' '}
                   연동됨
                 </Text>
-              </>
-            )}
+              )}
+            </VStack>
           </HStack>
         </VStack>
       </VStack>

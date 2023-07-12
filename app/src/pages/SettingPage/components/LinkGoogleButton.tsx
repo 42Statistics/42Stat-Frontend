@@ -1,41 +1,27 @@
-import { gql } from '@/__generated__';
 import { GAPI_URL } from '@/constants/GAPI';
 import { useScript } from '@/hooks/useScript';
-import { useMutation } from '@apollo/client';
+import { linkGoogle } from '@/services/link/linkGoogle';
 import { Clickable } from '@components/common';
 import { BsArrowLeftRight } from '@react-icons/all-files/bs/BsArrowLeftRight';
 import { createFakeGoogleWrapper } from '@utils/createFakeGoogleWrapper';
-import { useEffect } from 'react';
-
-const LINK_GOOGLE = gql(/* GraphQL */ `
-  mutation LinkGoogle($google: GoogleLoginInput!) {
-    linkGoogle(google: $google)
-  }
-`);
 
 export const LinkGoogleButton = () => {
-  const [linkGoogle, { loading, error, data }] = useMutation(LINK_GOOGLE);
   const status = useScript(GAPI_URL);
 
-  useEffect(() => {
-    console.log(loading, error, data);
-  }, [loading, error, data]);
+  if (status !== 'ready') {
+    return null;
+  }
 
-  if (status !== 'ready') return null;
-
-  const handleClick = (
+  const handleClick = async (
     credentialResponse: google.accounts.id.CredentialResponse,
   ) => {
-    const { credential } = credentialResponse;
     const clientId = import.meta.env.VITE_GAPI_CLIENT_ID;
-    linkGoogle({
-      variables: {
-        google: {
-          clientId,
-          credential,
-        },
-      },
+    const { credential } = credentialResponse;
+    const result = await linkGoogle({
+      clientId,
+      credential,
     });
+    console.log(result);
   };
 
   const googleButtonWrapper = createFakeGoogleWrapper(handleClick);

@@ -5,7 +5,11 @@ import { Clickable } from '@components/common';
 import { BsArrowLeftRight } from '@react-icons/all-files/bs/BsArrowLeftRight';
 import { createFakeGoogleWrapper } from '@utils/createFakeGoogleWrapper';
 
-export const LinkGoogleButton = () => {
+type LinkGoogleButtonProps = {
+  onSuccess: () => void;
+};
+
+export const LinkGoogleButton = ({ onSuccess }: LinkGoogleButtonProps) => {
   const status = useScript(GAPI_URL);
 
   if (status !== 'ready') {
@@ -17,11 +21,13 @@ export const LinkGoogleButton = () => {
   ) => {
     const clientId = import.meta.env.VITE_GAPI_CLIENT_ID;
     const { credential } = credentialResponse;
-    const result = await linkGoogle({
+    const { data } = await linkGoogle({
       clientId,
       credential,
     });
-    console.log(result);
+    if (data) {
+      onSuccess();
+    }
   };
 
   const googleButtonWrapper = createFakeGoogleWrapper(handleClick);

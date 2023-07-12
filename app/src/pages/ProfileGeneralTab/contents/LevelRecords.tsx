@@ -82,7 +82,7 @@ const LevelRecordsChart = ({ series }: LevelRecordsChartProps) => {
       max: 24,
       tickAmount: 24,
       labels: {
-        formatter: (value) => `${value}개월`,
+        formatter: (value) => value,
       },
     },
     yaxis: {

@@ -3,7 +3,6 @@ import { PrimaryText, Text } from '@components/common';
 import styled from '@emotion/styled';
 import { ROUTES } from '@routes/ROUTES';
 import { isDefined } from '@utils/isDefined';
-import { rgba } from 'emotion-rgba';
 import { truncate } from 'lodash-es';
 import { Link } from 'react-router-dom';
 import { DateDiffWithStatus } from './DateDiffWithStatus';
@@ -93,7 +92,17 @@ const Table = styled.table`
     transition: all 0.3s;
   }
 
+  td:first-of-type {
+    border-top-left-radius: ${({ theme }) => theme.radius.sm};
+    border-bottom-left-radius: ${({ theme }) => theme.radius.sm};
+  }
+
+  td:last-of-type {
+    border-top-right-radius: ${({ theme }) => theme.radius.sm};
+    border-bottom-right-radius: ${({ theme }) => theme.radius.sm};
+  }
+
   tbody tr:hover {
-    background-color: ${({ theme }) => rgba(theme.colors.accent.default, 0.15)};
+    background-color: #e8e8e8;
   }
 `;

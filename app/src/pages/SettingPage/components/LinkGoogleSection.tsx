@@ -11,9 +11,9 @@ import {
   VStack,
 } from '@components/common';
 import { useTheme } from '@emotion/react';
-import styled from '@emotion/styled';
+import { NeumorphismSection } from '@styles/custom/NeumorphismSection';
 import dayjs from 'dayjs';
-import { GET_SETTING } from './GET_SETTING';
+import { GET_SETTING } from '../GET_SETTING';
 import { LinkGoogleButton } from './LinkGoogleButton';
 import { UnlinkGoogleButton } from './UnlinkGoogleButton';
 
@@ -25,7 +25,7 @@ export const LinkGoogleSection = () => {
   const isLinked = googleEmail != null && linkedAt != null;
 
   return (
-    <Layout>
+    <NeumorphismSection>
       <VStack align="start" spacing="4rem">
         <VStack align="start" spacing="0.5rem">
           <H2BoldText>구글 계정 연동</H2BoldText>
@@ -60,19 +60,6 @@ export const LinkGoogleSection = () => {
           </HStack>
         </VStack>
       </VStack>
-    </Layout>
+    </NeumorphismSection>
   );
 };
-
-const Layout = styled.div`
-  width: 100%;
-  padding: 3rem;
-  border-radius: ${({ theme }) => theme.radius.md};
-  box-shadow: 10px 10px 10px #e8e8e8, -10px -10px 10px #ffffff;
-
-  transition: all 0.3s;
-  &:hover {
-    transform: scale(100.5%);
-    box-shadow: 10px 10px 10px #d2d2d2, -10px -10px 10px #ffffff;
-  }
-`;

@@ -1,10 +1,10 @@
-import { Divider, Skeleton, VStack } from '@components/common';
+import { Skeleton, VStack } from '@components/common';
+import { useTheme } from '@emotion/react';
 
 export const LeaderBoardTabResultSkeleton = () => {
   return (
     <VStack w="100%" spacing="5rem">
       <LeaderBoardItemSkeleteon />
-      <Divider />
       <VStack w="100%" spacing="1rem">
         {Array.from({ length: 50 }, (x) => x).map((_, idx) => (
           <LeaderBoardItemSkeleteon key={idx} />
@@ -15,11 +15,7 @@ export const LeaderBoardTabResultSkeleton = () => {
 };
 
 const LeaderBoardItemSkeleteon = () => {
-  return <Skeleton style={{ height: '50px' }} />;
-};
+  const theme = useTheme();
 
-// const SegmentedControlSkeleton = styled(Skeleton)`
-//   width: 100px;
-//   height: 40px;
-//   border-radius: 2rem;
-// `;
+  return <Skeleton h="5rem" radius={theme.radius.sm} />;
+};

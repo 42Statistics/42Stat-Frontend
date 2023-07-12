@@ -1,22 +1,14 @@
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { SkeletonAnimation } from '@styles/custom/SkeletonAnimation';
 
-const skeletonBackgroundAnimation = css`
-  background: #eeeeee;
-  background: linear-gradient(110deg, #eeeeee 8%, #f5f5f5 18%, #eeeeee 33%);
-  background-size: 200% 100%;
-  animation: 1.4s shine linear infinite;
+type SkeletonProps = Partial<{
+  w: string;
+  h: string;
+  radius: string;
+}>;
 
-  @keyframes shine {
-    to {
-      background-position-x: -200%;
-    }
-  }
-`;
-
-export const Skeleton = styled.div`
-  width: 100%;
-  height: 100%;
-  border-radius: ${({ theme }) => theme.radius.md};
-  ${skeletonBackgroundAnimation}
+export const Skeleton = styled(SkeletonAnimation)<SkeletonProps>`
+  width: ${({ w = '100%' }) => w};
+  height: ${({ h = '100%' }) => h};
+  border-radius: ${({ theme, radius = theme.radius.md }) => radius};
 `;

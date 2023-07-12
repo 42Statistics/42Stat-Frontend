@@ -8,11 +8,11 @@ export const ProjectIntroductionSkeleton = () => {
         <Divider
           orientation="vertical"
           thickness="3px"
-          style={{ height: '150px' }}
+          style={{ height: '200px' }}
         />
         <VStack w="100%" align="start" spacing="2rem">
-          <Skeleton style={{ width: '200px', height: '50px' }} />
-          <Skeleton style={{ width: '600px', height: '50px' }} />
+          <Skeleton w="20rem" h="5rem" />
+          <Skeleton w="60rem" h="5rem" />
         </VStack>
       </HStack>
     </Layout>

@@ -72,5 +72,5 @@ export const EvalLogSearchResult = ({
 };
 
 const EvalLogSkeleton = () => {
-  return <Skeleton style={{ height: '200px' }} />;
+  return <Skeleton h="20rem" />;
 };

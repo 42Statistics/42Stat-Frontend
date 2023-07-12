@@ -13,7 +13,7 @@ import {
 import { useTheme } from '@emotion/react';
 import { NeumorphismSection } from '@styles/custom/NeumorphismSection';
 import dayjs from 'dayjs';
-import { GET_SETTING } from '../GET_SETTING';
+import { GET_SETTING } from '../../GET_SETTING';
 import { LinkGoogleButton } from './LinkGoogleButton';
 import { UnlinkGoogleButton } from './UnlinkGoogleButton';
 

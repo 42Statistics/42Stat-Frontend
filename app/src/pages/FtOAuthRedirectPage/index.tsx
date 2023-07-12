@@ -17,28 +17,14 @@ const LOGIN_FT = gql(/* GraphQL */ `
   mutation LoginFt($code: String!, $google: GoogleLoginInput) {
     login(loginInput: { code: $code, google: $google }) {
       __typename
-      ... on UnauthorizedType {
-        status
+      ... on Success {
         message
-      }
-      ... on NotFoundType {
-        status
-        message
-      }
-      ... on InternalServerErrorType {
-        status
-        message
-      }
-      ... on SuccessType {
-        status
         accessToken
         refreshToken
-        userPreview {
-          id
-          login
-          imgUrl
-          displayname
-        }
+        userId
+      }
+      ... on NoAssociated {
+        message
       }
     }
   }
@@ -83,21 +69,18 @@ const FtOAuthRedirectPage = () => {
 
   useEffect(() => {
     if (loading || error || !data) {
-      console.log(loading, error, data);
       return;
     }
-    if (data.login.__typename !== 'SuccessType') {
-      console.log(data.login.status);
-      console.log(data.login.message);
-      navigate(ROUTES.ROOT);
-    } else {
-      const { accessToken, refreshToken } = data.login;
-      setAccessToken(accessToken);
-      setRefreshToken(refreshToken);
-      removeGoogleCredential();
-      navigate(ROUTES.HOME);
+    if (data.login.__typename !== 'Success') {
+      return; // unreachable
     }
+    const { accessToken, refreshToken } = data.login;
+    setAccessToken(accessToken);
+    setRefreshToken(refreshToken);
+    removeGoogleCredential();
+    navigate(ROUTES.HOME);
   }, [data, loading, error, navigate, setUser]);
+
   return (
     <Center>
       <Loader />

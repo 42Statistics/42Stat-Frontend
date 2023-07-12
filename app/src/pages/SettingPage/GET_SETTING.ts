@@ -5,7 +5,7 @@ export const GET_SETTING = gql(/* GraphQL */ `
     getSetting {
       userLogin
       googleEmail
-      linkedTime
+      linkedAt
     }
   }
 `);

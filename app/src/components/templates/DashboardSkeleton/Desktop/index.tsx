@@ -1,8 +1,8 @@
+import type { DesktopDashboardProps } from '@/types/Dashboard';
 import { DesktopDashboardLayout } from '@components/templates/Dashboard/Desktop';
 import { DesktopDashboardRow } from '@components/templates/Dashboard/Desktop/DesktopDashboardRow';
 import { DashboardItem } from '@components/templates/Dashboard/shared/DashboardItem';
-import type { DesktopDashboardProps } from '@/types/Dashboard';
-import { DashboardSkeletonItem } from '../shared/DashboardSkeletonItem';
+import { DashboardItemSkeleton } from '../shared/DashboardItemSkeleton';
 
 type DesktopDashboardSkeletonProps = Omit<DesktopDashboardProps, 'contents'>;
 
@@ -20,7 +20,7 @@ export const DesktopDashboardSkeleton = ({
               col={col}
               rowSpan={rowSpan}
               colSpan={colSpan}
-              content={DashboardSkeletonItem}
+              content={DashboardItemSkeleton}
             />
           ))}
         </DesktopDashboardRow>

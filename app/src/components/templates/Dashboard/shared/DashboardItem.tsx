@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { NeumorphismBox } from '@styles/custom/NeumorphismBox';
 
 type DashboardItemProps = {
   row: number; // TODO: 더 엄밀한 Type 필요
@@ -10,35 +11,18 @@ type DashboardItemProps = {
 
 export const DashboardItem = ({
   content: Content,
-  ...propsExceptContent
+  ...props
 }: DashboardItemProps) => {
   return (
-    <DashboardItemLayout {...propsExceptContent}>
+    <Layout {...props}>
       <Content />
-    </DashboardItemLayout>
+    </Layout>
   );
 };
 
-type DashboardItemLayoutProps = {
-  col: number;
-  colSpan: number;
-  row: number;
-  rowSpan: number;
-};
+type LayoutProps = Omit<DashboardItemProps, 'content'>;
 
-const DashboardItemLayout = styled.div<DashboardItemLayoutProps>`
+const Layout = styled(NeumorphismBox)<LayoutProps>`
   grid-column: ${({ col, colSpan }) => `${col} / span ${colSpan}`};
   grid-row: ${({ row, rowSpan }) => `${row} / span ${rowSpan}`};
-  border-radius: ${({ theme }) => theme.radius.md};
-  background-color: ${({ theme }) => theme.colors.mono.white};
-  box-shadow: 10px 10px 10px #e8e8e8, -10px -10px 10px #ffffff;
-
-  transition: all 0.3s;
-  :hover {
-    transform: scale(100.5%);
-    box-shadow: 10px 10px 10px #d2d2d2, -10px -10px 10px #ffffff;
-  }
-  /* :active {
-    box-shadow: inset 10px 10px 10px #f2f2f2, inset -10px -10px 10px #ffffff;
-  } */
 `;

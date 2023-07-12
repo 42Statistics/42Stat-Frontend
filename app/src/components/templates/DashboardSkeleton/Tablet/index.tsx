@@ -1,8 +1,8 @@
+import type { TabletDashboardProps } from '@/types/Dashboard';
 import { TabletDashboardLayout } from '@components/templates/Dashboard/Tablet';
 import { TabletDashboardRow } from '@components/templates/Dashboard/Tablet/TabletDashboardRow';
 import { DashboardItem } from '@components/templates/Dashboard/shared/DashboardItem';
-import type { TabletDashboardProps } from '@/types/Dashboard';
-import { DashboardSkeletonItem } from '../shared/DashboardSkeletonItem';
+import { DashboardItemSkeleton } from '../shared/DashboardItemSkeleton';
 
 type TabletDashboardSkeletonProps = Omit<TabletDashboardProps, 'contents'>;
 
@@ -20,7 +20,7 @@ export const TabletDashboardSkeleton = ({
               col={col}
               rowSpan={rowSpan}
               colSpan={colSpan}
-              content={DashboardSkeletonItem}
+              content={DashboardItemSkeleton}
             />
           ))}
         </TabletDashboardRow>

@@ -1,10 +1,12 @@
 import { userAtom } from '@atoms/userAtom';
 import { VStack } from '@components/common';
-import { AppLogoTitleButton } from '@components/elements/AppLogoTitle';
+import { AppLogoTitle } from '@components/elements/AppLogoTitle';
 import { DesktopNavProfile } from '@components/elements/NavProfile/Desktop';
 import { TabletAndAboveSearchBar } from '@components/elements/SearchBar/TabletAndAbove';
 import styled from '@emotion/styled';
+import { ROUTES } from '@routes/ROUTES';
 import { useAtomValue } from 'jotai';
+import { Link } from 'react-router-dom';
 import { DesktopNavMenu } from './DesktopNavMenu';
 
 type DesktopNavBarProps = {
@@ -17,7 +19,9 @@ export const DesktopNavBar = ({ fixed = true }: DesktopNavBarProps) => {
   return (
     <Layout fixed={fixed}>
       <VStack w="100%" h="100%" spacing="4rem">
-        <AppLogoTitleButton />
+        <Link to={ROUTES.ROOT}>
+          <AppLogoTitle size="sm" />
+        </Link>
         <DesktopNavProfile
           imgUrl={user.imgUrl}
           name={user.displayname}

@@ -18,12 +18,3 @@ export const AppLogoTitle = ({ size, color }: AppLogoTitleProps) => {
     </HStack>
   );
 };
-
-export const AppLogoTitleButton = () => {
-  // AppLogo를 눌렀을 때는 반드시 뭔가 반응이 있어야 할 것 같아서, Link -> a
-  return (
-    <a href="/">
-      <AppLogoTitle size="sm" />
-    </a>
-  );
-};

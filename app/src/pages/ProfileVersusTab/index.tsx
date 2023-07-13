@@ -1,7 +1,7 @@
 import { Center } from '@components/common';
 
-const ProfileRivalTab = () => {
+const ProfileVersusTab = () => {
   return <Center>이 유저와 나의 수치를 비교하는 탭</Center>;
 };
 
-export default ProfileRivalTab;
+export default ProfileVersusTab;

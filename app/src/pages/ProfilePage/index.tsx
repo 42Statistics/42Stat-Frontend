@@ -6,14 +6,14 @@ import { withFooter } from '@hoc/withFooter';
 import { withHead } from '@hoc/withHead';
 import ProfileEvalTab from '@pages/ProfileEvalTab';
 import ProfileGeneralTab from '@pages/ProfileGeneralTab';
-import ProfileRivalTab from '@pages/ProfileRivalTab';
+import ProfileVersusTab from '@pages/ProfileVersusTab';
 import { ROUTES } from '@routes/ROUTES';
 import { history } from '@utils/history';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useProfilePageDashboard } from './hooks/useProfilePageDashboard';
 
-type ProfileTabNames = 'General' | 'Eval' | 'Rival';
+type ProfileTabNames = 'General' | 'Eval' | 'Versus';
 
 // waterfall 방지를 위해 Tab은 lazy loading 하지 않겠습니다.
 export const ProfilePage = () => {
@@ -23,8 +23,8 @@ export const ProfilePage = () => {
         return 'General';
       case 'eval':
         return 'Eval';
-      case 'rival':
-        return 'Rival';
+      case 'versus':
+        return 'Versus';
       default:
         return 'General';
     }
@@ -70,13 +70,13 @@ export const ProfilePage = () => {
           평가
         </Tab>
         <Tab
-          selected={selectedTab === 'Rival'}
+          selected={selectedTab === 'Versus'}
           onClick={() => {
-            setSelectedTab('Rival');
-            navigate(`${ROUTES.PROFILE_ROOT}/${username}?tab=rival`);
+            setSelectedTab('Versus');
+            navigate(`${ROUTES.PROFILE_ROOT}/${username}?tab=versus`);
           }}
         >
-          라이벌
+          나와 비교
         </Tab>
       </Tabs>
       <TabPanel show={selectedTab === 'General'}>
@@ -85,8 +85,8 @@ export const ProfilePage = () => {
       <TabPanel show={selectedTab === 'Eval'}>
         <ProfileEvalTab />
       </TabPanel>
-      <TabPanel show={selectedTab === 'Rival'}>
-        <ProfileRivalTab />
+      <TabPanel show={selectedTab === 'Versus'}>
+        <ProfileVersusTab />
       </TabPanel>
     </VStack>
   );

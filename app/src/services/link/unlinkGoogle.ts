@@ -3,7 +3,12 @@ import { client } from '@providers/ApolloProvider';
 
 const UNLINK_GOOGLE = gql(/* GraphQL */ `
   mutation UnlinkGoogle {
-    unlinkGoogle
+    unlinkGoogle {
+      googleId
+      googleEmail
+      linkedAt
+      userId
+    }
   }
 `);
 

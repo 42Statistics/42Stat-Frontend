@@ -2,6 +2,7 @@ import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import ft_logo from '@assets/42-logo.svg';
 import google_logo from '@assets/google-logo.svg';
+import { userAtom } from '@atoms/userAtom';
 import {
   Divider,
   H2BoldText,
@@ -15,6 +16,7 @@ import {
 import { useTheme } from '@emotion/react';
 import { NeumorphismSection } from '@styles/custom/NeumorphismSection';
 import dayjs from 'dayjs';
+import { useAtomValue } from 'jotai';
 import { LinkGoogleButton } from './LinkGoogleButton';
 import { LinkLabel } from './LinkLabel';
 import { UnlinkGoogleButton } from './UnlinkGoogleButton';
@@ -22,9 +24,10 @@ import { UnlinkGoogleButton } from './UnlinkGoogleButton';
 export const GET_SETTING = gql(/* GraphQL */ `
   query GetSetting {
     getSetting {
-      userLogin
-      googleEmail
-      linkedAt
+      account {
+        googleEmail
+        linkedAt
+      }
     }
   }
 `);
@@ -32,8 +35,9 @@ export const GET_SETTING = gql(/* GraphQL */ `
 export const LinkGoogleSection = () => {
   const theme = useTheme();
   const { data, refetch } = useQuery(GET_SETTING);
+  const user = useAtomValue(userAtom);
 
-  const { userLogin, googleEmail, linkedAt } = data?.getSetting ?? {};
+  const { googleEmail, linkedAt } = data?.getSetting?.account ?? {};
   const isLinked = googleEmail != null && linkedAt != null;
 
   return (
@@ -52,7 +56,7 @@ export const LinkGoogleSection = () => {
             <Spacer />
             <LinkLabel
               left={<Image src={ft_logo} style={{ width: '24px' }} />}
-              text={userLogin ?? ''}
+              text={user.login}
             />
           </HStack>
           <HStack w="100%" spacing="2rem" wrap="wrap">

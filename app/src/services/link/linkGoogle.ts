@@ -4,7 +4,12 @@ import { client } from '@providers/ApolloProvider';
 
 const LINK_GOOGLE = gql(/* GraphQL */ `
   mutation LinkGoogle($google: GoogleLoginInput!) {
-    linkGoogle(google: $google)
+    linkGoogle(google: $google) {
+      googleId
+      googleEmail
+      linkedAt
+      userId
+    }
   }
 `);
 

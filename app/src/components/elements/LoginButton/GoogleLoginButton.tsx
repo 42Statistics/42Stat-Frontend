@@ -16,9 +16,9 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LoginButton } from './LoginButton';
 
-const LOGIN_GOOGLE = gql(/* GraphQL */ `
-  mutation LoginGoogle($google: GoogleLoginInput) {
-    login(loginInput: { google: $google }) {
+export const LOGIN_GOOGLE = gql(/* GraphQL */ `
+  mutation LoginGoogle($google: GoogleLoginInput!, $ftCode: String) {
+    loginGoogle(google: $google, ftCode: $ftCode) {
       __typename
       ... on Success {
         message
@@ -26,7 +26,7 @@ const LOGIN_GOOGLE = gql(/* GraphQL */ `
         refreshToken
         userId
       }
-      ... on NoAssociated {
+      ... on NotLinked {
         message
       }
     }
@@ -58,11 +58,11 @@ export const GoogleLoginButton = () => {
     if (loading || error || !data) {
       return;
     }
-    if (data.login.__typename === 'NoAssociated') {
+    if (data.loginGoogle.__typename === 'NotLinked') {
       navigate(ROUTES.FT_OAUTH);
       return;
     }
-    const { accessToken, refreshToken } = data.login;
+    const { accessToken, refreshToken } = data.loginGoogle;
     setAccessToken(accessToken);
     setRefreshToken(refreshToken);
     removeGoogleCredential();

@@ -26,7 +26,7 @@ export const LinkGoogleButton = ({ onSuccess }: LinkGoogleButtonProps) => {
       credential,
     });
     if (data) {
-      onSuccess();
+      onSuccess(); // TODO: refetch 대신 상태 저장
     }
   };
 

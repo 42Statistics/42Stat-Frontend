@@ -6,16 +6,10 @@ import { setRefreshToken } from '@utils/storage/refreshToken';
 const GET_NEW_ACCESS_TOKEN = gql(/* GraphQL */ `
   mutation GetNewAccessToken($refreshToken: String!) {
     refreshToken(refreshToken: $refreshToken) {
-      __typename
-      ... on Success {
-        message
-        accessToken
-        refreshToken
-        userId
-      }
-      ... on NoAssociated {
-        message
-      }
+      message
+      accessToken
+      refreshToken
+      userId
     }
   }
 `);

@@ -1,7 +1,7 @@
 const colors = {
   primary: {
     default: '#2B3E77',
-    light: '#e4f0f6',
+    light: '#dde8ed',
   },
   accent: {
     default: '#00C48C',
@@ -24,6 +24,7 @@ const colors = {
     gray300: '#777777',
     gray200: '#999999',
     gray100: '#bbbbbb',
+    gray50: '#dddddd',
   },
   background: '#f9f9f9',
 };

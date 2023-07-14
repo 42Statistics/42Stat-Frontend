@@ -1,60 +1,50 @@
 import {
   AveragePassFinalMark,
+  BasicInfo,
   ClosedTeamCount,
   CurrRegisteredTeamCount,
-  Difficulty,
-  EstimateTime,
   Objectives,
   PastEvaluationLink,
   ProjectUrl,
   Skills,
-  UserCount,
   ValidatedRate,
 } from '../contents';
 
 export const projectDetailPageDashboardContents = [
   {
     id: 0,
-    content: UserCount,
+    content: BasicInfo,
   },
   {
     id: 1,
-    content: EstimateTime,
-  },
-  {
-    id: 2,
-    content: Difficulty,
-  },
-  {
-    id: 3,
-    content: ProjectUrl,
-  },
-  {
-    id: 4,
     content: CurrRegisteredTeamCount,
   },
   {
-    id: 5,
+    id: 2,
+    content: ProjectUrl,
+  },
+  {
+    id: 3,
     content: ClosedTeamCount,
   },
   {
-    id: 6,
+    id: 4,
     content: AveragePassFinalMark,
   },
   {
-    id: 7,
+    id: 5,
     content: PastEvaluationLink,
   },
   {
-    id: 8,
+    id: 6,
     content: Objectives,
   },
   {
-    id: 9,
+    id: 7,
     content: Skills,
   },
   {
-    id: 10,
+    id: 8,
     content: ValidatedRate,
   },
 ];

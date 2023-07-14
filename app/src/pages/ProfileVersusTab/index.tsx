@@ -1,7 +1,8 @@
-import { Center } from '@components/common';
+import { Dashboard } from '@components/templates/Dashboard';
+import { useProfileVersusTabDashboard } from './hooks/useProfileVersusTabDashboard';
 
 const ProfileVersusTab = () => {
-  return <Center>이 유저와 나의 수치를 비교하는 탭</Center>;
+  return <Dashboard {...useProfileVersusTabDashboard()} />;
 };
 
 export default ProfileVersusTab;

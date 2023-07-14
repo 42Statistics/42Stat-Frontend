@@ -3,33 +3,47 @@ import {
   DashboardContentBadRequest,
   DashboardContentLoading,
   DashboardContentNotFound,
-  NoneDash,
 } from '@components/elements/DashboardContentView/Error';
 import { TextDefault } from '@components/elements/DashboardContentView/Text/TextDefault';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useParams } from 'react-router-dom';
 import { GET_PROJECT_INFO_BY_PROJECT_NAME } from '../GET_PROJECT_INFO_BY_PROJECT_NAME';
 
-export const EstimateTime = () => {
+export const BasicInfo = () => {
   const { projectName } = useParams() as { projectName: string };
 
-  const title = '예상 소요 기간';
+  const title = '기본 정보';
   const { loading, error, data } = useQuery(GET_PROJECT_INFO_BY_PROJECT_NAME, {
     variables: { projectName },
   });
+
+  const getPeopleRange = (from: number, to: number) => {
+    if (from === to) {
+      if (from === 1) {
+        return '1인';
+      }
+      return `${from}인`;
+    }
+    return `${from}~${to}인`;
+  };
   if (loading) return <DashboardContentLoading />;
   if (error) return <DashboardContentBadRequest message={error.message} />;
   if (!data) return <DashboardContentNotFound />;
 
-  const { estimateTime } = data.getProjectInfo;
+  const { minUserCount, maxUserCount, estimateTime, difficulty } =
+    data.getProjectInfo;
+
+  let text = `${getPeopleRange(minUserCount, maxUserCount)}`;
+  if (estimateTime != null) {
+    text += ` / ${estimateTime}`;
+  }
+  if (difficulty != null) {
+    text += ` / ${difficulty.toLocaleString()} XP`;
+  }
 
   return (
     <DashboardContent title={title}>
-      {estimateTime != null ? (
-        <TextDefault text={estimateTime} />
-      ) : (
-        <NoneDash />
-      )}
+      <TextDefault text={text} />
     </DashboardContent>
   );
 };

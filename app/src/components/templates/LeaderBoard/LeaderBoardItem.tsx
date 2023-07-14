@@ -87,7 +87,7 @@ const Layout = styled.li<LayoutProps>`
   ${mq({
     '&:hover': {
       transform: ['none', 'scale(1.01)'],
-      boxShadow: ['none', '10px 10px 10px #dddddd, -10px -10px 10px #ffffff'],
+      boxShadow: ['none', '0px 14px 10px #dddddd, -0px -10px 10px #ffffff'],
     },
   })}
 `;

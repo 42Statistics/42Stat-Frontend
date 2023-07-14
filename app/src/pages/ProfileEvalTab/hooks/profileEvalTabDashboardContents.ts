@@ -9,7 +9,6 @@ import {
   EvalLogSearchLink,
   MonthlyEvalCount,
   RecentComment,
-  TotalDuration,
   TotalEvalCount,
 } from '../contents';
 
@@ -28,34 +27,30 @@ export const profileEvalTabDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 3,
-    content: TotalDuration,
-  },
-  {
-    id: 4,
     content: AverageDuration,
   },
   {
-    id: 5,
+    id: 4,
     content: AverageFinalMark,
   },
   {
-    id: 6,
+    id: 5,
     content: AverageCommentLength,
   },
   {
-    id: 7,
+    id: 6,
     content: AverageFeedbackLength,
   },
   {
-    id: 8,
+    id: 7,
     content: DestinyUsers,
   },
   {
-    id: 9,
+    id: 8,
     content: RecentComment,
   },
   {
-    id: 10,
+    id: 9,
     content: EvalLogSearchLink,
   },
 ];

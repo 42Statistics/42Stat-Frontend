@@ -45,6 +45,11 @@ const UserCountPerLevelChart = ({
   series,
 }: UserCountPerLevelChartProps) => {
   const options: ApexCharts.ApexOptions = {
+    plotOptions: {
+      bar: {
+        borderRadius: 3,
+      },
+    },
     xaxis: {
       categories,
       labels: {

@@ -64,6 +64,11 @@ const AverageDurationPerCircleChart = ({
   seriesLabel,
 }: AverageDurationPerCircleChartProps) => {
   const options: ApexCharts.ApexOptions = {
+    plotOptions: {
+      bar: {
+        borderRadius: 6,
+      },
+    },
     xaxis: {
       categories,
       tickAmount: 4,

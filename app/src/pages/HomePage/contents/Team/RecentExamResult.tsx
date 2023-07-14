@@ -68,6 +68,11 @@ const LastExamResultChart = ({
   seriesLabel,
 }: LastExamResultChartProps) => {
   const options: ApexCharts.ApexOptions = {
+    plotOptions: {
+      bar: {
+        borderRadius: 8,
+      },
+    },
     xaxis: {
       categories,
       labels: {

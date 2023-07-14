@@ -59,6 +59,7 @@ const TotalScoresPerCoalitionChart = ({
   const options: ApexCharts.ApexOptions = {
     plotOptions: {
       bar: {
+        borderRadius: 10,
         distributed: true,
       },
     },

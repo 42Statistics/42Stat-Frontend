@@ -17,7 +17,7 @@ export const HorizontalBarChart = ({
     plotOptions: {
       bar: {
         horizontal: true,
-        borderRadius: 4,
+        borderRadiusApplication: 'end',
         dataLabels: {
           position: 'top',
         },
@@ -32,11 +32,11 @@ export const HorizontalBarChart = ({
     },
     colors: [theme.colors.primary.default],
     stroke: {
-      width: 1.5,
+      width: 1,
     },
     fill: {
       type: 'solid',
-      opacity: 0.4,
+      opacity: 0.5,
     },
   };
 

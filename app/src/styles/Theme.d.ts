@@ -26,6 +26,7 @@ type Colors = {
     gray300: string;
     gray200: string;
     gray100: string;
+    gray50: string;
   };
   background: string;
 };

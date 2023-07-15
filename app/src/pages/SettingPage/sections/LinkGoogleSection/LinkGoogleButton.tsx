@@ -1,6 +1,5 @@
 import { gql } from '@/__generated__';
 import { GAPI_URL } from '@/constants/GAPI';
-import { useScript } from '@/hooks/useScript';
 import { useMutation } from '@apollo/client';
 import { Clickable } from '@components/common';
 import { Spinner } from '@components/common/Loader';
@@ -10,6 +9,7 @@ import {
   createFakeGoogleWrapper,
 } from '@utils/createFakeGoogleWrapper';
 import { useEffect, useState } from 'react';
+import { useScript } from 'usehooks-ts';
 
 const LINK_GOOGLE = gql(/* GraphQL */ `
   mutation LinkGoogle($google: GoogleLoginInput!) {

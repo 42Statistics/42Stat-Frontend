@@ -1,23 +1,31 @@
+import { useDisclosure } from '@/hooks/useDisclosure';
 import { Clickable } from '@components/common';
+import { Dialog } from '@components/common/Dialog';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { MdSearch } from '@react-icons/all-files/md/MdSearch';
+import { ReactNode } from 'react';
 
 type EvalLogSearchAbsoluteButtonProps = {
   onClick: () => void;
+  dialog: ReactNode;
 };
 
 export const EvalLogSearchAbsoluteButton = ({
   onClick,
+  dialog,
 }: EvalLogSearchAbsoluteButtonProps) => {
   const theme = useTheme();
 
   return (
-    <Clickable onClick={onClick}>
-      <Layout>
-        <MdSearch color={theme.colors.mono.white} size="20px" />
-      </Layout>
-    </Clickable>
+    <>
+      <Clickable onClick={onClick}>
+        <Layout>
+          <MdSearch color={theme.colors.mono.white} size="20px" />
+        </Layout>
+      </Clickable>
+      {dialog}
+    </>
   );
 };
 

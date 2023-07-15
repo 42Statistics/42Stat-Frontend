@@ -5,14 +5,17 @@ import { useMutation } from '@apollo/client';
 import google_logo from '@assets/google-logo.svg';
 import { Image } from '@components/common';
 import { ROUTES } from '@routes/ROUTES';
-import { createFakeGoogleWrapper } from '@utils/createFakeGoogleWrapper';
+import {
+  FakeGoogleWrapperType,
+  createFakeGoogleWrapper,
+} from '@utils/createFakeGoogleWrapper';
 import { setAccessToken } from '@utils/storage/accessToken';
 import {
   removeGoogleCredential,
   setGoogleCredential,
 } from '@utils/storage/googleCredential';
 import { setRefreshToken } from '@utils/storage/refreshToken';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LoginButton } from './LoginButton';
 
@@ -34,25 +37,37 @@ export const LOGIN_GOOGLE = gql(/* GraphQL */ `
 `);
 
 export const GoogleLoginButton = () => {
-  const status = useScript(GAPI_URL);
+  const status = useScript(GAPI_URL, { removeOnUnmount: true });
   const [login, { data, loading, error }] = useMutation(LOGIN_GOOGLE);
+  const [googleButtonWrapper, setGoogleButtonWrapper] =
+    useState<FakeGoogleWrapperType>();
   const navigate = useNavigate();
 
-  const handleClick = (
-    credentialResponse: google.accounts.id.CredentialResponse,
-  ) => {
-    const { credential } = credentialResponse;
-    setGoogleCredential(credential);
-    const clientId = import.meta.env.VITE_GAPI_CLIENT_ID;
-    login({
-      variables: {
-        google: {
-          clientId,
-          credential,
+  useEffect(() => {
+    const handleClick = (
+      credentialResponse: google.accounts.id.CredentialResponse,
+    ) => {
+      const { credential } = credentialResponse;
+      setGoogleCredential(credential);
+      const clientId = import.meta.env.VITE_GAPI_CLIENT_ID;
+      login({
+        variables: {
+          google: {
+            clientId,
+            credential,
+          },
         },
-      },
-    });
-  };
+      });
+    };
+    if (status !== 'ready') {
+      return;
+    }
+    const fakeGoogleWrapper = createFakeGoogleWrapper(handleClick, true);
+    setGoogleButtonWrapper(fakeGoogleWrapper);
+    return () => {
+      fakeGoogleWrapper.remove();
+    };
+  }, [status, login]);
 
   useEffect(() => {
     if (loading || error || !data) {
@@ -69,25 +84,11 @@ export const GoogleLoginButton = () => {
     navigate(ROUTES.HOME);
   }, [data, loading, error, navigate]);
 
-  if (status !== 'ready')
-    return (
-      <LoginButton
-        logo={<GoogleLogo />}
-        text="Google 계정으로 로그인"
-        onClick={() => {
-          /* pass */
-        }}
-        disabled
-      />
-    );
-
-  const googleButtonWrapper = createFakeGoogleWrapper(handleClick);
-
   return (
     <LoginButton
       logo={<GoogleLogo />}
       text="Google 계정으로 로그인"
-      onClick={() => googleButtonWrapper.click()}
+      onClick={() => googleButtonWrapper?.click()}
     />
   );
 };

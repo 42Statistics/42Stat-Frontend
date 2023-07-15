@@ -1,8 +1,8 @@
 import { gql } from '@/__generated__';
 import { useLazyQuery } from '@apollo/client';
 import { isDefined } from '@utils/isDefined';
-import { useDebounce } from '@/hooks/useDebounce';
 import { useRef, useState } from 'react';
+import { useDebounce } from 'usehooks-ts';
 
 export const FIND_USER_PREVIEW = gql(/* GraphQL */ `
   query FindUserPreview($login: String!) {

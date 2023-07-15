@@ -1,6 +1,5 @@
 import { gql } from '@/__generated__';
 import { GAPI_URL } from '@/constants/GAPI';
-import { useScript } from '@/hooks/useScript';
 import { useMutation } from '@apollo/client';
 import google_logo from '@assets/google-logo.svg';
 import { Image } from '@components/common';
@@ -17,6 +16,7 @@ import {
 import { setRefreshToken } from '@utils/storage/refreshToken';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useScript } from 'usehooks-ts';
 import { LoginButton } from './LoginButton';
 
 export const LOGIN_GOOGLE = gql(/* GraphQL */ `

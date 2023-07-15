@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { useIntersectionObserver } from './useIntersectionObserver';
+import { useIntersectionObserver } from 'usehooks-ts';
 
 export const useInfiniteScroll = (threshold = 0.5) => {
   const ref = useRef<HTMLDivElement | null>(null);

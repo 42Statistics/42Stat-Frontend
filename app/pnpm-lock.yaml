@@ -43,9 +43,6 @@ dependencies:
   jotai:
     specifier: ^2.2.0
     version: 2.2.0(react@18.2.0)
-  jotai-utils:
-    specifier: ^0.0.0
-    version: 0.0.0
   lodash-es:
     specifier: ^4.17.21
     version: 4.17.21
@@ -8526,10 +8523,6 @@ packages:
   /jose@4.14.4:
     resolution: {integrity: sha512-j8GhLiKmUAh+dsFXlX1aJCbt5KMibuKb+d7j1JaOJG6s2UjX1PQlW+OKB/sD4a/5ZYF4RcmYmLSndOoU3Lt/3g==}
     dev: true
-
-  /jotai-utils@0.0.0:
-    resolution: {integrity: sha512-z/gS7iuWWwXY/JnvsYmcDpcFLnDsJVqkIFJ66h060LY5+cte8S7SDKEVEFPcoM6UQjyy3mj6eEKjcxb1+7OqZw==}
-    dev: false
 
   /jotai@2.2.0(react@18.2.0):
     resolution: {integrity: sha512-2gsMVpoaBa6aPHLArNhphck4+n8unZ8xF4Ciqhb+Z+tjsvabn5QFisNFHBMWooMAAmmTNU5TcvBIP8/XAsZy8Q==}

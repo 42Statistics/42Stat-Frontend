@@ -1,5 +1,6 @@
 import { gql } from '@/__generated__';
 import { EvalLogEdge, EvalLogSortOrder } from '@/__generated__/graphql';
+import { useDisclosure } from '@/hooks/useDisclosure';
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';
 import type { EvalLogSearchModel } from '@/types/EvalLogSearchModel';
 import { useLazyQuery } from '@apollo/client';
@@ -10,6 +11,7 @@ import { isDefined } from '@utils/isDefined';
 import { isEqual } from 'lodash-es';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { EvalLogSearchAbsoluteButton } from './EvalLogSearchAbsoluteButton';
 import { EvalLogSearchDialog } from './EvalLogSearchDialog';
 import { EvalLogSearchResult } from './EvalLogSearchResult';
 import { EvalLogSearchTitle } from './EvalLogSearchTitle';
@@ -96,9 +98,11 @@ const EvalLogSearchPage = () => {
   const [endCursor, setEndCursor] = useState<string>('');
   const [end, setEnd] = useState<boolean>(false);
   const { ref, isVisible } = useInfiniteScroll();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const onSubmit = (form: EvalLogSearchModel) => {
+  const handleSubmit = (form: EvalLogSearchModel) => {
     if (isEqual(form, evalLogSearchForm)) {
+      onClose();
       return;
     }
     setEvalLogEdges([]);
@@ -119,6 +123,7 @@ const EvalLogSearchPage = () => {
     });
     setEndCursor('');
     setEnd(false);
+    onClose();
   };
 
   useEffect(() => {
@@ -171,7 +176,17 @@ const EvalLogSearchPage = () => {
           infiniteScrollRef={ref}
         />
       </VStack>
-      <EvalLogSearchDialog form={evalLogSearchForm} onSubmit={onSubmit} />
+      <EvalLogSearchAbsoluteButton
+        onClick={onOpen}
+        dialog={
+          <EvalLogSearchDialog
+            form={evalLogSearchForm}
+            isOpen={isOpen}
+            onClose={onClose}
+            onSubmit={handleSubmit}
+          />
+        }
+      />
     </>
   );
 };

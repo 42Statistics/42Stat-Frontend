@@ -1,14 +1,11 @@
-import { useDisclosure } from '@/hooks/useDisclosure';
 import { Clickable } from '@components/common';
-import { Dialog } from '@components/common/Dialog';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { MdSearch } from '@react-icons/all-files/md/MdSearch';
-import { ReactNode } from 'react';
 
 type EvalLogSearchAbsoluteButtonProps = {
   onClick: () => void;
-  dialog: ReactNode;
+  dialog: React.ReactNode;
 };
 
 export const EvalLogSearchAbsoluteButton = ({

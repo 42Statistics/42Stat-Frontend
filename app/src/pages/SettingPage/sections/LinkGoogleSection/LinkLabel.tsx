@@ -1,11 +1,10 @@
 import { HStack, MediumText, Spacer } from '@components/common';
 import styled from '@emotion/styled';
-import { ReactNode } from 'react';
 
 type LinkLabelProps = {
-  left: ReactNode;
+  left: React.ReactNode;
   text: string;
-  right?: ReactNode;
+  right?: React.ReactNode;
 };
 
 export const LinkLabel = ({ left, text, right }: LinkLabelProps) => {

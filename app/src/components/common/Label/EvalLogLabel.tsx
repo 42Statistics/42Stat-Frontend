@@ -25,11 +25,11 @@ export const EvalLogLabel = ({
   const computeColor = (type: EvalLogLabelType) => {
     switch (type) {
       case 'positive':
-        return theme.colors.semantic.pass;
+        return theme.colors.evaluation.pass;
       case 'neutral':
-        return theme.colors.semantic.warning;
+        return theme.colors.evaluation.warning;
       case 'negative':
-        return theme.colors.semantic.fail;
+        return theme.colors.evaluation.fail;
       case 'none':
         return theme.colors.mono.gray300;
       default:

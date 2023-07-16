@@ -8,10 +8,17 @@ type Colors = {
   accent: {
     default: string;
   };
-  semantic: {
+  evaluation: {
     pass: string;
     warning: string;
     fail: string;
+  };
+  chart: {
+    up: string;
+    down: string;
+  };
+  semantic: {
+    error: string;
   };
   mono: {
     black: string;

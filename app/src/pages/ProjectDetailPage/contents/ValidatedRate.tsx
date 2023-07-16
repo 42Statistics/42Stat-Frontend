@@ -51,7 +51,7 @@ const ValidatedRateChart = ({ labels, series }: ValidatedRateChartProps) => {
   const theme = useTheme();
 
   const options: ApexCharts.ApexOptions = {
-    colors: [theme.colors.semantic.pass, theme.colors.semantic.fail],
+    colors: [theme.colors.evaluation.pass, theme.colors.evaluation.fail],
     tooltip: {
       y: {
         formatter: (value) => numberWithUnitFormatter(value, '팀'),

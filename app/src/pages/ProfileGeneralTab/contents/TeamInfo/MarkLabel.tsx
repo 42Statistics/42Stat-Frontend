@@ -1,5 +1,5 @@
 import { HStack, Text } from '@components/common';
-import styled from '@emotion/styled';
+import { useTheme } from '@emotion/react';
 import { AiOutlineCheck } from '@react-icons/all-files/ai/AiOutlineCheck';
 import { AiOutlineClose } from '@react-icons/all-files/ai/AiOutlineClose';
 
@@ -9,19 +9,19 @@ type MarkLabelProps = {
 };
 
 export const MarkLabel = ({ isValidate, finalMark }: MarkLabelProps) => {
+  const theme = useTheme();
+  const color = isValidate
+    ? theme.colors.evaluation.pass
+    : theme.colors.evaluation.fail;
+
   return (
-    <Layout isValidate={isValidate}>
-      {isValidate ? <AiOutlineCheck /> : <AiOutlineClose />}
-      <Text>{finalMark}</Text>
-    </Layout>
+    <HStack>
+      {isValidate ? (
+        <AiOutlineCheck color={color} />
+      ) : (
+        <AiOutlineClose color={color} />
+      )}
+      <Text color={color}>{finalMark}</Text>
+    </HStack>
   );
 };
-
-type LayoutProps = {
-  isValidate: boolean;
-};
-
-const Layout = styled(HStack)<LayoutProps>`
-  color: ${({ theme, isValidate }) =>
-    isValidate ? theme.colors.semantic.pass : theme.colors.semantic.fail};
-`;

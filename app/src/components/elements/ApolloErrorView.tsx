@@ -13,7 +13,7 @@ export const ApolloErrorView = ({
 
   return (
     <HStack spacing="1rem">
-      <MdErrorOutline size="20px" fill={theme.colors.semantic.fail} />
+      <MdErrorOutline size="20px" fill={theme.colors.semantic.error} />
       <Text color={theme.colors.mono.gray300}>{message}</Text>
     </HStack>
   );

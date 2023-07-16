@@ -6,10 +6,17 @@ const colors = {
   accent: {
     default: '#00C48C',
   },
-  semantic: {
+  evaluation: {
     pass: '#60c0c4',
     warning: '#f5b461',
     fail: '#f17c88',
+  },
+  chart: {
+    up: '#00c48c',
+    down: '#e31f2c',
+  },
+  semantic: {
+    error: '#b1232d',
   },
   mono: {
     black: '#161616',

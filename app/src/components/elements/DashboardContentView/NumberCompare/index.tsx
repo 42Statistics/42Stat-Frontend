@@ -1,4 +1,5 @@
 import { H3Text, HStack, Text } from '@components/common';
+import { useTheme } from '@emotion/react';
 import { NoneDash } from '../Error/NoneDash';
 import { Arrow } from './Arrow';
 
@@ -10,7 +11,8 @@ type NumberCompareProps = {
 
 export const NumberCompare = ({ curr, last, unit }: NumberCompareProps) => {
   const diff = curr - last;
-  const color = diff > 0 ? '#00C48C' : '#FF3D71';
+  const theme = useTheme();
+  const color = diff > 0 ? theme.colors.chart.up : theme.colors.chart.down;
 
   return (
     <HStack spacing="2rem">

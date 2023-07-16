@@ -59,6 +59,7 @@ export const EvalLogSearchDialog = ({
 };
 
 const EvalLogSearchForm = styled.form`
+  padding: 4rem;
   display: flex;
   flex-direction: column;
   align-items: center;

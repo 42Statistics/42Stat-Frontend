@@ -3,6 +3,7 @@ import ApolloProvider from './ApolloProvider';
 import DayjsProvider from './DayjsProvider';
 import ErrorBoundaryProvider from './ErrorBoundaryProvider';
 import HelmetProvider from './HelmetProvider';
+import ModalProvider from './ModalProvider';
 import { ScrollToTop } from './ScrollToTop';
 import ThemeProvider from './ThemeProvider';
 
@@ -14,7 +15,9 @@ export const AppProvider = ({ children }: React.PropsWithChildren) => {
           <DayjsProvider>
             <ThemeProvider>
               <Router>
-                <ScrollToTop>{children}</ScrollToTop>
+                <ScrollToTop>
+                  <ModalProvider>{children}</ModalProvider>
+                </ScrollToTop>
               </Router>
             </ThemeProvider>
           </DayjsProvider>

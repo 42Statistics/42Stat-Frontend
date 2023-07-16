@@ -9,16 +9,17 @@ import {
   fromPromise,
 } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
-import { ROUTES } from '@routes/ROUTES';
+import { isReLoginDialogOpenAtom } from '@atoms/isReLoginDialogOpenAtom';
 import { getAccessToken } from '@utils/storage/accessToken';
-import { clearStorage } from '@utils/storage/clearStorage';
 import { getRefreshToken } from '@utils/storage/refreshToken';
+import { useSetAtom } from 'jotai';
+import { useEffect } from 'react';
 
 const httpLink = new HttpLink({
   uri: import.meta.env.VITE_BACKEND_GRAPHQL_ENDPOINT,
 });
 
-const authMiddleWare = new ApolloLink((operation, forward) => {
+const requestInterceptor = new ApolloLink((operation, forward) => {
   if (operation.operationName === 'getLanding') {
     return forward(operation);
   }
@@ -35,38 +36,6 @@ const authMiddleWare = new ApolloLink((operation, forward) => {
   return forward(operation);
 });
 
-const refreshLink = onError(({ graphQLErrors, operation, forward }) => {
-  if (graphQLErrors) {
-    // forEach 내부에서 async await 사용하면 안됨 -> for ~ of
-    for (const { extensions } of graphQLErrors) {
-      if (extensions?.status === 401) {
-        return fromPromise(getNewAccessToken(getRefreshToken() ?? '')).flatMap(
-          (accessToken) => {
-            operation.setContext({
-              headers: {
-                ...operation.getContext().headers,
-                authorization: `Bearer ${accessToken}`,
-              },
-            });
-            return forward(operation);
-          },
-        );
-      }
-    }
-  }
-});
-
-const resetLink = onError(({ graphQLErrors }) => {
-  if (graphQLErrors) {
-    graphQLErrors.forEach(({ extensions }) => {
-      if (extensions?.status === 400) {
-        clearStorage();
-        window.location.href = ROUTES.ROOT;
-      }
-    });
-  }
-});
-
 /**
  * @description
  * 쿼리 바뀌었을때 이부분 안건드리면 기존에 있던캐시정보에 바뀐 쿼리정보 병합하려고해서 에러발생
@@ -78,7 +47,7 @@ const resetLink = onError(({ graphQLErrors }) => {
  */
 
 export const client = new ApolloClient({
-  link: from([authMiddleWare, refreshLink, resetLink, httpLink]),
+  link: from([requestInterceptor, httpLink]),
   cache: new InMemoryCache({
     typePolicies: {
       Query: {
@@ -126,7 +95,60 @@ export const client = new ApolloClient({
 });
 
 const Provider = ({ children }: React.PropsWithChildren) => {
-  return <ApolloProvider client={client}>{children}</ApolloProvider>;
+  return (
+    <ApolloProvider client={client}>
+      <ResponseInterceptor>{children}</ResponseInterceptor>
+    </ApolloProvider>
+  );
+};
+
+const ResponseInterceptor = ({ children }: React.PropsWithChildren) => {
+  const setIsReLoginDialogOpen = useSetAtom(isReLoginDialogOpenAtom);
+
+  useEffect(() => {
+    const responseInterceptor401 = onError(
+      ({ graphQLErrors, operation, forward }) => {
+        if (graphQLErrors) {
+          // forEach 내부에서 async await 사용하면 안됨 -> for ~ of
+          for (const { extensions } of graphQLErrors) {
+            if (extensions?.status === 401) {
+              return fromPromise(
+                getNewAccessToken(getRefreshToken() ?? ''),
+              ).flatMap((accessToken) => {
+                operation.setContext({
+                  headers: {
+                    ...operation.getContext().headers,
+                    authorization: `Bearer ${accessToken}`,
+                  },
+                });
+                return forward(operation);
+              });
+            }
+          }
+        }
+      },
+    );
+
+    const responseInterceptor400 = onError(({ graphQLErrors }) => {
+      if (graphQLErrors) {
+        graphQLErrors.forEach(({ extensions }) => {
+          if (extensions?.status === 400) {
+            setIsReLoginDialogOpen(true);
+          }
+        });
+      }
+    });
+
+    client.setLink(
+      from([
+        requestInterceptor,
+        responseInterceptor401,
+        responseInterceptor400,
+        httpLink,
+      ]),
+    );
+  }, [setIsReLoginDialogOpen]);
+  return <>{children}</>;
 };
 
 export default Provider;

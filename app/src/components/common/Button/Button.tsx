@@ -6,14 +6,19 @@ type ButtonSize = 'md';
 type ButtonProps = {
   size?: ButtonSize;
   children: string;
+  color?: string;
+  backgroundColor?: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 export const Button = styled(Clickable)<ButtonProps>`
   border-radius: ${({ theme }) => theme.radius.sm};
-  background-color: ${({ theme }) => theme.colors.primary.default};
-  color: ${({ theme }) => theme.colors.mono.white};
-  font-weight: ${({ theme }) => theme.fonts.weight.medium};
+  background-color: ${({
+    theme,
+    backgroundColor = theme.colors.primary.default,
+  }) => backgroundColor};
+  color: ${({ theme, color = theme.colors.mono.white }) => color};
+  font-weight: ${({ theme }) => theme.fonts.weight.bold};
   font-size: ${({ theme }) => theme.fonts.size.body};
   padding: 1rem 2.2rem;
   user-select: none;

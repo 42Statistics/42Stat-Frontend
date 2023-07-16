@@ -1,3 +1,4 @@
+import { useDisclosure } from '@/hooks/useDisclosure';
 import {
   Divider,
   H2BoldText,
@@ -8,9 +9,12 @@ import {
 import { NeumorphismSection } from '@styles/custom/NeumorphismSection';
 import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
 import { DeleteAccountButton } from './DeleteAccountButton';
+import { DeleteAccountDialog } from './DeleteAccountDialog';
 import { LogoutButton } from './LogoutButton';
 
 export const AccountSection = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <NeumorphismSection>
       <TabletAndAbove>
@@ -19,7 +23,10 @@ export const AccountSection = () => {
           <Spacer />
           <HStack spacing="2rem">
             <LogoutButton />
-            <DeleteAccountButton />
+            <DeleteAccountButton
+              onClick={onOpen}
+              dialog={<DeleteAccountDialog isOpen={isOpen} onClose={onClose} />}
+            />
           </HStack>
         </HStack>
       </TabletAndAbove>
@@ -29,7 +36,10 @@ export const AccountSection = () => {
           <Divider />
           <HStack spacing="2rem">
             <LogoutButton />
-            <DeleteAccountButton />
+            <DeleteAccountButton
+              onClick={onOpen}
+              dialog={<DeleteAccountDialog isOpen={isOpen} onClose={onClose} />}
+            />
           </HStack>
         </VStack>
       </Mobile>

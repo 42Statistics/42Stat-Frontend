@@ -1,15 +1,15 @@
 import { gql } from '@/__generated__';
 import { DateTemplate } from '@/__generated__/graphql';
 import { useQuery } from '@apollo/client';
-import { H3Text, HStack, Text, VStack } from '@components/common';
+import { H3BoldText, HStack, Text, VStack } from '@components/common';
 import {
   DashboardContentBadRequest,
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { ProgressionBar } from '@components/elements/ProgressionBar';
+import { TextMax } from '@components/elements/TextMax';
 import { DashboardContent } from '@components/templates/DashboardContent';
-import { useTheme } from '@emotion/react';
 import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
 
@@ -38,7 +38,6 @@ export const PreferredTime = () => {
   const { username } = useParams() as { username: string };
 
   const title = '주 접속 시간대';
-  const theme = useTheme();
   const { loading, error, data } = useQuery(
     GET_PREFERRED_TIME_BY_DATE_TEMPLATE_BY_LOGIN,
     {
@@ -111,23 +110,17 @@ export const PreferredTime = () => {
   return (
     <DashboardContent title={title} description={description}>
       <VStack spacing="4rem">
-        <H3Text>{getPreferredTimeTitle()}</H3Text>
+        <H3BoldText>{getPreferredTimeTitle()}</H3BoldText>
         <VStack spacing="1.5rem">
           {tableData.map(({ time, hour, minute, value }) => (
             <HStack key={time} spacing="2rem">
               <HStack w="30px">
-                <H3Text>{time}</H3Text>
+                <Text>{time}</Text>
               </HStack>
               <ProgressionBar rate={hour / 50} />
-              <Text
-                fontWeight={
-                  value === max
-                    ? theme.fonts.weight.bold
-                    : theme.fonts.weight.regular
-                }
-              >
+              <TextMax isMax={value !== 0 && max === value}>
                 {hour}시간 {minute}분
-              </Text>
+              </TextMax>
             </HStack>
           ))}
         </VStack>

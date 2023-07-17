@@ -8,10 +8,13 @@ import { useEffect } from 'react';
 const UNLINK_GOOGLE = gql(/* GraphQL */ `
   mutation UnlinkGoogle {
     unlinkGoogle {
-      googleId
-      googleEmail
-      linkedAt
       userId
+      linkedAccount {
+        linkedPlatform
+        id
+        email
+        linkedAt
+      }
     }
   }
 `);

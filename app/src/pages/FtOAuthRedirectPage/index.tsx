@@ -2,7 +2,7 @@ import { gql } from '@/__generated__';
 import { useMutation } from '@apollo/client';
 import { userAtom } from '@atoms/userAtom';
 import { Center, Loader } from '@components/common';
-import { LOGIN_GOOGLE } from '@components/elements/LoginButton';
+import { GOOGLE_LOGIN } from '@components/elements/LoginButton';
 import { ROUTES } from '@routes/ROUTES';
 import { setAccessToken } from '@utils/storage/accessToken';
 import {
@@ -14,9 +14,9 @@ import { useSetAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
-const LOGIN_FT = gql(/* GraphQL */ `
-  mutation LoginFt($ftCode: String!) {
-    login(ftCode: $ftCode) {
+const FT_LOGIN = gql(/* GraphQL */ `
+  mutation ftLogin($ftCode: String!) {
+    ftLogin(ftCode: $ftCode) {
       message
       accessToken
       refreshToken
@@ -28,11 +28,12 @@ const LOGIN_FT = gql(/* GraphQL */ `
 const FtOAuthRedirectPage = () => {
   const [searchParams] = useSearchParams();
   const ftCode = searchParams.get('code');
-  const [login, { data, loading, error }] = useMutation(LOGIN_FT);
+  const [ftLogin, { data: ftData, loading: ftLoading, error: ftError }] =
+    useMutation(FT_LOGIN);
   const [
-    loginGoogle,
+    googleLogin,
     { data: googleData, loading: googleLoading, error: googleError },
-  ] = useMutation(LOGIN_GOOGLE);
+  ] = useMutation(GOOGLE_LOGIN);
   const navigate = useNavigate();
 
   const [mounted, setMounted] = useState<boolean>(false);
@@ -51,10 +52,10 @@ const FtOAuthRedirectPage = () => {
     }
     const credential = getGoogleCredential();
     if (credential === null) {
-      login({ variables: { ftCode } });
+      ftLogin({ variables: { ftCode } });
     } else {
       const clientId = import.meta.env.VITE_GAPI_CLIENT_ID;
-      loginGoogle({
+      googleLogin({
         variables: {
           ftCode,
           google: {
@@ -64,26 +65,26 @@ const FtOAuthRedirectPage = () => {
         },
       });
     }
-  }, [login, loginGoogle, ftCode, mounted]);
+  }, [ftLogin, googleLogin, ftCode, mounted]);
 
   useEffect(() => {
-    if (loading || error || !data) {
+    if (ftLoading || ftError || !ftData) {
       return;
     }
-    const { accessToken, refreshToken } = data.login;
+    const { accessToken, refreshToken } = ftData.ftLogin;
     setAccessToken(accessToken);
     setRefreshToken(refreshToken);
     navigate(ROUTES.HOME);
-  }, [data, loading, error, navigate, setUser]);
+  }, [ftData, ftLoading, ftError, navigate, setUser]);
 
   useEffect(() => {
     if (googleLoading || googleError || !googleData) {
       return;
     }
-    if (googleData.loginGoogle.__typename === 'NotLinked') {
+    if (googleData.googleLogin.__typename === 'LoginNotLinked') {
       return; // unreachable
     }
-    const { accessToken, refreshToken } = googleData.loginGoogle;
+    const { accessToken, refreshToken } = googleData.googleLogin;
     setAccessToken(accessToken);
     setRefreshToken(refreshToken);
     removeGoogleCredential();

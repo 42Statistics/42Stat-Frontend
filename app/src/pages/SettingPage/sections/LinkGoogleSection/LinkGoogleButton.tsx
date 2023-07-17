@@ -14,10 +14,13 @@ import { useScript } from 'usehooks-ts';
 const LINK_GOOGLE = gql(/* GraphQL */ `
   mutation LinkGoogle($google: GoogleLoginInput!) {
     linkGoogle(google: $google) {
-      googleId
-      googleEmail
-      linkedAt
       userId
+      linkedAccount {
+        linkedPlatform
+        id
+        email
+        linkedAt
+      }
     }
   }
 `);

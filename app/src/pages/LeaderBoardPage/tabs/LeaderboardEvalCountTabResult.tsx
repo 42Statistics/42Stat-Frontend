@@ -3,12 +3,10 @@ import {
   GetLeaderboardEvalCountQueryVariables,
 } from '@/__generated__/graphql';
 import { QueryResult } from '@apollo/client';
-import { VStack } from '@components/common';
 import { ApolloErrorView } from '@components/elements/ApolloErrorView';
 import { ApolloNotFoundView } from '@components/elements/ApolloNotFoundView';
-import { LeaderBoard } from '@components/templates/LeaderBoard';
-import { LeaderBoardItem } from '@components/templates/LeaderBoard/LeaderBoardItem';
-import { LeaderBoardTabResultSkeleton } from '@pages/PageSkeletons/LeaderBoardTabResultSkeleton';
+import { Leaderboard } from '@components/templates/Leaderboard';
+import { LeaderboardTabResultSkeleton } from '@pages/PageSkeletons/LeaderboardTabResultSkeleton';
 import { isDefined } from '@utils/isDefined';
 
 type LeaderboardEvalCountTabResultProps = {
@@ -21,7 +19,7 @@ type LeaderboardEvalCountTabResultProps = {
 export const LeaderboardEvalCountTabResult = ({
   result: { data, loading, error },
 }: LeaderboardEvalCountTabResultProps) => {
-  if (loading) return <LeaderBoardTabResultSkeleton />;
+  if (loading) return <LeaderboardTabResultSkeleton />;
   if (error) return <ApolloErrorView message={error.message} />;
   if (!data) return <ApolloNotFoundView />;
 
@@ -49,10 +47,5 @@ export const LeaderboardEvalCountTabResult = ({
       imgUrl: userPreview.imgUrl,
     }));
 
-  return (
-    <VStack w="100%" spacing="6rem">
-      {myRanking && <LeaderBoardItem item={myRanking} unit={unit} isMe />}
-      <LeaderBoard list={list} me={myRanking} unit={unit} />
-    </VStack>
-  );
+  return <Leaderboard me={myRanking} list={list} unit={unit} />;
 };

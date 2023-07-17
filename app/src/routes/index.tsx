@@ -16,7 +16,7 @@ import { ROUTES } from './ROUTES';
 
 const LandingPage = lazy(() => import('@pages/LandingPage'));
 const HomePage = lazy(() => import('@pages/HomePage'));
-const LeaderBoardPage = lazy(() => import('@pages/LeaderBoardPage'));
+const LeaderboardPage = lazy(() => import('@pages/LeaderboardPage'));
 const EvalLogSearchPage = lazy(() => import('@pages/EvalLogSearchPage'));
 const ProfilePage = lazy(() => import('@pages/ProfilePage'));
 const ProjectDetailPage = lazy(() => import('@pages/ProjectDetailPage'));
@@ -84,7 +84,7 @@ export const AppRoutes = () => {
                     </DeferredComponent>
                   }
                 >
-                  <LeaderBoardPage />
+                  <LeaderboardPage />
                 </Suspense>
               }
             />

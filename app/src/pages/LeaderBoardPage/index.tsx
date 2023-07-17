@@ -14,15 +14,15 @@ import {
   LeaderboardLevelTab,
 } from './tabs';
 
-type LeaderBoardTabNames =
+type LeaderboardTabNames =
   | 'Level'
   | 'ExpIncrement'
   | 'CoalitionScore'
   | 'EvalCount';
 
 // waterfall 방지를 위해 Tab은 lazy loading 하지 않겠습니다.
-const LeaderBoardPage = () => {
-  const getSelectedTab = (tab: string | null): LeaderBoardTabNames => {
+const LeaderboardPage = () => {
+  const getSelectedTab = (tab: string | null): LeaderboardTabNames => {
     switch (tab) {
       case 'level':
         return 'Level';
@@ -38,7 +38,7 @@ const LeaderBoardPage = () => {
   };
 
   const [searchParams] = useSearchParams();
-  const [selectedTab, setSelectedTab] = useState<LeaderBoardTabNames>(
+  const [selectedTab, setSelectedTab] = useState<LeaderboardTabNames>(
     getSelectedTab(searchParams.get('tab')),
   );
   const navigate = useNavigate();
@@ -113,4 +113,4 @@ const Head = () => {
   return <Seo title="랭킹" />;
 };
 
-export default withHead(withFooter(LeaderBoardPage), Head);
+export default withHead(withFooter(LeaderboardPage), Head);

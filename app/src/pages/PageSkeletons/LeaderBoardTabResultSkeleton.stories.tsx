@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { LeaderBoardTabResultSkeleton } from './LeaderBoardTabResultSkeleton';
+import { LeaderboardTabResultSkeleton } from './LeaderboardTabResultSkeleton';
 
 const meta = {
   title: 'Common/Skeleton/LeaderBoardTabResultSkeleton',
-  component: LeaderBoardTabResultSkeleton,
+  component: LeaderboardTabResultSkeleton,
   tags: ['autodocs'],
-} satisfies Meta<typeof LeaderBoardTabResultSkeleton>;
+} satisfies Meta<typeof LeaderboardTabResultSkeleton>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

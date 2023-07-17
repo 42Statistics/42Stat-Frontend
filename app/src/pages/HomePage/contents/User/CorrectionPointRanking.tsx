@@ -4,7 +4,7 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
-import { UserRankList } from '@components/elements/DashboardContentView/Ranking/UserRankList';
+import { UserRankList } from '@components/elements/DashboardContentView/Rank/UserRankList';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { GET_HOME } from '@pages/HomePage/GET_HOME';
 import { Mobile, TabletAndAbove } from '@utils/responsive/Device';

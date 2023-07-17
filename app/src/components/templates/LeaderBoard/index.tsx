@@ -1,44 +1,36 @@
-import type { RankingItemType } from '@/types/Ranking';
-import { Divider } from '@components/common';
-import styled from '@emotion/styled';
-import { Fragment } from 'react';
-import { LeaderBoardItem } from './LeaderBoardItem';
+import { RankingUserItemType } from '@/types/Ranking';
+import { VStack } from '@components/common';
+import { LeaderboardList } from './LeaderboardList';
+import { LeaderboardListItem } from './LeaderboardListItem';
 
-type LeaderBoardProps = {
-  list: RankingItemType[];
-  me: RankingItemType | null;
+type LeaderboardProps = {
+  me: RankingUserItemType | null;
+  list: RankingUserItemType[];
   unit: string;
   fixedNumber?: number;
 };
-
-export const LeaderBoard = ({
-  list,
+export const Leaderboard = ({
   me,
+  list,
   unit,
   fixedNumber,
-}: LeaderBoardProps) => {
+}: LeaderboardProps) => {
   return (
-    <LeaderBoardList>
-      {list.map((item, idx) => (
-        <Fragment key={item.id}>
-          <LeaderBoardItem
-            item={item}
-            unit={unit}
-            fixedNumber={fixedNumber}
-            isMe={me !== null && item.id === me.id}
-          />
-          {idx !== list.length - 1 && <Divider />}
-        </Fragment>
-      ))}
-    </LeaderBoardList>
+    <VStack w="100%" spacing="6rem">
+      {me && (
+        <LeaderboardListItem
+          item={me}
+          unit={unit}
+          fixedNumber={fixedNumber}
+          isMe
+        />
+      )}
+      <LeaderboardList
+        list={list}
+        me={me}
+        unit={unit}
+        fixedNumber={fixedNumber}
+      />
+    </VStack>
   );
 };
-
-const LeaderBoardList = styled.ul`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.3rem;
-  width: 100%;
-  height: 100%;
-`;

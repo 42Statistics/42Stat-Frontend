@@ -1,7 +1,7 @@
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useParams } from 'react-router-dom';
 
-export const DestinyUsers = () => {
+export const DestinyRanking = () => {
   const { username } = useParams() as { username: string };
 
   const title = '인연 스코어';

@@ -1,5 +1,5 @@
 import { Input } from '@components/common';
-import { MdSearch } from '@react-icons/all-files/md/MdSearch';
+import { RiSearchLine } from '@react-icons/all-files/ri/RiSearchLine';
 
 type TabletAndAboveSearchInputProps = {
   inputRef: React.RefObject<HTMLInputElement>;
@@ -17,8 +17,8 @@ export const TabletAndAboveSearchInput = ({
       ref={inputRef}
       onChange={(e) => setInput(e.target.value)}
       onKeyDown={onKeyDown}
-      placeholder="Search..."
-      leftElement={<MdSearch id="search-icon" size="24px" />}
+      placeholder="Search"
+      left={<RiSearchLine id="search-icon" size="24px" />}
     />
   );
 };

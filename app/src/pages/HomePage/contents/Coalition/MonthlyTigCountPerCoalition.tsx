@@ -1,7 +1,7 @@
 import { gql } from '@/__generated__';
 import { DateTemplate } from '@/__generated__/graphql';
 import { useQuery } from '@apollo/client';
-import { Center, H3Text, Text, VStack } from '@components/common';
+import { Center, H3BoldText, Text, VStack } from '@components/common';
 import { CoalitionMark } from '@components/elements/CoalitionMark';
 import {
   DashboardContentBadRequest,
@@ -46,9 +46,10 @@ export const MonthlyTigCountPerCoalition = () => {
       variables: { dateTemplate: DateTemplate.CurrMonth },
     },
   );
-  if (loading) return <DashboardContentLoading />;
-  if (error) return <DashboardContentBadRequest message={error.message} />;
-  if (!data) return <DashboardContentNotFound />;
+  if (loading) return <DashboardContentLoading title={title} />;
+  if (error)
+    return <DashboardContentBadRequest title={title} message={error.message} />;
+  if (!data) return <DashboardContentNotFound title={title} />;
 
   const {
     data: tableRawData,
@@ -71,7 +72,7 @@ export const MonthlyTigCountPerCoalition = () => {
   return (
     <DashboardContent title={title} description={description}>
       <Center>
-        <VStack w="80%" h="100%">
+        <VStack h="100%">
           <MonthlyTigCountPerCoalitionTable>
             <tbody>
               {tableData.map(({ coalition, value }) => (
@@ -80,7 +81,7 @@ export const MonthlyTigCountPerCoalition = () => {
                     <CoalitionMark coalition={coalition} />
                   </td>
                   <td>
-                    <H3Text>{capitalize(coalition.name)}</H3Text>
+                    <H3BoldText>{capitalize(coalition.name)}</H3BoldText>
                   </td>
                   <td>
                     <TextMax isMax={max > 0 && max === value}>
@@ -102,7 +103,7 @@ const MonthlyTigCountPerCoalitionTable = styled.table`
   text-align: center;
 
   td {
-    padding: 0.6rem;
+    padding: 0.6rem 2rem;
     vertical-align: middle;
   }
 `;

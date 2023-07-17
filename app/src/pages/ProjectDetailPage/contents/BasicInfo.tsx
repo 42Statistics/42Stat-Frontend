@@ -26,9 +26,10 @@ export const BasicInfo = () => {
     }
     return `${from}~${to}인`;
   };
-  if (loading) return <DashboardContentLoading />;
-  if (error) return <DashboardContentBadRequest message={error.message} />;
-  if (!data) return <DashboardContentNotFound />;
+  if (loading) return <DashboardContentLoading title={title} />;
+  if (error)
+    return <DashboardContentBadRequest title={title} message={error.message} />;
+  if (!data) return <DashboardContentNotFound title={title} />;
 
   const { minUserCount, maxUserCount, estimateTime, difficulty } =
     data.getProjectInfo;

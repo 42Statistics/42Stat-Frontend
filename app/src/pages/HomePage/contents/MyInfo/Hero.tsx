@@ -103,7 +103,7 @@ export const Hero = () => {
 const Layout = styled(Center)`
   background-image: url('black-space.jpeg');
   background-size: cover;
-  border-radius: ${({ theme }) => theme.radius.md};
+  border-radius: ${({ theme }) => theme.radius.sm};
   padding: 0 4rem;
   height: 100%;
   user-select: none;

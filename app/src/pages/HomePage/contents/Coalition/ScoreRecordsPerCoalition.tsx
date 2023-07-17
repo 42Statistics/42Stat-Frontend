@@ -13,9 +13,10 @@ import { isDefined } from '@utils/isDefined';
 export const ScoreRecordsPerCoalition = () => {
   const title = '역대 코알리숑 스코어 변동 추이';
   const { loading, error, data } = useQuery(GET_HOME);
-  if (loading) return <DashboardContentLoading />;
-  if (error) return <DashboardContentBadRequest message={error.message} />;
-  if (!data) return <DashboardContentNotFound />;
+  if (loading) return <DashboardContentLoading title={title} />;
+  if (error)
+    return <DashboardContentBadRequest title={title} message={error.message} />;
+  if (!data) return <DashboardContentNotFound title={title} />;
 
   const { scoreRecordsPerCoalition } = data.getHomeCoalition;
 

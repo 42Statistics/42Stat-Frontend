@@ -13,9 +13,10 @@ import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
 export const CurrRegisteredCountRanking = () => {
   const title = '지금 가장 많은 사람이 참여하는 과제는?';
   const { loading, error, data } = useQuery(GET_HOME);
-  if (loading) return <DashboardContentLoading />;
-  if (error) return <DashboardContentBadRequest message={error.message} />;
-  if (!data) return <DashboardContentNotFound />;
+  if (loading) return <DashboardContentLoading title={title} />;
+  if (error)
+    return <DashboardContentBadRequest title={title} message={error.message} />;
+  if (!data) return <DashboardContentNotFound title={title} />;
 
   const { currRegisteredCountRanking } = data.getHomeTeam;
   const unit = '명';

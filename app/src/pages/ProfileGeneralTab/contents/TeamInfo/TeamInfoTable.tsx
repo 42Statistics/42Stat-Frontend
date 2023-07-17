@@ -89,20 +89,24 @@ const Table = styled.table`
   }
 
   tbody tr {
-    transition: all 0.3s;
+    transition: all 0.2s;
   }
 
   td:first-of-type {
-    border-top-left-radius: ${({ theme }) => theme.radius.sm};
-    border-bottom-left-radius: ${({ theme }) => theme.radius.sm};
+    border-top-left-radius: ${({ theme }) => theme.radius.xs};
+    border-bottom-left-radius: ${({ theme }) => theme.radius.xs};
   }
 
   td:last-of-type {
-    border-top-right-radius: ${({ theme }) => theme.radius.sm};
-    border-bottom-right-radius: ${({ theme }) => theme.radius.sm};
+    border-top-right-radius: ${({ theme }) => theme.radius.xs};
+    border-bottom-right-radius: ${({ theme }) => theme.radius.xs};
   }
 
   tbody tr:hover {
-    background-color: #e8e8e8;
+    background-color: ${({ theme }) => theme.colors.element.hover};
+  }
+
+  tbody tr:active {
+    background-color: ${({ theme }) => theme.colors.element.active};
   }
 `;

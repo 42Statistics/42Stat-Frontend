@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import { H3Text, HStack, Text } from '@components/common';
+import { H2BoldText, HStack, Text } from '@components/common';
 import {
   DashboardContentBadRequest,
   DashboardContentLoading,
@@ -19,17 +19,18 @@ export const BeginAt = () => {
   const { loading, error, data } = useQuery(GET_PERSONAL_GENERAL_BY_LOGIN, {
     variables: { login: username },
   });
-  if (loading) return <DashboardContentLoading />;
-  if (error) return <DashboardContentBadRequest message={error.message} />;
-  if (!data) return <DashboardContentNotFound />;
+  if (loading) return <DashboardContentLoading title={title} />;
+  if (error)
+    return <DashboardContentBadRequest title={title} message={error.message} />;
+  if (!data) return <DashboardContentNotFound title={title} />;
 
   const { beginAt } = data.getPersonalGeneral;
   const diff = getDateDiff(new Date(), new Date(beginAt));
 
   return (
     <DashboardContent title={title}>
-      <HStack spacing="1rem">
-        <H3Text>{dayjs(beginAt).format('YYYY. MM. DD.')}</H3Text>
+      <HStack spacing="1rem" align="baseline">
+        <H2BoldText>{dayjs(beginAt).format('YYYY. MM. DD.')}</H2BoldText>
         <Text>{dDayFormatter(diff)}</Text>
       </HStack>
     </DashboardContent>

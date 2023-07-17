@@ -3,8 +3,8 @@ import {
   DashboardContentBadRequest,
   DashboardContentLoading,
   DashboardContentNotFound,
+  NoneDash,
 } from '@components/elements/DashboardContentView/Error';
-import { TextDefault } from '@components/elements/DashboardContentView/Text/TextDefault';
 import { TextProject } from '@components/elements/DashboardContentView/Text/TextProject';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useParams } from 'react-router-dom';
@@ -17,9 +17,10 @@ export const LastPassed = () => {
   const { loading, error, data } = useQuery(GET_PERSONAL_GENERAL_BY_LOGIN, {
     variables: { login: username },
   });
-  if (loading) return <DashboardContentLoading />;
-  if (error) return <DashboardContentBadRequest message={error.message} />;
-  if (!data) return <DashboardContentNotFound />;
+  if (loading) return <DashboardContentLoading title={title} />;
+  if (error)
+    return <DashboardContentBadRequest title={title} message={error.message} />;
+  if (!data) return <DashboardContentNotFound title={title} />;
 
   const { lastPassed } = data.getPersonalGeneral.teamInfo;
 
@@ -28,7 +29,7 @@ export const LastPassed = () => {
       {lastPassed != null ? (
         <TextProject projectName={lastPassed} />
       ) : (
-        <TextDefault text="과제 제출 기록이 없어요 😓" />
+        <NoneDash />
       )}
     </DashboardContent>
   );

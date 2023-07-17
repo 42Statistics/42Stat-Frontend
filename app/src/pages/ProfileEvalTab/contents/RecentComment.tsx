@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import { H3MediumText, Scroll, Text, VStack } from '@components/common';
+import { H3BoldText, Scroll, Text, VStack } from '@components/common';
 import {
   DashboardContentBadRequest,
   DashboardContentLoading,
@@ -16,9 +16,10 @@ export const RecentComment = () => {
   const { loading, error, data } = useQuery(GET_PERSONAL_EVAL_BY_LOGIN, {
     variables: { login: username },
   });
-  if (loading) return <DashboardContentLoading />;
-  if (error) return <DashboardContentBadRequest message={error.message} />;
-  if (!data) return <DashboardContentNotFound />;
+  if (loading) return <DashboardContentLoading title={title} />;
+  if (error)
+    return <DashboardContentBadRequest title={title} message={error.message} />;
+  if (!data) return <DashboardContentNotFound title={title} />;
 
   const { recentComment } = data.getPersonalEval; // FIXME: null일 수 있음.
 
@@ -27,10 +28,12 @@ export const RecentComment = () => {
     <DashboardContentLayout>
       <VStack w="100%" h="100%" spacing="2rem" align="start">
         <VStack w="100%" align="start">
-          {title && <H3MediumText>{title}</H3MediumText>}
+          {title && <H3BoldText>{title}</H3BoldText>}
         </VStack>
         <Scroll>
-          <Text>{recentComment}</Text>
+          <Layout>
+            <Text>{recentComment}</Text>
+          </Layout>
         </Scroll>
       </VStack>
     </DashboardContentLayout>
@@ -41,4 +44,9 @@ const DashboardContentLayout = styled.div`
   width: 100%;
   height: 100%;
   padding: 2rem;
+`;
+
+const Layout = styled.div`
+  width: 100%;
+  padding: 0 1rem;
 `;

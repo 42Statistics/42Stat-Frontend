@@ -13,9 +13,10 @@ import { numberWithUnitFormatter } from '@utils/formatters';
 export const BlackholedCountPerCircle = () => {
   const title = '언제 블랙홀에 많이 빠질까?';
   const { loading, error, data } = useQuery(GET_HOME);
-  if (loading) return <DashboardContentLoading />;
-  if (error) return <DashboardContentBadRequest message={error.message} />;
-  if (!data) return <DashboardContentNotFound />;
+  if (loading) return <DashboardContentLoading title={title} />;
+  if (error)
+    return <DashboardContentBadRequest title={title} message={error.message} />;
+  if (!data) return <DashboardContentNotFound title={title} />;
 
   const { blackholedCountPerCircle } = data.getHomeUser;
 

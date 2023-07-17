@@ -5,6 +5,7 @@ import {
   DashboardContentBadRequest,
   DashboardContentLoading,
   DashboardContentNotFound,
+  NoneDash,
 } from '@components/elements/DashboardContentView/Error';
 import { TextDefault } from '@components/elements/DashboardContentView/Text/TextDefault';
 import { DashboardContent } from '@components/templates/DashboardContent';
@@ -38,9 +39,10 @@ export const PreferredCluster = () => {
       variables: { login: username, dateTemplate: DateTemplate.CurrMonth },
     },
   );
-  if (loading) return <DashboardContentLoading />;
-  if (error) return <DashboardContentBadRequest message={error.message} />;
-  if (!data) return <DashboardContentNotFound />;
+  if (loading) return <DashboardContentLoading title={title} />;
+  if (error)
+    return <DashboardContentBadRequest title={title} message={error.message} />;
+  if (!data) return <DashboardContentNotFound title={title} />;
 
   const {
     data: preferredCluster,
@@ -57,7 +59,7 @@ export const PreferredCluster = () => {
       {preferredCluster.name != null ? (
         <TextDefault text={`클러스터 ${preferredCluster.name.toUpperCase()}`} />
       ) : (
-        <TextDefault text="접속 기록이 없어요 😓" />
+        <NoneDash />
       )}
     </DashboardContent>
   );

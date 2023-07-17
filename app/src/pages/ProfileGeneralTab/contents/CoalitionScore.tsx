@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import { H3Text, HStack, Text } from '@components/common';
+import { H1BoldText, HStack, Text } from '@components/common';
 import { CoalitionMark } from '@components/elements/CoalitionMark';
 import {
   DashboardContentBadRequest,
@@ -17,23 +17,28 @@ export const CoalitionScore = () => {
   const { loading, error, data } = useQuery(GET_PERSONAL_GENERAL_BY_LOGIN, {
     variables: { login: username },
   });
-  if (loading) return <DashboardContentLoading />;
-  if (error) return <DashboardContentBadRequest message={error.message} />;
-  if (!data) return <DashboardContentNotFound />;
+  if (loading) return <DashboardContentLoading title={title} />;
+  if (error)
+    return <DashboardContentBadRequest title={title} message={error.message} />;
+  if (!data) return <DashboardContentNotFound title={title} />;
 
   const { userProfile, scoreInfo } = data.getPersonalGeneral;
   const { coalition } = userProfile;
   const { value } = scoreInfo;
+  const unit = '위';
+
   return (
     <DashboardContent title={title}>
-      <HStack spacing="1rem">
-        <H3Text>{value.toLocaleString()}</H3Text>
+      <HStack spacing="2rem" align="baseline">
+        <H1BoldText>{value.toLocaleString()}</H1BoldText>
         <HStack spacing="0.5rem">
-          <CoalitionMark coalition={coalition} />
+          <CoalitionMark size="18px" coalition={coalition} />
           {scoreInfo?.rankInCoalition && (
             <HStack align="baseline">
-              <H3Text>{scoreInfo.rankInCoalition.toLocaleString()}</H3Text>
-              <Text>위</Text>
+              <Text>
+                {scoreInfo.rankInCoalition.toLocaleString()}
+                {unit}
+              </Text>
             </HStack>
           )}
         </HStack>

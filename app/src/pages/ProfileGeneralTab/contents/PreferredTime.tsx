@@ -9,6 +9,7 @@ import {
 } from '@components/elements/DashboardContentView/Error';
 import { ProgressionBar } from '@components/elements/ProgressionBar';
 import { DashboardContent } from '@components/templates/DashboardContent';
+import { useTheme } from '@emotion/react';
 import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
 
@@ -37,15 +38,17 @@ export const PreferredTime = () => {
   const { username } = useParams() as { username: string };
 
   const title = '주 접속 시간대';
+  const theme = useTheme();
   const { loading, error, data } = useQuery(
     GET_PREFERRED_TIME_BY_DATE_TEMPLATE_BY_LOGIN,
     {
       variables: { login: username, dateTemplate: DateTemplate.CurrMonth },
     },
   );
-  if (loading) return <DashboardContentLoading />;
-  if (error) return <DashboardContentBadRequest message={error.message} />;
-  if (!data) return <DashboardContentNotFound />;
+  if (loading) return <DashboardContentLoading title={title} />;
+  if (error)
+    return <DashboardContentBadRequest title={title} message={error.message} />;
+  if (!data) return <DashboardContentNotFound title={title} />;
 
   const { preferredTimeByDateTemplate } = data.getPersonalGeneral;
   const {
@@ -84,10 +87,9 @@ export const PreferredTime = () => {
       minute: night % 60,
     },
   ];
+  const max = Math.max(morning, daytime, evening, night);
 
   const getPreferredTimeTitle = (): string => {
-    const max = Math.max(morning, daytime, evening, night);
-
     if (max === 0) {
       return '접속 기록이 없어요 😓';
     }
@@ -111,13 +113,19 @@ export const PreferredTime = () => {
       <VStack spacing="4rem">
         <H3Text>{getPreferredTimeTitle()}</H3Text>
         <VStack spacing="1.5rem">
-          {tableData.map(({ time, hour, minute }) => (
+          {tableData.map(({ time, hour, minute, value }) => (
             <HStack key={time} spacing="2rem">
               <HStack w="30px">
                 <H3Text>{time}</H3Text>
               </HStack>
               <ProgressionBar rate={hour / 50} />
-              <Text>
+              <Text
+                fontWeight={
+                  value === max
+                    ? theme.fonts.weight.bold
+                    : theme.fonts.weight.regular
+                }
+              >
                 {hour}시간 {minute}분
               </Text>
             </HStack>

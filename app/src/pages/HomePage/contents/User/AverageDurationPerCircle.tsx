@@ -13,9 +13,18 @@ export const AverageDurationPerCircle = () => {
   const title = 'N서클 통과할 때까지의 누적 기간';
   const description = '본과정 시작일 기준';
   const { loading, error, data } = useQuery(GET_HOME);
-  if (loading) return <DashboardContentLoading />;
-  if (error) return <DashboardContentBadRequest message={error.message} />;
-  if (!data) return <DashboardContentNotFound />;
+  if (loading)
+    return <DashboardContentLoading title={title} description={description} />;
+  if (error)
+    return (
+      <DashboardContentBadRequest
+        title={title}
+        description={description}
+        message={error.message}
+      />
+    );
+  if (!data)
+    return <DashboardContentNotFound title={title} description={description} />;
 
   const { averageDurationPerCircle } = data.getHomeUser;
 
@@ -66,7 +75,7 @@ const AverageDurationPerCircleChart = ({
   const options: ApexCharts.ApexOptions = {
     plotOptions: {
       bar: {
-        borderRadius: 6,
+        borderRadius: 4,
       },
     },
     xaxis: {

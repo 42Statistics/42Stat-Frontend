@@ -13,13 +13,13 @@ export const TotalDuration = () => {
   const { username } = useParams() as { username: string };
 
   const title = '누적 평가 시간';
-
   const { loading, error, data } = useQuery(GET_PERSONAL_EVAL_BY_LOGIN, {
     variables: { login: username },
   });
-  if (loading) return <DashboardContentLoading />;
-  if (error) return <DashboardContentBadRequest message={error.message} />;
-  if (!data) return <DashboardContentNotFound />;
+  if (loading) return <DashboardContentLoading title={title} />;
+  if (error)
+    return <DashboardContentBadRequest title={title} message={error.message} />;
+  if (!data) return <DashboardContentNotFound title={title} />;
 
   const { totalDuration } = data.getPersonalEval;
   const [hour, minute] = [Math.floor(totalDuration / 60), totalDuration % 60];

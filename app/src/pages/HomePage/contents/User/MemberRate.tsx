@@ -16,8 +16,16 @@ export const MemberRate = () => {
   const description = '블랙홀 유저 포함';
 
   const { loading, error, data } = useQuery(GET_HOME);
-  if (loading) return <DashboardContentLoading />;
-  if (error) return <DashboardContentBadRequest message={error.message} />;
+  if (loading)
+    return <DashboardContentLoading title={title} description={description} />;
+  if (error)
+    return (
+      <DashboardContentBadRequest
+        title={title}
+        description={description}
+        message={error.message}
+      />
+    );
   if (!data) return <DashboardContentNotFound />;
 
   const { fields } = data.getHomeUser.memberRate;

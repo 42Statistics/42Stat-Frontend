@@ -11,9 +11,10 @@ import { GET_HOME } from '@pages/HomePage/GET_HOME';
 export const AverageCommentLength = () => {
   const title = '평균 코멘트 길이';
   const { loading, error, data } = useQuery(GET_HOME);
-  if (loading) return <DashboardContentLoading />;
-  if (error) return <DashboardContentBadRequest message={error.message} />;
-  if (!data) return <DashboardContentNotFound />;
+  if (loading) return <DashboardContentLoading title={title} />;
+  if (error)
+    return <DashboardContentBadRequest title={title} message={error.message} />;
+  if (!data) return <DashboardContentNotFound title={title} />;
 
   const { averageCommentLength } = data.getHomeEval;
   const unit = '자';

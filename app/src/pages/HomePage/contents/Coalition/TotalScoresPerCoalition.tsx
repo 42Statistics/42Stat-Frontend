@@ -12,9 +12,10 @@ import { millionFormatter } from '@utils/formatters';
 export const TotalScoresPerCoalition = () => {
   const title = '누적 코알리숑 스코어 합산';
   const { loading, error, data } = useQuery(GET_HOME);
-  if (loading) return <DashboardContentLoading />;
-  if (error) return <DashboardContentBadRequest message={error.message} />;
-  if (!data) return <DashboardContentNotFound />;
+  if (loading) return <DashboardContentLoading title={title} />;
+  if (error)
+    return <DashboardContentBadRequest title={title} message={error.message} />;
+  if (!data) return <DashboardContentNotFound title={title} />;
 
   const { totalScoresPerCoalition } = data.getHomeCoalition;
 
@@ -59,7 +60,7 @@ const TotalScoresPerCoalitionChart = ({
   const options: ApexCharts.ApexOptions = {
     plotOptions: {
       bar: {
-        borderRadius: 10,
+        borderRadius: 5,
         distributed: true,
       },
     },
@@ -71,6 +72,7 @@ const TotalScoresPerCoalitionChart = ({
     },
     yaxis: {
       min: 2500000,
+      max: Math.max(...series[0].data) + 100000,
       labels: {
         formatter: (value) => millionFormatter(value),
       },

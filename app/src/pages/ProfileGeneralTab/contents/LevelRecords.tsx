@@ -19,9 +19,18 @@ export const LevelRecords = () => {
   const { loading, error, data } = useQuery(GET_PERSONAL_GENERAL_BY_LOGIN, {
     variables: { login: username },
   });
-  if (loading) return <DashboardContentLoading />;
-  if (error) return <DashboardContentBadRequest message={error.message} />;
-  if (!data) return <DashboardContentNotFound />;
+  if (loading)
+    return <DashboardContentLoading title={title} description={description} />;
+  if (error)
+    return (
+      <DashboardContentBadRequest
+        title={title}
+        description={description}
+        message={error.message}
+      />
+    );
+  if (!data)
+    return <DashboardContentNotFound title={title} description={description} />;
 
   const { userLevelRecords, promoLevelRecords, promoMemberLevelRecords } =
     data.getPersonalGeneral;
@@ -80,9 +89,9 @@ const LevelRecordsChart = ({ series }: LevelRecordsChartProps) => {
     ],
     xaxis: {
       max: 24,
-      tickAmount: 24,
+      tickAmount: 8,
       labels: {
-        formatter: (value) => value,
+        formatter: (value) => `${value}개월`,
       },
     },
     yaxis: {

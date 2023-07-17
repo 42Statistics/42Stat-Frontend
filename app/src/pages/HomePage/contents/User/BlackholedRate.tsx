@@ -1,4 +1,3 @@
-import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import { PieChart } from '@components/elements/Chart';
 import {
@@ -15,9 +14,10 @@ import { capitalize } from 'lodash-es';
 export const BlackholedRate = () => {
   const title = '블랙홀 유저 비율';
   const { loading, error, data } = useQuery(GET_HOME);
-  if (loading) return <DashboardContentLoading />;
-  if (error) return <DashboardContentBadRequest message={error.message} />;
-  if (!data) return <DashboardContentNotFound />;
+  if (loading) return <DashboardContentLoading title={title} />;
+  if (error)
+    return <DashboardContentBadRequest title={title} message={error.message} />;
+  if (!data) return <DashboardContentNotFound title={title} />;
 
   const { total, fields } = data.getHomeUser.blackholedRate;
   const labels = fields.map((field) => capitalize(field.key));

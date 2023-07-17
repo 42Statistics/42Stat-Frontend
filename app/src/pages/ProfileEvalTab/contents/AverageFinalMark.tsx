@@ -17,9 +17,18 @@ export const AverageFinalMark = () => {
   const { loading, error, data } = useQuery(GET_PERSONAL_EVAL_BY_LOGIN, {
     variables: { login: username },
   });
-  if (loading) return <DashboardContentLoading />;
-  if (error) return <DashboardContentBadRequest message={error.message} />;
-  if (!data) return <DashboardContentNotFound />;
+  if (loading)
+    return <DashboardContentLoading title={title} description={description} />;
+  if (error)
+    return (
+      <DashboardContentBadRequest
+        title={title}
+        description={description}
+        message={error.message}
+      />
+    );
+  if (!data)
+    return <DashboardContentNotFound title={title} description={description} />;
 
   const { averageFinalMark } = data.getPersonalEval;
   const unit = '점';

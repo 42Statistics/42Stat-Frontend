@@ -12,9 +12,10 @@ import { numberWithUnitFormatter } from '@utils/formatters';
 export const UserCountPerLevel = () => {
   const title = '여행 중인 유저 레벨 분포';
   const { loading, error, data } = useQuery(GET_HOME);
-  if (loading) return <DashboardContentLoading />;
-  if (error) return <DashboardContentBadRequest message={error.message} />;
-  if (!data) return <DashboardContentNotFound />;
+  if (loading) return <DashboardContentLoading title={title} />;
+  if (error)
+    return <DashboardContentBadRequest title={title} message={error.message} />;
+  if (!data) return <DashboardContentNotFound title={title} />;
 
   const { userCountPerLevel } = data.getHomeUser;
 
@@ -47,7 +48,7 @@ const UserCountPerLevelChart = ({
   const options: ApexCharts.ApexOptions = {
     plotOptions: {
       bar: {
-        borderRadius: 3,
+        borderRadius: 2,
       },
     },
     xaxis: {

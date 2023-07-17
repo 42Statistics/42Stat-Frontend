@@ -25,9 +25,10 @@ export const BlackholedAt = () => {
   const { loading, error, data } = useQuery(GET_PERSONAL_GENERAL_BY_LOGIN, {
     variables: { login: username },
   });
-  if (loading) return <DashboardContentLoading />;
-  if (error) return <DashboardContentBadRequest message={error.message} />;
-  if (!data) return <DashboardContentNotFound />;
+  if (loading) return <DashboardContentLoading title={title} />;
+  if (error)
+    return <DashboardContentBadRequest title={title} message={error.message} />;
+  if (!data) return <DashboardContentNotFound title={title} />;
 
   const { blackholedAt } = data.getPersonalGeneral;
   const daysLeft = blackholedAt

@@ -16,9 +16,10 @@ export const TotalEvalCount = () => {
   const { loading, error, data } = useQuery(GET_PERSONAL_EVAL_BY_LOGIN, {
     variables: { login: username },
   });
-  if (loading) return <DashboardContentLoading />;
-  if (error) return <DashboardContentBadRequest message={error.message} />;
-  if (!data) return <DashboardContentNotFound />;
+  if (loading) return <DashboardContentLoading title={title} />;
+  if (error)
+    return <DashboardContentBadRequest title={title} message={error.message} />;
+  if (!data) return <DashboardContentNotFound title={title} />;
 
   const { totalCount } = data.getPersonalEval;
   const unit = '회';

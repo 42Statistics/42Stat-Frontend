@@ -26,9 +26,10 @@ export const TotalEvalCount = () => {
   const { loading, error, data } = useQuery(GET_EVAL_COUNT_BY_DATE_TEMPLATE, {
     variables: { dateTemplate: DateTemplate.Total },
   });
-  if (loading) return <DashboardContentLoading />;
-  if (error) return <DashboardContentBadRequest message={error.message} />;
-  if (!data) return <DashboardContentNotFound />;
+  if (loading) return <DashboardContentLoading title={title} />;
+  if (error)
+    return <DashboardContentBadRequest title={title} message={error.message} />;
+  if (!data) return <DashboardContentNotFound title={title} />;
 
   const { data: totalEvalCount } = data.getHomeEval.evalCountByDateTemplate;
   const unit = '회';

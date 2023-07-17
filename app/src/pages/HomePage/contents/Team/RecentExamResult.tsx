@@ -12,9 +12,10 @@ import dayjs from 'dayjs';
 export const RecentExamResult = () => {
   const title = '직전 회차 시험 Rank 별 통과율';
   const { loading, error, data } = useQuery(GET_HOME);
-  if (loading) return <DashboardContentLoading />;
-  if (error) return <DashboardContentBadRequest message={error.message} />;
-  if (!data) return <DashboardContentNotFound />;
+  if (loading) return <DashboardContentLoading title={title} />;
+  if (error)
+    return <DashboardContentBadRequest title={title} message={error.message} />;
+  if (!data) return <DashboardContentNotFound title={title} />;
 
   const { recentExamResult } = data.getHomeTeam;
   const { beginAt, location, resultPerRank } = recentExamResult.data;
@@ -70,7 +71,7 @@ const LastExamResultChart = ({
   const options: ApexCharts.ApexOptions = {
     plotOptions: {
       bar: {
-        borderRadius: 8,
+        borderRadius: 4,
       },
     },
     xaxis: {

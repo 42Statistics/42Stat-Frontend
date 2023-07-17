@@ -19,9 +19,10 @@ export const ValidatedRate = () => {
   const { loading, error, data } = useQuery(GET_PROJECT_INFO_BY_PROJECT_NAME, {
     variables: { projectName },
   });
-  if (loading) return <DashboardContentLoading />;
-  if (error) return <DashboardContentBadRequest message={error.message} />;
-  if (!data) return <DashboardContentNotFound />;
+  if (loading) return <DashboardContentLoading title={title} />;
+  if (error)
+    return <DashboardContentBadRequest title={title} message={error.message} />;
+  if (!data) return <DashboardContentNotFound title={title} />;
 
   const { validatedRate } = data.getProjectInfo;
   const labels = validatedRate.fields.map(({ key }) => key);

@@ -43,9 +43,10 @@ export const LogTime = () => {
       lastDateTemplate: DateTemplate.LastMonth,
     },
   });
-  if (loading) return <DashboardContentLoading />;
-  if (error) return <DashboardContentBadRequest message={error.message} />;
-  if (!data) return <DashboardContentNotFound />;
+  if (loading) return <DashboardContentLoading title={title} />;
+  if (error)
+    return <DashboardContentBadRequest title={title} message={error.message} />;
+  if (!data) return <DashboardContentNotFound title={title} />;
 
   const {
     currData: { data: CurrLogTime, start, end },

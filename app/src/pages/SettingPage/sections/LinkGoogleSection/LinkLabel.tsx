@@ -25,4 +25,9 @@ const Layout = styled.div`
   padding: 1.2rem 2rem;
   background-color: #f0f0f0;
   border-radius: ${({ theme }) => theme.radius.sm};
+  border: 1px solid transparent;
+
+  &:hover {
+    border: 1px solid ${({ theme }) => theme.colors.mono.gray100};
+  }
 `;

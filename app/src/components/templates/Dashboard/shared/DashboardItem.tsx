@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { NeumorphismBox } from '@styles/custom/NeumorphismBox';
+import { CustomBox } from '@styles/custom/CustomBox';
 
 type DashboardItemProps = {
   row: number; // TODO: 더 엄밀한 Type 필요
@@ -22,7 +22,7 @@ export const DashboardItem = ({
 
 type LayoutProps = Omit<DashboardItemProps, 'content'>;
 
-const Layout = styled(NeumorphismBox)<LayoutProps>`
+const Layout = styled(CustomBox)<LayoutProps>`
   grid-column: ${({ col, colSpan }) => `${col} / span ${colSpan}`};
   grid-row: ${({ row, rowSpan }) => `${row} / span ${rowSpan}`};
 `;

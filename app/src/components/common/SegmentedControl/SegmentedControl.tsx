@@ -86,11 +86,7 @@ const Controls = styled.div<ControlsProps>`
   overflow: hidden;
   position: relative;
   transition: box-shadow 0.4s;
-  box-shadow: 8px 8px 10px #eaeaea, -8px -8px 10px #ffffff;
-
-  :hover {
-    box-shadow: 8px 8px 10px #dddddd, -8px -8px 10px #ffffff;
-  }
+  border: 1px solid ${({ theme }) => theme.colors.mono.gray50};
 
   ::before {
     content: '';
@@ -105,7 +101,7 @@ const Controls = styled.div<ControlsProps>`
     transition: ${({ ready }) =>
       ready && 'transform 0.3s ease, width 0.3s ease'};
 
-    box-shadow: inset 4px 4px 4px #eeeeee, inset -4px -4px 4px #ffffff;
+    background-color: ${({ theme }) => theme.colors.primary.default};
   }
 `;
 
@@ -114,7 +110,7 @@ type SegmentProps = {
 };
 
 const Segment = styled.div<SegmentProps>`
-  padding: 0.8rem 2.7rem;
+  padding: 0.9rem 3rem;
   position: relative;
   text-align: center;
   z-index: 1;
@@ -140,8 +136,9 @@ type SegmentLabelProps = {
 const SegmentLabel = styled.label<SegmentLabelProps>`
   cursor: pointer;
   display: block;
-  font-weight: medium;
   position: relative;
   transition: color 0.3s ease;
-  /* color: ${({ active, theme }) => active && theme.colors.mono.white}; */
+  color: ${({ active, theme }) => active && theme.colors.mono.white};
+  font-weight: ${({ active, theme }) =>
+    active ? theme.fonts.weight.bold : theme.fonts.weight.medium};
 `;

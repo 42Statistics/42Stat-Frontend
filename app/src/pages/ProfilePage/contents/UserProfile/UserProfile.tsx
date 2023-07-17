@@ -117,7 +117,7 @@ const Layout = styled.div<LayoutProps>`
       : 'black'}; // TODO: fallback 시 기존에 있는 코알리숑 background로 대체
   background-size: cover;
   background-position: center;
-  border-radius: ${({ theme }) => theme.radius.md};
+  border-radius: ${({ theme }) => theme.radius.sm};
   user-select: none;
 `;
 
@@ -131,5 +131,5 @@ const UserProfileLoaderLayout = styled.div`
   background-image: url('/coalition-mono.png');
   background-size: cover;
   background-position: center;
-  border-radius: ${({ theme }) => theme.radius.md};
+  border-radius: ${({ theme }) => theme.radius.sm};
 `;

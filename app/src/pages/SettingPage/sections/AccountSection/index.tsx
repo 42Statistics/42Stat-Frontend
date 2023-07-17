@@ -6,7 +6,7 @@ import {
   Spacer,
   VStack,
 } from '@components/common';
-import { NeumorphismSection } from '@styles/custom/NeumorphismSection';
+import { CustomSection } from '@styles/custom/CustomSection';
 import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
 import { DeleteAccountButton } from './DeleteAccountButton';
 import { DeleteAccountDialog } from './DeleteAccountDialog';
@@ -16,7 +16,7 @@ export const AccountSection = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <NeumorphismSection>
+    <CustomSection>
       <TabletAndAbove>
         <HStack>
           <H2BoldText>계정 관리</H2BoldText>
@@ -43,6 +43,6 @@ export const AccountSection = () => {
           </HStack>
         </VStack>
       </Mobile>
-    </NeumorphismSection>
+    </CustomSection>
   );
 };

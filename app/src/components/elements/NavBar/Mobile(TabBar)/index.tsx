@@ -26,5 +26,6 @@ const Layout = styled.nav`
   height: 6rem;
   padding: 1.4rem 2rem 6rem 2rem;
   background-color: ${({ theme }) => theme.colors.mono.white};
+  border-top: 1px solid ${({ theme }) => theme.colors.mono.gray50};
   user-select: none;
 `;

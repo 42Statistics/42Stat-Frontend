@@ -64,4 +64,5 @@ export const StyledLabel = styled.div<StyledLabelProps>`
   padding: ${({ padding }) => padding};
   background-color: ${({ backgroundColor }) => backgroundColor};
   border-radius: ${({ theme }) => theme.radius.md};
+  user-select: none;
 `;

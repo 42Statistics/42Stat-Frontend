@@ -51,7 +51,7 @@ export const ProfilePage = () => {
   }, []);
 
   return (
-    <VStack w="100%" spacing="2rem">
+    <VStack w="100%" spacing="3rem">
       <Dashboard {...useProfilePageDashboard()} />
       <Tabs>
         <Tab

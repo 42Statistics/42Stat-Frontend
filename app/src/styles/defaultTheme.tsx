@@ -18,6 +18,10 @@ const colors = {
   semantic: {
     error: '#b1232d',
   },
+  element: {
+    hover: '#eeeeee',
+    active: '#dddddd',
+  },
   mono: {
     black: '#161616',
     white: '#f9f9f9',
@@ -26,7 +30,6 @@ const colors = {
     gray100: '#bbbbbb',
     gray50: '#dddddd',
   },
-  background: '#f9f9f9',
 };
 
 const fonts = {

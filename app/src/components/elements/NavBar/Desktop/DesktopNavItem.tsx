@@ -1,4 +1,5 @@
 import { HStack, Text } from '@components/common';
+import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useLocation, useNavigate } from 'react-router-dom';
 import type { NavRoute } from '../hooks/useNavRoutes';
@@ -10,15 +11,16 @@ export type NavItemProps = {
 export const NavItem = ({ route }: NavItemProps) => {
   const location = useLocation();
   const isFocused = location.pathname === route.path;
-  const NavItemIcon = !isFocused ? route.icon : route.iconFocused;
+  const NavItemIcon = route.icon;
+  const theme = useTheme();
+  const color = isFocused ? theme.colors.mono.white : theme.colors.mono.black;
   const navigate = useNavigate();
 
-  // Link를 NavItemLayout 안에 넣으면 padding 부분을 눌렀을 때 작동하지 않아서 navigate으로 대체
   return (
     <Layout isFocused={isFocused} onClick={() => navigate(route.path)}>
       <HStack spacing="1.5rem" justify="start">
-        <NavItemIcon size="16px" />
-        <Text>{route.text}</Text>
+        <NavItemIcon size="16px" fill={color} />
+        <Text color={color}>{route.text}</Text>
       </HStack>
     </Layout>
   );
@@ -30,18 +32,21 @@ type LayoutProps = {
 
 const Layout = styled.li<LayoutProps>`
   width: 100%;
-  padding: 1.2rem 0 1.2rem 2rem;
-  border-radius: ${({ theme }) => theme.radius.md};
+  padding: 1rem 0 1rem 2rem;
+  border-radius: ${({ theme }) => theme.radius.sm};
   cursor: pointer;
-  box-shadow: ${({ isFocused }) =>
-    isFocused && 'inset 7px 7px 7px #f0f0f0, inset -7px -7px 7px #ffffff'};
-  transition: box-shadow 0.4s;
+  transition: all 0.2s;
 
-  :hover {
-    box-shadow: ${({ isFocused }) =>
-      !isFocused && '7px 7px 7px #e9e9e9, -7px -7px 7px #ffffff'};
+  background-color: ${({ theme, isFocused }) =>
+    isFocused && theme.colors.primary.default};
+
+  &:hover {
+    background-color: ${({ theme, isFocused }) =>
+      !isFocused && theme.colors.element.hover};
   }
-  :active {
-    box-shadow: inset 7px 7px 7px #f0f0f0, inset -7px -7px 7px #ffffff;
+
+  &:active {
+    background-color: ${({ theme, isFocused }) =>
+      !isFocused && theme.colors.element.active};
   }
 `;

@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { rgba } from 'emotion-rgba';
 import { Text } from '../Text';
 
 type TabProps = {
@@ -33,6 +32,10 @@ const Layout = styled.div<LayoutProps>`
   font-weight: ${({ theme, selected }) => selected && theme.fonts.weight.bold};
 
   &:hover {
-    background-color: ${({ theme }) => rgba(theme.colors.mono.gray200, 0.1)};
+    background-color: ${({ theme }) => theme.colors.element.hover};
+  }
+
+  &:active {
+    background-color: ${({ theme }) => theme.colors.element.active};
   }
 `;

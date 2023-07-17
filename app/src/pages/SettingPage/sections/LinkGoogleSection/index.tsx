@@ -14,7 +14,7 @@ import {
   VStack,
 } from '@components/common';
 import { useTheme } from '@emotion/react';
-import { NeumorphismSection } from '@styles/custom/NeumorphismSection';
+import { CustomSection } from '@styles/custom/CustomSection';
 import { useAtomValue } from 'jotai';
 import { LinkLabel } from './LinkLabel';
 import { LinkRow } from './LinkRow';
@@ -49,7 +49,7 @@ export const LinkGoogleSection = () => {
   const { linkedAccounts } = data?.getSetting?.account ?? {};
 
   return (
-    <NeumorphismSection>
+    <CustomSection>
       <VStack align="start" spacing="4rem">
         <VStack align="start" spacing="0.5rem">
           <H2BoldText>계정 연동</H2BoldText>
@@ -77,6 +77,6 @@ export const LinkGoogleSection = () => {
           />
         </VStack>
       </VStack>
-    </NeumorphismSection>
+    </CustomSection>
   );
 };

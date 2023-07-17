@@ -37,8 +37,9 @@ const Layout = styled.div`
   width: 30rem;
   padding: 2.5rem;
   gap: 3rem;
-  border-radius: ${({ theme }) => theme.radius.md};
-  box-shadow: 0px 4px 8px #ccc;
+  border-radius: ${({ theme }) => theme.radius.sm};
+  border: 1px solid ${({ theme }) => theme.colors.mono.gray50};
+  box-shadow: 4px 4px 8px #ccc;
   background-color: ${({ theme }) => theme.colors.mono.white};
   z-index: ${({ theme }) => theme.zIndex.searchResult};
 `;

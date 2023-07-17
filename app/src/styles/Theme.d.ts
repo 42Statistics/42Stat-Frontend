@@ -20,6 +20,10 @@ type Colors = {
   semantic: {
     error: string;
   };
+  element: {
+    hover: string;
+    active: string;
+  };
   mono: {
     black: string;
     white: string;
@@ -28,7 +32,6 @@ type Colors = {
     gray100: string;
     gray50: string;
   };
-  background: string;
 };
 
 type Fonts = {

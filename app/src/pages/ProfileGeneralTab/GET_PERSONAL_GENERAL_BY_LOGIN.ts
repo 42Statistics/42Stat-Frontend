@@ -13,6 +13,7 @@ export const GET_PERSONAL_GENERAL_BY_LOGIN = gql(/* GraphQL */ `
       blackholedAt
       ...levelRecordsFragment
       ...teamInfoFragment
+      ...characterFragment
     }
   }
 
@@ -52,48 +53,13 @@ export const GET_PERSONAL_GENERAL_BY_LOGIN = gql(/* GraphQL */ `
 
   fragment characterFragment on PersonalGeneral {
     character {
-      effort {
-        logtimeRank {
-          rank
-          value
-          userPreview {
-            id
-          }
-        }
-        evalCountRank {
-          rank
-          value
-        }
-        examTryCount
-        projectTryCount
+      name
+      types {
+        name
+        description
+        color
       }
-      talent {
-        levelRank {
-          rank
-          value
-        }
-        examOneshotRate {
-          total
-          fields {
-            key
-            value
-          }
-        }
-        projectOneshotRate {
-          total
-          fields {
-            key
-            value
-          }
-        }
-        outstandingRate {
-          total
-          fields {
-            key
-            value
-          }
-        }
-      }
+      imgUrl
     }
   }
 

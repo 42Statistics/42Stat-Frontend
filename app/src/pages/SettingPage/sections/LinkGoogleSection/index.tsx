@@ -1,7 +1,7 @@
 import { gql } from '@/__generated__';
+import google_logo from '@/assets/google-logo.svg';
 import { useQuery } from '@apollo/client';
 import ft_logo from '@assets/42-logo.svg';
-import google_logo from '@assets/google-logo.svg';
 import { userAtom } from '@atoms/userAtom';
 import {
   Divider,
@@ -15,18 +15,27 @@ import {
 } from '@components/common';
 import { useTheme } from '@emotion/react';
 import { NeumorphismSection } from '@styles/custom/NeumorphismSection';
-import dayjs from 'dayjs';
 import { useAtomValue } from 'jotai';
-import { LinkGoogleButton } from './LinkGoogleButton';
 import { LinkLabel } from './LinkLabel';
-import { UnlinkGoogleButton } from './UnlinkGoogleButton';
+import { LinkRow } from './LinkRow';
+
+export const ACCOUNT_FIELDS = gql(/* GraphQL */ `
+  fragment AccountFields on Account {
+    userId
+    linkedAccount {
+      linkedPlatform
+      id
+      email
+      linkedAt
+    }
+  }
+`);
 
 export const GET_SETTING = gql(/* GraphQL */ `
   query GetSetting {
     getSetting {
       account {
-        googleEmail
-        linkedAt
+        ...AccountFields
       }
     }
   }
@@ -37,8 +46,7 @@ export const LinkGoogleSection = () => {
   const { data, refetch } = useQuery(GET_SETTING);
   const user = useAtomValue(userAtom);
 
-  const { googleEmail, linkedAt } = data?.getSetting?.account ?? {};
-  const isLinked = googleEmail != null && linkedAt != null;
+  const { linkedAccount } = data?.getSetting?.account ?? {};
 
   return (
     <NeumorphismSection>
@@ -59,32 +67,14 @@ export const LinkGoogleSection = () => {
               text={user.login}
             />
           </HStack>
-          <HStack w="100%" spacing="2rem" wrap="wrap">
-            <H3MediumText>구글 계정</H3MediumText>
-            <Spacer />
-            <VStack align="end" spacing="1rem">
-              <LinkLabel
-                left={<Image src={google_logo} style={{ width: '24px' }} />}
-                text={isLinked ? googleEmail : '연동된 계정 없음'}
-                right={
-                  isLinked ? (
-                    <UnlinkGoogleButton onSuccess={refetch} />
-                  ) : (
-                    <LinkGoogleButton onSuccess={refetch} />
-                  )
-                }
-              />
-              {isLinked && (
-                <Text
-                  color={theme.colors.mono.gray300}
-                  style={{ marginRight: '2rem' }}
-                >
-                  {dayjs(new Date(linkedAt)).format('YYYY-MM-DD HH:mm:ss')}{' '}
-                  연동됨
-                </Text>
-              )}
-            </VStack>
-          </HStack>
+          <LinkRow
+            title="구글 계정"
+            logo={google_logo}
+            linkedAccount={linkedAccount?.find(
+              (account) => account.linkedPlatform === 'google',
+            )}
+            refetch={refetch}
+          />
         </VStack>
       </VStack>
     </NeumorphismSection>

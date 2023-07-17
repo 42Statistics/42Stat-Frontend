@@ -19,17 +19,17 @@ import { useNavigate } from 'react-router-dom';
 import { useScript } from 'usehooks-ts';
 import { LoginButton } from './LoginButton';
 
-export const LOGIN_GOOGLE = gql(/* GraphQL */ `
-  mutation LoginGoogle($google: GoogleLoginInput!, $ftCode: String) {
-    loginGoogle(google: $google, ftCode: $ftCode) {
+export const GOOGLE_LOGIN = gql(/* GraphQL */ `
+  mutation googleLogin($google: GoogleLoginInput!, $ftCode: String) {
+    googleLogin(google: $google, ftCode: $ftCode) {
       __typename
-      ... on Success {
+      ... on LoginSuccess {
         message
         accessToken
         refreshToken
         userId
       }
-      ... on NotLinked {
+      ... on LoginNotLinked {
         message
       }
     }
@@ -38,7 +38,7 @@ export const LOGIN_GOOGLE = gql(/* GraphQL */ `
 
 export const GoogleLoginButton = () => {
   const status = useScript(GAPI_URL, { removeOnUnmount: true });
-  const [login, { data, loading, error }] = useMutation(LOGIN_GOOGLE);
+  const [login, { data, loading, error }] = useMutation(GOOGLE_LOGIN);
   const [googleButtonWrapper, setGoogleButtonWrapper] =
     useState<FakeGoogleWrapperType>();
   const navigate = useNavigate();
@@ -73,11 +73,11 @@ export const GoogleLoginButton = () => {
     if (loading || error || !data) {
       return;
     }
-    if (data.loginGoogle.__typename === 'NotLinked') {
+    if (data.googleLogin.__typename === 'LoginNotLinked') {
       navigate(ROUTES.FT_OAUTH);
       return;
     }
-    const { accessToken, refreshToken } = data.loginGoogle;
+    const { accessToken, refreshToken } = data.googleLogin;
     setAccessToken(accessToken);
     setRefreshToken(refreshToken);
     removeGoogleCredential();

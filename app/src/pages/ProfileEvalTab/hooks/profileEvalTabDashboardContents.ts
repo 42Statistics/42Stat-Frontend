@@ -5,7 +5,7 @@ import {
   AverageFeedbackLength,
   AverageFinalMark,
   CorrectionPoint,
-  DestinyUsers,
+  DestinyRanking,
   EvalLogSearchLink,
   MonthlyEvalCount,
   RecentComment,
@@ -43,7 +43,7 @@ export const profileEvalTabDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 7,
-    content: DestinyUsers,
+    content: DestinyRanking,
   },
   {
     id: 8,

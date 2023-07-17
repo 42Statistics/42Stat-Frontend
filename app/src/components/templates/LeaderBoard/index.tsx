@@ -1,23 +1,23 @@
-import { RankingUserItemType } from '@/types/Ranking';
+import { UserRank } from '@/__generated__/graphql';
 import { VStack } from '@components/common';
 import { LeaderboardList } from './LeaderboardList';
 import { LeaderboardListItem } from './LeaderboardListItem';
 
 type LeaderboardProps = {
-  me: RankingUserItemType | null;
-  list: RankingUserItemType[];
+  list: UserRank[];
+  me?: UserRank | null;
   unit: string;
   fixedNumber?: number;
 };
 export const Leaderboard = ({
-  me,
   list,
+  me,
   unit,
   fixedNumber,
 }: LeaderboardProps) => {
   return (
     <VStack w="100%" spacing="6rem">
-      {me && (
+      {me != null && (
         <LeaderboardListItem
           item={me}
           unit={unit}

@@ -1,10 +1,10 @@
-import type { RankingUserItemType } from '@/types/Ranking';
+import { UserRank } from '@/__generated__/graphql';
 import {
   Avatar,
   CaptionText,
   H2BoldText,
   H3BoldText,
-  H3Text,
+  H3MediumText,
   HStack,
   MediumText,
   Spacer,
@@ -19,7 +19,7 @@ import { mq } from '@utils/responsive/mq';
 import { useNavigate } from 'react-router-dom';
 
 type LeaderboardListItemProps = {
-  item: RankingUserItemType;
+  item: UserRank;
   unit: string;
   isMe?: boolean;
   fixedNumber?: number;
@@ -32,24 +32,26 @@ export const LeaderboardListItem = ({
   fixedNumber,
 }: LeaderboardListItemProps) => {
   const theme = useTheme();
-  const { name, imgUrl, rank, value } = item;
   const navigate = useNavigate();
-
+  const {
+    userPreview: { login, imgUrl },
+    rank,
+    value,
+  } = item;
   const color = isMe ? theme.colors.mono.white : theme.colors.mono.black;
 
-  const goToProfile = (login: string) => {
-    navigate(`${ROUTES.PROFILE_ROOT}/${login}`);
-  };
-
   return (
-    <Layout isMe={isMe} onClick={() => goToProfile(name)}>
+    <Layout
+      isMe={isMe}
+      onClick={() => navigate(`${ROUTES.PROFILE_ROOT}/${login}`)}
+    >
       <TabletAndAbove>
         <HStack w="100%" spacing="4rem">
           <HStack w="5rem">
             <H3BoldText color={color}>{rank}</H3BoldText>
           </HStack>
           <Avatar src={imgUrl} />
-          <H3Text color={color}>{name}</H3Text>
+          <H3MediumText color={color}>{login}</H3MediumText>
           <Spacer />
           <HStack align="baseline" spacing="0.2rem">
             <H2BoldText color={color}>
@@ -67,7 +69,7 @@ export const LeaderboardListItem = ({
             <MediumText color={color}>{rank}</MediumText>
           </HStack>
           <Avatar size="sm" src={imgUrl} />
-          <Text color={color}>{name}</Text>
+          <MediumText color={color}>{login}</MediumText>
           <Spacer />
           <HStack align="baseline" spacing="0.2rem">
             <H3BoldText color={color}>

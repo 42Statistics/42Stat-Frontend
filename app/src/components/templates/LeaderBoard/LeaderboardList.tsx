@@ -1,12 +1,12 @@
-import type { RankingItemType } from '@/types/Ranking';
+import { UserRank } from '@/__generated__/graphql';
 import { Divider } from '@components/common';
 import styled from '@emotion/styled';
 import { Fragment } from 'react';
 import { LeaderboardListItem } from './LeaderboardListItem';
 
-type LeaderboardProps = {
-  list: RankingItemType[];
-  me: RankingItemType | null;
+type LeaderboardListProps = {
+  list: UserRank[];
+  me?: UserRank | null;
   unit: string;
   fixedNumber?: number;
 };
@@ -16,16 +16,16 @@ export const LeaderboardList = ({
   me,
   unit,
   fixedNumber,
-}: LeaderboardProps) => {
+}: LeaderboardListProps) => {
   return (
     <Layout>
       {list.map((item, idx) => (
-        <Fragment key={item.id}>
+        <Fragment key={item.userPreview.id}>
           <LeaderboardListItem
             item={item}
             unit={unit}
             fixedNumber={fixedNumber}
-            isMe={me !== null && item.id === me.id}
+            isMe={me != null && item.userPreview.id === me.userPreview.id}
           />
           {idx !== list.length - 1 && <Divider />}
         </Fragment>

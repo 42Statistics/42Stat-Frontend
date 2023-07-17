@@ -1,6 +1,6 @@
 import { useDisclosure } from '@/hooks/useDisclosure';
 import { Clickable, Input } from '@components/common';
-import { MdSearch } from '@react-icons/all-files/md/MdSearch';
+import { RiSearchLine } from '@react-icons/all-files/ri/RiSearchLine';
 import { SearchModal } from './SearchModal';
 
 // TODO: SearchBar 추상화
@@ -11,8 +11,8 @@ export const MobileSearchBar = () => {
     <>
       <Clickable onClick={onOpen}>
         <Input
-          leftElement={<MdSearch id="search-icon" size="24px" />}
-          placeholder="Search..."
+          left={<RiSearchLine id="search-icon" size="24px" />}
+          placeholder="Search"
           disabled
           style={{ width: '120px' }}
         />

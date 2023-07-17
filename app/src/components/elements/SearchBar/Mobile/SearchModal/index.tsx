@@ -1,7 +1,7 @@
 import { Clickable, HStack, Modal } from '@components/common';
 import styled from '@emotion/styled';
 import { MdArrowBack } from '@react-icons/all-files/md/MdArrowBack';
-import { MdSearch } from '@react-icons/all-files/md/MdSearch';
+import { RiSearchLine } from '@react-icons/all-files/ri/RiSearchLine';
 import { ROUTES } from '@routes/ROUTES';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -74,7 +74,7 @@ export const SearchModal = ({ isOpen, onClose }: SearchModalProps) => {
             onChange={(e) => setInput(e.target.value)}
           />
           <Clickable onClick={handleClickSearchButton}>
-            <MdSearch size="24px" />
+            <RiSearchLine size="24px" />
           </Clickable>
         </HStack>
         <MobileSearchResult

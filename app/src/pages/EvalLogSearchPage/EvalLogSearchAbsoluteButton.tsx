@@ -1,7 +1,7 @@
 import { Clickable } from '@components/common';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { MdSearch } from '@react-icons/all-files/md/MdSearch';
+import { RiSearchLine } from '@react-icons/all-files/ri/RiSearchLine';
 
 type EvalLogSearchAbsoluteButtonProps = {
   onClick: () => void;
@@ -18,7 +18,7 @@ export const EvalLogSearchAbsoluteButton = ({
     <>
       <Clickable onClick={onClick}>
         <Layout>
-          <MdSearch color={theme.colors.mono.white} size="20px" />
+          <RiSearchLine color={theme.colors.mono.white} size="20px" />
         </Layout>
       </Clickable>
       {dialog}

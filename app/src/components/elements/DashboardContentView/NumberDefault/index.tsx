@@ -1,4 +1,4 @@
-import { H3Text, HStack, Text } from '@components/common';
+import { H1BoldText, HStack, Text } from '@components/common';
 
 type NumberDefaultProps = {
   number: number;
@@ -12,12 +12,12 @@ export const NumberDefault = ({
   fixedNumber,
 }: NumberDefaultProps) => {
   return (
-    <HStack align="baseline">
-      <H3Text>
+    <HStack align="baseline" spacing="0.15rem">
+      <H1BoldText>
         {fixedNumber === undefined
           ? number.toLocaleString()
           : number.toFixed(2)}
-      </H3Text>
+      </H1BoldText>
       <Text>{unit}</Text>
     </HStack>
   );

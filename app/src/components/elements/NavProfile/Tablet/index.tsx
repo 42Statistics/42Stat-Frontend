@@ -5,7 +5,7 @@ import { useAtomValue } from 'jotai';
 import { Link } from 'react-router-dom';
 
 type TabletNavProfileProps = {
-  imgUrl: string;
+  imgUrl: string | null | undefined;
 };
 
 export const TabletNavProfile = ({ imgUrl }: TabletNavProfileProps) => {

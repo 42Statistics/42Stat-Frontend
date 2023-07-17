@@ -1,4 +1,4 @@
-import { H3Text } from '@components/common';
+import { H2BoldText } from '@components/common';
 import { Link } from 'react-router-dom';
 
 type TextDefaultProps = {
@@ -11,10 +11,10 @@ export const TextDefault = ({ text, link }: TextDefaultProps) => {
     <>
       {link !== undefined ? (
         <Link to={link}>
-          <H3Text style={{ textAlign: 'center' }}>{text}</H3Text>
+          <H2BoldText style={{ textAlign: 'center' }}>{text}</H2BoldText>
         </Link>
       ) : (
-        <H3Text style={{ textAlign: 'center' }}>{text}</H3Text>
+        <H2BoldText style={{ textAlign: 'center' }}>{text}</H2BoldText>
       )}
     </>
   );

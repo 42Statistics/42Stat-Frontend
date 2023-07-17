@@ -1,4 +1,4 @@
-import { CaptionText, Center, H3MediumText, VStack } from '@components/common';
+import { CaptionText, Center, H3BoldText, VStack } from '@components/common';
 import styled from '@emotion/styled';
 
 export type DashboardContentProps = React.PropsWithChildren & {
@@ -17,7 +17,7 @@ export const DashboardContent = ({
     <Layout>
       <VStack w="100%" h="100%" spacing="2rem" align="start">
         <VStack w="100%" align="start">
-          {title && <H3MediumText>{title}</H3MediumText>}
+          {title && <H3BoldText>{title}</H3BoldText>}
           {description && <CaptionText>{description}</CaptionText>}
         </VStack>
         {!isApexChart ? (

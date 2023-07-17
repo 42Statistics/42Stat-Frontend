@@ -1,13 +1,14 @@
 import { gql } from '@/__generated__';
 import { DateTemplate } from '@/__generated__/graphql';
 import { useQuery } from '@apollo/client';
-import { Center, H3BoldText, Text, VStack } from '@components/common';
+import { Center, H3BoldText, VStack } from '@components/common';
 import { CoalitionMark } from '@components/elements/CoalitionMark';
 import {
   DashboardContentBadRequest,
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
+import { TextMax } from '@components/elements/TextMax';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import styled from '@emotion/styled';
 import { numberWithUnitFormatter } from '@utils/formatters';
@@ -84,7 +85,7 @@ export const MonthlyTigCountPerCoalition = () => {
                     <H3BoldText>{capitalize(coalition.name)}</H3BoldText>
                   </td>
                   <td>
-                    <TextMax isMax={max > 0 && max === value}>
+                    <TextMax isMax={value !== 0 && max === value}>
                       {numberWithUnitFormatter(value, unit)}
                     </TextMax>
                   </td>
@@ -106,14 +107,4 @@ const MonthlyTigCountPerCoalitionTable = styled.table`
     padding: 0.6rem 2rem;
     vertical-align: middle;
   }
-`;
-
-type TextMaxProps = {
-  isMax: boolean;
-};
-
-const TextMax = styled(Text)<TextMaxProps>`
-  font-size: ${({ theme }) => theme.fonts.size.h3};
-  color: ${({ theme, isMax }) =>
-    isMax ? theme.colors.accent.default : theme.colors.mono.black};
 `;

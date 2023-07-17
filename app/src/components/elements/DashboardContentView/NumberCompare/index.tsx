@@ -1,4 +1,4 @@
-import { H3Text, HStack, Text } from '@components/common';
+import { H1BoldText, H3Text, HStack, Text } from '@components/common';
 import { useTheme } from '@emotion/react';
 import { NoneDash } from '../Error/NoneDash';
 import { Arrow } from './Arrow';
@@ -15,9 +15,9 @@ export const NumberCompare = ({ curr, last, unit }: NumberCompareProps) => {
   const color = diff > 0 ? theme.colors.chart.up : theme.colors.chart.down;
 
   return (
-    <HStack spacing="2rem">
-      <HStack align="baseline">
-        <H3Text>{curr.toLocaleString()}</H3Text>
+    <HStack spacing="2rem" align="baseline">
+      <HStack align="baseline" spacing="0.15rem">
+        <H1BoldText>{curr.toLocaleString()}</H1BoldText>
         <Text>{unit}</Text>
       </HStack>
       {diff !== 0 ? (

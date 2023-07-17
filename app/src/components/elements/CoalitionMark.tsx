@@ -10,7 +10,7 @@ type CoalitionMarkProps = {
 // TODO: 로드되기 전까지 coalition.color로 뒤에 띄워주기
 export const CoalitionMark = ({
   coalition,
-  size = '20px',
+  size = '18px',
 }: CoalitionMarkProps) => {
   return (
     <>

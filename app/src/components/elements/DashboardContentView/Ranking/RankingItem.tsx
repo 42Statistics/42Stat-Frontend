@@ -2,7 +2,7 @@ import type { RankingItemType, RankingUserItemType } from '@/types/Ranking';
 import {
   Avatar,
   H2BoldText,
-  H3MediumText,
+  H3BoldText,
   HStack,
   MediumText,
 } from '@components/common';
@@ -23,7 +23,7 @@ export const RankingItem = ({ item, link, unit }: RankingItemProps) => {
     rank === 1 ? theme.colors.accent.default : theme.colors.mono.black;
 
   return (
-    <HStack w="80%" spacing="2rem">
+    <HStack w="80%" spacing="2.4rem">
       <H2BoldText color={color}>{rank}</H2BoldText>
       {'imgUrl' in item && <Avatar src={item.imgUrl} />}
       <HStack
@@ -35,10 +35,10 @@ export const RankingItem = ({ item, link, unit }: RankingItemProps) => {
       >
         {link !== undefined ? (
           <Link to={link}>
-            <H3MediumText color={color}>{name}</H3MediumText>
+            <H3BoldText color={color}>{name}</H3BoldText>
           </Link>
         ) : (
-          <H3MediumText color={color}>{name}</H3MediumText>
+          <H3BoldText color={color}>{name}</H3BoldText>
         )}
         <MediumText color={color}>
           {numberWithUnitFormatter(value, unit)}

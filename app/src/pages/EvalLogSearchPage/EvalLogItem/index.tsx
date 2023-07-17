@@ -3,6 +3,7 @@ import { Center, HStack, Text, VStack } from '@components/common';
 import { EvalLogLabel, EvalLogLabelType } from '@components/common/Label';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { CustomBox } from '@styles/custom/CustomBox';
 import { EvalLogItemTitle } from './EvalLogItemTitle';
 
 type EvalLogItemProps = {
@@ -44,22 +45,11 @@ export const EvalLogItem = ({ element }: EvalLogItemProps) => {
   );
 };
 
-const Layout = styled.div`
+const Layout = styled(CustomBox)`
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  width: 100%;
-  background-color: ${({ theme }) => theme.colors.mono.white};
   padding: 2.5rem 3.5rem;
-  border-radius: ${({ theme }) => theme.radius.md};
-
-  box-shadow: 10px 10px 10px #eeeeee, -10px -10px 10px #ffffff;
-
-  transition: all 0.3s;
-  :hover {
-    transform: scale(100.5%);
-    box-shadow: 10px 10px 10px #dddddd, -10px -10px 10px #ffffff;
-  }
 `;
 
 const CorrectorReviewLabel = ({ number }: { number: number }) => {

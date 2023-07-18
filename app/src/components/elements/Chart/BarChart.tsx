@@ -31,11 +31,11 @@ export const BarChart = ({
     },
     colors: [theme.colors.primary.default],
     stroke: {
-      width: 1,
+      width: 0,
     },
     fill: {
       type: 'solid',
-      opacity: 0.5,
+      opacity: 0.6,
     },
   };
 

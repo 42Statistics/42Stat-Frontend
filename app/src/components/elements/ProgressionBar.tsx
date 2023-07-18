@@ -23,7 +23,7 @@ export const ProgressionBar = ({ rate }: ProgressionBarProps) => {
 const Layout = styled.div`
   width: 80px;
   height: 0.75rem;
-  background-color: #e9e9e9;
+  background-color: ${({ theme }) => theme.colors.mono.gray50};
   border-radius: ${({ theme }) => theme.radius.sm};
 `;
 

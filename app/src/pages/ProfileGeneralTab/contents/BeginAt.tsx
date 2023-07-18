@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import { H2BoldText, HStack, Text } from '@components/common';
+import { H2BoldText, H3Text, HStack } from '@components/common';
 import {
   DashboardContentBadRequest,
   DashboardContentLoading,
@@ -31,7 +31,7 @@ export const BeginAt = () => {
     <DashboardContent title={title}>
       <HStack spacing="1rem" align="baseline">
         <H2BoldText>{dayjs(beginAt).format('YYYY. MM. DD.')}</H2BoldText>
-        <Text>{dDayFormatter(diff)}</Text>
+        <H3Text>{dDayFormatter(diff)}</H3Text>
       </HStack>
     </DashboardContent>
   );

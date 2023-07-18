@@ -1,7 +1,7 @@
 import { gql } from '@/__generated__';
 import { DateTemplate } from '@/__generated__/graphql';
 import { useQuery } from '@apollo/client';
-import { Center, H3BoldText, VStack } from '@components/common';
+import { Center, H3Text, VStack } from '@components/common';
 import { CoalitionMark } from '@components/elements/CoalitionMark';
 import {
   DashboardContentBadRequest,
@@ -10,6 +10,7 @@ import {
 } from '@components/elements/DashboardContentView/Error';
 import { TextMax } from '@components/elements/TextMax';
 import { DashboardContent } from '@components/templates/DashboardContent';
+import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { numberWithUnitFormatter } from '@utils/formatters';
 import dayjs from 'dayjs';
@@ -40,6 +41,7 @@ const GET_TIG_COUNT_PER_COALITION_BY_DATE_TEMPLATE = gql(/* GraphQL */ `
 `);
 
 export const MonthlyTigCountPerCoalition = () => {
+  const theme = useTheme();
   const title = '월간 누적 코알리숑 티그 횟수';
   const { loading, error, data } = useQuery(
     GET_TIG_COUNT_PER_COALITION_BY_DATE_TEMPLATE,
@@ -82,10 +84,13 @@ export const MonthlyTigCountPerCoalition = () => {
                     <CoalitionMark coalition={coalition} />
                   </td>
                   <td>
-                    <H3BoldText>{capitalize(coalition.name)}</H3BoldText>
+                    <H3Text>{capitalize(coalition.name)}</H3Text>
                   </td>
                   <td>
-                    <TextMax isMax={value !== 0 && max === value}>
+                    <TextMax
+                      isMax={value !== 0 && max === value}
+                      fontSize={theme.fonts.size.h3}
+                    >
                       {numberWithUnitFormatter(value, unit)}
                     </TextMax>
                   </td>

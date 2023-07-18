@@ -36,10 +36,10 @@ export const BasicInfo = () => {
 
   let text = `${getPeopleRange(minUserCount, maxUserCount)}`;
   if (estimateTime != null) {
-    text += ` / ${estimateTime}`;
+    text += ` · ${estimateTime}`;
   }
   if (difficulty != null) {
-    text += ` / ${difficulty.toLocaleString()} XP`;
+    text += ` · ${difficulty.toLocaleString()} XP`;
   }
 
   return (

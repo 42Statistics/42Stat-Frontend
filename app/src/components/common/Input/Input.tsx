@@ -1,22 +1,14 @@
 import styled from '@emotion/styled';
 import { forwardRef } from 'react';
-import { HStack } from '../Stack';
 import { Writable } from './Writable';
 
-type InputProps = {
-  left?: React.ReactNode;
-  right?: React.ReactNode;
-} & React.InputHTMLAttributes<HTMLInputElement>;
+type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
 export const Input = forwardRef(
-  ({ left, right, ...props }: InputProps, ref: React.Ref<HTMLInputElement>) => {
+  (props: InputProps, ref: React.Ref<HTMLInputElement>) => {
     return (
       <Layout>
-        <HStack spacing="2rem">
-          {left}
-          <Writable {...props} ref={ref} />
-          {right}
-        </HStack>
+        <Writable {...props} ref={ref} />
       </Layout>
     );
   },
@@ -28,5 +20,9 @@ const Layout = styled.div`
   padding: 1rem 2rem;
   border-radius: ${({ theme }) => theme.radius.md};
   transition: all 0.2s;
-  background-color: #f2f2f2;
+  border: 1px solid ${({ theme }) => theme.colors.mono.gray50};
+
+  &:hover {
+    border-color: ${({ theme }) => theme.colors.mono.gray100};
+  }
 `;

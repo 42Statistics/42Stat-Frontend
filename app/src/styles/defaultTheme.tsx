@@ -54,11 +54,8 @@ const fonts = {
 };
 
 const zIndex = {
-  searchResult: 100,
   absoluteButton: 200,
-  overlay: 300,
-  navBar: 400,
-  modal: 500,
+  modal: 1000,
 };
 
 const radius = {
@@ -68,9 +65,14 @@ const radius = {
   circle: '50%',
 };
 
+const shadow = {
+  md: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+};
+
 export const defaultTheme = {
   colors,
   fonts,
   zIndex,
   radius,
+  shadow,
 };

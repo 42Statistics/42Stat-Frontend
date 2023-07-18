@@ -56,10 +56,7 @@ type Fonts = {
 };
 
 type ZIndex = {
-  searchResult: number;
   absoluteButton: number;
-  overlay: number;
-  navBar: number;
   modal: number;
 };
 
@@ -70,11 +67,16 @@ type Radius = {
   circle: string;
 };
 
+type Shadow = {
+  md: string;
+};
+
 declare module '@emotion/react' {
   export interface Theme {
     colors: Colors;
     fonts: Fonts;
     zIndex: ZIndex;
     radius: Radius;
+    shadow: Shadow;
   }
 }

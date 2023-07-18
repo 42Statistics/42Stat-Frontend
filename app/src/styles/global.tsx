@@ -68,4 +68,8 @@ export const global = () => css`
   body {
     font-size: 1.4rem;
   }
+
+  &:focus-visible {
+    outline: 2px solid blue;
+  }
 `;

@@ -1,4 +1,4 @@
-import { CaptionText, VStack } from '@components/common';
+import { CaptionText, Clickable, VStack } from '@components/common';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -9,9 +9,11 @@ type TabletNavItemProps = NavItemProps;
 export const TabletNavItem = ({ route }: TabletNavItemProps) => {
   const location = useLocation();
   const isFocused = location.pathname === route.path;
-  const NavItemIcon = route.icon;
+  const NavItemIcon = isFocused ? route.iconFocused : route.icon;
   const theme = useTheme();
-  const color = isFocused ? theme.colors.mono.white : theme.colors.mono.black;
+  const color = isFocused
+    ? theme.colors.primary.default
+    : theme.colors.mono.black;
   const navigate = useNavigate();
 
   return (
@@ -28,11 +30,12 @@ type LayoutProps = {
   isFocused: boolean;
 };
 
-const Layout = styled.li<LayoutProps>`
+const Layout = styled(Clickable)<LayoutProps>`
   width: 100%;
-  padding: 1rem 0;
-  border-radius: ${({ theme }) => theme.radius.sm};
+  padding: 0.4rem 0;
+  border-left: 4px solid
+    ${({ theme, isFocused }) =>
+      isFocused ? theme.colors.primary.default : 'transparent'};
+
   cursor: pointer;
-  background-color: ${({ theme, isFocused }) =>
-    isFocused && theme.colors.primary.default};
 `;

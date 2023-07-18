@@ -1,4 +1,4 @@
-import { CaptionText, VStack } from '@components/common';
+import { CaptionText, Clickable, VStack } from '@components/common';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -9,9 +9,11 @@ type TabItemProps = NavItemProps;
 export const TabItem = ({ route }: TabItemProps) => {
   const location = useLocation();
   const isFocused = location.pathname === route.path;
-  const TabItemIcon = route.icon;
+  const TabItemIcon = isFocused ? route.iconFocused : route.icon;
   const theme = useTheme();
-  const color = isFocused ? theme.colors.mono.white : theme.colors.mono.black;
+  const color = isFocused
+    ? theme.colors.primary.default
+    : theme.colors.mono.black;
   const navigate = useNavigate();
 
   return (
@@ -28,10 +30,7 @@ type LayoutProps = {
   isFocused: boolean;
 };
 
-const Layout = styled.li<LayoutProps>`
+const Layout = styled(Clickable)<LayoutProps>`
   cursor: pointer;
   padding: 0.6rem 1.4rem;
-  border-radius: ${({ theme }) => theme.radius.sm};
-  background-color: ${({ theme, isFocused }) =>
-    isFocused && theme.colors.primary.default};
 `;

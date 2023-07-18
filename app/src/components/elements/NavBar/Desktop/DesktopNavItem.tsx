@@ -1,4 +1,4 @@
-import { HStack, Text } from '@components/common';
+import { Clickable, HStack, Text } from '@components/common';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -30,7 +30,7 @@ type LayoutProps = {
   isFocused: boolean;
 };
 
-const Layout = styled.li<LayoutProps>`
+const Layout = styled(Clickable)<LayoutProps>`
   width: 100%;
   padding: 1rem 0 1rem 2rem;
   border-radius: ${({ theme }) => theme.radius.sm};

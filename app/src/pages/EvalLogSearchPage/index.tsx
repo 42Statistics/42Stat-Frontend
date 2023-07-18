@@ -8,6 +8,7 @@ import { VStack } from '@components/common';
 import { Seo } from '@components/elements/Seo';
 import { withHead } from '@hoc/withHead';
 import { isDefined } from '@utils/isDefined';
+import { isSlashKeyDown } from '@utils/keyboard';
 import { isEqual } from 'lodash-es';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
@@ -160,6 +161,19 @@ const EvalLogSearchPage = () => {
       },
     });
   }, [isVisible, loading, evalLogSearchForm, search, endCursor]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (isSlashKeyDown(e) && !isOpen) {
+        e.preventDefault();
+        onOpen();
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, onOpen]);
 
   return (
     <>

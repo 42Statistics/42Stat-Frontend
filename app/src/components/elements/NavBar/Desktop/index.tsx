@@ -2,7 +2,7 @@ import { userAtom } from '@atoms/userAtom';
 import { VStack } from '@components/common';
 import { AppLogoTitle } from '@components/elements/AppLogoTitle';
 import { DesktopNavProfile } from '@components/elements/NavProfile/Desktop';
-import { TabletAndAboveSearchBar } from '@components/elements/SearchBar/TabletAndAbove';
+import { SearchBarView } from '@components/elements/SearchBarView';
 import styled from '@emotion/styled';
 import { ROUTES } from '@routes/ROUTES';
 import { useAtomValue } from 'jotai';
@@ -27,7 +27,7 @@ export const DesktopNavBar = ({ fixed = true }: DesktopNavBarProps) => {
           name={user.displayname}
           login={user.login}
         />
-        <TabletAndAboveSearchBar />
+        <SearchBarView />
         <DesktopNavMenu />
       </VStack>
     </Layout>
@@ -50,5 +50,8 @@ const Layout = styled.nav<LayoutProps>`
   padding: 3rem;
   background-color: ${({ theme }) => theme.colors.mono.white};
   border-right: 1px solid ${({ theme }) => theme.colors.mono.gray50};
+  border-top-right-radius: ${({ theme, fixed }) => !fixed && theme.radius.sm};
+  border-bottom-right-radius: ${({ theme, fixed }) =>
+    !fixed && theme.radius.sm};
   user-select: none;
 `;

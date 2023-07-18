@@ -1,3 +1,4 @@
+import { PropsWithStringChildren } from '@/types/PropsWithChildren';
 import { useTheme } from '@emotion/react';
 import { rgba } from 'emotion-rgba';
 import { Text } from '../Text';
@@ -6,12 +7,11 @@ import { StyledLabel } from './Label';
 type EvalLogLabelSize = 'md';
 export type EvalLogLabelType = 'positive' | 'neutral' | 'negative' | 'none';
 
-type EvalLogLabelProps = {
+type EvalLogLabelProps = PropsWithStringChildren<{
   size?: EvalLogLabelSize;
   type: EvalLogLabelType;
   fontWeight?: number;
-  children: string;
-};
+}>;
 
 export const EvalLogLabel = ({
   size = 'md',

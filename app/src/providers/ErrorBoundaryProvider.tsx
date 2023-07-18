@@ -1,6 +1,7 @@
+import { PropsWithReactElementChildren } from '@/types/PropsWithChildren';
 import { ErrorBoundary } from 'react-error-boundary';
 
-const Provider = ({ children }: React.PropsWithChildren) => {
+const Provider = ({ children }: PropsWithReactElementChildren) => {
   return (
     <ErrorBoundary
       fallback={

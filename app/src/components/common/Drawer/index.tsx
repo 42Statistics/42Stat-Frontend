@@ -1,14 +1,17 @@
 import { ModalBaseProps } from '@/types/Modal';
+import { PropsWithReactElementChildren } from '@/types/PropsWithChildren';
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 import { Modal, Overlay } from '../Modal';
 
 type Anchor = 'left' | 'right' | 'top' | 'bottom';
 
-type DrawerProps = ModalBaseProps & {
-  onClose: () => void;
-  anchor: Anchor;
-} & React.PropsWithChildren;
+type DrawerProps = PropsWithReactElementChildren<
+  ModalBaseProps & {
+    onClose: () => void;
+    anchor: Anchor;
+  }
+>;
 
 export const Drawer = ({ anchor, isOpen, onClose, children }: DrawerProps) => {
   return (

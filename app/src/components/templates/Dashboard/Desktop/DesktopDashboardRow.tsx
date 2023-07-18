@@ -1,25 +1,13 @@
 import type { DesktopDashboardColSize } from '@/types/Dashboard';
+import { PropsWithReactElementChildren } from '@/types/PropsWithChildren';
 import styled from '@emotion/styled';
 
-type DesktopDashboardRowProps = {
+type DesktopDashboardRowProps = PropsWithReactElementChildren<{
   row: number;
   col: DesktopDashboardColSize;
-  children: React.ReactNode;
-};
+}>;
 
-export const DesktopDashboardRow = ({
-  children,
-  ...propsExceptChildren
-}: DesktopDashboardRowProps) => {
-  return <Layout {...propsExceptChildren}>{children}</Layout>;
-};
-
-type LayoutProps = {
-  row: number;
-  col: DesktopDashboardColSize;
-};
-
-const Layout = styled.div<LayoutProps>`
+export const DesktopDashboardRow = styled.div<DesktopDashboardRowProps>`
   display: grid;
   grid-template-columns: ${({ col }) => `repeat(${col}, 1fr)`};
   grid-template-rows: ${({ row, col }) =>

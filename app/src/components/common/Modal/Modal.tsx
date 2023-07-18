@@ -1,10 +1,11 @@
 import { usePreventScroll } from '@/hooks/usePreventScroll';
 import type { ModalBaseProps } from '@/types/Modal';
+import { PropsWithReactElementChildren } from '@/types/PropsWithChildren';
 import styled from '@emotion/styled';
 import { useEffect } from 'react';
 import { Portal } from './Portal';
 
-type ModalProps = ModalBaseProps & React.PropsWithChildren;
+type ModalProps = PropsWithReactElementChildren<ModalBaseProps>;
 
 export const Modal = ({ isOpen, children }: ModalProps) => {
   const { preventScroll, allowScroll } = usePreventScroll();
@@ -16,7 +17,15 @@ export const Modal = ({ isOpen, children }: ModalProps) => {
     }
   }, [isOpen, preventScroll, allowScroll]);
 
-  return <Portal>{isOpen && <Layout>{children}</Layout>}</Portal>;
+  return (
+    <>
+      {isOpen && (
+        <Portal>
+          <Layout>{children}</Layout>
+        </Portal>
+      )}
+    </>
+  );
 };
 
 const Layout = styled.div`

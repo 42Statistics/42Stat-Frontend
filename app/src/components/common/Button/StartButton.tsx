@@ -1,11 +1,11 @@
+import type { PropsWithStringChildren } from '@/types/PropsWithChildren';
 import styled from '@emotion/styled';
 import { rgba } from 'emotion-rgba';
 import { Clickable } from './Clickable';
 
-type StartButtonProps = {
-  children: string;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
-};
+type StartButtonProps = PropsWithStringChildren<{
+  onClick: () => void;
+}>;
 
 export const StartButton = styled(Clickable)<StartButtonProps>`
   border-radius: ${({ theme }) => theme.radius.md};

@@ -1,4 +1,5 @@
 import { getNewAccessToken } from '@/services/auth/getNewAccessToken';
+import { PropsWithReactElementChildren } from '@/types/PropsWithChildren';
 import {
   ApolloClient,
   ApolloLink,
@@ -94,7 +95,7 @@ export const client = new ApolloClient({
   }),
 });
 
-const Provider = ({ children }: React.PropsWithChildren) => {
+const Provider = ({ children }: PropsWithReactElementChildren) => {
   return (
     <ApolloProvider client={client}>
       <ResponseInterceptor>{children}</ResponseInterceptor>
@@ -102,7 +103,7 @@ const Provider = ({ children }: React.PropsWithChildren) => {
   );
 };
 
-const ResponseInterceptor = ({ children }: React.PropsWithChildren) => {
+const ResponseInterceptor = ({ children }: PropsWithReactElementChildren) => {
   const setIsReLoginDialogOpen = useSetAtom(isReLoginDialogOpenAtom);
 
   useEffect(() => {

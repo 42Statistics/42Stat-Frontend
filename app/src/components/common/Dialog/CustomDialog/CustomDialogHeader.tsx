@@ -1,11 +1,8 @@
+import type { PropsWithStringChildren } from '@/types/PropsWithChildren';
 import { H2BoldText } from '@components/common/Text';
 import styled from '@emotion/styled';
 
-type CustomDialogHeaderProps = {
-  children: React.ReactNode;
-};
-
-export const CustomDialogHeader = ({ children }: CustomDialogHeaderProps) => {
+export const CustomDialogHeader = ({ children }: PropsWithStringChildren) => {
   return (
     <Layout>
       <H2BoldText>{children}</H2BoldText>

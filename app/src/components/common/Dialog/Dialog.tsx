@@ -1,10 +1,11 @@
 import type { DialogBaseProps } from '@/types/Modal';
+import { PropsWithReactElementChildren } from '@/types/PropsWithChildren';
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 import { fadeIn } from '@styles/custom/fadeIn';
 import { Modal, Overlay } from '../Modal';
 
-export type DialogProps = DialogBaseProps & React.PropsWithChildren;
+export type DialogProps = PropsWithReactElementChildren<DialogBaseProps>;
 
 export const Dialog = ({ isOpen, onClose, children }: DialogProps) => {
   return (

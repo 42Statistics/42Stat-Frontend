@@ -1,11 +1,8 @@
+import type { PropsWithStringChildren } from '@/types/PropsWithChildren';
 import { Text } from '@components/common/Text';
 import styled from '@emotion/styled';
 
-type CustomDialogBodyProps = {
-  children: React.ReactNode;
-};
-
-export const CustomDialogBody = ({ children }: CustomDialogBodyProps) => {
+export const CustomDialogBody = ({ children }: PropsWithStringChildren) => {
   return (
     <Layout>
       <Text>{children}</Text>

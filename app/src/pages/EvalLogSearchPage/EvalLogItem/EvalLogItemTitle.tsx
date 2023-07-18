@@ -31,7 +31,9 @@ export const EvalLogItemTitle = ({ header }: EvalLogItemTitleProps) => {
       </Text>
       <Spacer />
       <HStack spacing="1rem">
-        <BoldText>{projectPreview.name}</BoldText>
+        <Link to={`${ROUTES.PROJECT_ROOT}/${projectPreview.name}`}>
+          <BoldText>{projectPreview.name}</BoldText>
+        </Link>
         <FlagLabel name={flag.name} isPositive={flag.isPositive} />
       </HStack>
     </HStack>

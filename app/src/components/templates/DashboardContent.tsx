@@ -1,11 +1,11 @@
 import { CaptionText, Center, H3BoldText, VStack } from '@components/common';
 import styled from '@emotion/styled';
 
-export type DashboardContentProps = React.PropsWithChildren & {
+export type DashboardContentProps = React.PropsWithChildren<{
   title?: string;
   description?: string;
   isApexChart?: boolean;
-};
+}>;
 
 export const DashboardContent = ({
   title,

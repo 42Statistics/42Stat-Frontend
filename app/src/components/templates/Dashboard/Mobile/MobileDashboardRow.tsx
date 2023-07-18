@@ -1,29 +1,13 @@
-import styled from '@emotion/styled';
 import type { MobileDashboardColSize } from '@/types/Dashboard';
+import { PropsWithReactElementChildren } from '@/types/PropsWithChildren';
+import styled from '@emotion/styled';
 
-type MobileDashboardRowProps = {
+type MobileDashboardRowProps = PropsWithReactElementChildren<{
   row: number;
   col: MobileDashboardColSize;
-  children: React.ReactNode;
-};
+}>;
 
-export const MobileDashboardRow = ({
-  children,
-  ...propsExceptChildren
-}: MobileDashboardRowProps) => {
-  return (
-    <MobileDashboardRowLayout {...propsExceptChildren}>
-      {children}
-    </MobileDashboardRowLayout>
-  );
-};
-
-type MobileDashboardRowLayoutProps = {
-  row: number;
-  col: MobileDashboardColSize;
-};
-
-const MobileDashboardRowLayout = styled.div<MobileDashboardRowLayoutProps>`
+export const MobileDashboardRow = styled.div<MobileDashboardRowProps>`
   display: grid;
   grid-template-columns: ${({ col }) => `repeat(${col}, 1fr)`};
   grid-template-rows: ${({ row, col }) =>

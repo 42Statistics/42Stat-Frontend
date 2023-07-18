@@ -1,11 +1,11 @@
+import { PropsWithStringChildren } from '@/types/PropsWithChildren';
 import styled from '@emotion/styled';
 import { Text } from '../Text';
 
-type TabProps = {
+type TabProps = PropsWithStringChildren<{
   selected: boolean;
   onClick: () => void;
-  children: string;
-};
+}>;
 
 export const Tab = ({ selected, onClick, children }: TabProps) => {
   return (

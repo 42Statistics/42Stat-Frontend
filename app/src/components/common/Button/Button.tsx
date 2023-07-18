@@ -1,15 +1,15 @@
+import type { PropsWithStringChildren } from '@/types/PropsWithChildren';
 import styled from '@emotion/styled';
 import { Clickable } from './Clickable';
 
 type ButtonSize = 'md';
 
-type ButtonProps = {
+type ButtonProps = PropsWithStringChildren<{
   size?: ButtonSize;
-  children: string;
   color?: string;
   backgroundColor?: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
-};
+}>;
 
 export const Button = styled(Clickable)<ButtonProps>`
   border-radius: ${({ theme }) => theme.radius.sm};

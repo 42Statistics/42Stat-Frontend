@@ -1,3 +1,4 @@
+import { PropsWithReactElementChildren } from '@/types/PropsWithChildren';
 import { BrowserRouter as Router } from 'react-router-dom';
 import ApolloProvider from './ApolloProvider';
 import DayjsProvider from './DayjsProvider';
@@ -7,7 +8,7 @@ import ModalProvider from './ModalProvider';
 import { ScrollToTop } from './ScrollToTop';
 import ThemeProvider from './ThemeProvider';
 
-export const AppProvider = ({ children }: React.PropsWithChildren) => {
+export const AppProvider = ({ children }: PropsWithReactElementChildren) => {
   return (
     <ErrorBoundaryProvider>
       <ApolloProvider>

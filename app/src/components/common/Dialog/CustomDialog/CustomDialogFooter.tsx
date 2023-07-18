@@ -1,10 +1,9 @@
+import type { PropsWithReactNodeChildren } from '@/types/PropsWithChildren';
 import styled from '@emotion/styled';
 
-type CustomDialogFooterProps = {
-  children: React.ReactNode;
-};
-
-export const CustomDialogFooter = ({ children }: CustomDialogFooterProps) => {
+export const CustomDialogFooter = ({
+  children,
+}: PropsWithReactNodeChildren) => {
   return <Layout>{children}</Layout>;
 };
 

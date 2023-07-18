@@ -1,25 +1,13 @@
 import type { TabletDashboardColSize } from '@/types/Dashboard';
+import { PropsWithReactElementChildren } from '@/types/PropsWithChildren';
 import styled from '@emotion/styled';
 
-type TabletDashboardRowProps = {
+type TabletDashboardRowProps = PropsWithReactElementChildren<{
   row: number;
   col: TabletDashboardColSize;
-  children: React.ReactNode;
-};
+}>;
 
-export const TabletDashboardRow = ({
-  children,
-  ...propsExceptChildren
-}: TabletDashboardRowProps) => {
-  return <Layout {...propsExceptChildren}>{children}</Layout>;
-};
-
-type LayoutProps = {
-  row: number;
-  col: TabletDashboardColSize;
-};
-
-const Layout = styled.div<LayoutProps>`
+export const TabletDashboardRow = styled.div<TabletDashboardRowProps>`
   display: grid;
   grid-template-columns: ${({ col }) => `repeat(${col}, 1fr)`};
   grid-template-rows: ${({ row, col }) =>

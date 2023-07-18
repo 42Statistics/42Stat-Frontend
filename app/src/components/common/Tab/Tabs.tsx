@@ -1,6 +1,7 @@
+import { PropsWithReactElementChildren } from '@/types/PropsWithChildren';
 import styled from '@emotion/styled';
 
-export const Tabs = ({ children }: React.PropsWithChildren) => {
+export const Tabs = ({ children }: PropsWithReactElementChildren) => {
   return <Layout>{children}</Layout>;
 };
 

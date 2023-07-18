@@ -2,6 +2,7 @@ import { UserRank } from '@/__generated__/graphql';
 import {
   Avatar,
   CaptionText,
+  Clickable,
   H2BoldText,
   H3BoldText,
   H3MediumText,
@@ -89,7 +90,7 @@ type LayoutProps = {
   isMe: boolean;
 };
 
-const Layout = styled.li<LayoutProps>`
+const Layout = styled(Clickable)<LayoutProps>`
   width: 100%;
   ${mq({
     padding: ['0.5rem 2rem', '0.5rem 3rem'],

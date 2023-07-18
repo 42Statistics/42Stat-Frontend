@@ -1,5 +1,6 @@
 import { PropsWithStringChildren } from '@/types/PropsWithChildren';
 import styled from '@emotion/styled';
+import { Clickable } from '../Button';
 import { Text } from '../Text';
 
 type TabProps = PropsWithStringChildren<{
@@ -19,11 +20,11 @@ type LayoutProps = {
   selected: boolean;
 };
 
-const Layout = styled.div<LayoutProps>`
+const Layout = styled(Clickable)<LayoutProps>`
   display: inline-block;
   padding: 1.4rem 2rem;
-  cursor: pointer;
   transition: background-color 0.3s;
+  outline-offset: -0.2rem;
 
   border-bottom: ${({ theme, selected }) =>
     selected && `3px solid ${theme.colors.primary.default}`};

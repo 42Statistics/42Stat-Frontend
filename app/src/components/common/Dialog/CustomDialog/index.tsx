@@ -20,5 +20,8 @@ const Layout = styled.div`
   display: flex;
   flex-direction: column;
   width: 448px;
-  max-width: 100vw;
+  max-width: calc(100vw - 2rem);
+  background-color: ${({ theme }) => theme.colors.mono.white};
+  box-shadow: ${({ theme }) => theme.shadow.md};
+  border-radius: ${({ theme }) => theme.radius.sm};
 `;

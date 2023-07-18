@@ -1,18 +1,14 @@
-import { isReLoginDialogOpenAtom } from '@atoms/isReLoginDialogOpenAtom';
+import { DialogBaseProps } from '@/types/Modal';
 import { AlertDialog } from '@components/common/Dialog';
 import { ROUTES } from '@routes/ROUTES';
 import { clearStorage } from '@utils/storage/clearStorage';
-import { useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-type ReLoginDialogProps = {
-  isOpen: boolean;
-};
+type ReLoginDialogProps = DialogBaseProps;
 
-export const ReLoginDialog = ({ isOpen }: ReLoginDialogProps) => {
+export const ReLoginDialog = ({ isOpen, onClose }: ReLoginDialogProps) => {
   const navigate = useNavigate();
-  const setIsReLoginDialogOpen = useSetAtom(isReLoginDialogOpenAtom);
 
   const goToLandingPage = () => {
     navigate(ROUTES.ROOT);
@@ -20,7 +16,7 @@ export const ReLoginDialog = ({ isOpen }: ReLoginDialogProps) => {
 
   const handleConfirm = () => {
     clearStorage();
-    setIsReLoginDialogOpen(false);
+    onClose();
     goToLandingPage();
   };
 

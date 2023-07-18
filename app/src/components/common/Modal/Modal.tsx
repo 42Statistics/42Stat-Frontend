@@ -1,13 +1,19 @@
 import { usePreventScroll } from '@/hooks/usePreventScroll';
 import type { ModalBaseProps } from '@/types/Modal';
 import { PropsWithReactElementChildren } from '@/types/PropsWithChildren';
-import styled from '@emotion/styled';
+import { useTheme } from '@emotion/react';
 import { useEffect } from 'react';
 import { Portal } from './Portal';
 
-type ModalProps = PropsWithReactElementChildren<ModalBaseProps>;
+type ModalProps = PropsWithReactElementChildren<
+  ModalBaseProps & {
+    zIndex?: number;
+  }
+>;
 
-export const Modal = ({ isOpen, children }: ModalProps) => {
+export const Modal = ({ isOpen, children, zIndex }: ModalProps) => {
+  const theme = useTheme();
+
   const { preventScroll, allowScroll } = usePreventScroll();
 
   useEffect(() => {
@@ -21,13 +27,9 @@ export const Modal = ({ isOpen, children }: ModalProps) => {
     <>
       {isOpen && (
         <Portal>
-          <Layout>{children}</Layout>
+          <div style={{ zIndex: zIndex ?? theme.zIndex.modal }}>{children}</div>
         </Portal>
       )}
     </>
   );
 };
-
-const Layout = styled.div`
-  z-index: ${({ theme }) => theme.zIndex.modal};
-`;

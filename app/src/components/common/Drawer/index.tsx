@@ -1,7 +1,9 @@
+import { MODAL_ID } from '@/constants/HTML_ID';
 import { ModalBaseProps } from '@/types/Modal';
 import { PropsWithReactElementChildren } from '@/types/PropsWithChildren';
-import { keyframes } from '@emotion/react';
+import { keyframes, useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { useLayoutEffect, useState } from 'react';
 import { Modal, Overlay } from '../Modal';
 
 type Anchor = 'left' | 'right' | 'top' | 'bottom';
@@ -14,13 +16,25 @@ type DrawerProps = PropsWithReactElementChildren<
 >;
 
 export const Drawer = ({ anchor, isOpen, onClose, children }: DrawerProps) => {
+  const theme = useTheme();
+  const [zIndex, setZIndex] = useState<number>();
+
+  useLayoutEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+    const count = document.getElementById(MODAL_ID)?.childNodes.length ?? 0;
+    setZIndex(theme.zIndex.modal + 10 * count);
+  }, [isOpen, theme.zIndex.modal]);
+
   return (
-    <Modal isOpen={isOpen}>
-      <Overlay onClick={onClose} />
+    <Modal isOpen={isOpen} zIndex={zIndex}>
+      <Overlay onClick={onClose} style={{ zIndex }} />
       <Layout
         isOpen={isOpen}
         anchor={anchor}
         onClick={(e) => e.stopPropagation()}
+        style={{ zIndex }}
       >
         {children}
       </Layout>
@@ -86,5 +100,4 @@ const Layout = styled.div<LayoutProps>`
     (anchor === 'top' && drawerSlideFromTop) ||
     (anchor === 'bottom' && drawerSlideFromBottom)};
   animation-duration: 0.3s;
-  z-index: ${({ theme }) => theme.zIndex.modal};
 `;

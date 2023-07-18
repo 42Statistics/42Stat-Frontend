@@ -15,7 +15,7 @@ export const LevelRecords = () => {
   const { username } = useParams() as { username: string };
 
   const title = '레벨 증가 그래프';
-  const description = `본과정 시작일로부터 24개월`;
+  const description = `본과정 시작일로부터 최대 24개월`;
   const { loading, error, data } = useQuery(GET_PERSONAL_GENERAL_BY_LOGIN, {
     variables: { login: username },
   });
@@ -88,8 +88,6 @@ const LevelRecordsChart = ({ series }: LevelRecordsChartProps) => {
       theme.colors.accent.default,
     ],
     xaxis: {
-      max: 24,
-      tickAmount: 8,
       labels: {
         formatter: (value) => `${value}개월`,
       },

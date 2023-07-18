@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import { H1BoldText, HStack, Text } from '@components/common';
+import { H1BoldText, H3Text, HStack } from '@components/common';
 import { CoalitionMark } from '@components/elements/CoalitionMark';
 import {
   DashboardContentBadRequest,
@@ -35,10 +35,10 @@ export const CoalitionScore = () => {
           <CoalitionMark size="18px" coalition={coalition} />
           {scoreInfo?.rankInCoalition && (
             <HStack align="baseline">
-              <Text>
+              <H3Text>
                 {scoreInfo.rankInCoalition.toLocaleString()}
                 {unit}
-              </Text>
+              </H3Text>
             </HStack>
           )}
         </HStack>

@@ -334,7 +334,7 @@ export type LevelRecord = {
 
 export type LinkedAccount = {
   __typename?: 'LinkedAccount';
-  email: Scalars['String'];
+  email?: Maybe<Scalars['String']>;
   id: Scalars['String'];
   linkedAt: Scalars['DateTime'];
   linkedPlatform: Scalars['String'];
@@ -363,7 +363,7 @@ export type Mutation = {
   linkGoogle: Account;
   logout: Scalars['Int'];
   refreshToken: LoginSuccess;
-  unlinkGoogle: Account;
+  unlinkAccount: Account;
 };
 
 
@@ -385,6 +385,11 @@ export type MutationLinkGoogleArgs = {
 
 export type MutationRefreshTokenArgs = {
   refreshToken: Scalars['String'];
+};
+
+
+export type MutationUnlinkAccountArgs = {
+  targetPlatform: Scalars['String'];
 };
 
 export type MyInfo = {
@@ -962,19 +967,21 @@ export type LinkGoogleMutationVariables = Exact<{
 }>;
 
 
-export type LinkGoogleMutation = { __typename?: 'Mutation', linkGoogle: { __typename?: 'Account', userId: number, linkedAccount: Array<{ __typename?: 'LinkedAccount', linkedPlatform: string, id: string, email: string, linkedAt: string }> } };
+export type LinkGoogleMutation = { __typename?: 'Mutation', linkGoogle: { __typename?: 'Account', userId: number, linkedAccount: Array<{ __typename?: 'LinkedAccount', linkedPlatform: string, id: string, email?: string | null, linkedAt: string }> } };
 
-export type UnlinkGoogleMutationVariables = Exact<{ [key: string]: never; }>;
+export type UnlinkAccountMutationVariables = Exact<{
+  targetPlatform: Scalars['String'];
+}>;
 
 
-export type UnlinkGoogleMutation = { __typename?: 'Mutation', unlinkGoogle: { __typename?: 'Account', userId: number, linkedAccount: Array<{ __typename?: 'LinkedAccount', linkedPlatform: string, id: string, email: string, linkedAt: string }> } };
+export type UnlinkAccountMutation = { __typename?: 'Mutation', unlinkAccount: { __typename?: 'Account', userId: number, linkedAccount: Array<{ __typename?: 'LinkedAccount', linkedPlatform: string, id: string, email?: string | null, linkedAt: string }> } };
 
-export type AccountFieldsFragment = { __typename?: 'Account', userId: number, linkedAccount: Array<{ __typename?: 'LinkedAccount', linkedPlatform: string, id: string, email: string, linkedAt: string }> };
+export type AccountFieldsFragment = { __typename?: 'Account', userId: number, linkedAccount: Array<{ __typename?: 'LinkedAccount', linkedPlatform: string, id: string, email?: string | null, linkedAt: string }> };
 
 export type GetSettingQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetSettingQuery = { __typename?: 'Query', getSetting: { __typename?: 'Setting', account: { __typename?: 'Account', userId: number, linkedAccount: Array<{ __typename?: 'LinkedAccount', linkedPlatform: string, id: string, email: string, linkedAt: string }> } } };
+export type GetSettingQuery = { __typename?: 'Query', getSetting: { __typename?: 'Setting', account: { __typename?: 'Account', userId: number, linkedAccount: Array<{ __typename?: 'LinkedAccount', linkedPlatform: string, id: string, email?: string | null, linkedAt: string }> } } };
 
 export type GetNewAccessTokenMutationVariables = Exact<{
   refreshToken: Scalars['String'];
@@ -1038,7 +1045,7 @@ export const GetUserProfileByLoginDocument = {"kind":"Document","definitions":[{
 export const GetProjectInfoByProjectNameDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetProjectInfoByProjectName"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"projectName"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getProjectInfo"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"projectName"},"value":{"kind":"Variable","name":{"kind":"Name","value":"projectName"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"minUserCount"}},{"kind":"Field","name":{"kind":"Name","value":"maxUserCount"}},{"kind":"Field","name":{"kind":"Name","value":"estimateTime"}},{"kind":"Field","name":{"kind":"Name","value":"difficulty"}},{"kind":"Field","name":{"kind":"Name","value":"currRegisteredTeamCount"}},{"kind":"Field","name":{"kind":"Name","value":"closedTeamCount"}},{"kind":"Field","name":{"kind":"Name","value":"averagePassFinalMark"}},{"kind":"Field","name":{"kind":"Name","value":"objectives"}},{"kind":"Field","name":{"kind":"Name","value":"skills"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"validatedRateFragment"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"validatedRateFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ProjectInfo"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"validatedRate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"total"}},{"kind":"Field","name":{"kind":"Name","value":"fields"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"key"}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]}}]} as unknown as DocumentNode<GetProjectInfoByProjectNameQuery, GetProjectInfoByProjectNameQueryVariables>;
 export const DeleteAccountDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteAccount"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deleteAccount"}}]}}]} as unknown as DocumentNode<DeleteAccountMutation, DeleteAccountMutationVariables>;
 export const LinkGoogleDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"LinkGoogle"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"google"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"GoogleLoginInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"linkGoogle"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"google"},"value":{"kind":"Variable","name":{"kind":"Name","value":"google"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"linkedAccount"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"linkedPlatform"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"linkedAt"}}]}}]}}]}}]} as unknown as DocumentNode<LinkGoogleMutation, LinkGoogleMutationVariables>;
-export const UnlinkGoogleDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UnlinkGoogle"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"unlinkGoogle"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"linkedAccount"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"linkedPlatform"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"linkedAt"}}]}}]}}]}}]} as unknown as DocumentNode<UnlinkGoogleMutation, UnlinkGoogleMutationVariables>;
+export const UnlinkAccountDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UnlinkAccount"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"targetPlatform"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"unlinkAccount"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"targetPlatform"},"value":{"kind":"Variable","name":{"kind":"Name","value":"targetPlatform"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"linkedAccount"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"linkedPlatform"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"linkedAt"}}]}}]}}]}}]} as unknown as DocumentNode<UnlinkAccountMutation, UnlinkAccountMutationVariables>;
 export const GetSettingDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetSetting"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getSetting"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"account"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"AccountFields"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AccountFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Account"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"linkedAccount"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"linkedPlatform"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"linkedAt"}}]}}]}}]} as unknown as DocumentNode<GetSettingQuery, GetSettingQueryVariables>;
 export const GetNewAccessTokenDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"GetNewAccessToken"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"refreshToken"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"refreshToken"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"refreshToken"},"value":{"kind":"Variable","name":{"kind":"Name","value":"refreshToken"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}},{"kind":"Field","name":{"kind":"Name","value":"accessToken"}},{"kind":"Field","name":{"kind":"Name","value":"refreshToken"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}}]}}]}}]} as unknown as DocumentNode<GetNewAccessTokenMutation, GetNewAccessTokenMutationVariables>;
 export const LogoutDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Logout"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logout"}}]}}]} as unknown as DocumentNode<LogoutMutation, LogoutMutationVariables>;

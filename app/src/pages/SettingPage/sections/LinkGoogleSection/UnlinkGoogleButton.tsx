@@ -5,9 +5,9 @@ import { Spinner } from '@components/common/Loader';
 import { IoTrashOutline } from '@react-icons/all-files/io5/IoTrashOutline';
 import { useEffect } from 'react';
 
-const UNLINK_GOOGLE = gql(/* GraphQL */ `
-  mutation UnlinkGoogle {
-    unlinkGoogle {
+const UNLINK_ACCOUNT = gql(/* GraphQL */ `
+  mutation UnlinkAccount($targetPlatform: String!) {
+    unlinkAccount(targetPlatform: $targetPlatform) {
       userId
       linkedAccount {
         linkedPlatform
@@ -24,7 +24,11 @@ type UnlinkGoogleButtonProps = {
 };
 
 export const UnlinkGoogleButton = ({ onSuccess }: UnlinkGoogleButtonProps) => {
-  const [unlinkGoogle, { loading, error, data }] = useMutation(UNLINK_GOOGLE);
+  const [unlinkGoogle, { loading, error, data }] = useMutation(UNLINK_ACCOUNT, {
+    variables: {
+      targetPlatform: 'google',
+    },
+  });
 
   const handleClick = () => {
     unlinkGoogle();

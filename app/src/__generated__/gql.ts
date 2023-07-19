@@ -40,7 +40,7 @@ const documents = {
     "\n  query GetProjectInfoByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      name\n      description\n      minUserCount\n      maxUserCount\n      estimateTime\n      difficulty\n      currRegisteredTeamCount\n      closedTeamCount\n      averagePassFinalMark\n      objectives\n      skills\n      ...validatedRateFragment\n    }\n  }\n\n  fragment validatedRateFragment on ProjectInfo {\n    validatedRate {\n      total\n      fields {\n        key\n        value\n      }\n    }\n  }\n": types.GetProjectInfoByProjectNameDocument,
     "\n  mutation DeleteAccount {\n    deleteAccount\n  }\n": types.DeleteAccountDocument,
     "\n  mutation LinkGoogle($google: GoogleLoginInput!) {\n    linkGoogle(google: $google) {\n      userId\n      linkedAccount {\n        linkedPlatform\n        id\n        email\n        linkedAt\n      }\n    }\n  }\n": types.LinkGoogleDocument,
-    "\n  mutation UnlinkGoogle {\n    unlinkGoogle {\n      userId\n      linkedAccount {\n        linkedPlatform\n        id\n        email\n        linkedAt\n      }\n    }\n  }\n": types.UnlinkGoogleDocument,
+    "\n  mutation UnlinkAccount($targetPlatform: String!) {\n    unlinkAccount(targetPlatform: $targetPlatform) {\n      userId\n      linkedAccount {\n        linkedPlatform\n        id\n        email\n        linkedAt\n      }\n    }\n  }\n": types.UnlinkAccountDocument,
     "\n  fragment AccountFields on Account {\n    userId\n    linkedAccount {\n      linkedPlatform\n      id\n      email\n      linkedAt\n    }\n  }\n": types.AccountFieldsFragmentDoc,
     "\n  query GetSetting {\n    getSetting {\n      account {\n        ...AccountFields\n      }\n    }\n  }\n": types.GetSettingDocument,
     "\n  mutation GetNewAccessToken($refreshToken: String!) {\n    refreshToken(refreshToken: $refreshToken) {\n      message\n      accessToken\n      refreshToken\n      userId\n    }\n  }\n": types.GetNewAccessTokenDocument,
@@ -172,7 +172,7 @@ export function gql(source: "\n  mutation LinkGoogle($google: GoogleLoginInput!)
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  mutation UnlinkGoogle {\n    unlinkGoogle {\n      userId\n      linkedAccount {\n        linkedPlatform\n        id\n        email\n        linkedAt\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation UnlinkGoogle {\n    unlinkGoogle {\n      userId\n      linkedAccount {\n        linkedPlatform\n        id\n        email\n        linkedAt\n      }\n    }\n  }\n"];
+export function gql(source: "\n  mutation UnlinkAccount($targetPlatform: String!) {\n    unlinkAccount(targetPlatform: $targetPlatform) {\n      userId\n      linkedAccount {\n        linkedPlatform\n        id\n        email\n        linkedAt\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation UnlinkAccount($targetPlatform: String!) {\n    unlinkAccount(targetPlatform: $targetPlatform) {\n      userId\n      linkedAccount {\n        linkedPlatform\n        id\n        email\n        linkedAt\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -19,7 +19,7 @@ export const getNewAccessToken = async (refreshToken: string) => {
     mutation: GET_NEW_ACCESS_TOKEN,
     variables: { refreshToken },
   });
-  if (!data || data.refreshToken.__typename !== 'Success') {
+  if (!data) {
     return null;
   }
   const { accessToken: newAccessToken, refreshToken: newRefreshToken } =

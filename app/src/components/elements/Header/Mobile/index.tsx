@@ -1,6 +1,6 @@
 import { VStack } from '@components/common';
 import { AppLogoTitle } from '@components/elements/AppLogoTitle';
-import { SearchBarView } from '@components/elements/SearchBarView';
+import { SearchBarShapeButton } from '@components/elements/SearchBarShapeButton';
 import styled from '@emotion/styled';
 import { ROUTES } from '@routes/ROUTES';
 import { Link } from 'react-router-dom';
@@ -12,7 +12,7 @@ export const MobileHeader = () => {
         <Link to={ROUTES.ROOT}>
           <AppLogoTitle size="sm" />
         </Link>
-        <SearchBarView />
+        <SearchBarShapeButton />
       </VStack>
     </Layout>
   );

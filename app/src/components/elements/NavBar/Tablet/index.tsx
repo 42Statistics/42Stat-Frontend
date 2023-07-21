@@ -1,14 +1,20 @@
+import { isSpotlightOpenAtom } from '@atoms/isSpotlightOpenAtom';
 import { userAtom } from '@atoms/userAtom';
-import { Center, VStack } from '@components/common';
+import { Center, Clickable, VStack } from '@components/common';
 import { TabletNavProfile } from '@components/elements/NavProfile/Tablet';
-import { SearchBarButton } from '@components/elements/SearchBarView/SearchBarButton';
 import styled from '@emotion/styled';
-import { useAtomValue } from 'jotai';
+import { RiSearchLine } from '@react-icons/all-files/ri/RiSearchLine';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { TabletNavDrawer } from './TabletNavDrawer';
 import { TabletNavMenu } from './TabletNavMenu';
 
 export const TabletNavBar = () => {
   const user = useAtomValue(userAtom);
+  const setIsSpotlightOpen = useSetAtom(isSpotlightOpenAtom);
+
+  const openSpotlight = () => {
+    setIsSpotlightOpen(true);
+  };
 
   return (
     <Layout>
@@ -17,7 +23,9 @@ export const TabletNavBar = () => {
         <Center h="12rem">
           <TabletNavProfile imgUrl={user.imgUrl} />
         </Center>
-        <SearchBarButton />
+        <Clickable onClick={openSpotlight}>
+          <RiSearchLine size="16px" />
+        </Clickable>
         <TabletNavMenu />
       </VStack>
     </Layout>

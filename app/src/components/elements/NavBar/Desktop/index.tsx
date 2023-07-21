@@ -2,7 +2,7 @@ import { userAtom } from '@atoms/userAtom';
 import { VStack } from '@components/common';
 import { AppLogoTitle } from '@components/elements/AppLogoTitle';
 import { DesktopNavProfile } from '@components/elements/NavProfile/Desktop';
-import { SearchBarView } from '@components/elements/SearchBarView';
+import { SearchBarShapeButton } from '@components/elements/SearchBarShapeButton';
 import styled from '@emotion/styled';
 import { ROUTES } from '@routes/ROUTES';
 import { useAtomValue } from 'jotai';
@@ -27,7 +27,7 @@ export const DesktopNavBar = ({ fixed = true }: DesktopNavBarProps) => {
           name={user.displayname}
           login={user.login}
         />
-        <SearchBarView />
+        <SearchBarShapeButton />
         <DesktopNavMenu />
       </VStack>
     </Layout>

@@ -1,4 +1,4 @@
-import { isSearchDialogOpenAtom } from '@atoms/isSearchDialogOpenAtom';
+import { isSpotlightOpenAtom } from '@atoms/isSpotlightOpenAtom';
 import {
   CaptionText,
   Clickable,
@@ -11,12 +11,16 @@ import styled from '@emotion/styled';
 import { RiSearchLine } from '@react-icons/all-files/ri/RiSearchLine';
 import { useSetAtom } from 'jotai';
 
-export const SearchBarView = () => {
+export const SearchBarShapeButton = () => {
   const theme = useTheme();
-  const setIsSearchDialogOpen = useSetAtom(isSearchDialogOpenAtom);
+  const setIsSpotlightOpen = useSetAtom(isSpotlightOpenAtom);
+
+  const openSpotlight = () => {
+    setIsSpotlightOpen(true);
+  };
 
   return (
-    <Layout onClick={() => setIsSearchDialogOpen(true)}>
+    <Layout onClick={openSpotlight}>
       <HStack w="100%" justify="start" spacing="1.6rem">
         <RiSearchLine size="16px" />
         <Text color={theme.colors.mono.gray300}>Search</Text>

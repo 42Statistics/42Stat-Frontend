@@ -22,8 +22,8 @@ import { LinkRow } from './LinkRow';
 export const ACCOUNT_FIELDS = gql(/* GraphQL */ `
   fragment AccountFields on Account {
     userId
-    linkedAccount {
-      linkedPlatform
+    linkedAccounts {
+      platform
       id
       email
       linkedAt
@@ -46,7 +46,7 @@ export const LinkGoogleSection = () => {
   const { data, refetch } = useQuery(GET_SETTING);
   const user = useAtomValue(userAtom);
 
-  const { linkedAccount } = data?.getSetting?.account ?? {};
+  const { linkedAccounts } = data?.getSetting?.account ?? {};
 
   return (
     <NeumorphismSection>
@@ -70,8 +70,8 @@ export const LinkGoogleSection = () => {
           <LinkRow
             title="구글 계정"
             logo={google_logo}
-            linkedAccount={linkedAccount?.find(
-              (account) => account.linkedPlatform === 'google',
+            linkedAccount={linkedAccounts?.find(
+              (account) => account.platform === 'google',
             )}
             refetch={refetch}
           />

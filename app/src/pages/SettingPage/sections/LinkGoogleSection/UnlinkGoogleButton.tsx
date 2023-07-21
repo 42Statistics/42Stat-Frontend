@@ -9,8 +9,8 @@ const UNLINK_ACCOUNT = gql(/* GraphQL */ `
   mutation UnlinkAccount($targetPlatform: String!) {
     unlinkAccount(targetPlatform: $targetPlatform) {
       userId
-      linkedAccount {
-        linkedPlatform
+      linkedAccounts {
+        platform
         id
         email
         linkedAt

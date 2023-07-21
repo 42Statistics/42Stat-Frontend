@@ -15,8 +15,8 @@ const LINK_GOOGLE = gql(/* GraphQL */ `
   mutation LinkGoogle($google: GoogleLoginInput!) {
     linkGoogle(google: $google) {
       userId
-      linkedAccount {
-        linkedPlatform
+      linkedAccounts {
+        platform
         id
         email
         linkedAt

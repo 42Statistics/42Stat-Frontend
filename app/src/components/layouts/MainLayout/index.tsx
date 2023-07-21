@@ -1,4 +1,4 @@
-import { isSearchDialogOpenAtom } from '@atoms/isSearchDialogOpenAtom';
+import { isSpotlightOpenAtom } from '@atoms/isSpotlightOpenAtom';
 import { Global } from '@emotion/react';
 import { mainLayoutGlobalStyle } from '@styles/mainLayoutGlobalStyle';
 import { isMacKKeyDown } from '@utils/keyboard';
@@ -11,14 +11,12 @@ import { MobileMainLayout } from './Mobile';
 import { TabletMainLayout } from './Tablet';
 
 export const MainLayout = () => {
-  const [isSearchDialogOpen, setIsSearchDialogOpen] = useAtom(
-    isSearchDialogOpenAtom,
-  );
+  const [isSpotlightOpen, setIsSpotlightOpen] = useAtom(isSpotlightOpenAtom);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (isMacKKeyDown(e)) {
-        setIsSearchDialogOpen((cur) => !cur);
+        setIsSpotlightOpen((cur) => !cur);
       }
     };
 
@@ -27,7 +25,7 @@ export const MainLayout = () => {
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [isSearchDialogOpen, setIsSearchDialogOpen]);
+  }, [isSpotlightOpen, setIsSpotlightOpen]);
 
   return (
     <>

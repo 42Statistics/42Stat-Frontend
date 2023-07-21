@@ -1,9 +1,9 @@
 import { Exact, FindUserPreviewQuery } from '@/__generated__/graphql';
 import { QueryResult } from '@apollo/client';
 import { BoldText, Divider, VStack } from '@components/common';
-import { SearchDialogFindUserResultList } from './SearchDialogFindUserResultList';
+import { SpotlightUserList } from './SpotlightUserList';
 
-type SearchDialogFindUserResultProps = {
+type SpotlightUserSectionProps = {
   result: QueryResult<
     FindUserPreviewQuery,
     Exact<{
@@ -14,10 +14,10 @@ type SearchDialogFindUserResultProps = {
   startIndex: number;
 };
 
-export const SearchDialogFindUserResult = ({
+export const SpotlightUserSection = ({
   result: { loading, error, data },
   startIndex,
-}: SearchDialogFindUserResultProps) => {
+}: SpotlightUserSectionProps) => {
   if (loading || error || !data || data.findUserPreview.length === 0) {
     return null;
   }
@@ -26,10 +26,7 @@ export const SearchDialogFindUserResult = ({
     <VStack w="100%" align="start" spacing="1rem">
       <BoldText style={{ padding: '0.4rem 2rem' }}>유저</BoldText>
       <Divider />
-      <SearchDialogFindUserResultList
-        list={data.findUserPreview}
-        startIndex={startIndex}
-      />
+      <SpotlightUserList list={data.findUserPreview} startIndex={startIndex} />
     </VStack>
   );
 };

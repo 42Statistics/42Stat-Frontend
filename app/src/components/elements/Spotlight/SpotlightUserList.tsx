@@ -1,20 +1,20 @@
 import { UserPreview } from '@/__generated__/graphql';
 import { VStack } from '@components/common';
-import { SearchDialogFindUserResultListItem } from './SearchDialogFindUserResultListItem';
+import { SpotlightUserListItem } from './SpotlightUserListItem';
 
-type SearchDialogFindUserResultListProps = {
+type SpotlightUserListProps = {
   list: UserPreview[];
   startIndex: number;
 };
 
-export const SearchDialogFindUserResultList = ({
+export const SpotlightUserList = ({
   list,
   startIndex,
-}: SearchDialogFindUserResultListProps) => {
+}: SpotlightUserListProps) => {
   return (
     <VStack w="100%" align="start">
       {list.map((item, index) => (
-        <SearchDialogFindUserResultListItem
+        <SpotlightUserListItem
           key={item.id}
           item={item}
           index={startIndex + index}

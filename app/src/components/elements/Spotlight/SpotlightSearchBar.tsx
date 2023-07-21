@@ -1,25 +1,23 @@
 import { HStack, Writable } from '@components/common';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { SearchDialogFocusContext } from '@utils/contexts/SearchDialogFocusContext';
+import { SpotlightFocusContext } from '@utils/contexts/SpotlightFocusContext';
 import { useContext, useEffect, useRef } from 'react';
 
-type SearchDialogProps = {
+type SpotlightSearchBarProps = {
   left: React.ReactElement;
   input: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export const SearchDialogInput = ({
+export const SpotlightSearchBar = ({
   left,
   input,
   onChange,
-}: SearchDialogProps) => {
+}: SpotlightSearchBarProps) => {
   const theme = useTheme();
   const ref = useRef<HTMLInputElement>(null);
-  const { currentFocus, setCurrentFocus } = useContext(
-    SearchDialogFocusContext,
-  );
+  const { currentFocus, setCurrentFocus } = useContext(SpotlightFocusContext);
   const index = 0;
   const isFocused = currentFocus === index;
 

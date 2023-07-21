@@ -8,10 +8,10 @@ import { Center, H3Text, VStack } from '@components/common';
 import { ApolloErrorView } from '@components/elements/ApolloErrorView';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { SearchDialogFindProjectResult } from './SearchDialogFindProjectResult';
-import { SearchDialogFindUserResult } from './SearchDialogFindUserResult';
+import { SpotlightProjectSection } from './SpotlightProjectSection';
+import { SpotlightUserSection } from './SpotlightUserSection';
 
-type SearchDialogResultProps = {
+type SpotlightResultProps = {
   findUserResult: QueryResult<
     FindUserPreviewQuery,
     Exact<{
@@ -28,10 +28,10 @@ type SearchDialogResultProps = {
   >;
 };
 
-export const SearchDialogResult = ({
+export const SpotlightResult = ({
   findUserResult,
   findProjectResult,
-}: SearchDialogResultProps) => {
+}: SpotlightResultProps) => {
   const theme = useTheme();
 
   if (findUserResult.loading || findProjectResult.loading) {
@@ -77,8 +77,8 @@ export const SearchDialogResult = ({
   return (
     <Layout>
       <VStack w="100%" h="100%" spacing="2rem">
-        <SearchDialogFindUserResult result={findUserResult} startIndex={1} />
-        <SearchDialogFindProjectResult
+        <SpotlightUserSection result={findUserResult} startIndex={1} />
+        <SpotlightProjectSection
           result={findProjectResult}
           startIndex={1 + userResultLength}
         />

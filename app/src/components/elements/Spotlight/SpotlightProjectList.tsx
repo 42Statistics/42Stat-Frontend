@@ -1,20 +1,20 @@
 import { ProjectPreview } from '@/__generated__/graphql';
 import { VStack } from '@components/common';
-import { SearchDialogFindProjectResultListItem } from './SearchDialogFindProjectResultListItem';
+import { SpotlightProjectListItem } from './SpotlightProjectListItem';
 
-type SearchDialogFindProjectResultListProps = {
+type SpotlightProjectListProps = {
   list: ProjectPreview[];
   startIndex: number;
 };
 
-export const SearchDialogFindProjectResultList = ({
+export const SpotlightProjectList = ({
   list,
   startIndex,
-}: SearchDialogFindProjectResultListProps) => {
+}: SpotlightProjectListProps) => {
   return (
     <VStack w="100%" align="start">
       {list.map((item, index) => (
-        <SearchDialogFindProjectResultListItem
+        <SpotlightProjectListItem
           key={item.id}
           item={item}
           index={startIndex + index}

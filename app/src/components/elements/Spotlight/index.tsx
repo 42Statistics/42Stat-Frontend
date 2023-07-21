@@ -6,12 +6,12 @@ import { VStack } from '@components/common';
 import { Dialog } from '@components/common/Dialog';
 import styled from '@emotion/styled';
 import { RiSearchLine } from '@react-icons/all-files/ri/RiSearchLine';
-import { SearchDialogFocusContext } from '@utils/contexts/SearchDialogFocusContext';
+import { SpotlightFocusContext } from '@utils/contexts/SpotlightFocusContext';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDebounce } from 'usehooks-ts';
-import { SearchDialogInput } from './SearchDialogInput';
-import { SearchDialogResult } from './SearchDialogResult';
+import { SpotlightResult } from './SpotlightResult';
+import { SpotlightSearchBar } from './SpotlightSearchBar';
 
 export const FIND_USER_PREVIEW = gql(/* GraphQL */ `
   query FindUserPreview($login: String!, $limit: Int!) {
@@ -33,9 +33,9 @@ export const FIND_PROJECT_PREVIEW = gql(/* GraphQL */ `
   }
 `);
 
-type SearchDialogProps = DialogBaseProps;
+type SpotlightProps = DialogBaseProps;
 
-export const SearchDialog = ({ isOpen, onClose }: SearchDialogProps) => {
+export const Spotlight = ({ isOpen, onClose }: SpotlightProps) => {
   const [input, setInput] = useState<string>('');
   const debouncedInput = useDebounce(input, 250);
   const [findUser, findUserResult] = useLazyQuery(FIND_USER_PREVIEW);
@@ -69,19 +69,17 @@ export const SearchDialog = ({ isOpen, onClose }: SearchDialogProps) => {
   };
 
   return (
-    <SearchDialogFocusContext.Provider
-      value={{ currentFocus, setCurrentFocus }}
-    >
+    <SpotlightFocusContext.Provider value={{ currentFocus, setCurrentFocus }}>
       <Dialog isOpen={isOpen} onClose={onClose} position="top">
         <Layout>
           <VStack w="100%" h="100%" spacing="2rem">
-            <SearchDialogInput
+            <SpotlightSearchBar
               left={<RiSearchLine size={32} />}
               input={input}
               onChange={handleChange}
             />
             {input.length >= 2 && (
-              <SearchDialogResult
+              <SpotlightResult
                 findUserResult={findUserResult}
                 findProjectResult={findProjectResult}
               />
@@ -89,7 +87,7 @@ export const SearchDialog = ({ isOpen, onClose }: SearchDialogProps) => {
           </VStack>
         </Layout>
       </Dialog>
-    </SearchDialogFocusContext.Provider>
+    </SpotlightFocusContext.Provider>
   );
 };
 

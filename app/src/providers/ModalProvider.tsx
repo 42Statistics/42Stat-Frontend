@@ -1,28 +1,31 @@
 import { PropsWithReactElementChildren } from '@/types/PropsWithChildren';
 import { isReLoginDialogOpenAtom } from '@atoms/isReLoginDialogOpenAtom';
-import { isSearchDialogOpenAtom } from '@atoms/isSearchDialogOpenAtom';
+import { isSpotlightOpenAtom } from '@atoms/isSpotlightOpenAtom';
 import { ReLoginDialog } from '@components/elements/Modal/ReLoginDialog';
-import { SearchDialog } from '@components/elements/SearchBarView/SearchDialog';
+import { Spotlight } from '@components/elements/Spotlight';
 import { useAtom } from 'jotai';
 
 const ModalProvider = ({ children }: PropsWithReactElementChildren) => {
   const [isReLoginDialogOpen, setIsReLoginDialogOpen] = useAtom(
     isReLoginDialogOpenAtom,
   );
-  const [isSearchDialogOpen, setIsSearchDialogOpen] = useAtom(
-    isSearchDialogOpenAtom,
-  );
+  const [isSpotlightOpen, setIsSpotlightOpen] = useAtom(isSpotlightOpenAtom);
+
+  const closeReLoginDialog = () => {
+    setIsReLoginDialogOpen(false);
+  };
+
+  const closeSpotlight = () => {
+    setIsSpotlightOpen(false);
+  };
 
   return (
     <>
       <ReLoginDialog
         isOpen={isReLoginDialogOpen}
-        onClose={() => setIsReLoginDialogOpen(false)}
+        onClose={closeReLoginDialog}
       />
-      <SearchDialog
-        isOpen={isSearchDialogOpen}
-        onClose={() => setIsSearchDialogOpen(false)}
-      />
+      <Spotlight isOpen={isSpotlightOpen} onClose={closeSpotlight} />
       {children}
     </>
   );

@@ -1,19 +1,19 @@
 import { UserPreview } from '@/__generated__/graphql';
 import { Avatar } from '@components/common';
 import { ROUTES } from '@routes/ROUTES';
-import { SearchDialogResultListItem } from './SearchDialogResultListItem';
+import { SpotlightListItem } from './SpotlightListItem';
 
-type SearchDialogFindUserResultListItemProps = {
+type SpotlightUserListItemProps = {
   item: UserPreview;
   index: number;
 };
 
-export const SearchDialogFindUserResultListItem = ({
+export const SpotlightUserListItem = ({
   item: { login, imgUrl },
   index,
-}: SearchDialogFindUserResultListItemProps) => {
+}: SpotlightUserListItemProps) => {
   return (
-    <SearchDialogResultListItem
+    <SpotlightListItem
       left={<Avatar size="xs" src={imgUrl} />}
       name={login}
       link={`${ROUTES.PROFILE_ROOT}/${login}`}

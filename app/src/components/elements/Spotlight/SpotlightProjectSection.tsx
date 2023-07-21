@@ -1,9 +1,9 @@
 import { Exact, FindProjectPreviewQuery } from '@/__generated__/graphql';
 import { QueryResult } from '@apollo/client';
 import { BoldText, Divider, VStack } from '@components/common';
-import { SearchDialogFindProjectResultList } from './SearchDialogFindProjectResultList';
+import { SpotlightProjectList } from './SpotlightProjectList';
 
-type SearchDialogFindProjectResultProps = {
+type SpotlightProjectSectionProps = {
   result: QueryResult<
     FindProjectPreviewQuery,
     Exact<{
@@ -14,10 +14,10 @@ type SearchDialogFindProjectResultProps = {
   startIndex: number;
 };
 
-export const SearchDialogFindProjectResult = ({
+export const SpotlightProjectSection = ({
   result: { loading, error, data },
   startIndex,
-}: SearchDialogFindProjectResultProps) => {
+}: SpotlightProjectSectionProps) => {
   if (loading || error || !data || data.findProjectPreview.length === 0) {
     return null;
   }
@@ -25,7 +25,7 @@ export const SearchDialogFindProjectResult = ({
     <VStack w="100%" align="start" spacing="1rem">
       <BoldText style={{ padding: '0.4rem 2rem' }}>프로젝트</BoldText>
       <Divider />
-      <SearchDialogFindProjectResultList
+      <SpotlightProjectList
         list={data.findProjectPreview}
         startIndex={startIndex}
       />

@@ -1,27 +1,25 @@
 import { Clickable, H3MediumText, HStack, Spacer } from '@components/common';
 import styled from '@emotion/styled';
-import { SearchDialogFocusContext } from '@utils/contexts/SearchDialogFocusContext';
+import { SpotlightFocusContext } from '@utils/contexts/SpotlightFocusContext';
 import { useContext, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-type SearchDialogResultListItemProps = {
+type SpotlightListItemProps = {
   left: React.ReactElement;
   name: string;
   link: string;
   index: number;
 };
 
-export const SearchDialogResultListItem = ({
+export const SpotlightListItem = ({
   left,
   name,
   link,
   index,
-}: SearchDialogResultListItemProps) => {
+}: SpotlightListItemProps) => {
   const navigate = useNavigate();
   const ref = useRef<HTMLButtonElement>(null);
-  const { currentFocus, setCurrentFocus } = useContext(
-    SearchDialogFocusContext,
-  );
+  const { currentFocus, setCurrentFocus } = useContext(SpotlightFocusContext);
   const isFocused = currentFocus === index;
 
   useEffect(() => {

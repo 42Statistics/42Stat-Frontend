@@ -47,7 +47,7 @@ export const Avatar = ({ size = 'md', src }: AvatarProps) => {
 
   return (
     <div style={{ position: 'relative' }}>
-      {isLoading && <Cover style={{ width, height: width }} />}
+      {isLoading ? <Cover style={{ width, height: width }} /> : null}
       <StyledAvatar
         onLoad={handleLoad}
         onError={handleError}

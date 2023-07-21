@@ -33,14 +33,14 @@ export const CoalitionScore = () => {
         <H1BoldText>{value.toLocaleString()}</H1BoldText>
         <HStack spacing="0.5rem">
           <CoalitionMark size="18px" coalition={coalition} />
-          {scoreInfo?.rankInCoalition && (
+          {scoreInfo?.rankInCoalition ? (
             <HStack align="baseline">
               <H3Text>
                 {scoreInfo.rankInCoalition.toLocaleString()}
                 {unit}
               </H3Text>
             </HStack>
-          )}
+          ) : null}
         </HStack>
       </HStack>
     </DashboardContent>

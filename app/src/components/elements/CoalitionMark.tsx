@@ -14,7 +14,7 @@ export const CoalitionMark = ({
 }: CoalitionMarkProps) => {
   return (
     <>
-      {coalition.imageUrl != null && coalition.color !== null && (
+      {coalition.imageUrl != null && coalition.color !== null ? (
         <StyledCoalitionMark
           src={coalition.imageUrl}
           width={size}
@@ -22,7 +22,7 @@ export const CoalitionMark = ({
             backgroundColor: coalition.color,
           }}
         />
-      )}
+      ) : null}
     </>
   );
 };

@@ -72,7 +72,7 @@ export const ProfilePage = () => {
         >
           평가
         </Tab>
-        {username !== user.login && (
+        {username !== user.login ? (
           <Tab
             selected={selectedTab === 'Versus'}
             onClick={() => {
@@ -82,7 +82,7 @@ export const ProfilePage = () => {
           >
             나와 비교
           </Tab>
-        )}
+        ) : null}
       </Tabs>
       <TabPanel show={selectedTab === 'General'}>
         <ProfileGeneralTab />

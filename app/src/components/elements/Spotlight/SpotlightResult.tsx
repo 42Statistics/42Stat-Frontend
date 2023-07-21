@@ -48,12 +48,12 @@ export const SpotlightResult = ({
     return (
       <Layout>
         <Center>
-          {findUserResult.error && (
+          {findUserResult.error ? (
             <ApolloErrorView message={findUserResult.error.message} />
-          )}
-          {findProjectResult.error && (
+          ) : null}
+          {findProjectResult.error ? (
             <ApolloErrorView message={findProjectResult.error.message} />
-          )}
+          ) : null}
         </Center>
       </Layout>
     );

@@ -37,11 +37,11 @@ export const ProjectIntroduction = () => {
               <BoldText fontSize="3rem">{name}</BoldText>
             </Mobile>
           </VStack>
-          {description !== '' && (
+          {description !== '' ? (
             <div style={{ maxWidth: '600px' }}>
               <Text>{description}</Text>
             </div>
-          )}
+          ) : null}
         </VStack>
       </HStack>
     </Layout>

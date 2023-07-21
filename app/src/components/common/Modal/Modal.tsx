@@ -25,11 +25,11 @@ export const Modal = ({ isOpen, children, zIndex }: ModalProps) => {
 
   return (
     <>
-      {isOpen && (
+      {isOpen ? (
         <Portal>
           <div style={{ zIndex: zIndex ?? theme.zIndex.modal }}>{children}</div>
         </Portal>
-      )}
+      ) : null}
     </>
   );
 };

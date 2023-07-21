@@ -78,12 +78,12 @@ export const Spotlight = ({ isOpen, onClose }: SpotlightProps) => {
               input={input}
               onChange={handleChange}
             />
-            {input.length >= 2 && (
+            {input.length >= 2 ? (
               <SpotlightResult
                 findUserResult={findUserResult}
                 findProjectResult={findProjectResult}
               />
-            )}
+            ) : null}
           </VStack>
         </Layout>
       </Dialog>

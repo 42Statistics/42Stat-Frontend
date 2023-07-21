@@ -28,7 +28,7 @@ export const RecentComment = () => {
     <DashboardContentLayout>
       <VStack w="100%" h="100%" spacing="2rem" align="start">
         <VStack w="100%" align="start">
-          {title && <H3BoldText>{title}</H3BoldText>}
+          <H3BoldText>{title}</H3BoldText>
         </VStack>
         <Scroll>
           <Layout>

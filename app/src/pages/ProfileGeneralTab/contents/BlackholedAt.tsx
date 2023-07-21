@@ -82,7 +82,7 @@ export const BlackholedAt = () => {
   return (
     <DashboardContent title={title}>
       <HStack spacing="1rem">
-        {Svg && <Svg width="24px" stroke={color} />}
+        {Svg !== null ? <Svg width="24px" stroke={color} /> : null}
         <H2BoldText color={color} style={{ textAlign: 'center' }}>
           {text}
         </H2BoldText>

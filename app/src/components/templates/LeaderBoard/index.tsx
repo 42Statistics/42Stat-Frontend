@@ -17,14 +17,14 @@ export const Leaderboard = ({
 }: LeaderboardProps) => {
   return (
     <VStack w="100%" spacing="6rem">
-      {me != null && (
+      {me != null ? (
         <LeaderboardListItem
           item={me}
           unit={unit}
           fixedNumber={fixedNumber}
           isMe
         />
-      )}
+      ) : null}
       <LeaderboardList
         list={list}
         me={me}

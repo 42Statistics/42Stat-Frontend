@@ -12,9 +12,9 @@ export const LinkLabel = ({ left, text, right }: LinkLabelProps) => {
     <Layout>
       <HStack w="100%" spacing="2rem">
         {left}
-        {text && <MediumText>{text}</MediumText>}
+        <MediumText>{text}</MediumText>
         <Spacer />
-        {right && right}
+        {right !== undefined ? right : null}
       </HStack>
     </Layout>
   );

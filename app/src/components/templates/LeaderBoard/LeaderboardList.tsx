@@ -27,7 +27,7 @@ export const LeaderboardList = ({
             fixedNumber={fixedNumber}
             isMe={me != null && item.userPreview.id === me.userPreview.id}
           />
-          {idx !== list.length - 1 && <Divider />}
+          {idx !== list.length - 1 ? <Divider /> : null}
         </Fragment>
       ))}
     </Layout>

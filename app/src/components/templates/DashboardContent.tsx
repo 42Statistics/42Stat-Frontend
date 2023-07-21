@@ -17,8 +17,8 @@ export const DashboardContent = ({
     <Layout>
       <VStack w="100%" h="100%" spacing="2rem" align="start">
         <VStack w="100%" align="start">
-          {title && <H3BoldText>{title}</H3BoldText>}
-          {description && <CaptionText>{description}</CaptionText>}
+          {title ? <H3BoldText>{title}</H3BoldText> : null}
+          {description ? <CaptionText>{description}</CaptionText> : null}
         </VStack>
         {!isApexChart ? (
           <Center>{children}</Center>

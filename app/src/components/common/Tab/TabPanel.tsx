@@ -5,5 +5,5 @@ type TabPanelProps = PropsWithReactNodeChildren<{
 }>;
 
 export const TabPanel = ({ children, show }: TabPanelProps) => {
-  return <>{show && <div style={{ width: '100%' }}>{children}</div>}</>;
+  return <>{show ? <div style={{ width: '100%' }}>{children}</div> : null}</>;
 };

@@ -54,7 +54,7 @@ export const LinkRow = ({
             )
           }
         />
-        {isLinked && (
+        {isLinked ? (
           <Text
             color={theme.colors.mono.gray300}
             style={{ marginRight: '2rem' }}
@@ -64,7 +64,7 @@ export const LinkRow = ({
             )}{' '}
             연동됨
           </Text>
-        )}
+        ) : null}
       </VStack>
     </HStack>
   );

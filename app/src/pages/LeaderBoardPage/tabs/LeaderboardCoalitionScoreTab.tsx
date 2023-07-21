@@ -3,9 +3,9 @@ import { DateTemplate } from '@/__generated__/graphql';
 import { useSegmentedControl } from '@/hooks/useSegmentedControl';
 import { useLazyQuery } from '@apollo/client';
 import { SegmentedControl, VStack } from '@components/common';
+import { Pagination } from '@components/elements/Pagination';
 import { useEffect, useState } from 'react';
 import { LeaderboardCoalitionScoreTabResult } from './LeaderboardCoalitionScoreTabResult';
-import { LeaderboardPageButtonList } from './LeaderboardPageButtonList';
 
 const GET_LEADERBOARD_COALITION_SCORE = gql(/* GraphQL */ `
   query GetLeaderboardCoalitionScore(
@@ -118,7 +118,7 @@ export const LeaderboardCoalitionScoreTab = () => {
         segments={segments}
       />
       <LeaderboardCoalitionScoreTabResult result={result} />
-      <LeaderboardPageButtonList
+      <Pagination
         currPageNumber={pageNumber}
         setPageNumber={setPageNumber}
         totalPageNumber={Math.ceil(totalPage / SIZE_PER_PAGE)}

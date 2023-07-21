@@ -3,9 +3,9 @@ import { DateTemplate } from '@/__generated__/graphql';
 import { useSegmentedControl } from '@/hooks/useSegmentedControl';
 import { useLazyQuery } from '@apollo/client';
 import { SegmentedControl, VStack } from '@components/common';
+import { Pagination } from '@components/elements/Pagination';
 import { useEffect, useState } from 'react';
 import { LeaderboardEvalCountTabResult } from './LeaderboardEvalCountTabResult';
-import { LeaderboardPageButtonList } from './LeaderboardPageButtonList';
 
 const GET_LEADERBOARD_EVAL_COUNT = gql(/* GraphQL */ `
   query GetLeaderboardEvalCount(
@@ -114,7 +114,7 @@ export const LeaderboardEvalCountTab = () => {
         segments={segments}
       />
       <LeaderboardEvalCountTabResult result={result} />
-      <LeaderboardPageButtonList
+      <Pagination
         currPageNumber={pageNumber}
         setPageNumber={setPageNumber}
         totalPageNumber={Math.ceil(totalPage / SIZE_PER_PAGE)}

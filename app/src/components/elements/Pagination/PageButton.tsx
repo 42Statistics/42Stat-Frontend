@@ -1,4 +1,4 @@
-import { Center, Clickable, Text } from '@components/common';
+import { Clickable, H3Text } from '@components/common';
 import { useTheme } from '@emotion/react';
 
 type PageButtonProps = {
@@ -22,18 +22,15 @@ export const PageButton = ({
   };
   return (
     <Clickable onClick={handleClick}>
-      <Center w="1.4rem">
-        <Text
-          color={
-            pageNumber !== currPageNumber
-              ? theme.colors.mono.gray300
-              : theme.colors.mono.black
-          }
-          fontWeight={pageNumber === currPageNumber ? 700 : 400}
-        >
-          {pageNumber}
-        </Text>
-      </Center>
+      <H3Text
+        color={
+          pageNumber !== currPageNumber
+            ? theme.colors.mono.gray200
+            : theme.colors.mono.black
+        }
+      >
+        {pageNumber}
+      </H3Text>
     </Clickable>
   );
 };

@@ -27,7 +27,16 @@ export const LinkRow = ({
   refetch,
 }: LinkRowProps) => {
   const theme = useTheme();
-  const isLinked = !!linkedAccount;
+  const isLinked = linkedAccount !== undefined;
+
+  const getLinkLabelText = (linkedAccount?: LinkedAccount) => {
+    if (linkedAccount === undefined) {
+      return '연동된 계정 없음';
+    }
+    return linkedAccount.email ?? linkedAccount.id;
+  };
+
+  const text = getLinkLabelText(linkedAccount);
 
   return (
     <HStack w="100%" spacing="2rem" wrap="wrap">
@@ -36,7 +45,7 @@ export const LinkRow = ({
       <VStack align="end" spacing="1rem">
         <LinkLabel
           left={<Image src={logo} style={{ width: '24px' }} />}
-          text={isLinked ? linkedAccount.email : '연동된 계정 없음'}
+          text={text}
           right={
             isLinked ? (
               <UnlinkGoogleButton onSuccess={refetch} />

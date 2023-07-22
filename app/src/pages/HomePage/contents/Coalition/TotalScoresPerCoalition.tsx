@@ -72,7 +72,6 @@ const TotalScoresPerCoalitionChart = ({
     },
     yaxis: {
       min: 2500000,
-      max: Math.max(...series[0].data) + 100000,
       labels: {
         formatter: (value) => millionFormatter(value),
       },

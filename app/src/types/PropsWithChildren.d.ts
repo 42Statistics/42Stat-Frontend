@@ -3,7 +3,7 @@ export type PropsWithReactNodeChildren<P = unknown> = P & {
 };
 
 export type PropsWithReactElementChildren<P = unknown> = P & {
-  children: React.ReactElement | Iterable<React.ReactElement>;
+  children: React.ReactElement | Iterable<React.ReactElement | null>;
 };
 
 export type PropsWithStringChildren<P = unknown> = P & {

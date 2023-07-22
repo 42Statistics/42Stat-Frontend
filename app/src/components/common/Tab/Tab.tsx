@@ -4,11 +4,11 @@ import { Clickable } from '../Button';
 import { Text } from '../Text';
 
 type TabProps = PropsWithStringChildren<{
-  selected: boolean;
+  selected?: boolean;
   onClick: () => void;
 }>;
 
-export const Tab = ({ selected, onClick, children }: TabProps) => {
+export const Tab = ({ selected = false, onClick, children }: TabProps) => {
   return (
     <Layout onClick={onClick} selected={selected}>
       <Text>{children}</Text>

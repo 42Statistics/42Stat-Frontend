@@ -13,327 +13,193 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  render: () => (
-    <Tabs>
+  args: {
+    children: [
       <Tab
+        key="general"
         selected
         onClick={() => {
           /* pass */
         }}
       >
         일반
-      </Tab>
+      </Tab>,
       <Tab
-        selected={false}
+        key="eval"
         onClick={() => {
           /* pass */
         }}
       >
         평가
-      </Tab>
-    </Tabs>
-  ),
+      </Tab>,
+    ],
+  },
 };
 
 export const ManyTabs: Story = {
-  render: () => (
-    <Tabs>
+  args: {
+    children: [
       <Tab
+        key={1}
         selected
         onClick={() => {
           /* pass */
         }}
       >
         일반
-      </Tab>
+      </Tab>,
       <Tab
-        selected={false}
+        key={2}
         onClick={() => {
           /* pass */
         }}
       >
-        평가
-      </Tab>
+        일반
+      </Tab>,
       <Tab
-        selected={false}
+        key={3}
         onClick={() => {
           /* pass */
         }}
       >
-        평가
-      </Tab>
+        일반
+      </Tab>,
       <Tab
-        selected={false}
+        key={4}
         onClick={() => {
           /* pass */
         }}
       >
-        평가
-      </Tab>
+        일반
+      </Tab>,
       <Tab
-        selected={false}
+        key={5}
         onClick={() => {
           /* pass */
         }}
       >
-        평가
-      </Tab>
+        일반
+      </Tab>,
       <Tab
-        selected={false}
+        key={6}
         onClick={() => {
           /* pass */
         }}
       >
-        평가
-      </Tab>
+        일반
+      </Tab>,
       <Tab
-        selected={false}
+        key={7}
         onClick={() => {
           /* pass */
         }}
       >
-        평가
-      </Tab>
+        일반
+      </Tab>,
       <Tab
-        selected={false}
+        key={8}
         onClick={() => {
           /* pass */
         }}
       >
-        평가
-      </Tab>
+        일반
+      </Tab>,
       <Tab
-        selected={false}
+        key={9}
         onClick={() => {
           /* pass */
         }}
       >
-        평가
-      </Tab>
+        일반
+      </Tab>,
       <Tab
-        selected={false}
+        key={10}
         onClick={() => {
           /* pass */
         }}
       >
-        평가
-      </Tab>
+        일반
+      </Tab>,
       <Tab
-        selected={false}
+        key={11}
         onClick={() => {
           /* pass */
         }}
       >
-        평가
-      </Tab>
+        일반
+      </Tab>,
       <Tab
-        selected={false}
+        key={12}
         onClick={() => {
           /* pass */
         }}
       >
-        평가
-      </Tab>
+        일반
+      </Tab>,
       <Tab
-        selected={false}
+        key={13}
         onClick={() => {
           /* pass */
         }}
       >
-        평가
-      </Tab>
+        일반
+      </Tab>,
       <Tab
-        selected={false}
+        key={14}
         onClick={() => {
           /* pass */
         }}
       >
-        평가
-      </Tab>
+        일반
+      </Tab>,
       <Tab
-        selected={false}
+        key={15}
         onClick={() => {
           /* pass */
         }}
       >
-        평가
-      </Tab>
+        일반
+      </Tab>,
       <Tab
-        selected={false}
+        key={16}
         onClick={() => {
           /* pass */
         }}
       >
-        평가
-      </Tab>
+        일반
+      </Tab>,
       <Tab
-        selected={false}
+        key={17}
         onClick={() => {
           /* pass */
         }}
       >
-        평가
-      </Tab>
+        일반
+      </Tab>,
       <Tab
-        selected={false}
+        key={18}
         onClick={() => {
           /* pass */
         }}
       >
-        평가
-      </Tab>
+        일반
+      </Tab>,
       <Tab
-        selected={false}
+        key={19}
         onClick={() => {
           /* pass */
         }}
       >
-        평가
-      </Tab>
+        일반
+      </Tab>,
       <Tab
-        selected={false}
+        key={20}
         onClick={() => {
           /* pass */
         }}
       >
-        평가
-      </Tab>
-      <Tab
-        selected={false}
-        onClick={() => {
-          /* pass */
-        }}
-      >
-        평가
-      </Tab>
-      <Tab
-        selected={false}
-        onClick={() => {
-          /* pass */
-        }}
-      >
-        평가
-      </Tab>
-      <Tab
-        selected={false}
-        onClick={() => {
-          /* pass */
-        }}
-      >
-        평가
-      </Tab>
-      <Tab
-        selected={false}
-        onClick={() => {
-          /* pass */
-        }}
-      >
-        평가
-      </Tab>
-      <Tab
-        selected={false}
-        onClick={() => {
-          /* pass */
-        }}
-      >
-        평가
-      </Tab>
-      <Tab
-        selected={false}
-        onClick={() => {
-          /* pass */
-        }}
-      >
-        평가
-      </Tab>
-      <Tab
-        selected={false}
-        onClick={() => {
-          /* pass */
-        }}
-      >
-        평가
-      </Tab>
-      <Tab
-        selected={false}
-        onClick={() => {
-          /* pass */
-        }}
-      >
-        평가
-      </Tab>
-      <Tab
-        selected={false}
-        onClick={() => {
-          /* pass */
-        }}
-      >
-        평가
-      </Tab>
-      <Tab
-        selected={false}
-        onClick={() => {
-          /* pass */
-        }}
-      >
-        평가
-      </Tab>
-      <Tab
-        selected={false}
-        onClick={() => {
-          /* pass */
-        }}
-      >
-        평가
-      </Tab>
-      <Tab
-        selected={false}
-        onClick={() => {
-          /* pass */
-        }}
-      >
-        평가
-      </Tab>
-      <Tab
-        selected={false}
-        onClick={() => {
-          /* pass */
-        }}
-      >
-        평가
-      </Tab>
-      <Tab
-        selected={false}
-        onClick={() => {
-          /* pass */
-        }}
-      >
-        평가
-      </Tab>
-      <Tab
-        selected={false}
-        onClick={() => {
-          /* pass */
-        }}
-      >
-        평가
-      </Tab>
-      <Tab
-        selected={false}
-        onClick={() => {
-          /* pass */
-        }}
-      >
-        평가
-      </Tab>
-      <Tab
-        selected={false}
-        onClick={() => {
-          /* pass */
-        }}
-      >
-        평가
-      </Tab>
-    </Tabs>
-  ),
+        일반
+      </Tab>,
+    ],
+  },
 };

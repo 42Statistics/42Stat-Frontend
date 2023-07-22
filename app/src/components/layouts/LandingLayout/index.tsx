@@ -1,3 +1,4 @@
+import space_background from '@assets/space-background.webp';
 import { Center } from '@components/common';
 import { Global } from '@emotion/react';
 import styled from '@emotion/styled';
@@ -22,6 +23,6 @@ export const LandingLayout = () => {
 };
 
 const Layout = styled.main`
-  background: url('/black-space.jpeg');
+  background: url(${space_background});
   background-size: cover;
 `;

@@ -1,10 +1,8 @@
 import { useQuery } from '@apollo/client';
-import {
-  SmileyCheekySvg,
-  SmileySadSvg,
-  SmileyShockSvg,
-  SmileySmile1Svg,
-} from '@assets/blackhole';
+import { ReactComponent as SmileyCheekySvg } from '@assets/blackhole/smiley-cheeky.svg';
+import { ReactComponent as SmileySadSvg } from '@assets/blackhole/smiley-sad.svg';
+import { ReactComponent as SmileyScaredSvg } from '@assets/blackhole/smiley-scared.svg';
+import { ReactComponent as SmileySmile1Svg } from '@assets/blackhole/smiley-smile-1.svg';
 import { H2BoldText, HStack } from '@components/common';
 import {
   DashboardContentBadRequest,
@@ -59,7 +57,7 @@ export const BlackholedAt = () => {
     if (daysLeft >= 15)
       return {
         color: '#d7a900',
-        Svg: SmileyShockSvg,
+        Svg: SmileyScaredSvg,
         text: `${daysLeft.toLocaleString()} days left`,
       };
     if (daysLeft > 0)
@@ -82,7 +80,7 @@ export const BlackholedAt = () => {
   return (
     <DashboardContent title={title}>
       <HStack spacing="1rem">
-        {Svg !== null ? <Svg width="24px" stroke={color} /> : null}
+        {Svg !== null ? <Svg width={24} height={24} stroke={color} /> : null}
         <H2BoldText color={color} style={{ textAlign: 'center' }}>
           {text}
         </H2BoldText>

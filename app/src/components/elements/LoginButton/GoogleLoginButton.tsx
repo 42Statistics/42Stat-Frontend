@@ -1,8 +1,7 @@
 import { gql } from '@/__generated__';
 import { GAPI_URL } from '@/constants/GAPI';
 import { useMutation } from '@apollo/client';
-import google_logo from '@assets/google-logo.svg';
-import { Image } from '@components/common';
+import { ReactComponent as GoogleLogo } from '@assets/logo/google-logo.svg';
 import { ROUTES } from '@routes/ROUTES';
 import {
   FakeGoogleWrapperType,
@@ -86,13 +85,9 @@ export const GoogleLoginButton = () => {
 
   return (
     <LoginButton
-      logo={<GoogleLogo />}
+      logo={<GoogleLogo width={18} height={18} />}
       text="Google 계정으로 로그인"
       onClick={() => googleButtonWrapper?.click()}
     />
   );
-};
-
-const GoogleLogo = () => {
-  return <Image src={google_logo} alt="구글 로고" width="18px" />;
 };

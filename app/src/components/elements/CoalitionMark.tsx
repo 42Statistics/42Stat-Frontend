@@ -1,5 +1,5 @@
 import { Coalition } from '@/__generated__/graphql';
-import ft_logo from '@assets/42-logo.svg';
+import ft_logo from '@assets/logo/ft-logo.svg';
 import coalition_gam_mark from '@assets/coalition/mark/coalition-gam-mark.svg';
 import coalition_gon_mark from '@assets/coalition/mark/coalition-gon-mark.svg';
 import coalition_gun_mark from '@assets/coalition/mark/coalition-gun-mark.svg';

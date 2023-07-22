@@ -1,6 +1,5 @@
 import { ProjectPreview } from '@/__generated__/graphql';
-import ft_logo from '@assets/42-logo.svg';
-import { Image } from '@components/common';
+import { ReactComponent as FtLogo } from '@assets/logo/ft-logo.svg';
 import { ROUTES } from '@routes/ROUTES';
 import { SpotlightListItem } from './SpotlightListItem';
 
@@ -15,7 +14,7 @@ export const SpotlightProjectListItem = ({
 }: SpotlightProjectListItemProps) => {
   return (
     <SpotlightListItem
-      left={<Image src={ft_logo} width={20} />}
+      left={<FtLogo width={20} height={20} />}
       name={name}
       link={`${ROUTES.PROJECT_ROOT}/${name}`}
       index={index}

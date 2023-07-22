@@ -2,8 +2,7 @@ import {
   FT_OAUTH_ENDPOINT,
   FT_OAUTH_RESPONSE_TYPE,
 } from '@/constants/FT_OAUTH';
-import ft_logo from '@assets/42-logo.svg';
-import { Image } from '@components/common';
+import { ReactComponent as FtLogo } from '@assets/logo/ft-logo.svg';
 import { LoginButton } from './LoginButton';
 
 export const FtLoginButton = () => {
@@ -16,7 +15,7 @@ export const FtLoginButton = () => {
   return (
     <a href={FT_OAUTH_URL}>
       <LoginButton
-        logo={<FtLogo />}
+        logo={<FtLogo width={18} height={18} />}
         text="42 계정으로 로그인"
         onClick={() => {
           /* pass */
@@ -24,8 +23,4 @@ export const FtLoginButton = () => {
       />
     </a>
   );
-};
-
-const FtLogo = () => {
-  return <Image src={ft_logo} alt="42 로고" width="18px" />;
 };

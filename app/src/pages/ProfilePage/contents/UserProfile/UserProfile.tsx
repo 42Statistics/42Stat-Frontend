@@ -1,5 +1,13 @@
 import { gql } from '@/__generated__';
+import { Coalition } from '@/__generated__/graphql';
 import { useQuery } from '@apollo/client';
+import coalition_black_cover from '@assets/coalition/cover/coalition-black-cover.jpg';
+import coalition_gam_cover from '@assets/coalition/cover/coalition-gam-cover.jpg';
+import coalition_gon_cover from '@assets/coalition/cover/coalition-gon-cover.jpg';
+import coalition_gray_cover from '@assets/coalition/cover/coalition-gray-cover.png';
+import coalition_gun_cover from '@assets/coalition/cover/coalition-gun-cover.jpg';
+import coalition_lee_cover from '@assets/coalition/cover/coalition-lee-cover.jpg';
+
 import {
   Avatar,
   HStack,
@@ -69,8 +77,46 @@ export const UserProfile = () => {
     data.getPersonalGeneral.userProfile;
   const titleWithLogin = getTitleWithLogin(titles, login);
 
+  const getCoalitionBackgroundFallbackUrlById = (id: number) => {
+    switch (id) {
+      case 85:
+        return coalition_gun_cover;
+      case 86:
+        return coalition_gon_cover;
+      case 87:
+        return coalition_gam_cover;
+      case 88:
+        return coalition_lee_cover;
+      default:
+        return coalition_black_cover;
+    }
+  };
+
+  const getCoalitionBackgroundUrlByCoalition = (
+    coalition?: Coalition | null,
+  ) => {
+    if (coalition == null || coalition.coverUrl == null) {
+      return {
+        backgroundUrl: coalition_black_cover,
+        backgroundFallbackUrl: coalition_black_cover,
+      };
+    }
+    return {
+      backgroundUrl: coalition.coverUrl,
+      backgroundFallbackUrl: getCoalitionBackgroundFallbackUrlById(
+        coalition.id,
+      ),
+    };
+  };
+
+  const { backgroundUrl, backgroundFallbackUrl } =
+    getCoalitionBackgroundUrlByCoalition(coalition);
+
   return (
-    <Layout backgroundUrl={coalition.coverUrl}>
+    <Layout
+      backgroundUrl={backgroundUrl}
+      backgroundFallbackUrl={backgroundFallbackUrl}
+    >
       <Desktop>
         <HStack h="100%" spacing="4rem">
           <Avatar size="xl" src={imgUrl} />
@@ -106,29 +152,23 @@ export const UserProfile = () => {
 };
 
 type LayoutProps = {
-  backgroundUrl?: string | null;
+  backgroundUrl: string;
+  backgroundFallbackUrl: string;
 };
 
 const Layout = styled.div<LayoutProps>`
   height: 100%;
-  background-image: ${({ backgroundUrl }) =>
-    backgroundUrl != null
-      ? `url(${backgroundUrl})`
-      : 'black'}; // TODO: fallback 시 기존에 있는 코알리숑 background로 대체
+  background-image: ${({ backgroundUrl, backgroundFallbackUrl }) =>
+    `url(${backgroundUrl}), url(${backgroundFallbackUrl})`};
   background-size: cover;
   background-position: center;
   border-radius: ${({ theme }) => theme.radius.sm};
   user-select: none;
 `;
 
-// TODO: Loader가 아니라 Skeleton으로 이동. 여러 타입의 Skeleton을 적용시킬 수 있도록 변경해야 함
-const UserProfileLoader = () => {
-  return <UserProfileLoaderLayout />;
-};
-
-const UserProfileLoaderLayout = styled.div`
+const UserProfileLoader = styled.div`
   height: 100%;
-  background-image: url('/coalition-mono.png');
+  background-image: url(${coalition_gray_cover});
   background-size: cover;
   background-position: center;
   border-radius: ${({ theme }) => theme.radius.sm};

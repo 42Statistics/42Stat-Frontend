@@ -44,7 +44,7 @@ export const LinkRow = ({
       <Spacer />
       <VStack align="end" spacing="1rem">
         <LinkLabel
-          left={<Image src={logo} style={{ width: '24px' }} />}
+          left={<Image src={logo} width={24} height={24} />}
           text={text}
           right={
             isLinked ? (

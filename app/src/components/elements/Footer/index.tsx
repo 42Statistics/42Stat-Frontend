@@ -1,4 +1,4 @@
-import { GithubLogoSvg } from '@assets/GithubLogoSvg';
+import { ReactComponent as GithubLogo } from '@assets/logo/github-logo.svg';
 import { HStack, Text } from '@components/common';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
@@ -16,7 +16,7 @@ export const Footer = () => {
           target="_blank"
           rel="noreferrer"
         >
-          <GithubLogoSvg width="16px" fill={theme.colors.mono.gray300} />
+          <GithubLogo width={24} height={24} fill={theme.colors.mono.gray300} />
         </Link>
       </HStack>
     </Layout>

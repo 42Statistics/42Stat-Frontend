@@ -1,14 +1,13 @@
 import { gql } from '@/__generated__';
-import google_logo from '@/assets/google-logo.svg';
 import { useQuery } from '@apollo/client';
-import ft_logo from '@assets/42-logo.svg';
+import { ReactComponent as FtLogo } from '@assets/logo/ft-logo.svg';
+import google_logo from '@assets/logo/google-logo.svg';
 import { userAtom } from '@atoms/userAtom';
 import {
   Divider,
   H2BoldText,
   H3MediumText,
   HStack,
-  Image,
   Spacer,
   Text,
   VStack,
@@ -63,7 +62,7 @@ export const LinkGoogleSection = () => {
             <H3MediumText>42 계정</H3MediumText>
             <Spacer />
             <LinkLabel
-              left={<Image src={ft_logo} style={{ width: '24px' }} />}
+              left={<FtLogo width={24} height={24} />}
               text={user.login}
             />
           </HStack>

@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client';
+import space_background from '@assets/space-background.webp';
 import {
   Center,
   Loader,
@@ -14,8 +15,6 @@ import { getDateDiff } from '@utils/getDateDiff';
 import { getDailyProgrammingQuote } from './getDailyProgrammingQuote';
 
 export const Hero = () => {
-  // const user = useAtomValue(userAtom);
-
   const { loading, error, data } = useQuery(GET_HOME);
   if (loading)
     return (
@@ -101,7 +100,7 @@ export const Hero = () => {
 };
 
 const Layout = styled(Center)`
-  background-image: url('black-space.jpeg');
+  background-image: url(${space_background});
   background-size: cover;
   border-radius: ${({ theme }) => theme.radius.sm};
   padding: 0 4rem;

@@ -1,4 +1,3 @@
-import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import {
   DashboardContentBadRequest,
@@ -9,24 +8,18 @@ import {
 import { TextProject } from '@components/elements/DashboardContentView/Text/TextProject';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useParams } from 'react-router-dom';
-
-const GET_LAST_REGISTERED_BY_LOGIN = gql(/* GraphQL */ `
-  query GetLastRegisteredByLogin($login: String!) {
-    getPersonalGeneral(login: $login) {
-      teamInfo {
-        lastRegistered
-      }
-    }
-  }
-`);
+import { GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN } from '../queries/GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN';
 
 export const LastRegistered = () => {
   const { username } = useParams() as { username: string };
 
   const title = '최근 신청한 과제';
-  const { loading, error, data } = useQuery(GET_LAST_REGISTERED_BY_LOGIN, {
-    variables: { login: username },
-  });
+  const { loading, error, data } = useQuery(
+    GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN,
+    {
+      variables: { login: username },
+    },
+  );
 
   if (loading) {
     return <DashboardContentLoading title={title} />;

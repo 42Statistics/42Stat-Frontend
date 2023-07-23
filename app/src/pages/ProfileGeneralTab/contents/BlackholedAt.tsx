@@ -1,4 +1,3 @@
-import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import { ReactComponent as SmileyCheekySvg } from '@assets/blackhole/smiley-cheeky.svg';
 import { ReactComponent as SmileySadSvg } from '@assets/blackhole/smiley-sad.svg';
@@ -13,23 +12,19 @@ import {
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useTheme } from '@emotion/react';
 import { useParams } from 'react-router-dom';
-
-const GET_BLACKHOLED_AT_BY_LOGIN = gql(/* GraphQL */ `
-  query GetBlackholedAtByLogin($login: String!) {
-    getPersonalGeneral(login: $login) {
-      blackholedAt
-    }
-  }
-`);
+import { GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN } from '../queries/GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN';
 
 export const BlackholedAt = () => {
   const theme = useTheme();
   const { username } = useParams() as { username: string };
 
   const title = 'Black Hole Absorption';
-  const { loading, error, data } = useQuery(GET_BLACKHOLED_AT_BY_LOGIN, {
-    variables: { login: username },
-  });
+  const { loading, error, data } = useQuery(
+    GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN,
+    {
+      variables: { login: username },
+    },
+  );
 
   if (loading) {
     return <DashboardContentLoading title={title} />;

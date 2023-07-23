@@ -7,15 +7,18 @@ import {
 } from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { Link, useParams } from 'react-router-dom';
-import { GET_PROJECT_INFO_BY_PROJECT_NAME } from './queries/GET_PROJECT_INFO_BY_PROJECT_NAME';
+import { GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME } from '../queries/GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME';
 
 export const ProjectUrl = () => {
   const { projectName } = useParams() as { projectName: string };
   const title = 'Intra 프로젝트 링크';
 
-  const { loading, error, data } = useQuery(GET_PROJECT_INFO_BY_PROJECT_NAME, {
-    variables: { projectName },
-  });
+  const { loading, error, data } = useQuery(
+    GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME,
+    {
+      variables: { projectName },
+    },
+  );
 
   if (loading) {
     return <DashboardContentLoading title={title} />;

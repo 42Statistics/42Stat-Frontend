@@ -1,3 +1,4 @@
+import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import {
   DashboardContentBadRequest,
@@ -6,15 +7,28 @@ import {
 } from '@components/elements/DashboardContentView/Error';
 import { NumberDefault } from '@components/elements/DashboardContentView/NumberDefault';
 import { DashboardContent } from '@components/templates/DashboardContent';
-import { GET_HOME } from '@pages/HomePage/GET_HOME';
+
+const GET_AVERAGE_COMMENT_LENGTH = gql(/* GraphQL */ `
+  query GetAverageCommentLength {
+    getHomeEval {
+      averageCommentLength
+    }
+  }
+`);
 
 export const AverageCommentLength = () => {
   const title = '평균 코멘트 길이';
-  const { loading, error, data } = useQuery(GET_HOME);
-  if (loading) return <DashboardContentLoading title={title} />;
-  if (error)
+  const { loading, error, data } = useQuery(GET_AVERAGE_COMMENT_LENGTH);
+
+  if (loading) {
+    return <DashboardContentLoading title={title} />;
+  }
+  if (error) {
     return <DashboardContentBadRequest title={title} message={error.message} />;
-  if (!data) return <DashboardContentNotFound title={title} />;
+  }
+  if (!data) {
+    return <DashboardContentNotFound title={title} />;
+  }
 
   const { averageCommentLength } = data.getHomeEval;
   const unit = '자';

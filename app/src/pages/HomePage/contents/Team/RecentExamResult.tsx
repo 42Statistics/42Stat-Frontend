@@ -1,3 +1,4 @@
+import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import { BarChart } from '@components/elements/Chart';
 import {
@@ -6,16 +7,46 @@ import {
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
-import { GET_HOME } from '@pages/HomePage/GET_HOME';
 import dayjs from 'dayjs';
+
+const GET_RECENT_EXAM_RESULT = gql(/* GraphQL */ `
+  query GetRecentExamResult($after: Int!) {
+    getHomeTeam {
+      recentExamResult(after: $after) {
+        data {
+          resultPerRank {
+            rank
+            rate {
+              total
+              fields {
+                key
+                value
+              }
+            }
+          }
+          beginAt
+          location
+        }
+      }
+    }
+  }
+`);
 
 export const RecentExamResult = () => {
   const title = '직전 회차 시험 Rank 별 통과율';
-  const { loading, error, data } = useQuery(GET_HOME);
-  if (loading) return <DashboardContentLoading title={title} />;
-  if (error)
+  const { loading, error, data } = useQuery(GET_RECENT_EXAM_RESULT, {
+    variables: { after: 1 },
+  });
+
+  if (loading) {
+    return <DashboardContentLoading title={title} />;
+  }
+  if (error) {
     return <DashboardContentBadRequest title={title} message={error.message} />;
-  if (!data) return <DashboardContentNotFound title={title} />;
+  }
+  if (!data) {
+    return <DashboardContentNotFound title={title} />;
+  }
 
   const { recentExamResult } = data.getHomeTeam;
   const { beginAt, location, resultPerRank } = recentExamResult.data;

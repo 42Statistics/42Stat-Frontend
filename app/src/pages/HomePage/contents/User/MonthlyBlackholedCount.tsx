@@ -41,10 +41,16 @@ export const MonthlyBlackholedCount = () => {
       },
     },
   );
-  if (loading) return <DashboardContentLoading title={title} />;
-  if (error)
+
+  if (loading) {
+    return <DashboardContentLoading title={title} />;
+  }
+  if (error) {
     return <DashboardContentBadRequest title={title} message={error.message} />;
-  if (!data) return <DashboardContentNotFound title={title} />;
+  }
+  if (!data) {
+    return <DashboardContentNotFound title={title} />;
+  }
 
   const {
     currData: { data: currBlackholedCount, start, end },

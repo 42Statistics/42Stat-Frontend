@@ -18,9 +18,15 @@ type LeaderboardLevelTabResultProps = {
 export const LeaderboardLevelTabResult = ({
   result: { data, loading, error },
 }: LeaderboardLevelTabResultProps) => {
-  if (loading) return <LeaderboardTabResultSkeleton />;
-  if (error) return <ApolloErrorView message={error.message} />;
-  if (!data) return <ApolloNotFoundView />;
+  if (loading) {
+    return <LeaderboardTabResultSkeleton />;
+  }
+  if (error) {
+    return <ApolloErrorView message={error.message} />;
+  }
+  if (!data) {
+    return <ApolloNotFoundView />;
+  }
 
   const {
     me,

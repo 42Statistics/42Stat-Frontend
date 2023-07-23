@@ -7,7 +7,7 @@ import {
 import { TextDefault } from '@components/elements/DashboardContentView/Text/TextDefault';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useParams } from 'react-router-dom';
-import { GET_PROJECT_INFO_BY_PROJECT_NAME } from '../GET_PROJECT_INFO_BY_PROJECT_NAME';
+import { GET_PROJECT_INFO_BY_PROJECT_NAME } from './queries/GET_PROJECT_INFO_BY_PROJECT_NAME';
 
 export const BasicInfo = () => {
   const { projectName } = useParams() as { projectName: string };
@@ -16,6 +16,16 @@ export const BasicInfo = () => {
   const { loading, error, data } = useQuery(GET_PROJECT_INFO_BY_PROJECT_NAME, {
     variables: { projectName },
   });
+
+  if (loading) {
+    return <DashboardContentLoading title={title} />;
+  }
+  if (error) {
+    return <DashboardContentBadRequest title={title} message={error.message} />;
+  }
+  if (!data) {
+    return <DashboardContentNotFound title={title} />;
+  }
 
   const getPeopleRange = (from: number, to: number) => {
     if (from === to) {
@@ -26,10 +36,6 @@ export const BasicInfo = () => {
     }
     return `${from}~${to}인`;
   };
-  if (loading) return <DashboardContentLoading title={title} />;
-  if (error)
-    return <DashboardContentBadRequest title={title} message={error.message} />;
-  if (!data) return <DashboardContentNotFound title={title} />;
 
   const { minUserCount, maxUserCount, estimateTime, difficulty } =
     data.getProjectInfo;

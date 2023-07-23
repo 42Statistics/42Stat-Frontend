@@ -9,7 +9,7 @@ import {
   EvalLogSearchLink,
   MonthlyEvalCount,
   RecentComment,
-  TotalEvalCount,
+  TotalCount,
 } from '../contents';
 
 export const profileEvalTabDashboardContents: DashboardItemProps[] = [
@@ -23,7 +23,7 @@ export const profileEvalTabDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 2,
-    content: TotalEvalCount,
+    content: TotalCount,
   },
   {
     id: 3,

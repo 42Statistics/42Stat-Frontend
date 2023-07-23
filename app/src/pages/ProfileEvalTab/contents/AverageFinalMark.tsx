@@ -1,3 +1,4 @@
+import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import {
   DashboardContentBadRequest,
@@ -7,19 +8,28 @@ import {
 import { NumberDefault } from '@components/elements/DashboardContentView/NumberDefault';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useParams } from 'react-router-dom';
-import { GET_PERSONAL_EVAL_BY_LOGIN } from '../GET_PERSONAL_EVAL_BY_LOGIN';
+
+const GET_AVERAGE_FINAL_MARK_BY_LOGIN = gql(/* GraphQL */ `
+  query GetAverageFinalMarkByLogin($login: String!) {
+    getPersonalEval(login: $login) {
+      averageFinalMark
+    }
+  }
+`);
 
 export const AverageFinalMark = () => {
   const { username } = useParams() as { username: string };
 
   const title = '평균 평가 점수';
   const description = '평가자일 때';
-  const { loading, error, data } = useQuery(GET_PERSONAL_EVAL_BY_LOGIN, {
+  const { loading, error, data } = useQuery(GET_AVERAGE_FINAL_MARK_BY_LOGIN, {
     variables: { login: username },
   });
-  if (loading)
+
+  if (loading) {
     return <DashboardContentLoading title={title} description={description} />;
-  if (error)
+  }
+  if (error) {
     return (
       <DashboardContentBadRequest
         title={title}
@@ -27,8 +37,10 @@ export const AverageFinalMark = () => {
         message={error.message}
       />
     );
-  if (!data)
+  }
+  if (!data) {
     return <DashboardContentNotFound title={title} description={description} />;
+  }
 
   const { averageFinalMark } = data.getPersonalEval;
   const unit = '점';

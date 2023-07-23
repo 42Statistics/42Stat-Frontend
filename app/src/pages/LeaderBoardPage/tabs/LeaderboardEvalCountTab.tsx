@@ -22,9 +22,7 @@ const GET_LEADERBOARD_EVAL_COUNT = gql(/* GraphQL */ `
         data {
           me {
             userPreview {
-              id
-              login
-              imgUrl
+              ...userPreviewFields
             }
             value
             rank
@@ -32,9 +30,7 @@ const GET_LEADERBOARD_EVAL_COUNT = gql(/* GraphQL */ `
           totalRanking {
             nodes {
               userPreview {
-                id
-                login
-                imgUrl
+                ...userPreviewFields
               }
               value
               rank

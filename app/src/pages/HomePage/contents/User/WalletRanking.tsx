@@ -1,3 +1,4 @@
+import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import {
   DashboardContentBadRequest,
@@ -6,16 +7,37 @@ import {
 } from '@components/elements/DashboardContentView/Error';
 import { UserRankList } from '@components/elements/DashboardContentView/Rank/UserRankList';
 import { DashboardContent } from '@components/templates/DashboardContent';
-import { GET_HOME } from '@pages/HomePage/GET_HOME';
 import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
+
+const GET_WALLET_RANKING = gql(/* GraphQL */ `
+  query GetWalletRanking($limit: Int!) {
+    getHomeUser {
+      walletRanking(limit: $limit) {
+        userPreview {
+          ...userPreviewFields
+        }
+        value
+        rank
+      }
+    }
+  }
+`);
 
 export const WalletRanking = () => {
   const title = '보유 월렛 랭킹';
-  const { loading, error, data } = useQuery(GET_HOME);
-  if (loading) return <DashboardContentLoading title={title} />;
-  if (error)
+  const { loading, error, data } = useQuery(GET_WALLET_RANKING, {
+    variables: { limit: 5 },
+  });
+
+  if (loading) {
+    return <DashboardContentLoading title={title} />;
+  }
+  if (error) {
     return <DashboardContentBadRequest title={title} message={error.message} />;
-  if (!data) return <DashboardContentNotFound title={title} />;
+  }
+  if (!data) {
+    return <DashboardContentNotFound title={title} />;
+  }
 
   const { walletRanking } = data.getHomeUser;
   const unit = '₳';

@@ -1,3 +1,4 @@
+import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import {
   DashboardContentBadRequest,
@@ -8,19 +9,34 @@ import { UserRankList } from '@components/elements/DashboardContentView/Rank/Use
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
 import { useParams } from 'react-router-dom';
-import { GET_PERSONAL_EVAL_BY_LOGIN } from '../GET_PERSONAL_EVAL_BY_LOGIN';
+
+const GET_DESTINY_RANKING_BY_LOGIN = gql(/* GraphQL */ `
+  query GetDestinyRankingByLogin($login: String!, $limit: Int!) {
+    getPersonalEval(login: $login) {
+      destinyRanking(limit: $limit) {
+        userPreview {
+          ...userPreviewFields
+        }
+        value
+        rank
+      }
+    }
+  }
+`);
 
 export const DestinyRanking = () => {
   const { username } = useParams() as { username: string };
 
   const title = '인연 스코어';
   const description = `${username}의 여행 동반자들`;
-  const { loading, error, data } = useQuery(GET_PERSONAL_EVAL_BY_LOGIN, {
-    variables: { login: username },
+  const { loading, error, data } = useQuery(GET_DESTINY_RANKING_BY_LOGIN, {
+    variables: { login: username, limit: 5 },
   });
-  if (loading)
+
+  if (loading) {
     return <DashboardContentLoading title={title} description={description} />;
-  if (error)
+  }
+  if (error) {
     return (
       <DashboardContentBadRequest
         title={title}
@@ -28,8 +44,10 @@ export const DestinyRanking = () => {
         message={error.message}
       />
     );
-  if (!data)
+  }
+  if (!data) {
     return <DashboardContentNotFound title={title} description={description} />;
+  }
 
   const { destinyRanking } = data.getPersonalEval;
   const unit = '점';

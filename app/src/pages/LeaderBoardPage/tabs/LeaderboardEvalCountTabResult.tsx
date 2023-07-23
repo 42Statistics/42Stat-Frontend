@@ -18,9 +18,15 @@ type LeaderboardEvalCountTabResultProps = {
 export const LeaderboardEvalCountTabResult = ({
   result: { data, loading, error },
 }: LeaderboardEvalCountTabResultProps) => {
-  if (loading) return <LeaderboardTabResultSkeleton />;
-  if (error) return <ApolloErrorView message={error.message} />;
-  if (!data) return <ApolloNotFoundView />;
+  if (loading) {
+    return <LeaderboardTabResultSkeleton />;
+  }
+  if (error) {
+    return <ApolloErrorView message={error.message} />;
+  }
+  if (!data) {
+    return <ApolloNotFoundView />;
+  }
 
   const {
     me,

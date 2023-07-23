@@ -18,9 +18,15 @@ type LeaderboardExpIncrementTabResultProps = {
 export const LeaderboardExpIncrementTabResult = ({
   result: { data, loading, error },
 }: LeaderboardExpIncrementTabResultProps) => {
-  if (loading) return <LeaderboardTabResultSkeleton />;
-  if (error) return <ApolloErrorView message={error.message} />;
-  if (!data) return <ApolloNotFoundView />;
+  if (loading) {
+    return <LeaderboardTabResultSkeleton />;
+  }
+  if (error) {
+    return <ApolloErrorView message={error.message} />;
+  }
+  if (!data) {
+    return <ApolloNotFoundView />;
+  }
 
   const {
     me,

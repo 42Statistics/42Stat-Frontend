@@ -7,7 +7,7 @@ import {
 } from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { Link, useParams } from 'react-router-dom';
-import { GET_PROJECT_INFO_BY_PROJECT_NAME } from '../GET_PROJECT_INFO_BY_PROJECT_NAME';
+import { GET_PROJECT_INFO_BY_PROJECT_NAME } from './queries/GET_PROJECT_INFO_BY_PROJECT_NAME';
 
 export const ProjectUrl = () => {
   const { projectName } = useParams() as { projectName: string };
@@ -16,10 +16,16 @@ export const ProjectUrl = () => {
   const { loading, error, data } = useQuery(GET_PROJECT_INFO_BY_PROJECT_NAME, {
     variables: { projectName },
   });
-  if (loading) return <DashboardContentLoading title={title} />;
-  if (error)
+
+  if (loading) {
+    return <DashboardContentLoading title={title} />;
+  }
+  if (error) {
     return <DashboardContentBadRequest title={title} message={error.message} />;
-  if (!data) return <DashboardContentNotFound title={title} />;
+  }
+  if (!data) {
+    return <DashboardContentNotFound title={title} />;
+  }
 
   const { url } = data.getProjectInfo;
 

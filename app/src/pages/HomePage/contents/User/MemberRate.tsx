@@ -1,3 +1,4 @@
+import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import { PieChart } from '@components/elements/Chart';
 import {
@@ -7,18 +8,32 @@ import {
 } from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useTheme } from '@emotion/react';
-import { GET_HOME } from '@pages/HomePage/GET_HOME';
 import { numberWithUnitFormatter } from '@utils/formatters';
 import { capitalize } from 'lodash-es';
+
+const GET_MEMBER_RATE = gql(/* GraphQL */ `
+  query GetMemberRate {
+    getHomeUser {
+      memberRate {
+        fields {
+          key
+          value
+        }
+      }
+    }
+  }
+`);
 
 export const MemberRate = () => {
   const title = 'Member 비율';
   const description = '블랙홀 유저 포함';
 
-  const { loading, error, data } = useQuery(GET_HOME);
-  if (loading)
+  const { loading, error, data } = useQuery(GET_MEMBER_RATE);
+
+  if (loading) {
     return <DashboardContentLoading title={title} description={description} />;
-  if (error)
+  }
+  if (error) {
     return (
       <DashboardContentBadRequest
         title={title}
@@ -26,7 +41,10 @@ export const MemberRate = () => {
         message={error.message}
       />
     );
-  if (!data) return <DashboardContentNotFound />;
+  }
+  if (!data) {
+    return <DashboardContentNotFound />;
+  }
 
   const { fields } = data.getHomeUser.memberRate;
   const labels = fields.map((field) => capitalize(field.key));

@@ -22,9 +22,7 @@ const GET_LEADERBOARD_EXP_INCREMENT = gql(/* GraphQL */ `
         data {
           me {
             userPreview {
-              id
-              login
-              imgUrl
+              ...userPreviewFields
             }
             value
             rank
@@ -32,9 +30,7 @@ const GET_LEADERBOARD_EXP_INCREMENT = gql(/* GraphQL */ `
           totalRanking {
             nodes {
               userPreview {
-                id
-                login
-                imgUrl
+                ...userPreviewFields
               }
               value
               rank

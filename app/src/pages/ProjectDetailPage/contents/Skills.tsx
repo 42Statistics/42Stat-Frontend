@@ -9,8 +9,8 @@ import {
 } from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useTheme } from '@emotion/react';
-import { isDefined } from '@utils/isDefined';
-import { isShortString } from '@utils/isShortString';
+import { isDefined } from '@shared/utils/isDefined';
+import { isShortString } from '@shared/utils/isShortString';
 import { useParams } from 'react-router-dom';
 import { GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME } from '../queries/GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME';
 

@@ -11,7 +11,7 @@ import { ApolloNotFoundView } from '@components/elements/ApolloNotFoundView';
 import styled from '@emotion/styled';
 import { gql } from '@shared/__generated__';
 import space_background from '@shared/assets/space-background.webp';
-import { getDateDiff } from '@utils/getDateDiff';
+import { getDateDiff } from '@shared/utils/getDateDiff';
 import { getDailyProgrammingQuote } from './getDailyProgrammingQuote';
 
 const GET_MY_INFO = gql(/* GraphQL */ `

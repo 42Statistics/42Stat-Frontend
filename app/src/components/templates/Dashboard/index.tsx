@@ -1,6 +1,6 @@
 import { Center } from '@components/common';
 import type { DashboardProps } from '@shared/types/Dashboard';
-import { Desktop, Mobile, Tablet } from '@utils/responsive/Device';
+import { Desktop, Mobile, Tablet } from '@shared/utils/responsive/Device';
 import { DesktopDashboard } from './Desktop';
 import { MobileDashboard } from './Mobile';
 import { TabletDashboard } from './Tablet';

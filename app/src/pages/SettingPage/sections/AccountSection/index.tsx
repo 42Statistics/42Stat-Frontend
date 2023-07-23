@@ -7,7 +7,7 @@ import {
   VStack,
 } from '@components/common';
 import { CustomSection } from '@shared/styles/custom/CustomSection';
-import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
+import { Mobile, TabletAndAbove } from '@shared/utils/responsive/Device';
 import { DeleteAccountButton } from './DeleteAccountButton';
 import { DeleteAccountDialog } from './DeleteAccountDialog';
 import { LogoutButton } from './LogoutButton';

@@ -5,7 +5,7 @@ import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { withHead } from '@hoc/withHead';
 import { ROUTES } from '@shared/constants/ROUTES';
-import { mq } from '@utils/responsive/mq';
+import { mq } from '@shared/utils/responsive/mq';
 import { Link } from 'react-router-dom';
 
 const FtOAuthPage = () => {

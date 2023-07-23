@@ -1,4 +1,3 @@
-import { gql } from '@shared/__generated__';
 import { useQuery } from '@apollo/client';
 import { DonutChart } from '@components/elements/Chart';
 import {
@@ -8,7 +7,8 @@ import {
 } from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useTheme } from '@emotion/react';
-import { numberWithUnitFormatter } from '@utils/formatters';
+import { gql } from '@shared/__generated__';
+import { numberWithUnitFormatter } from '@shared/utils/formatters';
 
 const GET_BLACKHOLED_COUNT_PER_CIRCLE = gql(/* GraphQL */ `
   query GetBlackholedCountPerCircle {

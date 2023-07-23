@@ -4,7 +4,7 @@ import { MODAL_ID } from '@shared/constants/HTML_ID';
 import { fadeIn } from '@shared/styles/custom/fadeIn';
 import type { DialogBaseProps } from '@shared/types/Modal';
 import { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
-import { isEscapeKeyDown } from '@utils/keyboard';
+import { isEscapeKeyDown } from '@shared/utils/keyboard';
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { Modal, Overlay } from '../Modal';
 

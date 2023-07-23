@@ -1,5 +1,5 @@
 import { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
-import weekOfMonth from '@utils/plugin/weekOfMonth';
+import weekOfMonth from '@shared/utils/plugin/weekOfMonth';
 import dayjs from 'dayjs';
 
 const Provider = ({ children }: PropsWithReactElementChildren) => {

@@ -1,5 +1,3 @@
-import { gql } from '@shared/__generated__';
-import { DateTemplate } from '@shared/__generated__/graphql';
 import { useQuery } from '@apollo/client';
 import { Center, H3Text, VStack } from '@components/common';
 import { CoalitionMark } from '@components/elements/CoalitionMark';
@@ -12,7 +10,9 @@ import { TextMax } from '@components/elements/TextMax';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { numberWithUnitFormatter } from '@utils/formatters';
+import { gql } from '@shared/__generated__';
+import { DateTemplate } from '@shared/__generated__/graphql';
+import { numberWithUnitFormatter } from '@shared/utils/formatters';
 import dayjs from 'dayjs';
 import { capitalize } from 'lodash-es';
 

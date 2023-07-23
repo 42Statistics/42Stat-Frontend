@@ -1,5 +1,4 @@
 import { useQuery } from '@apollo/client';
-import { userAtom } from '@atoms/userAtom';
 import {
   Divider,
   H2BoldText,
@@ -14,6 +13,7 @@ import { gql } from '@shared/__generated__';
 import { ReactComponent as FtLogo } from '@shared/assets/logo/ft-logo.svg';
 import google_logo from '@shared/assets/logo/google-logo.svg';
 import { CustomSection } from '@shared/styles/custom/CustomSection';
+import { userAtom } from '@shared/utils/jotai/atoms/userAtom';
 import { useAtomValue } from 'jotai';
 import { LinkLabel } from './LinkLabel';
 import { LinkRow } from './LinkRow';

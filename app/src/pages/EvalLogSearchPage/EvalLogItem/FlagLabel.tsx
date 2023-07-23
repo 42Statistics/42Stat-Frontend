@@ -1,6 +1,6 @@
 import { EvalLogLabel, EvalLogLabelType } from '@components/common/Label';
 import { useTheme } from '@emotion/react';
-import { snakeCaseFormatter } from '@utils/formatters';
+import { snakeCaseFormatter } from '@shared/utils/formatters';
 
 type FlagLabelProps = {
   name: string;

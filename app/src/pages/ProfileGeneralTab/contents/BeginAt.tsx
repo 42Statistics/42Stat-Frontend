@@ -6,8 +6,8 @@ import {
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
-import { dDayFormatter } from '@utils/formatters';
-import { getDateDiff } from '@utils/getDateDiff';
+import { dDayFormatter } from '@shared/utils/formatters';
+import { getDateDiff } from '@shared/utils/getDateDiff';
 import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
 import { GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN } from '../queries/GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN';

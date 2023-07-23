@@ -1,4 +1,3 @@
-import { gql } from '@shared/__generated__';
 import { useQuery } from '@apollo/client';
 import { LineChart } from '@components/elements/Chart';
 import {
@@ -7,8 +6,9 @@ import {
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
-import { numberWithUnitFormatter } from '@utils/formatters';
-import { isDefined } from '@utils/isDefined';
+import { gql } from '@shared/__generated__';
+import { numberWithUnitFormatter } from '@shared/utils/formatters';
+import { isDefined } from '@shared/utils/isDefined';
 
 const GET_SCORE_RECORDS_PER_COALITION = gql(/* GraphQL */ `
   query GetScoreRecordsPerCoalition {

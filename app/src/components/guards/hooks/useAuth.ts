@@ -1,5 +1,5 @@
-import { getAccessToken } from '@utils/storage/accessToken';
-import { getRefreshToken } from '@utils/storage/refreshToken';
+import { getAccessToken } from '@shared/utils/storage/accessToken';
+import { getRefreshToken } from '@shared/utils/storage/refreshToken';
 
 export const useAuth = () => {
   const accessToken = getAccessToken();

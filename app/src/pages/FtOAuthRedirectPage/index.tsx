@@ -1,15 +1,15 @@
 import { useMutation } from '@apollo/client';
-import { userAtom } from '@atoms/userAtom';
 import { Center, Loader } from '@components/common';
 import { GOOGLE_LOGIN } from '@components/elements/LoginButton';
 import { gql } from '@shared/__generated__';
 import { ROUTES } from '@shared/constants/ROUTES';
-import { setAccessToken } from '@utils/storage/accessToken';
+import { userAtom } from '@shared/utils/jotai/atoms/userAtom';
+import { setAccessToken } from '@shared/utils/storage/accessToken';
 import {
   getGoogleCredential,
   removeGoogleCredential,
-} from '@utils/storage/googleCredential';
-import { setRefreshToken } from '@utils/storage/refreshToken';
+} from '@shared/utils/storage/googleCredential';
+import { setRefreshToken } from '@shared/utils/storage/refreshToken';
 import { useSetAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';

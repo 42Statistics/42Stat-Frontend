@@ -7,7 +7,7 @@ import { GAPI_URL } from '@shared/constants/GAPI';
 import {
   FakeGoogleWrapperType,
   createFakeGoogleWrapper,
-} from '@utils/createFakeGoogleWrapper';
+} from '@shared/utils/createFakeGoogleWrapper';
 import { useEffect, useState } from 'react';
 import { useScript } from 'usehooks-ts';
 

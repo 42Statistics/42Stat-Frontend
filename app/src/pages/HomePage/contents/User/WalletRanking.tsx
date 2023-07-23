@@ -1,4 +1,3 @@
-import { gql } from '@shared/__generated__';
 import { useQuery } from '@apollo/client';
 import {
   DashboardContentBadRequest,
@@ -7,7 +6,8 @@ import {
 } from '@components/elements/DashboardContentView/Error';
 import { UserRankList } from '@components/elements/DashboardContentView/Rank/UserRankList';
 import { DashboardContent } from '@components/templates/DashboardContent';
-import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
+import { gql } from '@shared/__generated__';
+import { Mobile, TabletAndAbove } from '@shared/utils/responsive/Device';
 
 const GET_WALLET_RANKING = gql(/* GraphQL */ `
   query GetWalletRanking($limit: Int!) {

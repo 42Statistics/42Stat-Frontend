@@ -1,6 +1,6 @@
 // https://dev.to/rafi993/roving-focus-in-react-with-custom-hooks-1ln
 
-import { isArrowDownKeyDown, isArrowUpKeyDown } from '@utils/keyboard';
+import { isArrowDownKeyDown, isArrowUpKeyDown } from '@shared/utils/keyboard';
 import { useCallback, useEffect, useState } from 'react';
 
 export const useRoveFocus = (size: number) => {

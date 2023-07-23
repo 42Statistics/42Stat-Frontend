@@ -1,7 +1,7 @@
 import { gql } from '@shared/__generated__';
 import { client } from '@shared/providers/ApolloProvider';
-import { setAccessToken } from '@utils/storage/accessToken';
-import { setRefreshToken } from '@utils/storage/refreshToken';
+import { setAccessToken } from '@shared/utils/storage/accessToken';
+import { setRefreshToken } from '@shared/utils/storage/refreshToken';
 
 const GET_NEW_ACCESS_TOKEN = gql(/* GraphQL */ `
   mutation GetNewAccessToken($refreshToken: String!) {

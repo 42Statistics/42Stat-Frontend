@@ -1,4 +1,3 @@
-import { gql } from '@shared/__generated__';
 import { useQuery } from '@apollo/client';
 import {
   DashboardContentBadRequest,
@@ -7,7 +6,8 @@ import {
 } from '@components/elements/DashboardContentView/Error';
 import { ProjectRankList } from '@components/elements/DashboardContentView/Rank/ProjectRankList';
 import { DashboardContent } from '@components/templates/DashboardContent';
-import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
+import { gql } from '@shared/__generated__';
+import { Mobile, TabletAndAbove } from '@shared/utils/responsive/Device';
 
 const GET_CURR_REGISTERED_COUNT_RANKING = gql(/* GraphQL */ `
   query GetCurrRegisteredCountRanking($limit: Int!) {

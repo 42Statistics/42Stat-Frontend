@@ -1,8 +1,8 @@
-import { gql } from '@shared/__generated__';
 import { useQuery } from '@apollo/client';
 import { VStack, WhiteBoldText } from '@components/common';
 import styled from '@emotion/styled';
-import { mq } from '@utils/responsive/mq';
+import { gql } from '@shared/__generated__';
+import { mq } from '@shared/utils/responsive/mq';
 import { useEffect, useState } from 'react';
 import { CountUp } from 'use-count-up';
 

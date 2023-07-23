@@ -2,9 +2,9 @@ import { useMutation } from '@apollo/client';
 import { ConfirmDialog } from '@components/common/Dialog';
 import { gql } from '@shared/__generated__';
 import { ROUTES } from '@shared/constants/ROUTES';
-import { removeAccessToken } from '@utils/storage/accessToken';
-import { removeGoogleCredential } from '@utils/storage/googleCredential';
-import { removeRefreshToken } from '@utils/storage/refreshToken';
+import { removeAccessToken } from '@shared/utils/storage/accessToken';
+import { removeGoogleCredential } from '@shared/utils/storage/googleCredential';
+import { removeRefreshToken } from '@shared/utils/storage/refreshToken';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 

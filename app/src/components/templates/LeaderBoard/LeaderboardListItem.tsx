@@ -14,9 +14,9 @@ import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { UserRank } from '@shared/__generated__/graphql';
 import { ROUTES } from '@shared/constants/ROUTES';
-import { numberWithUnitFormatter } from '@utils/formatters';
-import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
-import { mq } from '@utils/responsive/mq';
+import { numberWithUnitFormatter } from '@shared/utils/formatters';
+import { Mobile, TabletAndAbove } from '@shared/utils/responsive/Device';
+import { mq } from '@shared/utils/responsive/mq';
 import { useNavigate } from 'react-router-dom';
 
 type LeaderboardListItemProps = {

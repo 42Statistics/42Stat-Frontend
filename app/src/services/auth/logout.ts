@@ -1,7 +1,7 @@
 import { gql } from '@shared/__generated__';
 import { ROUTES } from '@shared/constants/ROUTES';
 import { client } from '@shared/providers/ApolloProvider';
-import { clearStorage } from '@utils/storage/clearStorage';
+import { clearStorage } from '@shared/utils/storage/clearStorage';
 
 const LOGOUT = gql(/* GraphQL */ `
   mutation Logout {

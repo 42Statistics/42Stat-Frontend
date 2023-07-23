@@ -6,13 +6,13 @@ import { ROUTES } from '@shared/constants/ROUTES';
 import {
   FakeGoogleWrapperType,
   createFakeGoogleWrapper,
-} from '@utils/createFakeGoogleWrapper';
-import { setAccessToken } from '@utils/storage/accessToken';
+} from '@shared/utils/createFakeGoogleWrapper';
+import { setAccessToken } from '@shared/utils/storage/accessToken';
 import {
   removeGoogleCredential,
   setGoogleCredential,
-} from '@utils/storage/googleCredential';
-import { setRefreshToken } from '@utils/storage/refreshToken';
+} from '@shared/utils/storage/googleCredential';
+import { setRefreshToken } from '@shared/utils/storage/refreshToken';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useScript } from 'usehooks-ts';

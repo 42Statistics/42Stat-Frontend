@@ -1,4 +1,3 @@
-import { gql } from '@shared/__generated__';
 import { useQuery } from '@apollo/client';
 import { PieChart } from '@components/elements/Chart';
 import {
@@ -8,7 +7,8 @@ import {
 } from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useTheme } from '@emotion/react';
-import { numberWithUnitFormatter } from '@utils/formatters';
+import { gql } from '@shared/__generated__';
+import { numberWithUnitFormatter } from '@shared/utils/formatters';
 import { capitalize } from 'lodash-es';
 
 const GET_BLACKHOLED_RATE = gql(/* GraphQL */ `

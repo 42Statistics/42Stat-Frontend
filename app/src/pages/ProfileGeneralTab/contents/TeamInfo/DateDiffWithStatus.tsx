@@ -1,6 +1,6 @@
-import { TeamStatus } from '@shared/__generated__/graphql';
 import { Text } from '@components/common';
-import { getDateDiff } from '@utils/getDateDiff';
+import { TeamStatus } from '@shared/__generated__/graphql';
+import { getDateDiff } from '@shared/utils/getDateDiff';
 
 type DateDiffWithStatusProps = {
   date: Date;

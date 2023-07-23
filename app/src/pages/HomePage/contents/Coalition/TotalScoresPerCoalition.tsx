@@ -1,4 +1,3 @@
-import { gql } from '@shared/__generated__';
 import { useQuery } from '@apollo/client';
 import { BarChart } from '@components/elements/Chart';
 import {
@@ -7,7 +6,8 @@ import {
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
-import { millionFormatter } from '@utils/formatters';
+import { gql } from '@shared/__generated__';
+import { millionFormatter } from '@shared/utils/formatters';
 
 const GET_TOTAL_SCORES_PER_COALITION = gql(/* GraphQL */ `
   query GetTotalScoresPerCoalition {

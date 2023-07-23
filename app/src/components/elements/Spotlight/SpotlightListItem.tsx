@@ -1,6 +1,6 @@
 import { Clickable, H3MediumText, HStack, Spacer } from '@components/common';
 import styled from '@emotion/styled';
-import { SpotlightFocusContext } from '@utils/contexts/SpotlightFocusContext';
+import { SpotlightFocusContext } from '@shared/utils/contexts/SpotlightFocusContext';
 import { useContext, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 

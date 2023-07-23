@@ -24,9 +24,9 @@ import {
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import styled from '@emotion/styled';
-import { getTitleWithLogin } from '@utils/getTitleWithLogin';
-import { Desktop, TabletAndBelow } from '@utils/responsive/Device';
-import { titleCase } from '@utils/titleCase';
+import { getTitleWithLogin } from '@shared/utils/getTitleWithLogin';
+import { Desktop, TabletAndBelow } from '@shared/utils/responsive/Device';
+import { titleCase } from '@shared/utils/titleCase';
 import { truncate } from 'lodash-es';
 import { useParams } from 'react-router-dom';
 

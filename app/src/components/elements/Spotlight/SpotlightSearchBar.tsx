@@ -1,7 +1,7 @@
 import { HStack, Writable } from '@components/common';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { SpotlightFocusContext } from '@utils/contexts/SpotlightFocusContext';
+import { SpotlightFocusContext } from '@shared/utils/contexts/SpotlightFocusContext';
 import { useContext, useEffect, useRef } from 'react';
 
 type SpotlightSearchBarProps = {

@@ -1,4 +1,3 @@
-import { gql } from '@shared/__generated__';
 import { useQuery } from '@apollo/client';
 import {
   DashboardContentBadRequest,
@@ -6,6 +5,7 @@ import {
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import styled from '@emotion/styled';
+import { gql } from '@shared/__generated__';
 import { useParams } from 'react-router-dom';
 import { TeamInfoTable } from './TeamInfoTable';
 

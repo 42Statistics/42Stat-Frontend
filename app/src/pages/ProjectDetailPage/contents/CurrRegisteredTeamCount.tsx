@@ -1,4 +1,3 @@
-import { gql } from '@shared/__generated__';
 import { useQuery } from '@apollo/client';
 import {
   DashboardContentBadRequest,
@@ -7,6 +6,7 @@ import {
 } from '@components/elements/DashboardContentView/Error';
 import { NumberDefault } from '@components/elements/DashboardContentView/NumberDefault';
 import { DashboardContent } from '@components/templates/DashboardContent';
+import { gql } from '@shared/__generated__';
 import { useParams } from 'react-router-dom';
 
 const GET_CURR_REGISTERED_TEAM_COUNT_BY_PROJECT_NAME = gql(/* GraphQL */ `

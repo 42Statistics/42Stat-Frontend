@@ -13,7 +13,7 @@
       "@styles/*": ["src/styles/*"],
       "@atoms/*": ["src/utils/jotai/atoms/*"],
       "@utils/*": ["src/utils/*"],
-      "@shared/*": ["src/shared/*"],
+      "@shared/*": ["src/@shared/*"],
       "@/*": ["src/*"]
     }
   }

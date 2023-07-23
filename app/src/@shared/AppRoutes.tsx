@@ -14,7 +14,7 @@ import { ROUTES } from '@shared/constants/ROUTES';
 import { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-const LandingPage = lazy(() => import('@pages/LandingPage'));
+const LandingPage = lazy(() => import('@/Landing'));
 const HomePage = lazy(() => import('@/Home'));
 const LeaderboardPage = lazy(() => import('@pages/LeaderboardPage'));
 const EvalLogSearchPage = lazy(() => import('@pages/EvalLogSearchPage'));

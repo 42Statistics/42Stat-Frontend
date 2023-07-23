@@ -6,7 +6,7 @@ import {
 } from '@components/elements/LoginButton';
 import { useTheme } from '@emotion/react';
 import { withHead } from '@hoc/withHead';
-import { Introduction } from './Introduction';
+import { Introduction } from './components/Introduction';
 
 const LandingPage = () => {
   const theme = useTheme();

@@ -10,7 +10,7 @@ export type NavItemProps = {
 
 export const NavItem = ({ route }: NavItemProps) => {
   const location = useLocation();
-  const isFocused = location.pathname === route.path;
+  const isFocused = location.pathname.startsWith(route.path);
   const NavItemIcon = isFocused ? route.iconFocused : route.icon;
   const theme = useTheme();
   const color = isFocused ? theme.colors.mono.white : theme.colors.mono.black;

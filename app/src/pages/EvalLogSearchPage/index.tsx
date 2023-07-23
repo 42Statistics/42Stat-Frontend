@@ -1,7 +1,7 @@
-import { gql } from '@/__generated__';
-import { EvalLogEdge, EvalLogSortOrder } from '@/__generated__/graphql';
 import { useDisclosure } from '@/hooks/useDisclosure';
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';
+import { gql } from '@shared/__generated__';
+import { EvalLogEdge, EvalLogSortOrder } from '@shared/__generated__/graphql';
 import type { EvalLogSearchModel } from '@/types/EvalLogSearchModel';
 import { useLazyQuery } from '@apollo/client';
 import { VStack } from '@components/common';

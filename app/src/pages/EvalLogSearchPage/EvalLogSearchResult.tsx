@@ -1,4 +1,4 @@
-import { EvalLogEdge } from '@/__generated__/graphql';
+import { EvalLogEdge } from '@shared/__generated__/graphql';
 import { ApolloError } from '@apollo/client';
 import { Center, Skeleton, Text, VStack } from '@components/common';
 import { ApolloErrorView } from '@components/elements/ApolloErrorView';

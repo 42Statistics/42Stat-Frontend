@@ -1,4 +1,4 @@
-import { EvalLogEdge } from '@/__generated__/graphql';
+import { EvalLogEdge } from '@shared/__generated__/graphql';
 import { VStack } from '@components/common';
 import { EvalLogItem } from './EvalLogItem';
 

@@ -1,4 +1,4 @@
-import { UserPreview } from '@/__generated__/graphql';
+import { UserPreview } from '@shared/__generated__/graphql';
 import { VStack } from '@components/common';
 import { SpotlightUserListItem } from './SpotlightUserListItem';
 

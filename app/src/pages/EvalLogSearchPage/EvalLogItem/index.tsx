@@ -1,4 +1,4 @@
-import { EvalLog } from '@/__generated__/graphql';
+import { EvalLog } from '@shared/__generated__/graphql';
 import { Center, HStack, Text, VStack } from '@components/common';
 import { EvalLogLabel, EvalLogLabelType } from '@components/common/Label';
 import { useTheme } from '@emotion/react';

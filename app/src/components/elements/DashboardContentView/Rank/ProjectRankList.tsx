@@ -1,4 +1,4 @@
-import { ProjectRank } from '@/__generated__/graphql';
+import { ProjectRank } from '@shared/__generated__/graphql';
 import { VStack } from '@components/common';
 import { ProjectRankListItem } from './ProjectRankListItem';
 

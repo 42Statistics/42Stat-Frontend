@@ -1,10 +1,9 @@
 import {
   GetLeaderboardEvalCountQuery,
   GetLeaderboardEvalCountQueryVariables,
-} from '@/__generated__/graphql';
+} from '@shared/__generated__/graphql';
 import { QueryResult } from '@apollo/client';
 import { ApolloErrorView } from '@components/elements/ApolloErrorView';
-import { ApolloNotFoundView } from '@components/elements/ApolloNotFoundView';
 import { Leaderboard } from '@components/templates/Leaderboard';
 import { LeaderboardTabResultSkeleton } from '@pages/PageSkeletons/LeaderboardTabResultSkeleton';
 

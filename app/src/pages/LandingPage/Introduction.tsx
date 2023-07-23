@@ -1,4 +1,4 @@
-import { gql } from '@/__generated__';
+import { gql } from '@shared/__generated__';
 import { useQuery } from '@apollo/client';
 import { VStack, WhiteBoldText } from '@components/common';
 import styled from '@emotion/styled';

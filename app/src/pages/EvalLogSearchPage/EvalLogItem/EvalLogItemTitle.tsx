@@ -1,5 +1,5 @@
-import { EvalLogHeader } from '@/__generated__/graphql';
 import { ROUTES } from '@/constants/ROUTES';
+import { EvalLogHeader } from '@shared/__generated__/graphql';
 import {
   BoldText,
   HStack,

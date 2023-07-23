@@ -1,5 +1,5 @@
-import { gql } from '@/__generated__';
 import { useRoveFocus } from '@/hooks/useRoveFocus';
+import { gql } from '@shared/__generated__';
 import { DialogBaseProps } from '@/types/Modal';
 import { useLazyQuery } from '@apollo/client';
 import { ReactComponent as MdSearch } from '@assets/icon/md-search.svg';

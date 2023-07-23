@@ -1,5 +1,5 @@
-import { gql } from '@/__generated__';
 import { ROUTES } from '@/constants/ROUTES';
+import { gql } from '@shared/__generated__';
 import { client } from '@providers/ApolloProvider';
 import { clearStorage } from '@utils/storage/clearStorage';
 

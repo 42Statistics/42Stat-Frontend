@@ -1,5 +1,5 @@
-import { ProjectRank } from '@/__generated__/graphql';
 import { ROUTES } from '@/constants/ROUTES';
+import { ProjectRank } from '@shared/__generated__/graphql';
 import { RankListItem } from './RankListItem';
 
 type ProjectRankListItemProps = {

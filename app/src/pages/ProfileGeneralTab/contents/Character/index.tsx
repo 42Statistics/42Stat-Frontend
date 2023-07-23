@@ -1,5 +1,5 @@
-import { gql } from '@/__generated__';
 import { DashboardContent } from '@/components/templates/DashboardContent';
+import { gql } from '@shared/__generated__';
 import { useQuery } from '@apollo/client';
 import { H3BoldText, HStack, Image, VStack } from '@components/common';
 import { Label } from '@components/common/Label';

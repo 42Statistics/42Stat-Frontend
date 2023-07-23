@@ -1,7 +1,7 @@
 import {
   GetLeaderboardLevelQuery,
   GetLeaderboardLevelQueryVariables,
-} from '@/__generated__/graphql';
+} from '@shared/__generated__/graphql';
 import { QueryResult } from '@apollo/client';
 import { ApolloErrorView } from '@components/elements/ApolloErrorView';
 import { Leaderboard } from '@components/templates/Leaderboard';

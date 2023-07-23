@@ -1,4 +1,4 @@
-import { ProjectPreview } from '@/__generated__/graphql';
+import { ProjectPreview } from '@shared/__generated__/graphql';
 import { ROUTES } from '@/constants/ROUTES';
 import { ReactComponent as FtLogo } from '@assets/logo/ft-logo.svg';
 import { SpotlightListItem } from './SpotlightListItem';

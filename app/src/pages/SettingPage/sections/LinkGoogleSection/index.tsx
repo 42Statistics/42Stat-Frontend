@@ -1,4 +1,4 @@
-import { gql } from '@/__generated__';
+import { gql } from '@shared/__generated__';
 import { useQuery } from '@apollo/client';
 import { ReactComponent as FtLogo } from '@assets/logo/ft-logo.svg';
 import google_logo from '@assets/logo/google-logo.svg';

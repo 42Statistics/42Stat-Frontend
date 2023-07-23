@@ -1,6 +1,6 @@
-import { gql } from '@/__generated__';
-import { DateTemplate } from '@/__generated__/graphql';
 import { useSegmentedControl } from '@/hooks/useSegmentedControl';
+import { gql } from '@shared/__generated__';
+import { DateTemplate } from '@shared/__generated__/graphql';
 import { useLazyQuery } from '@apollo/client';
 import { SegmentedControl, VStack } from '@components/common';
 import { Pagination } from '@components/elements/Pagination';

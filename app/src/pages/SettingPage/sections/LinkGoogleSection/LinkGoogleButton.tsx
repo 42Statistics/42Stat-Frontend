@@ -1,5 +1,5 @@
-import { gql } from '@/__generated__';
 import { GAPI_URL } from '@/constants/GAPI';
+import { gql } from '@shared/__generated__';
 import { useMutation } from '@apollo/client';
 import { ReactComponent as MdSyncAlt } from '@assets/icon/md-sync-alt.svg';
 import { Clickable } from '@components/common';

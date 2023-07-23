@@ -1,5 +1,5 @@
-import { gql } from '@/__generated__';
-import { DateTemplate } from '@/__generated__/graphql';
+import { gql } from '@shared/__generated__';
+import { DateTemplate } from '@shared/__generated__/graphql';
 import { useQuery } from '@apollo/client';
 import { Center, H3Text, VStack } from '@components/common';
 import { CoalitionMark } from '@components/elements/CoalitionMark';

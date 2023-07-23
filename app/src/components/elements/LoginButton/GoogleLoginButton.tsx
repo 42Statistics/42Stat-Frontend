@@ -1,6 +1,6 @@
-import { gql } from '@/__generated__';
 import { GAPI_URL } from '@/constants/GAPI';
 import { ROUTES } from '@/constants/ROUTES';
+import { gql } from '@shared/__generated__';
 import { useMutation } from '@apollo/client';
 import { ReactComponent as GoogleLogo } from '@assets/logo/google-logo.svg';
 import {

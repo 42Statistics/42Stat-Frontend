@@ -1,5 +1,5 @@
-import { gql } from '@/__generated__';
 import { ROUTES } from '@/constants/ROUTES';
+import { gql } from '@shared/__generated__';
 import { useMutation } from '@apollo/client';
 import { userAtom } from '@atoms/userAtom';
 import { Center, Loader } from '@components/common';

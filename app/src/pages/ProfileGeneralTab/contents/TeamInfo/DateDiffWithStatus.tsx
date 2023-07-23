@@ -1,4 +1,4 @@
-import { TeamStatus } from '@/__generated__/graphql';
+import { TeamStatus } from '@shared/__generated__/graphql';
 import { Text } from '@components/common';
 import { getDateDiff } from '@utils/getDateDiff';
 

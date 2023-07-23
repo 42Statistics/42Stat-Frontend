@@ -1,5 +1,5 @@
-import { UserRank } from '@/__generated__/graphql';
 import { ROUTES } from '@/constants/ROUTES';
+import { UserRank } from '@shared/__generated__/graphql';
 import { Avatar } from '@components/common';
 import { RankListItem } from './RankListItem';
 

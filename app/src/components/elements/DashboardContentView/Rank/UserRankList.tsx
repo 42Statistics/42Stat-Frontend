@@ -1,4 +1,4 @@
-import { UserRank } from '@/__generated__/graphql';
+import { UserRank } from '@shared/__generated__/graphql';
 import { VStack } from '@components/common';
 import { UserRankListItem } from './UserRankListItem';
 

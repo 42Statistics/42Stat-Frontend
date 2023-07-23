@@ -1,4 +1,4 @@
-import { gql } from '@/__generated__';
+import { gql } from '@shared/__generated__';
 
 export const GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME = gql(/* GraphQL */ `
   query GetProjectInfoZeroCostByProjectName($projectName: String!) {

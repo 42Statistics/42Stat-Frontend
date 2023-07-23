@@ -1,4 +1,4 @@
-import { gql } from '@/__generated__';
+import { gql } from '@shared/__generated__';
 import { useQuery } from '@apollo/client';
 import { H3Text } from '@components/common';
 import { PieChart } from '@components/elements/Chart';

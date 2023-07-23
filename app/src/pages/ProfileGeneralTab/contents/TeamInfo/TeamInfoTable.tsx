@@ -1,5 +1,5 @@
-import { UserTeam } from '@/__generated__/graphql';
 import { ROUTES } from '@/constants/ROUTES';
+import { UserTeam } from '@shared/__generated__/graphql';
 import { PrimaryText, Text } from '@components/common';
 import styled from '@emotion/styled';
 import { isDefined } from '@utils/isDefined';

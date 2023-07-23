@@ -1,4 +1,4 @@
-import { UserRank } from '@/__generated__/graphql';
+import { UserRank } from '@shared/__generated__/graphql';
 import { Divider } from '@components/common';
 import styled from '@emotion/styled';
 import { Fragment } from 'react';

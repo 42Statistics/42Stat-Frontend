@@ -62,6 +62,10 @@ export default defineConfig({
         find: '@utils',
         replacement: path.resolve(__dirname, 'src/utils'),
       },
+      {
+        find: '@shared',
+        replacement: path.resolve(__dirname, 'src/shared'),
+      },
       { find: '@', replacement: path.resolve(__dirname, 'src') },
     ],
   },

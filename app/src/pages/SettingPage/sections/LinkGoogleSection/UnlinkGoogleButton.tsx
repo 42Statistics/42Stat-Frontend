@@ -1,4 +1,4 @@
-import { gql } from '@/__generated__';
+import { gql } from '@shared/__generated__';
 import { useMutation } from '@apollo/client';
 import { ReactComponent as MdDelete } from '@assets/icon/md-delete.svg';
 import { Clickable } from '@components/common';

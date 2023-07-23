@@ -1,5 +1,5 @@
-import { gql } from '@/__generated__';
-import { Coalition } from '@/__generated__/graphql';
+import { gql } from '@shared/__generated__';
+import { Coalition } from '@shared/__generated__/graphql';
 import { useQuery } from '@apollo/client';
 import coalition_black_cover from '@assets/coalition/cover/coalition-black-cover.jpg';
 import coalition_gam_cover from '@assets/coalition/cover/coalition-gam-cover.jpg';

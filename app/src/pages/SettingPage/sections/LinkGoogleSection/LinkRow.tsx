@@ -1,4 +1,4 @@
-import { LinkedAccount } from '@/__generated__/graphql';
+import { LinkedAccount } from '@shared/__generated__/graphql';
 import {
   H3MediumText,
   HStack,

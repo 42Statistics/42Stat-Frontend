@@ -1,4 +1,4 @@
-import { ProjectPreview } from '@/__generated__/graphql';
+import { ProjectPreview } from '@shared/__generated__/graphql';
 import { VStack } from '@components/common';
 import { SpotlightProjectListItem } from './SpotlightProjectListItem';
 

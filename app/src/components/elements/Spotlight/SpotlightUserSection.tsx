@@ -1,4 +1,4 @@
-import { Exact, FindUserPreviewQuery } from '@/__generated__/graphql';
+import { Exact, FindUserPreviewQuery } from '@shared/__generated__/graphql';
 import { QueryResult } from '@apollo/client';
 import { BoldText, Divider, VStack } from '@components/common';
 import { SpotlightUserList } from './SpotlightUserList';

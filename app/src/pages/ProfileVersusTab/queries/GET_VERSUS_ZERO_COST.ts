@@ -1,4 +1,4 @@
-import { gql } from '@/__generated__';
+import { gql } from '@shared/__generated__';
 
 export const GET_VERSUS_ZERO_COST = gql(/* GraphQL */ `
   query GetVersusZeroCost($login1: String!, $login2: String!) {

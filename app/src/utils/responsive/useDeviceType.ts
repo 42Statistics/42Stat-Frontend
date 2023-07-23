@@ -1,4 +1,4 @@
-import type { Device } from '@/types/Device';
+import type { Device } from '@shared/types/Device';
 import { useMediaQuery } from 'react-responsive';
 
 const useIsDesktop = () => useMediaQuery({ minWidth: 1280 });

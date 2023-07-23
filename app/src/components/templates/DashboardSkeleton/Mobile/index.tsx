@@ -1,7 +1,7 @@
-import type { MobileDashboardProps } from '@/types/Dashboard';
 import { MobileDashboardLayout } from '@components/templates/Dashboard/Mobile';
 import { MobileDashboardRow } from '@components/templates/Dashboard/Mobile/MobileDashboardRow';
 import { DashboardItem } from '@components/templates/Dashboard/shared/DashboardItem';
+import type { MobileDashboardProps } from '@shared/types/Dashboard';
 import { DashboardItemSkeleton } from '../shared/DashboardItemSkeleton';
 
 type MobileDashboardSkeletonProps = Omit<MobileDashboardProps, 'contents'>;

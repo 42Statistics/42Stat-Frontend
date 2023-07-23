@@ -1,6 +1,6 @@
-import type { TabletDashboardColSize } from '@/types/Dashboard';
-import { PropsWithReactElementChildren } from '@/types/PropsWithChildren';
 import styled from '@emotion/styled';
+import type { TabletDashboardColSize } from '@shared/types/Dashboard';
+import { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
 
 type TabletDashboardRowProps = PropsWithReactElementChildren<{
   row: number;

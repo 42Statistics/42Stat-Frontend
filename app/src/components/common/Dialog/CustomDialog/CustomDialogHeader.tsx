@@ -1,6 +1,6 @@
-import type { PropsWithStringChildren } from '@/types/PropsWithChildren';
 import { H2BoldText } from '@components/common/Text';
 import styled from '@emotion/styled';
+import type { PropsWithStringChildren } from '@shared/types/PropsWithChildren';
 
 export const CustomDialogHeader = ({ children }: PropsWithStringChildren) => {
   return (

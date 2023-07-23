@@ -1,15 +1,15 @@
-import type { DashboardItemProps } from '@/types/Dashboard';
+import type { DashboardItemProps } from '@shared/types/Dashboard';
 import {
-  AverageCommentLength,
-  AverageDuration,
-  AverageFeedbackLength,
-  AverageFinalMark,
-  CorrectionPoint,
-  DestinyRanking,
-  EvalLogSearchLink,
-  MonthlyEvalCount,
-  RecentComment,
-  TotalCount,
+    AverageCommentLength,
+    AverageDuration,
+    AverageFeedbackLength,
+    AverageFinalMark,
+    CorrectionPoint,
+    DestinyRanking,
+    EvalLogSearchLink,
+    MonthlyEvalCount,
+    RecentComment,
+    TotalCount,
 } from '../contents';
 
 export const profileEvalTabDashboardContents: DashboardItemProps[] = [

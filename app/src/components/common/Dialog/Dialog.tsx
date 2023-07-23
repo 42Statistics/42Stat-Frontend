@@ -1,9 +1,9 @@
-import type { DialogBaseProps } from '@/types/Modal';
-import { PropsWithReactElementChildren } from '@/types/PropsWithChildren';
 import { keyframes, useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { MODAL_ID } from '@shared/constants/HTML_ID';
 import { fadeIn } from '@shared/styles/custom/fadeIn';
+import type { DialogBaseProps } from '@shared/types/Modal';
+import { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
 import { isEscapeKeyDown } from '@utils/keyboard';
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { Modal, Overlay } from '../Modal';

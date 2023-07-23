@@ -1,7 +1,7 @@
-import type { TabletDashboardProps } from '@/types/Dashboard';
 import { TabletDashboardLayout } from '@components/templates/Dashboard/Tablet';
 import { TabletDashboardRow } from '@components/templates/Dashboard/Tablet/TabletDashboardRow';
 import { DashboardItem } from '@components/templates/Dashboard/shared/DashboardItem';
+import type { TabletDashboardProps } from '@shared/types/Dashboard';
 import { DashboardItemSkeleton } from '../shared/DashboardItemSkeleton';
 
 type TabletDashboardSkeletonProps = Omit<TabletDashboardProps, 'contents'>;

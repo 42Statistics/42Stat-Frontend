@@ -1,4 +1,4 @@
-import { PropsWithReactNodeChildren } from '@/types/PropsWithChildren';
+import { PropsWithReactNodeChildren } from '@shared/types/PropsWithChildren';
 import { useDeviceType } from './useDeviceType';
 
 export const Desktop = ({ children }: PropsWithReactNodeChildren) => {

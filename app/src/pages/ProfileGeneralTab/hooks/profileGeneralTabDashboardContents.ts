@@ -1,17 +1,17 @@
-import type { DashboardItemProps } from '@/types/Dashboard';
+import type { DashboardItemProps } from '@shared/types/Dashboard';
 import {
-  BeginAt,
-  BlackholedAt,
-  Character,
-  CoalitionScore,
-  LastPassed,
-  LastRegistered,
-  LevelRecords,
-  MonthlyLogtime,
-  PreferredCluster,
-  PreferredTime,
-  TeamInfo,
-  Wallet,
+    BeginAt,
+    BlackholedAt,
+    Character,
+    CoalitionScore,
+    LastPassed,
+    LastRegistered,
+    LevelRecords,
+    MonthlyLogtime,
+    PreferredCluster,
+    PreferredTime,
+    TeamInfo,
+    Wallet,
 } from '../contents';
 
 export const profileGeneralTabDashboardContents: DashboardItemProps[] = [

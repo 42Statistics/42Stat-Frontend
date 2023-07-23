@@ -1,5 +1,4 @@
 import { getNewAccessToken } from '@/services/auth/getNewAccessToken';
-import { PropsWithReactElementChildren } from '@/types/PropsWithChildren';
 import {
   ApolloClient,
   ApolloLink,
@@ -11,6 +10,7 @@ import {
 } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 import { isReLoginDialogOpenAtom } from '@atoms/isReLoginDialogOpenAtom';
+import { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
 import { getAccessToken } from '@utils/storage/accessToken';
 import { getRefreshToken } from '@utils/storage/refreshToken';
 import { useSetAtom } from 'jotai';

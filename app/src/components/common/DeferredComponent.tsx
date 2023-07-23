@@ -1,4 +1,4 @@
-import { PropsWithReactNodeChildren } from '@/types/PropsWithChildren';
+import { PropsWithReactNodeChildren } from '@shared/types/PropsWithChildren';
 import { useEffect, useState } from 'react';
 
 // https://tech.kakaopay.com/post/skeleton-ui-idea/

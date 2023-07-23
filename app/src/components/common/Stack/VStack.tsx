@@ -1,5 +1,5 @@
-import type { StackProps } from '@/types/StackProps';
 import styled from '@emotion/styled';
+import type { StackProps } from '@shared/types/StackProps';
 
 export const VStack = styled.div<StackProps>`
   display: flex;

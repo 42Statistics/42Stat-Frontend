@@ -1,7 +1,7 @@
-import type { EvalLogSearchModel } from '@/types/EvalLogSearchModel';
 import { Button, Input, Select } from '@components/common';
 import { Dialog } from '@components/common/Dialog';
 import styled from '@emotion/styled';
+import type { EvalLogSearchModel } from '@shared/types/EvalLogSearchModel';
 import { useForm } from 'react-hook-form';
 
 type EvalLogSearchDialogProps = {

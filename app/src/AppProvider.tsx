@@ -1,4 +1,4 @@
-import { PropsWithReactElementChildren } from '@/types/PropsWithChildren';
+import { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
 import { BrowserRouter as Router } from 'react-router-dom';
 import ApolloProvider from './providers/ApolloProvider';
 import DayjsProvider from './providers/DayjsProvider';

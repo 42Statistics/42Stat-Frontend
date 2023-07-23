@@ -1,5 +1,5 @@
-import type { PropsWithStringChildren } from '@/types/PropsWithChildren';
 import styled from '@emotion/styled';
+import type { PropsWithStringChildren } from '@shared/types/PropsWithChildren';
 import { Clickable } from './Clickable';
 
 type ButtonSize = 'md';

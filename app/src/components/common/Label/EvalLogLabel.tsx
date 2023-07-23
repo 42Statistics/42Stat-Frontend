@@ -1,5 +1,5 @@
-import { PropsWithStringChildren } from '@/types/PropsWithChildren';
 import { useTheme } from '@emotion/react';
+import { PropsWithStringChildren } from '@shared/types/PropsWithChildren';
 import { rgba } from 'emotion-rgba';
 import { Text } from '../Text';
 import { StyledLabel } from './Label';

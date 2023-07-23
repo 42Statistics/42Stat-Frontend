@@ -1,5 +1,5 @@
-import { DialogBaseProps } from '@/types/Modal';
 import { useTheme } from '@emotion/react';
+import { DialogBaseProps } from '@shared/types/Modal';
 import { Button } from '../Button';
 import { CustomDialog } from './CustomDialog';
 

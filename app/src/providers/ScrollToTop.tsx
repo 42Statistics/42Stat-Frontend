@@ -1,4 +1,4 @@
-import { PropsWithReactElementChildren } from '@/types/PropsWithChildren';
+import { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 

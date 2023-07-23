@@ -1,4 +1,4 @@
-import { PropsWithReactNodeChildren } from '@/types/PropsWithChildren';
+import { PropsWithReactNodeChildren } from '@shared/types/PropsWithChildren';
 
 type TabPanelProps = PropsWithReactNodeChildren<{
   show: boolean;

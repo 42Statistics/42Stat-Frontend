@@ -1,4 +1,4 @@
-import type { DashboardItemProps } from '@/types/Dashboard';
+import type { DashboardItemProps } from '@shared/types/Dashboard';
 import { UserProfile } from '../contents';
 
 export const profilePageDashboardContents: DashboardItemProps[] = [

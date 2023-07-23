@@ -1,6 +1,6 @@
-import type { MobileDashboardColSize } from '@/types/Dashboard';
-import { PropsWithReactElementChildren } from '@/types/PropsWithChildren';
 import styled from '@emotion/styled';
+import type { MobileDashboardColSize } from '@shared/types/Dashboard';
+import { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
 
 type MobileDashboardRowProps = PropsWithReactElementChildren<{
   row: number;

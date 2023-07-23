@@ -1,12 +1,12 @@
 import { useDisclosure } from '@/hooks/useDisclosure';
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';
-import { gql } from '@shared/__generated__';
-import { EvalLogEdge, EvalLogSortOrder } from '@shared/__generated__/graphql';
-import type { EvalLogSearchModel } from '@/types/EvalLogSearchModel';
 import { useLazyQuery } from '@apollo/client';
 import { VStack } from '@components/common';
 import { Seo } from '@components/elements/Seo';
 import { withHead } from '@hoc/withHead';
+import { gql } from '@shared/__generated__';
+import { EvalLogEdge, EvalLogSortOrder } from '@shared/__generated__/graphql';
+import type { EvalLogSearchModel } from '@shared/types/EvalLogSearchModel';
 import { isDefined } from '@utils/isDefined';
 import { isSlashKeyDown } from '@utils/keyboard';
 import { isEqual } from 'lodash-es';

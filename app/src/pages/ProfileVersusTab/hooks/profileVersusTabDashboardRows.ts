@@ -1,8 +1,8 @@
 import type {
-  DesktopDashboardRowType,
-  MobileDashboardRowType,
-  TabletDashboardRowType,
-} from '@/types/Dashboard';
+    DesktopDashboardRowType,
+    MobileDashboardRowType,
+    TabletDashboardRowType,
+} from '@shared/types/Dashboard';
 
 export const profileVersusTabDesktopDashboardRows: DesktopDashboardRowType[] = [
   {

@@ -1,4 +1,4 @@
-import type { DialogBaseProps } from '@/types/Modal';
+import type { DialogBaseProps } from '@shared/types/Modal';
 import { Button } from '../Button';
 import { CustomDialog } from './CustomDialog';
 

@@ -1,6 +1,6 @@
-import { PropsWithStringChildren } from '@/types/PropsWithChildren';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { PropsWithStringChildren } from '@shared/types/PropsWithChildren';
 import { Text } from '../Text';
 
 type LabelSize = 'md';

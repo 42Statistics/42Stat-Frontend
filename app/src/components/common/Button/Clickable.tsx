@@ -1,5 +1,5 @@
-import type { PropsWithReactNodeChildren } from '@/types/PropsWithChildren';
 import styled from '@emotion/styled';
+import type { PropsWithReactNodeChildren } from '@shared/types/PropsWithChildren';
 
 type ClickableProps = PropsWithReactNodeChildren<
   React.ButtonHTMLAttributes<HTMLButtonElement>

@@ -12,10 +12,10 @@ import { isSlashKeyDown } from '@shared/utils/keyboard';
 import { isEqual } from 'lodash-es';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { EvalLogSearchAbsoluteButton } from './EvalLogSearchAbsoluteButton';
-import { EvalLogSearchDialog } from './EvalLogSearchDialog';
-import { EvalLogSearchResult } from './EvalLogSearchResult';
-import { EvalLogSearchTitle } from './EvalLogSearchTitle';
+import { EvalLogSearchAbsoluteButton } from './components/EvalLogSearchAbsoluteButton';
+import { EvalLogSearchDialog } from './components/EvalLogSearchDialog';
+import { EvalLogSearchResult } from './components/EvalLogSearchResult';
+import { EvalLogSearchTitle } from './components/EvalLogSearchTitle';
 
 const GET_EVAL_LOGS = gql(/* GraphQL */ `
   query GetEvalLogs(

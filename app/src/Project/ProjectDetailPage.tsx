@@ -4,7 +4,7 @@ import { Dashboard } from '@components/templates/Dashboard';
 import { withFooter } from '@hoc/withFooter';
 import { withHead } from '@hoc/withHead';
 import { useParams } from 'react-router-dom';
-import { ProjectIntroduction } from './ProjectIntroduction';
+import { ProjectIntroduction } from './components/ProjectIntroduction';
 import { useProjectDetailPageDashboard } from './hooks/useProjectDetailPageDashboard';
 
 const ProjectDetailPage = () => {

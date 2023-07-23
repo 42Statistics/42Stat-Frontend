@@ -5,7 +5,7 @@ import { NoAuthGuard } from '@guards/NoAuthGuard';
 import { UserMiddleware } from '@guards/UserMiddleware';
 import { LandingLayout } from '@layouts/LandingLayout';
 import { MainLayout } from '@layouts/MainLayout';
-import NotFoundPage from '@pages/Error/404';
+import NotFoundPage from '@/Error/404';
 import FtOAuthPage from '@pages/FtOAuthPage';
 import FtOAuthRedirectPage from '@pages/FtOAuthRedirectPage';
 import { HomePageSkeleton } from '@pages/PageSkeletons/HomePageSkeleton';

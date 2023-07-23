@@ -1,9 +1,9 @@
 import { gql } from '@/__generated__';
 import { GAPI_URL } from '@/constants/GAPI';
 import { useMutation } from '@apollo/client';
+import { ReactComponent as MdSyncAlt } from '@assets/icon/md-sync-alt.svg';
 import { Clickable } from '@components/common';
 import { Spinner } from '@components/common/Loader';
-import { BsArrowLeftRight } from '@react-icons/all-files/bs/BsArrowLeftRight';
 import {
   FakeGoogleWrapperType,
   createFakeGoogleWrapper,
@@ -71,7 +71,7 @@ export const LinkGoogleButton = ({ onSuccess }: LinkGoogleButtonProps) => {
 
   return (
     <Clickable onClick={() => googleButtonWrapper?.click()}>
-      <BsArrowLeftRight />
+      <MdSyncAlt width={20} height={20} />
     </Clickable>
   );
 };

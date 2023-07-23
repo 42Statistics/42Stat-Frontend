@@ -1,6 +1,6 @@
 import { useDisclosure } from '@/hooks/useDisclosure';
+import { ReactComponent as MdMenu } from '@assets/icon/md-menu.svg';
 import { Clickable } from '@components/common';
-import { GiHamburgerMenu } from '@react-icons/all-files/gi/GiHamburgerMenu';
 import { isMacBKeyDown } from '@utils/keyboard';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -31,7 +31,7 @@ export const TabletNavDrawer = () => {
   return (
     <>
       <Clickable onClick={onOpen}>
-        <GiHamburgerMenu size="18px" />
+        <MdMenu width={22} height={22} />
       </Clickable>
       <TabletNavDrawerView isOpen={isOpen} onClose={onClose} />
     </>

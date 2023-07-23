@@ -1,6 +1,6 @@
+import { ReactComponent as MdErrorOutline } from '@assets/icon/md-error-outline.svg';
 import { HStack, Text } from '@components/common';
 import { useTheme } from '@emotion/react';
-import { MdErrorOutline } from '@react-icons/all-files/md/MdErrorOutline';
 
 export type ApolloErrorViewProps = {
   message?: string;
@@ -13,7 +13,11 @@ export const ApolloErrorView = ({
 
   return (
     <HStack spacing="1rem">
-      <MdErrorOutline size="20px" fill={theme.colors.semantic.error} />
+      <MdErrorOutline
+        width={20}
+        height={20}
+        fill={theme.colors.semantic.error}
+      />
       <Text color={theme.colors.mono.gray300}>{message}</Text>
     </HStack>
   );

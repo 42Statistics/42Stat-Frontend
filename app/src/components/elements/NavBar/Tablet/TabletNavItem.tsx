@@ -19,7 +19,7 @@ export const TabletNavItem = ({ route }: TabletNavItemProps) => {
   return (
     <Layout isFocused={isFocused} onClick={() => navigate(route.path)}>
       <VStack>
-        <NavItemIcon size="20px" fill={color} />
+        <NavItemIcon width={20} height={20} fill={color} />
         <CaptionText color={color}>{route.abbr}</CaptionText>
       </VStack>
     </Layout>

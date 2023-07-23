@@ -1,8 +1,5 @@
-import { useTheme } from '@emotion/react';
-import { BsDash } from '@react-icons/all-files/bs/BsDash';
+import { ReactComponent as MdHorizontalRule } from '@assets/icon/md-horizontal-rule.svg';
 
 export const NoneDash = () => {
-  const theme = useTheme();
-
-  return <BsDash size="12px" color={theme.colors.mono.black} />;
+  return <MdHorizontalRule width={20} height={20} />;
 };

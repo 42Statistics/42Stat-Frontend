@@ -1,7 +1,7 @@
+import { ReactComponent as MdCheck } from '@assets/icon/md-check.svg';
+import { ReactComponent as MdClose } from '@assets/icon/md-close.svg';
 import { HStack, Text } from '@components/common';
 import { useTheme } from '@emotion/react';
-import { AiOutlineCheck } from '@react-icons/all-files/ai/AiOutlineCheck';
-import { AiOutlineClose } from '@react-icons/all-files/ai/AiOutlineClose';
 
 type MarkLabelProps = {
   isValidate: boolean;
@@ -17,9 +17,9 @@ export const MarkLabel = ({ isValidate, finalMark }: MarkLabelProps) => {
   return (
     <HStack>
       {isValidate ? (
-        <AiOutlineCheck color={color} />
+        <MdCheck width={20} height={20} fill={color} />
       ) : (
-        <AiOutlineClose color={color} />
+        <MdClose width={20} height={20} fill={color} />
       )}
       <Text color={color}>{finalMark}</Text>
     </HStack>

@@ -1,9 +1,9 @@
+import { ReactComponent as MdSearch } from '@assets/icon/md-search.svg';
 import { isSpotlightOpenAtom } from '@atoms/isSpotlightOpenAtom';
 import { userAtom } from '@atoms/userAtom';
 import { Center, Clickable, VStack } from '@components/common';
 import { TabletNavProfile } from '@components/elements/NavProfile/Tablet';
 import styled from '@emotion/styled';
-import { RiSearchLine } from '@react-icons/all-files/ri/RiSearchLine';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { TabletNavDrawer } from './TabletNavDrawer';
 import { TabletNavMenu } from './TabletNavMenu';
@@ -24,7 +24,7 @@ export const TabletNavBar = () => {
           <TabletNavProfile imgUrl={user.imgUrl} />
         </Center>
         <Clickable onClick={openSpotlight}>
-          <RiSearchLine size="16px" />
+          <MdSearch width={20} height={20} />
         </Clickable>
         <TabletNavMenu />
       </VStack>

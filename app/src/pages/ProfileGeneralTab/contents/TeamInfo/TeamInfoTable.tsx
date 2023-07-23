@@ -1,7 +1,7 @@
-import { ROUTES } from '@/constants/ROUTES';
-import { UserTeam } from '@shared/__generated__/graphql';
 import { PrimaryText, Text } from '@components/common';
 import styled from '@emotion/styled';
+import { UserTeam } from '@shared/__generated__/graphql';
+import { ROUTES } from '@shared/constants/ROUTES';
 import { isDefined } from '@utils/isDefined';
 import { truncate } from 'lodash-es';
 import { Link } from 'react-router-dom';

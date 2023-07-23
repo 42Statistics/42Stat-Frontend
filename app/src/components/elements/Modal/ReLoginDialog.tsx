@@ -1,6 +1,6 @@
-import { ROUTES } from '@/constants/ROUTES';
 import { DialogBaseProps } from '@/types/Modal';
 import { AlertDialog } from '@components/common/Dialog';
+import { ROUTES } from '@shared/constants/ROUTES';
 import { clearStorage } from '@utils/storage/clearStorage';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';

@@ -1,8 +1,8 @@
-import { MODAL_ID } from '@/constants/HTML_ID';
 import { ModalBaseProps } from '@/types/Modal';
 import { PropsWithReactElementChildren } from '@/types/PropsWithChildren';
 import { keyframes, useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { MODAL_ID } from '@shared/constants/HTML_ID';
 import { useLayoutEffect, useState } from 'react';
 import { Modal, Overlay } from '../Modal';
 

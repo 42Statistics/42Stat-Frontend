@@ -1,6 +1,6 @@
-import { ROUTES } from '@/constants/ROUTES';
-import { gql } from '@shared/__generated__';
 import { client } from '@providers/ApolloProvider';
+import { gql } from '@shared/__generated__';
+import { ROUTES } from '@shared/constants/ROUTES';
 import { clearStorage } from '@utils/storage/clearStorage';
 
 const LOGOUT = gql(/* GraphQL */ `

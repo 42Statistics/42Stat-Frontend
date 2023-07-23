@@ -1,4 +1,4 @@
-import { ACCESS_TOKEN_KEY } from '@/constants/SESSION_STORAGE_KEY';
+import { ACCESS_TOKEN_KEY } from '@shared/constants/SESSION_STORAGE_KEY';
 
 export const getAccessToken = () => {
   return sessionStorage.getItem(ACCESS_TOKEN_KEY);

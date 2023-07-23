@@ -1,8 +1,8 @@
-import { GAPI_URL } from '@/constants/GAPI';
-import { ROUTES } from '@/constants/ROUTES';
 import { useMutation } from '@apollo/client';
 import { gql } from '@shared/__generated__';
 import { ReactComponent as GoogleLogo } from '@shared/assets/logo/google-logo.svg';
+import { GAPI_URL } from '@shared/constants/GAPI';
+import { ROUTES } from '@shared/constants/ROUTES';
 import {
   FakeGoogleWrapperType,
   createFakeGoogleWrapper,

@@ -12,7 +12,7 @@ import { ProfilePageSkeleton } from '@pages/PageSkeletons/ProfilePageSkeleton';
 import SettingPage from '@pages/SettingPage';
 import { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { ROUTES } from './constants/ROUTES';
+import { ROUTES } from '@shared/constants/ROUTES';
 
 const LandingPage = lazy(() => import('@pages/LandingPage'));
 const HomePage = lazy(() => import('@pages/HomePage'));

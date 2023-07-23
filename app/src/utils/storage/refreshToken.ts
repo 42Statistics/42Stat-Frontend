@@ -1,4 +1,4 @@
-import { REFRESH_TOKEN_KEY } from '@/constants/LOCAL_STORAGE_KEY';
+import { REFRESH_TOKEN_KEY } from '@shared/constants/LOCAL_STORAGE_KEY';
 
 export const getRefreshToken = () => {
   return localStorage.getItem(REFRESH_TOKEN_KEY);

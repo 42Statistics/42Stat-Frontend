@@ -1,4 +1,4 @@
-import { ROUTES } from '@/constants/ROUTES';
+import { ROUTES } from '@shared/constants/ROUTES';
 import { TextDefault } from './TextDefault';
 
 type TextProjectProps = {

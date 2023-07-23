@@ -1,4 +1,4 @@
-import { GOOGLE_CREDENTIAL_KEY } from '@/constants/SESSION_STORAGE_KEY';
+import { GOOGLE_CREDENTIAL_KEY } from '@shared/constants/SESSION_STORAGE_KEY';
 
 export const getGoogleCredential = () => {
   return sessionStorage.getItem(GOOGLE_CREDENTIAL_KEY);

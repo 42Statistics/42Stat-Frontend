@@ -1,6 +1,6 @@
-import { ROUTES } from '@/constants/ROUTES';
-import { UserPreview } from '@shared/__generated__/graphql';
 import { Avatar } from '@components/common';
+import { UserPreview } from '@shared/__generated__/graphql';
+import { ROUTES } from '@shared/constants/ROUTES';
 import { SpotlightListItem } from './SpotlightListItem';
 
 type SpotlightUserListItemProps = {

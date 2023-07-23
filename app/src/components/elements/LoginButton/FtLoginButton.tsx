@@ -1,8 +1,8 @@
+import { ReactComponent as FtLogo } from '@shared/assets/logo/ft-logo.svg';
 import {
   FT_OAUTH_ENDPOINT,
   FT_OAUTH_RESPONSE_TYPE,
-} from '@/constants/FT_OAUTH';
-import { ReactComponent as FtLogo } from '@shared/assets/logo/ft-logo.svg';
+} from '@shared/constants/FT_OAUTH';
 import { LoginButton } from './LoginButton';
 
 export const FtLoginButton = () => {

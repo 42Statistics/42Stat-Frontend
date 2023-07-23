@@ -1,4 +1,3 @@
-import { ROUTES } from '@/constants/ROUTES';
 import {
   AccentBoldText,
   AccentH3Text,
@@ -9,6 +8,7 @@ import {
 } from '@components/common';
 import { Seo } from '@components/elements/Seo';
 import { withHead } from '@hoc/withHead';
+import { ROUTES } from '@shared/constants/ROUTES';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 

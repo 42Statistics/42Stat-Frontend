@@ -4,7 +4,6 @@ import {
 } from '@/__generated__/graphql';
 import { QueryResult } from '@apollo/client';
 import { ApolloErrorView } from '@components/elements/ApolloErrorView';
-import { ApolloNotFoundView } from '@components/elements/ApolloNotFoundView';
 import { Leaderboard } from '@components/templates/Leaderboard';
 import { LeaderboardTabResultSkeleton } from '@pages/PageSkeletons/LeaderboardTabResultSkeleton';
 
@@ -25,7 +24,7 @@ export const LeaderboardLevelTabResult = ({
     return <ApolloErrorView message={error.message} />;
   }
   if (!data) {
-    return <ApolloNotFoundView />;
+    return <LeaderboardTabResultSkeleton />;
   }
 
   const {

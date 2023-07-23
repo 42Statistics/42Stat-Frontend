@@ -25,7 +25,7 @@ export const LeaderboardEvalCountTabResult = ({
     return <ApolloErrorView message={error.message} />;
   }
   if (!data) {
-    return <ApolloNotFoundView />;
+    return <LeaderboardTabResultSkeleton />;
   }
 
   const {

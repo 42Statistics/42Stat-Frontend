@@ -2,10 +2,11 @@ import { gql } from '@/__generated__';
 import { useRoveFocus } from '@/hooks/useRoveFocus';
 import { DialogBaseProps } from '@/types/Modal';
 import { useLazyQuery } from '@apollo/client';
+import { ReactComponent as MdSearch } from '@assets/icon/md-search.svg';
 import { VStack } from '@components/common';
 import { Dialog } from '@components/common/Dialog';
+import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { RiSearchLine } from '@react-icons/all-files/ri/RiSearchLine';
 import { SpotlightFocusContext } from '@utils/contexts/SpotlightFocusContext';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -36,6 +37,7 @@ export const FIND_PROJECT_PREVIEW = gql(/* GraphQL */ `
 type SpotlightProps = DialogBaseProps;
 
 export const Spotlight = ({ isOpen, onClose }: SpotlightProps) => {
+  const theme = useTheme();
   const [input, setInput] = useState<string>('');
   const debouncedInput = useDebounce(input, 250);
   const [findUser, findUserResult] = useLazyQuery(FIND_USER_PREVIEW);
@@ -74,7 +76,13 @@ export const Spotlight = ({ isOpen, onClose }: SpotlightProps) => {
         <Layout>
           <VStack w="100%" h="100%" spacing="2rem">
             <SpotlightSearchBar
-              left={<RiSearchLine size={32} />}
+              left={
+                <MdSearch
+                  width={36}
+                  height={36}
+                  fill={theme.colors.mono.gray300}
+                />
+              }
               input={input}
               onChange={handleChange}
             />

@@ -60,8 +60,8 @@ const Layout = styled.div<LayoutProps>`
   padding: 1rem 3rem;
   border-radius: ${({ theme }) => theme.radius.sm};
   border: 2px solid ${({ theme }) => theme.colors.mono.gray50};
-  outline-offset: -4px;
+  outline-offset: -5px;
 
   outline: ${({ theme, isFocused }) =>
-    isFocused && `2px solid ${theme.colors.accent.default}`};
+    isFocused && `2px solid ${theme.colors.primary.default}`};
 `;

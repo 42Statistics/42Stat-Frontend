@@ -1,8 +1,8 @@
+import { ReactComponent as MdChevronLeft } from '@assets/icon/md-chevron-left.svg';
+import { ReactComponent as MdChevronRight } from '@assets/icon/md-chevron-right.svg';
+import { ReactComponent as MdFirstPage } from '@assets/icon/md-first-page.svg';
+import { ReactComponent as MdLastPage } from '@assets/icon/md-last-page.svg';
 import { Clickable, HStack } from '@components/common';
-import { AiOutlineLeft } from '@react-icons/all-files/ai/AiOutlineLeft';
-import { AiOutlineRight } from '@react-icons/all-files/ai/AiOutlineRight';
-import { AiOutlineVerticalLeft } from '@react-icons/all-files/ai/AiOutlineVerticalLeft';
-import { AiOutlineVerticalRight } from '@react-icons/all-files/ai/AiOutlineVerticalRight';
 import { PageButton } from './PageButton';
 
 type PaginationProps = {
@@ -50,33 +50,35 @@ export const Pagination = ({
   };
 
   return (
-    <HStack spacing="3rem">
+    <HStack spacing="1rem">
       {isStartButtonDisabled ? null : (
         <Clickable onClick={handleClickStartButton}>
-          <AiOutlineVerticalRight size={20} />
+          <MdFirstPage width={20} height={20} />
         </Clickable>
       )}
       {isBackButtonDisabled ? null : (
         <Clickable onClick={handleClickBackButton}>
-          <AiOutlineLeft size={20} />
+          <MdChevronLeft width={20} height={20} />
         </Clickable>
       )}
-      {pageNumberList.map((pageNumber) => (
-        <PageButton
-          key={pageNumber}
-          currPageNumber={currPageNumber}
-          pageNumber={pageNumber}
-          setPageNumber={setPageNumber}
-        />
-      ))}
+      <HStack spacing="2rem">
+        {pageNumberList.map((pageNumber) => (
+          <PageButton
+            key={pageNumber}
+            currPageNumber={currPageNumber}
+            pageNumber={pageNumber}
+            setPageNumber={setPageNumber}
+          />
+        ))}
+      </HStack>
       {isForwardButtonDisabled ? null : (
         <Clickable onClick={handleClickForwardButton}>
-          <AiOutlineRight size={20} />
+          <MdChevronRight width={20} height={20} />
         </Clickable>
       )}
       {isEndButtonDisabled ? null : (
         <Clickable onClick={handleClickEndButton}>
-          <AiOutlineVerticalLeft size={20} />
+          <MdLastPage width={20} height={20} />
         </Clickable>
       )}
     </HStack>

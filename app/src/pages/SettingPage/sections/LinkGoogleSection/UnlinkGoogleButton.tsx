@@ -1,8 +1,8 @@
 import { gql } from '@/__generated__';
 import { useMutation } from '@apollo/client';
+import { ReactComponent as MdDelete } from '@assets/icon/md-delete.svg';
 import { Clickable } from '@components/common';
 import { Spinner } from '@components/common/Loader';
-import { IoTrashOutline } from '@react-icons/all-files/io5/IoTrashOutline';
 import { useEffect } from 'react';
 
 const UNLINK_ACCOUNT = gql(/* GraphQL */ `
@@ -45,7 +45,7 @@ export const UnlinkGoogleButton = ({ onSuccess }: UnlinkGoogleButtonProps) => {
 
   return (
     <Clickable onClick={handleClick}>
-      <IoTrashOutline size="20px" />
+      <MdDelete width={20} height={20} />
     </Clickable>
   );
 };

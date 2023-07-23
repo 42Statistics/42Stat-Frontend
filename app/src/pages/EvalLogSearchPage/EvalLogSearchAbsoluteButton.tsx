@@ -1,7 +1,7 @@
+import { ReactComponent as MdSearch } from '@assets/icon/md-search.svg';
 import { Clickable } from '@components/common';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { RiSearchLine } from '@react-icons/all-files/ri/RiSearchLine';
 
 type EvalLogSearchAbsoluteButtonProps = {
   onClick: () => void;
@@ -18,7 +18,7 @@ export const EvalLogSearchAbsoluteButton = ({
     <>
       <Clickable onClick={onClick}>
         <Layout>
-          <RiSearchLine color={theme.colors.mono.white} size="20px" />
+          <MdSearch width={26} height={26} fill={theme.colors.mono.white} />
         </Layout>
       </Clickable>
       {dialog}
@@ -31,7 +31,7 @@ const Layout = styled.div`
   bottom: 8rem;
   right: 5rem;
   border-radius: ${({ theme }) => theme.radius.circle};
-  padding: 1.5rem;
+  padding: 1.2rem;
   background-color: ${({ theme }) => theme.colors.primary.default};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   z-index: ${({ theme }) => theme.zIndex.absoluteButton};

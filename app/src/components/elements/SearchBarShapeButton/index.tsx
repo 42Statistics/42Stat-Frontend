@@ -1,3 +1,4 @@
+import { ReactComponent as MdSearch } from '@assets/icon/md-search.svg';
 import { isSpotlightOpenAtom } from '@atoms/isSpotlightOpenAtom';
 import {
   CaptionText,
@@ -8,7 +9,6 @@ import {
 } from '@components/common';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { RiSearchLine } from '@react-icons/all-files/ri/RiSearchLine';
 import { useSetAtom } from 'jotai';
 
 export const SearchBarShapeButton = () => {
@@ -22,7 +22,7 @@ export const SearchBarShapeButton = () => {
   return (
     <Layout onClick={openSpotlight}>
       <HStack w="100%" justify="start" spacing="1.6rem">
-        <RiSearchLine size="16px" />
+        <MdSearch width={18} height={18} fill={theme.colors.mono.gray300} />
         <Text color={theme.colors.mono.gray300}>Search</Text>
         <Spacer />
         <CaptionText color={theme.colors.mono.gray300}>⌘ K</CaptionText>

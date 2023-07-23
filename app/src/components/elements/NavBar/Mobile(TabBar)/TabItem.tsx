@@ -19,7 +19,7 @@ export const TabItem = ({ route }: TabItemProps) => {
   return (
     <Layout isFocused={isFocused} onClick={() => navigate(route.path)}>
       <VStack>
-        <TabItemIcon size="22px" fill={color} />
+        <TabItemIcon width={22} height={22} fill={color} />
         <CaptionText color={color}>{route.abbr}</CaptionText>
       </VStack>
     </Layout>

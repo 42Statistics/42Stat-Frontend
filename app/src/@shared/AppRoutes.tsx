@@ -18,7 +18,7 @@ const LandingPage = lazy(() => import('@/Landing'));
 const HomePage = lazy(() => import('@/Home'));
 const LeaderboardPage = lazy(() => import('@pages/LeaderboardPage'));
 const EvalLogSearchPage = lazy(() => import('@pages/EvalLogSearchPage'));
-const ProfilePage = lazy(() => import('@pages/ProfilePage'));
+const ProfilePage = lazy(() => import('@/Profile'));
 const ProjectDetailPage = lazy(() => import('@/Project/ProjectDetailPage'));
 
 export const AppRoutes = () => {

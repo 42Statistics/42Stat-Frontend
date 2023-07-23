@@ -1,3 +1,4 @@
+import { LevelRecordsChart } from '@/Profile/tabs/General/contents';
 import { useQuery } from '@apollo/client';
 import {
   DashboardContentBadRequest,
@@ -5,7 +6,6 @@ import {
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
-import { LevelRecordsChart } from '@pages/ProfileGeneralTab/contents';
 import { gql } from '@shared/__generated__';
 import { userAtom } from '@shared/utils/jotai/atoms/userAtom';
 import { useAtomValue } from 'jotai';

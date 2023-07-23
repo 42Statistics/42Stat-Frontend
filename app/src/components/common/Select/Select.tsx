@@ -1,4 +1,4 @@
-import triangle_down from '@assets/icon/triangle-down.svg';
+import triangle_down from '@shared/assets/icon/triangle-down.svg';
 import styled from '@emotion/styled';
 
 export const Select = styled.select`

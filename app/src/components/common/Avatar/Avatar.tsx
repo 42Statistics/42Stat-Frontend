@@ -1,6 +1,6 @@
-import default_avatar from '@assets/avatar/default.png';
-import marvin from '@assets/avatar/marvin.jpeg';
 import styled from '@emotion/styled';
+import default_avatar from '@shared/assets/avatar/default.png';
+import marvin from '@shared/assets/avatar/marvin.jpeg';
 import { useState } from 'react';
 import { Image } from '../Image';
 

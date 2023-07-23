@@ -1,16 +1,16 @@
 import { ROUTES } from '@/constants/ROUTES';
 import type { SvgElement } from '@/types/SvgElement';
-import { ReactComponent as MdHomeFill } from '@assets/icon/md-home-fill.svg';
-import { ReactComponent as MdHome } from '@assets/icon/md-home.svg';
-import { ReactComponent as MdLeaderboardFill } from '@assets/icon/md-leaderboard-fill.svg';
-import { ReactComponent as MdLeaderboard } from '@assets/icon/md-leaderboard.svg';
-import { ReactComponent as MdPersonFill } from '@assets/icon/md-person-fill.svg';
-import { ReactComponent as MdPerson } from '@assets/icon/md-person.svg';
-import { ReactComponent as MdQuickReferenceFill } from '@assets/icon/md-quick-reference-fill.svg';
-import { ReactComponent as MdQuickReference } from '@assets/icon/md-quick-reference.svg';
-import { ReactComponent as MdSettingsFill } from '@assets/icon/md-settings-fill.svg';
-import { ReactComponent as MdSettings } from '@assets/icon/md-settings.svg';
 import { userAtom } from '@atoms/userAtom';
+import { ReactComponent as MdHomeFill } from '@shared/assets/icon/md-home-fill.svg';
+import { ReactComponent as MdHome } from '@shared/assets/icon/md-home.svg';
+import { ReactComponent as MdLeaderboardFill } from '@shared/assets/icon/md-leaderboard-fill.svg';
+import { ReactComponent as MdLeaderboard } from '@shared/assets/icon/md-leaderboard.svg';
+import { ReactComponent as MdPersonFill } from '@shared/assets/icon/md-person-fill.svg';
+import { ReactComponent as MdPerson } from '@shared/assets/icon/md-person.svg';
+import { ReactComponent as MdQuickReferenceFill } from '@shared/assets/icon/md-quick-reference-fill.svg';
+import { ReactComponent as MdQuickReference } from '@shared/assets/icon/md-quick-reference.svg';
+import { ReactComponent as MdSettingsFill } from '@shared/assets/icon/md-settings-fill.svg';
+import { ReactComponent as MdSettings } from '@shared/assets/icon/md-settings.svg';
 import { useAtomValue } from 'jotai';
 
 export type NavRoute = {

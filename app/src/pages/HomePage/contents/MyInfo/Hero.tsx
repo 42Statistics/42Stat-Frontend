@@ -1,6 +1,4 @@
-import { gql } from '@shared/__generated__';
 import { useQuery } from '@apollo/client';
-import space_background from '@assets/space-background.webp';
 import {
   Center,
   Loader,
@@ -11,6 +9,8 @@ import {
 import { ApolloErrorView } from '@components/elements/ApolloErrorView';
 import { ApolloNotFoundView } from '@components/elements/ApolloNotFoundView';
 import styled from '@emotion/styled';
+import { gql } from '@shared/__generated__';
+import space_background from '@shared/assets/space-background.webp';
 import { getDateDiff } from '@utils/getDateDiff';
 import { getDailyProgrammingQuote } from './getDailyProgrammingQuote';
 

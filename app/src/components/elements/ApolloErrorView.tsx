@@ -1,6 +1,6 @@
-import { ReactComponent as MdErrorOutline } from '@assets/icon/md-error-outline.svg';
 import { HStack, Text } from '@components/common';
 import { useTheme } from '@emotion/react';
+import { ReactComponent as MdErrorOutline } from '@shared/assets/icon/md-error-outline.svg';
 
 export type ApolloErrorViewProps = {
   message?: string;

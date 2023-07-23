@@ -1,7 +1,7 @@
-import { ReactComponent as TriangleDown } from '@assets/icon/triangle-down.svg';
-import { ReactComponent as TriangleUp } from '@assets/icon/triangle-up.svg';
 import { HStack, Text } from '@components/common';
 import { useTheme } from '@emotion/react';
+import { ReactComponent as TriangleDown } from '@shared/assets/icon/triangle-down.svg';
+import { ReactComponent as TriangleUp } from '@shared/assets/icon/triangle-up.svg';
 
 type DiffProps = {
   curr: number;

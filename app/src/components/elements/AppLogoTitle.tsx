@@ -1,5 +1,5 @@
-import { AppLogoSvg } from '@assets/AppLogoSvg';
-import { AppTitleSvg } from '@assets/AppTitleSvg';
+import { AppLogoSvg } from '@shared/assets/AppLogoSvg';
+import { AppTitleSvg } from '@shared/assets/AppTitleSvg';
 import { HStack } from '@components/common';
 
 type AppLogoSize = 'sm' | 'md';

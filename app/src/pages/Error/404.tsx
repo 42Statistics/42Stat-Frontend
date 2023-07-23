@@ -1,5 +1,4 @@
 import { ROUTES } from '@/constants/ROUTES';
-import marvin_depressed from '@assets/marvin-depressed.gif';
 import {
   Button,
   Image,
@@ -10,6 +9,7 @@ import {
 import { AppLogoTitle } from '@components/elements/AppLogoTitle';
 import { Seo } from '@components/elements/Seo';
 import { withHead } from '@hoc/withHead';
+import marvin_depressed from '@shared/assets/marvin-depressed.gif';
 import { Link, useNavigate } from 'react-router-dom';
 
 const NotFoundPage = () => {

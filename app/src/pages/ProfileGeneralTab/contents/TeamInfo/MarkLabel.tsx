@@ -1,7 +1,7 @@
-import { ReactComponent as MdCheck } from '@assets/icon/md-check.svg';
-import { ReactComponent as MdClose } from '@assets/icon/md-close.svg';
 import { HStack, Text } from '@components/common';
 import { useTheme } from '@emotion/react';
+import { ReactComponent as MdCheck } from '@shared/assets/icon/md-check.svg';
+import { ReactComponent as MdClose } from '@shared/assets/icon/md-close.svg';
 
 type MarkLabelProps = {
   isValidate: boolean;

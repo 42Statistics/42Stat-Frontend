@@ -2,7 +2,7 @@ import {
   FT_OAUTH_ENDPOINT,
   FT_OAUTH_RESPONSE_TYPE,
 } from '@/constants/FT_OAUTH';
-import { ReactComponent as FtLogo } from '@assets/logo/ft-logo.svg';
+import { ReactComponent as FtLogo } from '@shared/assets/logo/ft-logo.svg';
 import { LoginButton } from './LoginButton';
 
 export const FtLoginButton = () => {

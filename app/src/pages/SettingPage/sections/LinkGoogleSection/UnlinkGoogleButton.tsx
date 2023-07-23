@@ -1,8 +1,8 @@
-import { gql } from '@shared/__generated__';
 import { useMutation } from '@apollo/client';
-import { ReactComponent as MdDelete } from '@assets/icon/md-delete.svg';
 import { Clickable } from '@components/common';
 import { Spinner } from '@components/common/Loader';
+import { gql } from '@shared/__generated__';
+import { ReactComponent as MdDelete } from '@shared/assets/icon/md-delete.svg';
 import { useEffect } from 'react';
 
 const UNLINK_ACCOUNT = gql(/* GraphQL */ `

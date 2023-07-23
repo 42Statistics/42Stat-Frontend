@@ -1,7 +1,7 @@
-import { ReactComponent as MdSearch } from '@assets/icon/md-search.svg';
 import { Clickable } from '@components/common';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { ReactComponent as MdSearch } from '@shared/assets/icon/md-search.svg';
 
 type EvalLogSearchAbsoluteButtonProps = {
   onClick: () => void;

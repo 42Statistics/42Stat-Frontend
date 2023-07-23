@@ -1,12 +1,12 @@
+import { useQuery } from '@apollo/client';
 import { gql } from '@shared/__generated__';
 import { Coalition } from '@shared/__generated__/graphql';
-import { useQuery } from '@apollo/client';
-import coalition_black_cover from '@assets/coalition/cover/coalition-black-cover.jpg';
-import coalition_gam_cover from '@assets/coalition/cover/coalition-gam-cover.jpg';
-import coalition_gon_cover from '@assets/coalition/cover/coalition-gon-cover.jpg';
-import coalition_gray_cover from '@assets/coalition/cover/coalition-gray-cover.png';
-import coalition_gun_cover from '@assets/coalition/cover/coalition-gun-cover.jpg';
-import coalition_lee_cover from '@assets/coalition/cover/coalition-lee-cover.jpg';
+import coalition_black_cover from '@shared/assets/coalition/cover/coalition-black-cover.jpg';
+import coalition_gam_cover from '@shared/assets/coalition/cover/coalition-gam-cover.jpg';
+import coalition_gon_cover from '@shared/assets/coalition/cover/coalition-gon-cover.jpg';
+import coalition_gray_cover from '@shared/assets/coalition/cover/coalition-gray-cover.png';
+import coalition_gun_cover from '@shared/assets/coalition/cover/coalition-gun-cover.jpg';
+import coalition_lee_cover from '@shared/assets/coalition/cover/coalition-lee-cover.jpg';
 
 import {
   Avatar,

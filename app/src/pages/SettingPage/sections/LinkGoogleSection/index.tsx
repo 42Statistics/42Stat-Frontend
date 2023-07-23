@@ -1,7 +1,4 @@
-import { gql } from '@shared/__generated__';
 import { useQuery } from '@apollo/client';
-import { ReactComponent as FtLogo } from '@assets/logo/ft-logo.svg';
-import google_logo from '@assets/logo/google-logo.svg';
 import { userAtom } from '@atoms/userAtom';
 import {
   Divider,
@@ -13,6 +10,9 @@ import {
   VStack,
 } from '@components/common';
 import { useTheme } from '@emotion/react';
+import { gql } from '@shared/__generated__';
+import { ReactComponent as FtLogo } from '@shared/assets/logo/ft-logo.svg';
+import google_logo from '@shared/assets/logo/google-logo.svg';
 import { CustomSection } from '@styles/custom/CustomSection';
 import { useAtomValue } from 'jotai';
 import { LinkLabel } from './LinkLabel';

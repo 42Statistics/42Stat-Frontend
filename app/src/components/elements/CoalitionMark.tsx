@@ -1,12 +1,12 @@
-import { Coalition } from '@shared/__generated__/graphql';
-import coalition_gam_mark from '@assets/coalition/mark/coalition-gam-mark.svg';
-import coalition_gon_mark from '@assets/coalition/mark/coalition-gon-mark.svg';
-import coalition_gun_mark from '@assets/coalition/mark/coalition-gun-mark.svg';
-import coalition_lee_mark from '@assets/coalition/mark/coalition-lee-mark.svg';
-import ft_logo from '@assets/logo/ft-logo.svg';
 import { Image } from '@components/common';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { Coalition } from '@shared/__generated__/graphql';
+import coalition_gam_mark from '@shared/assets/coalition/mark/coalition-gam-mark.svg';
+import coalition_gon_mark from '@shared/assets/coalition/mark/coalition-gon-mark.svg';
+import coalition_gun_mark from '@shared/assets/coalition/mark/coalition-gun-mark.svg';
+import coalition_lee_mark from '@shared/assets/coalition/mark/coalition-lee-mark.svg';
+import ft_logo from '@shared/assets/logo/ft-logo.svg';
 
 type CoalitionMarkProps = {
   coalition?: Coalition | null;

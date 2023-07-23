@@ -10,12 +10,12 @@ import FtOAuthRedirectPage from '@pages/FtOAuthRedirectPage';
 import { HomePageSkeleton } from '@pages/PageSkeletons/HomePageSkeleton';
 import { ProfilePageSkeleton } from '@pages/PageSkeletons/ProfilePageSkeleton';
 import SettingPage from '@pages/SettingPage';
+import { ROUTES } from '@shared/constants/ROUTES';
 import { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { ROUTES } from '@shared/constants/ROUTES';
 
 const LandingPage = lazy(() => import('@pages/LandingPage'));
-const HomePage = lazy(() => import('@pages/HomePage'));
+const HomePage = lazy(() => import('@/Home'));
 const LeaderboardPage = lazy(() => import('@pages/LeaderboardPage'));
 const EvalLogSearchPage = lazy(() => import('@pages/EvalLogSearchPage'));
 const ProfilePage = lazy(() => import('@pages/ProfilePage'));

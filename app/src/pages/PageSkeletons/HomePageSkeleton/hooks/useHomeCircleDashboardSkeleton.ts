@@ -2,7 +2,7 @@ import {
   homeCircleDesktopDashboardRows,
   homeCircleMobileDashboardRows,
   homeCircleTabletDashboardRows,
-} from '@pages/HomePage/hooks/homeCircleDashboardRows';
+} from '@/Home/hooks/homeCircleDashboardRows';
 
 export const useHomeCircleDashboardSkeleton = () => ({
   desktopRows: homeCircleDesktopDashboardRows,

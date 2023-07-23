@@ -2,7 +2,7 @@ import {
   homeCoalitionDesktopDashboardRows,
   homeCoalitionMobileDashboardRows,
   homeCoalitionTabletDashboardRows,
-} from '@pages/HomePage/hooks/homeCoalitionDashboardRows';
+} from '@/Home/hooks/homeCoalitionDashboardRows';
 
 export const useHomeCoalitionDashboardSkeleton = () => ({
   desktopRows: homeCoalitionDesktopDashboardRows,

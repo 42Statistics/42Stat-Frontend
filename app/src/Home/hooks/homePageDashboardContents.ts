@@ -1,28 +1,28 @@
 import type { DashboardItemProps } from '@shared/types/Dashboard';
 import {
-    MonthlyTigCountPerCoalition,
-    ScoreRecordsPerCoalition,
-    TotalScoresPerCoalition,
+  MonthlyTigCountPerCoalition,
+  ScoreRecordsPerCoalition,
+  TotalScoresPerCoalition,
 } from '../contents/Coalition';
 import {
-    AverageCommentLength,
-    AverageFeedbackLength,
-    TotalEvalCount,
-    WeeklyAverageEvalCount,
-    WeeklyEvalCount,
+  AverageCommentLength,
+  AverageFeedbackLength,
+  TotalEvalCount,
+  WeeklyAverageEvalCount,
+  WeeklyEvalCount,
 } from '../contents/Eval';
-import { Hero } from '../contents/MyInfo/Hero';
+import { Hero } from '../contents/MyInfo';
 import { CurrRegisteredCountRanking, RecentExamResult } from '../contents/Team';
 import {
-    AliveUserCountRecords,
-    AverageDurationPerCircle,
-    BlackholedCountPerCircle,
-    BlackholedRate,
-    CorrectionPointRanking,
-    MemberRate,
-    MonthlyBlackholedCount,
-    UserCountPerLevel,
-    WalletRanking,
+  AliveUserCountRecords,
+  AverageDurationPerCircle,
+  BlackholedCountPerCircle,
+  BlackholedRate,
+  CorrectionPointRanking,
+  MemberRate,
+  MonthlyBlackholedCount,
+  UserCountPerLevel,
+  WalletRanking,
 } from '../contents/User';
 
 export const homePageDashboardContents: DashboardItemProps[] = [

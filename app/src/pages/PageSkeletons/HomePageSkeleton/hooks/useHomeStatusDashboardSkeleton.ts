@@ -2,7 +2,7 @@ import {
   homeStatusDesktopDashboardRows,
   homeStatusMobileDashboardRows,
   homeStatusTabletDashboardRows,
-} from '@pages/HomePage/hooks/homeStatusDashboardRows';
+} from '@/Home/hooks/homeStatusDashboardRows';
 
 export const useHomeStatusDashboardSkeleton = () => ({
   desktopRows: homeStatusDesktopDashboardRows,

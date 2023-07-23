@@ -1,8 +1,8 @@
 import { gql } from '@/__generated__';
 import { GAPI_URL } from '@/constants/GAPI';
+import { ROUTES } from '@/constants/ROUTES';
 import { useMutation } from '@apollo/client';
 import { ReactComponent as GoogleLogo } from '@assets/logo/google-logo.svg';
-import { ROUTES } from '@routes/ROUTES';
 import {
   FakeGoogleWrapperType,
   createFakeGoogleWrapper,

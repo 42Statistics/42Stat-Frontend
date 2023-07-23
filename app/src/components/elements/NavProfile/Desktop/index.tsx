@@ -1,3 +1,4 @@
+import { ROUTES } from '@/constants/ROUTES';
 import { userAtom } from '@atoms/userAtom';
 import {
   Avatar,
@@ -8,7 +9,6 @@ import {
 } from '@components/common';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { ROUTES } from '@routes/ROUTES';
 import { titleCase } from '@utils/titleCase';
 import { useAtomValue } from 'jotai';
 import { Link } from 'react-router-dom';

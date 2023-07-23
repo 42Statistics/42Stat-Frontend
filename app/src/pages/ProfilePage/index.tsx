@@ -1,3 +1,4 @@
+import { ROUTES } from '@/constants/ROUTES';
 import { userAtom } from '@atoms/userAtom';
 import { VStack } from '@components/common';
 import { Tab, TabPanel, Tabs } from '@components/common/Tab';
@@ -8,7 +9,6 @@ import { withHead } from '@hoc/withHead';
 import ProfileEvalTab from '@pages/ProfileEvalTab';
 import ProfileGeneralTab from '@pages/ProfileGeneralTab';
 import ProfileVersusTab from '@pages/ProfileVersusTab';
-import { ROUTES } from '@routes/ROUTES';
 import { useAtomValue } from 'jotai';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useProfilePageDashboard } from './hooks/useProfilePageDashboard';

@@ -1,4 +1,5 @@
 import { UserRank } from '@/__generated__/graphql';
+import { ROUTES } from '@/constants/ROUTES';
 import {
   Avatar,
   CaptionText,
@@ -13,7 +14,6 @@ import {
 } from '@components/common';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { ROUTES } from '@routes/ROUTES';
 import { numberWithUnitFormatter } from '@utils/formatters';
 import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
 import { mq } from '@utils/responsive/mq';

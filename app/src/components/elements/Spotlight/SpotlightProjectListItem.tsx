@@ -1,6 +1,6 @@
 import { ProjectPreview } from '@/__generated__/graphql';
+import { ROUTES } from '@/constants/ROUTES';
 import { ReactComponent as FtLogo } from '@assets/logo/ft-logo.svg';
-import { ROUTES } from '@routes/ROUTES';
 import { SpotlightListItem } from './SpotlightListItem';
 
 type SpotlightProjectListItemProps = {

@@ -1,6 +1,6 @@
+import { ROUTES } from '@/constants/ROUTES';
 import { AccentH3BoldText } from '@components/common';
 import { DashboardContent } from '@components/templates/DashboardContent';
-import { ROUTES } from '@routes/ROUTES';
 import { Link, useParams } from 'react-router-dom';
 
 export const PastEvaluationLink = () => {

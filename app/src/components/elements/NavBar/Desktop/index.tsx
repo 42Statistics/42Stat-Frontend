@@ -1,10 +1,10 @@
+import { ROUTES } from '@/constants/ROUTES';
 import { userAtom } from '@atoms/userAtom';
 import { VStack } from '@components/common';
 import { AppLogoTitle } from '@components/elements/AppLogoTitle';
 import { DesktopNavProfile } from '@components/elements/NavProfile/Desktop';
 import { SearchBarShapeButton } from '@components/elements/SearchBarShapeButton';
 import styled from '@emotion/styled';
-import { ROUTES } from '@routes/ROUTES';
 import { useAtomValue } from 'jotai';
 import { Link } from 'react-router-dom';
 import { DesktopNavMenu } from './DesktopNavMenu';

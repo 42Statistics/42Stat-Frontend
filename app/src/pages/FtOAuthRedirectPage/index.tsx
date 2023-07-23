@@ -1,9 +1,9 @@
 import { gql } from '@/__generated__';
+import { ROUTES } from '@/constants/ROUTES';
 import { useMutation } from '@apollo/client';
 import { userAtom } from '@atoms/userAtom';
 import { Center, Loader } from '@components/common';
 import { GOOGLE_LOGIN } from '@components/elements/LoginButton';
-import { ROUTES } from '@routes/ROUTES';
 import { setAccessToken } from '@utils/storage/accessToken';
 import {
   getGoogleCredential,

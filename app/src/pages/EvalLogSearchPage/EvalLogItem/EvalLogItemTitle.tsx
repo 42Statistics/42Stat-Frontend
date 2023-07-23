@@ -1,4 +1,5 @@
 import { EvalLogHeader } from '@/__generated__/graphql';
+import { ROUTES } from '@/constants/ROUTES';
 import {
   BoldText,
   HStack,
@@ -6,7 +7,6 @@ import {
   Spacer,
   Text,
 } from '@components/common';
-import { ROUTES } from '@routes/ROUTES';
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
 import { FlagLabel } from './FlagLabel';

@@ -1,6 +1,6 @@
 import { UserRank } from '@/__generated__/graphql';
+import { ROUTES } from '@/constants/ROUTES';
 import { Avatar } from '@components/common';
-import { ROUTES } from '@routes/ROUTES';
 import { RankListItem } from './RankListItem';
 
 type UserRankListItemProps = {

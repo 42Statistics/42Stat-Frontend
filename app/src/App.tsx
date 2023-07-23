@@ -1,6 +1,6 @@
 import { Global } from '@emotion/react';
-import { AppProvider } from './providers';
-import { AppRoutes } from './routes';
+import { AppProvider } from './AppProvider';
+import { AppRoutes } from './AppRoutes';
 import { global } from './styles/global';
 import { reset } from './styles/reset';
 

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { fadeIn } from '@styles/custom/fadeIn';
+import { fadeIn } from '@shared/styles/custom/fadeIn';
 import { rgba } from 'emotion-rgba';
 
 export const Overlay = styled.div`

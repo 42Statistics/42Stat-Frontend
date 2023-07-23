@@ -3,7 +3,7 @@ import type { DialogBaseProps } from '@/types/Modal';
 import { PropsWithReactElementChildren } from '@/types/PropsWithChildren';
 import { keyframes, useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { fadeIn } from '@styles/custom/fadeIn';
+import { fadeIn } from '@shared/styles/custom/fadeIn';
 import { isEscapeKeyDown } from '@utils/keyboard';
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { Modal, Overlay } from '../Modal';

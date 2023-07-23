@@ -1,9 +1,9 @@
-import { EvalLog } from '@shared/__generated__/graphql';
 import { Center, HStack, Text, VStack } from '@components/common';
 import { EvalLogLabel, EvalLogLabelType } from '@components/common/Label';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { CustomBox } from '@styles/custom/CustomBox';
+import { EvalLog } from '@shared/__generated__/graphql';
+import { CustomBox } from '@shared/styles/custom/CustomBox';
 import { EvalLogItemTitle } from './EvalLogItemTitle';
 
 type EvalLogItemProps = {

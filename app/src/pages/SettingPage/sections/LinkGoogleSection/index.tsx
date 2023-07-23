@@ -13,7 +13,7 @@ import { useTheme } from '@emotion/react';
 import { gql } from '@shared/__generated__';
 import { ReactComponent as FtLogo } from '@shared/assets/logo/ft-logo.svg';
 import google_logo from '@shared/assets/logo/google-logo.svg';
-import { CustomSection } from '@styles/custom/CustomSection';
+import { CustomSection } from '@shared/styles/custom/CustomSection';
 import { useAtomValue } from 'jotai';
 import { LinkLabel } from './LinkLabel';
 import { LinkRow } from './LinkRow';

@@ -1,8 +1,8 @@
 import { Global } from '@emotion/react';
+import { global } from '@shared/styles/global';
+import { reset } from '@shared/styles/reset';
 import { AppProvider } from './AppProvider';
 import { AppRoutes } from './AppRoutes';
-import { global } from './styles/global';
-import { reset } from './styles/reset';
 
 function App() {
   return (

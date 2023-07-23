@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { SkeletonAnimation } from '@styles/custom/SkeletonAnimation';
+import { SkeletonAnimation } from '@shared/styles/custom/SkeletonAnimation';
 
 type SkeletonProps = Partial<{
   w: string;

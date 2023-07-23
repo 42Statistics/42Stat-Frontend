@@ -2,7 +2,7 @@ import { Center } from '@components/common';
 import { Global } from '@emotion/react';
 import styled from '@emotion/styled';
 import space_background from '@shared/assets/space-background.webp';
-import { landingLayoutGlobalStyle } from '@styles/landingLayoutGlobalStyle';
+import { landingLayoutGlobalStyle } from '@shared/styles/landingLayoutGlobalStyle';
 import { Helmet } from 'react-helmet-async';
 import { Outlet } from 'react-router-dom';
 

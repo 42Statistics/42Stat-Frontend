@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { CustomBox } from '@styles/custom/CustomBox';
+import { CustomBox } from '@shared/styles/custom/CustomBox';
 
 type DashboardItemProps = {
   row: number; // TODO: 더 엄밀한 Type 필요

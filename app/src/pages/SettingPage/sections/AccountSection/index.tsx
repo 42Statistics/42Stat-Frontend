@@ -6,7 +6,7 @@ import {
   Spacer,
   VStack,
 } from '@components/common';
-import { CustomSection } from '@styles/custom/CustomSection';
+import { CustomSection } from '@shared/styles/custom/CustomSection';
 import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
 import { DeleteAccountButton } from './DeleteAccountButton';
 import { DeleteAccountDialog } from './DeleteAccountDialog';

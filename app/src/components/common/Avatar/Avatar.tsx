@@ -1,3 +1,5 @@
+import default_avatar from '@assets/avatar/default.png';
+import marvin from '@assets/avatar/marvin.jpeg';
 import styled from '@emotion/styled';
 import { useState } from 'react';
 import { Image } from '../Image';
@@ -10,10 +12,13 @@ type AvatarProps = {
 };
 
 export const Avatar = ({ size = 'md', src }: AvatarProps) => {
-  const DEFAULT_AVATAR = '/default-avatar.png';
   const [isLoading, setIsLoading] = useState(true);
 
-  const computeWidth = (size: AvatarSize) => {
+  if (src == null) {
+    src = marvin;
+  }
+
+  const getWidth = (size: AvatarSize) => {
     switch (size) {
       case 'xs':
         return '2rem';
@@ -29,27 +34,20 @@ export const Avatar = ({ size = 'md', src }: AvatarProps) => {
         return '3.2rem';
     }
   };
-
-  const width = computeWidth(size);
-
-  if (src == null) {
-    src = DEFAULT_AVATAR;
-  }
-
-  const handleLoad = () => {
-    setIsLoading(false);
-  };
+  const width = getWidth(size);
 
   const handleError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    e.currentTarget.src = DEFAULT_AVATAR;
+    e.currentTarget.src = marvin;
     setIsLoading(false);
   };
 
   return (
     <div style={{ position: 'relative' }}>
-      {isLoading ? <Cover style={{ width, height: width }} /> : null}
+      {isLoading ? (
+        <Cover src={default_avatar} style={{ width, height: width }} />
+      ) : null}
       <StyledAvatar
-        onLoad={handleLoad}
+        onLoad={() => setIsLoading(false)}
         onError={handleError}
         src={src}
         style={{ width, height: width }}
@@ -58,7 +56,7 @@ export const Avatar = ({ size = 'md', src }: AvatarProps) => {
   );
 };
 
-const Cover = styled.div`
+const Cover = styled(Image)`
   position: absolute;
   border-radius: ${({ theme }) => theme.radius.circle};
   background-color: ${({ theme }) => theme.colors.mono.gray100};

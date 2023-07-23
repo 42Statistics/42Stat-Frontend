@@ -5,15 +5,15 @@ import { gql } from '@shared/__generated__';
 import { DateTemplate } from '@shared/__generated__/graphql';
 import { useSegmentedControl } from '@shared/utils/hooks/useSegmentedControl';
 import { useEffect, useState } from 'react';
-import { LeaderboardCoalitionScoreTabResult } from './LeaderboardCoalitionScoreTabResult';
+import { LeaderboardLevelTabResult } from './LeaderboardLevelTabResult';
 
-const GET_LEADERBOARD_COALITION_SCORE = gql(/* GraphQL */ `
-  query GetLeaderboardCoalitionScore(
+const GET_LEADERBOARD_LEVEL = gql(/* GraphQL */ `
+  query GetLeaderboardLevel(
     $pageSize: Int!
     $pageNumber: Int!
     $dateTemplate: DateTemplate!
   ) {
-    getLeaderboardScore {
+    getLeaderboardLevel {
       byDateTemplate(
         pageSize: $pageSize
         pageNumber: $pageNumber
@@ -47,24 +47,15 @@ const GET_LEADERBOARD_COALITION_SCORE = gql(/* GraphQL */ `
   }
 `);
 
-export const LeaderboardCoalitionScoreTab = () => {
+const LeaderboardLevelTab = () => {
   const SIZE_PER_PAGE = 50;
-  const [search, result] = useLazyQuery(GET_LEADERBOARD_COALITION_SCORE);
+  const [search, result] = useLazyQuery(GET_LEADERBOARD_LEVEL);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<number>(0);
   const [dateTemplate, setDateTemplate] = useState<DateTemplate>(
-    DateTemplate.CurrWeek,
+    DateTemplate.Total,
   );
-
   const options = [
-    {
-      label: '주간',
-      value: 'weekly',
-    },
-    {
-      label: '월간',
-      value: 'monthly',
-    },
     {
       label: '누적',
       value: 'total',
@@ -72,22 +63,12 @@ export const LeaderboardCoalitionScoreTab = () => {
   ];
   const { controlRef, segments } = useSegmentedControl(options);
 
-  const handleSegmentedControlChange = (value: string) => {
-    if (value === 'weekly') {
-      setDateTemplate(DateTemplate.CurrWeek);
-    } else if (value === 'monthly') {
-      setDateTemplate(DateTemplate.CurrMonth);
-    } else if (value === 'total') {
-      setDateTemplate(DateTemplate.Total);
-    }
-  };
-
   useEffect(() => {
     if (result.loading) {
       return;
     }
     setTotalPage(
-      result.data?.getLeaderboardScore.byDateTemplate.data.totalRanking
+      result.data?.getLeaderboardLevel.byDateTemplate.data.totalRanking
         .totalCount ?? 0,
     );
   }, [result]);
@@ -100,20 +81,19 @@ export const LeaderboardCoalitionScoreTab = () => {
         dateTemplate,
       },
     });
-  }, [dateTemplate, pageNumber, search]);
-
-  useEffect(() => {
-    setPageNumber(1);
-  }, [dateTemplate]);
+    setPageNumber(pageNumber);
+  }, [dateTemplate, search, pageNumber]);
 
   return (
     <VStack w="100%" spacing="6rem">
       <SegmentedControl
-        callback={handleSegmentedControlChange}
+        callback={() => {
+          /* pass */
+        }}
         controlRef={controlRef}
         segments={segments}
       />
-      <LeaderboardCoalitionScoreTabResult result={result} />
+      <LeaderboardLevelTabResult result={result} />
       <Pagination
         currPageNumber={pageNumber}
         setPageNumber={setPageNumber}
@@ -122,3 +102,5 @@ export const LeaderboardCoalitionScoreTab = () => {
     </VStack>
   );
 };
+
+export default LeaderboardLevelTab;

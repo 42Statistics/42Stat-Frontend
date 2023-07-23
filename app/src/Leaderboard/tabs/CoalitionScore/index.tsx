@@ -5,15 +5,15 @@ import { gql } from '@shared/__generated__';
 import { DateTemplate } from '@shared/__generated__/graphql';
 import { useSegmentedControl } from '@shared/utils/hooks/useSegmentedControl';
 import { useEffect, useState } from 'react';
-import { LeaderboardExpIncrementTabResult } from './LeaderboardExpIncrementTabResult';
+import { LeaderboardCoalitionScoreTabResult } from './LeaderboardCoalitionScoreTabResult';
 
-const GET_LEADERBOARD_EXP_INCREMENT = gql(/* GraphQL */ `
-  query GetLeaderboardExpIncrement(
+const GET_LEADERBOARD_COALITION_SCORE = gql(/* GraphQL */ `
+  query GetLeaderboardCoalitionScore(
     $pageSize: Int!
     $pageNumber: Int!
     $dateTemplate: DateTemplate!
   ) {
-    getLeaderboardExpIncrement {
+    getLeaderboardScore {
       byDateTemplate(
         pageSize: $pageSize
         pageNumber: $pageNumber
@@ -47,9 +47,9 @@ const GET_LEADERBOARD_EXP_INCREMENT = gql(/* GraphQL */ `
   }
 `);
 
-export const LeaderboardExpIncrementTab = () => {
+const LeaderboardCoalitionScoreTab = () => {
   const SIZE_PER_PAGE = 50;
-  const [search, result] = useLazyQuery(GET_LEADERBOARD_EXP_INCREMENT);
+  const [search, result] = useLazyQuery(GET_LEADERBOARD_COALITION_SCORE);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<number>(0);
   const [dateTemplate, setDateTemplate] = useState<DateTemplate>(
@@ -65,8 +65,11 @@ export const LeaderboardExpIncrementTab = () => {
       label: '월간',
       value: 'monthly',
     },
+    {
+      label: '누적',
+      value: 'total',
+    },
   ];
-
   const { controlRef, segments } = useSegmentedControl(options);
 
   const handleSegmentedControlChange = (value: string) => {
@@ -74,6 +77,8 @@ export const LeaderboardExpIncrementTab = () => {
       setDateTemplate(DateTemplate.CurrWeek);
     } else if (value === 'monthly') {
       setDateTemplate(DateTemplate.CurrMonth);
+    } else if (value === 'total') {
+      setDateTemplate(DateTemplate.Total);
     }
   };
 
@@ -82,7 +87,7 @@ export const LeaderboardExpIncrementTab = () => {
       return;
     }
     setTotalPage(
-      result.data?.getLeaderboardExpIncrement.byDateTemplate.data.totalRanking
+      result.data?.getLeaderboardScore.byDateTemplate.data.totalRanking
         .totalCount ?? 0,
     );
   }, [result]);
@@ -108,7 +113,7 @@ export const LeaderboardExpIncrementTab = () => {
         controlRef={controlRef}
         segments={segments}
       />
-      <LeaderboardExpIncrementTabResult result={result} />
+      <LeaderboardCoalitionScoreTabResult result={result} />
       <Pagination
         currPageNumber={pageNumber}
         setPageNumber={setPageNumber}
@@ -117,3 +122,5 @@ export const LeaderboardExpIncrementTab = () => {
     </VStack>
   );
 };
+
+export default LeaderboardCoalitionScoreTab;

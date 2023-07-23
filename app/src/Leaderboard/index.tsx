@@ -5,12 +5,10 @@ import { withFooter } from '@hoc/withFooter';
 import { withHead } from '@hoc/withHead';
 import { ROUTES } from '@shared/constants/ROUTES';
 import { useNavigate, useParams } from 'react-router-dom';
-import {
-  LeaderboardCoalitionScoreTab,
-  LeaderboardEvalCountTab,
-  LeaderboardExpIncrementTab,
-  LeaderboardLevelTab,
-} from './tabs';
+import LeaderboardCoalitionScoreTab from './tabs/CoalitionScore';
+import LeaderboardEvalCountTab from './tabs/EvalCount';
+import LeaderboardExpIncrementTab from './tabs/ExpIncrement';
+import LeaderboardLevelTab from './tabs/Level';
 
 type LeaderboardTabNames =
   | 'Level'

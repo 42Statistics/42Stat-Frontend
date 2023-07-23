@@ -16,7 +16,7 @@ import { Route, Routes } from 'react-router-dom';
 
 const LandingPage = lazy(() => import('@/Landing'));
 const HomePage = lazy(() => import('@/Home'));
-const LeaderboardPage = lazy(() => import('@pages/LeaderboardPage'));
+const LeaderboardPage = lazy(() => import('@/Leaderboard'));
 const EvalLogSearchPage = lazy(() => import('@pages/EvalLogSearchPage'));
 const ProfilePage = lazy(() => import('@/Profile'));
 const ProjectDetailPage = lazy(() => import('@/Project/ProjectDetailPage'));

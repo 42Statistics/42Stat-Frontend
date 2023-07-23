@@ -1,3 +1,4 @@
+import { gql } from '@/__generated__';
 import { DashboardContent } from '@/components/templates/DashboardContent';
 import { useQuery } from '@apollo/client';
 import { H3BoldText, HStack, Image, VStack } from '@components/common';
@@ -7,8 +8,23 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
-import { GET_PERSONAL_GENERAL_BY_LOGIN } from '@pages/ProfileGeneralTab/GET_PERSONAL_GENERAL_BY_LOGIN';
 import { useParams } from 'react-router-dom';
+
+const GET_CHARACTER_BY_LOGIN = gql(/* GraphQL */ `
+  query GetCharacterByLogin($login: String!) {
+    getPersonalGeneral(login: $login) {
+      character {
+        name
+        imgUrl
+        types {
+          name
+          description
+          color
+        }
+      }
+    }
+  }
+`);
 
 export const Character = () => {
   const { username } = useParams() as { username: string };
@@ -16,13 +32,14 @@ export const Character = () => {
   const title = '이 유저를 캐릭터로 표현한다면?';
   const description = '과제 점수, 레벨 증가, 접속 시간, 평가 횟수 기준';
 
-  const { loading, error, data } = useQuery(GET_PERSONAL_GENERAL_BY_LOGIN, {
+  const { loading, error, data } = useQuery(GET_CHARACTER_BY_LOGIN, {
     variables: { login: username },
   });
 
-  if (loading)
+  if (loading) {
     return <DashboardContentLoading title={title} description={description} />;
-  if (error)
+  }
+  if (error) {
     return (
       <DashboardContentBadRequest
         title={title}
@@ -30,8 +47,10 @@ export const Character = () => {
         message={error.message}
       />
     );
-  if (!data)
+  }
+  if (!data) {
     return <DashboardContentNotFound title={title} description={description} />;
+  }
 
   const { name, types, imgUrl } = data.getPersonalGeneral.character ?? {};
 

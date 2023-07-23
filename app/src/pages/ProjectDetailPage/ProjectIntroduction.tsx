@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import { ProjectIntroductionSkeleton } from '@pages/PageSkeletons/ProjectIntroductionSkeleton';
 import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
 import { useParams } from 'react-router-dom';
-import { GET_PROJECT_INFO_BY_PROJECT_NAME } from './GET_PROJECT_INFO_BY_PROJECT_NAME';
+import { GET_PROJECT_INFO_BY_PROJECT_NAME } from './contents/queries/GET_PROJECT_INFO_BY_PROJECT_NAME';
 
 export const ProjectIntroduction = () => {
   const { projectName } = useParams() as { projectName: string };
@@ -12,9 +12,15 @@ export const ProjectIntroduction = () => {
     variables: { projectName },
   });
 
-  if (loading) return <ProjectIntroductionSkeleton />;
-  if (error) return <></>;
-  if (!data) return <></>;
+  if (loading) {
+    return <ProjectIntroductionSkeleton />;
+  }
+  if (error) {
+    return <></>;
+  }
+  if (!data) {
+    return <></>;
+  }
 
   const { name, description } = data.getProjectInfo;
   const circle = 3;

@@ -7,5 +7,5 @@ export * from './DestinyRanking';
 export * from './EvalLogSearchLink';
 export * from './RecentComment';
 export * from './MonthlyEvalCount';
-export * from './TotalEvalCount';
+export * from './TotalCount';
 export * from './TotalDuration';

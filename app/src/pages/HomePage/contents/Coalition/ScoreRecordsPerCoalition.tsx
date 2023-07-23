@@ -1,3 +1,4 @@
+import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import { LineChart } from '@components/elements/Chart';
 import {
@@ -6,17 +7,38 @@ import {
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
-import { GET_HOME } from '@pages/HomePage/GET_HOME';
 import { numberWithUnitFormatter } from '@utils/formatters';
 import { isDefined } from '@utils/isDefined';
 
+const GET_SCORE_RECORDS_PER_COALITION = gql(/* GraphQL */ `
+  query GetScoreRecordsPerCoalition {
+    getHomeCoalition {
+      scoreRecordsPerCoalition {
+        coalition {
+          ...coalitionFields
+        }
+        records {
+          at
+          value
+        }
+      }
+    }
+  }
+`);
+
 export const ScoreRecordsPerCoalition = () => {
   const title = '역대 코알리숑 스코어 변동 추이';
-  const { loading, error, data } = useQuery(GET_HOME);
-  if (loading) return <DashboardContentLoading title={title} />;
-  if (error)
+  const { loading, error, data } = useQuery(GET_SCORE_RECORDS_PER_COALITION);
+
+  if (loading) {
+    return <DashboardContentLoading title={title} />;
+  }
+  if (error) {
     return <DashboardContentBadRequest title={title} message={error.message} />;
-  if (!data) return <DashboardContentNotFound title={title} />;
+  }
+  if (!data) {
+    return <DashboardContentNotFound title={title} />;
+  }
 
   const { scoreRecordsPerCoalition } = data.getHomeCoalition;
 

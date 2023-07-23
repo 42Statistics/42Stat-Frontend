@@ -40,14 +40,7 @@ export const GET_USER_PROFILE_BY_LOGIN = gql(/* GraphQL */ `
         grade
         displayname
         coalition {
-          id
-          name
-          slug
-          imageUrl
-          coverUrl
-          color
-          score
-          userId
+          ...coalitionFields
         }
         titles {
           titleId
@@ -69,11 +62,17 @@ export const UserProfile = () => {
     variables: { login: username },
   });
 
-  if (loading) return <UserProfileLoader />;
-  if (error) return <DashboardContentBadRequest message={error.message} />; // TODO: UI
-  if (!data) return <DashboardContentNotFound />; // TODO: UI
+  if (loading) {
+    return <UserProfileLoader />;
+  }
+  if (error) {
+    return <DashboardContentBadRequest message={error.message} />; // TODO: UI
+  }
+  if (!data) {
+    return <DashboardContentNotFound />; // TODO: UI
+  }
 
-  const { id, login, imgUrl, titles, coalition, grade, level, displayname } =
+  const { login, imgUrl, titles, coalition, grade, level, displayname } =
     data.getPersonalGeneral.userProfile;
   const titleWithLogin = getTitleWithLogin(titles, login);
 

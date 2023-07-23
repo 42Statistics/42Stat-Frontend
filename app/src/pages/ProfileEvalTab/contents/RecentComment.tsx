@@ -1,3 +1,4 @@
+import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import { H3BoldText, Scroll, Text, VStack } from '@components/common';
 import {
@@ -7,19 +8,32 @@ import {
 } from '@components/elements/DashboardContentView/Error';
 import styled from '@emotion/styled';
 import { useParams } from 'react-router-dom';
-import { GET_PERSONAL_EVAL_BY_LOGIN } from '../GET_PERSONAL_EVAL_BY_LOGIN';
+
+const GET_RECENT_COMMENT_BY_LOGIN = gql(/* GraphQL */ `
+  query GetRecentCommentByLogin($login: String!) {
+    getPersonalEval(login: $login) {
+      recentComment
+    }
+  }
+`);
 
 export const RecentComment = () => {
   const { username } = useParams() as { username: string };
 
   const title = '최근 쓴 코멘트';
-  const { loading, error, data } = useQuery(GET_PERSONAL_EVAL_BY_LOGIN, {
+  const { loading, error, data } = useQuery(GET_RECENT_COMMENT_BY_LOGIN, {
     variables: { login: username },
   });
-  if (loading) return <DashboardContentLoading title={title} />;
-  if (error)
+
+  if (loading) {
+    return <DashboardContentLoading title={title} />;
+  }
+  if (error) {
     return <DashboardContentBadRequest title={title} message={error.message} />;
-  if (!data) return <DashboardContentNotFound title={title} />;
+  }
+  if (!data) {
+    return <DashboardContentNotFound title={title} />;
+  }
 
   const { recentComment } = data.getPersonalEval; // FIXME: null일 수 있음.
 

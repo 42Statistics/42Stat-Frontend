@@ -1,3 +1,4 @@
+import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import {
   DashboardContentBadRequest,
@@ -6,16 +7,36 @@ import {
 } from '@components/elements/DashboardContentView/Error';
 import { UserRankList } from '@components/elements/DashboardContentView/Rank/UserRankList';
 import { DashboardContent } from '@components/templates/DashboardContent';
-import { GET_HOME } from '@pages/HomePage/GET_HOME';
 import { Mobile, TabletAndAbove } from '@utils/responsive/Device';
+
+const GET_CORRECTION_POINT_RANKING = gql(/* GraphQL */ `
+  query GetCorrectionPointRanking($limit: Int!) {
+    getHomeUser {
+      correctionPointRanking(limit: $limit) {
+        userPreview {
+          ...userPreviewFields
+        }
+        value
+        rank
+      }
+    }
+  }
+`);
 
 export const CorrectionPointRanking = () => {
   const title = '보유 평가 포인트 랭킹';
-  const { loading, error, data } = useQuery(GET_HOME);
-  if (loading) return <DashboardContentLoading title={title} />;
-  if (error)
+  const { loading, error, data } = useQuery(GET_CORRECTION_POINT_RANKING, {
+    variables: { limit: 5 },
+  });
+  if (loading) {
+    return <DashboardContentLoading title={title} />;
+  }
+  if (error) {
     return <DashboardContentBadRequest title={title} message={error.message} />;
-  if (!data) return <DashboardContentNotFound title={title} />;
+  }
+  if (!data) {
+    return <DashboardContentNotFound title={title} />;
+  }
 
   const { correctionPointRanking } = data.getHomeUser;
   const unit = '개';

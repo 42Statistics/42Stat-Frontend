@@ -1,17 +1,18 @@
 import { useQuery } from '@apollo/client';
-import { H3Text, VStack } from '@components/common';
+import { VStack } from '@components/common';
 import { Label } from '@components/common/Label';
 import {
   DashboardContentBadRequest,
   DashboardContentLoading,
   DashboardContentNotFound,
+  NoneDash,
 } from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useTheme } from '@emotion/react';
 import { isDefined } from '@utils/isDefined';
 import { isShortString } from '@utils/isShortString';
 import { useParams } from 'react-router-dom';
-import { GET_PROJECT_INFO_BY_PROJECT_NAME } from '../GET_PROJECT_INFO_BY_PROJECT_NAME';
+import { GET_PROJECT_INFO_BY_PROJECT_NAME } from './queries/GET_PROJECT_INFO_BY_PROJECT_NAME';
 
 export const Objectives = () => {
   const theme = useTheme();
@@ -21,10 +22,16 @@ export const Objectives = () => {
   const { loading, error, data } = useQuery(GET_PROJECT_INFO_BY_PROJECT_NAME, {
     variables: { projectName },
   });
-  if (loading) return <DashboardContentLoading title={title} />;
-  if (error)
+
+  if (loading) {
+    return <DashboardContentLoading title={title} />;
+  }
+  if (error) {
     return <DashboardContentBadRequest title={title} message={error.message} />;
-  if (!data) return <DashboardContentNotFound title={title} />;
+  }
+  if (!data) {
+    return <DashboardContentNotFound title={title} />;
+  }
 
   const { objectives } = data.getProjectInfo;
   const objectivesCount = objectives.filter(isDefined).length;
@@ -32,7 +39,7 @@ export const Objectives = () => {
   if (objectivesCount === 0) {
     return (
       <DashboardContent title={title}>
-        <H3Text>키워드가 없는 과제입니다 😐</H3Text>
+        <NoneDash />
       </DashboardContent>
     );
   }

@@ -18,9 +18,15 @@ type LeaderboardCoalitionScoreTabResultProps = {
 export const LeaderboardCoalitionScoreTabResult = ({
   result: { data, loading, error },
 }: LeaderboardCoalitionScoreTabResultProps) => {
-  if (loading) return <LeaderboardTabResultSkeleton />;
-  if (error) return <ApolloErrorView message={error.message} />;
-  if (!data) return <ApolloNotFoundView />;
+  if (loading) {
+    return <LeaderboardTabResultSkeleton />;
+  }
+  if (error) {
+    return <ApolloErrorView message={error.message} />;
+  }
+  if (!data) {
+    return <ApolloNotFoundView />;
+  }
 
   const {
     me,

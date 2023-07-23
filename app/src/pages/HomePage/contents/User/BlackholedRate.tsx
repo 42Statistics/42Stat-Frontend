@@ -1,3 +1,4 @@
+import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import { PieChart } from '@components/elements/Chart';
 import {
@@ -7,24 +8,42 @@ import {
 } from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useTheme } from '@emotion/react';
-import { GET_HOME } from '@pages/HomePage/GET_HOME';
 import { numberWithUnitFormatter } from '@utils/formatters';
 import { capitalize } from 'lodash-es';
 
+const GET_BLACKHOLED_RATE = gql(/* GraphQL */ `
+  query GetBlackholedRate {
+    getHomeUser {
+      blackholedRate {
+        fields {
+          key
+          value
+        }
+      }
+    }
+  }
+`);
+
 export const BlackholedRate = () => {
   const title = '블랙홀 유저 비율';
-  const { loading, error, data } = useQuery(GET_HOME);
-  if (loading) return <DashboardContentLoading title={title} />;
-  if (error)
-    return <DashboardContentBadRequest title={title} message={error.message} />;
-  if (!data) return <DashboardContentNotFound title={title} />;
+  const { loading, error, data } = useQuery(GET_BLACKHOLED_RATE);
 
-  const { total, fields } = data.getHomeUser.blackholedRate;
+  if (loading) {
+    return <DashboardContentLoading title={title} />;
+  }
+  if (error) {
+    return <DashboardContentBadRequest title={title} message={error.message} />;
+  }
+  if (!data) {
+    return <DashboardContentNotFound title={title} />;
+  }
+
+  const { fields } = data.getHomeUser.blackholedRate;
   const labels = fields.map((field) => capitalize(field.key));
   const series = fields.map((field) => field.value);
 
   return (
-    <DashboardContent title={title}>
+    <DashboardContent title={title} isApexChart>
       <BlackholedRateChart labels={labels} series={series} />
     </DashboardContent>
   );

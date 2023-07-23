@@ -1,3 +1,4 @@
+import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import { H3Text } from '@components/common';
 import { PieChart } from '@components/elements/Chart';
@@ -10,19 +11,41 @@ import { DashboardContent } from '@components/templates/DashboardContent';
 import { useTheme } from '@emotion/react';
 import { numberWithUnitFormatter } from '@utils/formatters';
 import { useParams } from 'react-router-dom';
-import { GET_PROJECT_INFO_BY_PROJECT_NAME } from '../GET_PROJECT_INFO_BY_PROJECT_NAME';
+
+const GET_VALIDATED_RATE_BY_PROJECT_NAME = gql(/* GraphQL */ `
+  query GetValidatedRateByProjectName($projectName: String!) {
+    getProjectInfo(projectName: $projectName) {
+      validatedRate {
+        total
+        fields {
+          key
+          value
+        }
+      }
+    }
+  }
+`);
 
 export const ValidatedRate = () => {
   const { projectName } = useParams() as { projectName: string };
 
   const title = '결과 분포';
-  const { loading, error, data } = useQuery(GET_PROJECT_INFO_BY_PROJECT_NAME, {
-    variables: { projectName },
-  });
-  if (loading) return <DashboardContentLoading title={title} />;
-  if (error)
+  const { loading, error, data } = useQuery(
+    GET_VALIDATED_RATE_BY_PROJECT_NAME,
+    {
+      variables: { projectName },
+    },
+  );
+
+  if (loading) {
+    return <DashboardContentLoading title={title} />;
+  }
+  if (error) {
     return <DashboardContentBadRequest title={title} message={error.message} />;
-  if (!data) return <DashboardContentNotFound title={title} />;
+  }
+  if (!data) {
+    return <DashboardContentNotFound title={title} />;
+  }
 
   const { validatedRate } = data.getProjectInfo;
   const labels = validatedRate.fields.map(({ key }) => key);

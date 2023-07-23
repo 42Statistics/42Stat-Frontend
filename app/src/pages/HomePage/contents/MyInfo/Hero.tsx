@@ -1,3 +1,4 @@
+import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import space_background from '@assets/space-background.webp';
 import {
@@ -10,12 +11,38 @@ import {
 import { ApolloErrorView } from '@components/elements/ApolloErrorView';
 import { ApolloNotFoundView } from '@components/elements/ApolloNotFoundView';
 import styled from '@emotion/styled';
-import { GET_HOME } from '@pages/HomePage/GET_HOME';
 import { getDateDiff } from '@utils/getDateDiff';
 import { getDailyProgrammingQuote } from './getDailyProgrammingQuote';
 
+const GET_MY_INFO = gql(/* GraphQL */ `
+  query GetMyInfo {
+    getMyInfo {
+      userPreview {
+        id
+        login
+        imgUrl
+      }
+      recentValidatedTeam {
+        status
+        lastEventTime
+        projectPreview {
+          id
+          name
+          url
+        }
+      }
+      isNewMember
+      blackholedAt
+      experienceRank
+      scoreRank
+      evalCountRank
+    }
+  }
+`);
+
 export const Hero = () => {
-  const { loading, error, data } = useQuery(GET_HOME);
+  const { loading, error, data } = useQuery(GET_MY_INFO);
+
   if (loading)
     return (
       <Layout>

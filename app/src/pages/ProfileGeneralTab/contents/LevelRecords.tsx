@@ -1,3 +1,4 @@
+import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import { LineChart } from '@components/elements/Chart';
 import {
@@ -9,19 +10,39 @@ import { DashboardContent } from '@components/templates/DashboardContent';
 import { useTheme } from '@emotion/react';
 import { isDefined } from '@utils/isDefined';
 import { useParams } from 'react-router-dom';
-import { GET_PERSONAL_GENERAL_BY_LOGIN } from '../GET_PERSONAL_GENERAL_BY_LOGIN';
+
+const GET_LEVEL_RECORDS_BY_LOGIN = gql(/* GraphQL */ `
+  query GetLevelRecordsByLogin($login: String!) {
+    getPersonalGeneral(login: $login) {
+      userLevelRecords {
+        monthsPassed
+        level
+      }
+      promoLevelRecords {
+        monthsPassed
+        level
+      }
+      promoMemberLevelRecords {
+        monthsPassed
+        level
+      }
+    }
+  }
+`);
 
 export const LevelRecords = () => {
   const { username } = useParams() as { username: string };
 
   const title = '레벨 증가 그래프';
   const description = `본과정 시작일로부터 최대 24개월`;
-  const { loading, error, data } = useQuery(GET_PERSONAL_GENERAL_BY_LOGIN, {
+  const { loading, error, data } = useQuery(GET_LEVEL_RECORDS_BY_LOGIN, {
     variables: { login: username },
   });
-  if (loading)
+
+  if (loading) {
     return <DashboardContentLoading title={title} description={description} />;
-  if (error)
+  }
+  if (error) {
     return (
       <DashboardContentBadRequest
         title={title}
@@ -29,8 +50,10 @@ export const LevelRecords = () => {
         message={error.message}
       />
     );
-  if (!data)
+  }
+  if (!data) {
     return <DashboardContentNotFound title={title} description={description} />;
+  }
 
   const { userLevelRecords, promoLevelRecords, promoMemberLevelRecords } =
     data.getPersonalGeneral;

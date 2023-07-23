@@ -1,5 +1,5 @@
 import { gql } from '@shared/__generated__';
-import { client } from '@providers/ApolloProvider';
+import { client } from '@shared/providers/ApolloProvider';
 import { setAccessToken } from '@utils/storage/accessToken';
 import { setRefreshToken } from '@utils/storage/refreshToken';
 

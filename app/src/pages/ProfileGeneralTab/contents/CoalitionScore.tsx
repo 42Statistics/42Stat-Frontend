@@ -1,4 +1,3 @@
-import { gql } from '@/__generated__';
 import { useQuery } from '@apollo/client';
 import { H1BoldText, H3Text, HStack } from '@components/common';
 import { CoalitionMark } from '@components/elements/CoalitionMark';
@@ -9,30 +8,18 @@ import {
 } from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useParams } from 'react-router-dom';
-
-const GET_COALITION_SCORE_BY_LOGIN = gql(/* GraphQL */ `
-  query GetCoalitionScoreByLogin($login: String!) {
-    getPersonalGeneral(login: $login) {
-      userProfile {
-        coalition {
-          ...coalitionFields
-        }
-      }
-      scoreInfo {
-        value
-        rankInCoalition
-      }
-    }
-  }
-`);
+import { GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN } from '../queries/GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN';
 
 export const CoalitionScore = () => {
   const { username } = useParams() as { username: string };
 
   const title = '코알리숑 스코어';
-  const { loading, error, data } = useQuery(GET_COALITION_SCORE_BY_LOGIN, {
-    variables: { login: username },
-  });
+  const { loading, error, data } = useQuery(
+    GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN,
+    {
+      variables: { login: username },
+    },
+  );
 
   if (loading) {
     return <DashboardContentLoading title={title} />;

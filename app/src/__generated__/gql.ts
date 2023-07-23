@@ -48,30 +48,24 @@ const documents = {
     "\n  query GetAverageDurationByLogin($login: String!) {\n    getPersonalEval(login: $login) {\n      averageDuration\n    }\n  }\n": types.GetAverageDurationByLoginDocument,
     "\n  query GetAverageFeedbackLengthByLogin($login: String!) {\n    getPersonalEval(login: $login) {\n      averageFeedbackLength\n    }\n  }\n": types.GetAverageFeedbackLengthByLoginDocument,
     "\n  query GetAverageFinalMarkByLogin($login: String!) {\n    getPersonalEval(login: $login) {\n      averageFinalMark\n    }\n  }\n": types.GetAverageFinalMarkByLoginDocument,
-    "\n  query GetCorrectionPointByLogin($login: String!) {\n    getPersonalEval(login: $login) {\n      correctionPoint\n    }\n  }\n": types.GetCorrectionPointByLoginDocument,
     "\n  query GetDestinyRankingByLogin($login: String!, $limit: Int!) {\n    getPersonalEval(login: $login) {\n      destinyRanking(limit: $limit) {\n        userPreview {\n          ...userPreviewFields\n        }\n        value\n        rank\n      }\n    }\n  }\n": types.GetDestinyRankingByLoginDocument,
     "\n  query GetEvalCountByDateTemplateByLogin(\n    $login: String!\n    $currDateTemplate: DateTemplate!\n    $lastDateTemplate: DateTemplate!\n  ) {\n    getPersonalEval(login: $login) {\n      currData: countByDateTemplate(dateTemplate: $currDateTemplate) {\n        data\n        start\n        end\n      }\n      lastData: countByDateTemplate(dateTemplate: $lastDateTemplate) {\n        data\n        start\n        end\n      }\n    }\n  }\n": types.GetEvalCountByDateTemplateByLoginDocument,
-    "\n  query GetRecentCommentByLogin($login: String!) {\n    getPersonalEval(login: $login) {\n      recentComment\n    }\n  }\n": types.GetRecentCommentByLoginDocument,
     "\n  query GetTotalCountByLogin($login: String!) {\n    getPersonalEval(login: $login) {\n      totalCount\n    }\n  }\n": types.GetTotalCountByLoginDocument,
     "\n  query GetTotalDurationByLogin($login: String!) {\n    getPersonalEval(login: $login) {\n      totalDuration\n    }\n  }\n": types.GetTotalDurationByLoginDocument,
-    "\n  query GetBeginAtByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      beginAt\n    }\n  }\n": types.GetBeginAtByLoginDocument,
-    "\n  query GetBlackholedAtByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      blackholedAt\n    }\n  }\n": types.GetBlackholedAtByLoginDocument,
+    "\n  query GetPersonalEvalZeroCostByLogin($login: String!) {\n    getPersonalEval(login: $login) {\n      correctionPoint\n      recentComment\n    }\n  }\n": types.GetPersonalEvalZeroCostByLoginDocument,
     "\n  query GetCharacterByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      character {\n        name\n        imgUrl\n        types {\n          name\n          description\n          color\n        }\n      }\n    }\n  }\n": types.GetCharacterByLoginDocument,
-    "\n  query GetCoalitionScoreByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      userProfile {\n        coalition {\n          ...coalitionFields\n        }\n      }\n      scoreInfo {\n        value\n        rankInCoalition\n      }\n    }\n  }\n": types.GetCoalitionScoreByLoginDocument,
-    "\n  query GetLastPassedByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      teamInfo {\n        lastPassed\n      }\n    }\n  }\n": types.GetLastPassedByLoginDocument,
-    "\n  query GetLastRegisteredByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      teamInfo {\n        lastRegistered\n      }\n    }\n  }\n": types.GetLastRegisteredByLoginDocument,
     "\n  query GetLevelRecordsByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      userLevelRecords {\n        monthsPassed\n        level\n      }\n      promoLevelRecords {\n        monthsPassed\n        level\n      }\n      promoMemberLevelRecords {\n        monthsPassed\n        level\n      }\n    }\n  }\n": types.GetLevelRecordsByLoginDocument,
     "\n  query GetLogtimeByDateTemplate(\n    $login: String!\n    $currDateTemplate: DateTemplate!\n    $lastDateTemplate: DateTemplate!\n  ) {\n    getPersonalGeneral(login: $login) {\n      currData: logtimeByDateTemplate(dateTemplate: $currDateTemplate) {\n        data\n        start\n        end\n      }\n      lastData: logtimeByDateTemplate(dateTemplate: $lastDateTemplate) {\n        data\n        start\n        end\n      }\n    }\n  }\n": types.GetLogtimeByDateTemplateDocument,
     "\n  query GetPreferredClusterByDateTemplateByLogin(\n    $login: String!\n    $dateTemplate: DateTemplate!\n  ) {\n    getPersonalGeneral(login: $login) {\n      preferredClusterByDateTemplate(dateTemplate: $dateTemplate) {\n        data {\n          name\n        }\n        start\n        end\n      }\n    }\n  }\n": types.GetPreferredClusterByDateTemplateByLoginDocument,
     "\n  query GetPrefferedTimeByDateTemplateByLogin(\n    $login: String!\n    $dateTemplate: DateTemplate!\n  ) {\n    getPersonalGeneral(login: $login) {\n      preferredTimeByDateTemplate(dateTemplate: $dateTemplate) {\n        data {\n          total\n          morning\n          daytime\n          evening\n          night\n        }\n        start\n        end\n      }\n    }\n  }\n": types.GetPrefferedTimeByDateTemplateByLoginDocument,
     "\n  query GetTeamInfoByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      teamInfo {\n        teams {\n          id\n          name\n          occurrence\n          projectPreview {\n            ...projectPreviewFields\n          }\n          status\n          lastEventTime\n          isValidated\n          finalMark\n        }\n      }\n    }\n  }\n": types.GetTeamInfoByLoginDocument,
-    "\n  query GetWalletByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      wallet\n    }\n  }\n": types.GetWalletByLoginDocument,
+    "\n  query GetPersonalGeneralZeroCostByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      beginAt\n      blackholedAt\n      ...coalitionScoreFragment\n      teamInfo {\n        lastPassed\n        lastRegistered\n      }\n      wallet\n    }\n  }\n\n  fragment coalitionScoreFragment on PersonalGeneral {\n    userProfile {\n      coalition {\n        ...coalitionFields\n      }\n    }\n    scoreInfo {\n      value\n      rankInCoalition\n    }\n  }\n": types.GetPersonalGeneralZeroCostByLoginDocument,
     "\n  query GetUserProfileByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      userProfile {\n        id\n        login\n        imgUrl\n        grade\n        displayname\n        coalition {\n          ...coalitionFields\n        }\n        titles {\n          titleId\n          name\n          selected\n          createdAt\n          updatedAt\n        }\n        level\n      }\n    }\n  }\n": types.GetUserProfileByLoginDocument,
-    "\n  query GetProjectInfoByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      name\n      url\n      description\n      minUserCount\n      maxUserCount\n      estimateTime\n      difficulty\n      objectives\n      skills\n    }\n  }\n": types.GetProjectInfoByProjectNameDocument,
     "\n  query GetAveragePassFinalMarkByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      averagePassFinalMark\n    }\n  }\n": types.GetAveragePassFinalMarkByProjectNameDocument,
     "\n  query GetClosedTeamCountByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      closedTeamCount\n    }\n  }\n": types.GetClosedTeamCountByProjectNameDocument,
     "\n  query GetCurrRegisteredTeamCountByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      currRegisteredTeamCount\n    }\n  }\n": types.GetCurrRegisteredTeamCountByProjectNameDocument,
     "\n  query GetValidatedRateByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      validatedRate {\n        total\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n": types.GetValidatedRateByProjectNameDocument,
+    "\n  query GetProjectInfoZeroCostByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      name\n      url\n      description\n      minUserCount\n      maxUserCount\n      estimateTime\n      difficulty\n      objectives\n      skills\n    }\n  }\n": types.GetProjectInfoZeroCostByProjectNameDocument,
     "\n  mutation DeleteAccount {\n    deleteAccount\n  }\n": types.DeleteAccountDocument,
     "\n  mutation LinkGoogle($google: GoogleLoginInput!) {\n    linkGoogle(google: $google) {\n      userId\n      linkedAccounts {\n        platform\n        id\n        email\n        linkedAt\n      }\n    }\n  }\n": types.LinkGoogleDocument,
     "\n  mutation UnlinkAccount($targetPlatform: String!) {\n    unlinkAccount(targetPlatform: $targetPlatform) {\n      userId\n      linkedAccounts {\n        platform\n        id\n        email\n        linkedAt\n      }\n    }\n  }\n": types.UnlinkAccountDocument,
@@ -241,19 +235,11 @@ export function gql(source: "\n  query GetAverageFinalMarkByLogin($login: String
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query GetCorrectionPointByLogin($login: String!) {\n    getPersonalEval(login: $login) {\n      correctionPoint\n    }\n  }\n"): (typeof documents)["\n  query GetCorrectionPointByLogin($login: String!) {\n    getPersonalEval(login: $login) {\n      correctionPoint\n    }\n  }\n"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
 export function gql(source: "\n  query GetDestinyRankingByLogin($login: String!, $limit: Int!) {\n    getPersonalEval(login: $login) {\n      destinyRanking(limit: $limit) {\n        userPreview {\n          ...userPreviewFields\n        }\n        value\n        rank\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetDestinyRankingByLogin($login: String!, $limit: Int!) {\n    getPersonalEval(login: $login) {\n      destinyRanking(limit: $limit) {\n        userPreview {\n          ...userPreviewFields\n        }\n        value\n        rank\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query GetEvalCountByDateTemplateByLogin(\n    $login: String!\n    $currDateTemplate: DateTemplate!\n    $lastDateTemplate: DateTemplate!\n  ) {\n    getPersonalEval(login: $login) {\n      currData: countByDateTemplate(dateTemplate: $currDateTemplate) {\n        data\n        start\n        end\n      }\n      lastData: countByDateTemplate(dateTemplate: $lastDateTemplate) {\n        data\n        start\n        end\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetEvalCountByDateTemplateByLogin(\n    $login: String!\n    $currDateTemplate: DateTemplate!\n    $lastDateTemplate: DateTemplate!\n  ) {\n    getPersonalEval(login: $login) {\n      currData: countByDateTemplate(dateTemplate: $currDateTemplate) {\n        data\n        start\n        end\n      }\n      lastData: countByDateTemplate(dateTemplate: $lastDateTemplate) {\n        data\n        start\n        end\n      }\n    }\n  }\n"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function gql(source: "\n  query GetRecentCommentByLogin($login: String!) {\n    getPersonalEval(login: $login) {\n      recentComment\n    }\n  }\n"): (typeof documents)["\n  query GetRecentCommentByLogin($login: String!) {\n    getPersonalEval(login: $login) {\n      recentComment\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -265,27 +251,11 @@ export function gql(source: "\n  query GetTotalDurationByLogin($login: String!) 
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query GetBeginAtByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      beginAt\n    }\n  }\n"): (typeof documents)["\n  query GetBeginAtByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      beginAt\n    }\n  }\n"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function gql(source: "\n  query GetBlackholedAtByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      blackholedAt\n    }\n  }\n"): (typeof documents)["\n  query GetBlackholedAtByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      blackholedAt\n    }\n  }\n"];
+export function gql(source: "\n  query GetPersonalEvalZeroCostByLogin($login: String!) {\n    getPersonalEval(login: $login) {\n      correctionPoint\n      recentComment\n    }\n  }\n"): (typeof documents)["\n  query GetPersonalEvalZeroCostByLogin($login: String!) {\n    getPersonalEval(login: $login) {\n      correctionPoint\n      recentComment\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query GetCharacterByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      character {\n        name\n        imgUrl\n        types {\n          name\n          description\n          color\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetCharacterByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      character {\n        name\n        imgUrl\n        types {\n          name\n          description\n          color\n        }\n      }\n    }\n  }\n"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function gql(source: "\n  query GetCoalitionScoreByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      userProfile {\n        coalition {\n          ...coalitionFields\n        }\n      }\n      scoreInfo {\n        value\n        rankInCoalition\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetCoalitionScoreByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      userProfile {\n        coalition {\n          ...coalitionFields\n        }\n      }\n      scoreInfo {\n        value\n        rankInCoalition\n      }\n    }\n  }\n"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function gql(source: "\n  query GetLastPassedByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      teamInfo {\n        lastPassed\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetLastPassedByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      teamInfo {\n        lastPassed\n      }\n    }\n  }\n"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function gql(source: "\n  query GetLastRegisteredByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      teamInfo {\n        lastRegistered\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetLastRegisteredByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      teamInfo {\n        lastRegistered\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -309,15 +279,11 @@ export function gql(source: "\n  query GetTeamInfoByLogin($login: String!) {\n  
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query GetWalletByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      wallet\n    }\n  }\n"): (typeof documents)["\n  query GetWalletByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      wallet\n    }\n  }\n"];
+export function gql(source: "\n  query GetPersonalGeneralZeroCostByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      beginAt\n      blackholedAt\n      ...coalitionScoreFragment\n      teamInfo {\n        lastPassed\n        lastRegistered\n      }\n      wallet\n    }\n  }\n\n  fragment coalitionScoreFragment on PersonalGeneral {\n    userProfile {\n      coalition {\n        ...coalitionFields\n      }\n    }\n    scoreInfo {\n      value\n      rankInCoalition\n    }\n  }\n"): (typeof documents)["\n  query GetPersonalGeneralZeroCostByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      beginAt\n      blackholedAt\n      ...coalitionScoreFragment\n      teamInfo {\n        lastPassed\n        lastRegistered\n      }\n      wallet\n    }\n  }\n\n  fragment coalitionScoreFragment on PersonalGeneral {\n    userProfile {\n      coalition {\n        ...coalitionFields\n      }\n    }\n    scoreInfo {\n      value\n      rankInCoalition\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query GetUserProfileByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      userProfile {\n        id\n        login\n        imgUrl\n        grade\n        displayname\n        coalition {\n          ...coalitionFields\n        }\n        titles {\n          titleId\n          name\n          selected\n          createdAt\n          updatedAt\n        }\n        level\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetUserProfileByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      userProfile {\n        id\n        login\n        imgUrl\n        grade\n        displayname\n        coalition {\n          ...coalitionFields\n        }\n        titles {\n          titleId\n          name\n          selected\n          createdAt\n          updatedAt\n        }\n        level\n      }\n    }\n  }\n"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function gql(source: "\n  query GetProjectInfoByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      name\n      url\n      description\n      minUserCount\n      maxUserCount\n      estimateTime\n      difficulty\n      objectives\n      skills\n    }\n  }\n"): (typeof documents)["\n  query GetProjectInfoByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      name\n      url\n      description\n      minUserCount\n      maxUserCount\n      estimateTime\n      difficulty\n      objectives\n      skills\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -334,6 +300,10 @@ export function gql(source: "\n  query GetCurrRegisteredTeamCountByProjectName($
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query GetValidatedRateByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      validatedRate {\n        total\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetValidatedRateByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      validatedRate {\n        total\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query GetProjectInfoZeroCostByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      name\n      url\n      description\n      minUserCount\n      maxUserCount\n      estimateTime\n      difficulty\n      objectives\n      skills\n    }\n  }\n"): (typeof documents)["\n  query GetProjectInfoZeroCostByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      name\n      url\n      description\n      minUserCount\n      maxUserCount\n      estimateTime\n      difficulty\n      objectives\n      skills\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

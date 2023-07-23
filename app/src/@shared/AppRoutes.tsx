@@ -1,3 +1,4 @@
+import SettingPage from '@/Setting';
 import { DeferredComponent } from '@components/common';
 import { AuthGuard } from '@guards/AuthGuard';
 import { NoAuthGuard } from '@guards/NoAuthGuard';
@@ -9,7 +10,6 @@ import FtOAuthPage from '@pages/FtOAuthPage';
 import FtOAuthRedirectPage from '@pages/FtOAuthRedirectPage';
 import { HomePageSkeleton } from '@pages/PageSkeletons/HomePageSkeleton';
 import { ProfilePageSkeleton } from '@pages/PageSkeletons/ProfilePageSkeleton';
-import SettingPage from '@pages/SettingPage';
 import { ROUTES } from '@shared/constants/ROUTES';
 import { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';

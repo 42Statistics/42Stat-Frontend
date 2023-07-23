@@ -5,7 +5,7 @@ export * from './Wallet';
 export * from './LastPassed';
 export * from './LastRegistered';
 export * from './LevelRecords';
-export * from './LogTime';
+export * from './MonthlyLogtime';
 export * from './PreferredCluster';
 export * from './PreferredTime';
 export * from './Character';

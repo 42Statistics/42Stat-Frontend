@@ -8,7 +8,6 @@ import {
 } from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useTheme } from '@emotion/react';
-import { isDefined } from '@utils/isDefined';
 import { useParams } from 'react-router-dom';
 
 const GET_LEVEL_RECORDS_BY_LOGIN = gql(/* GraphQL */ `
@@ -58,12 +57,10 @@ export const LevelRecords = () => {
   const { userLevelRecords, promoLevelRecords, promoMemberLevelRecords } =
     data.getPersonalGeneral;
 
-  const userLevelSeries = userLevelRecords
-    .filter(isDefined)
-    .map(({ monthsPassed, level }) => ({
-      x: monthsPassed,
-      y: level,
-    }));
+  const userLevelSeries = userLevelRecords.map(({ monthsPassed, level }) => ({
+    x: monthsPassed,
+    y: level,
+  }));
   const promoLevelSeries = promoLevelRecords.map(({ monthsPassed, level }) => ({
     x: monthsPassed,
     y: level,
@@ -101,7 +98,7 @@ type LevelRecordsChartProps = {
   series: ApexAxisChartSeries;
 };
 
-const LevelRecordsChart = ({ series }: LevelRecordsChartProps) => {
+export const LevelRecordsChart = ({ series }: LevelRecordsChartProps) => {
   const theme = useTheme();
 
   const options: ApexCharts.ApexOptions = {
@@ -112,7 +109,7 @@ const LevelRecordsChart = ({ series }: LevelRecordsChartProps) => {
     ],
     xaxis: {
       labels: {
-        formatter: (value) => `${value}개월`,
+        formatter: (value) => `${value}`,
       },
     },
     yaxis: {

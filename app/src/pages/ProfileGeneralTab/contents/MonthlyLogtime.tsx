@@ -32,7 +32,7 @@ const GET_LOGTIME_BY_DATE_TEMPLATE = gql(/* GraphQL */ `
   }
 `);
 
-export const LogTime = () => {
+export const MonthlyLogtime = () => {
   const { username } = useParams() as { username: string };
 
   const title = '월간 접속 시간';
@@ -55,21 +55,22 @@ export const LogTime = () => {
   }
 
   const {
-    currData: { data: CurrLogTime, start, end },
-    lastData: { data: LastLogTime },
+    currData: { data: currLogtime, start, end },
+    lastData: { data: lastLogtime },
   } = data.getPersonalGeneral;
-  const currLogTimeByHours = Math.floor(CurrLogTime / 60);
-  const lastLogTimeByHours = Math.floor(LastLogTime / 60);
+  const currLogtimeByHours = Math.floor(currLogtime / 60);
+  const lastLogtimeByHours = Math.floor(lastLogtime / 60);
   const description = `${dayjs(start).format('M월 D일')} ~ ${dayjs(end).format(
     'M월 D일',
   )}`;
+  const unit = '시간';
 
   return (
     <DashboardContent title={title} description={description}>
       <NumberCompare
-        curr={currLogTimeByHours}
-        last={lastLogTimeByHours}
-        unit="시간"
+        curr={currLogtimeByHours}
+        last={lastLogtimeByHours}
+        unit={unit}
       />
     </DashboardContent>
   );

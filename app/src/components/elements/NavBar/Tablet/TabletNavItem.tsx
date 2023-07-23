@@ -8,7 +8,7 @@ type TabletNavItemProps = NavItemProps;
 
 export const TabletNavItem = ({ route }: TabletNavItemProps) => {
   const location = useLocation();
-  const isFocused = location.pathname === route.path;
+  const isFocused = location.pathname.startsWith(route.path);
   const NavItemIcon = isFocused ? route.iconFocused : route.icon;
   const theme = useTheme();
   const color = isFocused

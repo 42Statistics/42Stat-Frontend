@@ -8,7 +8,7 @@ type TabItemProps = NavItemProps;
 
 export const TabItem = ({ route }: TabItemProps) => {
   const location = useLocation();
-  const isFocused = location.pathname === route.path;
+  const isFocused = location.pathname.startsWith(route.path);
   const TabItemIcon = isFocused ? route.iconFocused : route.icon;
   const theme = useTheme();
   const color = isFocused

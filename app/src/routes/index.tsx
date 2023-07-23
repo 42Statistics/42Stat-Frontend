@@ -61,7 +61,7 @@ export const AppRoutes = () => {
               }
             />
             <Route
-              path={ROUTES.PROFILE}
+              path={ROUTES.PROFILE_USERNAME_ROOT}
               element={
                 <Suspense
                   fallback={
@@ -75,46 +75,28 @@ export const AppRoutes = () => {
               }
             />
             <Route
-              path={ROUTES.LEADERBOARD}
+              path={ROUTES.PROFILE_USERNAME}
               element={
                 <Suspense
                   fallback={
                     <DeferredComponent>
-                      <></>
+                      <ProfilePageSkeleton />
                     </DeferredComponent>
                   }
                 >
-                  <LeaderboardPage />
+                  <ProfilePage />
                 </Suspense>
               }
             />
             <Route
-              path={ROUTES.EVALLOG}
-              element={
-                <Suspense
-                  fallback={
-                    <DeferredComponent>
-                      <></>
-                    </DeferredComponent>
-                  }
-                >
-                  <EvalLogSearchPage />
-                </Suspense>
-              }
+              path={ROUTES.LEADERBOARD_ROOT}
+              element={<LeaderboardPage />}
             />
+            <Route path={ROUTES.LEADERBOARD} element={<LeaderboardPage />} />
+            <Route path={ROUTES.EVALLOG} element={<EvalLogSearchPage />} />
             <Route
               path={ROUTES.PROJECT_DETAIL}
-              element={
-                <Suspense
-                  fallback={
-                    <DeferredComponent>
-                      <></>
-                    </DeferredComponent>
-                  }
-                >
-                  <ProjectDetailPage />
-                </Suspense>
-              }
+              element={<ProjectDetailPage />}
             />
             <Route path={ROUTES.SETTING} element={<SettingPage />} />
           </Route>

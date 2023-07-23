@@ -1,4 +1,3 @@
-import { useDisclosure } from '@/hooks/useDisclosure';
 import {
   Divider,
   H2BoldText,
@@ -7,6 +6,7 @@ import {
   VStack,
 } from '@components/common';
 import { CustomSection } from '@shared/styles/custom/CustomSection';
+import { useDisclosure } from '@shared/utils/hooks/useDisclosure';
 import { Mobile, TabletAndAbove } from '@shared/utils/responsive/Device';
 import { DeleteAccountButton } from './DeleteAccountButton';
 import { DeleteAccountDialog } from './DeleteAccountDialog';

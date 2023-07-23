@@ -1,4 +1,3 @@
-import { useRoveFocus } from '@/hooks/useRoveFocus';
 import { useLazyQuery } from '@apollo/client';
 import { VStack } from '@components/common';
 import { Dialog } from '@components/common/Dialog';
@@ -8,6 +7,7 @@ import { gql } from '@shared/__generated__';
 import { ReactComponent as MdSearch } from '@shared/assets/icon/md-search.svg';
 import { DialogBaseProps } from '@shared/types/Modal';
 import { SpotlightFocusContext } from '@shared/utils/contexts/SpotlightFocusContext';
+import { useRoveFocus } from '@shared/utils/hooks/useRoveFocus';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDebounce } from 'usehooks-ts';

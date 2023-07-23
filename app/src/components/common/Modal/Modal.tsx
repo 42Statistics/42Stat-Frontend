@@ -1,7 +1,7 @@
-import { usePreventScroll } from '@/hooks/usePreventScroll';
 import { useTheme } from '@emotion/react';
 import type { ModalBaseProps } from '@shared/types/Modal';
 import { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
+import { usePreventScroll } from '@shared/utils/hooks/usePreventScroll';
 import { useEffect } from 'react';
 import { Portal } from './Portal';
 

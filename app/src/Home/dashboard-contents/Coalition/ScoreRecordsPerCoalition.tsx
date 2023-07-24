@@ -8,7 +8,6 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { numberWithUnitFormatter } from '@shared/utils/formatters';
-import { isDefined } from '@shared/utils/isDefined';
 
 const GET_SCORE_RECORDS_PER_COALITION = gql(/* GraphQL */ `
   query GetScoreRecordsPerCoalition {
@@ -44,7 +43,7 @@ export const ScoreRecordsPerCoalition = () => {
 
   const colors: string[] = [];
   const series = scoreRecordsPerCoalition.map(({ coalition, records }) => {
-    const seriesData = records.filter(isDefined).map(({ at, value }) => ({
+    const seriesData = records.map(({ at, value }) => ({
       x: at,
       y: value,
     }));

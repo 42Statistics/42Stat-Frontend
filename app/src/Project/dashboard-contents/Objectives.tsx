@@ -8,7 +8,7 @@ import {
   NoneDash,
 } from '@shared/components/DashboardContentView/Error';
 import { Label, VStack } from '@shared/ui-kit';
-import { isShortString } from '@shared/utils/isShortString';
+import { compareLength } from '@shared/utils/compareLength';
 import { useParams } from 'react-router-dom';
 import { GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME } from '../dashboard-contents-queries/GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME';
 
@@ -48,7 +48,7 @@ export const Objectives = () => {
   return (
     <DashboardContent title={title}>
       <VStack spacing="1rem">
-        {objectives.sort(isShortString).map((objective) => (
+        {[...objectives].sort(compareLength).map((objective) => (
           <Label
             key={objective}
             backgroundColor={theme.colors.accent.default}

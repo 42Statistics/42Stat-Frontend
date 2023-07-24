@@ -7,7 +7,6 @@ import { useDisclosure } from '@shared/hooks/useDisclosure';
 import { useInfiniteScroll } from '@shared/hooks/useInfiniteScroll';
 import type { EvalLogSearchModel } from '@shared/types/EvalLogSearchModel';
 import { VStack } from '@shared/ui-kit';
-import { isDefined } from '@shared/utils/isDefined';
 import { isSlashKeyDown } from '@shared/utils/keyboard';
 import { isEqual } from 'lodash-es';
 import { useEffect, useState } from 'react';
@@ -138,7 +137,7 @@ const EvalLogSearchPage = () => {
     if (edges.length > 0 && edges[edges.length - 1]?.cursor === endCursor) {
       return;
     }
-    setEvalLogEdges((cur) => [...cur, ...edges.filter(isDefined)]);
+    setEvalLogEdges((cur) => [...cur, ...edges]);
     setEndCursor(pageInfo?.endCursor ?? '');
   }, [data, endCursor]);
 

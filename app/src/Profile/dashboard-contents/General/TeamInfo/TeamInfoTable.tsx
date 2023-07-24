@@ -2,14 +2,13 @@ import styled from '@emotion/styled';
 import { UserTeam } from '@shared/__generated__/graphql';
 import { ROUTES } from '@shared/constants/ROUTES';
 import { PrimaryText, Text } from '@shared/ui-kit';
-import { isDefined } from '@shared/utils/isDefined';
 import { truncate } from 'lodash-es';
 import { Link } from 'react-router-dom';
 import { DateDiffWithStatus } from './DateDiffWithStatus';
 import { ResultWithStatus } from './ResultWithStatus';
 
 type TeamInfoTableProps = {
-  teams: (UserTeam | null)[];
+  teams: UserTeam[];
 };
 
 export const TeamInfoTable = ({ teams }: TeamInfoTableProps) => {
@@ -27,47 +26,45 @@ export const TeamInfoTable = ({ teams }: TeamInfoTableProps) => {
         </tr>
       </thead>
       <tbody>
-        {teams
-          .filter(isDefined)
-          .map(
-            ({
-              id,
-              name,
-              occurrence,
-              projectPreview,
-              status,
-              lastEventTime,
-              isValidated,
-              finalMark,
-            }) => (
-              <tr key={id}>
-                <td>
-                  <Link to={`${ROUTES.PROJECT_ROOT}/${projectPreview.name}`}>
-                    <Text>{projectPreview.name}</Text>
-                  </Link>
-                </td>
-                <td>
-                  <Text>{occurrence + 1}</Text>
-                </td>
-                <td>
-                  <Text>{truncate(name, { length: 42 })}</Text>
-                </td>
-                <td>
-                  <DateDiffWithStatus
-                    date={new Date(lastEventTime)}
-                    status={status}
-                  />
-                </td>
-                <td>
-                  <ResultWithStatus
-                    isValidated={isValidated}
-                    finalMark={finalMark}
-                    status={status}
-                  />
-                </td>
-              </tr>
-            ),
-          )}
+        {teams.map(
+          ({
+            id,
+            name,
+            occurrence,
+            projectPreview,
+            status,
+            lastEventTime,
+            isValidated,
+            finalMark,
+          }) => (
+            <tr key={id}>
+              <td>
+                <Link to={`${ROUTES.PROJECT_ROOT}/${projectPreview.name}`}>
+                  <Text>{projectPreview.name}</Text>
+                </Link>
+              </td>
+              <td>
+                <Text>{occurrence + 1}</Text>
+              </td>
+              <td>
+                <Text>{truncate(name, { length: 42 })}</Text>
+              </td>
+              <td>
+                <DateDiffWithStatus
+                  date={new Date(lastEventTime)}
+                  status={status}
+                />
+              </td>
+              <td>
+                <ResultWithStatus
+                  isValidated={isValidated}
+                  finalMark={finalMark}
+                  status={status}
+                />
+              </td>
+            </tr>
+          ),
+        )}
       </tbody>
     </Table>
   );

@@ -8,8 +8,7 @@ import {
   NoneDash,
 } from '@shared/components/DashboardContentView/Error';
 import { Label, VStack } from '@shared/ui-kit';
-import { isDefined } from '@shared/utils/isDefined';
-import { isShortString } from '@shared/utils/isShortString';
+import { compareLength } from '@shared/utils/compareLength';
 import { useParams } from 'react-router-dom';
 import { GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME } from '../dashboard-contents-queries/GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME';
 
@@ -37,7 +36,7 @@ export const Skills = () => {
 
   const { skills } = data.getProjectInfo;
 
-  const skillsCount = skills.filter(isDefined).length;
+  const skillsCount = skills.length;
   if (skillsCount === 0) {
     return (
       <DashboardContent title={title}>
@@ -49,14 +48,11 @@ export const Skills = () => {
   return (
     <DashboardContent title={title}>
       <VStack spacing="1rem">
-        {skills
-          .filter(isDefined)
-          .sort(isShortString)
-          .map((skill) => (
-            <Label key={skill} fontWeight={theme.fonts.weight.medium}>
-              {skill}
-            </Label>
-          ))}
+        {[...skills].sort(compareLength).map((skill) => (
+          <Label key={skill} fontWeight={theme.fonts.weight.medium}>
+            {skill}
+          </Label>
+        ))}
       </VStack>
     </DashboardContent>
   );

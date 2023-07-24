@@ -13,10 +13,15 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n  mutation googleLogin($google: GoogleLoginInput!, $ftCode: String) {\n    googleLogin(google: $google, ftCode: $ftCode) {\n      __typename\n      ... on LoginSuccess {\n        message\n        accessToken\n        refreshToken\n        userId\n      }\n      ... on LoginNotLinked {\n        message\n      }\n    }\n  }\n": types.GoogleLoginDocument,
     "\n  query FindUserPreview($login: String!, $limit: Int!) {\n    findUserPreview(login: $login, limit: $limit) {\n      id\n      login\n      imgUrl\n    }\n  }\n": types.FindUserPreviewDocument,
     "\n  query FindProjectPreview($name: String!, $limit: Int!) {\n    findProjectPreview(name: $name, limit: $limit) {\n      id\n      name\n      url\n    }\n  }\n": types.FindProjectPreviewDocument,
     "\n  query GetMyProfile {\n    getPersonalGeneral {\n      userProfile {\n        id\n        login\n        imgUrl\n        displayname\n      }\n    }\n  }\n": types.GetMyProfileDocument,
+    "\n  mutation GetNewAccessToken($refreshToken: String!) {\n    refreshToken(refreshToken: $refreshToken) {\n      message\n      accessToken\n      refreshToken\n      userId\n    }\n  }\n": types.GetNewAccessTokenDocument,
+    "\n  mutation googleLogin($google: GoogleLoginInput!, $ftCode: String) {\n    googleLogin(google: $google, ftCode: $ftCode) {\n      __typename\n      ... on LoginSuccess {\n        message\n        accessToken\n        refreshToken\n        userId\n      }\n      ... on LoginNotLinked {\n        message\n      }\n    }\n  }\n": types.GoogleLoginDocument,
+    "\n  mutation Logout {\n    logout\n  }\n": types.LogoutDocument,
+    "\n  fragment coalitionFields on Coalition {\n    id\n    name\n    slug\n    imageUrl\n    coverUrl\n    color\n    score\n    userId\n  }\n": types.CoalitionFieldsFragmentDoc,
+    "\n  fragment projectPreviewFields on ProjectPreview {\n    id\n    name\n    url\n  }\n": types.ProjectPreviewFieldsFragmentDoc,
+    "\n  fragment userPreviewFields on UserPreview {\n    id\n    login\n    imgUrl\n  }\n": types.UserPreviewFieldsFragmentDoc,
     "\n  query GetEvalLogs(\n    $after: String\n    $first: Int!\n    $corrector: String\n    $corrected: String\n    $projectName: String\n    $outstandingOnly: Boolean\n    $sortOrder: EvalLogSortOrder!\n  ) {\n    getEvalLogs(\n      after: $after\n      first: $first\n      corrector: $corrector\n      corrected: $corrected\n      projectName: $projectName\n      outstandingOnly: $outstandingOnly\n      sortOrder: $sortOrder\n    ) {\n      edges {\n        cursor\n        node {\n          id\n          header {\n            corrector {\n              id\n              login\n              imgUrl\n            }\n            teamPreview {\n              id\n              name\n              url\n            }\n            beginAt\n            projectPreview {\n              id\n              name\n              url\n            }\n            flag {\n              id\n              name\n              isPositive\n            }\n          }\n          correctorReview {\n            mark\n            review\n          }\n          correctedsReview {\n            mark\n            review\n          }\n        }\n      }\n      pageInfo {\n        totalCount\n        hasNextPage\n        endCursor\n      }\n    }\n  }\n": types.GetEvalLogsDocument,
     "\n  mutation ftLogin($ftCode: String!) {\n    ftLogin(ftCode: $ftCode) {\n      message\n      accessToken\n      refreshToken\n      userId\n    }\n  }\n": types.FtLoginDocument,
     "\n  query GetTigCountPerCoalitionByDateTemplate($dateTemplate: DateTemplate!) {\n    getHomeCoalition {\n      tigCountPerCoalitionByDateTemplate(dateTemplate: $dateTemplate) {\n        data {\n          coalition {\n            id\n            name\n            slug\n            imageUrl\n            coverUrl\n            color\n            score\n            userId\n          }\n          value\n        }\n        start\n        end\n      }\n    }\n  }\n": types.GetTigCountPerCoalitionByDateTemplateDocument,
@@ -44,6 +49,9 @@ const documents = {
     "\n  query GetLeaderboardEvalCount(\n    $pageSize: Int!\n    $pageNumber: Int!\n    $dateTemplate: DateTemplate!\n  ) {\n    getLeaderboardEvalCount {\n      byDateTemplate(\n        pageSize: $pageSize\n        pageNumber: $pageNumber\n        dateTemplate: $dateTemplate\n      ) {\n        data {\n          me {\n            userPreview {\n              ...userPreviewFields\n            }\n            value\n            rank\n          }\n          totalRanking {\n            nodes {\n              userPreview {\n                ...userPreviewFields\n              }\n              value\n              rank\n            }\n            totalCount\n            pageSize\n            pageNumber\n          }\n        }\n        start\n        end\n      }\n    }\n  }\n": types.GetLeaderboardEvalCountDocument,
     "\n  query GetLeaderboardExpIncrement(\n    $pageSize: Int!\n    $pageNumber: Int!\n    $dateTemplate: DateTemplate!\n  ) {\n    getLeaderboardExpIncrement {\n      byDateTemplate(\n        pageSize: $pageSize\n        pageNumber: $pageNumber\n        dateTemplate: $dateTemplate\n      ) {\n        data {\n          me {\n            userPreview {\n              ...userPreviewFields\n            }\n            value\n            rank\n          }\n          totalRanking {\n            nodes {\n              userPreview {\n                ...userPreviewFields\n              }\n              value\n              rank\n            }\n            totalCount\n            pageSize\n            pageNumber\n          }\n        }\n        start\n        end\n      }\n    }\n  }\n": types.GetLeaderboardExpIncrementDocument,
     "\n  query GetLeaderboardLevel(\n    $pageSize: Int!\n    $pageNumber: Int!\n    $dateTemplate: DateTemplate!\n  ) {\n    getLeaderboardLevel {\n      byDateTemplate(\n        pageSize: $pageSize\n        pageNumber: $pageNumber\n        dateTemplate: $dateTemplate\n      ) {\n        data {\n          me {\n            userPreview {\n              ...userPreviewFields\n            }\n            value\n            rank\n          }\n          totalRanking {\n            nodes {\n              userPreview {\n                ...userPreviewFields\n              }\n              value\n              rank\n            }\n            totalCount\n            pageSize\n            pageNumber\n          }\n        }\n        start\n        end\n      }\n    }\n  }\n": types.GetLeaderboardLevelDocument,
+    "\n  query GetPersonalEvalZeroCostByLogin($login: String!) {\n    getPersonalEval(login: $login) {\n      correctionPoint\n      recentComment\n    }\n  }\n": types.GetPersonalEvalZeroCostByLoginDocument,
+    "\n  query GetPersonalGeneralZeroCostByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      beginAt\n      blackholedAt\n      ...coalitionScoreFragment\n      teamInfo {\n        lastPassed\n        lastRegistered\n      }\n      wallet\n    }\n  }\n\n  fragment coalitionScoreFragment on PersonalGeneral {\n    userProfile {\n      coalition {\n        ...coalitionFields\n      }\n    }\n    scoreInfo {\n      value\n      rankInCoalition\n    }\n  }\n": types.GetPersonalGeneralZeroCostByLoginDocument,
+    "\n  query GetVersusZeroCost($login1: String!, $login2: String!) {\n    data1: getPersonalGeneral(login: $login1) {\n      userProfile {\n        level\n      }\n      beginAt\n    }\n    data2: getPersonalGeneral(login: $login2) {\n      userProfile {\n        level\n      }\n      beginAt\n    }\n  }\n": types.GetVersusZeroCostDocument,
     "\n  query GetAverageCommentLengthByLogin($login: String!) {\n    getPersonalEval(login: $login) {\n      averageCommentLength\n    }\n  }\n": types.GetAverageCommentLengthByLoginDocument,
     "\n  query GetAverageDurationByLogin($login: String!) {\n    getPersonalEval(login: $login) {\n      averageDuration\n    }\n  }\n": types.GetAverageDurationByLoginDocument,
     "\n  query GetAverageFeedbackLengthByLogin($login: String!) {\n    getPersonalEval(login: $login) {\n      averageFeedbackLength\n    }\n  }\n": types.GetAverageFeedbackLengthByLoginDocument,
@@ -52,36 +60,28 @@ const documents = {
     "\n  query GetEvalCountByDateTemplateByLogin(\n    $login: String!\n    $currDateTemplate: DateTemplate!\n    $lastDateTemplate: DateTemplate!\n  ) {\n    getPersonalEval(login: $login) {\n      currData: countByDateTemplate(dateTemplate: $currDateTemplate) {\n        data\n        start\n        end\n      }\n      lastData: countByDateTemplate(dateTemplate: $lastDateTemplate) {\n        data\n        start\n        end\n      }\n    }\n  }\n": types.GetEvalCountByDateTemplateByLoginDocument,
     "\n  query GetTotalCountByLogin($login: String!) {\n    getPersonalEval(login: $login) {\n      totalCount\n    }\n  }\n": types.GetTotalCountByLoginDocument,
     "\n  query GetTotalDurationByLogin($login: String!) {\n    getPersonalEval(login: $login) {\n      totalDuration\n    }\n  }\n": types.GetTotalDurationByLoginDocument,
-    "\n  query GetPersonalEvalZeroCostByLogin($login: String!) {\n    getPersonalEval(login: $login) {\n      correctionPoint\n      recentComment\n    }\n  }\n": types.GetPersonalEvalZeroCostByLoginDocument,
     "\n  query GetCharacterByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      character {\n        name\n        imgUrl\n        types {\n          name\n          description\n          color\n        }\n      }\n    }\n  }\n": types.GetCharacterByLoginDocument,
     "\n  query GetLevelRecordsByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      userLevelRecords {\n        monthsPassed\n        level\n      }\n      promoLevelRecords {\n        monthsPassed\n        level\n      }\n      promoMemberLevelRecords {\n        monthsPassed\n        level\n      }\n    }\n  }\n": types.GetLevelRecordsByLoginDocument,
     "\n  query GetLogtimeByDateTemplate(\n    $login: String!\n    $currDateTemplate: DateTemplate!\n    $lastDateTemplate: DateTemplate!\n  ) {\n    getPersonalGeneral(login: $login) {\n      currData: logtimeByDateTemplate(dateTemplate: $currDateTemplate) {\n        data\n        start\n        end\n      }\n      lastData: logtimeByDateTemplate(dateTemplate: $lastDateTemplate) {\n        data\n        start\n        end\n      }\n    }\n  }\n": types.GetLogtimeByDateTemplateDocument,
     "\n  query GetPreferredClusterByDateTemplateByLogin(\n    $login: String!\n    $dateTemplate: DateTemplate!\n  ) {\n    getPersonalGeneral(login: $login) {\n      preferredClusterByDateTemplate(dateTemplate: $dateTemplate) {\n        data {\n          name\n        }\n        start\n        end\n      }\n    }\n  }\n": types.GetPreferredClusterByDateTemplateByLoginDocument,
     "\n  query GetPrefferedTimeByDateTemplateByLogin(\n    $login: String!\n    $dateTemplate: DateTemplate!\n  ) {\n    getPersonalGeneral(login: $login) {\n      preferredTimeByDateTemplate(dateTemplate: $dateTemplate) {\n        data {\n          total\n          morning\n          daytime\n          evening\n          night\n        }\n        start\n        end\n      }\n    }\n  }\n": types.GetPrefferedTimeByDateTemplateByLoginDocument,
     "\n  query GetTeamInfoByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      teamInfo {\n        teams {\n          id\n          name\n          occurrence\n          projectPreview {\n            ...projectPreviewFields\n          }\n          status\n          lastEventTime\n          isValidated\n          finalMark\n        }\n      }\n    }\n  }\n": types.GetTeamInfoByLoginDocument,
-    "\n  query GetPersonalGeneralZeroCostByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      beginAt\n      blackholedAt\n      ...coalitionScoreFragment\n      teamInfo {\n        lastPassed\n        lastRegistered\n      }\n      wallet\n    }\n  }\n\n  fragment coalitionScoreFragment on PersonalGeneral {\n    userProfile {\n      coalition {\n        ...coalitionFields\n      }\n    }\n    scoreInfo {\n      value\n      rankInCoalition\n    }\n  }\n": types.GetPersonalGeneralZeroCostByLoginDocument,
     "\n  query GetUserProfileByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      userProfile {\n        id\n        login\n        imgUrl\n        grade\n        displayname\n        coalition {\n          ...coalitionFields\n        }\n        titles {\n          titleId\n          name\n          selected\n          createdAt\n          updatedAt\n        }\n        level\n      }\n    }\n  }\n": types.GetUserProfileByLoginDocument,
     "\n  query GetAverageCommentLengthVersus($login1: String!, $login2: String!) {\n    data1: getPersonalEval(login: $login1) {\n      averageCommentLength\n    }\n    data2: getPersonalEval(login: $login2) {\n      averageCommentLength\n    }\n  }\n": types.GetAverageCommentLengthVersusDocument,
     "\n  query GetAverageFinalMarkVersus($login1: String!, $login2: String!) {\n    data1: getPersonalEval(login: $login1) {\n      averageFinalMark\n    }\n    data2: getPersonalEval(login: $login2) {\n      averageFinalMark\n    }\n  }\n": types.GetAverageFinalMarkVersusDocument,
     "\n  query GetLevelRecordsVersus($login1: String!, $login2: String!) {\n    data1: getPersonalGeneral(login: $login1) {\n      userLevelRecords {\n        monthsPassed\n        level\n      }\n    }\n    data2: getPersonalGeneral(login: $login2) {\n      userLevelRecords {\n        monthsPassed\n        level\n      }\n    }\n  }\n": types.GetLevelRecordsVersusDocument,
     "\n  query GetEvalCountByDateTemplateVersus(\n    $login1: String!\n    $login2: String!\n    $dateTemplate: DateTemplate!\n  ) {\n    data1: getPersonalEval(login: $login1) {\n      countByDateTemplate(dateTemplate: $dateTemplate) {\n        data\n        start\n        end\n      }\n    }\n    data2: getPersonalEval(login: $login2) {\n      countByDateTemplate(dateTemplate: $dateTemplate) {\n        data\n        start\n        end\n      }\n    }\n  }\n": types.GetEvalCountByDateTemplateVersusDocument,
     "\n  query GetLogtimeByDateTemplateVersus(\n    $login1: String!\n    $login2: String!\n    $dateTemplate: DateTemplate!\n  ) {\n    data1: getPersonalGeneral(login: $login1) {\n      logtimeByDateTemplate(dateTemplate: $dateTemplate) {\n        data\n        start\n        end\n      }\n    }\n    data2: getPersonalGeneral(login: $login2) {\n      logtimeByDateTemplate(dateTemplate: $dateTemplate) {\n        data\n        start\n        end\n      }\n    }\n  }\n": types.GetLogtimeByDateTemplateVersusDocument,
-    "\n  query GetVersusZeroCost($login1: String!, $login2: String!) {\n    data1: getPersonalGeneral(login: $login1) {\n      userProfile {\n        level\n      }\n      beginAt\n    }\n    data2: getPersonalGeneral(login: $login2) {\n      userProfile {\n        level\n      }\n      beginAt\n    }\n  }\n": types.GetVersusZeroCostDocument,
+    "\n  query GetProjectInfoZeroCostByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      name\n      url\n      description\n      minUserCount\n      maxUserCount\n      estimateTime\n      difficulty\n      objectives\n      skills\n    }\n  }\n": types.GetProjectInfoZeroCostByProjectNameDocument,
     "\n  query GetAveragePassFinalMarkByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      averagePassFinalMark\n    }\n  }\n": types.GetAveragePassFinalMarkByProjectNameDocument,
     "\n  query GetClosedTeamCountByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      closedTeamCount\n    }\n  }\n": types.GetClosedTeamCountByProjectNameDocument,
     "\n  query GetCurrRegisteredTeamCountByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      currRegisteredTeamCount\n    }\n  }\n": types.GetCurrRegisteredTeamCountByProjectNameDocument,
     "\n  query GetValidatedRateByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      validatedRate {\n        total\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n": types.GetValidatedRateByProjectNameDocument,
-    "\n  query GetProjectInfoZeroCostByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      name\n      url\n      description\n      minUserCount\n      maxUserCount\n      estimateTime\n      difficulty\n      objectives\n      skills\n    }\n  }\n": types.GetProjectInfoZeroCostByProjectNameDocument,
     "\n  mutation DeleteAccount {\n    deleteAccount\n  }\n": types.DeleteAccountDocument,
     "\n  mutation LinkGoogle($google: GoogleLoginInput!) {\n    linkGoogle(google: $google) {\n      userId\n      linkedAccounts {\n        platform\n        id\n        email\n        linkedAt\n      }\n    }\n  }\n": types.LinkGoogleDocument,
     "\n  mutation UnlinkAccount($targetPlatform: String!) {\n    unlinkAccount(targetPlatform: $targetPlatform) {\n      userId\n      linkedAccounts {\n        platform\n        id\n        email\n        linkedAt\n      }\n    }\n  }\n": types.UnlinkAccountDocument,
     "\n  fragment AccountFields on Account {\n    userId\n    linkedAccounts {\n      platform\n      id\n      email\n      linkedAt\n    }\n  }\n": types.AccountFieldsFragmentDoc,
     "\n  query GetSetting {\n    getSetting {\n      account {\n        ...AccountFields\n      }\n    }\n  }\n": types.GetSettingDocument,
-    "\n  mutation GetNewAccessToken($refreshToken: String!) {\n    refreshToken(refreshToken: $refreshToken) {\n      message\n      accessToken\n      refreshToken\n      userId\n    }\n  }\n": types.GetNewAccessTokenDocument,
-    "\n  mutation Logout {\n    logout\n  }\n": types.LogoutDocument,
-    "\n  fragment coalitionFields on Coalition {\n    id\n    name\n    slug\n    imageUrl\n    coverUrl\n    color\n    score\n    userId\n  }\n": types.CoalitionFieldsFragmentDoc,
-    "\n  fragment projectPreviewFields on ProjectPreview {\n    id\n    name\n    url\n  }\n": types.ProjectPreviewFieldsFragmentDoc,
-    "\n  fragment userPreviewFields on UserPreview {\n    id\n    login\n    imgUrl\n  }\n": types.UserPreviewFieldsFragmentDoc,
 };
 
 /**
@@ -101,10 +101,6 @@ export function gql(source: string): unknown;
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  mutation googleLogin($google: GoogleLoginInput!, $ftCode: String) {\n    googleLogin(google: $google, ftCode: $ftCode) {\n      __typename\n      ... on LoginSuccess {\n        message\n        accessToken\n        refreshToken\n        userId\n      }\n      ... on LoginNotLinked {\n        message\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation googleLogin($google: GoogleLoginInput!, $ftCode: String) {\n    googleLogin(google: $google, ftCode: $ftCode) {\n      __typename\n      ... on LoginSuccess {\n        message\n        accessToken\n        refreshToken\n        userId\n      }\n      ... on LoginNotLinked {\n        message\n      }\n    }\n  }\n"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
 export function gql(source: "\n  query FindUserPreview($login: String!, $limit: Int!) {\n    findUserPreview(login: $login, limit: $limit) {\n      id\n      login\n      imgUrl\n    }\n  }\n"): (typeof documents)["\n  query FindUserPreview($login: String!, $limit: Int!) {\n    findUserPreview(login: $login, limit: $limit) {\n      id\n      login\n      imgUrl\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -114,6 +110,30 @@ export function gql(source: "\n  query FindProjectPreview($name: String!, $limit
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query GetMyProfile {\n    getPersonalGeneral {\n      userProfile {\n        id\n        login\n        imgUrl\n        displayname\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetMyProfile {\n    getPersonalGeneral {\n      userProfile {\n        id\n        login\n        imgUrl\n        displayname\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation GetNewAccessToken($refreshToken: String!) {\n    refreshToken(refreshToken: $refreshToken) {\n      message\n      accessToken\n      refreshToken\n      userId\n    }\n  }\n"): (typeof documents)["\n  mutation GetNewAccessToken($refreshToken: String!) {\n    refreshToken(refreshToken: $refreshToken) {\n      message\n      accessToken\n      refreshToken\n      userId\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation googleLogin($google: GoogleLoginInput!, $ftCode: String) {\n    googleLogin(google: $google, ftCode: $ftCode) {\n      __typename\n      ... on LoginSuccess {\n        message\n        accessToken\n        refreshToken\n        userId\n      }\n      ... on LoginNotLinked {\n        message\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation googleLogin($google: GoogleLoginInput!, $ftCode: String) {\n    googleLogin(google: $google, ftCode: $ftCode) {\n      __typename\n      ... on LoginSuccess {\n        message\n        accessToken\n        refreshToken\n        userId\n      }\n      ... on LoginNotLinked {\n        message\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation Logout {\n    logout\n  }\n"): (typeof documents)["\n  mutation Logout {\n    logout\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  fragment coalitionFields on Coalition {\n    id\n    name\n    slug\n    imageUrl\n    coverUrl\n    color\n    score\n    userId\n  }\n"): (typeof documents)["\n  fragment coalitionFields on Coalition {\n    id\n    name\n    slug\n    imageUrl\n    coverUrl\n    color\n    score\n    userId\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  fragment projectPreviewFields on ProjectPreview {\n    id\n    name\n    url\n  }\n"): (typeof documents)["\n  fragment projectPreviewFields on ProjectPreview {\n    id\n    name\n    url\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  fragment userPreviewFields on UserPreview {\n    id\n    login\n    imgUrl\n  }\n"): (typeof documents)["\n  fragment userPreviewFields on UserPreview {\n    id\n    login\n    imgUrl\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -225,6 +245,18 @@ export function gql(source: "\n  query GetLeaderboardLevel(\n    $pageSize: Int!
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function gql(source: "\n  query GetPersonalEvalZeroCostByLogin($login: String!) {\n    getPersonalEval(login: $login) {\n      correctionPoint\n      recentComment\n    }\n  }\n"): (typeof documents)["\n  query GetPersonalEvalZeroCostByLogin($login: String!) {\n    getPersonalEval(login: $login) {\n      correctionPoint\n      recentComment\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query GetPersonalGeneralZeroCostByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      beginAt\n      blackholedAt\n      ...coalitionScoreFragment\n      teamInfo {\n        lastPassed\n        lastRegistered\n      }\n      wallet\n    }\n  }\n\n  fragment coalitionScoreFragment on PersonalGeneral {\n    userProfile {\n      coalition {\n        ...coalitionFields\n      }\n    }\n    scoreInfo {\n      value\n      rankInCoalition\n    }\n  }\n"): (typeof documents)["\n  query GetPersonalGeneralZeroCostByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      beginAt\n      blackholedAt\n      ...coalitionScoreFragment\n      teamInfo {\n        lastPassed\n        lastRegistered\n      }\n      wallet\n    }\n  }\n\n  fragment coalitionScoreFragment on PersonalGeneral {\n    userProfile {\n      coalition {\n        ...coalitionFields\n      }\n    }\n    scoreInfo {\n      value\n      rankInCoalition\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query GetVersusZeroCost($login1: String!, $login2: String!) {\n    data1: getPersonalGeneral(login: $login1) {\n      userProfile {\n        level\n      }\n      beginAt\n    }\n    data2: getPersonalGeneral(login: $login2) {\n      userProfile {\n        level\n      }\n      beginAt\n    }\n  }\n"): (typeof documents)["\n  query GetVersusZeroCost($login1: String!, $login2: String!) {\n    data1: getPersonalGeneral(login: $login1) {\n      userProfile {\n        level\n      }\n      beginAt\n    }\n    data2: getPersonalGeneral(login: $login2) {\n      userProfile {\n        level\n      }\n      beginAt\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function gql(source: "\n  query GetAverageCommentLengthByLogin($login: String!) {\n    getPersonalEval(login: $login) {\n      averageCommentLength\n    }\n  }\n"): (typeof documents)["\n  query GetAverageCommentLengthByLogin($login: String!) {\n    getPersonalEval(login: $login) {\n      averageCommentLength\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -257,10 +289,6 @@ export function gql(source: "\n  query GetTotalDurationByLogin($login: String!) 
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query GetPersonalEvalZeroCostByLogin($login: String!) {\n    getPersonalEval(login: $login) {\n      correctionPoint\n      recentComment\n    }\n  }\n"): (typeof documents)["\n  query GetPersonalEvalZeroCostByLogin($login: String!) {\n    getPersonalEval(login: $login) {\n      correctionPoint\n      recentComment\n    }\n  }\n"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
 export function gql(source: "\n  query GetCharacterByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      character {\n        name\n        imgUrl\n        types {\n          name\n          description\n          color\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetCharacterByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      character {\n        name\n        imgUrl\n        types {\n          name\n          description\n          color\n        }\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -282,10 +310,6 @@ export function gql(source: "\n  query GetPrefferedTimeByDateTemplateByLogin(\n 
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query GetTeamInfoByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      teamInfo {\n        teams {\n          id\n          name\n          occurrence\n          projectPreview {\n            ...projectPreviewFields\n          }\n          status\n          lastEventTime\n          isValidated\n          finalMark\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetTeamInfoByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      teamInfo {\n        teams {\n          id\n          name\n          occurrence\n          projectPreview {\n            ...projectPreviewFields\n          }\n          status\n          lastEventTime\n          isValidated\n          finalMark\n        }\n      }\n    }\n  }\n"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function gql(source: "\n  query GetPersonalGeneralZeroCostByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      beginAt\n      blackholedAt\n      ...coalitionScoreFragment\n      teamInfo {\n        lastPassed\n        lastRegistered\n      }\n      wallet\n    }\n  }\n\n  fragment coalitionScoreFragment on PersonalGeneral {\n    userProfile {\n      coalition {\n        ...coalitionFields\n      }\n    }\n    scoreInfo {\n      value\n      rankInCoalition\n    }\n  }\n"): (typeof documents)["\n  query GetPersonalGeneralZeroCostByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      beginAt\n      blackholedAt\n      ...coalitionScoreFragment\n      teamInfo {\n        lastPassed\n        lastRegistered\n      }\n      wallet\n    }\n  }\n\n  fragment coalitionScoreFragment on PersonalGeneral {\n    userProfile {\n      coalition {\n        ...coalitionFields\n      }\n    }\n    scoreInfo {\n      value\n      rankInCoalition\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -313,7 +337,7 @@ export function gql(source: "\n  query GetLogtimeByDateTemplateVersus(\n    $log
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query GetVersusZeroCost($login1: String!, $login2: String!) {\n    data1: getPersonalGeneral(login: $login1) {\n      userProfile {\n        level\n      }\n      beginAt\n    }\n    data2: getPersonalGeneral(login: $login2) {\n      userProfile {\n        level\n      }\n      beginAt\n    }\n  }\n"): (typeof documents)["\n  query GetVersusZeroCost($login1: String!, $login2: String!) {\n    data1: getPersonalGeneral(login: $login1) {\n      userProfile {\n        level\n      }\n      beginAt\n    }\n    data2: getPersonalGeneral(login: $login2) {\n      userProfile {\n        level\n      }\n      beginAt\n    }\n  }\n"];
+export function gql(source: "\n  query GetProjectInfoZeroCostByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      name\n      url\n      description\n      minUserCount\n      maxUserCount\n      estimateTime\n      difficulty\n      objectives\n      skills\n    }\n  }\n"): (typeof documents)["\n  query GetProjectInfoZeroCostByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      name\n      url\n      description\n      minUserCount\n      maxUserCount\n      estimateTime\n      difficulty\n      objectives\n      skills\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -330,10 +354,6 @@ export function gql(source: "\n  query GetCurrRegisteredTeamCountByProjectName($
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query GetValidatedRateByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      validatedRate {\n        total\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetValidatedRateByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      validatedRate {\n        total\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function gql(source: "\n  query GetProjectInfoZeroCostByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      name\n      url\n      description\n      minUserCount\n      maxUserCount\n      estimateTime\n      difficulty\n      objectives\n      skills\n    }\n  }\n"): (typeof documents)["\n  query GetProjectInfoZeroCostByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      name\n      url\n      description\n      minUserCount\n      maxUserCount\n      estimateTime\n      difficulty\n      objectives\n      skills\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -354,26 +374,6 @@ export function gql(source: "\n  fragment AccountFields on Account {\n    userId
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query GetSetting {\n    getSetting {\n      account {\n        ...AccountFields\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetSetting {\n    getSetting {\n      account {\n        ...AccountFields\n      }\n    }\n  }\n"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function gql(source: "\n  mutation GetNewAccessToken($refreshToken: String!) {\n    refreshToken(refreshToken: $refreshToken) {\n      message\n      accessToken\n      refreshToken\n      userId\n    }\n  }\n"): (typeof documents)["\n  mutation GetNewAccessToken($refreshToken: String!) {\n    refreshToken(refreshToken: $refreshToken) {\n      message\n      accessToken\n      refreshToken\n      userId\n    }\n  }\n"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function gql(source: "\n  mutation Logout {\n    logout\n  }\n"): (typeof documents)["\n  mutation Logout {\n    logout\n  }\n"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function gql(source: "\n  fragment coalitionFields on Coalition {\n    id\n    name\n    slug\n    imageUrl\n    coverUrl\n    color\n    score\n    userId\n  }\n"): (typeof documents)["\n  fragment coalitionFields on Coalition {\n    id\n    name\n    slug\n    imageUrl\n    coverUrl\n    color\n    score\n    userId\n  }\n"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function gql(source: "\n  fragment projectPreviewFields on ProjectPreview {\n    id\n    name\n    url\n  }\n"): (typeof documents)["\n  fragment projectPreviewFields on ProjectPreview {\n    id\n    name\n    url\n  }\n"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function gql(source: "\n  fragment userPreviewFields on UserPreview {\n    id\n    login\n    imgUrl\n  }\n"): (typeof documents)["\n  fragment userPreviewFields on UserPreview {\n    id\n    login\n    imgUrl\n  }\n"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

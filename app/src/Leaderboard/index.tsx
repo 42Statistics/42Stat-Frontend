@@ -1,7 +1,7 @@
 import { Seo } from '@components/elements/Seo';
-import { withFooter } from '@hoc/withFooter';
-import { withHead } from '@hoc/withHead';
 import { ROUTES } from '@shared/constants/ROUTES';
+import { withFooter } from '@shared/hoc/withFooter';
+import { withHead } from '@shared/hoc/withHead';
 import { Tab, TabPanel, Tabs, VStack } from '@shared/ui-kit';
 import { useNavigate, useParams } from 'react-router-dom';
 import LeaderboardCoalitionScoreTab from './tabs/CoalitionScore';

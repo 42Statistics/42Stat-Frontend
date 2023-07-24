@@ -1,8 +1,8 @@
 import { Seo } from '@components/elements/Seo';
 import { Dashboard } from '@components/templates/Dashboard';
-import { withFooter } from '@hoc/withFooter';
-import { withHead } from '@hoc/withHead';
 import { ROUTES } from '@shared/constants/ROUTES';
+import { withFooter } from '@shared/hoc/withFooter';
+import { withHead } from '@shared/hoc/withHead';
 import { Tab, TabPanel, Tabs, VStack } from '@shared/ui-kit';
 import { userAtom } from '@shared/utils/jotai/atoms/userAtom';
 import { useAtomValue } from 'jotai';

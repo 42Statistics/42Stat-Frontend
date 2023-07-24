@@ -1,7 +1,7 @@
 import { Seo } from '@components/elements/Seo';
 import { Dashboard } from '@components/templates/Dashboard';
-import { withFooter } from '@hoc/withFooter';
-import { withHead } from '@hoc/withHead';
+import { withFooter } from '@shared/hoc/withFooter';
+import { withHead } from '@shared/hoc/withHead';
 import { H2BoldText, VStack } from '@shared/ui-kit';
 import { useHomeCircleDashboard } from './hooks/useHomeCircleDashboard';
 import { useHomeCoalitionDashboard } from './hooks/useHomeCoalitionDashboard';

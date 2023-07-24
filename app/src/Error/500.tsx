@@ -1,6 +1,6 @@
 import { Seo } from '@components/elements/Seo';
-import { withHead } from '@hoc/withHead';
 import { ROUTES } from '@shared/constants/ROUTES';
+import { withHead } from '@shared/hoc/withHead';
 import {
   AccentBoldText,
   AccentH3Text,

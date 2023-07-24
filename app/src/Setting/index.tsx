@@ -1,6 +1,6 @@
 import { Seo } from '@components/elements/Seo';
-import { withFooter } from '@hoc/withFooter';
-import { withHead } from '@hoc/withHead';
+import { withFooter } from '@shared/hoc/withFooter';
+import { withHead } from '@shared/hoc/withHead';
 import { H1BoldText, VStack } from '@shared/ui-kit';
 import { AccountSection } from './sections/AccountSection';
 import { LinkGoogleSection } from './sections/LinkGoogleSection';

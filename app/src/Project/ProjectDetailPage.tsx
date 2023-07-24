@@ -1,7 +1,7 @@
 import { Seo } from '@components/elements/Seo';
 import { Dashboard } from '@components/templates/Dashboard';
-import { withFooter } from '@hoc/withFooter';
-import { withHead } from '@hoc/withHead';
+import { withFooter } from '@shared/hoc/withFooter';
+import { withHead } from '@shared/hoc/withHead';
 import { VStack } from '@shared/ui-kit';
 import { useParams } from 'react-router-dom';
 import { ProjectIntroduction } from './components/ProjectIntroduction';

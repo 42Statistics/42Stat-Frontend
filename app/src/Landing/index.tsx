@@ -4,7 +4,7 @@ import {
   GoogleLoginButton,
 } from '@components/elements/LoginButton';
 import { useTheme } from '@emotion/react';
-import { withHead } from '@hoc/withHead';
+import { withHead } from '@shared/hoc/withHead';
 import { VStack } from '@shared/ui-kit';
 import { Introduction } from './components/Introduction';
 

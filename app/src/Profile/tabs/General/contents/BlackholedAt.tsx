@@ -1,9 +1,9 @@
+import { ReactComponent as SmileyCheekySvg } from '@/Profile/assets/blackhole/smiley-cheeky.svg';
+import { ReactComponent as SmileySadSvg } from '@/Profile/assets/blackhole/smiley-sad.svg';
+import { ReactComponent as SmileyScaredSvg } from '@/Profile/assets/blackhole/smiley-scared.svg';
+import { ReactComponent as SmileySmile1Svg } from '@/Profile/assets/blackhole/smiley-smile-1.svg';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
-import { ReactComponent as SmileyCheekySvg } from '@shared/assets/blackhole/smiley-cheeky.svg';
-import { ReactComponent as SmileySadSvg } from '@shared/assets/blackhole/smiley-sad.svg';
-import { ReactComponent as SmileyScaredSvg } from '@shared/assets/blackhole/smiley-scared.svg';
-import { ReactComponent as SmileySmile1Svg } from '@shared/assets/blackhole/smiley-smile-1.svg';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,

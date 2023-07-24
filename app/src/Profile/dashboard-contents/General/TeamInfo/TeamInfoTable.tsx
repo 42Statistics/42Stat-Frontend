@@ -78,11 +78,13 @@ const Table = styled.table`
   th {
     text-align: center;
     padding: 0.8rem 2rem;
+    vertical-align: middle;
   }
 
   td {
     text-align: center;
     padding: 0.4rem 2rem;
+    vertical-align: middle;
   }
 
   tbody tr {

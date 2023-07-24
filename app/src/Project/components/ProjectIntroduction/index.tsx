@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import { BoldText, Divider, HStack, Text, VStack } from '@shared/ui-kit';
 import { Mobile, TabletAndAbove } from '@shared/utils/react-responsive/Device';
 import { useParams } from 'react-router-dom';
-import { GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME } from '../../queries/GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME';
+import { GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME } from '../../dashboard-contents-queries/GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME';
 
 export const ProjectIntroduction = () => {
   const { projectName } = useParams() as { projectName: string };

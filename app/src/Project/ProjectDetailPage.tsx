@@ -5,7 +5,7 @@ import { withHead } from '@shared/hoc/withHead';
 import { VStack } from '@shared/ui-kit';
 import { useParams } from 'react-router-dom';
 import { ProjectIntroduction } from './components/ProjectIntroduction';
-import { useProjectDetailPageDashboard } from './hooks/useProjectDetailPageDashboard';
+import { useProjectDetailPageDashboard } from './dashboard-hooks/useProjectDetailPageDashboard';
 
 const ProjectDetailPage = () => {
   return (

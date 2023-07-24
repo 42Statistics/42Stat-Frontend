@@ -7,7 +7,7 @@ import {
 } from '@shared/components/DashboardContentView/Error';
 import { TextDefault } from '@shared/components/DashboardContentView/Text/TextDefault';
 import { useParams } from 'react-router-dom';
-import { GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME } from '../queries/GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME';
+import { GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME } from '../dashboard-contents-queries/GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME';
 
 export const BasicInfo = () => {
   const { projectName } = useParams() as { projectName: string };

@@ -1,7 +1,7 @@
 import type {
-    DesktopDashboardRowType,
-    MobileDashboardRowType,
-    TabletDashboardRowType,
+  DesktopDashboardRowType,
+  MobileDashboardRowType,
+  TabletDashboardRowType,
 } from '@shared/types/Dashboard';
 
 export const projectDetailPageDesktopDashboardRows: DesktopDashboardRowType[] =

@@ -8,7 +8,7 @@ import {
   ProjectUrl,
   Skills,
   ValidatedRate,
-} from '../contents';
+} from '.';
 
 export const projectDetailPageDashboardContents = [
   {

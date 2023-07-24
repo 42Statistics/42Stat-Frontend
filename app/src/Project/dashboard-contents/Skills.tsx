@@ -8,15 +8,16 @@ import {
   NoneDash,
 } from '@shared/components/DashboardContentView/Error';
 import { Label, VStack } from '@shared/ui-kit';
+import { isDefined } from '@shared/utils/isDefined';
 import { isShortString } from '@shared/utils/isShortString';
 import { useParams } from 'react-router-dom';
-import { GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME } from '../queries/GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME';
+import { GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME } from '../dashboard-contents-queries/GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME';
 
-export const Objectives = () => {
+export const Skills = () => {
   const theme = useTheme();
   const { projectName } = useParams() as { projectName: string };
 
-  const title = '키워드';
+  const title = '스킬';
   const { loading, error, data } = useQuery(
     GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME,
     {
@@ -34,10 +35,10 @@ export const Objectives = () => {
     return <DashboardContentNotFound title={title} />;
   }
 
-  const { objectives } = data.getProjectInfo;
-  const objectivesCount = objectives.length;
+  const { skills } = data.getProjectInfo;
 
-  if (objectivesCount === 0) {
+  const skillsCount = skills.filter(isDefined).length;
+  if (skillsCount === 0) {
     return (
       <DashboardContent title={title}>
         <NoneDash />
@@ -48,15 +49,14 @@ export const Objectives = () => {
   return (
     <DashboardContent title={title}>
       <VStack spacing="1rem">
-        {objectives.sort(isShortString).map((objective) => (
-          <Label
-            key={objective}
-            backgroundColor={theme.colors.accent.default}
-            fontWeight={theme.fonts.weight.medium}
-          >
-            {objective}
-          </Label>
-        ))}
+        {skills
+          .filter(isDefined)
+          .sort(isShortString)
+          .map((skill) => (
+            <Label key={skill} fontWeight={theme.fonts.weight.medium}>
+              {skill}
+            </Label>
+          ))}
       </VStack>
     </DashboardContent>
   );

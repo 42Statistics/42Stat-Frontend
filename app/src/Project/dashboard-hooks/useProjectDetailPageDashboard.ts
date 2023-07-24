@@ -1,9 +1,9 @@
-import { projectDetailPageDashboardContents } from './projectDetailPageDashboardContents';
+import { projectDetailPageDashboardContents } from '../dashboard-contents/projectDetailPageDashboardContents';
 import {
   projectDetailPageDesktopDashboardRows,
   projectDetailPageMobileDashboardRows,
   projectDetailPageTabletDashboardRows,
-} from './projectDetailPageDashboardRows';
+} from '../dashboard-frames/projectDetailPageDashboardRows';
 
 export const useProjectDetailPageDashboard = () => ({
   contents: projectDetailPageDashboardContents,

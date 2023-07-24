@@ -1,3 +1,6 @@
+import FtOAuthPage from '@/FtOAuth';
+import FtOAuthRedirectPage from '@/FtOAuthRedirect';
+import NotFoundPage from '@/Error/404';
 import SettingPage from '@/Setting';
 import { DeferredComponent } from '@components/common';
 import { AuthGuard } from '@guards/AuthGuard';
@@ -5,9 +8,6 @@ import { NoAuthGuard } from '@guards/NoAuthGuard';
 import { UserMiddleware } from '@guards/UserMiddleware';
 import { LandingLayout } from '@layouts/LandingLayout';
 import { MainLayout } from '@layouts/MainLayout';
-import NotFoundPage from '@/Error/404';
-import FtOAuthPage from '@pages/FtOAuthPage';
-import FtOAuthRedirectPage from '@pages/FtOAuthRedirectPage';
 import { HomePageSkeleton } from '@pages/PageSkeletons/HomePageSkeleton';
 import { ProfilePageSkeleton } from '@pages/PageSkeletons/ProfilePageSkeleton';
 import { ROUTES } from '@shared/constants/ROUTES';

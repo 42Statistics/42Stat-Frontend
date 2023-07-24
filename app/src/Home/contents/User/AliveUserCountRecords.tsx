@@ -1,11 +1,11 @@
 import { useQuery } from '@apollo/client';
-import { AreaChart } from '@components/elements/Chart';
 import {
   DashboardContentBadRequest,
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { gql } from '@shared/__generated__';
+import { AreaChart } from '@shared/components/Chart';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import { numberWithUnitFormatter } from '@shared/utils/formatters';
 

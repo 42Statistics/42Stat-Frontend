@@ -1,5 +1,4 @@
 import { useQuery } from '@apollo/client';
-import { DonutChart } from '@components/elements/Chart';
 import {
   DashboardContentBadRequest,
   DashboardContentLoading,
@@ -7,6 +6,7 @@ import {
 } from '@components/elements/DashboardContentView/Error';
 import { useTheme } from '@emotion/react';
 import { gql } from '@shared/__generated__';
+import { DonutChart } from '@shared/components/Chart';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import { numberWithUnitFormatter } from '@shared/utils/formatters';
 

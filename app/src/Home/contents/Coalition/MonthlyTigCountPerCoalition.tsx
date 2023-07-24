@@ -1,5 +1,4 @@
 import { useQuery } from '@apollo/client';
-import { Center, H3Text, VStack } from '@components/common';
 import { CoalitionMark } from '@components/elements/CoalitionMark';
 import {
   DashboardContentBadRequest,
@@ -12,6 +11,7 @@ import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { gql } from '@shared/__generated__';
 import { DateTemplate } from '@shared/__generated__/graphql';
+import { Center, H3Text, VStack } from '@shared/ui-kit';
 import { numberWithUnitFormatter } from '@shared/utils/formatters';
 import dayjs from 'dayjs';
 import { capitalize } from 'lodash-es';

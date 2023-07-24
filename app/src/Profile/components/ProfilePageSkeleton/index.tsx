@@ -1,5 +1,5 @@
-import { VStack } from '@components/common';
 import { DashboardSkeleton } from '@components/templates/DashboardSkeleton';
+import { VStack } from '@shared/ui-kit';
 import { useProfileGeneralTabDashboardSkeleton } from './hooks/useProfileGeneralTabDashboardSkeleton';
 import { useProfilePageDashboardSkeleton } from './hooks/useProfilePageDashboardSkeleton';
 

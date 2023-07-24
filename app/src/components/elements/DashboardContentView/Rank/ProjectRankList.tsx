@@ -1,5 +1,5 @@
 import { ProjectRank } from '@shared/__generated__/graphql';
-import { VStack } from '@components/common';
+import { VStack } from '@shared/ui-kit';
 import { ProjectRankListItem } from './ProjectRankListItem';
 
 type ProjectRankListProps = {

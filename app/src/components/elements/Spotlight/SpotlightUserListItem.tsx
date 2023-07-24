@@ -1,6 +1,6 @@
-import { Avatar } from '@components/common';
 import { UserPreview } from '@shared/__generated__/graphql';
 import { ROUTES } from '@shared/constants/ROUTES';
+import { Avatar } from '@shared/ui-kit';
 import { SpotlightListItem } from './SpotlightListItem';
 
 type SpotlightUserListItemProps = {

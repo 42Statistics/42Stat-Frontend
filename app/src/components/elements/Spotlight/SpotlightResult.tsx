@@ -1,13 +1,13 @@
+import { QueryResult } from '@apollo/client';
+import { ApolloErrorView } from '@components/elements/ApolloErrorView';
+import { useTheme } from '@emotion/react';
+import styled from '@emotion/styled';
 import {
   Exact,
   FindProjectPreviewQuery,
   FindUserPreviewQuery,
 } from '@shared/__generated__/graphql';
-import { QueryResult } from '@apollo/client';
-import { Center, H3Text, VStack } from '@components/common';
-import { ApolloErrorView } from '@components/elements/ApolloErrorView';
-import { useTheme } from '@emotion/react';
-import styled from '@emotion/styled';
+import { Center, H3Text, VStack } from '@shared/ui-kit';
 import { SpotlightProjectSection } from './SpotlightProjectSection';
 import { SpotlightUserSection } from './SpotlightUserSection';
 

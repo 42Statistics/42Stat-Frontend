@@ -1,6 +1,6 @@
-import { CaptionText, Clickable, VStack } from '@components/common';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { CaptionText, Clickable, VStack } from '@shared/ui-kit';
 import { useLocation, useNavigate } from 'react-router-dom';
 import type { NavItemProps } from '../Desktop/DesktopNavItem';
 

@@ -1,16 +1,16 @@
 import { useQuery } from '@apollo/client';
+import { ApolloErrorView } from '@components/elements/ApolloErrorView';
+import { ApolloNotFoundView } from '@components/elements/ApolloNotFoundView';
+import styled from '@emotion/styled';
+import { gql } from '@shared/__generated__';
+import space_background from '@shared/assets/space-background.webp';
 import {
   Center,
   Loader,
   VStack,
   WhiteH2BoldText,
   WhiteText,
-} from '@components/common';
-import { ApolloErrorView } from '@components/elements/ApolloErrorView';
-import { ApolloNotFoundView } from '@components/elements/ApolloNotFoundView';
-import styled from '@emotion/styled';
-import { gql } from '@shared/__generated__';
-import space_background from '@shared/assets/space-background.webp';
+} from '@shared/ui-kit';
 import { getDateDiff } from '@shared/utils/getDateDiff';
 import { getDailyProgrammingQuote } from './getDailyProgrammingQuote';
 

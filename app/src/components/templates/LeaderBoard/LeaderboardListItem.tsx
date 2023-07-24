@@ -1,3 +1,7 @@
+import { useTheme } from '@emotion/react';
+import styled from '@emotion/styled';
+import { UserRank } from '@shared/__generated__/graphql';
+import { ROUTES } from '@shared/constants/ROUTES';
 import {
   Avatar,
   CaptionText,
@@ -9,11 +13,7 @@ import {
   MediumText,
   Spacer,
   Text,
-} from '@components/common';
-import { useTheme } from '@emotion/react';
-import styled from '@emotion/styled';
-import { UserRank } from '@shared/__generated__/graphql';
-import { ROUTES } from '@shared/constants/ROUTES';
+} from '@shared/ui-kit';
 import { numberWithUnitFormatter } from '@shared/utils/formatters';
 import { Mobile, TabletAndAbove } from '@shared/utils/responsive/Device';
 import { mq } from '@shared/utils/responsive/mq';

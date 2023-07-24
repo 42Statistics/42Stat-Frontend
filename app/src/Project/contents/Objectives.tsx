@@ -1,6 +1,4 @@
 import { useQuery } from '@apollo/client';
-import { VStack } from '@components/common';
-import { Label } from '@components/common/Label';
 import {
   DashboardContentBadRequest,
   DashboardContentLoading,
@@ -9,7 +7,7 @@ import {
 } from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useTheme } from '@emotion/react';
-import { isDefined } from '@shared/utils/isDefined';
+import { Label, VStack } from '@shared/ui-kit';
 import { isShortString } from '@shared/utils/isShortString';
 import { useParams } from 'react-router-dom';
 import { GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME } from '../queries/GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME';
@@ -37,7 +35,7 @@ export const Objectives = () => {
   }
 
   const { objectives } = data.getProjectInfo;
-  const objectivesCount = objectives.filter(isDefined).length;
+  const objectivesCount = objectives.length;
 
   if (objectivesCount === 0) {
     return (
@@ -50,18 +48,15 @@ export const Objectives = () => {
   return (
     <DashboardContent title={title}>
       <VStack spacing="1rem">
-        {objectives
-          .filter(isDefined)
-          .sort(isShortString)
-          .map((objective) => (
-            <Label
-              key={objective}
-              backgroundColor={theme.colors.accent.default}
-              fontWeight={theme.fonts.weight.medium}
-            >
-              {objective}
-            </Label>
-          ))}
+        {objectives.sort(isShortString).map((objective) => (
+          <Label
+            key={objective}
+            backgroundColor={theme.colors.accent.default}
+            fontWeight={theme.fonts.weight.medium}
+          >
+            {objective}
+          </Label>
+        ))}
       </VStack>
     </DashboardContent>
   );

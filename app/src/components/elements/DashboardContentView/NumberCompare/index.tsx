@@ -1,4 +1,4 @@
-import { H1BoldText, HStack, Text } from '@components/common';
+import { H1BoldText, HStack, Text } from '@shared/ui-kit';
 import { NoneDash } from '../Error/NoneDash';
 import { Diff } from './Diff';
 

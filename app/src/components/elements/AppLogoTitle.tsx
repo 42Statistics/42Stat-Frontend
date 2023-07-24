@@ -1,6 +1,6 @@
 import { AppLogoSvg } from '@shared/assets/AppLogoSvg';
 import { AppTitleSvg } from '@shared/assets/AppTitleSvg';
-import { HStack } from '@components/common';
+import { HStack } from '@shared/ui-kit';
 
 type AppLogoSize = 'sm' | 'md';
 

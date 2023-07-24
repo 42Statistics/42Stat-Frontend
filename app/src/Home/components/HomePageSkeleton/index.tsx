@@ -1,5 +1,5 @@
-import { H2BoldText, VStack } from '@components/common';
 import { DashboardSkeleton } from '@components/templates/DashboardSkeleton';
+import { H2BoldText, VStack } from '@shared/ui-kit';
 import { useHomeCircleDashboardSkeleton } from './hooks/useHomeCircleDashboardSkeleton';
 import { useHomeCoalitionDashboardSkeleton } from './hooks/useHomeCoalitionDashboardSkeleton';
 import { useHomeHeroDashboardSkeleton } from './hooks/useHomeHeroDashboardSkeleton';

@@ -1,3 +1,6 @@
+import { Seo } from '@components/elements/Seo';
+import { withHead } from '@hoc/withHead';
+import { ROUTES } from '@shared/constants/ROUTES';
 import {
   AccentBoldText,
   AccentH3Text,
@@ -5,10 +8,7 @@ import {
   Image,
   Text,
   VStack,
-} from '@components/common';
-import { Seo } from '@components/elements/Seo';
-import { withHead } from '@hoc/withHead';
-import { ROUTES } from '@shared/constants/ROUTES';
+} from '@shared/ui-kit';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 

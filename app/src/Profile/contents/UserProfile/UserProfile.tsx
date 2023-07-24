@@ -9,6 +9,11 @@ import coalition_gun_cover from '@shared/assets/coalition/cover/coalition-gun-co
 import coalition_lee_cover from '@shared/assets/coalition/cover/coalition-lee-cover.jpg';
 
 import {
+  DashboardContentBadRequest,
+  DashboardContentNotFound,
+} from '@components/elements/DashboardContentView/Error';
+import styled from '@emotion/styled';
+import {
   Avatar,
   HStack,
   VStack,
@@ -18,12 +23,7 @@ import {
   WhiteH3BoldText,
   WhiteMediumText,
   WhiteText,
-} from '@components/common';
-import {
-  DashboardContentBadRequest,
-  DashboardContentNotFound,
-} from '@components/elements/DashboardContentView/Error';
-import styled from '@emotion/styled';
+} from '@shared/ui-kit';
 import { getTitleWithLogin } from '@shared/utils/getTitleWithLogin';
 import { Desktop, TabletAndBelow } from '@shared/utils/responsive/Device';
 import { titleCase } from '@shared/utils/titleCase';

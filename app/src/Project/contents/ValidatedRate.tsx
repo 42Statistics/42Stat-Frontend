@@ -1,5 +1,4 @@
 import { useQuery } from '@apollo/client';
-import { H3Text } from '@components/common';
 import { PieChart } from '@components/elements/Chart';
 import {
   DashboardContentBadRequest,
@@ -9,6 +8,7 @@ import {
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { useTheme } from '@emotion/react';
 import { gql } from '@shared/__generated__';
+import { H3Text } from '@shared/ui-kit';
 import { numberWithUnitFormatter } from '@shared/utils/formatters';
 import { useParams } from 'react-router-dom';
 

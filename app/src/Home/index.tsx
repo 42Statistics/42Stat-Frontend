@@ -1,8 +1,8 @@
-import { H2BoldText, VStack } from '@components/common';
 import { Seo } from '@components/elements/Seo';
 import { Dashboard } from '@components/templates/Dashboard';
 import { withFooter } from '@hoc/withFooter';
 import { withHead } from '@hoc/withHead';
+import { H2BoldText, VStack } from '@shared/ui-kit';
 import { useHomeCircleDashboard } from './hooks/useHomeCircleDashboard';
 import { useHomeCoalitionDashboard } from './hooks/useHomeCoalitionDashboard';
 import { useHomeHeroDashboard } from './hooks/useHomeHeroDashboard';

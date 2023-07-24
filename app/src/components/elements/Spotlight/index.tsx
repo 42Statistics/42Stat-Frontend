@@ -1,11 +1,10 @@
 import { useLazyQuery } from '@apollo/client';
-import { VStack } from '@components/common';
-import { Dialog } from '@components/common/Dialog';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { gql } from '@shared/__generated__';
 import { ReactComponent as MdSearch } from '@shared/assets/icon/md-search.svg';
 import { DialogBaseProps } from '@shared/types/Modal';
+import { Dialog, VStack } from '@shared/ui-kit';
 import { SpotlightFocusContext } from '@shared/utils/contexts/SpotlightFocusContext';
 import { useRoveFocus } from '@shared/utils/hooks/useRoveFocus';
 import { useEffect, useState } from 'react';

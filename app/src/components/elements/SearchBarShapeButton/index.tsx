@@ -1,13 +1,7 @@
-import {
-  CaptionText,
-  Clickable,
-  HStack,
-  Spacer,
-  Text,
-} from '@components/common';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { ReactComponent as MdSearch } from '@shared/assets/icon/md-search.svg';
+import { CaptionText, Clickable, HStack, Spacer, Text } from '@shared/ui-kit';
 import { isSpotlightOpenAtom } from '@shared/utils/jotai/atoms/isSpotlightOpenAtom';
 import { useSetAtom } from 'jotai';
 

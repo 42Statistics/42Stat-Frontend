@@ -1,11 +1,11 @@
 import { useQuery } from '@apollo/client';
-import { H3BoldText, Scroll, Text, VStack } from '@components/common';
 import {
   DashboardContentBadRequest,
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import styled from '@emotion/styled';
+import { H3BoldText, Scroll, Text, VStack } from '@shared/ui-kit';
 import { useParams } from 'react-router-dom';
 import { GET_PERSONAL_EVAL_ZERO_COST_BY_LOGIN } from '../queries/GET_PERSONAL_EVAL_ZERO_COST_BY_LOGIN';
 

@@ -1,5 +1,5 @@
 import { UserRank } from '@shared/__generated__/graphql';
-import { VStack } from '@components/common';
+import { VStack } from '@shared/ui-kit';
 import { LeaderboardList } from './LeaderboardList';
 import { LeaderboardListItem } from './LeaderboardListItem';
 

@@ -1,11 +1,11 @@
 import { useQuery } from '@apollo/client';
-import { H2BoldText, H3Text, HStack } from '@components/common';
 import {
   DashboardContentBadRequest,
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { DashboardContent } from '@components/templates/DashboardContent';
+import { H2BoldText, H3Text, HStack } from '@shared/ui-kit';
 import { dDayFormatter } from '@shared/utils/formatters';
 import { getDateDiff } from '@shared/utils/getDateDiff';
 import dayjs from 'dayjs';

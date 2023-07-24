@@ -1,13 +1,12 @@
 import { DashboardContent } from '@/components/templates/DashboardContent';
-import { gql } from '@shared/__generated__';
 import { useQuery } from '@apollo/client';
-import { H3BoldText, HStack, Image, VStack } from '@components/common';
-import { Label } from '@components/common/Label';
 import {
   DashboardContentBadRequest,
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
+import { gql } from '@shared/__generated__';
+import { H3BoldText, HStack, Image, Label, VStack } from '@shared/ui-kit';
 import { useParams } from 'react-router-dom';
 
 const GET_CHARACTER_BY_LOGIN = gql(/* GraphQL */ `

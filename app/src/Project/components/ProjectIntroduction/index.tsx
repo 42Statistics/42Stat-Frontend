@@ -1,7 +1,7 @@
 import { ProjectIntroductionSkeleton } from '@/Project/components/ProjectIntroductionSkeleton';
 import { useQuery } from '@apollo/client';
-import { BoldText, Divider, HStack, Text, VStack } from '@components/common';
 import styled from '@emotion/styled';
+import { BoldText, Divider, HStack, Text, VStack } from '@shared/ui-kit';
 import { Mobile, TabletAndAbove } from '@shared/utils/responsive/Device';
 import { useParams } from 'react-router-dom';
 import { GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME } from '../../queries/GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME';

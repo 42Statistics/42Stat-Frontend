@@ -1,6 +1,6 @@
-import { Exact, FindProjectPreviewQuery } from '@shared/__generated__/graphql';
 import { QueryResult } from '@apollo/client';
-import { BoldText, Divider, VStack } from '@components/common';
+import { Exact, FindProjectPreviewQuery } from '@shared/__generated__/graphql';
+import { BoldText, Divider, VStack } from '@shared/ui-kit';
 import { SpotlightProjectList } from './SpotlightProjectList';
 
 type SpotlightProjectSectionProps = {

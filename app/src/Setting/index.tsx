@@ -1,7 +1,7 @@
-import { H1BoldText, VStack } from '@components/common';
 import { Seo } from '@components/elements/Seo';
 import { withFooter } from '@hoc/withFooter';
 import { withHead } from '@hoc/withHead';
+import { H1BoldText, VStack } from '@shared/ui-kit';
 import { AccountSection } from './sections/AccountSection';
 import { LinkGoogleSection } from './sections/LinkGoogleSection';
 

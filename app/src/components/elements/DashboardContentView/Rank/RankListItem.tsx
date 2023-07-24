@@ -1,5 +1,5 @@
-import { H2BoldText, H3BoldText, HStack, MediumText } from '@components/common';
 import { useTheme } from '@emotion/react';
+import { H2BoldText, H3BoldText, HStack, MediumText } from '@shared/ui-kit';
 import { numberWithUnitFormatter } from '@shared/utils/formatters';
 import { Link } from 'react-router-dom';
 

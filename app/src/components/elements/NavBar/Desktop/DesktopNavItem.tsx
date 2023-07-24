@@ -1,6 +1,6 @@
-import { Clickable, HStack, Text } from '@components/common';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { Clickable, HStack, Text } from '@shared/ui-kit';
 import { useLocation, useNavigate } from 'react-router-dom';
 import type { NavRoute } from '../hooks/useNavRoutes';
 

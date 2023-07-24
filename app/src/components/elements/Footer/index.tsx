@@ -1,7 +1,7 @@
-import { HStack, Text } from '@components/common';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { ReactComponent as GithubLogo } from '@shared/assets/logo/github-logo.svg';
+import { HStack, Text } from '@shared/ui-kit';
 import { Link } from 'react-router-dom';
 
 export const Footer = () => {

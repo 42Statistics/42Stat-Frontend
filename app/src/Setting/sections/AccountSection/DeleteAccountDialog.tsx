@@ -1,7 +1,7 @@
 import { useMutation } from '@apollo/client';
-import { ConfirmDialog } from '@components/common/Dialog';
 import { gql } from '@shared/__generated__';
 import { ROUTES } from '@shared/constants/ROUTES';
+import { ConfirmDialog } from '@shared/ui-kit/Dialog';
 import { removeAccessToken } from '@shared/utils/storage/accessToken';
 import { removeGoogleCredential } from '@shared/utils/storage/googleCredential';
 import { removeRefreshToken } from '@shared/utils/storage/refreshToken';

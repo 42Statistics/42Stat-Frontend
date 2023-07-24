@@ -1,5 +1,5 @@
-import { Skeleton, VStack } from '@components/common';
 import { useTheme } from '@emotion/react';
+import { Skeleton, VStack } from '@shared/ui-kit';
 
 export const LeaderboardTabResultSkeleton = () => {
   return (

@@ -1,5 +1,5 @@
-import { Text } from '@components/common';
 import { TeamStatus } from '@shared/__generated__/graphql';
+import { Text } from '@shared/ui-kit';
 import { getDateDiff } from '@shared/utils/getDateDiff';
 
 type DateDiffWithStatusProps = {

@@ -1,5 +1,5 @@
-import { Text } from '@components/common';
 import styled from '@emotion/styled';
+import { Text } from '@shared/ui-kit';
 
 type TextMaxProps = {
   isMax: boolean;

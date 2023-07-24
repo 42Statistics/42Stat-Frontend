@@ -1,4 +1,4 @@
-import { Button } from '@components/common';
+import { Button } from '@shared/ui-kit';
 
 type DeleteAccountButtonProps = {
   onClick: () => void;

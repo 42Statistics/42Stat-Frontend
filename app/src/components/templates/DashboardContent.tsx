@@ -1,5 +1,5 @@
-import { CaptionText, Center, H3BoldText, VStack } from '@components/common';
 import styled from '@emotion/styled';
+import { CaptionText, Center, H3BoldText, VStack } from '@shared/ui-kit';
 
 export type DashboardContentProps = React.PropsWithChildren<{
   title?: string;

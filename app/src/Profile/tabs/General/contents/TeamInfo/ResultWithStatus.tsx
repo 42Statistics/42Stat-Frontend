@@ -1,5 +1,5 @@
 import { TeamStatus } from '@shared/__generated__/graphql';
-import { Text } from '@components/common';
+import { Text } from '@shared/ui-kit';
 import { MarkLabel } from './MarkLabel';
 
 type ResultWithStatusProps = {

@@ -1,9 +1,9 @@
-import { EvalLogEdge } from '@shared/__generated__/graphql';
 import { ApolloError } from '@apollo/client';
-import { Center, Skeleton, Text, VStack } from '@components/common';
 import { ApolloErrorView } from '@components/elements/ApolloErrorView';
 import { Footer } from '@components/elements/Footer';
 import { useTheme } from '@emotion/react';
+import { EvalLogEdge } from '@shared/__generated__/graphql';
+import { Center, Skeleton, Text, VStack } from '@shared/ui-kit';
 import React from 'react';
 import { EvalLogList } from './EvalLogList';
 

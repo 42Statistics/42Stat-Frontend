@@ -1,6 +1,6 @@
-import { Center, Clickable, HStack, MediumText } from '@components/common';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { Center, Clickable, HStack, MediumText } from '@shared/ui-kit';
 import { rgba } from 'emotion-rgba';
 
 type LoginButtonProps = {

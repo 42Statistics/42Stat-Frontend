@@ -1,9 +1,9 @@
-import { Center, HStack, Text, VStack } from '@components/common';
-import { EvalLogLabel, EvalLogLabelType } from '@components/common/Label';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { EvalLog } from '@shared/__generated__/graphql';
 import { CustomBox } from '@shared/styles/custom/CustomBox';
+import { Center, HStack, Text, VStack } from '@shared/ui-kit';
+import { EvalLogLabel } from '../EvalLogLabel';
 import { EvalLogItemTitle } from './EvalLogItemTitle';
 
 type EvalLogItemProps = {
@@ -53,13 +53,13 @@ const Layout = styled(CustomBox)`
 `;
 
 const CorrectorReviewLabel = ({ number }: { number: number }) => {
-  const computeType = (number: number): EvalLogLabelType => {
+  const getType = (number: number) => {
     if (number >= 100) return 'positive';
     if (number >= 80) return 'neutral';
     return 'negative';
   };
 
-  const type = computeType(number);
+  const type = getType(number);
 
   return <EvalLogLabel type={type}>{`${String(number)}%`}</EvalLogLabel>;
 };
@@ -71,7 +71,7 @@ const CorrectedsReviewLabel = ({
   number?: number; // isNone일 때만 undefined 가능
   isNone?: boolean;
 }) => {
-  const computeType = (number: number, isNone: boolean): EvalLogLabelType => {
+  const computeType = (number: number, isNone: boolean) => {
     if (isNone) return 'none';
     if (number >= 5) return 'positive';
     if (number >= 3) return 'neutral';

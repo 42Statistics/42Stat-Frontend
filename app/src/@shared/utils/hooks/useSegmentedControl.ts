@@ -1,4 +1,4 @@
-import { SegmentType } from '@components/common';
+import { SegmentType } from '@shared/ui-kit';
 import { createRef } from 'react';
 
 export const useSegmentedControl = (options: Omit<SegmentType, 'ref'>[]) => {

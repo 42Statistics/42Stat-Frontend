@@ -1,4 +1,4 @@
-import { Spacer, VStack } from '@components/common';
+import { Spacer, VStack } from '@shared/ui-kit';
 import { useNavRoutes } from '../hooks/useNavRoutes';
 import { NavItem } from './DesktopNavItem';
 

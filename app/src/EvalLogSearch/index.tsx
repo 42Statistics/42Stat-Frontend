@@ -1,10 +1,10 @@
 import { useLazyQuery } from '@apollo/client';
-import { VStack } from '@components/common';
 import { Seo } from '@components/elements/Seo';
 import { withHead } from '@hoc/withHead';
 import { gql } from '@shared/__generated__';
 import { EvalLogEdge, EvalLogSortOrder } from '@shared/__generated__/graphql';
 import type { EvalLogSearchModel } from '@shared/types/EvalLogSearchModel';
+import { VStack } from '@shared/ui-kit';
 import { useDisclosure } from '@shared/utils/hooks/useDisclosure';
 import { useInfiniteScroll } from '@shared/utils/hooks/useInfiniteScroll';
 import { isDefined } from '@shared/utils/isDefined';

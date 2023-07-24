@@ -1,6 +1,6 @@
-import { HStack } from '@components/common';
 import { DesktopNavBar } from '@components/elements/NavBar/Desktop';
 import styled from '@emotion/styled';
+import { HStack } from '@shared/ui-kit';
 import { Outlet } from 'react-router-dom';
 
 export const DesktopMainLayout = () => {

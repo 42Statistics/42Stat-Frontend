@@ -1,9 +1,8 @@
-import { VStack } from '@components/common';
-import { Tab, TabPanel, Tabs } from '@components/common/Tab';
 import { Seo } from '@components/elements/Seo';
 import { withFooter } from '@hoc/withFooter';
 import { withHead } from '@hoc/withHead';
 import { ROUTES } from '@shared/constants/ROUTES';
+import { Tab, TabPanel, Tabs, VStack } from '@shared/ui-kit';
 import { useNavigate, useParams } from 'react-router-dom';
 import LeaderboardCoalitionScoreTab from './tabs/CoalitionScore';
 import LeaderboardEvalCountTab from './tabs/EvalCount';

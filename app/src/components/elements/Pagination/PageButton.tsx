@@ -1,5 +1,5 @@
-import { Clickable, H3Text } from '@components/common';
 import { useTheme } from '@emotion/react';
+import { Clickable, H3Text } from '@shared/ui-kit';
 
 type PageButtonProps = {
   currPageNumber: number;

@@ -1,3 +1,4 @@
+import { useTheme } from '@emotion/react';
 import { LinkedAccount } from '@shared/__generated__/graphql';
 import {
   H3MediumText,
@@ -6,8 +7,7 @@ import {
   Spacer,
   Text,
   VStack,
-} from '@components/common';
-import { useTheme } from '@emotion/react';
+} from '@shared/ui-kit';
 import dayjs from 'dayjs';
 import { LinkGoogleButton } from './LinkGoogleButton';
 import { LinkLabel } from './LinkLabel';

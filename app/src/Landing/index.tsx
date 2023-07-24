@@ -1,4 +1,3 @@
-import { VStack } from '@components/common';
 import { AppLogoTitle } from '@components/elements/AppLogoTitle';
 import {
   FtLoginButton,
@@ -6,6 +5,7 @@ import {
 } from '@components/elements/LoginButton';
 import { useTheme } from '@emotion/react';
 import { withHead } from '@hoc/withHead';
+import { VStack } from '@shared/ui-kit';
 import { Introduction } from './components/Introduction';
 
 const LandingPage = () => {

@@ -1,10 +1,10 @@
-import { VStack, WhiteText } from '@components/common';
 import { AppLogoTitle } from '@components/elements/AppLogoTitle';
 import { FtLoginButton } from '@components/elements/LoginButton';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { withHead } from '@hoc/withHead';
 import { ROUTES } from '@shared/constants/ROUTES';
+import { VStack, WhiteText } from '@shared/ui-kit';
 import { mq } from '@shared/utils/responsive/mq';
 import { Link } from 'react-router-dom';
 

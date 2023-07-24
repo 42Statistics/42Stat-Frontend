@@ -1,5 +1,5 @@
-import { HStack } from '@components/common';
 import styled from '@emotion/styled';
+import { HStack } from '@shared/ui-kit';
 import { useNavRoutes } from '../hooks/useNavRoutes';
 import { TabItem } from './TabItem';
 

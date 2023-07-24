@@ -1,13 +1,13 @@
+import { useTheme } from '@emotion/react';
+import styled from '@emotion/styled';
+import { ROUTES } from '@shared/constants/ROUTES';
 import {
   Avatar,
   CaptionText,
   HStack,
   MediumText,
   VStack,
-} from '@components/common';
-import { useTheme } from '@emotion/react';
-import styled from '@emotion/styled';
-import { ROUTES } from '@shared/constants/ROUTES';
+} from '@shared/ui-kit';
 import { userAtom } from '@shared/utils/jotai/atoms/userAtom';
 import { titleCase } from '@shared/utils/titleCase';
 import { useAtomValue } from 'jotai';

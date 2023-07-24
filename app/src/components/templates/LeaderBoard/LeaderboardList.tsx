@@ -1,6 +1,6 @@
-import { UserRank } from '@shared/__generated__/graphql';
-import { Divider } from '@components/common';
 import styled from '@emotion/styled';
+import { UserRank } from '@shared/__generated__/graphql';
+import { Divider } from '@shared/ui-kit';
 import { Fragment } from 'react';
 import { LeaderboardListItem } from './LeaderboardListItem';
 

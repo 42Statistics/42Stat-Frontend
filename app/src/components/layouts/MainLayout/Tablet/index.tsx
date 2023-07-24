@@ -1,6 +1,6 @@
-import { HStack } from '@components/common';
 import { TabletNavBar } from '@components/elements/NavBar/Tablet';
 import styled from '@emotion/styled';
+import { HStack } from '@shared/ui-kit';
 import { Outlet } from 'react-router-dom';
 
 export const TabletMainLayout = () => {

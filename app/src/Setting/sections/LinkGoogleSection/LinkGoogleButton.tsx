@@ -1,9 +1,8 @@
 import { useMutation } from '@apollo/client';
-import { Clickable } from '@components/common';
-import { Spinner } from '@components/common/Loader';
 import { gql } from '@shared/__generated__';
 import { ReactComponent as MdSyncAlt } from '@shared/assets/icon/md-sync-alt.svg';
 import { GAPI_URL } from '@shared/constants/GAPI';
+import { Clickable, Spinner } from '@shared/ui-kit';
 import {
   FakeGoogleWrapperType,
   createFakeGoogleWrapper,

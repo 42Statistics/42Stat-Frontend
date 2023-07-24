@@ -1,8 +1,8 @@
-import { Clickable, HStack } from '@components/common';
 import { ReactComponent as MdChevronLeft } from '@shared/assets/icon/md-chevron-left.svg';
 import { ReactComponent as MdChevronRight } from '@shared/assets/icon/md-chevron-right.svg';
 import { ReactComponent as MdFirstPage } from '@shared/assets/icon/md-first-page.svg';
 import { ReactComponent as MdLastPage } from '@shared/assets/icon/md-last-page.svg';
+import { Clickable, HStack } from '@shared/ui-kit';
 import { PageButton } from './PageButton';
 
 type PaginationProps = {

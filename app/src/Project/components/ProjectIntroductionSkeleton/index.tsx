@@ -1,5 +1,5 @@
-import { Divider, HStack, Skeleton, VStack } from '@components/common';
 import styled from '@emotion/styled';
+import { Divider, HStack, Skeleton, VStack } from '@shared/ui-kit';
 
 export const ProjectIntroductionSkeleton = () => {
   return (

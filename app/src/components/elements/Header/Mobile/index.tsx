@@ -1,8 +1,8 @@
-import { VStack } from '@components/common';
 import { AppLogoTitle } from '@components/elements/AppLogoTitle';
 import { SearchBarShapeButton } from '@components/elements/SearchBarShapeButton';
 import styled from '@emotion/styled';
 import { ROUTES } from '@shared/constants/ROUTES';
+import { VStack } from '@shared/ui-kit';
 import { Link } from 'react-router-dom';
 
 export const MobileHeader = () => {

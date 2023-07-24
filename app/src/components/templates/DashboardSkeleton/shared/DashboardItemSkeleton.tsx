@@ -1,5 +1,5 @@
-import { Skeleton } from '@components/common';
 import styled from '@emotion/styled';
+import { Skeleton } from '@shared/ui-kit';
 
 export const DashboardItemSkeleton = () => {
   return (

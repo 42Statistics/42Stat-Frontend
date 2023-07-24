@@ -1,11 +1,5 @@
-import {
-  Divider,
-  H2BoldText,
-  HStack,
-  Spacer,
-  VStack,
-} from '@components/common';
 import { CustomSection } from '@shared/styles/custom/CustomSection';
+import { Divider, H2BoldText, HStack, Spacer, VStack } from '@shared/ui-kit';
 import { useDisclosure } from '@shared/utils/hooks/useDisclosure';
 import { Mobile, TabletAndAbove } from '@shared/utils/responsive/Device';
 import { DeleteAccountButton } from './DeleteAccountButton';

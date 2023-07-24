@@ -1,6 +1,6 @@
-import { AccentH3BoldText } from '@components/common';
 import { DashboardContent } from '@components/templates/DashboardContent';
 import { ROUTES } from '@shared/constants/ROUTES';
+import { AccentH3BoldText } from '@shared/ui-kit';
 import { Link, useParams } from 'react-router-dom';
 
 export const PastEvaluationLink = () => {

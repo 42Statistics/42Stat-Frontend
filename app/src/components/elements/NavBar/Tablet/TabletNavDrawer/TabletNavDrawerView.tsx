@@ -1,4 +1,4 @@
-import { Drawer } from '@components/common/Drawer';
+import { Drawer } from '@shared/ui-kit';
 import { DesktopNavBar } from '../../Desktop';
 
 type TabletNavDrawerViewProps = {

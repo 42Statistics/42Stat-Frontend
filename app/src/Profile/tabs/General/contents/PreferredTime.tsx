@@ -1,7 +1,4 @@
-import { gql } from '@shared/__generated__';
-import { DateTemplate } from '@shared/__generated__/graphql';
 import { useQuery } from '@apollo/client';
-import { H3BoldText, HStack, Text, VStack } from '@components/common';
 import {
   DashboardContentBadRequest,
   DashboardContentLoading,
@@ -10,6 +7,9 @@ import {
 import { ProgressionBar } from '@components/elements/ProgressionBar';
 import { TextMax } from '@components/elements/TextMax';
 import { DashboardContent } from '@components/templates/DashboardContent';
+import { gql } from '@shared/__generated__';
+import { DateTemplate } from '@shared/__generated__/graphql';
+import { H3BoldText, HStack, Text, VStack } from '@shared/ui-kit';
 import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
 

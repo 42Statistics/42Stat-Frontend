@@ -1,6 +1,6 @@
-import { PrimaryBoldText, Text, VStack } from '@components/common';
 import { useTheme } from '@emotion/react';
 import type { EvalLogSearchModel } from '@shared/types/EvalLogSearchModel';
+import { PrimaryBoldText, Text, VStack } from '@shared/ui-kit';
 
 type EvalLogSearchTitleProps = {
   form: EvalLogSearchModel;

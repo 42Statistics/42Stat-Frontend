@@ -1,4 +1,4 @@
-import { H2BoldText } from '@components/common';
+import { H2BoldText } from '@shared/ui-kit';
 import { Link } from 'react-router-dom';
 
 type TextDefaultProps = {

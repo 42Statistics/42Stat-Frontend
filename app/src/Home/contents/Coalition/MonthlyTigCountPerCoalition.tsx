@@ -1,16 +1,16 @@
 import { useQuery } from '@apollo/client';
 import { CoalitionMark } from '@components/elements/CoalitionMark';
-import {
-  DashboardContentBadRequest,
-  DashboardContentLoading,
-  DashboardContentNotFound,
-} from '@components/elements/DashboardContentView/Error';
 import { TextMax } from '@components/elements/TextMax';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { gql } from '@shared/__generated__';
 import { DateTemplate } from '@shared/__generated__/graphql';
 import { DashboardContent } from '@shared/components/DashboardContent';
+import {
+  DashboardContentBadRequest,
+  DashboardContentLoading,
+  DashboardContentNotFound,
+} from '@shared/components/DashboardContentView/Error';
 import { Center, H3Text, VStack } from '@shared/ui-kit';
 import { numberWithUnitFormatter } from '@shared/utils/formatters';
 import dayjs from 'dayjs';

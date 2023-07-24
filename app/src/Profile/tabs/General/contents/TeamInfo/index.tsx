@@ -1,11 +1,11 @@
 import { useQuery } from '@apollo/client';
+import styled from '@emotion/styled';
+import { gql } from '@shared/__generated__';
 import {
   DashboardContentBadRequest,
   DashboardContentLoading,
   DashboardContentNotFound,
-} from '@components/elements/DashboardContentView/Error';
-import styled from '@emotion/styled';
-import { gql } from '@shared/__generated__';
+} from '@shared/components/DashboardContentView/Error';
 import { useParams } from 'react-router-dom';
 import { TeamInfoTable } from './TeamInfoTable';
 

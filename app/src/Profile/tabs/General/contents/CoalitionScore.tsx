@@ -1,11 +1,11 @@
 import { useQuery } from '@apollo/client';
 import { CoalitionMark } from '@components/elements/CoalitionMark';
+import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,
   DashboardContentLoading,
   DashboardContentNotFound,
-} from '@components/elements/DashboardContentView/Error';
-import { DashboardContent } from '@shared/components/DashboardContent';
+} from '@shared/components/DashboardContentView/Error';
 import { H1BoldText, H3Text, HStack } from '@shared/ui-kit';
 import { useParams } from 'react-router-dom';
 import { GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN } from '../queries/GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN';

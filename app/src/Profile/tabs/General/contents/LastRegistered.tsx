@@ -1,12 +1,12 @@
 import { useQuery } from '@apollo/client';
+import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,
   DashboardContentLoading,
   DashboardContentNotFound,
   NoneDash,
-} from '@components/elements/DashboardContentView/Error';
-import { TextProject } from '@components/elements/DashboardContentView/Text/TextProject';
-import { DashboardContent } from '@shared/components/DashboardContent';
+} from '@shared/components/DashboardContentView/Error';
+import { TextProject } from '@shared/components/DashboardContentView/Text/TextProject';
 import { useParams } from 'react-router-dom';
 import { GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN } from '../queries/GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN';
 

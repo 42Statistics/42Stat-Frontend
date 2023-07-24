@@ -1,10 +1,10 @@
 import { useQuery } from '@apollo/client';
+import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,
   DashboardContentLoading,
   DashboardContentNotFound,
-} from '@components/elements/DashboardContentView/Error';
-import { DashboardContent } from '@shared/components/DashboardContent';
+} from '@shared/components/DashboardContentView/Error';
 import { H2BoldText, H3Text, HStack } from '@shared/ui-kit';
 import { dDayFormatter } from '@shared/utils/formatters';
 import { getDateDiff } from '@shared/utils/getDateDiff';

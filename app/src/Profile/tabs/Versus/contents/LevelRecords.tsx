@@ -1,12 +1,12 @@
 import { LevelRecordsChart } from '@/Profile/tabs/General/contents';
 import { useQuery } from '@apollo/client';
+import { gql } from '@shared/__generated__';
+import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,
   DashboardContentLoading,
   DashboardContentNotFound,
-} from '@components/elements/DashboardContentView/Error';
-import { gql } from '@shared/__generated__';
-import { DashboardContent } from '@shared/components/DashboardContent';
+} from '@shared/components/DashboardContentView/Error';
 import { userAtom } from '@shared/utils/jotai/atoms/userAtom';
 import { useAtomValue } from 'jotai';
 import { useParams } from 'react-router-dom';

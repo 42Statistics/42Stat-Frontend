@@ -1,12 +1,12 @@
 import { useQuery } from '@apollo/client';
+import { useTheme } from '@emotion/react';
+import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,
   DashboardContentLoading,
   DashboardContentNotFound,
   NoneDash,
-} from '@components/elements/DashboardContentView/Error';
-import { useTheme } from '@emotion/react';
-import { DashboardContent } from '@shared/components/DashboardContent';
+} from '@shared/components/DashboardContentView/Error';
 import { Label, VStack } from '@shared/ui-kit';
 import { isShortString } from '@shared/utils/isShortString';
 import { useParams } from 'react-router-dom';

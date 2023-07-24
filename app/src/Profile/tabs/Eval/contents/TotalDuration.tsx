@@ -1,12 +1,12 @@
 import { useQuery } from '@apollo/client';
+import { gql } from '@shared/__generated__';
+import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,
   DashboardContentLoading,
   DashboardContentNotFound,
-} from '@components/elements/DashboardContentView/Error';
-import { TextDefault } from '@components/elements/DashboardContentView/Text/TextDefault';
-import { gql } from '@shared/__generated__';
-import { DashboardContent } from '@shared/components/DashboardContent';
+} from '@shared/components/DashboardContentView/Error';
+import { TextDefault } from '@shared/components/DashboardContentView/Text/TextDefault';
 import { useParams } from 'react-router-dom';
 
 const GET_TOTAL_DURATION_BY_LOGIN = gql(/* GraphQL */ `

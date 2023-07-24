@@ -1,12 +1,12 @@
 import { useQuery } from '@apollo/client';
+import { gql } from '@shared/__generated__';
+import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,
   DashboardContentLoading,
   DashboardContentNotFound,
-} from '@components/elements/DashboardContentView/Error';
-import { NumberDefault } from '@components/elements/DashboardContentView/NumberDefault';
-import { gql } from '@shared/__generated__';
-import { DashboardContent } from '@shared/components/DashboardContent';
+} from '@shared/components/DashboardContentView/Error';
+import { NumberDefault } from '@shared/components/DashboardContentView/NumberDefault';
 
 const GET_AVERAGE_COMMENT_LENGTH = gql(/* GraphQL */ `
   query GetAverageCommentLength {

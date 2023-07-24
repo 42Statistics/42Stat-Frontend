@@ -1,13 +1,13 @@
 import { useQuery } from '@apollo/client';
-import {
-  DashboardContentBadRequest,
-  DashboardContentLoading,
-  DashboardContentNotFound,
-} from '@components/elements/DashboardContentView/Error';
 import { useTheme } from '@emotion/react';
 import { gql } from '@shared/__generated__';
 import { LineChart } from '@shared/components/Chart';
 import { DashboardContent } from '@shared/components/DashboardContent';
+import {
+  DashboardContentBadRequest,
+  DashboardContentLoading,
+  DashboardContentNotFound,
+} from '@shared/components/DashboardContentView/Error';
 import { useParams } from 'react-router-dom';
 
 const GET_LEVEL_RECORDS_BY_LOGIN = gql(/* GraphQL */ `

@@ -1,12 +1,12 @@
 import { useQuery } from '@apollo/client';
+import { gql } from '@shared/__generated__';
+import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,
   DashboardContentLoading,
   DashboardContentNotFound,
-} from '@components/elements/DashboardContentView/Error';
-import { NumberDefault } from '@components/elements/DashboardContentView/NumberDefault';
-import { gql } from '@shared/__generated__';
-import { DashboardContent } from '@shared/components/DashboardContent';
+} from '@shared/components/DashboardContentView/Error';
+import { NumberDefault } from '@shared/components/DashboardContentView/NumberDefault';
 import { useParams } from 'react-router-dom';
 
 const GET_AVERAGE_PASS_FINAL_MARK_BY_PROJECT_NAME = gql(/* GraphQL */ `

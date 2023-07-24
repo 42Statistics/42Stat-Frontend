@@ -1,15 +1,15 @@
 import { useQuery } from '@apollo/client';
-import {
-  DashboardContentBadRequest,
-  DashboardContentLoading,
-  DashboardContentNotFound,
-} from '@components/elements/DashboardContentView/Error';
 import { useTheme } from '@emotion/react';
 import { ReactComponent as SmileyCheekySvg } from '@shared/assets/blackhole/smiley-cheeky.svg';
 import { ReactComponent as SmileySadSvg } from '@shared/assets/blackhole/smiley-sad.svg';
 import { ReactComponent as SmileyScaredSvg } from '@shared/assets/blackhole/smiley-scared.svg';
 import { ReactComponent as SmileySmile1Svg } from '@shared/assets/blackhole/smiley-smile-1.svg';
 import { DashboardContent } from '@shared/components/DashboardContent';
+import {
+  DashboardContentBadRequest,
+  DashboardContentLoading,
+  DashboardContentNotFound,
+} from '@shared/components/DashboardContentView/Error';
 import { H2BoldText, HStack } from '@shared/ui-kit';
 import { useParams } from 'react-router-dom';
 import { GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN } from '../queries/GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN';

@@ -1,11 +1,11 @@
 import { useQuery } from '@apollo/client';
+import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,
   DashboardContentLoading,
   DashboardContentNotFound,
-} from '@components/elements/DashboardContentView/Error';
-import { NumberCompare } from '@components/elements/DashboardContentView/NumberCompare';
-import { DashboardContent } from '@shared/components/DashboardContent';
+} from '@shared/components/DashboardContentView/Error';
+import { NumberCompare } from '@shared/components/DashboardContentView/NumberCompare';
 import { userAtom } from '@shared/utils/jotai/atoms/userAtom';
 import { useAtomValue } from 'jotai';
 import { useParams } from 'react-router-dom';

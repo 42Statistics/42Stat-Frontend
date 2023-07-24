@@ -1,12 +1,12 @@
 import { useQuery } from '@apollo/client';
+import { gql } from '@shared/__generated__';
+import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,
   DashboardContentLoading,
   DashboardContentNotFound,
-} from '@components/elements/DashboardContentView/Error';
-import { ProjectRankList } from '@components/elements/DashboardContentView/Rank/ProjectRankList';
-import { gql } from '@shared/__generated__';
-import { DashboardContent } from '@shared/components/DashboardContent';
+} from '@shared/components/DashboardContentView/Error';
+import { ProjectRankList } from '@shared/components/DashboardContentView/Rank/ProjectRankList';
 import { Mobile, TabletAndAbove } from '@shared/utils/responsive/Device';
 
 const GET_CURR_REGISTERED_COUNT_RANKING = gql(/* GraphQL */ `

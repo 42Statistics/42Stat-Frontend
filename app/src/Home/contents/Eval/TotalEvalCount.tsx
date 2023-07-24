@@ -1,13 +1,13 @@
 import { useQuery } from '@apollo/client';
+import { gql } from '@shared/__generated__';
+import { DateTemplate } from '@shared/__generated__/graphql';
+import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,
   DashboardContentLoading,
   DashboardContentNotFound,
-} from '@components/elements/DashboardContentView/Error';
-import { NumberDefault } from '@components/elements/DashboardContentView/NumberDefault';
-import { gql } from '@shared/__generated__';
-import { DateTemplate } from '@shared/__generated__/graphql';
-import { DashboardContent } from '@shared/components/DashboardContent';
+} from '@shared/components/DashboardContentView/Error';
+import { NumberDefault } from '@shared/components/DashboardContentView/NumberDefault';
 
 const GET_EVAL_COUNT_BY_DATE_TEMPLATE = gql(/* GraphQL */ `
   query GetEvalCountByDateTemplate($dateTemplate: DateTemplate!) {

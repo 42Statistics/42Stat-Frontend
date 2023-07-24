@@ -8,11 +8,11 @@ import coalition_gray_cover from '@shared/assets/coalition/cover/coalition-gray-
 import coalition_gun_cover from '@shared/assets/coalition/cover/coalition-gun-cover.jpg';
 import coalition_lee_cover from '@shared/assets/coalition/cover/coalition-lee-cover.jpg';
 
+import styled from '@emotion/styled';
 import {
   DashboardContentBadRequest,
   DashboardContentNotFound,
-} from '@components/elements/DashboardContentView/Error';
-import styled from '@emotion/styled';
+} from '@shared/components/DashboardContentView/Error';
 import {
   Avatar,
   HStack,

@@ -1,12 +1,12 @@
 import { useQuery } from '@apollo/client';
+import { gql } from '@shared/__generated__';
+import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,
   DashboardContentLoading,
   DashboardContentNotFound,
-} from '@components/elements/DashboardContentView/Error';
-import { UserRankList } from '@components/elements/DashboardContentView/Rank/UserRankList';
-import { gql } from '@shared/__generated__';
-import { DashboardContent } from '@shared/components/DashboardContent';
+} from '@shared/components/DashboardContentView/Error';
+import { UserRankList } from '@shared/components/DashboardContentView/Rank/UserRankList';
 import { Mobile, TabletAndAbove } from '@shared/utils/responsive/Device';
 import { useParams } from 'react-router-dom';
 

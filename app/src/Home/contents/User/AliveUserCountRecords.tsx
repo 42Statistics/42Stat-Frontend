@@ -1,12 +1,12 @@
 import { useQuery } from '@apollo/client';
+import { gql } from '@shared/__generated__';
+import { AreaChart } from '@shared/components/Chart';
+import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,
   DashboardContentLoading,
   DashboardContentNotFound,
-} from '@components/elements/DashboardContentView/Error';
-import { gql } from '@shared/__generated__';
-import { AreaChart } from '@shared/components/Chart';
-import { DashboardContent } from '@shared/components/DashboardContent';
+} from '@shared/components/DashboardContentView/Error';
 import { numberWithUnitFormatter } from '@shared/utils/formatters';
 
 const GET_ALIVE_USER_COUNT_RECORDS = gql(/* GraphQL */ `

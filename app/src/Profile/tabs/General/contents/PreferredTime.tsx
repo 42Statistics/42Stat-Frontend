@@ -1,14 +1,14 @@
 import { useQuery } from '@apollo/client';
-import {
-  DashboardContentBadRequest,
-  DashboardContentLoading,
-  DashboardContentNotFound,
-} from '@components/elements/DashboardContentView/Error';
 import { ProgressionBar } from '@components/elements/ProgressionBar';
 import { TextMax } from '@components/elements/TextMax';
 import { gql } from '@shared/__generated__';
 import { DateTemplate } from '@shared/__generated__/graphql';
 import { DashboardContent } from '@shared/components/DashboardContent';
+import {
+  DashboardContentBadRequest,
+  DashboardContentLoading,
+  DashboardContentNotFound,
+} from '@shared/components/DashboardContentView/Error';
 import { H3BoldText, HStack, Text, VStack } from '@shared/ui-kit';
 import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';

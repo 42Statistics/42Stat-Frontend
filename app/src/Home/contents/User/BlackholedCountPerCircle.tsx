@@ -1,13 +1,13 @@
 import { useQuery } from '@apollo/client';
-import {
-  DashboardContentBadRequest,
-  DashboardContentLoading,
-  DashboardContentNotFound,
-} from '@components/elements/DashboardContentView/Error';
 import { useTheme } from '@emotion/react';
 import { gql } from '@shared/__generated__';
 import { DonutChart } from '@shared/components/Chart';
 import { DashboardContent } from '@shared/components/DashboardContent';
+import {
+  DashboardContentBadRequest,
+  DashboardContentLoading,
+  DashboardContentNotFound,
+} from '@shared/components/DashboardContentView/Error';
 import { numberWithUnitFormatter } from '@shared/utils/formatters';
 
 const GET_BLACKHOLED_COUNT_PER_CIRCLE = gql(/* GraphQL */ `

@@ -1,13 +1,13 @@
 import { useQuery } from '@apollo/client';
+import { gql } from '@shared/__generated__';
+import { DateTemplate } from '@shared/__generated__/graphql';
+import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,
   DashboardContentLoading,
   DashboardContentNotFound,
-} from '@components/elements/DashboardContentView/Error';
-import { NumberCompare } from '@components/elements/DashboardContentView/NumberCompare';
-import { gql } from '@shared/__generated__';
-import { DateTemplate } from '@shared/__generated__/graphql';
-import { DashboardContent } from '@shared/components/DashboardContent';
+} from '@shared/components/DashboardContentView/Error';
+import { NumberCompare } from '@shared/components/DashboardContentView/NumberCompare';
 import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
 

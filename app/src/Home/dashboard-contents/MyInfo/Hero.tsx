@@ -1,3 +1,4 @@
+import { getDailyProgrammingQuote } from '@/Home/utils/getDailyProgrammingQuote';
 import { useQuery } from '@apollo/client';
 import styled from '@emotion/styled';
 import { gql } from '@shared/__generated__';
@@ -11,8 +12,9 @@ import {
   WhiteH2BoldText,
   WhiteText,
 } from '@shared/ui-kit';
-import { getDateDiff } from '@shared/utils/getDateDiff';
-import { getDailyProgrammingQuote } from './getDailyProgrammingQuote';
+import { timeDiffStringFormatter } from '@shared/utils/formatters/timeDiffStringFormatter';
+import { getBlackholeDaysLeft } from '@shared/utils/getBlackholeDaysLeft';
+import { getTimeDiffFromNow } from '@shared/utils/getTimeDiffFromNow';
 
 const GET_MY_INFO = gql(/* GraphQL */ `
   query GetMyInfo {
@@ -80,21 +82,24 @@ export const Hero = () => {
       recentValidatedTeam != null &&
       recentValidatedTeam.lastEventTime != null
     ) {
-      const diff = getDateDiff(
-        new Date(),
+      const diffDays = getTimeDiffFromNow(
+        new Date(recentValidatedTeam.lastEventTime),
+        'day',
+      );
+      const timeDiffString = timeDiffStringFormatter(
         new Date(recentValidatedTeam.lastEventTime),
       );
-      if (diff <= 2) {
-        return `${diff}일 전에 ${recentValidatedTeam.projectPreview.name}를 통과하셨네요! 축하드려요 🎉`;
+      if (-2 <= diffDays && diffDays <= 0) {
+        return `${timeDiffString}에 ${recentValidatedTeam.projectPreview.name}를 통과하셨네요! 축하드려요 🎉`;
       }
     }
     if (blackholedAt != null) {
-      const diff = Math.abs(getDateDiff(new Date(blackholedAt)));
-      if (diff <= 7) {
+      const daysLeft = getBlackholeDaysLeft(new Date(blackholedAt));
+      if (daysLeft <= 7) {
         return "DON'T PANIC! You can do it 💙";
       }
-      if (diff <= 21) {
-        return `${diff}일 앞에 블랙홀이 보여요 👀 조심하세요`;
+      if (daysLeft <= 21) {
+        return `${daysLeft}일 앞에 블랙홀이 보여요 👀 조심하세요`;
       }
     }
     const maxRank = Math.max(

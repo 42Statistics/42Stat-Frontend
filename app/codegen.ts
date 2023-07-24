@@ -4,7 +4,7 @@ const config: CodegenConfig = {
   schema: process.env.VITE_BACKEND_GRAPHQL_ENDPOINT,
   documents: ['src/**/*'],
   generates: {
-    './src/__generated__/': {
+    './src/@shared/__generated__/': {
       preset: 'client',
       plugins: [],
       presetConfig: {

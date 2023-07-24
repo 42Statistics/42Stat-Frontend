@@ -2,17 +2,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@assets/*": ["src/assets/*"],
-      "@guards/*": ["src/components/guards/*"],
-      "@hoc/*": ["src/components/hoc/*"],
-      "@layouts/*": ["src/components/layouts/*"],
-      "@components/*": ["src/components/*"],
-      "@pages/*": ["src/pages/*"],
-      "@providers/*": ["src/providers/*"],
-      "@routes/*": ["src/routes/*"],
-      "@styles/*": ["src/styles/*"],
-      "@atoms/*": ["src/utils/jotai/atoms/*"],
-      "@utils/*": ["src/utils/*"],
+      "@core/*": ["src/@core/*"],
+      "@shared/*": ["src/@shared/*"],
       "@/*": ["src/*"]
     }
   }

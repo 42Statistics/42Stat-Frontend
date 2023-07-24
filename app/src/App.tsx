@@ -1,8 +1,8 @@
+import { AppRoutes } from '@core/AppRoutes';
+import { global } from '@core/styles/global';
+import { reset } from '@core/styles/reset';
 import { Global } from '@emotion/react';
-import { AppProvider } from './providers';
-import { AppRoutes } from './routes';
-import { global } from './styles/global';
-import { reset } from './styles/reset';
+import { AppProvider } from './@core/AppProvider';
 
 function App() {
   return (

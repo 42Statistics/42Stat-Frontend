@@ -1,7 +1,7 @@
 import {
   DashboardContent,
   DashboardContentProps,
-} from '@components/templates/DashboardContent';
+} from '@shared/components/DashboardContent';
 import { Loader } from '@shared/ui-kit';
 
 type DashboardContentLoadingProps = DashboardContentProps;

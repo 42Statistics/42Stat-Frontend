@@ -1,6 +1,6 @@
-import { TabletDashboardLayout } from '@components/templates/Dashboard/Tablet';
-import { TabletDashboardRow } from '@components/templates/Dashboard/Tablet/TabletDashboardRow';
-import { DashboardItem } from '@components/templates/Dashboard/shared/DashboardItem';
+import { TabletDashboardLayout } from '@shared/components/Dashboard/Tablet';
+import { TabletDashboardRow } from '@shared/components/Dashboard/Tablet/TabletDashboardRow';
+import { DashboardItem } from '@shared/components/Dashboard/shared/DashboardItem';
 import type { TabletDashboardProps } from '@shared/types/Dashboard';
 import { DashboardItemSkeleton } from '../shared/DashboardItemSkeleton';
 

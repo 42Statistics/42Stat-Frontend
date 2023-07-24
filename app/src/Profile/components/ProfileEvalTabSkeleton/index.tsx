@@ -1,4 +1,4 @@
-import { DashboardSkeleton } from '@components/templates/DashboardSkeleton';
+import { DashboardSkeleton } from '@shared/components/DashboardSkeleton';
 import { useProfileEvalTabDashboardSkeleton } from './hooks/useProfileEvalTabDashboardSkeleton';
 
 export const ProfileEvalTabSkeleton = () => {

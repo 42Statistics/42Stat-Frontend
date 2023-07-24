@@ -1,4 +1,4 @@
-import { DashboardContent } from '@components/templates/DashboardContent';
+import { DashboardContent } from '@shared/components/DashboardContent';
 
 export const Rankings = () => {
   const title = '랭킹';

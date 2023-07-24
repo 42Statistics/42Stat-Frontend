@@ -5,8 +5,8 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
-import { DashboardContent } from '@components/templates/DashboardContent';
 import { gql } from '@shared/__generated__';
+import { DashboardContent } from '@shared/components/DashboardContent';
 import { numberWithUnitFormatter } from '@shared/utils/formatters';
 import { isDefined } from '@shared/utils/isDefined';
 

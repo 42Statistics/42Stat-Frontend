@@ -2,7 +2,7 @@ import { ApolloErrorView } from '@components/elements/ApolloErrorView';
 import {
   DashboardContent,
   DashboardContentProps,
-} from '@components/templates/DashboardContent';
+} from '@shared/components/DashboardContent';
 
 type DashboardContentBadRequestProps = {
   message?: string;

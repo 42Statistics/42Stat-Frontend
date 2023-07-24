@@ -1,4 +1,3 @@
-import { gql } from '@shared/__generated__';
 import { useQuery } from '@apollo/client';
 import { BarChart } from '@components/elements/Chart';
 import {
@@ -6,7 +5,8 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
-import { DashboardContent } from '@components/templates/DashboardContent';
+import { gql } from '@shared/__generated__';
+import { DashboardContent } from '@shared/components/DashboardContent';
 import dayjs from 'dayjs';
 
 const GET_RECENT_EXAM_RESULT = gql(/* GraphQL */ `

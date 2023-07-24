@@ -4,7 +4,7 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
-import { DashboardContent } from '@components/templates/DashboardContent';
+import { DashboardContent } from '@shared/components/DashboardContent';
 import { H2BoldText, H3Text, HStack } from '@shared/ui-kit';
 import { dDayFormatter } from '@shared/utils/formatters';
 import { getDateDiff } from '@shared/utils/getDateDiff';

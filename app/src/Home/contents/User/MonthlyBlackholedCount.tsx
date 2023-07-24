@@ -1,5 +1,3 @@
-import { gql } from '@shared/__generated__';
-import { DateTemplate } from '@shared/__generated__/graphql';
 import { useQuery } from '@apollo/client';
 import {
   DashboardContentBadRequest,
@@ -7,7 +5,9 @@ import {
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { NumberCompare } from '@components/elements/DashboardContentView/NumberCompare';
-import { DashboardContent } from '@components/templates/DashboardContent';
+import { gql } from '@shared/__generated__';
+import { DateTemplate } from '@shared/__generated__/graphql';
+import { DashboardContent } from '@shared/components/DashboardContent';
 import dayjs from 'dayjs';
 
 const GET_BLACKHOLED_COUNT_BY_DATE_TEMPLATE = gql(/* GraphQL */ `

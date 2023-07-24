@@ -5,7 +5,7 @@ import {
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { TextDefault } from '@components/elements/DashboardContentView/Text/TextDefault';
-import { DashboardContent } from '@components/templates/DashboardContent';
+import { DashboardContent } from '@shared/components/DashboardContent';
 import { useParams } from 'react-router-dom';
 import { GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME } from '../queries/GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME';
 

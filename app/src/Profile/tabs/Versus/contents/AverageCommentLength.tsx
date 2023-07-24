@@ -5,8 +5,8 @@ import {
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { NumberCompare } from '@components/elements/DashboardContentView/NumberCompare';
-import { DashboardContent } from '@components/templates/DashboardContent';
 import { gql } from '@shared/__generated__';
+import { DashboardContent } from '@shared/components/DashboardContent';
 import { userAtom } from '@shared/utils/jotai/atoms/userAtom';
 import { useAtomValue } from 'jotai';
 import { useParams } from 'react-router-dom';

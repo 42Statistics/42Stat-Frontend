@@ -6,11 +6,11 @@ import {
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { TextMax } from '@components/elements/TextMax';
-import { DashboardContent } from '@components/templates/DashboardContent';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { gql } from '@shared/__generated__';
 import { DateTemplate } from '@shared/__generated__/graphql';
+import { DashboardContent } from '@shared/components/DashboardContent';
 import { Center, H3Text, VStack } from '@shared/ui-kit';
 import { numberWithUnitFormatter } from '@shared/utils/formatters';
 import dayjs from 'dayjs';

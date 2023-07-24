@@ -5,8 +5,8 @@ import {
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { UserRankList } from '@components/elements/DashboardContentView/Rank/UserRankList';
-import { DashboardContent } from '@components/templates/DashboardContent';
 import { gql } from '@shared/__generated__';
+import { DashboardContent } from '@shared/components/DashboardContent';
 import { Mobile, TabletAndAbove } from '@shared/utils/responsive/Device';
 import { useParams } from 'react-router-dom';
 

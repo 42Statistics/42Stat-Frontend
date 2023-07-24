@@ -1,5 +1,5 @@
 import { Seo } from '@components/elements/Seo';
-import { Dashboard } from '@components/templates/Dashboard';
+import { Dashboard } from '@shared/components/Dashboard';
 import { withFooter } from '@shared/hoc/withFooter';
 import { withHead } from '@shared/hoc/withHead';
 import { VStack } from '@shared/ui-kit';

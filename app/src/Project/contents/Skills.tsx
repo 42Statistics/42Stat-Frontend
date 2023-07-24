@@ -5,8 +5,8 @@ import {
   DashboardContentNotFound,
   NoneDash,
 } from '@components/elements/DashboardContentView/Error';
-import { DashboardContent } from '@components/templates/DashboardContent';
 import { useTheme } from '@emotion/react';
+import { DashboardContent } from '@shared/components/DashboardContent';
 import { Label, VStack } from '@shared/ui-kit';
 import { isDefined } from '@shared/utils/isDefined';
 import { isShortString } from '@shared/utils/isShortString';

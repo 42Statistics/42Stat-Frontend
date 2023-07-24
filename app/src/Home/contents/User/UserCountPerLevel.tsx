@@ -5,8 +5,8 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
-import { DashboardContent } from '@components/templates/DashboardContent';
 import { gql } from '@shared/__generated__';
+import { DashboardContent } from '@shared/components/DashboardContent';
 import { numberWithUnitFormatter } from '@shared/utils/formatters';
 
 const GET_USER_COUNT_PER_LEVEL = gql(/* GraphQL */ `

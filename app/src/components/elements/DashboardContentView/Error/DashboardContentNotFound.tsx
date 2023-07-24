@@ -2,7 +2,7 @@ import { ApolloNotFoundView } from '@components/elements/ApolloNotFoundView';
 import {
   DashboardContent,
   DashboardContentProps,
-} from '@components/templates/DashboardContent';
+} from '@shared/components/DashboardContent';
 
 type DashboardContentNotFoundProps = DashboardContentProps;
 

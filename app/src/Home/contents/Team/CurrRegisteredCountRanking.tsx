@@ -5,8 +5,8 @@ import {
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { ProjectRankList } from '@components/elements/DashboardContentView/Rank/ProjectRankList';
-import { DashboardContent } from '@components/templates/DashboardContent';
 import { gql } from '@shared/__generated__';
+import { DashboardContent } from '@shared/components/DashboardContent';
 import { Mobile, TabletAndAbove } from '@shared/utils/responsive/Device';
 
 const GET_CURR_REGISTERED_COUNT_RANKING = gql(/* GraphQL */ `

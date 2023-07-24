@@ -5,8 +5,8 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
-import { DashboardContent } from '@components/templates/DashboardContent';
 import { gql } from '@shared/__generated__';
+import { DashboardContent } from '@shared/components/DashboardContent';
 import { millionFormatter } from '@shared/utils/formatters';
 
 const GET_TOTAL_SCORES_PER_COALITION = gql(/* GraphQL */ `

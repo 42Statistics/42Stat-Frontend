@@ -5,9 +5,9 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
-import { DashboardContent } from '@components/templates/DashboardContent';
 import { useTheme } from '@emotion/react';
 import { gql } from '@shared/__generated__';
+import { DashboardContent } from '@shared/components/DashboardContent';
 import { H3Text } from '@shared/ui-kit';
 import { numberWithUnitFormatter } from '@shared/utils/formatters';
 import { useParams } from 'react-router-dom';

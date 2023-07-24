@@ -1,4 +1,3 @@
-import { DashboardContent } from '@/components/templates/DashboardContent';
 import { useQuery } from '@apollo/client';
 import {
   DashboardContentBadRequest,
@@ -6,6 +5,7 @@ import {
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { gql } from '@shared/__generated__';
+import { DashboardContent } from '@shared/components/DashboardContent';
 import { H3BoldText, HStack, Image, Label, VStack } from '@shared/ui-kit';
 import { useParams } from 'react-router-dom';
 

@@ -5,7 +5,7 @@ import {
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { NumberCompare } from '@components/elements/DashboardContentView/NumberCompare';
-import { DashboardContent } from '@components/templates/DashboardContent';
+import { DashboardContent } from '@shared/components/DashboardContent';
 import { getDateDiff } from '@shared/utils/getDateDiff';
 import { userAtom } from '@shared/utils/jotai/atoms/userAtom';
 import { useAtomValue } from 'jotai';

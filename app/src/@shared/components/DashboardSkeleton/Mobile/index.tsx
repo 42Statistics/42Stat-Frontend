@@ -1,6 +1,6 @@
-import { MobileDashboardLayout } from '@components/templates/Dashboard/Mobile';
-import { MobileDashboardRow } from '@components/templates/Dashboard/Mobile/MobileDashboardRow';
-import { DashboardItem } from '@components/templates/Dashboard/shared/DashboardItem';
+import { MobileDashboardLayout } from '@shared/components/Dashboard/Mobile';
+import { MobileDashboardRow } from '@shared/components/Dashboard/Mobile/MobileDashboardRow';
+import { DashboardItem } from '@shared/components/Dashboard/shared/DashboardItem';
 import type { MobileDashboardProps } from '@shared/types/Dashboard';
 import { DashboardItemSkeleton } from '../shared/DashboardItemSkeleton';
 

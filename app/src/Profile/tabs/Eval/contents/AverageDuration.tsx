@@ -1,4 +1,3 @@
-import { gql } from '@shared/__generated__';
 import { useQuery } from '@apollo/client';
 import {
   DashboardContentBadRequest,
@@ -6,7 +5,8 @@ import {
   DashboardContentNotFound,
 } from '@components/elements/DashboardContentView/Error';
 import { NumberDefault } from '@components/elements/DashboardContentView/NumberDefault';
-import { DashboardContent } from '@components/templates/DashboardContent';
+import { gql } from '@shared/__generated__';
+import { DashboardContent } from '@shared/components/DashboardContent';
 import { useParams } from 'react-router-dom';
 
 const GET_AVERAGE_DURATION_BY_LOGIN = gql(/* GraphQL */ `

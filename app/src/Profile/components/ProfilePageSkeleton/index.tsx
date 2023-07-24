@@ -1,4 +1,4 @@
-import { DashboardSkeleton } from '@components/templates/DashboardSkeleton';
+import { DashboardSkeleton } from '@shared/components/DashboardSkeleton';
 import { VStack } from '@shared/ui-kit';
 import { useProfileGeneralTabDashboardSkeleton } from './hooks/useProfileGeneralTabDashboardSkeleton';
 import { useProfilePageDashboardSkeleton } from './hooks/useProfilePageDashboardSkeleton';

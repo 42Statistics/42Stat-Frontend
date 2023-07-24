@@ -1,4 +1,4 @@
-import { DashboardContent } from '@components/templates/DashboardContent';
+import { DashboardContent } from '@shared/components/DashboardContent';
 import { ROUTES } from '@shared/constants/ROUTES';
 import { AccentH3BoldText } from '@shared/ui-kit';
 import { Link, useParams } from 'react-router-dom';

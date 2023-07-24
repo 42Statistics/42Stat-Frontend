@@ -1,5 +1,4 @@
 import { Global } from '@emotion/react';
-import { mainLayoutGlobalStyle } from '@shared/styles/mainLayoutGlobalStyle';
 import { isSpotlightOpenAtom } from '@shared/utils/jotai/atoms/isSpotlightOpenAtom';
 import { isMacKKeyDown } from '@shared/utils/keyboard';
 import { Desktop, Mobile, Tablet } from '@shared/utils/responsive/Device';
@@ -9,6 +8,7 @@ import { Helmet } from 'react-helmet-async';
 import { DesktopMainLayout } from './Desktop';
 import { MobileMainLayout } from './Mobile';
 import { TabletMainLayout } from './Tablet';
+import { mainLayoutGlobalStyle } from './mainLayoutGlobalStyle';
 
 export const MainLayout = () => {
   const [isSpotlightOpen, setIsSpotlightOpen] = useAtom(isSpotlightOpenAtom);

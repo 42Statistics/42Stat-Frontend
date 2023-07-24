@@ -1,5 +1,5 @@
-import { ReLoginDialog } from '@shared/components/Modal/ReLoginDialog';
-import { Spotlight } from '@shared/components/Spotlight';
+import { ReLoginDialog } from '@core/components/Modal/ReLoginDialog';
+import { Spotlight } from '@core/components/Spotlight';
 import { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
 import { isReLoginDialogOpenAtom } from '@shared/utils/jotai/atoms/isReLoginDialogOpenAtom';
 import { isSpotlightOpenAtom } from '@shared/utils/jotai/atoms/isSpotlightOpenAtom';

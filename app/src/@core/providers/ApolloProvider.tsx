@@ -8,7 +8,7 @@ import {
   fromPromise,
 } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
-import { getNewAccessToken } from '@shared/services/auth/getNewAccessToken';
+import { getNewAccessToken } from '@core/services/auth/getNewAccessToken';
 import { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
 import { isReLoginDialogOpenAtom } from '@shared/utils/jotai/atoms/isReLoginDialogOpenAtom';
 import { getAccessToken } from '@shared/utils/storage/accessToken';

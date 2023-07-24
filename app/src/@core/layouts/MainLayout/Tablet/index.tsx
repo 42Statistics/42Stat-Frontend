@@ -1,5 +1,5 @@
+import { TabletNavBar } from '@core/components/NavBar/Tablet';
 import styled from '@emotion/styled';
-import { TabletNavBar } from '@shared/components/NavBar/Tablet';
 import { HStack } from '@shared/ui-kit';
 import { Outlet } from 'react-router-dom';
 

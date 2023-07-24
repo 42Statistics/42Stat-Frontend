@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client';
 import styled from '@emotion/styled';
 import { gql } from '@shared/__generated__';
 import { VStack, WhiteBoldText } from '@shared/ui-kit';
-import { mq } from '@shared/utils/responsive/mq';
+import { mq } from '@shared/utils/facepaint/mq';
 import { useEffect, useState } from 'react';
 import { CountUp } from 'use-count-up';
 

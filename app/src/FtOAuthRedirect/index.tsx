@@ -1,9 +1,9 @@
 import { useMutation } from '@apollo/client';
 import { gql } from '@shared/__generated__';
+import { userAtom } from '@shared/atoms/userAtom';
 import { GOOGLE_LOGIN } from '@shared/components/LoginButton';
 import { ROUTES } from '@shared/constants/ROUTES';
 import { Center, Loader } from '@shared/ui-kit';
-import { userAtom } from '@shared/utils/jotai/atoms/userAtom';
 import { setAccessToken } from '@shared/utils/storage/accessToken';
 import {
   getGoogleCredential,

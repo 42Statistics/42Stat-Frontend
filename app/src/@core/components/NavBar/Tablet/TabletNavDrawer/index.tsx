@@ -1,6 +1,6 @@
 import { ReactComponent as MdMenu } from '@shared/assets/icon/md-menu.svg';
+import { useDisclosure } from '@shared/hooks/useDisclosure';
 import { Clickable } from '@shared/ui-kit';
-import { useDisclosure } from '@shared/utils/hooks/useDisclosure';
 import { isMacBKeyDown } from '@shared/utils/keyboard';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';

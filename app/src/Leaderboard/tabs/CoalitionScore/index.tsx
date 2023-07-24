@@ -2,8 +2,8 @@ import { useLazyQuery } from '@apollo/client';
 import { gql } from '@shared/__generated__';
 import { DateTemplate } from '@shared/__generated__/graphql';
 import { Pagination } from '@shared/components/Pagination';
+import { useSegmentedControl } from '@shared/hooks/useSegmentedControl';
 import { SegmentedControl, VStack } from '@shared/ui-kit';
-import { useSegmentedControl } from '@shared/utils/hooks/useSegmentedControl';
 import { useEffect, useState } from 'react';
 import { LeaderboardCoalitionScoreTabResult } from './LeaderboardCoalitionScoreTabResult';
 

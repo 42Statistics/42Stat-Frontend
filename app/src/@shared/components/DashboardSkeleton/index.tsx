@@ -1,6 +1,6 @@
 import type { DashboardProps } from '@shared/types/Dashboard';
 import { Center } from '@shared/ui-kit';
-import { Desktop, Mobile, Tablet } from '@shared/utils/responsive/Device';
+import { Desktop, Mobile, Tablet } from '@shared/utils/react-responsive/Device';
 import { DesktopDashboardSkeleton } from './Desktop';
 import { MobileDashboardSkeleton } from './Mobile';
 import { TabletDashboardSkeleton } from './Tablet';

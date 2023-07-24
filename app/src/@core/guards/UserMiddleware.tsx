@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client';
 import { gql } from '@shared/__generated__';
-import { userAtom } from '@shared/utils/jotai/atoms/userAtom';
+import { userAtom } from '@shared/atoms/userAtom';
 import { useSetAtom } from 'jotai';
 import { Outlet } from 'react-router-dom';
 

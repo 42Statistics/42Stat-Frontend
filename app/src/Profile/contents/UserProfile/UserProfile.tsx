@@ -24,9 +24,9 @@ import {
   WhiteMediumText,
   WhiteText,
 } from '@shared/ui-kit';
+import { titleCase } from '@shared/utils/formatters/titleCase';
 import { getTitleWithLogin } from '@shared/utils/getTitleWithLogin';
-import { Desktop, TabletAndBelow } from '@shared/utils/responsive/Device';
-import { titleCase } from '@shared/utils/titleCase';
+import { Desktop, TabletAndBelow } from '@shared/utils/react-responsive/Device';
 import { truncate } from 'lodash-es';
 import { useParams } from 'react-router-dom';
 

@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client';
+import { userAtom } from '@shared/atoms/userAtom';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,
@@ -7,7 +8,6 @@ import {
 } from '@shared/components/DashboardContentView/Error';
 import { NumberCompare } from '@shared/components/DashboardContentView/NumberCompare';
 import { getDateDiff } from '@shared/utils/getDateDiff';
-import { userAtom } from '@shared/utils/jotai/atoms/userAtom';
 import { useAtomValue } from 'jotai';
 import { useParams } from 'react-router-dom';
 import { GET_VERSUS_ZERO_COST } from '../queries/GET_VERSUS_ZERO_COST';

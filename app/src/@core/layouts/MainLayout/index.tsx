@@ -1,7 +1,7 @@
+import { isSpotlightOpenAtom } from '@core/atoms/isSpotlightOpenAtom';
 import { Global } from '@emotion/react';
-import { isSpotlightOpenAtom } from '@shared/utils/jotai/atoms/isSpotlightOpenAtom';
 import { isMacKKeyDown } from '@shared/utils/keyboard';
-import { Desktop, Mobile, Tablet } from '@shared/utils/responsive/Device';
+import { Desktop, Mobile, Tablet } from '@shared/utils/react-responsive/Device';
 import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';

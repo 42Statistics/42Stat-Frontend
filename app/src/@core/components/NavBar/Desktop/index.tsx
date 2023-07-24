@@ -1,10 +1,10 @@
 import { DesktopNavProfile } from '@core/components/NavProfile/Desktop';
 import { SearchBarShapeButton } from '@core/components/SearchBarShapeButton';
 import styled from '@emotion/styled';
+import { userAtom } from '@shared/atoms/userAtom';
 import { AppLogoTitle } from '@shared/components/AppLogoTitle';
 import { ROUTES } from '@shared/constants/ROUTES';
 import { VStack } from '@shared/ui-kit';
-import { userAtom } from '@shared/utils/jotai/atoms/userAtom';
 import { useAtomValue } from 'jotai';
 import { Link } from 'react-router-dom';
 import { DesktopNavMenu } from './DesktopNavMenu';

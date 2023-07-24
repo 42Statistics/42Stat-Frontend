@@ -5,7 +5,7 @@ import { FtLoginButton } from '@shared/components/LoginButton';
 import { ROUTES } from '@shared/constants/ROUTES';
 import { withHead } from '@shared/hoc/withHead';
 import { VStack, WhiteText } from '@shared/ui-kit';
-import { mq } from '@shared/utils/responsive/mq';
+import { mq } from '@shared/utils/facepaint/mq';
 import { Link } from 'react-router-dom';
 
 const FtOAuthPage = () => {

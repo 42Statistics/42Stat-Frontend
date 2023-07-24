@@ -1,7 +1,7 @@
+import { useDisclosure } from '@shared/hooks/useDisclosure';
 import { Divider, H2BoldText, HStack, Spacer, VStack } from '@shared/ui-kit';
 import { CustomSection } from '@shared/ui-kit-styled';
-import { useDisclosure } from '@shared/utils/hooks/useDisclosure';
-import { Mobile, TabletAndAbove } from '@shared/utils/responsive/Device';
+import { Mobile, TabletAndAbove } from '@shared/utils/react-responsive/Device';
 import { DeleteAccountButton } from './DeleteAccountButton';
 import { DeleteAccountDialog } from './DeleteAccountDialog';
 import { LogoutButton } from './LogoutButton';

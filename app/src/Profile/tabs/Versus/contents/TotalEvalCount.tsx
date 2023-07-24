@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/client';
 import { gql } from '@shared/__generated__';
 import { DateTemplate } from '@shared/__generated__/graphql';
+import { userAtom } from '@shared/atoms/userAtom';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,
@@ -8,7 +9,6 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { NumberCompare } from '@shared/components/DashboardContentView/NumberCompare';
-import { userAtom } from '@shared/utils/jotai/atoms/userAtom';
 import { useAtomValue } from 'jotai';
 import { useParams } from 'react-router-dom';
 

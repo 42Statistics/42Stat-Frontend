@@ -1,5 +1,6 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { userAtom } from '@shared/atoms/userAtom';
 import { ROUTES } from '@shared/constants/ROUTES';
 import {
   Avatar,
@@ -8,8 +9,7 @@ import {
   MediumText,
   VStack,
 } from '@shared/ui-kit';
-import { userAtom } from '@shared/utils/jotai/atoms/userAtom';
-import { titleCase } from '@shared/utils/titleCase';
+import { titleCase } from '@shared/utils/formatters/titleCase';
 import { useAtomValue } from 'jotai';
 import { Link } from 'react-router-dom';
 

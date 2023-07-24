@@ -1,9 +1,9 @@
+import { isSpotlightOpenAtom } from '@core/atoms/isSpotlightOpenAtom';
 import { TabletNavProfile } from '@core/components/NavProfile/Tablet';
 import styled from '@emotion/styled';
 import { ReactComponent as MdSearch } from '@shared/assets/icon/md-search.svg';
+import { userAtom } from '@shared/atoms/userAtom';
 import { Center, Clickable, VStack } from '@shared/ui-kit';
-import { isSpotlightOpenAtom } from '@shared/utils/jotai/atoms/isSpotlightOpenAtom';
-import { userAtom } from '@shared/utils/jotai/atoms/userAtom';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { TabletNavDrawer } from './TabletNavDrawer';
 import { TabletNavMenu } from './TabletNavMenu';

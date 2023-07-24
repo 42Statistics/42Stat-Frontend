@@ -1,10 +1,10 @@
+import { userAtom } from '@shared/atoms/userAtom';
 import { Dashboard } from '@shared/components/Dashboard';
 import { Seo } from '@shared/components/Seo';
 import { ROUTES } from '@shared/constants/ROUTES';
 import { withFooter } from '@shared/hoc/withFooter';
 import { withHead } from '@shared/hoc/withHead';
 import { Tab, TabPanel, Tabs, VStack } from '@shared/ui-kit';
-import { userAtom } from '@shared/utils/jotai/atoms/userAtom';
 import { useAtomValue } from 'jotai';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useProfilePageDashboard } from './hooks/useProfilePageDashboard';

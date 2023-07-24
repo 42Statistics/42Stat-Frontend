@@ -8,9 +8,9 @@ import { ReactComponent as MdQuickReferenceFill } from '@shared/assets/icon/md-q
 import { ReactComponent as MdQuickReference } from '@shared/assets/icon/md-quick-reference.svg';
 import { ReactComponent as MdSettingsFill } from '@shared/assets/icon/md-settings-fill.svg';
 import { ReactComponent as MdSettings } from '@shared/assets/icon/md-settings.svg';
+import { userAtom } from '@shared/atoms/userAtom';
 import { ROUTES } from '@shared/constants/ROUTES';
 import type { SvgElement } from '@shared/types/SvgElement';
-import { userAtom } from '@shared/utils/jotai/atoms/userAtom';
 import { useAtomValue } from 'jotai';
 
 export type NavRoute = {

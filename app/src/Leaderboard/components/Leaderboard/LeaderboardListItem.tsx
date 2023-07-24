@@ -14,9 +14,9 @@ import {
   Spacer,
   Text,
 } from '@shared/ui-kit';
+import { mq } from '@shared/utils/facepaint/mq';
 import { numberWithUnitFormatter } from '@shared/utils/formatters';
-import { Mobile, TabletAndAbove } from '@shared/utils/responsive/Device';
-import { mq } from '@shared/utils/responsive/mq';
+import { Mobile, TabletAndAbove } from '@shared/utils/react-responsive/Device';
 import { useNavigate } from 'react-router-dom';
 
 type LeaderboardListItemProps = {

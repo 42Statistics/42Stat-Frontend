@@ -7,7 +7,7 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { ProjectRankList } from '@shared/components/DashboardContentView/Rank/ProjectRankList';
-import { Mobile, TabletAndAbove } from '@shared/utils/responsive/Device';
+import { Mobile, TabletAndAbove } from '@shared/utils/react-responsive/Device';
 
 const GET_CURR_REGISTERED_COUNT_RANKING = gql(/* GraphQL */ `
   query GetCurrRegisteredCountRanking($limit: Int!) {

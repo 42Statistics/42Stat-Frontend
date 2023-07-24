@@ -1,8 +1,8 @@
+import { isReLoginDialogOpenAtom } from '@core/atoms/isReLoginDialogOpenAtom';
+import { isSpotlightOpenAtom } from '@core/atoms/isSpotlightOpenAtom';
 import { ReLoginDialog } from '@core/components/Modal/ReLoginDialog';
 import { Spotlight } from '@core/components/Spotlight';
 import { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
-import { isReLoginDialogOpenAtom } from '@shared/utils/jotai/atoms/isReLoginDialogOpenAtom';
-import { isSpotlightOpenAtom } from '@shared/utils/jotai/atoms/isSpotlightOpenAtom';
 import { useAtom } from 'jotai';
 
 const ModalProvider = ({ children }: PropsWithReactElementChildren) => {

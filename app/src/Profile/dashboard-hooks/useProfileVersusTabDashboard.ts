@@ -1,4 +1,4 @@
-import { profileVersusTabDashboardContents } from '../dashboard-contents/profileVersusTabDashboardContents';
+import { profileVersusTabDashboardContents } from '../dashboard-frames/profileVersusTabDashboardContents';
 import {
   profileVersusTabDesktopDashboardRows,
   profileVersusTabMobileDashboardRows,

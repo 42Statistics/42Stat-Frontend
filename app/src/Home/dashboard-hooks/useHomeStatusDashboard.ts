@@ -1,4 +1,4 @@
-import { homePageDashboardContents } from '../dashboard-contents/homePageDashboardContents';
+import { homePageDashboardContents } from '../dashboard-frames/homePageDashboardContents';
 import {
   homeStatusDesktopDashboardRows,
   homeStatusMobileDashboardRows,

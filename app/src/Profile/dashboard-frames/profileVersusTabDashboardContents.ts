@@ -8,7 +8,7 @@ import {
   Rankings,
   TotalEvalCount,
   TotalLogtime,
-} from './Versus';
+} from '../dashboard-contents/Versus';
 
 export const profileVersusTabDashboardContents: DashboardItemProps[] = [
   {

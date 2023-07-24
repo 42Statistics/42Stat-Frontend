@@ -1,4 +1,4 @@
-import { profileEvalTabDashboardContents } from '../dashboard-contents/profileEvalTabDashboardContents';
+import { profileEvalTabDashboardContents } from '../dashboard-frames/profileEvalTabDashboardContents';
 import {
   profileEvalTabDesktopDashboardRows,
   profileEvalTabMobileDashboardRows,

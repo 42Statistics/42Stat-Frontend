@@ -10,7 +10,7 @@ import {
   MonthlyEvalCount,
   RecentComment,
   TotalCount,
-} from './Eval';
+} from '../dashboard-contents/Eval';
 
 export const profileEvalTabDashboardContents: DashboardItemProps[] = [
   {

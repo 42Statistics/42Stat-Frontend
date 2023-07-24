@@ -1,4 +1,4 @@
-import { profilePageDashboardContents } from '../dashboard-contents/profilePageDashboardContents';
+import { profilePageDashboardContents } from '../dashboard-frames/profilePageDashboardContents';
 import {
   profilePageDesktopDashboardRows,
   profilePageMobileDashboardRows,

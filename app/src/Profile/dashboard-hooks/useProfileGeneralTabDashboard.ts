@@ -1,4 +1,4 @@
-import { profileGeneralTabDashboardContents } from '../dashboard-contents/profileGeneralTabDashboardContents';
+import { profileGeneralTabDashboardContents } from '../dashboard-frames/profileGeneralTabDashboardContents';
 import {
   profileGeneralTabDesktopDashboardRows,
   profileGeneralTabMobileDashboardRows,

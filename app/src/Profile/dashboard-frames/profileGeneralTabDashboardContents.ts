@@ -12,7 +12,7 @@ import {
   PreferredTime,
   TeamInfo,
   Wallet,
-} from './General';
+} from '../dashboard-contents/General';
 
 export const profileGeneralTabDashboardContents: DashboardItemProps[] = [
   {

@@ -1,4 +1,4 @@
-import { projectDetailPageDashboardContents } from '../dashboard-contents/projectDetailPageDashboardContents';
+import { projectDetailPageDashboardContents } from '../dashboard-frames/projectDetailPageDashboardContents';
 import {
   projectDetailPageDesktopDashboardRows,
   projectDetailPageMobileDashboardRows,

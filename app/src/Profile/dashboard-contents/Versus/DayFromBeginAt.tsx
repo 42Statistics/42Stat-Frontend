@@ -7,7 +7,7 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { NumberCompare } from '@shared/components/DashboardContentView/NumberCompare';
-import { getDateDiff } from '@shared/utils/getDateDiff';
+import { getTimeDiffFromNow } from '@shared/utils/getTimeDiffFromNow';
 import { useAtomValue } from 'jotai';
 import { useParams } from 'react-router-dom';
 import { GET_VERSUS_ZERO_COST } from '../../dashboard-contents-queries/GET_VERSUS_ZERO_COST';
@@ -36,8 +36,8 @@ export const DayFromBeginAt = () => {
     data2: { beginAt: myBeginAt },
   } = data;
 
-  const diff = getDateDiff(new Date(), new Date(beginAt));
-  const myDiff = getDateDiff(new Date(), new Date(myBeginAt));
+  const diff = Math.abs(getTimeDiffFromNow(new Date(beginAt), 'day'));
+  const myDiff = Math.abs(getTimeDiffFromNow(new Date(myBeginAt), 'day'));
   const unit = '일째';
 
   return (

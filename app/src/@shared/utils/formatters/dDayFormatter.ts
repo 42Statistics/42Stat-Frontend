@@ -1,9 +1,10 @@
-export const dDayFormatter = (value: number) => {
-  if (value === 0) {
+import { getTimeDiffFromNow } from '../getTimeDiffFromNow';
+
+export const dDayFormatter = (date: Date) => {
+  const diffDays = getTimeDiffFromNow(date, 'day');
+  const diffDaysAbs = Math.abs(diffDays);
+  if (diffDays === 0) {
     return 'D-Day';
   }
-  if (value > 0) {
-    return `D+${value}`;
-  }
-  return `D-${Math.abs(value)}`;
+  return `D${diffDays < 0 ? '+' : '-'}${diffDaysAbs}`;
 };

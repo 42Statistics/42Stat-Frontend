@@ -7,7 +7,6 @@ import {
 } from '@shared/components/DashboardContentView/Error';
 import { H2BoldText, H3Text, HStack } from '@shared/ui-kit';
 import { dDayFormatter } from '@shared/utils/formatters';
-import { getDateDiff } from '@shared/utils/getDateDiff';
 import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
 import { GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN } from '../../dashboard-contents-queries/GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN';
@@ -34,13 +33,12 @@ export const BeginAt = () => {
   }
 
   const { beginAt } = data.getPersonalGeneral;
-  const diff = getDateDiff(new Date(), new Date(beginAt));
 
   return (
     <DashboardContent title={title}>
       <HStack spacing="1rem" align="baseline">
         <H2BoldText>{dayjs(beginAt).format('YYYY. MM. DD.')}</H2BoldText>
-        <H3Text>{dDayFormatter(diff)}</H3Text>
+        <H3Text>{dDayFormatter(new Date(beginAt))}</H3Text>
       </HStack>
     </DashboardContent>
   );

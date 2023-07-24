@@ -1,6 +1,6 @@
-import { TabletNavProfile } from '@components/elements/NavProfile/Tablet';
 import styled from '@emotion/styled';
 import { ReactComponent as MdSearch } from '@shared/assets/icon/md-search.svg';
+import { TabletNavProfile } from '@shared/components/NavProfile/Tablet';
 import { Center, Clickable, VStack } from '@shared/ui-kit';
 import { isSpotlightOpenAtom } from '@shared/utils/jotai/atoms/isSpotlightOpenAtom';
 import { userAtom } from '@shared/utils/jotai/atoms/userAtom';

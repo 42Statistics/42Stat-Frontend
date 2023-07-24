@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client';
-import { GOOGLE_LOGIN } from '@components/elements/LoginButton';
 import { gql } from '@shared/__generated__';
+import { GOOGLE_LOGIN } from '@shared/components/LoginButton';
 import { ROUTES } from '@shared/constants/ROUTES';
 import { Center, Loader } from '@shared/ui-kit';
 import { userAtom } from '@shared/utils/jotai/atoms/userAtom';

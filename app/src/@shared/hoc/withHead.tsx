@@ -1,4 +1,4 @@
-import { Seo } from '@components/elements/Seo';
+import { Seo } from '@shared/components/Seo';
 
 const defaultHead = () => {
   return <Seo />;

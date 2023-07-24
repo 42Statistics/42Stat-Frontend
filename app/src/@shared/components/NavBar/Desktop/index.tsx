@@ -1,7 +1,7 @@
-import { AppLogoTitle } from '@components/elements/AppLogoTitle';
-import { DesktopNavProfile } from '@components/elements/NavProfile/Desktop';
-import { SearchBarShapeButton } from '@components/elements/SearchBarShapeButton';
 import styled from '@emotion/styled';
+import { AppLogoTitle } from '@shared/components/AppLogoTitle';
+import { DesktopNavProfile } from '@shared/components/NavProfile/Desktop';
+import { SearchBarShapeButton } from '@shared/components/SearchBarShapeButton';
 import { ROUTES } from '@shared/constants/ROUTES';
 import { VStack } from '@shared/ui-kit';
 import { userAtom } from '@shared/utils/jotai/atoms/userAtom';

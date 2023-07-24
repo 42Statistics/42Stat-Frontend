@@ -1,4 +1,4 @@
-import { Seo } from '@components/elements/Seo';
+import { Seo } from '@shared/components/Seo';
 import { withFooter } from '@shared/hoc/withFooter';
 import { withHead } from '@shared/hoc/withHead';
 import { H1BoldText, VStack } from '@shared/ui-kit';

@@ -1,6 +1,6 @@
-import { AppLogoTitle } from '@components/elements/AppLogoTitle';
-import { SearchBarShapeButton } from '@components/elements/SearchBarShapeButton';
 import styled from '@emotion/styled';
+import { AppLogoTitle } from '@shared/components/AppLogoTitle';
+import { SearchBarShapeButton } from '@shared/components/SearchBarShapeButton';
 import { ROUTES } from '@shared/constants/ROUTES';
 import { VStack } from '@shared/ui-kit';
 import { Link } from 'react-router-dom';

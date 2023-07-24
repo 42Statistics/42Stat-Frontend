@@ -1,11 +1,11 @@
 import { Leaderboard } from '@/Leaderboard/components/Leaderboard';
 import { LeaderboardTabResultSkeleton } from '@/Leaderboard/components/LeaderboardTabResultSkeleton';
 import { QueryResult } from '@apollo/client';
-import { ApolloErrorView } from '@components/elements/ApolloErrorView';
 import {
   GetLeaderboardExpIncrementQuery,
   GetLeaderboardExpIncrementQueryVariables,
 } from '@shared/__generated__/graphql';
+import { ApolloErrorView } from '@shared/components/ApolloErrorView';
 
 type LeaderboardExpIncrementTabResultProps = {
   result: QueryResult<

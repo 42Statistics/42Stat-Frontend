@@ -1,6 +1,6 @@
-import { AppLogoTitle } from '@components/elements/AppLogoTitle';
-import { Seo } from '@components/elements/Seo';
 import marvin_depressed from '@shared/assets/marvin-depressed.gif';
+import { AppLogoTitle } from '@shared/components/AppLogoTitle';
+import { Seo } from '@shared/components/Seo';
 import { ROUTES } from '@shared/constants/ROUTES';
 import { withHead } from '@shared/hoc/withHead';
 import {

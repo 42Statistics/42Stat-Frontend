@@ -1,9 +1,9 @@
-import { AppLogoTitle } from '@components/elements/AppLogoTitle';
+import { useTheme } from '@emotion/react';
+import { AppLogoTitle } from '@shared/components/AppLogoTitle';
 import {
   FtLoginButton,
   GoogleLoginButton,
-} from '@components/elements/LoginButton';
-import { useTheme } from '@emotion/react';
+} from '@shared/components/LoginButton';
 import { withHead } from '@shared/hoc/withHead';
 import { VStack } from '@shared/ui-kit';
 import { Introduction } from './components/Introduction';

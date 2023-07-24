@@ -1,7 +1,7 @@
-import { AppLogoTitle } from '@components/elements/AppLogoTitle';
-import { FtLoginButton } from '@components/elements/LoginButton';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { AppLogoTitle } from '@shared/components/AppLogoTitle';
+import { FtLoginButton } from '@shared/components/LoginButton';
 import { ROUTES } from '@shared/constants/ROUTES';
 import { withHead } from '@shared/hoc/withHead';
 import { VStack, WhiteText } from '@shared/ui-kit';

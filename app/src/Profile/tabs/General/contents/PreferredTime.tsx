@@ -1,6 +1,4 @@
 import { useQuery } from '@apollo/client';
-import { ProgressionBar } from '@components/elements/ProgressionBar';
-import { TextMax } from '@components/elements/TextMax';
 import { gql } from '@shared/__generated__';
 import { DateTemplate } from '@shared/__generated__/graphql';
 import { DashboardContent } from '@shared/components/DashboardContent';
@@ -9,6 +7,8 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
+import { ProgressionBar } from '@shared/components/ProgressionBar';
+import { TextMax } from '@shared/components/TextMax';
 import { H3BoldText, HStack, Text, VStack } from '@shared/ui-kit';
 import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';

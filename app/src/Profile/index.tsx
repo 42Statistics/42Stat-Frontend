@@ -1,5 +1,5 @@
-import { Seo } from '@components/elements/Seo';
 import { Dashboard } from '@shared/components/Dashboard';
+import { Seo } from '@shared/components/Seo';
 import { ROUTES } from '@shared/constants/ROUTES';
 import { withFooter } from '@shared/hoc/withFooter';
 import { withHead } from '@shared/hoc/withHead';

@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import { CoalitionMark } from '@components/elements/CoalitionMark';
+import { CoalitionMark } from '@shared/components/CoalitionMark';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,

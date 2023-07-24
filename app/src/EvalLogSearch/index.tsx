@@ -1,7 +1,7 @@
 import { useLazyQuery } from '@apollo/client';
-import { Seo } from '@components/elements/Seo';
 import { gql } from '@shared/__generated__';
 import { EvalLogEdge, EvalLogSortOrder } from '@shared/__generated__/graphql';
+import { Seo } from '@shared/components/Seo';
 import { withHead } from '@shared/hoc/withHead';
 import type { EvalLogSearchModel } from '@shared/types/EvalLogSearchModel';
 import { VStack } from '@shared/ui-kit';

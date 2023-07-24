@@ -1,9 +1,9 @@
 import { useQuery } from '@apollo/client';
-import { ApolloErrorView } from '@components/elements/ApolloErrorView';
-import { ApolloNotFoundView } from '@components/elements/ApolloNotFoundView';
 import styled from '@emotion/styled';
 import { gql } from '@shared/__generated__';
 import space_background from '@shared/assets/space-background.webp';
+import { ApolloErrorView } from '@shared/components/ApolloErrorView';
+import { ApolloNotFoundView } from '@shared/components/ApolloNotFoundView';
 import {
   Center,
   Loader,

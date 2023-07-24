@@ -1,4 +1,4 @@
-import { ApolloNotFoundView } from '@components/elements/ApolloNotFoundView';
+import { ApolloNotFoundView } from '@shared/components/ApolloNotFoundView';
 import {
   DashboardContent,
   DashboardContentProps,

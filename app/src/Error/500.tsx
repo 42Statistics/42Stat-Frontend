@@ -1,4 +1,4 @@
-import { Seo } from '@components/elements/Seo';
+import { Seo } from '@shared/components/Seo';
 import { ROUTES } from '@shared/constants/ROUTES';
 import { withHead } from '@shared/hoc/withHead';
 import {

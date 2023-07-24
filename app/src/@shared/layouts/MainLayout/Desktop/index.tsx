@@ -1,5 +1,5 @@
-import { DesktopNavBar } from '@components/elements/NavBar/Desktop';
 import styled from '@emotion/styled';
+import { DesktopNavBar } from '@shared/components/NavBar/Desktop';
 import { HStack } from '@shared/ui-kit';
 import { Outlet } from 'react-router-dom';
 

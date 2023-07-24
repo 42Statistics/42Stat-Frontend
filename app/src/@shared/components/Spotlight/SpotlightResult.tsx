@@ -1,5 +1,4 @@
 import { QueryResult } from '@apollo/client';
-import { ApolloErrorView } from '@components/elements/ApolloErrorView';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import {
@@ -7,6 +6,7 @@ import {
   FindProjectPreviewQuery,
   FindUserPreviewQuery,
 } from '@shared/__generated__/graphql';
+import { ApolloErrorView } from '@shared/components/ApolloErrorView';
 import { Center, H3Text, VStack } from '@shared/ui-kit';
 import { SpotlightProjectSection } from './SpotlightProjectSection';
 import { SpotlightUserSection } from './SpotlightUserSection';

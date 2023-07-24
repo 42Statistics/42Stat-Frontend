@@ -1,6 +1,6 @@
-import { MobileHeader } from '@components/elements/Header/Mobile';
-import { TabBar } from '@components/elements/NavBar/Mobile(TabBar)';
 import styled from '@emotion/styled';
+import { MobileHeader } from '@shared/components/Header/Mobile';
+import { TabBar } from '@shared/components/NavBar/Mobile(TabBar)';
 import { Outlet } from 'react-router-dom';
 
 export const MobileMainLayout = () => {

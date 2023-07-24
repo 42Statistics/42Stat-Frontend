@@ -2,11 +2,9 @@ import {
   homeHeroDesktopDashboardRows,
   homeHeroMobileDashboardRows,
   homeHeroTabletDashboardRows,
-} from './homeHeroDashboardRows';
-import { homePageDashboardContents } from './homePageDashboardContents';
+} from '../dashboard-frames/homeHeroDashboardRows';
 
-export const useHomeHeroDashboard = () => ({
-  contents: homePageDashboardContents,
+export const useHomeHeroDashboardSkeleton = () => ({
   desktopRows: homeHeroDesktopDashboardRows,
   tabletRows: homeHeroTabletDashboardRows,
   mobileRows: homeHeroMobileDashboardRows,

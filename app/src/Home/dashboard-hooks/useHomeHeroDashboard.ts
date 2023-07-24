@@ -1,10 +1,12 @@
+import { homePageDashboardContents } from '../dashboard-contents/homePageDashboardContents';
 import {
   homeHeroDesktopDashboardRows,
   homeHeroMobileDashboardRows,
   homeHeroTabletDashboardRows,
-} from '@/Home/hooks/homeHeroDashboardRows';
+} from '../dashboard-frames/homeHeroDashboardRows';
 
-export const useHomeHeroDashboardSkeleton = () => ({
+export const useHomeHeroDashboard = () => ({
+  contents: homePageDashboardContents,
   desktopRows: homeHeroDesktopDashboardRows,
   tabletRows: homeHeroTabletDashboardRows,
   mobileRows: homeHeroMobileDashboardRows,

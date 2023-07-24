@@ -1,9 +1,9 @@
-import { homePageDashboardContents } from './homePageDashboardContents';
+import { homePageDashboardContents } from '../dashboard-contents/homePageDashboardContents';
 import {
   homeCoalitionDesktopDashboardRows,
   homeCoalitionMobileDashboardRows,
   homeCoalitionTabletDashboardRows,
-} from './homeCoalitionDashboardRows';
+} from '../dashboard-frames/homeCoalitionDashboardRows';
 
 export const useHomeCoalitionDashboard = () => ({
   contents: homePageDashboardContents,

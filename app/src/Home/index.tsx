@@ -3,11 +3,11 @@ import { Seo } from '@shared/components/Seo';
 import { withFooter } from '@shared/hoc/withFooter';
 import { withHead } from '@shared/hoc/withHead';
 import { H2BoldText, VStack } from '@shared/ui-kit';
-import { useHomeCircleDashboard } from './hooks/useHomeCircleDashboard';
-import { useHomeCoalitionDashboard } from './hooks/useHomeCoalitionDashboard';
-import { useHomeHeroDashboard } from './hooks/useHomeHeroDashboard';
-import { useHomeRecordDashboard } from './hooks/useHomeRecordDashboard';
-import { useHomeStatusDashboard } from './hooks/useHomeStatusDashboard';
+import { useHomeCircleDashboard } from './dashboard-hooks/useHomeCircleDashboard';
+import { useHomeCoalitionDashboard } from './dashboard-hooks/useHomeCoalitionDashboard';
+import { useHomeHeroDashboard } from './dashboard-hooks/useHomeHeroDashboard';
+import { useHomeRecordDashboard } from './dashboard-hooks/useHomeRecordDashboard';
+import { useHomeStatusDashboard } from './dashboard-hooks/useHomeStatusDashboard';
 
 const HomePage = () => {
   return (

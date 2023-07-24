@@ -1,10 +1,12 @@
+import { homePageDashboardContents } from '../dashboard-contents/homePageDashboardContents';
 import {
   homeCircleDesktopDashboardRows,
   homeCircleMobileDashboardRows,
   homeCircleTabletDashboardRows,
-} from '@/Home/hooks/homeCircleDashboardRows';
+} from '../dashboard-frames/homeCircleDashboardRows';
 
-export const useHomeCircleDashboardSkeleton = () => ({
+export const useHomeCircleDashboard = () => ({
+  contents: homePageDashboardContents,
   desktopRows: homeCircleDesktopDashboardRows,
   tabletRows: homeCircleTabletDashboardRows,
   mobileRows: homeCircleMobileDashboardRows,

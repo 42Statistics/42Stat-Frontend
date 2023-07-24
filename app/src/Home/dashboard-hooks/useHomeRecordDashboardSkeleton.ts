@@ -1,12 +1,10 @@
-import { homePageDashboardContents } from './homePageDashboardContents';
 import {
   homeRecordDesktopDashboardRows,
   homeRecordMobileDashboardRows,
   homeRecordTabletDashboardRows,
-} from './homeRecordDashboardRows';
+} from '../dashboard-frames/homeRecordDashboardRows';
 
-export const useHomeRecordDashboard = () => ({
-  contents: homePageDashboardContents,
+export const useHomeRecordDashboardSkeleton = () => ({
   desktopRows: homeRecordDesktopDashboardRows,
   tabletRows: homeRecordTabletDashboardRows,
   mobileRows: homeRecordMobileDashboardRows,

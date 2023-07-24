@@ -1,10 +1,10 @@
+import { useHomeCircleDashboardSkeleton } from '@/Home/dashboard-hooks/useHomeCircleDashboardSkeleton';
+import { useHomeCoalitionDashboardSkeleton } from '@/Home/dashboard-hooks/useHomeCoalitionDashboardSkeleton';
+import { useHomeHeroDashboardSkeleton } from '@/Home/dashboard-hooks/useHomeHeroDashboardSkeleton';
+import { useHomeRecordDashboardSkeleton } from '@/Home/dashboard-hooks/useHomeRecordDashboardSkeleton';
+import { useHomeStatusDashboardSkeleton } from '@/Home/dashboard-hooks/useHomeStatusDashboardSkeleton';
 import { DashboardSkeleton } from '@shared/components/DashboardSkeleton';
 import { H2BoldText, VStack } from '@shared/ui-kit';
-import { useHomeCircleDashboardSkeleton } from './hooks/useHomeCircleDashboardSkeleton';
-import { useHomeCoalitionDashboardSkeleton } from './hooks/useHomeCoalitionDashboardSkeleton';
-import { useHomeHeroDashboardSkeleton } from './hooks/useHomeHeroDashboardSkeleton';
-import { useHomeRecordDashboardSkeleton } from './hooks/useHomeRecordDashboardSkeleton';
-import { useHomeStatusDashboardSkeleton } from './hooks/useHomeStatusDashboardSkeleton';
 
 export const HomePageSkeleton = () => {
   return (

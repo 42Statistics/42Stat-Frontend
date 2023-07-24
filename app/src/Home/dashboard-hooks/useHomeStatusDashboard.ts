@@ -1,9 +1,9 @@
-import { homePageDashboardContents } from './homePageDashboardContents';
+import { homePageDashboardContents } from '../dashboard-contents/homePageDashboardContents';
 import {
   homeStatusDesktopDashboardRows,
   homeStatusMobileDashboardRows,
   homeStatusTabletDashboardRows,
-} from './homeStatusDashboardRows';
+} from '../dashboard-frames/homeStatusDashboardRows';
 
 export const useHomeStatusDashboard = () => ({
   contents: homePageDashboardContents,

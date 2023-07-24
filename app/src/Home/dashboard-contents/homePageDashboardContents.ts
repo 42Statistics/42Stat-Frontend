@@ -3,16 +3,16 @@ import {
   MonthlyTigCountPerCoalition,
   ScoreRecordsPerCoalition,
   TotalScoresPerCoalition,
-} from '../contents/Coalition';
+} from './Coalition';
 import {
   AverageCommentLength,
   AverageFeedbackLength,
   TotalEvalCount,
   WeeklyAverageEvalCount,
   WeeklyEvalCount,
-} from '../contents/Eval';
-import { Hero } from '../contents/MyInfo';
-import { CurrRegisteredCountRanking, RecentExamResult } from '../contents/Team';
+} from './Eval';
+import { Hero } from './MyInfo';
+import { CurrRegisteredCountRanking, RecentExamResult } from './Team';
 import {
   AliveUserCountRecords,
   AverageDurationPerCircle,
@@ -23,7 +23,7 @@ import {
   MonthlyBlackholedCount,
   UserCountPerLevel,
   WalletRanking,
-} from '../contents/User';
+} from './User';
 
 export const homePageDashboardContents: DashboardItemProps[] = [
   {

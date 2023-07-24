@@ -1,7 +1,10 @@
 import { ReactComponent as SmileyCheekySvg } from '@/Profile/assets/blackhole/smiley-cheeky.svg';
 import { ReactComponent as SmileySadSvg } from '@/Profile/assets/blackhole/smiley-sad.svg';
 import { ReactComponent as SmileyScaredSvg } from '@/Profile/assets/blackhole/smiley-scared.svg';
+import { ReactComponent as SmileySleepySvg } from '@/Profile/assets/blackhole/smiley-sleepy.svg';
 import { ReactComponent as SmileySmile1Svg } from '@/Profile/assets/blackhole/smiley-smile-1.svg';
+import { GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN } from '@/Profile/dashboard-contents-queries/GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN';
+import { getBlackholeDaysLeft } from '@shared/utils/getBlackholeDaysLeft';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
 import { DashboardContent } from '@shared/components/DashboardContent';
@@ -12,7 +15,6 @@ import {
 } from '@shared/components/DashboardContentView/Error';
 import { H2BoldText, HStack } from '@shared/ui-kit';
 import { useParams } from 'react-router-dom';
-import { GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN } from '../../dashboard-contents-queries/GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN';
 
 export const BlackholedAt = () => {
   const theme = useTheme();
@@ -37,23 +39,20 @@ export const BlackholedAt = () => {
   }
 
   const { blackholedAt } = data.getPersonalGeneral;
-  const daysLeft = blackholedAt
-    ? Math.floor(
-        (new Date(blackholedAt).getTime() - Date.now()) / 1000 / 60 / 60 / 24,
-      )
-    : 0; // TODO: days left 로직 검증
+  const daysLeft =
+    blackholedAt != null ? getBlackholeDaysLeft(new Date(blackholedAt)) : null;
 
-  const getColorAndText = (isFree: boolean, daysLeft: number) => {
-    if (isFree)
+  const getColorAndText = (daysLeft: number | null) => {
+    if (daysLeft === null)
       return {
         color: theme.colors.mono.black,
         Svg: SmileyCheekySvg,
         text: 'Never',
-      }; // 반드시 Member일 때만 blackholedAt === null
+      };
     if (daysLeft >= 365)
       return {
         color: '#3db618',
-        Svg: SmileySmile1Svg, // 다른 Svg로 변경
+        Svg: SmileySleepySvg,
         text: `${daysLeft.toLocaleString()} days left`,
       };
     if (daysLeft >= 100)
@@ -83,7 +82,7 @@ export const BlackholedAt = () => {
     };
   };
 
-  const { color, Svg, text } = getColorAndText(blackholedAt === null, daysLeft);
+  const { color, Svg, text } = getColorAndText(daysLeft);
 
   return (
     <DashboardContent title={title}>

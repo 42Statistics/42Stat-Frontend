@@ -1,10 +1,10 @@
 import { keyframes, useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { Modal, Overlay } from '@shared/ui-kit';
 import { MODAL_ID } from '@shared/constants/HTML_ID';
-import { fadeIn } from '@shared/styles/custom/fadeIn';
 import type { DialogBaseProps } from '@shared/types/Modal';
 import { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
+import { Modal, Overlay } from '@shared/ui-kit';
+import { fadeIn } from '@shared/ui-kit-styled';
 import { isEscapeKeyDown } from '@shared/utils/keyboard';
 import { useEffect, useLayoutEffect, useState } from 'react';
 

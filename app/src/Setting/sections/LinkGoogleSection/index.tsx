@@ -3,7 +3,6 @@ import { useTheme } from '@emotion/react';
 import { gql } from '@shared/__generated__';
 import { ReactComponent as FtLogo } from '@shared/assets/logo/ft-logo.svg';
 import google_logo from '@shared/assets/logo/google-logo.svg';
-import { CustomSection } from '@shared/styles/custom/CustomSection';
 import {
   Divider,
   H2BoldText,
@@ -13,6 +12,7 @@ import {
   Text,
   VStack,
 } from '@shared/ui-kit';
+import { CustomSection } from '@shared/ui-kit-styled';
 import { userAtom } from '@shared/utils/jotai/atoms/userAtom';
 import { useAtomValue } from 'jotai';
 import { LinkLabel } from './LinkLabel';

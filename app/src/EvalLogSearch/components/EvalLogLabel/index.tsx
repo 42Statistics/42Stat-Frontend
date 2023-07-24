@@ -1,7 +1,6 @@
 import { useTheme } from '@emotion/react';
 import { PropsWithStringChildren } from '@shared/types/PropsWithChildren';
-import { Text } from '@shared/ui-kit';
-import { StyledLabel } from '@shared/ui-kit/Label';
+import { StyledLabel, Text } from '@shared/ui-kit';
 import { rgba } from 'emotion-rgba';
 
 type EvalLogLabelSize = 'md';

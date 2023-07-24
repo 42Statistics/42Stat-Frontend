@@ -1,8 +1,8 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { EvalLog } from '@shared/__generated__/graphql';
-import { CustomBox } from '@shared/styles/custom/CustomBox';
 import { Center, HStack, Text, VStack } from '@shared/ui-kit';
+import { CustomBox } from '@shared/ui-kit-styled';
 import { EvalLogLabel } from '../EvalLogLabel';
 import { EvalLogItemTitle } from './EvalLogItemTitle';
 

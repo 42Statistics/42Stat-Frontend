@@ -1,5 +1,5 @@
 import { Dashboard } from '@shared/components/Dashboard';
-import { useProfileVersusTabDashboard } from '../dashboard-hooks/useProfileVersusTabDashboard';
+import { useProfileVersusTabDashboard } from '../../dashboard-hooks/useProfileVersusTabDashboard';
 
 const ProfileVersusTab = () => {
   return <Dashboard {...useProfileVersusTabDashboard()} />;

@@ -8,9 +8,9 @@ import { Tab, TabPanel, Tabs, VStack } from '@shared/ui-kit';
 import { useAtomValue } from 'jotai';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useProfilePageDashboard } from './dashboard-hooks/useProfilePageDashboard';
-import ProfileEvalTab from './tabs/ProfileEvalTab';
-import ProfileGeneralTab from './tabs/ProfileGeneralTab';
-import ProfileVersusTab from './tabs/ProfileVersusTab';
+import ProfileEvalTab from './tabs/Eval';
+import ProfileGeneralTab from './tabs/General';
+import ProfileVersusTab from './tabs/Versus';
 
 type ProfileTabNames = 'General' | 'Eval' | 'Versus';
 

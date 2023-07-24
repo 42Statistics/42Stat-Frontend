@@ -1,11 +1,11 @@
+import { QueryResult } from '@apollo/client';
+import { ApolloErrorView } from '@components/elements/ApolloErrorView';
+import { Leaderboard } from '@components/templates/Leaderboard';
 import {
   GetLeaderboardLevelQuery,
   GetLeaderboardLevelQueryVariables,
 } from '@shared/__generated__/graphql';
-import { QueryResult } from '@apollo/client';
-import { ApolloErrorView } from '@components/elements/ApolloErrorView';
-import { Leaderboard } from '@components/templates/Leaderboard';
-import { LeaderboardTabResultSkeleton } from '@pages/PageSkeletons/LeaderboardTabResultSkeleton';
+import { LeaderboardTabResultSkeleton } from '../../components/LeaderboardTabResultSkeleton';
 
 type LeaderboardLevelTabResultProps = {
   result: QueryResult<

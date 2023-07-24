@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { LeaderboardTabResultSkeleton } from './LeaderboardTabResultSkeleton';
+import { LeaderboardTabResultSkeleton } from '.';
 
 const meta = {
   title: 'Common/Skeleton/LeaderBoardTabResultSkeleton',

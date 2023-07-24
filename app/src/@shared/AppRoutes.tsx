@@ -1,6 +1,8 @@
+import NotFoundPage from '@/Error/404';
 import FtOAuthPage from '@/FtOAuth';
 import FtOAuthRedirectPage from '@/FtOAuthRedirect';
-import NotFoundPage from '@/Error/404';
+import { HomePageSkeleton } from '@/Home/components/HomePageSkeleton';
+import { ProfilePageSkeleton } from '@/Profile/components/ProfilePageSkeleton';
 import SettingPage from '@/Setting';
 import { DeferredComponent } from '@components/common';
 import { AuthGuard } from '@guards/AuthGuard';
@@ -8,8 +10,6 @@ import { NoAuthGuard } from '@guards/NoAuthGuard';
 import { UserMiddleware } from '@guards/UserMiddleware';
 import { LandingLayout } from '@layouts/LandingLayout';
 import { MainLayout } from '@layouts/MainLayout';
-import { HomePageSkeleton } from '@pages/PageSkeletons/HomePageSkeleton';
-import { ProfilePageSkeleton } from '@pages/PageSkeletons/ProfilePageSkeleton';
 import { ROUTES } from '@shared/constants/ROUTES';
 import { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';

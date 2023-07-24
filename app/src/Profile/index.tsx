@@ -7,10 +7,10 @@ import { withHead } from '@shared/hoc/withHead';
 import { Tab, TabPanel, Tabs, VStack } from '@shared/ui-kit';
 import { useAtomValue } from 'jotai';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useProfilePageDashboard } from './hooks/useProfilePageDashboard';
-import ProfileEvalTab from './tabs/Eval';
-import ProfileGeneralTab from './tabs/General';
-import ProfileVersusTab from './tabs/Versus';
+import { useProfilePageDashboard } from './dashboard-hooks/useProfilePageDashboard';
+import ProfileEvalTab from './tabs/ProfileEvalTab';
+import ProfileGeneralTab from './tabs/ProfileGeneralTab';
+import ProfileVersusTab from './tabs/ProfileVersusTab';
 
 type ProfileTabNames = 'General' | 'Eval' | 'Versus';
 

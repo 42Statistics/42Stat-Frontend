@@ -4,3 +4,4 @@ export * from './DonutChart';
 export * from './HorizontalBarChart';
 export * from './LineChart';
 export * from './PieChart';
+export * from './RadarChart';

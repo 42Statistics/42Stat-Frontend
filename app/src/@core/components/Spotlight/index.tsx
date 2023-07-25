@@ -58,6 +58,18 @@ export const Spotlight = ({ isOpen, onClose }: SpotlightProps) => {
   }, [location]);
 
   useEffect(() => {
+    if (debouncedInput.length >= 2) {
+      return;
+    }
+    if (findUserResult.data) {
+      findUserResult.data = undefined;
+    }
+    if (findProjectResult.data) {
+      findProjectResult.data = undefined;
+    }
+  }, [debouncedInput, findUserResult, findProjectResult]);
+
+  useEffect(() => {
     if (debouncedInput.length < 2) {
       return;
     }
@@ -89,7 +101,7 @@ export const Spotlight = ({ isOpen, onClose }: SpotlightProps) => {
               input={input}
               onChange={handleChange}
             />
-            {input.length >= 2 ? (
+            {debouncedInput.length >= 2 ? (
               <SpotlightResult
                 findUserResult={findUserResult}
                 findProjectResult={findProjectResult}

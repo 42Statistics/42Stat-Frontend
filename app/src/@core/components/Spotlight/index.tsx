@@ -61,8 +61,12 @@ export const Spotlight = ({ isOpen, onClose }: SpotlightProps) => {
     if (debouncedInput.length < 2) {
       return;
     }
-    findUser({ variables: { login: debouncedInput, limit: LIMIT } });
-    findProject({ variables: { name: debouncedInput, limit: LIMIT } });
+    if (debouncedInput.length <= 10) {
+      findUser({ variables: { login: debouncedInput, limit: LIMIT } });
+    }
+    if (debouncedInput.length <= 100) {
+      findProject({ variables: { name: debouncedInput, limit: LIMIT } });
+    }
   }, [debouncedInput, findUser, findProject]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

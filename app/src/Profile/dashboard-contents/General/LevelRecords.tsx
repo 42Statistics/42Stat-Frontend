@@ -98,7 +98,7 @@ type LevelRecordsChartProps = {
   series: ApexAxisChartSeries;
 };
 
-export const LevelRecordsChart = ({ series }: LevelRecordsChartProps) => {
+const LevelRecordsChart = ({ series }: LevelRecordsChartProps) => {
   const theme = useTheme();
 
   const options: ApexCharts.ApexOptions = {

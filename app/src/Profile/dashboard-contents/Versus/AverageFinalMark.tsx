@@ -48,7 +48,7 @@ export const AverageFinalMark = () => {
     data1: { averageFinalMark },
     data2: { averageFinalMark: myAverageFinalMark },
   } = data;
-  const unit = '회';
+  const unit = '점';
 
   return (
     <DashboardContent title={title} description={description}>

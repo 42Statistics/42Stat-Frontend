@@ -1,5 +1,4 @@
 import { QueryResult } from '@apollo/client';
-import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import {
   Exact,
@@ -32,16 +31,8 @@ export const SpotlightResult = ({
   findUserResult,
   findProjectResult,
 }: SpotlightResultProps) => {
-  const theme = useTheme();
-
   if (findUserResult.loading || findProjectResult.loading) {
-    return (
-      <Layout>
-        <Center>
-          <H3Text color={theme.colors.mono.gray300}>검색 중...</H3Text>
-        </Center>
-      </Layout>
-    );
+    return null;
   }
 
   if (findUserResult.error || findProjectResult.error) {
@@ -57,6 +48,10 @@ export const SpotlightResult = ({
         </Center>
       </Layout>
     );
+  }
+
+  if (!findUserResult.data || !findProjectResult.data) {
+    return null;
   }
 
   if (

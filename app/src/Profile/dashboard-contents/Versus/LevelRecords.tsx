@@ -1,7 +1,8 @@
-import { LevelRecordsChart } from '@/Profile/dashboard-contents/General';
 import { useQuery } from '@apollo/client';
+import { useTheme } from '@emotion/react';
 import { gql } from '@shared/__generated__';
 import { userAtom } from '@shared/atoms/userAtom';
+import { LineChart } from '@shared/components/Chart';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,
@@ -84,4 +85,33 @@ export const LevelRecords = () => {
       <LevelRecordsChart series={series} />
     </DashboardContent>
   );
+};
+
+type LevelRecordsChartProps = {
+  series: ApexAxisChartSeries;
+};
+
+const LevelRecordsChart = ({ series }: LevelRecordsChartProps) => {
+  const theme = useTheme();
+
+  const options: ApexCharts.ApexOptions = {
+    colors: [theme.colors.primary.default, theme.colors.accent.default],
+    xaxis: {
+      labels: {
+        formatter: (value) => `${value}`,
+      },
+    },
+    yaxis: {
+      labels: {
+        formatter: (value) => `lv. ${value}`,
+      },
+    },
+    tooltip: {
+      x: {
+        formatter: (value) => `${value}개월 차`,
+      },
+    },
+  };
+
+  return <LineChart series={series} options={options} />;
 };

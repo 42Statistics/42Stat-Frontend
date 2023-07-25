@@ -97,7 +97,7 @@ const EvalLogSearchPage = () => {
   const [evalLogEdges, setEvalLogEdges] = useState<EvalLogEdge[]>([]);
   const [endCursor, setEndCursor] = useState<string>('');
   const [end, setEnd] = useState<boolean>(false);
-  const { ref, isVisible } = useInfiniteScroll();
+  const { ref, isVisible } = useInfiniteScroll(0.1);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleSubmit = (form: EvalLogSearchModel) => {

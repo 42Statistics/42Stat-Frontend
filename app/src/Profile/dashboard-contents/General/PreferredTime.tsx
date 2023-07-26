@@ -9,7 +9,7 @@ import {
 } from '@shared/components/DashboardContentView/Error';
 import { ProgressionBar } from '@shared/components/ProgressionBar';
 import { TextMax } from '@shared/components/TextMax';
-import { H3BoldText, HStack, Text, VStack } from '@shared/ui-kit';
+import { H3MediumText, HStack, Text, VStack } from '@shared/ui-kit';
 import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
 
@@ -116,7 +116,7 @@ export const PreferredTime = () => {
   return (
     <DashboardContent title={title} description={description}>
       <VStack spacing="4rem">
-        <H3BoldText>{getPreferredTimeTitle()}</H3BoldText>
+        <H3MediumText>{getPreferredTimeTitle()}</H3MediumText>
         <VStack spacing="1.5rem">
           {tableData.map(({ time, hour, minute, value }) => (
             <HStack key={time} spacing="2rem">

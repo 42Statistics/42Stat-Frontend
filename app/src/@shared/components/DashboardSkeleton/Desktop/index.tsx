@@ -1,6 +1,5 @@
 import { DesktopDashboardLayout } from '@shared/components/Dashboard/Desktop';
 import { DesktopDashboardRow } from '@shared/components/Dashboard/Desktop/DesktopDashboardRow';
-import { DashboardItem } from '@shared/components/Dashboard/shared/DashboardItem';
 import type { DesktopDashboardProps } from '@shared/types/Dashboard';
 import { DashboardItemSkeleton } from '../shared/DashboardItemSkeleton';
 
@@ -14,13 +13,12 @@ export const DesktopDashboardSkeleton = ({
       {rows.map(({ row, col, items }, rowIdx) => (
         <DesktopDashboardRow key={rowIdx} row={row} col={col}>
           {items.map(({ row, col, rowSpan, colSpan }, itemIdx) => (
-            <DashboardItem
+            <DashboardItemSkeleton
               key={itemIdx}
               row={row}
               col={col}
               rowSpan={rowSpan}
               colSpan={colSpan}
-              content={DashboardItemSkeleton}
             />
           ))}
         </DesktopDashboardRow>

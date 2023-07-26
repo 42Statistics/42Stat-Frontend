@@ -10,7 +10,7 @@ type ProjectRankListProps = {
 
 export const ProjectRankList = ({ list, cnt, unit }: ProjectRankListProps) => {
   return (
-    <VStack w="100%" h="100%" spacing="2rem">
+    <VStack w="100%" h="100%" spacing="2.4rem">
       {list.slice(0, cnt).map((item) => (
         <ProjectRankListItem
           key={item.projectPreview.id}

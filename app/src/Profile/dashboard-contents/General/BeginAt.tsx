@@ -5,7 +5,7 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
-import { H2BoldText, H3Text, HStack } from '@shared/ui-kit';
+import { H2MediumText, H3Text, HStack } from '@shared/ui-kit';
 import { dDayFormatter } from '@shared/utils/formatters';
 import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
@@ -37,7 +37,7 @@ export const BeginAt = () => {
   return (
     <DashboardContent title={title}>
       <HStack spacing="1rem" align="baseline">
-        <H2BoldText>{dayjs(beginAt).format('YYYY. MM. DD.')}</H2BoldText>
+        <H2MediumText>{dayjs(beginAt).format('YYYY. MM. DD.')}</H2MediumText>
         <H3Text>{dDayFormatter(new Date(beginAt))}</H3Text>
       </HStack>
     </DashboardContent>

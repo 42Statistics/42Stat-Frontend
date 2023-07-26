@@ -10,5 +10,5 @@ type SkeletonProps = Partial<{
 export const Skeleton = styled(SkeletonAnimation)<SkeletonProps>`
   width: ${({ w = '100%' }) => w};
   height: ${({ h = '100%' }) => h};
-  border-radius: ${({ theme, radius = theme.radius.sm }) => radius};
+  border-radius: ${({ theme, radius = theme.radius.md }) => radius};
 `;

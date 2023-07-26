@@ -1,15 +1,22 @@
 import styled from '@emotion/styled';
+import type { DashboardItemProps } from '@shared/components/Dashboard/shared/DashboardItem';
 import { Skeleton } from '@shared/ui-kit';
 
-export const DashboardItemSkeleton = () => {
+type DashboardItemSkeletonProps = Omit<DashboardItemProps, 'content'>;
+
+export const DashboardItemSkeleton = ({
+  ...props
+}: DashboardItemSkeletonProps) => {
   return (
-    <Layout>
+    <Layout {...props}>
       <Skeleton />
     </Layout>
   );
 };
 
-const Layout = styled.div`
-  width: 100%;
-  height: 100%;
+type LayoutProps = Omit<DashboardItemProps, 'content'>;
+
+const Layout = styled.div<LayoutProps>`
+  grid-column: ${({ col, colSpan }) => `${col} / span ${colSpan}`};
+  grid-row: ${({ row, rowSpan }) => `${row} / span ${rowSpan}`};
 `;

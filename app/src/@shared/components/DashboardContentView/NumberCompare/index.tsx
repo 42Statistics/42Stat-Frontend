@@ -1,4 +1,4 @@
-import { H1BoldText, HStack, Text } from '@shared/ui-kit';
+import { H1MediumText, H3Text, HStack } from '@shared/ui-kit';
 import { NoneDash } from '../Error/NoneDash';
 import { Diff } from './Diff';
 
@@ -12,8 +12,8 @@ export const NumberCompare = ({ curr, last, unit }: NumberCompareProps) => {
   return (
     <HStack spacing="2rem" align="baseline">
       <HStack align="baseline" spacing="0.15rem">
-        <H1BoldText>{curr.toLocaleString()}</H1BoldText>
-        <Text>{unit}</Text>
+        <H1MediumText>{curr.toLocaleString()}</H1MediumText>
+        <H3Text>{unit}</H3Text>
       </HStack>
       {curr !== last ? <Diff curr={curr} last={last} /> : <NoneDash />}
     </HStack>

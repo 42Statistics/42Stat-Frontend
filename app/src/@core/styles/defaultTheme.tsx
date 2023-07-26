@@ -24,7 +24,7 @@ const colors = {
   },
   mono: {
     black: '#161616',
-    white: '#f9f9f9',
+    white: '#ffffff',
     gray300: '#777777',
     gray200: '#999999',
     gray100: '#bbbbbb',
@@ -34,11 +34,12 @@ const colors = {
 
 const fonts = {
   size: {
-    h1: '2.8rem',
+    title: '3.2rem',
+    h1: '2.4rem',
     h2: '2.0rem',
-    h3: '1.6rem',
+    h3: '1.8rem',
     body: '1.4rem',
-    caption: '1.1rem',
+    caption: '1.2rem',
   },
   weight: {
     thin: 100,

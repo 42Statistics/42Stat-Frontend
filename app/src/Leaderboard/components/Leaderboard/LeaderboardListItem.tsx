@@ -6,8 +6,7 @@ import {
   Avatar,
   CaptionText,
   Clickable,
-  H2BoldText,
-  H3BoldText,
+  H2MediumText,
   H3MediumText,
   HStack,
   MediumText,
@@ -49,17 +48,17 @@ export const LeaderboardListItem = ({
       <TabletAndAbove>
         <HStack w="100%" spacing="4rem">
           <HStack w="5rem">
-            <H3BoldText color={color}>{rank}</H3BoldText>
+            <H3MediumText color={color}>{rank}</H3MediumText>
           </HStack>
           <Avatar src={imgUrl} />
           <H3MediumText color={color}>{login}</H3MediumText>
           <Spacer />
           <HStack align="baseline" spacing="0.2rem">
-            <H2BoldText color={color}>
+            <H2MediumText color={color}>
               {fixedNumber === undefined
                 ? numberWithUnitFormatter(value)
                 : `${value.toFixed(2)}`}
-            </H2BoldText>
+            </H2MediumText>
             <Text color={color}>{unit}</Text>
           </HStack>
         </HStack>
@@ -73,11 +72,11 @@ export const LeaderboardListItem = ({
           <MediumText color={color}>{login}</MediumText>
           <Spacer />
           <HStack align="baseline" spacing="0.2rem">
-            <H3BoldText color={color}>
+            <H3MediumText color={color}>
               {fixedNumber === undefined
                 ? numberWithUnitFormatter(value)
                 : `${value.toFixed(2)}`}
-            </H3BoldText>
+            </H3MediumText>
             <CaptionText color={color}>{unit}</CaptionText>
           </HStack>
         </HStack>

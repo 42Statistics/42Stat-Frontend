@@ -1,4 +1,4 @@
-import { H1BoldText, HStack, Text } from '@shared/ui-kit';
+import { H1MediumText, H3Text, HStack } from '@shared/ui-kit';
 
 type NumberDefaultProps = {
   number: number;
@@ -13,12 +13,12 @@ export const NumberDefault = ({
 }: NumberDefaultProps) => {
   return (
     <HStack align="baseline" spacing="0.15rem">
-      <H1BoldText>
+      <H1MediumText>
         {fixedNumber === undefined
           ? number.toLocaleString()
           : number.toFixed(2)}
-      </H1BoldText>
-      <Text>{unit}</Text>
+      </H1MediumText>
+      <H3Text>{unit}</H3Text>
     </HStack>
   );
 };

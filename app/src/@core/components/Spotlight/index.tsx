@@ -57,6 +57,7 @@ export const Spotlight = ({ isOpen, onClose }: SpotlightProps) => {
   }, [location]);
 
   useEffect(() => {
+    setCurrentFocus(0);
     if (debouncedInput.length >= 2) {
       return;
     }
@@ -66,7 +67,7 @@ export const Spotlight = ({ isOpen, onClose }: SpotlightProps) => {
     if (findProjectResult.data) {
       findProjectResult.data = undefined;
     }
-  }, [debouncedInput, findUserResult, findProjectResult]);
+  }, [debouncedInput, setCurrentFocus, findUserResult, findProjectResult]);
 
   useEffect(() => {
     if (debouncedInput.length < 2) {

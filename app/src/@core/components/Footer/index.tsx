@@ -16,7 +16,12 @@ export const Footer = () => {
           target="_blank"
           rel="noreferrer"
         >
-          <GithubLogo width={24} height={24} fill={theme.colors.mono.gray300} />
+          <GithubLogo
+            width={24}
+            height={24}
+            fill={theme.colors.mono.gray300}
+            aria-label="42Stat 깃허브로 이동"
+          />
         </Link>
       </HStack>
     </Layout>

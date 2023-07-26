@@ -8,6 +8,7 @@ type ButtonProps = PropsWithStringChildren<{
   size?: ButtonSize;
   color?: string;
   backgroundColor?: string;
+  ariaLabel?: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }>;
 
@@ -19,7 +20,7 @@ export const Button = styled(Clickable)<ButtonProps>`
   }) => backgroundColor};
   color: ${({ theme, color = theme.colors.mono.white }) => color};
   font-weight: ${({ theme }) => theme.fonts.weight.bold};
-  font-size: ${({ theme }) => theme.fonts.size.body};
+  font-size: ${({ theme }) => theme.fonts.size.body2};
   padding: 1rem 2.2rem;
   user-select: none;
   transition: all 0.3s;

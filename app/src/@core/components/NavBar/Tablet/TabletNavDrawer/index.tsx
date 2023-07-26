@@ -30,7 +30,7 @@ export const TabletNavDrawer = () => {
 
   return (
     <>
-      <Clickable onClick={onOpen}>
+      <Clickable onClick={onOpen} aria-label="메뉴 열기">
         <MdMenu width={22} height={22} />
       </Clickable>
       <TabletNavDrawerView isOpen={isOpen} onClose={onClose} />

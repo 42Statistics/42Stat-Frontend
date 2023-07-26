@@ -20,7 +20,7 @@ export const LoginButton = ({
   const theme = useTheme();
 
   return (
-    <Clickable onClick={onClick} disabled={disabled}>
+    <Clickable onClick={onClick} disabled={disabled} aria-label={text}>
       <Layout>
         <Center w="40px">{logo}</Center>
         <HStack w="100%">

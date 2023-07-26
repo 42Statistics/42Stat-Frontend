@@ -69,7 +69,10 @@ export const LinkGoogleButton = ({ onSuccess }: LinkGoogleButtonProps) => {
   if (loading) return <Spinner />;
 
   return (
-    <Clickable onClick={() => googleButtonWrapper?.click()}>
+    <Clickable
+      onClick={() => googleButtonWrapper?.click()}
+      aria-label="구글 계정으로 연동하기"
+    >
       <MdSyncAlt width={20} height={20} />
     </Clickable>
   );

@@ -52,12 +52,12 @@ export const Pagination = ({
   return (
     <HStack spacing="1rem">
       {isStartButtonDisabled ? null : (
-        <Clickable onClick={handleClickStartButton}>
+        <Clickable onClick={handleClickStartButton} aria-label="처음으로">
           <MdFirstPage width={20} height={20} />
         </Clickable>
       )}
       {isBackButtonDisabled ? null : (
-        <Clickable onClick={handleClickBackButton}>
+        <Clickable onClick={handleClickBackButton} aria-label="앞으로">
           <MdChevronLeft width={20} height={20} />
         </Clickable>
       )}
@@ -72,12 +72,12 @@ export const Pagination = ({
         ))}
       </HStack>
       {isForwardButtonDisabled ? null : (
-        <Clickable onClick={handleClickForwardButton}>
+        <Clickable onClick={handleClickForwardButton} aria-label="뒤로">
           <MdChevronRight width={20} height={20} />
         </Clickable>
       )}
       {isEndButtonDisabled ? null : (
-        <Clickable onClick={handleClickEndButton}>
+        <Clickable onClick={handleClickEndButton} aria-label="끝으로">
           <MdLastPage width={20} height={20} />
         </Clickable>
       )}

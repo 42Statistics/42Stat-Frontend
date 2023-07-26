@@ -52,7 +52,7 @@ export const LeaderboardListItem = ({
           <HStack w="5rem">
             <H3BoldText color={color}>{rank}</H3BoldText>
           </HStack>
-          <Avatar src={imgUrl} />
+          <Avatar src={imgUrl} alt={`${login}의 프로필 사진`} />
           <Body1MediumText color={color}>{login}</Body1MediumText>
           <Spacer />
           <HStack align="baseline" spacing="0.2rem">

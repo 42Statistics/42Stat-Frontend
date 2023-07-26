@@ -118,7 +118,7 @@ export const UserProfile = () => {
     >
       <Desktop>
         <HStack h="100%" spacing="4rem">
-          <Avatar size="xl" src={imgUrl} />
+          <Avatar size="xl" src={imgUrl} alt={`${login}의 프로필 사진`} />
           <WhiteH3BoldText>{titleCase(grade)}</WhiteH3BoldText>
           <WhiteH3BoldText>{titleCase(displayname)}</WhiteH3BoldText>
           <WhiteMediumText>
@@ -132,7 +132,7 @@ export const UserProfile = () => {
       </Desktop>
       <TabletAndBelow>
         <VStack h="100%" spacing="2rem">
-          <Avatar size="xl" src={imgUrl} />
+          <Avatar size="xl" src={imgUrl} alt={`${login}의 프로필 사진`} />
           <VStack>
             <WhiteBoldText>{titleCase(grade)}</WhiteBoldText>
             <WhiteH1BoldText>{titleCase(displayname)}</WhiteH1BoldText>

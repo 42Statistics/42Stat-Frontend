@@ -13,7 +13,7 @@ export const TabletNavProfile = ({ imgUrl }: TabletNavProfileProps) => {
 
   return (
     <Link to={`${ROUTES.PROFILE_ROOT}/${user.login}`}>
-      <Avatar size="sm" src={imgUrl} />
+      <Avatar size="sm" src={imgUrl} alt={`${user.login}의 프로필 사진`} />
     </Link>
   );
 };

@@ -17,7 +17,7 @@ export const UserRankListItem = ({ item, unit }: UserRankListItemProps) => {
   return (
     <RankListItem
       rank={rank}
-      center={<Avatar src={imgUrl} />}
+      center={<Avatar src={imgUrl} alt={`${login}의 프로필 사진`} />}
       name={login}
       link={`${ROUTES.PROFILE_ROOT}/${login}`}
       value={value}

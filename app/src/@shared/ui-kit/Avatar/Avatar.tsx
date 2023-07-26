@@ -9,9 +9,10 @@ type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 type AvatarProps = {
   size?: AvatarSize;
   src?: string | null;
+  alt?: string;
 };
 
-export const Avatar = ({ size = 'md', src }: AvatarProps) => {
+export const Avatar = ({ size = 'md', src, alt = '아바타' }: AvatarProps) => {
   const [isLoading, setIsLoading] = useState(true);
 
   if (src == null) {
@@ -50,6 +51,7 @@ export const Avatar = ({ size = 'md', src }: AvatarProps) => {
         onLoad={() => setIsLoading(false)}
         onError={handleError}
         src={src}
+        alt={alt}
         style={{ width, height: width }}
       />
     </div>

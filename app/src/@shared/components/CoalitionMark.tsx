@@ -66,6 +66,7 @@ export const CoalitionMark = ({
   return (
     <StyledCoalitionMark
       src={imageUrl}
+      alt={`${coalition?.name ?? '42'} 로고`}
       onError={handleImageError}
       style={{
         width: size,

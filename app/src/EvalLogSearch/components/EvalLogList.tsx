@@ -8,7 +8,7 @@ type EvalLogListProps = {
 
 export const EvalLogList = ({ evalLogEdges }: EvalLogListProps) => {
   return (
-    <VStack as="ul" w="100%" spacing="2rem">
+    <VStack as="ul" w="100%" spacing="1rem">
       {evalLogEdges.map(({ node }) => (
         <EvalLogItem key={node.id} element={node} />
       ))}

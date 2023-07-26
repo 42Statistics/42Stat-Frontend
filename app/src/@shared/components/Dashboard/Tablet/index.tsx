@@ -27,6 +27,6 @@ export const TabletDashboard = ({ rows, contents }: TabletDashboardProps) => {
 export const TabletDashboardLayout = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2.4rem;
+  gap: 1rem;
   width: 100%;
 `;

@@ -7,7 +7,6 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { UserRankList } from '@shared/components/DashboardContentView/Rank/UserRankList';
-import { Mobile, TabletAndAbove } from '@shared/utils/react-responsive/Device';
 
 const GET_CORRECTION_POINT_RANKING = gql(/* GraphQL */ `
   query GetCorrectionPointRanking($limit: Int!) {
@@ -43,12 +42,7 @@ export const CorrectionPointRanking = () => {
 
   return (
     <DashboardContent title={title}>
-      <TabletAndAbove>
-        <UserRankList list={correctionPointRanking} cnt={5} unit={unit} />
-      </TabletAndAbove>
-      <Mobile>
-        <UserRankList list={correctionPointRanking} cnt={3} unit={unit} />
-      </Mobile>
+      <UserRankList list={correctionPointRanking} cnt={5} unit={unit} />
     </DashboardContent>
   );
 };

@@ -27,6 +27,6 @@ export const DesktopDashboard = ({ rows, contents }: DesktopDashboardProps) => {
 export const DesktopDashboardLayout = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2.4rem;
+  gap: 1rem;
   width: 100%;
 `;

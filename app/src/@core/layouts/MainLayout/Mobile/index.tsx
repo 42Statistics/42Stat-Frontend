@@ -19,7 +19,7 @@ const Layout = styled.main`
   width: 100%;
   max-width: 480px;
   min-height: 100vh;
-  padding: 1rem;
+  padding: 0 2rem;
   padding-bottom: calc(2rem + 6rem);
   margin: auto;
 `;

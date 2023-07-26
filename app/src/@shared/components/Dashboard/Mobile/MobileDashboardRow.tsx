@@ -12,16 +12,15 @@ export const MobileDashboardRow = styled.div<MobileDashboardRowProps>`
   grid-template-columns: ${({ col }) => `repeat(${col}, 1fr)`};
   grid-template-rows: ${({ row, col }) =>
     `repeat(${row}, ${getHeightByCol(col)})`};
-  column-gap: 2rem;
-  row-gap: 2rem;
+  column-gap: 1rem;
+  row-gap: 1rem;
   width: 100%;
 `;
 
 const getHeightByCol = (col: MobileDashboardColSize) => {
   switch (col) {
     case 1:
-      return '15rem';
     default:
-      throw new Error('Invalid col size');
+      return '18rem';
   }
 };

@@ -27,6 +27,6 @@ export const MobileDashboard = ({ rows, contents }: MobileDashboardProps) => {
 export const MobileDashboardLayout = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
   width: 100%;
 `;

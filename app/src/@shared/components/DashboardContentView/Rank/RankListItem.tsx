@@ -1,12 +1,5 @@
 import { useTheme } from '@emotion/react';
-import {
-  Body1MediumText,
-  Center,
-  H3BoldText,
-  H3MediumText,
-  HStack,
-  MediumText,
-} from '@shared/ui-kit';
+import { Body1Text, Center, H3Text, HStack, Text } from '@shared/ui-kit';
 import { numberWithUnitFormatter } from '@shared/utils/formatters';
 import { Link } from 'react-router-dom';
 
@@ -28,26 +21,26 @@ export const RankListItem = ({
   unit,
 }: RankListItemProps) => {
   const theme = useTheme();
-  const color =
-    rank === 1 ? theme.colors.accent.default : theme.colors.mono.black;
+  const fontWeight =
+    rank === 1 ? theme.fonts.weight.bold : theme.fonts.weight.medium;
 
   return (
     <HStack w="90%" justify="start" spacing="2.4rem">
       <Center w="2rem">
-        <H3BoldText color={color}>{rank}</H3BoldText>
+        <H3Text fontWeight={fontWeight}>{rank}</H3Text>
       </Center>
       {center}
       <HStack spacing="1rem" align="baseline" justify="start" wrap="wrap">
         {link ? (
           <Link to={link}>
-            <Body1MediumText color={color}>{name}</Body1MediumText>
+            <Body1Text fontWeight={fontWeight}>{name}</Body1Text>
           </Link>
         ) : (
-          <H3MediumText color={color}>{name}</H3MediumText>
+          <H3Text fontWeight={fontWeight}>{name}</H3Text>
         )}
-        <MediumText color={color}>
+        <Text fontWeight={fontWeight}>
           {numberWithUnitFormatter(value, unit)}
-        </MediumText>
+        </Text>
       </HStack>
     </HStack>
   );

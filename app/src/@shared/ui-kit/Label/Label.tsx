@@ -36,9 +36,9 @@ export const Label = ({
   const computeFontSize = (size: LabelSize) => {
     switch (size) {
       case 'md':
-        return theme.fonts.size.body;
+        return theme.fonts.size.body2;
       default:
-        return theme.fonts.size.body;
+        return theme.fonts.size.body2;
     }
   };
 

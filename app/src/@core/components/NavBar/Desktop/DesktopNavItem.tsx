@@ -1,6 +1,6 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { Clickable, HStack, Text } from '@shared/ui-kit';
+import { HStack, Text } from '@shared/ui-kit';
 import { useLocation, useNavigate } from 'react-router-dom';
 import type { NavRoute } from '../hooks/useNavRoutes';
 
@@ -17,7 +17,11 @@ export const NavItem = ({ route }: NavItemProps) => {
   const navigate = useNavigate();
 
   return (
-    <Layout isFocused={isFocused} onClick={() => navigate(route.path)}>
+    <Layout
+      isFocused={isFocused}
+      tabIndex={0}
+      onClick={() => navigate(route.path)}
+    >
       <HStack spacing="1.5rem" justify="start">
         <NavItemIcon width={18} height={18} fill={color} />
         <Text color={color}>{route.text}</Text>
@@ -30,12 +34,12 @@ type LayoutProps = {
   isFocused: boolean;
 };
 
-const Layout = styled(Clickable)<LayoutProps>`
+const Layout = styled.li<LayoutProps>`
   width: 100%;
   padding: 1rem 0 1rem 2rem;
   border-radius: ${({ theme }) => theme.radius.sm};
   cursor: pointer;
-  transition: all 0.2s;
+  transition: background-color 0.2s;
 
   background-color: ${({ theme, isFocused }) =>
     isFocused && theme.colors.primary.default};

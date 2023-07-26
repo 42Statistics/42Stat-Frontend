@@ -31,7 +31,7 @@ export const DesktopNavProfile = ({
     <Link to={`${ROUTES.PROFILE_ROOT}/${user.login}`} style={{ width: '100%' }}>
       <Layout>
         <HStack w="100%" spacing="2rem">
-          <Avatar size="lg" src={imgUrl} />
+          <Avatar size="lg" src={imgUrl} alt={`${user.login}의 프로필 사진`} />
           <VStack align="start" spacing="0.5rem">
             <MediumText>{login}</MediumText>
             <CaptionText color={theme.colors.mono.gray300}>

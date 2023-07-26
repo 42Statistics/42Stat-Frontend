@@ -56,7 +56,7 @@ export const Character = () => {
   return (
     <DashboardContent title={title} description={description}>
       <VStack>
-        <Image width="200px" src={imgUrl} />
+        <Image width={200} height={200} src={imgUrl} alt={name ?? ''} />
         <VStack spacing="2rem">
           <HStack spacing="1rem">
             {types?.map((type, idx) => (

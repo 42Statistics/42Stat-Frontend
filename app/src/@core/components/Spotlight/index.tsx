@@ -42,7 +42,6 @@ export const Spotlight = ({ isOpen, onClose }: SpotlightProps) => {
   const [findUser, findUserResult] = useLazyQuery(FIND_USER_PREVIEW);
   const [findProject, findProjectResult] = useLazyQuery(FIND_PROJECT_PREVIEW);
   const size =
-    1 +
     (findUserResult.data?.findUserPreview.length ?? 0) +
     (findProjectResult.data?.findProjectPreview.length ?? 0);
   const { currentFocus, setCurrentFocus } = useRoveFocus(size);

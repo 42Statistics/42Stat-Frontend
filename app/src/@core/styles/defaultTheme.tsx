@@ -19,8 +19,8 @@ const colors = {
     error: '#b1232d',
   },
   element: {
-    hover: '#eeeeee',
-    active: '#dddddd',
+    hover: '#f8f8f8',
+    active: '#eeeeee',
   },
   mono: {
     black: '#161616',

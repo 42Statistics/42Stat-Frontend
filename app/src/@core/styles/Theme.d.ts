@@ -36,6 +36,7 @@ type Colors = {
 
 type Fonts = {
   size: {
+    title: string;
     h1: string;
     h2: string;
     h3: string;

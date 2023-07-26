@@ -1,5 +1,6 @@
+import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { CaptionText, Center, H3BoldText, VStack } from '@shared/ui-kit';
+import { CaptionText, Center, H3MediumText, VStack } from '@shared/ui-kit';
 
 export type DashboardContentProps = React.PropsWithChildren<{
   title?: string;
@@ -13,12 +14,18 @@ export const DashboardContent = ({
   children,
   isApexChart = false,
 }: DashboardContentProps) => {
+  const theme = useTheme();
+
   return (
     <Layout>
       <VStack w="100%" h="100%" spacing="2rem" align="start">
-        <VStack w="100%" align="start">
-          {title ? <H3BoldText>{title}</H3BoldText> : null}
-          {description ? <CaptionText>{description}</CaptionText> : null}
+        <VStack w="100%" align="start" style={{ marginLeft: '1rem' }}>
+          {title ? <H3MediumText>{title}</H3MediumText> : null}
+          {description ? (
+            <CaptionText color={theme.colors.mono.gray300}>
+              {description}
+            </CaptionText>
+          ) : null}
         </VStack>
         {!isApexChart ? (
           <Center>{children}</Center>
@@ -33,5 +40,5 @@ export const DashboardContent = ({
 const Layout = styled.div`
   width: 100%;
   height: 100%;
-  padding: 2rem;
+  padding: 2.4rem;
 `;

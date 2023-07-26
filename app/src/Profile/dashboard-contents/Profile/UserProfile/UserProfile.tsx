@@ -161,7 +161,7 @@ const Layout = styled.div<LayoutProps>`
     `url(${backgroundUrl}), url(${backgroundFallbackUrl})`};
   background-size: cover;
   background-position: center;
-  border-radius: ${({ theme }) => theme.radius.sm};
+  border-radius: ${({ theme }) => theme.radius.md};
   user-select: none;
 `;
 
@@ -170,5 +170,5 @@ const UserProfileLoader = styled.div`
   background-image: url(${coalition_gray_cover});
   background-size: cover;
   background-position: center;
-  border-radius: ${({ theme }) => theme.radius.sm};
+  border-radius: ${({ theme }) => theme.radius.md};
 `;

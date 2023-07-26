@@ -6,7 +6,7 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
-import { H3BoldText, HStack, Image, Label, VStack } from '@shared/ui-kit';
+import { H3MediumText, HStack, Image, Label, VStack } from '@shared/ui-kit';
 import { useParams } from 'react-router-dom';
 
 const GET_CHARACTER_BY_LOGIN = gql(/* GraphQL */ `
@@ -65,7 +65,7 @@ export const Character = () => {
               </Label>
             ))}
           </HStack>
-          <H3BoldText>{name ?? ''}</H3BoldText>
+          <H3MediumText>{name ?? ''}</H3MediumText>
         </VStack>
       </VStack>
     </DashboardContent>

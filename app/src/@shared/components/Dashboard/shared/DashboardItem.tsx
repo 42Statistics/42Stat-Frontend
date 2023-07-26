@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { CustomBox } from '@shared/ui-kit-styled';
 
-type DashboardItemProps = {
+export type DashboardItemProps = {
   row: number; // TODO: 더 엄밀한 Type 필요
   col: number;
   rowSpan: number;

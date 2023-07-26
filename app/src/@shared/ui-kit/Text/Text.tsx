@@ -15,6 +15,25 @@ export const Text = styled.p<TextProps>`
   user-select: ${({ preventSelect }) => preventSelect && 'none'};
 `;
 
+export const TitleThinText = styled(Text)`
+  font-size: ${({ theme }) => theme.fonts.size.title};
+  font-weight: ${({ theme }) => theme.fonts.weight.thin};
+`;
+
+export const TitleText = styled(Text)`
+  font-size: ${({ theme }) => theme.fonts.size.title};
+`;
+
+export const TitleMediumText = styled(Text)`
+  font-size: ${({ theme }) => theme.fonts.size.title};
+  font-weight: ${({ theme }) => theme.fonts.weight.medium};
+`;
+
+export const TitleBoldText = styled(Text)`
+  font-size: ${({ theme }) => theme.fonts.size.title};
+  font-weight: ${({ theme }) => theme.fonts.weight.bold};
+`;
+
 export const H1ThinText = styled(Text)`
   font-size: ${({ theme }) => theme.fonts.size.h1};
   font-weight: ${({ theme }) => theme.fonts.weight.thin};
@@ -102,6 +121,29 @@ export const CaptionMediumText = styled(Text)`
 export const CaptionBoldText = styled(Text)`
   font-size: ${({ theme }) => theme.fonts.size.caption};
   font-weight: ${({ theme }) => theme.fonts.weight.bold};
+`;
+
+export const PrimaryTitleThinText = styled(Text)`
+  font-size: ${({ theme }) => theme.fonts.size.title};
+  font-weight: ${({ theme }) => theme.fonts.weight.thin};
+  color: ${({ theme }) => theme.colors.primary.default};
+`;
+
+export const PrimaryTitleText = styled(Text)`
+  font-size: ${({ theme }) => theme.fonts.size.title};
+  color: ${({ theme }) => theme.colors.primary.default};
+`;
+
+export const PrimaryTitleMediumText = styled(Text)`
+  font-size: ${({ theme }) => theme.fonts.size.title};
+  font-weight: ${({ theme }) => theme.fonts.weight.medium};
+  color: ${({ theme }) => theme.colors.primary.default};
+`;
+
+export const PrimaryTitleBoldText = styled(Text)`
+  font-size: ${({ theme }) => theme.fonts.size.title};
+  font-weight: ${({ theme }) => theme.fonts.weight.bold};
+  color: ${({ theme }) => theme.colors.primary.default};
 `;
 
 export const PrimaryH1ThinText = styled(Text)`
@@ -215,6 +257,28 @@ export const PrimaryCaptionBoldText = styled(Text)`
   font-weight: ${({ theme }) => theme.fonts.weight.bold};
   color: ${({ theme }) => theme.colors.primary.default};
 `;
+export const AccentTitleThinText = styled(Text)`
+  font-size: ${({ theme }) => theme.fonts.size.title};
+  font-weight: ${({ theme }) => theme.fonts.weight.thin};
+  color: ${({ theme }) => theme.colors.accent.default};
+`;
+
+export const AccentTitleText = styled(Text)`
+  font-size: ${({ theme }) => theme.fonts.size.title};
+  color: ${({ theme }) => theme.colors.accent.default};
+`;
+
+export const AccentTitleMediumText = styled(Text)`
+  font-size: ${({ theme }) => theme.fonts.size.title};
+  font-weight: ${({ theme }) => theme.fonts.weight.medium};
+  color: ${({ theme }) => theme.colors.accent.default};
+`;
+
+export const AccentTitleBoldText = styled(Text)`
+  font-size: ${({ theme }) => theme.fonts.size.title};
+  font-weight: ${({ theme }) => theme.fonts.weight.bold};
+  color: ${({ theme }) => theme.colors.accent.default};
+`;
 
 export const AccentH1ThinText = styled(Text)`
   font-size: ${({ theme }) => theme.fonts.size.h1};
@@ -325,6 +389,29 @@ export const AccentCaptionBoldText = styled(Text)`
   font-size: ${({ theme }) => theme.fonts.size.caption};
   font-weight: ${({ theme }) => theme.fonts.weight.bold};
   color: ${({ theme }) => theme.colors.accent.default};
+`;
+
+export const WhiteTitleThinText = styled(Text)`
+  font-size: ${({ theme }) => theme.fonts.size.title};
+  font-weight: ${({ theme }) => theme.fonts.weight.thin};
+  color: ${({ theme }) => theme.colors.mono.white};
+`;
+
+export const WhiteTitleText = styled(Text)`
+  font-size: ${({ theme }) => theme.fonts.size.title};
+  color: ${({ theme }) => theme.colors.mono.white};
+`;
+
+export const WhiteTitleMediumText = styled(Text)`
+  font-size: ${({ theme }) => theme.fonts.size.title};
+  font-weight: ${({ theme }) => theme.fonts.weight.medium};
+  color: ${({ theme }) => theme.colors.mono.white};
+`;
+
+export const WhiteTitleBoldText = styled(Text)`
+  font-size: ${({ theme }) => theme.fonts.size.title};
+  font-weight: ${({ theme }) => theme.fonts.weight.bold};
+  color: ${({ theme }) => theme.colors.mono.white};
 `;
 
 export const WhiteH1ThinText = styled(Text)`

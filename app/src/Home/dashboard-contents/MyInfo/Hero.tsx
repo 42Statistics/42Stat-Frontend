@@ -9,7 +9,7 @@ import {
   Center,
   Loader,
   VStack,
-  WhiteH2BoldText,
+  WhiteH1BoldText,
   WhiteText,
 } from '@shared/ui-kit';
 import { timeDiffStringFormatter } from '@shared/utils/formatters/timeDiffStringFormatter';
@@ -124,7 +124,7 @@ export const Hero = () => {
   return (
     <Layout>
       <VStack w="100%" h="100%" align="start" spacing="1rem">
-        <WhiteH2BoldText>반가워요, {userPreview.login} 👋</WhiteH2BoldText>
+        <WhiteH1BoldText>반가워요, {userPreview.login} 👋</WhiteH1BoldText>
         <WhiteText>{getIndividualizedMessage()}</WhiteText>
       </VStack>
     </Layout>
@@ -134,7 +134,7 @@ export const Hero = () => {
 const Layout = styled(Center)`
   background-image: url(${space_background});
   background-size: cover;
-  border-radius: ${({ theme }) => theme.radius.sm};
+  border-radius: ${({ theme }) => theme.radius.md};
   padding: 0 4rem;
   height: 100%;
   user-select: none;

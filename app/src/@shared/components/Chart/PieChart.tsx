@@ -22,12 +22,15 @@ export const PieChart = ({
       pie: {
         // startAngle: -270,
         // endAngle: 90,
+        dataLabels: {
+          offset: -15,
+        },
       },
     },
     legend: {
       position: 'bottom',
     },
-    colors: [theme.colors.primary.default],
+    colors: [theme.colors.primary.default, theme.colors.primary.light],
     stroke: {
       show: false,
     },

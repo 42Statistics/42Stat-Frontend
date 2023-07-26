@@ -1,5 +1,4 @@
 import { useQuery } from '@apollo/client';
-import { useTheme } from '@emotion/react';
 import { gql } from '@shared/__generated__';
 import { PieChart } from '@shared/components/Chart';
 import { DashboardContent } from '@shared/components/DashboardContent';
@@ -63,10 +62,7 @@ type MemberRateChartProps = {
 };
 
 const MemberRateChart = ({ labels, series }: MemberRateChartProps) => {
-  const theme = useTheme();
-
   const options: ApexCharts.ApexOptions = {
-    colors: [theme.colors.accent.default, theme.colors.primary.light],
     tooltip: {
       y: {
         formatter: (value) => numberWithUnitFormatter(value, '명'),

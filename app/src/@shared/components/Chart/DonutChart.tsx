@@ -32,10 +32,16 @@ export const DonutChart = ({
       type: 'solid',
       opacity: 1,
     },
-    stroke: {
-      width: 1.5,
+    theme: {
+      monochrome: {
+        enabled: true,
+        shadeTo: 'light',
+        color: theme.colors.primary.default,
+      },
     },
-    colors: [theme.colors.primary.default],
+    stroke: {
+      show: false,
+    },
     responsive: [],
   };
 

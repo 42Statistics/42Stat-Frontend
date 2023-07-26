@@ -30,13 +30,16 @@ export const HorizontalBarChart = ({
         fontWeight: 400,
       },
     },
-    colors: [theme.colors.primary.default],
+    colors: [theme.colors.accent.default],
     stroke: {
       width: 0,
     },
     fill: {
-      type: 'solid',
-      opacity: 1,
+      type: 'gradient',
+      gradient: {
+        shade: 'light',
+        type: 'horizontal',
+      },
     },
   };
 

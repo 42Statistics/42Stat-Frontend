@@ -55,10 +55,7 @@ type BlackholedRateChartProps = {
 };
 
 const BlackholedRateChart = ({ labels, series }: BlackholedRateChartProps) => {
-  const theme = useTheme();
-
   const options: ApexCharts.ApexOptions = {
-    colors: [theme.colors.mono.black, theme.colors.primary.light],
     tooltip: {
       y: {
         formatter: (value) => numberWithUnitFormatter(value, '명'),

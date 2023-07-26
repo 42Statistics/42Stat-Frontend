@@ -1,10 +1,11 @@
 const colors = {
   primary: {
-    default: '#2B3E77',
+    default: '#2b3e77',
     light: '#dde8ed',
   },
   accent: {
-    default: '#00C48C',
+    default: '#00c48c',
+    light: '#90e5cd',
   },
   evaluation: {
     pass: '#60c0c4',

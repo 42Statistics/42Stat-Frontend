@@ -7,6 +7,7 @@ type Colors = {
   };
   accent: {
     default: string;
+    light: string;
   };
   evaluation: {
     pass: string;

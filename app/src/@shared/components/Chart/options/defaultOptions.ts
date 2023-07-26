@@ -17,14 +17,14 @@ export const defaultOptions: ApexCharts.ApexOptions = {
   states: {
     hover: {
       filter: {
-        type: 'lighten',
-        value: 0.02,
+        type: 'darken',
+        value: 0.9,
       },
     },
     active: {
       filter: {
         type: 'darken',
-        value: 0.98,
+        value: 0.8,
       },
     },
   },

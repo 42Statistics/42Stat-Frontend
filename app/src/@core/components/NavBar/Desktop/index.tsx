@@ -49,7 +49,7 @@ const Layout = styled.nav<LayoutProps>`
   height: 100%;
   padding: 3rem;
   background-color: ${({ theme }) => theme.colors.mono.white};
-  border-right: 1px solid ${({ theme }) => theme.colors.mono.gray50};
+
   border-top-right-radius: ${({ theme, fixed }) => !fixed && theme.radius.sm};
   border-bottom-right-radius: ${({ theme, fixed }) =>
     !fixed && theme.radius.sm};

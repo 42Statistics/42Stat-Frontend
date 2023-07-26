@@ -59,7 +59,6 @@ const Layout = styled.div<LayoutProps>`
   background-color: ${({ theme }) => theme.colors.mono.white};
   padding: 1rem 3rem;
   border-radius: ${({ theme }) => theme.radius.sm};
-  border: 2px solid ${({ theme }) => theme.colors.mono.gray50};
   outline-offset: -5px;
 
   outline: ${({ theme, isFocused }) =>

@@ -7,7 +7,6 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { UserRankList } from '@shared/components/DashboardContentView/Rank/UserRankList';
-import { Mobile, TabletAndAbove } from '@shared/utils/react-responsive/Device';
 
 const GET_WALLET_RANKING = gql(/* GraphQL */ `
   query GetWalletRanking($limit: Int!) {
@@ -44,12 +43,7 @@ export const WalletRanking = () => {
 
   return (
     <DashboardContent title={title}>
-      <TabletAndAbove>
-        <UserRankList list={walletRanking} cnt={5} unit={unit} />
-      </TabletAndAbove>
-      <Mobile>
-        <UserRankList list={walletRanking} cnt={3} unit={unit} />
-      </Mobile>
+      <UserRankList list={walletRanking} cnt={5} unit={unit} />
     </DashboardContent>
   );
 };

@@ -7,7 +7,6 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { UserRankList } from '@shared/components/DashboardContentView/Rank/UserRankList';
-import { Mobile, TabletAndAbove } from '@shared/utils/react-responsive/Device';
 import { useParams } from 'react-router-dom';
 
 const GET_DESTINY_RANKING_BY_LOGIN = gql(/* GraphQL */ `
@@ -54,12 +53,7 @@ export const DestinyRanking = () => {
 
   return (
     <DashboardContent title={title} description={description}>
-      <TabletAndAbove>
-        <UserRankList list={destinyRanking} cnt={5} unit={unit} />
-      </TabletAndAbove>
-      <Mobile>
-        <UserRankList list={destinyRanking} cnt={3} unit={unit} />
-      </Mobile>
+      <UserRankList list={destinyRanking} cnt={5} unit={unit} />
     </DashboardContent>
   );
 };

@@ -7,7 +7,6 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { ProjectRankList } from '@shared/components/DashboardContentView/Rank/ProjectRankList';
-import { Mobile, TabletAndAbove } from '@shared/utils/react-responsive/Device';
 
 const GET_CURR_REGISTERED_COUNT_RANKING = gql(/* GraphQL */ `
   query GetCurrRegisteredCountRanking($limit: Int!) {
@@ -44,20 +43,7 @@ export const CurrRegisteredCountRanking = () => {
 
   return (
     <DashboardContent title={title}>
-      <TabletAndAbove>
-        <ProjectRankList
-          list={currRegisteredCountRanking}
-          cnt={5}
-          unit={unit}
-        />
-      </TabletAndAbove>
-      <Mobile>
-        <ProjectRankList
-          list={currRegisteredCountRanking}
-          cnt={3}
-          unit={unit}
-        />
-      </Mobile>
+      <ProjectRankList list={currRegisteredCountRanking} cnt={5} unit={unit} />
     </DashboardContent>
   );
 };

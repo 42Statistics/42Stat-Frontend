@@ -35,7 +35,7 @@ export const BarChart = ({
     },
     fill: {
       type: 'solid',
-      opacity: 0.6,
+      opacity: 1,
     },
   };
 

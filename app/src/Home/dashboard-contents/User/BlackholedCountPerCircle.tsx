@@ -1,5 +1,4 @@
 import { useQuery } from '@apollo/client';
-import { useTheme } from '@emotion/react';
 import { gql } from '@shared/__generated__';
 import { DonutChart } from '@shared/components/Chart';
 import { DashboardContent } from '@shared/components/DashboardContent';
@@ -56,17 +55,9 @@ const BlackholedCountPerCircleChart = ({
   labels,
   series,
 }: BlackholedCountPerCircleChartProps) => {
-  const theme = useTheme();
-
   const options: ApexCharts.ApexOptions = {
     legend: {
       show: false,
-    },
-    theme: {
-      monochrome: {
-        enabled: true,
-        color: theme.colors.primary.default,
-      },
     },
     tooltip: {
       enabled: false,

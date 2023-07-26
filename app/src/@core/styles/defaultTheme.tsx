@@ -25,7 +25,7 @@ const colors = {
   mono: {
     black: '#161616',
     white: '#ffffff',
-    gray300: '#777777',
+    gray300: '#767676', // 웹 접근성 하한
     gray200: '#999999',
     gray100: '#bbbbbb',
     gray50: '#dddddd',
@@ -34,11 +34,11 @@ const colors = {
 
 const fonts = {
   size: {
-    title: '3.2rem',
-    h1: '2.4rem',
-    h2: '2.0rem',
+    h1: '2.6rem',
+    h2: '2.2rem',
     h3: '1.8rem',
-    body: '1.4rem',
+    body1: '1.6rem',
+    body2: '1.4rem',
     caption: '1.2rem',
   },
   weight: {

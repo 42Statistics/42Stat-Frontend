@@ -1,3 +1,4 @@
+import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { PropsWithStringChildren } from '@shared/types/PropsWithChildren';
 import { Clickable, Text } from '@shared/ui-kit';
@@ -8,9 +9,14 @@ type TabProps = PropsWithStringChildren<{
 }>;
 
 export const Tab = ({ selected = false, onClick, children }: TabProps) => {
+  const theme = useTheme();
+  const color = selected
+    ? theme.colors.primary.default
+    : theme.colors.mono.black;
+
   return (
     <Layout onClick={onClick} selected={selected}>
-      <Text>{children}</Text>
+      <Text color={color}>{children}</Text>
     </Layout>
   );
 };

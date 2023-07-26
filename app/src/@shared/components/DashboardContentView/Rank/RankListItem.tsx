@@ -1,7 +1,8 @@
 import { useTheme } from '@emotion/react';
 import {
+  Body1MediumText,
   Center,
-  H2MediumText,
+  H3BoldText,
   H3MediumText,
   HStack,
   MediumText,
@@ -33,13 +34,13 @@ export const RankListItem = ({
   return (
     <HStack w="90%" justify="start" spacing="2.4rem">
       <Center w="2rem">
-        <H2MediumText color={color}>{rank}</H2MediumText>
+        <H3BoldText color={color}>{rank}</H3BoldText>
       </Center>
       {center}
       <HStack spacing="1rem" align="baseline" justify="start" wrap="wrap">
         {link ? (
           <Link to={link}>
-            <H3MediumText color={color}>{name}</H3MediumText>
+            <Body1MediumText color={color}>{name}</Body1MediumText>
           </Link>
         ) : (
           <H3MediumText color={color}>{name}</H3MediumText>

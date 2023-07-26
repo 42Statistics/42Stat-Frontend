@@ -4,9 +4,11 @@ import { UserRank } from '@shared/__generated__/graphql';
 import { ROUTES } from '@shared/constants/ROUTES';
 import {
   Avatar,
+  Body1MediumText,
+  BoldText,
   CaptionText,
   Clickable,
-  H2MediumText,
+  H3BoldText,
   H3MediumText,
   HStack,
   MediumText,
@@ -48,17 +50,17 @@ export const LeaderboardListItem = ({
       <TabletAndAbove>
         <HStack w="100%" spacing="4rem">
           <HStack w="5rem">
-            <H3MediumText color={color}>{rank}</H3MediumText>
+            <H3BoldText color={color}>{rank}</H3BoldText>
           </HStack>
           <Avatar src={imgUrl} />
-          <H3MediumText color={color}>{login}</H3MediumText>
+          <Body1MediumText color={color}>{login}</Body1MediumText>
           <Spacer />
           <HStack align="baseline" spacing="0.2rem">
-            <H2MediumText color={color}>
+            <H3MediumText color={color}>
               {fixedNumber === undefined
                 ? numberWithUnitFormatter(value)
                 : `${value.toFixed(2)}`}
-            </H2MediumText>
+            </H3MediumText>
             <Text color={color}>{unit}</Text>
           </HStack>
         </HStack>
@@ -66,7 +68,7 @@ export const LeaderboardListItem = ({
       <Mobile>
         <HStack w="100%" spacing="2.4rem">
           <HStack w="2rem">
-            <MediumText color={color}>{rank}</MediumText>
+            <BoldText color={color}>{rank}</BoldText>
           </HStack>
           <Avatar size="sm" src={imgUrl} />
           <MediumText color={color}>{login}</MediumText>

@@ -1,8 +1,6 @@
 import { useQuery } from '@apollo/client';
-import styled from '@emotion/styled';
 import { gql } from '@shared/__generated__';
-import { VStack, WhiteBoldText } from '@shared/ui-kit';
-import { mq } from '@shared/utils/facepaint/mq';
+import { VStack, WhiteH2BoldText } from '@shared/ui-kit';
 import { useEffect, useState } from 'react';
 import { CountUp } from 'use-count-up';
 
@@ -88,26 +86,19 @@ export const Introduction = () => {
   // TODO: text slider 구현
   return (
     <VStack spacing="1rem">
-      <TitleText>
+      <WhiteH2BoldText>
         은하수를 여행한지{' '}
         {<CountUp isCounting end={introData.daysAfterBeginAt} duration={3.5} />}
         일째
-      </TitleText>
-      <TitleText>
+      </WhiteH2BoldText>
+      <WhiteH2BoldText>
         {<CountUp isCounting end={introData.aliveCount} duration={3.5} />}
         명의 히치하이커와 함께 여행중
-      </TitleText>
-      <TitleText>{strs[0]}</TitleText>
+      </WhiteH2BoldText>
+      <WhiteH2BoldText>{strs[0]}</WhiteH2BoldText>
       {/* {strs.map((str, index) => (
         <WhiteH2BoldText key={index}>{str}</WhiteH2BoldText>
       ))} */}
     </VStack>
   );
 };
-
-const TitleText = styled(WhiteBoldText)`
-  ${({ theme }) =>
-    mq({
-      fontSize: [theme.fonts.size.h3, theme.fonts.size.h2],
-    })}
-`;

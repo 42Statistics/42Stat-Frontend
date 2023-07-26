@@ -87,5 +87,4 @@ const Layout = styled.div`
   padding: 2rem 0;
   background-color: ${({ theme }) => theme.colors.mono.white};
   border-radius: ${({ theme }) => theme.radius.sm};
-  border: 2px solid ${({ theme }) => theme.colors.mono.gray50};
 `;

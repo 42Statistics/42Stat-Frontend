@@ -1,6 +1,6 @@
 import { SpotlightFocusContext } from '@core/contexts/SpotlightFocusContext';
 import styled from '@emotion/styled';
-import { Clickable, H3MediumText, HStack, Spacer } from '@shared/ui-kit';
+import { Body1MediumText, Clickable, HStack, Spacer } from '@shared/ui-kit';
 import { isEnterKeyDown } from '@shared/utils/keyboard';
 import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -46,7 +46,7 @@ export const SpotlightListItem = ({
     >
       <HStack w="100%" align="start" spacing="2rem">
         {left}
-        <H3MediumText>{name}</H3MediumText>
+        <Body1MediumText>{name}</Body1MediumText>
         <Spacer />
       </HStack>
     </Layout>

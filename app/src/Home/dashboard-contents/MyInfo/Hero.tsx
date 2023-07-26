@@ -9,7 +9,7 @@ import {
   Center,
   Loader,
   VStack,
-  WhiteH1BoldText,
+  WhiteH2BoldText,
   WhiteText,
 } from '@shared/ui-kit';
 import { timeDiffStringFormatter } from '@shared/utils/formatters/timeDiffStringFormatter';
@@ -124,7 +124,7 @@ export const Hero = () => {
   return (
     <Layout>
       <VStack w="100%" h="100%" align="start" spacing="1rem">
-        <WhiteH1BoldText>반가워요, {userPreview.login} 👋</WhiteH1BoldText>
+        <WhiteH2BoldText>반가워요, {userPreview.login} 👋</WhiteH2BoldText>
         <WhiteText>{getIndividualizedMessage()}</WhiteText>
       </VStack>
     </Layout>

@@ -1,4 +1,4 @@
-import { H2MediumText } from '@shared/ui-kit';
+import { H3MediumText } from '@shared/ui-kit';
 import { Link } from 'react-router-dom';
 
 type TextDefaultProps = {
@@ -11,10 +11,10 @@ export const TextDefault = ({ text, link }: TextDefaultProps) => {
     <>
       {link !== undefined ? (
         <Link to={link}>
-          <H2MediumText style={{ textAlign: 'center' }}>{text}</H2MediumText>
+          <H3MediumText style={{ textAlign: 'center' }}>{text}</H3MediumText>
         </Link>
       ) : (
-        <H2MediumText style={{ textAlign: 'center' }}>{text}</H2MediumText>
+        <H3MediumText style={{ textAlign: 'center' }}>{text}</H3MediumText>
       )}
     </>
   );

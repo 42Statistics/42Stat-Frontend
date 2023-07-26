@@ -6,7 +6,7 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
-import { H1MediumText, H3Text, HStack } from '@shared/ui-kit';
+import { Body1Text, H2MediumText, HStack } from '@shared/ui-kit';
 import { useParams } from 'react-router-dom';
 import { GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN } from '../../dashboard-contents-queries/GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN';
 
@@ -39,15 +39,15 @@ export const CoalitionScore = () => {
   return (
     <DashboardContent title={title}>
       <HStack spacing="2rem" align="baseline">
-        <H1MediumText>{value.toLocaleString()}</H1MediumText>
+        <H2MediumText>{value.toLocaleString()}</H2MediumText>
         <HStack spacing="0.5rem">
           <CoalitionMark size="18px" coalition={coalition} />
           {scoreInfo?.rankInCoalition ? (
             <HStack align="baseline">
-              <H3Text>
+              <Body1Text>
                 {scoreInfo.rankInCoalition.toLocaleString()}
                 {unit}
-              </H3Text>
+              </Body1Text>
             </HStack>
           ) : null}
         </HStack>

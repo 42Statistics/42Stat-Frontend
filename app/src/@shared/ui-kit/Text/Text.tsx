@@ -8,30 +8,11 @@ type TextProps = Partial<{
 }>;
 
 export const Text = styled.p<TextProps>`
-  font-size: ${({ theme, fontSize = theme.fonts.size.body }) => fontSize};
+  font-size: ${({ theme, fontSize = theme.fonts.size.body2 }) => fontSize};
   font-weight: ${({ fontWeight }) => fontWeight};
-  color: ${({ color }) => color};
+  color: ${({ theme, color = theme.colors.mono.black }) => color};
   line-height: 1.5;
   user-select: ${({ preventSelect }) => preventSelect && 'none'};
-`;
-
-export const TitleThinText = styled(Text)`
-  font-size: ${({ theme }) => theme.fonts.size.title};
-  font-weight: ${({ theme }) => theme.fonts.weight.thin};
-`;
-
-export const TitleText = styled(Text)`
-  font-size: ${({ theme }) => theme.fonts.size.title};
-`;
-
-export const TitleMediumText = styled(Text)`
-  font-size: ${({ theme }) => theme.fonts.size.title};
-  font-weight: ${({ theme }) => theme.fonts.weight.medium};
-`;
-
-export const TitleBoldText = styled(Text)`
-  font-size: ${({ theme }) => theme.fonts.size.title};
-  font-weight: ${({ theme }) => theme.fonts.weight.bold};
 `;
 
 export const H1ThinText = styled(Text)`
@@ -91,6 +72,25 @@ export const H3BoldText = styled(Text)`
   font-weight: ${({ theme }) => theme.fonts.weight.bold};
 `;
 
+export const Body1ThinText = styled(Text)`
+  font-size: ${({ theme }) => theme.fonts.size.body1};
+  font-weight: ${({ theme }) => theme.fonts.weight.thin};
+`;
+
+export const Body1Text = styled(Text)`
+  font-size: ${({ theme }) => theme.fonts.size.body1};
+`;
+
+export const Body1MediumText = styled(Text)`
+  font-size: ${({ theme }) => theme.fonts.size.body1};
+  font-weight: ${({ theme }) => theme.fonts.weight.medium};
+`;
+
+export const Body1BoldText = styled(Text)`
+  font-size: ${({ theme }) => theme.fonts.size.body1};
+  font-weight: ${({ theme }) => theme.fonts.weight.bold};
+`;
+
 export const ThinText = styled(Text)`
   font-weight: ${({ theme }) => theme.fonts.weight.thin};
 `;
@@ -121,29 +121,6 @@ export const CaptionMediumText = styled(Text)`
 export const CaptionBoldText = styled(Text)`
   font-size: ${({ theme }) => theme.fonts.size.caption};
   font-weight: ${({ theme }) => theme.fonts.weight.bold};
-`;
-
-export const PrimaryTitleThinText = styled(Text)`
-  font-size: ${({ theme }) => theme.fonts.size.title};
-  font-weight: ${({ theme }) => theme.fonts.weight.thin};
-  color: ${({ theme }) => theme.colors.primary.default};
-`;
-
-export const PrimaryTitleText = styled(Text)`
-  font-size: ${({ theme }) => theme.fonts.size.title};
-  color: ${({ theme }) => theme.colors.primary.default};
-`;
-
-export const PrimaryTitleMediumText = styled(Text)`
-  font-size: ${({ theme }) => theme.fonts.size.title};
-  font-weight: ${({ theme }) => theme.fonts.weight.medium};
-  color: ${({ theme }) => theme.colors.primary.default};
-`;
-
-export const PrimaryTitleBoldText = styled(Text)`
-  font-size: ${({ theme }) => theme.fonts.size.title};
-  font-weight: ${({ theme }) => theme.fonts.weight.bold};
-  color: ${({ theme }) => theme.colors.primary.default};
 `;
 
 export const PrimaryH1ThinText = styled(Text)`
@@ -215,8 +192,30 @@ export const PrimaryH3BoldText = styled(Text)`
   color: ${({ theme }) => theme.colors.primary.default};
 `;
 
-export const PrimaryBodyThinText = styled(Text)`
-  font-size: ${({ theme }) => theme.fonts.size.body};
+export const PrimaryBody1ThinText = styled(Text)`
+  font-size: ${({ theme }) => theme.fonts.size.body1};
+  font-weight: ${({ theme }) => theme.fonts.weight.thin};
+  color: ${({ theme }) => theme.colors.primary.default};
+`;
+
+export const PrimaryBody1Text = styled(Text)`
+  font-size: ${({ theme }) => theme.fonts.size.body1};
+  color: ${({ theme }) => theme.colors.primary.default};
+`;
+
+export const PrimaryBody1MediumText = styled(Text)`
+  font-size: ${({ theme }) => theme.fonts.size.body1};
+  font-weight: ${({ theme }) => theme.fonts.weight.medium};
+  color: ${({ theme }) => theme.colors.primary.default};
+`;
+
+export const PrimaryBody1BoldText = styled(Text)`
+  font-size: ${({ theme }) => theme.fonts.size.body1};
+  font-weight: ${({ theme }) => theme.fonts.weight.bold};
+  color: ${({ theme }) => theme.colors.primary.default};
+`;
+
+export const PrimaryThinText = styled(Text)`
   font-weight: ${({ theme }) => theme.fonts.weight.thin};
   color: ${({ theme }) => theme.colors.primary.default};
 `;
@@ -256,28 +255,6 @@ export const PrimaryCaptionBoldText = styled(Text)`
   font-size: ${({ theme }) => theme.fonts.size.caption};
   font-weight: ${({ theme }) => theme.fonts.weight.bold};
   color: ${({ theme }) => theme.colors.primary.default};
-`;
-export const AccentTitleThinText = styled(Text)`
-  font-size: ${({ theme }) => theme.fonts.size.title};
-  font-weight: ${({ theme }) => theme.fonts.weight.thin};
-  color: ${({ theme }) => theme.colors.accent.default};
-`;
-
-export const AccentTitleText = styled(Text)`
-  font-size: ${({ theme }) => theme.fonts.size.title};
-  color: ${({ theme }) => theme.colors.accent.default};
-`;
-
-export const AccentTitleMediumText = styled(Text)`
-  font-size: ${({ theme }) => theme.fonts.size.title};
-  font-weight: ${({ theme }) => theme.fonts.weight.medium};
-  color: ${({ theme }) => theme.colors.accent.default};
-`;
-
-export const AccentTitleBoldText = styled(Text)`
-  font-size: ${({ theme }) => theme.fonts.size.title};
-  font-weight: ${({ theme }) => theme.fonts.weight.bold};
-  color: ${({ theme }) => theme.colors.accent.default};
 `;
 
 export const AccentH1ThinText = styled(Text)`
@@ -349,6 +326,29 @@ export const AccentH3BoldText = styled(Text)`
   color: ${({ theme }) => theme.colors.accent.default};
 `;
 
+export const AccentBody1ThinText = styled(Text)`
+  font-size: ${({ theme }) => theme.fonts.size.body1};
+  font-weight: ${({ theme }) => theme.fonts.weight.thin};
+  color: ${({ theme }) => theme.colors.accent.default};
+`;
+
+export const AccentBody1Text = styled(Text)`
+  font-size: ${({ theme }) => theme.fonts.size.body1};
+  color: ${({ theme }) => theme.colors.accent.default};
+`;
+
+export const AccentBody1MediumText = styled(Text)`
+  font-size: ${({ theme }) => theme.fonts.size.body1};
+  font-weight: ${({ theme }) => theme.fonts.weight.medium};
+  color: ${({ theme }) => theme.colors.accent.default};
+`;
+
+export const AccentBody1BoldText = styled(Text)`
+  font-size: ${({ theme }) => theme.fonts.size.body1};
+  font-weight: ${({ theme }) => theme.fonts.weight.bold};
+  color: ${({ theme }) => theme.colors.primary.default};
+`;
+
 export const AccentThinText = styled(Text)`
   font-weight: ${({ theme }) => theme.fonts.weight.thin};
   color: ${({ theme }) => theme.colors.accent.default};
@@ -389,29 +389,6 @@ export const AccentCaptionBoldText = styled(Text)`
   font-size: ${({ theme }) => theme.fonts.size.caption};
   font-weight: ${({ theme }) => theme.fonts.weight.bold};
   color: ${({ theme }) => theme.colors.accent.default};
-`;
-
-export const WhiteTitleThinText = styled(Text)`
-  font-size: ${({ theme }) => theme.fonts.size.title};
-  font-weight: ${({ theme }) => theme.fonts.weight.thin};
-  color: ${({ theme }) => theme.colors.mono.white};
-`;
-
-export const WhiteTitleText = styled(Text)`
-  font-size: ${({ theme }) => theme.fonts.size.title};
-  color: ${({ theme }) => theme.colors.mono.white};
-`;
-
-export const WhiteTitleMediumText = styled(Text)`
-  font-size: ${({ theme }) => theme.fonts.size.title};
-  font-weight: ${({ theme }) => theme.fonts.weight.medium};
-  color: ${({ theme }) => theme.colors.mono.white};
-`;
-
-export const WhiteTitleBoldText = styled(Text)`
-  font-size: ${({ theme }) => theme.fonts.size.title};
-  font-weight: ${({ theme }) => theme.fonts.weight.bold};
-  color: ${({ theme }) => theme.colors.mono.white};
 `;
 
 export const WhiteH1ThinText = styled(Text)`
@@ -479,6 +456,29 @@ export const WhiteH3MediumText = styled(Text)`
 
 export const WhiteH3BoldText = styled(Text)`
   font-size: ${({ theme }) => theme.fonts.size.h3};
+  font-weight: ${({ theme }) => theme.fonts.weight.bold};
+  color: ${({ theme }) => theme.colors.mono.white};
+`;
+
+export const WhiteBody1ThinText = styled(Text)`
+  font-size: ${({ theme }) => theme.fonts.size.body1};
+  font-weight: ${({ theme }) => theme.fonts.weight.thin};
+  color: ${({ theme }) => theme.colors.mono.white};
+`;
+
+export const WhiteBody1Text = styled(Text)`
+  font-size: ${({ theme }) => theme.fonts.size.body1};
+  color: ${({ theme }) => theme.colors.mono.white};
+`;
+
+export const WhiteBody1MediumText = styled(Text)`
+  font-size: ${({ theme }) => theme.fonts.size.body1};
+  font-weight: ${({ theme }) => theme.fonts.weight.medium};
+  color: ${({ theme }) => theme.colors.mono.white};
+`;
+
+export const WhiteBody1BoldText = styled(Text)`
+  font-size: ${({ theme }) => theme.fonts.size.body1};
   font-weight: ${({ theme }) => theme.fonts.weight.bold};
   color: ${({ theme }) => theme.colors.mono.white};
 `;

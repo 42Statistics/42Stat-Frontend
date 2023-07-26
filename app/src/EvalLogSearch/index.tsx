@@ -179,7 +179,7 @@ const EvalLogSearchPage = () => {
       <VStack w="100%" align="start" spacing="2rem">
         <EvalLogSearchTitle
           form={evalLogSearchForm}
-          totalCount={data?.getEvalLogs.pageInfo?.totalCount ?? 0}
+          totalCount={data?.getEvalLogs.pageInfo?.totalCount}
         />
         <EvalLogSearchResult
           evalLogEdges={evalLogEdges}

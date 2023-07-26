@@ -30,9 +30,10 @@ export const DonutChart = ({
     },
     fill: {
       type: 'solid',
+      opacity: 1,
     },
     stroke: {
-      show: false,
+      width: 1.5,
     },
     colors: [theme.colors.primary.default],
     responsive: [],

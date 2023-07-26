@@ -40,6 +40,5 @@ const Layout = styled.div`
   height: 100%;
   padding: 3rem 0;
   background-color: ${({ theme }) => theme.colors.mono.white};
-  border-right: 1px solid ${({ theme }) => theme.colors.mono.gray50};
   user-select: none;
 `;

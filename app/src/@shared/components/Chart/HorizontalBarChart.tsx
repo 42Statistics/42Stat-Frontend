@@ -38,7 +38,7 @@ export const HorizontalBarChart = ({
       type: 'gradient',
       gradient: {
         shade: 'light',
-        type: 'horizontal',
+        type: 'diagonal2',
       },
     },
   };

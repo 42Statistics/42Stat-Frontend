@@ -72,10 +72,10 @@ export const SpotlightResult = ({
   return (
     <Layout>
       <VStack w="100%" h="100%" spacing="2rem">
-        <SpotlightUserSection result={findUserResult} startIndex={1} />
+        <SpotlightUserSection result={findUserResult} startIndex={0} />
         <SpotlightProjectSection
           result={findProjectResult}
-          startIndex={1 + userResultLength}
+          startIndex={userResultLength}
         />
       </VStack>
     </Layout>

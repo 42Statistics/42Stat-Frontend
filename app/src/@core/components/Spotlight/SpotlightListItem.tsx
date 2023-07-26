@@ -1,7 +1,8 @@
 import { SpotlightFocusContext } from '@core/contexts/SpotlightFocusContext';
 import styled from '@emotion/styled';
 import { Clickable, H3MediumText, HStack, Spacer } from '@shared/ui-kit';
-import { useContext, useEffect, useRef } from 'react';
+import { isEnterKeyDown } from '@shared/utils/keyboard';
+import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 type SpotlightListItemProps = {
@@ -18,26 +19,30 @@ export const SpotlightListItem = ({
   index,
 }: SpotlightListItemProps) => {
   const navigate = useNavigate();
-  const ref = useRef<HTMLButtonElement>(null);
   const { currentFocus, setCurrentFocus } = useContext(SpotlightFocusContext);
   const isFocused = currentFocus === index;
 
   useEffect(() => {
-    if (!ref.current) {
-      return;
-    }
-    if (isFocused) {
-      ref.current.focus();
-    } else {
-      ref.current.blur();
-    }
-  }, [isFocused, ref]);
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (isEnterKeyDown(e)) {
+        e.preventDefault();
+        if (!isFocused) {
+          return;
+        }
+        navigate(link);
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [currentFocus, isFocused, navigate, link]);
 
   return (
     <Layout
+      isFocused={isFocused}
       onClick={() => navigate(link)}
-      forwardRef={ref}
-      onFocus={() => setCurrentFocus(index)}
+      onMouseOver={() => setCurrentFocus(index)}
     >
       <HStack w="100%" align="start" spacing="2rem">
         {left}
@@ -48,20 +53,18 @@ export const SpotlightListItem = ({
   );
 };
 
-const Layout = styled(Clickable)`
+type LayoutProps = {
+  isFocused: boolean;
+};
+
+const Layout = styled(Clickable)<LayoutProps>`
   width: 100%;
   padding: 0.8rem 2rem;
 
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.element.hover};
-  }
+  background-color: ${({ theme, isFocused }) =>
+    isFocused && theme.colors.element.active};
 
-  &:active {
-    background-color: ${({ theme }) => theme.colors.element.active};
-  }
-
-  &:focus {
-    outline: none;
-    background-color: ${({ theme }) => theme.colors.element.active};
+  &:focus-visible {
+    outline: 2px solid blue;
   }
 `;

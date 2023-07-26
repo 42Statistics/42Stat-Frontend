@@ -23,7 +23,7 @@ export const TabletNavBar = () => {
         <Center h="12rem">
           <TabletNavProfile imgUrl={user.imgUrl} />
         </Center>
-        <Clickable onClick={openSpotlight}>
+        <Clickable onClick={openSpotlight} aria-label="spotlight 열기">
           <MdSearch width={20} height={20} />
         </Clickable>
         <TabletNavMenu />

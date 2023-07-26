@@ -21,7 +21,7 @@ export const PageButton = ({
     setPageNumber(pageNumber);
   };
   return (
-    <Clickable onClick={handleClick}>
+    <Clickable onClick={handleClick} aria-label={`${pageNumber} 페이지`}>
       <H3Text
         color={
           pageNumber !== currPageNumber

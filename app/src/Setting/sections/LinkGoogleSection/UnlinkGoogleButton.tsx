@@ -43,7 +43,7 @@ export const UnlinkGoogleButton = ({ onSuccess }: UnlinkGoogleButtonProps) => {
   if (loading) return <Spinner />;
 
   return (
-    <Clickable onClick={handleClick}>
+    <Clickable onClick={handleClick} aria-label="연동된 구글 계정 삭제하기">
       <MdDelete width={20} height={20} />
     </Clickable>
   );

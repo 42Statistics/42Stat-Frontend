@@ -16,7 +16,7 @@ export const EvalLogSearchAbsoluteButton = ({
 
   return (
     <>
-      <Clickable onClick={onClick}>
+      <Clickable onClick={onClick} aria-label="평가로그 검색 모달 열기">
         <Layout>
           <MdSearch width={26} height={26} fill={theme.colors.mono.white} />
         </Layout>

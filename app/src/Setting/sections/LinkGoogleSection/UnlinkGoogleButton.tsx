@@ -1,6 +1,7 @@
 import { useMutation } from '@apollo/client';
 import { gql } from '@shared/__generated__';
 import { ReactComponent as MdDelete } from '@shared/assets/icon/md-delete.svg';
+import { ARIA_LABEL_BUTTON } from '@shared/constants/accessibility/ARIA_LABEL';
 import { Clickable, Spinner } from '@shared/ui-kit';
 import { useEffect } from 'react';
 
@@ -43,7 +44,10 @@ export const UnlinkGoogleButton = ({ onSuccess }: UnlinkGoogleButtonProps) => {
   if (loading) return <Spinner />;
 
   return (
-    <Clickable onClick={handleClick} aria-label="연동된 구글 계정 삭제하기">
+    <Clickable
+      onClick={handleClick}
+      aria-label={ARIA_LABEL_BUTTON.UNLINK_WITH('구글')}
+    >
       <MdDelete width={20} height={20} />
     </Clickable>
   );

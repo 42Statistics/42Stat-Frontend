@@ -2,6 +2,8 @@ import marvin_depressed from '@shared/assets/marvin-depressed.gif';
 import { AppLogoTitle } from '@shared/components/AppLogoTitle';
 import { Seo } from '@shared/components/Seo';
 import { ROUTES } from '@shared/constants/ROUTES';
+import { ALT } from '@shared/constants/accessibility/ALT';
+import { ARIA_LABEL_LINK } from '@shared/constants/accessibility/ARIA_LABEL';
 import { withHead } from '@shared/hoc/withHead';
 import {
   Button,
@@ -20,7 +22,7 @@ const NotFoundPage = () => {
 
   return (
     <VStack w="100%" h="100%" spacing="6rem">
-      <Link to={ROUTES.ROOT}>
+      <Link to={ROUTES.ROOT} aria-label={ARIA_LABEL_LINK.STAT}>
         <AppLogoTitle size="sm" color="white" />
       </Link>
       <WhiteH1BoldText>
@@ -33,7 +35,7 @@ const NotFoundPage = () => {
           요청하신 페이지의 주소가 변경 또는 삭제되어 찾을 수 없습니다.
         </WhiteText>
       </VStack>
-      <Image width="400px" src={marvin_depressed} alt="marvin-depressed" />
+      <Image width="400px" src={marvin_depressed} alt={ALT.MARVIN_DEPRESSED} />
       <Button onClick={() => navigate(ROUTES.ROOT)}>홈으로 돌아가기</Button>
     </VStack>
   );

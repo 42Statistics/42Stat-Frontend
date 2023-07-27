@@ -1,5 +1,6 @@
 import { UserRank } from '@shared/__generated__/graphql';
 import { ROUTES } from '@shared/constants/ROUTES';
+import { ALT } from '@shared/constants/accessibility/ALT';
 import { Avatar } from '@shared/ui-kit';
 import { RankListItem } from './RankListItem';
 
@@ -17,7 +18,7 @@ export const UserRankListItem = ({ item, unit }: UserRankListItemProps) => {
   return (
     <RankListItem
       rank={rank}
-      center={<Avatar src={imgUrl} alt={`${login}의 프로필 사진`} />}
+      center={<Avatar src={imgUrl} alt={ALT.AVATAR_OF(login)} />}
       name={login}
       link={`${ROUTES.PROFILE_ROOT}/${login}`}
       value={value}

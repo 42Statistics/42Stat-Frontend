@@ -3,6 +3,7 @@ import { gql } from '@shared/__generated__';
 import { ReactComponent as GoogleLogo } from '@shared/assets/logo/google-logo.svg';
 import { GAPI_URL } from '@shared/constants/GAPI';
 import { ROUTES } from '@shared/constants/ROUTES';
+import { ARIA_LABEL_BUTTON } from '@shared/constants/accessibility/ARIA_LABEL';
 import {
   FakeGoogleWrapperType,
   createFakeGoogleWrapper,
@@ -87,6 +88,7 @@ export const GoogleLoginButton = () => {
     <LoginButton
       logo={<GoogleLogo width={18} height={18} />}
       text="Google 계정으로 로그인"
+      ariaLabel={ARIA_LABEL_BUTTON.LOGIN_WITH_GOOGLE_ACCOUNT}
       onClick={() => googleButtonWrapper?.click()}
     />
   );

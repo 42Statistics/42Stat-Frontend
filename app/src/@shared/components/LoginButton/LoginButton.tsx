@@ -6,6 +6,7 @@ import { rgba } from 'emotion-rgba';
 type LoginButtonProps = {
   logo: React.ReactNode;
   text: string;
+  ariaLabel?: string;
   onClick: () => void;
   disabled?: boolean;
 };
@@ -14,13 +15,14 @@ type LoginButtonProps = {
 export const LoginButton = ({
   logo,
   text,
+  ariaLabel = '',
   onClick,
   disabled = false,
 }: LoginButtonProps) => {
   const theme = useTheme();
 
   return (
-    <Clickable onClick={onClick} disabled={disabled} aria-label={text}>
+    <Clickable onClick={onClick} disabled={disabled} aria-label={ariaLabel}>
       <Layout>
         <Center w="40px">{logo}</Center>
         <HStack w="100%">

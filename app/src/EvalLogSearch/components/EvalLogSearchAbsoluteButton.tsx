@@ -1,6 +1,7 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { ReactComponent as MdSearch } from '@shared/assets/icon/md-search.svg';
+import { ARIA_LABEL_BUTTON } from '@shared/constants/accessibility/ARIA_LABEL';
 import { Clickable } from '@shared/ui-kit';
 
 type EvalLogSearchAbsoluteButtonProps = {
@@ -16,7 +17,11 @@ export const EvalLogSearchAbsoluteButton = ({
 
   return (
     <>
-      <Clickable onClick={onClick} aria-label="평가로그 검색 모달 열기">
+      <Clickable
+        onClick={onClick}
+        tabIndex={1}
+        aria-label={ARIA_LABEL_BUTTON.SEARCH_EVAL_LOGS}
+      >
         <Layout>
           <MdSearch width={26} height={26} fill={theme.colors.mono.white} />
         </Layout>
@@ -28,7 +33,7 @@ export const EvalLogSearchAbsoluteButton = ({
 
 const Layout = styled.div`
   position: fixed;
-  bottom: 8rem;
+  bottom: 10rem;
   right: 5rem;
   border-radius: ${({ theme }) => theme.radius.circle};
   padding: 1.2rem;
@@ -40,5 +45,9 @@ const Layout = styled.div`
 
   &:hover {
     transform: translateY(-5px);
+  }
+
+  &:focus {
+    outline: 2px solid blue;
   }
 `;

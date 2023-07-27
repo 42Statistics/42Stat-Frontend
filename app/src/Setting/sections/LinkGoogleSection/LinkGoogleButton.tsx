@@ -2,6 +2,7 @@ import { useMutation } from '@apollo/client';
 import { gql } from '@shared/__generated__';
 import { ReactComponent as MdSyncAlt } from '@shared/assets/icon/md-sync-alt.svg';
 import { GAPI_URL } from '@shared/constants/GAPI';
+import { ARIA_LABEL_BUTTON } from '@shared/constants/accessibility/ARIA_LABEL';
 import { Clickable, Spinner } from '@shared/ui-kit';
 import {
   FakeGoogleWrapperType,
@@ -71,7 +72,7 @@ export const LinkGoogleButton = ({ onSuccess }: LinkGoogleButtonProps) => {
   return (
     <Clickable
       onClick={() => googleButtonWrapper?.click()}
-      aria-label="구글 계정으로 연동하기"
+      aria-label={ARIA_LABEL_BUTTON.LINK_WITH('구글')}
     >
       <MdSyncAlt width={20} height={20} />
     </Clickable>

@@ -2,6 +2,7 @@ import { ReactComponent as MdChevronLeft } from '@shared/assets/icon/md-chevron-
 import { ReactComponent as MdChevronRight } from '@shared/assets/icon/md-chevron-right.svg';
 import { ReactComponent as MdFirstPage } from '@shared/assets/icon/md-first-page.svg';
 import { ReactComponent as MdLastPage } from '@shared/assets/icon/md-last-page.svg';
+import { ARIA_LABEL_BUTTON } from '@shared/constants/accessibility/ARIA_LABEL';
 import { Clickable, HStack } from '@shared/ui-kit';
 import { PageButton } from './PageButton';
 
@@ -52,12 +53,18 @@ export const Pagination = ({
   return (
     <HStack spacing="1rem">
       {isStartButtonDisabled ? null : (
-        <Clickable onClick={handleClickStartButton} aria-label="처음으로">
+        <Clickable
+          onClick={handleClickStartButton}
+          aria-label={ARIA_LABEL_BUTTON.PAGINATION.FIRST_PAGE}
+        >
           <MdFirstPage width={20} height={20} />
         </Clickable>
       )}
       {isBackButtonDisabled ? null : (
-        <Clickable onClick={handleClickBackButton} aria-label="앞으로">
+        <Clickable
+          onClick={handleClickBackButton}
+          aria-label={ARIA_LABEL_BUTTON.PAGINATION.PREVIOUS_PAGE_GROUP}
+        >
           <MdChevronLeft width={20} height={20} />
         </Clickable>
       )}
@@ -72,12 +79,18 @@ export const Pagination = ({
         ))}
       </HStack>
       {isForwardButtonDisabled ? null : (
-        <Clickable onClick={handleClickForwardButton} aria-label="뒤로">
+        <Clickable
+          onClick={handleClickForwardButton}
+          aria-label={ARIA_LABEL_BUTTON.PAGINATION.NEXT_PAGE_GROUP}
+        >
           <MdChevronRight width={20} height={20} />
         </Clickable>
       )}
       {isEndButtonDisabled ? null : (
-        <Clickable onClick={handleClickEndButton} aria-label="끝으로">
+        <Clickable
+          onClick={handleClickEndButton}
+          aria-label={ARIA_LABEL_BUTTON.PAGINATION.LAST_PAGE}
+        >
           <MdLastPage width={20} height={20} />
         </Clickable>
       )}

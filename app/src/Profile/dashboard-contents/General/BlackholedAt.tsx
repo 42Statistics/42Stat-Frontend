@@ -4,7 +4,6 @@ import { ReactComponent as SmileyScaredSvg } from '@/Profile/assets/blackhole/sm
 import { ReactComponent as SmileySleepySvg } from '@/Profile/assets/blackhole/smiley-sleepy.svg';
 import { ReactComponent as SmileySmile1Svg } from '@/Profile/assets/blackhole/smiley-smile-1.svg';
 import { GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN } from '@/Profile/dashboard-contents-queries/GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN';
-import { getBlackholeDaysLeft } from '@shared/utils/getBlackholeDaysLeft';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
 import { DashboardContent } from '@shared/components/DashboardContent';
@@ -14,6 +13,7 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { H2BoldText, HStack } from '@shared/ui-kit';
+import { getBlackholeDaysLeft } from '@shared/utils/getBlackholeDaysLeft';
 import { useParams } from 'react-router-dom';
 
 export const BlackholedAt = () => {

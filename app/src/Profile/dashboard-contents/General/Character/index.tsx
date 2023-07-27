@@ -6,6 +6,7 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
+import { ALT } from '@shared/constants/accessibility/ALT';
 import { H3MediumText, HStack, Image, Label, VStack } from '@shared/ui-kit';
 import { useParams } from 'react-router-dom';
 
@@ -56,7 +57,14 @@ export const Character = () => {
   return (
     <DashboardContent title={title} description={description}>
       <VStack>
-        <Image width={200} height={200} src={imgUrl} alt={name ?? ''} />
+        <Image
+          width={200}
+          height={200}
+          src={imgUrl}
+          alt={
+            name !== undefined ? ALT.POKEMON_OF(name) : ALT.POKEMON_NOT_FOUND
+          }
+        />
         <VStack spacing="2rem">
           <HStack spacing="1rem">
             {types?.map((type, idx) => (

@@ -1,4 +1,5 @@
 import { useTheme } from '@emotion/react';
+import { ARIA_LABEL_BUTTON } from '@shared/constants/accessibility/ARIA_LABEL';
 import { Clickable, H3Text } from '@shared/ui-kit';
 
 type PageButtonProps = {
@@ -21,7 +22,14 @@ export const PageButton = ({
     setPageNumber(pageNumber);
   };
   return (
-    <Clickable onClick={handleClick} aria-label={`${pageNumber} 페이지`}>
+    <Clickable
+      onClick={handleClick}
+      aria-label={
+        pageNumber !== currPageNumber
+          ? ARIA_LABEL_BUTTON.PAGINATION.PAGE_OF(pageNumber)
+          : ARIA_LABEL_BUTTON.PAGINATION.CURRENT_PAGE_OF(pageNumber)
+      }
+    >
       <H3Text
         color={
           pageNumber !== currPageNumber

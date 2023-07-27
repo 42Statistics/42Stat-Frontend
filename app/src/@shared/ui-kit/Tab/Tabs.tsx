@@ -5,7 +5,7 @@ export const Tabs = ({ children }: PropsWithReactElementChildren) => {
   return <Layout>{children}</Layout>;
 };
 
-const Layout = styled.div`
+const Layout = styled.ul`
   display: flex;
   justify-content: flex-start;
   width: 100%;

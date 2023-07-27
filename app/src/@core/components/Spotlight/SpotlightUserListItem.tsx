@@ -1,5 +1,6 @@
 import { UserPreview } from '@shared/__generated__/graphql';
 import { ROUTES } from '@shared/constants/ROUTES';
+import { ALT } from '@shared/constants/accessibility/ALT';
 import { Avatar } from '@shared/ui-kit';
 import { SpotlightListItem } from './SpotlightListItem';
 
@@ -14,7 +15,7 @@ export const SpotlightUserListItem = ({
 }: SpotlightUserListItemProps) => {
   return (
     <SpotlightListItem
-      left={<Avatar size="xs" src={imgUrl} alt={`${login}의 프로필 사진`} />}
+      left={<Avatar size="xs" src={imgUrl} alt={ALT.AVATAR_OF(login)} />}
       name={login}
       link={`${ROUTES.PROFILE_ROOT}/${login}`}
       index={index}

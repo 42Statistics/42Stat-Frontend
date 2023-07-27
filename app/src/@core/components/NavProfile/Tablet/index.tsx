@@ -1,5 +1,6 @@
 import { userAtom } from '@shared/atoms/userAtom';
 import { ROUTES } from '@shared/constants/ROUTES';
+import { ALT } from '@shared/constants/accessibility/ALT';
 import { Avatar } from '@shared/ui-kit';
 import { useAtomValue } from 'jotai';
 import { Link } from 'react-router-dom';
@@ -13,7 +14,7 @@ export const TabletNavProfile = ({ imgUrl }: TabletNavProfileProps) => {
 
   return (
     <Link to={`${ROUTES.PROFILE_ROOT}/${user.login}`}>
-      <Avatar size="sm" src={imgUrl} alt={`${user.login}의 프로필 사진`} />
+      <Avatar size="sm" src={imgUrl} alt={ALT.AVATAR_OF(user.login)} />
     </Link>
   );
 };

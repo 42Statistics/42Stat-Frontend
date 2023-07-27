@@ -1,11 +1,5 @@
-import {
-  profilePageDesktopDashboardRows,
-  profilePageMobileDashboardRows,
-  profilePageTabletDashboardRows,
-} from '@/Profile/dashboard-frames/profilePageDashboardRows';
+import { profilePageDashboardRows } from '@/Profile/dashboard-frames/profilePageDashboardRows';
 
 export const useProfilePageDashboardSkeleton = () => ({
-  desktopRows: profilePageDesktopDashboardRows,
-  tabletRows: profilePageTabletDashboardRows,
-  mobileRows: profilePageMobileDashboardRows,
+  rows: profilePageDashboardRows,
 });

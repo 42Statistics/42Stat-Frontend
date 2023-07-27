@@ -1,27 +1,30 @@
+import styled from '@emotion/styled';
 import type { DashboardProps } from '@shared/types/Dashboard';
-import { Center } from '@shared/ui-kit';
-import { Desktop, Mobile, Tablet } from '@shared/utils/react-responsive/Device';
-import { DesktopDashboard } from './Desktop';
-import { MobileDashboard } from './Mobile';
-import { TabletDashboard } from './Tablet';
+import { DashboardRow } from './DashboardRow';
+import { DashboardRowItem } from './DashboardRowItem';
 
-export const Dashboard = ({
-  desktopRows,
-  tabletRows,
-  mobileRows,
-  contents,
-}: DashboardProps) => {
+export const Dashboard = ({ rows, contents }: DashboardProps) => {
   return (
-    <Center>
-      <Desktop>
-        <DesktopDashboard rows={desktopRows} contents={contents} />
-      </Desktop>
-      <Tablet>
-        <TabletDashboard rows={tabletRows} contents={contents} />
-      </Tablet>
-      <Mobile>
-        <MobileDashboard rows={mobileRows} contents={contents} />
-      </Mobile>
-    </Center>
+    <Layout>
+      {rows.map((items, rowIdx) => (
+        <DashboardRow key={rowIdx}>
+          {items.map(({ rowSpan, colSpan, elementId }, itemIdx) => (
+            <DashboardRowItem
+              key={itemIdx}
+              rowSpan={rowSpan}
+              colSpan={colSpan}
+              content={contents[elementId].content}
+            />
+          ))}
+        </DashboardRow>
+      ))}
+    </Layout>
   );
 };
+
+const Layout = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+`;

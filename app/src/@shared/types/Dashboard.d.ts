@@ -4,10 +4,12 @@ export type DashboardProps = {
 };
 
 export type DashboardRowType = {
-  rowSpan: number;
   colSpan: number;
-  elementId: number;
-}[];
+  items: {
+    rowSpan: number;
+    elementId: number;
+  }[];
+};
 
 export type DashboardItemProps = {
   id: number;

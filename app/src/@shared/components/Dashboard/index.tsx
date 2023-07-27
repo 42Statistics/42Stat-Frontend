@@ -6,9 +6,9 @@ import { DashboardRowItem } from './DashboardRowItem';
 export const Dashboard = ({ rows, contents }: DashboardProps) => {
   return (
     <Layout>
-      {rows.map((items, rowIdx) => (
+      {rows.map(({ colSpan, items }, rowIdx) => (
         <DashboardRow key={rowIdx}>
-          {items.map(({ rowSpan, colSpan, elementId }, itemIdx) => (
+          {items.map(({ rowSpan, elementId }, itemIdx) => (
             <DashboardRowItem
               key={itemIdx}
               rowSpan={rowSpan}

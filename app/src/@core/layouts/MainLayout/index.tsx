@@ -35,7 +35,7 @@ export const MainLayout = () => {
   return (
     <>
       <Helmet>
-        <meta name="theme-color" content="#fffff" />
+        <meta name="theme-color" content="#ffffff" />
       </Helmet>
       <Global styles={mainLayoutGlobalStyle} />
       {device === 'desktop' ? <DesktopNavBar /> : null}

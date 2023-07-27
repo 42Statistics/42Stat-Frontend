@@ -8,9 +8,9 @@ type DashboardSkeletonProps = Omit<DashboardProps, 'contents'>;
 export const DashboardSkeleton = ({ rows }: DashboardSkeletonProps) => {
   return (
     <Layout>
-      {rows.map((items, rowIdx) => (
+      {rows.map(({ colSpan, items }, rowIdx) => (
         <DashboardRow key={rowIdx}>
-          {items.map(({ rowSpan, colSpan }, itemIdx) => (
+          {items.map(({ rowSpan }, itemIdx) => (
             <DashboardRowItemSkeleton
               key={itemIdx}
               rowSpan={rowSpan}

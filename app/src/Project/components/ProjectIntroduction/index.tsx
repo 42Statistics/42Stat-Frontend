@@ -1,4 +1,3 @@
-import { ProjectIntroductionSkeleton } from '@/Project/components/ProjectIntroductionSkeleton';
 import { useQuery } from '@apollo/client';
 import styled from '@emotion/styled';
 import { BoldText, Divider, HStack, Text, VStack } from '@shared/ui-kit';
@@ -16,13 +15,21 @@ export const ProjectIntroduction = () => {
   );
 
   if (loading) {
-    return <ProjectIntroductionSkeleton />;
+    return (
+      <Layout>
+        <Divider
+          orientation="vertical"
+          thickness="3px"
+          style={{ height: '200px' }}
+        />
+      </Layout>
+    );
   }
   if (error) {
-    return <></>;
+    return null;
   }
   if (!data) {
-    return <></>;
+    return null;
   }
 
   const { name, description } = data.getProjectInfo;

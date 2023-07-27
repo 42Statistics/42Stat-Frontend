@@ -16,6 +16,9 @@ export default defineConfig({
     host: 'localhost',
     port: 8080,
   },
+  build: {
+    sourcemap: true,
+  },
   resolve: {
     alias: [
       {

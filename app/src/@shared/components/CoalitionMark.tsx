@@ -6,6 +6,7 @@ import coalition_gon_mark from '@shared/assets/coalition/mark/coalition-gon-mark
 import coalition_gun_mark from '@shared/assets/coalition/mark/coalition-gun-mark.svg';
 import coalition_lee_mark from '@shared/assets/coalition/mark/coalition-lee-mark.svg';
 import ft_logo from '@shared/assets/logo/ft-logo.svg';
+import { ALT } from '@shared/constants/accessibility/ALT';
 import { Image } from '@shared/ui-kit';
 
 type CoalitionMarkProps = {
@@ -66,7 +67,9 @@ export const CoalitionMark = ({
   return (
     <StyledCoalitionMark
       src={imageUrl}
-      alt={`${coalition?.name ?? '42'} 로고`}
+      alt={
+        coalition != null ? ALT.COALITION_LOGO_OF(coalition.name) : ALT.LOGO_42
+      }
       onError={handleImageError}
       style={{
         width: size,

@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import { userAtom } from '@shared/atoms/userAtom';
 import { AppLogoTitle } from '@shared/components/AppLogoTitle';
 import { ROUTES } from '@shared/constants/ROUTES';
+import { ARIA_LABEL_LINK } from '@shared/constants/accessibility/ARIA_LABEL';
 import { VStack } from '@shared/ui-kit';
 import { useAtomValue } from 'jotai';
 import { Link } from 'react-router-dom';
@@ -19,7 +20,7 @@ export const DesktopNavBar = ({ fixed = true }: DesktopNavBarProps) => {
   return (
     <Layout fixed={fixed}>
       <VStack w="100%" h="100%" spacing="4rem">
-        <Link to={ROUTES.ROOT}>
+        <Link to={ROUTES.ROOT} aria-label={ARIA_LABEL_LINK.STAT}>
           <AppLogoTitle size="sm" />
         </Link>
         <DesktopNavProfile

@@ -12,7 +12,7 @@ type AvatarProps = {
   alt?: string;
 };
 
-export const Avatar = ({ size = 'md', src, alt = '아바타' }: AvatarProps) => {
+export const Avatar = ({ size = 'md', src, alt = '' }: AvatarProps) => {
   const [isLoading, setIsLoading] = useState(true);
 
   if (src == null) {

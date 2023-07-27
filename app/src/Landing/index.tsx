@@ -4,6 +4,7 @@ import {
   FtLoginButton,
   GoogleLoginButton,
 } from '@shared/components/LoginButton';
+import { ARIA_LABEL_LINK } from '@shared/constants/accessibility/ARIA_LABEL';
 import { withHead } from '@shared/hoc/withHead';
 import { VStack } from '@shared/ui-kit';
 import { Introduction } from './components/Introduction';
@@ -13,7 +14,7 @@ const LandingPage = () => {
 
   return (
     <VStack spacing="10rem">
-      <a href="/">
+      <a href="/" aria-label={ARIA_LABEL_LINK.STAT}>
         <AppLogoTitle size="sm" color={theme.colors.mono.white} />
       </a>
       <Introduction />

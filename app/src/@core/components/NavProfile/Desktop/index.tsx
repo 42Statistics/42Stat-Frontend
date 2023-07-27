@@ -1,6 +1,8 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { userAtom } from '@shared/atoms/userAtom';
+import { ALT } from '@shared/constants/accessibility/ALT';
+import { ARIA_LABEL_LINK } from '@shared/constants/accessibility/ARIA_LABEL';
 import { ROUTES } from '@shared/constants/ROUTES';
 import {
   Avatar,
@@ -28,10 +30,14 @@ export const DesktopNavProfile = ({
   const theme = useTheme();
 
   return (
-    <Link to={`${ROUTES.PROFILE_ROOT}/${user.login}`} style={{ width: '100%' }}>
+    <Link
+      to={`${ROUTES.PROFILE_ROOT}/${user.login}`}
+      style={{ width: '100%' }}
+      aria-label={ARIA_LABEL_LINK.PROFILE_OF(user.login)}
+    >
       <Layout>
         <HStack w="100%" spacing="2rem">
-          <Avatar size="lg" src={imgUrl} alt={`${user.login}의 프로필 사진`} />
+          <Avatar size="lg" src={imgUrl} alt={ALT.AVATAR_OF(login)} />
           <VStack align="start" spacing="0.5rem">
             <MediumText>{login}</MediumText>
             <CaptionText color={theme.colors.mono.gray300}>

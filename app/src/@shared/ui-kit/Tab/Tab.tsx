@@ -15,9 +15,11 @@ export const Tab = ({ selected = false, onClick, children }: TabProps) => {
     : theme.colors.mono.black;
 
   return (
-    <Layout onClick={onClick} selected={selected}>
-      <Text color={color}>{children}</Text>
-    </Layout>
+    <li>
+      <Layout onClick={onClick} selected={selected} tabIndex={0}>
+        <Text color={color}>{children}</Text>
+      </Layout>
+    </li>
   );
 };
 
@@ -30,6 +32,7 @@ const Layout = styled(Clickable)<LayoutProps>`
   padding: 1.4rem 2rem;
   transition: background-color 0.3s;
   outline-offset: -0.2rem;
+  cursor: pointer;
 
   border-bottom: ${({ theme, selected }) =>
     selected && `3px solid ${theme.colors.primary.default}`};

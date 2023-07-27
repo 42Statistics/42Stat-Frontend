@@ -6,7 +6,7 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
-import { NumberCompare } from '@shared/components/DashboardContentView/NumberCompare';
+import { NumberVersus } from '@shared/components/DashboardContentView/Number/NumberVersus';
 import { useAtomValue } from 'jotai';
 import { useParams } from 'react-router-dom';
 import { GET_VERSUS_ZERO_COST } from '../../dashboard-contents-queries/GET_VERSUS_ZERO_COST';
@@ -42,7 +42,7 @@ export const Level = () => {
 
   return (
     <DashboardContent title={title}>
-      <NumberCompare curr={level} last={myLevel} unit={unit} />
+      <NumberVersus number1={level} number2={myLevel} unit={unit} />
     </DashboardContent>
   );
 };

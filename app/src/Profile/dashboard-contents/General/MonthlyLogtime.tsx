@@ -7,7 +7,7 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
-import { NumberCompare } from '@shared/components/DashboardContentView/NumberCompare';
+import { NumberCompare } from '@shared/components/DashboardContentView/Number/NumberCompare';
 import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
 

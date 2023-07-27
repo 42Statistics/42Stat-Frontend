@@ -5,7 +5,7 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
-import { NumberDefault } from '@shared/components/DashboardContentView/NumberDefault';
+import { NumberDefault } from '@shared/components/DashboardContentView/Number/NumberDefault';
 import { useParams } from 'react-router-dom';
 import { GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN } from '../../dashboard-contents-queries/GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN';
 

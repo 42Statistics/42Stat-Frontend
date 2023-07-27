@@ -7,7 +7,7 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
-import { NumberCompare } from '@shared/components/DashboardContentView/NumberCompare';
+import { NumberVersus } from '@shared/components/DashboardContentView/Number/NumberVersus';
 import { useAtomValue } from 'jotai';
 import { useParams } from 'react-router-dom';
 
@@ -52,9 +52,9 @@ export const AverageFinalMark = () => {
 
   return (
     <DashboardContent title={title} description={description}>
-      <NumberCompare
-        curr={averageFinalMark}
-        last={myAverageFinalMark}
+      <NumberVersus
+        number1={averageFinalMark}
+        number2={myAverageFinalMark}
         unit={unit}
       />
     </DashboardContent>

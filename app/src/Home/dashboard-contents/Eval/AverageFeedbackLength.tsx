@@ -6,7 +6,7 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
-import { NumberDefault } from '@shared/components/DashboardContentView/NumberDefault';
+import { NumberDefault } from '@shared/components/DashboardContentView/Number/NumberDefault';
 
 const GET_AVERAGE_FEEDBACK_LENGTH = gql(/* GraphQL */ `
   query GetAverageFeedbackLength {

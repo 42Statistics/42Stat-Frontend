@@ -7,7 +7,7 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
-import { NumberDefault } from '@shared/components/DashboardContentView/NumberDefault';
+import { NumberDefault } from '@shared/components/DashboardContentView/Number/NumberDefault';
 
 const GET_EVAL_COUNT_BY_DATE_TEMPLATE = gql(/* GraphQL */ `
   query GetEvalCountByDateTemplate($dateTemplate: DateTemplate!) {

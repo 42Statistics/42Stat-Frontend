@@ -4,7 +4,7 @@ import marvin from '@shared/assets/avatar/marvin.jpeg';
 import { useState } from 'react';
 import { Image } from '../Image';
 
-type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
 type AvatarProps = {
   size?: AvatarSize;
@@ -31,6 +31,8 @@ export const Avatar = ({ size = 'md', src, alt = '' }: AvatarProps) => {
         return '4rem';
       case 'xl':
         return '6rem';
+      case '2xl':
+        return '10rem';
       default:
         return '3.2rem';
     }

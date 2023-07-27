@@ -18,9 +18,6 @@ import {
   Avatar,
   HStack,
   VStack,
-  WhiteBoldText,
-  WhiteCaptionText,
-  WhiteH1BoldText,
   WhiteH3BoldText,
   WhiteMediumText,
   WhiteText,
@@ -132,20 +129,22 @@ export const UserProfile = () => {
         </HStack>
       </Desktop>
       <TabletAndBelow>
-        <VStack h="100%" spacing="2rem">
-          <Avatar size="xl" src={imgUrl} alt={ALT.AVATAR_OF(login)} />
+        <HStack h="100%" spacing="4rem">
           <VStack>
-            <WhiteBoldText>{titleCase(grade)}</WhiteBoldText>
-            <WhiteH1BoldText>{titleCase(displayname)}</WhiteH1BoldText>
+            <Avatar size="2xl" src={imgUrl} alt={ALT.AVATAR_OF(login)} />
           </VStack>
-          <WhiteMediumText>
-            {truncate(titleWithLogin, { length: 42 })}
-          </WhiteMediumText>
-          <HStack align="baseline">
-            <WhiteCaptionText>lv.</WhiteCaptionText>
-            <WhiteH3BoldText>{level.toFixed(2)}</WhiteH3BoldText>
-          </HStack>
-        </VStack>
+          <VStack w="20rem" spacing="1rem" style={{ textAlign: 'center' }}>
+            <WhiteH3BoldText>{titleCase(grade)}</WhiteH3BoldText>
+            <WhiteH3BoldText>{titleCase(displayname)}</WhiteH3BoldText>
+            <WhiteMediumText>
+              {truncate(titleWithLogin, { length: 52 })}
+            </WhiteMediumText>
+            <HStack align="baseline">
+              <WhiteText>lv.</WhiteText>
+              <WhiteH3BoldText>{level.toFixed(2)}</WhiteH3BoldText>
+            </HStack>
+          </VStack>
+        </HStack>
       </TabletAndBelow>
     </Layout>
   );

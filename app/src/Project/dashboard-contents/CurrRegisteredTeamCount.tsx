@@ -6,7 +6,7 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
-import { NumberDefault } from '@shared/components/DashboardContentView/NumberDefault';
+import { NumberDefault } from '@shared/components/DashboardContentView/Number/NumberDefault';
 import { useParams } from 'react-router-dom';
 
 const GET_CURR_REGISTERED_TEAM_COUNT_BY_PROJECT_NAME = gql(/* GraphQL */ `

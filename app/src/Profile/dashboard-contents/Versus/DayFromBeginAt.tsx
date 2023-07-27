@@ -6,7 +6,7 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
-import { NumberCompare } from '@shared/components/DashboardContentView/NumberCompare';
+import { NumberVersus } from '@shared/components/DashboardContentView/Number/NumberVersus';
 import { getTimeDiffFromNow } from '@shared/utils/getTimeDiffFromNow';
 import { useAtomValue } from 'jotai';
 import { useParams } from 'react-router-dom';
@@ -42,7 +42,7 @@ export const DayFromBeginAt = () => {
 
   return (
     <DashboardContent title={title}>
-      <NumberCompare curr={diff} last={myDiff} unit={unit} />
+      <NumberVersus number1={diff} number2={myDiff} unit={unit} />
     </DashboardContent>
   );
 };

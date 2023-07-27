@@ -15,7 +15,7 @@ export const NumberCompare = ({ curr, last, unit }: NumberCompareProps) => {
         <H2MediumText>{curr.toLocaleString()}</H2MediumText>
         <Body1Text>{unit}</Body1Text>
       </HStack>
-      {curr !== last ? <Diff curr={curr} last={last} /> : <NoneDash />}
+      {curr !== last ? <Diff number1={curr} number2={last} /> : <NoneDash />}
     </HStack>
   );
 };

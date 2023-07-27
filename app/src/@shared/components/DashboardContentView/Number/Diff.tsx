@@ -4,12 +4,12 @@ import { ReactComponent as TriangleUp } from '@shared/assets/icon/triangle-up.sv
 import { Body1Text, HStack } from '@shared/ui-kit';
 
 type DiffProps = {
-  curr: number;
-  last: number;
+  number1: number;
+  number2: number;
 };
 
-export const Diff = ({ curr, last }: DiffProps) => {
-  const diff = curr - last;
+export const Diff = ({ number1, number2 }: DiffProps) => {
+  const diff = number1 - number2;
   const theme = useTheme();
   const color = diff > 0 ? theme.colors.chart.up : theme.colors.chart.down;
   const ArrowSvg = diff > 0 ? TriangleUp : TriangleDown;

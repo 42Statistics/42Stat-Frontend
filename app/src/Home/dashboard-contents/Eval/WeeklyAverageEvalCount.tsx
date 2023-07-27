@@ -7,7 +7,7 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
-import { NumberDefault } from '@shared/components/DashboardContentView/NumberDefault';
+import { NumberDefault } from '@shared/components/DashboardContentView/Number/NumberDefault';
 import dayjs from 'dayjs';
 
 const GET_AVERAGE_EVAL_COUNT_BY_DATE_TEMPLATE = gql(/* GraphQL */ `

@@ -1,8 +1,9 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
 import { CaptionText, Center, H3MediumText, VStack } from '@shared/ui-kit';
 
-export type DashboardContentProps = React.PropsWithChildren<{
+export type DashboardContentProps = PropsWithReactElementChildren<{
   title?: string;
   description?: string;
   isApexChart?: boolean;
@@ -30,7 +31,7 @@ export const DashboardContent = ({
         {!isApexChart ? (
           <Center>{children}</Center>
         ) : (
-          <div style={{ width: '100%', height: '100%' }}>{children}</div> // ApexChart의 부모 요소가 Flex인 경우 width: 100%가 적용되지 않는 버그
+          <ApexChartsContainer>{children}</ApexChartsContainer>
         )}
       </VStack>
     </Layout>
@@ -42,3 +43,32 @@ const Layout = styled.div`
   height: 100%;
   padding: 2.4rem;
 `;
+
+/**
+ * about slow chart resizing issue,
+ * @see https://github.com/recharts/recharts/issues/1767#issuecomment-598607012
+ */
+
+const ApexChartsContainer = ({ children }: PropsWithReactElementChildren) => {
+  return (
+    <div
+      style={{
+        width: '100%',
+        height: '100%',
+        position: 'relative',
+      }}
+    >
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+        }}
+      >
+        {children}
+      </div>
+    </div>
+  );
+};

@@ -4,7 +4,10 @@ import {
 } from '@shared/components/DashboardContent';
 import { Loader } from '@shared/ui-kit';
 
-type DashboardContentLoadingProps = DashboardContentProps;
+type DashboardContentLoadingProps = Omit<
+  DashboardContentProps,
+  'children' | 'isApexChart'
+>;
 
 export const DashboardContentLoading = ({
   ...props

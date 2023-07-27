@@ -4,7 +4,10 @@ import {
   DashboardContentProps,
 } from '@shared/components/DashboardContent';
 
-type DashboardContentNotFoundProps = DashboardContentProps;
+type DashboardContentNotFoundProps = Omit<
+  DashboardContentProps,
+  'children' | 'isApexChart'
+>;
 
 export const DashboardContentNotFound = ({
   ...props

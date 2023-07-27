@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 import { UserTeam } from '@shared/__generated__/graphql';
 import { ROUTES } from '@shared/constants/ROUTES';
 import { PrimaryText, Text } from '@shared/ui-kit';
-import { truncate } from 'lodash-es';
 import { Link } from 'react-router-dom';
 import { DateDiffWithStatus } from './DateDiffWithStatus';
 import { ResultWithStatus } from './ResultWithStatus';
@@ -47,7 +46,7 @@ export const TeamInfoTable = ({ teams }: TeamInfoTableProps) => {
                 <Text>{occurrence + 1}</Text>
               </td>
               <td>
-                <Text>{truncate(name, { length: 42 })}</Text>
+                <Text>{name}</Text>
               </td>
               <td>
                 <DateDiffWithStatus
@@ -82,6 +81,8 @@ const Table = styled.table`
   }
 
   td {
+    max-width: 300px;
+    overflow-x: hidden;
     text-align: center;
     padding: 0.4rem 2rem;
     vertical-align: middle;

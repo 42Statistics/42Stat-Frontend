@@ -1,13 +1,7 @@
 import { profileEvalTabDashboardContents } from '../dashboard-frames/profileEvalTabDashboardContents';
-import {
-  profileEvalTabDesktopDashboardRows,
-  profileEvalTabMobileDashboardRows,
-  profileEvalTabTabletDashboardRows,
-} from '../dashboard-frames/profileEvalTabDashboardRows';
+import { profileEvalTabDashboardRows } from '../dashboard-frames/profileEvalTabDashboardRows';
 
 export const useProfileEvalTabDashboard = () => ({
   contents: profileEvalTabDashboardContents,
-  desktopRows: profileEvalTabDesktopDashboardRows,
-  tabletRows: profileEvalTabTabletDashboardRows,
-  mobileRows: profileEvalTabMobileDashboardRows,
+  rows: profileEvalTabDashboardRows,
 });

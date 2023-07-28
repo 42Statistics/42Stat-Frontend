@@ -57,7 +57,7 @@ export const Pagination = ({
           onClick={handleClickStartButton}
           aria-label={ARIA_LABEL_BUTTON.PAGINATION.FIRST_PAGE}
         >
-          <MdFirstPage width={20} height={20} />
+          <MdFirstPage width={16} height={16} />
         </Clickable>
       )}
       {isBackButtonDisabled ? null : (
@@ -65,10 +65,10 @@ export const Pagination = ({
           onClick={handleClickBackButton}
           aria-label={ARIA_LABEL_BUTTON.PAGINATION.PREVIOUS_PAGE_GROUP}
         >
-          <MdChevronLeft width={20} height={20} />
+          <MdChevronLeft width={16} height={16} />
         </Clickable>
       )}
-      <HStack spacing="2rem">
+      <HStack spacing="0.6rem">
         {pageNumberList.map((pageNumber) => (
           <PageButton
             key={pageNumber}
@@ -83,7 +83,7 @@ export const Pagination = ({
           onClick={handleClickForwardButton}
           aria-label={ARIA_LABEL_BUTTON.PAGINATION.NEXT_PAGE_GROUP}
         >
-          <MdChevronRight width={20} height={20} />
+          <MdChevronRight width={16} height={16} />
         </Clickable>
       )}
       {isEndButtonDisabled ? null : (
@@ -91,7 +91,7 @@ export const Pagination = ({
           onClick={handleClickEndButton}
           aria-label={ARIA_LABEL_BUTTON.PAGINATION.LAST_PAGE}
         >
-          <MdLastPage width={20} height={20} />
+          <MdLastPage width={16} height={16} />
         </Clickable>
       )}
     </HStack>

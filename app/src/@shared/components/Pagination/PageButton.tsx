@@ -1,6 +1,7 @@
 import { useTheme } from '@emotion/react';
+import styled from '@emotion/styled';
 import { ARIA_LABEL_BUTTON } from '@shared/constants/accessibility/ARIA_LABEL';
-import { Clickable, H3Text } from '@shared/ui-kit';
+import { Clickable, Text } from '@shared/ui-kit';
 
 type PageButtonProps = {
   currPageNumber: number;
@@ -22,7 +23,8 @@ export const PageButton = ({
     setPageNumber(pageNumber);
   };
   return (
-    <Clickable
+    <Layout
+      isCurrPage={pageNumber === currPageNumber}
       onClick={handleClick}
       aria-label={
         pageNumber !== currPageNumber
@@ -30,15 +32,30 @@ export const PageButton = ({
           : ARIA_LABEL_BUTTON.PAGINATION.CURRENT_PAGE_OF(pageNumber)
       }
     >
-      <H3Text
+      <Text
         color={
           pageNumber !== currPageNumber
-            ? theme.colors.mono.gray200
-            : theme.colors.mono.black
+            ? theme.colors.mono.black
+            : theme.colors.mono.white
         }
       >
         {pageNumber}
-      </H3Text>
-    </Clickable>
+      </Text>
+    </Layout>
   );
 };
+
+type LayoutProps = {
+  isCurrPage: boolean;
+};
+
+const Layout = styled(Clickable)<LayoutProps>`
+  width: 3rem;
+  height: 3rem;
+  border-radius: ${({ theme }) => theme.radius.circle};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${({ theme, isCurrPage }) =>
+    isCurrPage && theme.colors.primary.default};
+`;

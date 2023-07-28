@@ -4,6 +4,7 @@ import { DateTemplate } from '@shared/__generated__/graphql';
 import { Pagination } from '@shared/components/Pagination';
 import { useSegmentedControl } from '@shared/hooks/useSegmentedControl';
 import { SegmentedControl, VStack } from '@shared/ui-kit';
+import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 import { useEffect, useState } from 'react';
 import { LeaderboardExpIncrementTabResult } from './LeaderboardExpIncrementTabResult';
 
@@ -49,6 +50,7 @@ const GET_LEADERBOARD_EXP_INCREMENT = gql(/* GraphQL */ `
 
 const LeaderboardExpIncrementTab = () => {
   const SIZE_PER_PAGE = 50;
+  const device = useDeviceType();
   const [search, result] = useLazyQuery(GET_LEADERBOARD_EXP_INCREMENT);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<number>(0);
@@ -113,6 +115,7 @@ const LeaderboardExpIncrementTab = () => {
         currPageNumber={pageNumber}
         setPageNumber={setPageNumber}
         totalPageNumber={Math.ceil(totalPage / SIZE_PER_PAGE)}
+        pagePerRow={device === 'mobile' ? 5 : 10}
       />
     </VStack>
   );

@@ -1,5 +1,4 @@
 import { userAtom } from '@shared/atoms/userAtom';
-import { Dashboard } from '@shared/components/Dashboard';
 import { Seo } from '@shared/components/Seo';
 import { ROUTES } from '@shared/constants/ROUTES';
 import { withFooter } from '@shared/hoc/withFooter';
@@ -7,7 +6,7 @@ import { withHead } from '@shared/hoc/withHead';
 import { Tab, TabPanel, Tabs, VStack } from '@shared/ui-kit';
 import { useAtomValue } from 'jotai';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useProfilePageDashboard } from './dashboard-hooks/useProfilePageDashboard';
+import { UserProfile } from './components/UserProfile';
 import ProfileEvalTab from './tabs/Eval';
 import ProfileGeneralTab from './tabs/General';
 import ProfileVersusTab from './tabs/Versus';
@@ -38,7 +37,7 @@ export const ProfilePage = () => {
 
   return (
     <VStack w="100%" spacing="3rem">
-      <Dashboard {...useProfilePageDashboard()} />
+      <UserProfile />
       <Tabs>
         <Tab
           selected={tab === 'General'}

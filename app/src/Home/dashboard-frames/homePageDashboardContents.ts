@@ -11,7 +11,6 @@ import {
   WeeklyAverageEvalCount,
   WeeklyEvalCount,
 } from '../dashboard-contents/Eval';
-import { Hero } from '../dashboard-contents/MyInfo';
 import {
   CurrRegisteredCountRanking,
   RecentExamResult,
@@ -31,82 +30,78 @@ import {
 export const homePageDashboardContents: DashboardItemProps[] = [
   {
     id: 0,
-    content: Hero,
-  },
-  {
-    id: 1,
     content: WeeklyEvalCount,
   },
   {
-    id: 2,
+    id: 1,
     content: MonthlyBlackholedCount,
   },
   {
-    id: 3,
+    id: 2,
     content: WeeklyAverageEvalCount,
   },
   {
-    id: 4,
+    id: 3,
     content: TotalEvalCount,
   },
   {
-    id: 5,
+    id: 4,
     content: CurrRegisteredCountRanking,
   },
   {
-    id: 6,
+    id: 5,
     content: AverageCommentLength,
   },
   {
-    id: 7,
+    id: 6,
     content: AverageFeedbackLength,
   },
   {
-    id: 8,
+    id: 7,
     content: AliveUserCountRecords,
   },
   {
-    id: 9,
+    id: 8,
     content: UserCountPerLevel,
   },
   {
-    id: 10,
+    id: 9,
     content: MemberRate,
   },
   {
-    id: 11,
+    id: 10,
     content: BlackholedRate,
   },
   {
-    id: 12,
+    id: 11,
     content: BlackholedCountPerCircle,
   },
   {
-    id: 13,
+    id: 12,
     content: AverageDurationPerCircle,
   },
   {
-    id: 14,
+    id: 13,
     content: CorrectionPointRanking,
   },
   {
-    id: 15,
+    id: 14,
     content: WalletRanking,
   },
   {
-    id: 16,
+    id: 15,
     content: RecentExamResult,
   },
   {
-    id: 17,
+    id: 16,
     content: ScoreRecordsPerCoalition,
   },
   {
-    id: 18,
+    id: 17,
     content: TotalScoresPerCoalition,
   },
   {
-    id: 19,
+    id: 18,
     content: MonthlyTigCountPerCoalition,
   },
 ];

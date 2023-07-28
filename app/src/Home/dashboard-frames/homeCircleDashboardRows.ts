@@ -6,10 +6,6 @@ export const homeCircleDashboardRows: DashboardRowType[] = [
     items: [
       {
         rowSpan: 2,
-        elementId: 13,
-      },
-      {
-        rowSpan: 2,
         elementId: 12,
       },
       {
@@ -22,7 +18,11 @@ export const homeCircleDashboardRows: DashboardRowType[] = [
       },
       {
         rowSpan: 2,
-        elementId: 16,
+        elementId: 9,
+      },
+      {
+        rowSpan: 2,
+        elementId: 15,
       },
     ],
   },

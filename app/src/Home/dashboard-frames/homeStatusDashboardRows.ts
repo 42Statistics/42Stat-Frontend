@@ -6,27 +6,27 @@ export const homeStatusDashboardRows: DashboardRowType[] = [
     items: [
       {
         rowSpan: 1,
-        elementId: 1,
-      },
-      {
-        rowSpan: 1,
-        elementId: 3,
+        elementId: 0,
       },
       {
         rowSpan: 1,
         elementId: 2,
       },
       {
-        rowSpan: 2,
-        elementId: 5,
+        rowSpan: 1,
+        elementId: 1,
       },
       {
         rowSpan: 2,
-        elementId: 9,
+        elementId: 4,
       },
       {
         rowSpan: 2,
-        elementId: 14,
+        elementId: 8,
+      },
+      {
+        rowSpan: 2,
+        elementId: 13,
       },
     ],
   },

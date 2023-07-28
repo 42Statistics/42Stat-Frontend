@@ -32,7 +32,7 @@ export const Avatar = ({ size = 'md', src, alt = '' }: AvatarProps) => {
       case 'xl':
         return '6rem';
       case '2xl':
-        return '10rem';
+        return '8rem';
       default:
         return '3.2rem';
     }

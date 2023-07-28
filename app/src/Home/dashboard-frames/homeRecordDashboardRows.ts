@@ -6,23 +6,23 @@ export const homeRecordDashboardRows: DashboardRowType[] = [
     items: [
       {
         rowSpan: 1,
-        elementId: 4,
+        elementId: 3,
+      },
+      {
+        rowSpan: 1,
+        elementId: 5,
       },
       {
         rowSpan: 1,
         elementId: 6,
       },
       {
-        rowSpan: 1,
+        rowSpan: 2,
         elementId: 7,
       },
       {
         rowSpan: 2,
-        elementId: 8,
-      },
-      {
-        rowSpan: 2,
-        elementId: 15,
+        elementId: 14,
       },
     ],
   },

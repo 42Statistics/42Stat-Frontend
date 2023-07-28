@@ -22,6 +22,7 @@ import {
   WhiteMediumText,
   WhiteText,
 } from '@shared/ui-kit';
+import { mq } from '@shared/utils/facepaint/mq';
 import { titleCase } from '@shared/utils/formatters/titleCase';
 import { getTitleWithLogin } from '@shared/utils/getTitleWithLogin';
 import { Desktop, TabletAndBelow } from '@shared/utils/react-responsive/Device';
@@ -119,7 +120,7 @@ export const UserProfile = () => {
           <Avatar size="xl" src={imgUrl} alt={ALT.AVATAR_OF(login)} />
           <WhiteH3BoldText>{titleCase(grade)}</WhiteH3BoldText>
           <WhiteH3BoldText>{titleCase(displayname)}</WhiteH3BoldText>
-          <WhiteMediumText>
+          <WhiteMediumText style={{}}>
             {truncate(titleWithLogin, { length: 52 })}
           </WhiteMediumText>
           <HStack align="baseline">
@@ -133,7 +134,7 @@ export const UserProfile = () => {
           <VStack>
             <Avatar size="2xl" src={imgUrl} alt={ALT.AVATAR_OF(login)} />
           </VStack>
-          <VStack w="20rem" spacing="1rem" style={{ textAlign: 'center' }}>
+          <VStack w="15rem" spacing="1rem" style={{ textAlign: 'center' }}>
             <WhiteH3BoldText>{titleCase(grade)}</WhiteH3BoldText>
             <WhiteH3BoldText>{titleCase(displayname)}</WhiteH3BoldText>
             <WhiteMediumText>
@@ -156,13 +157,17 @@ type LayoutProps = {
 };
 
 const Layout = styled.div<LayoutProps>`
-  height: 100%;
   background-image: ${({ backgroundUrl, backgroundFallbackUrl }) =>
     `url(${backgroundUrl}), url(${backgroundFallbackUrl})`};
   background-size: cover;
   background-position: center;
   border-radius: ${({ theme }) => theme.radius.md};
   user-select: none;
+  width: 100%;
+
+  ${mq({
+    height: ['24rem', '24rem', '12rem'],
+  })}
 `;
 
 const UserProfileLoader = styled.div`
@@ -171,4 +176,8 @@ const UserProfileLoader = styled.div`
   background-size: cover;
   background-position: center;
   border-radius: ${({ theme }) => theme.radius.md};
+
+  ${mq({
+    height: ['24rem', '24rem', '12rem'],
+  })}
 `;

@@ -12,6 +12,7 @@ import {
   WhiteH2BoldText,
   WhiteText,
 } from '@shared/ui-kit';
+import { mq } from '@shared/utils/facepaint/mq';
 import { timeDiffStringFormatter } from '@shared/utils/formatters/timeDiffStringFormatter';
 import { getBlackholeDaysLeft } from '@shared/utils/getBlackholeDaysLeft';
 import { getTimeDiffFromNow } from '@shared/utils/getTimeDiffFromNow';
@@ -136,6 +137,9 @@ const Layout = styled(Center)`
   background-size: cover;
   border-radius: ${({ theme }) => theme.radius.md};
   padding: 0 4rem;
-  height: 100%;
   user-select: none;
+
+  ${mq({
+    height: ['18rem', '16rem', '14rem'],
+  })}
 `;

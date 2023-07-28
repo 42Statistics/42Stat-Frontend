@@ -6,7 +6,7 @@ export const homeCoalitionDashboardRows: DashboardRowType[] = [
     items: [
       {
         rowSpan: 2,
-        elementId: 17,
+        elementId: 16,
       },
     ],
   },
@@ -15,11 +15,11 @@ export const homeCoalitionDashboardRows: DashboardRowType[] = [
     items: [
       {
         rowSpan: 2,
-        elementId: 18,
+        elementId: 17,
       },
       {
         rowSpan: 2,
-        elementId: 19,
+        elementId: 18,
       },
     ],
   },

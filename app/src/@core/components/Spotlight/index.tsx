@@ -116,5 +116,5 @@ export const Spotlight = ({ isOpen, onClose }: SpotlightProps) => {
 
 const Layout = styled.div`
   width: 70rem;
-  max-width: calc(100vw - 2rem);
+  max-width: calc(100vw - 4rem);
 `;

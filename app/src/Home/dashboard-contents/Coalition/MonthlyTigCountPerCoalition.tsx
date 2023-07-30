@@ -11,7 +11,7 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { TextMax } from '@shared/components/TextMax';
-import { Center, H3Text, VStack } from '@shared/ui-kit';
+import { Body1Text, Center, VStack } from '@shared/ui-kit';
 import { numberWithUnitFormatter } from '@shared/utils/formatters';
 import dayjs from 'dayjs';
 import { capitalize } from 'lodash-es';
@@ -90,12 +90,12 @@ export const MonthlyTigCountPerCoalition = () => {
                     <CoalitionMark coalition={coalition} />
                   </td>
                   <td>
-                    <H3Text>{capitalize(coalition.name)}</H3Text>
+                    <Body1Text>{capitalize(coalition.name)}</Body1Text>
                   </td>
                   <td>
                     <TextMax
                       isMax={value !== 0 && max === value}
-                      fontSize={theme.fonts.size.h3}
+                      fontSize={theme.fonts.size.body1}
                     >
                       {numberWithUnitFormatter(value, unit)}
                     </TextMax>

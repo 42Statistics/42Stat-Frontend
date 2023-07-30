@@ -164,6 +164,7 @@ const Layout = styled.div<LayoutProps>`
   border-radius: ${({ theme }) => theme.radius.md};
   user-select: none;
   width: 100%;
+  transition: all 0.2s;
 
   ${mq({
     height: ['24rem', '24rem', '12rem'],

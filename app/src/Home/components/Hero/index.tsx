@@ -5,13 +5,8 @@ import { gql } from '@shared/__generated__';
 import space_background from '@shared/assets/space-background.webp';
 import { ApolloErrorView } from '@shared/components/ApolloErrorView';
 import { ApolloNotFoundView } from '@shared/components/ApolloNotFoundView';
-import {
-  Center,
-  Loader,
-  VStack,
-  WhiteH2BoldText,
-  WhiteText,
-} from '@shared/ui-kit';
+import { Loader, VStack, WhiteH2BoldText, WhiteText } from '@shared/ui-kit';
+import { CustomBox } from '@shared/ui-kit-styled';
 import { mq } from '@shared/utils/facepaint/mq';
 import { timeDiffStringFormatter } from '@shared/utils/formatters/timeDiffStringFormatter';
 import { getBlackholeDaysLeft } from '@shared/utils/getBlackholeDaysLeft';
@@ -46,24 +41,27 @@ const GET_MY_INFO = gql(/* GraphQL */ `
 export const Hero = () => {
   const { loading, error, data } = useQuery(GET_MY_INFO);
 
-  if (loading)
+  if (loading) {
     return (
       <Layout>
         <Loader />
       </Layout>
     );
-  if (error)
+  }
+  if (error) {
     return (
       <Layout>
         <ApolloErrorView message={error.message} />
       </Layout>
     );
-  if (!data)
+  }
+  if (!data) {
     return (
       <Layout>
         <ApolloNotFoundView />
       </Layout>
     );
+  }
 
   const {
     userPreview,
@@ -132,7 +130,11 @@ export const Hero = () => {
   );
 };
 
-const Layout = styled(Center)`
+const Layout = styled(CustomBox)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
   background-image: url(${space_background});
   background-size: cover;
   border-radius: ${({ theme }) => theme.radius.md};

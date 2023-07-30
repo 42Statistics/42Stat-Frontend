@@ -1,7 +1,7 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
-import { CaptionText, Center, H3MediumText, VStack } from '@shared/ui-kit';
+import { Body1MediumText, CaptionText, Center, VStack } from '@shared/ui-kit';
 
 export type DashboardContentProps = PropsWithReactElementChildren<{
   title?: string;
@@ -21,7 +21,7 @@ export const DashboardContent = ({
     <Layout>
       <VStack w="100%" h="100%" spacing="2rem" align="start">
         <VStack w="100%" align="start" style={{ marginLeft: '1rem' }}>
-          {title ? <H3MediumText>{title}</H3MediumText> : null}
+          {title ? <Body1MediumText>{title}</Body1MediumText> : null}
           {description ? (
             <CaptionText color={theme.colors.mono.gray300}>
               {description}

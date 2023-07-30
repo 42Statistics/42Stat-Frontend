@@ -37,7 +37,7 @@ const Layout = styled.div`
   background-color: ${({ theme }) => theme.colors.mono.white};
   padding: 1rem 3rem;
   border-radius: ${({ theme }) => theme.radius.sm};
-  outline-offset: -5px;
+  outline-offset: -4px;
 
   &:focus-within {
     outline: ${({ theme }) => `2px solid ${theme.colors.primary.default}`};

@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
 import { UserTeam } from '@shared/__generated__/graphql';
 import { ROUTES } from '@shared/constants/ROUTES';
-import { PrimaryText, Text } from '@shared/ui-kit';
+import { PrimaryMediumText, Text } from '@shared/ui-kit';
+import { rgba } from 'emotion-rgba';
 import { Link } from 'react-router-dom';
 import { DateDiffWithStatus } from './DateDiffWithStatus';
 import { ResultWithStatus } from './ResultWithStatus';
@@ -19,7 +20,7 @@ export const TeamInfoTable = ({ teams }: TeamInfoTableProps) => {
         <tr>
           {heads.map((head, index) => (
             <th key={index}>
-              <PrimaryText>{head}</PrimaryText>
+              <PrimaryMediumText>{head}</PrimaryMediumText>
             </th>
           ))}
         </tr>
@@ -38,7 +39,7 @@ export const TeamInfoTable = ({ teams }: TeamInfoTableProps) => {
           }) => (
             <tr key={id}>
               <td>
-                <Link to={`${ROUTES.PROJECT_ROOT}/${projectPreview.name}`}>
+                <Link to={ROUTES.PROJECT_DETAIL_OF(projectPreview.name)}>
                   <Text>{projectPreview.name}</Text>
                 </Link>
               </td>
@@ -75,9 +76,12 @@ const Table = styled.table`
   white-space: nowrap;
 
   th {
+    position: sticky;
+    top: 0;
     text-align: center;
     padding: 0.8rem 2rem;
     vertical-align: middle;
+    background-color: ${({ theme }) => rgba(theme.colors.mono.white, 0.9)};
   }
 
   td {

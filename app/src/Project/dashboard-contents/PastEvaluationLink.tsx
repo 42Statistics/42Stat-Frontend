@@ -1,7 +1,7 @@
 import { DashboardContent } from '@shared/components/DashboardContent';
 import { ROUTES } from '@shared/constants/ROUTES';
-import { AccentH3BoldText } from '@shared/ui-kit';
-import { Link, useParams } from 'react-router-dom';
+import { CustomLink } from '@shared/ui-kit-styled/CustomLink';
+import { useParams } from 'react-router-dom';
 
 export const PastEvaluationLink = () => {
   const { projectName } = useParams() as { projectName: string };
@@ -9,9 +9,9 @@ export const PastEvaluationLink = () => {
 
   return (
     <DashboardContent title={title}>
-      <Link to={`${ROUTES.EVALLOG}?projectName=${projectName}`}>
-        <AccentH3BoldText>Past Evaluations</AccentH3BoldText>
-      </Link>
+      <CustomLink to={`${ROUTES.EVALLOG}?projectName=${projectName}`}>
+        Past Evaluations
+      </CustomLink>
     </DashboardContent>
   );
 };

@@ -5,8 +5,8 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
-import { AccentH3BoldText } from '@shared/ui-kit';
-import { Link, useParams } from 'react-router-dom';
+import { CustomLink } from '@shared/ui-kit-styled/CustomLink';
+import { useParams } from 'react-router-dom';
 import { GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME } from '../dashboard-contents-queries/GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME';
 
 export const ProjectUrl = () => {
@@ -34,9 +34,9 @@ export const ProjectUrl = () => {
 
   return (
     <DashboardContent title={title}>
-      <Link to={url} target="_blank" rel="noreferrer">
-        <AccentH3BoldText>바로가기</AccentH3BoldText>
-      </Link>
+      <CustomLink to={url} target="_blank" rel="noreferrer">
+        바로가기
+      </CustomLink>
     </DashboardContent>
   );
 };

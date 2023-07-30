@@ -31,7 +31,6 @@ export const LeaderboardLevelTabResult = ({
     me,
     totalRanking: { nodes },
   } = data.getLeaderboardLevel.byDateTemplate.data;
-  const unit = '';
 
-  return <Leaderboard me={me} list={nodes} unit={unit} fixedNumber={2} />;
+  return <Leaderboard me={me} list={nodes} fixedNumber={2} />;
 };

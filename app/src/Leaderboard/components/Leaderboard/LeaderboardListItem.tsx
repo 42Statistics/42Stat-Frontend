@@ -6,10 +6,8 @@ import { ALT } from '@shared/constants/accessibility/ALT';
 import {
   Avatar,
   Body1MediumText,
-  BoldText,
   CaptionText,
   Clickable,
-  H3BoldText,
   H3MediumText,
   HStack,
   MediumText,
@@ -23,7 +21,7 @@ import { useNavigate } from 'react-router-dom';
 
 type LeaderboardListItemProps = {
   item: UserRank;
-  unit: string;
+  unit?: string;
   isMe?: boolean;
   fixedNumber?: number;
 };
@@ -47,16 +45,16 @@ export const LeaderboardListItem = ({
     <li style={{ width: '100%' }}>
       <Layout
         isMe={isMe}
-        onClick={() => navigate(`${ROUTES.PROFILE_ROOT}/${login}`)}
+        onClick={() => navigate(ROUTES.PROFILE_OF(login))}
         tabIndex={0}
       >
         <TabletAndAbove>
           <HStack w="100%" spacing="4rem">
             <HStack w="5rem">
-              <H3BoldText color={color}>{rank}</H3BoldText>
+              <Body1MediumText color={color}>{rank}</Body1MediumText>
             </HStack>
             <Avatar src={imgUrl} alt={ALT.AVATAR_OF(login)} />
-            <Body1MediumText color={color}>{login}</Body1MediumText>
+            <MediumText color={color}>{login}</MediumText>
             <Spacer />
             <HStack align="baseline" spacing="0.2rem">
               <H3MediumText color={color}>
@@ -71,7 +69,7 @@ export const LeaderboardListItem = ({
         <Mobile>
           <HStack w="100%" spacing="2.4rem">
             <HStack w="2rem">
-              <BoldText color={color}>{rank}</BoldText>
+              <MediumText color={color}>{rank}</MediumText>
             </HStack>
             <Avatar size="sm" src={imgUrl} alt={ALT.AVATAR_OF(login)} />
             <MediumText color={color}>{login}</MediumText>
@@ -82,7 +80,7 @@ export const LeaderboardListItem = ({
                   ? numberWithUnitFormatter(value)
                   : `${value.toFixed(2)}`}
               </H3MediumText>
-              <CaptionText color={color}>{unit}</CaptionText>
+              {unit ? <CaptionText color={color}>{unit}</CaptionText> : null}
             </HStack>
           </HStack>
         </Mobile>
@@ -101,7 +99,7 @@ const Layout = styled(Clickable)<LayoutProps>`
     padding: ['0.5rem 2rem', '0.5rem 3rem'],
   })}
   cursor: pointer;
-  border-radius: ${({ theme }) => theme.radius.sm};
+  border-radius: ${({ theme }) => theme.radius.xs};
   background-color: ${({ isMe, theme }) =>
     isMe && theme.colors.primary.default} !important; // FIXME: !important
   user-select: ${({ isMe }) => isMe && 'none'};

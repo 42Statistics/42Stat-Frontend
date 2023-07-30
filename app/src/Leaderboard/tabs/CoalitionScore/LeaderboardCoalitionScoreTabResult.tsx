@@ -31,7 +31,6 @@ export const LeaderboardCoalitionScoreTabResult = ({
     me,
     totalRanking: { nodes },
   } = data.getLeaderboardScore.byDateTemplate.data;
-  const unit = '';
 
-  return <Leaderboard me={me} list={nodes} unit={unit} />;
+  return <Leaderboard me={me} list={nodes} />;
 };

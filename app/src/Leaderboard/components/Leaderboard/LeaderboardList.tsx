@@ -7,7 +7,7 @@ import { LeaderboardListItem } from './LeaderboardListItem';
 type LeaderboardListProps = {
   list: UserRank[];
   me?: UserRank | null;
-  unit: string;
+  unit?: string;
   fixedNumber?: number;
 };
 
@@ -38,7 +38,6 @@ const Layout = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.3rem;
   width: 100%;
   height: 100%;
 `;

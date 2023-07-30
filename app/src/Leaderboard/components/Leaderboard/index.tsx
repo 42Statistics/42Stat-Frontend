@@ -6,7 +6,7 @@ import { LeaderboardListItem } from './LeaderboardListItem';
 type LeaderboardProps = {
   list: UserRank[];
   me?: UserRank | null;
-  unit: string;
+  unit?: string;
   fixedNumber?: number;
 };
 export const Leaderboard = ({

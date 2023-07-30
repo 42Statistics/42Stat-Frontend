@@ -38,11 +38,10 @@ export const Level = () => {
       userProfile: { level: myLevel },
     },
   } = data;
-  const unit = '';
 
   return (
     <DashboardContent title={title}>
-      <NumberVersus number1={level} number2={myLevel} unit={unit} />
+      <NumberVersus number1={level} number2={myLevel} />
     </DashboardContent>
   );
 };

@@ -30,13 +30,13 @@ const GET_PREFERRED_CLUSTER_BY_DATE_TEMPLATE_BY_LOGIN = gql(/* GraphQL */ `
 `);
 
 export const PreferredCluster = () => {
-  const { username } = useParams() as { username: string };
+  const { login } = useParams() as { login: string };
 
   const title = '주 접속 클러스터';
   const { loading, error, data } = useQuery(
     GET_PREFERRED_CLUSTER_BY_DATE_TEMPLATE_BY_LOGIN,
     {
-      variables: { login: username, dateTemplate: DateTemplate.CurrMonth },
+      variables: { login, dateTemplate: DateTemplate.CurrMonth },
     },
   );
 

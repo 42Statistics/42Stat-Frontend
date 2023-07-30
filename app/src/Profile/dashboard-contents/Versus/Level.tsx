@@ -12,12 +12,12 @@ import { useParams } from 'react-router-dom';
 import { GET_VERSUS_ZERO_COST } from '../../dashboard-contents-queries/GET_VERSUS_ZERO_COST';
 
 export const Level = () => {
-  const { username } = useParams() as { username: string };
+  const { login } = useParams() as { login: string };
   const user = useAtomValue(userAtom);
 
   const title = '레벨';
   const { loading, error, data } = useQuery(GET_VERSUS_ZERO_COST, {
-    variables: { login1: username, login2: user.login },
+    variables: { login1: login, login2: user.login },
   });
 
   if (loading) {

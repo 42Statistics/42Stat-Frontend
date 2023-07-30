@@ -20,7 +20,7 @@ export const UserRankListItem = ({ item, unit }: UserRankListItemProps) => {
       rank={rank}
       center={<Avatar src={imgUrl} alt={ALT.AVATAR_OF(login)} />}
       name={login}
-      link={`${ROUTES.PROFILE_ROOT}/${login}`}
+      link={ROUTES.PROFILE_OF(login)}
       value={value}
       unit={unit}
     />

@@ -18,13 +18,13 @@ const GET_AVERAGE_FEEDBACK_LENGTH_BY_LOGIN = gql(/* GraphQL */ `
 `);
 
 export const AverageFeedbackLength = () => {
-  const { username } = useParams() as { username: string };
+  const { login } = useParams() as { login: string };
 
   const title = '평균 피드백 길이';
   const { loading, error, data } = useQuery(
     GET_AVERAGE_FEEDBACK_LENGTH_BY_LOGIN,
     {
-      variables: { login: username },
+      variables: { login },
     },
   );
 

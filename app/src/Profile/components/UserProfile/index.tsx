@@ -4,7 +4,6 @@ import { Coalition } from '@shared/__generated__/graphql';
 import coalition_black_cover from '@shared/assets/coalition/cover/coalition-black-cover.jpg';
 import coalition_gam_cover from '@shared/assets/coalition/cover/coalition-gam-cover.jpg';
 import coalition_gon_cover from '@shared/assets/coalition/cover/coalition-gon-cover.jpg';
-import coalition_gray_cover from '@shared/assets/coalition/cover/coalition-gray-cover.png';
 import coalition_gun_cover from '@shared/assets/coalition/cover/coalition-gun-cover.jpg';
 import coalition_lee_cover from '@shared/assets/coalition/cover/coalition-lee-cover.jpg';
 
@@ -28,6 +27,7 @@ import { getTitleWithLogin } from '@shared/utils/getTitleWithLogin';
 import { Desktop, TabletAndBelow } from '@shared/utils/react-responsive/Device';
 import { truncate } from 'lodash-es';
 import { useParams } from 'react-router-dom';
+import { UserProfileLoader } from './UserProfileLoader';
 
 export const GET_USER_PROFILE_BY_LOGIN = gql(/* GraphQL */ `
   query GetUserProfileByLogin($login: String!) {
@@ -55,10 +55,10 @@ export const GET_USER_PROFILE_BY_LOGIN = gql(/* GraphQL */ `
 `);
 
 export const UserProfile = () => {
-  const { username } = useParams() as { username: string };
+  const { login } = useParams() as { login: string };
 
   const { loading, error, data } = useQuery(GET_USER_PROFILE_BY_LOGIN, {
-    variables: { login: username },
+    variables: { login },
   });
 
   if (loading) {
@@ -71,7 +71,7 @@ export const UserProfile = () => {
     return <DashboardContentNotFound />; // TODO: UI
   }
 
-  const { login, imgUrl, titles, coalition, grade, level, displayname } =
+  const { imgUrl, titles, coalition, grade, level, displayname } =
     data.getPersonalGeneral.userProfile;
   const titleWithLogin = getTitleWithLogin(titles, login);
 
@@ -164,18 +164,6 @@ const Layout = styled.div<LayoutProps>`
   border-radius: ${({ theme }) => theme.radius.md};
   user-select: none;
   width: 100%;
-
-  ${mq({
-    height: ['24rem', '24rem', '12rem'],
-  })}
-`;
-
-const UserProfileLoader = styled.div`
-  height: 100%;
-  background-image: url(${coalition_gray_cover});
-  background-size: cover;
-  background-position: center;
-  border-radius: ${({ theme }) => theme.radius.md};
 
   ${mq({
     height: ['24rem', '24rem', '12rem'],

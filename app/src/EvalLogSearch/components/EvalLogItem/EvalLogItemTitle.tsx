@@ -19,7 +19,7 @@ export const EvalLogItemTitle = ({ header }: EvalLogItemTitleProps) => {
   const { corrector, teamPreview, beginAt, projectPreview, flag } = header;
   return (
     <HStack w="100%" justify="start" wrap="wrap">
-      <Link to={`${ROUTES.PROFILE_ROOT}/${corrector.login}`}>
+      <Link to={ROUTES.PROFILE_OF(corrector.login)}>
         <PrimaryBoldText>{corrector.login}</PrimaryBoldText>
       </Link>
       <Text>님이&nbsp;</Text>
@@ -31,7 +31,7 @@ export const EvalLogItemTitle = ({ header }: EvalLogItemTitleProps) => {
       </Text>
       <Spacer />
       <HStack spacing="1rem">
-        <Link to={`${ROUTES.PROJECT_ROOT}/${projectPreview.name}`}>
+        <Link to={ROUTES.PROJECT_DETAIL_OF(projectPreview.name)}>
           <BoldText>{projectPreview.name}</BoldText>
         </Link>
         <FlagLabel name={flag.name} isPositive={flag.isPositive} />

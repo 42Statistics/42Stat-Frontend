@@ -31,7 +31,7 @@ export const DesktopNavProfile = ({
 
   return (
     <Link
-      to={`${ROUTES.PROFILE_ROOT}/${user.login}`}
+      to={ROUTES.PROFILE_OF(user.login)}
       style={{ width: '100%' }}
       aria-label={ARIA_LABEL_LINK.PROFILE_OF(user.login)}
     >

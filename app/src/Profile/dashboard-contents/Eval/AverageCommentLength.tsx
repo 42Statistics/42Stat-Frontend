@@ -18,13 +18,13 @@ const GET_AVERAGE_COMMENT_LENGTH_BY_LOGIN = gql(/* GraphQL */ `
 `);
 
 export const AverageCommentLength = () => {
-  const { username } = useParams() as { username: string };
+  const { login } = useParams() as { login: string };
 
   const title = '평균 코멘트 길이';
   const { loading, error, data } = useQuery(
     GET_AVERAGE_COMMENT_LENGTH_BY_LOGIN,
     {
-      variables: { login: username },
+      variables: { login },
     },
   );
 

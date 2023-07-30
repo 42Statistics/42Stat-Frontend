@@ -36,7 +36,7 @@ const GET_LOGTIME_BY_DATE_TEMPLATE_VERSUS = gql(/* GraphQL */ `
 `);
 
 export const TotalLogtime = () => {
-  const { username } = useParams() as { username: string };
+  const { login } = useParams() as { login: string };
   const user = useAtomValue(userAtom);
 
   const title = '누적 접속 시간';
@@ -44,7 +44,7 @@ export const TotalLogtime = () => {
     GET_LOGTIME_BY_DATE_TEMPLATE_VERSUS,
     {
       variables: {
-        login1: username,
+        login1: login,
         login2: user.login,
         dateTemplate: DateTemplate.Total,
       },

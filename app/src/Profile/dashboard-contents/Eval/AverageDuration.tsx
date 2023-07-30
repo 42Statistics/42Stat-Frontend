@@ -18,12 +18,12 @@ const GET_AVERAGE_DURATION_BY_LOGIN = gql(/* GraphQL */ `
 `);
 
 export const AverageDuration = () => {
-  const { username } = useParams() as { username: string };
+  const { login } = useParams() as { login: string };
 
   const title = '평균 평가 시간';
   const description = '평가자일 때';
   const { loading, error, data } = useQuery(GET_AVERAGE_DURATION_BY_LOGIN, {
-    variables: { login: username },
+    variables: { login },
   });
 
   if (loading) {

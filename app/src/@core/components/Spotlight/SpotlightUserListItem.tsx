@@ -17,7 +17,7 @@ export const SpotlightUserListItem = ({
     <SpotlightListItem
       left={<Avatar size="xs" src={imgUrl} alt={ALT.AVATAR_OF(login)} />}
       name={login}
-      link={`${ROUTES.PROFILE_ROOT}/${login}`}
+      link={ROUTES.PROFILE_OF(login)}
       index={index}
     />
   );

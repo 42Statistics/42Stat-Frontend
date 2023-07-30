@@ -11,13 +11,13 @@ import { useParams } from 'react-router-dom';
 import { GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN } from '../../dashboard-contents-queries/GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN';
 
 export const CoalitionScore = () => {
-  const { username } = useParams() as { username: string };
+  const { login } = useParams() as { login: string };
 
   const title = '코알리숑 스코어';
   const { loading, error, data } = useQuery(
     GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN,
     {
-      variables: { login: username },
+      variables: { login },
     },
   );
 

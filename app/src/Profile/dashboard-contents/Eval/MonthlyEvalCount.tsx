@@ -33,14 +33,14 @@ const GET_EVAL_COUNT_BY_DATE_TEMPLATE_BY_LOGIN = gql(/* GraphQL */ `
 `);
 
 export const MonthlyEvalCount = () => {
-  const { username } = useParams() as { username: string };
+  const { login } = useParams() as { login: string };
 
   const title = '월간 평가 횟수';
   const { loading, error, data } = useQuery(
     GET_EVAL_COUNT_BY_DATE_TEMPLATE_BY_LOGIN,
     {
       variables: {
-        login: username,
+        login,
         currDateTemplate: DateTemplate.CurrMonth,
         lastDateTemplate: DateTemplate.LastMonth,
       },

@@ -24,12 +24,12 @@ const GET_DESTINY_RANKING_BY_LOGIN = gql(/* GraphQL */ `
 `);
 
 export const DestinyRanking = () => {
-  const { username } = useParams() as { username: string };
+  const { login } = useParams() as { login: string };
 
   const title = '인연 스코어';
-  const description = `${username}의 여행 동반자들`;
+  const description = `${login}의 여행 동반자들`;
   const { loading, error, data } = useQuery(GET_DESTINY_RANKING_BY_LOGIN, {
-    variables: { login: username, limit: 5 },
+    variables: { login, limit: 5 },
   });
 
   if (loading) {

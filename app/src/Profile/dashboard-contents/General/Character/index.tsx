@@ -27,13 +27,13 @@ const GET_CHARACTER_BY_LOGIN = gql(/* GraphQL */ `
 `);
 
 export const Character = () => {
-  const { username } = useParams() as { username: string };
+  const { login } = useParams() as { login: string };
 
   const title = '이 유저를 캐릭터로 표현한다면?';
   const description = '과제 점수, 레벨 증가, 접속 시간, 평가 횟수 기준';
 
   const { loading, error, data } = useQuery(GET_CHARACTER_BY_LOGIN, {
-    variables: { login: username },
+    variables: { login },
   });
 
   if (loading) {

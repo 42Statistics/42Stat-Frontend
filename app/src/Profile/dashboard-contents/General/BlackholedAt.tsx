@@ -18,13 +18,13 @@ import { useParams } from 'react-router-dom';
 
 export const BlackholedAt = () => {
   const theme = useTheme();
-  const { username } = useParams() as { username: string };
+  const { login } = useParams() as { login: string };
 
   const title = 'Black Hole Absorption';
   const { loading, error, data } = useQuery(
     GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN,
     {
-      variables: { login: username },
+      variables: { login },
     },
   );
 

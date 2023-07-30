@@ -18,11 +18,11 @@ const GET_TOTAL_DURATION_BY_LOGIN = gql(/* GraphQL */ `
 `);
 
 export const TotalDuration = () => {
-  const { username } = useParams() as { username: string };
+  const { login } = useParams() as { login: string };
 
   const title = '누적 평가 시간';
   const { loading, error, data } = useQuery(GET_TOTAL_DURATION_BY_LOGIN, {
-    variables: { login: username },
+    variables: { login },
   });
 
   if (loading) {

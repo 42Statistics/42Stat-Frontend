@@ -59,13 +59,13 @@ const GET_RANKINGS_VERSUS = gql(/* GraphQL */ `
 `);
 
 export const Rankings = () => {
-  const { username } = useParams() as { username: string };
+  const { login } = useParams() as { login: string };
   const user = useAtomValue(userAtom);
 
   const title = '랭킹 백분위수 비교';
   const description = '레벨, 코알리숑 포인트, 평가 횟수 누적/월간 랭킹';
   const { loading, error, data } = useQuery(GET_RANKINGS_VERSUS, {
-    variables: { login1: username, login2: user.login },
+    variables: { login1: login, login2: user.login },
   });
 
   if (loading) {
@@ -141,7 +141,7 @@ export const Rankings = () => {
   ];
   const series = [
     {
-      name: username,
+      name: login,
       data: [
         levelRankPercentile,
         totalScoreRankPercentile,

@@ -2,23 +2,28 @@ import NotFoundPage from '@/Error/404';
 import FtOAuthPage from '@/FtOAuth';
 import FtOAuthRedirectPage from '@/FtOAuthRedirect';
 import { HomePageSkeleton } from '@/Home/components/HomePageSkeleton';
-import { ProfilePageSkeleton } from '@/Profile/components/ProfilePageSkeleton';
+import LaederboardPage from '@/Leaderboard';
+import LeaderboardCoalitionScoreTab from '@/Leaderboard/tabs/CoalitionScore';
+import LeaderboardEvalCountTab from '@/Leaderboard/tabs/EvalCount';
+import LeaderboardExpIncrementTab from '@/Leaderboard/tabs/ExpIncrement';
+import LeaderboardLevelTab from '@/Leaderboard/tabs/Level';
+import ProfilePage from '@/Profile';
+import ProfileEvalTab from '@/Profile/tabs/Eval';
+import ProfileGeneralTab from '@/Profile/tabs/General';
+import ProfileVersusTab from '@/Profile/tabs/Versus';
 import SettingPage from '@/Setting';
 import { AuthGuard } from '@core/guards/AuthGuard';
 import { NoAuthGuard } from '@core/guards/NoAuthGuard';
-import { UserMiddleware } from '@core/guards/UserMiddleware';
-import { ROUTES } from '@shared/constants/ROUTES';
 import { LandingLayout } from '@core/layouts/LandingLayout';
 import { MainLayout } from '@core/layouts/MainLayout';
+import { ROUTES } from '@shared/constants/ROUTES';
 import { DeferredComponent } from '@shared/ui-kit';
 import { Suspense, lazy } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 const LandingPage = lazy(() => import('@/Landing'));
 const HomePage = lazy(() => import('@/Home'));
-const LeaderboardPage = lazy(() => import('@/Leaderboard'));
 const EvalLogSearchPage = lazy(() => import('@/EvalLogSearch'));
-const ProfilePage = lazy(() => import('@/Profile'));
 const ProjectDetailPage = lazy(() => import('@/Project/ProjectDetailPage'));
 
 export const AppRoutes = () => {
@@ -44,62 +49,58 @@ export const AppRoutes = () => {
         />
       </Route>
       <Route element={<AuthGuard />}>
-        <Route element={<UserMiddleware />}>
-          <Route element={<MainLayout />}>
+        <Route element={<MainLayout />}>
+          <Route
+            path={ROUTES.HOME}
+            element={
+              <Suspense
+                fallback={
+                  <DeferredComponent>
+                    <HomePageSkeleton />
+                  </DeferredComponent>
+                }
+              >
+                <HomePage />
+              </Suspense>
+            }
+          />
+          <Route path={ROUTES.PROFILE} element={<ProfilePage />}>
+            <Route index element={<Navigate to="general" />} />
             <Route
-              path={ROUTES.HOME}
-              element={
-                <Suspense
-                  fallback={
-                    <DeferredComponent>
-                      <HomePageSkeleton />
-                    </DeferredComponent>
-                  }
-                >
-                  <HomePage />
-                </Suspense>
-              }
+              path={ROUTES.PROFILE_GENERAL_TAB}
+              element={<ProfileGeneralTab />}
             />
             <Route
-              path={ROUTES.PROFILE_USERNAME_ROOT}
-              element={
-                <Suspense
-                  fallback={
-                    <DeferredComponent>
-                      <ProfilePageSkeleton />
-                    </DeferredComponent>
-                  }
-                >
-                  <ProfilePage />
-                </Suspense>
-              }
+              path={ROUTES.PROFILE_EVAL_TAB}
+              element={<ProfileEvalTab />}
             />
             <Route
-              path={ROUTES.PROFILE_USERNAME}
-              element={
-                <Suspense
-                  fallback={
-                    <DeferredComponent>
-                      <ProfilePageSkeleton />
-                    </DeferredComponent>
-                  }
-                >
-                  <ProfilePage />
-                </Suspense>
-              }
+              path={ROUTES.PROFILE_VERSUS_TAB}
+              element={<ProfileVersusTab />}
             />
-            <Route
-              path={ROUTES.LEADERBOARD_ROOT}
-              element={<LeaderboardPage />}
-            />
-            <Route path={ROUTES.LEADERBOARD} element={<LeaderboardPage />} />
-            <Route path={ROUTES.EVALLOG} element={<EvalLogSearchPage />} />
-            <Route
-              path={ROUTES.PROJECT_DETAIL}
-              element={<ProjectDetailPage />}
-            />
-            <Route path={ROUTES.SETTING} element={<SettingPage />} />
           </Route>
+          <Route path={ROUTES.LEADERBOARD} element={<LaederboardPage />}>
+            <Route index element={<Navigate to={ROUTES.LEADERBOARD_LEVEL} />} />
+            <Route
+              path={ROUTES.LEADERBOARD_LEVEL}
+              element={<LeaderboardLevelTab />}
+            />
+            <Route
+              path={ROUTES.LEADERBOARD_EXP_INCREMENT}
+              element={<LeaderboardExpIncrementTab />}
+            />
+            <Route
+              path={ROUTES.LEADERBOARD_COALITION_SCORE}
+              element={<LeaderboardCoalitionScoreTab />}
+            />
+            <Route
+              path={ROUTES.LEADERBOARD_EVAL_COUNT}
+              element={<LeaderboardEvalCountTab />}
+            />
+          </Route>
+          <Route path={ROUTES.EVALLOG} element={<EvalLogSearchPage />} />
+          <Route path={ROUTES.PROJECT_DETAIL} element={<ProjectDetailPage />} />
+          <Route path={ROUTES.SETTING} element={<SettingPage />} />
         </Route>
       </Route>
       <Route element={<LandingLayout />}>

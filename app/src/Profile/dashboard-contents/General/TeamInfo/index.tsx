@@ -31,10 +31,10 @@ const GET_TEAM_INFO_BY_LOGIN = gql(/* GraphQL */ `
 `);
 
 export const TeamInfo = () => {
-  const { username } = useParams() as { username: string };
+  const { login } = useParams() as { login: string };
 
   const { loading, error, data } = useQuery(GET_TEAM_INFO_BY_LOGIN, {
-    variables: { login: username },
+    variables: { login },
   });
 
   if (loading) {

@@ -13,7 +13,7 @@ export const TabletNavProfile = ({ imgUrl }: TabletNavProfileProps) => {
   const user = useAtomValue(userAtom);
 
   return (
-    <Link to={`${ROUTES.PROFILE_ROOT}/${user.login}`}>
+    <Link to={ROUTES.PROFILE_OF(user.login)}>
       <Avatar size="sm" src={imgUrl} alt={ALT.AVATAR_OF(user.login)} />
     </Link>
   );

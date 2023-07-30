@@ -30,13 +30,13 @@ const GET_LEVEL_RECORDS_VERSUS = gql(/* GraphQL */ `
 `);
 
 export const LevelRecords = () => {
-  const { username } = useParams() as { username: string };
+  const { login } = useParams() as { login: string };
   const user = useAtomValue(userAtom);
 
   const title = '레벨 증가 그래프';
   const description = '본과정 시작일로부터 최대 24개월';
   const { loading, error, data } = useQuery(GET_LEVEL_RECORDS_VERSUS, {
-    variables: { login1: username, login2: user.login },
+    variables: { login1: login, login2: user.login },
   });
 
   if (loading) {
@@ -71,7 +71,7 @@ export const LevelRecords = () => {
 
   const series = [
     {
-      name: username,
+      name: login,
       data: levelSeries,
     },
     {

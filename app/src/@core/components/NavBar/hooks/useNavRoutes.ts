@@ -35,14 +35,14 @@ export const useNavRoutes = () => {
     PROFILE: {
       text: '내 정보',
       abbr: '내 정보',
-      path: `${ROUTES.PROFILE_ROOT}/${user.login}`,
+      path: ROUTES.PROFILE_OF(user.login),
       icon: MdPerson,
       iconFocused: MdPersonFill,
     },
     LEADERBOARD: {
       text: '랭킹',
       abbr: '랭킹',
-      path: ROUTES.LEADERBOARD_ROOT,
+      path: ROUTES.LEADERBOARD,
       icon: MdLeaderboard,
       iconFocused: MdLeaderboardFill,
     },

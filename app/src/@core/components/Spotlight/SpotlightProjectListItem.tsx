@@ -16,7 +16,7 @@ export const SpotlightProjectListItem = ({
     <SpotlightListItem
       left={<FtLogo width={20} height={20} />}
       name={name}
-      link={`${ROUTES.PROJECT_ROOT}/${name}`}
+      link={ROUTES.PROJECT_DETAIL_OF(name)}
       index={index}
     />
   );

@@ -9,7 +9,7 @@ export const TextProject = ({ projectName }: TextProjectProps) => {
   return (
     <TextDefault
       text={projectName}
-      link={`${ROUTES.PROJECT_ROOT}/${projectName}`}
+      link={ROUTES.PROJECT_DETAIL_OF(projectName)}
     />
   );
 };

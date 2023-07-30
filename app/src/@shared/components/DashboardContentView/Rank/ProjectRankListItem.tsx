@@ -20,7 +20,7 @@ export const ProjectRankListItem = ({
     <RankListItem
       rank={rank}
       name={name}
-      link={`${ROUTES.PROJECT_ROOT}/${name}`}
+      link={ROUTES.PROJECT_DETAIL_OF(name)}
       value={value}
       unit={unit}
     />

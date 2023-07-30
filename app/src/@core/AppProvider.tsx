@@ -1,7 +1,6 @@
 import { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
 import { BrowserRouter as Router } from 'react-router-dom';
 import ApolloProvider from './providers/ApolloProvider';
-import DayjsProvider from './providers/DayjsProvider';
 import ErrorBoundaryProvider from './providers/ErrorBoundaryProvider';
 import HelmetProvider from './providers/HelmetProvider';
 import ModalProvider from './providers/ModalProvider';
@@ -13,15 +12,13 @@ export const AppProvider = ({ children }: PropsWithReactElementChildren) => {
     <ErrorBoundaryProvider>
       <ApolloProvider>
         <HelmetProvider>
-          <DayjsProvider>
-            <ThemeProvider>
-              <Router>
-                <ScrollToTop>
-                  <ModalProvider>{children}</ModalProvider>
-                </ScrollToTop>
-              </Router>
-            </ThemeProvider>
-          </DayjsProvider>
+          <ThemeProvider>
+            <Router>
+              <ScrollToTop>
+                <ModalProvider>{children}</ModalProvider>
+              </ScrollToTop>
+            </Router>
+          </ThemeProvider>
         </HelmetProvider>
       </ApolloProvider>
     </ErrorBoundaryProvider>

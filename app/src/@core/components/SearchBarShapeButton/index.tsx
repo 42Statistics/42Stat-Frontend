@@ -35,10 +35,9 @@ const Layout = styled(Clickable)`
   padding: 1rem 1.6rem;
   border-radius: ${({ theme }) => theme.radius.md};
   border: 1px solid ${({ theme }) => theme.colors.mono.gray50};
-  background-color: ${({ theme }) => theme.colors.mono.white};
   transition: all 0.2s;
 
   &:hover {
-    border: 1px solid ${({ theme }) => theme.colors.mono.gray100};
+    border: 1px solid ${({ theme }) => theme.colors.mono.gray200};
   }
 `;

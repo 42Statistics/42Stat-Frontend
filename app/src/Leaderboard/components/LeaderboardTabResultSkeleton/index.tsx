@@ -1,5 +1,4 @@
-import { useTheme } from '@emotion/react';
-import { Skeleton, VStack } from '@shared/ui-kit';
+import { VStack } from '@shared/ui-kit';
 
 export const LeaderboardTabResultSkeleton = () => {
   return (
@@ -15,7 +14,5 @@ export const LeaderboardTabResultSkeleton = () => {
 };
 
 const LeaderboardListItemSkeleteon = () => {
-  const theme = useTheme();
-
-  return <Skeleton h="5rem" radius={theme.radius.sm} />;
+  return <div style={{ width: '100%', height: '5rem' }} />;
 };

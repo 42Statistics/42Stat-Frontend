@@ -7,7 +7,7 @@ export const DashboardRow = styled.div`
     gridTemplateColumns: ['repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(3, 1fr)'],
   })}
   grid-auto-rows: 20rem;
-  column-gap: 1rem;
-  row-gap: 1rem;
+  column-gap: 1.6rem;
+  row-gap: 1.6rem;
   width: 100%;
 `;

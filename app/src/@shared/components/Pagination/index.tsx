@@ -26,9 +26,9 @@ export const Pagination = ({
     (_, i) => start + i,
   );
 
+  const isStartButtonDisabled = currPageNumber === 1;
   const isBackButtonDisabled = start === 1;
   const isForwardButtonDisabled = pageNumberList.includes(totalPageNumber);
-  const isStartButtonDisabled = currPageNumber === 1;
   const isEndButtonDisabled = currPageNumber === totalPageNumber;
 
   const handleClickBackButton = () => {
@@ -49,6 +49,10 @@ export const Pagination = ({
   const handleClickEndButton = () => {
     setPageNumber(totalPageNumber);
   };
+
+  if (totalPageNumber === 0) {
+    return null;
+  }
 
   return (
     <HStack spacing="1rem">

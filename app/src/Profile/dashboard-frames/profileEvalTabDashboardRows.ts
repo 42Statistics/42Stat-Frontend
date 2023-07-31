@@ -26,7 +26,7 @@ export const profileEvalTabDashboardRows: DashboardRowType[] = [
       },
       {
         rowSpan: 1,
-        elementId: 5,
+        elementId: 9,
       },
     ],
   },
@@ -43,11 +43,11 @@ export const profileEvalTabDashboardRows: DashboardRowType[] = [
       },
       {
         rowSpan: 1,
-        elementId: 6,
+        elementId: 5,
       },
       {
         rowSpan: 1,
-        elementId: 9,
+        elementId: 6,
       },
     ],
   },

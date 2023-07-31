@@ -1,8 +1,14 @@
+import { profileVersusTabDashboardContents } from '@/Profile/dashboard-frames/profileVersusTabDashboardContents';
+import { profileVersusTabDashboardRows } from '@/Profile/dashboard-frames/profileVersusTabDashboardRows';
 import { Dashboard } from '@shared/components/Dashboard';
-import { useProfileVersusTabDashboard } from '../../dashboard-hooks/useProfileVersusTabDashboard';
 
 const ProfileVersusTab = () => {
-  return <Dashboard {...useProfileVersusTabDashboard()} />;
+  return (
+    <Dashboard
+      contents={profileVersusTabDashboardContents}
+      rows={profileVersusTabDashboardRows}
+    />
+  );
 };
 
 export default ProfileVersusTab;

@@ -1,8 +1,14 @@
+import { profileGeneralTabDashboardContents } from '@/Profile/dashboard-frames/profileGeneralTabDashboardContents';
+import { profileGeneralTabDashboardRows } from '@/Profile/dashboard-frames/profileGeneralTabDashboardRows';
 import { Dashboard } from '@shared/components/Dashboard';
-import { useProfileGeneralTabDashboard } from '../../dashboard-hooks/useProfileGeneralTabDashboard';
 
 const ProfileGeneralTab = () => {
-  return <Dashboard {...useProfileGeneralTabDashboard()} />;
+  return (
+    <Dashboard
+      contents={profileGeneralTabDashboardContents}
+      rows={profileGeneralTabDashboardRows}
+    />
+  );
 };
 
 export default ProfileGeneralTab;

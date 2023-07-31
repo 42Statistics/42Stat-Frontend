@@ -9,7 +9,8 @@ import { withHead } from '@shared/hoc/withHead';
 import { VStack } from '@shared/ui-kit';
 import { useParams } from 'react-router-dom';
 import { ProjectIntroduction } from './components/ProjectIntroduction';
-import { useProjectDetailPageDashboard } from './dashboard-hooks/useProjectDetailPageDashboard';
+import { projectDetailPageDashboardContents } from './dashboard-frames/projectDetailPageDashboardContents';
+import { projectDetailPageDashboardRows } from './dashboard-frames/projectDetailPageDashboardRows';
 
 const GET_PROJECT_EXISTS = gql(/* GraphQL */ `
   query GetProjectExists($projectName: String!) {
@@ -27,8 +28,6 @@ const ProjectDetailPage = () => {
     },
   });
 
-  const projectDetailPageDashboard = useProjectDetailPageDashboard();
-
   if (loading) {
     return null; // TODO: Skeleton
   }
@@ -42,7 +41,10 @@ const ProjectDetailPage = () => {
   return (
     <VStack w="100%" spacing="4rem">
       <ProjectIntroduction />
-      <Dashboard {...projectDetailPageDashboard} />
+      <Dashboard
+        contents={projectDetailPageDashboardContents}
+        rows={projectDetailPageDashboardRows}
+      />
     </VStack>
   );
 };

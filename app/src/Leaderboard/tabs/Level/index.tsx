@@ -1,3 +1,11 @@
+import {
+  parseDateTemplate,
+  stringifyDateTemplate,
+} from '@/Leaderboard/utils/parseDateTemplate';
+import {
+  parsePageNumber,
+  stringifyPageNumber,
+} from '@/Leaderboard/utils/parsePageNumber';
 import { useLazyQuery } from '@apollo/client';
 import { gql } from '@shared/__generated__';
 import { DateTemplate } from '@shared/__generated__/graphql';
@@ -6,6 +14,7 @@ import { useSegmentedControl } from '@shared/hooks/useSegmentedControl';
 import { SegmentedControl, VStack } from '@shared/ui-kit';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { LeaderboardLevelTabResult } from './LeaderboardLevelTabResult';
 
 const GET_LEADERBOARD_LEVEL = gql(/* GraphQL */ `
@@ -52,17 +61,22 @@ const LeaderboardLevelTab = () => {
   const SIZE_PER_PAGE = 50;
   const device = useDeviceType();
   const [search, result] = useLazyQuery(GET_LEADERBOARD_LEVEL);
-  const [pageNumber, setPageNumber] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<number>(0);
-  const [dateTemplate, setDateTemplate] = useState<DateTemplate>(
-    DateTemplate.Total,
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [dateTemplate] = useState<DateTemplate>(
+    parseDateTemplate(searchParams.get('dateTemplate'), DateTemplate.Total),
   );
+  const [pageNumber, setPageNumber] = useState<number>(
+    parsePageNumber(searchParams.get('pageNumber')),
+  );
+
   const options = [
     {
       label: '누적',
       value: 'total',
     },
   ];
+
   const { controlRef, segments } = useSegmentedControl(options);
 
   useEffect(() => {
@@ -83,8 +97,15 @@ const LeaderboardLevelTab = () => {
         dateTemplate,
       },
     });
-    setPageNumber(pageNumber);
-  }, [dateTemplate, search, pageNumber]);
+    setSearchParams({
+      dateTemplate: stringifyDateTemplate(dateTemplate),
+      pageNumber: stringifyPageNumber(pageNumber),
+    });
+  }, [dateTemplate, search, pageNumber, setSearchParams]);
+
+  useEffect(() => {
+    setPageNumber(1);
+  }, [dateTemplate]);
 
   return (
     <VStack w="100%" spacing="6rem">

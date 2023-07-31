@@ -26,7 +26,7 @@ const GET_SCORE_RECORDS_PER_COALITION = gql(/* GraphQL */ `
 `);
 
 export const ScoreRecordsPerCoalition = () => {
-  const title = '역대 코알리숑 스코어 변동 추이';
+  const title = '코알리숑 스코어 변동 추이';
   const { loading, error, data } = useQuery(GET_SCORE_RECORDS_PER_COALITION);
 
   if (loading) {

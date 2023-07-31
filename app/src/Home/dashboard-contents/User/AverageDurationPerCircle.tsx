@@ -21,7 +21,7 @@ const GET_AVERAGE_DURATION_PER_CIRCLE = gql(/* GraphQL */ `
 `);
 
 export const AverageDurationPerCircle = () => {
-  const title = 'N서클 통과할 때까지의 누적 기간';
+  const title = 'N서클 통과할 때까지의 평균 기간';
   const description = '본과정 시작일 기준';
   const { loading, error, data } = useQuery(GET_AVERAGE_DURATION_PER_CIRCLE);
 

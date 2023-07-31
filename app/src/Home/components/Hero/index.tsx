@@ -75,7 +75,7 @@ export const Hero = () => {
 
   const getIndividualizedMessage = () => {
     if (isNewMember) {
-      return '🎉🎉 Member 달성 축하드려요 🎉🎉';
+      return '🎉🎉 멤버 달성 축하드려요 🎉🎉';
     }
     if (
       recentValidatedTeam != null &&

@@ -23,7 +23,7 @@ const GET_CURR_REGISTERED_COUNT_RANKING = gql(/* GraphQL */ `
 `);
 
 export const CurrRegisteredCountRanking = () => {
-  const title = '지금 가장 많은 사람이 참여하는 과제는?';
+  const title = '지금 사람들이 참여하는 과제는?';
   const { loading, error, data } = useQuery(GET_CURR_REGISTERED_COUNT_RANKING, {
     variables: { limit: 5 },
   });

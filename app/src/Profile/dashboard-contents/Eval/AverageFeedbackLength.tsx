@@ -20,7 +20,7 @@ const GET_AVERAGE_FEEDBACK_LENGTH_BY_LOGIN = gql(/* GraphQL */ `
 export const AverageFeedbackLength = () => {
   const { login } = useParams() as { login: string };
 
-  const title = '평균 피드백 길이';
+  const title = '평균 피드백 글자수';
   const { loading, error, data } = useQuery(
     GET_AVERAGE_FEEDBACK_LENGTH_BY_LOGIN,
     {

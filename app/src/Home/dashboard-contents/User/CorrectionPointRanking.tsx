@@ -23,7 +23,7 @@ const GET_CORRECTION_POINT_RANKING = gql(/* GraphQL */ `
 `);
 
 export const CorrectionPointRanking = () => {
-  const title = '보유 평가 포인트 랭킹';
+  const title = '평가 포인트 랭킹';
   const { loading, error, data } = useQuery(GET_CORRECTION_POINT_RANKING, {
     variables: { limit: 5 },
   });

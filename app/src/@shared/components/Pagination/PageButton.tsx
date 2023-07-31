@@ -58,4 +58,10 @@ const Layout = styled(Clickable)<LayoutProps>`
   align-items: center;
   background-color: ${({ theme, isCurrPage }) =>
     isCurrPage && theme.colors.primary.default};
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: ${({ theme, isCurrPage }) =>
+      !isCurrPage && theme.colors.primary.light};
+  }
 `;

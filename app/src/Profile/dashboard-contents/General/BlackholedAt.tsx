@@ -55,13 +55,13 @@ export const BlackholedAt = () => {
         Svg: SmileySleepySvg,
         text: `${daysLeft.toLocaleString()} days left`,
       };
-    if (daysLeft >= 100)
+    if (daysLeft >= 42)
       return {
         color: '#3db618',
         Svg: SmileySmile1Svg,
         text: `${daysLeft.toLocaleString()} days left`,
       };
-    if (daysLeft >= 15)
+    if (daysLeft >= 19)
       return {
         color: '#d7a900',
         Svg: SmileyScaredSvg,
@@ -76,7 +76,7 @@ export const BlackholedAt = () => {
     if (daysLeft === 0)
       return { color: '#ff0303', Svg: SmileySadSvg, text: 'a few hours left' };
     return {
-      color: theme.colors.mono.black,
+      color: '#ff0303',
       Svg: null,
       text: 'Absorbed by Black Hole',
     };

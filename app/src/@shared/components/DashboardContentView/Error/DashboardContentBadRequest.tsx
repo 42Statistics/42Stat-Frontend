@@ -1,4 +1,4 @@
-import { ApolloErrorView } from '@shared/components/ApolloErrorView';
+import { ApolloErrorView } from '@shared/components/ApolloError/ApolloErrorView';
 import {
   DashboardContent,
   DashboardContentProps,

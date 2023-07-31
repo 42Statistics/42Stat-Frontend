@@ -92,7 +92,7 @@ const FtOAuthRedirectPage = () => {
   }, [googleData, googleLoading, googleError, navigate, setUser]);
 
   return (
-    <Center>
+    <Center h="100vh">
       <Loader />
     </Center>
   );

@@ -1,3 +1,11 @@
+import {
+  parseDateTemplate,
+  stringifyDateTemplate,
+} from '@/Leaderboard/utils/parseDateTemplate';
+import {
+  parsePageNumber,
+  stringifyPageNumber,
+} from '@/Leaderboard/utils/parsePageNumber';
 import { useLazyQuery } from '@apollo/client';
 import { gql } from '@shared/__generated__';
 import { DateTemplate } from '@shared/__generated__/graphql';
@@ -6,6 +14,7 @@ import { useSegmentedControl } from '@shared/hooks/useSegmentedControl';
 import { SegmentedControl, VStack } from '@shared/ui-kit';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { LeaderboardEvalCountTabResult } from './LeaderboardEvalCountTabResult';
 
 const GET_LEADERBOARD_EVAL_COUNT = gql(/* GraphQL */ `
@@ -52,10 +61,13 @@ const LeaderboardEvalCountTab = () => {
   const SIZE_PER_PAGE = 50;
   const device = useDeviceType();
   const [search, result] = useLazyQuery(GET_LEADERBOARD_EVAL_COUNT);
-  const [pageNumber, setPageNumber] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<number>(0);
+  const [searchParams, setSearchParams] = useSearchParams();
   const [dateTemplate, setDateTemplate] = useState<DateTemplate>(
-    DateTemplate.CurrWeek,
+    parseDateTemplate(searchParams.get('dateTemplate'), DateTemplate.CurrWeek),
+  );
+  const [pageNumber, setPageNumber] = useState<number>(
+    parsePageNumber(searchParams.get('pageNumber')),
   );
 
   const options = [
@@ -102,7 +114,15 @@ const LeaderboardEvalCountTab = () => {
         dateTemplate,
       },
     });
-  }, [dateTemplate, pageNumber, search]);
+    setSearchParams({
+      dateTemplate: stringifyDateTemplate(dateTemplate),
+      pageNumber: stringifyPageNumber(pageNumber),
+    });
+  }, [dateTemplate, search, pageNumber, setSearchParams]);
+
+  useEffect(() => {
+    setPageNumber(1);
+  }, [dateTemplate]);
 
   return (
     <VStack w="100%" spacing="6rem">

@@ -17,7 +17,7 @@ const GET_AVERAGE_COMMENT_LENGTH = gql(/* GraphQL */ `
 `);
 
 export const AverageCommentLength = () => {
-  const title = '평균 코멘트 길이';
+  const title = '평균 코멘트 글자수';
   const { loading, error, data } = useQuery(GET_AVERAGE_COMMENT_LENGTH);
 
   if (loading) {

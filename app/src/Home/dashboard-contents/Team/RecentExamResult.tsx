@@ -33,7 +33,7 @@ const GET_RECENT_EXAM_RESULT = gql(/* GraphQL */ `
 `);
 
 export const RecentExamResult = () => {
-  const title = '직전 회차 시험 Rank 별 통과율';
+  const title = '직전 회차 시험 통과율';
   const { loading, error, data } = useQuery(GET_RECENT_EXAM_RESULT, {
     variables: { after: 1 },
   });

@@ -24,7 +24,7 @@ const GET_MEMBER_RATE = gql(/* GraphQL */ `
 `);
 
 export const MemberRate = () => {
-  const title = 'Member 비율';
+  const title = '멤버 비율';
   const description = '블랙홀 유저 포함';
 
   const { loading, error, data } = useQuery(GET_MEMBER_RATE);

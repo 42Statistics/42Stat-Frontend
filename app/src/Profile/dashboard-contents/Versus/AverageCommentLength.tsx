@@ -26,7 +26,7 @@ export const AverageCommentLength = () => {
   const { login } = useParams() as { login: string };
   const user = useAtomValue(userAtom);
 
-  const title = '평균 코멘트 길이';
+  const title = '평균 코멘트 글자수';
   const { loading, error, data } = useQuery(GET_AVERAGE_COMMENT_LENGTH_VERSUS, {
     variables: { login1: login, login2: user.login },
   });

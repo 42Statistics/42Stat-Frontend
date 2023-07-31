@@ -10,19 +10,19 @@ export const profileGeneralTabDashboardRows: DashboardRowType[] = [
       },
       {
         rowSpan: 1,
-        elementId: 2,
-      },
-      {
-        rowSpan: 1,
         elementId: 6,
       },
       {
         rowSpan: 1,
-        elementId: 1,
+        elementId: 4,
       },
       {
         rowSpan: 1,
-        elementId: 3,
+        elementId: 2,
+      },
+      {
+        rowSpan: 1,
+        elementId: 5,
       },
       {
         rowSpan: 1,
@@ -45,7 +45,7 @@ export const profileGeneralTabDashboardRows: DashboardRowType[] = [
     items: [
       {
         rowSpan: 1,
-        elementId: 5,
+        elementId: 1,
       },
       {
         rowSpan: 2,
@@ -57,7 +57,7 @@ export const profileGeneralTabDashboardRows: DashboardRowType[] = [
       },
       {
         rowSpan: 1,
-        elementId: 4,
+        elementId: 3,
       },
     ],
   },

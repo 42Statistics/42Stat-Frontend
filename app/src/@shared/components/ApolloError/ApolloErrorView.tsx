@@ -7,7 +7,7 @@ export type ApolloErrorViewProps = {
 };
 
 export const ApolloErrorView = ({
-  message = 'Not Found',
+  message = 'Something went wrong',
 }: ApolloErrorViewProps) => {
   const theme = useTheme();
 

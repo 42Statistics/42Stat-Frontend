@@ -1,8 +1,14 @@
+import { profileEvalTabDashboardContents } from '@/Profile/dashboard-frames/profileEvalTabDashboardContents';
+import { profileEvalTabDashboardRows } from '@/Profile/dashboard-frames/profileEvalTabDashboardRows';
 import { Dashboard } from '@shared/components/Dashboard';
-import { useProfileEvalTabDashboard } from '../../dashboard-hooks/useProfileEvalTabDashboard';
 
 const ProfileEvalTab = () => {
-  return <Dashboard {...useProfileEvalTabDashboard()} />;
+  return (
+    <Dashboard
+      contents={profileEvalTabDashboardContents}
+      rows={profileEvalTabDashboardRows}
+    />
+  );
 };
 
 export default ProfileEvalTab;

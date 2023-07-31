@@ -5,7 +5,7 @@ import {
   FindProjectPreviewQuery,
   FindUserPreviewQuery,
 } from '@shared/__generated__/graphql';
-import { ApolloErrorView } from '@shared/components/ApolloErrorView';
+import { ApolloErrorView } from '@shared/components/ApolloError/ApolloErrorView';
 import { Center, H3Text, VStack } from '@shared/ui-kit';
 import { SpotlightProjectSection } from './SpotlightProjectSection';
 import { SpotlightUserSection } from './SpotlightUserSection';

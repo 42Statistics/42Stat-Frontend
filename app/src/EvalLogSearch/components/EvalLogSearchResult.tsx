@@ -2,8 +2,8 @@ import { ApolloError } from '@apollo/client';
 import { Footer } from '@core/components/Footer';
 import { useTheme } from '@emotion/react';
 import { EvalLogEdge } from '@shared/__generated__/graphql';
-import { ApolloErrorView } from '@shared/components/ApolloErrorView';
-import { Center, Skeleton, Text, VStack } from '@shared/ui-kit';
+import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
+import { Skeleton, VStack } from '@shared/ui-kit';
 import React from 'react';
 import { EvalLogList } from './EvalLogList';
 
@@ -22,14 +22,10 @@ export const EvalLogSearchResult = ({
   error,
   infiniteScrollRef,
 }: EvalLogSearchResultProps) => {
-  const theme = useTheme();
-
   if (error) {
     return (
       <>
-        <Center h="20rem">
-          <ApolloErrorView message={error.message} />
-        </Center>
+        <FullPageApolloErrorView message={error.message} />
         <Footer />
       </>
     );
@@ -37,9 +33,7 @@ export const EvalLogSearchResult = ({
   if (end && evalLogEdges.length === 0) {
     return (
       <>
-        <Center h="20rem">
-          <Text color={theme.colors.mono.gray300}>검색 결과가 없습니다.</Text>
-        </Center>
+        <FullPageApolloErrorView message="검색 결과가 없습니다." />
         <Footer />
       </>
     );

@@ -5,7 +5,7 @@ import {
   GetLeaderboardCoalitionScoreQuery,
   GetLeaderboardCoalitionScoreQueryVariables,
 } from '@shared/__generated__/graphql';
-import { ApolloErrorView } from '@shared/components/ApolloErrorView';
+import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
 
 type LeaderboardCoalitionScoreTabResultProps = {
   result: QueryResult<
@@ -21,7 +21,7 @@ export const LeaderboardCoalitionScoreTabResult = ({
     return <LeaderboardTabResultSkeleton />;
   }
   if (error) {
-    return <ApolloErrorView message={error.message} />;
+    return <FullPageApolloErrorView message={error.message} />;
   }
   if (!data) {
     return <LeaderboardTabResultSkeleton />;

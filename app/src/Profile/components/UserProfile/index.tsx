@@ -29,7 +29,7 @@ import { truncate } from 'lodash-es';
 import { useParams } from 'react-router-dom';
 import { UserProfileLoader } from './UserProfileLoader';
 
-export const GET_USER_PROFILE_BY_LOGIN = gql(/* GraphQL */ `
+const GET_USER_PROFILE_BY_LOGIN = gql(/* GraphQL */ `
   query GetUserProfileByLogin($login: String!) {
     getPersonalGeneral(login: $login) {
       userProfile {

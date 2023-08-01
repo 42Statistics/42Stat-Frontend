@@ -133,7 +133,7 @@ const LevelRecordsChart = ({ series }: LevelRecordsChartProps) => {
         formatter: (value) => `${value}개월 차`,
       },
       y: {
-        formatter: (value) => (value === null ? '미정' : value.toFixed(2)),
+        formatter: (value) => (value === null ? '-' : value.toFixed(2)),
       },
     },
     responsive: [

@@ -23,8 +23,14 @@ export const PieChart = ({
         // startAngle: -270,
         // endAngle: 90,
         dataLabels: {
-          offset: -15,
+          offset: -20,
         },
+      },
+    },
+    dataLabels: {
+      style: {
+        fontSize: '1.3rem',
+        fontWeight: 400,
       },
     },
     legend: {

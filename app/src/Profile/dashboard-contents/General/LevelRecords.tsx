@@ -1,3 +1,4 @@
+import { padWithNullValues } from '@/Profile/utils/padWithNullValues';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
 import { gql } from '@shared/__generated__';
@@ -8,6 +9,7 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
+import { BREAKPOINT } from '@shared/constants/BREAKPOINT';
 import { useParams } from 'react-router-dom';
 
 const GET_LEVEL_RECORDS_BY_LOGIN = gql(/* GraphQL */ `
@@ -57,19 +59,26 @@ export const LevelRecords = () => {
   const { userLevelRecords, promoLevelRecords, promoMemberLevelRecords } =
     data.getPersonalGeneral;
 
-  const userLevelSeries = userLevelRecords.map(({ monthsPassed, level }) => ({
-    x: monthsPassed,
-    y: level,
-  }));
-  const promoLevelSeries = promoLevelRecords.map(({ monthsPassed, level }) => ({
-    x: monthsPassed,
-    y: level,
-  }));
-  const promoMemberLevelSeries = promoMemberLevelRecords.map(
-    ({ monthsPassed, level }) => ({
+  const userLevelSeries = padWithNullValues(
+    userLevelRecords.map(({ monthsPassed, level }) => ({
       x: monthsPassed,
       y: level,
-    }),
+    })),
+    25,
+  );
+  const promoLevelSeries = padWithNullValues(
+    promoLevelRecords.map(({ monthsPassed, level }) => ({
+      x: monthsPassed,
+      y: level,
+    })),
+    25,
+  );
+  const promoMemberLevelSeries = padWithNullValues(
+    promoMemberLevelRecords.map(({ monthsPassed, level }) => ({
+      x: monthsPassed,
+      y: level,
+    })),
+    25,
   );
 
   const series = [
@@ -82,7 +91,7 @@ export const LevelRecords = () => {
       data: promoLevelSeries,
     },
     {
-      name: '동일 기수 중 멤버 평균',
+      name: '동일 기수 멤버 평균',
       data: promoMemberLevelSeries,
     },
   ];
@@ -101,6 +110,17 @@ type LevelRecordsChartProps = {
 const LevelRecordsChart = ({ series }: LevelRecordsChartProps) => {
   const theme = useTheme();
 
+  const mobileOptions: ApexCharts.ApexOptions = {
+    xaxis: {
+      tickAmount: 4,
+    },
+    yaxis: {
+      labels: {
+        show: false,
+      },
+    },
+  };
+
   const options: ApexCharts.ApexOptions = {
     colors: [
       theme.colors.primary.default,
@@ -108,20 +128,32 @@ const LevelRecordsChart = ({ series }: LevelRecordsChartProps) => {
       theme.colors.accent.default,
     ],
     xaxis: {
+      min: 0,
+      max: 24,
+      tickAmount: 8,
       labels: {
-        formatter: (value) => `${value}`,
+        formatter: (value) => `${value}개월`,
       },
     },
     yaxis: {
       labels: {
-        formatter: (value) => `lv. ${value}`,
+        formatter: (value) => value.toFixed(0),
       },
     },
     tooltip: {
       x: {
         formatter: (value) => `${value}개월 차`,
       },
+      y: {
+        formatter: (value) => (value === null ? '미정' : value.toFixed(2)),
+      },
     },
+    responsive: [
+      {
+        breakpoint: BREAKPOINT.MOBILE,
+        options: mobileOptions,
+      },
+    ],
   };
 
   return <LineChart series={series} options={options} />;

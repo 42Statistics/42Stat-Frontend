@@ -7,7 +7,8 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
-import { numberWithUnitFormatter } from '@shared/utils/formatters';
+import { kiloFormatter } from '@shared/utils/formatters/kiloFormatter';
+import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 
 const GET_SCORE_RECORDS_PER_COALITION = gql(/* GraphQL */ `
   query GetScoreRecordsPerCoalition {
@@ -70,6 +71,14 @@ const ScoreRecordsPerCoalitionChart = ({
   series,
   colors,
 }: ScoreRecordsPerCoalitionChartProps) => {
+  const data = series.flatMap(
+    (elem) => elem.data as { x: number; y: number }[],
+  );
+  const [min, max] = [
+    Math.min(...data.map(({ y }) => y)),
+    Math.max(...data.map(({ y }) => y)),
+  ];
+
   const options: ApexCharts.ApexOptions = {
     chart: {
       width: '100%',
@@ -77,19 +86,26 @@ const ScoreRecordsPerCoalitionChart = ({
     xaxis: {
       type: 'datetime',
       labels: {
+        show: false,
         datetimeUTC: false,
         format: 'yy.MM.',
       },
     },
     colors: colors,
     yaxis: {
+      min: Math.floor(min / 10000) * 10000,
+      max: Math.ceil(max / 10000) * 10000,
       labels: {
-        formatter: (value) => numberWithUnitFormatter(value, 'P'),
+        formatter: (value) => kiloFormatter(value, 0),
       },
+      tickAmount: 4,
     },
     tooltip: {
       x: {
         format: 'yyyy년 M월',
+      },
+      y: {
+        formatter: (value) => numberWithUnitFormatter(value, 'P'),
       },
     },
   };

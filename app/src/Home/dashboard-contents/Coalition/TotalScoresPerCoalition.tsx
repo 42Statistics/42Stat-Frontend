@@ -7,7 +7,8 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
-import { millionFormatter } from '@shared/utils/formatters';
+import { kiloFormatter } from '@shared/utils/formatters/kiloFormatter';
+import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 
 const GET_TOTAL_SCORES_PER_COALITION = gql(/* GraphQL */ `
   query GetTotalScoresPerCoalition {
@@ -49,7 +50,7 @@ export const TotalScoresPerCoalition = () => {
 
   const series: ApexAxisChartSeries = [
     {
-      name: 'Coalition 합산 점수',
+      name: '',
       data: seriesData,
     },
   ];
@@ -76,6 +77,9 @@ const TotalScoresPerCoalitionChart = ({
   series,
   colors,
 }: TotalScoresPerCoalitionChartProps) => {
+  const data = series[0].data as number[];
+  const [min, max] = [Math.min(...data), Math.max(...data)];
+
   const options: ApexCharts.ApexOptions = {
     plotOptions: {
       bar: {
@@ -83,20 +87,31 @@ const TotalScoresPerCoalitionChart = ({
         distributed: true,
       },
     },
-
+    legend: {
+      show: false,
+    },
     colors: colors,
-
     xaxis: {
       categories,
     },
     yaxis: {
-      min: 2500000,
+      min: Math.floor((min - (max + 50000 - min)) / 100000) * 100000, // 최솟값이 50%에 위치하도록
+      max: Math.ceil((max + 50000) / 100000) * 100000,
+      tickAmount: 4,
       labels: {
-        formatter: (value) => millionFormatter(value),
+        formatter: (value) => kiloFormatter(value, 2),
       },
     },
     dataLabels: {
-      formatter: (value) => millionFormatter(value as number), // FIXME: Type Assertion
+      formatter: (value) => kiloFormatter(value as number, 2), // FIXME: Type Assertion
+    },
+    tooltip: {
+      y: {
+        formatter: (value) => numberWithUnitFormatter(value, 'P'),
+      },
+      marker: {
+        show: false,
+      },
     },
   };
 

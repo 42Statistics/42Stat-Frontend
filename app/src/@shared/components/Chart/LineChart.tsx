@@ -17,7 +17,8 @@ export const LineChart = ({
   const lineChartOptions: ApexCharts.ApexOptions = {
     colors: [theme.colors.primary.default],
     stroke: {
-      width: 1.5,
+      curve: 'smooth',
+      width: 2.5,
     },
   };
 

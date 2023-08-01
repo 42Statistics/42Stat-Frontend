@@ -7,7 +7,7 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
-import { numberWithUnitFormatter } from '@shared/utils/formatters';
+import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 import { capitalize } from 'lodash-es';
 
 const GET_MEMBER_RATE = gql(/* GraphQL */ `
@@ -67,7 +67,6 @@ const MemberRateChart = ({ labels, series }: MemberRateChartProps) => {
       y: {
         formatter: (value) => numberWithUnitFormatter(value, '명'),
       },
-      fillSeriesColor: false,
     },
   };
 

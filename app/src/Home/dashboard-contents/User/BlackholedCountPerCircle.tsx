@@ -7,7 +7,7 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
-import { numberWithUnitFormatter } from '@shared/utils/formatters';
+import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 
 const GET_BLACKHOLED_COUNT_PER_CIRCLE = gql(/* GraphQL */ `
   query GetBlackholedCountPerCircle {

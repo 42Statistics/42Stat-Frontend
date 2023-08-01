@@ -1,5 +1,5 @@
 import { useTheme } from '@emotion/react';
-import { snakeCaseFormatter } from '@shared/utils/formatters';
+import { snakeCaseFormatter } from '@shared/utils/formatters/snakeCaseFormatter';
 import { EvalLogLabel } from '../EvalLogLabel';
 
 type FlagLabelProps = {

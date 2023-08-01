@@ -1,6 +1,6 @@
 import { TeamStatus } from '@shared/__generated__/graphql';
 import { Text } from '@shared/ui-kit';
-import { timeDiffStringFormatter } from '@shared/utils/formatters';
+import { timeDiffStringFormatter } from '@shared/utils/formatters/timeDiffStringFormatter';
 
 type DateDiffWithStatusProps = {
   date: Date;

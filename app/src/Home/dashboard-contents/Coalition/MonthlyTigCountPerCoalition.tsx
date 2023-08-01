@@ -12,7 +12,7 @@ import {
 } from '@shared/components/DashboardContentView/Error';
 import { TextMax } from '@shared/components/TextMax';
 import { Body1Text, Center, VStack } from '@shared/ui-kit';
-import { numberWithUnitFormatter } from '@shared/utils/formatters';
+import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 import dayjs from 'dayjs';
 import { capitalize } from 'lodash-es';
 

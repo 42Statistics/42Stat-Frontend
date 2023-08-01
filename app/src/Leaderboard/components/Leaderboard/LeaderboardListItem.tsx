@@ -15,7 +15,7 @@ import {
   Text,
 } from '@shared/ui-kit';
 import { mq } from '@shared/utils/facepaint/mq';
-import { numberWithUnitFormatter } from '@shared/utils/formatters';
+import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 import { Mobile, TabletAndAbove } from '@shared/utils/react-responsive/Device';
 import { useNavigate } from 'react-router-dom';
 

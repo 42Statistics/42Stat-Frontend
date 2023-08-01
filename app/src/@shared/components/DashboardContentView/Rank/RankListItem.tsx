@@ -1,6 +1,6 @@
 import { useTheme } from '@emotion/react';
 import { Body1Text, Center, H3Text, HStack, Text } from '@shared/ui-kit';
-import { numberWithUnitFormatter } from '@shared/utils/formatters';
+import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 import { Link } from 'react-router-dom';
 
 type RankListItemProps = {

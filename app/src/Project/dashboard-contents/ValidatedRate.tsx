@@ -9,7 +9,7 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { H3Text } from '@shared/ui-kit';
-import { numberWithUnitFormatter } from '@shared/utils/formatters';
+import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 import { useParams } from 'react-router-dom';
 
 const GET_VALIDATED_RATE_BY_PROJECT_NAME = gql(/* GraphQL */ `

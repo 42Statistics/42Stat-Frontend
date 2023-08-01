@@ -35,6 +35,9 @@ export const DashboardContent = ({
               {description}
             </CaptionText>
           ) : null}
+          {title && !description ? (
+            <Body1MediumText>&nbsp;</Body1MediumText>
+          ) : null}
         </VStack>
         {type === 'Default' ? <Center>{children}</Center> : null}
         {type === 'ApexCharts' ? (

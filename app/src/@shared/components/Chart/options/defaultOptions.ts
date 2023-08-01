@@ -23,12 +23,4 @@ export const defaultOptions: ApexCharts.ApexOptions = {
       },
     },
   },
-  legend: {
-    onItemClick: {
-      toggleDataSeries: false,
-    },
-    onItemHover: {
-      highlightDataSeries: false,
-    },
-  },
 };

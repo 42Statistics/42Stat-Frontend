@@ -7,7 +7,7 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
-import { numberWithUnitFormatter } from '@shared/utils/formatters';
+import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 
 const GET_ALIVE_USER_COUNT_RECORDS = gql(/* GraphQL */ `
   query GetAliveUserCountRecords {
@@ -41,7 +41,7 @@ export const AliveUserCountRecords = () => {
   }));
   const series: ApexAxisChartSeries = [
     {
-      name: '여행 중인 유저',
+      name: '',
       data: seriesData,
     },
   ];
@@ -64,6 +64,7 @@ const ActiveUserCountRecordsChart = ({
     xaxis: {
       type: 'datetime',
       labels: {
+        show: false,
         format: 'yy.MM.',
       },
     },
@@ -78,6 +79,9 @@ const ActiveUserCountRecordsChart = ({
       },
       y: {
         formatter: (value) => numberWithUnitFormatter(value, '명'),
+      },
+      marker: {
+        show: false,
       },
     },
   };

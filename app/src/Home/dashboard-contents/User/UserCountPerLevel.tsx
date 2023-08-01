@@ -7,7 +7,7 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
-import { numberWithUnitFormatter } from '@shared/utils/formatters';
+import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 
 const GET_USER_COUNT_PER_LEVEL = gql(/* GraphQL */ `
   query GetUserCountPerLevel {
@@ -41,7 +41,7 @@ export const UserCountPerLevel = () => {
 
   const series: ApexAxisChartSeries = [
     {
-      name: '인원수',
+      name: '',
       data: seriesData,
     },
   ];
@@ -81,7 +81,10 @@ const UserCountPerLevelChart = ({
     },
     tooltip: {
       x: {
-        formatter: (value) => `Level ${value}`,
+        formatter: (value) => `레벨 ${value}`,
+      },
+      marker: {
+        show: false,
       },
     },
   };

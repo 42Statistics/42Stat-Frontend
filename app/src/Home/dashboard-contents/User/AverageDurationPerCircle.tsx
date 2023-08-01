@@ -7,7 +7,7 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
-import { numberWithUnitFormatter } from '@shared/utils/formatters';
+import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 
 const GET_AVERAGE_DURATION_PER_CIRCLE = gql(/* GraphQL */ `
   query GetAverageDurationPerCircle {
@@ -60,7 +60,7 @@ export const AverageDurationPerCircle = () => {
 
   const series: ApexAxisChartSeries = [
     {
-      name: '평균 체류 기간',
+      name: '이전 서클과의 차',
       data: seriesData,
     },
   ];
@@ -106,11 +106,13 @@ const AverageDurationPerCircleChart = ({
       },
     },
     tooltip: {
-      shared: false,
       y: {
         // formatter: (value) => numberWithUnitFormatter(value, '일'),
         formatter: (value, { dataPointIndex }) =>
           numberWithUnitFormatter(seriesLabel[dataPointIndex], '일'),
+      },
+      marker: {
+        show: false,
       },
     },
   };

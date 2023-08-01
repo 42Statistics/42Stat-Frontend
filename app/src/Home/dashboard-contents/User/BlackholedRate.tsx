@@ -1,5 +1,4 @@
 import { useQuery } from '@apollo/client';
-import { useTheme } from '@emotion/react';
 import { gql } from '@shared/__generated__';
 import { PieChart } from '@shared/components/Chart';
 import { DashboardContent } from '@shared/components/DashboardContent';
@@ -8,7 +7,7 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
-import { numberWithUnitFormatter } from '@shared/utils/formatters';
+import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 import { capitalize } from 'lodash-es';
 
 const GET_BLACKHOLED_RATE = gql(/* GraphQL */ `
@@ -60,7 +59,6 @@ const BlackholedRateChart = ({ labels, series }: BlackholedRateChartProps) => {
       y: {
         formatter: (value) => numberWithUnitFormatter(value, '명'),
       },
-      fillSeriesColor: false,
     },
   };
 

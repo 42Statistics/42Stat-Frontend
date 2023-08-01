@@ -1,3 +1,4 @@
+import { padWithNullValues } from '@/Profile/utils/padWithNullValues';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
 import { gql } from '@shared/__generated__';
@@ -9,6 +10,7 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
+import { BREAKPOINT } from '@shared/constants/BREAKPOINT';
 import { useAtomValue } from 'jotai';
 import { useParams } from 'react-router-dom';
 
@@ -60,14 +62,20 @@ export const LevelRecords = () => {
     data2: { userLevelRecords: myLevelRecords },
   } = data;
 
-  const levelSeries = levelRecords.map(({ monthsPassed, level }) => ({
-    x: monthsPassed,
-    y: level,
-  }));
-  const myLevelSeries = myLevelRecords.map(({ monthsPassed, level }) => ({
-    x: monthsPassed,
-    y: level,
-  }));
+  const levelSeries = padWithNullValues(
+    levelRecords.map(({ monthsPassed, level }) => ({
+      x: monthsPassed,
+      y: level,
+    })),
+    25,
+  );
+  const myLevelSeries = padWithNullValues(
+    myLevelRecords.map(({ monthsPassed, level }) => ({
+      x: monthsPassed,
+      y: level,
+    })),
+    25,
+  );
 
   const series = [
     {
@@ -94,23 +102,46 @@ type LevelRecordsChartProps = {
 const LevelRecordsChart = ({ series }: LevelRecordsChartProps) => {
   const theme = useTheme();
 
+  const mobileOptions: ApexCharts.ApexOptions = {
+    xaxis: {
+      tickAmount: 4,
+    },
+    yaxis: {
+      labels: {
+        show: false,
+      },
+    },
+  };
+
   const options: ApexCharts.ApexOptions = {
     colors: [theme.colors.primary.default, theme.colors.accent.default],
     xaxis: {
+      min: 0,
+      max: 24,
+      tickAmount: 8,
       labels: {
-        formatter: (value) => `${value}`,
+        formatter: (value) => `${value}개월`,
       },
     },
     yaxis: {
       labels: {
-        formatter: (value) => `lv. ${value}`,
+        formatter: (value) => value.toFixed(0),
       },
     },
     tooltip: {
       x: {
         formatter: (value) => `${value}개월 차`,
       },
+      y: {
+        formatter: (value) => (value === null ? '미정' : value.toFixed(2)),
+      },
     },
+    responsive: [
+      {
+        breakpoint: BREAKPOINT.MOBILE,
+        options: mobileOptions,
+      },
+    ],
   };
 
   return <LineChart series={series} options={options} />;

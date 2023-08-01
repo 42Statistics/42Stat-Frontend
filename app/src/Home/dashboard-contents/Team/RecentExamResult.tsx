@@ -72,7 +72,7 @@ export const RecentExamResult = () => {
 
   const series: ApexAxisChartSeries = [
     {
-      name: '통과율',
+      name: '',
       data: seriesData,
     },
   ];
@@ -108,7 +108,7 @@ const LastExamResultChart = ({
     xaxis: {
       categories,
       labels: {
-        formatter: (value) => `Rank ${String(value).padStart(2, '0')}`,
+        formatter: (value) => String(value).padStart(2, '0'),
       },
     },
     yaxis: {
@@ -118,11 +118,17 @@ const LastExamResultChart = ({
       },
     },
     tooltip: {
+      x: {
+        formatter: (value) => `Exam Rank ${String(value).padStart(2, '0')}`,
+      },
       y: {
         formatter: (value, { dataPointIndex }) =>
-          `${(value * 100).toFixed(1)}% (${seriesLabel[dataPointIndex].pass}/${
+          `${(value * 100).toFixed(1)}% (${
             seriesLabel[dataPointIndex].total
-          })`,
+          }명 중 ${seriesLabel[dataPointIndex].pass}명)`,
+      },
+      marker: {
+        show: false,
       },
     },
     dataLabels: {

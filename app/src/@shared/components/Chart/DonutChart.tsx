@@ -25,6 +25,12 @@ export const DonutChart = ({
         },
       },
     },
+    dataLabels: {
+      style: {
+        fontSize: '1.3rem',
+        fontWeight: 400,
+      },
+    },
     legend: {
       position: 'bottom',
     },

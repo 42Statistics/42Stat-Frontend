@@ -3,7 +3,7 @@ import { gql } from '@shared/__generated__';
 import { userAtom } from '@shared/atoms/userAtom';
 import { GOOGLE_LOGIN } from '@shared/components/LoginButton';
 import { ROUTES } from '@shared/constants/ROUTES';
-import { Center, Loader } from '@shared/ui-kit';
+import { Loader } from '@shared/ui-kit';
 import { setAccessToken } from '@shared/utils/storage/accessToken';
 import {
   getGoogleCredential,
@@ -91,11 +91,7 @@ const FtOAuthRedirectPage = () => {
     navigate(ROUTES.HOME);
   }, [googleData, googleLoading, googleError, navigate, setUser]);
 
-  return (
-    <Center h="100vh">
-      <Loader />
-    </Center>
-  );
+  return <Loader />;
 };
 
 export default FtOAuthRedirectPage;

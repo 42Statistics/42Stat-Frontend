@@ -1,6 +1,7 @@
 import { Global } from '@emotion/react';
 import styled from '@emotion/styled';
 import space_background from '@shared/assets/space-background.webp';
+import { Center } from '@shared/ui-kit';
 import { Helmet } from 'react-helmet-async';
 import { Outlet } from 'react-router-dom';
 import { landingLayoutGlobalStyle } from './landingLayoutGlobalStyle';
@@ -13,7 +14,9 @@ export const LandingLayout = () => {
       </Helmet>
       <Global styles={landingLayoutGlobalStyle} />
       <Layout>
-        <Outlet />
+        <Center h="100vh">
+          <Outlet />
+        </Center>
       </Layout>
     </>
   );
@@ -21,7 +24,6 @@ export const LandingLayout = () => {
 
 const Layout = styled.main`
   width: 100%;
-  min-height: 100vh;
   background: url(${space_background});
   background-size: cover;
   background-repeat: no-repeat;

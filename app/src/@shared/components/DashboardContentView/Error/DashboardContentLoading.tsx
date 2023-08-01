@@ -6,7 +6,7 @@ import { Loader } from '@shared/ui-kit';
 
 type DashboardContentLoadingProps = Omit<
   DashboardContentProps,
-  'children' | 'isApexChart'
+  'children' | 'type'
 >;
 
 export const DashboardContentLoading = ({

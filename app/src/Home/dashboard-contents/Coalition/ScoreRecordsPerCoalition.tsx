@@ -56,7 +56,7 @@ export const ScoreRecordsPerCoalition = () => {
   });
 
   return (
-    <DashboardContent title={title} isApexChart>
+    <DashboardContent title={title} type="ApexCharts">
       <ScoreRecordsPerCoalitionChart series={series} colors={colors} />
     </DashboardContent>
   );

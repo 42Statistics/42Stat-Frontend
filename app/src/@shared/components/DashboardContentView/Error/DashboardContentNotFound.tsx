@@ -6,7 +6,7 @@ import {
 
 type DashboardContentNotFoundProps = Omit<
   DashboardContentProps,
-  'children' | 'isApexChart'
+  'children' | 'type'
 >;
 
 export const DashboardContentNotFound = ({

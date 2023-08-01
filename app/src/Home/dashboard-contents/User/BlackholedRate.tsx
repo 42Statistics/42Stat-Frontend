@@ -42,7 +42,7 @@ export const BlackholedRate = () => {
   const series = fields.map((field) => field.value);
 
   return (
-    <DashboardContent title={title} isApexChart>
+    <DashboardContent title={title} type="ApexCharts">
       <BlackholedRateChart labels={labels} series={series} />
     </DashboardContent>
   );

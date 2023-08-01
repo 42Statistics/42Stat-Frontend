@@ -1,19 +1,27 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
-import { Body1MediumText, CaptionText, Center, VStack } from '@shared/ui-kit';
+import {
+  Body1MediumText,
+  CaptionText,
+  Center,
+  Scroll,
+  VStack,
+} from '@shared/ui-kit';
+
+type DashboardContentType = 'Default' | 'ApexCharts' | 'Scrollable';
 
 export type DashboardContentProps = PropsWithReactElementChildren<{
   title?: string;
   description?: string;
-  isApexChart?: boolean;
+  type?: DashboardContentType;
 }>;
 
 export const DashboardContent = ({
   title,
   description,
   children,
-  isApexChart = false,
+  type = 'Default',
 }: DashboardContentProps) => {
   const theme = useTheme();
 
@@ -28,11 +36,13 @@ export const DashboardContent = ({
             </CaptionText>
           ) : null}
         </VStack>
-        {!isApexChart ? (
-          <Center>{children}</Center>
-        ) : (
+        {type === 'Default' ? <Center>{children}</Center> : null}
+        {type === 'ApexCharts' ? (
           <ApexChartsContainer>{children}</ApexChartsContainer>
-        )}
+        ) : null}
+        {type === 'Scrollable' ? (
+          <ScrollableContainer>{children}</ScrollableContainer>
+        ) : null}
       </VStack>
     </Layout>
   );
@@ -42,6 +52,11 @@ const Layout = styled.div`
   width: 100%;
   height: 100%;
   padding: 2.4rem;
+`;
+
+const ScrollableContainer = styled(Scroll)`
+  width: 100%;
+  padding: 0 1rem;
 `;
 
 /**

@@ -47,7 +47,7 @@ export const AliveUserCountRecords = () => {
   ];
 
   return (
-    <DashboardContent title={title} isApexChart>
+    <DashboardContent title={title} type="ApexCharts">
       <ActiveUserCountRecordsChart series={series} />
     </DashboardContent>
   );

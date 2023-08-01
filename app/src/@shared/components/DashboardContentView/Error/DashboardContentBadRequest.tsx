@@ -6,7 +6,7 @@ import {
 
 type DashboardContentBadRequestProps = {
   message?: string;
-} & Omit<DashboardContentProps, 'children' | 'isApexChart'>;
+} & Omit<DashboardContentProps, 'children' | 'type'>;
 
 export const DashboardContentBadRequest = ({
   message = 'Something Went Wrong',

@@ -165,7 +165,7 @@ export const Rankings = () => {
   ];
 
   return (
-    <DashboardContent title={title} description={description} isApexChart>
+    <DashboardContent title={title} description={description} type="ApexCharts">
       <RankingsChart categories={categories} series={series} />
     </DashboardContent>
   );

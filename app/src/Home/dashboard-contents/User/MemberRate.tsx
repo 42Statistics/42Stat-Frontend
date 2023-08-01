@@ -50,7 +50,7 @@ export const MemberRate = () => {
   const series = fields.map((field) => field.value);
 
   return (
-    <DashboardContent title={title} description={description} isApexChart>
+    <DashboardContent title={title} description={description} type="ApexCharts">
       <MemberRateChart labels={labels} series={series} />
     </DashboardContent>
   );

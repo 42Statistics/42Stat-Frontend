@@ -1,11 +1,11 @@
 import { useQuery } from '@apollo/client';
-import styled from '@emotion/styled';
+import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
-import { H3BoldText, Scroll, Text, VStack } from '@shared/ui-kit';
+import { Text } from '@shared/ui-kit';
 import { useParams } from 'react-router-dom';
 import { GET_PERSONAL_EVAL_ZERO_COST_BY_LOGIN } from '../../dashboard-contents-queries/GET_PERSONAL_EVAL_ZERO_COST_BY_LOGIN';
 
@@ -32,30 +32,9 @@ export const RecentComment = () => {
 
   const { recentComment } = data.getPersonalEval; // FIXME: null일 수 있음.
 
-  // 내부에서 overflow가 발생하는 경우, div w='100%' h='100%'으로 밖을 감싸면 비정상적으로 작동함
   return (
-    <DashboardContentLayout>
-      <VStack w="100%" h="100%" spacing="2rem" align="start">
-        <VStack w="100%" align="start">
-          <H3BoldText>{title}</H3BoldText>
-        </VStack>
-        <Scroll>
-          <Layout>
-            <Text>{recentComment}</Text>
-          </Layout>
-        </Scroll>
-      </VStack>
-    </DashboardContentLayout>
+    <DashboardContent title={title} type="Scrollable">
+      <Text>{recentComment}</Text>
+    </DashboardContent>
   );
 };
-
-const DashboardContentLayout = styled.div`
-  width: 100%;
-  height: 100%;
-  padding: 2rem;
-`;
-
-const Layout = styled.div`
-  width: 100%;
-  padding: 0 1rem;
-`;

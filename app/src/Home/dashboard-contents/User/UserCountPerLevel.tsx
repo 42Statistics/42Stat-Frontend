@@ -47,7 +47,7 @@ export const UserCountPerLevel = () => {
   ];
 
   return (
-    <DashboardContent title={title} isApexChart>
+    <DashboardContent title={title} type="ApexCharts">
       <UserCountPerLevelChart categories={categories} series={series} />
     </DashboardContent>
   );

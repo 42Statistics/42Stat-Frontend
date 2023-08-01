@@ -1,6 +1,7 @@
+import { BREAKPOINT } from '@shared/constants/BREAKPOINT';
 import facepaint from 'facepaint';
 
-const breakpoints = [768, 1280];
+const breakpoints = [BREAKPOINT.MOBILE, BREAKPOINT.TABLET];
 
 export const mq = facepaint(
   breakpoints.map((bp) => `@media(min-width: ${bp}px)`),

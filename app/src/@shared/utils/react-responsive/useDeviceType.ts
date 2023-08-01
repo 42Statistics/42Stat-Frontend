@@ -1,9 +1,14 @@
+import { BREAKPOINT } from '@shared/constants/BREAKPOINT';
 import type { Device } from '@shared/types/Device';
 import { useMediaQuery } from 'react-responsive';
 
-const useIsDesktop = () => useMediaQuery({ minWidth: 1280 });
-const useIsTablet = () => useMediaQuery({ minWidth: 768, maxWidth: 1279 });
-const useIsMobile = () => useMediaQuery({ maxWidth: 767 });
+const useIsDesktop = () => useMediaQuery({ minWidth: BREAKPOINT.TABLET });
+const useIsTablet = () =>
+  useMediaQuery({
+    minWidth: BREAKPOINT.MOBILE,
+    maxWidth: BREAKPOINT.TABLET - 1,
+  });
+const useIsMobile = () => useMediaQuery({ maxWidth: BREAKPOINT.MOBILE - 1 });
 
 export const useDeviceType = (): Device | null => {
   const isDesktop = useIsDesktop();

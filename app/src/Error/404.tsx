@@ -1,42 +1,45 @@
-import marvin_depressed from '@shared/assets/marvin-depressed.gif';
+import dont_panic from '@/Error/assets/dont-panic.webp';
+import { useTheme } from '@emotion/react';
 import { AppLogoTitle } from '@shared/components/AppLogoTitle';
 import { Seo } from '@shared/components/Seo';
 import { ROUTES } from '@shared/constants/ROUTES';
-import { ALT } from '@shared/constants/accessibility/ALT';
 import { ARIA_LABEL_LINK } from '@shared/constants/accessibility/ARIA_LABEL';
 import { withHead } from '@shared/hoc/withHead';
 import {
   Button,
+  HStack,
   Image,
   VStack,
+  WhiteBody1Text,
   WhiteH1BoldText,
-  WhiteText,
 } from '@shared/ui-kit';
 import { Link, useNavigate } from 'react-router-dom';
 
 const NotFoundPage = () => {
   const statusCode = 404;
   const statusText = 'Not Found';
-
   const navigate = useNavigate();
+  const theme = useTheme();
 
   return (
-    <VStack w="100%" h="100%" spacing="6rem">
+    <VStack spacing="6rem">
       <Link to={ROUTES.ROOT} aria-label={ARIA_LABEL_LINK.STAT}>
         <AppLogoTitle size="sm" color="white" />
       </Link>
-      <WhiteH1BoldText>
-        {statusCode} {statusText}
-      </WhiteH1BoldText>
-      <VStack spacing="0.5rem">
-        <WhiteText>죄송합니다. 페이지를 찾을 수 없습니다. </WhiteText>
-        <WhiteText>존재하지 않는 주소를 입력하셨거나, </WhiteText>
-        <WhiteText>
-          요청하신 페이지의 주소가 변경 또는 삭제되어 찾을 수 없습니다.
-        </WhiteText>
+      <VStack spacing="2rem">
+        <HStack align="baseline" spacing="1rem">
+          <WhiteH1BoldText>{statusCode}</WhiteH1BoldText>
+          <WhiteBody1Text>{statusText}</WhiteBody1Text>
+        </HStack>
+        <Image width={200} src={dont_panic} alt="" />
       </VStack>
-      <Image width="400px" src={marvin_depressed} alt={ALT.MARVIN_DEPRESSED} />
-      <Button onClick={() => navigate(ROUTES.ROOT)}>홈으로 돌아가기</Button>
+      <Button
+        backgroundColor={theme.colors.mono.white}
+        color={theme.colors.mono.black}
+        onClick={() => navigate(ROUTES.ROOT)}
+      >
+        홈으로 돌아가기
+      </Button>
     </VStack>
   );
 };

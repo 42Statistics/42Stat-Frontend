@@ -4,5 +4,4 @@ export const ALT = {
   LOGO_42: '42 로고',
   POKEMON_OF: (name: string) => `포켓몬 ${name}`,
   POKEMON_NOT_FOUND: '포켓몬을 찾을 수 없습니다',
-  MARVIN_DEPRESSED: '실망하는 마빈',
 } as const;

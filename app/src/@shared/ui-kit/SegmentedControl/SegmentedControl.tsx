@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 export type SegmentType = {
   label: string;
@@ -9,8 +9,8 @@ export type SegmentType = {
 
 type SegmentedControlProps = {
   segments: SegmentType[];
-  callback: (value: string, index: number) => void;
-  defaultIndex?: number;
+  index: number;
+  onIndexChange: (index: number) => void;
   controlRef: React.RefObject<HTMLDivElement>;
 };
 
@@ -18,45 +18,38 @@ type SegmentedControlProps = {
 // 위 내용에 type 추가, styled-components 방식으로 변경, css 테마에 맞게 변경
 export const SegmentedControl = ({
   segments,
-  callback,
-  defaultIndex = 0,
+  index,
+  onIndexChange,
   controlRef,
 }: SegmentedControlProps) => {
-  const [activeIndex, setActiveIndex] = useState<number>(defaultIndex);
   const componentReady = useRef<boolean>(false);
-
-  const onInputChange = (value: string, index: number) => {
-    setActiveIndex(index);
-    callback(value, index);
-  };
-
   useEffect(() => {
     componentReady.current = true;
   }, []);
 
   useEffect(() => {
-    const activeSegmentRef = segments[activeIndex].ref;
+    const activeSegmentRef = segments[index].ref;
     if (!activeSegmentRef.current || !controlRef.current) return;
     const { offsetWidth, offsetLeft } = activeSegmentRef.current;
     const { style } = controlRef.current;
 
     style.setProperty('--highlight-width', `${offsetWidth}px`);
     style.setProperty('--highlight-x-pos', `${offsetLeft}px`);
-  }, [activeIndex, callback, segments, controlRef]);
+  }, [index, segments, controlRef]);
 
   return (
     <ControlsContainer ref={controlRef}>
       <Controls ready={componentReady.current}>
         {segments.map((item, i) => (
-          <Segment key={item.value} active={activeIndex === i} ref={item.ref}>
+          <Segment key={item.value} active={index === i} ref={item.ref}>
             <SegmentInput
               type="radio"
               value={item.value}
               id={item.label}
-              onChange={() => onInputChange(item.value, i)}
-              checked={activeIndex === i}
+              onChange={() => onIndexChange(i)}
+              checked={index === i}
             />
-            <SegmentLabel htmlFor={item.label} active={activeIndex === i}>
+            <SegmentLabel htmlFor={item.label} active={index === i}>
               {item.label}
             </SegmentLabel>
           </Segment>

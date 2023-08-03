@@ -6,13 +6,13 @@ import { Clickable, Text } from '@shared/ui-kit';
 type PageButtonProps = {
   currPageNumber: number;
   pageNumber: number;
-  setPageNumber: React.Dispatch<React.SetStateAction<number>>;
+  onPageNumberChange: (pageNumber: number) => void;
 };
 
 export const PageButton = ({
   currPageNumber,
   pageNumber,
-  setPageNumber,
+  onPageNumberChange,
 }: PageButtonProps) => {
   const theme = useTheme();
 
@@ -20,7 +20,7 @@ export const PageButton = ({
     if (pageNumber === currPageNumber) {
       return;
     }
-    setPageNumber(pageNumber);
+    onPageNumberChange(pageNumber);
   };
   return (
     <Layout

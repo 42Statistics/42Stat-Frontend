@@ -1,7 +1,4 @@
-import { Seo } from '@shared/components/Seo';
 import { ROUTES } from '@shared/constants/ROUTES';
-import { withFooter } from '@shared/hoc/withFooter';
-import { withHead } from '@shared/hoc/withHead';
 import { Tab, Tabs, VStack } from '@shared/ui-kit';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
@@ -47,8 +44,4 @@ const LeaderboardPage = () => {
   );
 };
 
-const Head = () => {
-  return <Seo title="랭킹" />;
-};
-
-export default withHead(withFooter(LeaderboardPage), Head);
+export default LeaderboardPage;

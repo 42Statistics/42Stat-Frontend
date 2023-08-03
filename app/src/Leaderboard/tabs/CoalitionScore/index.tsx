@@ -1,20 +1,21 @@
-import {
-  parseDateTemplate,
-  stringifyDateTemplate,
-} from '@/Leaderboard/utils/parseDateTemplate';
-import {
-  parsePageNumber,
-  stringifyPageNumber,
-} from '@/Leaderboard/utils/parsePageNumber';
+import { QUERY_STRING_KEY } from '@/Leaderboard/constants/QUERY_STRING_KEY';
+import { parseDateTemplate } from '@/Leaderboard/utils/parseDateTemplate';
 import { useLazyQuery } from '@apollo/client';
 import { gql } from '@shared/__generated__';
 import { DateTemplate } from '@shared/__generated__/graphql';
 import { Pagination } from '@shared/components/Pagination';
+import { Seo } from '@shared/components/Seo';
+import { withFooter } from '@shared/hoc/withFooter';
+import { withHead } from '@shared/hoc/withHead';
 import { useSegmentedControl } from '@shared/hooks/useSegmentedControl';
 import { SegmentedControl, VStack } from '@shared/ui-kit';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import {
+  createSearchParams,
+  useNavigate,
+  useSearchParams,
+} from 'react-router-dom';
 import { LeaderboardCoalitionScoreTabResult } from './LeaderboardCoalitionScoreTabResult';
 
 const GET_LEADERBOARD_COALITION_SCORE = gql(/* GraphQL */ `
@@ -60,40 +61,54 @@ const GET_LEADERBOARD_COALITION_SCORE = gql(/* GraphQL */ `
 const LeaderboardCoalitionScoreTab = () => {
   const SIZE_PER_PAGE = 50;
   const device = useDeviceType();
+  const navigate = useNavigate();
   const [search, result] = useLazyQuery(GET_LEADERBOARD_COALITION_SCORE);
   const [totalPage, setTotalPage] = useState<number>(0);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [dateTemplate, setDateTemplate] = useState<DateTemplate>(
-    parseDateTemplate(searchParams.get('dateTemplate'), DateTemplate.CurrWeek),
+  const [searchParams] = useSearchParams();
+  const dateTemplate = parseDateTemplate(
+    searchParams.get(QUERY_STRING_KEY.DATE_TEMPLATE),
+    DateTemplate.CurrWeek,
   );
-  const [pageNumber, setPageNumber] = useState<number>(
-    parsePageNumber(searchParams.get('pageNumber')),
+  const pageNumber = Number(
+    searchParams.get(QUERY_STRING_KEY.PAGE_NUMBER) ?? '1',
   );
 
   const options = [
     {
       label: '주간',
-      value: 'weekly',
+      value: DateTemplate.CurrWeek,
     },
     {
       label: '월간',
-      value: 'monthly',
+      value: DateTemplate.CurrMonth,
     },
     {
       label: '누적',
-      value: 'total',
+      value: DateTemplate.Total,
     },
   ];
-  const { controlRef, segments } = useSegmentedControl(options);
 
-  const handleSegmentedControlChange = (value: string) => {
-    if (value === 'weekly') {
-      setDateTemplate(DateTemplate.CurrWeek);
-    } else if (value === 'monthly') {
-      setDateTemplate(DateTemplate.CurrMonth);
-    } else if (value === 'total') {
-      setDateTemplate(DateTemplate.Total);
-    }
+  const { controlRef, segments } = useSegmentedControl(options);
+  const segmentIndex = options.findIndex(
+    (option) => option.value === dateTemplate,
+  );
+
+  const handleSegmentedControlChange = (index: number) => {
+    const dateTemplate = options[index].value;
+    navigate({
+      search: `?${createSearchParams({
+        [QUERY_STRING_KEY.DATE_TEMPLATE]: dateTemplate,
+      })}`,
+    });
+  };
+
+  const handlePageNumberChange = (pageNumber: number) => {
+    navigate({
+      search: `?${createSearchParams({
+        [QUERY_STRING_KEY.DATE_TEMPLATE]: dateTemplate,
+        [QUERY_STRING_KEY.PAGE_NUMBER]: String(pageNumber),
+      })}`,
+    });
   };
 
   useEffect(() => {
@@ -114,27 +129,20 @@ const LeaderboardCoalitionScoreTab = () => {
         dateTemplate,
       },
     });
-    setSearchParams({
-      dateTemplate: stringifyDateTemplate(dateTemplate),
-      pageNumber: stringifyPageNumber(pageNumber),
-    });
-  }, [dateTemplate, search, pageNumber, setSearchParams]);
-
-  useEffect(() => {
-    setPageNumber(1);
-  }, [dateTemplate]);
+  }, [dateTemplate, search, pageNumber]);
 
   return (
     <VStack w="100%" spacing="6rem">
       <SegmentedControl
-        callback={handleSegmentedControlChange}
+        index={segmentIndex}
+        onIndexChange={handleSegmentedControlChange}
         controlRef={controlRef}
         segments={segments}
       />
       <LeaderboardCoalitionScoreTabResult result={result} />
       <Pagination
         currPageNumber={pageNumber}
-        setPageNumber={setPageNumber}
+        onPageNumberChange={handlePageNumberChange}
         totalPageNumber={Math.ceil(totalPage / SIZE_PER_PAGE)}
         pagePerRow={device === 'mobile' ? 5 : 10}
       />
@@ -142,4 +150,8 @@ const LeaderboardCoalitionScoreTab = () => {
   );
 };
 
-export default LeaderboardCoalitionScoreTab;
+const Head = () => {
+  return <Seo title="랭킹 › 코알리숑 스코어" />;
+};
+
+export default withHead(withFooter(LeaderboardCoalitionScoreTab), Head);

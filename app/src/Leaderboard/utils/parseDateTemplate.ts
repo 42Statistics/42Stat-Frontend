@@ -5,25 +5,11 @@ export const parseDateTemplate = (
   defaultValue: DateTemplate,
 ) => {
   switch (str) {
-    case 'weekly':
-      return DateTemplate.CurrWeek;
-    case 'monthly':
-      return DateTemplate.CurrMonth;
-    case 'total':
-      return DateTemplate.Total;
+    case DateTemplate.CurrWeek:
+    case DateTemplate.CurrMonth:
+    case DateTemplate.Total:
+      return str;
     default:
       return defaultValue;
-  }
-};
-
-export const stringifyDateTemplate = (dateTemplate: DateTemplate) => {
-  switch (dateTemplate) {
-    case DateTemplate.CurrWeek:
-      return 'weekly';
-    case DateTemplate.CurrMonth:
-      return 'monthly';
-    case DateTemplate.Total:
-    default:
-      return 'total';
   }
 };

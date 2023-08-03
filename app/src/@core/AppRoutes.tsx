@@ -65,7 +65,7 @@ export const AppRoutes = () => {
             }
           />
           <Route path={ROUTES.PROFILE} element={<ProfilePage />}>
-            <Route index element={<Navigate to="general" />} />
+            <Route index element={<Navigate replace to="general" />} />
             <Route
               path={ROUTES.PROFILE_GENERAL_TAB}
               element={<ProfileGeneralTab />}
@@ -80,7 +80,10 @@ export const AppRoutes = () => {
             />
           </Route>
           <Route path={ROUTES.LEADERBOARD} element={<LaederboardPage />}>
-            <Route index element={<Navigate to={ROUTES.LEADERBOARD_LEVEL} />} />
+            <Route
+              index
+              element={<Navigate replace to={ROUTES.LEADERBOARD_LEVEL} />}
+            />
             <Route
               path={ROUTES.LEADERBOARD_LEVEL}
               element={<LeaderboardLevelTab />}

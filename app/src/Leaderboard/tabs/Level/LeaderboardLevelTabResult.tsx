@@ -28,9 +28,21 @@ export const LeaderboardLevelTabResult = ({
   }
 
   const {
-    me,
-    totalRanking: { nodes },
-  } = data.getLeaderboardLevel.byDateTemplate.data;
+    data: {
+      me,
+      totalRanking: { nodes },
+    },
+    start,
+    end,
+  } = data.getLeaderboardLevel.byDateTemplate;
 
-  return <Leaderboard me={me} list={nodes} fixedNumber={2} />;
+  return (
+    <Leaderboard
+      me={me}
+      list={nodes}
+      fixedNumber={2}
+      start={new Date(start)}
+      end={new Date(end)}
+    />
+  );
 };

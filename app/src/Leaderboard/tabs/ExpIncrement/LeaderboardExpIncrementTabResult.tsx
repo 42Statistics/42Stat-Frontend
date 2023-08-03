@@ -28,10 +28,22 @@ export const LeaderboardExpIncrementTabResult = ({
   }
 
   const {
-    me,
-    totalRanking: { nodes },
-  } = data.getLeaderboardExpIncrement.byDateTemplate.data;
+    data: {
+      me,
+      totalRanking: { nodes },
+    },
+    start,
+    end,
+  } = data.getLeaderboardExpIncrement.byDateTemplate;
   const unit = 'XP';
 
-  return <Leaderboard me={me} list={nodes} unit={unit} />;
+  return (
+    <Leaderboard
+      me={me}
+      list={nodes}
+      unit={unit}
+      start={new Date(start)}
+      end={new Date(end)}
+    />
+  );
 };

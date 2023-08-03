@@ -28,10 +28,22 @@ export const LeaderboardEvalCountTabResult = ({
   }
 
   const {
-    me,
-    totalRanking: { nodes },
-  } = data.getLeaderboardEvalCount.byDateTemplate.data;
+    data: {
+      me,
+      totalRanking: { nodes },
+    },
+    start,
+    end,
+  } = data.getLeaderboardEvalCount.byDateTemplate;
   const unit = '회';
 
-  return <Leaderboard me={me} list={nodes} unit={unit} />;
+  return (
+    <Leaderboard
+      me={me}
+      list={nodes}
+      unit={unit}
+      start={new Date(start)}
+      end={new Date(end)}
+    />
+  );
 };

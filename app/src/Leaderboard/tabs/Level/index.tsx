@@ -7,8 +7,7 @@ import { Pagination } from '@shared/components/Pagination';
 import { Seo } from '@shared/components/Seo';
 import { withFooter } from '@shared/hoc/withFooter';
 import { withHead } from '@shared/hoc/withHead';
-import { useSegmentedControl } from '@shared/hooks/useSegmentedControl';
-import { SegmentedControl, VStack } from '@shared/ui-kit';
+import { VStack } from '@shared/ui-kit';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 import { useEffect, useState } from 'react';
 import {
@@ -73,27 +72,6 @@ const LeaderboardLevelTab = () => {
     searchParams.get(QUERY_STRING_KEY.PAGE_NUMBER) ?? '1',
   );
 
-  const options = [
-    {
-      label: '누적',
-      value: DateTemplate.Total,
-    },
-  ];
-
-  const { controlRef, segments } = useSegmentedControl(options);
-  const segmentIndex = options.findIndex(
-    (option) => option.value === dateTemplate,
-  );
-
-  const handleSegmentedControlChange = (index: number) => {
-    const dateTemplate = options[index].value;
-    navigate({
-      search: `?${createSearchParams({
-        [QUERY_STRING_KEY.DATE_TEMPLATE]: dateTemplate,
-      })}`,
-    });
-  };
-
   const handlePageNumberChange = (pageNumber: number) => {
     navigate({
       search: `?${createSearchParams({
@@ -125,12 +103,6 @@ const LeaderboardLevelTab = () => {
 
   return (
     <VStack w="100%" spacing="6rem">
-      <SegmentedControl
-        index={segmentIndex}
-        onIndexChange={handleSegmentedControlChange}
-        controlRef={controlRef}
-        segments={segments}
-      />
       <LeaderboardLevelTabResult result={result} />
       <Pagination
         currPageNumber={pageNumber}

@@ -28,9 +28,20 @@ export const LeaderboardCoalitionScoreTabResult = ({
   }
 
   const {
-    me,
-    totalRanking: { nodes },
-  } = data.getLeaderboardScore.byDateTemplate.data;
+    data: {
+      me,
+      totalRanking: { nodes },
+    },
+    start,
+    end,
+  } = data.getLeaderboardScore.byDateTemplate;
 
-  return <Leaderboard me={me} list={nodes} />;
+  return (
+    <Leaderboard
+      me={me}
+      list={nodes}
+      start={new Date(start)}
+      end={new Date(end)}
+    />
+  );
 };

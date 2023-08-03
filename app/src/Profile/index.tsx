@@ -3,10 +3,7 @@ import { gql } from '@shared/__generated__';
 import { userAtom } from '@shared/atoms/userAtom';
 import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
 import { FullPageApolloNotFoundView } from '@shared/components/ApolloError/FullPageApolloNotFoundView';
-import { Seo } from '@shared/components/Seo';
 import { ROUTES } from '@shared/constants/ROUTES';
-import { withFooter } from '@shared/hoc/withFooter';
-import { withHead } from '@shared/hoc/withHead';
 import { Tab, Tabs, VStack } from '@shared/ui-kit';
 import { useAtomValue } from 'jotai';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
@@ -79,10 +76,4 @@ const ProfilePage = () => {
   );
 };
 
-const Head = () => {
-  const { login } = useParams() as { login: string };
-
-  return <Seo title={login} />;
-};
-
-export default withHead(withFooter(ProfilePage), Head);
+export default ProfilePage;

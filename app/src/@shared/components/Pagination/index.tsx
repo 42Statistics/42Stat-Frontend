@@ -8,14 +8,14 @@ import { PageButton } from './PageButton';
 
 type PaginationProps = {
   currPageNumber: number;
-  setPageNumber: React.Dispatch<React.SetStateAction<number>>;
+  onPageNumberChange: (pageNumber: number) => void;
   totalPageNumber: number;
   pagePerRow?: number;
 };
 
 export const Pagination = ({
   currPageNumber,
-  setPageNumber,
+  onPageNumberChange,
   totalPageNumber,
   pagePerRow = 5,
 }: PaginationProps) => {
@@ -35,19 +35,19 @@ export const Pagination = ({
     if (currPageNumber === 1) {
       return;
     }
-    setPageNumber(start - pagePerRow);
+    onPageNumberChange(start - pagePerRow);
   };
 
   const handleClickForwardButton = () => {
-    setPageNumber(end + 1);
+    onPageNumberChange(end + 1);
   };
 
   const handleClickStartButton = () => {
-    setPageNumber(1);
+    onPageNumberChange(1);
   };
 
   const handleClickEndButton = () => {
-    setPageNumber(totalPageNumber);
+    onPageNumberChange(totalPageNumber);
   };
 
   if (totalPageNumber === 0) {
@@ -78,7 +78,7 @@ export const Pagination = ({
             key={pageNumber}
             currPageNumber={currPageNumber}
             pageNumber={pageNumber}
-            setPageNumber={setPageNumber}
+            onPageNumberChange={onPageNumberChange}
           />
         ))}
       </HStack>

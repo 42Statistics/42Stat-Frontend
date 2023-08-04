@@ -1,8 +1,9 @@
+import { MyUserProfileContext } from '@/Profile/contexts/MyUserProfileContext';
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { padWithNullValues } from '@/Profile/utils/padWithNullValues';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
 import { gql } from '@shared/__generated__';
-import { userAtom } from '@shared/atoms/userAtom';
 import { LineChart } from '@shared/components/Chart';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
@@ -11,8 +12,7 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { BREAKPOINT } from '@shared/constants/BREAKPOINT';
-import { useAtomValue } from 'jotai';
-import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
 
 const GET_LEVEL_RECORDS_VERSUS = gql(/* GraphQL */ `
   query GetLevelRecordsVersus($login1: String!, $login2: String!) {
@@ -32,13 +32,13 @@ const GET_LEVEL_RECORDS_VERSUS = gql(/* GraphQL */ `
 `);
 
 export const LevelRecords = () => {
-  const { login } = useParams() as { login: string };
-  const user = useAtomValue(userAtom);
+  const myUserProfile = useContext(MyUserProfileContext);
+  const userProfile = useContext(UserProfileContext);
 
   const title = '레벨 증가 그래프';
   const description = '본과정 시작일로부터 최대 24개월';
   const { loading, error, data } = useQuery(GET_LEVEL_RECORDS_VERSUS, {
-    variables: { login1: login, login2: user.login },
+    variables: { login1: myUserProfile.login, login2: userProfile.login },
   });
 
   if (loading) {
@@ -58,19 +58,19 @@ export const LevelRecords = () => {
   }
 
   const {
-    data1: { userLevelRecords: levelRecords },
-    data2: { userLevelRecords: myLevelRecords },
+    data1: { userLevelRecords: myLevelRecords },
+    data2: { userLevelRecords: levelRecords },
   } = data;
 
-  const levelSeries = padWithNullValues(
-    levelRecords.map(({ monthsPassed, level }) => ({
+  const myLevelSeries = padWithNullValues(
+    myLevelRecords.map(({ monthsPassed, level }) => ({
       x: monthsPassed,
       y: level,
     })),
     25,
   );
-  const myLevelSeries = padWithNullValues(
-    myLevelRecords.map(({ monthsPassed, level }) => ({
+  const levelSeries = padWithNullValues(
+    levelRecords.map(({ monthsPassed, level }) => ({
       x: monthsPassed,
       y: level,
     })),
@@ -79,12 +79,12 @@ export const LevelRecords = () => {
 
   const series = [
     {
-      name: login,
-      data: levelSeries,
+      name: myUserProfile.login,
+      data: myLevelSeries,
     },
     {
-      name: user.login,
-      data: myLevelSeries,
+      name: userProfile.login,
+      data: levelSeries,
     },
   ];
 

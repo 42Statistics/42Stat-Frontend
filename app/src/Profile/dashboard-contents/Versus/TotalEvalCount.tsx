@@ -1,7 +1,8 @@
+import { MyUserProfileContext } from '@/Profile/contexts/MyUserProfileContext';
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { useQuery } from '@apollo/client';
 import { gql } from '@shared/__generated__';
 import { DateTemplate } from '@shared/__generated__/graphql';
-import { userAtom } from '@shared/atoms/userAtom';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,
@@ -9,8 +10,7 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { NumberVersus } from '@shared/components/DashboardContentView/Number/NumberVersus';
-import { useAtomValue } from 'jotai';
-import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
 
 const GET_EVAL_COUNT_BY_DATE_TEMPLATE_VERSUS = gql(/* GraphQL */ `
   query GetEvalCountByDateTemplateVersus(
@@ -36,16 +36,16 @@ const GET_EVAL_COUNT_BY_DATE_TEMPLATE_VERSUS = gql(/* GraphQL */ `
 `);
 
 export const TotalEvalCount = () => {
-  const { login } = useParams() as { login: string };
-  const user = useAtomValue(userAtom);
+  const myUserProfile = useContext(MyUserProfileContext);
+  const userProfile = useContext(UserProfileContext);
 
   const title = '누적 평가 횟수';
   const { loading, error, data } = useQuery(
     GET_EVAL_COUNT_BY_DATE_TEMPLATE_VERSUS,
     {
       variables: {
-        login1: login,
-        login2: user.login,
+        login1: myUserProfile.login,
+        login2: userProfile.login,
         dateTemplate: DateTemplate.Total,
       },
     },
@@ -63,17 +63,23 @@ export const TotalEvalCount = () => {
 
   const {
     data1: {
-      countByDateTemplate: { data: count },
+      countByDateTemplate: { data: myCount },
     },
     data2: {
-      countByDateTemplate: { data: myCount },
+      countByDateTemplate: { data: count },
     },
   } = data;
   const unit = '회';
 
   return (
     <DashboardContent title={title}>
-      <NumberVersus number1={count} number2={myCount} unit={unit} />
+      <NumberVersus
+        imgUrl1={myUserProfile.imgUrl}
+        number1={myCount}
+        imgUrl2={userProfile.imgUrl}
+        number2={count}
+        unit={unit}
+      />
     </DashboardContent>
   );
 };

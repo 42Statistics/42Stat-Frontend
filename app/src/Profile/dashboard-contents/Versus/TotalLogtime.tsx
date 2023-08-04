@@ -1,7 +1,8 @@
+import { MyUserProfileContext } from '@/Profile/contexts/MyUserProfileContext';
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { useQuery } from '@apollo/client';
 import { gql } from '@shared/__generated__';
 import { DateTemplate } from '@shared/__generated__/graphql';
-import { userAtom } from '@shared/atoms/userAtom';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,
@@ -9,8 +10,7 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { NumberVersus } from '@shared/components/DashboardContentView/Number/NumberVersus';
-import { useAtomValue } from 'jotai';
-import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
 
 const GET_LOGTIME_BY_DATE_TEMPLATE_VERSUS = gql(/* GraphQL */ `
   query GetLogtimeByDateTemplateVersus(
@@ -36,16 +36,16 @@ const GET_LOGTIME_BY_DATE_TEMPLATE_VERSUS = gql(/* GraphQL */ `
 `);
 
 export const TotalLogtime = () => {
-  const { login } = useParams() as { login: string };
-  const user = useAtomValue(userAtom);
+  const myUserProfile = useContext(MyUserProfileContext);
+  const userProfile = useContext(UserProfileContext);
 
   const title = '누적 접속 시간';
   const { loading, error, data } = useQuery(
     GET_LOGTIME_BY_DATE_TEMPLATE_VERSUS,
     {
       variables: {
-        login1: login,
-        login2: user.login,
+        login1: myUserProfile.login,
+        login2: userProfile.login,
         dateTemplate: DateTemplate.Total,
       },
     },
@@ -63,21 +63,23 @@ export const TotalLogtime = () => {
 
   const {
     data1: {
-      logtimeByDateTemplate: { data: logtime },
-    },
-    data2: {
       logtimeByDateTemplate: { data: myLogtime },
     },
+    data2: {
+      logtimeByDateTemplate: { data: logtime },
+    },
   } = data;
-  const logtimeByHours = Math.floor(logtime / 60);
   const myLogtimeByHours = Math.floor(myLogtime / 60);
+  const logtimeByHours = Math.floor(logtime / 60);
   const unit = '시간';
 
   return (
     <DashboardContent title={title}>
       <NumberVersus
-        number1={logtimeByHours}
-        number2={myLogtimeByHours}
+        imgUrl1={myUserProfile.imgUrl}
+        number1={myLogtimeByHours}
+        imgUrl2={userProfile.imgUrl}
+        number2={logtimeByHours}
         unit={unit}
       />
     </DashboardContent>

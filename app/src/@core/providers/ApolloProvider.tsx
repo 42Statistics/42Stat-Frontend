@@ -37,6 +37,29 @@ const requestInterceptor = new ApolloLink((operation, forward) => {
   return forward(operation);
 });
 
+const responseInterceptor401 = onError(
+  ({ graphQLErrors, operation, forward }) => {
+    const authError = graphQLErrors?.find(
+      ({ extensions }) => extensions.status === 401,
+    );
+
+    if (authError) {
+      return fromPromise(getNewAccessToken(getRefreshToken() ?? '')).flatMap(
+        (accessToken) => {
+          operation.setContext({
+            headers: {
+              ...operation.getContext().headers,
+              authorization: `Bearer ${accessToken}`,
+            },
+          });
+
+          return forward(operation);
+        },
+      );
+    }
+  },
+);
+
 /**
  * @description
  * 쿼리 바뀌었을때 이부분 안건드리면 기존에 있던캐시정보에 바뀐 쿼리정보 병합하려고해서 에러발생
@@ -48,7 +71,7 @@ const requestInterceptor = new ApolloLink((operation, forward) => {
  */
 
 export const client = new ApolloClient({
-  link: from([requestInterceptor, httpLink]),
+  link: from([requestInterceptor, responseInterceptor401, httpLink]),
   cache: new InMemoryCache({
     typePolicies: {
       Query: {
@@ -107,29 +130,6 @@ const ResponseInterceptor = ({ children }: PropsWithReactElementChildren) => {
   const setIsReLoginDialogOpen = useSetAtom(isReLoginDialogOpenAtom);
 
   useEffect(() => {
-    const responseInterceptor401 = onError(
-      ({ graphQLErrors, operation, forward }) => {
-        if (graphQLErrors) {
-          // forEach 내부에서 async await 사용하면 안됨 -> for ~ of
-          for (const { extensions } of graphQLErrors) {
-            if (extensions?.status === 401) {
-              return fromPromise(
-                getNewAccessToken(getRefreshToken() ?? ''),
-              ).flatMap((accessToken) => {
-                operation.setContext({
-                  headers: {
-                    ...operation.getContext().headers,
-                    authorization: `Bearer ${accessToken}`,
-                  },
-                });
-                return forward(operation);
-              });
-            }
-          }
-        }
-      },
-    );
-
     const responseInterceptor400 = onError(({ graphQLErrors }) => {
       if (graphQLErrors) {
         graphQLErrors.forEach(({ extensions }) => {

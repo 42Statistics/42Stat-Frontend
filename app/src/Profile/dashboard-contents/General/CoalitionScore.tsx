@@ -1,3 +1,4 @@
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { useQuery } from '@apollo/client';
 import { CoalitionMark } from '@shared/components/CoalitionMark';
 import { DashboardContent } from '@shared/components/DashboardContent';
@@ -7,11 +8,11 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { Body1Text, H2MediumText, HStack } from '@shared/ui-kit';
-import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
 import { GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN } from '../../dashboard-contents-queries/GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN';
 
 export const CoalitionScore = () => {
-  const { login } = useParams() as { login: string };
+  const { login } = useContext(UserProfileContext);
 
   const title = '코알리숑 스코어';
   const { loading, error, data } = useQuery(

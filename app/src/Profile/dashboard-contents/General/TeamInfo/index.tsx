@@ -1,3 +1,4 @@
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { useQuery } from '@apollo/client';
 import styled from '@emotion/styled';
 import { gql } from '@shared/__generated__';
@@ -6,7 +7,7 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
-import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
 import { TeamInfoTable } from './TeamInfoTable';
 
 const GET_TEAM_INFO_BY_LOGIN = gql(/* GraphQL */ `
@@ -31,7 +32,7 @@ const GET_TEAM_INFO_BY_LOGIN = gql(/* GraphQL */ `
 `);
 
 export const TeamInfo = () => {
-  const { login } = useParams() as { login: string };
+  const { login } = useContext(UserProfileContext);
 
   const { loading, error, data } = useQuery(GET_TEAM_INFO_BY_LOGIN, {
     variables: { login },

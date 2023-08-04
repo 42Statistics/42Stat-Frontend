@@ -1,3 +1,4 @@
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { useQuery } from '@apollo/client';
 import { gql } from '@shared/__generated__';
 import { DashboardContent } from '@shared/components/DashboardContent';
@@ -7,7 +8,7 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { UserRankList } from '@shared/components/DashboardContentView/Rank/UserRankList';
-import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
 
 const GET_DESTINY_RANKING_BY_LOGIN = gql(/* GraphQL */ `
   query GetDestinyRankingByLogin($login: String!, $limit: Int!) {
@@ -24,7 +25,7 @@ const GET_DESTINY_RANKING_BY_LOGIN = gql(/* GraphQL */ `
 `);
 
 export const DestinyRanking = () => {
-  const { login } = useParams() as { login: string };
+  const { login } = useContext(UserProfileContext);
 
   const title = '인연 스코어';
   const description = `${login}의 여행 동반자들`;

@@ -1,3 +1,4 @@
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { useQuery } from '@apollo/client';
 import { gql } from '@shared/__generated__';
 import { DashboardContent } from '@shared/components/DashboardContent';
@@ -7,7 +8,7 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { NumberDefault } from '@shared/components/DashboardContentView/Number/NumberDefault';
-import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
 
 const GET_AVERAGE_DURATION_BY_LOGIN = gql(/* GraphQL */ `
   query GetAverageDurationByLogin($login: String!) {
@@ -18,7 +19,7 @@ const GET_AVERAGE_DURATION_BY_LOGIN = gql(/* GraphQL */ `
 `);
 
 export const AverageDuration = () => {
-  const { login } = useParams() as { login: string };
+  const { login } = useContext(UserProfileContext);
 
   const title = '평균 평가 시간';
   const description = '평가자일 때';

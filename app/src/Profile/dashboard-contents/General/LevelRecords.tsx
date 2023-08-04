@@ -1,3 +1,4 @@
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { padWithNullValues } from '@/Profile/utils/padWithNullValues';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
@@ -10,7 +11,7 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { BREAKPOINT } from '@shared/constants/BREAKPOINT';
-import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
 
 const GET_LEVEL_RECORDS_BY_LOGIN = gql(/* GraphQL */ `
   query GetLevelRecordsByLogin($login: String!) {
@@ -32,7 +33,7 @@ const GET_LEVEL_RECORDS_BY_LOGIN = gql(/* GraphQL */ `
 `);
 
 export const LevelRecords = () => {
-  const { login } = useParams() as { login: string };
+  const { login } = useContext(UserProfileContext);
 
   const title = '레벨 증가 그래프';
   const description = `본과정 시작일로부터 최대 24개월`;

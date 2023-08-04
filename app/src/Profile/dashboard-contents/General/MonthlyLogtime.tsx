@@ -1,3 +1,4 @@
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { useQuery } from '@apollo/client';
 import { gql } from '@shared/__generated__';
 import { DateTemplate } from '@shared/__generated__/graphql';
@@ -9,7 +10,7 @@ import {
 } from '@shared/components/DashboardContentView/Error';
 import { NumberCompare } from '@shared/components/DashboardContentView/Number/NumberCompare';
 import dayjs from 'dayjs';
-import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
 
 const GET_LOGTIME_BY_DATE_TEMPLATE = gql(/* GraphQL */ `
   query GetLogtimeByDateTemplate(
@@ -33,7 +34,7 @@ const GET_LOGTIME_BY_DATE_TEMPLATE = gql(/* GraphQL */ `
 `);
 
 export const MonthlyLogtime = () => {
-  const { login } = useParams() as { login: string };
+  const { login } = useContext(UserProfileContext);
 
   const title = '월간 접속 시간';
   const { loading, error, data } = useQuery(GET_LOGTIME_BY_DATE_TEMPLATE, {

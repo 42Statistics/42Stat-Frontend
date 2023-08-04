@@ -1,5 +1,3 @@
-import { useQuery } from '@apollo/client';
-import { gql } from '@shared/__generated__';
 import { Coalition } from '@shared/__generated__/graphql';
 import coalition_black_cover from '@shared/assets/coalition/cover/coalition-black-cover.jpg';
 import coalition_gam_cover from '@shared/assets/coalition/cover/coalition-gam-cover.jpg';
@@ -7,11 +5,8 @@ import coalition_gon_cover from '@shared/assets/coalition/cover/coalition-gon-co
 import coalition_gun_cover from '@shared/assets/coalition/cover/coalition-gun-cover.jpg';
 import coalition_lee_cover from '@shared/assets/coalition/cover/coalition-lee-cover.jpg';
 
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import styled from '@emotion/styled';
-import {
-  DashboardContentBadRequest,
-  DashboardContentNotFound,
-} from '@shared/components/DashboardContentView/Error';
 import { ALT } from '@shared/constants/accessibility/ALT';
 import {
   Avatar,
@@ -26,53 +21,13 @@ import { titleCase } from '@shared/utils/formatters/titleCase';
 import { getTitleWithLogin } from '@shared/utils/getTitleWithLogin';
 import { Desktop, TabletAndBelow } from '@shared/utils/react-responsive/Device';
 import { truncate } from 'lodash-es';
-import { useParams } from 'react-router-dom';
-import { UserProfileLoader } from './UserProfileLoader';
-
-const GET_USER_PROFILE_BY_LOGIN = gql(/* GraphQL */ `
-  query GetUserProfileByLogin($login: String!) {
-    getPersonalGeneral(login: $login) {
-      userProfile {
-        id
-        login
-        imgUrl
-        grade
-        displayname
-        coalition {
-          ...coalitionFields
-        }
-        titles {
-          titleId
-          name
-          selected
-          createdAt
-          updatedAt
-        }
-        level
-      }
-    }
-  }
-`);
+import { useContext } from 'react';
 
 export const UserProfile = () => {
-  const { login } = useParams() as { login: string };
+  const userProfile = useContext(UserProfileContext);
 
-  const { loading, error, data } = useQuery(GET_USER_PROFILE_BY_LOGIN, {
-    variables: { login },
-  });
-
-  if (loading) {
-    return <UserProfileLoader />;
-  }
-  if (error) {
-    return <DashboardContentBadRequest message={error.message} />; // TODO: UI
-  }
-  if (!data) {
-    return <DashboardContentNotFound />; // TODO: UI
-  }
-
-  const { imgUrl, titles, coalition, grade, level, displayname } =
-    data.getPersonalGeneral.userProfile;
+  const { login, imgUrl, titles, coalition, grade, level, displayname } =
+    userProfile;
   const titleWithLogin = getTitleWithLogin(titles, login);
 
   const getCoalitionBackgroundFallbackUrlById = (id: number) => {

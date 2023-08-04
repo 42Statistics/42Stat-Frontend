@@ -1,3 +1,4 @@
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { useQuery } from '@apollo/client';
 import { gql } from '@shared/__generated__';
 import { DateTemplate } from '@shared/__generated__/graphql';
@@ -9,7 +10,7 @@ import {
 } from '@shared/components/DashboardContentView/Error';
 import { NumberCompare } from '@shared/components/DashboardContentView/Number/NumberCompare';
 import dayjs from 'dayjs';
-import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
 
 const GET_EVAL_COUNT_BY_DATE_TEMPLATE_BY_LOGIN = gql(/* GraphQL */ `
   query GetEvalCountByDateTemplateByLogin(
@@ -33,7 +34,7 @@ const GET_EVAL_COUNT_BY_DATE_TEMPLATE_BY_LOGIN = gql(/* GraphQL */ `
 `);
 
 export const MonthlyEvalCount = () => {
-  const { login } = useParams() as { login: string };
+  const { login } = useContext(UserProfileContext);
 
   const title = '월간 평가 횟수';
   const { loading, error, data } = useQuery(

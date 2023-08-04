@@ -1,3 +1,4 @@
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { useQuery } from '@apollo/client';
 import { gql } from '@shared/__generated__';
 import { DateTemplate } from '@shared/__generated__/graphql';
@@ -11,7 +12,7 @@ import { ProgressionBar } from '@shared/components/ProgressionBar';
 import { TextMax } from '@shared/components/TextMax';
 import { H3MediumText, HStack, Text, VStack } from '@shared/ui-kit';
 import dayjs from 'dayjs';
-import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
 
 const GET_PREFERRED_TIME_BY_DATE_TEMPLATE_BY_LOGIN = gql(/* GraphQL */ `
   query GetPrefferedTimeByDateTemplateByLogin(
@@ -35,7 +36,7 @@ const GET_PREFERRED_TIME_BY_DATE_TEMPLATE_BY_LOGIN = gql(/* GraphQL */ `
 `);
 
 export const PreferredTime = () => {
-  const { login } = useParams() as { login: string };
+  const { login } = useContext(UserProfileContext);
 
   const title = '주 접속 시간대';
   const { loading, error, data } = useQuery(

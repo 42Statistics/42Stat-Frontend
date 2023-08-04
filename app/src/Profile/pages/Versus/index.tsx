@@ -1,9 +1,12 @@
+import { ProfileVersusPageSkeleton } from '@/Profile/components/skeletons/ProfileVersusPageSkeleton';
 import { MyUserProfileContext } from '@/Profile/contexts/MyUserProfileContext';
 import { GET_USER_PROFILE_BY_LOGIN } from '@/Profile/dashboard-contents-queries/GET_USER_PROFILE_BY_LOGIN';
-import { profileVersusTabDashboardContents } from '@/Profile/dashboard-frames/profileVersusTabDashboardContents';
-import { profileVersusTabDashboardRows } from '@/Profile/dashboard-frames/profileVersusTabDashboardRows';
+import { profileVersusPageDashboardContents } from '@/Profile/dashboard-frames/profileVersusPageDashboardContents';
+import { profileVersusPageDashboardRows } from '@/Profile/dashboard-frames/profileVersusPageDashboardRows';
 import { useQuery } from '@apollo/client';
 import { userAtom } from '@shared/atoms/userAtom';
+import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
+import { FullPageApolloNotFoundView } from '@shared/components/ApolloError/FullPageApolloNotFoundView';
 import { Dashboard } from '@shared/components/Dashboard';
 import { Seo } from '@shared/components/Seo';
 import { withFooter } from '@shared/hoc/withFooter';
@@ -18,21 +21,21 @@ const ProfileVersusPage = () => {
   });
 
   if (loading) {
-    return null;
+    return <ProfileVersusPageSkeleton />;
   }
   if (error) {
-    return null;
+    return <FullPageApolloErrorView message={error.message} />;
   }
   if (!data) {
-    return null;
+    return <FullPageApolloNotFoundView />;
   }
   const { userProfile } = data.getPersonalGeneral;
 
   return (
     <MyUserProfileContext.Provider value={userProfile}>
       <Dashboard
-        contents={profileVersusTabDashboardContents}
-        rows={profileVersusTabDashboardRows}
+        contents={profileVersusPageDashboardContents}
+        rows={profileVersusPageDashboardRows}
       />
     </MyUserProfileContext.Provider>
   );

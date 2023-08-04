@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet-async';
 import { Outlet } from 'react-router-dom';
 import { landingLayoutGlobalStyle } from './landingLayoutGlobalStyle';
 
-export const LandingLayout = () => {
+const LandingLayout = () => {
   return (
     <>
       <Helmet>
@@ -29,3 +29,5 @@ const Layout = styled.main`
   background-repeat: no-repeat;
   background-attachment: fixed;
 `;
+
+export default LandingLayout;

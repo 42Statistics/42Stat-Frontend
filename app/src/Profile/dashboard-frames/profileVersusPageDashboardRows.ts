@@ -1,6 +1,6 @@
 import type { DashboardRowType } from '@shared/types/Dashboard';
 
-export const profileVersusTabDashboardRows: DashboardRowType[] = [
+export const profileVersusPageDashboardRows: DashboardRowType[] = [
   {
     colSpan: 3,
     items: [

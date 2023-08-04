@@ -14,7 +14,7 @@ import { Helmet } from 'react-helmet-async';
 import { Outlet } from 'react-router-dom';
 import { mainLayoutGlobalStyle } from './mainLayoutGlobalStyle';
 
-export const MainLayout = () => {
+const MainLayout = () => {
   const [isSpotlightOpen, setIsSpotlightOpen] = useAtom(isSpotlightOpenAtom);
   const device = useDeviceType();
 
@@ -68,3 +68,5 @@ const Layout = styled.main`
     padding: ['0 2rem', '3rem', '3rem 4.5rem'],
   })}
 `;
+
+export default MainLayout;

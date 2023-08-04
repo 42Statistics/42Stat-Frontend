@@ -12,7 +12,7 @@ import {
   TotalCount,
 } from '../dashboard-contents/Eval';
 
-export const profileEvalTabDashboardContents: DashboardItemProps[] = [
+export const profileEvalPageDashboardContents: DashboardItemProps[] = [
   {
     id: 0,
     content: CorrectionPoint,

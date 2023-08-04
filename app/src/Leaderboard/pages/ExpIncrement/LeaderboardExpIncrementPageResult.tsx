@@ -1,5 +1,5 @@
 import { Leaderboard } from '@/Leaderboard/components/Leaderboard';
-import { LeaderboardTabResultSkeleton } from '@/Leaderboard/components/LeaderboardTabResultSkeleton';
+import { LeaderboardResultSkeleton } from '@/Leaderboard/components/skeletons/LeaderboardResultSkeleton';
 import { QueryResult } from '@apollo/client';
 import {
   GetLeaderboardExpIncrementQuery,
@@ -18,13 +18,13 @@ export const LeaderboardExpIncrementPageResult = ({
   result: { data, loading, error },
 }: LeaderboardExpIncrementPageResultProps) => {
   if (loading) {
-    return <LeaderboardTabResultSkeleton />;
+    return <LeaderboardResultSkeleton />;
   }
   if (error) {
     return <FullPageApolloErrorView message={error.message} />;
   }
   if (!data) {
-    return <LeaderboardTabResultSkeleton />;
+    return <LeaderboardResultSkeleton />;
   }
 
   const {

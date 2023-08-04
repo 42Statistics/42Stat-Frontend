@@ -60,6 +60,7 @@ type Fonts = {
 type ZIndex = {
   absoluteButton: number;
   modal: number;
+  tooltip: number;
 };
 
 type Radius = {

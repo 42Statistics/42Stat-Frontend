@@ -2,15 +2,8 @@ import NotFoundPage from '@/Error/404';
 import FtOAuthPage from '@/FtOAuth';
 import FtOAuthRedirectPage from '@/FtOAuthRedirect';
 import { HomePageSkeleton } from '@/Home/components/HomePageSkeleton';
-import LaederboardPage from '@/Leaderboard';
-import LeaderboardCoalitionScoreTab from '@/Leaderboard/tabs/CoalitionScore';
-import LeaderboardEvalCountTab from '@/Leaderboard/tabs/EvalCount';
-import LeaderboardExpIncrementTab from '@/Leaderboard/tabs/ExpIncrement';
-import LeaderboardLevelTab from '@/Leaderboard/tabs/Level';
-import ProfilePage from '@/Profile';
-import ProfileEvalTab from '@/Profile/tabs/Eval';
-import ProfileGeneralTab from '@/Profile/tabs/General';
-import ProfileVersusTab from '@/Profile/tabs/Versus';
+import LeaderboardLayout from '@/Leaderboard';
+import ProfileLayout from '@/Profile';
 import SettingPage from '@/Setting';
 import { AuthGuard } from '@core/guards/AuthGuard';
 import { NoAuthGuard } from '@core/guards/NoAuthGuard';
@@ -25,6 +18,19 @@ const LandingPage = lazy(() => import('@/Landing'));
 const HomePage = lazy(() => import('@/Home'));
 const EvalLogSearchPage = lazy(() => import('@/EvalLogSearch'));
 const ProjectDetailPage = lazy(() => import('@/Project/ProjectDetailPage'));
+const ProfileGeneralPage = lazy(() => import('@/Profile/pages/General'));
+const ProfileEvalPage = lazy(() => import('@/Profile/pages/Eval'));
+const ProfileVersusPage = lazy(() => import('@/Profile/pages/Versus'));
+const LeaderboardLevelPage = lazy(() => import('@/Leaderboard/pages/Level'));
+const LeaderboardExpIncrementPage = lazy(
+  () => import('@/Leaderboard/pages/ExpIncrement'),
+);
+const LeaderboardCoalitionScorePage = lazy(
+  () => import('@/Leaderboard/pages/CoalitionScore'),
+);
+const LeaderboardEvalCountPage = lazy(
+  () => import('@/Leaderboard/pages/EvalCount'),
+);
 
 export const AppRoutes = () => {
   return (
@@ -64,45 +70,87 @@ export const AppRoutes = () => {
               </Suspense>
             }
           />
-          <Route path={ROUTES.PROFILE} element={<ProfilePage />}>
+          <Route path={ROUTES.PROFILE} element={<ProfileLayout />}>
             <Route index element={<Navigate replace to="general" />} />
             <Route
-              path={ROUTES.PROFILE_GENERAL_TAB}
-              element={<ProfileGeneralTab />}
+              path={ROUTES.PROFILE_GENERAL}
+              element={
+                <Suspense>
+                  <ProfileGeneralPage />
+                </Suspense>
+              }
             />
             <Route
-              path={ROUTES.PROFILE_EVAL_TAB}
-              element={<ProfileEvalTab />}
+              path={ROUTES.PROFILE_EVAL}
+              element={
+                <Suspense>
+                  <ProfileEvalPage />
+                </Suspense>
+              }
             />
             <Route
-              path={ROUTES.PROFILE_VERSUS_TAB}
-              element={<ProfileVersusTab />}
+              path={ROUTES.PROFILE_VERSUS}
+              element={
+                <Suspense>
+                  <ProfileVersusPage />
+                </Suspense>
+              }
             />
           </Route>
-          <Route path={ROUTES.LEADERBOARD} element={<LaederboardPage />}>
+          <Route path={ROUTES.LEADERBOARD} element={<LeaderboardLayout />}>
             <Route
               index
               element={<Navigate replace to={ROUTES.LEADERBOARD_LEVEL} />}
             />
             <Route
               path={ROUTES.LEADERBOARD_LEVEL}
-              element={<LeaderboardLevelTab />}
+              element={
+                <Suspense>
+                  <LeaderboardLevelPage />
+                </Suspense>
+              }
             />
             <Route
               path={ROUTES.LEADERBOARD_EXP_INCREMENT}
-              element={<LeaderboardExpIncrementTab />}
+              element={
+                <Suspense>
+                  <LeaderboardExpIncrementPage />
+                </Suspense>
+              }
             />
             <Route
               path={ROUTES.LEADERBOARD_COALITION_SCORE}
-              element={<LeaderboardCoalitionScoreTab />}
+              element={
+                <Suspense>
+                  <LeaderboardCoalitionScorePage />
+                </Suspense>
+              }
             />
             <Route
               path={ROUTES.LEADERBOARD_EVAL_COUNT}
-              element={<LeaderboardEvalCountTab />}
+              element={
+                <Suspense>
+                  <LeaderboardEvalCountPage />
+                </Suspense>
+              }
             />
           </Route>
-          <Route path={ROUTES.EVALLOG} element={<EvalLogSearchPage />} />
-          <Route path={ROUTES.PROJECT_DETAIL} element={<ProjectDetailPage />} />
+          <Route
+            path={ROUTES.EVALLOG}
+            element={
+              <Suspense>
+                <EvalLogSearchPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path={ROUTES.PROJECT_DETAIL}
+            element={
+              <Suspense>
+                <ProjectDetailPage />
+              </Suspense>
+            }
+          />
           <Route path={ROUTES.SETTING} element={<SettingPage />} />
         </Route>
       </Route>

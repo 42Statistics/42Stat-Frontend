@@ -7,7 +7,8 @@ import { Pagination } from '@shared/components/Pagination';
 import { Seo } from '@shared/components/Seo';
 import { withFooter } from '@shared/hoc/withFooter';
 import { withHead } from '@shared/hoc/withHead';
-import { VStack } from '@shared/ui-kit';
+import { useSegmentedControl } from '@shared/hooks/useSegmentedControl';
+import { SegmentedControl, VStack } from '@shared/ui-kit';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 import { useEffect, useState } from 'react';
 import {
@@ -15,15 +16,15 @@ import {
   useNavigate,
   useSearchParams,
 } from 'react-router-dom';
-import { LeaderboardLevelTabResult } from './LeaderboardLevelTabResult';
+import { LeaderboardExpIncrementPageResult } from './LeaderboardExpIncrementPageResult';
 
-const GET_LEADERBOARD_LEVEL = gql(/* GraphQL */ `
-  query GetLeaderboardLevel(
+const GET_LEADERBOARD_EXP_INCREMENT = gql(/* GraphQL */ `
+  query GetLeaderboardExpIncrement(
     $pageSize: Int!
     $pageNumber: Int!
     $dateTemplate: DateTemplate!
   ) {
-    getLeaderboardLevel {
+    getLeaderboardExpIncrement {
       byDateTemplate(
         pageSize: $pageSize
         pageNumber: $pageNumber
@@ -57,20 +58,45 @@ const GET_LEADERBOARD_LEVEL = gql(/* GraphQL */ `
   }
 `);
 
-const LeaderboardLevelTab = () => {
+const LeaderboardExpIncrementPage = () => {
   const SIZE_PER_PAGE = 50;
   const device = useDeviceType();
   const navigate = useNavigate();
-  const [search, result] = useLazyQuery(GET_LEADERBOARD_LEVEL);
+  const [search, result] = useLazyQuery(GET_LEADERBOARD_EXP_INCREMENT);
   const [totalPage, setTotalPage] = useState<number>(0);
   const [searchParams] = useSearchParams();
   const dateTemplate = parseDateTemplate(
     searchParams.get(QUERY_STRING_KEY.DATE_TEMPLATE),
-    DateTemplate.Total,
+    DateTemplate.CurrWeek,
   );
   const pageNumber = Number(
     searchParams.get(QUERY_STRING_KEY.PAGE_NUMBER) ?? '1',
   );
+
+  const options = [
+    {
+      label: '주간',
+      value: DateTemplate.CurrWeek,
+    },
+    {
+      label: '월간',
+      value: DateTemplate.CurrMonth,
+    },
+  ];
+
+  const { controlRef, segments } = useSegmentedControl(options);
+  const segmentIndex = options.findIndex(
+    (option) => option.value === dateTemplate,
+  );
+
+  const handleSegmentedControlChange = (index: number) => {
+    const dateTemplate = options[index].value;
+    navigate({
+      search: `?${createSearchParams({
+        [QUERY_STRING_KEY.DATE_TEMPLATE]: dateTemplate,
+      })}`,
+    });
+  };
 
   const handlePageNumberChange = (pageNumber: number) => {
     navigate({
@@ -86,7 +112,7 @@ const LeaderboardLevelTab = () => {
       return;
     }
     setTotalPage(
-      result.data?.getLeaderboardLevel.byDateTemplate.data.totalRanking
+      result.data?.getLeaderboardExpIncrement.byDateTemplate.data.totalRanking
         .totalCount ?? 0,
     );
   }, [result]);
@@ -103,7 +129,13 @@ const LeaderboardLevelTab = () => {
 
   return (
     <VStack w="100%" spacing="6rem">
-      <LeaderboardLevelTabResult result={result} />
+      <SegmentedControl
+        index={segmentIndex}
+        onIndexChange={handleSegmentedControlChange}
+        controlRef={controlRef}
+        segments={segments}
+      />
+      <LeaderboardExpIncrementPageResult result={result} />
       <Pagination
         currPageNumber={pageNumber}
         onPageNumberChange={handlePageNumberChange}
@@ -115,7 +147,7 @@ const LeaderboardLevelTab = () => {
 };
 
 const Head = () => {
-  return <Seo title="랭킹 › 레벨" />;
+  return <Seo title="랭킹 › 경험치 증가량" />;
 };
 
-export default withHead(withFooter(LeaderboardLevelTab), Head);
+export default withHead(withFooter(LeaderboardExpIncrementPage), Head);

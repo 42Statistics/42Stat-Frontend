@@ -16,15 +16,15 @@ import {
   useNavigate,
   useSearchParams,
 } from 'react-router-dom';
-import { LeaderboardExpIncrementTabResult } from './LeaderboardExpIncrementTabResult';
+import { LeaderboardCoalitionScorePageResult } from './LeaderboardCoalitionScorePageResult';
 
-const GET_LEADERBOARD_EXP_INCREMENT = gql(/* GraphQL */ `
-  query GetLeaderboardExpIncrement(
+const GET_LEADERBOARD_COALITION_SCORE = gql(/* GraphQL */ `
+  query GetLeaderboardCoalitionScore(
     $pageSize: Int!
     $pageNumber: Int!
     $dateTemplate: DateTemplate!
   ) {
-    getLeaderboardExpIncrement {
+    getLeaderboardScore {
       byDateTemplate(
         pageSize: $pageSize
         pageNumber: $pageNumber
@@ -58,11 +58,11 @@ const GET_LEADERBOARD_EXP_INCREMENT = gql(/* GraphQL */ `
   }
 `);
 
-const LeaderboardExpIncrementTab = () => {
+const LeaderboardCoalitionScorePage = () => {
   const SIZE_PER_PAGE = 50;
   const device = useDeviceType();
   const navigate = useNavigate();
-  const [search, result] = useLazyQuery(GET_LEADERBOARD_EXP_INCREMENT);
+  const [search, result] = useLazyQuery(GET_LEADERBOARD_COALITION_SCORE);
   const [totalPage, setTotalPage] = useState<number>(0);
   const [searchParams] = useSearchParams();
   const dateTemplate = parseDateTemplate(
@@ -81,6 +81,10 @@ const LeaderboardExpIncrementTab = () => {
     {
       label: '월간',
       value: DateTemplate.CurrMonth,
+    },
+    {
+      label: '누적',
+      value: DateTemplate.Total,
     },
   ];
 
@@ -112,7 +116,7 @@ const LeaderboardExpIncrementTab = () => {
       return;
     }
     setTotalPage(
-      result.data?.getLeaderboardExpIncrement.byDateTemplate.data.totalRanking
+      result.data?.getLeaderboardScore.byDateTemplate.data.totalRanking
         .totalCount ?? 0,
     );
   }, [result]);
@@ -135,7 +139,7 @@ const LeaderboardExpIncrementTab = () => {
         controlRef={controlRef}
         segments={segments}
       />
-      <LeaderboardExpIncrementTabResult result={result} />
+      <LeaderboardCoalitionScorePageResult result={result} />
       <Pagination
         currPageNumber={pageNumber}
         onPageNumberChange={handlePageNumberChange}
@@ -147,7 +151,7 @@ const LeaderboardExpIncrementTab = () => {
 };
 
 const Head = () => {
-  return <Seo title="랭킹 › 경험치 증가량" />;
+  return <Seo title="랭킹 › 코알리숑 스코어" />;
 };
 
-export default withHead(withFooter(LeaderboardExpIncrementTab), Head);
+export default withHead(withFooter(LeaderboardCoalitionScorePage), Head);

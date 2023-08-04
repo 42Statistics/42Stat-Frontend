@@ -7,16 +7,16 @@ import {
 } from '@shared/__generated__/graphql';
 import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
 
-type LeaderboardEvalCountTabResultProps = {
+type LeaderboardEvalCountPageResultProps = {
   result: QueryResult<
     GetLeaderboardEvalCountQuery,
     GetLeaderboardEvalCountQueryVariables
   >;
 };
 
-export const LeaderboardEvalCountTabResult = ({
+export const LeaderboardEvalCountPageResult = ({
   result: { data, loading, error },
-}: LeaderboardEvalCountTabResultProps) => {
+}: LeaderboardEvalCountPageResultProps) => {
   if (loading) {
     return <LeaderboardTabResultSkeleton />;
   }

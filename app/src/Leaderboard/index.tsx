@@ -2,8 +2,7 @@ import { ROUTES } from '@shared/constants/ROUTES';
 import { Tab, Tabs, VStack } from '@shared/ui-kit';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
-// waterfall 방지를 위해 Tab은 lazy loading 하지 않겠습니다.
-const LeaderboardPage = () => {
+const LeaderboardLayout = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -44,4 +43,4 @@ const LeaderboardPage = () => {
   );
 };
 
-export default LeaderboardPage;
+export default LeaderboardLayout;

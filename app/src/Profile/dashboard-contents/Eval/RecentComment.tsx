@@ -1,3 +1,4 @@
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { useQuery } from '@apollo/client';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
@@ -6,11 +7,11 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { Text } from '@shared/ui-kit';
-import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
 import { GET_PERSONAL_EVAL_ZERO_COST_BY_LOGIN } from '../../dashboard-contents-queries/GET_PERSONAL_EVAL_ZERO_COST_BY_LOGIN';
 
 export const RecentComment = () => {
-  const { login } = useParams() as { login: string };
+  const { login } = useContext(UserProfileContext);
 
   const title = '최근 쓴 코멘트';
   const { loading, error, data } = useQuery(

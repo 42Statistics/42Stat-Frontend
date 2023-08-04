@@ -1,3 +1,4 @@
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { useQuery } from '@apollo/client';
 import { gql } from '@shared/__generated__';
 import { DashboardContent } from '@shared/components/DashboardContent';
@@ -8,7 +9,7 @@ import {
 } from '@shared/components/DashboardContentView/Error';
 import { ALT } from '@shared/constants/accessibility/ALT';
 import { H3MediumText, HStack, Image, Label, VStack } from '@shared/ui-kit';
-import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
 
 const GET_CHARACTER_BY_LOGIN = gql(/* GraphQL */ `
   query GetCharacterByLogin($login: String!) {
@@ -27,7 +28,7 @@ const GET_CHARACTER_BY_LOGIN = gql(/* GraphQL */ `
 `);
 
 export const Character = () => {
-  const { login } = useParams() as { login: string };
+  const { login } = useContext(UserProfileContext);
 
   const title = '이 유저를 캐릭터로 표현한다면?';
   const description = '과제 점수, 레벨 증가, 접속 시간, 평가 횟수 기준';

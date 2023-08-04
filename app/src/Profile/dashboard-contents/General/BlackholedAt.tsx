@@ -3,6 +3,7 @@ import { ReactComponent as SmileySadSvg } from '@/Profile/assets/blackhole/smile
 import { ReactComponent as SmileyScaredSvg } from '@/Profile/assets/blackhole/smiley-scared.svg';
 import { ReactComponent as SmileySleepySvg } from '@/Profile/assets/blackhole/smiley-sleepy.svg';
 import { ReactComponent as SmileySmile1Svg } from '@/Profile/assets/blackhole/smiley-smile-1.svg';
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN } from '@/Profile/dashboard-contents-queries/GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
@@ -14,11 +15,11 @@ import {
 } from '@shared/components/DashboardContentView/Error';
 import { H2BoldText, HStack } from '@shared/ui-kit';
 import { getBlackholeDaysLeft } from '@shared/utils/getBlackholeDaysLeft';
-import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
 
 export const BlackholedAt = () => {
   const theme = useTheme();
-  const { login } = useParams() as { login: string };
+  const { login } = useContext(UserProfileContext);
 
   const title = 'Black Hole Absorption';
   const { loading, error, data } = useQuery(

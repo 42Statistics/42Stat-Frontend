@@ -1,3 +1,4 @@
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { useQuery } from '@apollo/client';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
@@ -7,11 +8,11 @@ import {
   NoneDash,
 } from '@shared/components/DashboardContentView/Error';
 import { TextProject } from '@shared/components/DashboardContentView/Text/TextProject';
-import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
 import { GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN } from '../../dashboard-contents-queries/GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN';
 
 export const LastPassed = () => {
-  const { login } = useParams() as { login: string };
+  const { login } = useContext(UserProfileContext);
 
   const title = '최근 통과한 과제';
   const { loading, error, data } = useQuery(

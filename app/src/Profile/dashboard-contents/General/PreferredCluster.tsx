@@ -1,3 +1,4 @@
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { useQuery } from '@apollo/client';
 import { gql } from '@shared/__generated__';
 import { DateTemplate } from '@shared/__generated__/graphql';
@@ -10,7 +11,7 @@ import {
 } from '@shared/components/DashboardContentView/Error';
 import { TextDefault } from '@shared/components/DashboardContentView/Text/TextDefault';
 import dayjs from 'dayjs';
-import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
 
 const GET_PREFERRED_CLUSTER_BY_DATE_TEMPLATE_BY_LOGIN = gql(/* GraphQL */ `
   query GetPreferredClusterByDateTemplateByLogin(
@@ -30,7 +31,7 @@ const GET_PREFERRED_CLUSTER_BY_DATE_TEMPLATE_BY_LOGIN = gql(/* GraphQL */ `
 `);
 
 export const PreferredCluster = () => {
-  const { login } = useParams() as { login: string };
+  const { login } = useContext(UserProfileContext);
 
   const title = '주 접속 클러스터';
   const { loading, error, data } = useQuery(

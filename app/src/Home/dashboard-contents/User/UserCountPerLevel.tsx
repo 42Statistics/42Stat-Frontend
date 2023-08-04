@@ -7,6 +7,7 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
+import { InfoTooltip } from '@shared/components/InfoTooltip';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 
 const GET_USER_COUNT_PER_LEVEL = gql(/* GraphQL */ `
@@ -47,7 +48,13 @@ export const UserCountPerLevel = () => {
   ];
 
   return (
-    <DashboardContent title={title} type="ApexCharts">
+    <DashboardContent
+      title={title}
+      titleRight={
+        <InfoTooltip text="여행 중 : 멤버 포함, 블랙홀 제외한 러너" />
+      }
+      type="ApexCharts"
+    >
       <UserCountPerLevelChart categories={categories} series={series} />
     </DashboardContent>
   );

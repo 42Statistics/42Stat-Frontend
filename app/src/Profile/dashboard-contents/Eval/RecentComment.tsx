@@ -6,6 +6,7 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
+import { InfoTooltip } from '@shared/components/InfoTooltip';
 import { Text } from '@shared/ui-kit';
 import { useContext } from 'react';
 import { GET_PERSONAL_EVAL_ZERO_COST_BY_LOGIN } from '../../dashboard-contents-queries/GET_PERSONAL_EVAL_ZERO_COST_BY_LOGIN';
@@ -34,7 +35,11 @@ export const RecentComment = () => {
   const { recentComment } = data.getPersonalEval; // FIXME: null일 수 있음.
 
   return (
-    <DashboardContent title={title} type="Scrollable">
+    <DashboardContent
+      title={title}
+      titleRight={<InfoTooltip text="코멘트 : 평가하러 가서 작성한 리뷰" />}
+      type="Scrollable"
+    >
       <Text>{recentComment}</Text>
     </DashboardContent>
   );

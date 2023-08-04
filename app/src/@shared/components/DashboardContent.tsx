@@ -5,6 +5,7 @@ import {
   Body1MediumText,
   CaptionText,
   Center,
+  HStack,
   Scroll,
   VStack,
 } from '@shared/ui-kit';
@@ -14,12 +15,14 @@ type DashboardContentType = 'Default' | 'ApexCharts' | 'Scrollable';
 export type DashboardContentProps = PropsWithReactElementChildren<{
   title?: string;
   description?: string;
+  titleRight?: React.ReactNode;
   type?: DashboardContentType;
 }>;
 
 export const DashboardContent = ({
   title,
   description,
+  titleRight,
   children,
   type = 'Default',
 }: DashboardContentProps) => {
@@ -29,7 +32,10 @@ export const DashboardContent = ({
     <Layout>
       <VStack w="100%" h="100%" spacing="2rem" align="start">
         <VStack w="100%" align="start" style={{ marginLeft: '1rem' }}>
-          {title ? <Body1MediumText>{title}</Body1MediumText> : null}
+          <HStack spacing="0.6rem" wrap="wrap">
+            {title ? <Body1MediumText>{title}</Body1MediumText> : null}
+            {titleRight ? titleRight : null}
+          </HStack>
           {description ? (
             <CaptionText color={theme.colors.mono.gray300}>
               {description}

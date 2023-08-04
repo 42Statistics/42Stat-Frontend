@@ -1,5 +1,6 @@
+import { MyUserProfileContext } from '@/Profile/contexts/MyUserProfileContext';
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { useQuery } from '@apollo/client';
-import { userAtom } from '@shared/atoms/userAtom';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,
@@ -7,17 +8,16 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { NumberVersus } from '@shared/components/DashboardContentView/Number/NumberVersus';
-import { useAtomValue } from 'jotai';
-import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
 import { GET_VERSUS_ZERO_COST } from '../../dashboard-contents-queries/GET_VERSUS_ZERO_COST';
 
 export const Level = () => {
-  const { login } = useParams() as { login: string };
-  const user = useAtomValue(userAtom);
+  const myUserProfile = useContext(MyUserProfileContext);
+  const userProfile = useContext(UserProfileContext);
 
   const title = '레벨';
   const { loading, error, data } = useQuery(GET_VERSUS_ZERO_COST, {
-    variables: { login1: login, login2: user.login },
+    variables: { login1: myUserProfile.login, login2: userProfile.login },
   });
 
   if (loading) {
@@ -32,16 +32,21 @@ export const Level = () => {
 
   const {
     data1: {
-      userProfile: { level },
+      userProfile: { level: myLevel },
     },
     data2: {
-      userProfile: { level: myLevel },
+      userProfile: { level },
     },
   } = data;
 
   return (
     <DashboardContent title={title}>
-      <NumberVersus number1={level} number2={myLevel} />
+      <NumberVersus
+        imgUrl1={myUserProfile.imgUrl}
+        number1={myLevel}
+        imgUrl2={userProfile.imgUrl}
+        number2={level}
+      />
     </DashboardContent>
   );
 };

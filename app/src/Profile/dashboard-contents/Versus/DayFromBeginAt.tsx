@@ -1,5 +1,6 @@
+import { MyUserProfileContext } from '@/Profile/contexts/MyUserProfileContext';
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { useQuery } from '@apollo/client';
-import { userAtom } from '@shared/atoms/userAtom';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,
@@ -8,17 +9,16 @@ import {
 } from '@shared/components/DashboardContentView/Error';
 import { NumberVersus } from '@shared/components/DashboardContentView/Number/NumberVersus';
 import { getTimeDiffFromNow } from '@shared/utils/getTimeDiffFromNow';
-import { useAtomValue } from 'jotai';
-import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
 import { GET_VERSUS_ZERO_COST } from '../../dashboard-contents-queries/GET_VERSUS_ZERO_COST';
 
 export const DayFromBeginAt = () => {
-  const { login } = useParams() as { login: string };
-  const user = useAtomValue(userAtom);
+  const myUserProfile = useContext(MyUserProfileContext);
+  const userProfile = useContext(UserProfileContext);
 
   const title = '본과정 시작한지';
   const { loading, error, data } = useQuery(GET_VERSUS_ZERO_COST, {
-    variables: { login1: login, login2: user.login },
+    variables: { login1: myUserProfile.login, login2: userProfile.login },
   });
 
   if (loading) {
@@ -32,8 +32,8 @@ export const DayFromBeginAt = () => {
   }
 
   const {
-    data1: { beginAt },
-    data2: { beginAt: myBeginAt },
+    data1: { beginAt: myBeginAt },
+    data2: { beginAt },
   } = data;
 
   const diff = Math.abs(getTimeDiffFromNow(new Date(beginAt), 'day'));
@@ -42,7 +42,13 @@ export const DayFromBeginAt = () => {
 
   return (
     <DashboardContent title={title}>
-      <NumberVersus number1={diff} number2={myDiff} unit={unit} />
+      <NumberVersus
+        imgUrl1={myUserProfile.imgUrl}
+        number1={myDiff}
+        imgUrl2={userProfile.imgUrl}
+        number2={diff}
+        unit={unit}
+      />
     </DashboardContent>
   );
 };

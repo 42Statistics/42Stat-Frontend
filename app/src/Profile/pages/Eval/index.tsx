@@ -1,5 +1,5 @@
-import { profileEvalTabDashboardContents } from '@/Profile/dashboard-frames/profileEvalTabDashboardContents';
-import { profileEvalTabDashboardRows } from '@/Profile/dashboard-frames/profileEvalTabDashboardRows';
+import { profileEvalPageDashboardContents } from '@/Profile/dashboard-frames/profileEvalPageDashboardContents';
+import { profileEvalPageDashboardRows } from '@/Profile/dashboard-frames/profileEvalPageDashboardRows';
 import { Dashboard } from '@shared/components/Dashboard';
 import { Seo } from '@shared/components/Seo';
 import { withFooter } from '@shared/hoc/withFooter';
@@ -9,8 +9,8 @@ import { useParams } from 'react-router-dom';
 const ProfileEvalPage = () => {
   return (
     <Dashboard
-      contents={profileEvalTabDashboardContents}
-      rows={profileEvalTabDashboardRows}
+      contents={profileEvalPageDashboardContents}
+      rows={profileEvalPageDashboardRows}
     />
   );
 };

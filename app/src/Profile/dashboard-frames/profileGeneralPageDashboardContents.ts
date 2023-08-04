@@ -14,7 +14,7 @@ import {
   Wallet,
 } from '../dashboard-contents/General';
 
-export const profileGeneralTabDashboardContents: DashboardItemProps[] = [
+export const profileGeneralPageDashboardContents: DashboardItemProps[] = [
   {
     id: 0,
     content: BeginAt,

@@ -1,19 +1,20 @@
-import NotFoundPage from '@/Error/404';
-import FtOAuthPage from '@/FtOAuth';
-import FtOAuthRedirectPage from '@/FtOAuthRedirect';
-import { HomePageSkeleton } from '@/Home/components/HomePageSkeleton';
-import LeaderboardLayout from '@/Leaderboard';
-import ProfileLayout from '@/Profile';
-import SettingPage from '@/Setting';
+import { HomePageSkeleton } from '@/Home/components/skeletons/HomePageSkeleton';
+import { LeaderboardPageSkeleton } from '@/Leaderboard/components/skeletons/LeaderboardPageSkeleton';
+import { ProfileEvalPageSkeleton } from '@/Profile/components/skeletons/ProfileEvalPageSkeleton';
+import { ProfileGeneralPageSkeleton } from '@/Profile/components/skeletons/ProfileGeneralPageSkeleton';
+import { ProfileVersusPageSkeleton } from '@/Profile/components/skeletons/ProfileVersusPageSkeleton';
+import { UserProfileSkeleton } from '@/Profile/components/skeletons/UserProfileSkeleton';
 import { AuthGuard } from '@core/guards/AuthGuard';
 import { NoAuthGuard } from '@core/guards/NoAuthGuard';
-import { LandingLayout } from '@core/layouts/LandingLayout';
-import { MainLayout } from '@core/layouts/MainLayout';
 import { ROUTES } from '@shared/constants/ROUTES';
 import { DeferredComponent } from '@shared/ui-kit';
 import { Suspense, lazy } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
+const LandingLayout = lazy(() => import('@core/layouts/LandingLayout'));
+const MainLayout = lazy(() => import('@core/layouts/MainLayout'));
+const ProfileLayout = lazy(() => import('@/Profile'));
+const LeaderboardLayout = lazy(() => import('@/Leaderboard'));
 const LandingPage = lazy(() => import('@/Landing'));
 const HomePage = lazy(() => import('@/Home'));
 const EvalLogSearchPage = lazy(() => import('@/EvalLogSearch'));
@@ -31,12 +32,22 @@ const LeaderboardCoalitionScorePage = lazy(
 const LeaderboardEvalCountPage = lazy(
   () => import('@/Leaderboard/pages/EvalCount'),
 );
+const NotFoundPage = lazy(() => import('@/Error/404'));
+const FtOAuthPage = lazy(() => import('@/FtOAuth'));
+const FtOAuthRedirectPage = lazy(() => import('@/FtOAuthRedirect'));
+const SettingPage = lazy(() => import('@/Setting'));
 
 export const AppRoutes = () => {
   return (
     <Routes>
       <Route element={<NoAuthGuard />}>
-        <Route element={<LandingLayout />}>
+        <Route
+          element={
+            <Suspense>
+              <LandingLayout />
+            </Suspense>
+          }
+        >
           <Route
             path={ROUTES.ROOT}
             element={
@@ -45,17 +56,32 @@ export const AppRoutes = () => {
               </Suspense>
             }
           />
+          <Route
+            path={ROUTES.FT_OAUTH}
+            element={
+              <Suspense>
+                <FtOAuthPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path={ROUTES.FT_OAUTH_REDIRECT}
+            element={
+              <Suspense>
+                <FtOAuthRedirectPage />
+              </Suspense>
+            }
+          />
         </Route>
       </Route>
-      <Route element={<LandingLayout />}>
-        <Route path={ROUTES.FT_OAUTH} element={<FtOAuthPage />} />
-        <Route
-          path={ROUTES.FT_OAUTH_REDIRECT}
-          element={<FtOAuthRedirectPage />}
-        />
-      </Route>
       <Route element={<AuthGuard />}>
-        <Route element={<MainLayout />}>
+        <Route
+          element={
+            <Suspense>
+              <MainLayout />
+            </Suspense>
+          }
+        >
           <Route
             path={ROUTES.HOME}
             element={
@@ -70,12 +96,19 @@ export const AppRoutes = () => {
               </Suspense>
             }
           />
-          <Route path={ROUTES.PROFILE} element={<ProfileLayout />}>
+          <Route
+            path={ROUTES.PROFILE}
+            element={
+              <Suspense fallback={<UserProfileSkeleton />}>
+                <ProfileLayout />
+              </Suspense>
+            }
+          >
             <Route index element={<Navigate replace to="general" />} />
             <Route
               path={ROUTES.PROFILE_GENERAL}
               element={
-                <Suspense>
+                <Suspense fallback={<ProfileGeneralPageSkeleton />}>
                   <ProfileGeneralPage />
                 </Suspense>
               }
@@ -83,7 +116,7 @@ export const AppRoutes = () => {
             <Route
               path={ROUTES.PROFILE_EVAL}
               element={
-                <Suspense>
+                <Suspense fallback={<ProfileEvalPageSkeleton />}>
                   <ProfileEvalPage />
                 </Suspense>
               }
@@ -91,13 +124,20 @@ export const AppRoutes = () => {
             <Route
               path={ROUTES.PROFILE_VERSUS}
               element={
-                <Suspense>
+                <Suspense fallback={<ProfileVersusPageSkeleton />}>
                   <ProfileVersusPage />
                 </Suspense>
               }
             />
           </Route>
-          <Route path={ROUTES.LEADERBOARD} element={<LeaderboardLayout />}>
+          <Route
+            path={ROUTES.LEADERBOARD}
+            element={
+              <Suspense>
+                <LeaderboardLayout />
+              </Suspense>
+            }
+          >
             <Route
               index
               element={<Navigate replace to={ROUTES.LEADERBOARD_LEVEL} />}
@@ -105,7 +145,7 @@ export const AppRoutes = () => {
             <Route
               path={ROUTES.LEADERBOARD_LEVEL}
               element={
-                <Suspense>
+                <Suspense fallback={<LeaderboardPageSkeleton />}>
                   <LeaderboardLevelPage />
                 </Suspense>
               }
@@ -113,7 +153,7 @@ export const AppRoutes = () => {
             <Route
               path={ROUTES.LEADERBOARD_EXP_INCREMENT}
               element={
-                <Suspense>
+                <Suspense fallback={<LeaderboardPageSkeleton />}>
                   <LeaderboardExpIncrementPage />
                 </Suspense>
               }
@@ -121,7 +161,7 @@ export const AppRoutes = () => {
             <Route
               path={ROUTES.LEADERBOARD_COALITION_SCORE}
               element={
-                <Suspense>
+                <Suspense fallback={<LeaderboardPageSkeleton />}>
                   <LeaderboardCoalitionScorePage />
                 </Suspense>
               }
@@ -129,7 +169,7 @@ export const AppRoutes = () => {
             <Route
               path={ROUTES.LEADERBOARD_EVAL_COUNT}
               element={
-                <Suspense>
+                <Suspense fallback={<LeaderboardPageSkeleton />}>
                   <LeaderboardEvalCountPage />
                 </Suspense>
               }
@@ -151,11 +191,25 @@ export const AppRoutes = () => {
               </Suspense>
             }
           />
-          <Route path={ROUTES.SETTING} element={<SettingPage />} />
+          <Route
+            path={ROUTES.SETTING}
+            element={
+              <Suspense>
+                <SettingPage />
+              </Suspense>
+            }
+          />
         </Route>
       </Route>
       <Route element={<LandingLayout />}>
-        <Route path="*" element={<NotFoundPage />} />
+        <Route
+          path="*"
+          element={
+            <Suspense>
+              <NotFoundPage />
+            </Suspense>
+          }
+        />
       </Route>
     </Routes>
   );

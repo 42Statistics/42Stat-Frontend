@@ -1,8 +1,9 @@
 import { VStack } from '@shared/ui-kit';
+import { LeaderboardListItemSkeleteon } from './LeaderboardListItemSkeleton';
 
-export const LeaderboardTabResultSkeleton = () => {
+export const LeaderboardResultSkeleton = () => {
   return (
-    <VStack w="100%" spacing="6rem">
+    <VStack w="100%" spacing="2rem" style={{ marginTop: '4rem' }}>
       <LeaderboardListItemSkeleteon />
       <VStack w="100%" spacing="0.5rem">
         {Array.from({ length: 50 }, (x) => x).map((_, idx) => (
@@ -11,8 +12,4 @@ export const LeaderboardTabResultSkeleton = () => {
       </VStack>
     </VStack>
   );
-};
-
-const LeaderboardListItemSkeleteon = () => {
-  return <div style={{ width: '100%', height: '5rem' }} />;
 };

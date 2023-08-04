@@ -1,5 +1,5 @@
-import { profileGeneralTabDashboardContents } from '@/Profile/dashboard-frames/profileGeneralTabDashboardContents';
-import { profileGeneralTabDashboardRows } from '@/Profile/dashboard-frames/profileGeneralTabDashboardRows';
+import { profileGeneralPageDashboardContents } from '@/Profile/dashboard-frames/profileGeneralPageDashboardContents';
+import { profileGeneralPageDashboardRows } from '@/Profile/dashboard-frames/profileGeneralPageDashboardRows';
 import { Dashboard } from '@shared/components/Dashboard';
 import { Seo } from '@shared/components/Seo';
 import { withFooter } from '@shared/hoc/withFooter';
@@ -9,8 +9,8 @@ import { useParams } from 'react-router-dom';
 const ProfileGeneralPage = () => {
   return (
     <Dashboard
-      contents={profileGeneralTabDashboardContents}
-      rows={profileGeneralTabDashboardRows}
+      contents={profileGeneralPageDashboardContents}
+      rows={profileGeneralPageDashboardRows}
     />
   );
 };

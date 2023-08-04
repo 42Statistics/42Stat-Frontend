@@ -1,6 +1,6 @@
 import type { DashboardRowType } from '@shared/types/Dashboard';
 
-export const profileGeneralTabDashboardRows: DashboardRowType[] = [
+export const profileEvalPageDashboardRows: DashboardRowType[] = [
   {
     colSpan: 1,
     items: [
@@ -10,7 +10,11 @@ export const profileGeneralTabDashboardRows: DashboardRowType[] = [
       },
       {
         rowSpan: 1,
-        elementId: 6,
+        elementId: 3,
+      },
+      {
+        rowSpan: 1,
+        elementId: 1,
       },
       {
         rowSpan: 1,
@@ -22,51 +26,28 @@ export const profileGeneralTabDashboardRows: DashboardRowType[] = [
       },
       {
         rowSpan: 1,
-        elementId: 5,
-      },
-      {
-        rowSpan: 1,
-        elementId: 7,
+        elementId: 9,
       },
     ],
   },
-  {
-    colSpan: 3,
-    items: [
-      {
-        rowSpan: 2,
-        elementId: 11,
-      },
-    ],
-  },
-
   {
     colSpan: 1,
     items: [
       {
-        rowSpan: 1,
-        elementId: 1,
-      },
-      {
         rowSpan: 2,
-        elementId: 10,
+        elementId: 7,
       },
-      {
-        rowSpan: 2,
-        elementId: 9,
-      },
-      {
-        rowSpan: 1,
-        elementId: 3,
-      },
-    ],
-  },
-  {
-    colSpan: 3,
-    items: [
       {
         rowSpan: 2,
         elementId: 8,
+      },
+      {
+        rowSpan: 1,
+        elementId: 5,
+      },
+      {
+        rowSpan: 1,
+        elementId: 6,
       },
     ],
   },

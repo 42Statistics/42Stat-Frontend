@@ -10,7 +10,7 @@ import {
   TotalLogtime,
 } from '../dashboard-contents/Versus';
 
-export const profileVersusTabDashboardContents: DashboardItemProps[] = [
+export const profileVersusPageDashboardContents: DashboardItemProps[] = [
   {
     id: 0,
     content: Level,

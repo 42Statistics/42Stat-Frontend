@@ -2,21 +2,21 @@ import { Leaderboard } from '@/Leaderboard/components/Leaderboard';
 import { LeaderboardTabResultSkeleton } from '@/Leaderboard/components/LeaderboardTabResultSkeleton';
 import { QueryResult } from '@apollo/client';
 import {
-  GetLeaderboardCoalitionScoreQuery,
-  GetLeaderboardCoalitionScoreQueryVariables,
+  GetLeaderboardLevelQuery,
+  GetLeaderboardLevelQueryVariables,
 } from '@shared/__generated__/graphql';
 import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
 
-type LeaderboardCoalitionScoreTabResultProps = {
+type LeaderboardLevelPageResultProps = {
   result: QueryResult<
-    GetLeaderboardCoalitionScoreQuery,
-    GetLeaderboardCoalitionScoreQueryVariables
+    GetLeaderboardLevelQuery,
+    GetLeaderboardLevelQueryVariables
   >;
 };
 
-export const LeaderboardCoalitionScoreTabResult = ({
+export const LeaderboardLevelPageResult = ({
   result: { data, loading, error },
-}: LeaderboardCoalitionScoreTabResultProps) => {
+}: LeaderboardLevelPageResultProps) => {
   if (loading) {
     return <LeaderboardTabResultSkeleton />;
   }
@@ -34,12 +34,13 @@ export const LeaderboardCoalitionScoreTabResult = ({
     },
     start,
     end,
-  } = data.getLeaderboardScore.byDateTemplate;
+  } = data.getLeaderboardLevel.byDateTemplate;
 
   return (
     <Leaderboard
       me={me}
       list={nodes}
+      fixedNumber={2}
       start={new Date(start)}
       end={new Date(end)}
     />

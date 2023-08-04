@@ -6,7 +6,7 @@ import { withFooter } from '@shared/hoc/withFooter';
 import { withHead } from '@shared/hoc/withHead';
 import { useParams } from 'react-router-dom';
 
-const ProfileGeneralTab = () => {
+const ProfileGeneralPage = () => {
   return (
     <Dashboard
       contents={profileGeneralTabDashboardContents}
@@ -20,4 +20,4 @@ const Head = () => {
 
   return <Seo title={`${login} › 일반`} />;
 };
-export default withHead(withFooter(ProfileGeneralTab), Head);
+export default withHead(withFooter(ProfileGeneralPage), Head);

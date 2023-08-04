@@ -16,15 +16,15 @@ import {
   useNavigate,
   useSearchParams,
 } from 'react-router-dom';
-import { LeaderboardCoalitionScoreTabResult } from './LeaderboardCoalitionScoreTabResult';
+import { LeaderboardEvalCountPageResult } from './LeaderboardEvalCountPageResult';
 
-const GET_LEADERBOARD_COALITION_SCORE = gql(/* GraphQL */ `
-  query GetLeaderboardCoalitionScore(
+const GET_LEADERBOARD_EVAL_COUNT = gql(/* GraphQL */ `
+  query GetLeaderboardEvalCount(
     $pageSize: Int!
     $pageNumber: Int!
     $dateTemplate: DateTemplate!
   ) {
-    getLeaderboardScore {
+    getLeaderboardEvalCount {
       byDateTemplate(
         pageSize: $pageSize
         pageNumber: $pageNumber
@@ -58,11 +58,11 @@ const GET_LEADERBOARD_COALITION_SCORE = gql(/* GraphQL */ `
   }
 `);
 
-const LeaderboardCoalitionScoreTab = () => {
+const LeaderboardEvalCountPage = () => {
   const SIZE_PER_PAGE = 50;
   const device = useDeviceType();
   const navigate = useNavigate();
-  const [search, result] = useLazyQuery(GET_LEADERBOARD_COALITION_SCORE);
+  const [search, result] = useLazyQuery(GET_LEADERBOARD_EVAL_COUNT);
   const [totalPage, setTotalPage] = useState<number>(0);
   const [searchParams] = useSearchParams();
   const dateTemplate = parseDateTemplate(
@@ -116,7 +116,7 @@ const LeaderboardCoalitionScoreTab = () => {
       return;
     }
     setTotalPage(
-      result.data?.getLeaderboardScore.byDateTemplate.data.totalRanking
+      result.data?.getLeaderboardEvalCount.byDateTemplate.data.totalRanking
         .totalCount ?? 0,
     );
   }, [result]);
@@ -139,7 +139,7 @@ const LeaderboardCoalitionScoreTab = () => {
         controlRef={controlRef}
         segments={segments}
       />
-      <LeaderboardCoalitionScoreTabResult result={result} />
+      <LeaderboardEvalCountPageResult result={result} />
       <Pagination
         currPageNumber={pageNumber}
         onPageNumberChange={handlePageNumberChange}
@@ -151,7 +151,7 @@ const LeaderboardCoalitionScoreTab = () => {
 };
 
 const Head = () => {
-  return <Seo title="랭킹 › 코알리숑 스코어" />;
+  return <Seo title="랭킹 › 평가 횟수" />;
 };
 
-export default withHead(withFooter(LeaderboardCoalitionScoreTab), Head);
+export default withHead(withFooter(LeaderboardEvalCountPage), Head);

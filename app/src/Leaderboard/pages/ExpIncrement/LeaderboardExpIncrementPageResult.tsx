@@ -2,21 +2,21 @@ import { Leaderboard } from '@/Leaderboard/components/Leaderboard';
 import { LeaderboardTabResultSkeleton } from '@/Leaderboard/components/LeaderboardTabResultSkeleton';
 import { QueryResult } from '@apollo/client';
 import {
-  GetLeaderboardLevelQuery,
-  GetLeaderboardLevelQueryVariables,
+  GetLeaderboardExpIncrementQuery,
+  GetLeaderboardExpIncrementQueryVariables,
 } from '@shared/__generated__/graphql';
 import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
 
-type LeaderboardLevelTabResultProps = {
+type LeaderboardExpIncrementPageResultProps = {
   result: QueryResult<
-    GetLeaderboardLevelQuery,
-    GetLeaderboardLevelQueryVariables
+    GetLeaderboardExpIncrementQuery,
+    GetLeaderboardExpIncrementQueryVariables
   >;
 };
 
-export const LeaderboardLevelTabResult = ({
+export const LeaderboardExpIncrementPageResult = ({
   result: { data, loading, error },
-}: LeaderboardLevelTabResultProps) => {
+}: LeaderboardExpIncrementPageResultProps) => {
   if (loading) {
     return <LeaderboardTabResultSkeleton />;
   }
@@ -34,13 +34,14 @@ export const LeaderboardLevelTabResult = ({
     },
     start,
     end,
-  } = data.getLeaderboardLevel.byDateTemplate;
+  } = data.getLeaderboardExpIncrement.byDateTemplate;
+  const unit = 'XP';
 
   return (
     <Leaderboard
       me={me}
       list={nodes}
-      fixedNumber={2}
+      unit={unit}
       start={new Date(start)}
       end={new Date(end)}
     />

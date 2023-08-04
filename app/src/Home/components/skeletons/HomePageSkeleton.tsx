@@ -12,7 +12,7 @@ export const HomePageSkeleton = () => {
       <HeroSkeleton />
       <VStack w="100%" align="start" spacing="6rem">
         <VStack w="100%" align="start" spacing="2rem">
-          <H2BoldText>✨ 실시간 여행 현황</H2BoldText>
+          <H2BoldText>✨ 현재 여행 현황</H2BoldText>
           <DashboardSkeleton rows={homeStatusDashboardRows} />
         </VStack>
         <VStack w="100%" align="start" spacing="2rem">

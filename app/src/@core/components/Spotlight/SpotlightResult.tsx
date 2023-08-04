@@ -1,62 +1,43 @@
 import { QueryResult } from '@apollo/client';
 import styled from '@emotion/styled';
-import {
-  Exact,
-  FindProjectPreviewQuery,
-  FindUserPreviewQuery,
-} from '@shared/__generated__/graphql';
+import { Exact, GetSearchResultQuery } from '@shared/__generated__/graphql';
 import { ApolloErrorView } from '@shared/components/ApolloError/ApolloErrorView';
 import { Center, H3Text, VStack } from '@shared/ui-kit';
 import { SpotlightProjectSection } from './SpotlightProjectSection';
 import { SpotlightUserSection } from './SpotlightUserSection';
 
 type SpotlightResultProps = {
-  findUserResult: QueryResult<
-    FindUserPreviewQuery,
+  result: QueryResult<
+    GetSearchResultQuery,
     Exact<{
-      login: string;
-      limit: number;
-    }>
-  >;
-  findProjectResult: QueryResult<
-    FindProjectPreviewQuery,
-    Exact<{
-      name: string;
+      input: string;
       limit: number;
     }>
   >;
 };
 
 export const SpotlightResult = ({
-  findUserResult,
-  findProjectResult,
+  result: { loading, error, data },
 }: SpotlightResultProps) => {
-  if (findUserResult.loading || findProjectResult.loading) {
+  if (loading) {
     return null;
   }
-
-  if (findUserResult.error || findProjectResult.error) {
+  if (error) {
     return (
       <Layout>
         <Center>
-          {findUserResult.error ? (
-            <ApolloErrorView message={findUserResult.error.message} />
-          ) : null}
-          {findProjectResult.error ? (
-            <ApolloErrorView message={findProjectResult.error.message} />
-          ) : null}
+          <ApolloErrorView message={error.message} />
         </Center>
       </Layout>
     );
   }
-
-  if (!findUserResult.data || !findProjectResult.data) {
+  if (!data) {
     return null;
   }
 
   if (
-    findUserResult.data?.findUserPreview.length === 0 &&
-    findProjectResult.data?.findProjectPreview.length === 0
+    data?.getSearchResult.userPreviews.length === 0 &&
+    data?.getSearchResult.projectPreviews.length === 0
   ) {
     return (
       <Layout>
@@ -67,14 +48,15 @@ export const SpotlightResult = ({
     );
   }
 
-  const userResultLength = findUserResult.data?.findUserPreview.length ?? 0;
+  const userResultLength = data?.getSearchResult.userPreviews.length ?? 0;
+  const { userPreviews, projectPreviews } = data.getSearchResult;
 
   return (
     <Layout>
       <VStack w="100%" h="100%" spacing="2rem">
-        <SpotlightUserSection result={findUserResult} startIndex={0} />
+        <SpotlightUserSection list={userPreviews} startIndex={0} />
         <SpotlightProjectSection
-          result={findProjectResult}
+          list={projectPreviews}
           startIndex={userResultLength}
         />
       </VStack>

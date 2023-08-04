@@ -1,9 +1,12 @@
-export const getPercentile = (value: number, total: number) => {
+export const getPercentile = (rank: number, total: number) => {
   if (total === 0) {
     return 0;
   }
-  if (value > total) {
+  if (rank === 0) {
     return 0;
   }
-  return Math.round(((total - value) / total) * 100);
+  if (rank > total) {
+    return 0;
+  }
+  return Math.round(((total - rank) / total) * 100);
 };

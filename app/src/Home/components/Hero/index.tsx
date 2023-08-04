@@ -106,7 +106,7 @@ export const Hero = () => {
       evalCountRank ?? 4242,
       experienceRank ?? 4242,
     );
-    if (maxRank <= 3) {
+    if (maxRank <= 3 && maxRank !== 0) {
       if (experienceRank === maxRank) {
         return `대단해요! 주간 경험치 증가량 랭킹 ${experienceRank}위를 차지했어요 🏅`;
       }

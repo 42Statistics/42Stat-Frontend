@@ -9,6 +9,7 @@ import {
 } from '@shared/components/DashboardContentView/Error';
 import { ALT } from '@shared/constants/accessibility/ALT';
 import { H3MediumText, HStack, Image, Label, VStack } from '@shared/ui-kit';
+import { Tooltip } from '@shared/ui-kit/Tooltip';
 import { useContext } from 'react';
 
 const GET_CHARACTER_BY_LOGIN = gql(/* GraphQL */ `
@@ -69,9 +70,12 @@ export const Character = () => {
         <VStack spacing="2rem">
           <HStack spacing="1rem">
             {types?.map((type, idx) => (
-              <Label backgroundColor={type.color} key={idx}>
-                {type.name}
-              </Label>
+              <Tooltip.Container key={idx}>
+                <Label backgroundColor={type.color} key={idx}>
+                  {type.name}
+                </Label>
+                <Tooltip position="top">{type.description}</Tooltip>
+              </Tooltip.Container>
             ))}
           </HStack>
           <H3MediumText>{name ?? ''}</H3MediumText>

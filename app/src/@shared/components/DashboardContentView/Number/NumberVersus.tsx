@@ -1,15 +1,5 @@
 import { useTheme } from '@emotion/react';
-import {
-  Avatar,
-  Body1Text,
-  H2MediumText,
-  H3MediumText,
-  HStack,
-  Text,
-  VStack,
-} from '@shared/ui-kit';
-import { NoneDash } from '../Error';
-import { Diff } from './Diff';
+import { Avatar, HStack, MediumText, Text } from '@shared/ui-kit';
 
 type NumberVersusProps = {
   imgUrl1: string | null | undefined;
@@ -29,32 +19,73 @@ export const NumberVersus = ({
   const theme = useTheme();
 
   return (
-    <VStack spacing="2rem">
-      <HStack align="baseline" spacing="2rem">
-        <HStack spacing="0.5rem">
-          <Avatar size="xs" src={imgUrl1} />
-          <HStack align="baseline" spacing="0.15rem">
-            <H2MediumText>{number1.toLocaleString()}</H2MediumText>
-            {unit ? <Body1Text>{unit}</Body1Text> : null}
-          </HStack>
-        </HStack>
-        <HStack spacing="0.5rem">
-          <Avatar size="xs" src={imgUrl2} />
-          <HStack align="baseline" spacing="0.15rem">
-            <H3MediumText color={theme.colors.mono.gray300}>
-              {number2.toLocaleString()}
-            </H3MediumText>
-            {unit ? (
-              <Text color={theme.colors.mono.gray300}>{unit}</Text>
-            ) : null}
-          </HStack>
+    <HStack spacing="3rem">
+      <HStack spacing="1rem">
+        <Avatar size={number1 >= number2 ? 'sm' : 'xs'} src={imgUrl1} />
+        <HStack align="baseline" spacing="0.15rem">
+          <MediumText
+            color={
+              number1 >= number2
+                ? theme.colors.mono.black
+                : theme.colors.mono.gray300
+            }
+            fontSize={
+              number1 >= number2 ? theme.fonts.size.h2 : theme.fonts.size.body1
+            }
+          >
+            {number1.toLocaleString()}
+          </MediumText>
+          {unit ? (
+            <Text
+              color={
+                number1 >= number2
+                  ? theme.colors.mono.black
+                  : theme.colors.mono.gray300
+              }
+              fontSize={
+                number1 >= number2
+                  ? theme.fonts.size.body1
+                  : theme.fonts.size.body2
+              }
+            >
+              {unit}
+            </Text>
+          ) : null}
         </HStack>
       </HStack>
-      {number1 !== number2 ? (
-        <Diff number1={number1} number2={number2} />
-      ) : (
-        <NoneDash />
-      )}
-    </VStack>
+      <HStack spacing="1rem">
+        <Avatar size={number1 <= number2 ? 'sm' : 'xs'} src={imgUrl2} />
+        <HStack align="baseline" spacing="0.15rem">
+          <MediumText
+            color={
+              number1 <= number2
+                ? theme.colors.mono.black
+                : theme.colors.mono.gray300
+            }
+            fontSize={
+              number1 <= number2 ? theme.fonts.size.h2 : theme.fonts.size.body1
+            }
+          >
+            {number2.toLocaleString()}
+          </MediumText>
+          {unit ? (
+            <Text
+              color={
+                number1 <= number2
+                  ? theme.colors.mono.black
+                  : theme.colors.mono.gray300
+              }
+              fontSize={
+                number1 <= number2
+                  ? theme.fonts.size.body1
+                  : theme.fonts.size.body2
+              }
+            >
+              {unit}
+            </Text>
+          ) : null}
+        </HStack>
+      </HStack>
+    </HStack>
   );
 };

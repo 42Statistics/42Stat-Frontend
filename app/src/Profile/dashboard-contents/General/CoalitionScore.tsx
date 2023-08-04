@@ -32,9 +32,10 @@ export const CoalitionScore = () => {
     return <DashboardContentNotFound title={title} />;
   }
 
-  const { userProfile, scoreInfo } = data.getPersonalGeneral;
-  const { coalition } = userProfile;
-  const { value } = scoreInfo;
+  const {
+    userProfile: { coalition },
+    scoreInfo: { value, rankInCoalition },
+  } = data.getPersonalGeneral;
   const unit = '위';
 
   return (
@@ -43,10 +44,10 @@ export const CoalitionScore = () => {
         <H2MediumText>{value.toLocaleString()}</H2MediumText>
         <HStack spacing="0.5rem">
           <CoalitionMark size="18px" coalition={coalition} />
-          {scoreInfo?.rankInCoalition ? (
+          {rankInCoalition ? (
             <HStack align="baseline">
               <Body1Text>
-                {scoreInfo.rankInCoalition.toLocaleString()}
+                {rankInCoalition.toLocaleString()}
                 {unit}
               </Body1Text>
             </HStack>

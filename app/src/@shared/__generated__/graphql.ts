@@ -18,7 +18,7 @@ export type Scalars = {
 
 export type Account = {
   __typename?: 'Account';
-  linkedAccounts: Array<LinkedAccount>;
+  linkedAccounts: Array<LinkableAccount>;
   userId: Scalars['Int'];
 };
 
@@ -38,10 +38,10 @@ export type CharacterType = {
 
 export type Coalition = {
   __typename?: 'Coalition';
-  color?: Maybe<Scalars['String']>;
-  coverUrl?: Maybe<Scalars['String']>;
+  color: Scalars['String'];
+  coverUrl: Scalars['String'];
   id: Scalars['Int'];
-  imageUrl?: Maybe<Scalars['String']>;
+  imageUrl: Scalars['String'];
   name: Scalars['String'];
   score: Scalars['Int'];
   slug: Scalars['String'];
@@ -96,7 +96,7 @@ export enum EvalLogSortOrder {
 export type EvalLogsPaginated = {
   __typename?: 'EvalLogsPaginated';
   edges: Array<EvalLogEdge>;
-  pageInfo?: Maybe<CursorPageInfo>;
+  pageInfo: CursorPageInfo;
 };
 
 export type EvalReview = {
@@ -157,9 +157,12 @@ export type HomeCoalitionTigCountPerCoalitionByDateTemplateArgs = {
 export type HomeEval = {
   __typename?: 'HomeEval';
   averageCommentLength: Scalars['Int'];
+  /** @deprecated 0.6.0 */
   averageEvalCountByDateTemplate: FloatDateRanged;
   averageFeedbackLength: Scalars['Int'];
+  /** @deprecated 0.6.0 */
   evalCountByDateTemplate: IntDateRanged;
+  evalCountRecord: Array<IntRecord>;
 };
 
 
@@ -172,10 +175,16 @@ export type HomeEvalEvalCountByDateTemplateArgs = {
   dateTemplate: DateTemplate;
 };
 
+
+export type HomeEvalEvalCountRecordArgs = {
+  last: Scalars['Int'];
+};
+
 export type HomeTeam = {
   __typename?: 'HomeTeam';
   currRegisteredCountRanking: Array<ProjectRank>;
   recentExamResult: ExamResultDateRanged;
+  teamCloseRecord: Array<IntRecord>;
 };
 
 
@@ -188,12 +197,19 @@ export type HomeTeamRecentExamResultArgs = {
   after?: Scalars['Int'];
 };
 
+
+export type HomeTeamTeamCloseRecordArgs = {
+  last: Scalars['Int'];
+};
+
 export type HomeUser = {
   __typename?: 'HomeUser';
   aliveUserCountRecords: Array<IntRecord>;
   averageDurationPerCircle: Array<IntPerCircle>;
+  /** @deprecated 0.6.0 */
   blackholedCountByDateTemplate: IntDateRanged;
   blackholedCountPerCircle: Array<IntPerCircle>;
+  blackholedCountRecord: Array<IntRecord>;
   blackholedRate: Rate;
   correctionPointRanking: Array<UserRank>;
   memberRate: Rate;
@@ -204,6 +220,11 @@ export type HomeUser = {
 
 export type HomeUserBlackholedCountByDateTemplateArgs = {
   dateTemplate: DateTemplate;
+};
+
+
+export type HomeUserBlackholedCountRecordArgs = {
+  last: Scalars['Int'];
 };
 
 
@@ -332,8 +353,8 @@ export type LevelRecord = {
   monthsPassed: Scalars['Int'];
 };
 
-export type LinkedAccount = {
-  __typename?: 'LinkedAccount';
+export type LinkableAccount = {
+  __typename?: 'LinkableAccount';
   email?: Maybe<Scalars['String']>;
   id: Scalars['String'];
   linkedAt: Scalars['DateTime'];
@@ -417,6 +438,7 @@ export type PersonalEval = {
   averageFinalMark: Scalars['Float'];
   correctionPoint: Scalars['Int'];
   countByDateTemplate: IntDateRanged;
+  countRecord: Array<IntRecord>;
   destinyRanking: Array<UserRank>;
   recentComment?: Maybe<Scalars['String']>;
   totalCount: Scalars['Int'];
@@ -430,6 +452,11 @@ export type PersonalEvalCountByDateTemplateArgs = {
 };
 
 
+export type PersonalEvalCountRecordArgs = {
+  last: Scalars['Int'];
+};
+
+
 export type PersonalEvalDestinyRankingArgs = {
   limit?: Scalars['Int'];
 };
@@ -439,13 +466,15 @@ export type PersonalGeneral = {
   beginAt: Scalars['DateTime'];
   blackholedAt?: Maybe<Scalars['DateTime']>;
   character?: Maybe<Character>;
+  /** @deprecated 0.6.0 */
   logtimeByDateTemplate: IntDateRanged;
+  logtimeRecord: Array<IntRecord>;
   preferredClusterByDateTemplate: PreferredClusterDateRanged;
   preferredTimeByDateTemplate: PreferredTimeDateRanged;
   promoLevelRecords: Array<LevelRecord>;
   promoMemberLevelRecords: Array<LevelRecord>;
   scoreInfo: UserScoreInfo;
-  teamInfo: TeamInfo;
+  teamInfo: UserTeamInfo;
   userLevelRecords: Array<LevelRecord>;
   userProfile: UserProfile;
   wallet: Scalars['Int'];
@@ -454,6 +483,11 @@ export type PersonalGeneral = {
 
 export type PersonalGeneralLogtimeByDateTemplateArgs = {
   dateTemplate: DateTemplate;
+};
+
+
+export type PersonalGeneralLogtimeRecordArgs = {
+  last: Scalars['Int'];
 };
 
 
@@ -468,12 +502,12 @@ export type PersonalGeneralPreferredTimeByDateTemplateArgs = {
 
 export type PersonalVersus = {
   __typename?: 'PersonalVersus';
-  currWeekEvalCountRank: UserRank;
-  currWeekExpIncreamentRank: UserRank;
-  currWeekScoreRank: UserRank;
-  levelRank: UserRank;
-  totalEvalCountRank: UserRank;
-  totalScoreRank: UserRank;
+  currMonthEvalCountRankWithTotal: UserRankWithTotal;
+  currMonthExpIncreamentRankWithTotal: UserRankWithTotal;
+  currMonthScoreRankWithTotal: UserRankWithTotal;
+  levelRankWithTotal: UserRankWithTotal;
+  totalEvalCountRankWithTotal: UserRankWithTotal;
+  totalScoreRankWithTotal: UserRankWithTotal;
 };
 
 export type PreferredCluster = {
@@ -511,6 +545,7 @@ export type PreferredTimeDateRanged = {
 export type ProjectInfo = {
   __typename?: 'ProjectInfo';
   averagePassFinalMark: Scalars['Int'];
+  circle: Scalars['Int'];
   /** 총 제출 횟수 입니다. */
   closedTeamCount: Scalars['Int'];
   currRegisteredTeamCount: Scalars['Int'];
@@ -529,6 +564,7 @@ export type ProjectInfo = {
 
 export type ProjectPreview = {
   __typename?: 'ProjectPreview';
+  circle?: Maybe<Scalars['Int']>;
   id: Scalars['Int'];
   name: Scalars['String'];
   url: Scalars['String'];
@@ -543,7 +579,9 @@ export type ProjectRank = {
 
 export type Query = {
   __typename?: 'Query';
+  /** @deprecated search module 로 분리 */
   findProjectPreview: Array<ProjectPreview>;
+  /** @deprecated search module 로 분리 */
   findUserPreview: Array<UserPreview>;
   getEvalLogs: EvalLogsPaginated;
   getHomeCoalition: HomeCoalition;
@@ -560,7 +598,9 @@ export type Query = {
   getPersonalGeneral: PersonalGeneral;
   getPersonalVersus?: Maybe<PersonalVersus>;
   getProjectInfo: ProjectInfo;
+  getSearchResult: SearchResult;
   getSetting: Setting;
+  getTeamInfo: TeamInfo;
 };
 
 
@@ -609,6 +649,17 @@ export type QueryGetProjectInfoArgs = {
   projectName?: Scalars['String'];
 };
 
+
+export type QueryGetSearchResultArgs = {
+  input: Scalars['String'];
+  limit?: Scalars['Int'];
+};
+
+
+export type QueryGetTeamInfoArgs = {
+  id: Scalars['Int'];
+};
+
 export type Rate = {
   __typename?: 'Rate';
   fields: Array<Pair>;
@@ -627,16 +678,45 @@ export type ScoreRecordPerCoalition = {
   records: Array<IntRecord>;
 };
 
+export type SearchResult = {
+  __typename?: 'SearchResult';
+  projectPreviews: Array<ProjectPreview>;
+  userPreviews: Array<UserPreview>;
+};
+
 export type Setting = {
   __typename?: 'Setting';
   account: Account;
 };
 
+export type TeamEvalLog = {
+  __typename?: 'TeamEvalLog';
+  correctedsReview?: Maybe<EvalReview>;
+  correctorReview: EvalReview;
+  header: TeamEvalLogHeader;
+  id: Scalars['Int'];
+};
+
+export type TeamEvalLogHeader = {
+  __typename?: 'TeamEvalLogHeader';
+  beginAt: Scalars['DateTime'];
+  corrector: UserPreview;
+  flag: Flag;
+};
+
 export type TeamInfo = {
   __typename?: 'TeamInfo';
-  lastPassed?: Maybe<Scalars['String']>;
-  lastRegistered?: Maybe<Scalars['String']>;
-  teams: Array<UserTeam>;
+  closedAt?: Maybe<Scalars['DateTime']>;
+  evalLogs: Array<TeamEvalLog>;
+  id: Scalars['Int'];
+  lockedAt?: Maybe<Scalars['DateTime']>;
+  /** 기계 채점 결과 */
+  moulinette?: Maybe<TeamUpload>;
+  name: Scalars['String'];
+  projectPreview: ProjectPreview;
+  status: TeamStatus;
+  url: Scalars['String'];
+  users: Array<UserPreview>;
 };
 
 export type TeamPreview = {
@@ -652,6 +732,14 @@ export enum TeamStatus {
   Registered = 'REGISTERED',
   WaitingForCorrection = 'WAITING_FOR_CORRECTION'
 }
+
+export type TeamUpload = {
+  __typename?: 'TeamUpload';
+  comment: Scalars['String'];
+  createdAt: Scalars['DateTime'];
+  finalMark: Scalars['Int'];
+  id: Scalars['Int'];
+};
 
 export type UserCountPerLevel = {
   __typename?: 'UserCountPerLevel';
@@ -685,6 +773,14 @@ export type UserRank = {
   value: Scalars['Float'];
 };
 
+export type UserRankWithTotal = {
+  __typename?: 'UserRankWithTotal';
+  rank: Scalars['Int'];
+  totalUserCount: Scalars['Int'];
+  userPreview: UserPreview;
+  value: Scalars['Float'];
+};
+
 export type UserRankingIndexPaginated = {
   __typename?: 'UserRankingIndexPaginated';
   nodes: Array<UserRank>;
@@ -712,6 +808,13 @@ export type UserTeam = {
   status: TeamStatus;
 };
 
+export type UserTeamInfo = {
+  __typename?: 'UserTeamInfo';
+  lastPassed?: Maybe<Scalars['String']>;
+  lastRegistered?: Maybe<Scalars['String']>;
+  teams: Array<UserTeam>;
+};
+
 export type UserTitle = {
   __typename?: 'UserTitle';
   createdAt: Scalars['DateTime'];
@@ -721,21 +824,13 @@ export type UserTitle = {
   updatedAt: Scalars['DateTime'];
 };
 
-export type FindUserPreviewQueryVariables = Exact<{
-  login: Scalars['String'];
+export type GetSearchResultQueryVariables = Exact<{
+  input: Scalars['String'];
   limit: Scalars['Int'];
 }>;
 
 
-export type FindUserPreviewQuery = { __typename?: 'Query', findUserPreview: Array<{ __typename?: 'UserPreview', id: number, login: string, imgUrl?: string | null }> };
-
-export type FindProjectPreviewQueryVariables = Exact<{
-  name: Scalars['String'];
-  limit: Scalars['Int'];
-}>;
-
-
-export type FindProjectPreviewQuery = { __typename?: 'Query', findProjectPreview: Array<{ __typename?: 'ProjectPreview', id: number, name: string, url: string }> };
+export type GetSearchResultQuery = { __typename?: 'Query', getSearchResult: { __typename?: 'SearchResult', userPreviews: Array<{ __typename?: 'UserPreview', id: number, login: string, imgUrl?: string | null }>, projectPreviews: Array<{ __typename?: 'ProjectPreview', id: number, name: string, url: string }> } };
 
 export type GetMyProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -762,13 +857,13 @@ export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
 
 export type LogoutMutation = { __typename?: 'Mutation', logout: number };
 
-export type CoalitionFieldsFragment = { __typename?: 'Coalition', id: number, name: string, slug: string, imageUrl?: string | null, coverUrl?: string | null, color?: string | null, score: number, userId: number };
+export type CoalitionFieldsFragment = { __typename?: 'Coalition', id: number, name: string, slug: string, imageUrl: string, coverUrl: string, color: string, score: number, userId: number };
 
 export type ProjectPreviewFieldsFragment = { __typename?: 'ProjectPreview', id: number, name: string, url: string };
 
 export type UserPreviewFieldsFragment = { __typename?: 'UserPreview', id: number, login: string, imgUrl?: string | null };
 
-export type UserProfileFieldsFragment = { __typename?: 'UserProfile', id: number, login: string, imgUrl?: string | null, grade: string, displayname: string, level: number, coalition?: { __typename?: 'Coalition', id: number, name: string, slug: string, imageUrl?: string | null, coverUrl?: string | null, color?: string | null, score: number, userId: number } | null, titles: Array<{ __typename?: 'UserTitle', titleId: number, name: string, selected: boolean, createdAt: string, updatedAt: string }> };
+export type UserProfileFieldsFragment = { __typename?: 'UserProfile', id: number, login: string, imgUrl?: string | null, grade: string, displayname: string, level: number, coalition?: { __typename?: 'Coalition', id: number, name: string, slug: string, imageUrl: string, coverUrl: string, color: string, score: number, userId: number } | null, titles: Array<{ __typename?: 'UserTitle', titleId: number, name: string, selected: boolean, createdAt: string, updatedAt: string }> };
 
 export type GetEvalLogsQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
@@ -781,7 +876,7 @@ export type GetEvalLogsQueryVariables = Exact<{
 }>;
 
 
-export type GetEvalLogsQuery = { __typename?: 'Query', getEvalLogs: { __typename?: 'EvalLogsPaginated', edges: Array<{ __typename?: 'EvalLogEdge', cursor: string, node: { __typename?: 'EvalLog', id: number, header: { __typename?: 'EvalLogHeader', beginAt: string, corrector: { __typename?: 'UserPreview', id: number, login: string, imgUrl?: string | null }, teamPreview: { __typename?: 'TeamPreview', id: number, name: string, url: string }, projectPreview: { __typename?: 'ProjectPreview', id: number, name: string, url: string }, flag: { __typename?: 'Flag', id: number, name: string, isPositive: boolean } }, correctorReview: { __typename?: 'EvalReview', mark: number, review: string }, correctedsReview?: { __typename?: 'EvalReview', mark: number, review: string } | null } }>, pageInfo?: { __typename?: 'CursorPageInfo', totalCount: number, hasNextPage: boolean, endCursor?: string | null } | null } };
+export type GetEvalLogsQuery = { __typename?: 'Query', getEvalLogs: { __typename?: 'EvalLogsPaginated', edges: Array<{ __typename?: 'EvalLogEdge', cursor: string, node: { __typename?: 'EvalLog', id: number, header: { __typename?: 'EvalLogHeader', beginAt: string, corrector: { __typename?: 'UserPreview', id: number, login: string, imgUrl?: string | null }, teamPreview: { __typename?: 'TeamPreview', id: number, name: string, url: string }, projectPreview: { __typename?: 'ProjectPreview', id: number, name: string, url: string }, flag: { __typename?: 'Flag', id: number, name: string, isPositive: boolean } }, correctorReview: { __typename?: 'EvalReview', mark: number, review: string }, correctedsReview?: { __typename?: 'EvalReview', mark: number, review: string } | null } }>, pageInfo: { __typename?: 'CursorPageInfo', totalCount: number, hasNextPage: boolean, endCursor?: string | null } } };
 
 export type FtLoginMutationVariables = Exact<{
   ftCode: Scalars['String'];
@@ -800,17 +895,17 @@ export type GetTigCountPerCoalitionByDateTemplateQueryVariables = Exact<{
 }>;
 
 
-export type GetTigCountPerCoalitionByDateTemplateQuery = { __typename?: 'Query', getHomeCoalition: { __typename?: 'HomeCoalition', tigCountPerCoalitionByDateTemplate: { __typename?: 'IntPerCoalitionDateRanged', start: string, end: string, data: Array<{ __typename?: 'IntPerCoalition', value: number, coalition: { __typename?: 'Coalition', id: number, name: string, slug: string, imageUrl?: string | null, coverUrl?: string | null, color?: string | null, score: number, userId: number } }> } } };
+export type GetTigCountPerCoalitionByDateTemplateQuery = { __typename?: 'Query', getHomeCoalition: { __typename?: 'HomeCoalition', tigCountPerCoalitionByDateTemplate: { __typename?: 'IntPerCoalitionDateRanged', start: string, end: string, data: Array<{ __typename?: 'IntPerCoalition', value: number, coalition: { __typename?: 'Coalition', id: number, name: string, slug: string, imageUrl: string, coverUrl: string, color: string, score: number, userId: number } }> } } };
 
 export type GetScoreRecordsPerCoalitionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetScoreRecordsPerCoalitionQuery = { __typename?: 'Query', getHomeCoalition: { __typename?: 'HomeCoalition', scoreRecordsPerCoalition: Array<{ __typename?: 'ScoreRecordPerCoalition', coalition: { __typename?: 'Coalition', id: number, name: string, slug: string, imageUrl?: string | null, coverUrl?: string | null, color?: string | null, score: number, userId: number }, records: Array<{ __typename?: 'IntRecord', at: string, value: number }> }> } };
+export type GetScoreRecordsPerCoalitionQuery = { __typename?: 'Query', getHomeCoalition: { __typename?: 'HomeCoalition', scoreRecordsPerCoalition: Array<{ __typename?: 'ScoreRecordPerCoalition', coalition: { __typename?: 'Coalition', id: number, name: string, slug: string, imageUrl: string, coverUrl: string, color: string, score: number, userId: number }, records: Array<{ __typename?: 'IntRecord', at: string, value: number }> }> } };
 
 export type GetTotalScoresPerCoalitionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetTotalScoresPerCoalitionQuery = { __typename?: 'Query', getHomeCoalition: { __typename?: 'HomeCoalition', totalScoresPerCoalition: Array<{ __typename?: 'IntPerCoalition', value: number, coalition: { __typename?: 'Coalition', id: number, name: string, slug: string, imageUrl?: string | null, coverUrl?: string | null, color?: string | null, score: number, userId: number } }> } };
+export type GetTotalScoresPerCoalitionQuery = { __typename?: 'Query', getHomeCoalition: { __typename?: 'HomeCoalition', totalScoresPerCoalition: Array<{ __typename?: 'IntPerCoalition', value: number, coalition: { __typename?: 'Coalition', id: number, name: string, slug: string, imageUrl: string, coverUrl: string, color: string, score: number, userId: number } }> } };
 
 export type GetAverageCommentLengthQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -963,16 +1058,16 @@ export type GetPersonalGeneralZeroCostByLoginQueryVariables = Exact<{
 }>;
 
 
-export type GetPersonalGeneralZeroCostByLoginQuery = { __typename?: 'Query', getPersonalGeneral: { __typename?: 'PersonalGeneral', beginAt: string, blackholedAt?: string | null, wallet: number, teamInfo: { __typename?: 'TeamInfo', lastPassed?: string | null, lastRegistered?: string | null }, userProfile: { __typename?: 'UserProfile', coalition?: { __typename?: 'Coalition', id: number, name: string, slug: string, imageUrl?: string | null, coverUrl?: string | null, color?: string | null, score: number, userId: number } | null }, scoreInfo: { __typename?: 'UserScoreInfo', value: number, rankInCoalition?: number | null } } };
+export type GetPersonalGeneralZeroCostByLoginQuery = { __typename?: 'Query', getPersonalGeneral: { __typename?: 'PersonalGeneral', beginAt: string, blackholedAt?: string | null, wallet: number, teamInfo: { __typename?: 'UserTeamInfo', lastPassed?: string | null, lastRegistered?: string | null }, userProfile: { __typename?: 'UserProfile', coalition?: { __typename?: 'Coalition', id: number, name: string, slug: string, imageUrl: string, coverUrl: string, color: string, score: number, userId: number } | null }, scoreInfo: { __typename?: 'UserScoreInfo', value: number, rankInCoalition?: number | null } } };
 
-export type CoalitionScoreFragmentFragment = { __typename?: 'PersonalGeneral', userProfile: { __typename?: 'UserProfile', coalition?: { __typename?: 'Coalition', id: number, name: string, slug: string, imageUrl?: string | null, coverUrl?: string | null, color?: string | null, score: number, userId: number } | null }, scoreInfo: { __typename?: 'UserScoreInfo', value: number, rankInCoalition?: number | null } };
+export type CoalitionScoreFragmentFragment = { __typename?: 'PersonalGeneral', userProfile: { __typename?: 'UserProfile', coalition?: { __typename?: 'Coalition', id: number, name: string, slug: string, imageUrl: string, coverUrl: string, color: string, score: number, userId: number } | null }, scoreInfo: { __typename?: 'UserScoreInfo', value: number, rankInCoalition?: number | null } };
 
 export type GetUserProfileByLoginQueryVariables = Exact<{
   login: Scalars['String'];
 }>;
 
 
-export type GetUserProfileByLoginQuery = { __typename?: 'Query', getPersonalGeneral: { __typename?: 'PersonalGeneral', userProfile: { __typename?: 'UserProfile', id: number, login: string, imgUrl?: string | null, grade: string, displayname: string, level: number, coalition?: { __typename?: 'Coalition', id: number, name: string, slug: string, imageUrl?: string | null, coverUrl?: string | null, color?: string | null, score: number, userId: number } | null, titles: Array<{ __typename?: 'UserTitle', titleId: number, name: string, selected: boolean, createdAt: string, updatedAt: string }> } } };
+export type GetUserProfileByLoginQuery = { __typename?: 'Query', getPersonalGeneral: { __typename?: 'PersonalGeneral', userProfile: { __typename?: 'UserProfile', id: number, login: string, imgUrl?: string | null, grade: string, displayname: string, level: number, coalition?: { __typename?: 'Coalition', id: number, name: string, slug: string, imageUrl: string, coverUrl: string, color: string, score: number, userId: number } | null, titles: Array<{ __typename?: 'UserTitle', titleId: number, name: string, selected: boolean, createdAt: string, updatedAt: string }> } } };
 
 export type GetVersusZeroCostQueryVariables = Exact<{
   login1: Scalars['String'];
@@ -1085,7 +1180,7 @@ export type GetTeamInfoByLoginQueryVariables = Exact<{
 }>;
 
 
-export type GetTeamInfoByLoginQuery = { __typename?: 'Query', getPersonalGeneral: { __typename?: 'PersonalGeneral', teamInfo: { __typename?: 'TeamInfo', teams: Array<{ __typename?: 'UserTeam', id: number, name: string, occurrence: number, status: TeamStatus, lastEventTime: string, isValidated?: boolean | null, finalMark?: number | null, projectPreview: { __typename?: 'ProjectPreview', id: number, name: string, url: string } }> } } };
+export type GetTeamInfoByLoginQuery = { __typename?: 'Query', getPersonalGeneral: { __typename?: 'PersonalGeneral', teamInfo: { __typename?: 'UserTeamInfo', teams: Array<{ __typename?: 'UserTeam', id: number, name: string, occurrence: number, status: TeamStatus, lastEventTime: string, isValidated?: boolean | null, finalMark?: number | null, projectPreview: { __typename?: 'ProjectPreview', id: number, name: string, url: string } }> } } };
 
 export type GetAverageCommentLengthVersusQueryVariables = Exact<{
   login1: Scalars['String'];
@@ -1117,7 +1212,7 @@ export type GetRankingsVersusQueryVariables = Exact<{
 }>;
 
 
-export type GetRankingsVersusQuery = { __typename?: 'Query', data1?: { __typename?: 'PersonalVersus', levelRank: { __typename?: 'UserRank', rank: number }, totalScoreRank: { __typename?: 'UserRank', rank: number }, totalEvalCountRank: { __typename?: 'UserRank', rank: number }, currWeekExpIncreamentRank: { __typename?: 'UserRank', rank: number }, currWeekScoreRank: { __typename?: 'UserRank', rank: number }, currWeekEvalCountRank: { __typename?: 'UserRank', rank: number } } | null, data2?: { __typename?: 'PersonalVersus', levelRank: { __typename?: 'UserRank', rank: number }, totalScoreRank: { __typename?: 'UserRank', rank: number }, totalEvalCountRank: { __typename?: 'UserRank', rank: number }, currWeekExpIncreamentRank: { __typename?: 'UserRank', rank: number }, currWeekScoreRank: { __typename?: 'UserRank', rank: number }, currWeekEvalCountRank: { __typename?: 'UserRank', rank: number } } | null };
+export type GetRankingsVersusQuery = { __typename?: 'Query', data1?: { __typename?: 'PersonalVersus', levelRankWithTotal: { __typename?: 'UserRankWithTotal', rank: number, totalUserCount: number }, totalScoreRankWithTotal: { __typename?: 'UserRankWithTotal', rank: number, totalUserCount: number }, totalEvalCountRankWithTotal: { __typename?: 'UserRankWithTotal', rank: number, totalUserCount: number }, currMonthExpIncreamentRankWithTotal: { __typename?: 'UserRankWithTotal', rank: number, totalUserCount: number }, currMonthScoreRankWithTotal: { __typename?: 'UserRankWithTotal', rank: number, totalUserCount: number }, currMonthEvalCountRankWithTotal: { __typename?: 'UserRankWithTotal', rank: number, totalUserCount: number } } | null, data2?: { __typename?: 'PersonalVersus', levelRankWithTotal: { __typename?: 'UserRankWithTotal', rank: number, totalUserCount: number }, totalScoreRankWithTotal: { __typename?: 'UserRankWithTotal', rank: number, totalUserCount: number }, totalEvalCountRankWithTotal: { __typename?: 'UserRankWithTotal', rank: number, totalUserCount: number }, currMonthExpIncreamentRankWithTotal: { __typename?: 'UserRankWithTotal', rank: number, totalUserCount: number }, currMonthScoreRankWithTotal: { __typename?: 'UserRankWithTotal', rank: number, totalUserCount: number }, currMonthEvalCountRankWithTotal: { __typename?: 'UserRankWithTotal', rank: number, totalUserCount: number } } | null };
 
 export type GetEvalCountByDateTemplateVersusQueryVariables = Exact<{
   login1: Scalars['String'];
@@ -1189,21 +1284,21 @@ export type LinkGoogleMutationVariables = Exact<{
 }>;
 
 
-export type LinkGoogleMutation = { __typename?: 'Mutation', linkGoogle: { __typename?: 'Account', userId: number, linkedAccounts: Array<{ __typename?: 'LinkedAccount', platform: string, id: string, email?: string | null, linkedAt: string }> } };
+export type LinkGoogleMutation = { __typename?: 'Mutation', linkGoogle: { __typename?: 'Account', userId: number, linkedAccounts: Array<{ __typename?: 'LinkableAccount', platform: string, id: string, email?: string | null, linkedAt: string }> } };
 
 export type UnlinkAccountMutationVariables = Exact<{
   targetPlatform: Scalars['String'];
 }>;
 
 
-export type UnlinkAccountMutation = { __typename?: 'Mutation', unlinkAccount: { __typename?: 'Account', userId: number, linkedAccounts: Array<{ __typename?: 'LinkedAccount', platform: string, id: string, email?: string | null, linkedAt: string }> } };
+export type UnlinkAccountMutation = { __typename?: 'Mutation', unlinkAccount: { __typename?: 'Account', userId: number, linkedAccounts: Array<{ __typename?: 'LinkableAccount', platform: string, id: string, email?: string | null, linkedAt: string }> } };
 
-export type AccountFieldsFragment = { __typename?: 'Account', userId: number, linkedAccounts: Array<{ __typename?: 'LinkedAccount', platform: string, id: string, email?: string | null, linkedAt: string }> };
+export type AccountFieldsFragment = { __typename?: 'Account', userId: number, linkedAccounts: Array<{ __typename?: 'LinkableAccount', platform: string, id: string, email?: string | null, linkedAt: string }> };
 
 export type GetSettingQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetSettingQuery = { __typename?: 'Query', getSetting: { __typename?: 'Setting', account: { __typename?: 'Account', userId: number, linkedAccounts: Array<{ __typename?: 'LinkedAccount', platform: string, id: string, email?: string | null, linkedAt: string }> } } };
+export type GetSettingQuery = { __typename?: 'Query', getSetting: { __typename?: 'Setting', account: { __typename?: 'Account', userId: number, linkedAccounts: Array<{ __typename?: 'LinkableAccount', platform: string, id: string, email?: string | null, linkedAt: string }> } } };
 
 export const ProjectPreviewFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"projectPreviewFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ProjectPreview"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]} as unknown as DocumentNode<ProjectPreviewFieldsFragment, unknown>;
 export const UserPreviewFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"userPreviewFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"UserPreview"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"login"}},{"kind":"Field","name":{"kind":"Name","value":"imgUrl"}}]}}]} as unknown as DocumentNode<UserPreviewFieldsFragment, unknown>;
@@ -1211,8 +1306,7 @@ export const CoalitionFieldsFragmentDoc = {"kind":"Document","definitions":[{"ki
 export const UserProfileFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"userProfileFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"UserProfile"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"login"}},{"kind":"Field","name":{"kind":"Name","value":"imgUrl"}},{"kind":"Field","name":{"kind":"Name","value":"grade"}},{"kind":"Field","name":{"kind":"Name","value":"displayname"}},{"kind":"Field","name":{"kind":"Name","value":"coalition"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"coalitionFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"titles"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"titleId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"selected"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}},{"kind":"Field","name":{"kind":"Name","value":"level"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"coalitionFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Coalition"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"imageUrl"}},{"kind":"Field","name":{"kind":"Name","value":"coverUrl"}},{"kind":"Field","name":{"kind":"Name","value":"color"}},{"kind":"Field","name":{"kind":"Name","value":"score"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}}]}}]} as unknown as DocumentNode<UserProfileFieldsFragment, unknown>;
 export const CoalitionScoreFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"coalitionScoreFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PersonalGeneral"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"userProfile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"coalition"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"coalitionFields"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"scoreInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"value"}},{"kind":"Field","name":{"kind":"Name","value":"rankInCoalition"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"coalitionFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Coalition"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"imageUrl"}},{"kind":"Field","name":{"kind":"Name","value":"coverUrl"}},{"kind":"Field","name":{"kind":"Name","value":"color"}},{"kind":"Field","name":{"kind":"Name","value":"score"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}}]}}]} as unknown as DocumentNode<CoalitionScoreFragmentFragment, unknown>;
 export const AccountFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AccountFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Account"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"linkedAccounts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"platform"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"linkedAt"}}]}}]}}]} as unknown as DocumentNode<AccountFieldsFragment, unknown>;
-export const FindUserPreviewDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"FindUserPreview"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"login"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"findUserPreview"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"login"},"value":{"kind":"Variable","name":{"kind":"Name","value":"login"}}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"login"}},{"kind":"Field","name":{"kind":"Name","value":"imgUrl"}}]}}]}}]} as unknown as DocumentNode<FindUserPreviewQuery, FindUserPreviewQueryVariables>;
-export const FindProjectPreviewDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"FindProjectPreview"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"name"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"findProjectPreview"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"name"},"value":{"kind":"Variable","name":{"kind":"Name","value":"name"}}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]} as unknown as DocumentNode<FindProjectPreviewQuery, FindProjectPreviewQueryVariables>;
+export const GetSearchResultDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetSearchResult"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getSearchResult"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"userPreviews"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"userPreviewFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"projectPreviews"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"projectPreviewFields"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"userPreviewFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"UserPreview"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"login"}},{"kind":"Field","name":{"kind":"Name","value":"imgUrl"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"projectPreviewFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ProjectPreview"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]} as unknown as DocumentNode<GetSearchResultQuery, GetSearchResultQueryVariables>;
 export const GetMyProfileDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetMyProfile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getPersonalGeneral"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"userProfile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"login"}},{"kind":"Field","name":{"kind":"Name","value":"imgUrl"}},{"kind":"Field","name":{"kind":"Name","value":"displayname"}}]}}]}}]}}]} as unknown as DocumentNode<GetMyProfileQuery, GetMyProfileQueryVariables>;
 export const GetNewAccessTokenDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"GetNewAccessToken"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"refreshToken"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"refreshToken"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"refreshToken"},"value":{"kind":"Variable","name":{"kind":"Name","value":"refreshToken"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}},{"kind":"Field","name":{"kind":"Name","value":"accessToken"}},{"kind":"Field","name":{"kind":"Name","value":"refreshToken"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}}]}}]}}]} as unknown as DocumentNode<GetNewAccessTokenMutation, GetNewAccessTokenMutationVariables>;
 export const GoogleLoginDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"googleLogin"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"google"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"GoogleLoginInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"ftCode"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"googleLogin"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"google"},"value":{"kind":"Variable","name":{"kind":"Name","value":"google"}}},{"kind":"Argument","name":{"kind":"Name","value":"ftCode"},"value":{"kind":"Variable","name":{"kind":"Name","value":"ftCode"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"LoginSuccess"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}},{"kind":"Field","name":{"kind":"Name","value":"accessToken"}},{"kind":"Field","name":{"kind":"Name","value":"refreshToken"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"LoginNotLinked"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}}]}}]}}]}}]} as unknown as DocumentNode<GoogleLoginMutation, GoogleLoginMutationVariables>;
@@ -1265,7 +1359,7 @@ export const GetTeamInfoByLoginDocument = {"kind":"Document","definitions":[{"ki
 export const GetAverageCommentLengthVersusDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetAverageCommentLengthVersus"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"login1"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"login2"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"data1"},"name":{"kind":"Name","value":"getPersonalEval"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"login"},"value":{"kind":"Variable","name":{"kind":"Name","value":"login1"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"averageCommentLength"}}]}},{"kind":"Field","alias":{"kind":"Name","value":"data2"},"name":{"kind":"Name","value":"getPersonalEval"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"login"},"value":{"kind":"Variable","name":{"kind":"Name","value":"login2"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"averageCommentLength"}}]}}]}}]} as unknown as DocumentNode<GetAverageCommentLengthVersusQuery, GetAverageCommentLengthVersusQueryVariables>;
 export const GetAverageFinalMarkVersusDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetAverageFinalMarkVersus"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"login1"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"login2"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"data1"},"name":{"kind":"Name","value":"getPersonalEval"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"login"},"value":{"kind":"Variable","name":{"kind":"Name","value":"login1"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"averageFinalMark"}}]}},{"kind":"Field","alias":{"kind":"Name","value":"data2"},"name":{"kind":"Name","value":"getPersonalEval"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"login"},"value":{"kind":"Variable","name":{"kind":"Name","value":"login2"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"averageFinalMark"}}]}}]}}]} as unknown as DocumentNode<GetAverageFinalMarkVersusQuery, GetAverageFinalMarkVersusQueryVariables>;
 export const GetLevelRecordsVersusDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetLevelRecordsVersus"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"login1"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"login2"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"data1"},"name":{"kind":"Name","value":"getPersonalGeneral"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"login"},"value":{"kind":"Variable","name":{"kind":"Name","value":"login1"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"userLevelRecords"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"monthsPassed"}},{"kind":"Field","name":{"kind":"Name","value":"level"}}]}}]}},{"kind":"Field","alias":{"kind":"Name","value":"data2"},"name":{"kind":"Name","value":"getPersonalGeneral"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"login"},"value":{"kind":"Variable","name":{"kind":"Name","value":"login2"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"userLevelRecords"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"monthsPassed"}},{"kind":"Field","name":{"kind":"Name","value":"level"}}]}}]}}]}}]} as unknown as DocumentNode<GetLevelRecordsVersusQuery, GetLevelRecordsVersusQueryVariables>;
-export const GetRankingsVersusDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetRankingsVersus"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"login1"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"login2"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"data1"},"name":{"kind":"Name","value":"getPersonalVersus"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"login"},"value":{"kind":"Variable","name":{"kind":"Name","value":"login1"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"levelRank"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rank"}}]}},{"kind":"Field","name":{"kind":"Name","value":"totalScoreRank"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rank"}}]}},{"kind":"Field","name":{"kind":"Name","value":"totalEvalCountRank"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rank"}}]}},{"kind":"Field","name":{"kind":"Name","value":"currWeekExpIncreamentRank"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rank"}}]}},{"kind":"Field","name":{"kind":"Name","value":"currWeekScoreRank"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rank"}}]}},{"kind":"Field","name":{"kind":"Name","value":"currWeekEvalCountRank"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rank"}}]}}]}},{"kind":"Field","alias":{"kind":"Name","value":"data2"},"name":{"kind":"Name","value":"getPersonalVersus"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"login"},"value":{"kind":"Variable","name":{"kind":"Name","value":"login2"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"levelRank"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rank"}}]}},{"kind":"Field","name":{"kind":"Name","value":"totalScoreRank"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rank"}}]}},{"kind":"Field","name":{"kind":"Name","value":"totalEvalCountRank"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rank"}}]}},{"kind":"Field","name":{"kind":"Name","value":"currWeekExpIncreamentRank"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rank"}}]}},{"kind":"Field","name":{"kind":"Name","value":"currWeekScoreRank"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rank"}}]}},{"kind":"Field","name":{"kind":"Name","value":"currWeekEvalCountRank"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rank"}}]}}]}}]}}]} as unknown as DocumentNode<GetRankingsVersusQuery, GetRankingsVersusQueryVariables>;
+export const GetRankingsVersusDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetRankingsVersus"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"login1"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"login2"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"data1"},"name":{"kind":"Name","value":"getPersonalVersus"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"login"},"value":{"kind":"Variable","name":{"kind":"Name","value":"login1"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"levelRankWithTotal"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rank"}},{"kind":"Field","name":{"kind":"Name","value":"totalUserCount"}}]}},{"kind":"Field","name":{"kind":"Name","value":"totalScoreRankWithTotal"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rank"}},{"kind":"Field","name":{"kind":"Name","value":"totalUserCount"}}]}},{"kind":"Field","name":{"kind":"Name","value":"totalEvalCountRankWithTotal"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rank"}},{"kind":"Field","name":{"kind":"Name","value":"totalUserCount"}}]}},{"kind":"Field","name":{"kind":"Name","value":"currMonthExpIncreamentRankWithTotal"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rank"}},{"kind":"Field","name":{"kind":"Name","value":"totalUserCount"}}]}},{"kind":"Field","name":{"kind":"Name","value":"currMonthScoreRankWithTotal"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rank"}},{"kind":"Field","name":{"kind":"Name","value":"totalUserCount"}}]}},{"kind":"Field","name":{"kind":"Name","value":"currMonthEvalCountRankWithTotal"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rank"}},{"kind":"Field","name":{"kind":"Name","value":"totalUserCount"}}]}}]}},{"kind":"Field","alias":{"kind":"Name","value":"data2"},"name":{"kind":"Name","value":"getPersonalVersus"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"login"},"value":{"kind":"Variable","name":{"kind":"Name","value":"login2"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"levelRankWithTotal"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rank"}},{"kind":"Field","name":{"kind":"Name","value":"totalUserCount"}}]}},{"kind":"Field","name":{"kind":"Name","value":"totalScoreRankWithTotal"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rank"}},{"kind":"Field","name":{"kind":"Name","value":"totalUserCount"}}]}},{"kind":"Field","name":{"kind":"Name","value":"totalEvalCountRankWithTotal"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rank"}},{"kind":"Field","name":{"kind":"Name","value":"totalUserCount"}}]}},{"kind":"Field","name":{"kind":"Name","value":"currMonthExpIncreamentRankWithTotal"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rank"}},{"kind":"Field","name":{"kind":"Name","value":"totalUserCount"}}]}},{"kind":"Field","name":{"kind":"Name","value":"currMonthScoreRankWithTotal"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rank"}},{"kind":"Field","name":{"kind":"Name","value":"totalUserCount"}}]}},{"kind":"Field","name":{"kind":"Name","value":"currMonthEvalCountRankWithTotal"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rank"}},{"kind":"Field","name":{"kind":"Name","value":"totalUserCount"}}]}}]}}]}}]} as unknown as DocumentNode<GetRankingsVersusQuery, GetRankingsVersusQueryVariables>;
 export const GetEvalCountByDateTemplateVersusDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetEvalCountByDateTemplateVersus"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"login1"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"login2"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dateTemplate"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"DateTemplate"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"data1"},"name":{"kind":"Name","value":"getPersonalEval"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"login"},"value":{"kind":"Variable","name":{"kind":"Name","value":"login1"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"countByDateTemplate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"dateTemplate"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dateTemplate"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"}},{"kind":"Field","name":{"kind":"Name","value":"start"}},{"kind":"Field","name":{"kind":"Name","value":"end"}}]}}]}},{"kind":"Field","alias":{"kind":"Name","value":"data2"},"name":{"kind":"Name","value":"getPersonalEval"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"login"},"value":{"kind":"Variable","name":{"kind":"Name","value":"login2"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"countByDateTemplate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"dateTemplate"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dateTemplate"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"}},{"kind":"Field","name":{"kind":"Name","value":"start"}},{"kind":"Field","name":{"kind":"Name","value":"end"}}]}}]}}]}}]} as unknown as DocumentNode<GetEvalCountByDateTemplateVersusQuery, GetEvalCountByDateTemplateVersusQueryVariables>;
 export const GetLogtimeByDateTemplateVersusDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetLogtimeByDateTemplateVersus"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"login1"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"login2"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dateTemplate"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"DateTemplate"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"data1"},"name":{"kind":"Name","value":"getPersonalGeneral"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"login"},"value":{"kind":"Variable","name":{"kind":"Name","value":"login1"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logtimeByDateTemplate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"dateTemplate"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dateTemplate"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"}},{"kind":"Field","name":{"kind":"Name","value":"start"}},{"kind":"Field","name":{"kind":"Name","value":"end"}}]}}]}},{"kind":"Field","alias":{"kind":"Name","value":"data2"},"name":{"kind":"Name","value":"getPersonalGeneral"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"login"},"value":{"kind":"Variable","name":{"kind":"Name","value":"login2"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logtimeByDateTemplate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"dateTemplate"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dateTemplate"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"}},{"kind":"Field","name":{"kind":"Name","value":"start"}},{"kind":"Field","name":{"kind":"Name","value":"end"}}]}}]}}]}}]} as unknown as DocumentNode<GetLogtimeByDateTemplateVersusQuery, GetLogtimeByDateTemplateVersusQueryVariables>;
 export const GetProjectExistsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetProjectExists"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"projectName"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getProjectInfo"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"projectName"},"value":{"kind":"Variable","name":{"kind":"Name","value":"projectName"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<GetProjectExistsQuery, GetProjectExistsQueryVariables>;

@@ -13,22 +13,15 @@ import { useDebounce } from 'usehooks-ts';
 import { SpotlightResult } from './SpotlightResult';
 import { SpotlightSearchBar } from './SpotlightSearchBar';
 
-export const FIND_USER_PREVIEW = gql(/* GraphQL */ `
-  query FindUserPreview($login: String!, $limit: Int!) {
-    findUserPreview(login: $login, limit: $limit) {
-      id
-      login
-      imgUrl
-    }
-  }
-`);
-
-export const FIND_PROJECT_PREVIEW = gql(/* GraphQL */ `
-  query FindProjectPreview($name: String!, $limit: Int!) {
-    findProjectPreview(name: $name, limit: $limit) {
-      id
-      name
-      url
+export const GET_SEARCH_RESULT = gql(/* GraphQL */ `
+  query GetSearchResult($input: String!, $limit: Int!) {
+    getSearchResult(input: $input, limit: $limit) {
+      userPreviews {
+        ...userPreviewFields
+      }
+      projectPreviews {
+        ...projectPreviewFields
+      }
     }
   }
 `);
@@ -39,11 +32,10 @@ export const Spotlight = ({ isOpen, onClose }: SpotlightProps) => {
   const theme = useTheme();
   const [input, setInput] = useState<string>('');
   const debouncedInput = useDebounce(input, 250);
-  const [findUser, findUserResult] = useLazyQuery(FIND_USER_PREVIEW);
-  const [findProject, findProjectResult] = useLazyQuery(FIND_PROJECT_PREVIEW);
+  const [search, searchResult] = useLazyQuery(GET_SEARCH_RESULT);
   const size =
-    (findUserResult.data?.findUserPreview.length ?? 0) +
-    (findProjectResult.data?.findProjectPreview.length ?? 0);
+    (searchResult.data?.getSearchResult.userPreviews.length ?? 0) +
+    (searchResult.data?.getSearchResult.projectPreviews.length ?? 0);
   const { currentFocus, setCurrentFocus } = useRoveFocus(size);
   const LIMIT = 4;
   const location = useLocation();
@@ -61,25 +53,19 @@ export const Spotlight = ({ isOpen, onClose }: SpotlightProps) => {
     if (debouncedInput.length >= 2) {
       return;
     }
-    if (findUserResult.data) {
-      findUserResult.data = undefined;
+    if (searchResult.data) {
+      searchResult.data = undefined;
     }
-    if (findProjectResult.data) {
-      findProjectResult.data = undefined;
-    }
-  }, [debouncedInput, setCurrentFocus, findUserResult, findProjectResult]);
+  }, [debouncedInput, setCurrentFocus, searchResult]);
 
   useEffect(() => {
     if (debouncedInput.length < 2) {
       return;
     }
-    if (debouncedInput.length <= 10) {
-      findUser({ variables: { login: debouncedInput, limit: LIMIT } });
-    }
     if (debouncedInput.length <= 100) {
-      findProject({ variables: { name: debouncedInput, limit: LIMIT } });
+      search({ variables: { input: debouncedInput, limit: LIMIT } });
     }
-  }, [debouncedInput, findUser, findProject]);
+  }, [debouncedInput, search]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
@@ -102,10 +88,7 @@ export const Spotlight = ({ isOpen, onClose }: SpotlightProps) => {
               onChange={handleChange}
             />
             {debouncedInput.length >= 2 ? (
-              <SpotlightResult
-                findUserResult={findUserResult}
-                findProjectResult={findProjectResult}
-              />
+              <SpotlightResult result={searchResult} />
             ) : null}
           </VStack>
         </Layout>

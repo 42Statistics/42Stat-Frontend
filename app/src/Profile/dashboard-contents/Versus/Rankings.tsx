@@ -16,43 +16,55 @@ import { useContext } from 'react';
 const GET_RANKINGS_VERSUS = gql(/* GraphQL */ `
   query GetRankingsVersus($login1: String!, $login2: String!) {
     data1: getPersonalVersus(login: $login1) {
-      levelRank {
+      levelRankWithTotal {
         rank
+        totalUserCount
       }
-      totalScoreRank {
+      totalScoreRankWithTotal {
         rank
+        totalUserCount
       }
-      totalEvalCountRank {
+      totalEvalCountRankWithTotal {
         rank
+        totalUserCount
       }
-      currWeekExpIncreamentRank {
+      currMonthExpIncreamentRankWithTotal {
         rank
+        totalUserCount
       }
-      currWeekScoreRank {
+      currMonthScoreRankWithTotal {
         rank
+        totalUserCount
       }
-      currWeekEvalCountRank {
+      currMonthEvalCountRankWithTotal {
         rank
+        totalUserCount
       }
     }
     data2: getPersonalVersus(login: $login2) {
-      levelRank {
+      levelRankWithTotal {
         rank
+        totalUserCount
       }
-      totalScoreRank {
+      totalScoreRankWithTotal {
         rank
+        totalUserCount
       }
-      totalEvalCountRank {
+      totalEvalCountRankWithTotal {
         rank
+        totalUserCount
       }
-      currWeekExpIncreamentRank {
+      currMonthExpIncreamentRankWithTotal {
         rank
+        totalUserCount
       }
-      currWeekScoreRank {
+      currMonthScoreRankWithTotal {
         rank
+        totalUserCount
       }
-      currWeekEvalCountRank {
+      currMonthEvalCountRankWithTotal {
         rank
+        totalUserCount
       }
     }
   }
@@ -80,55 +92,82 @@ export const Rankings = () => {
 
   const {
     data1: {
-      levelRank: { rank: myLevelRank },
-      totalScoreRank: { rank: myTotalScoreRank },
-      totalEvalCountRank: { rank: myTotalEvalCountRank },
-      currWeekExpIncreamentRank: { rank: myCurrWeekExpIncreamentRank },
-      currWeekScoreRank: { rank: myCurrWeekScoreRank },
-      currWeekEvalCountRank: { rank: myCurrWeekEvalCountRank },
+      levelRankWithTotal: { rank: myLevelRank },
+      totalScoreRankWithTotal: { rank: myTotalScoreRank },
+      totalEvalCountRankWithTotal: { rank: myTotalEvalCountRank },
+      currMonthExpIncreamentRankWithTotal: {
+        rank: myCurrMonthExpIncreamentRank,
+      },
+      currMonthScoreRankWithTotal: { rank: myCurrMonthScoreRank },
+      currMonthEvalCountRankWithTotal: { rank: myCurrMonthEvalCountRank },
     },
     data2: {
-      levelRank: { rank: levelRank },
-      totalScoreRank: { rank: totalScoreRank },
-      totalEvalCountRank: { rank: totalEvalCountRank },
-      currWeekExpIncreamentRank: { rank: currWeekExpIncreamentRank },
-      currWeekScoreRank: { rank: currWeekScoreRank },
-      currWeekEvalCountRank: { rank: currWeekEvalCountRank },
+      levelRankWithTotal: { rank: levelRank, totalUserCount: levelRankTotal },
+      totalScoreRankWithTotal: {
+        rank: totalScoreRank,
+        totalUserCount: totalScoreRankTotal,
+      },
+      totalEvalCountRankWithTotal: {
+        rank: totalEvalCountRank,
+        totalUserCount: totalEvalCountRankTotal,
+      },
+      currMonthExpIncreamentRankWithTotal: {
+        rank: currMonthExpIncreamentRank,
+        totalUserCount: currMonthExpIncreamentRankTotal,
+      },
+      currMonthScoreRankWithTotal: {
+        rank: currMonthScoreRank,
+        totalUserCount: currMonthScoreRankTotal,
+      },
+      currMonthEvalCountRankWithTotal: {
+        rank: currMonthEvalCountRank,
+        totalUserCount: currMonthEvalCountRankTotal,
+      },
     },
   } = data;
 
-  const total = 2350; // FIXME: rank와 total을 함께 받기로 합의함
-
-  const myLevelRankPercentile = getPercentile(myLevelRank, total);
-  const myTotalScoreRankPercentile = getPercentile(myTotalScoreRank, total);
+  const myLevelRankPercentile = getPercentile(myLevelRank, levelRankTotal);
+  const myTotalScoreRankPercentile = getPercentile(
+    myTotalScoreRank,
+    totalScoreRankTotal,
+  );
   const myTotalEvalCountRankPercentile = getPercentile(
     myTotalEvalCountRank,
-    total,
+    totalEvalCountRankTotal,
   );
-  const myCurrWeekExpIncreamentRankPercentile = getPercentile(
-    myCurrWeekExpIncreamentRank,
-    total,
+  const myCurrMonthExpIncreamentRankPercentile = getPercentile(
+    myCurrMonthExpIncreamentRank,
+    currMonthExpIncreamentRankTotal,
   );
-  const myCurrWeekScoreRankPercentile = getPercentile(
-    myCurrWeekScoreRank,
-    total,
+  const myCurrMonthScoreRankPercentile = getPercentile(
+    myCurrMonthScoreRank,
+    currMonthScoreRankTotal,
   );
-  const myCurrWeekEvalCountRankPercentile = getPercentile(
-    myCurrWeekEvalCountRank,
-    total,
+  const myCurrMonthEvalCountRankPercentile = getPercentile(
+    myCurrMonthEvalCountRank,
+    currMonthEvalCountRankTotal,
   );
 
-  const levelRankPercentile = getPercentile(levelRank, total);
-  const totalScoreRankPercentile = getPercentile(totalScoreRank, total);
-  const totalEvalCountRankPercentile = getPercentile(totalEvalCountRank, total);
-  const currWeekExpIncreamentRankPercentile = getPercentile(
-    currWeekExpIncreamentRank,
-    total,
+  const levelRankPercentile = getPercentile(levelRank, levelRankTotal);
+  const totalScoreRankPercentile = getPercentile(
+    totalScoreRank,
+    totalScoreRankTotal,
   );
-  const currWeekScoreRankPercentile = getPercentile(currWeekScoreRank, total);
-  const currWeekEvalCountRankPercentile = getPercentile(
-    currWeekEvalCountRank,
-    total,
+  const totalEvalCountRankPercentile = getPercentile(
+    totalEvalCountRank,
+    totalEvalCountRankTotal,
+  );
+  const currMonthExpIncreamentRankPercentile = getPercentile(
+    currMonthExpIncreamentRank,
+    currMonthExpIncreamentRankTotal,
+  );
+  const currMonthScoreRankPercentile = getPercentile(
+    currMonthScoreRank,
+    currMonthScoreRankTotal,
+  );
+  const currMonthEvalCountRankPercentile = getPercentile(
+    currMonthEvalCountRank,
+    currMonthEvalCountRankTotal,
   );
 
   const categories = [
@@ -146,9 +185,9 @@ export const Rankings = () => {
         myLevelRankPercentile,
         myTotalScoreRankPercentile,
         myTotalEvalCountRankPercentile,
-        myCurrWeekExpIncreamentRankPercentile,
-        myCurrWeekScoreRankPercentile,
-        myCurrWeekEvalCountRankPercentile,
+        myCurrMonthExpIncreamentRankPercentile,
+        myCurrMonthScoreRankPercentile,
+        myCurrMonthEvalCountRankPercentile,
       ],
     },
     {
@@ -157,9 +196,9 @@ export const Rankings = () => {
         levelRankPercentile,
         totalScoreRankPercentile,
         totalEvalCountRankPercentile,
-        currWeekExpIncreamentRankPercentile,
-        currWeekScoreRankPercentile,
-        currWeekEvalCountRankPercentile,
+        currMonthExpIncreamentRankPercentile,
+        currMonthScoreRankPercentile,
+        currMonthEvalCountRankPercentile,
       ],
     },
   ];

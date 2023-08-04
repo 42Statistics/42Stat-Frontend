@@ -1,6 +1,10 @@
 import { useLazyQuery } from '@apollo/client';
 import { gql } from '@shared/__generated__';
-import { EvalLogEdge, EvalLogSortOrder } from '@shared/__generated__/graphql';
+import {
+  EvalLogEdge,
+  EvalLogSortOrder,
+  GetEvalLogsQuery,
+} from '@shared/__generated__/graphql';
 import { Seo } from '@shared/components/Seo';
 import { withHead } from '@shared/hoc/withHead';
 import { useDisclosure } from '@shared/hooks/useDisclosure';
@@ -179,7 +183,7 @@ const EvalLogSearchPage = () => {
       <VStack w="100%" align="start" spacing="2rem">
         <EvalLogSearchTitle
           form={evalLogSearchForm}
-          totalCount={data?.getEvalLogs.pageInfo?.totalCount}
+          totalCount={calculateTotalCount({ data, error, loading })}
         />
         <EvalLogSearchResult
           evalLogEdges={evalLogEdges}
@@ -206,6 +210,25 @@ const EvalLogSearchPage = () => {
 
 const Head = () => {
   return <Seo title="평가로그 검색기" />;
+};
+
+const calculateTotalCount = ({
+  data,
+  error,
+  loading,
+}: Pick<
+  ReturnType<typeof useLazyQuery<GetEvalLogsQuery>>[1],
+  'data' | 'error' | 'loading'
+>): number | undefined => {
+  if (loading) {
+    return undefined;
+  }
+
+  if (error) {
+    return 0;
+  }
+
+  return data?.getEvalLogs.pageInfo.totalCount ?? 0;
 };
 
 export default withHead(EvalLogSearchPage, Head);

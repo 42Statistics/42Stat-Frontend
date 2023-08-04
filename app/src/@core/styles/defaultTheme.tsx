@@ -57,6 +57,7 @@ const fonts = {
 
 const zIndex = {
   absoluteButton: 200,
+  tooltip: 300,
   modal: 1000,
 };
 

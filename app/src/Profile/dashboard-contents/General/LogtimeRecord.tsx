@@ -1,3 +1,4 @@
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { useQuery } from '@apollo/client';
 import { gql } from '@shared/__generated__';
 import { AreaChart } from '@shared/components/Chart';
@@ -8,10 +9,11 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
+import { useContext } from 'react';
 
-const GET_LOGTIME_RECORD = gql(/* GraphQL */ `
-  query GetLogtimeRecord($last: Int!) {
-    getPersonalGeneral {
+const GET_LOGTIME_RECORD_BY_LOGIN = gql(/* GraphQL */ `
+  query GetLogtimeRecord($login: String!, $last: Int!) {
+    getPersonalGeneral(login: $login) {
       logtimeRecord(last: $last) {
         at
         value
@@ -21,9 +23,12 @@ const GET_LOGTIME_RECORD = gql(/* GraphQL */ `
 `);
 
 export const LogtimeRecord = () => {
+  const { login } = useContext(UserProfileContext);
+
   const title = '월간 접속 시간 추이';
-  const { loading, error, data } = useQuery(GET_LOGTIME_RECORD, {
+  const { loading, error, data } = useQuery(GET_LOGTIME_RECORD_BY_LOGIN, {
     variables: {
+      login,
       last: 12,
     },
   });

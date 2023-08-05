@@ -37,29 +37,6 @@ const requestInterceptor = new ApolloLink((operation, forward) => {
   return forward(operation);
 });
 
-const responseInterceptor401 = onError(
-  ({ graphQLErrors, operation, forward }) => {
-    const authError = graphQLErrors?.find(
-      ({ extensions }) => extensions.status === 401,
-    );
-
-    if (authError) {
-      return fromPromise(getNewAccessToken(getRefreshToken() ?? '')).flatMap(
-        (accessToken) => {
-          operation.setContext({
-            headers: {
-              ...operation.getContext().headers,
-              authorization: `Bearer ${accessToken}`,
-            },
-          });
-
-          return forward(operation);
-        },
-      );
-    }
-  },
-);
-
 /**
  * @description
  * 쿼리 바뀌었을때 이부분 안건드리면 기존에 있던캐시정보에 바뀐 쿼리정보 병합하려고해서 에러발생
@@ -71,7 +48,7 @@ const responseInterceptor401 = onError(
  */
 
 export const client = new ApolloClient({
-  link: from([requestInterceptor, responseInterceptor401, httpLink]),
+  link: from([requestInterceptor, httpLink]),
   cache: new InMemoryCache({
     typePolicies: {
       Query: {
@@ -130,15 +107,40 @@ const ResponseInterceptor = ({ children }: PropsWithReactElementChildren) => {
   const setIsReLoginDialogOpen = useSetAtom(isReLoginDialogOpenAtom);
 
   useEffect(() => {
-    const responseInterceptor400 = onError(({ graphQLErrors }) => {
-      if (graphQLErrors) {
-        graphQLErrors.forEach(({ extensions }) => {
-          if (extensions?.status === 400) {
-            setIsReLoginDialogOpen(true);
-          }
-        });
-      }
-    });
+    const responseInterceptor400 = onError(
+      ({ graphQLErrors, operation, forward }) => {
+        if (graphQLErrors) {
+          graphQLErrors.forEach(({ extensions }) => {
+            if (extensions?.status === 400) {
+              setIsReLoginDialogOpen(true);
+            }
+          });
+        }
+        return forward(operation);
+      },
+    );
+
+    const responseInterceptor401 = onError(
+      ({ graphQLErrors, operation, forward }) => {
+        const authError = graphQLErrors?.find(
+          ({ extensions }) => extensions.status === 401,
+        );
+
+        if (authError) {
+          return fromPromise(
+            getNewAccessToken(getRefreshToken() ?? ''),
+          ).flatMap((accessToken) => {
+            operation.setContext({
+              headers: {
+                ...operation.getContext().headers,
+                authorization: `Bearer ${accessToken}`,
+              },
+            });
+            return forward(operation);
+          });
+        }
+      },
+    );
 
     client.setLink(
       from([

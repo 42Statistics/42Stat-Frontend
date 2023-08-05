@@ -1,3 +1,4 @@
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { useQuery } from '@apollo/client';
 import { gql } from '@shared/__generated__';
 import { AreaChart } from '@shared/components/Chart';
@@ -7,13 +8,13 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
-import { InfoTooltip } from '@shared/components/InfoTooltip';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
+import { useContext } from 'react';
 
-const GET_ALIVE_USER_COUNT_RECORDS = gql(/* GraphQL */ `
-  query GetAliveUserCountRecords {
-    getHomeUser {
-      aliveUserCountRecords {
+const GET_COUNT_RECORD_BY_LOGIN = gql(/* GraphQL */ `
+  query GetCountRecordByLogin($login: String!, $last: Int!) {
+    getPersonalEval(login: $login) {
+      countRecord(last: $last) {
         at
         value
       }
@@ -21,9 +22,16 @@ const GET_ALIVE_USER_COUNT_RECORDS = gql(/* GraphQL */ `
   }
 `);
 
-export const AliveUserCountRecords = () => {
-  const title = '여행 중인 유저 수 추이';
-  const { loading, error, data } = useQuery(GET_ALIVE_USER_COUNT_RECORDS);
+export const CountRecord = () => {
+  const { login } = useContext(UserProfileContext);
+
+  const title = '월간 평가 횟수 추이';
+  const { loading, error, data } = useQuery(GET_COUNT_RECORD_BY_LOGIN, {
+    variables: {
+      login,
+      last: 12,
+    },
+  });
 
   if (loading) {
     return <DashboardContentLoading title={title} />;
@@ -35,49 +43,37 @@ export const AliveUserCountRecords = () => {
     return <DashboardContentNotFound title={title} />;
   }
 
-  const { aliveUserCountRecords } = data.getHomeUser;
-  const seriesData = aliveUserCountRecords.map(({ at, value }) => ({
+  const { countRecord } = data.getPersonalEval;
+  const seriesData = countRecord.map(({ at, value }) => ({
     x: at,
     y: value,
   }));
   const series: ApexAxisChartSeries = [
     {
-      name: '인원수',
+      name: '평가 횟수',
       data: seriesData,
     },
   ];
 
   return (
-    <DashboardContent
-      title={title}
-      titleRight={
-        <InfoTooltip text="여행 중 : 멤버 포함, 블랙홀 제외한 러너" />
-      }
-      type="ApexCharts"
-    >
-      <ActiveUserCountRecordsChart series={series} />
+    <DashboardContent title={title} type="ApexCharts">
+      <CountRecordChart series={series} />
     </DashboardContent>
   );
 };
 
-type ActiveUserCountRecordsChartProps = {
+type CountRecordChartProps = {
   series: ApexAxisChartSeries;
 };
 
-const ActiveUserCountRecordsChart = ({
-  series,
-}: ActiveUserCountRecordsChartProps) => {
+const CountRecordChart = ({ series }: CountRecordChartProps) => {
   const options: ApexCharts.ApexOptions = {
     xaxis: {
       type: 'datetime',
+
       labels: {
-        format: "'yy MMM",
         datetimeUTC: false,
-      },
-    },
-    yaxis: {
-      labels: {
-        formatter: (value) => value.toLocaleString(),
+        format: "'yy MMM",
       },
     },
     tooltip: {
@@ -85,10 +81,7 @@ const ActiveUserCountRecordsChart = ({
         format: 'yyyy년 M월',
       },
       y: {
-        formatter: (value) => numberWithUnitFormatter(value, '명'),
-      },
-      marker: {
-        show: false,
+        formatter: (value) => numberWithUnitFormatter(value, '회'),
       },
     },
   };

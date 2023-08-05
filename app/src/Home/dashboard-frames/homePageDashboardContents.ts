@@ -7,22 +7,22 @@ import {
 import {
   AverageCommentLength,
   AverageFeedbackLength,
+  EvalCountRecord,
   TotalEvalCount,
-  WeeklyAverageEvalCount,
-  WeeklyEvalCount,
 } from '../dashboard-contents/Eval';
 import {
   CurrRegisteredCountRanking,
   RecentExamResult,
+  TeamCloseRecord,
 } from '../dashboard-contents/Team';
 import {
   AliveUserCountRecords,
   AverageDurationPerCircle,
   BlackholedCountPerCircle,
+  BlackholedCountRecord,
   BlackholedRate,
   CorrectionPointRanking,
   MemberRate,
-  MonthlyBlackholedCount,
   UserCountPerLevel,
   WalletRanking,
 } from '../dashboard-contents/User';
@@ -30,15 +30,15 @@ import {
 export const homePageDashboardContents: DashboardItemProps[] = [
   {
     id: 0,
-    content: WeeklyEvalCount,
+    content: EvalCountRecord,
   },
   {
     id: 1,
-    content: MonthlyBlackholedCount,
+    content: BlackholedCountRecord,
   },
   {
     id: 2,
-    content: WeeklyAverageEvalCount,
+    content: TeamCloseRecord,
   },
   {
     id: 3,

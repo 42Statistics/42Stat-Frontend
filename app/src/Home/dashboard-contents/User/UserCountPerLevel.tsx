@@ -42,7 +42,7 @@ export const UserCountPerLevel = () => {
 
   const series: ApexAxisChartSeries = [
     {
-      name: '',
+      name: '인원수',
       data: seriesData,
     },
   ];

@@ -30,18 +30,18 @@ const documents = {
     "\n  query GetTotalScoresPerCoalition {\n    getHomeCoalition {\n      totalScoresPerCoalition {\n        coalition {\n          ...coalitionFields\n        }\n        value\n      }\n    }\n  }\n": types.GetTotalScoresPerCoalitionDocument,
     "\n  query GetAverageCommentLength {\n    getHomeEval {\n      averageCommentLength\n    }\n  }\n": types.GetAverageCommentLengthDocument,
     "\n  query GetAverageFeedbackLength {\n    getHomeEval {\n      averageFeedbackLength\n    }\n  }\n": types.GetAverageFeedbackLengthDocument,
+    "\n  query GetEvalCountRecord($last: Int!) {\n    getHomeEval {\n      evalCountRecord(last: $last) {\n        at\n        value\n      }\n    }\n  }\n": types.GetEvalCountRecordDocument,
     "\n  query GetEvalCountByDateTemplate($dateTemplate: DateTemplate!) {\n    getHomeEval {\n      evalCountByDateTemplate(dateTemplate: $dateTemplate) {\n        data\n        start\n        end\n      }\n    }\n  }\n": types.GetEvalCountByDateTemplateDocument,
-    "\n  query GetAverageEvalCountByDateTemplate($dateTemplate: DateTemplate!) {\n    getHomeEval {\n      averageEvalCountByDateTemplate(dateTemplate: $dateTemplate) {\n        data\n        start\n        end\n      }\n    }\n  }\n": types.GetAverageEvalCountByDateTemplateDocument,
-    "\n  query GetCurrLastEvalCountByDateTemplate(\n    $currDateTemplate: DateTemplate!\n    $lastDateTemplate: DateTemplate!\n  ) {\n    getHomeEval {\n      currData: evalCountByDateTemplate(dateTemplate: $currDateTemplate) {\n        data\n        start\n        end\n      }\n      lastData: evalCountByDateTemplate(dateTemplate: $lastDateTemplate) {\n        data\n        start\n        end\n      }\n    }\n  }\n": types.GetCurrLastEvalCountByDateTemplateDocument,
     "\n  query GetCurrRegisteredCountRanking($limit: Int!) {\n    getHomeTeam {\n      currRegisteredCountRanking(limit: $limit) {\n        projectPreview {\n          ...projectPreviewFields\n        }\n        rank\n        value\n      }\n    }\n  }\n": types.GetCurrRegisteredCountRankingDocument,
     "\n  query GetRecentExamResult($after: Int!) {\n    getHomeTeam {\n      recentExamResult(after: $after) {\n        data {\n          resultPerRank {\n            rank\n            rate {\n              total\n              fields {\n                key\n                value\n              }\n            }\n          }\n          beginAt\n          location\n        }\n      }\n    }\n  }\n": types.GetRecentExamResultDocument,
+    "\n  query GetTeamCloseRecord($last: Int!) {\n    getHomeTeam {\n      teamCloseRecord(last: $last) {\n        at\n        value\n      }\n    }\n  }\n": types.GetTeamCloseRecordDocument,
     "\n  query GetAliveUserCountRecords {\n    getHomeUser {\n      aliveUserCountRecords {\n        at\n        value\n      }\n    }\n  }\n": types.GetAliveUserCountRecordsDocument,
     "\n  query GetAverageDurationPerCircle {\n    getHomeUser {\n      averageDurationPerCircle {\n        circle\n        value\n      }\n    }\n  }\n": types.GetAverageDurationPerCircleDocument,
     "\n  query GetBlackholedCountPerCircle {\n    getHomeUser {\n      blackholedCountPerCircle {\n        circle\n        value\n      }\n    }\n  }\n": types.GetBlackholedCountPerCircleDocument,
+    "\n  query GetBlackholedCountRecord($last: Int!) {\n    getHomeUser {\n      blackholedCountRecord(last: $last) {\n        at\n        value\n      }\n    }\n  }\n": types.GetBlackholedCountRecordDocument,
     "\n  query GetBlackholedRate {\n    getHomeUser {\n      blackholedRate {\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n": types.GetBlackholedRateDocument,
     "\n  query GetCorrectionPointRanking($limit: Int!) {\n    getHomeUser {\n      correctionPointRanking(limit: $limit) {\n        userPreview {\n          ...userPreviewFields\n        }\n        value\n        rank\n      }\n    }\n  }\n": types.GetCorrectionPointRankingDocument,
     "\n  query GetMemberRate {\n    getHomeUser {\n      memberRate {\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n": types.GetMemberRateDocument,
-    "\n  query GetBlackholedCountByDateTemplate(\n    $currDateTemplate: DateTemplate!\n    $lastDateTemplate: DateTemplate!\n  ) {\n    getHomeUser {\n      currData: blackholedCountByDateTemplate(dateTemplate: $currDateTemplate) {\n        data\n        start\n        end\n      }\n      lastData: blackholedCountByDateTemplate(dateTemplate: $lastDateTemplate) {\n        data\n        start\n        end\n      }\n    }\n  }\n": types.GetBlackholedCountByDateTemplateDocument,
     "\n  query GetUserCountPerLevel {\n    getHomeUser {\n      userCountPerLevel {\n        level\n        value\n      }\n    }\n  }\n": types.GetUserCountPerLevelDocument,
     "\n  query GetWalletRanking($limit: Int!) {\n    getHomeUser {\n      walletRanking(limit: $limit) {\n        userPreview {\n          ...userPreviewFields\n        }\n        value\n        rank\n      }\n    }\n  }\n": types.GetWalletRankingDocument,
     "\n  query GetLanding {\n    getLanding {\n      daysAfterBeginAt\n      aliveCount\n      blackholedCount\n      memberCount\n      evalCount\n      trendingProject {\n        projectPreview {\n          id\n          name\n          url\n        }\n        rank\n        value\n      }\n    }\n  }\n": types.GetLandingDocument,
@@ -57,13 +57,13 @@ const documents = {
     "\n  query GetAverageDurationByLogin($login: String!) {\n    getPersonalEval(login: $login) {\n      averageDuration\n    }\n  }\n": types.GetAverageDurationByLoginDocument,
     "\n  query GetAverageFeedbackLengthByLogin($login: String!) {\n    getPersonalEval(login: $login) {\n      averageFeedbackLength\n    }\n  }\n": types.GetAverageFeedbackLengthByLoginDocument,
     "\n  query GetAverageFinalMarkByLogin($login: String!) {\n    getPersonalEval(login: $login) {\n      averageFinalMark\n    }\n  }\n": types.GetAverageFinalMarkByLoginDocument,
+    "\n  query GetCountRecordByLogin($login: String!, $last: Int!) {\n    getPersonalEval(login: $login) {\n      countRecord(last: $last) {\n        at\n        value\n      }\n    }\n  }\n": types.GetCountRecordByLoginDocument,
     "\n  query GetDestinyRankingByLogin($login: String!, $limit: Int!) {\n    getPersonalEval(login: $login) {\n      destinyRanking(limit: $limit) {\n        userPreview {\n          ...userPreviewFields\n        }\n        value\n        rank\n      }\n    }\n  }\n": types.GetDestinyRankingByLoginDocument,
-    "\n  query GetEvalCountByDateTemplateByLogin(\n    $login: String!\n    $currDateTemplate: DateTemplate!\n    $lastDateTemplate: DateTemplate!\n  ) {\n    getPersonalEval(login: $login) {\n      currData: countByDateTemplate(dateTemplate: $currDateTemplate) {\n        data\n        start\n        end\n      }\n      lastData: countByDateTemplate(dateTemplate: $lastDateTemplate) {\n        data\n        start\n        end\n      }\n    }\n  }\n": types.GetEvalCountByDateTemplateByLoginDocument,
     "\n  query GetTotalCountByLogin($login: String!) {\n    getPersonalEval(login: $login) {\n      totalCount\n    }\n  }\n": types.GetTotalCountByLoginDocument,
     "\n  query GetTotalDurationByLogin($login: String!) {\n    getPersonalEval(login: $login) {\n      totalDuration\n    }\n  }\n": types.GetTotalDurationByLoginDocument,
     "\n  query GetCharacterByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      character {\n        name\n        imgUrl\n        types {\n          name\n          description\n          color\n        }\n      }\n    }\n  }\n": types.GetCharacterByLoginDocument,
     "\n  query GetLevelRecordsByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      userLevelRecords {\n        monthsPassed\n        level\n      }\n      promoLevelRecords {\n        monthsPassed\n        level\n      }\n      promoMemberLevelRecords {\n        monthsPassed\n        level\n      }\n    }\n  }\n": types.GetLevelRecordsByLoginDocument,
-    "\n  query GetLogtimeByDateTemplate(\n    $login: String!\n    $currDateTemplate: DateTemplate!\n    $lastDateTemplate: DateTemplate!\n  ) {\n    getPersonalGeneral(login: $login) {\n      currData: logtimeByDateTemplate(dateTemplate: $currDateTemplate) {\n        data\n        start\n        end\n      }\n      lastData: logtimeByDateTemplate(dateTemplate: $lastDateTemplate) {\n        data\n        start\n        end\n      }\n    }\n  }\n": types.GetLogtimeByDateTemplateDocument,
+    "\n  query GetLogtimeRecord($last: Int!) {\n    getPersonalGeneral {\n      logtimeRecord(last: $last) {\n        at\n        value\n      }\n    }\n  }\n": types.GetLogtimeRecordDocument,
     "\n  query GetPreferredClusterByDateTemplateByLogin(\n    $login: String!\n    $dateTemplate: DateTemplate!\n  ) {\n    getPersonalGeneral(login: $login) {\n      preferredClusterByDateTemplate(dateTemplate: $dateTemplate) {\n        data {\n          name\n        }\n        start\n        end\n      }\n    }\n  }\n": types.GetPreferredClusterByDateTemplateByLoginDocument,
     "\n  query GetPrefferedTimeByDateTemplateByLogin(\n    $login: String!\n    $dateTemplate: DateTemplate!\n  ) {\n    getPersonalGeneral(login: $login) {\n      preferredTimeByDateTemplate(dateTemplate: $dateTemplate) {\n        data {\n          total\n          morning\n          daytime\n          evening\n          night\n        }\n        start\n        end\n      }\n    }\n  }\n": types.GetPrefferedTimeByDateTemplateByLoginDocument,
     "\n  query GetTeamInfoByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      teamInfo {\n        teams {\n          id\n          name\n          occurrence\n          projectPreview {\n            ...projectPreviewFields\n          }\n          status\n          lastEventTime\n          isValidated\n          finalMark\n        }\n      }\n    }\n  }\n": types.GetTeamInfoByLoginDocument,
@@ -171,15 +171,11 @@ export function gql(source: "\n  query GetAverageFeedbackLength {\n    getHomeEv
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function gql(source: "\n  query GetEvalCountRecord($last: Int!) {\n    getHomeEval {\n      evalCountRecord(last: $last) {\n        at\n        value\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetEvalCountRecord($last: Int!) {\n    getHomeEval {\n      evalCountRecord(last: $last) {\n        at\n        value\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function gql(source: "\n  query GetEvalCountByDateTemplate($dateTemplate: DateTemplate!) {\n    getHomeEval {\n      evalCountByDateTemplate(dateTemplate: $dateTemplate) {\n        data\n        start\n        end\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetEvalCountByDateTemplate($dateTemplate: DateTemplate!) {\n    getHomeEval {\n      evalCountByDateTemplate(dateTemplate: $dateTemplate) {\n        data\n        start\n        end\n      }\n    }\n  }\n"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function gql(source: "\n  query GetAverageEvalCountByDateTemplate($dateTemplate: DateTemplate!) {\n    getHomeEval {\n      averageEvalCountByDateTemplate(dateTemplate: $dateTemplate) {\n        data\n        start\n        end\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetAverageEvalCountByDateTemplate($dateTemplate: DateTemplate!) {\n    getHomeEval {\n      averageEvalCountByDateTemplate(dateTemplate: $dateTemplate) {\n        data\n        start\n        end\n      }\n    }\n  }\n"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function gql(source: "\n  query GetCurrLastEvalCountByDateTemplate(\n    $currDateTemplate: DateTemplate!\n    $lastDateTemplate: DateTemplate!\n  ) {\n    getHomeEval {\n      currData: evalCountByDateTemplate(dateTemplate: $currDateTemplate) {\n        data\n        start\n        end\n      }\n      lastData: evalCountByDateTemplate(dateTemplate: $lastDateTemplate) {\n        data\n        start\n        end\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetCurrLastEvalCountByDateTemplate(\n    $currDateTemplate: DateTemplate!\n    $lastDateTemplate: DateTemplate!\n  ) {\n    getHomeEval {\n      currData: evalCountByDateTemplate(dateTemplate: $currDateTemplate) {\n        data\n        start\n        end\n      }\n      lastData: evalCountByDateTemplate(dateTemplate: $lastDateTemplate) {\n        data\n        start\n        end\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -188,6 +184,10 @@ export function gql(source: "\n  query GetCurrRegisteredCountRanking($limit: Int
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query GetRecentExamResult($after: Int!) {\n    getHomeTeam {\n      recentExamResult(after: $after) {\n        data {\n          resultPerRank {\n            rank\n            rate {\n              total\n              fields {\n                key\n                value\n              }\n            }\n          }\n          beginAt\n          location\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetRecentExamResult($after: Int!) {\n    getHomeTeam {\n      recentExamResult(after: $after) {\n        data {\n          resultPerRank {\n            rank\n            rate {\n              total\n              fields {\n                key\n                value\n              }\n            }\n          }\n          beginAt\n          location\n        }\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query GetTeamCloseRecord($last: Int!) {\n    getHomeTeam {\n      teamCloseRecord(last: $last) {\n        at\n        value\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetTeamCloseRecord($last: Int!) {\n    getHomeTeam {\n      teamCloseRecord(last: $last) {\n        at\n        value\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -203,6 +203,10 @@ export function gql(source: "\n  query GetBlackholedCountPerCircle {\n    getHom
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function gql(source: "\n  query GetBlackholedCountRecord($last: Int!) {\n    getHomeUser {\n      blackholedCountRecord(last: $last) {\n        at\n        value\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetBlackholedCountRecord($last: Int!) {\n    getHomeUser {\n      blackholedCountRecord(last: $last) {\n        at\n        value\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function gql(source: "\n  query GetBlackholedRate {\n    getHomeUser {\n      blackholedRate {\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetBlackholedRate {\n    getHomeUser {\n      blackholedRate {\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -212,10 +216,6 @@ export function gql(source: "\n  query GetCorrectionPointRanking($limit: Int!) {
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query GetMemberRate {\n    getHomeUser {\n      memberRate {\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetMemberRate {\n    getHomeUser {\n      memberRate {\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function gql(source: "\n  query GetBlackholedCountByDateTemplate(\n    $currDateTemplate: DateTemplate!\n    $lastDateTemplate: DateTemplate!\n  ) {\n    getHomeUser {\n      currData: blackholedCountByDateTemplate(dateTemplate: $currDateTemplate) {\n        data\n        start\n        end\n      }\n      lastData: blackholedCountByDateTemplate(dateTemplate: $lastDateTemplate) {\n        data\n        start\n        end\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetBlackholedCountByDateTemplate(\n    $currDateTemplate: DateTemplate!\n    $lastDateTemplate: DateTemplate!\n  ) {\n    getHomeUser {\n      currData: blackholedCountByDateTemplate(dateTemplate: $currDateTemplate) {\n        data\n        start\n        end\n      }\n      lastData: blackholedCountByDateTemplate(dateTemplate: $lastDateTemplate) {\n        data\n        start\n        end\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -279,11 +279,11 @@ export function gql(source: "\n  query GetAverageFinalMarkByLogin($login: String
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query GetDestinyRankingByLogin($login: String!, $limit: Int!) {\n    getPersonalEval(login: $login) {\n      destinyRanking(limit: $limit) {\n        userPreview {\n          ...userPreviewFields\n        }\n        value\n        rank\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetDestinyRankingByLogin($login: String!, $limit: Int!) {\n    getPersonalEval(login: $login) {\n      destinyRanking(limit: $limit) {\n        userPreview {\n          ...userPreviewFields\n        }\n        value\n        rank\n      }\n    }\n  }\n"];
+export function gql(source: "\n  query GetCountRecordByLogin($login: String!, $last: Int!) {\n    getPersonalEval(login: $login) {\n      countRecord(last: $last) {\n        at\n        value\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetCountRecordByLogin($login: String!, $last: Int!) {\n    getPersonalEval(login: $login) {\n      countRecord(last: $last) {\n        at\n        value\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query GetEvalCountByDateTemplateByLogin(\n    $login: String!\n    $currDateTemplate: DateTemplate!\n    $lastDateTemplate: DateTemplate!\n  ) {\n    getPersonalEval(login: $login) {\n      currData: countByDateTemplate(dateTemplate: $currDateTemplate) {\n        data\n        start\n        end\n      }\n      lastData: countByDateTemplate(dateTemplate: $lastDateTemplate) {\n        data\n        start\n        end\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetEvalCountByDateTemplateByLogin(\n    $login: String!\n    $currDateTemplate: DateTemplate!\n    $lastDateTemplate: DateTemplate!\n  ) {\n    getPersonalEval(login: $login) {\n      currData: countByDateTemplate(dateTemplate: $currDateTemplate) {\n        data\n        start\n        end\n      }\n      lastData: countByDateTemplate(dateTemplate: $lastDateTemplate) {\n        data\n        start\n        end\n      }\n    }\n  }\n"];
+export function gql(source: "\n  query GetDestinyRankingByLogin($login: String!, $limit: Int!) {\n    getPersonalEval(login: $login) {\n      destinyRanking(limit: $limit) {\n        userPreview {\n          ...userPreviewFields\n        }\n        value\n        rank\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetDestinyRankingByLogin($login: String!, $limit: Int!) {\n    getPersonalEval(login: $login) {\n      destinyRanking(limit: $limit) {\n        userPreview {\n          ...userPreviewFields\n        }\n        value\n        rank\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -303,7 +303,7 @@ export function gql(source: "\n  query GetLevelRecordsByLogin($login: String!) {
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query GetLogtimeByDateTemplate(\n    $login: String!\n    $currDateTemplate: DateTemplate!\n    $lastDateTemplate: DateTemplate!\n  ) {\n    getPersonalGeneral(login: $login) {\n      currData: logtimeByDateTemplate(dateTemplate: $currDateTemplate) {\n        data\n        start\n        end\n      }\n      lastData: logtimeByDateTemplate(dateTemplate: $lastDateTemplate) {\n        data\n        start\n        end\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetLogtimeByDateTemplate(\n    $login: String!\n    $currDateTemplate: DateTemplate!\n    $lastDateTemplate: DateTemplate!\n  ) {\n    getPersonalGeneral(login: $login) {\n      currData: logtimeByDateTemplate(dateTemplate: $currDateTemplate) {\n        data\n        start\n        end\n      }\n      lastData: logtimeByDateTemplate(dateTemplate: $lastDateTemplate) {\n        data\n        start\n        end\n      }\n    }\n  }\n"];
+export function gql(source: "\n  query GetLogtimeRecord($last: Int!) {\n    getPersonalGeneral {\n      logtimeRecord(last: $last) {\n        at\n        value\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetLogtimeRecord($last: Int!) {\n    getPersonalGeneral {\n      logtimeRecord(last: $last) {\n        at\n        value\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

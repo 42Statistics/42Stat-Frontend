@@ -46,7 +46,7 @@ export const AverageFeedbackLength = () => {
   return (
     <DashboardContent
       title={title}
-      titleRight={<InfoTooltip text="피드백 : 평가자일 때 작성한 리뷰" />}
+      titleRight={<InfoTooltip text="피드백 : 평가받고 나서 작성한 리뷰" />}
     >
       <NumberDefault number={averageFeedbackLength} unit={unit} />
     </DashboardContent>

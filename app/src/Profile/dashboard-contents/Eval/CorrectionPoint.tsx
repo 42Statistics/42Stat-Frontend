@@ -13,7 +13,7 @@ import { GET_PERSONAL_EVAL_ZERO_COST_BY_LOGIN } from '../../dashboard-contents-q
 export const CorrectionPoint = () => {
   const { login } = useContext(UserProfileContext);
 
-  const title = '보유 평가 포인트';
+  const title = '평가 포인트';
   const { loading, error, data } = useQuery(
     GET_PERSONAL_EVAL_ZERO_COST_BY_LOGIN,
     {

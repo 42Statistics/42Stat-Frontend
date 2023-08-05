@@ -86,9 +86,8 @@ const ScoreRecordsPerCoalitionChart = ({
     xaxis: {
       type: 'datetime',
       labels: {
-        show: false,
         datetimeUTC: false,
-        format: 'yy.MM.',
+        format: "'yy MMM",
       },
     },
     colors: colors,

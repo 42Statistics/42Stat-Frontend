@@ -4,6 +4,6 @@ export * from './BlackholedCountPerCircle';
 export * from './BlackholedRate';
 export * from './CorrectionPointRanking';
 export * from './MemberRate';
-export * from './MonthlyBlackholedCount';
+export * from './BlackholedCountRecord';
 export * from './UserCountPerLevel';
 export * from './WalletRanking';

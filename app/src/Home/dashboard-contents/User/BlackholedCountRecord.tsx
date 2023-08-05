@@ -7,13 +7,12 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
-import { InfoTooltip } from '@shared/components/InfoTooltip';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 
-const GET_ALIVE_USER_COUNT_RECORDS = gql(/* GraphQL */ `
-  query GetAliveUserCountRecords {
+const GET_BLACKHOLED_COUNT_RECORD = gql(/* GraphQL */ `
+  query GetBlackholedCountRecord($last: Int!) {
     getHomeUser {
-      aliveUserCountRecords {
+      blackholedCountRecord(last: $last) {
         at
         value
       }
@@ -21,9 +20,13 @@ const GET_ALIVE_USER_COUNT_RECORDS = gql(/* GraphQL */ `
   }
 `);
 
-export const AliveUserCountRecords = () => {
-  const title = '여행 중인 유저 수 추이';
-  const { loading, error, data } = useQuery(GET_ALIVE_USER_COUNT_RECORDS);
+export const BlackholedCountRecord = () => {
+  const title = '월간 블랙홀 인원 추이';
+  const { loading, error, data } = useQuery(GET_BLACKHOLED_COUNT_RECORD, {
+    variables: {
+      last: 12,
+    },
+  });
 
   if (loading) {
     return <DashboardContentLoading title={title} />;
@@ -35,8 +38,8 @@ export const AliveUserCountRecords = () => {
     return <DashboardContentNotFound title={title} />;
   }
 
-  const { aliveUserCountRecords } = data.getHomeUser;
-  const seriesData = aliveUserCountRecords.map(({ at, value }) => ({
+  const { blackholedCountRecord } = data.getHomeUser;
+  const seriesData = blackholedCountRecord.map(({ at, value }) => ({
     x: at,
     y: value,
   }));
@@ -48,36 +51,26 @@ export const AliveUserCountRecords = () => {
   ];
 
   return (
-    <DashboardContent
-      title={title}
-      titleRight={
-        <InfoTooltip text="여행 중 : 멤버 포함, 블랙홀 제외한 러너" />
-      }
-      type="ApexCharts"
-    >
-      <ActiveUserCountRecordsChart series={series} />
+    <DashboardContent title={title} type="ApexCharts">
+      <BlackholedCountRecordChart series={series} />
     </DashboardContent>
   );
 };
 
-type ActiveUserCountRecordsChartProps = {
+type BlackholedCountRecordChartProps = {
   series: ApexAxisChartSeries;
 };
 
-const ActiveUserCountRecordsChart = ({
+const BlackholedCountRecordChart = ({
   series,
-}: ActiveUserCountRecordsChartProps) => {
+}: BlackholedCountRecordChartProps) => {
   const options: ApexCharts.ApexOptions = {
     xaxis: {
       type: 'datetime',
+
       labels: {
-        format: "'yy MMM",
         datetimeUTC: false,
-      },
-    },
-    yaxis: {
-      labels: {
-        formatter: (value) => value.toLocaleString(),
+        format: "'yy MMM",
       },
     },
     tooltip: {
@@ -86,9 +79,6 @@ const ActiveUserCountRecordsChart = ({
       },
       y: {
         formatter: (value) => numberWithUnitFormatter(value, '명'),
-      },
-      marker: {
-        show: false,
       },
     },
   };

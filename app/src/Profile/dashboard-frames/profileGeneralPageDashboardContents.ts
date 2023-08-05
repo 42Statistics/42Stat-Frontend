@@ -7,7 +7,7 @@ import {
   LastPassed,
   LastRegistered,
   LevelRecords,
-  MonthlyLogtime,
+  LogtimeRecord,
   PreferredCluster,
   PreferredTime,
   TeamInfo,
@@ -25,7 +25,7 @@ export const profileGeneralPageDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 2,
-    content: MonthlyLogtime,
+    content: LogtimeRecord,
   },
   {
     id: 3,

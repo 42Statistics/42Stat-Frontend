@@ -5,15 +5,15 @@ export const homeStatusDashboardRows: DashboardRowType[] = [
     colSpan: 1,
     items: [
       {
-        rowSpan: 1,
+        rowSpan: 2,
         elementId: 0,
       },
       {
-        rowSpan: 1,
+        rowSpan: 2,
         elementId: 2,
       },
       {
-        rowSpan: 1,
+        rowSpan: 2,
         elementId: 1,
       },
       {

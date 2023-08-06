@@ -1,5 +1,7 @@
 import { useQuery } from '@apollo/client';
+import { useTheme } from '@emotion/react';
 import { gql } from '@shared/__generated__';
+import { ReactComponent as FtLogo } from '@shared/assets/logo/ft-logo.svg';
 import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
 import { FullPageApolloNotFoundView } from '@shared/components/ApolloError/FullPageApolloNotFoundView';
 import { EvalLogList } from '@shared/components/EvalLogList/EvalLogList';
@@ -7,9 +9,23 @@ import { Seo } from '@shared/components/Seo';
 import { ROUTES } from '@shared/constants/ROUTES';
 import { withFooter } from '@shared/hoc/withFooter';
 import { withHead } from '@shared/hoc/withHead';
-import { Text, VStack } from '@shared/ui-kit';
+import {
+  Avatar,
+  Divider,
+  H1BoldText,
+  H2BoldText,
+  H3MediumText,
+  HStack,
+  Label,
+  MediumText,
+  Text,
+  VStack,
+} from '@shared/ui-kit';
 import { CustomLink } from '@shared/ui-kit-styled/CustomLink';
+import { getDateDiffStringWithTeamStatus } from '@shared/utils/getDateDiffStringWithTeamStatus';
+import { getTeamStatusString } from '@shared/utils/getTeamStatusString';
 import { Link, useParams } from 'react-router-dom';
+import { MoulinetteEvalLogListItem } from './components/MoulinetteEvalLogListItem';
 
 const GET_TEAM_INFO = gql(/* GraphQL */ `
   query GetTeamInfo($id: Int!) {
@@ -58,7 +74,22 @@ const GET_TEAM_INFO = gql(/* GraphQL */ `
   }
 `);
 
+const computeLastEventTime = (
+  lockedAt: string | null | undefined,
+  closedAt: string | null | undefined,
+) => {
+  if (lockedAt != null) {
+    return new Date(lockedAt);
+  }
+  if (closedAt != null) {
+    return new Date(closedAt);
+  }
+  return new Date(); // unreachable
+};
+
 const TeamPage = () => {
+  const theme = useTheme();
+
   const { id } = useParams() as { id: string };
 
   const { loading, error, data } = useQuery(GET_TEAM_INFO, {
@@ -89,28 +120,66 @@ const TeamPage = () => {
     evalLogs,
   } = data.getTeamInfo;
 
+  const lastEventTime = computeLastEventTime(lockedAt, closedAt);
+
   return (
-    <VStack align="start">
-      <Text>{name}</Text>
-      <CustomLink to={url} target="_blank" rel="noreferrer">
-        Intra 팀 페이지 바로가기
-      </CustomLink>
-      <Text>{users.map((user) => user.login).join(', ')}</Text>
-      <Text>{moulinette?.finalMark}</Text>
-      <Text>{moulinette?.comment}</Text>
-      <Text>{status}</Text>
-      <Text>lockedAt: {lockedAt}</Text>
-      <Text>closedAt: {closedAt}</Text>
-      <Link to={ROUTES.PROJECT_DETAIL_OF(projectPreview.name)}>
-        <Text>{projectPreview.name}</Text>
-      </Link>
-      <EvalLogList list={evalLogs} />
+    <VStack align="start" spacing="5rem">
+      <VStack align="start" spacing="3rem">
+        <HStack spacing="1rem">
+          <Label>{getTeamStatusString(status)}</Label>
+          <Text color={theme.colors.mono.gray300}>
+            {getDateDiffStringWithTeamStatus(lastEventTime, status)}
+          </Text>
+        </HStack>
+        <H1BoldText>{name}</H1BoldText>
+        <HStack spacing="1rem">
+          <FtLogo width={20} height={20} />
+          <Link to={ROUTES.PROJECT_DETAIL_OF(projectPreview.name)}>
+            <H3MediumText>{projectPreview.name}</H3MediumText>
+          </Link>
+          <Text>
+            {projectPreview.circle != null
+              ? `${projectPreview.circle}서클`
+              : 'Outer 서클'}
+          </Text>
+        </HStack>
+      </VStack>
+      <Divider />
+      <VStack align="start" spacing="3rem">
+        <H2BoldText>팀원</H2BoldText>
+        <HStack spacing="2rem">
+          {users.map((user) => (
+            <Link key={user.id} to={ROUTES.PROFILE_OF(user.login)}>
+              <VStack spacing="0.6rem">
+                <Avatar size="lg" src={user.imgUrl} alt={user.login} />
+                <MediumText>{user.login}</MediumText>
+              </VStack>
+            </Link>
+          ))}
+        </HStack>
+        <CustomLink to={url} target="_blank" rel="noreferrer">
+          Intra 팀 페이지 바로가기
+        </CustomLink>
+      </VStack>
+      <Divider />
+      <VStack align="start" spacing="3rem">
+        <H2BoldText>평가 기록</H2BoldText>
+        {moulinette == null && evalLogs.length === 0 ? (
+          <Text>평가 기록이 없습니다.</Text>
+        ) : null}
+        <VStack align="start" spacing="1.5rem">
+          <EvalLogList list={evalLogs} />
+          {moulinette != null ? (
+            <MoulinetteEvalLogListItem item={moulinette} />
+          ) : null}
+        </VStack>
+      </VStack>
     </VStack>
   );
 };
 
 const Head = () => {
-  return <Seo title="팀명" />;
+  return <Seo title="팀" />; // TODO: withFooter 없애고 나서 팀명으로 바꾸기
 };
 
 export default withHead(withFooter(TeamPage), Head);

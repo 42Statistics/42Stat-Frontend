@@ -20,7 +20,7 @@ export const DesktopNavBar = ({ fixed = true }: DesktopNavBarProps) => {
   return (
     <Layout fixed={fixed}>
       <VStack w="100%" h="100%" spacing="4rem">
-        <Link to={ROUTES.ROOT} aria-label={ARIA_LABEL_LINK.STAT}>
+        <Link to={ROUTES.HOME} aria-label={ARIA_LABEL_LINK.STAT}>
           <AppLogoTitle size="sm" />
         </Link>
         <DesktopNavProfile

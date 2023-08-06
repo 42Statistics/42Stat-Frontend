@@ -45,4 +45,8 @@ export const global = () => css`
   &:focus-visible {
     outline: 2px solid blue;
   }
+
+  strong {
+    font-weight: 700;
+  }
 `;

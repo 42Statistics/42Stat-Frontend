@@ -4,7 +4,7 @@ import { EvalLog, TeamEvalLog } from '@shared/__generated__/graphql';
 import { Center, HStack, Text, VStack } from '@shared/ui-kit';
 import { CustomBox } from '@shared/ui-kit-styled';
 import { EvalLogLabel } from '../EvalLogLabel';
-import { EvalLogItemTitle } from './EvalLogItemTitle';
+import { EvalLogListItemTitle } from './EvalLogListItemTitle';
 
 type EvalLogListItemProps = {
   element: EvalLog | TeamEvalLog;
@@ -16,7 +16,7 @@ export const EvalLogListItem = ({ element }: EvalLogListItemProps) => {
 
   return (
     <Layout>
-      <EvalLogItemTitle header={header} />
+      <EvalLogListItemTitle header={header} />
       <VStack w="100%" align="start" spacing="1rem">
         <HStack w="100%">
           <Center w="10rem">
@@ -52,7 +52,7 @@ const Layout = styled(CustomBox)`
   padding: 2.5rem 3.5rem;
 `;
 
-const CorrectorReviewLabel = ({ number }: { number: number }) => {
+export const CorrectorReviewLabel = ({ number }: { number: number }) => {
   const getType = (number: number) => {
     if (number >= 100) return 'positive';
     if (number >= 80) return 'neutral';

@@ -14,11 +14,11 @@ import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
 import { FlagLabel } from '../FlagLabel';
 
-type EvalLogItemTitleProps = {
+type EvalLogListItemTitleProps = {
   header: EvalLogHeader | TeamEvalLogHeader;
 };
 
-export const EvalLogItemTitle = ({ header }: EvalLogItemTitleProps) => {
+export const EvalLogListItemTitle = ({ header }: EvalLogListItemTitleProps) => {
   const { corrector, beginAt, flag } = header;
   const { teamPreview, projectPreview } =
     'teamPreview' in header

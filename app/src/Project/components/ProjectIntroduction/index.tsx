@@ -1,12 +1,13 @@
+import { ProjectNameContext } from '@/Project/contexts/ProjectNameContext';
 import { useQuery } from '@apollo/client';
 import styled from '@emotion/styled';
 import { BoldText, Divider, HStack, Text, VStack } from '@shared/ui-kit';
 import { Mobile, TabletAndAbove } from '@shared/utils/react-responsive/Device';
-import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
 import { GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME } from '../../dashboard-contents-queries/GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME';
 
 export const ProjectIntroduction = () => {
-  const { projectName } = useParams() as { projectName: string };
+  const projectName = useContext(ProjectNameContext);
   const { loading, error, data } = useQuery(
     GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME,
     {

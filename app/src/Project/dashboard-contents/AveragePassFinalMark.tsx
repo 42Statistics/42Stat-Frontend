@@ -7,7 +7,8 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { NumberDefault } from '@shared/components/DashboardContentView/Number/NumberDefault';
-import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
+import { ProjectNameContext } from '../contexts/ProjectNameContext';
 
 const GET_AVERAGE_PASS_FINAL_MARK_BY_PROJECT_NAME = gql(/* GraphQL */ `
   query GetAveragePassFinalMarkByProjectName($projectName: String!) {
@@ -18,7 +19,7 @@ const GET_AVERAGE_PASS_FINAL_MARK_BY_PROJECT_NAME = gql(/* GraphQL */ `
 `);
 
 export const AveragePassFinalMark = () => {
-  const { projectName } = useParams() as { projectName: string };
+  const projectName = useContext(ProjectNameContext);
 
   const title = '통과 시 평균 점수';
   const { loading, error, data } = useQuery(

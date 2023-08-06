@@ -1,10 +1,11 @@
 import { DashboardContent } from '@shared/components/DashboardContent';
 import { ROUTES } from '@shared/constants/ROUTES';
 import { CustomLink } from '@shared/ui-kit-styled/CustomLink';
-import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
+import { ProjectNameContext } from '../contexts/ProjectNameContext';
 
 export const PastEvaluationLink = () => {
-  const { projectName } = useParams() as { projectName: string };
+  const projectName = useContext(ProjectNameContext);
   const title = '지난 평가 보기';
 
   return (

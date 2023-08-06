@@ -6,11 +6,12 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { TextDefault } from '@shared/components/DashboardContentView/Text/TextDefault';
-import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
+import { ProjectNameContext } from '../contexts/ProjectNameContext';
 import { GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME } from '../dashboard-contents-queries/GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME';
 
 export const BasicInfo = () => {
-  const { projectName } = useParams() as { projectName: string };
+  const projectName = useContext(ProjectNameContext);
 
   const title = '기본 정보';
   const { loading, error, data } = useQuery(

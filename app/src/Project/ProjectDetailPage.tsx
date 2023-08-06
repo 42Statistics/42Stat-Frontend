@@ -9,6 +9,7 @@ import { withHead } from '@shared/hoc/withHead';
 import { VStack } from '@shared/ui-kit';
 import { useParams } from 'react-router-dom';
 import { ProjectIntroduction } from './components/ProjectIntroduction';
+import { ProjectNameContext } from './contexts/ProjectNameContext';
 import { projectDetailPageDashboardContents } from './dashboard-frames/projectDetailPageDashboardContents';
 import { projectDetailPageDashboardRows } from './dashboard-frames/projectDetailPageDashboardRows';
 
@@ -39,13 +40,15 @@ const ProjectDetailPage = () => {
   }
 
   return (
-    <VStack w="100%" spacing="4rem">
-      <ProjectIntroduction />
-      <Dashboard
-        contents={projectDetailPageDashboardContents}
-        rows={projectDetailPageDashboardRows}
-      />
-    </VStack>
+    <ProjectNameContext.Provider value={projectName}>
+      <VStack w="100%" spacing="4rem">
+        <ProjectIntroduction />
+        <Dashboard
+          contents={projectDetailPageDashboardContents}
+          rows={projectDetailPageDashboardRows}
+        />
+      </VStack>
+    </ProjectNameContext.Provider>
   );
 };
 

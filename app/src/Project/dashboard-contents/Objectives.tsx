@@ -9,12 +9,13 @@ import {
 } from '@shared/components/DashboardContentView/Error';
 import { Label, VStack } from '@shared/ui-kit';
 import { compareLength } from '@shared/utils/compareLength';
-import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
+import { ProjectNameContext } from '../contexts/ProjectNameContext';
 import { GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME } from '../dashboard-contents-queries/GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME';
 
 export const Objectives = () => {
   const theme = useTheme();
-  const { projectName } = useParams() as { projectName: string };
+  const projectName = useContext(ProjectNameContext);
 
   const title = '키워드';
   const { loading, error, data } = useQuery(

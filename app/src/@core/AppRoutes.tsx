@@ -32,6 +32,7 @@ const LeaderboardCoalitionScorePage = lazy(
 const LeaderboardEvalCountPage = lazy(
   () => import('@/Leaderboard/pages/EvalCount'),
 );
+const TeamPage = lazy(() => import('@/Team'));
 const NotFoundPage = lazy(() => import('@/Error/404'));
 const FtOAuthPage = lazy(() => import('@/FtOAuth'));
 const FtOAuthRedirectPage = lazy(() => import('@/FtOAuthRedirect'));
@@ -175,6 +176,14 @@ export const AppRoutes = () => {
               }
             />
           </Route>
+          <Route
+            path={ROUTES.TEAM}
+            element={
+              <Suspense>
+                <TeamPage />
+              </Suspense>
+            }
+          />
           <Route
             path={ROUTES.EVALLOG}
             element={

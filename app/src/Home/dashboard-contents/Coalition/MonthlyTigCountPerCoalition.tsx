@@ -13,7 +13,7 @@ import {
 import { TextMax } from '@shared/components/TextMax';
 import { Body1Text, Center, VStack } from '@shared/ui-kit';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
-import dayjs from 'dayjs';
+import { getStartEndDateString } from '@shared/utils/getStartEndDateString';
 import { capitalize } from 'lodash-es';
 
 const GET_TIG_COUNT_PER_COALITION_BY_DATE_TEMPLATE = gql(/* GraphQL */ `
@@ -73,9 +73,11 @@ export const MonthlyTigCountPerCoalition = () => {
 
   const max = Math.max(...tableData.map(({ value }) => value));
 
-  const description = `${dayjs(start).format('M월 D일')} ~ ${dayjs(end).format(
+  const description = getStartEndDateString(
+    new Date(start),
+    new Date(end),
     'M월 D일',
-  )}`;
+  );
   const unit = '회';
 
   return (

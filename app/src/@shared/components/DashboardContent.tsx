@@ -42,7 +42,7 @@ export const DashboardContent = ({
             </CaptionText>
           ) : null}
           {title && !description ? (
-            <Body1MediumText>&nbsp;</Body1MediumText>
+            <Body1MediumText preventSelect>&nbsp;</Body1MediumText>
           ) : null}
         </VStack>
         {type === 'Default' ? <Center>{children}</Center> : null}

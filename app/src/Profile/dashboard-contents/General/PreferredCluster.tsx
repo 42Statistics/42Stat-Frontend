@@ -10,7 +10,7 @@ import {
   NoneDash,
 } from '@shared/components/DashboardContentView/Error';
 import { TextDefault } from '@shared/components/DashboardContentView/Text/TextDefault';
-import dayjs from 'dayjs';
+import { getStartEndDateString } from '@shared/utils/getStartEndDateString';
 import { useContext } from 'react';
 
 const GET_PREFERRED_CLUSTER_BY_DATE_TEMPLATE_BY_LOGIN = gql(/* GraphQL */ `
@@ -57,9 +57,11 @@ export const PreferredCluster = () => {
     end,
   } = data.getPersonalGeneral.preferredClusterByDateTemplate;
 
-  const description = `${dayjs(start).format('M월 D일')} ~ ${dayjs(end).format(
+  const description = getStartEndDateString(
+    new Date(start),
+    new Date(end),
     'M월 D일',
-  )}`;
+  );
 
   return (
     <DashboardContent title={title} description={description}>

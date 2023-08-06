@@ -11,7 +11,7 @@ import {
 import { ProgressionBar } from '@shared/components/ProgressionBar';
 import { TextMax } from '@shared/components/TextMax';
 import { H3MediumText, HStack, Text, VStack } from '@shared/ui-kit';
-import dayjs from 'dayjs';
+import { getStartEndDateString } from '@shared/utils/getStartEndDateString';
 import { useContext } from 'react';
 
 const GET_PREFERRED_TIME_BY_DATE_TEMPLATE_BY_LOGIN = gql(/* GraphQL */ `
@@ -63,9 +63,11 @@ export const PreferredTime = () => {
     end,
   } = preferredTimeByDateTemplate;
 
-  const description = `${dayjs(start).format('M월 D일')} ~ ${dayjs(end).format(
+  const description = getStartEndDateString(
+    new Date(start),
+    new Date(end),
     'M월 D일',
-  )}`;
+  );
 
   const tableData = [
     {

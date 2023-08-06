@@ -1,7 +1,7 @@
 import { useTheme } from '@emotion/react';
 import { UserRank } from '@shared/__generated__/graphql';
 import { HStack, Spacer, Text, VStack } from '@shared/ui-kit';
-import dayjs from 'dayjs';
+import { getStartEndDateString } from '@shared/utils/getStartEndDateString';
 import { LeaderboardList } from './LeaderboardList';
 import { LeaderboardListItem } from './LeaderboardListItem';
 
@@ -28,8 +28,8 @@ export const Leaderboard = ({
       <HStack w="100%">
         <Spacer />
         <Text color={theme.colors.mono.gray300}>
-          집계기간 : {dayjs(start).format('YYYY-MM-DD')} ~&nbsp;
-          {dayjs(end).format('YYYY-MM-DD')}
+          집계기간 :&nbsp;
+          {getStartEndDateString(start, end, 'YYYY-MM-DD')}
         </Text>
       </HStack>
       {me != null ? (

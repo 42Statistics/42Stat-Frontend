@@ -1,16 +1,19 @@
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
 import { gql } from '@shared/__generated__';
+import { ReactComponent as Star } from '@shared/assets/icon/star.svg';
 import { ReactComponent as FtLogo } from '@shared/assets/logo/ft-logo.svg';
 import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
 import { FullPageApolloNotFoundView } from '@shared/components/ApolloError/FullPageApolloNotFoundView';
 import { EvalLogList } from '@shared/components/EvalLogList/EvalLogList';
+import { CorrectorReviewLabel } from '@shared/components/EvalLogList/EvalLogListItem';
 import { Seo } from '@shared/components/Seo';
 import { ROUTES } from '@shared/constants/ROUTES';
 import { withFooter } from '@shared/hoc/withFooter';
 import { withHead } from '@shared/hoc/withHead';
 import {
   Avatar,
+  CaptionText,
   Divider,
   H1BoldText,
   H2BoldText,
@@ -34,8 +37,9 @@ const GET_TEAM_INFO = gql(/* GraphQL */ `
       name
       url
       users {
-        ...userPreviewFields
+        ...teamUserPreviewFields
       }
+      finalMark
       moulinette {
         id
         finalMark
@@ -112,6 +116,7 @@ const TeamPage = () => {
     name,
     url,
     users,
+    finalMark,
     moulinette,
     status,
     lockedAt,
@@ -123,10 +128,14 @@ const TeamPage = () => {
   const lastEventTime = computeLastEventTime(lockedAt, closedAt);
 
   return (
-    <VStack align="start" spacing="5rem">
+    <VStack w="100%" align="start" spacing="5rem">
       <VStack align="start" spacing="3rem">
         <HStack spacing="1rem">
-          <Label>{getTeamStatusString(status)}</Label>
+          {finalMark == null ? (
+            <Label>{getTeamStatusString(status)}</Label>
+          ) : (
+            <CorrectorReviewLabel number={finalMark} />
+          )}
           <Text color={theme.colors.mono.gray300}>
             {getDateDiffStringWithTeamStatus(lastEventTime, status)}
           </Text>
@@ -151,8 +160,18 @@ const TeamPage = () => {
           {users.map((user) => (
             <Link key={user.id} to={ROUTES.PROFILE_OF(user.login)}>
               <VStack spacing="0.6rem">
-                <Avatar size="lg" src={user.imgUrl} alt={user.login} />
+                {user.isLeader ? (
+                  <Avatar
+                    size="lg"
+                    src={user.imgUrl}
+                    alt={user.login}
+                    badge={<Star width={18} height={18} fill="#ffd700" />}
+                  />
+                ) : (
+                  <Avatar size="lg" src={user.imgUrl} alt={user.login} />
+                )}
                 <MediumText>{user.login}</MediumText>
+                <CaptionText>#{user.occurrence + 1}</CaptionText>
               </VStack>
             </Link>
           ))}

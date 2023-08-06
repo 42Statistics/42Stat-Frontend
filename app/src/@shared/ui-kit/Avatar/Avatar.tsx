@@ -10,9 +10,10 @@ type AvatarProps = {
   size?: AvatarSize;
   src?: string | null;
   alt?: string;
+  badge?: React.ReactNode;
 };
 
-export const Avatar = ({ size = 'md', src, alt = '' }: AvatarProps) => {
+export const Avatar = ({ size = 'md', src, alt = '', badge }: AvatarProps) => {
   const [isLoading, setIsLoading] = useState(true);
 
   if (src == null) {
@@ -56,6 +57,11 @@ export const Avatar = ({ size = 'md', src, alt = '' }: AvatarProps) => {
         alt={alt}
         style={{ width, height: width }}
       />
+      {badge != null ? (
+        <div style={{ position: 'absolute', top: '-10%', right: '-10%' }}>
+          {badge}
+        </div>
+      ) : null}
     </div>
   );
 };

@@ -45,20 +45,14 @@ const GET_EVAL_LOGS = gql(/* GraphQL */ `
           id
           header {
             corrector {
-              id
-              login
-              imgUrl
+              ...userPreviewFields
             }
             teamPreview {
-              id
-              name
-              url
+              ...teamPreviewFields
             }
             beginAt
             projectPreview {
-              id
-              name
-              url
+              ...projectPreviewFields
             }
             flag {
               id

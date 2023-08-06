@@ -1,6 +1,5 @@
 import { ApolloError } from '@apollo/client';
 import { Footer } from '@core/components/Footer';
-import { useTheme } from '@emotion/react';
 import { EvalLogEdge } from '@shared/__generated__/graphql';
 import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
 import { Skeleton, VStack } from '@shared/ui-kit';
@@ -51,7 +50,7 @@ export const EvalLogSearchResult = ({
 
   return (
     <>
-      <EvalLogList evalLogEdges={evalLogEdges} />
+      <EvalLogList list={evalLogEdges.map((edge) => edge.node)} />
       {!end ? (
         <VStack w="100%" spacing="1.2rem" ref={infiniteScrollRef}>
           <EvalLogSkeleton />

@@ -1,8 +1,8 @@
-import { EvalLogList } from '@/EvalLogSearch/components/EvalLogList';
 import { useQuery } from '@apollo/client';
 import { gql } from '@shared/__generated__';
 import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
 import { FullPageApolloNotFoundView } from '@shared/components/ApolloError/FullPageApolloNotFoundView';
+import { EvalLogList } from '@shared/components/EvalLogList/EvalLogList';
 import { Seo } from '@shared/components/Seo';
 import { ROUTES } from '@shared/constants/ROUTES';
 import { withFooter } from '@shared/hoc/withFooter';

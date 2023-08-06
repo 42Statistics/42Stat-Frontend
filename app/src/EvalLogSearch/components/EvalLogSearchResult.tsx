@@ -4,7 +4,7 @@ import { EvalLogEdge } from '@shared/__generated__/graphql';
 import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
 import { Skeleton, VStack } from '@shared/ui-kit';
 import React from 'react';
-import { EvalLogList } from './EvalLogList';
+import { EvalLogList } from '../../@shared/components/EvalLogList/EvalLogList';
 
 type EvalLogSearchResultProps = {
   evalLogEdges: EvalLogEdge[];

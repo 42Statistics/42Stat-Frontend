@@ -6,11 +6,11 @@ import { CustomBox } from '@shared/ui-kit-styled';
 import { EvalLogLabel } from '../EvalLogLabel';
 import { EvalLogItemTitle } from './EvalLogItemTitle';
 
-type EvalLogItemProps = {
+type EvalLogListItemProps = {
   element: EvalLog | TeamEvalLog;
 };
 
-export const EvalLogItem = ({ element }: EvalLogItemProps) => {
+export const EvalLogListItem = ({ element }: EvalLogListItemProps) => {
   const theme = useTheme();
   const { header, correctorReview, correctedsReview } = element;
 

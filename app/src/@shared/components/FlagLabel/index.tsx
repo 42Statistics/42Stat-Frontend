@@ -1,6 +1,6 @@
 import { useTheme } from '@emotion/react';
+import { EvalLogLabel } from '@shared/components/EvalLogLabel';
 import { snakeCaseFormatter } from '@shared/utils/formatters/snakeCaseFormatter';
-import { EvalLogLabel } from '../EvalLogLabel';
 
 type FlagLabelProps = {
   name: string;

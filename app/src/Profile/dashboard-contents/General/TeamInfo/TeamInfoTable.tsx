@@ -2,9 +2,9 @@ import styled from '@emotion/styled';
 import { UserTeam } from '@shared/__generated__/graphql';
 import { ROUTES } from '@shared/constants/ROUTES';
 import { PrimaryMediumText, Text } from '@shared/ui-kit';
+import { getDateDiffStringWithTeamStatus } from '@shared/utils/getDateDiffStringWithTeamStatus';
 import { rgba } from 'emotion-rgba';
-import { Link } from 'react-router-dom';
-import { DateDiffWithStatus } from './DateDiffWithStatus';
+import { useNavigate } from 'react-router-dom';
 import { ResultWithStatus } from './ResultWithStatus';
 
 type TeamInfoTableProps = {
@@ -12,6 +12,7 @@ type TeamInfoTableProps = {
 };
 
 export const TeamInfoTable = ({ teams }: TeamInfoTableProps) => {
+  const navigate = useNavigate();
   const heads = ['과제명', '시도', '팀명', '현재일로부터', '점수'];
 
   return (
@@ -37,11 +38,9 @@ export const TeamInfoTable = ({ teams }: TeamInfoTableProps) => {
             isValidated,
             finalMark,
           }) => (
-            <tr key={id}>
+            <tr key={id} onClick={() => navigate(ROUTES.TEAM_OF(id))}>
               <td>
-                <Link to={ROUTES.PROJECT_DETAIL_OF(projectPreview.name)}>
-                  <Text>{projectPreview.name}</Text>
-                </Link>
+                <Text>{projectPreview.name}</Text>
               </td>
               <td>
                 <Text>{occurrence + 1}</Text>
@@ -50,10 +49,12 @@ export const TeamInfoTable = ({ teams }: TeamInfoTableProps) => {
                 <Text>{name}</Text>
               </td>
               <td>
-                <DateDiffWithStatus
-                  date={new Date(lastEventTime)}
-                  status={status}
-                />
+                <Text>
+                  {getDateDiffStringWithTeamStatus(
+                    new Date(lastEventTime),
+                    status,
+                  )}
+                </Text>
               </td>
               <td>
                 <ResultWithStatus

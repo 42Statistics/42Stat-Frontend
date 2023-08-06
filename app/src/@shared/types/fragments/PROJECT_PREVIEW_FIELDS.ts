@@ -5,5 +5,6 @@ export const PROJECT_PREVIEW_FIELDS = gql(/* GraphQL */ `
     id
     name
     url
+    circle
   }
 `);

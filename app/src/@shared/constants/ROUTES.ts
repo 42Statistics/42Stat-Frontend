@@ -19,5 +19,7 @@ export const ROUTES = {
   LEADERBOARD_COALITION_SCORE: '/leaderboard/coalition_score',
   LEADERBOARD_EVAL_COUNT: '/leaderboard/eval_count',
   EVALLOG: '/evallog',
+  TEAM: '/team/:id',
+  TEAM_OF: (id: number) => `/team/${id}`,
   SETTING: '/setting',
 } as const;

@@ -32,8 +32,7 @@ export const ProjectIntroduction = () => {
     return null;
   }
 
-  const { name, description } = data.getProjectInfo;
-  const circle = 3;
+  const { name, circle, description } = data.getProjectInfo;
 
   return (
     <Layout>

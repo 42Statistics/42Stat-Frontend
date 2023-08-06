@@ -1,13 +1,13 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { EvalLog } from '@shared/__generated__/graphql';
+import { EvalLog, TeamEvalLog } from '@shared/__generated__/graphql';
 import { Center, HStack, Text, VStack } from '@shared/ui-kit';
 import { CustomBox } from '@shared/ui-kit-styled';
 import { EvalLogLabel } from '../EvalLogLabel';
 import { EvalLogItemTitle } from './EvalLogItemTitle';
 
 type EvalLogItemProps = {
-  element: EvalLog;
+  element: EvalLog | TeamEvalLog;
 };
 
 export const EvalLogItem = ({ element }: EvalLogItemProps) => {

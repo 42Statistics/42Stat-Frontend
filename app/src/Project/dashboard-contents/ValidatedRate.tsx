@@ -10,7 +10,8 @@ import {
 } from '@shared/components/DashboardContentView/Error';
 import { H3Text } from '@shared/ui-kit';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
-import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
+import { ProjectNameContext } from '../contexts/ProjectNameContext';
 
 const GET_VALIDATED_RATE_BY_PROJECT_NAME = gql(/* GraphQL */ `
   query GetValidatedRateByProjectName($projectName: String!) {
@@ -27,7 +28,7 @@ const GET_VALIDATED_RATE_BY_PROJECT_NAME = gql(/* GraphQL */ `
 `);
 
 export const ValidatedRate = () => {
-  const { projectName } = useParams() as { projectName: string };
+  const projectName = useContext(ProjectNameContext);
 
   const title = '결과 분포';
   const { loading, error, data } = useQuery(

@@ -1,22 +1,24 @@
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
+import styled from '@emotion/styled';
 import { gql } from '@shared/__generated__';
+import { LinkableAccount } from '@shared/__generated__/graphql';
 import { ReactComponent as FtLogo } from '@shared/assets/logo/ft-logo.svg';
-import google_logo from '@shared/assets/logo/google-logo.svg';
+import { ReactComponent as GoogleLogo } from '@shared/assets/logo/google-logo.svg';
 import { userAtom } from '@shared/atoms/userAtom';
 import {
   Divider,
   H2BoldText,
   H3MediumText,
-  HStack,
-  Spacer,
   Text,
   VStack,
 } from '@shared/ui-kit';
 import { CustomSection } from '@shared/ui-kit-styled';
+import { mq } from '@shared/utils/facepaint/mq';
 import { useAtomValue } from 'jotai';
+import { LinkGoogleButton } from './LinkGoogleButton';
 import { LinkLabel } from './LinkLabel';
-import { LinkRow } from './LinkRow';
+import { UnlinkGoogleButton } from './UnlinkGoogleButton';
 
 export const ACCOUNT_FIELDS = gql(/* GraphQL */ `
   fragment AccountFields on Account {
@@ -47,6 +49,10 @@ export const LinkGoogleSection = () => {
 
   const { linkedAccounts } = data?.getSetting?.account ?? {};
 
+  const linkedGoogleAccount = linkedAccounts?.find(
+    (account) => account.platform === 'google',
+  );
+
   return (
     <CustomSection>
       <VStack align="start" spacing="4rem">
@@ -57,25 +63,48 @@ export const LinkGoogleSection = () => {
           </Text>
         </VStack>
         <Divider />
-        <VStack w="100%" align="start" spacing="3rem">
-          <HStack w="100%" spacing="2rem" wrap="wrap">
+        <VStack w="100%" align="start" spacing="4rem">
+          <LinkRow>
             <H3MediumText>42 계정</H3MediumText>
-            <Spacer />
             <LinkLabel
-              left={<FtLogo width={24} height={24} />}
+              left={<FtLogo width={20} height={20} />}
               text={user.login}
             />
-          </HStack>
-          <LinkRow
-            title="구글 계정"
-            logo={google_logo}
-            linkedAccount={linkedAccounts?.find(
-              (account) => account.platform === 'google',
-            )}
-            refetch={refetch}
-          />
+          </LinkRow>
+          <LinkRow>
+            <H3MediumText>구글 계정</H3MediumText>
+            <LinkLabel
+              left={<GoogleLogo width={20} height={20} />}
+              text={computeLinkLabelText(linkedGoogleAccount)}
+              right={
+                linkedGoogleAccount === undefined ? (
+                  <LinkGoogleButton onSuccess={refetch} />
+                ) : (
+                  <UnlinkGoogleButton onSuccess={refetch} />
+                )
+              }
+            />
+          </LinkRow>
         </VStack>
       </VStack>
     </CustomSection>
   );
 };
+
+const computeLinkLabelText = (linkedAccount: LinkableAccount | undefined) => {
+  if (linkedAccount === undefined) {
+    return '연동된 계정 없음';
+  }
+  return linkedAccount.email ?? linkedAccount.id;
+};
+
+const LinkRow = styled.div`
+  display: flex;
+  width: 100%;
+  ${mq({
+    flexDirection: ['column', 'row'],
+    justifyContent: ['center', 'space-between'],
+    alignItems: ['flex-start', 'center'],
+    gap: ['2rem', 0],
+  })}
+`;

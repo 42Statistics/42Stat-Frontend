@@ -1,21 +1,22 @@
+import { Leaderboard } from '@/Leaderboard/components/Leaderboard';
+import { LeaderboardResultSkeleton } from '@/Leaderboard/components/skeletons/LeaderboardResultSkeleton';
 import { QUERY_STRING_KEY } from '@/Leaderboard/constants/QUERY_STRING_KEY';
 import { parseDateTemplate } from '@/Leaderboard/utils/parseDateTemplate';
-import { useLazyQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { Footer } from '@core/components/Footer';
 import { gql } from '@shared/__generated__';
 import { DateTemplate } from '@shared/__generated__/graphql';
+import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
 import { Pagination } from '@shared/components/Pagination';
 import { Seo } from '@shared/components/Seo';
 import { useSegmentedControl } from '@shared/hooks/useSegmentedControl';
 import { SegmentedControl, VStack } from '@shared/ui-kit';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
-import { useEffect, useState } from 'react';
 import {
   createSearchParams,
   useNavigate,
   useSearchParams,
 } from 'react-router-dom';
-import { LeaderboardCoalitionScorePageResult } from './LeaderboardCoalitionScorePageResult';
 
 const GET_LEADERBOARD_COALITION_SCORE = gql(/* GraphQL */ `
   query GetLeaderboardCoalitionScore(
@@ -61,8 +62,6 @@ const LeaderboardCoalitionScorePage = () => {
   const SIZE_PER_PAGE = 50;
   const device = useDeviceType();
   const navigate = useNavigate();
-  const [search, result] = useLazyQuery(GET_LEADERBOARD_COALITION_SCORE);
-  const [totalPage, setTotalPage] = useState<number>(0);
   const [searchParams] = useSearchParams();
   const dateTemplate = parseDateTemplate(
     searchParams.get(QUERY_STRING_KEY.DATE_TEMPLATE),
@@ -71,6 +70,13 @@ const LeaderboardCoalitionScorePage = () => {
   const pageNumber = Number(
     searchParams.get(QUERY_STRING_KEY.PAGE_NUMBER) ?? '1',
   );
+  const { loading, error, data } = useQuery(GET_LEADERBOARD_COALITION_SCORE, {
+    variables: {
+      pageSize: SIZE_PER_PAGE,
+      pageNumber,
+      dateTemplate,
+    },
+  });
 
   const options = [
     {
@@ -110,25 +116,24 @@ const LeaderboardCoalitionScorePage = () => {
     });
   };
 
-  useEffect(() => {
-    if (result.loading) {
-      return;
-    }
-    setTotalPage(
-      result.data?.getLeaderboardScore.byDateTemplate.data.totalRanking
-        .totalCount ?? 0,
-    );
-  }, [result]);
+  if (loading) {
+    return <LeaderboardResultSkeleton />;
+  }
+  if (error) {
+    return <FullPageApolloErrorView message={error.message} />;
+  }
+  if (!data) {
+    return <LeaderboardResultSkeleton />;
+  }
 
-  useEffect(() => {
-    search({
-      variables: {
-        pageSize: SIZE_PER_PAGE,
-        pageNumber,
-        dateTemplate,
-      },
-    });
-  }, [dateTemplate, search, pageNumber]);
+  const {
+    data: {
+      me,
+      totalRanking: { nodes, totalCount },
+    },
+    start,
+    end,
+  } = data.getLeaderboardScore.byDateTemplate;
 
   return (
     <>
@@ -140,11 +145,16 @@ const LeaderboardCoalitionScorePage = () => {
           controlRef={controlRef}
           segments={segments}
         />
-        <LeaderboardCoalitionScorePageResult result={result} />
+        <Leaderboard
+          me={me}
+          list={nodes}
+          start={new Date(start)}
+          end={new Date(end)}
+        />
         <Pagination
           currPageNumber={pageNumber}
           onPageNumberChange={handlePageNumberChange}
-          totalPageNumber={Math.ceil(totalPage / SIZE_PER_PAGE)}
+          totalPageNumber={Math.ceil(totalCount / SIZE_PER_PAGE)}
           pagePerRow={device === 'mobile' ? 5 : 10}
         />
       </VStack>

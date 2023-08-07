@@ -1,5 +1,5 @@
 import { useTheme } from '@emotion/react';
-import { Avatar, Body1Text, H2MediumText, HStack } from '@shared/ui-kit';
+import { Avatar, H3MediumText, HStack, Text } from '@shared/ui-kit';
 
 type NumberVersusProps = {
   imgUrl1: string | null | undefined;
@@ -23,7 +23,7 @@ export const NumberVersus = ({
       <HStack spacing="1rem">
         <Avatar size="xs" src={imgUrl1} />
         <HStack align="baseline" spacing="0.15rem">
-          <H2MediumText
+          <H3MediumText
             color={
               number1 >= number2
                 ? theme.colors.mono.black
@@ -31,9 +31,9 @@ export const NumberVersus = ({
             }
           >
             {number1.toLocaleString()}
-          </H2MediumText>
+          </H3MediumText>
           {unit ? (
-            <Body1Text
+            <Text
               color={
                 number1 >= number2
                   ? theme.colors.mono.black
@@ -41,14 +41,14 @@ export const NumberVersus = ({
               }
             >
               {unit}
-            </Body1Text>
+            </Text>
           ) : null}
         </HStack>
       </HStack>
       <HStack spacing="1rem">
         <Avatar size="xs" src={imgUrl2} />
         <HStack align="baseline" spacing="0.15rem">
-          <H2MediumText
+          <H3MediumText
             color={
               number1 <= number2
                 ? theme.colors.mono.black
@@ -56,9 +56,9 @@ export const NumberVersus = ({
             }
           >
             {number2.toLocaleString()}
-          </H2MediumText>
+          </H3MediumText>
           {unit ? (
-            <Body1Text
+            <Text
               color={
                 number1 <= number2
                   ? theme.colors.mono.black
@@ -66,7 +66,7 @@ export const NumberVersus = ({
               }
             >
               {unit}
-            </Body1Text>
+            </Text>
           ) : null}
         </HStack>
       </HStack>

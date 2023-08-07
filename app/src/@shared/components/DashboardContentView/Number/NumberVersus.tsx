@@ -1,5 +1,5 @@
 import { useTheme } from '@emotion/react';
-import { Avatar, HStack, MediumText, Text } from '@shared/ui-kit';
+import { Avatar, Body1Text, H2MediumText, HStack } from '@shared/ui-kit';
 
 type NumberVersusProps = {
   imgUrl1: string | null | undefined;
@@ -21,68 +21,52 @@ export const NumberVersus = ({
   return (
     <HStack spacing="3rem">
       <HStack spacing="1rem">
-        <Avatar size={number1 >= number2 ? 'sm' : 'xs'} src={imgUrl1} />
+        <Avatar size="xs" src={imgUrl1} />
         <HStack align="baseline" spacing="0.15rem">
-          <MediumText
+          <H2MediumText
             color={
               number1 >= number2
                 ? theme.colors.mono.black
                 : theme.colors.mono.gray300
             }
-            fontSize={
-              number1 >= number2 ? theme.fonts.size.h2 : theme.fonts.size.body1
-            }
           >
             {number1.toLocaleString()}
-          </MediumText>
+          </H2MediumText>
           {unit ? (
-            <Text
+            <Body1Text
               color={
                 number1 >= number2
                   ? theme.colors.mono.black
                   : theme.colors.mono.gray300
               }
-              fontSize={
-                number1 >= number2
-                  ? theme.fonts.size.body1
-                  : theme.fonts.size.body2
-              }
             >
               {unit}
-            </Text>
+            </Body1Text>
           ) : null}
         </HStack>
       </HStack>
       <HStack spacing="1rem">
-        <Avatar size={number1 <= number2 ? 'sm' : 'xs'} src={imgUrl2} />
+        <Avatar size="xs" src={imgUrl2} />
         <HStack align="baseline" spacing="0.15rem">
-          <MediumText
+          <H2MediumText
             color={
               number1 <= number2
                 ? theme.colors.mono.black
                 : theme.colors.mono.gray300
             }
-            fontSize={
-              number1 <= number2 ? theme.fonts.size.h2 : theme.fonts.size.body1
-            }
           >
             {number2.toLocaleString()}
-          </MediumText>
+          </H2MediumText>
           {unit ? (
-            <Text
+            <Body1Text
               color={
                 number1 <= number2
                   ? theme.colors.mono.black
                   : theme.colors.mono.gray300
               }
-              fontSize={
-                number1 <= number2
-                  ? theme.fonts.size.body1
-                  : theme.fonts.size.body2
-              }
             >
               {unit}
-            </Text>
+            </Body1Text>
           ) : null}
         </HStack>
       </HStack>

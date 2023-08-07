@@ -6,8 +6,9 @@ import { TabletNavBar } from '@core/components/NavBar/Tablet';
 import { Global } from '@emotion/react';
 import styled from '@emotion/styled';
 import { mq } from '@shared/utils/facepaint/mq';
-import { isMacKKeyDown } from '@shared/utils/keyboard';
+import { isCtrlKKeyDown, isMacKKeyDown } from '@shared/utils/keyboard';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
+import { detect } from 'detect-browser';
 import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
@@ -17,10 +18,12 @@ import { mainLayoutGlobalStyle } from './mainLayoutGlobalStyle';
 const MainLayout = () => {
   const [isSpotlightOpen, setIsSpotlightOpen] = useAtom(isSpotlightOpenAtom);
   const device = useDeviceType();
+  const browser = detect();
+  const isMacOS = browser?.os === 'Mac OS';
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (isMacKKeyDown(e)) {
+      if ((isMacOS && isMacKKeyDown(e)) || (!isMacOS && isCtrlKKeyDown(e))) {
         setIsSpotlightOpen((cur) => !cur);
       }
     };
@@ -30,7 +33,7 @@ const MainLayout = () => {
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [isSpotlightOpen, setIsSpotlightOpen]);
+  }, [isSpotlightOpen, setIsSpotlightOpen, isMacOS]);
 
   return (
     <>

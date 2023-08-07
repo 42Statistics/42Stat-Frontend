@@ -10,6 +10,14 @@ export const isMacBKeyDown = (e: KeyboardEvent) => {
   return e.metaKey && e.key === 'b';
 };
 
+export const isCtrlKKeyDown = (e: KeyboardEvent) => {
+  return e.ctrlKey && e.key === 'k';
+};
+
+export const isCtrlBKeyDown = (e: KeyboardEvent) => {
+  return e.ctrlKey && e.key === 'b';
+};
+
 export const isArrowUpKeyDown = (e: KeyboardEvent) => {
   return e.key === 'ArrowUp';
 };
@@ -24,4 +32,4 @@ export const isSlashKeyDown = (e: KeyboardEvent) => {
 
 export const isEnterKeyDown = (e: KeyboardEvent) => {
   return e.key === 'Enter';
-}
+};

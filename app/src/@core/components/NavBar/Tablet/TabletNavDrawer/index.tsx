@@ -1,7 +1,8 @@
 import { ReactComponent as MdMenu } from '@shared/assets/icon/md-menu.svg';
 import { useDisclosure } from '@shared/hooks/useDisclosure';
 import { Clickable } from '@shared/ui-kit';
-import { isMacBKeyDown } from '@shared/utils/keyboard';
+import { isCtrlBKeyDown, isMacBKeyDown } from '@shared/utils/keyboard';
+import { detect } from 'detect-browser';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { TabletNavDrawerView } from './TabletNavDrawerView';
@@ -9,10 +10,12 @@ import { TabletNavDrawerView } from './TabletNavDrawerView';
 export const TabletNavDrawer = () => {
   const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
   const location = useLocation();
+  const browser = detect();
+  const isMacOS = browser?.os === 'Mac OS';
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (isMacBKeyDown(e)) {
+      if ((isMacOS && isMacBKeyDown(e)) || (!isMacOS && isCtrlBKeyDown(e))) {
         e.preventDefault();
         onToggle();
       }
@@ -21,7 +24,7 @@ export const TabletNavDrawer = () => {
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [onToggle]);
+  }, [onToggle, isMacOS]);
 
   useEffect(() => {
     onClose();

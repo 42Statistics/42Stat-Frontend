@@ -107,6 +107,9 @@ const ScoreRecordsPerCoalitionChart = ({
         formatter: (value) => numberWithUnitFormatter(value, 'P'),
       },
     },
+    forecastDataPoints: {
+      count: 1,
+    },
   };
 
   return <LineChart series={series} options={options} />;

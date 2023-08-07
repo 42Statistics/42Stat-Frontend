@@ -3,7 +3,6 @@
  * @returns 1: date2가 미래, -1: data1이 미래, 0: 같음
  */
 export const compareDateDiff = (date1: Date, date2: Date) => {
-  console.log(date1, date2);
   if (date1.getFullYear() !== date2.getFullYear()) {
     return date1.getFullYear() < date2.getFullYear() ? 1 : -1;
   }

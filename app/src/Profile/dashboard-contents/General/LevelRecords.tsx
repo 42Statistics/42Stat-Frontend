@@ -129,8 +129,7 @@ const LevelRecordsChart = ({ series }: LevelRecordsChartProps) => {
       theme.colors.accent.default,
     ],
     xaxis: {
-      min: 0,
-      max: 24,
+      type: 'numeric',
       tickAmount: 8,
       labels: {
         formatter: (value) => `${value}개월`,

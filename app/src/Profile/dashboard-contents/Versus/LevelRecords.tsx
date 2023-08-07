@@ -116,8 +116,7 @@ const LevelRecordsChart = ({ series }: LevelRecordsChartProps) => {
   const options: ApexCharts.ApexOptions = {
     colors: [theme.colors.primary.default, theme.colors.accent.default],
     xaxis: {
-      min: 0,
-      max: 24,
+      type: 'numeric',
       tickAmount: 8,
       labels: {
         formatter: (value) => `${value}개월`,

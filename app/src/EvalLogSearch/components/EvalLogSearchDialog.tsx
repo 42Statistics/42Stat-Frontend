@@ -27,15 +27,19 @@ export const EvalLogSearchDialog = ({
           <ul>
             <li>
               <label htmlFor="projectName">과제명</label>
-              <Input {...register('projectName')} autoFocus />
+              <Input
+                {...register('projectName')}
+                autoFocus
+                style={{ width: '150px' }}
+              />
             </li>
             <li>
               <label htmlFor="corrector">From</label>
-              <Input {...register('corrector')} />
+              <Input {...register('corrector')} style={{ width: '150px' }} />
             </li>
             <li>
               <label htmlFor="corrected">To</label>
-              <Input {...register('corrected')} />
+              <Input {...register('corrected')} style={{ width: '150px' }} />
             </li>
             <li>
               <label htmlFor="flag">플래그</label>

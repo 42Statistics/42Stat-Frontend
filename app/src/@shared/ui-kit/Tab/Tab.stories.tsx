@@ -15,9 +15,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     selected: false,
-    onClick: () => {
-      /* pass */
-    },
+    link: '',
     children: '일반',
   },
 };
@@ -25,9 +23,7 @@ export const Default: Story = {
 export const Selected: Story = {
   args: {
     selected: true,
-    onClick: () => {
-      /* pass */
-    },
+    link: '',
     children: '일반',
   },
 };

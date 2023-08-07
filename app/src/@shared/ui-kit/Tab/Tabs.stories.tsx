@@ -15,21 +15,10 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     children: [
-      <Tab
-        key="general"
-        selected
-        onClick={() => {
-          /* pass */
-        }}
-      >
+      <Tab key="general" selected link="">
         일반
       </Tab>,
-      <Tab
-        key="eval"
-        onClick={() => {
-          /* pass */
-        }}
-      >
+      <Tab key="eval" link="">
         평가
       </Tab>,
     ],
@@ -39,165 +28,64 @@ export const Default: Story = {
 export const ManyTabs: Story = {
   args: {
     children: [
-      <Tab
-        key={1}
-        selected
-        onClick={() => {
-          /* pass */
-        }}
-      >
+      <Tab key={1} selected link="">
         일반
       </Tab>,
-      <Tab
-        key={2}
-        onClick={() => {
-          /* pass */
-        }}
-      >
+      <Tab key={2} link="">
         일반
       </Tab>,
-      <Tab
-        key={3}
-        onClick={() => {
-          /* pass */
-        }}
-      >
+      <Tab key={3} link="">
         일반
       </Tab>,
-      <Tab
-        key={4}
-        onClick={() => {
-          /* pass */
-        }}
-      >
+      <Tab key={4} link="">
         일반
       </Tab>,
-      <Tab
-        key={5}
-        onClick={() => {
-          /* pass */
-        }}
-      >
+      <Tab key={5} link="">
         일반
       </Tab>,
-      <Tab
-        key={6}
-        onClick={() => {
-          /* pass */
-        }}
-      >
+      <Tab key={6} link="">
         일반
       </Tab>,
-      <Tab
-        key={7}
-        onClick={() => {
-          /* pass */
-        }}
-      >
+      <Tab key={7} link="">
         일반
       </Tab>,
-      <Tab
-        key={8}
-        onClick={() => {
-          /* pass */
-        }}
-      >
+      <Tab key={8} link="">
         일반
       </Tab>,
-      <Tab
-        key={9}
-        onClick={() => {
-          /* pass */
-        }}
-      >
+      <Tab key={9} link="">
         일반
       </Tab>,
-      <Tab
-        key={10}
-        onClick={() => {
-          /* pass */
-        }}
-      >
+      <Tab key={10} link="">
         일반
       </Tab>,
-      <Tab
-        key={11}
-        onClick={() => {
-          /* pass */
-        }}
-      >
+      <Tab key={11} link="">
         일반
       </Tab>,
-      <Tab
-        key={12}
-        onClick={() => {
-          /* pass */
-        }}
-      >
+      <Tab key={12} link="">
         일반
       </Tab>,
-      <Tab
-        key={13}
-        onClick={() => {
-          /* pass */
-        }}
-      >
+      <Tab key={13} link="">
         일반
       </Tab>,
-      <Tab
-        key={14}
-        onClick={() => {
-          /* pass */
-        }}
-      >
+      <Tab key={14} link="">
         일반
       </Tab>,
-      <Tab
-        key={15}
-        onClick={() => {
-          /* pass */
-        }}
-      >
+      <Tab key={15} link="">
         일반
       </Tab>,
-      <Tab
-        key={16}
-        onClick={() => {
-          /* pass */
-        }}
-      >
+      <Tab key={16} link="">
         일반
       </Tab>,
-      <Tab
-        key={17}
-        onClick={() => {
-          /* pass */
-        }}
-      >
+      <Tab key={17} link="">
         일반
       </Tab>,
-      <Tab
-        key={18}
-        onClick={() => {
-          /* pass */
-        }}
-      >
+      <Tab key={18} link="">
         일반
       </Tab>,
-      <Tab
-        key={19}
-        onClick={() => {
-          /* pass */
-        }}
-      >
+      <Tab key={19} link="">
         일반
       </Tab>,
-      <Tab
-        key={20}
-        onClick={() => {
-          /* pass */
-        }}
-      >
+      <Tab key={20} link="">
         일반
       </Tab>,
     ],

@@ -1,24 +1,24 @@
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { profileEvalPageDashboardContents } from '@/Profile/dashboard-frames/profileEvalPageDashboardContents';
 import { profileEvalPageDashboardRows } from '@/Profile/dashboard-frames/profileEvalPageDashboardRows';
+import { Footer } from '@core/components/Footer';
 import { Dashboard } from '@shared/components/Dashboard';
 import { Seo } from '@shared/components/Seo';
-import { withFooter } from '@shared/hoc/withFooter';
-import { withHead } from '@shared/hoc/withHead';
-import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
 
 const ProfileEvalPage = () => {
+  const { login } = useContext(UserProfileContext);
+
   return (
-    <Dashboard
-      contents={profileEvalPageDashboardContents}
-      rows={profileEvalPageDashboardRows}
-    />
+    <>
+      <Seo title={`${login} › 평가`} />
+      <Dashboard
+        contents={profileEvalPageDashboardContents}
+        rows={profileEvalPageDashboardRows}
+      />
+      <Footer />
+    </>
   );
 };
 
-const Head = () => {
-  const { login } = useParams() as { login: string };
-
-  return <Seo title={`${login} › 평가`} />;
-};
-
-export default withHead(withFooter(ProfileEvalPage), Head);
+export default ProfileEvalPage;

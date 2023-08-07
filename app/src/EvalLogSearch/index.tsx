@@ -6,7 +6,6 @@ import {
   GetEvalLogsQuery,
 } from '@shared/__generated__/graphql';
 import { Seo } from '@shared/components/Seo';
-import { withHead } from '@shared/hoc/withHead';
 import { useDisclosure } from '@shared/hooks/useDisclosure';
 import { useInfiniteScroll } from '@shared/hooks/useInfiniteScroll';
 import type { EvalLogSearchModel } from '@shared/types/EvalLogSearchModel';
@@ -174,6 +173,7 @@ const EvalLogSearchPage = () => {
 
   return (
     <>
+      <Seo title="평가로그 검색기" />
       <VStack w="100%" align="start" spacing="2rem">
         <EvalLogSearchTitle
           form={evalLogSearchForm}
@@ -202,9 +202,7 @@ const EvalLogSearchPage = () => {
   );
 };
 
-const Head = () => {
-  return <Seo title="평가로그 검색기" />;
-};
+export default EvalLogSearchPage;
 
 const calculateTotalCount = ({
   data,
@@ -224,5 +222,3 @@ const calculateTotalCount = ({
 
   return data?.getEvalLogs.pageInfo.totalCount ?? 0;
 };
-
-export default withHead(EvalLogSearchPage, Head);

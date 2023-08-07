@@ -1,12 +1,11 @@
 import { QUERY_STRING_KEY } from '@/Leaderboard/constants/QUERY_STRING_KEY';
 import { parseDateTemplate } from '@/Leaderboard/utils/parseDateTemplate';
 import { useLazyQuery } from '@apollo/client';
+import { Footer } from '@core/components/Footer';
 import { gql } from '@shared/__generated__';
 import { DateTemplate } from '@shared/__generated__/graphql';
 import { Pagination } from '@shared/components/Pagination';
 import { Seo } from '@shared/components/Seo';
-import { withFooter } from '@shared/hoc/withFooter';
-import { withHead } from '@shared/hoc/withHead';
 import { VStack } from '@shared/ui-kit';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 import { useEffect, useState } from 'react';
@@ -102,20 +101,20 @@ const LeaderboardLevelPage = () => {
   }, [dateTemplate, search, pageNumber]);
 
   return (
-    <VStack w="100%" spacing="6rem">
-      <LeaderboardLevelPageResult result={result} />
-      <Pagination
-        currPageNumber={pageNumber}
-        onPageNumberChange={handlePageNumberChange}
-        totalPageNumber={Math.ceil(totalPage / SIZE_PER_PAGE)}
-        pagePerRow={device === 'mobile' ? 5 : 10}
-      />
-    </VStack>
+    <>
+      <Seo title="랭킹 › 레벨" />
+      <VStack w="100%" spacing="6rem">
+        <LeaderboardLevelPageResult result={result} />
+        <Pagination
+          currPageNumber={pageNumber}
+          onPageNumberChange={handlePageNumberChange}
+          totalPageNumber={Math.ceil(totalPage / SIZE_PER_PAGE)}
+          pagePerRow={device === 'mobile' ? 5 : 10}
+        />
+      </VStack>
+      <Footer />
+    </>
   );
 };
 
-const Head = () => {
-  return <Seo title="랭킹 › 레벨" />;
-};
-
-export default withHead(withFooter(LeaderboardLevelPage), Head);
+export default LeaderboardLevelPage;

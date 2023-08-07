@@ -1,11 +1,10 @@
 import { useQuery } from '@apollo/client';
+import { Footer } from '@core/components/Footer';
 import { gql } from '@shared/__generated__';
 import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
 import { FullPageApolloNotFoundView } from '@shared/components/ApolloError/FullPageApolloNotFoundView';
 import { Dashboard } from '@shared/components/Dashboard';
 import { Seo } from '@shared/components/Seo';
-import { withFooter } from '@shared/hoc/withFooter';
-import { withHead } from '@shared/hoc/withHead';
 import { VStack } from '@shared/ui-kit';
 import { useParams } from 'react-router-dom';
 import { ProjectIntroduction } from './components/ProjectIntroduction';
@@ -40,22 +39,20 @@ const ProjectDetailPage = () => {
   }
 
   return (
-    <ProjectNameContext.Provider value={projectName}>
-      <VStack w="100%" spacing="4rem">
-        <ProjectIntroduction />
-        <Dashboard
-          contents={projectDetailPageDashboardContents}
-          rows={projectDetailPageDashboardRows}
-        />
-      </VStack>
-    </ProjectNameContext.Provider>
+    <>
+      <Seo title={projectName} />
+      <ProjectNameContext.Provider value={projectName}>
+        <VStack w="100%" spacing="4rem">
+          <ProjectIntroduction />
+          <Dashboard
+            contents={projectDetailPageDashboardContents}
+            rows={projectDetailPageDashboardRows}
+          />
+        </VStack>
+      </ProjectNameContext.Provider>
+      <Footer />
+    </>
   );
 };
 
-const Head = () => {
-  const { projectName } = useParams() as { projectName: string };
-
-  return <Seo title={projectName} />;
-};
-
-export default withHead(withFooter(ProjectDetailPage), Head);
+export default ProjectDetailPage;

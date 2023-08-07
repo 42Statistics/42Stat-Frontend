@@ -3,7 +3,6 @@ import styled from '@emotion/styled';
 import { AppLogoTitle } from '@shared/components/AppLogoTitle';
 import { FtLoginButton } from '@shared/components/LoginButton';
 import { ROUTES } from '@shared/constants/ROUTES';
-import { withHead } from '@shared/hoc/withHead';
 import { VStack, WhiteText } from '@shared/ui-kit';
 import { mq } from '@shared/utils/facepaint/mq';
 import { Link } from 'react-router-dom';
@@ -37,4 +36,4 @@ const Layout = styled.div`
   border-radius: ${({ theme }) => theme.radius.md};
 `;
 
-export default withHead(FtOAuthPage);
+export default FtOAuthPage;

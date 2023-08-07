@@ -1,31 +1,37 @@
+import { isReLoginDialogOpenAtom } from '@core/atoms/isReLoginDialogOpenAtom';
 import { ROUTES } from '@shared/constants/ROUTES';
-import { DialogBaseProps } from '@shared/types/Modal';
 import { AlertDialog } from '@shared/ui-kit';
 import { clearStorage } from '@shared/utils/storage/clearStorage';
+import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-type ReLoginDialogProps = DialogBaseProps;
-
-export const ReLoginDialog = ({ isOpen, onClose }: ReLoginDialogProps) => {
+export const ReLoginDialog = () => {
   const navigate = useNavigate();
+  const [isReLoginDialogOpen, setIsReLoginDialogOpen] = useAtom(
+    isReLoginDialogOpenAtom,
+  );
+
+  const closeReLoginDialog = () => {
+    setIsReLoginDialogOpen(false);
+  };
 
   const handleConfirm = () => {
     clearStorage();
-    onClose();
+    closeReLoginDialog();
     navigate(ROUTES.ROOT);
   };
 
   useEffect(() => {
-    if (!isOpen) {
+    if (!isReLoginDialogOpen) {
       return;
     }
     clearStorage();
-  }, [isOpen]);
+  }, [isReLoginDialogOpen]);
 
   return (
     <AlertDialog
-      isOpen={isOpen}
+      isOpen={isReLoginDialogOpen}
       onClose={() => {
         /* can't close */
       }}

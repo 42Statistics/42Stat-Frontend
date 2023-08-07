@@ -1,12 +1,13 @@
 import { useLazyQuery } from '@apollo/client';
+import { isSpotlightOpenAtom } from '@core/atoms/isSpotlightOpenAtom';
 import { SpotlightFocusContext } from '@core/contexts/SpotlightFocusContext';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { gql } from '@shared/__generated__';
 import { ReactComponent as MdSearch } from '@shared/assets/icon/md-search.svg';
 import { useRoveFocus } from '@shared/hooks/useRoveFocus';
-import { DialogBaseProps } from '@shared/types/Modal';
 import { Dialog, VStack } from '@shared/ui-kit';
+import { useAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDebounce } from 'usehooks-ts';
@@ -26,9 +27,7 @@ export const GET_SEARCH_RESULT = gql(/* GraphQL */ `
   }
 `);
 
-type SpotlightProps = DialogBaseProps;
-
-export const Spotlight = ({ isOpen, onClose }: SpotlightProps) => {
+export const Spotlight = () => {
   const theme = useTheme();
   const [input, setInput] = useState<string>('');
   const debouncedInput = useDebounce(input, 250);
@@ -39,11 +38,24 @@ export const Spotlight = ({ isOpen, onClose }: SpotlightProps) => {
   const { currentFocus, setCurrentFocus } = useRoveFocus(size);
   const LIMIT = 4;
   const location = useLocation();
+  const [isMounted, setIsMounted] = useState(false);
+  const [isSpotlightOpen, setIsSpotlightOpen] = useAtom(isSpotlightOpenAtom);
+
+  const closeSpotlight = () => {
+    setIsSpotlightOpen(false);
+  };
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // 페이지 이동 감지
   useEffect(() => {
+    if (!isMounted) {
+      return;
+    }
     setInput('');
-    onClose();
+    closeSpotlight();
     setCurrentFocus(0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
@@ -73,7 +85,7 @@ export const Spotlight = ({ isOpen, onClose }: SpotlightProps) => {
 
   return (
     <SpotlightFocusContext.Provider value={{ currentFocus, setCurrentFocus }}>
-      <Dialog isOpen={isOpen} onClose={onClose} position="top">
+      <Dialog isOpen={isSpotlightOpen} onClose={closeSpotlight} position="top">
         <Layout>
           <VStack w="100%" h="100%" spacing="2rem">
             <SpotlightSearchBar

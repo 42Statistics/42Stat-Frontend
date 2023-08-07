@@ -75,7 +75,7 @@ export const Rankings = () => {
   const userProfile = useContext(UserProfileContext);
 
   const title = '랭킹 백분위수 비교';
-  const description = '레벨, 코알리숑 포인트, 평가 횟수 누적/월간 랭킹';
+  const description = '레벨, 코알리숑 스코어, 평가 횟수 누적/월간 랭킹';
   const { loading, error, data } = useQuery(GET_RANKINGS_VERSUS, {
     variables: { login1: myUserProfile.login, login2: userProfile.login },
   });

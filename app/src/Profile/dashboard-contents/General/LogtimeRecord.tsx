@@ -50,7 +50,7 @@ export const LogtimeRecord = () => {
   }));
   const series: ApexAxisChartSeries = [
     {
-      name: '',
+      name: '접속 시간',
       data: seriesData,
     },
   ];

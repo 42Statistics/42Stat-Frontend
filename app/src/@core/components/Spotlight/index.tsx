@@ -7,7 +7,7 @@ import { gql } from '@shared/__generated__';
 import { ReactComponent as MdSearch } from '@shared/assets/icon/md-search.svg';
 import { useRoveFocus } from '@shared/hooks/useRoveFocus';
 import { Dialog, VStack } from '@shared/ui-kit';
-import { useAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDebounce } from 'usehooks-ts';
@@ -39,7 +39,7 @@ export const Spotlight = () => {
   const LIMIT = 4;
   const location = useLocation();
   const [isMounted, setIsMounted] = useState(false);
-  const [isSpotlightOpen, setIsSpotlightOpen] = useAtom(isSpotlightOpenAtom);
+  const setIsSpotlightOpen = useSetAtom(isSpotlightOpenAtom);
 
   const closeSpotlight = () => {
     setIsSpotlightOpen(false);
@@ -85,7 +85,7 @@ export const Spotlight = () => {
 
   return (
     <SpotlightFocusContext.Provider value={{ currentFocus, setCurrentFocus }}>
-      <Dialog isOpen={isSpotlightOpen} onClose={closeSpotlight} position="top">
+      <Dialog isOpen onClose={closeSpotlight} position="top">
         <Layout>
           <VStack w="100%" h="100%" spacing="2rem">
             <SpotlightSearchBar

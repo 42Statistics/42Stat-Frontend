@@ -31,7 +31,7 @@ export const ReLoginDialog = () => {
 
   return (
     <AlertDialog
-      isOpen={isReLoginDialogOpen}
+      isOpen
       onClose={() => {
         /* can't close */
       }}

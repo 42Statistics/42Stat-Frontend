@@ -24,6 +24,7 @@ const MainLayout = () => {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((isMacOS && isMacKKeyDown(e)) || (!isMacOS && isCtrlKKeyDown(e))) {
+        e.preventDefault();
         setIsSpotlightOpen((cur) => !cur);
       }
     };

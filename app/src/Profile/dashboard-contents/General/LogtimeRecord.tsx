@@ -93,6 +93,9 @@ const LogtimeRecordChart = ({ series }: LogtimeRecordChartProps) => {
           )} ${numberWithUnitFormatter(value % 60, '분')}`,
       },
     },
+    forecastDataPoints: {
+      count: 1,
+    },
   };
   return <AreaChart series={series} options={options} />;
 };

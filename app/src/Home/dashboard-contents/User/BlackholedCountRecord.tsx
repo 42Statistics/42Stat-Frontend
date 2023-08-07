@@ -81,6 +81,9 @@ const BlackholedCountRecordChart = ({
         formatter: (value) => numberWithUnitFormatter(value, '명'),
       },
     },
+    forecastDataPoints: {
+      count: 1,
+    },
   };
   return <AreaChart series={series} options={options} />;
 };

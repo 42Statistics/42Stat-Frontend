@@ -91,6 +91,9 @@ const ActiveUserCountRecordsChart = ({
         show: false,
       },
     },
+    forecastDataPoints: {
+      count: 2, // FIXME: why not 1?
+    },
   };
   return <AreaChart series={series} options={options} />;
 };

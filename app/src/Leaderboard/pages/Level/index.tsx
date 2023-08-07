@@ -9,7 +9,7 @@ import { DateTemplate } from '@shared/__generated__/graphql';
 import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
 import { Pagination } from '@shared/components/Pagination';
 import { Seo } from '@shared/components/Seo';
-import { VStack } from '@shared/ui-kit';
+import { DeferredComponent, VStack } from '@shared/ui-kit';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 import {
   createSearchParams,
@@ -87,13 +87,25 @@ const LeaderboardLevelPage = () => {
   };
 
   if (loading) {
-    return <LeaderboardResultSkeleton />;
+    return (
+      <DeferredComponent>
+        <LeaderboardResultSkeleton />
+      </DeferredComponent>
+    );
   }
   if (error) {
-    return <FullPageApolloErrorView message={error.message} />;
+    return (
+      <DeferredComponent>
+        <FullPageApolloErrorView message={error.message} />
+      </DeferredComponent>
+    );
   }
   if (!data) {
-    return <LeaderboardResultSkeleton />;
+    return (
+      <DeferredComponent>
+        <LeaderboardResultSkeleton />
+      </DeferredComponent>
+    );
   }
 
   const {

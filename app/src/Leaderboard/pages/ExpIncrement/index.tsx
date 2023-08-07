@@ -10,7 +10,7 @@ import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPage
 import { Pagination } from '@shared/components/Pagination';
 import { Seo } from '@shared/components/Seo';
 import { useSegmentedControl } from '@shared/hooks/useSegmentedControl';
-import { SegmentedControl, VStack } from '@shared/ui-kit';
+import { DeferredComponent, SegmentedControl, VStack } from '@shared/ui-kit';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 import {
   createSearchParams,
@@ -113,13 +113,21 @@ const LeaderboardExpIncrementPage = () => {
   };
 
   if (loading) {
-    return <LeaderboardResultSkeleton />;
+    return (
+      <DeferredComponent>
+        <LeaderboardResultSkeleton />
+      </DeferredComponent>
+    );
   }
   if (error) {
     return <FullPageApolloErrorView message={error.message} />;
   }
   if (!data) {
-    return <LeaderboardResultSkeleton />;
+    return (
+      <DeferredComponent>
+        <LeaderboardResultSkeleton />
+      </DeferredComponent>
+    );
   }
 
   const {

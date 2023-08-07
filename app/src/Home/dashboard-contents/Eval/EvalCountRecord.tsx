@@ -77,6 +77,9 @@ const EvalCountRecordChart = ({ series }: EvalCountRecordChartProps) => {
         formatter: (value) => numberWithUnitFormatter(value, '회'),
       },
     },
+    forecastDataPoints: {
+      count: 1,
+    },
   };
   return <AreaChart series={series} options={options} />;
 };

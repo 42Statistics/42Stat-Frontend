@@ -7,7 +7,6 @@ import {
   GoogleLoginButton,
 } from '@shared/components/LoginButton';
 import { ARIA_LABEL_LINK } from '@shared/constants/accessibility/ARIA_LABEL';
-import { withHead } from '@shared/hoc/withHead';
 import { HStack, Image, VStack } from '@shared/ui-kit';
 import { mq } from '@shared/utils/facepaint/mq';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
@@ -49,4 +48,4 @@ const LoginButtonContainer = styled.div`
   })}
 `;
 
-export default withHead(LandingPage);
+export default LandingPage;

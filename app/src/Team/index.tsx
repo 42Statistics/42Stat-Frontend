@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client';
+import { Footer } from '@core/components/Footer';
 import { useTheme } from '@emotion/react';
 import { gql } from '@shared/__generated__';
 import { ReactComponent as Star } from '@shared/assets/icon/star.svg';
@@ -9,8 +10,6 @@ import { EvalLogList } from '@shared/components/EvalLogList/EvalLogList';
 import { CorrectorReviewLabel } from '@shared/components/EvalLogList/EvalLogListItem';
 import { Seo } from '@shared/components/Seo';
 import { ROUTES } from '@shared/constants/ROUTES';
-import { withFooter } from '@shared/hoc/withFooter';
-import { withHead } from '@shared/hoc/withHead';
 import {
   Avatar,
   CaptionText,
@@ -128,77 +127,77 @@ const TeamPage = () => {
   const lastEventTime = computeLastEventTime(lockedAt, closedAt);
 
   return (
-    <VStack w="100%" align="start" spacing="5rem">
-      <VStack align="start" spacing="3rem">
-        <HStack spacing="1rem">
-          {finalMark == null ? (
-            <Label>{getTeamStatusString(status)}</Label>
-          ) : (
-            <CorrectorReviewLabel number={finalMark} />
-          )}
-          <Text color={theme.colors.mono.gray300}>
-            {getDateDiffStringWithTeamStatus(lastEventTime, status)}
-          </Text>
-        </HStack>
-        <H1BoldText>{name}</H1BoldText>
-        <HStack spacing="1rem">
-          <FtLogo width={20} height={20} />
-          <Link to={ROUTES.PROJECT_DETAIL_OF(projectPreview.name)}>
-            <H3MediumText>{projectPreview.name}</H3MediumText>
-          </Link>
-          <Text>
-            {projectPreview.circle != null
-              ? `${projectPreview.circle}서클`
-              : 'Outer 서클'}
-          </Text>
-        </HStack>
-      </VStack>
-      <Divider />
-      <VStack align="start" spacing="3rem">
-        <H2BoldText>팀원</H2BoldText>
-        <HStack spacing="2rem">
-          {users.map((user) => (
-            <Link key={user.id} to={ROUTES.PROFILE_OF(user.login)}>
-              <VStack spacing="0.6rem">
-                {user.isLeader ? (
-                  <Avatar
-                    size="lg"
-                    src={user.imgUrl}
-                    alt={user.login}
-                    badge={<Star width={18} height={18} fill="#ffd700" />}
-                  />
-                ) : (
-                  <Avatar size="lg" src={user.imgUrl} alt={user.login} />
-                )}
-                <MediumText>{user.login}</MediumText>
-                <CaptionText>#{user.occurrence + 1}</CaptionText>
-              </VStack>
+    <>
+      <Seo title={name} />
+      <VStack w="100%" align="start" spacing="5rem">
+        <VStack align="start" spacing="3rem">
+          <HStack spacing="1rem">
+            {finalMark == null ? (
+              <Label>{getTeamStatusString(status)}</Label>
+            ) : (
+              <CorrectorReviewLabel number={finalMark} />
+            )}
+            <Text color={theme.colors.mono.gray300}>
+              {getDateDiffStringWithTeamStatus(lastEventTime, status)}
+            </Text>
+          </HStack>
+          <H1BoldText>{name}</H1BoldText>
+          <HStack spacing="1rem">
+            <FtLogo width={20} height={20} />
+            <Link to={ROUTES.PROJECT_DETAIL_OF(projectPreview.name)}>
+              <H3MediumText>{projectPreview.name}</H3MediumText>
             </Link>
-          ))}
-        </HStack>
-        <CustomLink to={url} target="_blank" rel="noreferrer">
-          Intra 팀 페이지 바로가기
-        </CustomLink>
-      </VStack>
-      <Divider />
-      <VStack align="start" spacing="3rem">
-        <H2BoldText>평가 기록</H2BoldText>
-        {moulinette == null && evalLogs.length === 0 ? (
-          <Text>평가 기록이 없습니다.</Text>
-        ) : null}
-        <VStack align="start" spacing="1.5rem">
-          <EvalLogList list={evalLogs} />
-          {moulinette != null ? (
-            <MoulinetteEvalLogListItem item={moulinette} />
+            <Text>
+              {projectPreview.circle != null
+                ? `${projectPreview.circle}서클`
+                : 'Outer 서클'}
+            </Text>
+          </HStack>
+        </VStack>
+        <Divider />
+        <VStack align="start" spacing="3rem">
+          <H2BoldText>팀원</H2BoldText>
+          <HStack spacing="2rem">
+            {users.map((user) => (
+              <Link key={user.id} to={ROUTES.PROFILE_OF(user.login)}>
+                <VStack spacing="0.6rem">
+                  {user.isLeader ? (
+                    <Avatar
+                      size="lg"
+                      src={user.imgUrl}
+                      alt={user.login}
+                      badge={<Star width={18} height={18} fill="#ffd700" />}
+                    />
+                  ) : (
+                    <Avatar size="lg" src={user.imgUrl} alt={user.login} />
+                  )}
+                  <MediumText>{user.login}</MediumText>
+                  <CaptionText>#{user.occurrence + 1}</CaptionText>
+                </VStack>
+              </Link>
+            ))}
+          </HStack>
+          <CustomLink to={url} target="_blank" rel="noreferrer">
+            Intra 팀 페이지 바로가기
+          </CustomLink>
+        </VStack>
+        <Divider />
+        <VStack align="start" spacing="3rem">
+          <H2BoldText>평가 기록</H2BoldText>
+          {moulinette == null && evalLogs.length === 0 ? (
+            <Text>평가 기록이 없습니다.</Text>
           ) : null}
+          <VStack align="start" spacing="1.5rem">
+            <EvalLogList list={evalLogs} />
+            {moulinette != null ? (
+              <MoulinetteEvalLogListItem item={moulinette} />
+            ) : null}
+          </VStack>
         </VStack>
       </VStack>
-    </VStack>
+      <Footer />
+    </>
   );
 };
 
-const Head = () => {
-  return <Seo title="팀" />; // TODO: withFooter 없애고 나서 팀명으로 바꾸기
-};
-
-export default withHead(withFooter(TeamPage), Head);
+export default TeamPage;

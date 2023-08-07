@@ -1,23 +1,24 @@
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { profileGeneralPageDashboardContents } from '@/Profile/dashboard-frames/profileGeneralPageDashboardContents';
 import { profileGeneralPageDashboardRows } from '@/Profile/dashboard-frames/profileGeneralPageDashboardRows';
+import { Footer } from '@core/components/Footer';
 import { Dashboard } from '@shared/components/Dashboard';
 import { Seo } from '@shared/components/Seo';
-import { withFooter } from '@shared/hoc/withFooter';
-import { withHead } from '@shared/hoc/withHead';
-import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
 
 const ProfileGeneralPage = () => {
+  const { login } = useContext(UserProfileContext);
+
   return (
-    <Dashboard
-      contents={profileGeneralPageDashboardContents}
-      rows={profileGeneralPageDashboardRows}
-    />
+    <>
+      <Seo title={`${login} › 일반`} />
+      <Dashboard
+        contents={profileGeneralPageDashboardContents}
+        rows={profileGeneralPageDashboardRows}
+      />
+      <Footer />
+    </>
   );
 };
 
-const Head = () => {
-  const { login } = useParams() as { login: string };
-
-  return <Seo title={`${login} › 일반`} />;
-};
-export default withHead(withFooter(ProfileGeneralPage), Head);
+export default ProfileGeneralPage;

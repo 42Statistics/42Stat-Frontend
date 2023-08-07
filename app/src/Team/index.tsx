@@ -46,8 +46,7 @@ const GET_TEAM_INFO = gql(/* GraphQL */ `
         createdAt
       }
       status
-      lockedAt
-      closedAt
+      lastEventTime
       projectPreview {
         ...projectPreviewFields
       }
@@ -77,19 +76,6 @@ const GET_TEAM_INFO = gql(/* GraphQL */ `
   }
 `);
 
-const computeLastEventTime = (
-  lockedAt: string | null | undefined,
-  closedAt: string | null | undefined,
-) => {
-  if (lockedAt != null) {
-    return new Date(lockedAt);
-  }
-  if (closedAt != null) {
-    return new Date(closedAt);
-  }
-  return new Date(); // unreachable
-};
-
 const TeamPage = () => {
   const theme = useTheme();
 
@@ -118,13 +104,10 @@ const TeamPage = () => {
     finalMark,
     moulinette,
     status,
-    lockedAt,
-    closedAt,
+    lastEventTime,
     projectPreview,
     evalLogs,
   } = data.getTeamInfo;
-
-  const lastEventTime = computeLastEventTime(lockedAt, closedAt);
 
   return (
     <>
@@ -138,7 +121,7 @@ const TeamPage = () => {
               <CorrectorReviewLabel number={finalMark} />
             )}
             <Text color={theme.colors.mono.gray300}>
-              {getDateDiffStringWithTeamStatus(lastEventTime, status)}
+              {getDateDiffStringWithTeamStatus(new Date(lastEventTime), status)}
             </Text>
           </HStack>
           <H1BoldText>{name}</H1BoldText>

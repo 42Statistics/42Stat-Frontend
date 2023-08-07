@@ -7,7 +7,6 @@ import {
   Avatar,
   Body1MediumText,
   CaptionText,
-  Clickable,
   H3MediumText,
   HStack,
   MediumText,
@@ -17,7 +16,7 @@ import {
 import { mq } from '@shared/utils/facepaint/mq';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 import { Mobile, TabletAndAbove } from '@shared/utils/react-responsive/Device';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 type LeaderboardListItemProps = {
   item: UserRank;
@@ -33,7 +32,6 @@ export const LeaderboardListItem = ({
   fixedNumber,
 }: LeaderboardListItemProps) => {
   const theme = useTheme();
-  const navigate = useNavigate();
   const {
     userPreview: { login, imgUrl },
     rank,
@@ -43,50 +41,48 @@ export const LeaderboardListItem = ({
 
   return (
     <li style={{ width: '100%' }}>
-      <Layout
-        isMe={isMe}
-        onClick={() => navigate(ROUTES.PROFILE_OF(login))}
-        tabIndex={0}
-      >
-        <TabletAndAbove>
-          <HStack w="100%" spacing="4rem">
-            <HStack w="5rem">
-              <Body1MediumText color={color}>
-                {rank === 0 ? '–' : rank}
-              </Body1MediumText>
+      <Link to={ROUTES.PROFILE_OF(login)}>
+        <Layout isMe={isMe} tabIndex={0}>
+          <TabletAndAbove>
+            <HStack w="100%" spacing="4rem">
+              <HStack w="5rem">
+                <Body1MediumText color={color}>
+                  {rank === 0 ? '–' : rank}
+                </Body1MediumText>
+              </HStack>
+              <Avatar src={imgUrl} alt={ALT.AVATAR_OF(login)} />
+              <MediumText color={color}>{login}</MediumText>
+              <Spacer />
+              <HStack align="baseline" spacing="0.2rem">
+                <H3MediumText color={color}>
+                  {fixedNumber === undefined
+                    ? numberWithUnitFormatter(value)
+                    : `${value.toFixed(2)}`}
+                </H3MediumText>
+                <Text color={color}>{unit}</Text>
+              </HStack>
             </HStack>
-            <Avatar src={imgUrl} alt={ALT.AVATAR_OF(login)} />
-            <MediumText color={color}>{login}</MediumText>
-            <Spacer />
-            <HStack align="baseline" spacing="0.2rem">
-              <H3MediumText color={color}>
-                {fixedNumber === undefined
-                  ? numberWithUnitFormatter(value)
-                  : `${value.toFixed(2)}`}
-              </H3MediumText>
-              <Text color={color}>{unit}</Text>
+          </TabletAndAbove>
+          <Mobile>
+            <HStack w="100%" spacing="2.4rem">
+              <HStack w="2rem">
+                <MediumText color={color}>{rank}</MediumText>
+              </HStack>
+              <Avatar size="sm" src={imgUrl} alt={ALT.AVATAR_OF(login)} />
+              <MediumText color={color}>{login}</MediumText>
+              <Spacer />
+              <HStack align="baseline" spacing="0.2rem">
+                <H3MediumText color={color}>
+                  {fixedNumber === undefined
+                    ? numberWithUnitFormatter(value)
+                    : `${value.toFixed(2)}`}
+                </H3MediumText>
+                {unit ? <CaptionText color={color}>{unit}</CaptionText> : null}
+              </HStack>
             </HStack>
-          </HStack>
-        </TabletAndAbove>
-        <Mobile>
-          <HStack w="100%" spacing="2.4rem">
-            <HStack w="2rem">
-              <MediumText color={color}>{rank}</MediumText>
-            </HStack>
-            <Avatar size="sm" src={imgUrl} alt={ALT.AVATAR_OF(login)} />
-            <MediumText color={color}>{login}</MediumText>
-            <Spacer />
-            <HStack align="baseline" spacing="0.2rem">
-              <H3MediumText color={color}>
-                {fixedNumber === undefined
-                  ? numberWithUnitFormatter(value)
-                  : `${value.toFixed(2)}`}
-              </H3MediumText>
-              {unit ? <CaptionText color={color}>{unit}</CaptionText> : null}
-            </HStack>
-          </HStack>
-        </Mobile>
-      </Layout>
+          </Mobile>
+        </Layout>
+      </Link>
     </li>
   );
 };
@@ -95,12 +91,11 @@ type LayoutProps = {
   isMe: boolean;
 };
 
-const Layout = styled(Clickable)<LayoutProps>`
+const Layout = styled.div<LayoutProps>`
   width: 100%;
   ${mq({
     padding: ['0.5rem 2rem', '0.5rem 3rem'],
   })}
-  cursor: pointer;
   border-radius: ${({ theme }) => theme.radius.xs};
   background-color: ${({ isMe, theme }) =>
     isMe && theme.colors.primary.default} !important; // FIXME: !important

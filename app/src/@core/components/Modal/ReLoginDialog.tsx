@@ -10,14 +10,10 @@ type ReLoginDialogProps = DialogBaseProps;
 export const ReLoginDialog = ({ isOpen, onClose }: ReLoginDialogProps) => {
   const navigate = useNavigate();
 
-  const goToLandingPage = () => {
-    navigate(ROUTES.ROOT);
-  };
-
   const handleConfirm = () => {
     clearStorage();
     onClose();
-    goToLandingPage();
+    navigate(ROUTES.ROOT);
   };
 
   useEffect(() => {

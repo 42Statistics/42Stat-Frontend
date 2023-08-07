@@ -4,11 +4,14 @@ import styled from '@emotion/styled';
 import { ReactComponent as MdSearch } from '@shared/assets/icon/md-search.svg';
 import { ARIA_LABEL_BUTTON } from '@shared/constants/accessibility/ARIA_LABEL';
 import { CaptionText, Clickable, HStack, Spacer, Text } from '@shared/ui-kit';
+import { detect } from 'detect-browser';
 import { useSetAtom } from 'jotai';
 
 export const SearchBarShapeButton = () => {
   const theme = useTheme();
   const setIsSpotlightOpen = useSetAtom(isSpotlightOpenAtom);
+  const browser = detect();
+  const isMacOS = browser?.os === 'Mac OS';
 
   const openSpotlight = () => {
     setIsSpotlightOpen(true);
@@ -23,7 +26,9 @@ export const SearchBarShapeButton = () => {
         <MdSearch width={18} height={18} fill={theme.colors.mono.gray300} />
         <Text color={theme.colors.mono.gray300}>Search</Text>
         <Spacer />
-        <CaptionText color={theme.colors.mono.gray300}>⌘ K</CaptionText>
+        <CaptionText color={theme.colors.mono.gray300}>
+          {isMacOS ? '⌘ K' : 'Ctrl K'}
+        </CaptionText>
       </HStack>
     </Layout>
   );

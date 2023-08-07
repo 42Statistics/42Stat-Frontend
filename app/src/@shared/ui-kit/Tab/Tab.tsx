@@ -1,14 +1,15 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { PropsWithStringChildren } from '@shared/types/PropsWithChildren';
-import { Clickable, Text } from '@shared/ui-kit';
+import { Text } from '@shared/ui-kit';
+import { Link } from 'react-router-dom';
 
 type TabProps = PropsWithStringChildren<{
   selected?: boolean;
-  onClick: () => void;
+  link: string;
 }>;
 
-export const Tab = ({ selected = false, onClick, children }: TabProps) => {
+export const Tab = ({ selected = false, link, children }: TabProps) => {
   const theme = useTheme();
   const color = selected
     ? theme.colors.primary.default
@@ -16,9 +17,11 @@ export const Tab = ({ selected = false, onClick, children }: TabProps) => {
 
   return (
     <li>
-      <Layout onClick={onClick} selected={selected} tabIndex={0}>
-        <Text color={color}>{children}</Text>
-      </Layout>
+      <Link to={link}>
+        <Layout selected={selected} tabIndex={0}>
+          <Text color={color}>{children}</Text>
+        </Layout>
+      </Link>
     </li>
   );
 };
@@ -27,12 +30,10 @@ type LayoutProps = {
   selected: boolean;
 };
 
-const Layout = styled(Clickable)<LayoutProps>`
-  display: inline-block;
+const Layout = styled.div<LayoutProps>`
   padding: 1.4rem 2rem;
   transition: background-color 0.3s;
   outline-offset: -0.2rem;
-  cursor: pointer;
 
   border-bottom: ${({ theme, selected }) =>
     selected && `3px solid ${theme.colors.primary.default}`};

@@ -5,19 +5,19 @@ import { FullPageApolloNotFoundView } from '@shared/components/ApolloError/FullP
 import { ROUTES } from '@shared/constants/ROUTES';
 import { Tab, Tabs, VStack } from '@shared/ui-kit';
 import { useAtomValue } from 'jotai';
-import { Outlet, useNavigate, useParams } from 'react-router-dom';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
 import { UserProfile } from './components/UserProfile';
 import { UserProfileContext } from './contexts/UserProfileContext';
 import { GET_USER_PROFILE_BY_LOGIN } from './dashboard-contents-queries/GET_USER_PROFILE_BY_LOGIN';
 
 const ProfileLayout = () => {
+  const { pathname } = useLocation();
   const { login } = useParams() as { login: string };
   const { loading, error, data } = useQuery(GET_USER_PROFILE_BY_LOGIN, {
     variables: { login },
   });
 
   const user = useAtomValue(userAtom);
-  const navigate = useNavigate();
 
   if (loading) {
     return null;
@@ -37,27 +37,21 @@ const ProfileLayout = () => {
         <UserProfile />
         <Tabs>
           <Tab
-            selected={location.pathname.startsWith(
-              ROUTES.PROFILE_GENERAL_OF(login),
-            )}
-            onClick={() => navigate(ROUTES.PROFILE_GENERAL_OF(login))}
+            selected={pathname.startsWith(ROUTES.PROFILE_GENERAL_OF(login))}
+            link={ROUTES.PROFILE_GENERAL_OF(login)}
           >
             일반
           </Tab>
           <Tab
-            selected={location.pathname.startsWith(
-              ROUTES.PROFILE_EVAL_OF(login),
-            )}
-            onClick={() => navigate(ROUTES.PROFILE_EVAL_OF(login))}
+            selected={pathname.startsWith(ROUTES.PROFILE_EVAL_OF(login))}
+            link={ROUTES.PROFILE_EVAL_OF(login)}
           >
             평가
           </Tab>
           {login !== user.login ? (
             <Tab
-              selected={location.pathname.startsWith(
-                ROUTES.PROFILE_VERSUS_OF(login),
-              )}
-              onClick={() => navigate(ROUTES.PROFILE_VERSUS_OF(login))}
+              selected={pathname.startsWith(ROUTES.PROFILE_VERSUS_OF(login))}
+              link={ROUTES.PROFILE_VERSUS_OF(login)}
             >
               나와 비교
             </Tab>

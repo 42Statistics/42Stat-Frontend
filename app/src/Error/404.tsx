@@ -13,12 +13,11 @@ import {
   WhiteBody1Text,
   WhiteH1BoldText,
 } from '@shared/ui-kit';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const NotFoundPage = () => {
   const statusCode = 404;
   const statusText = 'Not Found';
-  const navigate = useNavigate();
   const theme = useTheme();
 
   return (
@@ -33,13 +32,14 @@ const NotFoundPage = () => {
         </HStack>
         <Image width={200} src={dont_panic} alt="" />
       </VStack>
-      <Button
-        backgroundColor={theme.colors.mono.white}
-        color={theme.colors.mono.black}
-        onClick={() => navigate(ROUTES.ROOT)}
-      >
-        홈으로 돌아가기
-      </Button>
+      <Link to={ROUTES.ROOT}>
+        <Button
+          backgroundColor={theme.colors.mono.white}
+          color={theme.colors.mono.black}
+        >
+          홈으로 돌아가기
+        </Button>
+      </Link>
     </VStack>
   );
 };

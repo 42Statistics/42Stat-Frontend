@@ -1,9 +1,9 @@
 import { SpotlightFocusContext } from '@core/contexts/SpotlightFocusContext';
 import styled from '@emotion/styled';
-import { Body1Text, Clickable, HStack, Spacer } from '@shared/ui-kit';
+import { Body1Text, HStack, Spacer } from '@shared/ui-kit';
 import { isEnterKeyDown } from '@shared/utils/keyboard';
 import { useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 type SpotlightListItemProps = {
   left: React.ReactElement;
@@ -39,17 +39,15 @@ export const SpotlightListItem = ({
   }, [currentFocus, isFocused, navigate, link]);
 
   return (
-    <Layout
-      isFocused={isFocused}
-      onClick={() => navigate(link)}
-      onMouseOver={() => setCurrentFocus(index)}
-    >
-      <HStack w="100%" align="start" spacing="2rem">
-        {left}
-        <Body1Text>{name}</Body1Text>
-        <Spacer />
-      </HStack>
-    </Layout>
+    <Link to={link} style={{ width: '100%' }}>
+      <Layout isFocused={isFocused} onMouseOver={() => setCurrentFocus(index)}>
+        <HStack w="100%" align="start" spacing="2rem">
+          {left}
+          <Body1Text>{name}</Body1Text>
+          <Spacer />
+        </HStack>
+      </Layout>
+    </Link>
   );
 };
 
@@ -57,7 +55,7 @@ type LayoutProps = {
   isFocused: boolean;
 };
 
-const Layout = styled(Clickable)<LayoutProps>`
+const Layout = styled.div<LayoutProps>`
   width: 100%;
   padding: 0.8rem 2rem;
 

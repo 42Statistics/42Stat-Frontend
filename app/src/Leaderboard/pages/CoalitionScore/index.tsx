@@ -1,7 +1,8 @@
 import { Leaderboard } from '@/Leaderboard/components/Leaderboard';
 import { LeaderboardResultSkeleton } from '@/Leaderboard/components/skeletons/LeaderboardResultSkeleton';
-import { QUERY_STRING_KEY } from '@/Leaderboard/constants/QUERY_STRING_KEY';
+import { QUERY_KEY } from '@/Leaderboard/constants/QUERY_KEY';
 import { parseDateTemplate } from '@/Leaderboard/utils/parseDateTemplate';
+import { stringifyDateTemplate } from '@/Leaderboard/utils/stringifyDateTemplate';
 import { useQuery } from '@apollo/client';
 import { Footer } from '@core/components/Footer';
 import { gql } from '@shared/__generated__';
@@ -64,12 +65,10 @@ const LeaderboardCoalitionScorePage = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const dateTemplate = parseDateTemplate(
-    searchParams.get(QUERY_STRING_KEY.DATE_TEMPLATE),
+    searchParams.get(QUERY_KEY.DATE),
     DateTemplate.CurrWeek,
   );
-  const pageNumber = Number(
-    searchParams.get(QUERY_STRING_KEY.PAGE_NUMBER) ?? '1',
-  );
+  const pageNumber = Number(searchParams.get(QUERY_KEY.PAGE) ?? '1');
   const { loading, error, data } = useQuery(GET_LEADERBOARD_COALITION_SCORE, {
     variables: {
       pageSize: SIZE_PER_PAGE,
@@ -102,7 +101,7 @@ const LeaderboardCoalitionScorePage = () => {
     const dateTemplate = options[index].value;
     navigate({
       search: `?${createSearchParams({
-        [QUERY_STRING_KEY.DATE_TEMPLATE]: dateTemplate,
+        [QUERY_KEY.DATE]: stringifyDateTemplate(dateTemplate),
       })}`,
     });
   };
@@ -110,8 +109,8 @@ const LeaderboardCoalitionScorePage = () => {
   const handlePageNumberChange = (pageNumber: number) => {
     navigate({
       search: `?${createSearchParams({
-        [QUERY_STRING_KEY.DATE_TEMPLATE]: dateTemplate,
-        [QUERY_STRING_KEY.PAGE_NUMBER]: String(pageNumber),
+        [QUERY_KEY.DATE]: stringifyDateTemplate(dateTemplate),
+        [QUERY_KEY.PAGE]: String(pageNumber),
       })}`,
     });
   };

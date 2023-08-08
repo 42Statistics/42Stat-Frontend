@@ -1,58 +1,101 @@
 import styled from '@emotion/styled';
-import type { EvalLogSearchModel } from '@shared/types/EvalLogSearchModel';
 import { Button, Dialog, Input, Select } from '@shared/ui-kit';
+import { useAtomValue } from 'jotai';
 import { useForm } from 'react-hook-form';
+import { useSearchParams } from 'react-router-dom';
+import type { EvalLogSearchArgs } from '../api/getEvalLogs';
+import { evalLogSearchArgsAtom } from '../atoms/evalLogSearchArgsAtom';
+import { EVAL_LOG_SEARCH_ARGS_TEXT } from '../constants/evalLogArgsText';
+import {
+  EVAL_LOG_SEARCH_URL_PARAM_KEYS,
+  EVAL_LOG_SEARCH_URL_PARAM_VALUES,
+} from '../constants/urlParams';
 
 type EvalLogSearchDialogProps = {
-  form: EvalLogSearchModel;
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (data: EvalLogSearchModel) => void;
 };
 
+type EvalLogSearchForm = Omit<
+  EvalLogSearchArgs,
+  'after' | 'first' | 'outstandingOnly'
+> & {
+  flag: string;
+};
+
+const { CORRECTOR, CORRECTED, PROJECT_NAME, FLAG, SORT_ORDER } =
+  EVAL_LOG_SEARCH_URL_PARAM_KEYS;
+
+const { ALL_FLAG, OUTSTANDING_FLAG, BEGIN_AT_ASC, BEGIN_AT_DESC } =
+  EVAL_LOG_SEARCH_URL_PARAM_VALUES;
+
+const { ALL_FLAG_INCLUDED, OUTSTANDING_FLAG_ONLY, ASC, DESC } =
+  EVAL_LOG_SEARCH_ARGS_TEXT;
+
 export const EvalLogSearchDialog = ({
-  form,
   isOpen,
   onClose,
-  onSubmit,
 }: EvalLogSearchDialogProps) => {
-  const { register, handleSubmit } = useForm<EvalLogSearchModel>({
-    defaultValues: form,
+  const [_, setSearchParams] = useSearchParams();
+  const evalLogSearchArgs = useAtomValue(evalLogSearchArgsAtom);
+
+  const { register, handleSubmit } = useForm<EvalLogSearchForm>({
+    defaultValues: evalLogSearchArgs,
   });
 
   return (
     <Dialog isOpen={isOpen} onClose={onClose}>
       <Layout>
-        <EvalLogSearchForm onSubmit={handleSubmit(onSubmit)}>
+        <EvalLogSearchForm
+          onSubmit={handleSubmit((evalLogSearchForm) => {
+            setSearchParams(toURLSearchParams(evalLogSearchForm));
+            onClose();
+          })}
+        >
           <ul>
             <li>
-              <label htmlFor="projectName">과제명</label>
+              <label htmlFor={PROJECT_NAME}>과제명</label>
               <Input
-                {...register('projectName')}
+                id={PROJECT_NAME}
+                {...register(PROJECT_NAME)}
                 autoFocus
                 style={{ width: '150px' }}
               />
             </li>
             <li>
-              <label htmlFor="corrector">From</label>
-              <Input {...register('corrector')} style={{ width: '150px' }} />
+              <label htmlFor={CORRECTOR}>From</label>
+              <Input
+                id={CORRECTOR}
+                {...register(CORRECTOR)}
+                style={{ width: '150px' }}
+              />
             </li>
             <li>
-              <label htmlFor="corrected">To</label>
-              <Input {...register('corrected')} style={{ width: '150px' }} />
+              <label htmlFor={CORRECTED}>To</label>
+              <Input
+                id={CORRECTED}
+                {...register(CORRECTED)}
+                style={{ width: '150px' }}
+              />
             </li>
             <li>
-              <label htmlFor="flag">플래그</label>
-              <Select {...register('flag')} style={{ width: '150px' }}>
-                <option value="all">전체</option>
-                <option value="outstanding">Outstanding만</option>
+              <label htmlFor={FLAG}>플래그</label>
+              <Select id={FLAG} {...register(FLAG)} style={{ width: '150px' }}>
+                <option value={ALL_FLAG}>{ALL_FLAG_INCLUDED}</option>
+                <option value={OUTSTANDING_FLAG}>
+                  {OUTSTANDING_FLAG_ONLY}
+                </option>
               </Select>
             </li>
             <li>
-              <label htmlFor="sortOrder">정렬</label>
-              <Select {...register('sortOrder')} style={{ width: '150px' }}>
-                <option value="desc">최신순</option>
-                <option value="asc">오래된순</option>
+              <label htmlFor={SORT_ORDER}>정렬</label>
+              <Select
+                id={SORT_ORDER}
+                {...register(SORT_ORDER)}
+                style={{ width: '150px' }}
+              >
+                <option value={BEGIN_AT_DESC}>{DESC}</option>
+                <option value={BEGIN_AT_ASC}>{ASC}</option>
               </Select>
             </li>
           </ul>
@@ -61,6 +104,38 @@ export const EvalLogSearchDialog = ({
       </Layout>
     </Dialog>
   );
+};
+
+const toURLSearchParams = ({
+  corrector,
+  corrected,
+  projectName,
+  flag,
+  sortOrder,
+}: EvalLogSearchForm): URLSearchParams => {
+  const searchParams = new URLSearchParams();
+
+  if (corrector && corrector !== '') {
+    searchParams.append(CORRECTOR, corrector);
+  }
+
+  if (corrected && corrected !== '') {
+    searchParams.append(CORRECTED, corrected);
+  }
+
+  if (projectName && projectName !== '') {
+    searchParams.append(PROJECT_NAME, projectName);
+  }
+
+  if (flag) {
+    searchParams.append(FLAG, flag);
+  }
+
+  if (sortOrder) {
+    searchParams.append(SORT_ORDER, sortOrder);
+  }
+
+  return searchParams;
 };
 
 const Layout = styled.div`

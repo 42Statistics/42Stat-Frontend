@@ -7,12 +7,10 @@ import { mq } from '@shared/utils/facepaint/mq';
 
 type EvalLogSearchAbsoluteButtonProps = {
   onClick: () => void;
-  dialog: React.ReactNode;
 };
 
 export const EvalLogSearchAbsoluteButton = ({
   onClick,
-  dialog,
 }: EvalLogSearchAbsoluteButtonProps) => {
   const theme = useTheme();
 
@@ -27,7 +25,6 @@ export const EvalLogSearchAbsoluteButton = ({
           <MdSearch width={26} height={26} fill={theme.colors.mono.white} />
         </Layout>
       </Clickable>
-      {dialog}
     </>
   );
 };

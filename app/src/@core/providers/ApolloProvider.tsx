@@ -8,6 +8,7 @@ import {
   fromPromise,
 } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
+import { relayStylePagination } from '@apollo/client/utilities';
 import { getNewAccessToken } from '@core/services/auth/getNewAccessToken';
 import { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
 import { getAccessToken } from '@shared/utils/storage/accessToken';
@@ -64,7 +65,7 @@ const errorLink = onError(({ graphQLErrors, operation, forward }) => {
  *  https://go.apollo.dev/c/merging-non-normalized-objects
  *  https://go.apollo.dev/c/generating-unique-identifiers
  */
-
+// todo: 이거 제대로 알고 쓴 거 맞나?
 export const client = new ApolloClient({
   link: from([errorLink, authLink, httpLink]),
   cache: new InMemoryCache({
@@ -105,7 +106,14 @@ export const client = new ApolloClient({
             merge: true,
           },
           getEvalLogs: {
-            merge: true,
+            ...relayStylePagination(),
+            keyArgs: [
+              'projectName',
+              'outstandingOnly',
+              'corrector',
+              'corrected',
+              'sortOrder',
+            ],
           },
         },
       },

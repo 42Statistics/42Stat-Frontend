@@ -15,7 +15,7 @@ export const EvalLogListItem = ({ element }: EvalLogListItemProps) => {
   const { header, correctorReview, correctedsReview } = element;
 
   return (
-    <Layout>
+    <Layout id={element.id.toString()}>
       <EvalLogListItemTitle header={header} />
       <VStack w="100%" align="start" spacing="1rem">
         <HStack w="100%">

@@ -12,7 +12,7 @@ import {
 import { setRefreshToken } from '@shared/utils/storage/refreshToken';
 import { useSetAtom } from 'jotai';
 import { useEffect, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { Navigate, useNavigate, useSearchParams } from 'react-router-dom';
 
 const FT_LOGIN = gql(/* GraphQL */ `
   mutation ftLogin($ftCode: String!) {
@@ -68,7 +68,14 @@ const FtOAuthRedirectPage = () => {
   }, [ftLogin, googleLogin, ftCode, mounted]);
 
   useEffect(() => {
-    if (ftLoading || ftError || !ftData) {
+    if (ftLoading) {
+      return;
+    }
+    if (ftError) {
+      navigate(ROUTES.ROOT);
+      return;
+    }
+    if (!ftData) {
       return;
     }
     const { accessToken, refreshToken } = ftData.ftLogin;
@@ -78,7 +85,21 @@ const FtOAuthRedirectPage = () => {
   }, [ftData, ftLoading, ftError, navigate, setUser]);
 
   useEffect(() => {
-    if (googleLoading || googleError || !googleData) {
+    if (googleLoading) {
+      return;
+    }
+    if (googleError) {
+      const isConflict = googleError.graphQLErrors.some(
+        (error) => error.extensions?.status === 409,
+      );
+      if (isConflict) {
+        alert('이미 다른 구글 계정과 연동되어있습니다.'); // TODO: Modal
+        removeGoogleCredential();
+        navigate(ROUTES.ROOT);
+      }
+      return;
+    }
+    if (!googleData) {
       return;
     }
     if (googleData.googleLogin.__typename === 'LoginNotLinked') {
@@ -90,6 +111,10 @@ const FtOAuthRedirectPage = () => {
     removeGoogleCredential();
     navigate(ROUTES.HOME);
   }, [googleData, googleLoading, googleError, navigate, setUser]);
+
+  if (ftCode === null) {
+    return <Navigate to={ROUTES.ROOT} />;
+  }
 
   return <Loader />;
 };

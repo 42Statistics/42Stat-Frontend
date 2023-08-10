@@ -7,7 +7,7 @@ import { VStack, WhiteText } from '@shared/ui-kit';
 import { mq } from '@shared/utils/facepaint/mq';
 import { Link } from 'react-router-dom';
 
-const FtOAuthPage = () => {
+const FtOAuthRequestPage = () => {
   const theme = useTheme();
 
   return (
@@ -36,4 +36,4 @@ const Layout = styled.div`
   border-radius: ${({ theme }) => theme.radius.md};
 `;
 
-export default FtOAuthPage;
+export default FtOAuthRequestPage;

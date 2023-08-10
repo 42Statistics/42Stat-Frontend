@@ -26,7 +26,8 @@ const LandingLayout = () => {
 
 const Layout = styled.main`
   width: 100%;
-  background: url(${space_background});
+  background: ${({ theme }) =>
+    `${theme.colors.background.landing} url(${space_background})`};
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;

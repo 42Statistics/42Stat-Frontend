@@ -5,7 +5,7 @@ import { ProfileGeneralPageSkeleton } from '@/Profile/components/skeletons/Profi
 import { ProfileVersusPageSkeleton } from '@/Profile/components/skeletons/ProfileVersusPageSkeleton';
 import { UserProfileSkeleton } from '@/Profile/components/skeletons/UserProfileSkeleton';
 import { AuthGuard } from '@core/guards/AuthGuard';
-import { NoAuthGuard } from '@core/guards/NoAuthGuard';
+import { UnAuthGuard } from '@core/guards/UnAuthGuard';
 import { ROUTES } from '@shared/constants/ROUTES';
 import { DeferredComponent } from '@shared/ui-kit';
 import { Suspense, lazy } from 'react';
@@ -41,7 +41,7 @@ const SettingPage = lazy(() => import('@/Setting'));
 export const AppRoutes = () => {
   return (
     <Routes>
-      <Route element={<NoAuthGuard />}>
+      <Route element={<UnAuthGuard />}>
         <Route
           element={
             <Suspense>

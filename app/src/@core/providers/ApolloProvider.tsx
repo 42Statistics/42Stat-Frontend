@@ -8,34 +8,82 @@ import {
   fromPromise,
 } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
-import { isReLoginDialogOpenAtom } from '@core/atoms/isReLoginDialogOpenAtom';
 import { getNewAccessToken } from '@core/services/auth/getNewAccessToken';
 import { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
 import { getAccessToken } from '@shared/utils/storage/accessToken';
 import { getRefreshToken } from '@shared/utils/storage/refreshToken';
-import { useSetAtom } from 'jotai';
-import { useEffect } from 'react';
 
 const httpLink = new HttpLink({
   uri: import.meta.env.VITE_BACKEND_GRAPHQL_ENDPOINT,
 });
 
-const requestInterceptor = new ApolloLink((operation, forward) => {
-  if (operation.operationName === 'getLanding') {
-    return forward(operation);
-  }
+const authLink = new ApolloLink((operation, forward) => {
   const accessToken = getAccessToken();
   if (accessToken === null) {
     return forward(operation);
   }
+  const oldHeaders = operation.getContext().headers;
   operation.setContext({
     headers: {
-      ...operation.getContext().headers,
+      ...oldHeaders,
       authorization: `Bearer ${accessToken}`,
     },
   });
   return forward(operation);
 });
+
+const errorLink = onError(({ graphQLErrors, operation, forward }) => {
+  const oldHeaders = operation.getContext().headers;
+
+  if (graphQLErrors) {
+    for (const error of graphQLErrors) {
+      switch (error.extensions.status) {
+        case 400:
+          console.log('400');
+          return forward(operation);
+        case 401:
+          console.log('401');
+          return fromPromise(
+            getNewAccessToken(getRefreshToken() ?? ''),
+          ).flatMap((newAccessToken) => {
+            console.log('newAccessToken', newAccessToken);
+            operation.setContext({
+              headers: {
+                ...oldHeaders,
+                authorization: `Bearer ${newAccessToken}`,
+              },
+            });
+            return forward(operation);
+          });
+      }
+    }
+  }
+});
+
+// const ResponseInterceptor = ({ children }: PropsWithReactElementChildren) => {
+//   const setIsReLoginDialogOpen = useSetAtom(isReLoginDialogOpenAtom);
+
+//   useEffect(() => {
+//     const responseInterceptor400 = onError(
+//       ({ graphQLErrors, operation, forward }) => {
+//         if (graphQLErrors) {
+//           graphQLErrors.forEach(({ extensions }) => {
+//             if (extensions?.status === 400) {
+//               console.log('400');
+//               // setIsReLoginDialogOpen(true);
+//             }
+//           });
+//         }
+//         return forward(operation);
+//       },
+//     );
+
+//     client.setLink(
+//       from([errorLink, responseInterceptor400, authLink, httpLink]),
+//     );
+//   }, [setIsReLoginDialogOpen]);
+//   return <>{children}</>;
+// };
 
 /**
  * @description
@@ -48,7 +96,7 @@ const requestInterceptor = new ApolloLink((operation, forward) => {
  */
 
 export const client = new ApolloClient({
-  link: from([requestInterceptor, httpLink]),
+  link: from([errorLink, authLink, httpLink]),
   cache: new InMemoryCache({
     typePolicies: {
       Query: {
@@ -96,62 +144,7 @@ export const client = new ApolloClient({
 });
 
 const Provider = ({ children }: PropsWithReactElementChildren) => {
-  return (
-    <ApolloProvider client={client}>
-      <ResponseInterceptor>{children}</ResponseInterceptor>
-    </ApolloProvider>
-  );
-};
-
-const ResponseInterceptor = ({ children }: PropsWithReactElementChildren) => {
-  const setIsReLoginDialogOpen = useSetAtom(isReLoginDialogOpenAtom);
-
-  useEffect(() => {
-    const responseInterceptor400 = onError(
-      ({ graphQLErrors, operation, forward }) => {
-        if (graphQLErrors) {
-          graphQLErrors.forEach(({ extensions }) => {
-            if (extensions?.status === 400) {
-              setIsReLoginDialogOpen(true);
-            }
-          });
-        }
-        return forward(operation);
-      },
-    );
-
-    const responseInterceptor401 = onError(
-      ({ graphQLErrors, operation, forward }) => {
-        const authError = graphQLErrors?.find(
-          ({ extensions }) => extensions.status === 401,
-        );
-
-        if (authError) {
-          return fromPromise(
-            getNewAccessToken(getRefreshToken() ?? ''),
-          ).flatMap((accessToken) => {
-            operation.setContext({
-              headers: {
-                ...operation.getContext().headers,
-                authorization: `Bearer ${accessToken}`,
-              },
-            });
-            return forward(operation);
-          });
-        }
-      },
-    );
-
-    client.setLink(
-      from([
-        requestInterceptor,
-        responseInterceptor401,
-        responseInterceptor400,
-        httpLink,
-      ]),
-    );
-  }, [setIsReLoginDialogOpen]);
-  return <>{children}</>;
+  return <ApolloProvider client={client}>{children}</ApolloProvider>;
 };
 
 export default Provider;

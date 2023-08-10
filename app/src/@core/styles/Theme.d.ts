@@ -25,6 +25,9 @@ type Colors = {
     hover: string;
     active: string;
   };
+  background: {
+    landing: string;
+  };
   mono: {
     black: string;
     white: string;

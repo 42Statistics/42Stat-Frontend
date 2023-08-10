@@ -1,7 +1,7 @@
 export const ROUTES = {
   ROOT: '/',
   HOME: '/home',
-  FT_OAUTH: '/ftoauth',
+  FT_OAUTH_REQUEST: '/auth/ft/request',
   FT_OAUTH_REDIRECT: '/auth/ft/redirect',
   PROFILE: '/profile/:login',
   PROFILE_GENERAL: '/profile/:login/general',

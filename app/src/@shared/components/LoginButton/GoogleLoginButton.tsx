@@ -74,7 +74,7 @@ export const GoogleLoginButton = () => {
       return;
     }
     if (data.googleLogin.__typename === 'LoginNotLinked') {
-      navigate(ROUTES.FT_OAUTH);
+      navigate(ROUTES.FT_OAUTH_REQUEST);
       return;
     }
     const { accessToken, refreshToken } = data.googleLogin;

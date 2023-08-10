@@ -34,7 +34,7 @@ const LeaderboardEvalCountPage = lazy(
 );
 const TeamPage = lazy(() => import('@/Team'));
 const NotFoundPage = lazy(() => import('@/Error/404'));
-const FtOAuthPage = lazy(() => import('@/FtOAuth'));
+const FtOAuthRequestPage = lazy(() => import('@/FtOAuthRequest'));
 const FtOAuthRedirectPage = lazy(() => import('@/FtOAuthRedirect'));
 const SettingPage = lazy(() => import('@/Setting'));
 
@@ -58,10 +58,10 @@ export const AppRoutes = () => {
             }
           />
           <Route
-            path={ROUTES.FT_OAUTH}
+            path={ROUTES.FT_OAUTH_REQUEST}
             element={
               <Suspense>
-                <FtOAuthPage />
+                <FtOAuthRequestPage />
               </Suspense>
             }
           />

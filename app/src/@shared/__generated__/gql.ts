@@ -17,7 +17,6 @@ const documents = {
     "\n  query GetMyProfile {\n    getPersonalGeneral {\n      userProfile {\n        id\n        login\n        imgUrl\n        displayname\n      }\n    }\n  }\n": types.GetMyProfileDocument,
     "\n  mutation GetNewAccessToken($refreshToken: String!) {\n    refreshToken(refreshToken: $refreshToken) {\n      message\n      accessToken\n      refreshToken\n      userId\n    }\n  }\n": types.GetNewAccessTokenDocument,
     "\n  mutation googleLogin($google: GoogleLoginInput!, $ftCode: String) {\n    googleLogin(google: $google, ftCode: $ftCode) {\n      __typename\n      ... on LoginSuccess {\n        message\n        accessToken\n        refreshToken\n        userId\n      }\n      ... on LoginNotLinked {\n        message\n      }\n    }\n  }\n": types.GoogleLoginDocument,
-    "\n  mutation Logout {\n    logout\n  }\n": types.LogoutDocument,
     "\n  fragment coalitionFields on Coalition {\n    id\n    name\n    slug\n    imageUrl\n    coverUrl\n    color\n    score\n    userId\n  }\n": types.CoalitionFieldsFragmentDoc,
     "\n  fragment projectPreviewFields on ProjectPreview {\n    id\n    name\n    url\n    circle\n  }\n": types.ProjectPreviewFieldsFragmentDoc,
     "\n  fragment teamPreviewFields on TeamPreview {\n    id\n    name\n    url\n  }\n": types.TeamPreviewFieldsFragmentDoc,
@@ -82,6 +81,7 @@ const documents = {
     "\n  query GetCurrRegisteredTeamCountByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      currRegisteredTeamCount\n    }\n  }\n": types.GetCurrRegisteredTeamCountByProjectNameDocument,
     "\n  query GetValidatedRateByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      validatedRate {\n        total\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n": types.GetValidatedRateByProjectNameDocument,
     "\n  mutation DeleteAccount {\n    deleteAccount\n  }\n": types.DeleteAccountDocument,
+    "\n  mutation Logout {\n    logout\n  }\n": types.LogoutDocument,
     "\n  mutation LinkGoogle($google: GoogleLoginInput!) {\n    linkGoogle(google: $google) {\n      userId\n      linkedAccounts {\n        platform\n        id\n        email\n        linkedAt\n      }\n    }\n  }\n": types.LinkGoogleDocument,
     "\n  mutation UnlinkAccount($targetPlatform: String!) {\n    unlinkAccount(targetPlatform: $targetPlatform) {\n      userId\n      linkedAccounts {\n        platform\n        id\n        email\n        linkedAt\n      }\n    }\n  }\n": types.UnlinkAccountDocument,
     "\n  fragment AccountFields on Account {\n    userId\n    linkedAccounts {\n      platform\n      id\n      email\n      linkedAt\n    }\n  }\n": types.AccountFieldsFragmentDoc,
@@ -119,10 +119,6 @@ export function gql(source: "\n  mutation GetNewAccessToken($refreshToken: Strin
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  mutation googleLogin($google: GoogleLoginInput!, $ftCode: String) {\n    googleLogin(google: $google, ftCode: $ftCode) {\n      __typename\n      ... on LoginSuccess {\n        message\n        accessToken\n        refreshToken\n        userId\n      }\n      ... on LoginNotLinked {\n        message\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation googleLogin($google: GoogleLoginInput!, $ftCode: String) {\n    googleLogin(google: $google, ftCode: $ftCode) {\n      __typename\n      ... on LoginSuccess {\n        message\n        accessToken\n        refreshToken\n        userId\n      }\n      ... on LoginNotLinked {\n        message\n      }\n    }\n  }\n"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function gql(source: "\n  mutation Logout {\n    logout\n  }\n"): (typeof documents)["\n  mutation Logout {\n    logout\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -379,6 +375,10 @@ export function gql(source: "\n  query GetValidatedRateByProjectName($projectNam
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  mutation DeleteAccount {\n    deleteAccount\n  }\n"): (typeof documents)["\n  mutation DeleteAccount {\n    deleteAccount\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation Logout {\n    logout\n  }\n"): (typeof documents)["\n  mutation Logout {\n    logout\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

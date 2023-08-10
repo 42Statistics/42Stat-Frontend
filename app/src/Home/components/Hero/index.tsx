@@ -135,7 +135,8 @@ const Layout = styled(CustomBox)`
   align-items: center;
   justify-content: center;
   width: 100%;
-  background-image: url(${space_background});
+  background: ${({ theme }) =>
+    `${theme.colors.background.landing} url(${space_background})`};
   background-size: cover;
   border-radius: ${({ theme }) => theme.radius.md};
   padding: 0 4rem;

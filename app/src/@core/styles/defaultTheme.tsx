@@ -23,6 +23,9 @@ const colors = {
     hover: '#f0f0f0',
     active: '#e2e2e2',
   },
+  background: {
+    landing: '#070f21',
+  },
   mono: {
     black: '#161616',
     white: '#ffffff',

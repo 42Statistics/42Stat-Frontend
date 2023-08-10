@@ -38,15 +38,10 @@ const errorLink = onError(({ graphQLErrors, operation, forward }) => {
   if (graphQLErrors) {
     for (const error of graphQLErrors) {
       switch (error.extensions.status) {
-        case 400:
-          console.log('400');
-          return forward(operation);
         case 401:
-          console.log('401');
           return fromPromise(
             getNewAccessToken(getRefreshToken() ?? ''),
           ).flatMap((newAccessToken) => {
-            console.log('newAccessToken', newAccessToken);
             operation.setContext({
               headers: {
                 ...oldHeaders,
@@ -59,31 +54,6 @@ const errorLink = onError(({ graphQLErrors, operation, forward }) => {
     }
   }
 });
-
-// const ResponseInterceptor = ({ children }: PropsWithReactElementChildren) => {
-//   const setIsReLoginDialogOpen = useSetAtom(isReLoginDialogOpenAtom);
-
-//   useEffect(() => {
-//     const responseInterceptor400 = onError(
-//       ({ graphQLErrors, operation, forward }) => {
-//         if (graphQLErrors) {
-//           graphQLErrors.forEach(({ extensions }) => {
-//             if (extensions?.status === 400) {
-//               console.log('400');
-//               // setIsReLoginDialogOpen(true);
-//             }
-//           });
-//         }
-//         return forward(operation);
-//       },
-//     );
-
-//     client.setLink(
-//       from([errorLink, responseInterceptor400, authLink, httpLink]),
-//     );
-//   }, [setIsReLoginDialogOpen]);
-//   return <>{children}</>;
-// };
 
 /**
  * @description

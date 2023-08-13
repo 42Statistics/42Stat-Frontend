@@ -13,8 +13,8 @@ const SettingPage = () => {
         <H1BoldText style={{ marginLeft: '2rem' }}>설정</H1BoldText>
         <VStack w="100%" align="start" spacing="1rem">
           <LinkGoogleSection />
-          <AccountSection />
           <FeedbackSection />
+          <AccountSection />
         </VStack>
       </VStack>
       <Footer />

@@ -9,7 +9,7 @@ import {
 } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 import { relayStylePagination } from '@apollo/client/utilities';
-import { isReLoginDialogOpenAtom } from '@core/atoms/isReLoginDialogOpenAtom';
+import { reLoginDialogInfoAtom } from '@core/atoms/reLoginDialogInfoAtom';
 import { getNewAccessToken } from '@core/services/auth/getNewAccessToken';
 import { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
 import { getAccessToken } from '@shared/utils/storage/accessToken';
@@ -135,7 +135,7 @@ const Provider = ({ children }: PropsWithReactElementChildren) => {
 const ResponseInterceptor400 = ({
   children,
 }: PropsWithReactElementChildren) => {
-  const setIsReLoginDialogOpen = useSetAtom(isReLoginDialogOpenAtom);
+  const setReLoginDialogInfo = useSetAtom(reLoginDialogInfoAtom);
 
   useEffect(() => {
     const responseInterceptor400 = onError(({ graphQLErrors }) => {
@@ -149,7 +149,10 @@ const ResponseInterceptor400 = ({
               if (refreshToken === null && accessToken === null) {
                 break;
               }
-              setIsReLoginDialogOpen(true);
+              setReLoginDialogInfo({
+                isOpen: true,
+                description: error.message,
+              });
               break;
           }
         }

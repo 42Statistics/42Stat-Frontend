@@ -5,10 +5,16 @@ import { FtLoginButton } from '@shared/components/LoginButton';
 import { ROUTES } from '@shared/constants/ROUTES';
 import { VStack, WhiteText } from '@shared/ui-kit';
 import { mq } from '@shared/utils/facepaint/mq';
-import { Link } from 'react-router-dom';
+import { getGoogleCredential } from '@shared/utils/storage/googleCredential';
+import { Link, Navigate } from 'react-router-dom';
 
 const FtOAuthRequestPage = () => {
   const theme = useTheme();
+  const googleCredential = getGoogleCredential();
+
+  if (googleCredential === null) {
+    return <Navigate to={ROUTES.ROOT} />;
+  }
 
   return (
     <Layout>

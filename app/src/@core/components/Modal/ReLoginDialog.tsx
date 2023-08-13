@@ -1,4 +1,4 @@
-import { isReLoginDialogOpenAtom } from '@core/atoms/isReLoginDialogOpenAtom';
+import { reLoginDialogInfoAtom } from '@core/atoms/reLoginDialogInfoAtom';
 import { ROUTES } from '@shared/constants/ROUTES';
 import { AlertDialog } from '@shared/ui-kit';
 import { clearStorage } from '@shared/utils/storage/clearStorage';
@@ -8,12 +8,15 @@ import { useNavigate } from 'react-router-dom';
 
 export const ReLoginDialog = () => {
   const navigate = useNavigate();
-  const [isReLoginDialogOpen, setIsReLoginDialogOpen] = useAtom(
-    isReLoginDialogOpenAtom,
+  const [{ isOpen, description }, setReLoginDialogInfo] = useAtom(
+    reLoginDialogInfoAtom,
   );
 
   const closeReLoginDialog = () => {
-    setIsReLoginDialogOpen(false);
+    setReLoginDialogInfo({
+      isOpen: false,
+      description: '',
+    });
   };
 
   const handleConfirm = () => {
@@ -23,11 +26,11 @@ export const ReLoginDialog = () => {
   };
 
   useEffect(() => {
-    if (!isReLoginDialogOpen) {
+    if (!isOpen) {
       return;
     }
     clearStorage();
-  }, [isReLoginDialogOpen]);
+  }, [isOpen]);
 
   return (
     <AlertDialog
@@ -36,7 +39,7 @@ export const ReLoginDialog = () => {
         /* can't close */
       }}
       title="재로그인 요청"
-      description="세션이 만료되어 로그아웃되었습니다. 다시 로그인해주세요."
+      description={description}
       confirmText="홈으로 이동"
       onConfirm={handleConfirm}
     />

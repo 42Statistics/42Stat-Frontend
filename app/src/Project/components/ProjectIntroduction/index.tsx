@@ -45,7 +45,7 @@ export const ProjectIntroduction = () => {
         />
         <VStack align="start" w="100%" spacing="2rem">
           <VStack align="start">
-            <Text>{circle}서클</Text>
+            <Text>{circle == null ? 'Outer 서클' : `${circle}서클`}</Text>
             <TabletAndAbove>
               <BoldText fontSize="4rem">{name}</BoldText>
             </TabletAndAbove>

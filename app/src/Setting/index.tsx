@@ -2,6 +2,7 @@ import { Footer } from '@core/components/Footer';
 import { Seo } from '@shared/components/Seo';
 import { H1BoldText, VStack } from '@shared/ui-kit';
 import { AccountSection } from './sections/AccountSection';
+import { FeedbackSection } from './sections/FeedbackSection';
 import { LinkGoogleSection } from './sections/LinkGoogleSection';
 
 const SettingPage = () => {
@@ -13,6 +14,7 @@ const SettingPage = () => {
         <VStack w="100%" align="start" spacing="1rem">
           <LinkGoogleSection />
           <AccountSection />
+          <FeedbackSection />
         </VStack>
       </VStack>
       <Footer />

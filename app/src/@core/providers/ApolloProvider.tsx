@@ -9,10 +9,13 @@ import {
 } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 import { relayStylePagination } from '@apollo/client/utilities';
+import { isReLoginDialogOpenAtom } from '@core/atoms/isReLoginDialogOpenAtom';
 import { getNewAccessToken } from '@core/services/auth/getNewAccessToken';
 import { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
 import { getAccessToken } from '@shared/utils/storage/accessToken';
 import { getRefreshToken } from '@shared/utils/storage/refreshToken';
+import { useSetAtom } from 'jotai';
+import { useEffect } from 'react';
 
 const httpLink = new HttpLink({
   uri: import.meta.env.VITE_BACKEND_GRAPHQL_ENDPOINT,
@@ -122,7 +125,43 @@ export const client = new ApolloClient({
 });
 
 const Provider = ({ children }: PropsWithReactElementChildren) => {
-  return <ApolloProvider client={client}>{children}</ApolloProvider>;
+  return (
+    <ApolloProvider client={client}>
+      <ResponseInterceptor400>{children}</ResponseInterceptor400>
+    </ApolloProvider>
+  );
+};
+
+const ResponseInterceptor400 = ({
+  children,
+}: PropsWithReactElementChildren) => {
+  const setIsReLoginDialogOpen = useSetAtom(isReLoginDialogOpenAtom);
+
+  useEffect(() => {
+    const responseInterceptor400 = onError(({ graphQLErrors }) => {
+      if (graphQLErrors) {
+        const refreshToken = getRefreshToken();
+        const accessToken = getAccessToken();
+
+        for (const error of graphQLErrors) {
+          switch (error.extensions.status) {
+            case 400:
+              if (refreshToken === null && accessToken === null) {
+                break;
+              }
+              setIsReLoginDialogOpen(true);
+              break;
+          }
+        }
+      }
+    });
+
+    client.setLink(
+      from([responseInterceptor400, errorLink, authLink, httpLink]),
+    );
+  }, []);
+
+  return children;
 };
 
 export default Provider;

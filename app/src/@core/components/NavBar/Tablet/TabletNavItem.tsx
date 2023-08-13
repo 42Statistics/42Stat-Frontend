@@ -6,6 +6,7 @@ import type { NavItemProps } from '../Desktop/DesktopNavItem';
 
 type TabletNavItemProps = NavItemProps;
 
+// TODO: Link와 Layout을 합쳐서 StyledLink를 만들고 싶지만, styled(Link)에 isFocused라는 custom prop을 전달할 수 없음.
 export const TabletNavItem = ({ route }: TabletNavItemProps) => {
   const location = useLocation();
   const isFocused = location.pathname.startsWith(route.path);
@@ -17,7 +18,7 @@ export const TabletNavItem = ({ route }: TabletNavItemProps) => {
 
   return (
     <li style={{ width: '100%' }}>
-      <Link to={route.path}>
+      <Link to={route.path} style={{ display: 'block' }}>
         <Layout isFocused={isFocused}>
           <VStack>
             <NavItemIcon width={20} height={20} fill={color} />

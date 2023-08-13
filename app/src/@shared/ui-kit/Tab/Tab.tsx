@@ -17,20 +17,19 @@ export const Tab = ({ selected = false, link, children }: TabProps) => {
 
   return (
     <li>
-      <Link to={link}>
-        <Layout selected={selected} tabIndex={0}>
-          <Text color={color}>{children}</Text>
-        </Layout>
-      </Link>
+      <StyledLink selected={selected} to={link}>
+        <Text color={color}>{children}</Text>
+      </StyledLink>
     </li>
   );
 };
 
-type LayoutProps = {
+type StyledLinkProps = {
   selected: boolean;
 };
 
-const Layout = styled.div<LayoutProps>`
+const StyledLink = styled(Link)<StyledLinkProps>`
+  display: block;
   padding: 1.4rem 2rem;
   transition: background-color 0.3s;
   outline-offset: -0.2rem;

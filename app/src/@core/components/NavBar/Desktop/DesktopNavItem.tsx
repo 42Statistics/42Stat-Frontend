@@ -8,6 +8,7 @@ export type NavItemProps = {
   route: NavRoute;
 };
 
+// TODO: Link와 Layout을 합쳐서 StyledLink를 만들고 싶지만, styled(Link)에 isFocused라는 custom prop을 전달할 수 없음.
 export const NavItem = ({ route }: NavItemProps) => {
   const location = useLocation();
   const isFocused = location.pathname.startsWith(route.path);
@@ -17,7 +18,7 @@ export const NavItem = ({ route }: NavItemProps) => {
 
   return (
     <li style={{ width: '100%' }}>
-      <Link to={route.path}>
+      <Link to={route.path} style={{ display: 'block' }}>
         <Layout isFocused={isFocused}>
           <HStack spacing="1.5rem" justify="start">
             <NavItemIcon width={18} height={18} fill={color} />

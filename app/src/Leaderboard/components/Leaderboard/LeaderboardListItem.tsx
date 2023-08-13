@@ -25,6 +25,7 @@ type LeaderboardListItemProps = {
   fixedNumber?: number;
 };
 
+// TODO: Link와 Layout을 합쳐서 StyledLink를 만들고 싶지만, styled(Link)에 isMe라는 custom prop을 전달할 수 없음.
 export const LeaderboardListItem = ({
   item,
   unit,
@@ -41,8 +42,8 @@ export const LeaderboardListItem = ({
 
   return (
     <li style={{ width: '100%' }}>
-      <Link to={ROUTES.PROFILE_OF(login)}>
-        <Layout isMe={isMe} tabIndex={0}>
+      <Link to={ROUTES.PROFILE_OF(login)} style={{ display: 'block' }}>
+        <Layout isMe={isMe}>
           <TabletAndAbove>
             <HStack w="100%" spacing="4rem">
               <HStack w="5rem">
@@ -100,7 +101,7 @@ const Layout = styled.div<LayoutProps>`
   background-color: ${({ isMe, theme }) =>
     isMe && theme.colors.primary.default} !important; // FIXME: !important
   user-select: ${({ isMe }) => isMe && 'none'};
-  transition: all 0.2s;
+  transition: background-color 0.2s;
 
   &:hover {
     background-color: ${({ theme, isMe }) =>

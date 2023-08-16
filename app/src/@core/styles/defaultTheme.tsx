@@ -1,7 +1,7 @@
 const colors = {
   primary: {
     default: '#2b3e77',
-    light: '#dde8ed',
+    light: '#c4ccdf',
   },
   accent: {
     default: '#00c48c',

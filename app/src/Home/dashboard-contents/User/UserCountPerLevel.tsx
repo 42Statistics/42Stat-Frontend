@@ -37,8 +37,22 @@ export const UserCountPerLevel = () => {
 
   const { userCountPerLevel } = data.getHomeUser;
 
-  const categories = userCountPerLevel.map(({ level }) => level);
-  const seriesData = userCountPerLevel.map(({ value }) => value);
+  const categories = userCountPerLevel
+    .filter(({ level }) => level < 12)
+    .map(({ level }) => String(level));
+
+  const seriesData = userCountPerLevel
+    .filter(({ level }) => level < 12)
+    .map(({ value }) => value);
+
+  const userCountMoreThanLevel12 = userCountPerLevel
+    .filter(({ level }) => level >= 12)
+    .reduce((acc, { value }) => acc + value, 0);
+
+  if (userCountMoreThanLevel12 > 0) {
+    categories.push('12+');
+    seriesData.push(userCountMoreThanLevel12);
+  }
 
   const series: ApexAxisChartSeries = [
     {
@@ -61,7 +75,7 @@ export const UserCountPerLevel = () => {
 };
 
 type UserCountPerLevelChartProps = {
-  categories: number[];
+  categories: string[];
   series: ApexAxisChartSeries;
 };
 
@@ -79,6 +93,7 @@ const UserCountPerLevelChart = ({
       categories,
       labels: {
         formatter: (value) => value,
+        rotate: 0,
       },
     },
     yaxis: {

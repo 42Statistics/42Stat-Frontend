@@ -1,6 +1,5 @@
 import { useQuery } from '@apollo/client';
 import { gql } from '@shared/__generated__';
-import { DateTemplate } from '@shared/__generated__/graphql';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,
@@ -9,23 +8,17 @@ import {
 } from '@shared/components/DashboardContentView/Error';
 import { NumberDefault } from '@shared/components/DashboardContentView/Number/NumberDefault';
 
-const GET_EVAL_COUNT_BY_DATE_TEMPLATE = gql(/* GraphQL */ `
-  query GetEvalCountByDateTemplate($dateTemplate: DateTemplate!) {
+const GET_TOTAL_EVAL_COUNT = gql(/* GraphQL */ `
+  query GetTotalEvalCount {
     getHomeEval {
-      evalCountByDateTemplate(dateTemplate: $dateTemplate) {
-        data
-        start
-        end
-      }
+      totalEvalCount
     }
   }
 `);
 
 export const TotalEvalCount = () => {
   const title = '역대 총 평가 횟수';
-  const { loading, error, data } = useQuery(GET_EVAL_COUNT_BY_DATE_TEMPLATE, {
-    variables: { dateTemplate: DateTemplate.Total },
-  });
+  const { loading, error, data } = useQuery(GET_TOTAL_EVAL_COUNT);
   if (loading) {
     return <DashboardContentLoading title={title} />;
   }
@@ -36,7 +29,7 @@ export const TotalEvalCount = () => {
     return <DashboardContentNotFound title={title} />;
   }
 
-  const { data: totalEvalCount } = data.getHomeEval.evalCountByDateTemplate;
+  const { totalEvalCount } = data.getHomeEval;
   const unit = '회';
 
   return (

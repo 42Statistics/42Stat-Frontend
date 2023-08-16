@@ -2,7 +2,6 @@ import { MyUserProfileContext } from '@/Profile/contexts/MyUserProfileContext';
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { useQuery } from '@apollo/client';
 import { gql } from '@shared/__generated__';
-import { DateTemplate } from '@shared/__generated__/graphql';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,
@@ -12,24 +11,16 @@ import {
 import { NumberVersus } from '@shared/components/DashboardContentView/Number/NumberVersus';
 import { useContext } from 'react';
 
-const GET_EVAL_COUNT_BY_DATE_TEMPLATE_VERSUS = gql(/* GraphQL */ `
-  query GetEvalCountByDateTemplateVersus(
-    $login1: String!
-    $login2: String!
-    $dateTemplate: DateTemplate!
-  ) {
-    data1: getPersonalEval(login: $login1) {
-      countByDateTemplate(dateTemplate: $dateTemplate) {
-        data
-        start
-        end
+const GET_TOTAL_EVAL_COUNT_VERSUS = gql(/* GraphQL */ `
+  query GetTotalEvalCountVersus($login1: String!, $login2: String!) {
+    data1: getPersonalVersus(login: $login1) {
+      totalEvalCountRankWithTotal {
+        value
       }
     }
-    data2: getPersonalEval(login: $login2) {
-      countByDateTemplate(dateTemplate: $dateTemplate) {
-        data
-        start
-        end
+    data2: getPersonalVersus(login: $login2) {
+      totalEvalCountRankWithTotal {
+        value
       }
     }
   }
@@ -40,16 +31,12 @@ export const TotalEvalCount = () => {
   const userProfile = useContext(UserProfileContext);
 
   const title = '누적 평가 횟수';
-  const { loading, error, data } = useQuery(
-    GET_EVAL_COUNT_BY_DATE_TEMPLATE_VERSUS,
-    {
-      variables: {
-        login1: myUserProfile.login,
-        login2: userProfile.login,
-        dateTemplate: DateTemplate.Total,
-      },
+  const { loading, error, data } = useQuery(GET_TOTAL_EVAL_COUNT_VERSUS, {
+    variables: {
+      login1: myUserProfile.login,
+      login2: userProfile.login,
     },
-  );
+  });
 
   if (loading) {
     return <DashboardContentLoading title={title} />;
@@ -57,16 +44,16 @@ export const TotalEvalCount = () => {
   if (error) {
     return <DashboardContentBadRequest title={title} message={error.message} />;
   }
-  if (!data) {
+  if (!data || !data.data1 || !data.data2) {
     return <DashboardContentNotFound title={title} />;
   }
 
   const {
     data1: {
-      countByDateTemplate: { data: myCount },
+      totalEvalCountRankWithTotal: { value: myCount },
     },
     data2: {
-      countByDateTemplate: { data: count },
+      totalEvalCountRankWithTotal: { value: count },
     },
   } = data;
   const unit = '회';

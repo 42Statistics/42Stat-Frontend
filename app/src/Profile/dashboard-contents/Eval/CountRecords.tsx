@@ -1,3 +1,4 @@
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { useQuery } from '@apollo/client';
 import { gql } from '@shared/__generated__';
 import { AreaChart } from '@shared/components/Chart';
@@ -8,11 +9,12 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
+import { useContext } from 'react';
 
-const GET_TEAM_CLOSE_RECORD = gql(/* GraphQL */ `
-  query GetTeamCloseRecord($last: Int!) {
-    getHomeTeam {
-      teamCloseRecord(last: $last) {
+const GET_COUNT_RECORDS_BY_LOGIN = gql(/* GraphQL */ `
+  query GetCountRecordsByLogin($login: String!, $last: Int!) {
+    getPersonalEval(login: $login) {
+      countRecords(last: $last) {
         at
         value
       }
@@ -20,13 +22,17 @@ const GET_TEAM_CLOSE_RECORD = gql(/* GraphQL */ `
   }
 `);
 
-export const TeamCloseRecord = () => {
-  const title = '일간 팀 제출 횟수 추이';
-  const { loading, error, data } = useQuery(GET_TEAM_CLOSE_RECORD, {
+export const CountRecords = () => {
+  const { login } = useContext(UserProfileContext);
+
+  const title = '월간 평가 횟수 추이';
+  const { loading, error, data } = useQuery(GET_COUNT_RECORDS_BY_LOGIN, {
     variables: {
-      last: 30,
+      login,
+      last: 12,
     },
   });
+
   if (loading) {
     return <DashboardContentLoading title={title} />;
   }
@@ -37,41 +43,42 @@ export const TeamCloseRecord = () => {
     return <DashboardContentNotFound title={title} />;
   }
 
-  const { teamCloseRecord } = data.getHomeTeam;
-  const seriesData = teamCloseRecord.map(({ at, value }) => ({
+  const { countRecords } = data.getPersonalEval;
+  const seriesData = countRecords.map(({ at, value }) => ({
     x: at,
     y: value,
   }));
   const series: ApexAxisChartSeries = [
     {
-      name: '제출 횟수',
+      name: '평가 횟수',
       data: seriesData,
     },
   ];
 
   return (
     <DashboardContent title={title} type="ApexCharts">
-      <EvalCountRecordChart series={series} />
+      <CountRecordsChart series={series} />
     </DashboardContent>
   );
 };
 
-type EvalCountRecordChartProps = {
+type CountRecordsChartProps = {
   series: ApexAxisChartSeries;
 };
 
-const EvalCountRecordChart = ({ series }: EvalCountRecordChartProps) => {
+const CountRecordsChart = ({ series }: CountRecordsChartProps) => {
   const options: ApexCharts.ApexOptions = {
     xaxis: {
       type: 'datetime',
+
       labels: {
-        format: 'MMM d',
         datetimeUTC: false,
+        format: "'yy MMM",
       },
     },
     tooltip: {
       x: {
-        format: 'M월 d일',
+        format: 'yyyy년 M월',
       },
       y: {
         formatter: (value) => numberWithUnitFormatter(value, '회'),

@@ -5,7 +5,7 @@ export * from './CoalitionScore';
 export * from './LastPassed';
 export * from './LastRegistered';
 export * from './LevelRecords';
-export * from './LogtimeRecord';
+export * from './LogtimeRecords';
 export * from './PreferredCluster';
 export * from './PreferredTime';
 export * from './TeamInfo';

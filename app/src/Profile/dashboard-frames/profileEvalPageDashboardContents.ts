@@ -5,7 +5,7 @@ import {
   AverageFeedbackLength,
   AverageFinalMark,
   CorrectionPoint,
-  CountRecord,
+  CountRecords,
   DestinyRanking,
   EvalLogSearchLink,
   RecentComment,
@@ -19,7 +19,7 @@ export const profileEvalPageDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 1,
-    content: CountRecord,
+    content: CountRecords,
   },
   {
     id: 2,

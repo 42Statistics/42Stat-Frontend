@@ -1,6 +1,6 @@
 import { QueryResult } from '@apollo/client';
 import styled from '@emotion/styled';
-import { Exact, GetSearchResultQuery } from '@shared/__generated__/graphql';
+import { Exact, GetSpotlightQuery } from '@shared/__generated__/graphql';
 import { ApolloErrorView } from '@shared/components/ApolloError/ApolloErrorView';
 import { Center, H3Text, VStack } from '@shared/ui-kit';
 import { SpotlightProjectSection } from './SpotlightProjectSection';
@@ -8,7 +8,7 @@ import { SpotlightUserSection } from './SpotlightUserSection';
 
 type SpotlightResultProps = {
   result: QueryResult<
-    GetSearchResultQuery,
+    GetSpotlightQuery,
     Exact<{
       input: string;
       limit: number;
@@ -36,8 +36,8 @@ export const SpotlightResult = ({
   }
 
   if (
-    data?.getSearchResult.userPreviews.length === 0 &&
-    data?.getSearchResult.projectPreviews.length === 0
+    data?.getSpotlight.userPreviews.length === 0 &&
+    data?.getSpotlight.projectPreviews.length === 0
   ) {
     return (
       <Layout>
@@ -48,8 +48,8 @@ export const SpotlightResult = ({
     );
   }
 
-  const userResultLength = data?.getSearchResult.userPreviews.length ?? 0;
-  const { userPreviews, projectPreviews } = data.getSearchResult;
+  const userResultLength = data?.getSpotlight.userPreviews.length ?? 0;
+  const { userPreviews, projectPreviews } = data.getSpotlight;
 
   return (
     <Layout>

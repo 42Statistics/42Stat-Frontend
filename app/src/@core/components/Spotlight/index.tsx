@@ -15,9 +15,9 @@ import { useDebounce } from 'usehooks-ts';
 import { SpotlightResult } from './SpotlightResult';
 import { SpotlightSearchBar } from './SpotlightSearchBar';
 
-export const GET_SEARCH_RESULT = gql(/* GraphQL */ `
-  query GetSearchResult($input: String!, $limit: Int!) {
-    getSearchResult(input: $input, limit: $limit) {
+export const GET_SPOTLIGHT = gql(/* GraphQL */ `
+  query GetSpotlight($input: String!, $limit: Int!) {
+    getSpotlight(input: $input, limit: $limit) {
       userPreviews {
         ...userPreviewFields
       }
@@ -33,10 +33,10 @@ export const Spotlight = () => {
   const device = useDeviceType();
   const [input, setInput] = useState<string>('');
   const debouncedInput = useDebounce(input, 250);
-  const [search, searchResult] = useLazyQuery(GET_SEARCH_RESULT);
+  const [search, searchResult] = useLazyQuery(GET_SPOTLIGHT);
   const size =
-    (searchResult.data?.getSearchResult.userPreviews.length ?? 0) +
-    (searchResult.data?.getSearchResult.projectPreviews.length ?? 0);
+    (searchResult.data?.getSpotlight.userPreviews.length ?? 0) +
+    (searchResult.data?.getSpotlight.projectPreviews.length ?? 0);
   const { currentFocus, setCurrentFocus } = useRoveFocus(size);
   const LIMIT = 4;
   const location = useLocation();

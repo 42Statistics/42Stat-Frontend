@@ -9,10 +9,10 @@ import {
 } from '@shared/components/DashboardContentView/Error';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 
-const GET_BLACKHOLED_COUNT_RECORD = gql(/* GraphQL */ `
-  query GetBlackholedCountRecord($last: Int!) {
+const GET_BLACKHOLED_COUNT_RECORDS = gql(/* GraphQL */ `
+  query GetBlackholedCountRecords($last: Int!) {
     getHomeUser {
-      blackholedCountRecord(last: $last) {
+      blackholedCountRecords(last: $last) {
         at
         value
       }
@@ -20,9 +20,9 @@ const GET_BLACKHOLED_COUNT_RECORD = gql(/* GraphQL */ `
   }
 `);
 
-export const BlackholedCountRecord = () => {
+export const BlackholedCountRecords = () => {
   const title = '월간 블랙홀 인원 추이';
-  const { loading, error, data } = useQuery(GET_BLACKHOLED_COUNT_RECORD, {
+  const { loading, error, data } = useQuery(GET_BLACKHOLED_COUNT_RECORDS, {
     variables: {
       last: 12,
     },
@@ -38,8 +38,8 @@ export const BlackholedCountRecord = () => {
     return <DashboardContentNotFound title={title} />;
   }
 
-  const { blackholedCountRecord } = data.getHomeUser;
-  const seriesData = blackholedCountRecord.map(({ at, value }) => ({
+  const { blackholedCountRecords } = data.getHomeUser;
+  const seriesData = blackholedCountRecords.map(({ at, value }) => ({
     x: at,
     y: value,
   }));
@@ -52,18 +52,18 @@ export const BlackholedCountRecord = () => {
 
   return (
     <DashboardContent title={title} type="ApexCharts">
-      <BlackholedCountRecordChart series={series} />
+      <BlackholedCountRecordsChart series={series} />
     </DashboardContent>
   );
 };
 
-type BlackholedCountRecordChartProps = {
+type BlackholedCountRecordsChartProps = {
   series: ApexAxisChartSeries;
 };
 
-const BlackholedCountRecordChart = ({
+const BlackholedCountRecordsChart = ({
   series,
-}: BlackholedCountRecordChartProps) => {
+}: BlackholedCountRecordsChartProps) => {
   const options: ApexCharts.ApexOptions = {
     xaxis: {
       type: 'datetime',

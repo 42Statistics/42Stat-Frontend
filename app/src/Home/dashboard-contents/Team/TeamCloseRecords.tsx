@@ -9,10 +9,10 @@ import {
 } from '@shared/components/DashboardContentView/Error';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 
-const GET_EVAL_COUNT_RECORD = gql(/* GraphQL */ `
-  query GetEvalCountRecord($last: Int!) {
-    getHomeEval {
-      evalCountRecord(last: $last) {
+const GET_TEAM_CLOSE_RECORDS = gql(/* GraphQL */ `
+  query GetTeamCloseRecords($last: Int!) {
+    getHomeTeam {
+      teamCloseRecords(last: $last) {
         at
         value
       }
@@ -20,9 +20,9 @@ const GET_EVAL_COUNT_RECORD = gql(/* GraphQL */ `
   }
 `);
 
-export const EvalCountRecord = () => {
-  const title = '일간 평가 횟수 추이';
-  const { loading, error, data } = useQuery(GET_EVAL_COUNT_RECORD, {
+export const TeamCloseRecords = () => {
+  const title = '일간 팀 제출 횟수 추이';
+  const { loading, error, data } = useQuery(GET_TEAM_CLOSE_RECORDS, {
     variables: {
       last: 30,
     },
@@ -37,30 +37,30 @@ export const EvalCountRecord = () => {
     return <DashboardContentNotFound title={title} />;
   }
 
-  const { evalCountRecord } = data.getHomeEval;
-  const seriesData = evalCountRecord.map(({ at, value }) => ({
+  const { teamCloseRecords } = data.getHomeTeam;
+  const seriesData = teamCloseRecords.map(({ at, value }) => ({
     x: at,
     y: value,
   }));
   const series: ApexAxisChartSeries = [
     {
-      name: '평가 횟수',
+      name: '제출 횟수',
       data: seriesData,
     },
   ];
 
   return (
     <DashboardContent title={title} type="ApexCharts">
-      <EvalCountRecordChart series={series} />
+      <EvalCountRecordsChart series={series} />
     </DashboardContent>
   );
 };
 
-type EvalCountRecordChartProps = {
+type EvalCountRecordsChartProps = {
   series: ApexAxisChartSeries;
 };
 
-const EvalCountRecordChart = ({ series }: EvalCountRecordChartProps) => {
+const EvalCountRecordsChart = ({ series }: EvalCountRecordsChartProps) => {
   const options: ApexCharts.ApexOptions = {
     xaxis: {
       type: 'datetime',

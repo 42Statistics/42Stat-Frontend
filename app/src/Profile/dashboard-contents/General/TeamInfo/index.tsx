@@ -15,16 +15,7 @@ const GET_TEAM_INFO_BY_LOGIN = gql(/* GraphQL */ `
     getPersonalGeneral(login: $login) {
       teamInfo {
         teams {
-          id
-          name
-          occurrence
-          projectPreview {
-            ...projectPreviewFields
-          }
-          status
-          lastEventTime
-          isValidated
-          finalMark
+          ...userTeamFields
         }
       }
     }

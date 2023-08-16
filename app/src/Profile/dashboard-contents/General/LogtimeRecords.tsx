@@ -11,10 +11,10 @@ import {
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 import { useContext } from 'react';
 
-const GET_LOGTIME_RECORD_BY_LOGIN = gql(/* GraphQL */ `
-  query GetLogtimeRecord($login: String!, $last: Int!) {
+const GET_LOGTIME_RECORDS_BY_LOGIN = gql(/* GraphQL */ `
+  query GetLogtimeRecords($login: String!, $last: Int!) {
     getPersonalGeneral(login: $login) {
-      logtimeRecord(last: $last) {
+      logtimeRecords(last: $last) {
         at
         value
       }
@@ -22,11 +22,11 @@ const GET_LOGTIME_RECORD_BY_LOGIN = gql(/* GraphQL */ `
   }
 `);
 
-export const LogtimeRecord = () => {
+export const LogtimeRecords = () => {
   const { login } = useContext(UserProfileContext);
 
   const title = '월간 접속 시간 추이';
-  const { loading, error, data } = useQuery(GET_LOGTIME_RECORD_BY_LOGIN, {
+  const { loading, error, data } = useQuery(GET_LOGTIME_RECORDS_BY_LOGIN, {
     variables: {
       login,
       last: 12,
@@ -43,8 +43,8 @@ export const LogtimeRecord = () => {
     return <DashboardContentNotFound title={title} />;
   }
 
-  const { logtimeRecord } = data.getPersonalGeneral;
-  const seriesData = logtimeRecord.map(({ at, value }) => ({
+  const { logtimeRecords } = data.getPersonalGeneral;
+  const seriesData = logtimeRecords.map(({ at, value }) => ({
     x: at,
     y: value,
   }));
@@ -57,16 +57,16 @@ export const LogtimeRecord = () => {
 
   return (
     <DashboardContent title={title} type="ApexCharts">
-      <LogtimeRecordChart series={series} />
+      <LogtimeRecordsChart series={series} />
     </DashboardContent>
   );
 };
 
-type LogtimeRecordChartProps = {
+type LogtimeRecordsChartProps = {
   series: ApexAxisChartSeries;
 };
 
-const LogtimeRecordChart = ({ series }: LogtimeRecordChartProps) => {
+const LogtimeRecordsChart = ({ series }: LogtimeRecordsChartProps) => {
   const options: ApexCharts.ApexOptions = {
     xaxis: {
       type: 'datetime',

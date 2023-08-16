@@ -2,7 +2,6 @@ import { MyUserProfileContext } from '@/Profile/contexts/MyUserProfileContext';
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { useQuery } from '@apollo/client';
 import { gql } from '@shared/__generated__';
-import { DateTemplate } from '@shared/__generated__/graphql';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,
@@ -13,24 +12,12 @@ import { NumberVersus } from '@shared/components/DashboardContentView/Number/Num
 import { useContext } from 'react';
 
 const GET_LOGTIME_BY_DATE_TEMPLATE_VERSUS = gql(/* GraphQL */ `
-  query GetLogtimeByDateTemplateVersus(
-    $login1: String!
-    $login2: String!
-    $dateTemplate: DateTemplate!
-  ) {
-    data1: getPersonalGeneral(login: $login1) {
-      logtimeByDateTemplate(dateTemplate: $dateTemplate) {
-        data
-        start
-        end
-      }
+  query GetTotalLogtimeVersus($login1: String!, $login2: String!) {
+    data1: getPersonalVersus(login: $login1) {
+      totalLogtime
     }
-    data2: getPersonalGeneral(login: $login2) {
-      logtimeByDateTemplate(dateTemplate: $dateTemplate) {
-        data
-        start
-        end
-      }
+    data2: getPersonalVersus(login: $login2) {
+      totalLogtime
     }
   }
 `);
@@ -46,7 +33,6 @@ export const TotalLogtime = () => {
       variables: {
         login1: myUserProfile.login,
         login2: userProfile.login,
-        dateTemplate: DateTemplate.Total,
       },
     },
   );
@@ -57,17 +43,13 @@ export const TotalLogtime = () => {
   if (error) {
     return <DashboardContentBadRequest title={title} message={error.message} />;
   }
-  if (!data) {
+  if (!data || !data.data1 || !data.data2) {
     return <DashboardContentNotFound title={title} />;
   }
 
   const {
-    data1: {
-      logtimeByDateTemplate: { data: myLogtime },
-    },
-    data2: {
-      logtimeByDateTemplate: { data: logtime },
-    },
+    data1: { totalLogtime: myLogtime },
+    data2: { totalLogtime: logtime },
   } = data;
   const myLogtimeByHours = Math.floor(myLogtime / 60);
   const logtimeByHours = Math.floor(logtime / 60);

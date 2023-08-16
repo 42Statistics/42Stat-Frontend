@@ -7,8 +7,12 @@ export const GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN = gql(/* GraphQL */ `
       blackholedAt
       ...coalitionScoreFragment
       teamInfo {
-        lastPassed
-        lastRegistered
+        lastPassed {
+          ...userTeamFields
+        }
+        lastRegistered {
+          ...userTeamFields
+        }
       }
       wallet
     }

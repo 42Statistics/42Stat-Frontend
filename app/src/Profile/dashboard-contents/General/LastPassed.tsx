@@ -7,7 +7,8 @@ import {
   DashboardContentNotFound,
   NoneDash,
 } from '@shared/components/DashboardContentView/Error';
-import { TextProject } from '@shared/components/DashboardContentView/Text/TextProject';
+import { TextDefault } from '@shared/components/DashboardContentView/Text/TextDefault';
+import { ROUTES } from '@shared/constants/ROUTES';
 import { useContext } from 'react';
 import { GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN } from '../../dashboard-contents-queries/GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN';
 
@@ -37,7 +38,10 @@ export const LastPassed = () => {
   return (
     <DashboardContent title={title}>
       {lastPassed != null ? (
-        <TextProject projectName={lastPassed} />
+        <TextDefault
+          text={lastPassed.projectPreview.name}
+          link={ROUTES.TEAM_OF(lastPassed.id)}
+        />
       ) : (
         <NoneDash />
       )}

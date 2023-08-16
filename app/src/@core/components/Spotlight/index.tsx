@@ -7,6 +7,7 @@ import { gql } from '@shared/__generated__';
 import { ReactComponent as MdSearch } from '@shared/assets/icon/md-search.svg';
 import { useRoveFocus } from '@shared/hooks/useRoveFocus';
 import { Dialog, VStack } from '@shared/ui-kit';
+import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 import { useSetAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -29,6 +30,7 @@ export const GET_SEARCH_RESULT = gql(/* GraphQL */ `
 
 export const Spotlight = () => {
   const theme = useTheme();
+  const device = useDeviceType();
   const [input, setInput] = useState<string>('');
   const debouncedInput = useDebounce(input, 250);
   const [search, searchResult] = useLazyQuery(GET_SEARCH_RESULT);
@@ -90,11 +92,15 @@ export const Spotlight = () => {
           <VStack w="100%" h="100%" spacing="2rem">
             <SpotlightSearchBar
               left={
-                <MdSearch
-                  width={36}
-                  height={36}
-                  fill={theme.colors.mono.gray300}
-                />
+                device !== 'mobile' ? (
+                  <MdSearch
+                    width={36}
+                    height={36}
+                    fill={theme.colors.mono.gray300}
+                  />
+                ) : (
+                  <></>
+                )
               }
               input={input}
               onChange={handleChange}

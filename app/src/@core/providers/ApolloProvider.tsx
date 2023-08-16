@@ -164,7 +164,7 @@ const ResponseInterceptor400 = ({
     );
   }, []);
 
-  return children;
+  return <>{children}</>;
 };
 
 export default Provider;

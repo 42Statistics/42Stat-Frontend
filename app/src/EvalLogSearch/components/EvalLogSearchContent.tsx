@@ -63,7 +63,7 @@ export const EvalLogSearchContent = () => {
   useEffect(() => {
     if (newDataStartRef.current) {
       newDataStartRef.current.scrollIntoView({
-        behavior: 'instant',
+        behavior: 'auto',
         block: 'nearest',
         inline: 'nearest',
       });

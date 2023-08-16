@@ -17,5 +17,5 @@ export const EvalLogSearchURLReader = ({
     setEvalLogSearchArgs(searchParams);
   }, [searchParams]);
 
-  return children;
+  return <>{children}</>;
 };

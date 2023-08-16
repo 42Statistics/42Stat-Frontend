@@ -6,14 +6,10 @@ import { evalLogSearchTotalCountAtom } from '../atoms/evalLogSearchTotalCountAto
 import { EVAL_LOG_SEARCH_ARGS_HEADER_TEXT } from '../constants/evalLogArgsText';
 
 export const EvalLogSearchHeader = () => {
-  const theme = useTheme();
-
   return (
     <VStack align="start">
       <EvalLogSearchHeaderFormDescriptor />
-      <Text color={theme.colors.mono.gray300}>
-        <EvalLogSearchHeaderTotalCountDescriptor />
-      </Text>
+      <EvalLogSearchHeaderTotalCountDescriptor />
     </VStack>
   );
 };
@@ -38,11 +34,16 @@ const EvalLogSearchHeaderFormDescriptor = () => {
 };
 
 const EvalLogSearchHeaderTotalCountDescriptor = () => {
+  const theme = useTheme();
   const totalCount = useAtomValue(evalLogSearchTotalCountAtom);
 
   if (totalCount === undefined) {
-    return '검색 중...';
+    return <Text color={theme.colors.mono.gray300}>검색 중...</Text>;
   }
 
-  return `검색 결과 ${totalCount.toLocaleString()}건`;
+  return (
+    <Text color={theme.colors.mono.gray300}>
+      검색 결과 {totalCount.toLocaleString()}건
+    </Text>
+  );
 };

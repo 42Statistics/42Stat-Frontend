@@ -24,7 +24,7 @@ export const EvalLogSearchArgsAtomHydrator = ({
 
   useHydrateAtoms([[evalLogSearchArgsAtom, toEvalLogSearchArgs(searchParams)]]);
 
-  return children;
+  return <>{children}</>;
 };
 
 const { CORRECTOR, CORRECTED, PROJECT_NAME, FLAG, SORT_ORDER } =

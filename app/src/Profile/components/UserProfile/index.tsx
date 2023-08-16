@@ -16,7 +16,6 @@ import {
   WhiteMediumText,
   WhiteText,
 } from '@shared/ui-kit';
-import { mq } from '@shared/utils/facepaint/mq';
 import { titleCase } from '@shared/utils/formatters/titleCase';
 import { getTitleWithLogin } from '@shared/utils/getTitleWithLogin';
 import { Desktop, TabletAndBelow } from '@shared/utils/react-responsive/Device';
@@ -121,7 +120,5 @@ const Layout = styled.div<LayoutProps>`
   width: 100%;
   transition: all 0.2s;
 
-  ${mq({
-    height: ['24rem', '24rem', '12rem'],
-  })}
+  padding: 2rem 0;
 `;

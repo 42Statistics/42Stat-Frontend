@@ -7,7 +7,6 @@ import { ApolloErrorView } from '@shared/components/ApolloError/ApolloErrorView'
 import { ApolloNotFoundView } from '@shared/components/ApolloError/ApolloNotFoundView';
 import { Loader, VStack, WhiteH2BoldText, WhiteText } from '@shared/ui-kit';
 import { CustomBox } from '@shared/ui-kit-styled';
-import { mq } from '@shared/utils/facepaint/mq';
 import { timeDiffStringFormatter } from '@shared/utils/formatters/timeDiffStringFormatter';
 import { getBlackholeDaysLeft } from '@shared/utils/getBlackholeDaysLeft';
 import { getTimeDiffFromNow } from '@shared/utils/getTimeDiffFromNow';
@@ -139,10 +138,6 @@ const Layout = styled(CustomBox)`
     `${theme.colors.background.landing} url(${space_background})`};
   background-size: cover;
   border-radius: ${({ theme }) => theme.radius.md};
-  padding: 0 4rem;
+  padding: 3rem 4rem;
   user-select: none;
-
-  ${mq({
-    height: ['18rem', '16rem', '14rem'],
-  })}
 `;

@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import { ReactComponent as MdSearch } from '@shared/assets/icon/md-search.svg';
 import { ARIA_LABEL_BUTTON } from '@shared/constants/accessibility/ARIA_LABEL';
 import { CaptionText, Clickable, HStack, Spacer, Text } from '@shared/ui-kit';
+import { mq } from '@shared/utils/facepaint/mq';
 import { detect } from 'detect-browser';
 import { useSetAtom } from 'jotai';
 
@@ -35,8 +36,6 @@ export const SearchBarShapeButton = () => {
 };
 
 const Layout = styled(Clickable)`
-  width: 100%;
-  max-width: 24rem;
   padding: 1rem 1.6rem;
   border-radius: ${({ theme }) => theme.radius.md};
   border: 1px solid ${({ theme }) => theme.colors.mono.gray50};
@@ -45,4 +44,8 @@ const Layout = styled(Clickable)`
   &:hover {
     border: 1px solid ${({ theme }) => theme.colors.mono.gray200};
   }
+
+  ${mq({
+    width: ['80%', '100%', '100%'],
+  })}
 `;

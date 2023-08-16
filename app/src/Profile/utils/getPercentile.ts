@@ -8,5 +8,5 @@ export const getPercentile = (rank: number, total: number) => {
   if (rank > total) {
     return 0;
   }
-  return Math.round(((total - rank) / total) * 100);
+  return ((total - rank) / total) * 100;
 };

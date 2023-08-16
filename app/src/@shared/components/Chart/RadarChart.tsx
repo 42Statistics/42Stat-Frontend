@@ -11,7 +11,24 @@ export const RadarChart = ({
   series,
   options: additionalOptions,
 }: RadarChartProps) => {
-  const radarChartOptions: ApexCharts.ApexOptions = {};
+  const radarChartOptions: ApexCharts.ApexOptions = {
+    plotOptions: {
+      radar: {
+        polygons: {
+          strokeColors: ['#e8e8e8'],
+          fill: {
+            colors: ['#f8f8f8', '#fff'],
+          },
+        },
+      },
+    },
+    markers: {
+      size: 4,
+      hover: {
+        size: 7,
+      },
+    },
+  };
 
   const options = merge(
     {},

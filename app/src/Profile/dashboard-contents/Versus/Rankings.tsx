@@ -224,9 +224,13 @@ const RankingsChart = ({ categories, series }: RankingsChartProps) => {
       categories,
     },
     yaxis: {
-      min: 0,
-      max: 100,
-      tickAmount: 5,
+      show: false,
+    },
+    tooltip: {
+      y: {
+        formatter: (value) =>
+          value === 0 ? '-' : `상위 ${(100 - value).toFixed(2)}%`,
+      },
     },
   };
 

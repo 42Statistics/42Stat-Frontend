@@ -10,9 +10,9 @@ import {
 import dayjs from 'dayjs';
 
 const GET_RECENT_EXAM_RESULT = gql(/* GraphQL */ `
-  query GetRecentExamResult($after: Int!) {
+  query GetRecentExamResult {
     getHomeTeam {
-      recentExamResult(after: $after) {
+      recentExamResult {
         data {
           resultPerRank {
             rank

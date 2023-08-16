@@ -3,7 +3,8 @@ import { gql } from '@shared/__generated__';
 import { ReactComponent as MdSyncAlt } from '@shared/assets/icon/md-sync-alt.svg';
 import { GAPI_URL } from '@shared/constants/GAPI';
 import { ARIA_LABEL_BUTTON } from '@shared/constants/accessibility/ARIA_LABEL';
-import { Clickable, Spinner } from '@shared/ui-kit';
+import { useDisclosure } from '@shared/hooks/useDisclosure';
+import { AlertDialog, Clickable, Spinner } from '@shared/ui-kit';
 import {
   FakeGoogleWrapperType,
   createFakeGoogleWrapper,
@@ -32,6 +33,7 @@ type LinkGoogleButtonProps = {
 export const LinkGoogleButton = ({ onSuccess }: LinkGoogleButtonProps) => {
   const status = useScript(GAPI_URL, { removeOnUnmount: true });
   const [linkGoogle, { data, loading, error }] = useMutation(LINK_GOOGLE);
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [googleButtonWrapper, setGoogleButtonWrapper] =
     useState<FakeGoogleWrapperType>();
 
@@ -61,20 +63,44 @@ export const LinkGoogleButton = ({ onSuccess }: LinkGoogleButtonProps) => {
   }, [status, linkGoogle]);
 
   useEffect(() => {
-    if (loading || error || !data) {
+    if (loading) {
+      return;
+    }
+    if (error) {
+      const isConflict = error.graphQLErrors.some(
+        (error) => error.extensions?.status === 409,
+      );
+      if (isConflict) {
+        onOpen();
+      }
+      return;
+    }
+    if (!data) {
       return;
     }
     onSuccess();
-  }, [data, loading, error, onSuccess]);
+  }, [data, loading, error, onOpen, onSuccess]);
 
-  if (loading) return <Spinner />;
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
-    <Clickable
-      onClick={() => googleButtonWrapper?.click()}
-      aria-label={ARIA_LABEL_BUTTON.LINK_WITH('구글')}
-    >
-      <MdSyncAlt width={20} height={20} />
-    </Clickable>
+    <>
+      <Clickable
+        onClick={() => googleButtonWrapper?.click()}
+        aria-label={ARIA_LABEL_BUTTON.LINK_WITH('구글')}
+      >
+        <MdSyncAlt width={20} height={20} />
+      </Clickable>
+      <AlertDialog
+        isOpen={isOpen}
+        onClose={onClose}
+        title="계정 연동 실패"
+        description="해당 구글 계정은 이미 다른 42 계정과 연동되어있습니다."
+        confirmText="확인"
+        onConfirm={onClose}
+      />
+    </>
   );
 };

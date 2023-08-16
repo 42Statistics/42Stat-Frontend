@@ -1,17 +1,9 @@
-import dont_panic from '@/Error/assets/dont-panic.webp';
 import { useTheme } from '@emotion/react';
 import { AppLogoTitle } from '@shared/components/AppLogoTitle';
 import { Seo } from '@shared/components/Seo';
 import { ROUTES } from '@shared/constants/ROUTES';
 import { ARIA_LABEL_LINK } from '@shared/constants/accessibility/ARIA_LABEL';
-import {
-  Button,
-  HStack,
-  Image,
-  VStack,
-  WhiteBody1Text,
-  WhiteH1BoldText,
-} from '@shared/ui-kit';
+import { Button, VStack, WhiteBoldText, WhiteText } from '@shared/ui-kit';
 import { Link } from 'react-router-dom';
 
 const NotFoundPage = () => {
@@ -26,12 +18,17 @@ const NotFoundPage = () => {
         <Link to={ROUTES.ROOT} aria-label={ARIA_LABEL_LINK.STAT}>
           <AppLogoTitle size="sm" color="white" />
         </Link>
-        <VStack spacing="2rem">
-          <HStack align="baseline" spacing="1rem">
-            <WhiteH1BoldText>{statusCode}</WhiteH1BoldText>
-            <WhiteBody1Text>{statusText}</WhiteBody1Text>
-          </HStack>
-          <Image width={200} src={dont_panic} alt="" />
+        <VStack spacing="3rem">
+          <WhiteBoldText fontSize="4rem">
+            {statusCode} {statusText}
+          </WhiteBoldText>
+          <VStack spacing="1rem">
+            <WhiteText>죄송합니다. 페이지를 찾을 수 없습니다.</WhiteText>
+            <WhiteText>존재하지 않는 주소를 입력하셨거나,</WhiteText>
+            <WhiteText>
+              요청하신 페이지의 주소가 변경 또는 삭제되어 찾을 수 없습니다.
+            </WhiteText>
+          </VStack>
         </VStack>
         <Link to={ROUTES.ROOT}>
           <Button

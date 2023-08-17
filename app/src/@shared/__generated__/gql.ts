@@ -20,7 +20,7 @@ const documents = {
     "\n  fragment coalitionFields on Coalition {\n    id\n    name\n    slug\n    imageUrl\n    coverUrl\n    color\n    score\n    userId\n  }\n": types.CoalitionFieldsFragmentDoc,
     "\n  fragment projectPreviewFields on ProjectPreview {\n    id\n    name\n    url\n    circle\n  }\n": types.ProjectPreviewFieldsFragmentDoc,
     "\n  fragment teamPreviewFields on TeamPreview {\n    id\n    name\n    url\n  }\n": types.TeamPreviewFieldsFragmentDoc,
-    "\n  fragment teamUserPreviewFields on TeamUserPreview {\n    id\n    login\n    imgUrl\n    occurrence\n    isLeader\n  }\n": types.TeamUserPreviewFieldsFragmentDoc,
+    "\n  fragment teamUserPreviewFields on TeamUserPreview {\n    login\n    imgUrl\n    occurrence\n    isLeader\n  }\n": types.TeamUserPreviewFieldsFragmentDoc,
     "\n  fragment userPreviewFields on UserPreview {\n    id\n    login\n    imgUrl\n  }\n": types.UserPreviewFieldsFragmentDoc,
     "\n  fragment userProfileFields on UserProfile {\n    id\n    login\n    imgUrl\n    grade\n    displayname\n    coalition {\n      ...coalitionFields\n    }\n    titles {\n      titleId\n      name\n      selected\n      createdAt\n      updatedAt\n    }\n    level\n  }\n": types.UserProfileFieldsFragmentDoc,
     "\n  fragment userTeamFields on UserTeam {\n    id\n    name\n    occurrence\n    projectPreview {\n      ...projectPreviewFields\n    }\n    status\n    lastEventTime\n    isValidated\n    finalMark\n  }\n": types.UserTeamFieldsFragmentDoc,
@@ -135,7 +135,7 @@ export function gql(source: "\n  fragment teamPreviewFields on TeamPreview {\n  
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  fragment teamUserPreviewFields on TeamUserPreview {\n    id\n    login\n    imgUrl\n    occurrence\n    isLeader\n  }\n"): (typeof documents)["\n  fragment teamUserPreviewFields on TeamUserPreview {\n    id\n    login\n    imgUrl\n    occurrence\n    isLeader\n  }\n"];
+export function gql(source: "\n  fragment teamUserPreviewFields on TeamUserPreview {\n    login\n    imgUrl\n    occurrence\n    isLeader\n  }\n"): (typeof documents)["\n  fragment teamUserPreviewFields on TeamUserPreview {\n    login\n    imgUrl\n    occurrence\n    isLeader\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -142,7 +142,7 @@ const TeamPage = () => {
           <H2BoldText>팀원</H2BoldText>
           <HStack spacing="2rem">
             {users.map((user) => (
-              <Link key={user.id} to={ROUTES.PROFILE_OF(user.login)}>
+              <Link key={user.login} to={ROUTES.PROFILE_OF(user.login)}>
                 <VStack spacing="0.6rem">
                   {user.isLeader ? (
                     <Avatar

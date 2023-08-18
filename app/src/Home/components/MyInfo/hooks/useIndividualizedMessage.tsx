@@ -60,7 +60,7 @@ const getIndividualizedMessage = (userExistData: UserExistData) => {
   }
 
   if (isHighRank(evalCountRank)) {
-    return `대단해요! 주간 평가 횟수 랭킹 ${scoreRank}위를 차지했어요 🏅`;
+    return `대단해요! 주간 평가 횟수 랭킹 ${evalCountRank}위를 차지했어요 🏅`;
   }
 
   return getDailyProgrammingQuote();

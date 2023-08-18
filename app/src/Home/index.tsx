@@ -2,7 +2,7 @@ import { Footer } from '@core/components/Footer';
 import { Dashboard } from '@shared/components/Dashboard';
 import { Seo } from '@shared/components/Seo';
 import { H2BoldText, VStack } from '@shared/ui-kit';
-import { Hero } from './components/Hero';
+import { MyInfo } from './components/MyInfo';
 import { homeCircleDashboardRows } from './dashboard-frames/homeCircleDashboardRows';
 import { homeCoalitionDashboardRows } from './dashboard-frames/homeCoalitionDashboardRows';
 import { homePageDashboardContents } from './dashboard-frames/homePageDashboardContents';
@@ -14,7 +14,7 @@ const HomePage = () => {
     <>
       <Seo title="홈" />
       <VStack w="100%" align="start" spacing="4rem">
-        <Hero />
+        <MyInfo />
         <VStack w="100%" align="start" spacing="6rem">
           <VStack w="100%" align="start" spacing="2rem">
             <H2BoldText>✨ 현재 여행 현황</H2BoldText>

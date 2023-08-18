@@ -3,7 +3,7 @@ import { atom } from 'jotai';
 type User = {
   id: number;
   login: string;
-  imgUrl: string | null | undefined;
+  imgUrl?: string | null | undefined;
   displayname: string;
 };
 

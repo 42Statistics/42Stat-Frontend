@@ -6,21 +6,21 @@ import { getRefreshToken } from '@shared/utils/storage/refreshToken';
 import { useSetAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 
-const GET_MY_PROFILE = gql(/* GraphQL */ `
-  query GetMyProfile {
-    getPersonalGeneral {
-      userProfile {
+const GET_MY_PREVIEW = gql(/* GraphQL */ `
+  query GetMyPreview {
+    getMyInfo {
+      userPreview {
         id
         login
         imgUrl
-        displayname
       }
+      displayname
     }
   }
 `);
 
 export const useAuth = () => {
-  const { loading, error, data } = useQuery(GET_MY_PROFILE);
+  const { loading, error, data } = useQuery(GET_MY_PREVIEW);
   const [authLoading, setAuthLoading] = useState<boolean>(true);
   const [auth, setAuth] = useState<boolean>(false);
 
@@ -33,25 +33,34 @@ export const useAuth = () => {
       setAuthLoading(false);
       return;
     }
+
     if (loading) {
       return;
     }
+
     if (error) {
       setAuthLoading(false);
       return;
     }
+
     if (!data) {
       setAuthLoading(false);
       return;
     }
-    const { id, login, imgUrl, displayname } =
-      data.getPersonalGeneral.userProfile;
-    setUser({
-      id,
-      login,
-      imgUrl,
-      displayname,
-    });
+
+    const user = data.getMyInfo
+      ? {
+          ...data.getMyInfo.userPreview,
+          displayname: data.getMyInfo.displayname,
+        }
+      : {
+          id: 0,
+          login: 'visitor',
+          imgUrl: null,
+          displayname: 'visitor',
+        };
+
+    setUser(user);
     setAuth(true);
     setAuthLoading(false);
   }, [loading, error, data, setUser]);

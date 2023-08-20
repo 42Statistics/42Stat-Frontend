@@ -22,6 +22,11 @@ jobs:
           submodules: true
           token: ${{ secrets.READ_PRIVATE_SUBMODULE_TOKEN }}
 
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 19
+
       - name: Pnpm setup
         uses: pnpm/action-setup@v2
 

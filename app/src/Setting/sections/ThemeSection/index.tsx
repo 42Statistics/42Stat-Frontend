@@ -1,3 +1,4 @@
+import { paletteAtom, type Palette } from '@shared/atoms/paletteAtom';
 import { useSegmentedControl } from '@shared/hooks/useSegmentedControl';
 import {
   Divider,
@@ -9,12 +10,10 @@ import {
 } from '@shared/ui-kit';
 import { CustomSection } from '@shared/ui-kit-styled';
 import { Mobile, TabletAndAbove } from '@shared/utils/react-responsive/Device';
-import { useState } from 'react';
-
-type Palette = 'light' | 'dark' | 'system';
+import { useAtom } from 'jotai';
 
 export const ThemeSection = () => {
-  const [palette, setPalette] = useState<Palette>('light');
+  const [palette, setPalette] = useAtom(paletteAtom);
 
   const options: {
     label: string;

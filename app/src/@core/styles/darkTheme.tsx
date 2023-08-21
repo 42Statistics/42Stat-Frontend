@@ -1,3 +1,5 @@
+import type { Theme } from '@emotion/react';
+
 const colors = {
   primary: {
     default: '#2b3e77',
@@ -75,7 +77,7 @@ const shadow = {
   md: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
 };
 
-export const defaultTheme = {
+export const darkTheme: Theme = {
   colors,
   fonts,
   zIndex,

@@ -1,7 +1,7 @@
 import { useTheme } from '@emotion/react';
 import { merge } from 'lodash-es';
 import ReactApexChart from 'react-apexcharts';
-import { defaultOptions } from './options';
+import { useDefaultOptions } from './hooks/useDefaultOptions';
 
 type DonutChartProps = {
   labels: string[];
@@ -15,6 +15,7 @@ export const DonutChart = ({
   options: additionalOptions,
 }: DonutChartProps) => {
   const theme = useTheme();
+  const { defaultOptions } = useDefaultOptions();
 
   const donutChartOptions: ApexCharts.ApexOptions = {
     labels,

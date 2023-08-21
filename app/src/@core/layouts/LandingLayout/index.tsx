@@ -12,7 +12,10 @@ const LandingLayout = () => {
   return (
     <>
       <Helmet>
-        <meta name="theme-color" content={theme.colors.background.landing} />
+        <meta
+          name="theme-color"
+          content={theme.colors.background.landing.theme}
+        />
       </Helmet>
       <Global styles={landingLayoutGlobalStyle} />
       <Layout>
@@ -27,7 +30,8 @@ const LandingLayout = () => {
 const Layout = styled.main`
   width: 100%;
   background: ${({ theme }) =>
-    `${theme.colors.background.landing} url(${space_background})`};
+    `${theme.colors.background.landing.default} url(${space_background})`};
+  color: ${({ theme }) => theme.colors.mono.absolute.white};
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;

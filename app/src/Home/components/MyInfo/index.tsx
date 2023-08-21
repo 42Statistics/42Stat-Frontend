@@ -41,10 +41,8 @@ export const MyInfo = () => {
   return (
     <Layout>
       <VStack w="100%" h="100%" align="start" spacing="1rem">
-        <H2BoldText color={theme.colors.mono.absolute.white}>
-          반가워요, {login} 👋
-        </H2BoldText>
-        <Text color={theme.colors.mono.absolute.white}>{message}</Text>
+        <H2BoldText>반가워요, {login} 👋</H2BoldText>
+        <Text>{message}</Text>
       </VStack>
     </Layout>
   );
@@ -55,6 +53,7 @@ const Layout = styled(CustomBox)`
   align-items: center;
   justify-content: center;
   width: 100%;
+  color: ${({ theme }) => theme.colors.mono.absolute.white};
   background: ${({ theme }) =>
     `${theme.colors.background.landing.default} url(${space_background})`};
   background-size: cover;

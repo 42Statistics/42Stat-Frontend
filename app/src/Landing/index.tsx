@@ -20,7 +20,7 @@ const LandingPage = () => {
     <HStack>
       <VStack align={device === 'desktop' ? 'start' : 'center'} spacing="8rem">
         <a href="/" aria-label={ARIA_LABEL_LINK.STAT}>
-          <AppLogoTitle color={theme.colors.mono.white} />
+          <AppLogoTitle color={theme.colors.mono.absolute.white} />
         </a>
         <Introduction />
         <LoginButtonContainer>

@@ -19,13 +19,17 @@ const NotFoundPage = () => {
           <AppLogoTitle size="sm" color="white" />
         </Link>
         <VStack spacing="3rem">
-          <BoldText fontSize="4rem">
+          <BoldText fontSize="4rem" color={theme.colors.mono.absolute.white}>
             {statusCode} {statusText}
           </BoldText>
           <VStack spacing="1rem">
-            <Text>죄송합니다. 페이지를 찾을 수 없습니다.</Text>
-            <Text>존재하지 않는 주소를 입력하셨거나,</Text>
-            <Text>
+            <Text color={theme.colors.mono.absolute.white}>
+              죄송합니다. 페이지를 찾을 수 없습니다.
+            </Text>
+            <Text color={theme.colors.mono.absolute.white}>
+              존재하지 않는 주소를 입력하셨거나,
+            </Text>
+            <Text color={theme.colors.mono.absolute.white}>
               요청하신 페이지의 주소가 변경 또는 삭제되어 찾을 수 없습니다.
             </Text>
           </VStack>

@@ -74,12 +74,20 @@ export const UserProfile = () => {
       <Desktop>
         <HStack h="100%" spacing="4rem">
           <Avatar size="xl" src={imgUrl} alt={ALT.AVATAR_OF(login)} />
-          <H3BoldText>{titleCase(grade)}</H3BoldText>
-          <H3BoldText>{titleCase(displayname)}</H3BoldText>
-          <MediumText>{truncate(titleWithLogin, { length: 52 })}</MediumText>
+          <H3BoldText color={theme.colors.mono.absolute.white}>
+            {titleCase(grade)}
+          </H3BoldText>
+          <H3BoldText color={theme.colors.mono.absolute.white}>
+            {titleCase(displayname)}
+          </H3BoldText>
+          <MediumText color={theme.colors.mono.absolute.white}>
+            {truncate(titleWithLogin, { length: 52 })}
+          </MediumText>
           <HStack align="baseline">
-            <Text>lv.</Text>
-            <H3BoldText>{level.toFixed(2)}</H3BoldText>
+            <Text color={theme.colors.mono.absolute.white}>lv.</Text>
+            <H3BoldText color={theme.colors.mono.absolute.white}>
+              {level.toFixed(2)}
+            </H3BoldText>
           </HStack>
         </HStack>
       </Desktop>
@@ -89,12 +97,20 @@ export const UserProfile = () => {
             <Avatar size="2xl" src={imgUrl} alt={ALT.AVATAR_OF(login)} />
           </VStack>
           <VStack w="15rem" spacing="1rem" style={{ textAlign: 'center' }}>
-            <H3BoldText>{titleCase(grade)}</H3BoldText>
-            <H3BoldText>{titleCase(displayname)}</H3BoldText>
-            <MediumText>{truncate(titleWithLogin, { length: 52 })}</MediumText>
+            <H3BoldText color={theme.colors.mono.absolute.white}>
+              {titleCase(grade)}
+            </H3BoldText>
+            <H3BoldText color={theme.colors.mono.absolute.white}>
+              {titleCase(displayname)}
+            </H3BoldText>
+            <MediumText color={theme.colors.mono.absolute.white}>
+              {truncate(titleWithLogin, { length: 52 })}
+            </MediumText>
             <HStack align="baseline">
-              <Text>lv.</Text>
-              <H3BoldText>{level.toFixed(2)}</H3BoldText>
+              <Text color={theme.colors.mono.absolute.white}>lv.</Text>
+              <H3BoldText color={theme.colors.mono.absolute.white}>
+                {level.toFixed(2)}
+              </H3BoldText>
             </HStack>
           </VStack>
         </HStack>
@@ -109,7 +125,6 @@ type LayoutProps = {
 };
 
 const Layout = styled.div<LayoutProps>`
-  color: ${({ theme }) => theme.colors.mono.absolute.white};
   background-image: ${({ backgroundUrl, backgroundFallbackUrl }) =>
     `url(${backgroundUrl}), url(${backgroundFallbackUrl})`};
   background-size: cover;

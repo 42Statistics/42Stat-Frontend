@@ -31,7 +31,6 @@ const Layout = styled.main`
   width: 100%;
   background: ${({ theme }) =>
     `${theme.colors.background.landing.default} url(${space_background})`};
-  color: ${({ theme }) => theme.colors.mono.absolute.white};
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;

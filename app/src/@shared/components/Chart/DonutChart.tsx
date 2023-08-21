@@ -42,7 +42,7 @@ export const DonutChart = ({
       monochrome: {
         enabled: true,
         shadeTo: 'light',
-        color: theme.colors.primary.default,
+        color: theme.colors.chart.primary.default,
       },
     },
     stroke: {

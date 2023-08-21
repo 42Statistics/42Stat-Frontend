@@ -35,7 +35,7 @@ export const EvalLogListItem = ({ element }: EvalLogListItemProps) => {
           {correctedsReview ? (
             <Text style={{ width: '100%' }}>{correctedsReview.review}</Text>
           ) : (
-            <Text color={theme.colors.mono.gray300} style={{ width: '100%' }}>
+            <Text color={theme.colors.mono.gray500} style={{ width: '100%' }}>
               아직 피드백을 작성하지 않았습니다.
             </Text>
           )}

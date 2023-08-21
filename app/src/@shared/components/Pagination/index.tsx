@@ -1,3 +1,4 @@
+import { useTheme } from '@emotion/react';
 import { ReactComponent as MdChevronLeft } from '@shared/assets/icon/md-chevron-left.svg';
 import { ReactComponent as MdChevronRight } from '@shared/assets/icon/md-chevron-right.svg';
 import { ReactComponent as MdFirstPage } from '@shared/assets/icon/md-first-page.svg';
@@ -19,6 +20,7 @@ export const Pagination = ({
   totalPageNumber,
   pagePerRow = 5,
 }: PaginationProps) => {
+  const theme = useTheme();
   const start = Math.floor((currPageNumber - 1) / pagePerRow) * pagePerRow + 1;
   const end = Math.min(start + pagePerRow - 1, totalPageNumber);
   const pageNumberList = Array.from(
@@ -61,7 +63,7 @@ export const Pagination = ({
           onClick={handleClickStartButton}
           aria-label={ARIA_LABEL_BUTTON.PAGINATION.FIRST_PAGE}
         >
-          <MdFirstPage width={16} height={16} />
+          <MdFirstPage width={16} height={16} fill={theme.colors.mono.black} />
         </Clickable>
       )}
       {isBackButtonDisabled ? null : (
@@ -69,7 +71,11 @@ export const Pagination = ({
           onClick={handleClickBackButton}
           aria-label={ARIA_LABEL_BUTTON.PAGINATION.PREVIOUS_PAGE_GROUP}
         >
-          <MdChevronLeft width={16} height={16} />
+          <MdChevronLeft
+            width={16}
+            height={16}
+            fill={theme.colors.mono.black}
+          />
         </Clickable>
       )}
       <HStack spacing="0.6rem">
@@ -87,7 +93,11 @@ export const Pagination = ({
           onClick={handleClickForwardButton}
           aria-label={ARIA_LABEL_BUTTON.PAGINATION.NEXT_PAGE_GROUP}
         >
-          <MdChevronRight width={16} height={16} />
+          <MdChevronRight
+            width={16}
+            height={16}
+            fill={theme.colors.mono.black}
+          />
         </Clickable>
       )}
       {isEndButtonDisabled ? null : (
@@ -95,7 +105,7 @@ export const Pagination = ({
           onClick={handleClickEndButton}
           aria-label={ARIA_LABEL_BUTTON.PAGINATION.LAST_PAGE}
         >
-          <MdLastPage width={16} height={16} />
+          <MdLastPage width={16} height={16} fill={theme.colors.mono.black} />
         </Clickable>
       )}
     </HStack>

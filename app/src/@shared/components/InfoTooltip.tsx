@@ -11,7 +11,7 @@ export const InfoTooltip = ({ text }: InfoTooltipProps) => {
 
   return (
     <Tooltip.Container>
-      <MdInfo width={14} height={14} fill={theme.colors.mono.gray300} />
+      <MdInfo width={14} height={14} fill={theme.colors.mono.gray500} />
       <Tooltip position="top">{text}</Tooltip>
     </Tooltip.Container>
   );

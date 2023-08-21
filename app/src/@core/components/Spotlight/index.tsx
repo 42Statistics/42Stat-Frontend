@@ -96,7 +96,7 @@ export const Spotlight = () => {
                   <MdSearch
                     width={36}
                     height={36}
-                    fill={theme.colors.mono.gray300}
+                    fill={theme.colors.mono.gray500}
                   />
                 ) : (
                   <></>

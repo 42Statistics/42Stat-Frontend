@@ -18,7 +18,7 @@ export const ApolloErrorView = ({
         height={20}
         fill={theme.colors.semantic.error}
       />
-      <Text color={theme.colors.mono.gray300}>{message}</Text>
+      <Text color={theme.colors.mono.gray500}>{message}</Text>
     </HStack>
   );
 };

@@ -4,7 +4,7 @@ import triangle_down from '@shared/assets/icon/triangle-down.svg';
 export const Select = styled.select`
   all: unset;
   padding: 1rem 2rem;
-  border: 1px solid ${({ theme }) => theme.colors.mono.gray50};
+  border: 1px solid ${({ theme }) => theme.colors.mono.gray200};
   border-radius: ${({ theme }) => theme.radius.md};
   background: ${({ theme }) =>
     `url(${triangle_down}) no-repeat right 2rem center ${theme.colors.mono.white}`};
@@ -12,7 +12,7 @@ export const Select = styled.select`
   user-select: none;
 
   &:hover {
-    border-color: ${({ theme }) => theme.colors.mono.gray100};
+    border-color: ${({ theme }) => theme.colors.mono.gray300};
   }
 
   &:focus-visible {

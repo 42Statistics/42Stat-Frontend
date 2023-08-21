@@ -38,11 +38,11 @@ const EvalLogSearchHeaderTotalCountDescriptor = () => {
   const totalCount = useAtomValue(evalLogSearchTotalCountAtom);
 
   if (totalCount === undefined) {
-    return <Text color={theme.colors.mono.gray300}>검색 중...</Text>;
+    return <Text color={theme.colors.mono.gray500}>검색 중...</Text>;
   }
 
   return (
-    <Text color={theme.colors.mono.gray300}>
+    <Text color={theme.colors.mono.gray500}>
       검색 결과 {totalCount.toLocaleString()}건
     </Text>
   );

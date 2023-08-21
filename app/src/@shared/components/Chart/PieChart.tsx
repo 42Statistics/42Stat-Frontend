@@ -36,7 +36,10 @@ export const PieChart = ({
     legend: {
       position: 'bottom',
     },
-    colors: [theme.colors.primary.default, theme.colors.primary.light],
+    colors: [
+      theme.colors.chart.primary.default,
+      theme.colors.chart.primary.light,
+    ],
     stroke: {
       show: false,
     },

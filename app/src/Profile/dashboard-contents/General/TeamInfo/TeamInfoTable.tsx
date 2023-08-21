@@ -82,7 +82,8 @@ const Table = styled.table`
     text-align: center;
     padding: 0.8rem 2rem;
     vertical-align: middle;
-    background-color: ${({ theme }) => rgba(theme.colors.mono.white, 0.9)};
+    background-color: ${({ theme }) =>
+      rgba(theme.colors.background.box.default, 0.9)};
   }
 
   td {

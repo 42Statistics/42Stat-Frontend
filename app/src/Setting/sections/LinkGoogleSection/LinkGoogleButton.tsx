@@ -1,4 +1,5 @@
 import { useMutation } from '@apollo/client';
+import { useTheme } from '@emotion/react';
 import { gql } from '@shared/__generated__';
 import { ReactComponent as MdSyncAlt } from '@shared/assets/icon/md-sync-alt.svg';
 import { GAPI_URL } from '@shared/constants/GAPI';
@@ -31,6 +32,7 @@ type LinkGoogleButtonProps = {
 };
 
 export const LinkGoogleButton = ({ onSuccess }: LinkGoogleButtonProps) => {
+  const theme = useTheme();
   const status = useScript(GAPI_URL, { removeOnUnmount: true });
   const [linkGoogle, { data, loading, error }] = useMutation(LINK_GOOGLE);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -91,7 +93,7 @@ export const LinkGoogleButton = ({ onSuccess }: LinkGoogleButtonProps) => {
         onClick={() => googleButtonWrapper?.click()}
         aria-label={ARIA_LABEL_BUTTON.LINK_WITH('구글')}
       >
-        <MdSyncAlt width={20} height={20} />
+        <MdSyncAlt width={20} height={20} fill={theme.colors.mono.black} />
       </Clickable>
       <AlertDialog
         isOpen={isOpen}

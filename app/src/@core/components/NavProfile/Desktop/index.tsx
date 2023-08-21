@@ -40,7 +40,7 @@ export const DesktopNavProfile = ({
           <Avatar size="lg" src={imgUrl} alt={ALT.AVATAR_OF(login)} />
           <VStack align="start" spacing="0.5rem">
             <MediumText>{login}</MediumText>
-            <CaptionText color={theme.colors.mono.gray300}>
+            <CaptionText color={theme.colors.mono.gray500}>
               {titleCase(name)}
             </CaptionText>
           </VStack>

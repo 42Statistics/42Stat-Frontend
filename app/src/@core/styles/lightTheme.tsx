@@ -15,8 +15,14 @@ const colors = {
     fail: '#f17c88',
   },
   chart: {
-    up: '#00c48c',
-    down: '#e31f2c',
+    primary: {
+      default: '#2b3e77',
+      light: '#c4ccdf',
+    },
+    accent: {
+      default: '#00c48c',
+      light: '#90e5cd',
+    },
   },
   semantic: {
     error: '#b1232d',
@@ -26,15 +32,38 @@ const colors = {
     active: '#e2e2e2',
   },
   background: {
-    landing: '#070f21',
+    landing: {
+      default: '#070f21',
+      theme: '#070f21',
+    },
+    main: {
+      default: 'linear-gradient(150deg, #ffffff 0%, #e7e7e9 100%)',
+      theme: '#f2f2f2',
+    },
+    box: {
+      default: '#ffffff',
+      shadow: {
+        default: '2px 6px 20px #eeeeee',
+        hover: '2px 6px 20px #dddddd',
+      },
+    },
+    skeleton: {
+      default: '#ffffff',
+      gradient: 'linear-gradient(110deg, #ffffff 8%, #f5f5f5 18%, #ffffff 33%)',
+    },
   },
   mono: {
+    absolute: {
+      black: '#161616',
+      white: '#ffffff',
+    },
     black: '#161616',
     white: '#ffffff',
-    gray300: '#767676', // 웹 접근성 하한
-    gray200: '#999999',
-    gray100: '#bbbbbb',
-    gray50: '#dddddd',
+    gray500: '#767676', // 웹 접근성 하한
+    gray400: '#999999',
+    gray300: '#bbbbbb',
+    gray200: '#dddddd',
+    gray100: '#f0f0f0',
   },
 };
 

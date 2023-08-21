@@ -219,7 +219,10 @@ const RankingsChart = ({ categories, series }: RankingsChartProps) => {
   const theme = useTheme();
 
   const options: ApexCharts.ApexOptions = {
-    colors: [theme.colors.primary.default, theme.colors.accent.default],
+    colors: [
+      theme.colors.chart.primary.default,
+      theme.colors.chart.accent.default,
+    ],
     xaxis: {
       categories,
     },

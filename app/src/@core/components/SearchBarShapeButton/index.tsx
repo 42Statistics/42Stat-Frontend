@@ -24,10 +24,10 @@ export const SearchBarShapeButton = () => {
       aria-label={ARIA_LABEL_BUTTON.SEARCH_USER_OR_PROJECT_USING_SPOTLIGHT}
     >
       <HStack w="100%" justify="start" spacing="1.6rem">
-        <MdSearch width={18} height={18} fill={theme.colors.mono.gray300} />
-        <Text color={theme.colors.mono.gray300}>Search</Text>
+        <MdSearch width={18} height={18} fill={theme.colors.mono.gray500} />
+        <Text color={theme.colors.mono.gray500}>Search</Text>
         <Spacer />
-        <CaptionText color={theme.colors.mono.gray300}>
+        <CaptionText color={theme.colors.mono.gray500}>
           {isMacOS ? '⌘ K' : 'Ctrl K'}
         </CaptionText>
       </HStack>
@@ -38,7 +38,7 @@ export const SearchBarShapeButton = () => {
 const Layout = styled(Clickable)`
   padding: 1rem 1.6rem;
   border-radius: ${({ theme }) => theme.radius.md};
-  border: 1px solid ${({ theme }) => theme.colors.mono.gray50};
+  border: 1px solid ${({ theme }) => theme.colors.mono.gray200};
   transition: all 0.2s;
 
   &:hover {

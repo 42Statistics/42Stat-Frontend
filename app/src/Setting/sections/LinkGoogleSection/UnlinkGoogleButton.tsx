@@ -1,4 +1,5 @@
 import { useMutation } from '@apollo/client';
+import { useTheme } from '@emotion/react';
 import { gql } from '@shared/__generated__';
 import { ReactComponent as MdDelete } from '@shared/assets/icon/md-delete.svg';
 import { ARIA_LABEL_BUTTON } from '@shared/constants/accessibility/ARIA_LABEL';
@@ -24,6 +25,7 @@ type UnlinkGoogleButtonProps = {
 };
 
 export const UnlinkGoogleButton = ({ onSuccess }: UnlinkGoogleButtonProps) => {
+  const theme = useTheme();
   const [unlinkGoogle, { loading, error, data }] = useMutation(UNLINK_ACCOUNT, {
     variables: {
       targetPlatform: 'google',
@@ -48,7 +50,7 @@ export const UnlinkGoogleButton = ({ onSuccess }: UnlinkGoogleButtonProps) => {
       onClick={handleClick}
       aria-label={ARIA_LABEL_BUTTON.UNLINK_WITH('구글')}
     >
-      <MdDelete width={20} height={20} />
+      <MdDelete width={20} height={20} fill={theme.colors.mono.black} />
     </Clickable>
   );
 };

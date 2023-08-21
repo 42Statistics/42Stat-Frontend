@@ -30,9 +30,9 @@ export const EvalLogLabel = ({
       case 'negative':
         return theme.colors.evaluation.fail;
       case 'none':
-        return theme.colors.mono.gray300;
+        return theme.colors.mono.gray500;
       default:
-        return theme.colors.mono.gray300;
+        return theme.colors.mono.gray500;
     }
   };
 

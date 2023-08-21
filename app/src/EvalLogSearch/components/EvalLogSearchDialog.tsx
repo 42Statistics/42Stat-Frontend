@@ -151,6 +151,8 @@ const EvalLogSearchForm = styled.form`
   align-items: center;
   gap: 6rem;
 
+  color: ${({ theme }) => theme.colors.mono.black};
+
   ul {
     display: flex;
     flex-direction: column;

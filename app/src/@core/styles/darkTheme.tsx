@@ -2,39 +2,68 @@ import type { Theme } from '@emotion/react';
 
 const colors = {
   primary: {
-    default: '#2b3e77',
-    light: '#c4ccdf',
+    default: '#ffffff',
+    light: '#383b3f',
   },
   accent: {
     default: '#00c48c',
     light: '#90e5cd',
   },
   evaluation: {
-    pass: '#60c0c4',
-    warning: '#f5b461',
-    fail: '#f17c88',
+    pass: '#1ee2e9',
+    warning: '#f4ff79',
+    fail: '#f65252',
   },
   chart: {
-    up: '#00c48c',
-    down: '#e31f2c',
+    primary: {
+      default: '#1581df',
+      light: '#c4ccdf',
+    },
+    accent: {
+      default: '#12eeaf',
+      light: '#90e5cd',
+    },
   },
   semantic: {
-    error: '#b1232d',
+    error: '#ef3636',
   },
   element: {
-    hover: '#f0f0f0',
-    active: '#e2e2e2',
+    hover: '#262626',
+    active: '#1f1f1f',
   },
   background: {
-    landing: '#070f21',
+    landing: {
+      default: '#070f21',
+      theme: '#070f21',
+    },
+    main: {
+      default: '#1a1b1e',
+      theme: '#1a1b1e',
+    },
+    box: {
+      default: '#2b2c30',
+      shadow: {
+        default: 'none',
+        hover: 'none',
+      },
+    },
+    skeleton: {
+      default: '#161616',
+      gradient: 'linear-gradient(110deg, #161616 8%, #1f1f1f 18%, #161616 33%)',
+    },
   },
   mono: {
-    black: '#161616',
-    white: '#ffffff',
-    gray300: '#767676', // 웹 접근성 하한
-    gray200: '#999999',
-    gray100: '#bbbbbb',
-    gray50: '#dddddd',
+    absolute: {
+      black: '#161616',
+      white: '#ffffff',
+    },
+    black: '#ffffff',
+    white: '#161616',
+    gray500: '#bbbbbb',
+    gray400: '#777777',
+    gray300: '#555555',
+    gray200: '#383838',
+    gray100: '#262626',
   },
 };
 

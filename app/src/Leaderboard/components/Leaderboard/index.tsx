@@ -27,7 +27,7 @@ export const Leaderboard = ({
     <VStack w="100%" spacing="2rem">
       <HStack w="100%">
         <Spacer />
-        <Text color={theme.colors.mono.gray300}>
+        <Text color={theme.colors.mono.gray500}>
           집계기간 :&nbsp;
           {getStartEndDateString(start, end, 'YYYY-MM-DD')}
         </Text>

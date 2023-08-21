@@ -58,7 +58,7 @@ export const LinkGoogleSection = () => {
       <VStack align="start" spacing="4rem">
         <VStack align="start" spacing="0.5rem">
           <H2BoldText>계정 연동</H2BoldText>
-          <Text color={theme.colors.mono.gray300}>
+          <Text color={theme.colors.mono.gray500}>
             42 인증을 거치지 않고 로그인할 수 있어요.
           </Text>
         </VStack>

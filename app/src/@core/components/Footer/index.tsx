@@ -11,7 +11,7 @@ export const Footer = () => {
   return (
     <Layout>
       <HStack spacing="1rem">
-        <CaptionText color={theme.colors.mono.gray300}>
+        <CaptionText color={theme.colors.mono.gray500}>
           © 2023. 42Stat.
         </CaptionText>
         <Link
@@ -20,7 +20,7 @@ export const Footer = () => {
           rel="noreferrer"
           aria-label={ARIA_LABEL_LINK.STAT_GITHUB}
         >
-          <GithubLogo width={16} height={16} fill={theme.colors.mono.gray300} />
+          <GithubLogo width={16} height={16} fill={theme.colors.mono.gray500} />
         </Link>
       </HStack>
     </Layout>

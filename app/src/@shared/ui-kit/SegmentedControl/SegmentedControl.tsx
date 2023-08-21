@@ -78,7 +78,7 @@ const Controls = styled.div<ControlsProps>`
   overflow: hidden;
   position: relative;
   transition: box-shadow 0.4s;
-  border: 1px solid ${({ theme }) => theme.colors.mono.gray50};
+  border: 1px solid ${({ theme }) => theme.colors.mono.gray200};
 
   ::before {
     content: '';
@@ -102,7 +102,7 @@ type SegmentProps = {
 };
 
 const Segment = styled.div<SegmentProps>`
-  padding: 0.9rem 3rem;
+  padding: 0.8rem 2.4rem;
   position: relative;
   text-align: center;
   z-index: 1;
@@ -130,7 +130,8 @@ const SegmentLabel = styled.label<SegmentLabelProps>`
   display: block;
   position: relative;
   transition: color 0.3s ease;
-  color: ${({ active, theme }) => active && theme.colors.mono.white};
+  color: ${({ active, theme }) =>
+    active ? theme.colors.mono.white : theme.colors.mono.black};
   font-weight: ${({ active, theme }) =>
     active ? theme.fonts.weight.bold : theme.fonts.weight.medium};
 `;

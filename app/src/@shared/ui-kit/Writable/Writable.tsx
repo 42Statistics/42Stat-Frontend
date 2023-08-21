@@ -17,6 +17,6 @@ const StyledWritable = styled.input`
   width: 100%;
 
   &::placeholder {
-    color: ${({ theme }) => theme.colors.mono.gray300};
+    color: ${({ theme }) => theme.colors.mono.gray500};
   }
 `;

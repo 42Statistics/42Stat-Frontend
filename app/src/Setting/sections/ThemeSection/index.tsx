@@ -56,6 +56,11 @@ export const ThemeSection = () => {
         <VStack align="start" spacing="4rem">
           <H2BoldText>테마</H2BoldText>
           <Divider />
+          <SegmentedControl
+            index={segmentedControlIndex}
+            onIndexChange={handleSegmentedControlIndexChange}
+            {...useSegmentedControl(options)}
+          />
         </VStack>
       </Mobile>
     </CustomSection>

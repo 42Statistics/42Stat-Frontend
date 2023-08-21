@@ -120,7 +120,7 @@ const TeamPage = () => {
             ) : (
               <CorrectorReviewLabel number={finalMark} />
             )}
-            <Text color={theme.colors.mono.gray300}>
+            <Text color={theme.colors.mono.gray500}>
               {getDateDiffStringWithTeamStatus(new Date(lastEventTime), status)}
             </Text>
           </HStack>

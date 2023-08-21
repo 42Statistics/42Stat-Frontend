@@ -124,9 +124,9 @@ const LevelRecordsChart = ({ series }: LevelRecordsChartProps) => {
 
   const options: ApexCharts.ApexOptions = {
     colors: [
-      theme.colors.primary.default,
-      theme.colors.mono.gray300,
-      theme.colors.accent.default,
+      theme.colors.chart.primary.default,
+      theme.colors.mono.gray500,
+      theme.colors.chart.accent.default,
     ],
     xaxis: {
       type: 'numeric',

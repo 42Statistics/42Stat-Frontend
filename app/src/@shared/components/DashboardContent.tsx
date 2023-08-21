@@ -37,7 +37,7 @@ export const DashboardContent = ({
             {titleRight ? titleRight : null}
           </HStack>
           {description ? (
-            <CaptionText color={theme.colors.mono.gray300}>
+            <CaptionText color={theme.colors.mono.gray500}>
               {description}
             </CaptionText>
           ) : null}

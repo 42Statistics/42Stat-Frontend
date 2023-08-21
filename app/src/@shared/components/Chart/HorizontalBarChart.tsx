@@ -26,11 +26,11 @@ export const HorizontalBarChart = ({
     dataLabels: {
       offsetX: 37,
       style: {
-        colors: [theme.colors.mono.gray300],
+        colors: [theme.colors.mono.gray500],
         fontWeight: 400,
       },
     },
-    colors: [theme.colors.accent.default],
+    colors: [theme.colors.chart.accent.default],
     stroke: {
       width: 0,
     },

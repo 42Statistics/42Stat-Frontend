@@ -41,8 +41,10 @@ export const MyInfo = () => {
   return (
     <Layout>
       <VStack w="100%" h="100%" align="start" spacing="1rem">
-        <H2BoldText>반가워요, {login} 👋</H2BoldText>
-        <Text>{message}</Text>
+        <H2BoldText color={theme.colors.mono.absolute.white}>
+          반가워요, {login} 👋
+        </H2BoldText>
+        <Text color={theme.colors.mono.absolute.white}>{message}</Text>
       </VStack>
     </Layout>
   );

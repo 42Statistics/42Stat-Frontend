@@ -4,6 +4,7 @@ import { H1BoldText, VStack } from '@shared/ui-kit';
 import { AccountSection } from './sections/AccountSection';
 import { FeedbackSection } from './sections/FeedbackSection';
 import { LinkGoogleSection } from './sections/LinkGoogleSection';
+import { ThemeSection } from './sections/ThemeSection';
 
 const SettingPage = () => {
   return (
@@ -13,6 +14,7 @@ const SettingPage = () => {
         <H1BoldText style={{ marginLeft: '2rem' }}>설정</H1BoldText>
         <VStack w="100%" align="start" spacing="1rem">
           <LinkGoogleSection />
+          <ThemeSection />
           <FeedbackSection />
           <AccountSection />
         </VStack>

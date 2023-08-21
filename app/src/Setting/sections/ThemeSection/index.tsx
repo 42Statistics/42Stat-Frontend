@@ -1,4 +1,7 @@
-import { paletteAtom, type Palette } from '@shared/atoms/paletteAtom';
+import {
+  ThemePreference,
+  themePreferenceAtom,
+} from '@shared/atoms/themePreferenceAtom';
 import { useSegmentedControl } from '@shared/hooks/useSegmentedControl';
 import {
   Divider,
@@ -13,11 +16,11 @@ import { Mobile, TabletAndAbove } from '@shared/utils/react-responsive/Device';
 import { useAtom } from 'jotai';
 
 export const ThemeSection = () => {
-  const [palette, setPalette] = useAtom(paletteAtom);
+  const [themePreference, setThemePreference] = useAtom(themePreferenceAtom);
 
   const options: {
     label: string;
-    value: Palette;
+    value: ThemePreference;
   }[] = [
     {
       label: '라이트',
@@ -33,10 +36,10 @@ export const ThemeSection = () => {
     },
   ];
   const segmentedControlIndex = options.findIndex(
-    (option) => option.value === palette,
+    (option) => option.value === themePreference,
   );
   const handleSegmentedControlIndexChange = (index: number) => {
-    setPalette(options[index].value);
+    setThemePreference(options[index].value);
   };
 
   return (

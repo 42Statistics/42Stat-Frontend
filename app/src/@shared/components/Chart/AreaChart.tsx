@@ -1,7 +1,7 @@
 import { useTheme } from '@emotion/react';
 import { merge } from 'lodash-es';
 import ReactApexChart from 'react-apexcharts';
-import { defaultOptions } from './options';
+import { useDefaultOptions } from './hooks/useDefaultOptions';
 
 type AreaChartProps = {
   series: ApexAxisChartSeries;
@@ -13,6 +13,7 @@ export const AreaChart = ({
   options: additionalOptions,
 }: AreaChartProps) => {
   const theme = useTheme();
+  const { defaultOptions } = useDefaultOptions();
 
   const areaChartOptions: ApexCharts.ApexOptions = {
     colors: [theme.colors.chart.accent.default],

@@ -1,7 +1,7 @@
 import { useTheme } from '@emotion/react';
 import { merge } from 'lodash-es';
 import ReactApexChart from 'react-apexcharts';
-import { defaultOptions } from './options';
+import { useDefaultOptions } from './hooks/useDefaultOptions';
 
 type LineChartProps = {
   series: ApexAxisChartSeries;
@@ -13,6 +13,7 @@ export const LineChart = ({
   options: additionalOptions,
 }: LineChartProps) => {
   const theme = useTheme();
+  const { defaultOptions } = useDefaultOptions();
 
   const lineChartOptions: ApexCharts.ApexOptions = {
     chart: {

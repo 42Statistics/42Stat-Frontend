@@ -1,4 +1,6 @@
-export const defaultOptions: ApexCharts.ApexOptions = {
+import { merge } from 'lodash-es';
+
+const defaultOptions: ApexCharts.ApexOptions = {
   chart: {
     toolbar: {
       show: false,
@@ -24,3 +26,15 @@ export const defaultOptions: ApexCharts.ApexOptions = {
     },
   },
 };
+
+export const defaultLightOptions = defaultOptions;
+
+export const defaultDarkOptions: ApexCharts.ApexOptions = merge(
+  {},
+  defaultOptions,
+  {
+    theme: {
+      mode: 'dark',
+    },
+  },
+);

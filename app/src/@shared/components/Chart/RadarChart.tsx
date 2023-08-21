@@ -1,6 +1,6 @@
 import { merge } from 'lodash-es';
 import ReactApexChart from 'react-apexcharts';
-import { defaultOptions } from './options';
+import { useDefaultOptions } from './hooks/useDefaultOptions';
 
 type RadarChartProps = {
   series: ApexAxisChartSeries;
@@ -11,6 +11,8 @@ export const RadarChart = ({
   series,
   options: additionalOptions,
 }: RadarChartProps) => {
+  const { defaultOptions } = useDefaultOptions();
+
   const radarChartOptions: ApexCharts.ApexOptions = {
     plotOptions: {
       radar: {

@@ -1,7 +1,7 @@
 import { useTheme } from '@emotion/react';
 import { merge } from 'lodash-es';
 import ReactApexChart from 'react-apexcharts';
-import { defaultOptions } from './options';
+import { useDefaultOptions } from './hooks/useDefaultOptions';
 
 type BarChartProps = {
   series: ApexAxisChartSeries;
@@ -12,6 +12,7 @@ export const BarChart = ({
   options: additionalOptions,
 }: BarChartProps) => {
   const theme = useTheme();
+  const { defaultOptions } = useDefaultOptions();
 
   const barChartOptions: ApexCharts.ApexOptions = {
     plotOptions: {

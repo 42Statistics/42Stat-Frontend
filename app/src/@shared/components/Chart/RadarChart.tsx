@@ -1,3 +1,4 @@
+import { useTheme } from '@emotion/react';
 import { merge } from 'lodash-es';
 import ReactApexChart from 'react-apexcharts';
 import { useDefaultOptions } from './hooks/useDefaultOptions';
@@ -11,15 +12,16 @@ export const RadarChart = ({
   series,
   options: additionalOptions,
 }: RadarChartProps) => {
+  const theme = useTheme();
   const { defaultOptions } = useDefaultOptions();
 
   const radarChartOptions: ApexCharts.ApexOptions = {
     plotOptions: {
       radar: {
         polygons: {
-          strokeColors: ['#e8e8e8'],
+          strokeColors: [theme.colors.mono.gray200],
           fill: {
-            colors: ['#f8f8f8', '#fff'],
+            colors: [theme.colors.mono.gray100, theme.colors.mono.white],
           },
         },
       },

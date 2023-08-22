@@ -24,7 +24,7 @@ export const LineChart = ({
     colors: [theme.colors.chart.primary.default],
     stroke: {
       curve: 'smooth',
-      width: 1.5,
+      width: 2.5,
     },
   };
 

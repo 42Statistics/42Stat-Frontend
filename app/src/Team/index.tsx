@@ -124,7 +124,7 @@ const TeamPage = () => {
               {getDateDiffStringWithTeamStatus(new Date(lastEventTime), status)}
             </Text>
           </HStack>
-          <H1BoldText>{name}</H1BoldText>
+          <H1BoldText style={{ wordBreak: 'break-all' }}>{name}</H1BoldText>
           <HStack spacing="1rem">
             <FtLogo width={20} height={20} fill={theme.colors.mono.black} />
             <Link to={ROUTES.PROJECT_DETAIL_OF(projectPreview.name)}>

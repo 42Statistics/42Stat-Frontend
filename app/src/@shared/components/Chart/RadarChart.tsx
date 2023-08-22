@@ -1,7 +1,6 @@
 import { useTheme } from '@emotion/react';
 import { merge } from 'lodash-es';
-import ReactApexChart from 'react-apexcharts';
-import { useDefaultOptions } from './hooks/useDefaultOptions';
+import Chart from './Chart';
 
 type RadarChartProps = {
   series: ApexAxisChartSeries;
@@ -13,7 +12,6 @@ export const RadarChart = ({
   options: additionalOptions,
 }: RadarChartProps) => {
   const theme = useTheme();
-  const { defaultOptions } = useDefaultOptions();
 
   const radarChartOptions: ApexCharts.ApexOptions = {
     plotOptions: {
@@ -34,20 +32,7 @@ export const RadarChart = ({
     },
   };
 
-  const options = merge(
-    {},
-    defaultOptions,
-    radarChartOptions,
-    additionalOptions,
-  );
+  const options = merge({}, radarChartOptions, additionalOptions);
 
-  return (
-    <ReactApexChart
-      type="radar"
-      series={series}
-      options={options}
-      width="99%"
-      height="100%"
-    />
-  );
+  return <Chart type="radar" series={series} options={options} />;
 };

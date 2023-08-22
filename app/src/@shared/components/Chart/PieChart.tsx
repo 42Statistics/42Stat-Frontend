@@ -1,7 +1,6 @@
 import { useTheme } from '@emotion/react';
 import { merge } from 'lodash-es';
-import ReactApexChart from 'react-apexcharts';
-import { useDefaultOptions } from './hooks/useDefaultOptions';
+import Chart from './Chart';
 
 type PieChartProps = {
   labels: string[];
@@ -15,7 +14,6 @@ export const PieChart = ({
   options: additionalOptions,
 }: PieChartProps) => {
   const theme = useTheme();
-  const { defaultOptions } = useDefaultOptions();
 
   const pieChartOptions: ApexCharts.ApexOptions = {
     labels,
@@ -47,15 +45,7 @@ export const PieChart = ({
     responsive: [],
   };
 
-  const options = merge({}, defaultOptions, pieChartOptions, additionalOptions);
+  const options = merge({}, pieChartOptions, additionalOptions);
 
-  return (
-    <ReactApexChart
-      type="pie"
-      series={series}
-      options={options}
-      width="99%"
-      height="100%"
-    />
-  );
+  return <Chart type="pie" series={series} options={options} />;
 };

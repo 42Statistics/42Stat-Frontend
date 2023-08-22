@@ -22,7 +22,9 @@ export const EvalLogListItem = ({ element }: EvalLogListItemProps) => {
           <Center w="10rem">
             <CorrectorReviewLabel number={correctorReview.mark} />
           </Center>
-          <Text style={{ width: '100%' }}>{correctorReview.review}</Text>
+          <Text style={{ width: '100%', wordBreak: 'break-all' }}>
+            {correctorReview.review}
+          </Text>
         </HStack>
         <HStack w="100%">
           <Center w="10rem">
@@ -33,7 +35,9 @@ export const EvalLogListItem = ({ element }: EvalLogListItemProps) => {
             )}
           </Center>
           {correctedsReview ? (
-            <Text style={{ width: '100%' }}>{correctedsReview.review}</Text>
+            <Text style={{ width: '100%', wordBreak: 'break-all' }}>
+              {correctedsReview.review}
+            </Text>
           ) : (
             <Text color={theme.colors.mono.gray500} style={{ width: '100%' }}>
               아직 피드백을 작성하지 않았습니다.

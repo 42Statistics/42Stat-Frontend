@@ -1,4 +1,6 @@
 import { useTheme } from '@emotion/react';
+import { paletteAtom } from '@shared/atoms/paletteAtom';
+import { useAtomValue } from 'jotai';
 import { merge } from 'lodash-es';
 import Chart from './Chart';
 
@@ -14,9 +16,15 @@ export const PieChart = ({
   options: additionalOptions,
 }: PieChartProps) => {
   const theme = useTheme();
+  const palette = useAtomValue(paletteAtom);
 
   const pieChartOptions: ApexCharts.ApexOptions = {
     labels,
+    chart: {
+      dropShadow: {
+        enabled: palette === 'dark',
+      },
+    },
     plotOptions: {
       pie: {
         // startAngle: -270,

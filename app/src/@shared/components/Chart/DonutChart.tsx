@@ -1,4 +1,6 @@
 import { useTheme } from '@emotion/react';
+import { paletteAtom } from '@shared/atoms/paletteAtom';
+import { useAtomValue } from 'jotai';
 import { merge } from 'lodash-es';
 import Chart from './Chart';
 
@@ -14,9 +16,15 @@ export const DonutChart = ({
   options: additionalOptions,
 }: DonutChartProps) => {
   const theme = useTheme();
+  const palette = useAtomValue(paletteAtom);
 
   const donutChartOptions: ApexCharts.ApexOptions = {
     labels,
+    chart: {
+      dropShadow: {
+        enabled: palette === 'dark',
+      },
+    },
     plotOptions: {
       pie: {
         donut: {

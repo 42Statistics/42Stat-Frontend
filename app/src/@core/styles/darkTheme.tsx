@@ -37,7 +37,7 @@ const colors = {
       theme: '#070f21',
     },
     main: {
-      default: '#151515',
+      default: 'linear-gradient(150deg, #262626 0%, #0a0a0a 100%)',
       theme: '#151515',
     },
     box: {

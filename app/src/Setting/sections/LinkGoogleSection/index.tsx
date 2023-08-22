@@ -67,7 +67,9 @@ export const LinkGoogleSection = () => {
           <LinkRow>
             <H3MediumText>42 계정</H3MediumText>
             <LinkLabel
-              left={<FtLogo width={20} height={20} />}
+              left={
+                <FtLogo width={20} height={20} fill={theme.colors.mono.black} />
+              }
               text={user.login}
             />
           </LinkRow>

@@ -126,7 +126,7 @@ const TeamPage = () => {
           </HStack>
           <H1BoldText>{name}</H1BoldText>
           <HStack spacing="1rem">
-            <FtLogo width={20} height={20} />
+            <FtLogo width={20} height={20} fill={theme.colors.mono.black} />
             <Link to={ROUTES.PROJECT_DETAIL_OF(projectPreview.name)}>
               <H3MediumText>{projectPreview.name}</H3MediumText>
             </Link>

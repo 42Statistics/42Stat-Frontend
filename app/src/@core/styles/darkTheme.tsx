@@ -16,11 +16,11 @@ const colors = {
   },
   chart: {
     primary: {
-      default: '#1581df',
+      default: '#4c4ee3',
       light: '#c4ccdf',
     },
     accent: {
-      default: '#12eeaf',
+      default: '#0fecd9',
       light: '#90e5cd',
     },
   },
@@ -37,8 +37,8 @@ const colors = {
       theme: '#070f21',
     },
     main: {
-      default: '#1a1b1e',
-      theme: '#1a1b1e',
+      default: '#151515',
+      theme: '#151515',
     },
     box: {
       default: '#2b2c30',

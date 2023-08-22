@@ -99,7 +99,7 @@ const Layout = styled.div<LayoutProps>`
   })}
   border-radius: ${({ theme }) => theme.radius.xs};
   background-color: ${({ isMe, theme }) =>
-    isMe && theme.colors.primary.default} !important; // FIXME: !important
+    isMe ? theme.colors.primary.default : theme.colors.background.box.default};
   user-select: ${({ isMe }) => isMe && 'none'};
   transition: background-color 0.2s;
 

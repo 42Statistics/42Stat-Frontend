@@ -36,5 +36,13 @@ export const defaultDarkOptions: ApexCharts.ApexOptions = merge(
     theme: {
       mode: 'dark',
     },
+    chart: {
+      dropShadow: {
+        enabled: true,
+      },
+    },
+    grid: {
+      borderColor: '#555555',
+    },
   },
 );

@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client';
 import { css, useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { gql } from '@shared/__generated__';
-import { BoldText, WhiteBoldText } from '@shared/ui-kit';
+import { BoldText } from '@shared/ui-kit';
 import { mq } from '@shared/utils/facepaint/mq';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 import { useEffect, useState } from 'react';
@@ -145,9 +145,13 @@ export const Introduction = () => {
         css={device !== 'desktop' && SliderCenterStyle}
       >
         {strs.map((str, idx) => (
-          <WhiteBoldText fontSize={fontSize} key={idx}>
+          <BoldText
+            fontSize={fontSize}
+            key={idx}
+            color={theme.colors.mono.absolute.white}
+          >
             {str}
-          </WhiteBoldText>
+          </BoldText>
         ))}
       </Slider>
     </Layout>

@@ -18,7 +18,7 @@ export const AreaChart = ({
   const areaChartOptions: ApexCharts.ApexOptions = {
     colors: [theme.colors.chart.accent.default],
     stroke: {
-      width: 1.5,
+      width: 2,
       curve: 'smooth',
     },
     fill: {

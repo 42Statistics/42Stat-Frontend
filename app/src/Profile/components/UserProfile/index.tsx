@@ -132,6 +132,7 @@ const Layout = styled.div<LayoutProps>`
   border-radius: ${({ theme }) => theme.radius.md};
   user-select: none;
   width: 100%;
+  min-height: 102px;
   transition: all 0.2s;
 
   padding: 2rem 0;

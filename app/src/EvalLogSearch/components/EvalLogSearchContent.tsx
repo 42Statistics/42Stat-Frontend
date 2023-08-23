@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client';
+import { Footer } from '@core/components/Footer';
 import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
 import { EvalLogList } from '@shared/components/EvalLogList/EvalLogList';
 import { useIntersection } from '@shared/hooks/useIntersection';
@@ -109,12 +110,22 @@ export const EvalLogSearchContent = () => {
     );
   }
 
-  return <EvalLogList list={nodes} />;
+  return (
+    <>
+      <EvalLogList list={nodes} />
+      <Footer />
+    </>
+  );
 };
 
 // #region Views
 const EvalLogSearchError = ({ message }: { message: string }) => {
-  return <FullPageApolloErrorView message={message} />;
+  return (
+    <>
+      <FullPageApolloErrorView message={message} />
+      <Footer />
+    </>
+  );
 };
 
 const EvalLogSkeleton = () => {

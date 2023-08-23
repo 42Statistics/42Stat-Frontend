@@ -1,4 +1,3 @@
-import styled from '@emotion/styled';
 import {
   EvalLogHeader,
   TeamEvalLogHeader,
@@ -21,8 +20,8 @@ export const EvalLogListItemTitle = ({ header }: EvalLogListItemTitleProps) => {
       : { teamPreview: null, projectPreview: null };
 
   return (
-    <Layout>
-      <HStack justify="start" wrap="wrap">
+    <HStack justify="space-between" wrap="wrap" spacing="0.6rem">
+      <span style={{ wordBreak: 'break-all' }}>
         <Link to={ROUTES.PROFILE_OF(corrector.login)}>
           <PrimaryBoldText>{corrector.login}</PrimaryBoldText>
         </Link>
@@ -37,12 +36,10 @@ export const EvalLogListItemTitle = ({ header }: EvalLogListItemTitleProps) => {
             <Text>을&nbsp;</Text>
           </>
         ) : null}
-        <Text>
-          <strong>{dayjs(beginAt).format('YYYY-MM-DD HH:mm')}</strong>에
-          평가하였습니다
-        </Text>
-      </HStack>
-      <HStack spacing="1rem">
+        <BoldText>{dayjs(beginAt).format('YYYY-MM-DD HH:mm')}</BoldText>
+        <Text>에 평가하였습니다</Text>
+      </span>
+      <HStack justify="start" wrap="wrap" spacing="0.6rem">
         {projectPreview !== null ? (
           <Link to={ROUTES.PROJECT_DETAIL_OF(projectPreview.name)}>
             <BoldText>{projectPreview.name}</BoldText>
@@ -50,12 +47,6 @@ export const EvalLogListItemTitle = ({ header }: EvalLogListItemTitleProps) => {
         ) : null}
         <FlagLabel name={flag.name} isPositive={flag.isPositive} />
       </HStack>
-    </Layout>
+    </HStack>
   );
 };
-
-const Layout = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-`;

@@ -46,10 +46,6 @@ export const global = () => css`
     outline: 2px solid blue;
   }
 
-  strong {
-    font-weight: 700;
-  }
-
   // apexcharts 다크 모드 시 배경색이 변경되지 않는 버그
   .apexcharts-canvas > svg {
     background-color: transparent !important;

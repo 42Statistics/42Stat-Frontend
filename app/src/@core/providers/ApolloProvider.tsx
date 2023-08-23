@@ -75,6 +75,9 @@ export const client = new ApolloClient({
     typePolicies: {
       Query: {
         fields: {
+          getMyInfo: {
+            merge: true,
+          },
           getHomeEval: {
             merge: true,
           },

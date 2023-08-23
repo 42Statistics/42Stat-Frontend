@@ -21,24 +21,24 @@ export const EvalLogListItemTitle = ({ header }: EvalLogListItemTitleProps) => {
 
   return (
     <HStack justify="space-between" wrap="wrap" spacing="0.6rem">
-      <span style={{ wordBreak: 'break-all' }}>
+      <div style={{ wordBreak: 'break-all' }}>
         <Link to={ROUTES.PROFILE_OF(corrector.login)}>
-          <PrimaryBoldText>{corrector.login}</PrimaryBoldText>
+          <PrimaryBoldText inline>{corrector.login}</PrimaryBoldText>
         </Link>
-        <Text>님이&nbsp;</Text>
+        <Text inline>님이&nbsp;</Text>
         {teamPreview !== null ? (
           <>
             <Link to={ROUTES.TEAM_OF(teamPreview.id)}>
-              <PrimaryBoldText style={{ wordBreak: 'break-all' }}>
+              <PrimaryBoldText inline style={{ wordBreak: 'break-all' }}>
                 {teamPreview.name}
               </PrimaryBoldText>
             </Link>
-            <Text>을&nbsp;</Text>
+            <Text inline>을&nbsp;</Text>
           </>
         ) : null}
-        <BoldText>{dayjs(beginAt).format('YYYY-MM-DD HH:mm')}</BoldText>
-        <Text>에 평가하였습니다</Text>
-      </span>
+        <BoldText inline>{dayjs(beginAt).format('YYYY-MM-DD HH:mm')}</BoldText>
+        <Text inline>에 평가하였습니다</Text>
+      </div>
       <HStack justify="start" wrap="wrap" spacing="0.6rem">
         {projectPreview !== null ? (
           <Link to={ROUTES.PROJECT_DETAIL_OF(projectPreview.name)}>

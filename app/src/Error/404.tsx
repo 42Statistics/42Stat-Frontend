@@ -1,8 +1,8 @@
 import { useTheme } from '@emotion/react';
 import { AppLogoTitle } from '@shared/components/AppLogoTitle';
 import { Seo } from '@shared/components/Seo';
-import { ROUTES } from '@shared/constants/(tmp)routes';
 import { ARIA_LABEL } from '@shared/constants/accessibility';
+import { ROUTES } from '@shared/constants/routes';
 import { BoldText, Button, Text, VStack } from '@shared/ui-kit';
 import { Link } from 'react-router-dom';
 

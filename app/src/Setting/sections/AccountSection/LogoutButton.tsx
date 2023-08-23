@@ -1,7 +1,7 @@
 import { useMutation } from '@apollo/client';
 import { gql } from '@shared/__generated__';
 import { themePreferenceAtom } from '@shared/atoms/themePreferenceAtom';
-import { ROUTES } from '@shared/constants/(tmp)routes';
+import { ROUTES } from '@shared/constants/routes';
 import { Button } from '@shared/ui-kit';
 import { clearStorage } from '@shared/utils/storage/clearStorage';
 import { useSetAtom } from 'jotai';

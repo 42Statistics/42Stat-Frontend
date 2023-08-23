@@ -2,7 +2,7 @@ import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { userAtom } from '@shared/atoms/userAtom';
 import { ALT, ARIA_LABEL } from '@shared/constants/accessibility';
-import { ROUTES } from '@shared/constants/(tmp)routes';
+import { ROUTES } from '@shared/constants/routes';
 import {
   Avatar,
   CaptionText,

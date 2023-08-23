@@ -1,7 +1,7 @@
 import { SearchBarShapeButton } from '@core/components/SearchBarShapeButton';
 import styled from '@emotion/styled';
 import { AppLogoTitle } from '@shared/components/AppLogoTitle';
-import { ROUTES } from '@shared/constants/(tmp)routes';
+import { ROUTES } from '@shared/constants/routes';
 import { VStack } from '@shared/ui-kit';
 import { Link } from 'react-router-dom';
 

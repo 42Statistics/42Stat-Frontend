@@ -1,4 +1,4 @@
-import { MILLISECONDS } from '@shared/constants/(tmp)date';
+import { MILLISECONDS } from '@shared/constants/date';
 import { getTimeDiffFromNow } from '../getTimeDiffFromNow';
 
 export const timeDiffStringFormatter = (date: Date) => {

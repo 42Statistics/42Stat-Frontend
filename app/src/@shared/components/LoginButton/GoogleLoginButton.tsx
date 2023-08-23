@@ -1,8 +1,8 @@
 import { useMutation } from '@apollo/client';
 import { gql } from '@shared/__generated__';
 import { ReactComponent as GoogleLogo } from '@shared/assets/logo/google-logo.svg';
-import { ROUTES } from '@shared/constants/(tmp)routes';
 import { ARIA_LABEL } from '@shared/constants/accessibility';
+import { ROUTES } from '@shared/constants/routes';
 import { URL } from '@shared/constants/url';
 import {
   FakeGoogleWrapperType,

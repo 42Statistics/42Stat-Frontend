@@ -1,5 +1,5 @@
 import { reLoginDialogInfoAtom } from '@core/atoms/reLoginDialogInfoAtom';
-import { ROUTES } from '@shared/constants/(tmp)routes';
+import { ROUTES } from '@shared/constants/routes';
 import { AlertDialog } from '@shared/ui-kit';
 import { clearStorage } from '@shared/utils/storage/clearStorage';
 import { useAtom } from 'jotai';

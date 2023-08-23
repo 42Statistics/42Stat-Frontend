@@ -1,4 +1,4 @@
-import { QUOTES } from '../constants/(tmp)quotes';
+import { QUOTES } from '../constants/quotes';
 
 export const getDailyProgrammingQuote = (): string => {
   const today = new Date();

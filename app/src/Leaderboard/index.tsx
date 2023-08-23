@@ -1,4 +1,4 @@
-import { ROUTES } from '@shared/constants/(tmp)routes';
+import { ROUTES } from '@shared/constants/routes';
 import { Tab, Tabs, VStack } from '@shared/ui-kit';
 import { Outlet, useLocation } from 'react-router-dom';
 

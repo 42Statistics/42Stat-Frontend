@@ -1,4 +1,4 @@
-import { MILLISECONDS } from '@shared/constants/(tmp)date';
+import { MILLISECONDS } from '@shared/constants/date';
 
 type TimeDiffType = 'millisecond' | 'second' | 'minute' | 'hour' | 'day';
 

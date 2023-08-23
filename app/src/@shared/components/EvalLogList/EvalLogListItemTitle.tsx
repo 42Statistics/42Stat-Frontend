@@ -2,7 +2,7 @@ import {
   EvalLogHeader,
   TeamEvalLogHeader,
 } from '@shared/__generated__/graphql';
-import { ROUTES } from '@shared/constants/(tmp)routes';
+import { ROUTES } from '@shared/constants/routes';
 import { BoldText, HStack, PrimaryBoldText, Text } from '@shared/ui-kit';
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';

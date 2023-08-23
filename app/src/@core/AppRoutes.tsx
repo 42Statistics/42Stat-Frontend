@@ -6,7 +6,7 @@ import { ProfileVersusPageSkeleton } from '@/Profile/components/skeletons/Profil
 import { UserProfileSkeleton } from '@/Profile/components/skeletons/UserProfileSkeleton';
 import { AuthGuard } from '@core/guards/AuthGuard';
 import { UnAuthGuard } from '@core/guards/UnAuthGuard';
-import { ROUTES } from '@shared/constants/(tmp)routes';
+import { ROUTES } from '@shared/constants/routes';
 import { DeferredComponent } from '@shared/ui-kit';
 import { Suspense, lazy } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';

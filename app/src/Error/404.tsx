@@ -1,8 +1,8 @@
 import { useTheme } from '@emotion/react';
 import { AppLogoTitle } from '@shared/components/AppLogoTitle';
 import { Seo } from '@shared/components/Seo';
-import { ROUTES } from '@shared/constants/ROUTES';
-import { ARIA_LABEL_LINK } from '@shared/constants/accessibility/ARIA_LABEL';
+import { ROUTES } from '@shared/constants/(tmp)routes';
+import { ARIA_LABEL } from '@shared/constants/accessibility';
 import { BoldText, Button, Text, VStack } from '@shared/ui-kit';
 import { Link } from 'react-router-dom';
 
@@ -15,7 +15,7 @@ const NotFoundPage = () => {
     <>
       <Seo title={statusText} />
       <VStack spacing="6rem">
-        <Link to={ROUTES.ROOT} aria-label={ARIA_LABEL_LINK.STAT}>
+        <Link to={ROUTES.ROOT} aria-label={ARIA_LABEL.LINK.STAT}>
           <AppLogoTitle size="sm" color="white" />
         </Link>
         <VStack spacing="3rem">

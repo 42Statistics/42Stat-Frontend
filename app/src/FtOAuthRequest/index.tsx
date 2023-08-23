@@ -2,7 +2,7 @@ import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { AppLogoTitle } from '@shared/components/AppLogoTitle';
 import { FtLoginButton } from '@shared/components/LoginButton';
-import { ROUTES } from '@shared/constants/ROUTES';
+import { ROUTES } from '@shared/constants/(tmp)routes';
 import { Text, VStack } from '@shared/ui-kit';
 import { mq } from '@shared/utils/facepaint/mq';
 import { getGoogleCredential } from '@shared/utils/storage/googleCredential';

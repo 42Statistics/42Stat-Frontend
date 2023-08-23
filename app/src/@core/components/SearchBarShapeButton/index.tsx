@@ -2,7 +2,7 @@ import { isSpotlightOpenAtom } from '@core/atoms/isSpotlightOpenAtom';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { ReactComponent as MdSearch } from '@shared/assets/icon/md-search.svg';
-import { ARIA_LABEL_BUTTON } from '@shared/constants/accessibility/ARIA_LABEL';
+import { ARIA_LABEL } from '@shared/constants/accessibility';
 import { CaptionText, Clickable, HStack, Spacer, Text } from '@shared/ui-kit';
 import { mq } from '@shared/utils/facepaint/mq';
 import { detect } from 'detect-browser';
@@ -21,7 +21,7 @@ export const SearchBarShapeButton = () => {
   return (
     <Layout
       onClick={openSpotlight}
-      aria-label={ARIA_LABEL_BUTTON.SEARCH_USER_OR_PROJECT_USING_SPOTLIGHT}
+      aria-label={ARIA_LABEL.BUTTON.SEARCH_USER_OR_PROJECT_USING_SPOTLIGHT}
     >
       <HStack w="100%" justify="start" spacing="1.6rem">
         <MdSearch width={18} height={18} fill={theme.colors.mono.gray500} />

@@ -1,4 +1,4 @@
-import { BREAKPOINT } from '@shared/constants/BREAKPOINT';
+import { BREAKPOINT } from '@shared/constants/responsive';
 import type { Device } from '@shared/types/Device';
 import { useMediaQuery } from 'react-responsive';
 

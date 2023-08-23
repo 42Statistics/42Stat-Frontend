@@ -1,9 +1,4 @@
-import {
-  MILLISECONDS_IN_A_DAY,
-  MILLISECONDS_IN_A_HOUR,
-  MILLISECONDS_IN_A_MINUTE,
-  MILLISECONDS_IN_A_SECOND,
-} from '@shared/constants/Date';
+import { MILLISECONDS } from '@shared/constants/(tmp)date';
 
 type TimeDiffType = 'millisecond' | 'second' | 'minute' | 'hour' | 'day';
 
@@ -15,13 +10,13 @@ export const getTimeDiffFromNow = (
   const sign = diff >= 0 ? 1 : -1;
   switch (type) {
     case 'day':
-      return sign * Math.floor(Math.abs(diff) / MILLISECONDS_IN_A_DAY);
+      return sign * Math.floor(Math.abs(diff) / MILLISECONDS.DAY);
     case 'hour':
-      return sign * Math.floor(Math.abs(diff) / MILLISECONDS_IN_A_HOUR);
+      return sign * Math.floor(Math.abs(diff) / MILLISECONDS.HOUR);
     case 'minute':
-      return sign * Math.floor(Math.abs(diff) / MILLISECONDS_IN_A_MINUTE);
+      return sign * Math.floor(Math.abs(diff) / MILLISECONDS.MINUTE);
     case 'second':
-      return sign * Math.floor(Math.abs(diff) / MILLISECONDS_IN_A_SECOND);
+      return sign * Math.floor(Math.abs(diff) / MILLISECONDS.SECOND);
     case 'millisecond':
     default:
       return diff;

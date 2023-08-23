@@ -1,6 +1,6 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { ARIA_LABEL_BUTTON } from '@shared/constants/accessibility/ARIA_LABEL';
+import { ARIA_LABEL } from '@shared/constants/accessibility';
 import { Clickable, Text } from '@shared/ui-kit';
 
 type PageButtonProps = {
@@ -28,8 +28,8 @@ export const PageButton = ({
       onClick={handleClick}
       aria-label={
         pageNumber !== currPageNumber
-          ? ARIA_LABEL_BUTTON.PAGINATION.PAGE_OF(pageNumber)
-          : ARIA_LABEL_BUTTON.PAGINATION.CURRENT_PAGE_OF(pageNumber)
+          ? ARIA_LABEL.BUTTON.PAGINATION.PAGE_OF(pageNumber)
+          : ARIA_LABEL.BUTTON.PAGINATION.CURRENT_PAGE_OF(pageNumber)
       }
     >
       <Text

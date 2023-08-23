@@ -1,6 +1,6 @@
 import { UserPreview } from '@shared/__generated__/graphql';
-import { ROUTES } from '@shared/constants/ROUTES';
-import { ALT } from '@shared/constants/accessibility/ALT';
+import { ROUTES } from '@shared/constants/(tmp)routes';
+import { ALT } from '@shared/constants/accessibility';
 import { Avatar } from '@shared/ui-kit';
 import { SpotlightListItem } from './SpotlightListItem';
 

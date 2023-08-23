@@ -2,8 +2,8 @@ import { useMutation } from '@apollo/client';
 import { useTheme } from '@emotion/react';
 import { gql } from '@shared/__generated__';
 import { ReactComponent as MdSyncAlt } from '@shared/assets/icon/md-sync-alt.svg';
-import { GAPI_URL } from '@shared/constants/GAPI';
-import { ARIA_LABEL_BUTTON } from '@shared/constants/accessibility/ARIA_LABEL';
+import { ARIA_LABEL } from '@shared/constants/accessibility';
+import { URL } from '@shared/constants/url';
 import { useDisclosure } from '@shared/hooks/useDisclosure';
 import { AlertDialog, Clickable, Spinner } from '@shared/ui-kit';
 import {
@@ -33,7 +33,7 @@ type LinkGoogleButtonProps = {
 
 export const LinkGoogleButton = ({ onSuccess }: LinkGoogleButtonProps) => {
   const theme = useTheme();
-  const status = useScript(GAPI_URL, { removeOnUnmount: true });
+  const status = useScript(URL.GAPI, { removeOnUnmount: true });
   const [linkGoogle, { data, loading, error }] = useMutation(LINK_GOOGLE);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [googleButtonWrapper, setGoogleButtonWrapper] =
@@ -91,7 +91,7 @@ export const LinkGoogleButton = ({ onSuccess }: LinkGoogleButtonProps) => {
     <>
       <Clickable
         onClick={() => googleButtonWrapper?.click()}
-        aria-label={ARIA_LABEL_BUTTON.LINK_WITH('구글')}
+        aria-label={ARIA_LABEL.BUTTON.LINK_WITH('구글')}
       >
         <MdSyncAlt width={20} height={20} fill={theme.colors.mono.black} />
       </Clickable>

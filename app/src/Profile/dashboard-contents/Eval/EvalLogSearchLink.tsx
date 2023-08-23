@@ -1,6 +1,6 @@
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { DashboardContent } from '@shared/components/DashboardContent';
-import { ROUTES } from '@shared/constants/ROUTES';
+import { ROUTES } from '@shared/constants/(tmp)routes';
 import { Center } from '@shared/ui-kit';
 import { CustomLink } from '@shared/ui-kit-styled/CustomLink';
 import { useContext } from 'react';

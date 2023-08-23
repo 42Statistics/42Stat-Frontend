@@ -3,8 +3,8 @@ import { SearchBarShapeButton } from '@core/components/SearchBarShapeButton';
 import styled from '@emotion/styled';
 import { userAtom } from '@shared/atoms/userAtom';
 import { AppLogoTitle } from '@shared/components/AppLogoTitle';
-import { ROUTES } from '@shared/constants/ROUTES';
-import { ARIA_LABEL_LINK } from '@shared/constants/accessibility/ARIA_LABEL';
+import { ROUTES } from '@shared/constants/(tmp)routes';
+import { ARIA_LABEL } from '@shared/constants/accessibility';
 import { VStack } from '@shared/ui-kit';
 import { useAtomValue } from 'jotai';
 import { Link } from 'react-router-dom';
@@ -20,7 +20,7 @@ export const DesktopNavBar = ({ fixed = true }: DesktopNavBarProps) => {
   return (
     <Layout fixed={fixed}>
       <VStack w="100%" h="100%" spacing="4rem">
-        <Link to={ROUTES.HOME} aria-label={ARIA_LABEL_LINK.STAT}>
+        <Link to={ROUTES.HOME} aria-label={ARIA_LABEL.LINK.STAT}>
           <AppLogoTitle size="sm" />
         </Link>
         <DesktopNavProfile

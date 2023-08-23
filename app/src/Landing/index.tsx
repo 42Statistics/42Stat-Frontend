@@ -6,7 +6,7 @@ import {
   FtLoginButton,
   GoogleLoginButton,
 } from '@shared/components/LoginButton';
-import { ARIA_LABEL_LINK } from '@shared/constants/accessibility/ARIA_LABEL';
+import { ARIA_LABEL } from '@shared/constants/accessibility';
 import { HStack, Image, VStack } from '@shared/ui-kit';
 import { mq } from '@shared/utils/facepaint/mq';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
@@ -19,7 +19,7 @@ const LandingPage = () => {
   return (
     <HStack>
       <VStack align={device === 'desktop' ? 'start' : 'center'} spacing="8rem">
-        <a href="/" aria-label={ARIA_LABEL_LINK.STAT}>
+        <a href="/" aria-label={ARIA_LABEL.LINK.STAT}>
           <AppLogoTitle color={theme.colors.mono.absolute.white} />
         </a>
         <Introduction />

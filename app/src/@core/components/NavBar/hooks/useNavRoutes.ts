@@ -9,7 +9,7 @@ import { ReactComponent as MdQuickReference } from '@shared/assets/icon/md-quick
 import { ReactComponent as MdSettingsFill } from '@shared/assets/icon/md-settings-fill.svg';
 import { ReactComponent as MdSettings } from '@shared/assets/icon/md-settings.svg';
 import { userAtom } from '@shared/atoms/userAtom';
-import { ROUTES } from '@shared/constants/ROUTES';
+import { ROUTES } from '@shared/constants/(tmp)routes';
 import type { SvgElement } from '@shared/types/SvgElement';
 import { useAtomValue } from 'jotai';
 

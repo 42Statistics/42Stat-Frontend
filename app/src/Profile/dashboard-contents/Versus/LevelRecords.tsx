@@ -11,7 +11,7 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
-import { BREAKPOINT } from '@shared/constants/BREAKPOINT';
+import { BREAKPOINT } from '@shared/constants/responsive';
 import { useContext } from 'react';
 
 const GET_LEVEL_RECORDS_VERSUS = gql(/* GraphQL */ `

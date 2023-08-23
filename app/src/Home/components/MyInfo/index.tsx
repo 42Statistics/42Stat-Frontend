@@ -55,6 +55,7 @@ const Layout = styled(CustomBox)`
   align-items: center;
   justify-content: center;
   width: 100%;
+  min-height: 124px;
   color: ${({ theme }) => theme.colors.mono.absolute.white};
   background: ${({ theme }) =>
     `${theme.colors.background.landing.default} url(${space_background})`};

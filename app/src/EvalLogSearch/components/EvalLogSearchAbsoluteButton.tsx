@@ -1,7 +1,7 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { ReactComponent as MdSearch } from '@shared/assets/icon/md-search.svg';
-import { ARIA_LABEL_BUTTON } from '@shared/constants/accessibility/ARIA_LABEL';
+import { ARIA_LABEL } from '@shared/constants/accessibility';
 import { Clickable } from '@shared/ui-kit';
 import { mq } from '@shared/utils/facepaint/mq';
 
@@ -19,7 +19,7 @@ export const EvalLogSearchAbsoluteButton = ({
       <Clickable
         onClick={onClick}
         tabIndex={1}
-        aria-label={ARIA_LABEL_BUTTON.SEARCH_EVAL_LOGS}
+        aria-label={ARIA_LABEL.BUTTON.SEARCH_EVAL_LOGS}
       >
         <Layout>
           <MdSearch width={26} height={26} fill={theme.colors.mono.white} />

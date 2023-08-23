@@ -9,7 +9,7 @@ import { FullPageApolloNotFoundView } from '@shared/components/ApolloError/FullP
 import { EvalLogList } from '@shared/components/EvalLogList/EvalLogList';
 import { CorrectorReviewLabel } from '@shared/components/EvalLogList/EvalLogListItem';
 import { Seo } from '@shared/components/Seo';
-import { ROUTES } from '@shared/constants/ROUTES';
+import { ROUTES } from '@shared/constants/routes';
 import {
   Avatar,
   CaptionText,

@@ -1,9 +1,9 @@
 import { useMutation } from '@apollo/client';
 import { gql } from '@shared/__generated__';
 import { ReactComponent as GoogleLogo } from '@shared/assets/logo/google-logo.svg';
-import { GAPI_URL } from '@shared/constants/GAPI';
-import { ROUTES } from '@shared/constants/ROUTES';
-import { ARIA_LABEL_BUTTON } from '@shared/constants/accessibility/ARIA_LABEL';
+import { ARIA_LABEL } from '@shared/constants/accessibility';
+import { ROUTES } from '@shared/constants/routes';
+import { URL } from '@shared/constants/url';
 import {
   FakeGoogleWrapperType,
   createFakeGoogleWrapper,
@@ -37,7 +37,7 @@ export const GOOGLE_LOGIN = gql(/* GraphQL */ `
 `);
 
 export const GoogleLoginButton = () => {
-  const status = useScript(GAPI_URL, { removeOnUnmount: true });
+  const status = useScript(URL.GAPI, { removeOnUnmount: true });
   const [login, { data, loading, error }] = useMutation(GOOGLE_LOGIN);
   const [googleButtonWrapper, setGoogleButtonWrapper] =
     useState<FakeGoogleWrapperType>();
@@ -88,7 +88,7 @@ export const GoogleLoginButton = () => {
     <LoginButton
       logo={<GoogleLogo width={18} height={18} />}
       text="Google 계정으로 로그인"
-      ariaLabel={ARIA_LABEL_BUTTON.LOGIN_WITH_GOOGLE_ACCOUNT}
+      ariaLabel={ARIA_LABEL.BUTTON.LOGIN_WITH_GOOGLE_ACCOUNT}
       onClick={() => googleButtonWrapper?.click()}
     />
   );

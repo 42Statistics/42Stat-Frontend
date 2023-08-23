@@ -1,13 +1,13 @@
-import { REFRESH_TOKEN_KEY } from '@shared/constants/LOCAL_STORAGE_KEY';
+import { LOCAL_STORAGE_KEYS } from '@shared/constants/storage';
 
 export const getRefreshToken = () => {
-  return localStorage.getItem(REFRESH_TOKEN_KEY);
+  return localStorage.getItem(LOCAL_STORAGE_KEYS.REFRESH_TOKEN);
 };
 
 export const setRefreshToken = (refreshToken: string) => {
-  localStorage.setItem(REFRESH_TOKEN_KEY, refreshToken);
+  localStorage.setItem(LOCAL_STORAGE_KEYS.REFRESH_TOKEN, refreshToken);
 };
 
 export const removeRefreshToken = () => {
-  localStorage.removeItem(REFRESH_TOKEN_KEY);
+  localStorage.removeItem(LOCAL_STORAGE_KEYS.REFRESH_TOKEN);
 };

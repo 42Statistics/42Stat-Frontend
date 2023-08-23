@@ -1,8 +1,8 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { UserRank } from '@shared/__generated__/graphql';
-import { ROUTES } from '@shared/constants/ROUTES';
-import { ALT } from '@shared/constants/accessibility/ALT';
+import { ALT } from '@shared/constants/accessibility';
+import { ROUTES } from '@shared/constants/routes';
 import {
   Avatar,
   Body1MediumText,

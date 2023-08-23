@@ -1,13 +1,13 @@
-import { ACCESS_TOKEN_KEY } from '@shared/constants/SESSION_STORAGE_KEY';
+import { SESSION_STORAGE_KEYS } from '@shared/constants/storage';
 
 export const getAccessToken = () => {
-  return sessionStorage.getItem(ACCESS_TOKEN_KEY);
+  return sessionStorage.getItem(SESSION_STORAGE_KEYS.ACCESS_TOKEN);
 };
 
 export const setAccessToken = (accessToken: string) => {
-  sessionStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
+  sessionStorage.setItem(SESSION_STORAGE_KEYS.ACCESS_TOKEN, accessToken);
 };
 
 export const removeAccessToken = () => {
-  sessionStorage.removeItem(ACCESS_TOKEN_KEY);
+  sessionStorage.removeItem(SESSION_STORAGE_KEYS.ACCESS_TOKEN);
 };

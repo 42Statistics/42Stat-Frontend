@@ -8,7 +8,7 @@ import coalition_lee_cover from '@shared/assets/coalition/cover/coalition-lee-co
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { ALT } from '@shared/constants/accessibility/ALT';
+import { ALT } from '@shared/constants/accessibility';
 import {
   Avatar,
   H3BoldText,

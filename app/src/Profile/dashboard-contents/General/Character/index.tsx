@@ -8,7 +8,7 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
-import { ALT } from '@shared/constants/accessibility/ALT';
+import { ALT } from '@shared/constants/accessibility';
 import { H3MediumText, HStack, Image, Label, VStack } from '@shared/ui-kit';
 import { Tooltip } from '@shared/ui-kit/Tooltip';
 import { useContext } from 'react';

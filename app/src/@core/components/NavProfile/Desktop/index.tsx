@@ -1,9 +1,8 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { userAtom } from '@shared/atoms/userAtom';
-import { ALT } from '@shared/constants/accessibility/ALT';
-import { ARIA_LABEL_LINK } from '@shared/constants/accessibility/ARIA_LABEL';
-import { ROUTES } from '@shared/constants/ROUTES';
+import { ALT, ARIA_LABEL } from '@shared/constants/accessibility';
+import { ROUTES } from '@shared/constants/routes';
 import {
   Avatar,
   CaptionText,
@@ -33,7 +32,7 @@ export const DesktopNavProfile = ({
     <Link
       to={ROUTES.PROFILE_OF(user.login)}
       style={{ width: '100%' }}
-      aria-label={ARIA_LABEL_LINK.PROFILE_OF(user.login)}
+      aria-label={ARIA_LABEL.LINK.PROFILE_OF(user.login)}
     >
       <Layout>
         <HStack w="100%" spacing="2rem">

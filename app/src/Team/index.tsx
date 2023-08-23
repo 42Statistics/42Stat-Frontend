@@ -165,12 +165,12 @@ const TeamPage = () => {
           </CustomLink>
         </VStack>
         <Divider />
-        <VStack align="start" spacing="3rem">
+        <VStack w="100%" align="start" spacing="3rem">
           <H2BoldText>평가 기록</H2BoldText>
           {moulinette == null && evalLogs.length === 0 ? (
             <Text>평가 기록이 없습니다.</Text>
           ) : null}
-          <VStack align="start" spacing="1.5rem">
+          <VStack w="100%" align="start" spacing="1.5rem">
             <EvalLogList list={evalLogs} />
             {moulinette != null ? (
               <MoulinetteEvalLogListItem item={moulinette} />

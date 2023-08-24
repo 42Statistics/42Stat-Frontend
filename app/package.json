@@ -10,12 +10,12 @@
     "preview": "vite preview",
     "compile": "DOTENV_CONFIG_PATH=./env/.env.development graphql-codegen -r dotenv/config",
     "watch": "DOTENV_CONFIG_PATH=./env/.env.development graphql-codegen -r dotenv/config -w",
-    "format": "prettier .  --write",
+    "format": "prettier . --write",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "prepare": "cd .. && husky install"
+    "prepare": "cd .. && chmod ug+x .husky/* && husky install"
   },
   "dependencies": {
     "@apollo/client": "^3.7.15",
@@ -85,5 +85,11 @@
     "storybook": "^7.0.22",
     "typescript": "^4.9.5",
     "vite": "^4.3.9"
+  },
+  "lint-staged": {
+    "*": [
+      "prettier --write",
+      "eslint --fix"
+    ]
   }
 }

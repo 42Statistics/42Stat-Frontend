@@ -12,6 +12,7 @@ import { ProgressionBar } from '@shared/components/ProgressionBar';
 import { TextMax } from '@shared/components/TextMax';
 import { H3MediumText, HStack, Text, VStack } from '@shared/ui-kit';
 import { getStartEndDateString } from '@shared/utils/getStartEndDateString';
+import { sum } from 'lodash-es';
 import { useContext } from 'react';
 
 const GET_PREFERRED_TIME_BY_DATE_TEMPLATE_BY_LOGIN = gql(/* GraphQL */ `
@@ -95,22 +96,26 @@ export const PreferredTime = () => {
       minute: night % 60,
     },
   ];
-  const max = Math.max(morning, daytime, evening, night);
+  const minuteMax = Math.max(morning, daytime, evening, night);
+  const minuteSum = sum([morning, daytime, evening, night]);
 
   const getPreferredTimeTitle = (): string => {
-    if (max === 0) {
+    if (minuteMax === 0) {
       return '접속 기록이 없어요 😓';
     }
-    if (max === morning || morning >= 20 * 60) {
+    if (minuteSum >= 200 * 60) {
+      return '출석왕 🏆';
+    }
+    if (minuteMax === morning || morning >= 20 * 60) {
       return '일찍 일어나는 새 🐤';
     }
-    if (max === daytime) {
+    if (minuteMax === daytime) {
       return '점심 먹고 들어오는 편 👨‍💻';
     }
-    if (max === evening) {
+    if (minuteMax === evening) {
       return '저녁보다 코딩이 맛있어요 🍕';
     }
-    if (max === night || night >= 20 * 60) {
+    if (minuteMax === night || night >= 20 * 60) {
       return '새벽반 🌙';
     }
     return '';
@@ -127,7 +132,7 @@ export const PreferredTime = () => {
                 <Text>{time}</Text>
               </HStack>
               <ProgressionBar rate={hour / 50} />
-              <TextMax isMax={value !== 0 && max === value}>
+              <TextMax isMax={value !== 0 && minuteMax === value}>
                 {hour}시간 {minute}분
               </TextMax>
             </HStack>

@@ -111,7 +111,7 @@ const FtOAuthRedirectPage = () => {
     setRefreshToken(refreshToken);
     removeGoogleCredential();
     navigate(ROUTES.HOME);
-  }, [googleLoading, googleError, googleData]);
+  }, [googleLoading, googleError, googleData, navigate, onOpen]);
 
   if (ftCode === null) {
     return <Navigate to={ROUTES.ROOT} />;

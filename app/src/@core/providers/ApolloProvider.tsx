@@ -165,7 +165,7 @@ const ResponseInterceptor400 = ({
     client.setLink(
       from([responseInterceptor400, errorLink, authLink, httpLink]),
     );
-  }, []);
+  }, [setReLoginDialogInfo]);
 
   return <>{children}</>;
 };

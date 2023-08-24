@@ -36,7 +36,7 @@ export const EvalLogSearchDialog = ({
   isOpen,
   onClose,
 }: EvalLogSearchDialogProps) => {
-  const [_, setSearchParams] = useSearchParams();
+  const [, setSearchParams] = useSearchParams();
   const evalLogSearchArgs = useAtomValue(evalLogSearchArgsAtom);
 
   const { register, handleSubmit } = useForm<EvalLogSearchForm>({

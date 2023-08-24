@@ -47,7 +47,7 @@ export const EvalLogSearchContent = () => {
         variables: {
           after: data.getEvalLogs.pageInfo.endCursor,
         },
-      }).then((_) => setTimeout(() => setIsFetchingMore(false), 10));
+      }).then(() => setTimeout(() => setIsFetchingMore(false), 10));
     },
     [data, fetchMore],
   );
@@ -143,7 +143,7 @@ const EvalLogSearchInitialSkeleton = () => {
 };
 
 const EvalLogSearchNextPageSkeleton = forwardRef(
-  ({}, ref: React.ForwardedRef<HTMLDivElement>) => {
+  (_, ref: React.ForwardedRef<HTMLDivElement>) => {
     return (
       <VStack w="100%" spacing="1.2rem" ref={ref}>
         <EvalLogSkeleton />
@@ -151,4 +151,6 @@ const EvalLogSearchNextPageSkeleton = forwardRef(
     );
   },
 );
+
+EvalLogSearchNextPageSkeleton.displayName = 'EvalLogSearchNextPageSkeleton';
 // #endregion

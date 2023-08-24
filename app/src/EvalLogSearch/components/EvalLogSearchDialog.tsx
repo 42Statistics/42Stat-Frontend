@@ -1,5 +1,8 @@
+import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { Button, Dialog, Input, Select } from '@shared/ui-kit';
+import { ReactComponent as MdSwapVert } from '@shared/assets/icon/md-swap-vert.svg';
+import { ARIA_LABEL } from '@shared/constants/accessibility';
+import { Button, Clickable, Dialog, Input, Select } from '@shared/ui-kit';
 import { useAtomValue } from 'jotai';
 import { useForm } from 'react-hook-form';
 import { useSearchParams } from 'react-router-dom';
@@ -36,12 +39,22 @@ export const EvalLogSearchDialog = ({
   isOpen,
   onClose,
 }: EvalLogSearchDialogProps) => {
+  const theme = useTheme();
   const [, setSearchParams] = useSearchParams();
   const evalLogSearchArgs = useAtomValue(evalLogSearchArgsAtom);
 
-  const { register, handleSubmit } = useForm<EvalLogSearchForm>({
-    defaultValues: evalLogSearchArgs,
-  });
+  const { register, handleSubmit, getValues, setValue } =
+    useForm<EvalLogSearchForm>({
+      defaultValues: evalLogSearchArgs,
+    });
+
+  const handleSwapButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    const { corrector, corrected } = getValues();
+    setValue(CORRECTOR, corrected);
+    setValue(CORRECTED, corrector);
+  };
 
   return (
     <Dialog isOpen={isOpen} onClose={onClose}>
@@ -69,6 +82,17 @@ export const EvalLogSearchDialog = ({
                 {...register(CORRECTOR)}
                 style={{ width: '150px' }}
               />
+              <Clickable
+                type="button"
+                onClick={handleSwapButtonClick}
+                aria-label={ARIA_LABEL.BUTTON.SWAP_CORRECTOR_AND_CORRECTED}
+              >
+                <MdSwapVert
+                  width={20}
+                  height={20}
+                  fill={theme.colors.mono.black}
+                />
+              </Clickable>
             </li>
             <li>
               <label htmlFor={CORRECTED}>To</label>
@@ -162,7 +186,7 @@ const EvalLogSearchForm = styled.form`
   li {
     display: flex;
     align-items: center;
-    gap: 3rem;
+    gap: 1rem;
   }
 
   ul li label {

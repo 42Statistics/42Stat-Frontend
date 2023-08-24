@@ -24,7 +24,7 @@ export const useSearchTotalCount = ({
     }
 
     setEvalLogSearchTotalCount(undefined);
-  }, [data, error]);
+  }, [data, error, setEvalLogSearchTotalCount]);
 
   return evalLogSearchTotalCount;
 };

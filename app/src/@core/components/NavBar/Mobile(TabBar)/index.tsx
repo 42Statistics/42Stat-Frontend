@@ -23,8 +23,7 @@ const Layout = styled.nav`
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: 6rem;
-  padding: 1.4rem 2rem 6rem 2rem;
+  padding: 0.4rem 2rem 1rem 2rem;
   background-color: ${({ theme }) => theme.colors.mono.white};
   user-select: none;
 `;

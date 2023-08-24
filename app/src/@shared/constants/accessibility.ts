@@ -26,6 +26,7 @@ export const ARIA_LABEL = {
       PAGE_OF: (page: number) => `${page} 페이지`,
       CURRENT_PAGE_OF: (page: number) => `현재 ${page} 페이지`,
     } as const,
+    SWAP_CORRECTOR_AND_CORRECTED: '평가자와 피평가자 바꾸기',
     SEARCH_EVAL_LOGS: '평가 로그 검색',
     LINK_WITH: (provider: string) => `${provider} 계정으로 연결`,
     UNLINK_WITH: (provider: string) => `${provider} 계정 연결 해제`,

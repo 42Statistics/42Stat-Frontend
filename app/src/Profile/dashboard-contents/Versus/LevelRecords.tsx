@@ -120,6 +120,8 @@ const LevelRecordsChart = ({ series }: LevelRecordsChartProps) => {
     ],
     xaxis: {
       type: 'numeric',
+      min: 0,
+      max: 24,
       tickAmount: 8,
       labels: {
         formatter: (value) => `${value}개월`,

@@ -17,7 +17,7 @@ export const Footer = () => {
         <Link
           to="https://github.com/orgs/42Statistics/repositories"
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
           aria-label={ARIA_LABEL.LINK.STAT_GITHUB}
         >
           <GithubLogo width={16} height={16} fill={theme.colors.mono.gray500} />

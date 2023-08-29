@@ -18,7 +18,7 @@ export const FeedbackSection = () => {
         <HStack spacing="2rem">
           <H2BoldText>서비스 피드백</H2BoldText>
           <Spacer />
-          <Link to={URL.FEEDBACK} target="_blank" rel="noreferrer">
+          <Link to={URL.FEEDBACK} target="_blank" rel="noopener noreferrer">
             <Button
               onClick={() => {
                 /* pass */
@@ -33,7 +33,7 @@ export const FeedbackSection = () => {
         <VStack align="start" spacing="4rem">
           <H2BoldText>서비스 피드백</H2BoldText>
           <Divider />
-          <Link to={URL.FEEDBACK} target="_blank" rel="noreferrer">
+          <Link to={URL.FEEDBACK} target="_blank" rel="noopener noreferrer">
             <Button
               onClick={() => {
                 /* pass */

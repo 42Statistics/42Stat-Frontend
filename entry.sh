@@ -1,1 +1,1 @@
-pnpm i && pnpm run dev
+pnpm i --ignore-scripts && pnpm run dev 

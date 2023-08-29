@@ -2,6 +2,7 @@ import { ProjectNameContext } from '@/Project/contexts/ProjectNameContext';
 import { useQuery } from '@apollo/client';
 import styled from '@emotion/styled';
 import { BoldText, Divider, HStack, Text, VStack } from '@shared/ui-kit';
+import { CustomLink } from '@shared/ui-kit-styled/CustomLink';
 import { Mobile, TabletAndAbove } from '@shared/utils/react-responsive/Device';
 import { useContext } from 'react';
 import { GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME } from '../../dashboard-contents-queries/GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME';
@@ -33,7 +34,7 @@ export const ProjectIntroduction = () => {
     return null;
   }
 
-  const { name, circle, description } = data.getProjectInfo;
+  const { name, circle, description, pdfUrl } = data.getProjectInfo;
 
   return (
     <Layout>
@@ -58,6 +59,9 @@ export const ProjectIntroduction = () => {
               <Text>{description}</Text>
             </div>
           ) : null}
+          <CustomLink to={pdfUrl} target="_blank">
+            프로젝트 PDF 보기
+          </CustomLink>
         </VStack>
       </HStack>
     </Layout>

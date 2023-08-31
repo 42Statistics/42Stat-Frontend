@@ -38,6 +38,7 @@ const NotFoundPage = lazy(() => import('@/Error/404'));
 const FtOAuthRequestPage = lazy(() => import('@/FtOAuthRequest'));
 const FtOAuthRedirectPage = lazy(() => import('@/FtOAuthRedirect'));
 const SettingPage = lazy(() => import('@/Setting'));
+const CalculationPage = lazy(() => import('@/Calculator'));
 
 export const AppRoutes = () => {
   return (
@@ -209,6 +210,14 @@ export const AppRoutes = () => {
               </Suspense>
             }
           />
+					<Route
+						path={ROUTES.CALCULATOR}
+						element={
+							<Suspense>
+								<CalculationPage />
+							</Suspense>
+						}
+					/>
           <Route
             path={ROUTES.SETTING}
             element={

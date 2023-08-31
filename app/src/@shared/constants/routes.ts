@@ -22,5 +22,6 @@ export const ROUTES = {
   EVALLOG: '/evallog',
   TEAM: '/team/:id',
   TEAM_OF: (id: number) => `/team/${id}`,
+	CALCULATOR: '/calculator',
   SETTING: '/setting',
 } as const;

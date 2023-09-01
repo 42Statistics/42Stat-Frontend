@@ -6,6 +6,8 @@ import { ReactComponent as MdPersonFill } from '@shared/assets/icon/md-person-fi
 import { ReactComponent as MdPerson } from '@shared/assets/icon/md-person.svg';
 import { ReactComponent as MdQuickReferenceFill } from '@shared/assets/icon/md-quick-reference-fill.svg';
 import { ReactComponent as MdQuickReference } from '@shared/assets/icon/md-quick-reference.svg';
+import { ReactComponent as MdCalculateFill} from '@shared/assets/icon/md-calculate-fill.svg';
+import { ReactComponent as MdCalculate} from '@shared/assets/icon/md-calculate.svg';
 import { ReactComponent as MdSettingsFill } from '@shared/assets/icon/md-settings-fill.svg';
 import { ReactComponent as MdSettings } from '@shared/assets/icon/md-settings.svg';
 import { userAtom } from '@shared/atoms/userAtom';
@@ -57,8 +59,8 @@ export const useNavRoutes = () => {
 			text: '블랙홀 계산기',
 			abbr: '계산기',
 			path: ROUTES.CALCULATOR,
-			icon: MdQuickReference,
-			iconFocused: MdQuickReferenceFill,
+			icon: MdCalculate,
+			iconFocused: MdCalculateFill,
 		},
     SETTING: {
       text: '설정',

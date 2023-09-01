@@ -1,6 +1,5 @@
-import { PrimaryMediumText, Text } from '@shared/ui-kit';
+import { PrimaryMediumText, Text, GraphTextInput, GraphNumberInput } from '@shared/ui-kit';
 import styled from '@emotion/styled';
-import { rgba } from 'emotion-rgba';
 
 const CalculatorInput = () => {
 const heads = ['프로젝트명', '경험치', '점수', '코알리숑 보너스', '블랙홀 증가 일수', '통과시 레벨'];
@@ -13,6 +12,71 @@ const teams = [
 		isValidated: false,
 		finalMark: 0,
 	},
+	{
+		id: 1,
+		name: "팀1",
+		occurrence: 1,
+		lastEventTime: "2021-10-01",
+		isValidated: false,
+		finalMark: 0,
+	},
+	{
+		id: 1,
+		name: "팀1",
+		occurrence: 1,
+		lastEventTime: "2021-10-01",
+		isValidated: false,
+		finalMark: 0,
+	},
+	{
+		id: 1,
+		name: "팀1",
+		occurrence: 1,
+		lastEventTime: "2021-10-01",
+		isValidated: false,
+		finalMark: 0,
+	},
+	{
+		id: 1,
+		name: "팀1",
+		occurrence: 1,
+		lastEventTime: "2021-10-01",
+		isValidated: false,
+		finalMark: 0,
+	},
+	{
+		id: 1,
+		name: "팀1",
+		occurrence: 1,
+		lastEventTime: "2021-10-01",
+		isValidated: false,
+		finalMark: 0,
+	},
+	{
+		id: 1,
+		name: "팀1",
+		occurrence: 1,
+		lastEventTime: "2021-10-01",
+		isValidated: false,
+		finalMark: 0,
+	},
+	{
+		id: 1,
+		name: "팀1",
+		occurrence: 1,
+		lastEventTime: "2021-10-01",
+		isValidated: false,
+		finalMark: 0,
+	},
+	{
+		id: 1,
+		name: "팀1",
+		occurrence: 1,
+		lastEventTime: "2021-10-01",
+		isValidated: false,
+		finalMark: 0,
+	},
+
 ];
 
   return (
@@ -35,13 +99,13 @@ const teams = [
           }) => (
             <tr key={id}>
               <td>
-                <Text>{name}</Text>
+                <GraphTextInput w="10rem"></GraphTextInput>
               </td>
               <td>
                 <Text>{occurrence + 1}</Text>
               </td>
               <td>
-                <Text>{name}</Text>
+                <GraphNumberInput w="7rem" type="number"></GraphNumberInput>
               </td>
               <td>
                 <Text>
@@ -60,7 +124,6 @@ const teams = [
 };
 
 const Table = styled.table`
-  position: absolute;
   width: 90%;
   white-space: nowrap;
 
@@ -70,6 +133,7 @@ const Table = styled.table`
     text-align: center;
     padding: 0.8rem 2rem;
     vertical-align: middle;
+		border-bottom: solid 1px ${({ theme }) => theme.colors.mono.gray300};
   }
 
   td {
@@ -92,14 +156,6 @@ const Table = styled.table`
   td:last-of-type {
     border-top-right-radius: ${({ theme }) => theme.radius.xs};
     border-bottom-right-radius: ${({ theme }) => theme.radius.xs};
-  }
-
-  tbody tr:hover {
-    background-color: ${({ theme }) => theme.colors.element.hover};
-  }
-
-  tbody tr:active {
-    background-color: ${({ theme }) => theme.colors.element.active};
   }
 `;
 

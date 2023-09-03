@@ -1,26 +1,30 @@
 import { Text, H3BoldText, VStack, HStack, Writable } from '@shared/ui-kit';
 import { Seo } from '@shared/components/Seo';
 import { Footer } from '@core/components/Footer';
-import { Dashboard } from '@shared/components/Dashboard';
+import { DashboardTemp } from '@shared/components/Dashboard/DashboardTemp';
 import { calculatorPageDashboardContents } from '@/Calculator/dashboard-frames/calculatorPageDashboardContents';
-import { calculatorPageDashboardRows } from '@/Calculator/dashboard-frames/calculatorPageDashboardRows';
+import {
+  calculatorPageDashboardDesktop,
+  calculatorPageDashboardTablet,
+} from '@/Calculator/dashboard-frames/calculatorPageDashboardCols';
 import CalculatorInput from '@/Calculator/CalculatorInput';
 import { useAtom, useSetAtom } from 'jotai';
-import CalculatorPropsAtom from '@/Calculator/atoms/CalculatorPropsAtom';
-import SubjectListAtom from './atoms/SubjectListAtom';
+import { CalculatorPropsAtom } from '@/Calculator/atoms/CalculatorPropsAtom';
+import { SubjectListAtom } from './atoms/SubjectListAtom';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useEffect } from 'react';
-import { set } from 'react-hook-form';
+import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 
 const CalculatorLayout = () => {
   const theme = useTheme();
   const [CalculatorProps, setCalculatorProps] = useAtom(CalculatorPropsAtom);
   const setSubjectList = useSetAtom(SubjectListAtom);
   const { currentLevel, daysFromStart } = CalculatorProps;
+  const device = useDeviceType();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
+    const value = Number(e.target.value);
     const name = e.target.name as keyof typeof CalculatorProps;
     setCalculatorProps((prev) => ({
       ...prev,
@@ -30,10 +34,9 @@ const CalculatorLayout = () => {
 
   useEffect(() => {
     setCalculatorProps(() => ({
-      currentLevel: 0,
-      daysFromStart: 0,
+      currentLevel: 10,
+      daysFromStart: 10,
     }));
-
     setSubjectList([]);
   }, [setCalculatorProps, setSubjectList]);
 
@@ -48,6 +51,7 @@ const CalculatorLayout = () => {
           <H3BoldText>현재 레벨</H3BoldText>
           <HStack w="3rem">
             <Writable
+              type="number"
               name="currentLevel"
               value={currentLevel}
               onChange={onChange}
@@ -59,6 +63,7 @@ const CalculatorLayout = () => {
             <H3BoldText>본 과정 시작한지</H3BoldText>
             <HStack w="3rem">
               <Writable
+                type="number"
                 name="daysFromStart"
                 value={daysFromStart}
                 onChange={onChange}
@@ -70,9 +75,13 @@ const CalculatorLayout = () => {
           </Text>
         </VStack>
       </VStack>
-      <Dashboard
+      <DashboardTemp
         contents={calculatorPageDashboardContents}
-        rows={calculatorPageDashboardRows}
+        rows={
+          device === 'desktop'
+            ? calculatorPageDashboardDesktop
+            : calculatorPageDashboardTablet
+        }
       />
       <CalculatorInputLayout>
         <CalculatorInput />

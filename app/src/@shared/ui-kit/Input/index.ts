@@ -1,2 +1,2 @@
 export * from './Input';
-export * from './GraphInput';
+export * from './CheckBox';

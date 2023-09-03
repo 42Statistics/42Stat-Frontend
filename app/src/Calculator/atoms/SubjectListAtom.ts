@@ -1,12 +1,13 @@
 import { atom } from 'jotai';
 
-type Subject = {
+export type Subject = {
   id: number;
   name: string;
+  exp: number;
+  score: number;
+  bonus: boolean;
   blackhole: number;
   level: number;
 };
 
-const SubjectListAtom = atom<Subject[]>([]);
-
-export default SubjectListAtom;
+export const SubjectListAtom = atom<Subject[]>([]);

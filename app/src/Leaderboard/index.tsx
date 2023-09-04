@@ -32,6 +32,12 @@ const LeaderboardLayout = () => {
         >
           평가 횟수
         </Tab>
+        <Tab
+          selected={pathname.startsWith(ROUTES.LEADERBOARD_COMMENT)}
+          link={ROUTES.LEADERBOARD_COMMENT}
+        >
+          코멘트 길이
+        </Tab>
       </Tabs>
       <Outlet />
     </VStack>

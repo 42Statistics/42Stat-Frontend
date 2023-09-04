@@ -59,9 +59,11 @@ export const ProjectIntroduction = () => {
               <Text>{description}</Text>
             </div>
           ) : null}
-          <CustomLink to={pdfUrl} target="_blank" rel="noopener noreferrer">
-            프로젝트 PDF 보기
-          </CustomLink>
+          {pdfUrl != null && (
+            <CustomLink to={pdfUrl} target="_blank" rel="noopener noreferrer">
+              프로젝트 PDF 보기
+            </CustomLink>
+          )}
         </VStack>
       </HStack>
     </Layout>

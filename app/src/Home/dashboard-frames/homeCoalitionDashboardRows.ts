@@ -21,6 +21,10 @@ export const homeCoalitionDashboardRows: DashboardRowType[] = [
         rowSpan: 2,
         elementId: 18,
       },
+      {
+        rowSpan: 2,
+        elementId: 19,
+      },
     ],
   },
 ];

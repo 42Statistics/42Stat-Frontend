@@ -30,6 +30,7 @@ const documents = {
     "\n  query GetTigCountPerCoalitionByDateTemplate($dateTemplate: DateTemplate!) {\n    getHomeCoalition {\n      tigCountPerCoalitionByDateTemplate(dateTemplate: $dateTemplate) {\n        data {\n          coalition {\n            id\n            name\n            slug\n            imageUrl\n            coverUrl\n            color\n            score\n            userId\n          }\n          value\n        }\n        start\n        end\n      }\n    }\n  }\n": types.GetTigCountPerCoalitionByDateTemplateDocument,
     "\n  query GetScoreRecordsPerCoalition {\n    getHomeCoalition {\n      scoreRecordsPerCoalition {\n        coalition {\n          ...coalitionFields\n        }\n        records {\n          at\n          value\n        }\n      }\n    }\n  }\n": types.GetScoreRecordsPerCoalitionDocument,
     "\n  query GetTotalScoresPerCoalition {\n    getHomeCoalition {\n      totalScoresPerCoalition {\n        coalition {\n          ...coalitionFields\n        }\n        value\n      }\n    }\n  }\n": types.GetTotalScoresPerCoalitionDocument,
+    "\n  query GetWinCountPerCoalition {\n    getHomeCoalition {\n      winCountPerCoalition {\n        coalition {\n          ...coalitionFields\n        }\n        value\n      }\n    }\n  }\n": types.GetWinCountPerCoalitionDocument,
     "\n  query GetAverageCommentLength {\n    getHomeEval {\n      averageCommentLength\n    }\n  }\n": types.GetAverageCommentLengthDocument,
     "\n  query GetAverageFeedbackLength {\n    getHomeEval {\n      averageFeedbackLength\n    }\n  }\n": types.GetAverageFeedbackLengthDocument,
     "\n  query GetEvalCountRecords($last: Int!) {\n    getHomeEval {\n      evalCountRecords(last: $last) {\n        at\n        value\n      }\n    }\n  }\n": types.GetEvalCountRecordsDocument,
@@ -173,6 +174,10 @@ export function gql(source: "\n  query GetScoreRecordsPerCoalition {\n    getHom
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query GetTotalScoresPerCoalition {\n    getHomeCoalition {\n      totalScoresPerCoalition {\n        coalition {\n          ...coalitionFields\n        }\n        value\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetTotalScoresPerCoalition {\n    getHomeCoalition {\n      totalScoresPerCoalition {\n        coalition {\n          ...coalitionFields\n        }\n        value\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query GetWinCountPerCoalition {\n    getHomeCoalition {\n      winCountPerCoalition {\n        coalition {\n          ...coalitionFields\n        }\n        value\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetWinCountPerCoalition {\n    getHomeCoalition {\n      winCountPerCoalition {\n        coalition {\n          ...coalitionFields\n        }\n        value\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

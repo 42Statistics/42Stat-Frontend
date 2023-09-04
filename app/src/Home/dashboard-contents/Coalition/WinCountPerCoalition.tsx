@@ -1,7 +1,6 @@
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
 import { gql } from '@shared/__generated__';
-import { DateTemplate } from '@shared/__generated__/graphql';
 import { CoalitionMark } from '@shared/components/CoalitionMark';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
@@ -13,42 +12,25 @@ import { TextMax } from '@shared/components/TextMax';
 import { Body1Text, Center, VStack } from '@shared/ui-kit';
 import { CoalitionTable } from '@shared/ui-kit-styled/CoalitionTable';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
-import { getStartEndDateString } from '@shared/utils/getStartEndDateString';
 import { capitalize } from 'lodash-es';
 
-const GET_TIG_COUNT_PER_COALITION_BY_DATE_TEMPLATE = gql(/* GraphQL */ `
-  query GetTigCountPerCoalitionByDateTemplate($dateTemplate: DateTemplate!) {
+const GET_WIN_COUNT_PER_COALITION = gql(/* GraphQL */ `
+  query GetWinCountPerCoalition {
     getHomeCoalition {
-      tigCountPerCoalitionByDateTemplate(dateTemplate: $dateTemplate) {
-        data {
-          coalition {
-            id
-            name
-            slug
-            imageUrl
-            coverUrl
-            color
-            score
-            userId
-          }
-          value
+      winCountPerCoalition {
+        coalition {
+          ...coalitionFields
         }
-        start
-        end
+        value
       }
     }
   }
 `);
 
-export const MonthlyTigCountPerCoalition = () => {
+export const WinCountPerCoalition = () => {
   const theme = useTheme();
-  const title = '월간 코알리숑 티그 횟수';
-  const { loading, error, data } = useQuery(
-    GET_TIG_COUNT_PER_COALITION_BY_DATE_TEMPLATE,
-    {
-      variables: { dateTemplate: DateTemplate.CurrMonth },
-    },
-  );
+  const title = '코알리숑 우승 횟수';
+  const { loading, error, data } = useQuery(GET_WIN_COUNT_PER_COALITION);
 
   if (loading) {
     return <DashboardContentLoading title={title} />;
@@ -60,28 +42,19 @@ export const MonthlyTigCountPerCoalition = () => {
     return <DashboardContentNotFound title={title} />;
   }
 
-  const {
-    data: tableRawData,
-    start,
-    end,
-  } = data.getHomeCoalition.tigCountPerCoalitionByDateTemplate;
+  const { winCountPerCoalition } = data.getHomeCoalition;
 
-  const tableData = tableRawData.map(({ coalition, value }) => ({
+  const tableData = winCountPerCoalition.map(({ coalition, value }) => ({
     coalition,
     value,
   }));
 
   const max = Math.max(...tableData.map(({ value }) => value));
 
-  const description = getStartEndDateString(
-    new Date(start),
-    new Date(end),
-    'M월 D일',
-  );
   const unit = '회';
 
   return (
-    <DashboardContent title={title} description={description}>
+    <DashboardContent title={title}>
       <Center>
         <VStack h="100%">
           <CoalitionTable>

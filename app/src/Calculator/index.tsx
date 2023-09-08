@@ -9,23 +9,39 @@ import {
 } from '@/Calculator/dashboard-frames/calculatorPageDashboardCols';
 import CalculatorInput from '@/Calculator/CalculatorInput';
 import { useAtom, useSetAtom } from 'jotai';
-import { CalculatorPropsAtom } from '@/Calculator/atoms/CalculatorPropsAtom';
+import { calculatorPropsAtom } from '@/Calculator/atoms/CalculatorPropsAtom';
 import { SubjectListAtom } from './atoms/SubjectListAtom';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useEffect } from 'react';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
+import { gql } from '@shared/__generated__';
+import { useQuery } from '@apollo/client';
+import { getTimeDiffFromNow } from '@shared/utils/getTimeDiffFromNow';
+
+export const GET_BLACKHOLE_INFO = gql(/* GraphQL */ `
+  query GetBlackholeInfo {
+    getPersonalGeneral {
+      userProfile {
+        level
+      }
+      beginAt
+      blackholedAt
+    }
+  }
+`);
 
 const CalculatorLayout = () => {
   const theme = useTheme();
-  const [CalculatorProps, setCalculatorProps] = useAtom(CalculatorPropsAtom);
+  const [calculatorProps, setCalculatorProps] = useAtom(calculatorPropsAtom);
   const setSubjectList = useSetAtom(SubjectListAtom);
-  const { currentLevel, daysFromStart } = CalculatorProps;
+  const { currentLevel, daysFromStart } = calculatorProps;
   const device = useDeviceType();
+  const { loading, error, data } = useQuery(GET_BLACKHOLE_INFO);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
-    const name = e.target.name as keyof typeof CalculatorProps;
+    const name = e.target.name as keyof typeof calculatorProps;
     setCalculatorProps((prev) => ({
       ...prev,
       [name]: value,
@@ -34,11 +50,19 @@ const CalculatorLayout = () => {
 
   useEffect(() => {
     setCalculatorProps(() => ({
-      currentLevel: 10,
-      daysFromStart: 10,
+      currentLevel: data?.getPersonalGeneral.userProfile.level ?? 0,
+      daysFromStart:
+        getTimeDiffFromNow(
+          new Date(data?.getPersonalGeneral.beginAt ?? ''),
+          'day',
+        ) * -1,
     }));
     setSubjectList([]);
-  }, [setCalculatorProps, setSubjectList]);
+  }, [setCalculatorProps, setSubjectList, data]);
+
+  if (loading || error || !data) {
+    return <></>;
+  }
 
   return (
     <VStack w="100%" spacing="2rem">
@@ -51,7 +75,6 @@ const CalculatorLayout = () => {
           <H3BoldText>현재 레벨</H3BoldText>
           <HStack w="3rem">
             <Writable
-              type="number"
               name="currentLevel"
               value={currentLevel}
               onChange={onChange}
@@ -63,7 +86,6 @@ const CalculatorLayout = () => {
             <H3BoldText>본 과정 시작한지</H3BoldText>
             <HStack w="3rem">
               <Writable
-                type="number"
                 name="daysFromStart"
                 value={daysFromStart}
                 onChange={onChange}

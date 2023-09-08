@@ -5,7 +5,7 @@ type CalculatorProps = {
   daysFromStart: number;
 };
 
-export const CalculatorPropsAtom = atom<CalculatorProps>({
+export const calculatorPropsAtom = atom<CalculatorProps>({
   currentLevel: 0,
   daysFromStart: 0,
 });

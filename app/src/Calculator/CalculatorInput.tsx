@@ -20,12 +20,12 @@ const CalculatorInput = () => {
       ...prev,
       {
         id: subjectList.length,
-        name: '',
-        exp: 0,
-        score: 0,
-        blackhole: 10,
+        name: 'inception',
+        exp: 10042,
+        score: 100,
+        blackhole: 42,
         bonus: false,
-        level: 0,
+        level: 6.72,
       },
     ]);
   };

@@ -3,13 +3,13 @@ import { DonutChart } from '@shared/components/Chart';
 import { blackholeFormatter } from '@shared/utils/formatters/blackholeFormatter';
 import { useAtom } from 'jotai';
 import { SubjectListAtom } from '../atoms/SubjectListAtom';
-import { CalculatorPropsAtom } from '../atoms/CalculatorPropsAtom';
+import { calculatorPropsAtom } from '../atoms/CalculatorPropsAtom';
 import { useEffect, useState } from 'react';
 import { toInteger } from 'lodash-es';
 
 export const Blackhole = () => {
   const [subjectList] = useAtom(SubjectListAtom);
-  const [CalculatorProps] = useAtom(CalculatorPropsAtom);
+  const [CalculatorProps] = useAtom(calculatorPropsAtom);
   const [series, setSeries] = useState<number[]>([]);
   const [labels, setLabels] = useState<string[]>([]);
 

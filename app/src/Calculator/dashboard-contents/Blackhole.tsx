@@ -1,37 +1,25 @@
 import { DashboardContent } from '@shared/components/DashboardContent';
 import { DonutChart } from '@shared/components/Chart';
 import { blackholeFormatter } from '@shared/utils/formatters/blackholeFormatter';
-import { useAtom } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import { SubjectListAtom } from '../atoms/SubjectListAtom';
 import { calculatorPropsAtom } from '../atoms/CalculatorPropsAtom';
-import { useEffect, useState } from 'react';
-import { toInteger } from 'lodash-es';
 
 export const Blackhole = () => {
-  const [subjectList] = useAtom(SubjectListAtom);
-  const [CalculatorProps] = useAtom(calculatorPropsAtom);
-  const [series, setSeries] = useState<number[]>([]);
-  const [labels, setLabels] = useState<string[]>([]);
+  const subjectList = useAtomValue(SubjectListAtom);
+  const calculatorProps = useAtomValue(calculatorPropsAtom);
+	
+	console.log(calculatorProps);
 
-  useEffect(() => {
-    const filterList = subjectList.map((subject) => {
-      const blackhole = subject.blackhole;
+	const series = [
+		calculatorProps.daysFromStart,
+		...subjectList.map((subject) => subject.score),
+	];
 
-      if (!isNaN(blackhole)) {
-        subject.blackhole = toInteger(blackhole);
-        return subject;
-      }
-      return subject;
-    });
-    setSeries([
-      CalculatorProps.daysFromStart,
-      ...filterList.map((subject) => subject.blackhole),
-    ]);
-    setLabels(['현재', ...filterList.map((subject) => subject.name)]);
-  }, [CalculatorProps, subjectList]);
+	const labels = ['현재', ...subjectList.map((subject) => subject.name)];
 
   return (
-    <DashboardContent title={'Blackhole'} type="ApexCharts">
+    <DashboardContent title="Blackhole" type="ApexCharts">
       <BlackholeCalculatorChart labels={labels} series={series} />
     </DashboardContent>
   );

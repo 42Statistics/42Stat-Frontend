@@ -3,22 +3,18 @@ import { AreaChart } from '@shared/components/Chart';
 import { useAtom } from 'jotai';
 import { SubjectListAtom } from '@/Calculator/atoms/SubjectListAtom';
 import { calculatorPropsAtom } from '@/Calculator/atoms/CalculatorPropsAtom';
-import { useEffect, useState } from 'react';
 
 export const Level = () => {
   const [subjectList] = useAtom(SubjectListAtom);
   const [CalculatorProps] = useAtom(calculatorPropsAtom);
-  const [levelList, setLevelList] = useState<LevelProp[]>([]);
 
-  useEffect(() => {
-    setLevelList([
-      { x: '현재 레벨', y: CalculatorProps.currentLevel },
-      ...subjectList.map((subject) => ({
-        x: subject.name,
-        y: subject.level,
-      })),
-    ]);
-  }, [CalculatorProps, subjectList]);
+	const levelList = [
+		{ x: '현재 레벨', y: CalculatorProps.currentLevel },
+		...subjectList.map((subject) => ({
+			x: subject.name,
+			y: subject.level,
+		})),
+	];
 
   const series: ApexAxisChartSeries = [
     {

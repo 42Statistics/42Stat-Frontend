@@ -1,4 +1,4 @@
-import { Text, H3BoldText, VStack, HStack, Writable } from '@shared/ui-kit';
+import { Text, H3BoldText, VStack, HStack, Writable, H1BoldText } from '@shared/ui-kit';
 import { Seo } from '@shared/components/Seo';
 import { Footer } from '@core/components/Footer';
 import { DashboardTemp } from '@shared/components/Dashboard/DashboardTemp';
@@ -39,25 +39,23 @@ const CalculatorLayout = () => {
   const device = useDeviceType();
   const { loading, error, data } = useQuery(GET_BLACKHOLE_INFO);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
-    if (isNaN(value)) return;
     const name = e.target.name as keyof typeof calculatorProps;
     setCalculatorProps((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
-
   useEffect(() => {
+		if (!data) {
+			return;
+		}
+		const { beginAt, userProfile: { level }} = data.getPersonalGeneral;
+
     setCalculatorProps({
-      currentLevel: data?.getPersonalGeneral.userProfile.level ?? 0,
-      daysFromStart: Math.abs(
-        getTimeDiffFromNow(
-          new Date(data?.getPersonalGeneral.beginAt ?? ''),
-          'day',
-        ),
-      ),
+      currentLevel: level,
+      daysFromStart: -getTimeDiffFromNow(new Date(beginAt), 'day'),
     });
     setSubjectList([
       {
@@ -67,7 +65,7 @@ const CalculatorLayout = () => {
         score: 100,
         blackhole: 0,
         bonus: false,
-        level: data?.getPersonalGeneral.userProfile.level ?? 0,
+        level,
       },
     ]);
   }, [setCalculatorProps, setSubjectList, data]);
@@ -80,16 +78,14 @@ const CalculatorLayout = () => {
     <VStack w="100%" spacing="2rem">
       <Seo title="블랙홀 계산기" />
       <VStack w="100%" align="start" spacing="2rem">
-        <Text fontSize="4rem" fontWeight={600}>
-          블랙홀 계산기
-        </Text>
+				<H1BoldText>블랙홀 계산기</H1BoldText>
         <InputLayout>
           <H3BoldText>현재 레벨</H3BoldText>
           <HStack w="3rem">
             <Writable
               name="currentLevel"
-              value={isNaN(currentLevel) ? 0 : currentLevel} //초기화 이슈
-              onChange={onChange}
+							value={currentLevel}
+              onChange={handleChange}
             />
           </HStack>
         </InputLayout>
@@ -99,13 +95,13 @@ const CalculatorLayout = () => {
             <HStack w="3rem">
               <Writable
                 name="daysFromStart"
-                value={isNaN(daysFromStart) ? 0 : daysFromStart}
-                onChange={onChange}
+                value={daysFromStart}
+                onChange={handleChange}
               />
             </HStack>
           </InputLayout>
           <Text color={theme.colors.mono.gray500}>
-            휴학일이 포함된 경우, 휴학 기간을 뺄 수 있어요
+            휴학일이 포함된 경우, 휴학 기간을 뺄 수 있어요.
           </Text>
         </VStack>
       </VStack>

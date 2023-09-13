@@ -2,14 +2,10 @@ import { PrimaryMediumText, Writable, Button, CheckBox } from '@shared/ui-kit';
 import styled from '@emotion/styled';
 import { useAtom } from 'jotai';
 import { SubjectListAtom } from '@/Calculator/atoms/SubjectListAtom';
-import { ProjectSpotlightResult } from '@/Calculator/ProjectSpotlightResult';
-import { isProjectSpotlightOpenAtom } from '@/Calculator/atoms/isProjectSpotlightOpenAtom';
-import { toInteger } from 'lodash-es';
-import { useEffect } from 'react';
+import { ProjectSpotlight } from '@/Calculator/ProjectSpotlight';
 
 const CalculatorInput = () => {
   const [subjectList, setSubjectList] = useAtom(SubjectListAtom);
-  const [projectFocus, setProjectFocus] = useAtom(isProjectSpotlightOpenAtom);
 
   const heads = [
     '프로젝트명',
@@ -25,7 +21,7 @@ const CalculatorInput = () => {
       ...prev,
       {
         id: subjectList.length,
-        name: 'inception',
+        name: '',
         exp: 10042,
         score: 100,
         blackhole: 42,
@@ -35,28 +31,7 @@ const CalculatorInput = () => {
     ]);
   };
 
-  const onBlurChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (projectFocus !== toInteger(e.target.id)) return;
-    setProjectFocus(-1);
-  };
-
-  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    const name = e.target.name as keyof typeof subjectList;
-    const id = parseInt(e.target.id);
-    const updatedSubjectList = subjectList.map((subject) => {
-      if (subject.id === id) {
-        return {
-          ...subject,
-          [name]: value,
-        };
-      }
-      return subject;
-    });
-    setSubjectList(updatedSubjectList);
-  };
-
-  const onNumberInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     const name = e.target.name as keyof typeof subjectList;
     const id = parseInt(e.target.id);
@@ -87,10 +62,6 @@ const CalculatorInput = () => {
     setSubjectList(updatedSubjectList);
   };
 
-  useEffect(() => {
-    setProjectFocus(-1);
-  }, [setProjectFocus]);
-
   return (
     <>
       <Table>
@@ -108,15 +79,7 @@ const CalculatorInput = () => {
             ({ id, name, exp, score, bonus, blackhole, level }) => (
               <tr key={id}>
                 <td>
-                  <Writable
-                    id={id.toString()}
-                    name="name"
-                    onChange={onInputChange}
-                    onFocus={() => setProjectFocus(id)}
-                    onBlur={onBlurChange}
-                    value={name}
-                  />
-                  <ProjectSpotlightResult index={id} keyword={name} />
+                  <ProjectSpotlight index={id} keyword={name} />
                 </td>
                 <td>{exp}</td>
                 <td>
@@ -124,7 +87,7 @@ const CalculatorInput = () => {
                     type="number"
                     id={id.toString()}
                     name="score"
-                    onChange={onNumberInputChange}
+                    onChange={handleInputChange}
                     value={score}
                   />
                 </td>

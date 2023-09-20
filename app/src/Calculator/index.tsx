@@ -3,8 +3,8 @@ import {
   H3BoldText,
   VStack,
   HStack,
-  Writable,
   H1BoldText,
+  Input,
 } from '@shared/ui-kit';
 import { Seo } from '@shared/components/Seo';
 import { Footer } from '@core/components/Footer';
@@ -15,7 +15,7 @@ import {
   calculatorPageDashboardTablet,
 } from '@/Calculator/dashboard-frames/calculatorPageDashboardCols';
 import CalculatorInput from '@/Calculator/CalculatorInput';
-import { useAtom, useSetAtom } from 'jotai';
+import { useAtom } from 'jotai';
 import { calculatorPropsAtom } from '@/Calculator/atoms/CalculatorPropsAtom';
 import { SubjectListAtom } from './atoms/SubjectListAtom';
 import { useTheme } from '@emotion/react';
@@ -27,6 +27,7 @@ import { useQuery } from '@apollo/client';
 import { getTimeDiffFromNow } from '@shared/utils/getTimeDiffFromNow';
 import { getBlackholeDaysLeft } from '@shared/utils/getBlackholeDaysLeft';
 import { InfoTooltip } from '@shared/components/InfoTooltip';
+import { calculateSubjectList } from './utils/calculateSubjectList';
 
 export const GET_BLACKHOLE_INFO = gql(/* GraphQL */ `
   query GetBlackholeInfo {
@@ -43,7 +44,7 @@ export const GET_BLACKHOLE_INFO = gql(/* GraphQL */ `
 const CalculatorLayout = () => {
   const theme = useTheme();
   const [calculatorProps, setCalculatorProps] = useAtom(calculatorPropsAtom);
-  const setSubjectList = useSetAtom(SubjectListAtom);
+  const [subjectList, setSubjectList] = useAtom(SubjectListAtom);
   const { currentLevel, daysFromStart } = calculatorProps;
   const device = useDeviceType();
   const { loading, error, data } = useQuery(GET_BLACKHOLE_INFO);
@@ -55,6 +56,11 @@ const CalculatorLayout = () => {
       ...prev,
       [name]: value,
     }));
+    const calculatedSubjectList = calculateSubjectList({
+      subjectList: subjectList,
+      currentLevel: currentLevel,
+    });
+    setSubjectList(calculatedSubjectList);
   };
   useEffect(() => {
     if (!data) {
@@ -101,10 +107,14 @@ const CalculatorLayout = () => {
             <InfoTooltip text="레벨이 8.41을 넘으면, 블랙홀 기간이 늘지 않아요." />
           </HStack>
           <HStack w="3rem">
-            <Writable
+            <Input
               name="currentLevel"
+              type="number"
+              min="0"
+              max="30"
               value={currentLevel}
               onChange={handleChange}
+              style={{ width: '5rem' }}
             />
           </HStack>
         </InputLayout>
@@ -115,10 +125,12 @@ const CalculatorLayout = () => {
               <InfoTooltip text="670일이 넘으면, 블랙홀 기간이 늘지 않아요." />
             </HStack>
             <HStack w="3rem">
-              <Writable
+              <Input
                 name="daysFromStart"
+                type="number"
                 value={daysFromStart}
                 onChange={handleChange}
+                style={{ width: '5rem' }}
               />
             </HStack>
           </InputLayout>
@@ -149,7 +161,8 @@ const InputLayout = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 20rem;
+  width: 25rem;
+  color: ${({ theme }) => theme.colors.mono.black};
 `;
 
 const CalculatorInputLayout = styled.div`

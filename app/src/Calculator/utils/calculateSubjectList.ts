@@ -7,6 +7,7 @@ import {
 
 export const calculateSubjectList = ({
   subjectList,
+  currentLevel,
   newSubject,
 }: CalculateSubjectListProps) => {
   if (!subjectList.length) return [];
@@ -23,11 +24,11 @@ export const calculateSubjectList = ({
   };
 
   const newCalculatedList = subjectList.map((subject) => {
-    const { startLevel, score, bonus, exp } = subject;
-    if (newStartLevel === -1) newStartLevel = startLevel;
-    if (exp === null) return subject;
+    const { score, bonus, exp } = subject;
+    if (newStartLevel === -1) newStartLevel = currentLevel;
     const editStartLevel = newStartLevel;
     const decimalLevel = Math.floor(newStartLevel);
+    if (exp === null) return subject;
     const currentExp = Math.floor(
       EXP_MAX[decimalLevel] +
         EXP_REQUIRED_FOR_NEXT_LEVEL[decimalLevel] *
@@ -61,5 +62,6 @@ export const calculateSubjectList = ({
 
 type CalculateSubjectListProps = {
   subjectList: Subject[];
+  currentLevel: number;
   newSubject?: Subject;
 };

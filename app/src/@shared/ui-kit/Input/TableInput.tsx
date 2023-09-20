@@ -4,7 +4,7 @@ import { forwardRef } from 'react';
 
 type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
-export const Input = forwardRef(
+export const TableInput = forwardRef(
   (props: InputProps, ref: React.Ref<HTMLInputElement>) => {
     return (
       <Layout>
@@ -14,11 +14,11 @@ export const Input = forwardRef(
   },
 );
 
-Input.displayName = 'Input';
+TableInput.displayName = 'Input';
 
 const Layout = styled.div`
-  padding: 1rem 2rem;
-  border-radius: ${({ theme }) => theme.radius.md};
+  padding: 0.5rem;
+  border-radius: ${({ theme }) => theme.radius.sm};
   transition: all 0.2s;
   border: 1px solid ${({ theme }) => theme.colors.mono.gray200};
 

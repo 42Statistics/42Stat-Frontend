@@ -6,6 +6,7 @@ import { calculateSubjectList } from '@/Calculator/utils/calculateSubjectList';
 import { Center, H3Text } from '@shared/ui-kit';
 import { useAtom } from 'jotai';
 import { SubjectListAtom } from '@/Calculator/atoms/SubjectListAtom';
+import { calculatorPropsAtom } from '../atoms/CalculatorPropsAtom';
 import { useRoveFocus } from '@shared/hooks/useRoveFocus';
 
 export const Spotlight = ({
@@ -13,6 +14,7 @@ export const Spotlight = ({
   index,
 }: SpotlightProps) => {
   const [subjectList, setSubjectList] = useAtom(SubjectListAtom);
+  const [calculatorProps] = useAtom(calculatorPropsAtom);
   const size = data?.getSpotlight.projectPreviews.length ?? 0;
   const { currentFocus, setCurrentFocus } = useRoveFocus(size);
 
@@ -49,6 +51,7 @@ export const Spotlight = ({
     });
     const calculatedSubjectList = calculateSubjectList({
       subjectList: updatedSubjectList,
+      currentLevel: calculatorProps.currentLevel,
     });
     setSubjectList(calculatedSubjectList);
     return;
@@ -97,6 +100,7 @@ type ItemProps = {
 };
 
 const Item = styled.div<ItemProps>`
+  padding: 1rem;
   background-color: ${({ theme, isFocused }) =>
     isFocused && theme.colors.element.active};
   &:focus-visible {
@@ -105,6 +109,8 @@ const Item = styled.div<ItemProps>`
 `;
 
 const Layout = styled.div`
-  position: abosulte;
-  background-color: white;
+  position: absolute;
+  z-index: 100;
+  background-color: ${({ theme }) => theme.colors.background.box.default};
+  border-radius: ${({ theme }) => theme.radius.sm};
 `;

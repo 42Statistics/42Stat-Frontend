@@ -26,6 +26,7 @@ import { gql } from '@shared/__generated__';
 import { useQuery } from '@apollo/client';
 import { getTimeDiffFromNow } from '@shared/utils/getTimeDiffFromNow';
 import { getBlackholeDaysLeft } from '@shared/utils/getBlackholeDaysLeft';
+import { InfoTooltip } from '@shared/components/InfoTooltip';
 
 export const GET_BLACKHOLE_INFO = gql(/* GraphQL */ `
   query GetBlackholeInfo {
@@ -95,7 +96,10 @@ const CalculatorLayout = () => {
       <VStack w="100%" align="start" spacing="2rem">
         <H1BoldText>블랙홀 계산기</H1BoldText>
         <InputLayout>
-          <H3BoldText>현재 레벨</H3BoldText>
+          <HStack spacing="1rem">
+            <H3BoldText>현재 레벨</H3BoldText>
+            <InfoTooltip text="레벨이 8.41을 넘으면, 블랙홀 기간이 늘지 않아요." />
+          </HStack>
           <HStack w="3rem">
             <Writable
               name="currentLevel"
@@ -106,7 +110,10 @@ const CalculatorLayout = () => {
         </InputLayout>
         <VStack w="100%" align="start" spacing="0.7rem">
           <InputLayout>
-            <H3BoldText>본 과정 시작한지</H3BoldText>
+            <HStack spacing="1rem">
+              <H3BoldText>본 과정 시작한지</H3BoldText>
+              <InfoTooltip text="670일이 넘으면, 블랙홀 기간이 늘지 않아요." />
+            </HStack>
             <HStack w="3rem">
               <Writable
                 name="daysFromStart"

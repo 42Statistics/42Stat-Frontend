@@ -1,14 +1,4 @@
 import { atom } from 'jotai';
+import { Subject } from '../types/orderItemButton';
 
-export type Subject = {
-  id: number;
-  name: string;
-  exp: number | null;
-  score: number;
-  bonus: boolean;
-  blackhole: number;
-  startLevel: number;
-  finishLevel: number;
-};
-
-export const SubjectListAtom = atom<Subject[]>([]);
+export const subjectListAtom = atom<Subject[]>([]);

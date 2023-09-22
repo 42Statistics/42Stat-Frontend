@@ -1,18 +1,16 @@
-import {
-  PrimaryMediumText,
-  TableInput,
-  Button,
-  CheckBox,
-} from '@shared/ui-kit';
+import { PrimaryMediumText, TableInput, CheckBox } from '@shared/ui-kit';
 import styled from '@emotion/styled';
 import { useAtom } from 'jotai';
-import { SubjectListAtom } from '@/Calculator/atoms/SubjectListAtom';
+import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
 import { ProjectSpotlight } from '@/Calculator/ProjectSpotlight';
-import { calculatorPropsAtom } from './atoms/CalculatorPropsAtom';
+import { calculatorPropsAtom } from './atoms/calculatorPropsAtom';
 import { calculateSubjectList } from '@/Calculator/utils/calculateSubjectList';
+import { OrderItemButton } from '@/Calculator/OrderItemButton';
+import { TableRowList, Subject } from '@/Calculator/types/orderItemButton';
+import { Button } from '@shared/ui-kit';
 
 const CalculatorInput = () => {
-  const [subjectList, setSubjectList] = useAtom(SubjectListAtom);
+  const [subjectList, setSubjectList] = useAtom(subjectListAtom);
   const [calculatorProps] = useAtom(calculatorPropsAtom);
   const currentLevel = calculatorProps.currentLevel;
 
@@ -23,9 +21,19 @@ const CalculatorInput = () => {
     '코알리숑 보너스',
     '블랙홀 증가 일수',
     '통과시 레벨',
+    '과제 추가',
   ];
 
+  const onListChange = (subjectList: TableRowList[]) => {
+    const calculatedSubjectList = calculateSubjectList({
+      subjectList: subjectList as Subject[],
+      currentLevel: currentLevel,
+    });
+    setSubjectList(calculatedSubjectList);
+  };
+
   const onAddClick = () => {
+    if (subjectList.length >= 20) return; //ToDo: 20개 이상 추가 불가능 안내 추가
     const calculatedSubjectList = calculateSubjectList({
       subjectList: subjectList,
       currentLevel: currentLevel,
@@ -89,17 +97,21 @@ const CalculatorInput = () => {
           <tr>
             {heads.map((head, index) => (
               <th key={index}>
-                <PrimaryMediumText>{head}</PrimaryMediumText>
+                {index === heads.length - 1 ? (
+                  <Button onClick={onAddClick}>{head}</Button>
+                ) : (
+                  <PrimaryMediumText>{head}</PrimaryMediumText>
+                )}
               </th>
             ))}
           </tr>
         </thead>
         <tbody>
           {subjectList.map(
-            ({ id, name, exp, score, bonus, blackhole, finishLevel }) => (
-              <tr key={id}>
+            ({ name, exp, score, bonus, blackhole, finishLevel }, index) => (
+              <tr key={index}>
                 <td>
-                  <ProjectSpotlight index={id} keyword={name} />
+                  <ProjectSpotlight index={index} keyword={name} />
                 </td>
                 <td>{exp}</td>
                 <td>
@@ -107,7 +119,7 @@ const CalculatorInput = () => {
                     type="number"
                     min="0"
                     max="300"
-                    id={id.toString()}
+                    id={index.toString()}
                     name="score"
                     onChange={handleInputChange}
                     value={score}
@@ -116,7 +128,7 @@ const CalculatorInput = () => {
                 </td>
                 <td>
                   <CheckBox
-                    id={id.toString()}
+                    id={index.toString()}
                     type="checkbox"
                     name="bonus"
                     onChange={onCheckBoxChange}
@@ -125,18 +137,24 @@ const CalculatorInput = () => {
                 </td>
                 <td>{blackhole}</td>
                 <td>{finishLevel}</td>
+                <td>
+                  <OrderItemButton
+                    tableRowList={subjectList}
+                    index={index}
+                    onListChange={onListChange}
+                  />
+                </td>
               </tr>
             ),
           )}
         </tbody>
       </Table>
-      <Button onClick={onAddClick}>추가</Button>
     </>
   );
 };
 
 const Table = styled.table`
-  width: 90%;
+  width: 98%;
   white-space: nowrap;
 
   th {

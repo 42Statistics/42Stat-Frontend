@@ -1,19 +1,21 @@
 import { DashboardContent } from '@shared/components/DashboardContent';
 import { AreaChart } from '@shared/components/Chart';
 import { useAtom } from 'jotai';
-import { SubjectListAtom } from '@/Calculator/atoms/SubjectListAtom';
-import { calculatorPropsAtom } from '@/Calculator/atoms/CalculatorPropsAtom';
+import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
+import { calculatorPropsAtom } from '@/Calculator/atoms/calculatorPropsAtom';
 
 export const Level = () => {
-  const [subjectList] = useAtom(SubjectListAtom);
+  const [subjectList] = useAtom(subjectListAtom);
   const [CalculatorProps] = useAtom(calculatorPropsAtom);
 
   const levelList = [
     { x: '현재 레벨', y: CalculatorProps.currentLevel },
-    ...subjectList.map((subject) => ({
-      x: subject.name,
-      y: subject.finishLevel,
-    })),
+    ...subjectList
+      .filter((subject) => subject.name !== '')
+      .map((subject) => ({
+        x: subject.name,
+        y: subject.finishLevel,
+      })),
   ];
 
   const series: ApexAxisChartSeries = [
@@ -24,15 +26,10 @@ export const Level = () => {
   ];
 
   return (
-    <DashboardContent title="Level" type="ApexCharts">
+    <DashboardContent title="레벨 증가 그래프" type="ApexCharts">
       <LevelCalculatorChart series={series} />
     </DashboardContent>
   );
-};
-
-type LevelProp = {
-  x: string;
-  y: number;
 };
 
 type LevelCalculatorChartProps = {

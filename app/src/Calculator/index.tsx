@@ -1,9 +1,9 @@
 import {
   Text,
-  H3BoldText,
   VStack,
   HStack,
-  H1BoldText,
+  H2BoldText,
+  H3BoldText,
   Input,
 } from '@shared/ui-kit';
 import { Seo } from '@shared/components/Seo';
@@ -16,8 +16,8 @@ import {
 } from '@/Calculator/dashboard-frames/calculatorPageDashboardCols';
 import CalculatorInput from '@/Calculator/CalculatorInput';
 import { useAtom } from 'jotai';
-import { calculatorPropsAtom } from '@/Calculator/atoms/CalculatorPropsAtom';
-import { SubjectListAtom } from './atoms/SubjectListAtom';
+import { calculatorPropsAtom } from '@/Calculator/atoms/calculatorPropsAtom';
+import { subjectListAtom } from './atoms/subjectListAtom';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useEffect } from 'react';
@@ -44,7 +44,7 @@ export const GET_BLACKHOLE_INFO = gql(/* GraphQL */ `
 const CalculatorLayout = () => {
   const theme = useTheme();
   const [calculatorProps, setCalculatorProps] = useAtom(calculatorPropsAtom);
-  const [subjectList, setSubjectList] = useAtom(SubjectListAtom);
+  const [subjectList, setSubjectList] = useAtom(subjectListAtom);
   const { currentLevel, daysFromStart } = calculatorProps;
   const device = useDeviceType();
   const { loading, error, data } = useQuery(GET_BLACKHOLE_INFO);
@@ -56,11 +56,13 @@ const CalculatorLayout = () => {
       ...prev,
       [name]: value,
     }));
-    const calculatedSubjectList = calculateSubjectList({
-      subjectList: subjectList,
-      currentLevel: currentLevel,
-    });
-    setSubjectList(calculatedSubjectList);
+    if (name === 'currentLevel') {
+      const calculatedSubjectList = calculateSubjectList({
+        subjectList: subjectList,
+        currentLevel: value,
+      });
+      setSubjectList(calculatedSubjectList);
+    }
   };
   useEffect(() => {
     if (!data) {
@@ -99,8 +101,9 @@ const CalculatorLayout = () => {
   return (
     <VStack w="100%" spacing="2rem">
       <Seo title="블랙홀 계산기" />
-      <VStack w="100%" align="start" spacing="2rem">
-        <H1BoldText>블랙홀 계산기</H1BoldText>
+      <VStack w="100%" align="start" spacing="1rem">
+        <H2BoldText>내 정보</H2BoldText>
+        <hr style={{ width: '100%', border: 'solid 0.5px grey' }} />
         <InputLayout>
           <HStack spacing="1rem">
             <H3BoldText>현재 레벨</H3BoldText>
@@ -139,6 +142,10 @@ const CalculatorLayout = () => {
           </Text>
         </VStack>
       </VStack>
+      <VStack w="100%" align="start" spacing="1rem">
+        <H2BoldText>그래프</H2BoldText>
+        <hr style={{ width: '100%', border: 'solid 0.5px grey' }} />
+      </VStack>
       <DashboardTemp
         contents={calculatorPageDashboardContents}
         rows={
@@ -148,6 +155,10 @@ const CalculatorLayout = () => {
         }
       />
       <CalculatorInputLayout>
+        <VStack w="100%" align="start" spacing="1rem">
+          <H2BoldText>프로젝트 목록</H2BoldText>
+          <hr style={{ width: '100%', border: 'solid 0.5px grey' }} />
+        </VStack>
         <CalculatorInput />
       </CalculatorInputLayout>
       <Footer />

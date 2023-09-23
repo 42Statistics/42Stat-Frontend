@@ -36,8 +36,8 @@ export const DayFromBeginAt = () => {
     data2: { beginAt },
   } = data;
 
-  const diff = Math.abs(getTimeDiffFromNow(new Date(beginAt), 'day'));
-  const myDiff = Math.abs(getTimeDiffFromNow(new Date(myBeginAt), 'day'));
+  const diff = -getTimeDiffFromNow(new Date(beginAt), 'day');
+  const myDiff = -getTimeDiffFromNow(new Date(myBeginAt), 'day');
   const unit = '일째';
 
   return (

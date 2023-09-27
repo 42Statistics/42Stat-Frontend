@@ -1,10 +1,11 @@
 import {
-  VStack,
-  HStack,
   H2BoldText,
-  PrimaryMediumText,
+  H3BoldText,
   Writable,
   CheckBox,
+  VStack,
+  HStack,
+  H3MediumText,
 } from '@shared/ui-kit';
 import styled from '@emotion/styled';
 import { useAtom } from 'jotai';
@@ -16,20 +17,10 @@ import { OrderItemButton } from '@/Calculator/OrderItemButton';
 import { TableRowList, Subject } from '@/Calculator/types/orderItemButton';
 import { Button } from '@shared/ui-kit';
 
-const CalculatorInput = () => {
+const CalculatorInputMobile = () => {
   const [subjectList, setSubjectList] = useAtom(subjectListAtom);
   const [calculatorProps] = useAtom(calculatorPropsAtom);
   const currentLevel = calculatorProps.currentLevel;
-
-  const heads = [
-    '프로젝트명',
-    '경험치',
-    '점수',
-    '코알리숑 보너스',
-    '블랙홀',
-    '통과시 레벨',
-    '과제 추가',
-  ];
 
   const onListChange = (subjectList: TableRowList[]) => {
     const calculatedSubjectList = calculateSubjectList({
@@ -102,113 +93,88 @@ const CalculatorInput = () => {
       <VStack w="100%" align="start" spacing="1rem">
         <HStack w="100%" justify="space-between">
           <H2BoldText>프로젝트 목록</H2BoldText>
+          <Button onClick={onAddClick}>추가</Button>
         </HStack>
         <hr style={{ width: '100%', border: 'solid 0.5px grey' }} />
       </VStack>
-      <Table>
-        <thead>
-          <tr>
-            {heads.map((head, index) => (
-              <th key={index}>
-                {index === heads.length - 1 ? (
-                  <Button onClick={onAddClick}>{head}</Button>
-                ) : (
-                  <PrimaryMediumText>{head}</PrimaryMediumText>
-                )}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {subjectList.map(
-            ({ name, exp, score, bonus, blackhole, finishLevel }, index) => (
-              <tr key={index}>
-                <td>
-                  <ProjectSpotlight index={index} keyword={name} />
-                </td>
-                <td>{exp}</td>
-                <td>
-                  <InputLayout>
-                    <Writable
-                      type="number"
-                      min="0"
-                      max="300"
-                      id={index.toString()}
-                      name="score"
-                      onChange={handleInputChange}
-                      value={score}
-                      style={{ width: '4rem' }}
-                    />
-                  </InputLayout>
-                </td>
-                <td>
-                  <CheckBox
-                    id={index.toString()}
-                    type="checkbox"
-                    name="bonus"
-                    onChange={onCheckBoxChange}
-                    checked={bonus}
-                  />
-                </td>
-                <td>+{blackhole}일</td>
-                <td>{finishLevel}</td>
-                <td>
-                  <OrderItemButton
-                    tableRowList={subjectList}
-                    index={index}
-                    onListChange={onListChange}
-                  />
-                </td>
-              </tr>
-            ),
-          )}
-        </tbody>
-      </Table>
+      {subjectList.map((subject, index) => (
+        <Layout key={subject.id}>
+          <HStack w="100%" justify="space-between">
+            <H3MediumText>프로젝트명: {subject.name}</H3MediumText>
+            <OrderItemButton
+              tableRowList={subjectList}
+              index={index}
+              onListChange={onListChange}
+            />
+          </HStack>
+          <HStack justify="start" w="100%" spacing="5rem">
+            <VStack align="start" justify="start">
+              <TextLayout>
+                <H3MediumText>프로젝트 검색</H3MediumText>
+              </TextLayout>
+              <ProjectSpotlight
+                index={index}
+                keyword={subject.name}
+                width="15rem"
+              />
+            </VStack>
+            <VStack align="start" justify="start">
+              <TextLayout>
+                <H3MediumText>점수</H3MediumText>
+              </TextLayout>
+              <InputLayout>
+                <Writable
+                  type="number"
+                  min="0"
+                  max="300"
+                  id={index.toString()}
+                  name="score"
+                  onChange={handleInputChange}
+                  value={subject.score}
+                  style={{ width: '8rem' }}
+                />
+              </InputLayout>
+            </VStack>
+          </HStack>
+          <HStack justify="space-between" w="100%">
+            <HStack spacing="2rem">
+              <VStack>
+                <H3MediumText>코알리숑</H3MediumText>
+                <H3MediumText>보너스</H3MediumText>
+              </VStack>
+              <CheckBox
+                id={index.toString()}
+                type="checkbox"
+                name="bonus"
+                onChange={onCheckBoxChange}
+                checked={subject.bonus}
+              />
+            </HStack>
+            <VStack>
+              <H3MediumText>경험치</H3MediumText>
+              <H3MediumText>{subject.exp}</H3MediumText>
+            </VStack>
+            <VStack>
+              <H3MediumText>통과 시 레벨</H3MediumText>
+              <H3MediumText>{subject.finishLevel}</H3MediumText>
+            </VStack>
+            <VStack>
+              <H3MediumText>블랙홀 증가 일수</H3MediumText>
+              <H3MediumText>+{subject.blackhole}일</H3MediumText>
+            </VStack>
+          </HStack>
+          <hr />
+        </Layout>
+      ))}
     </>
   );
 };
 
-const Table = styled.table`
-  width: 98%;
-  white-space: nowrap;
-
-  th {
-    position: sticky;
-    top: 0;
-    text-align: center;
-    flex-wrap: wrap;
-    padding: 0.8rem 1rem;
-    vertical-align: middle;
-    border-bottom: solid 1px ${({ theme }) => theme.colors.mono.gray300};
-  }
-
-  td {
-    max-width: 300px;
-    overflow-x: hidden;
-    text-align: center;
-    padding: 0.6rem 1rem;
-    vertical-align: middle;
-    color: ${({ theme }) => theme.colors.mono.black};
-  }
-
-  tbody tr {
-    transition: all 0.2s;
-  }
-
-  td:first-of-type {
-    border-top-left-radius: ${({ theme }) => theme.radius.xs};
-    border-bottom-left-radius: ${({ theme }) => theme.radius.xs};
-  }
-
-  td:last-of-type {
-    border-top-right-radius: ${({ theme }) => theme.radius.xs};
-    border-bottom-right-radius: ${({ theme }) => theme.radius.xs};
-  }
-`;
-
 const InputLayout = styled.div`
   padding: 0.5rem;
   margin: 0.2rem;
+  width: 10rem;
+  height: 2.8rem;
   border-radius: ${({ theme }) => theme.radius.sm};
   transition: all 0.2s;
   border: 1px solid ${({ theme }) => theme.colors.mono.gray200};
@@ -219,4 +185,16 @@ const InputLayout = styled.div`
   background: ${({ theme }) => theme.colors.background.box.default};
 `;
 
-export default CalculatorInput;
+const TextLayout = styled.div`
+  padding: 0 0 0 0.7rem;
+`;
+
+const Layout = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 1rem;
+  gap: 1rem;
+`;
+
+export default CalculatorInputMobile;

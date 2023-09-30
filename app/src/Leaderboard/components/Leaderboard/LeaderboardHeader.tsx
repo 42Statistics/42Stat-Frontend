@@ -1,4 +1,6 @@
-import { HStack, Spacer } from '@shared/ui-kit';
+import styled from '@emotion/styled';
+
+import { mq } from '@shared/utils/facepaint/mq';
 
 type LeaderboardHeaderProps = {
   left: React.ReactNode;
@@ -10,10 +12,21 @@ export default function LeaderboardHeader({
   right,
 }: LeaderboardHeaderProps) {
   return (
-    <HStack w="100%" spacing="2rem">
+    <Layout>
       {left}
-      <Spacer />
       {right}
-    </HStack>
+    </Layout>
   );
 }
+
+const Layout = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  ${mq({
+    flexDirection: ['column', 'row'],
+    justifyContent: ['center', 'space-between'],
+    gap: ['2rem', 0],
+  })}
+`;

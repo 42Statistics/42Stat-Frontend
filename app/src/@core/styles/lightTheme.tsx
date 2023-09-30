@@ -90,9 +90,10 @@ const fonts = {
 };
 
 const zIndex = {
-  absoluteButton: 200,
-  tooltip: 300,
   modal: 1000,
+  dropdown: 500,
+  tooltip: 300,
+  absoluteButton: 200,
 };
 
 const radius = {

@@ -2,7 +2,7 @@ import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { ReactComponent as MdSwapVert } from '@shared/assets/icon/md-swap-vert.svg';
 import { ARIA_LABEL } from '@shared/constants/accessibility';
-import { Button, Clickable, Dialog, Input, Select } from '@shared/ui-kit';
+import { Button, Clickable, Dialog, FormSelect, Input } from '@shared/ui-kit';
 import { useAtomValue } from 'jotai';
 import { useForm } from 'react-hook-form';
 import { useSearchParams } from 'react-router-dom';
@@ -104,23 +104,27 @@ export const EvalLogSearchDialog = ({
             </li>
             <li>
               <label htmlFor={FLAG}>플래그</label>
-              <Select id={FLAG} {...register(FLAG)} style={{ width: '150px' }}>
+              <FormSelect
+                id={FLAG}
+                {...register(FLAG)}
+                style={{ width: '150px' }}
+              >
                 <option value={ALL_FLAG}>{ALL_FLAG_INCLUDED}</option>
                 <option value={OUTSTANDING_FLAG}>
                   {OUTSTANDING_FLAG_ONLY}
                 </option>
-              </Select>
+              </FormSelect>
             </li>
             <li>
               <label htmlFor={SORT_ORDER}>정렬</label>
-              <Select
+              <FormSelect
                 id={SORT_ORDER}
                 {...register(SORT_ORDER)}
                 style={{ width: '150px' }}
               >
                 <option value={BEGIN_AT_DESC}>{DESC}</option>
                 <option value={BEGIN_AT_ASC}>{ASC}</option>
-              </Select>
+              </FormSelect>
             </li>
           </ul>
           <Button type="submit">검색하기</Button>

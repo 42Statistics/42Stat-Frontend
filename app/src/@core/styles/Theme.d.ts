@@ -92,6 +92,7 @@ type Fonts = {
 type ZIndex = {
   absoluteButton: number;
   modal: number;
+  dropdown: number;
   tooltip: number;
 };
 

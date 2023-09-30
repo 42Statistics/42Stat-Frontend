@@ -1,10 +1,10 @@
 import {
   H2BoldText,
-  H3BoldText,
   Writable,
   CheckBox,
   VStack,
   HStack,
+  Body1ThinText,
   H3MediumText,
 } from '@shared/ui-kit';
 import styled from '@emotion/styled';
@@ -110,7 +110,7 @@ const CalculatorInputMobile = () => {
           <HStack justify="start" w="100%" spacing="5rem">
             <VStack align="start" justify="start">
               <TextLayout>
-                <H3MediumText>프로젝트 검색</H3MediumText>
+                <Body1ThinText>프로젝트 검색</Body1ThinText>
               </TextLayout>
               <ProjectSpotlight
                 index={index}
@@ -120,7 +120,7 @@ const CalculatorInputMobile = () => {
             </VStack>
             <VStack align="start" justify="start">
               <TextLayout>
-                <H3MediumText>점수</H3MediumText>
+                <Body1ThinText>점수</Body1ThinText>
               </TextLayout>
               <InputLayout>
                 <Writable
@@ -139,8 +139,8 @@ const CalculatorInputMobile = () => {
           <HStack justify="space-between" w="100%">
             <HStack spacing="2rem">
               <VStack>
-                <H3MediumText>코알리숑</H3MediumText>
-                <H3MediumText>보너스</H3MediumText>
+                <Body1ThinText>코알리숑</Body1ThinText>
+                <Body1ThinText>보너스</Body1ThinText>
               </VStack>
               <CheckBox
                 id={index.toString()}
@@ -151,16 +151,16 @@ const CalculatorInputMobile = () => {
               />
             </HStack>
             <VStack>
-              <H3MediumText>경험치</H3MediumText>
-              <H3MediumText>{subject.exp}</H3MediumText>
+              <Body1ThinText>경험치</Body1ThinText>
+              <Body1ThinText>{subject.exp}</Body1ThinText>
             </VStack>
             <VStack>
-              <H3MediumText>통과 시 레벨</H3MediumText>
-              <H3MediumText>{subject.finishLevel}</H3MediumText>
+              <Body1ThinText>통과 시 레벨</Body1ThinText>
+              <Body1ThinText>{subject.finishLevel}</Body1ThinText>
             </VStack>
             <VStack>
-              <H3MediumText>블랙홀 증가 일수</H3MediumText>
-              <H3MediumText>+{subject.blackhole}일</H3MediumText>
+              <Body1ThinText>블랙홀 증가 일수</Body1ThinText>
+              <Body1ThinText>+{subject.blackhole}일</Body1ThinText>
             </VStack>
           </HStack>
           <hr />

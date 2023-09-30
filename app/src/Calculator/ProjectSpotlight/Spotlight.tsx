@@ -3,17 +3,20 @@ import { QueryResult } from '@apollo/client';
 import { Exact, GetProjectsQuery } from '@shared/__generated__/graphql';
 import { ApolloErrorView } from '@shared/components/ApolloError/ApolloErrorView';
 import { calculateSubjectList } from '@/Calculator/utils/calculateSubjectList';
-import { Center, H3Text } from '@shared/ui-kit';
+import { Center, Body1Text } from '@shared/ui-kit';
 import { useAtom } from 'jotai';
 import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
 import { calculatorPropsAtom } from '../atoms/calculatorPropsAtom';
 import { useRoveFocus } from '@shared/hooks/useRoveFocus';
+import { checkDuplicateSubject } from '../utils/checkDuplicateSubject';
+import { isSubjectDuplicateAtom } from '@core/atoms/isSubjectDuplicateAtom';
 
 export const Spotlight = ({
   result: { loading, error, data },
   index,
 }: SpotlightProps) => {
   const [subjectList, setSubjectList] = useAtom(subjectListAtom);
+  const [isOpen, setIsOpen] = useAtom(isSubjectDuplicateAtom);
   const [calculatorProps] = useAtom(calculatorPropsAtom);
   const size = data?.getSpotlight.projectPreviews.length ?? 0;
   const { currentFocus, setCurrentFocus } = useRoveFocus(size);
@@ -38,7 +41,10 @@ export const Spotlight = ({
     if (!data) return;
     const id = parseInt(e.currentTarget.id);
     const project = data.getSpotlight.projectPreviews[id];
-
+    if (checkDuplicateSubject(subjectList, project.name)) {
+      setIsOpen(true);
+      return;
+    }
     const updatedSubjectList = subjectList.map((subject, idx) => {
       if (idx === index) {
         return {
@@ -61,7 +67,7 @@ export const Spotlight = ({
     return (
       <Layout>
         <Center>
-          <H3Text>검색 결과가 없습니다.</H3Text>
+          <Body1Text>검색 결과가 없습니다.</Body1Text>
         </Center>
       </Layout>
     );
@@ -110,7 +116,9 @@ const Item = styled.div<ItemProps>`
 
 const Layout = styled.div`
   position: absolute;
+  padding: 1rem 0;
   z-index: 100;
+  min-width: 20rem;
   background-color: ${({ theme }) => theme.colors.background.box.default};
   border-radius: ${({ theme }) => theme.radius.sm};
 `;

@@ -7,11 +7,12 @@ import {
   CheckBox,
 } from '@shared/ui-kit';
 import styled from '@emotion/styled';
-import { useAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
 import { ProjectSpotlight } from '@/Calculator/ProjectSpotlight';
 import { calculatorPropsAtom } from './atoms/calculatorPropsAtom';
 import { calculateSubjectList } from '@/Calculator/utils/calculateSubjectList';
+import { calculatorDialogAtom } from '@core/atoms/calculatorDialogAtom';
 import { OrderItemButton } from '@/Calculator/OrderItemButton';
 import { TableRowList, Subject } from '@/Calculator/types/orderItemButton';
 import { Button } from '@shared/ui-kit';
@@ -19,6 +20,7 @@ import { Button } from '@shared/ui-kit';
 const CalculatorInput = () => {
   const [subjectList, setSubjectList] = useAtom(subjectListAtom);
   const [calculatorProps] = useAtom(calculatorPropsAtom);
+  const setCalculatorDialogAtom = useSetAtom(calculatorDialogAtom);
   const currentLevel = calculatorProps.currentLevel;
 
   const heads = [
@@ -40,7 +42,13 @@ const CalculatorInput = () => {
   };
 
   const onAddClick = () => {
-    if (subjectList.length >= 20) return; //ToDo: 20개 이상 추가 불가능 안내 추가
+    if (subjectList.length >= 20) {
+      setCalculatorDialogAtom({
+        isOpen: true,
+        description: '과제는 최대 20개까지 추가 가능합니다.',
+      });
+      return;
+    }
     const calculatedSubjectList = calculateSubjectList({
       subjectList: subjectList,
       currentLevel: currentLevel,
@@ -173,7 +181,6 @@ const Table = styled.table`
   white-space: nowrap;
 
   th {
-    position: sticky;
     top: 0;
     text-align: center;
     flex-wrap: wrap;

@@ -4,19 +4,19 @@ import { Exact, GetProjectsQuery } from '@shared/__generated__/graphql';
 import { ApolloErrorView } from '@shared/components/ApolloError/ApolloErrorView';
 import { calculateSubjectList } from '@/Calculator/utils/calculateSubjectList';
 import { Center, Body1Text } from '@shared/ui-kit';
-import { useAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
 import { calculatorPropsAtom } from '../atoms/calculatorPropsAtom';
 import { useRoveFocus } from '@shared/hooks/useRoveFocus';
 import { checkDuplicateSubject } from '../utils/checkDuplicateSubject';
-import { isSubjectDuplicateAtom } from '@core/atoms/isSubjectDuplicateAtom';
+import { calculatorDialogAtom } from '@core/atoms/calculatorDialogAtom';
 
 export const Spotlight = ({
   result: { loading, error, data },
   index,
 }: SpotlightProps) => {
   const [subjectList, setSubjectList] = useAtom(subjectListAtom);
-  const [isOpen, setIsOpen] = useAtom(isSubjectDuplicateAtom);
+  const setCalculatorDialogAtom = useSetAtom(calculatorDialogAtom);
   const [calculatorProps] = useAtom(calculatorPropsAtom);
   const size = data?.getSpotlight.projectPreviews.length ?? 0;
   const { currentFocus, setCurrentFocus } = useRoveFocus(size);
@@ -42,7 +42,10 @@ export const Spotlight = ({
     const id = parseInt(e.currentTarget.id);
     const project = data.getSpotlight.projectPreviews[id];
     if (checkDuplicateSubject(subjectList, project.name)) {
-      setIsOpen(true);
+      setCalculatorDialogAtom({
+        isOpen: true,
+        description: '이미 추가된 프로젝트입니다.',
+      });
       return;
     }
     const updatedSubjectList = subjectList.map((subject, idx) => {

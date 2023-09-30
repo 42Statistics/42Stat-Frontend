@@ -1,21 +1,80 @@
 import styled from '@emotion/styled';
-import triangle_down from '@shared/assets/icon/triangle-down.svg';
+import { useEffect, useRef, useState } from 'react';
 
-export const Select = styled.select`
-  all: unset;
-  padding: 1rem 2rem;
-  border: 1px solid ${({ theme }) => theme.colors.mono.gray200};
-  border-radius: ${({ theme }) => theme.radius.md};
-  background: ${({ theme }) =>
-    `url(${triangle_down}) no-repeat right 2rem center ${theme.colors.mono.white}`};
-  background-size: 10px;
-  user-select: none;
+import { useDisclosure } from '@shared/hooks/useDisclosure';
+import { SelectDisclosureContext } from './contexts/SelectDisclosureContext';
+import { SelectValueContext } from './contexts/SelectValueContext';
 
-  &:hover {
-    border-color: ${({ theme }) => theme.colors.mono.gray300};
-  }
+type SelectProps = {
+  children: React.ReactNode;
+  width?: string;
+  onValueChange?: (value: string | null) => void;
+  defaultValue?: string;
+  defaultRenderValue?: string;
+};
 
-  &:focus-visible {
-    outline: 2px solid blue;
-  }
+export default function Select({
+  children,
+  width,
+  onValueChange,
+  defaultValue,
+  defaultRenderValue,
+}: SelectProps) {
+  const [value, setValue] = useState<string | null>(defaultValue ?? null);
+  const [renderValue, setRenderValue] = useState(defaultRenderValue ?? '');
+  const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
+
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    function handleClickOutside(e: MouseEvent) {
+      if (!ref.current) {
+        return;
+      }
+
+      if (ref.current.contains(e.target as Node)) {
+        return;
+      }
+
+      onClose();
+    }
+
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [isOpen, onClose]);
+
+  return (
+    <SelectDisclosureContext.Provider
+      value={{
+        isOpen,
+        onOpen,
+        onClose,
+        onToggle,
+      }}
+    >
+      <SelectValueContext.Provider
+        value={{ value, setValue, renderValue, setRenderValue, onValueChange }}
+      >
+        <StyledSelect ref={ref} width={width}>
+          {children}
+        </StyledSelect>
+      </SelectValueContext.Provider>
+    </SelectDisclosureContext.Provider>
+  );
+}
+
+type StyledSelectProps = {
+  width?: string;
+};
+
+const StyledSelect = styled.div<StyledSelectProps>`
+  width: ${({ width }) => width};
+  position: relative;
 `;

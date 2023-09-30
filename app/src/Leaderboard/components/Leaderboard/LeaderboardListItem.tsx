@@ -67,7 +67,7 @@ export const LeaderboardListItem = ({
           <Mobile>
             <HStack w="100%" spacing="2.4rem">
               <HStack w="2rem">
-                <MediumText color={color}>{rank}</MediumText>
+                <MediumText color={color}>{rank === 0 ? '–' : rank}</MediumText>
               </HStack>
               <Avatar size="sm" src={imgUrl} alt={ALT.AVATAR_OF(login)} />
               <MediumText color={color}>{login}</MediumText>

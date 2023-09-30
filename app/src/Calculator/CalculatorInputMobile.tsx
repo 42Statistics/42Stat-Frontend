@@ -4,6 +4,7 @@ import {
   CheckBox,
   VStack,
   HStack,
+  Body1Text,
   Body1ThinText,
   H3MediumText,
 } from '@shared/ui-kit';
@@ -17,12 +18,14 @@ import { calculatorDialogAtom } from '@core/atoms/calculatorDialogAtom';
 import { OrderItemButton } from '@/Calculator/OrderItemButton';
 import { TableRowList, Subject } from '@/Calculator/types/orderItemButton';
 import { Button } from '@shared/ui-kit';
+import { useTheme } from '@emotion/react';
 
 const CalculatorInputMobile = () => {
   const [subjectList, setSubjectList] = useAtom(subjectListAtom);
   const [calculatorProps] = useAtom(calculatorPropsAtom);
   const setCalculatorDialogAtom = useSetAtom(calculatorDialogAtom);
   const currentLevel = calculatorProps.currentLevel;
+  const theme = useTheme();
 
   const onListChange = (subjectList: TableRowList[]) => {
     const calculatedSubjectList = calculateSubjectList({
@@ -160,15 +163,19 @@ const CalculatorInputMobile = () => {
             </HStack>
             <VStack>
               <Body1ThinText>경험치</Body1ThinText>
-              <Body1ThinText>{subject.exp}</Body1ThinText>
+              <Body1Text>{subject.exp}</Body1Text>
             </VStack>
             <VStack>
               <Body1ThinText>통과 시 레벨</Body1ThinText>
-              <Body1ThinText>{subject.finishLevel}</Body1ThinText>
+              <Body1Text color={theme.colors.evaluation.pass}>
+                {subject.finishLevel}
+              </Body1Text>
             </VStack>
             <VStack>
               <Body1ThinText>블랙홀 증가 일수</Body1ThinText>
-              <Body1ThinText>+{subject.blackhole}일</Body1ThinText>
+              <Body1Text color={theme.colors.accent.default}>
+                +{subject.blackhole}일
+              </Body1Text>
             </VStack>
           </HStack>
           <hr />
@@ -203,6 +210,7 @@ const Layout = styled.div`
   width: 100%;
   padding: 1rem;
   gap: 1rem;
+  color: ${({ theme }) => theme.colors.mono.black};
 `;
 
 export default CalculatorInputMobile;

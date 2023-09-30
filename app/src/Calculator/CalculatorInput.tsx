@@ -2,6 +2,7 @@ import {
   VStack,
   HStack,
   H2BoldText,
+  Body1Text,
   PrimaryMediumText,
   Writable,
   CheckBox,
@@ -16,12 +17,14 @@ import { calculatorDialogAtom } from '@core/atoms/calculatorDialogAtom';
 import { OrderItemButton } from '@/Calculator/OrderItemButton';
 import { TableRowList, Subject } from '@/Calculator/types/orderItemButton';
 import { Button } from '@shared/ui-kit';
+import { useTheme } from '@emotion/react';
 
 const CalculatorInput = () => {
   const [subjectList, setSubjectList] = useAtom(subjectListAtom);
   const [calculatorProps] = useAtom(calculatorPropsAtom);
   const setCalculatorDialogAtom = useSetAtom(calculatorDialogAtom);
   const currentLevel = calculatorProps.currentLevel;
+  const theme = useTheme();
 
   const heads = [
     '프로젝트명',
@@ -158,8 +161,16 @@ const CalculatorInput = () => {
                     checked={bonus}
                   />
                 </td>
-                <td>+{blackhole}일</td>
-                <td>{finishLevel}</td>
+                <td>
+                  <Body1Text color={theme.colors.accent.default}>
+                    +{blackhole}일
+                  </Body1Text>
+                </td>
+                <td>
+                  <Body1Text color={theme.colors.evaluation.pass}>
+                    {finishLevel}
+                  </Body1Text>
+                </td>
                 <td>
                   <OrderItemButton
                     tableRowList={subjectList}

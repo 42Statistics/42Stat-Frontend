@@ -16,7 +16,7 @@ export const ROUTES = {
   LEADERBOARD: '/leaderboard',
   LEADERBOARD_LEVEL: '/leaderboard/level',
   LEADERBOARD_EXP_INCREMENT: '/leaderboard/exp_increment',
-  LEADERBOARD_COALITION_SCORE: '/leaderboard/coalition_score',
+  LEADERBOARD_SCORE: '/leaderboard/score',
   LEADERBOARD_EVAL_COUNT: '/leaderboard/eval_count',
   LEADERBOARD_COMMENT: '/leaderboard/comment',
   EVALLOG: '/evallog',

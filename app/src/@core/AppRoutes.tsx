@@ -26,9 +26,7 @@ const LeaderboardLevelPage = lazy(() => import('@/Leaderboard/pages/Level'));
 const LeaderboardExpIncrementPage = lazy(
   () => import('@/Leaderboard/pages/ExpIncrement'),
 );
-const LeaderboardCoalitionScorePage = lazy(
-  () => import('@/Leaderboard/pages/CoalitionScore'),
-);
+const LeaderboardScorePage = lazy(() => import('@/Leaderboard/pages/Score'));
 const LeaderboardEvalCountPage = lazy(
   () => import('@/Leaderboard/pages/EvalCount'),
 );
@@ -163,10 +161,10 @@ export const AppRoutes = () => {
               }
             />
             <Route
-              path={ROUTES.LEADERBOARD_COALITION_SCORE}
+              path={ROUTES.LEADERBOARD_SCORE}
               element={
                 <Suspense fallback={<LeaderboardPageSkeleton />}>
-                  <LeaderboardCoalitionScorePage />
+                  <LeaderboardScorePage />
                 </Suspense>
               }
             />

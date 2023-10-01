@@ -12,6 +12,7 @@ import {
 } from '@/Leaderboard/constants/defaultOptions';
 import { LEADERBOARD_PARAM_KEYS } from '@/Leaderboard/constants/paramKeys';
 import { useGetLeaderboardPromoListContext } from '@/Leaderboard/contexts/LeaderboardPromoListContext';
+import { useGetLeaderboardSearchParamsContext } from '@/Leaderboard/contexts/LeaderboardSearchParamsContext';
 import { Footer } from '@core/components/Footer';
 import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
 import { Pagination } from '@shared/components/Pagination';
@@ -25,7 +26,6 @@ import {
 } from '@shared/ui-kit';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 
-import { useGetLeaderboardEvalCountSearchParamsContext } from '../contexts/LeaderboardEvalCountSearchParamsContext';
 import useLeaderboardEvalCountSegmentedControl from '../hooks/useLeaderboardEvalCountSegmentedControl';
 import { GET_LEADERBOARD_EVAL_COUNT } from '../queries/getLeaderboardEvalCount';
 
@@ -35,7 +35,7 @@ export default function LeaderboardEvalCountContent() {
   const { DATE, PAGE, PROMO } = LEADERBOARD_PARAM_KEYS;
 
   const { dateTemplate, pageNumber, promo } =
-    useGetLeaderboardEvalCountSearchParamsContext();
+    useGetLeaderboardSearchParamsContext();
   const promoList = useGetLeaderboardPromoListContext();
 
   const { options, controlRef, segments } =

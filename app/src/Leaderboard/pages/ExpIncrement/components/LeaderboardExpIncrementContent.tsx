@@ -11,6 +11,8 @@ import {
   SIZE_PER_PAGE,
 } from '@/Leaderboard/constants/defaultOptions';
 import { LEADERBOARD_PARAM_KEYS } from '@/Leaderboard/constants/paramKeys';
+import { useGetLeaderboardPromoListContext } from '@/Leaderboard/contexts/LeaderboardPromoListContext';
+import { useGetLeaderboardSearchParamsContext } from '@/Leaderboard/contexts/LeaderboardSearchParamsContext';
 import { Footer } from '@core/components/Footer';
 import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
 import { Pagination } from '@shared/components/Pagination';
@@ -23,9 +25,7 @@ import {
   VStack,
 } from '@shared/ui-kit';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
-import { useGetLeaderboardPromoListContext } from '@/Leaderboard/contexts/LeaderboardPromoListContext';
 
-import { useGetLeaderboardExpIncrementSearchParamsContext } from '../contexts/LeaderboardExpIncrementSearchParamsContext';
 import useLeaderboardExpIncrementSegmentedControl from '../hooks/useLeaderboardExpIncrementSegmentedControl';
 import { GET_LEADERBOARD_EXP_INCREMENT } from '../queries/getLeaderboardExpIncrement';
 
@@ -35,7 +35,7 @@ export default function LeaderboardExpIncrementContent() {
   const { DATE, PAGE, PROMO } = LEADERBOARD_PARAM_KEYS;
 
   const { dateTemplate, pageNumber, promo } =
-    useGetLeaderboardExpIncrementSearchParamsContext();
+    useGetLeaderboardSearchParamsContext();
   const promoList = useGetLeaderboardPromoListContext();
 
   const { options, controlRef, segments } =

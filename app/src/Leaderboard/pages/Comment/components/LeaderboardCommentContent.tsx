@@ -11,6 +11,8 @@ import {
   SIZE_PER_PAGE,
 } from '@/Leaderboard/constants/defaultOptions';
 import { LEADERBOARD_PARAM_KEYS } from '@/Leaderboard/constants/paramKeys';
+import { useGetLeaderboardPromoListContext } from '@/Leaderboard/contexts/LeaderboardPromoListContext';
+import { useGetLeaderboardSearchParamsContext } from '@/Leaderboard/contexts/LeaderboardSearchParamsContext';
 import { Footer } from '@core/components/Footer';
 import { DateTemplate } from '@shared/__generated__/graphql';
 import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
@@ -23,9 +25,7 @@ import {
   VStack,
 } from '@shared/ui-kit';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
-import { useGetLeaderboardPromoListContext } from '@/Leaderboard/contexts/LeaderboardPromoListContext';
 
-import { useGetLeaderboardCommentSearchParamsContext } from '../contexts/LeaderboardCommentSearchParamsContext';
 import { GET_LEADERBOARD_COMMENT } from '../queries/getLeaderboardComment';
 
 export default function LeaderboardCommentContent() {
@@ -33,7 +33,7 @@ export default function LeaderboardCommentContent() {
   const [_, setSearchParams] = useSearchParams();
   const { PAGE, PROMO } = LEADERBOARD_PARAM_KEYS;
 
-  const { pageNumber, promo } = useGetLeaderboardCommentSearchParamsContext();
+  const { pageNumber, promo } = useGetLeaderboardSearchParamsContext();
   const promoList = useGetLeaderboardPromoListContext();
 
   const { loading, error, data } = useQuery(GET_LEADERBOARD_COMMENT, {

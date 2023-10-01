@@ -12,6 +12,7 @@ import {
 } from '@/Leaderboard/constants/defaultOptions';
 import { LEADERBOARD_PARAM_KEYS } from '@/Leaderboard/constants/paramKeys';
 import { useGetLeaderboardPromoListContext } from '@/Leaderboard/contexts/LeaderboardPromoListContext';
+import { useGetLeaderboardSearchParamsContext } from '@/Leaderboard/contexts/LeaderboardSearchParamsContext';
 import { Footer } from '@core/components/Footer';
 import { DateTemplate } from '@shared/__generated__/graphql';
 import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
@@ -25,7 +26,6 @@ import {
 } from '@shared/ui-kit';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 
-import { useGetLeaderboardLevelSearchParamsContext } from '../contexts/LeaderboardLevelSearchParamsContext';
 import { GET_LEADERBOARD_LEVEL } from '../queries/getLeaderboardLevel';
 
 export default function LeaderboardLevelContent() {
@@ -33,7 +33,7 @@ export default function LeaderboardLevelContent() {
   const [_, setSearchParams] = useSearchParams();
   const { PAGE, PROMO } = LEADERBOARD_PARAM_KEYS;
 
-  const { pageNumber, promo } = useGetLeaderboardLevelSearchParamsContext();
+  const { pageNumber, promo } = useGetLeaderboardSearchParamsContext();
   const promoList = useGetLeaderboardPromoListContext();
 
   const { loading, error, data } = useQuery(GET_LEADERBOARD_LEVEL, {

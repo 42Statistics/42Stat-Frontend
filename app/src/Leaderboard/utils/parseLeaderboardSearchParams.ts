@@ -6,18 +6,17 @@ import {
 } from '@/Leaderboard/utils/parse';
 import { DateTemplate } from '@shared/__generated__/graphql';
 
-import type { LeaderboardExpIncrementSearchParams } from '../contexts/LeaderboardExpIncrementSearchParamsContext';
+import type { LeaderboardSearchParams } from '../contexts/LeaderboardSearchParamsContext';
 
 export default function parseLeaderboardExpIncrementSearchParams(
   searchParams: URLSearchParams,
-): LeaderboardExpIncrementSearchParams {
+): LeaderboardSearchParams {
   const { DATE, PAGE, PROMO } = LEADERBOARD_PARAM_KEYS;
 
   const dateTemplate = parseDateTemplate(
     searchParams.get(DATE),
     DateTemplate.CurrWeek,
   );
-
   const pageNumber = parsePageNumber(searchParams.get(PAGE));
   const promo = parsePromo(searchParams.get(PROMO));
 

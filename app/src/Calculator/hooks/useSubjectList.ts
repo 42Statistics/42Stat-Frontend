@@ -1,4 +1,4 @@
-import { Subject } from '@/Calculator/types/orderItemButton';
+import { Subject } from '@/Calculator/types/OrderItemButton';
 import { MAX_EXP_VALUE } from '@/Calculator/constants/EXP';
 import { calculatorPropsAtom } from '../atoms/calculatorPropsAtom';
 import { subjectListAtom } from '../atoms/subjectListAtom';
@@ -52,6 +52,7 @@ export const useSubjectList = () => {
 
         return {
           ...subject,
+          expEdited: newExp,
           startLevel: editStartLevel,
           finishLevel: newLevel,
           blackhole: newBlackhole,

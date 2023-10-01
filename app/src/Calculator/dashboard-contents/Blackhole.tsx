@@ -5,9 +5,9 @@ import {
   blackholeValueFormatter,
 } from '@shared/utils/formatters/blackholeFormatter';
 import { useAtomValue } from 'jotai';
-import { subjectListAtom } from '../atoms/subjectListAtom';
-import { calculatorPropsAtom } from '../atoms/calculatorPropsAtom';
-import { MAX_BLACKHOLE_VALUE } from '../constants/blackhole';
+import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
+import { calculatorPropsAtom } from '@/Calculator/atoms/calculatorPropsAtom';
+import { MAX_BLACKHOLE_VALUE } from '@/Calculator/constants/blackhole';
 
 export const Blackhole = () => {
   const subjectList = useAtomValue(subjectListAtom);

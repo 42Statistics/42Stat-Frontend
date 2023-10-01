@@ -15,13 +15,13 @@ export default function SelectTrigger({
 }: SelectTriggerProps) {
   const theme = useTheme();
 
-  const { value, renderValue } = useGetSelectValueContext();
+  const { internalValue, renderValue } = useGetSelectValueContext();
   const { onToggle } = useGetSelectDisclosureContext();
 
   return (
     <StyledSelectTrigger onClick={onToggle}>
       <HStack w="100%" spacing="2rem">
-        {value != null ? (
+        {internalValue != null ? (
           <Text>{renderValue}</Text>
         ) : (
           <Text color={theme.colors.mono.gray500}>{placeholder}</Text>

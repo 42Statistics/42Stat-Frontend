@@ -13,7 +13,7 @@ import { ProjectSpotlight } from '@/Calculator/ProjectSpotlight';
 import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
 import { calculatorDialogAtom } from '@core/atoms/calculatorDialogAtom';
 import { OrderItemButton } from '@/Calculator/input-contents/OrderItemButton';
-import { TableRowList, Subject } from '@/Calculator/types/orderItemButton';
+import { TableRowList, Subject } from '@/Calculator/types/OrderItemButton';
 import { Button } from '@shared/ui-kit';
 import { useTheme } from '@emotion/react';
 
@@ -50,6 +50,7 @@ const CalculatorInput = () => {
         id: subjectList.length,
         name: '',
         exp: 0,
+        expEdited: 0,
         score: 100,
         blackhole: 0,
         bonus: false,
@@ -114,12 +115,15 @@ const CalculatorInput = () => {
         </thead>
         <tbody>
           {subjectList.map(
-            ({ name, exp, score, bonus, blackhole, finishLevel }, index) => (
+            (
+              { name, expEdited, score, bonus, blackhole, finishLevel },
+              index,
+            ) => (
               <tr key={index}>
                 <td>
                   <ProjectSpotlight index={index} keyword={name} />
                 </td>
-                <td>{exp}</td>
+                <td>{expEdited}</td>
                 <td>
                   <InputLayout>
                     <Writable

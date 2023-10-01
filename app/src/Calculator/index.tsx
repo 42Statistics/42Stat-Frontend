@@ -14,8 +14,8 @@ import {
   calculatorPageDashboardDesktop,
   calculatorPageDashboardTablet,
 } from '@/Calculator/dashboard-frames/calculatorPageDashboardCols';
-import CalculatorInput from '@/Calculator/CalculatorInput';
-import { useAtom } from 'jotai';
+import CalculatorInput from '@/Calculator/input-contents/CalculatorInput';
+import { useAtom, useSetAtom } from 'jotai';
 import { calculatorPropsAtom } from '@/Calculator/atoms/calculatorPropsAtom';
 import { subjectListAtom } from './atoms/subjectListAtom';
 import { useTheme } from '@emotion/react';
@@ -27,8 +27,7 @@ import { useQuery } from '@apollo/client';
 import { getTimeDiffFromNow } from '@shared/utils/getTimeDiffFromNow';
 import { getBlackholeDaysLeft } from '@shared/utils/getBlackholeDaysLeft';
 import { InfoTooltip } from '@shared/components/InfoTooltip';
-import { calculateSubjectList } from './utils/calculateSubjectList';
-import CalculatorInputMobile from './CalculatorInputMobile';
+import CalculatorInputMobile from './input-contents/CalculatorInputMobile';
 
 export const GET_BLACKHOLE_INFO = gql(/* GraphQL */ `
   query GetBlackholeInfo {
@@ -39,13 +38,17 @@ export const GET_BLACKHOLE_INFO = gql(/* GraphQL */ `
       beginAt
       blackholedAt
     }
+    getExpTable {
+      level
+      exp
+    }
   }
 `);
 
 const CalculatorLayout = () => {
   const theme = useTheme();
   const [calculatorProps, setCalculatorProps] = useAtom(calculatorPropsAtom);
-  const [subjectList, setSubjectList] = useAtom(subjectListAtom);
+  const setSubjectList = useSetAtom(subjectListAtom);
   const { currentLevel, daysFromStart } = calculatorProps;
   const device = useDeviceType();
   const { loading, error, data } = useQuery(GET_BLACKHOLE_INFO);
@@ -57,13 +60,6 @@ const CalculatorLayout = () => {
       ...prev,
       [name]: value,
     }));
-    if (name === 'currentLevel') {
-      const calculatedSubjectList = calculateSubjectList({
-        subjectList: subjectList,
-        currentLevel: value,
-      });
-      setSubjectList(calculatedSubjectList);
-    }
   };
   useEffect(() => {
     if (!data) {
@@ -75,11 +71,19 @@ const CalculatorLayout = () => {
       userProfile: { level },
     } = data.getPersonalGeneral;
 
+    const expMaxTable = data.getExpTable.map((level) => level.exp);
+    const expReqTable = [expMaxTable[0]];
+    for (let i = 1; i < expMaxTable.length; i++) {
+      expReqTable.push(expMaxTable[i] - expMaxTable[i - 1]);
+    }
+
     setCalculatorProps({
       currentLevel: level,
       currentBlackhole:
         blackholedAt != null ? getBlackholeDaysLeft(new Date(blackholedAt)) : 0,
       daysFromStart: -getTimeDiffFromNow(new Date(beginAt), 'day'),
+      expMaxTable: expMaxTable,
+      expReqTable: expReqTable,
     });
     setSubjectList([
       {

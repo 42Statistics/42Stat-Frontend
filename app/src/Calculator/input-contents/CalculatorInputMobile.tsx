@@ -9,30 +9,22 @@ import {
   H3MediumText,
 } from '@shared/ui-kit';
 import styled from '@emotion/styled';
-import { useAtom, useSetAtom } from 'jotai';
-import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
+import { useSetAtom } from 'jotai';
 import { ProjectSpotlight } from '@/Calculator/ProjectSpotlight';
-import { calculatorPropsAtom } from './atoms/calculatorPropsAtom';
-import { calculateSubjectList } from '@/Calculator/utils/calculateSubjectList';
+import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
 import { calculatorDialogAtom } from '@core/atoms/calculatorDialogAtom';
-import { OrderItemButton } from '@/Calculator/OrderItemButton';
+import { OrderItemButton } from '@/Calculator/input-contents/OrderItemButton';
 import { TableRowList, Subject } from '@/Calculator/types/orderItemButton';
 import { Button } from '@shared/ui-kit';
 import { useTheme } from '@emotion/react';
 
 const CalculatorInputMobile = () => {
-  const [subjectList, setSubjectList] = useAtom(subjectListAtom);
-  const [calculatorProps] = useAtom(calculatorPropsAtom);
+  const { subjectList, updateSubjectList } = useSubjectList();
   const setCalculatorDialogAtom = useSetAtom(calculatorDialogAtom);
-  const currentLevel = calculatorProps.currentLevel;
   const theme = useTheme();
 
   const onListChange = (subjectList: TableRowList[]) => {
-    const calculatedSubjectList = calculateSubjectList({
-      subjectList: subjectList as Subject[],
-      currentLevel: currentLevel,
-    });
-    setSubjectList(calculatedSubjectList);
+    updateSubjectList(subjectList as Subject[]);
   };
 
   const onAddClick = () => {
@@ -43,10 +35,9 @@ const CalculatorInputMobile = () => {
       });
       return;
     }
-    const calculatedSubjectList = calculateSubjectList({
-      subjectList: subjectList,
-      currentLevel: currentLevel,
-      newSubject: {
+    updateSubjectList([
+      ...subjectList,
+      {
         id: subjectList.length,
         name: '',
         exp: 0,
@@ -56,8 +47,7 @@ const CalculatorInputMobile = () => {
         startLevel: 0,
         finishLevel: 0,
       },
-    });
-    setSubjectList(calculatedSubjectList);
+    ]);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -73,11 +63,7 @@ const CalculatorInputMobile = () => {
       }
       return subject;
     });
-    const calculatedSubjectList = calculateSubjectList({
-      subjectList: updatedSubjectList,
-      currentLevel: currentLevel,
-    });
-    setSubjectList(calculatedSubjectList);
+    updateSubjectList(updatedSubjectList);
   };
 
   const onCheckBoxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -92,11 +78,7 @@ const CalculatorInputMobile = () => {
       }
       return subject;
     });
-    const calculatedSubjectList = calculateSubjectList({
-      subjectList: updatedSubjectList,
-      currentLevel: currentLevel,
-    });
-    setSubjectList(calculatedSubjectList);
+    updateSubjectList(updatedSubjectList);
   };
 
   return (

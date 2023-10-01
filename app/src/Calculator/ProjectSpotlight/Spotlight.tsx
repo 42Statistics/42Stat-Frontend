@@ -2,11 +2,9 @@ import styled from '@emotion/styled';
 import { QueryResult } from '@apollo/client';
 import { Exact, GetProjectsQuery } from '@shared/__generated__/graphql';
 import { ApolloErrorView } from '@shared/components/ApolloError/ApolloErrorView';
-import { calculateSubjectList } from '@/Calculator/utils/calculateSubjectList';
+import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
 import { Center, Body1Text } from '@shared/ui-kit';
-import { useAtom, useSetAtom } from 'jotai';
-import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
-import { calculatorPropsAtom } from '../atoms/calculatorPropsAtom';
+import { useSetAtom } from 'jotai';
 import { useRoveFocus } from '@shared/hooks/useRoveFocus';
 import { checkDuplicateSubject } from '../utils/checkDuplicateSubject';
 import { calculatorDialogAtom } from '@core/atoms/calculatorDialogAtom';
@@ -15,9 +13,8 @@ export const Spotlight = ({
   result: { loading, error, data },
   index,
 }: SpotlightProps) => {
-  const [subjectList, setSubjectList] = useAtom(subjectListAtom);
+  const { subjectList, updateSubjectList } = useSubjectList();
   const setCalculatorDialogAtom = useSetAtom(calculatorDialogAtom);
-  const [calculatorProps] = useAtom(calculatorPropsAtom);
   const size = data?.getSpotlight.projectPreviews.length ?? 0;
   const { currentFocus, setCurrentFocus } = useRoveFocus(size);
 
@@ -58,11 +55,7 @@ export const Spotlight = ({
       }
       return subject;
     });
-    const calculatedSubjectList = calculateSubjectList({
-      subjectList: updatedSubjectList,
-      currentLevel: calculatorProps.currentLevel,
-    });
-    setSubjectList(calculatedSubjectList);
+    updateSubjectList(updatedSubjectList);
     return;
   };
 

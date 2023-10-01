@@ -15,27 +15,23 @@ export default function SelectItem({
   renderValue = value ?? '',
   children,
 }: SelectItemProps) {
-  const {
-    value: currentValue,
-    setValue,
-    setRenderValue,
-    onValueChange,
-  } = useGetSelectValueContext();
+  const { internalValue, setInternalValue, setRenderValue, onValueChange } =
+    useGetSelectValueContext();
   const { onClose } = useGetSelectDisclosureContext();
 
   function handleClick() {
-    setValue(value);
+    setInternalValue(value);
     onValueChange?.(value);
     setRenderValue(renderValue);
     onClose();
   }
 
-  const active = value === currentValue;
+  const isActive = value === internalValue;
 
   return (
     <StyledSelectItem onClick={handleClick}>
       <div style={{ width: '1.6rem' }}>
-        {active && <Check width={16} height={16} />}
+        {isActive && <Check width={16} height={16} />}
       </div>
       {children}
     </StyledSelectItem>

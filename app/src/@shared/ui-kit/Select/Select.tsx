@@ -20,7 +20,9 @@ export default function Select({
   defaultValue,
   defaultRenderValue,
 }: SelectProps) {
-  const [value, setValue] = useState<string | null>(defaultValue ?? null);
+  const [internalValue, setInternalValue] = useState<string | null>(
+    defaultValue ?? null,
+  );
   const [renderValue, setRenderValue] = useState(defaultRenderValue ?? '');
   const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
 
@@ -60,7 +62,13 @@ export default function Select({
       }}
     >
       <SelectValueContext.Provider
-        value={{ value, setValue, renderValue, setRenderValue, onValueChange }}
+        value={{
+          internalValue,
+          setInternalValue,
+          renderValue,
+          setRenderValue,
+          onValueChange,
+        }}
       >
         <StyledSelect ref={ref} width={width}>
           {children}

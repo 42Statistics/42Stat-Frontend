@@ -1,8 +1,8 @@
 import { createContext, useContext } from 'react';
 
 type SelectValue = {
-  value: string | null;
-  setValue: React.Dispatch<React.SetStateAction<string | null>>;
+  internalValue: string | null;
+  setInternalValue: React.Dispatch<React.SetStateAction<string | null>>;
   renderValue: string;
   setRenderValue: React.Dispatch<React.SetStateAction<string>>;
   onValueChange?: (value: string | null) => void;

@@ -1,6 +1,9 @@
 import { useQuery } from '@apollo/client';
+import { useAtomValue } from 'jotai';
 import { useSearchParams } from 'react-router-dom';
 
+import { leaderboardArgsAtom } from '@/Leaderboard/atoms/leaderboardArgsAtom';
+import { leaderboardPromoListAtom } from '@/Leaderboard/atoms/leaderboardPromoListAtom';
 import { Leaderboard } from '@/Leaderboard/components/Leaderboard';
 import LeaderboardDateDescriptor from '@/Leaderboard/components/Leaderboard/LeaderboardDateDescriptor';
 import LeaderboardHeader from '@/Leaderboard/components/Leaderboard/LeaderboardHeader';
@@ -11,7 +14,6 @@ import {
   SIZE_PER_PAGE,
 } from '@/Leaderboard/constants/defaultOptions';
 import { LEADERBOARD_PARAM_KEYS } from '@/Leaderboard/constants/paramKeys';
-import { useGetLeaderboardPromoListContext } from '@/Leaderboard/contexts/LeaderboardPromoListContext';
 import { Footer } from '@core/components/Footer';
 import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
 import { Pagination } from '@shared/components/Pagination';
@@ -25,8 +27,6 @@ import {
 } from '@shared/ui-kit';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 
-import { leaderboardArgsAtom } from '@/Leaderboard/atoms/leaderboardArgsAtom';
-import { useAtomValue } from 'jotai';
 import useLeaderboardScoreSegmentedControl from './hooks/useLeaderboardScoreSegmentedControl';
 import { GET_LEADERBOARD_SCORE } from './queries/getLeaderboardScore';
 
@@ -36,10 +36,14 @@ export default function LeaderboardScorePage() {
   const { DATE, PAGE, PROMO } = LEADERBOARD_PARAM_KEYS;
 
   const leaderboardArgs = useAtomValue(leaderboardArgsAtom);
-  const promoList = useGetLeaderboardPromoListContext();
+  const promoList = useAtomValue(leaderboardPromoListAtom);
 
   if (leaderboardArgs === null) {
     throw new Error('leaderboardArgs is null');
+  }
+
+  if (promoList === null) {
+    throw new Error('promoList is null');
   }
 
   const { loading, error, data } = useQuery(GET_LEADERBOARD_SCORE, {
@@ -142,7 +146,7 @@ export default function LeaderboardScorePage() {
               >
                 <SelectTrigger placeholder="전체" />
                 <SelectContent maxHeight="20rem">
-                  <PromoSelectList list={promoList} />
+                  <PromoSelectList list={promoList ?? []} />
                 </SelectContent>
               </Select>
             }

@@ -1,22 +1,28 @@
 import { useQuery } from '@apollo/client';
+import { useSetAtom } from 'jotai';
+import { useEffect } from 'react';
 
-import { LeaderboardPromoListContext } from '../contexts/LeaderboardPromoListContext';
+import { leaderboardPromoListAtom } from '../atoms/leaderboardPromoListAtom';
 import { GET_LEADERBOARD_PROMO_LIST } from '../queries/getLeaderboardPromoList';
 
 export default function LeaderboardPromoListFetcher({
   children,
 }: React.PropsWithChildren) {
   const { loading, data } = useQuery(GET_LEADERBOARD_PROMO_LIST);
+  const setPromoList = useSetAtom(leaderboardPromoListAtom);
+
+  useEffect(() => {
+    if (!data) {
+      return;
+    }
+
+    const { promoList } = data.getLeaderboardMetadata;
+    setPromoList(promoList);
+  }, [data, setPromoList]);
 
   if (loading) {
     return null;
   }
 
-  const { promoList } = data?.getLeaderboardMetadata ?? {};
-
-  return (
-    <LeaderboardPromoListContext.Provider value={promoList}>
-      {children}
-    </LeaderboardPromoListContext.Provider>
-  );
+  return <>{children}</>;
 }

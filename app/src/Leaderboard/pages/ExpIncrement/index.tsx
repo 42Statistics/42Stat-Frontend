@@ -3,11 +3,8 @@ import { useAtomValue } from 'jotai';
 import { useSearchParams } from 'react-router-dom';
 
 import { leaderboardArgsAtom } from '@/Leaderboard/atoms/leaderboardArgsAtom';
-import { leaderboardPromoListAtom } from '@/Leaderboard/atoms/leaderboardPromoListAtom';
 import { Leaderboard } from '@/Leaderboard/components/Leaderboard';
-import LeaderboardDateDescriptor from '@/Leaderboard/components/Leaderboard/LeaderboardDateDescriptor';
 import LeaderboardHeader from '@/Leaderboard/components/Leaderboard/LeaderboardHeader';
-import PromoSelectList from '@/Leaderboard/components/PromoSelect/PromoSelectList';
 import { LeaderboardResultSkeleton } from '@/Leaderboard/components/skeletons/LeaderboardResultSkeleton';
 import {
   LEADERBOARD_DEFAULT_OPTIONS,
@@ -18,14 +15,7 @@ import { Footer } from '@core/components/Footer';
 import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
 import { Pagination } from '@shared/components/Pagination';
 import { Seo } from '@shared/components/Seo';
-import {
-  DeferredComponent,
-  SegmentedControl,
-  Select,
-  SelectContent,
-  SelectTrigger,
-  VStack,
-} from '@shared/ui-kit';
+import { DeferredComponent, SegmentedControl, VStack } from '@shared/ui-kit';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 
 import useLeaderboardExpIncrementSegmentedControl from './hooks/useLeaderboardExpIncrementSegmentedControl';
@@ -37,14 +27,9 @@ export default function LeaderboardExpIncrementPage() {
   const { DATE, PAGE, PROMO } = LEADERBOARD_PARAM_KEYS;
 
   const leaderboardArgs = useAtomValue(leaderboardArgsAtom);
-  const promoList = useAtomValue(leaderboardPromoListAtom);
 
   if (leaderboardArgs === null) {
     throw new Error('leaderboardArgs is null');
-  }
-
-  if (promoList === null) {
-    throw new Error('promoList is null');
   }
 
   const { loading, error, data } = useQuery(GET_LEADERBOARD_EXP_INCREMENT, {
@@ -138,26 +123,11 @@ export default function LeaderboardExpIncrementPage() {
             segments={segments}
           />
           <LeaderboardHeader
-            left={
-              <Select
-                key={segmentIndex} // reset select value on segment change
-                width="21rem"
-                onValueChange={handlePromoChange}
-                defaultValue={promo !== null ? String(promo) : undefined}
-                defaultRenderValue={promo !== null ? `${promo}기` : undefined}
-              >
-                <SelectTrigger placeholder="전체" />
-                <SelectContent maxHeight="20rem">
-                  <PromoSelectList list={promoList ?? []} />
-                </SelectContent>
-              </Select>
-            }
-            right={
-              <LeaderboardDateDescriptor
-                start={new Date(start)}
-                end={new Date(end)}
-              />
-            }
+            currSegmentIndex={segmentIndex}
+            currPromo={promo}
+            onPromoChange={handlePromoChange}
+            start={new Date(start)}
+            end={new Date(end)}
           />
           <Leaderboard me={me} list={nodes} unit={unit} />
         </VStack>

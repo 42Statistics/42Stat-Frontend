@@ -1,16 +1,12 @@
-import { LEADERBOARD_PARAM_KEYS } from '@/Leaderboard/constants/paramKeys';
-import {
-  parseDateTemplate,
-  parsePageNumber,
-  parsePromo,
-} from '@/Leaderboard/utils/parse';
 import { DateTemplate } from '@shared/__generated__/graphql';
 
-import type { LeaderboardSearchParams } from '../contexts/LeaderboardSearchParamsContext';
+import { LEADERBOARD_PARAM_KEYS } from '../constants/paramKeys';
+import type { LeaderboardArgs } from '../types/LeaderboardArgs';
+import { parseDateTemplate, parsePageNumber, parsePromo } from './parse';
 
-export default function parseLeaderboardExpIncrementSearchParams(
+export function toLeaderboardArgs(
   searchParams: URLSearchParams,
-): LeaderboardSearchParams {
+): LeaderboardArgs {
   const { DATE, PAGE, PROMO } = LEADERBOARD_PARAM_KEYS;
 
   const dateTemplate = parseDateTemplate(

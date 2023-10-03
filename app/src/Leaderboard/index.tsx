@@ -4,7 +4,7 @@ import { ROUTES } from '@shared/constants/routes';
 import { Tab, Tabs, VStack } from '@shared/ui-kit';
 
 import LeaderboardPromoListFetcher from './components/LeaderboardPromoListFetcher';
-import LeaderboardSearchParamsParser from './components/LeaderboardSearchParamsParser';
+import { LeaderboardURLReader } from './components/LeaderboardURLReader';
 
 const LeaderboardLayout = () => {
   const { pathname } = useLocation();
@@ -43,11 +43,11 @@ const LeaderboardLayout = () => {
           코멘트 길이
         </Tab>
       </Tabs>
-      <LeaderboardSearchParamsParser>
+      <LeaderboardURLReader>
         <LeaderboardPromoListFetcher>
           <Outlet />
         </LeaderboardPromoListFetcher>
-      </LeaderboardSearchParamsParser>
+      </LeaderboardURLReader>
     </VStack>
   );
 };

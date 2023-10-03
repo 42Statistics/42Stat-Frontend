@@ -13,7 +13,6 @@ import {
   SIZE_PER_PAGE,
 } from '@/Leaderboard/constants/defaultOptions';
 import { LEADERBOARD_PARAM_KEYS } from '@/Leaderboard/constants/paramKeys';
-import { useGetLeaderboardPromoListContext } from '@/Leaderboard/contexts/LeaderboardPromoListContext';
 import { Footer } from '@core/components/Footer';
 import { DateTemplate } from '@shared/__generated__/graphql';
 import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
@@ -27,6 +26,7 @@ import {
   VStack,
 } from '@shared/ui-kit';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
+import { leaderboardPromoListAtom } from '@/Leaderboard/atoms/leaderboardPromoListAtom';
 
 import { GET_LEADERBOARD_COMMENT } from './queries/getLeaderboardComment';
 
@@ -36,10 +36,14 @@ export default function LeaderboardCommentPage() {
   const { PAGE, PROMO } = LEADERBOARD_PARAM_KEYS;
 
   const leaderboardArgs = useAtomValue(leaderboardArgsAtom);
-  const promoList = useGetLeaderboardPromoListContext();
+  const promoList = useAtomValue(leaderboardPromoListAtom);
 
   if (leaderboardArgs === null) {
     throw new Error('leaderboardArgs is null');
+  }
+
+  if (promoList === null) {
+    throw new Error('promoList is null');
   }
 
   const { loading, error, data } = useQuery(GET_LEADERBOARD_COMMENT, {
@@ -121,7 +125,7 @@ export default function LeaderboardCommentPage() {
               >
                 <SelectTrigger placeholder="전체" />
                 <SelectContent maxHeight="20rem">
-                  <PromoSelectList list={promoList} />
+                  <PromoSelectList list={promoList ?? []} />
                 </SelectContent>
               </Select>
             }

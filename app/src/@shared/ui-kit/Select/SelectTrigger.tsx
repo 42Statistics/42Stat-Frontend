@@ -10,9 +10,7 @@ type SelectTriggerProps = {
   placeholder?: string;
 };
 
-export default function SelectTrigger({
-  placeholder = '',
-}: SelectTriggerProps) {
+export function SelectTrigger({ placeholder = '' }: SelectTriggerProps) {
   const theme = useTheme();
 
   const { internalValue, renderValue } = useGetSelectValueContext();

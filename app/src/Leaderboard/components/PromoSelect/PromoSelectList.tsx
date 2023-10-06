@@ -1,12 +1,13 @@
 import { Promo } from '@shared/__generated__/graphql';
 import { HStack, SelectItem, Text } from '@shared/ui-kit';
-import PromoSelectListItem from './PromoSelectListItem';
+
+import { PromoSelectListItem } from './PromoSelectListItem';
 
 type PromoSelectListProps = {
   list: Promo[];
 };
 
-export default function PromoSelectList({ list }: PromoSelectListProps) {
+export function PromoSelectList({ list }: PromoSelectListProps) {
   return (
     <>
       <SelectItem value={null}>

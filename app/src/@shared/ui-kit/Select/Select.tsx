@@ -13,7 +13,7 @@ type SelectProps = {
   defaultRenderValue?: string;
 };
 
-export default function Select({
+export function Select({
   children,
   width,
   onValueChange,

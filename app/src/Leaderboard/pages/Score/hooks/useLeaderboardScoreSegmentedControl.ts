@@ -1,7 +1,7 @@
 import { DateTemplate } from '@shared/__generated__/graphql';
 import { useSegmentedControl } from '@shared/hooks/useSegmentedControl';
 
-export default function useLeaderboardScoreSegmentedControl() {
+export function useLeaderboardScoreSegmentedControl() {
   const options = [
     {
       label: '주간',

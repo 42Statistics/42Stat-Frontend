@@ -10,7 +10,7 @@ type SelectItemProps = {
   children: React.ReactNode;
 };
 
-export default function SelectItem({
+export function SelectItem({
   value,
   renderValue = value ?? '',
   children,

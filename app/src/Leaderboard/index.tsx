@@ -3,10 +3,10 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { ROUTES } from '@shared/constants/routes';
 import { Tab, Tabs, VStack } from '@shared/ui-kit';
 
-import LeaderboardPromoListFetcher from './components/LeaderboardPromoListFetcher';
+import { LeaderboardPromoListFetcher } from './components/LeaderboardPromoListFetcher';
 import { LeaderboardURLReader } from './components/LeaderboardURLReader';
 
-const LeaderboardLayout = () => {
+export default function LeaderboardLayout() {
   const { pathname } = useLocation();
 
   return (
@@ -50,6 +50,4 @@ const LeaderboardLayout = () => {
       </LeaderboardURLReader>
     </VStack>
   );
-};
-
-export default LeaderboardLayout;
+}

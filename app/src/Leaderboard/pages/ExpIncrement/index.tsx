@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 
 import { leaderboardArgsAtom } from '@/Leaderboard/atoms/leaderboardArgsAtom';
 import { Leaderboard } from '@/Leaderboard/components/Leaderboard';
-import LeaderboardHeader from '@/Leaderboard/components/Leaderboard/LeaderboardHeader';
+import { LeaderboardHeader } from '@/Leaderboard/components/Leaderboard/LeaderboardHeader';
 import { LeaderboardResultSkeleton } from '@/Leaderboard/components/skeletons/LeaderboardResultSkeleton';
 import {
   LEADERBOARD_DEFAULT_OPTIONS,
@@ -18,7 +18,7 @@ import { Seo } from '@shared/components/Seo';
 import { DeferredComponent, SegmentedControl, VStack } from '@shared/ui-kit';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 
-import useLeaderboardExpIncrementSegmentedControl from './hooks/useLeaderboardExpIncrementSegmentedControl';
+import { useLeaderboardExpIncrementSegmentedControl } from './hooks/useLeaderboardExpIncrementSegmentedControl';
 import { GET_LEADERBOARD_EXP_INCREMENT } from './queries/getLeaderboardExpIncrement';
 
 export default function LeaderboardExpIncrementPage() {

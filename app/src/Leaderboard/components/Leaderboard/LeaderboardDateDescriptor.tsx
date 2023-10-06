@@ -7,7 +7,7 @@ type LeaderboardDateDescriptorProps = {
   end: Date;
 };
 
-export default function LeaderboardDateDescriptor({
+export function LeaderboardDateDescriptor({
   start,
   end,
 }: LeaderboardDateDescriptorProps) {

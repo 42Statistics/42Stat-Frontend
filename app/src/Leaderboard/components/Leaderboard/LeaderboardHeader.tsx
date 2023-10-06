@@ -6,6 +6,7 @@ import { LeaderboardDateDescriptor } from '@/Leaderboard/components/Leaderboard/
 import { PromoSelectList } from '@/Leaderboard/components/PromoSelect/PromoSelectList';
 import { Select, SelectContent, SelectTrigger } from '@shared/ui-kit';
 import { mq } from '@shared/utils/facepaint/mq';
+import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 
 type LeaderboardHeaderProps = {
   currSegmentIndex?: number;
@@ -28,6 +29,8 @@ export function LeaderboardHeader({
     throw new Error('promoList is null');
   }
 
+  const unit = '기';
+
   return (
     <Layout>
       <Select
@@ -35,7 +38,11 @@ export function LeaderboardHeader({
         width="21rem"
         onValueChange={onPromoChange}
         defaultValue={currPromo !== null ? String(currPromo) : undefined}
-        defaultRenderValue={currPromo !== null ? `${currPromo}기` : undefined}
+        defaultRenderValue={
+          currPromo !== null
+            ? numberWithUnitFormatter(currPromo, unit)
+            : undefined
+        }
       >
         <SelectTrigger placeholder="전체" />
         <SelectContent maxHeight="20rem">

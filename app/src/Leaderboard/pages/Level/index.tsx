@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 
 import { leaderboardArgsAtom } from '@/Leaderboard/atoms/leaderboardArgsAtom';
 import { Leaderboard } from '@/Leaderboard/components/Leaderboard';
-import LeaderboardHeader from '@/Leaderboard/components/Leaderboard/LeaderboardHeader';
+import { LeaderboardHeader } from '@/Leaderboard/components/Leaderboard/LeaderboardHeader';
 import { LeaderboardResultSkeleton } from '@/Leaderboard/components/skeletons/LeaderboardResultSkeleton';
 import {
   LEADERBOARD_DEFAULT_OPTIONS,

@@ -7,9 +7,7 @@ type PromoSelectListItemProps = {
   item: Promo;
 };
 
-export default function PromoSelectListItem({
-  item,
-}: PromoSelectListItemProps) {
+export function PromoSelectListItem({ item }: PromoSelectListItemProps) {
   const { promo, beginAt } = item;
 
   const unit = '기';

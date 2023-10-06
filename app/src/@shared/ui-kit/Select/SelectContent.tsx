@@ -6,10 +6,7 @@ type SelectContentProps = {
   maxHeight?: string;
 };
 
-export default function SelectContent({
-  children,
-  maxHeight,
-}: SelectContentProps) {
+export function SelectContent({ children, maxHeight }: SelectContentProps) {
   const { isOpen } = useGetSelectDisclosureContext();
 
   if (!isOpen) {

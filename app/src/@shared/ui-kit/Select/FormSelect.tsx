@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import triangle_down from '@shared/assets/icon/triangle-down.svg';
 
 // will depreciated
-const FormSelect = styled.select`
+export const FormSelect = styled.select`
   all: unset;
   padding: 1rem 2rem;
   border: 1px solid ${({ theme }) => theme.colors.mono.gray200};
@@ -20,5 +20,3 @@ const FormSelect = styled.select`
     outline: 2px solid blue;
   }
 `;
-
-export default FormSelect;

@@ -2,8 +2,8 @@ import styled from '@emotion/styled';
 import { useAtomValue } from 'jotai';
 
 import { leaderboardPromoListAtom } from '@/Leaderboard/atoms/leaderboardPromoListAtom';
-import LeaderboardDateDescriptor from '@/Leaderboard/components/Leaderboard/LeaderboardDateDescriptor';
-import PromoSelectList from '@/Leaderboard/components/PromoSelect/PromoSelectList';
+import { LeaderboardDateDescriptor } from '@/Leaderboard/components/Leaderboard/LeaderboardDateDescriptor';
+import { PromoSelectList } from '@/Leaderboard/components/PromoSelect/PromoSelectList';
 import { Select, SelectContent, SelectTrigger } from '@shared/ui-kit';
 import { mq } from '@shared/utils/facepaint/mq';
 
@@ -15,7 +15,7 @@ type LeaderboardHeaderProps = {
   end: Date;
 };
 
-export default function LeaderboardHeader({
+export function LeaderboardHeader({
   currSegmentIndex,
   currPromo,
   onPromoChange,

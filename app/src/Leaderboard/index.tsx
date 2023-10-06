@@ -3,7 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { ROUTES } from '@shared/constants/routes';
 import { Tab, Tabs, VStack } from '@shared/ui-kit';
 
-import { LeaderboardPromoListFetcher } from './components/LeaderboardPromoListFetcher';
+import { LeaderboardPromoListProvider } from './components/LeaderboardPromoListProvider';
 import { LeaderboardURLReader } from './components/LeaderboardURLReader';
 
 export default function LeaderboardLayout() {
@@ -44,9 +44,9 @@ export default function LeaderboardLayout() {
         </Tab>
       </Tabs>
       <LeaderboardURLReader>
-        <LeaderboardPromoListFetcher>
+        <LeaderboardPromoListProvider>
           <Outlet />
-        </LeaderboardPromoListFetcher>
+        </LeaderboardPromoListProvider>
       </LeaderboardURLReader>
     </VStack>
   );

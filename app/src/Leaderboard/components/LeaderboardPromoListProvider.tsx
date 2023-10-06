@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { leaderboardPromoListAtom } from '../atoms/leaderboardPromoListAtom';
 import { GET_LEADERBOARD_PROMO_LIST } from '../queries/getLeaderboardPromoList';
 
-export function LeaderboardPromoListFetcher({
+export function LeaderboardPromoListProvider({
   children,
 }: React.PropsWithChildren) {
   const { loading, data } = useQuery(GET_LEADERBOARD_PROMO_LIST);

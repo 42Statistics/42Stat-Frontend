@@ -43,11 +43,11 @@ export default function LeaderboardEvalCountPage() {
 
   const { options, controlRef, segments } =
     useLeaderboardEvalCountSegmentedControl();
-  const segmentIndex = options.findIndex(
+  const segmentedControlIndex = options.findIndex(
     (option) => option.value === dateTemplate,
   );
 
-  function handleSegmentedControlChange(index: number) {
+  function handleSegmentedControlIndexChange(index: number) {
     const params = new URLSearchParams();
 
     params.set(DATE, options[index].value);
@@ -117,13 +117,13 @@ export default function LeaderboardEvalCountPage() {
       <VStack w="100%" spacing="6rem">
         <VStack w="100%" spacing="2rem">
           <SegmentedControl
-            index={segmentIndex}
-            onIndexChange={handleSegmentedControlChange}
+            index={segmentedControlIndex}
+            onIndexChange={handleSegmentedControlIndexChange}
             controlRef={controlRef}
             segments={segments}
           />
           <LeaderboardHeader
-            currSegmentIndex={segmentIndex}
+            currSegmentedControlIndex={segmentedControlIndex}
             currPromo={promo}
             onPromoChange={handlePromoChange}
             start={new Date(start)}

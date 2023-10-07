@@ -101,7 +101,7 @@ const CalculatorInputMobile = () => {
               onListChange={onListChange}
             />
           </HStack>
-          <HStack justify="start" w="100%" spacing="5rem">
+          <HStack justify="start" w="100%" wrap="wrap" spacing="1rem">
             <VStack align="start" justify="start">
               <TextLayout>
                 <Body1ThinText>프로젝트 검색</Body1ThinText>
@@ -130,7 +130,7 @@ const CalculatorInputMobile = () => {
               </InputLayout>
             </VStack>
           </HStack>
-          <HStack justify="space-between" w="100%">
+          <HStack justify="space-between" w="100%" wrap="wrap" spacing="1rem">
             <HStack spacing="2rem">
               <VStack>
                 <Body1ThinText>코알리숑</Body1ThinText>
@@ -149,13 +149,13 @@ const CalculatorInputMobile = () => {
               <Body1Text>{subject.expEdited}</Body1Text>
             </VStack>
             <VStack>
-              <Body1ThinText>통과 시 레벨</Body1ThinText>
+              <Body1ThinText>통과 레벨</Body1ThinText>
               <Body1Text color={theme.colors.evaluation.pass}>
                 {subject.finishLevel}
               </Body1Text>
             </VStack>
             <VStack>
-              <Body1ThinText>블랙홀 증가 일수</Body1ThinText>
+              <Body1ThinText>블랙홀</Body1ThinText>
               <Body1Text color={theme.colors.accent.default}>
                 +{subject.blackhole}일
               </Body1Text>

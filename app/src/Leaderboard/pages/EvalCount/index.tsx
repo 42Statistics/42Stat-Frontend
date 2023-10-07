@@ -71,9 +71,9 @@ export default function LeaderboardEvalCountPage() {
 
     params.set(DATE, dateTemplate);
     if (promo) {
-      params.set(PROMO, String(promo));
+      params.set(PROMO, promo.toString());
     }
-    params.set(PAGE, String(pageNumber));
+    params.set(PAGE, pageNumber.toString());
 
     setSearchParams(params);
   }

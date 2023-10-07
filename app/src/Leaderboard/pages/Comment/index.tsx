@@ -56,9 +56,9 @@ export default function LeaderboardCommentPage() {
     const params = new URLSearchParams();
 
     if (promo) {
-      params.set(PROMO, String(promo));
+      params.set(PROMO, promo.toString());
     }
-    params.set(PAGE, String(pageNumber));
+    params.set(PAGE, pageNumber.toString());
 
     setSearchParams(params);
   }

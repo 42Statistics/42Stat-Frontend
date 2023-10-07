@@ -37,7 +37,7 @@ export function LeaderboardHeader({
         key={currSegmentIndex}
         width="21rem"
         onValueChange={onPromoChange}
-        defaultValue={currPromo !== null ? String(currPromo) : undefined}
+        defaultValue={currPromo !== null ? currPromo.toString() : undefined}
         defaultRenderValue={
           currPromo !== null
             ? numberWithUnitFormatter(currPromo, unit)

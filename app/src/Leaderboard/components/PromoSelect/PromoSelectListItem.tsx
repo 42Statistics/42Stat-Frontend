@@ -15,7 +15,7 @@ export function PromoSelectListItem({ item }: PromoSelectListItemProps) {
 
   return (
     <SelectItem
-      value={String(promo)}
+      value={promo.toString()}
       renderValue={numberWithUnitFormatter(promo, unit)}
     >
       <HStack spacing="2rem">

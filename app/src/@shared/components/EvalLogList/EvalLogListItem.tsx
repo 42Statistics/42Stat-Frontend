@@ -65,7 +65,7 @@ export const CorrectorReviewLabel = ({ number }: { number: number }) => {
 
   const type = getType(number);
 
-  return <EvalLogLabel type={type}>{`${String(number)}%`}</EvalLogLabel>;
+  return <EvalLogLabel type={type}>{`${number.toString()}%`}</EvalLogLabel>;
 };
 
 const CorrectedsReviewLabel = ({
@@ -86,7 +86,7 @@ const CorrectedsReviewLabel = ({
 
   return (
     <EvalLogLabel type={type}>
-      {!isNone ? `${String(number)} / 5` : '- / 5'}
+      {!isNone ? `${number.toString()} / 5` : '- / 5'}
     </EvalLogLabel>
   );
 };

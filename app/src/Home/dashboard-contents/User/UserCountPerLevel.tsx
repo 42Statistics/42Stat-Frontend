@@ -39,7 +39,7 @@ export const UserCountPerLevel = () => {
 
   const categories = userCountPerLevel
     .filter(({ level }) => level < 12)
-    .map(({ level }) => String(level));
+    .map(({ level }) => level.toString());
 
   const seriesData = userCountPerLevel
     .filter(({ level }) => level < 12)

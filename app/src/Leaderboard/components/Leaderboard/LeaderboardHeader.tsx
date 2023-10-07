@@ -9,7 +9,7 @@ import { mq } from '@shared/utils/facepaint/mq';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 
 type LeaderboardHeaderProps = {
-  currSegmentIndex?: number;
+  currSegmentedControlIndex?: number;
   currPromo: number | null;
   onPromoChange: (promo: string | null) => void;
   start: Date;
@@ -17,7 +17,7 @@ type LeaderboardHeaderProps = {
 };
 
 export function LeaderboardHeader({
-  currSegmentIndex,
+  currSegmentedControlIndex,
   currPromo,
   onPromoChange,
   start,
@@ -34,7 +34,7 @@ export function LeaderboardHeader({
   return (
     <Layout>
       <Select
-        key={currSegmentIndex}
+        key={currSegmentedControlIndex}
         width="21rem"
         onValueChange={onPromoChange}
         defaultValue={currPromo !== null ? currPromo.toString() : undefined}

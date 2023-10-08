@@ -21,8 +21,10 @@ export const GET_PROJECTS = gql(/* GraphQL */ `
 export const ProjectSpotlight = ({
   index,
   keyword,
-  width = '10rem',
-  height = '2.8rem',
+  width = '100%',
+  height = '100%',
+	isRelative = false,
+	spotlightWidth = '100%',
 }: ProjectSpotlightProps) => {
   const [search, searchResult] = useLazyQuery(GET_PROJECTS);
   const LIMIT = 4;
@@ -62,8 +64,8 @@ export const ProjectSpotlight = ({
   }, [debouncedInput, search]);
 
   return (
-    <VStack onBlur={handleBlur}>
-      <Layout>
+    <VStack w="100%" onBlur={handleBlur}>
+      <Layout isRelative={isRelative}>
         <InputLayout width={width} height={height}>
           <Writable
             name="name"
@@ -73,7 +75,7 @@ export const ProjectSpotlight = ({
             onFocus={() => setIsFocused(true)}
           />
           {isFocused && debouncedInput.length >= 2 && (
-            <Spotlight index={index} result={searchResult} />
+            <Spotlight width={spotlightWidth} index={index} result={searchResult} />
           )}
         </InputLayout>
       </Layout>
@@ -81,19 +83,22 @@ export const ProjectSpotlight = ({
   );
 };
 
-const Layout = styled.div`
+const Layout = styled.div<LayoutProps>`
   display: flex;
   justify-content: center;
-  width: 100%;
+	position: ${({ isRelative }) => isRelative ? 'relative' : 'auto'};
+	width: 100%;
   height: 100%;
 `;
 
 const InputLayout = styled.div<InputLayoutProps>`
-  padding: 0.5rem;
+	display: flex;
+	align-items: center;
+  padding: 1rem;
   margin: 0.2rem;
   width: ${({ width }) => width};
   height: ${({ height }) => height};
-  border-radius: ${({ theme }) => theme.radius.sm};
+  border-radius: ${({ theme }) => theme.radius.xs};
   transition: all 0.2s;
   border: 1px solid ${({ theme }) => theme.colors.mono.gray200};
 
@@ -102,6 +107,10 @@ const InputLayout = styled.div<InputLayoutProps>`
   }
   background: ${({ theme }) => theme.colors.background.box.default};
 `;
+
+type LayoutProps = {
+	isRelative?: boolean;
+};
 
 type InputLayoutProps = {
   width: string;
@@ -113,4 +122,6 @@ type ProjectSpotlightProps = {
   keyword: string;
   width?: string;
   height?: string;
+	isRelative?: boolean;
+	spotlightWidth?: string;
 };

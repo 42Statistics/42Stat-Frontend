@@ -3,6 +3,7 @@ import {
   HStack,
   H2BoldText,
   MediumText,
+  CaptionText,
   PrimaryMediumText,
   Writable,
   Checkbox,
@@ -97,8 +98,9 @@ const CalculatorInput = () => {
   return (
     <>
       <VStack w="100%" align="start" spacing="1rem">
-        <HStack w="100%" justify="space-between">
+        <HStack w="100%" justify="start" align="baseline" spacing="1rem">
           <H2BoldText>프로젝트 목록</H2BoldText>
+          <CaptionText>최대 20개</CaptionText>
         </HStack>
         <Divider color={theme.colors.mono.black} />
       </VStack>

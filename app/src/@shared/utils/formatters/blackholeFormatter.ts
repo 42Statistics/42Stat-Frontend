@@ -8,5 +8,5 @@ export const blackholeNameFormatter = (name: string): string => {
 };
 
 export const blackholeValueFormatter = (value: number): string => {
-  return `+${value.toLocaleString()}일`;
+  return `${value.toLocaleString()}일`;
 };

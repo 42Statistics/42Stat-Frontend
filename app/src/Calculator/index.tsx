@@ -15,10 +15,9 @@ import {
   calculatorPageDashboardTablet,
 } from '@/Calculator/dashboard-frames/calculatorPageDashboardCols';
 import CalculatorInput from '@/Calculator/input-contents/CalculatorInput';
-import { useAtom, useSetAtom } from 'jotai';
+import { useAtom } from 'jotai';
 import { calculatorPropsAtom } from '@/Calculator/atoms/calculatorPropsAtom';
 import { subjectListAtom } from './atoms/subjectListAtom';
-import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useEffect } from 'react';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
@@ -28,6 +27,7 @@ import { getTimeDiffFromNow } from '@shared/utils/getTimeDiffFromNow';
 import { getBlackholeDaysLeft } from '@shared/utils/getBlackholeDaysLeft';
 import { InfoTooltip } from '@shared/components/InfoTooltip';
 import CalculatorInputMobile from './input-contents/CalculatorInputMobile';
+import { useSubjectList } from './hooks/useSubjectList';
 
 export const GET_BLACKHOLE_INFO = gql(/* GraphQL */ `
   query GetBlackholeInfo {
@@ -46,21 +46,27 @@ export const GET_BLACKHOLE_INFO = gql(/* GraphQL */ `
 `);
 
 const CalculatorLayout = () => {
-  const theme = useTheme();
   const [calculatorProps, setCalculatorProps] = useAtom(calculatorPropsAtom);
-  const setSubjectList = useSetAtom(subjectListAtom);
-  const { currentLevel, daysFromStart } = calculatorProps;
+  const [subjectList, setSubjectList] = useAtom(subjectListAtom);
+  const { updateSubjectList } = useSubjectList();
+  const { currentLevel, daysFromStart, currentBlackhole } = calculatorProps;
   const device = useDeviceType();
   const { loading, error, data } = useQuery(GET_BLACKHOLE_INFO);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
+    if (isNaN(value)) return;
     const name = e.target.name as keyof typeof calculatorProps;
     setCalculatorProps((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
+
+  useEffect(() => {
+    updateSubjectList(subjectList);
+  }, [calculatorProps]);
+
   useEffect(() => {
     if (!data) {
       return;
@@ -126,26 +132,35 @@ const CalculatorLayout = () => {
             />
           </HStack>
         </InputLayout>
-        <VStack w="100%" align="start" spacing="0.7rem">
-          <InputLayout>
-            <HStack spacing="1rem">
-              <H3BoldText>본 과정 시작한지</H3BoldText>
-              <InfoTooltip text="670일이 넘으면, 블랙홀 기간이 늘지 않아요." />
-            </HStack>
-            <HStack w="3rem">
-              <Input
-                name="daysFromStart"
-                type="number"
-                value={daysFromStart}
-                onChange={handleChange}
-                style={{ width: '5rem' }}
-              />
-            </HStack>
-          </InputLayout>
-          <Text color={theme.colors.mono.gray500}>
-            휴학일이 포함된 경우, 휴학 기간을 뺄 수 있어요.
-          </Text>
-        </VStack>
+        <InputLayout>
+          <HStack spacing="1rem">
+            <H3BoldText>현재 블랙홀</H3BoldText>
+          </HStack>
+          <HStack w="3rem">
+            <Input
+              name="currentBlackhole"
+              type="number"
+              value={currentBlackhole}
+              onChange={handleChange}
+              style={{ width: '5rem' }}
+            />
+          </HStack>
+        </InputLayout>
+        <InputLayout>
+          <HStack spacing="1rem">
+            <H3BoldText>본 과정 시작한지</H3BoldText>
+            <InfoTooltip text="670일이 넘으면, 블랙홀 기간이 늘지 않아요." />
+          </HStack>
+          <HStack w="3rem">
+            <Input
+              name="daysFromStart"
+              type="number"
+              value={daysFromStart}
+              onChange={handleChange}
+              style={{ width: '5rem' }}
+            />
+          </HStack>
+        </InputLayout>
       </VStack>
       <DashboardTemp
         contents={calculatorPageDashboardContents}

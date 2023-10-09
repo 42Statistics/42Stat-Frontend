@@ -3,9 +3,9 @@ import {
   Writable,
   VStack,
   HStack,
-  Body1Text,
-  Body1ThinText,
-  H3MediumText,
+  Text,
+  Body1BoldText,
+  Divider,
 } from '@shared/ui-kit';
 import { CustomCheckbox } from '@shared/ui-kit-styled';
 import styled from '@emotion/styled';
@@ -17,6 +17,7 @@ import { OrderItemButton } from '@/Calculator/input-contents/OrderItemButton';
 import { TableRowList, Subject } from '@/Calculator/types/OrderItemButton';
 import { Button } from '@shared/ui-kit';
 import { useTheme } from '@emotion/react';
+import { Fragment } from 'react';
 
 const CalculatorInputMobile = () => {
   const { subjectList, updateSubjectList } = useSubjectList();
@@ -55,6 +56,7 @@ const CalculatorInputMobile = () => {
     const value = Number(e.target.value);
     const name = e.target.name as keyof typeof subjectList;
     const id = parseInt(e.target.id);
+    if (value < 0 || value > 125) return;
     const updatedSubjectList = subjectList.map((subject) => {
       if (subject.id === id) {
         return {
@@ -87,92 +89,81 @@ const CalculatorInputMobile = () => {
           <H2BoldText>프로젝트 목록</H2BoldText>
           <Button onClick={onAddClick}>추가</Button>
         </HStack>
-        <hr
-          style={{
-            width: '100%',
-            border: `solid 0.5px ${theme.colors.mono.black}`,
-          }}
-        />
+        <Divider color={theme.colors.mono.black} />
       </VStack>
       {subjectList.map((subject, index) => (
-        <SubjectLayout key={subject.id}>
-          <HStack justify="start" w="100%">
-            <VStack align="start" justify="start" w="100%" spacing="0.5rem">
-              <HStack justify="space-between" w="100%">
-                <TextLayout>
-                  <Body1ThinText>프로젝트 검색</Body1ThinText>
-                </TextLayout>
-                <OrderItemButton
-                  tableRowList={subjectList}
+        <Fragment key={subject.id}>
+          <SubjectLayout>
+            <HStack justify="start" w="100%">
+              <VStack align="start" justify="start" w="100%" spacing="0.5rem">
+                <HStack justify="space-between" w="100%">
+                  <TextLayout>
+                    <Text>프로젝트 검색</Text>
+                  </TextLayout>
+                  <OrderItemButton
+                    tableRowList={subjectList}
+                    index={index}
+                    onListChange={onListChange}
+                  />
+                </HStack>
+                <ProjectSpotlight
                   index={index}
-                  onListChange={onListChange}
-                />
-              </HStack>
-              <ProjectSpotlight
-                index={index}
-                keyword={subject.name}
-                height="4rem"
-                isRelative={true}
-                spotlightWidth="100%"
-              />
-            </VStack>
-          </HStack>
-          <HStack justify="space-between" spacing="1rem">
-            <VStack align="start" w="100%" spacing="0.5rem">
-              <TextLayout>
-                <Body1ThinText>점수</Body1ThinText>
-              </TextLayout>
-              <InputLayout>
-                <Writable
-                  type="number"
-                  min="0"
-                  max="300"
-                  id={index.toString()}
-                  name="score"
-                  onChange={handleInputChange}
-                  value={subject.score}
-                />
-              </InputLayout>
-            </VStack>
-            <VStack align="start" w="100%" spacing="0.5rem">
-              <TextLayout>
-                <Body1ThinText>보너스</Body1ThinText>
-              </TextLayout>
-              <VStack w="100%" h="4rem">
-                <CustomCheckbox
-                  label="코알리숑 보너스"
-                  onClick={() => onCheckboxChange(index)}
-                  checked={subject.bonus}
+                  keyword={subject.name}
+                  height="4rem"
+                  isRelative={true}
+                  spotlightWidth="100%"
                 />
               </VStack>
-            </VStack>
-          </HStack>
-          <InfoLayout>
-            <VStack>
-              <Body1ThinText>경험치</Body1ThinText>
-              <Body1Text>{subject.expEdited}</Body1Text>
-            </VStack>
-            <VStack>
-              <Body1ThinText>통과 레벨</Body1ThinText>
-              <Body1Text color={theme.colors.evaluation.pass}>
-                {subject.finishLevel}
-              </Body1Text>
-            </VStack>
-            <VStack>
-              <Body1ThinText>블랙홀</Body1ThinText>
-              <Body1Text color={theme.colors.accent.default}>
-                +{subject.blackhole}일
-              </Body1Text>
-            </VStack>
-          </InfoLayout>
-          <hr
-            style={{
-              margin: '0.5rem 0 0 0',
-              width: '100%',
-              border: `solid 0.5px ${theme.colors.mono.gray400}`,
-            }}
-          />
-        </SubjectLayout>
+            </HStack>
+            <HStack justify="space-between" spacing="1rem">
+              <VStack align="start" w="100%" spacing="0.5rem">
+                <TextLayout>
+                  <Text>점수</Text>
+                </TextLayout>
+                <InputLayout>
+                  <Writable
+                    type="number"
+                    min="0"
+                    max="125"
+                    id={index.toString()}
+                    name="score"
+                    onChange={handleInputChange}
+                    value={subject.score}
+                  />
+                </InputLayout>
+              </VStack>
+              <VStack align="start" w="100%" spacing="0.5rem">
+                <TextLayout>
+                  <Text>코알리숑 보너스</Text>
+                </TextLayout>
+                <VStack w="100%" h="4rem">
+                  <CustomCheckbox
+                    label="Bonus"
+                    onClick={() => onCheckboxChange(index)}
+                    checked={subject.bonus}
+                  />
+                </VStack>
+              </VStack>
+            </HStack>
+            <InfoLayout>
+              <VStack>
+                <Text>경험치</Text>
+                <Body1BoldText>
+                  {subject.expEdited?.toLocaleString()}
+                </Body1BoldText>
+              </VStack>
+              <VStack>
+                <Text>통과 레벨</Text>
+                <Body1BoldText>{subject.finishLevel}</Body1BoldText>
+              </VStack>
+              <VStack>
+                <Text>블랙홀</Text>
+                <Body1BoldText>+{subject.blackhole}일</Body1BoldText>
+              </VStack>
+            </InfoLayout>
+          </SubjectLayout>
+          {index !== subjectList.length - 1 && <Divider />}
+        </Fragment>
       ))}
     </>
   );
@@ -213,7 +204,7 @@ const SubjectLayout = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  padding: 1rem;
+  padding: 3rem 0;
   gap: 1rem;
   color: ${({ theme }) => theme.colors.mono.black};
 `;

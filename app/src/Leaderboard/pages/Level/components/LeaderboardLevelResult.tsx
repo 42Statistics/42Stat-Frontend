@@ -32,19 +32,11 @@ export function LeaderboardLevelResult({
   result: { loading, error, data },
 }: LeaderboardLevelResultProps) {
   const [_, setSearchParams] = useSearchParams();
-  const params = new URLSearchParams();
-
   const { PROMO, PAGE } = LEADERBOARD_PARAM_KEYS;
-
-  const leaderboardArgs = useAtomValue(leaderboardArgsAtom);
-
-  if (leaderboardArgs === null) {
-    throw new Error('leaderboardArgs is null');
-  }
-
-  const { promo, pageNumber } = leaderboardArgs;
+  const { promo, pageNumber } = useAtomValue(leaderboardArgsAtom);
 
   function handlePageNumberChange(pageNumber: number) {
+    const params = new URLSearchParams();
     if (promo) {
       params.set(PROMO, promo.toString());
     }

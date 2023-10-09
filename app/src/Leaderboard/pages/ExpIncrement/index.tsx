@@ -20,16 +20,7 @@ export default function LeaderboardExpIncrementPage() {
   const { DATE, PROMO } = LEADERBOARD_PARAM_KEYS;
 
   const leaderboardArgs = useAtomValue(leaderboardArgsAtom);
-
-  if (leaderboardArgs === null) {
-    throw new Error('leaderboardArgs is null');
-  }
-
   const promoList = useAtomValue(leaderboardPromoListAtom);
-
-  if (promoList === null) {
-    throw new Error('promoList is null');
-  }
 
   const result = useQuery(GET_LEADERBOARD_EXP_INCREMENT, {
     variables: {

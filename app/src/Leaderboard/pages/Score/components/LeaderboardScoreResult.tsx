@@ -34,19 +34,11 @@ export function LeaderboardScoreResult({
   result: { loading, error, data },
 }: LeaderboardScoreResultProps) {
   const [_, setSearchParams] = useSearchParams();
-  const params = new URLSearchParams();
-
   const { PROMO, PAGE, DATE } = LEADERBOARD_PARAM_KEYS;
-
-  const leaderboardArgs = useAtomValue(leaderboardArgsAtom);
-
-  if (leaderboardArgs === null) {
-    throw new Error('leaderboardArgs is null');
-  }
-
-  const { promo, dateTemplate, pageNumber } = leaderboardArgs;
+  const { promo, dateTemplate, pageNumber } = useAtomValue(leaderboardArgsAtom);
 
   function handlePageNumberChange(pageNumber: number) {
+    const params = new URLSearchParams();
     params.set(DATE, dateTemplate);
     if (promo) {
       params.set(PROMO, promo.toString());

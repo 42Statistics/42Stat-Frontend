@@ -20,16 +20,7 @@ export default function LeaderboardEvalCountPage() {
   const { DATE, PROMO } = LEADERBOARD_PARAM_KEYS;
 
   const leaderboardArgs = useAtomValue(leaderboardArgsAtom);
-
-  if (leaderboardArgs === null) {
-    throw new Error('leaderboardArgs is null');
-  }
-
   const promoList = useAtomValue(leaderboardPromoListAtom);
-
-  if (promoList === null) {
-    throw new Error('promoList is null');
-  }
 
   const result = useQuery(GET_LEADERBOARD_EVAL_COUNT, {
     variables: {
@@ -38,12 +29,10 @@ export default function LeaderboardEvalCountPage() {
     },
   });
 
-  const { promo, dateTemplate } = leaderboardArgs;
-
   const { options, controlRef, segments } =
     useLeaderboardEvalCountSegmentedControl();
   const segmentedControlIndex = options.findIndex(
-    (option) => option.value === dateTemplate,
+    (option) => option.value === leaderboardArgs.dateTemplate,
   );
 
   function handleSegmentedControlIndexChange(index: number) {
@@ -57,7 +46,7 @@ export default function LeaderboardEvalCountPage() {
   function handlePromoChange(promo: string | null) {
     const params = new URLSearchParams();
 
-    params.set(DATE, dateTemplate);
+    params.set(DATE, leaderboardArgs.dateTemplate);
     if (promo) {
       params.set(PROMO, promo);
     }
@@ -78,7 +67,7 @@ export default function LeaderboardEvalCountPage() {
         <VStack w="100%" spacing="1rem">
           <HStack w="100%" justify="start">
             <PromoSelect
-              curr={promo}
+              curr={leaderboardArgs.promo}
               onChange={handlePromoChange}
               list={promoList}
             />

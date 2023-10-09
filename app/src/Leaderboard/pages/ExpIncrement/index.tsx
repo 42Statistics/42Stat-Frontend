@@ -2,11 +2,11 @@ import { useQuery } from '@apollo/client';
 import { useAtomValue } from 'jotai';
 import { useSearchParams } from 'react-router-dom';
 
-import { leaderboardArgsAtom } from '@/Leaderboard/atoms/leaderboardArgsAtom';
 import { leaderboardPromoListAtom } from '@/Leaderboard/atoms/leaderboardPromoListAtom';
 import { PromoSelect } from '@/Leaderboard/components/PromoSelect';
 import { LEADERBOARD_DEFAULT_OPTIONS } from '@/Leaderboard/constants/defaultOptions';
 import { LEADERBOARD_PARAM_KEYS } from '@/Leaderboard/constants/paramKeys';
+import { toLeaderboardArgs } from '@/Leaderboard/utils/toLeaderboardArgs';
 import { Footer } from '@core/components/Footer';
 import { Seo } from '@shared/components/Seo';
 import { HStack, SegmentedControl, VStack } from '@shared/ui-kit';
@@ -16,10 +16,11 @@ import { useLeaderboardExpIncrementSegmentedControl } from './hooks/useLeaderboa
 import { GET_LEADERBOARD_EXP_INCREMENT } from './queries/getLeaderboardExpIncrement';
 
 export default function LeaderboardExpIncrementPage() {
-  const [_, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const leaderboardArgs = toLeaderboardArgs(searchParams);
+  const { dateTemplate, promo } = leaderboardArgs;
   const { DATE, PROMO } = LEADERBOARD_PARAM_KEYS;
 
-  const leaderboardArgs = useAtomValue(leaderboardArgsAtom);
   const promoList = useAtomValue(leaderboardPromoListAtom);
 
   const result = useQuery(GET_LEADERBOARD_EXP_INCREMENT, {
@@ -29,31 +30,27 @@ export default function LeaderboardExpIncrementPage() {
     },
   });
 
-  const { promo, dateTemplate } = leaderboardArgs;
-
   const { options, controlRef, segments } =
     useLeaderboardExpIncrementSegmentedControl();
   const segmentedControlIndex = options.findIndex(
     (option) => option.value === dateTemplate,
   );
 
-  function handleSegmentedControlIndexChange(index: number) {
-    const params = new URLSearchParams();
+  function handleSegmentedControlIndexChange(newIndex: number) {
+    const newURLSearchParams = new URLSearchParams();
 
-    params.set(DATE, options[index].value);
-
-    setSearchParams(params);
+    newURLSearchParams.set(DATE, options[newIndex].value);
+    setSearchParams(newURLSearchParams);
   }
 
-  function handlePromoChange(promo: string | null) {
-    const params = new URLSearchParams();
+  function handlePromoChange(newPromo: string | null) {
+    const newURLSearchParams = new URLSearchParams();
 
-    params.set(DATE, dateTemplate);
-    if (promo) {
-      params.set(PROMO, promo);
+    newURLSearchParams.set(DATE, dateTemplate);
+    if (newPromo) {
+      newURLSearchParams.set(PROMO, newPromo);
     }
-
-    setSearchParams(params);
+    setSearchParams(newURLSearchParams);
   }
 
   return (

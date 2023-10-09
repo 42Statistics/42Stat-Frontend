@@ -1,14 +1,13 @@
 import { QueryResult } from '@apollo/client';
-import { useAtomValue } from 'jotai';
 import { useSearchParams } from 'react-router-dom';
 
-import { leaderboardArgsAtom } from '@/Leaderboard/atoms/leaderboardArgsAtom';
 import { Leaderboard } from '@/Leaderboard/components/Leaderboard';
 import { LeaderboardDateDescriptor } from '@/Leaderboard/components/Leaderboard/LeaderboardDateDescriptor';
 import { LeaderboardPagination } from '@/Leaderboard/components/LeaderboardPagination';
 import { LeaderboardResultSkeleton } from '@/Leaderboard/components/skeletons/LeaderboardResultSkeleton';
 import { SIZE_PER_PAGE } from '@/Leaderboard/constants/defaultOptions';
 import { LEADERBOARD_PARAM_KEYS } from '@/Leaderboard/constants/paramKeys';
+import { toLeaderboardArgs } from '@/Leaderboard/utils/toLeaderboardArgs';
 import {
   DateTemplate,
   GetLeaderboardLevelQuery,
@@ -31,18 +30,18 @@ type LeaderboardLevelResultProps = {
 export function LeaderboardLevelResult({
   result: { loading, error, data },
 }: LeaderboardLevelResultProps) {
-  const [_, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { promo, pageNumber } = toLeaderboardArgs(searchParams);
   const { PROMO, PAGE } = LEADERBOARD_PARAM_KEYS;
-  const { promo, pageNumber } = useAtomValue(leaderboardArgsAtom);
 
-  function handlePageNumberChange(pageNumber: number) {
-    const params = new URLSearchParams();
+  function handlePageNumberChange(newPageNumber: number) {
+    const newURLSearchParams = new URLSearchParams();
+
     if (promo) {
-      params.set(PROMO, promo.toString());
+      newURLSearchParams.set(PROMO, promo.toString());
     }
-    params.set(PAGE, pageNumber.toString());
-
-    setSearchParams(params);
+    newURLSearchParams.set(PAGE, newPageNumber.toString());
+    setSearchParams(newURLSearchParams);
   }
 
   if (loading) {

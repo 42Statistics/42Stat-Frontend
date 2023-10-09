@@ -95,6 +95,7 @@ const ButtonLayout = styled.div`
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 12px;
     transform: translateY(-2px);
+    cursor: pointer;
   }
 
   &:active {

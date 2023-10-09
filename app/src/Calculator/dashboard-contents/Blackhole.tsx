@@ -33,12 +33,12 @@ export const Blackhole = () => {
     blackholeDaysLeft(),
   ];
 
-  const current = `현재 (${daysFromStart}일 + ${currentBlackhole}일)`;
+  const current = `현재 (${currentBlackhole}일 + ${daysFromStart}일)`;
 
   const labels = [
     current,
     ...subjectList.map((subject) => subject.name),
-    '남은 일수',
+    '총 670일 중 남은 일수',
   ];
 
   return (

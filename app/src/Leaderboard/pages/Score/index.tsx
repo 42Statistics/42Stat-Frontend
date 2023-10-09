@@ -3,27 +3,21 @@ import { useAtomValue } from 'jotai';
 import { useSearchParams } from 'react-router-dom';
 
 import { leaderboardArgsAtom } from '@/Leaderboard/atoms/leaderboardArgsAtom';
-import { Leaderboard } from '@/Leaderboard/components/Leaderboard';
-import { LeaderboardHeader } from '@/Leaderboard/components/Leaderboard/LeaderboardHeader';
-import { LeaderboardResultSkeleton } from '@/Leaderboard/components/skeletons/LeaderboardResultSkeleton';
-import {
-  LEADERBOARD_DEFAULT_OPTIONS,
-  SIZE_PER_PAGE,
-} from '@/Leaderboard/constants/defaultOptions';
+import { leaderboardPromoListAtom } from '@/Leaderboard/atoms/leaderboardPromoListAtom';
+import { PromoSelect } from '@/Leaderboard/components/PromoSelect';
+import { LEADERBOARD_DEFAULT_OPTIONS } from '@/Leaderboard/constants/defaultOptions';
 import { LEADERBOARD_PARAM_KEYS } from '@/Leaderboard/constants/paramKeys';
 import { Footer } from '@core/components/Footer';
-import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
-import { Pagination } from '@shared/components/Pagination';
-import { DeferredComponent, SegmentedControl, VStack } from '@shared/ui-kit';
-import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
+import { HStack, SegmentedControl, VStack } from '@shared/ui-kit';
 
+import { Seo } from '@shared/components/Seo';
+import { LeaderboardScoreResult } from './components/LeaderboardScoreResult';
 import { useLeaderboardScoreSegmentedControl } from './hooks/useLeaderboardScoreSegmentedControl';
 import { GET_LEADERBOARD_SCORE } from './queries/getLeaderboardScore';
 
 export default function LeaderboardScorePage() {
-  const device = useDeviceType();
   const [_, setSearchParams] = useSearchParams();
-  const { DATE, PAGE, PROMO } = LEADERBOARD_PARAM_KEYS;
+  const { DATE, PROMO } = LEADERBOARD_PARAM_KEYS;
 
   const leaderboardArgs = useAtomValue(leaderboardArgsAtom);
 
@@ -31,14 +25,20 @@ export default function LeaderboardScorePage() {
     throw new Error('leaderboardArgs is null');
   }
 
-  const { loading, error, data } = useQuery(GET_LEADERBOARD_SCORE, {
+  const promoList = useAtomValue(leaderboardPromoListAtom);
+
+  if (promoList === null) {
+    throw new Error('promoList is null');
+  }
+
+  const result = useQuery(GET_LEADERBOARD_SCORE, {
     variables: {
       ...LEADERBOARD_DEFAULT_OPTIONS,
       ...leaderboardArgs,
     },
   });
 
-  const { promo, pageNumber, dateTemplate } = leaderboardArgs;
+  const { promo, dateTemplate } = leaderboardArgs;
 
   const { options, controlRef, segments } =
     useLeaderboardScoreSegmentedControl();
@@ -65,76 +65,26 @@ export default function LeaderboardScorePage() {
     setSearchParams(params);
   }
 
-  function handlePageNumberChange(pageNumber: number) {
-    const params = new URLSearchParams();
-
-    params.set(DATE, dateTemplate);
-    if (promo) {
-      params.set(PROMO, promo.toString());
-    }
-    params.set(PAGE, pageNumber.toString());
-
-    setSearchParams(params);
-  }
-
-  if (loading) {
-    return (
-      <DeferredComponent>
-        <LeaderboardResultSkeleton />
-      </DeferredComponent>
-    );
-  }
-  if (error) {
-    return (
-      <DeferredComponent>
-        <FullPageApolloErrorView message={error.message} />
-      </DeferredComponent>
-    );
-  }
-  if (!data) {
-    return (
-      <DeferredComponent>
-        <LeaderboardResultSkeleton />
-      </DeferredComponent>
-    );
-  }
-
-  const {
-    data: {
-      me,
-      totalRanking: { nodes, totalCount },
-    },
-    start,
-    end,
-  } = data.getLeaderboardScore.byDateTemplate;
-
-  const unit = 'P';
-
   return (
     <>
+      <Seo title="랭킹 › 코알리숑 스코어" />
       <VStack w="100%" spacing="6rem">
-        <VStack w="100%" spacing="2rem">
-          <SegmentedControl
-            index={segmentedControlIndex}
-            onIndexChange={handleSegmentedControlIndexChange}
-            controlRef={controlRef}
-            segments={segments}
-          />
-          <LeaderboardHeader
-            currSegmentedControlIndex={segmentedControlIndex}
-            currPromo={promo}
-            onPromoChange={handlePromoChange}
-            start={new Date(start)}
-            end={new Date(end)}
-          />
-          <Leaderboard me={me} list={nodes} unit={unit} />
-        </VStack>
-        <Pagination
-          currPageNumber={pageNumber}
-          onPageNumberChange={handlePageNumberChange}
-          totalPageNumber={Math.ceil(totalCount / SIZE_PER_PAGE)}
-          pagePerRow={device === 'mobile' ? 5 : 10}
+        <SegmentedControl
+          index={segmentedControlIndex}
+          onIndexChange={handleSegmentedControlIndexChange}
+          controlRef={controlRef}
+          segments={segments}
         />
+        <VStack w="100%" spacing="1rem">
+          <HStack w="100%" justify="start">
+            <PromoSelect
+              curr={promo}
+              onChange={handlePromoChange}
+              list={promoList}
+            />
+          </HStack>
+          <LeaderboardScoreResult result={result} />
+        </VStack>
       </VStack>
       <Footer />
     </>

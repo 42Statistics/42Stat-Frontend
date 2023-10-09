@@ -7,7 +7,7 @@ import { ARIA_LABEL } from '@shared/constants/accessibility';
 import { Clickable, HStack } from '@shared/ui-kit';
 import { PageButton } from './PageButton';
 
-type PaginationProps = {
+export type PaginationProps = {
   currPageNumber: number;
   onPageNumberChange: (pageNumber: number) => void;
   totalPageNumber: number;

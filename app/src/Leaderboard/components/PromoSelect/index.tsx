@@ -3,6 +3,7 @@ import { Select, SelectContent, SelectTrigger } from '@shared/ui-kit';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 
 import { PromoSelectList } from './PromoSelectList';
+import { useGetPromoSelectKey } from './hooks/useGetPromoSelectKey';
 
 type PromoSelectProps = {
   curr: number | null;
@@ -13,8 +14,11 @@ type PromoSelectProps = {
 export function PromoSelect({ curr, list, onChange }: PromoSelectProps) {
   const unit = '기';
 
+  const promoSelectKey = useGetPromoSelectKey();
+
   return (
     <Select
+      key={promoSelectKey} // 이게 없으면 기수를 바꾼 채 다른 DateTemplate으로 이동해도 Select가 재렌더링되지 않음.
       width="21rem"
       onValueChange={onChange}
       defaultValue={curr !== null ? curr.toString() : undefined}

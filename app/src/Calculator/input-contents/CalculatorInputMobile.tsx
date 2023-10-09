@@ -98,31 +98,31 @@ const CalculatorInputMobile = () => {
       {subjectList.map((subject, index) => (
         <Fragment key={subject.id}>
           <SubjectLayout>
-            <HStack justify="start" w="100%">
-              <VStack align="start" justify="start" w="100%" spacing="0.5rem">
-                <HStack justify="space-between" w="100%">
-                  <TextLayout>
-                    <Text>프로젝트 검색</Text>
-                  </TextLayout>
-                  <OrderItemButton
-                    tableRowList={subjectList}
-                    index={index}
-                    onListChange={onListChange}
-                  />
-                </HStack>
-                <ProjectSpotlight
+            <VStack align="start" justify="start" w="100%" spacing="0.5rem">
+              <HStack justify="space-between" w="100%">
+                <TextLayout>
+                  <Text color={theme.colors.primary.default}>
+                    프로젝트 검색
+                  </Text>
+                </TextLayout>
+                <OrderItemButton
+                  tableRowList={subjectList}
                   index={index}
-                  keyword={subject.name}
-                  height="4rem"
-                  isRelative={true}
-                  spotlightWidth="100%"
+                  onListChange={onListChange}
                 />
-              </VStack>
-            </HStack>
+              </HStack>
+              <ProjectSpotlight
+                index={index}
+                keyword={subject.name}
+                height="4rem"
+                isRelative={true}
+                spotlightWidth="100%"
+              />
+            </VStack>
             <HStack justify="space-between" spacing="1rem">
               <VStack align="start" w="100%" spacing="0.5rem">
                 <TextLayout>
-                  <Text>점수</Text>
+                  <Text color={theme.colors.primary.default}>점수</Text>
                 </TextLayout>
                 <InputLayout>
                   <Writable
@@ -138,7 +138,9 @@ const CalculatorInputMobile = () => {
               </VStack>
               <VStack align="start" w="100%" spacing="0.5rem">
                 <TextLayout>
-                  <Text>코알리숑 보너스</Text>
+                  <Text color={theme.colors.primary.default}>
+                    코알리숑 보너스
+                  </Text>
                 </TextLayout>
                 <VStack w="100%" h="4rem">
                   <CustomCheckbox
@@ -151,20 +153,20 @@ const CalculatorInputMobile = () => {
             </HStack>
             <InfoLayout>
               <VStack>
-                <Text>경험치</Text>
-                <Body1BoldText color={theme.colors.primary.default}>
+                <Text color={theme.colors.primary.default}>경험치</Text>
+                <Body1BoldText color={theme.colors.mono.black}>
                   {subject.expEdited?.toLocaleString()}
                 </Body1BoldText>
               </VStack>
               <VStack>
-                <Text>통과 레벨</Text>
-                <Body1BoldText color={theme.colors.primary.default}>
+                <Text color={theme.colors.primary.default}>통과 레벨</Text>
+                <Body1BoldText color={theme.colors.mono.black}>
                   {subject.finishLevel}
                 </Body1BoldText>
               </VStack>
               <VStack>
-                <Text>블랙홀</Text>
-                <Body1BoldText color={theme.colors.primary.default}>
+                <Text color={theme.colors.primary.default}>블랙홀</Text>
+                <Body1BoldText color={theme.colors.mono.black}>
                   +{subject.blackhole}일
                 </Body1BoldText>
               </VStack>
@@ -201,6 +203,7 @@ const InfoLayout = styled.div`
   border-radius: ${({ theme }) => theme.radius.xs};
   border: 1px solid ${({ theme }) => theme.colors.mono.gray300};
   padding: 1rem 0;
+  margin: 1rem 0 0 0;
 `;
 
 const TextLayout = styled.div`

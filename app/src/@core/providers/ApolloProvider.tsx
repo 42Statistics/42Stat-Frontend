@@ -111,6 +111,9 @@ export const client = new ApolloClient({
           getLeaderboardScore: {
             merge: true,
           },
+          getLeaderboardComment: {
+            merge: true,
+          },
           getEvalLogs: {
             ...relayStylePagination(),
             keyArgs: [

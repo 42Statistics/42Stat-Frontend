@@ -2,11 +2,11 @@ import { useQuery } from '@apollo/client';
 import { useAtomValue } from 'jotai';
 import { useSearchParams } from 'react-router-dom';
 
-import { leaderboardArgsAtom } from '@/Leaderboard/atoms/leaderboardArgsAtom';
 import { leaderboardPromoListAtom } from '@/Leaderboard/atoms/leaderboardPromoListAtom';
 import { PromoSelect } from '@/Leaderboard/components/PromoSelect';
 import { LEADERBOARD_DEFAULT_OPTIONS } from '@/Leaderboard/constants/defaultOptions';
 import { LEADERBOARD_PARAM_KEYS } from '@/Leaderboard/constants/paramKeys';
+import { toLeaderboardArgs } from '@/Leaderboard/utils/toLeaderboardArgs';
 import { Footer } from '@core/components/Footer';
 import { DateTemplate } from '@shared/__generated__/graphql';
 import { Seo } from '@shared/components/Seo';
@@ -16,10 +16,11 @@ import { LeaderboardCommentResult } from './components/LeaderboardCommentResult'
 import { GET_LEADERBOARD_COMMENT } from './queries/getLeaderboardComment';
 
 export default function LeaderboardCommentPage() {
-  const [_, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const leaderboardArgs = toLeaderboardArgs(searchParams);
+  const { promo } = leaderboardArgs;
   const { PROMO } = LEADERBOARD_PARAM_KEYS;
 
-  const leaderboardArgs = useAtomValue(leaderboardArgsAtom);
   const promoList = useAtomValue(leaderboardPromoListAtom);
 
   const result = useQuery(GET_LEADERBOARD_COMMENT, {
@@ -30,14 +31,13 @@ export default function LeaderboardCommentPage() {
     },
   });
 
-  function handlePromoChange(promo: string | null) {
-    const params = new URLSearchParams();
+  function handlePromoChange(newPromo: string | null) {
+    const newURLSearchParams = new URLSearchParams();
 
-    if (promo) {
-      params.set(PROMO, promo);
+    if (newPromo) {
+      newURLSearchParams.set(PROMO, newPromo);
     }
-
-    setSearchParams(params);
+    setSearchParams(newURLSearchParams);
   }
 
   return (
@@ -46,7 +46,7 @@ export default function LeaderboardCommentPage() {
       <VStack w="100%" spacing="1rem">
         <HStack w="100%" justify="start">
           <PromoSelect
-            curr={leaderboardArgs.promo}
+            curr={promo}
             onChange={handlePromoChange}
             list={promoList}
           />

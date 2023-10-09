@@ -4,7 +4,6 @@ import { ROUTES } from '@shared/constants/routes';
 import { Tab, Tabs, VStack } from '@shared/ui-kit';
 
 import { LeaderboardPromoListProvider } from './components/LeaderboardPromoListProvider';
-import { LeaderboardURLReader } from './components/LeaderboardURLReader';
 
 export default function LeaderboardLayout() {
   const { pathname } = useLocation();
@@ -43,11 +42,9 @@ export default function LeaderboardLayout() {
           코멘트 길이
         </Tab>
       </Tabs>
-      <LeaderboardURLReader>
-        <LeaderboardPromoListProvider>
-          <Outlet />
-        </LeaderboardPromoListProvider>
-      </LeaderboardURLReader>
+      <LeaderboardPromoListProvider>
+        <Outlet />
+      </LeaderboardPromoListProvider>
     </VStack>
   );
 }

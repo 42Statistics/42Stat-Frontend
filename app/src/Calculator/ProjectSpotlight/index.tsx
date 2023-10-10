@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { VStack, Writable } from '@shared/ui-kit';
 import { Spotlight } from './Spotlight';
 import styled from '@emotion/styled';
+import { isEscapeKeyDown} from '@shared/utils/keyboard';
 
 export const GET_PROJECTS = gql(/* GraphQL */ `
   query GetProjects($input: String!, $limit: Int!) {
@@ -35,6 +36,7 @@ export const ProjectSpotlight = ({
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
+    if (!isFocused) setIsFocused(true);
   };
 
   const handleBlur = () => {
@@ -64,6 +66,20 @@ export const ProjectSpotlight = ({
     }
   }, [debouncedInput, search]);
 
+  useEffect(() => {
+    const handleEscapeKeyDown = (e: KeyboardEvent) => {
+      if (isEscapeKeyDown(e) && isFocused) {
+        e.preventDefault();
+        setIsFocused(false);
+      }
+    };
+    document.addEventListener('keydown', handleEscapeKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleEscapeKeyDown);
+    };
+  });
+
   return (
     <VStack w="100%" onBlur={handleBlur}>
       <Layout isRelative={isRelative}>
@@ -81,6 +97,7 @@ export const ProjectSpotlight = ({
               width={spotlightWidth}
               index={index}
               result={searchResult}
+              setIsFocused={setIsFocused}
             />
           )}
         </InputLayout>

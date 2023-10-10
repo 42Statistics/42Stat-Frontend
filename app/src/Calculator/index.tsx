@@ -1,11 +1,4 @@
-import {
-  Text,
-  VStack,
-  HStack,
-  H3BoldText,
-  Input,
-  H1BoldText,
-} from '@shared/ui-kit';
+import { VStack, HStack, H3BoldText, Input, H1BoldText } from '@shared/ui-kit';
 import { Seo } from '@shared/components/Seo';
 import { Footer } from '@core/components/Footer';
 import { DashboardTemp } from '@shared/components/Dashboard/DashboardTemp';
@@ -62,10 +55,6 @@ const CalculatorLayout = () => {
       [name]: value,
     }));
   };
-
-  useEffect(() => {
-    updateSubjectList(subjectList);
-  }, [calculatorProps]);
 
   useEffect(() => {
     if (!data) {

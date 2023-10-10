@@ -1,49 +1,63 @@
-import { DashboardContent } from '@shared/components/DashboardContent';
-import { DonutChart } from '@shared/components/Chart';
-import {
-  blackholeNameFormatter,
-  blackholeValueFormatter,
-} from '@shared/utils/formatters/blackholeFormatter';
 import { useAtomValue } from 'jotai';
-import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
+
 import { calculatorPropsAtom } from '@/Calculator/atoms/calculatorPropsAtom';
+import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
 import { MAX_BLACKHOLE_VALUE } from '@/Calculator/constants/blackhole';
+import type { Subject } from '@/Calculator/types/OrderItemButton';
+import { DonutChart } from '@shared/components/Chart';
+import { DashboardContent } from '@shared/components/DashboardContent';
+import { blackholeNameFormatter } from '@shared/utils/formatters/blackholeFormatter';
+import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
+
+const getBlackholeDaysLeft = (currentDays: number, subjectList: Subject[]) => {
+  let sum = 0;
+  subjectList.forEach((subject) => {
+    sum += subject.blackhole;
+    if (subject.exp !== 0 && subject.blackhole === 0) {
+      sum = -1;
+      return false;
+    }
+  });
+  const total = MAX_BLACKHOLE_VALUE - sum - currentDays;
+  if (total <= 0 || sum === -1) return 0;
+  return total;
+};
 
 export const Blackhole = () => {
   const subjectList = useAtomValue(subjectListAtom);
-  const calculatorProps = useAtomValue(calculatorPropsAtom);
-  const { currentBlackhole, daysFromStart } = calculatorProps;
-  const currentDays = daysFromStart + currentBlackhole;
-  const blackholeDaysLeft = () => {
-    let sum = 0;
-    subjectList.forEach((subject) => {
-      sum += subject.blackhole;
-      if (subject.exp !== 0 && subject.blackhole === 0) {
-        sum = -1;
-        return false;
-      }
-    });
-    const tot = MAX_BLACKHOLE_VALUE - sum - currentDays;
-    if (tot <= 0 || sum === -1) return 0;
-    return tot;
-  };
-  const series = [
-    currentDays,
-    ...subjectList.map((subject) => subject.blackhole),
-    blackholeDaysLeft(),
-  ];
+  const { currentBlackhole, daysFromStart } = useAtomValue(calculatorPropsAtom);
 
-  const current = `현재 (${currentBlackhole}일 + ${daysFromStart}일)`;
+  const blackholeDaysLeft = getBlackholeDaysLeft(
+    daysFromStart + currentBlackhole,
+    subjectList,
+  );
 
   const labels = [
-    current,
+    '본과정 시작한지',
+    '현재 블랙홀',
     ...subjectList.map((subject) => subject.name),
-    '총 670일 중 남은 일수',
+    '670일까지 남은 일수',
   ];
+
+  const series = [
+    daysFromStart,
+    currentBlackhole,
+    ...subjectList.map((subject) => subject.blackhole),
+    blackholeDaysLeft,
+  ];
+
+  const sumOfNewBlackholeDays = subjectList.reduce(
+    (acc, subject) => acc + subject.blackhole,
+    0,
+  );
 
   return (
     <DashboardContent title="블랙홀" type="ApexCharts">
-      <BlackholeCalculatorChart labels={labels} series={series} />
+      <BlackholeCalculatorChart
+        labels={labels}
+        series={series}
+        sumOfNewBlackholeDays={sumOfNewBlackholeDays}
+      />
     </DashboardContent>
   );
 };
@@ -51,19 +65,14 @@ export const Blackhole = () => {
 type BlackholeCalculatorChartProps = {
   labels: string[];
   series: number[];
+  sumOfNewBlackholeDays: number;
 };
 
 const BlackholeCalculatorChart = ({
   labels,
   series,
+  sumOfNewBlackholeDays,
 }: BlackholeCalculatorChartProps) => {
-  const sumBlackhole = () => {
-    let sum = 0;
-    series.forEach((blackhole, i) => {
-      if (i !== 0 && i !== series.length - 1) sum += blackhole;
-    });
-    return `+${sum.toString()}일`;
-  };
   const options: ApexCharts.ApexOptions = {
     legend: {
       show: false,
@@ -84,7 +93,8 @@ const BlackholeCalculatorChart = ({
             show: true,
             total: {
               show: true,
-              formatter: () => sumBlackhole(),
+              formatter: () =>
+                `+${numberWithUnitFormatter(sumOfNewBlackholeDays, '일')}`,
             },
             name: {
               show: true,
@@ -94,7 +104,8 @@ const BlackholeCalculatorChart = ({
             value: {
               show: true,
               offsetY: -5,
-              formatter: (value) => blackholeValueFormatter(parseInt(value)),
+              formatter: (value) =>
+                numberWithUnitFormatter(parseInt(value), '일'),
             },
           },
         },

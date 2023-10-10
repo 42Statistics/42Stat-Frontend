@@ -1,10 +1,11 @@
-import { Subject } from '@/Calculator/types/OrderItemButton';
-import { MAX_EXP_VALUE } from '@/Calculator/constants/EXP';
-import { MAX_BLACKHOLE_VALUE } from '../constants/blackhole';
-import { calculatorPropsAtom } from '../atoms/calculatorPropsAtom';
-import { subjectListAtom } from '../atoms/subjectListAtom';
 import { useAtom, useAtomValue } from 'jotai';
 import { useCallback } from 'react';
+
+import { calculatorPropsAtom } from '@/Calculator/atoms/calculatorPropsAtom';
+import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
+import { MAX_BLACKHOLE_VALUE } from '@/Calculator/constants/blackhole';
+import { MAX_EXP_VALUE } from '@/Calculator/constants/exp';
+import { Subject } from '@/Calculator/types/OrderItemButton';
 
 export const useSubjectList = () => {
   const calculatorProps = useAtomValue(calculatorPropsAtom);

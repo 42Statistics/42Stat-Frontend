@@ -1,35 +1,38 @@
-import {
-  H2BoldText,
-  Writable,
-  VStack,
-  HStack,
-  Text,
-  CaptionText,
-  Body1BoldText,
-  Divider,
-} from '@shared/ui-kit';
-import { CustomCheckbox } from '@shared/ui-kit-styled';
+import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useSetAtom } from 'jotai';
-import { ProjectSpotlight } from '@/Calculator/ProjectSpotlight';
-import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
-import { calculatorDialogAtom } from '@core/atoms/calculatorDialogAtom';
-import { OrderItemButton } from '@/Calculator/input-contents/OrderItemButton';
-import { TableRowList, Subject } from '@/Calculator/types/OrderItemButton';
-import { Button } from '@shared/ui-kit';
-import { useTheme } from '@emotion/react';
 import { Fragment } from 'react';
 
-const CalculatorInputMobile = () => {
+import { OrderItemButton } from '@/Calculator/components/OrderItemButton';
+import { ProjectSpotlight } from '@/Calculator/components/ProjectSpotlight';
+import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
+import type { Subject, TableRowList } from '@/Calculator/types/OrderItemButton';
+import { calculatorDialogAtom } from '@core/atoms/calculatorDialogAtom';
+import {
+  Body1BoldText,
+  Button,
+  CaptionText,
+  Divider,
+  H2BoldText,
+  HStack,
+  Spacer,
+  Text,
+  VStack,
+  Writable,
+} from '@shared/ui-kit';
+import { CustomCheckbox } from '@shared/ui-kit-styled';
+import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
+
+export const CalculatorInputMobile = () => {
+  const theme = useTheme();
   const { subjectList, updateSubjectList } = useSubjectList();
   const setCalculatorDialogAtom = useSetAtom(calculatorDialogAtom);
-  const theme = useTheme();
 
-  const onListChange = (subjectList: TableRowList[]) => {
+  const handleSubjectListChange = (subjectList: TableRowList[]) => {
     updateSubjectList(subjectList as Subject[]);
   };
 
-  const onAddClick = () => {
+  const handleAddButtonClick = () => {
     if (subjectList.length >= 20) {
       setCalculatorDialogAtom({
         isOpen: true,
@@ -58,7 +61,8 @@ const CalculatorInputMobile = () => {
     const name = e.target.name as keyof typeof subjectList;
     const id = parseInt(e.target.id);
     if (value < 0 || value > 125) return;
-    const updatedSubjectList = subjectList.map((subject) => {
+
+    const newSubjectList = subjectList.map((subject) => {
       if (subject.id === id) {
         return {
           ...subject,
@@ -67,11 +71,11 @@ const CalculatorInputMobile = () => {
       }
       return subject;
     });
-    updateSubjectList(updatedSubjectList);
+    updateSubjectList(newSubjectList);
   };
 
-  const onCheckboxChange = (index: number) => {
-    const updatedSubjectList = subjectList.map((subject, i) => {
+  const handleCheckboxChange = (index: number) => {
+    const newSubjectList = subjectList.map((subject, i) => {
       if (i === index) {
         return {
           ...subject,
@@ -80,21 +84,18 @@ const CalculatorInputMobile = () => {
       }
       return subject;
     });
-    updateSubjectList(updatedSubjectList);
+    updateSubjectList(newSubjectList);
   };
 
   return (
-    <>
-      <VStack w="100%" align="start" spacing="1rem">
-        <HStack w="100%" justify="space-between">
-          <HStack justify="start" align="baseline" spacing="1rem">
-            <H2BoldText>프로젝트 목록</H2BoldText>
-            <CaptionText>최대 20개</CaptionText>
-          </HStack>
-          <Button onClick={onAddClick}>추가</Button>
-        </HStack>
-        <Divider color={theme.colors.mono.black} />
-      </VStack>
+    <VStack w="100%" align="start" spacing="1rem">
+      <HStack w="100%" align="baseline" spacing="1rem">
+        <H2BoldText>프로젝트 목록</H2BoldText>
+        <CaptionText>최대 20개</CaptionText>
+        <Spacer />
+        <Button onClick={handleAddButtonClick}>추가</Button>
+      </HStack>
+      <Divider color={theme.colors.mono.black} />
       {subjectList.map((subject, index) => (
         <Fragment key={subject.id}>
           <SubjectLayout>
@@ -108,14 +109,14 @@ const CalculatorInputMobile = () => {
                 <OrderItemButton
                   tableRowList={subjectList}
                   index={index}
-                  onListChange={onListChange}
+                  onListChange={handleSubjectListChange}
                 />
               </HStack>
               <ProjectSpotlight
                 index={index}
                 keyword={subject.name}
                 height="4rem"
-                isRelative={true}
+                isRelative
                 spotlightWidth="100%"
               />
             </VStack>
@@ -145,7 +146,7 @@ const CalculatorInputMobile = () => {
                 <VStack w="100%" h="4rem">
                   <CustomCheckbox
                     label="Bonus"
-                    onClick={() => onCheckboxChange(index)}
+                    onClick={() => handleCheckboxChange(index)}
                     checked={subject.bonus}
                   />
                 </VStack>
@@ -167,7 +168,7 @@ const CalculatorInputMobile = () => {
               <VStack>
                 <Text color={theme.colors.primary.default}>블랙홀</Text>
                 <Body1BoldText color={theme.colors.mono.black}>
-                  +{subject.blackhole}일
+                  +{numberWithUnitFormatter(subject.blackhole, '일')}
                 </Body1BoldText>
               </VStack>
             </InfoLayout>
@@ -175,7 +176,7 @@ const CalculatorInputMobile = () => {
           {index !== subjectList.length - 1 && <Divider />}
         </Fragment>
       ))}
-    </>
+    </VStack>
   );
 };
 
@@ -219,5 +220,3 @@ const SubjectLayout = styled.div`
   gap: 1rem;
   color: ${({ theme }) => theme.colors.mono.black};
 `;
-
-export default CalculatorInputMobile;

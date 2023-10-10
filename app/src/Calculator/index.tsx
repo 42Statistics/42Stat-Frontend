@@ -56,6 +56,12 @@ const CalculatorLayout = () => {
     }));
   };
 
+  //handleChange에서 updateSubjectList를 호출할 때 update되지 않는 문제
+  useEffect(() => {
+    updateSubjectList(subjectList);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [calculatorProps]);
+
   useEffect(() => {
     if (!data) {
       return;

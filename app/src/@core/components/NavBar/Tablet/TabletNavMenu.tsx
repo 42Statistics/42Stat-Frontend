@@ -11,7 +11,7 @@ export const TabletNavMenu = () => {
       <TabletNavItem route={NAV_ROUTES.PROFILE} />
       <TabletNavItem route={NAV_ROUTES.LEADERBOARD} />
       <TabletNavItem route={NAV_ROUTES.EVALLOG} />
-			<TabletNavItem route={NAV_ROUTES.CALCULATOR} />
+      <TabletNavItem route={NAV_ROUTES.CALCULATOR} />
       <Spacer />
       <TabletNavItem route={NAV_ROUTES.SETTING} />
     </VStack>

@@ -4,13 +4,17 @@ import styled from '@emotion/styled';
 import { ReactComponent as CheckboxBlank } from '@shared/assets/icon/checkbox-blank.svg';
 import { ReactComponent as CheckboxFilled } from '@shared/assets/icon/checkbox-filled.svg';
 
-type CheckboxProps = {
+type CheckboxWithLabelProps = {
   onClick: () => void;
   label: string;
   checked: boolean;
 };
 
-export const CustomCheckbox = ({ onClick, label, checked }: CheckboxProps) => {
+export const CheckboxWithLabel = ({
+  onClick,
+  label,
+  checked,
+}: CheckboxWithLabelProps) => {
   const theme = useTheme();
 
   return (

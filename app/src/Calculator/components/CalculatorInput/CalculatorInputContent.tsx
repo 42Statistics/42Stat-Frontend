@@ -4,7 +4,7 @@ import type {
   TableRowList,
 } from '@/Calculator/types/OrderItemButtonGroup';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
-import { VStack } from '@shared/ui-kit';
+import { VStack, Body1MediumText } from '@shared/ui-kit';
 
 import { CalculatorInputContentCardView } from '../CalculatorInputContentCardView';
 import { CalculatorInputContentTableView } from '../CalculatorInputContentTableView';
@@ -78,7 +78,9 @@ export const CalculatorInputContent = () => {
         />
       )}
       {subjectList.length === 0 && (
-        <VStack h="5rem">프로젝트를 추가하세요</VStack>
+        <VStack h="5rem">
+          <Body1MediumText>프로젝트를 추가하세요</Body1MediumText>
+        </VStack>
       )}
     </>
   );

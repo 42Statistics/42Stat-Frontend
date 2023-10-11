@@ -1,12 +1,15 @@
 import { useAtomValue } from 'jotai';
+import { truncate } from 'lodash-es';
 
 import { calculatorPropsAtom } from '@/Calculator/atoms/calculatorPropsAtom';
 import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
-import { MAX_BLACKHOLE_VALUE } from '@/Calculator/constants/blackhole';
-import type { Subject } from '@/Calculator/types/OrderItemButton';
+import {
+  MAX_BLACKHOLE_DAYS,
+  MAX_BLACKHOLE_NAME_LENGTH,
+} from '@/Calculator/constants/blackhole';
+import type { Subject } from '@/Calculator/types/OrderItemButtonGroup';
 import { DonutChart } from '@shared/components/Chart';
 import { DashboardContent } from '@shared/components/DashboardContent';
-import { blackholeNameFormatter } from '@shared/utils/formatters/blackholeFormatter';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 
 const getBlackholeDaysLeft = (currentDays: number, subjectList: Subject[]) => {
@@ -18,7 +21,7 @@ const getBlackholeDaysLeft = (currentDays: number, subjectList: Subject[]) => {
       return false;
     }
   });
-  const total = MAX_BLACKHOLE_VALUE - sum - currentDays;
+  const total = MAX_BLACKHOLE_DAYS - sum - currentDays;
   if (total <= 0 || sum === -1) return 0;
   return total;
 };
@@ -99,7 +102,8 @@ const BlackholeCalculatorChart = ({
             name: {
               show: true,
               offsetY: 130,
-              formatter: (value) => blackholeNameFormatter(value),
+              formatter: (value) =>
+                truncate(value, { length: MAX_BLACKHOLE_NAME_LENGTH }),
             },
             value: {
               show: true,

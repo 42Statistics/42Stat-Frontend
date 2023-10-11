@@ -146,11 +146,11 @@ type LayoutProps = {
 const Layout = styled.div<LayoutProps>`
   position: absolute;
   width: ${({ width }) => width};
+  min-width: 100%;
   top: 4.2rem;
   left: ${({ left }) => left};
   padding: 1rem 0;
   z-index: 100;
-  min-width: 20rem;
   background-color: ${({ theme }) => theme.colors.background.box.default};
   border-radius: ${({ theme }) => theme.radius.xs};
 `;

@@ -93,6 +93,7 @@ export const ProjectSpotlight = ({
     const handleEscapeKeyDown = (e: KeyboardEvent) => {
       if (isEscapeKeyDown(e) && isProjectSpotlightOpen === index) {
         e.preventDefault();
+        setIsProjectSpotlightOpen(-1);
       }
     };
     document.addEventListener('keydown', handleEscapeKeyDown);

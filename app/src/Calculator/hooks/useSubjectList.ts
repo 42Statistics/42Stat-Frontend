@@ -3,9 +3,9 @@ import { useCallback } from 'react';
 
 import { calculatorPropsAtom } from '@/Calculator/atoms/calculatorPropsAtom';
 import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
-import { MAX_BLACKHOLE_VALUE } from '@/Calculator/constants/blackhole';
+import { MAX_BLACKHOLE_DAYS } from '@/Calculator/constants/blackhole';
 import { MAX_EXP_VALUE } from '@/Calculator/constants/exp';
-import { Subject } from '@/Calculator/types/OrderItemButton';
+import type { Subject } from '@/Calculator/types/OrderItemButtonGroup';
 
 export const useSubjectList = () => {
   const calculatorProps = useAtomValue(calculatorPropsAtom);
@@ -28,8 +28,8 @@ export const useSubjectList = () => {
     const blackhole = Math.floor(
       ((endExp / 49980) ** 0.45 - (startExp / 49980) ** 0.45) * 483,
     );
-    if (blackhole + sum > MAX_BLACKHOLE_VALUE)
-      return MAX_BLACKHOLE_VALUE - sum < 0 ? 0 : MAX_BLACKHOLE_VALUE - sum;
+    if (blackhole + sum > MAX_BLACKHOLE_DAYS)
+      return MAX_BLACKHOLE_DAYS - sum < 0 ? 0 : MAX_BLACKHOLE_DAYS - sum;
     return blackhole;
   };
 

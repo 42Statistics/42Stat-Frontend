@@ -1,15 +1,14 @@
 import { useQuery } from '@apollo/client';
-import styled from '@emotion/styled';
 import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 
 import { calculatorPropsAtom } from '@/Calculator/atoms/calculatorPropsAtom';
 import { CalculatorInput } from '@/Calculator/components/CalculatorInput';
+import { calculatorPageDashboardContents } from '@/Calculator/dashboard-frames/calculatorPageDashboardContents';
 import {
   calculatorPageDashboardDesktop,
   calculatorPageDashboardTablet,
 } from '@/Calculator/dashboard-frames/calculatorPageDashboardRows';
-import { calculatorPageDashboardContents } from '@/Calculator/dashboard-frames/calculatorPageDashboardContents';
 import { Footer } from '@core/components/Footer';
 import { gql } from '@shared/__generated__';
 import { DashboardTemp } from '@shared/components/Dashboard/DashboardTemp';
@@ -28,7 +27,6 @@ import { getTimeDiffFromNow } from '@shared/utils/getTimeDiffFromNow';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 
 import { subjectListAtom } from './atoms/subjectListAtom';
-import { CalculatorInputMobile } from './components/CalculatorInput/CalculatorInputMobile';
 import { useSubjectList } from './hooks/useSubjectList';
 
 export const GET_BLACKHOLE_INFO = gql(/* GraphQL */ `
@@ -179,13 +177,7 @@ const CalculatorPage = () => {
               : calculatorPageDashboardTablet
           }
         />
-        <CalculatorInputLayout>
-          {device === 'mobile' ? (
-            <CalculatorInputMobile />
-          ) : (
-            <CalculatorInput />
-          )}
-        </CalculatorInputLayout>
+        <CalculatorInput />
         <Footer />
       </VStack>
     </>
@@ -193,13 +185,3 @@ const CalculatorPage = () => {
 };
 
 export default CalculatorPage;
-
-const CalculatorInputLayout = styled.div`
-  display: flex;
-  width: 100%;
-  height: 100%;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem 0;
-`;

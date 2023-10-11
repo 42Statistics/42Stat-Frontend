@@ -5,16 +5,18 @@ import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
 import {
   MAX_XAXIS_COUNT,
   MAX_XVALUE_LENGTH,
-} from '@/Calculator/constants/level';
+} from '@/Calculator/constants/levelRecords';
 import { AreaChart } from '@shared/components/Chart';
 import { DashboardContent } from '@shared/components/DashboardContent';
+import { truncate } from 'lodash-es';
 
-export const Level = () => {
+export const LevelRecords = () => {
   const subjectList = useAtomValue(subjectListAtom);
-  const calculatorProps = useAtomValue(calculatorPropsAtom);
+  const { currentLevel } = useAtomValue(calculatorPropsAtom);
 
+  const title = '레벨 증가 그래프';
   const levelList = [
-    { x: '현재 레벨', y: calculatorProps.currentLevel },
+    { x: '현재 레벨', y: currentLevel },
     ...subjectList
       .filter((subject) => subject.name !== '')
       .map((subject) => ({
@@ -31,7 +33,7 @@ export const Level = () => {
   ];
 
   return (
-    <DashboardContent title="레벨 증가 그래프" type="ApexCharts">
+    <DashboardContent title={title} type="ApexCharts">
       <LevelCalculatorChart series={series} />
     </DashboardContent>
   );
@@ -57,10 +59,7 @@ const LevelCalculatorChart = ({ series }: LevelCalculatorChartProps) => {
         if (subjectLength > MAX_XAXIS_COUNT) {
           return '';
         }
-        if (item.x.length > MAX_XVALUE_LENGTH) {
-          return item.x.slice(0, MAX_XVALUE_LENGTH - 3) + '...';
-        }
-        return item.x;
+        return truncate(item.x, { length: MAX_XVALUE_LENGTH });
       }),
       labels: {
         formatter: (value) => value,

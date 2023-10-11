@@ -1,6 +1,6 @@
 import { useAtomValue } from 'jotai';
 
-import { calculatorPropsAtom } from '@/Calculator/atoms/calculatorPropsAtom';
+import { calculatorUserInfoAtom } from '@/Calculator/atoms/calculatorUserInfoAtom';
 import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
 import {
   MAX_XAXIS_COUNT,
@@ -14,7 +14,7 @@ import { useMemo } from 'react';
 
 export const LevelRecords = () => {
   const subjectList = useAtomValue(subjectListAtom);
-  const { currentLevel } = useAtomValue(calculatorPropsAtom);
+  const { currentLevel } = useAtomValue(calculatorUserInfoAtom);
 
   const filteredSubjectList = useMemo(
     () => subjectList.filter((subject) => subject.name !== ''),

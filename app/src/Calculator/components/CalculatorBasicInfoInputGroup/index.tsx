@@ -1,23 +1,25 @@
 import { useAtom, useAtomValue } from 'jotai';
 import { useEffect } from 'react';
 
-import { calculatorPropsAtom } from '@/Calculator/atoms/calculatorPropsAtom';
+import { calculatorUserInfoAtom } from '@/Calculator/atoms/calculatorUserInfoAtom';
 import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
 import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
 import { InfoTooltip } from '@shared/components/InfoTooltip';
 import { Body1MediumText, HStack, Input, Text, VStack } from '@shared/ui-kit';
 
 export const CalculatorBasicInfoInputGroup = () => {
-  const [calculatorProps, setCalculatorProps] = useAtom(calculatorPropsAtom);
-  const { currentLevel, daysFromStart, currentBlackhole } = calculatorProps;
+  const [calculatorUserInfo, setCalculatorUserInfo] = useAtom(
+    calculatorUserInfoAtom,
+  );
+  const { currentLevel, daysFromStart, currentBlackhole } = calculatorUserInfo;
   const subjectList = useAtomValue(subjectListAtom);
   const { updateSubjectList } = useSubjectList();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
     if (isNaN(value) || value < 0) return;
-    const name = e.target.name as keyof typeof calculatorProps;
-    setCalculatorProps((prev) => ({
+    const name = e.target.name as keyof typeof calculatorUserInfoAtom;
+    setCalculatorUserInfo((prev) => ({
       ...prev,
       [name]: value,
     }));
@@ -27,7 +29,7 @@ export const CalculatorBasicInfoInputGroup = () => {
   useEffect(() => {
     updateSubjectList(subjectList);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [calculatorProps]);
+  }, [calculatorUserInfo]);
 
   return (
     <VStack align="start" spacing="1rem">

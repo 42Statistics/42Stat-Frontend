@@ -1,9 +1,10 @@
 import { QueryResult } from '@apollo/client';
 import styled from '@emotion/styled';
-import { useAtom, useSetAtom } from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 
 import { isProjectSpotlightOpenAtom } from '@/Calculator/atoms/isProjectSpotlightOpenAtom';
+import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
 import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
 import { checkDuplicateSubject } from '@/Calculator/utils/checkDuplicateSubject';
 import { calculatorDialogAtom } from '@core/atoms/calculatorDialogAtom';
@@ -32,7 +33,8 @@ export const Spotlight = ({
   width,
   left = '0',
 }: SpotlightProps) => {
-  const { subjectList, updateSubjectList } = useSubjectList();
+  const { updateSubjectList } = useSubjectList();
+  const subjectList = useAtomValue(subjectListAtom);
   const setCalculatorDialog = useSetAtom(calculatorDialogAtom);
   const [isProjectSpotlightOpen, setIsProjectSpotlightOpen] = useAtom(
     isProjectSpotlightOpenAtom,

@@ -6,6 +6,7 @@ import { Fragment } from 'react';
 import { OrderItemButtonGroup } from '@/Calculator/components/OrderItemButton';
 import { ProjectSpotlight } from '@/Calculator/components/ProjectSpotlight';
 import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
+import { isProjectSpotlightOpenAtom } from '@/Calculator/atoms/isProjectSpotlightOpenAtom';
 import type {
   Subject,
   TableRowList,
@@ -30,6 +31,7 @@ export const CalculatorInputMobile = () => {
   const theme = useTheme();
   const { subjectList, updateSubjectList } = useSubjectList();
   const setCalculatorDialogAtom = useSetAtom(calculatorDialogAtom);
+  const setIsProjectSpotlightOpen = useSetAtom(isProjectSpotlightOpenAtom);
 
   const handleSubjectListChange = (subjectList: TableRowList[]) => {
     updateSubjectList(subjectList as Subject[]);
@@ -43,6 +45,7 @@ export const CalculatorInputMobile = () => {
       });
       return;
     }
+    setIsProjectSpotlightOpen(subjectList.length);
     updateSubjectList([
       ...subjectList,
       {

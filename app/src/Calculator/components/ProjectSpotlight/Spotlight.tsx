@@ -1,8 +1,9 @@
 import { QueryResult } from '@apollo/client';
 import styled from '@emotion/styled';
-import { useSetAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 
+import { isProjectSpotlightOpenAtom } from '@/Calculator/atoms/isProjectSpotlightOpenAtom';
 import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
 import { checkDuplicateSubject } from '@/Calculator/utils/checkDuplicateSubject';
 import { calculatorDialogAtom } from '@core/atoms/calculatorDialogAtom';
@@ -23,7 +24,6 @@ type SpotlightProps = {
   index: number;
   width: string;
   left?: string;
-  setIsFocused: (isFocused: boolean) => void;
 };
 
 export const Spotlight = ({
@@ -31,16 +31,16 @@ export const Spotlight = ({
   index,
   width,
   left = '0',
-  setIsFocused,
 }: SpotlightProps) => {
   const { subjectList, updateSubjectList } = useSubjectList();
-  const setCalculatorDialogAtom = useSetAtom(calculatorDialogAtom);
+  const [calculatorDialog, setCalculatorDialog] = useAtom(calculatorDialogAtom);
+  const setIsProjectSpotlightOpen = useSetAtom(isProjectSpotlightOpenAtom);
   const size = data?.getSpotlight.projectPreviews.length ?? 0;
   const { currentFocus, setCurrentFocus } = useRoveFocus(size);
 
   const handleSelectSubject = (name: string, difficulty: number) => {
-    if (checkDuplicateSubject(subjectList, name)) {
-      setCalculatorDialogAtom({
+    if (checkDuplicateSubject(subjectList, name, index)) {
+      setCalculatorDialog({
         isOpen: true,
         description: '이미 추가된 프로젝트입니다.',
       });
@@ -57,7 +57,7 @@ export const Spotlight = ({
       return subject;
     });
     updateSubjectList(updatedSubjectList);
-    setIsFocused(false);
+    setIsProjectSpotlightOpen(index + 1);
   };
 
   useEffect(() => {
@@ -68,7 +68,6 @@ export const Spotlight = ({
         handleSelectSubject(project.name, project.difficulty ?? 0);
       }
     };
-
     document.addEventListener('keydown', handleEnterKeyDown);
 
     return () => {

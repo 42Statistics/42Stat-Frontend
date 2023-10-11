@@ -1,4 +1,4 @@
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { useCallback } from 'react';
 
 import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
@@ -9,26 +9,11 @@ import { calculatorUserInfoAtom } from '../atoms/calculatorUserInfoAtom';
 import { expTablesAtom } from '../atoms/expTablesAtom';
 
 export const useSubjectList = () => {
-  const [subjectList, setSubjectList] = useAtom(subjectListAtom);
+  const setSubjectList = useSetAtom(subjectListAtom);
   const { expMaxTable, expReqTable } = useAtomValue(expTablesAtom);
   const { currentLevel, currentBlackhole, daysFromStart } = useAtomValue(
     calculatorUserInfoAtom,
   );
-
-  const calculateBlackhole = (
-    startExp: number,
-    endExp: number,
-    sum: number,
-  ) => {
-    if (startExp >= MAX_EXP_VALUE) return 0;
-    if (endExp >= MAX_EXP_VALUE) endExp = MAX_EXP_VALUE;
-    const blackhole = Math.floor(
-      ((endExp / 49980) ** 0.45 - (startExp / 49980) ** 0.45) * 483,
-    );
-    if (blackhole + sum > MAX_BLACKHOLE_DAYS)
-      return MAX_BLACKHOLE_DAYS - sum < 0 ? 0 : MAX_BLACKHOLE_DAYS - sum;
-    return blackhole;
-  };
 
   const updateSubjectList = useCallback(
     (subjectList: Subject[]) => {
@@ -83,5 +68,17 @@ export const useSubjectList = () => {
     ],
   );
 
-  return { subjectList, updateSubjectList };
+  return { updateSubjectList };
+};
+
+const calculateBlackhole = (startExp: number, endExp: number, sum: number) => {
+  if (startExp >= MAX_EXP_VALUE) return 0;
+  if (endExp >= MAX_EXP_VALUE) endExp = MAX_EXP_VALUE;
+  const blackhole = Math.floor(
+    ((endExp / 49980) ** 0.45 - (startExp / 49980) ** 0.45) * 483,
+  );
+  if (blackhole + sum > MAX_BLACKHOLE_DAYS) {
+    return Math.max(MAX_BLACKHOLE_DAYS - sum, 0);
+  }
+  return blackhole;
 };

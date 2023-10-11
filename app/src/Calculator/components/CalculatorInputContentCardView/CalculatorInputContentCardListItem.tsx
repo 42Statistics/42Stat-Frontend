@@ -4,12 +4,13 @@ import styled from '@emotion/styled';
 import { OrderItemButtonGroup } from '@/Calculator/components/OrderItemButtonGroup';
 import { ProjectSpotlight } from '@/Calculator/components/ProjectSpotlight';
 import { PROJECT_LIST_TITLES } from '@/Calculator/constants/projectListTitles';
-import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
 import type { Subject } from '@/Calculator/types/OrderItemButtonGroup';
 import { Body1BoldText, HStack, Text, VStack, Writable } from '@shared/ui-kit';
 import { CheckboxWithLabel } from '@shared/ui-kit-styled';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 
+import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
+import { useAtomValue } from 'jotai';
 import type { CalculatorInputContentCardViewProps } from '.';
 
 type CalculatorInputContentCardListItemProps =
@@ -26,7 +27,7 @@ export const CalculatorInputContentCardListItem = ({
   onCheckboxChange,
 }: CalculatorInputContentCardListItemProps) => {
   const theme = useTheme();
-  const { subjectList } = useSubjectList(); // FIXME: OrderItemButtonGroup 주려고 여기서 다시 부르기가 좀...
+  const subjectList = useAtomValue(subjectListAtom); // FIXME: OrderItemButtonGroup 주려고 여기서 다시 부르기가 좀...
   const { PROJECT_NAME, SCORE, COALITION_BONUS, EXP, FINISH_LEVEL, BLACKHOLE } =
     PROJECT_LIST_TITLES;
 

@@ -1,6 +1,7 @@
-import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
 import type { TableRowList } from '@/Calculator/types/OrderItemButtonGroup';
 
+import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
+import { useAtomValue } from 'jotai';
 import { CalculatorInputContentCardList } from './CalculatorInputContentCardList';
 
 export type CalculatorInputContentCardViewProps = {
@@ -12,7 +13,7 @@ export type CalculatorInputContentCardViewProps = {
 export const CalculatorInputContentCardView = (
   props: CalculatorInputContentCardViewProps,
 ) => {
-  const { subjectList } = useSubjectList();
+  const subjectList = useAtomValue(subjectListAtom);
 
   return <CalculatorInputContentCardList list={subjectList} {...props} />;
 };

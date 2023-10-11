@@ -8,14 +8,21 @@ import { CalculatorInput } from '@/Calculator/components/CalculatorInput';
 import {
   calculatorPageDashboardDesktop,
   calculatorPageDashboardTablet,
-} from '@/Calculator/dashboard-frames/calculatorPageDashboardCols';
+} from '@/Calculator/dashboard-frames/calculatorPageDashboardRows';
 import { calculatorPageDashboardContents } from '@/Calculator/dashboard-frames/calculatorPageDashboardContents';
 import { Footer } from '@core/components/Footer';
 import { gql } from '@shared/__generated__';
 import { DashboardTemp } from '@shared/components/Dashboard/DashboardTemp';
 import { InfoTooltip } from '@shared/components/InfoTooltip';
 import { Seo } from '@shared/components/Seo';
-import { H1BoldText, H3BoldText, HStack, Input, VStack } from '@shared/ui-kit';
+import {
+  Body1MediumText,
+  H1BoldText,
+  HStack,
+  Input,
+  Text,
+  VStack,
+} from '@shared/ui-kit';
 import { getBlackholeDaysLeft } from '@shared/utils/getBlackholeDaysLeft';
 import { getTimeDiffFromNow } from '@shared/utils/getTimeDiffFromNow';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
@@ -110,32 +117,30 @@ const CalculatorPage = () => {
   return (
     <>
       <Seo title="블랙홀 계산기" />
-      <VStack w="100%" spacing="2rem">
+      <VStack w="100%" spacing="4rem">
         <VStack w="100%" align="start" spacing="1rem">
           <H1BoldText>블랙홀 계산기</H1BoldText>
-          <InputLayout>
-            <HStack spacing="1rem">
-              <H3BoldText>현재 레벨</H3BoldText>
+          <HStack spacing="2rem">
+            <HStack w="13rem" justify="start" spacing="1rem">
+              <Body1MediumText>현재 레벨</Body1MediumText>
               <InfoTooltip text="레벨이 8.41을 넘으면, 블랙홀 기간이 늘지 않아요." />
             </HStack>
-            <HStack w="3rem">
-              <Input
-                name="currentLevel"
-                type="number"
-                min="0"
-                max="30"
-                value={currentLevel}
-                onChange={handleChange}
-                style={{ width: '5rem' }}
-              />
-            </HStack>
-          </InputLayout>
-          <InputLayout>
-            <HStack spacing="1rem">
-              <H3BoldText>현재 블랙홀</H3BoldText>
+            <Input
+              name="currentLevel"
+              type="number"
+              min="0"
+              max="30"
+              value={currentLevel}
+              onChange={handleChange}
+              style={{ width: '5rem' }}
+            />
+          </HStack>
+          <HStack spacing="2rem">
+            <HStack w="13rem" justify="start" spacing="1rem">
+              <Body1MediumText>현재 블랙홀</Body1MediumText>
               <InfoTooltip text="현재 블랙홀 + 본 과정 시작 날짜가 670일이 넘으면, 블랙홀 기간이 늘지 않아요." />
             </HStack>
-            <HStack w="3rem">
+            <HStack spacing="0.3rem">
               <Input
                 name="currentBlackhole"
                 type="number"
@@ -143,14 +148,15 @@ const CalculatorPage = () => {
                 onChange={handleChange}
                 style={{ width: '5rem' }}
               />
+              <Text>일</Text>
             </HStack>
-          </InputLayout>
-          <InputLayout>
-            <HStack spacing="1rem">
-              <H3BoldText>본 과정 시작한지</H3BoldText>
+          </HStack>
+          <HStack spacing="2rem">
+            <HStack w="13rem" justify="start" spacing="1rem">
+              <Body1MediumText>본과정 시작한지</Body1MediumText>
               <InfoTooltip text="휴학일이 포함된 경우, 휴학 기간을 뺄 수 있어요." />
             </HStack>
-            <HStack w="3rem">
+            <HStack spacing="0.3rem">
               <Input
                 name="daysFromStart"
                 type="number"
@@ -158,8 +164,9 @@ const CalculatorPage = () => {
                 onChange={handleChange}
                 style={{ width: '5rem' }}
               />
+              <Text>일</Text>
             </HStack>
-          </InputLayout>
+          </HStack>
         </VStack>
         <DashboardTemp
           contents={calculatorPageDashboardContents}
@@ -183,14 +190,6 @@ const CalculatorPage = () => {
 };
 
 export default CalculatorPage;
-
-const InputLayout = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 25rem;
-  color: ${({ theme }) => theme.colors.mono.black};
-`;
 
 const CalculatorInputLayout = styled.div`
   display: flex;

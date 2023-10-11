@@ -26,9 +26,9 @@ export const CalculatorInputContentTableView = ({
 
   const heads = [
     PROJECT_NAME,
-    EXP,
     SCORE,
     COALITION_BONUS,
+    EXP,
     BLACKHOLE,
     FINISH_LEVEL,
     '',
@@ -61,7 +61,6 @@ export const CalculatorInputContentTableView = ({
                   height="3rem"
                 />
               </td>
-              <td>{expEdited?.toLocaleString()}</td>
               <td>
                 <InputLayout>
                   <Writable
@@ -85,6 +84,8 @@ export const CalculatorInputContentTableView = ({
                   checked={bonus}
                 />
               </td>
+              <td>{expEdited?.toLocaleString()}</td>
+
               <td>
                 <MediumText>
                   +{numberWithUnitFormatter(blackhole, '일')}

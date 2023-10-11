@@ -46,7 +46,11 @@ export const CalculatorInputMobile = () => {
       });
       return;
     }
-    setIsProjectSpotlightOpen(subjectList.length);
+    const firstEmptyIndex = subjectList.findIndex(
+      (subject) => subject.name === '',
+    );
+
+    setIsProjectSpotlightOpen(firstEmptyIndex);
     updateSubjectList([
       ...subjectList,
       {

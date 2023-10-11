@@ -114,10 +114,18 @@ export const CalculatorInputMobile = () => {
         <H2BoldText>프로젝트 목록</H2BoldText>
         <InfoTooltip text="프로젝트는 최대 20개까지 추가 가능해요." />
         <Spacer />
-        <Button backgroundColor="#ff7f00" onClick={handleResetButtonClick}>
+        <Button
+          backgroundColor={theme.colors.semantic.warning}
+          onClick={handleResetButtonClick}
+        >
           리셋
         </Button>
-        <Button onClick={handleAddButtonClick}>추가</Button>
+        <Button
+          backgroundColor={theme.colors.accent.default}
+          onClick={handleAddButtonClick}
+        >
+          추가
+        </Button>
       </HStack>
       <Divider color={theme.colors.mono.black} />
       {subjectList.map((subject, index) => (

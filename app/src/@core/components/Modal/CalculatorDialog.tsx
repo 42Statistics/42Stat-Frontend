@@ -1,28 +1,39 @@
-import { calculatorDialogAtom } from '@core/atoms/calculatorDialogAtom';
-import { AlertDialog } from '@shared/ui-kit';
-import { useAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 
-export const CalculatorDialog = () => {
-  const [{ isOpen, description }, setCalculatorDialogAtom] =
-    useAtom(calculatorDialogAtom);
+import { AlertDialog } from '@shared/ui-kit';
+import { isEnterKeyDown, isEscapeKeyDown } from '@shared/utils/keyboard';
+import { calculatorDialogAtom } from '@core/atoms/calculatorDialogAtom';
+import { isProjectSpotlightOpenAtom } from '@/Calculator/atoms/isProjectSpotlightOpenAtom';
 
-  const closeCalculatorDialog = () => {
+export const CalculatorDialog = () => {
+  const [{ description, focus }, setCalculatorDialogAtom] =
+    useAtom(calculatorDialogAtom);
+  const setIsProjectSpotlightOpen = useSetAtom(isProjectSpotlightOpenAtom);
+
+  const handleConfirm = () => {
     setCalculatorDialogAtom({
       isOpen: false,
       description: '',
+      focus: -1,
     });
+    setIsProjectSpotlightOpen(focus);
   };
 
-  const handleConfirm = () => {
-    closeCalculatorDialog();
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (isEnterKeyDown(e) || isEscapeKeyDown(e)) {
+      e.preventDefault();
+      handleConfirm();
+    }
   };
 
   useEffect(() => {
-    if (!isOpen) {
-      return;
-    }
-  }, [isOpen]);
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
 
   return (
     <AlertDialog

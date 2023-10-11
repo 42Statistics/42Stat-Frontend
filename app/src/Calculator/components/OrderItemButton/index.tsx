@@ -1,17 +1,23 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 
-import type { TableRowList } from '@/Calculator/types/OrderItemButton';
+import type { TableRowList } from '@/Calculator/types/OrderItemButtonGroup';
 import { ReactComponent as MdDelete } from '@shared/assets/icon/md-delete.svg';
 import { ReactComponent as MdDown } from '@shared/assets/icon/md-down.svg';
 import { ReactComponent as MdUp } from '@shared/assets/icon/md-up.svg';
 import { IconButton } from '@shared/ui-kit';
 
-export const OrderItemButton = ({
+type OrderItemButtonGroupProps = {
+  tableRowList: TableRowList[];
+  index: number;
+  onListChange: (tableRowList: TableRowList[]) => void;
+};
+
+export const OrderItemButtonGroup = ({
   tableRowList,
   index,
   onListChange,
-}: OrderItemButtonProps) => {
+}: OrderItemButtonGroupProps) => {
   const theme = useTheme();
 
   const switchListOrder = ({ arr, index1, index2 }: SwitchListOrderProps) => {
@@ -51,12 +57,6 @@ export const OrderItemButton = ({
       </IconButton>
     </Layout>
   );
-};
-
-type OrderItemButtonProps = {
-  tableRowList: TableRowList[];
-  index: number;
-  onListChange: (tableRowList: TableRowList[]) => void;
 };
 
 type SwitchListOrderProps = {

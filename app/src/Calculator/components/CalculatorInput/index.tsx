@@ -2,10 +2,13 @@ import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useSetAtom } from 'jotai';
 
-import { OrderItemButton } from '@/Calculator/components/OrderItemButton';
+import { OrderItemButtonGroup } from '@/Calculator/components/OrderItemButton';
 import { ProjectSpotlight } from '@/Calculator/components/ProjectSpotlight';
 import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
-import type { Subject, TableRowList } from '@/Calculator/types/OrderItemButton';
+import type {
+  Subject,
+  TableRowList,
+} from '@/Calculator/types/OrderItemButtonGroup';
 import { calculatorDialogAtom } from '@core/atoms/calculatorDialogAtom';
 import {
   Button,
@@ -168,7 +171,7 @@ export const CalculatorInput = () => {
                   <MediumText>{finishLevel}</MediumText>
                 </td>
                 <td>
-                  <OrderItemButton
+                  <OrderItemButtonGroup
                     tableRowList={subjectList}
                     index={index}
                     onListChange={handleListChange}

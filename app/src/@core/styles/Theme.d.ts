@@ -26,6 +26,7 @@ type Colors = {
   };
   semantic: {
     error: string;
+    warning: string;
   };
   element: {
     hover: string;

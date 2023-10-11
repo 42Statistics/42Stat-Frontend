@@ -2,7 +2,6 @@ import { useQuery } from '@apollo/client';
 import { useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 
-import { calculatorPropsAtom } from '@/Calculator/atoms/calculatorPropsAtom';
 import { CalculatorInput } from '@/Calculator/components/CalculatorInput';
 import { calculatorPageDashboardContents } from '@/Calculator/dashboard-frames/calculatorPageDashboardContents';
 import {
@@ -18,8 +17,11 @@ import { getBlackholeDaysLeft } from '@shared/utils/getBlackholeDaysLeft';
 import { getTimeDiffFromNow } from '@shared/utils/getTimeDiffFromNow';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 
+import { calculatorUserInfoAtom } from './atoms/calculatorUserInfoAtom';
+import { expTablesAtom } from './atoms/expTablesAtom';
 import { subjectListAtom } from './atoms/subjectListAtom';
 import { CalculatorBasicInfoInputGroup } from './components/CalculatorBasicInfoInputGroup';
+import { getDifferences } from './utils/getDifferences';
 
 export const GET_BLACKHOLE_INFO = gql(/* GraphQL */ `
   query GetBlackholeInfo {
@@ -38,7 +40,8 @@ export const GET_BLACKHOLE_INFO = gql(/* GraphQL */ `
 `);
 
 const CalculatorPage = () => {
-  const setCalculatorProps = useSetAtom(calculatorPropsAtom);
+  const setCalculatorUserInfo = useSetAtom(calculatorUserInfoAtom);
+  const setExpTables = useSetAtom(expTablesAtom);
   const setSubjectList = useSetAtom(subjectListAtom);
   const device = useDeviceType();
   const { loading, error, data } = useQuery(GET_BLACKHOLE_INFO);
@@ -54,19 +57,15 @@ const CalculatorPage = () => {
     } = data.getPersonalGeneral;
 
     const expMaxTable = data.getExpTable.map((level) => level.exp);
-    const expReqTable = [expMaxTable[0]];
-    for (let i = 1; i < expMaxTable.length; i++) {
-      expReqTable.push(expMaxTable[i] - expMaxTable[i - 1]);
-    }
+    const expReqTable = getDifferences(expMaxTable);
 
-    setCalculatorProps({
+    setCalculatorUserInfo({
       currentLevel: level,
       currentBlackhole:
         blackholedAt != null ? getBlackholeDaysLeft(new Date(blackholedAt)) : 0,
       daysFromStart: -getTimeDiffFromNow(new Date(beginAt), 'day'),
-      expMaxTable: expMaxTable,
-      expReqTable: expReqTable,
     });
+    setExpTables({ expMaxTable, expReqTable });
     setSubjectList([
       {
         id: 0,
@@ -80,7 +79,7 @@ const CalculatorPage = () => {
         finishLevel: level,
       },
     ]);
-  }, [setCalculatorProps, setSubjectList, data]);
+  }, [data, setCalculatorUserInfo, setExpTables, setSubjectList]);
 
   if (loading || error || !data) {
     return <></>;

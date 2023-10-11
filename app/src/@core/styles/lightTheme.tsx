@@ -52,6 +52,10 @@ const colors = {
       default: '#ffffff',
       gradient: 'linear-gradient(110deg, #ffffff 8%, #f5f5f5 18%, #ffffff 33%)',
     },
+    button: {
+      hover: '#dadada',
+      shadow: '#cecece',
+    },
   },
   mono: {
     absolute: {

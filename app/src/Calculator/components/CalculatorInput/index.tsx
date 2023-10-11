@@ -141,7 +141,12 @@ export const CalculatorInput = () => {
           >
             초기화
           </Button>
-          <Button onClick={handleAddButtonClick}>프로젝트 추가</Button>
+          <Button
+            backgroundColor={theme.colors.accent.default}
+            onClick={handleAddButtonClick}
+          >
+            프로젝트 추가
+          </Button>
         </HStack>
         <Divider color={theme.colors.mono.black} />
       </VStack>

@@ -14,7 +14,6 @@ import { calculatorDialogAtom } from '@core/atoms/calculatorDialogAtom';
 import {
   Button,
   CaptionText,
-  Checkbox,
   Divider,
   H2BoldText,
   HStack,
@@ -192,7 +191,7 @@ export const CalculatorInput = () => {
                   </InputLayout>
                 </td>
                 <td>
-                  <Checkbox
+                  <input
                     id={index.toString()}
                     type="checkbox"
                     name="bonus"

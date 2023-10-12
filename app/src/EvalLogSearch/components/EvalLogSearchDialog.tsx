@@ -13,13 +13,14 @@ import {
   EVAL_LOG_SEARCH_URL_PARAM_KEYS,
   EVAL_LOG_SEARCH_URL_PARAM_VALUES,
 } from '../constants/urlParams';
+import { trimEvalLogSearchForm } from '../utils/trimEvalLogSearchForm';
 
 type EvalLogSearchDialogProps = {
   isOpen: boolean;
   onClose: () => void;
 };
 
-type EvalLogSearchForm = Omit<
+export type EvalLogSearchForm = Omit<
   EvalLogSearchArgs,
   'after' | 'first' | 'outstandingOnly'
 > & {
@@ -56,15 +57,16 @@ export const EvalLogSearchDialog = ({
     setValue(CORRECTED, corrector);
   };
 
+  const onSubmit = (data: EvalLogSearchForm) => {
+    const trimmedData = trimEvalLogSearchForm(data);
+    setSearchParams(toURLSearchParams(trimmedData));
+    onClose();
+  };
+
   return (
     <Dialog isOpen={isOpen} onClose={onClose}>
       <Layout>
-        <EvalLogSearchForm
-          onSubmit={handleSubmit((evalLogSearchForm) => {
-            setSearchParams(toURLSearchParams(evalLogSearchForm));
-            onClose();
-          })}
-        >
+        <EvalLogSearchForm onSubmit={handleSubmit(onSubmit)}>
           <ul>
             <li>
               <label htmlFor={PROJECT_NAME}>과제명</label>

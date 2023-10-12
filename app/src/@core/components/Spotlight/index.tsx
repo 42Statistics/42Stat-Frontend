@@ -73,12 +73,14 @@ export const Spotlight = () => {
   }, [debouncedInput, setCurrentFocus, searchResult]);
 
   useEffect(() => {
-    if (debouncedInput.length < 2) {
+    const trimmedDebouncedInput = debouncedInput.trim();
+    if (
+      trimmedDebouncedInput.length < 2 ||
+      trimmedDebouncedInput.length > 100
+    ) {
       return;
     }
-    if (debouncedInput.length <= 100) {
-      search({ variables: { input: debouncedInput, limit: LIMIT } });
-    }
+    search({ variables: { input: trimmedDebouncedInput, limit: LIMIT } });
   }, [debouncedInput, search]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

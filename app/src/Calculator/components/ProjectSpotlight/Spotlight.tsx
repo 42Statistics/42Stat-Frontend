@@ -36,7 +36,7 @@ export const Spotlight = ({
   const { updateSubjectList } = useSubjectList();
   const subjectList = useAtomValue(subjectListAtom);
   const setCalculatorDialog = useSetAtom(calculatorDialogAtom);
-  const [isProjectSpotlightOpen, setIsProjectSpotlightOpen] = useAtom(
+  const [currentOpenSpotlightIndex, setCurrentOpenSpotlightIndex] = useAtom(
     currentOpenSpotlightIndexAtom,
   );
   const size = data?.getSpotlight.projectPreviews.length ?? 0;
@@ -47,9 +47,9 @@ export const Spotlight = ({
       setCalculatorDialog({
         isOpen: true,
         description: '이미 추가된 프로젝트입니다.',
-        focus: isProjectSpotlightOpen,
+        focus: currentOpenSpotlightIndex,
       });
-      setIsProjectSpotlightOpen(-1);
+      setCurrentOpenSpotlightIndex(-1);
       return;
     }
     const updatedSubjectList = subjectList.map((subject, idx) => {
@@ -63,7 +63,7 @@ export const Spotlight = ({
       return subject;
     });
     updateSubjectList(updatedSubjectList);
-    setIsProjectSpotlightOpen(index + 1);
+    setCurrentOpenSpotlightIndex(index + 1);
   };
 
   useEffect(() => {
@@ -81,16 +81,16 @@ export const Spotlight = ({
     };
   });
 
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>, index: number) => {
     if (!data) return;
-    const id = parseInt(e.currentTarget.id);
-    const project = data.getSpotlight.projectPreviews[id];
+    const project = data.getSpotlight.projectPreviews[index];
     handleSelectSubject(project.name, project.difficulty ?? 0);
   };
 
-  if (loading) {
-    return null;
+  if (loading || !data) {
+    return <></>;
   }
+
   if (error) {
     return (
       <Layout width={width}>
@@ -99,9 +99,6 @@ export const Spotlight = ({
         </Center>
       </Layout>
     );
-  }
-  if (!data) {
-    return null;
   }
 
   if (data.getSpotlight.projectPreviews.length === 0) {
@@ -116,12 +113,11 @@ export const Spotlight = ({
 
   return (
     <Layout width={width} left={left}>
-      {data.getSpotlight.projectPreviews.map((project, i) => (
+      {data.getSpotlight.projectPreviews.map((project, index) => (
         <Item
-          id={i.toString()}
-          onMouseDown={handleClick}
-          isFocused={currentFocus === i}
-          onMouseOver={() => setCurrentFocus(i)}
+          onMouseDown={(event) => handleClick(event, index)}
+          isFocused={currentFocus === index}
+          onMouseOver={() => setCurrentFocus(index)}
           key={project.id}
         >
           {project.name}

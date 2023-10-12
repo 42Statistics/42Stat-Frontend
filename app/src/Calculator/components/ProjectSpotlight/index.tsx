@@ -44,7 +44,7 @@ export const ProjectSpotlight = ({
 }: ProjectSpotlightProps) => {
   const [search, searchResult] = useLazyQuery(GET_PROJECTS);
   const LIMIT = 4;
-  const [isProjectSpotlightOpen, setIsProjectSpotlightOpen] = useAtom(
+  const [currentOpenSpotlightIndex, setCurrentOpenSpotlightIndex] = useAtom(
     currentOpenSpotlightIndexAtom,
   );
   const inputRef = useRef<HTMLInputElement>(null);
@@ -53,21 +53,22 @@ export const ProjectSpotlight = ({
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
-    if (isProjectSpotlightOpen !== index) setIsProjectSpotlightOpen(index);
+    if (currentOpenSpotlightIndex !== index)
+      setCurrentOpenSpotlightIndex(index);
   };
 
   const handleBlur = () => {
-    setIsProjectSpotlightOpen(-1);
+    setCurrentOpenSpotlightIndex(-1);
     setInput(keyword);
   };
 
   useEffect(() => {
-    if (isProjectSpotlightOpen === index) {
+    if (currentOpenSpotlightIndex === index) {
       inputRef.current?.focus();
       return;
     }
     inputRef.current?.blur();
-  }, [isProjectSpotlightOpen, index]);
+  }, [currentOpenSpotlightIndex, index]);
 
   useEffect(() => {
     setInput(keyword);
@@ -93,9 +94,9 @@ export const ProjectSpotlight = ({
 
   useEffect(() => {
     const handleEscapeKeyDown = (e: KeyboardEvent) => {
-      if (isEscapeKeyDown(e) && isProjectSpotlightOpen === index) {
+      if (isEscapeKeyDown(e) && currentOpenSpotlightIndex === index) {
         e.preventDefault();
-        setIsProjectSpotlightOpen(-1);
+        setCurrentOpenSpotlightIndex(-1);
       }
     };
     document.addEventListener('keydown', handleEscapeKeyDown);
@@ -114,17 +115,18 @@ export const ProjectSpotlight = ({
             id={index.toString()}
             value={input}
             onChange={handleInputChange}
-            onFocus={() => setIsProjectSpotlightOpen(index)}
+            onFocus={() => setCurrentOpenSpotlightIndex(index)}
             ref={inputRef}
           />
-          {isProjectSpotlightOpen === index && debouncedInput.length >= 2 && (
-            <Spotlight
-              left={spotlightLeft}
-              width={spotlightWidth}
-              index={index}
-              result={searchResult}
-            />
-          )}
+          {currentOpenSpotlightIndex === index &&
+            debouncedInput.length >= 2 && (
+              <Spotlight
+                left={spotlightLeft}
+                width={spotlightWidth}
+                index={index}
+                result={searchResult}
+              />
+            )}
         </InputLayout>
       </Layout>
     </VStack>

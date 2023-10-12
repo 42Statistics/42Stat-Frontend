@@ -3,12 +3,24 @@ import type { EvalLogSearchForm } from '@/EvalLogSearch/components/EvalLogSearch
 export const trimEvalLogSearchForm = (
   form: EvalLogSearchForm,
 ): EvalLogSearchForm => {
-  const { projectName, corrector, corrected } = form;
+  const { projectName, corrector, corrected, ...rest } = form;
 
-  return {
-    ...form,
-    projectName: projectName?.trim() ?? undefined,
-    corrector: corrector?.trim() ?? undefined,
-    corrected: corrected?.trim() ?? undefined,
-  };
+  const newForm: EvalLogSearchForm = { ...rest };
+
+  const trimmedProjectName = projectName?.trim();
+  if (projectName) {
+    newForm.projectName = trimmedProjectName;
+  }
+
+  const trimmedCorrector = corrector?.trim();
+  if (corrector) {
+    newForm.corrector = trimmedCorrector;
+  }
+
+  const trimmedCorrected = corrected?.trim();
+  if (corrected) {
+    newForm.corrected = trimmedCorrected;
+  }
+
+  return newForm;
 };

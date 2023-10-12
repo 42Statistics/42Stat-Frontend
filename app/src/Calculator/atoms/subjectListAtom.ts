@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
 
-import type { Subject } from '@/Calculator/types/OrderItemButtonGroup';
+import type { Subject } from '@/Calculator/types/Subject';
 
 export const emptySubject: Subject = {
   id: 0,

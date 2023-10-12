@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 
-import type { Subject } from '@/Calculator/types/OrderItemButtonGroup';
+import type { Subject } from '@/Calculator/types/Subject';
 import { Divider } from '@shared/ui-kit';
 
 import type { CalculatorInputContentCardViewProps } from '.';

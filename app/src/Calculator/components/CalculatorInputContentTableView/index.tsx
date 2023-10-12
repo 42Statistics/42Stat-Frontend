@@ -5,12 +5,12 @@ import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
 import { OrderItemButtonGroup } from '@/Calculator/components/OrderItemButtonGroup';
 import { ProjectSpotlight } from '@/Calculator/components/ProjectSpotlight';
 import { PROJECT_LIST_TITLES } from '@/Calculator/constants/projectListTitles';
-import type { TableRowList } from '@/Calculator/types/OrderItemButtonGroup';
+import type { Subject } from '@/Calculator/types/Subject';
 import { MediumText, PrimaryMediumText, Writable } from '@shared/ui-kit';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 
 type CalculatorInputContentTableViewProps = {
-  onSubjectListChange: (subjectList: TableRowList[]) => void;
+  onSubjectListChange: (subjectList: Subject[]) => void;
   onInputChange: React.ChangeEventHandler<HTMLInputElement>;
   onCheckboxChange: React.ChangeEventHandler<HTMLInputElement>;
 };

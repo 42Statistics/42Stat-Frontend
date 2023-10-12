@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import { OrderItemButtonGroup } from '@/Calculator/components/OrderItemButtonGroup';
 import { ProjectSpotlight } from '@/Calculator/components/ProjectSpotlight';
 import { PROJECT_LIST_TITLES } from '@/Calculator/constants/projectListTitles';
-import type { Subject } from '@/Calculator/types/OrderItemButtonGroup';
+import type { Subject } from '@/Calculator/types/Subject';
 import { Body1BoldText, HStack, Text, VStack, Writable } from '@shared/ui-kit';
 import { CheckboxWithLabel } from '@shared/ui-kit-styled';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';

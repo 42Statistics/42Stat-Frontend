@@ -9,7 +9,9 @@ import { currentOpenSpotlightIndexAtom } from '@/Calculator/atoms/currentOpenSpo
 export const CalculatorDialog = () => {
   const [{ description, focus }, setCalculatorDialogAtom] =
     useAtom(calculatorDialogAtom);
-  const setIsProjectSpotlightOpen = useSetAtom(currentOpenSpotlightIndexAtom);
+  const setCurrentOpenSpotlightIndex = useSetAtom(
+    currentOpenSpotlightIndexAtom,
+  );
 
   const handleConfirm = () => {
     setCalculatorDialogAtom({
@@ -17,23 +19,23 @@ export const CalculatorDialog = () => {
       description: '',
       focus: -1,
     });
-    setIsProjectSpotlightOpen(focus);
-  };
-
-  const handleKeyDown = (e: KeyboardEvent) => {
-    if (isEnterKeyDown(e) || isEscapeKeyDown(e)) {
-      e.preventDefault();
-      handleConfirm();
-    }
+    setCurrentOpenSpotlightIndex(focus);
   };
 
   useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (isEnterKeyDown(e) || isEscapeKeyDown(e)) {
+        e.preventDefault();
+        handleConfirm();
+      }
+    };
+
     document.addEventListener('keydown', handleKeyDown);
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  });
 
   return (
     <AlertDialog

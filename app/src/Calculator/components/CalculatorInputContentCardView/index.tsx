@@ -6,8 +6,14 @@ import { CalculatorInputContentCardList } from './CalculatorInputContentCardList
 
 export type CalculatorInputContentCardViewProps = {
   onSubjectListChange: (subjectList: Subject[]) => void;
-  onInputChange: React.ChangeEventHandler<HTMLInputElement>;
-  onCheckboxChange: (index: number) => void; // FIXME: Change to React.ChangeEventHandler<HTMLInputElement> when refactoring
+  onInputChange: (
+    event: React.ChangeEvent<HTMLInputElement>,
+    index: number,
+  ) => void;
+  onCheckboxChange: (
+    event: React.ChangeEvent<HTMLInputElement>,
+    index: number,
+  ) => void;
 };
 
 export const CalculatorInputContentCardView = (

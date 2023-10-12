@@ -32,7 +32,7 @@ export const CalculatorInputHeader = () => {
       return;
     }
 
-    updateSubjectList([...subjectList, emptySubject]);
+    updateSubjectList([...subjectList, emptySubject(subjectList.length)]);
   };
 
   return (

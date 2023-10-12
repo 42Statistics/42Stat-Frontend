@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
 import { MAX_BLACKHOLE_DAYS } from '@/Calculator/constants/blackhole';
 import { MAX_EXP_VALUE } from '@/Calculator/constants/exp';
-import type { Subject } from '@/Calculator/types/OrderItemButtonGroup';
+import type { Subject } from '@/Calculator/types/Subject';
 import { calculatorUserInfoAtom } from '../atoms/calculatorUserInfoAtom';
 import { expTablesAtom } from '../atoms/expTablesAtom';
 

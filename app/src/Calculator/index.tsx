@@ -57,7 +57,7 @@ const CalculatorPage = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
-    if (isNaN(value) || value < 0) return;
+    if (isNaN(value)) return;
     const name = e.target.name as keyof typeof calculatorProps;
     setCalculatorProps((prev) => ({
       ...prev,

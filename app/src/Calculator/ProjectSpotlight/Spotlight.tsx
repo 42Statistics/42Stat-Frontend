@@ -4,69 +4,21 @@ import { Exact, GetProjectsQuery } from '@shared/__generated__/graphql';
 import { ApolloErrorView } from '@shared/components/ApolloError/ApolloErrorView';
 import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
 import { Center, Body1Text } from '@shared/ui-kit';
-import { useEffect } from 'react';
 import { useSetAtom } from 'jotai';
 import { useRoveFocus } from '@shared/hooks/useRoveFocus';
 import { checkDuplicateSubject } from '../utils/checkDuplicateSubject';
 import { calculatorDialogAtom } from '@core/atoms/calculatorDialogAtom';
-import { isEnterKeyDown } from '@shared/utils/keyboard';
 
 export const Spotlight = ({
   result: { loading, error, data },
   index,
   width,
   left = '0',
-  setIsFocused,
 }: SpotlightProps) => {
   const { subjectList, updateSubjectList } = useSubjectList();
   const setCalculatorDialogAtom = useSetAtom(calculatorDialogAtom);
   const size = data?.getSpotlight.projectPreviews.length ?? 0;
   const { currentFocus, setCurrentFocus } = useRoveFocus(size);
-
-  const onSelectSubject = (name: string, difficulty: number) => {
-    if (checkDuplicateSubject(subjectList, name)) {
-      setCalculatorDialogAtom({
-        isOpen: true,
-        description: '이미 추가된 프로젝트입니다.',
-      });
-      return;
-    }
-    const updatedSubjectList = subjectList.map((subject, idx) => {
-      if (idx === index) {
-        return {
-          ...subject,
-          name: name,
-          exp: difficulty ?? 0,
-        };
-      }
-      return subject;
-    });
-    updateSubjectList(updatedSubjectList);
-    setIsFocused(false);
-  };
-
-  useEffect(() => {
-    const handleEnterKeyDown = (e: KeyboardEvent) => {
-      if (isEnterKeyDown(e) && data) {
-        e.preventDefault();
-        const project = data.getSpotlight.projectPreviews[currentFocus];
-        onSelectSubject(project.name, project.difficulty ?? 0);
-      }
-    };
-
-    document.addEventListener('keydown', handleEnterKeyDown);
-
-    return () => {
-      document.removeEventListener('keydown', handleEnterKeyDown);
-    };
-  });
-
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!data) return;
-    const id = parseInt(e.currentTarget.id);
-    const project = data.getSpotlight.projectPreviews[id];
-    onSelectSubject(project.name, project.difficulty ?? 0);
-  };
 
   if (loading) {
     return null;
@@ -83,6 +35,31 @@ export const Spotlight = ({
   if (!data) {
     return null;
   }
+
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!data) return;
+    const id = parseInt(e.currentTarget.id);
+    const project = data.getSpotlight.projectPreviews[id];
+    if (checkDuplicateSubject(subjectList, project.name)) {
+      setCalculatorDialogAtom({
+        isOpen: true,
+        description: '이미 추가된 프로젝트입니다.',
+      });
+      return;
+    }
+    const updatedSubjectList = subjectList.map((subject, idx) => {
+      if (idx === index) {
+        return {
+          ...subject,
+          name: project.name,
+          exp: project.difficulty ?? 0,
+        };
+      }
+      return subject;
+    });
+    updateSubjectList(updatedSubjectList);
+    return;
+  };
 
   if (data.getSpotlight.projectPreviews.length === 0) {
     return (
@@ -122,7 +99,6 @@ type SpotlightProps = {
   index: number;
   width: string;
   left?: string;
-  setIsFocused: (isFocused: boolean) => void;
 };
 
 type ItemProps = {

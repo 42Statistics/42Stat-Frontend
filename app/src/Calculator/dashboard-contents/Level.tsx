@@ -3,10 +3,7 @@ import { AreaChart } from '@shared/components/Chart';
 import { useAtom } from 'jotai';
 import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
 import { calculatorPropsAtom } from '@/Calculator/atoms/calculatorPropsAtom';
-import {
-  MAX_XAXIS_COUNT,
-  MAX_XVALUE_LENGTH,
-} from '@/Calculator/constants/level';
+import { MAX_XAXIS_COUNT, MAX_XVALUE_LENGTH } from '../constants/level';
 
 export const Level = () => {
   const [subjectList] = useAtom(subjectListAtom);

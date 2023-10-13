@@ -8,18 +8,22 @@ import {
   CheckBox,
 } from '@shared/ui-kit';
 import styled from '@emotion/styled';
-import { useSetAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
+import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
 import { ProjectSpotlight } from '@/Calculator/ProjectSpotlight';
-import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
+import { calculatorPropsAtom } from './atoms/calculatorPropsAtom';
+import { calculateSubjectList } from '@/Calculator/utils/calculateSubjectList';
 import { calculatorDialogAtom } from '@core/atoms/calculatorDialogAtom';
-import { OrderItemButton } from '@/Calculator/input-contents/OrderItemButton';
+import { OrderItemButton } from '@/Calculator/OrderItemButton';
 import { TableRowList, Subject } from '@/Calculator/types/orderItemButton';
 import { Button } from '@shared/ui-kit';
 import { useTheme } from '@emotion/react';
 
 const CalculatorInput = () => {
-  const { subjectList, updateSubjectList } = useSubjectList();
+  const [subjectList, setSubjectList] = useAtom(subjectListAtom);
+  const [calculatorProps] = useAtom(calculatorPropsAtom);
   const setCalculatorDialogAtom = useSetAtom(calculatorDialogAtom);
+  const currentLevel = calculatorProps.currentLevel;
   const theme = useTheme();
 
   const heads = [
@@ -33,7 +37,11 @@ const CalculatorInput = () => {
   ];
 
   const onListChange = (subjectList: TableRowList[]) => {
-    updateSubjectList(subjectList as Subject[]);
+    const calculatedSubjectList = calculateSubjectList({
+      subjectList: subjectList as Subject[],
+      currentLevel: currentLevel,
+    });
+    setSubjectList(calculatedSubjectList);
   };
 
   const onAddClick = () => {
@@ -44,9 +52,10 @@ const CalculatorInput = () => {
       });
       return;
     }
-    updateSubjectList([
-      ...subjectList,
-      {
+    const calculatedSubjectList = calculateSubjectList({
+      subjectList: subjectList,
+      currentLevel: currentLevel,
+      newSubject: {
         id: subjectList.length,
         name: '',
         exp: 0,
@@ -56,7 +65,8 @@ const CalculatorInput = () => {
         startLevel: 0,
         finishLevel: 0,
       },
-    ]);
+    });
+    setSubjectList(calculatedSubjectList);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,7 +82,11 @@ const CalculatorInput = () => {
       }
       return subject;
     });
-    updateSubjectList(updatedSubjectList);
+    const calculatedSubjectList = calculateSubjectList({
+      subjectList: updatedSubjectList,
+      currentLevel: currentLevel,
+    });
+    setSubjectList(calculatedSubjectList);
   };
 
   const onCheckBoxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -87,7 +101,11 @@ const CalculatorInput = () => {
       }
       return subject;
     });
-    updateSubjectList(updatedSubjectList);
+    const calculatedSubjectList = calculateSubjectList({
+      subjectList: updatedSubjectList,
+      currentLevel: currentLevel,
+    });
+    setSubjectList(calculatedSubjectList);
   };
 
   return (

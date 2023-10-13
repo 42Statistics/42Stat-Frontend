@@ -28,7 +28,6 @@ import { getTimeDiffFromNow } from '@shared/utils/getTimeDiffFromNow';
 import { getBlackholeDaysLeft } from '@shared/utils/getBlackholeDaysLeft';
 import { InfoTooltip } from '@shared/components/InfoTooltip';
 import { calculateSubjectList } from './utils/calculateSubjectList';
-import CalculatorInputMobile from './CalculatorInputMobile';
 
 export const GET_BLACKHOLE_INFO = gql(/* GraphQL */ `
   query GetBlackholeInfo {
@@ -156,7 +155,11 @@ const CalculatorLayout = () => {
         }
       />
       <CalculatorInputLayout>
-        {device === 'mobile' ? <CalculatorInputMobile /> : <CalculatorInput />}
+        <VStack w="100%" align="start" spacing="1rem">
+          <H2BoldText>프로젝트 목록</H2BoldText>
+          <hr style={{ width: '100%', border: 'solid 0.5px grey' }} />
+        </VStack>
+        <CalculatorInput />
       </CalculatorInputLayout>
       <Footer />
     </VStack>

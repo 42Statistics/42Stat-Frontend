@@ -1,11 +1,4 @@
-import {
-  VStack,
-  HStack,
-  H2BoldText,
-  PrimaryMediumText,
-  Writable,
-  CheckBox,
-} from '@shared/ui-kit';
+import { PrimaryMediumText, TableInput, CheckBox } from '@shared/ui-kit';
 import styled from '@emotion/styled';
 import { useAtom } from 'jotai';
 import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
@@ -26,7 +19,7 @@ const CalculatorInput = () => {
     '경험치',
     '점수',
     '코알리숑 보너스',
-    '블랙홀',
+    '블랙홀 증가 일수',
     '통과시 레벨',
     '과제 추가',
   ];
@@ -99,12 +92,6 @@ const CalculatorInput = () => {
 
   return (
     <>
-      <VStack w="100%" align="start" spacing="1rem">
-        <HStack w="100%" justify="space-between">
-          <H2BoldText>프로젝트 목록</H2BoldText>
-        </HStack>
-        <hr style={{ width: '100%', border: 'solid 0.5px grey' }} />
-      </VStack>
       <Table>
         <thead>
           <tr>
@@ -128,18 +115,16 @@ const CalculatorInput = () => {
                 </td>
                 <td>{exp}</td>
                 <td>
-                  <InputLayout>
-                    <Writable
-                      type="number"
-                      min="0"
-                      max="300"
-                      id={index.toString()}
-                      name="score"
-                      onChange={handleInputChange}
-                      value={score}
-                      style={{ width: '4rem' }}
-                    />
-                  </InputLayout>
+                  <TableInput
+                    type="number"
+                    min="0"
+                    max="300"
+                    id={index.toString()}
+                    name="score"
+                    onChange={handleInputChange}
+                    value={score}
+                    style={{ width: '4rem' }}
+                  />
                 </td>
                 <td>
                   <CheckBox
@@ -150,7 +135,7 @@ const CalculatorInput = () => {
                     checked={bonus}
                   />
                 </td>
-                <td>+{blackhole}일</td>
+                <td>{blackhole}</td>
                 <td>{finishLevel}</td>
                 <td>
                   <OrderItemButton
@@ -176,8 +161,7 @@ const Table = styled.table`
     position: sticky;
     top: 0;
     text-align: center;
-    flex-wrap: wrap;
-    padding: 0.8rem 1rem;
+    padding: 0.8rem 2rem;
     vertical-align: middle;
     border-bottom: solid 1px ${({ theme }) => theme.colors.mono.gray300};
   }
@@ -186,7 +170,7 @@ const Table = styled.table`
     max-width: 300px;
     overflow-x: hidden;
     text-align: center;
-    padding: 0.6rem 1rem;
+    padding: 0.4rem 2rem;
     vertical-align: middle;
     color: ${({ theme }) => theme.colors.mono.black};
   }
@@ -204,19 +188,6 @@ const Table = styled.table`
     border-top-right-radius: ${({ theme }) => theme.radius.xs};
     border-bottom-right-radius: ${({ theme }) => theme.radius.xs};
   }
-`;
-
-const InputLayout = styled.div`
-  padding: 0.5rem;
-  margin: 0.2rem;
-  border-radius: ${({ theme }) => theme.radius.sm};
-  transition: all 0.2s;
-  border: 1px solid ${({ theme }) => theme.colors.mono.gray200};
-
-  &:hover {
-    border-color: ${({ theme }) => theme.colors.mono.gray300};
-  }
-  background: ${({ theme }) => theme.colors.background.box.default};
 `;
 
 export default CalculatorInput;

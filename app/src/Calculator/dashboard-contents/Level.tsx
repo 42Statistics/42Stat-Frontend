@@ -71,8 +71,11 @@ const LevelCalculatorChart = ({ series }: LevelCalculatorChartProps) => {
     },
     yaxis: {
       labels: {
-        formatter: (value) => `${Math.round(value * 100) / 100}`,
+        formatter: (value) => value.toLocaleString(),
       },
+    },
+    forecastDataPoints: {
+      count: 1,
     },
   };
   return <AreaChart series={series} options={options} />;

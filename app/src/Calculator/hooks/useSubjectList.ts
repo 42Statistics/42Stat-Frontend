@@ -1,41 +1,26 @@
 import { Subject } from '@/Calculator/types/OrderItemButton';
 import { MAX_EXP_VALUE } from '@/Calculator/constants/EXP';
-import { MAX_BLACKHOLE_VALUE } from '../constants/blackhole';
 import { calculatorPropsAtom } from '../atoms/calculatorPropsAtom';
 import { subjectListAtom } from '../atoms/subjectListAtom';
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtom } from 'jotai';
 import { useCallback } from 'react';
 
 export const useSubjectList = () => {
-  const calculatorProps = useAtomValue(calculatorPropsAtom);
-  const {
-    currentLevel,
-    expMaxTable,
-    expReqTable,
-    daysFromStart,
-    currentBlackhole,
-  } = calculatorProps;
+  const [calculatorProps] = useAtom(calculatorPropsAtom);
+  const { currentLevel, expMaxTable, expReqTable } = calculatorProps;
   const [subjectList, setSubjectList] = useAtom(subjectListAtom);
 
-  const calculateBlackhole = (
-    startExp: number,
-    endExp: number,
-    sum: number,
-  ) => {
+  const calculateBlackhole = (startExp: number, endExp: number) => {
     if (startExp >= MAX_EXP_VALUE) return 0;
     if (endExp >= MAX_EXP_VALUE) endExp = MAX_EXP_VALUE;
     const blackhole = Math.floor(
       ((endExp / 49980) ** 0.45 - (startExp / 49980) ** 0.45) * 483,
     );
-    if (blackhole + sum > MAX_BLACKHOLE_VALUE)
-      return MAX_BLACKHOLE_VALUE - sum < 0 ? 0 : MAX_BLACKHOLE_VALUE - sum;
     return blackhole;
   };
-
   const updateSubjectList = useCallback(
     (subjectList: Subject[]) => {
       let newStartLevel = -1;
-      let sum = daysFromStart + currentBlackhole + 1;
 
       const updatedList = subjectList.map((subject) => {
         const { score, bonus, exp } = subject;
@@ -61,8 +46,8 @@ export const useSubjectList = () => {
                 expReqTable[newDecimalLevel]) *
               100,
           ) / 100;
-        const newBlackhole = calculateBlackhole(currentExp, newCurrentExp, sum);
-        sum += newBlackhole;
+        const newBlackhole = calculateBlackhole(currentExp, newCurrentExp);
+
         newStartLevel = newLevel;
 
         return {
@@ -73,16 +58,10 @@ export const useSubjectList = () => {
           blackhole: newBlackhole,
         };
       });
-      setSubjectList(updatedList);
+
+      setSubjectList(updatedList); // 여기서 상태
     },
-    [
-      currentLevel,
-      daysFromStart,
-      currentBlackhole,
-      expMaxTable,
-      expReqTable,
-      setSubjectList,
-    ],
+    [currentLevel, expMaxTable, expReqTable, setSubjectList],
   );
 
   return { subjectList, updateSubjectList };

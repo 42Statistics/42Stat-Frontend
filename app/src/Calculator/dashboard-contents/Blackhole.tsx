@@ -12,8 +12,8 @@ import { MAX_BLACKHOLE_VALUE } from '@/Calculator/constants/blackhole';
 export const Blackhole = () => {
   const subjectList = useAtomValue(subjectListAtom);
   const calculatorProps = useAtomValue(calculatorPropsAtom);
-  const { currentBlackhole, daysFromStart } = calculatorProps;
-  const currentDays = daysFromStart + currentBlackhole;
+  const currentDays =
+    calculatorProps.daysFromStart + calculatorProps.currentBlackhole;
   const blackholeDaysLeft = () => {
     let sum = 0;
     subjectList.forEach((subject) => {
@@ -33,12 +33,10 @@ export const Blackhole = () => {
     blackholeDaysLeft(),
   ];
 
-  const current = `현재 (${daysFromStart}일 + ${currentBlackhole}일)`;
-
   const labels = [
-    current,
+    '현재',
     ...subjectList.map((subject) => subject.name),
-    '남은 일수',
+    '추가로 받을 수 있는 블랙홀 최대치',
   ];
 
   return (

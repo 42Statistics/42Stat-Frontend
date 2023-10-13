@@ -15,8 +15,13 @@ export const CustomCheckbox = ({ onClick, label, checked }: CheckboxProps) => {
           fill={theme.colors.accent.default}
         />
       ) : (
-        <CheckboxBlank width={16} height={16} fill={theme.colors.mono.black} />
+        <CheckboxBlank
+          width={16}
+          height={16}
+          fill={theme.colors.mono.gray500}
+        />
       )}
+      {` `}
       {label}
     </Layout>
   );

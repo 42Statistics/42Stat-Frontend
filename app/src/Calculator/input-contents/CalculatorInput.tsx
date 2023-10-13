@@ -2,11 +2,10 @@ import {
   VStack,
   HStack,
   H2BoldText,
-  MediumText,
+  Body1Text,
   PrimaryMediumText,
   Writable,
   Checkbox,
-  Divider,
 } from '@shared/ui-kit';
 import styled from '@emotion/styled';
 import { useSetAtom } from 'jotai';
@@ -65,8 +64,6 @@ const CalculatorInput = () => {
     const value = Number(e.target.value);
     const name = e.target.name as keyof typeof subjectList;
     const id = parseInt(e.target.id);
-    console.log(value);
-    if (value < 0 || value > 125) return;
     const updatedSubjectList = subjectList.map((subject) => {
       if (subject.id === id) {
         return {
@@ -100,7 +97,7 @@ const CalculatorInput = () => {
         <HStack w="100%" justify="space-between">
           <H2BoldText>프로젝트 목록</H2BoldText>
         </HStack>
-        <Divider color={theme.colors.mono.black} />
+        <hr style={{ width: '100%', border: 'solid 0.5px grey' }} />
       </VStack>
       <Table>
         <thead>
@@ -132,13 +129,13 @@ const CalculatorInput = () => {
                     height="3rem"
                   />
                 </td>
-                <td>{expEdited?.toLocaleString()}</td>
+                <td>{expEdited}</td>
                 <td>
                   <InputLayout>
                     <Writable
                       type="number"
                       min="0"
-                      max="125"
+                      max="300"
                       id={index.toString()}
                       name="score"
                       onChange={handleInputChange}
@@ -157,10 +154,14 @@ const CalculatorInput = () => {
                   />
                 </td>
                 <td>
-                  <MediumText>+{blackhole}일</MediumText>
+                  <Body1Text color={theme.colors.accent.default}>
+                    +{blackhole}일
+                  </Body1Text>
                 </td>
                 <td>
-                  <MediumText>{finishLevel}</MediumText>
+                  <Body1Text color={theme.colors.evaluation.pass}>
+                    {finishLevel}
+                  </Body1Text>
                 </td>
                 <td>
                   <OrderItemButton
@@ -179,8 +180,7 @@ const CalculatorInput = () => {
 };
 
 const Table = styled.table`
-  margin-top: 1rem;
-  width: 100%;
+  width: 98%;
   white-space: nowrap;
   color: ${({ theme }) => theme.colors.mono.black};
 
@@ -190,7 +190,7 @@ const Table = styled.table`
     text-align: center;
     padding: 0.6rem 1rem;
     vertical-align: middle;
-    border-bottom: solid 1px ${({ theme }) => theme.colors.mono.gray200};
+    border-bottom: solid 1px ${({ theme }) => theme.colors.mono.gray400};
   }
 
   th {

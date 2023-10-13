@@ -182,31 +182,59 @@ const CalculatorInput = () => {
 const Table = styled.table`
   width: 98%;
   white-space: nowrap;
-  color: ${({ theme }) => theme.colors.mono.black};
 
-  th,
-  td {
-    position: relative;
+  th {
+    top: 0;
     text-align: center;
-    padding: 0.6rem 1rem;
+    flex-wrap: wrap;
+    padding: 0.8rem 1rem;
     vertical-align: middle;
     border-bottom: solid 1px ${({ theme }) => theme.colors.mono.gray300};
   }
 
-  th {
+  td {
     max-width: 300px;
-    padding: 0.8rem 1rem;
+    overflow-x: hidden;
+    text-align: center;
+    padding: 0.6rem 1rem;
+    vertical-align: middle;
+    color: ${({ theme }) => theme.colors.mono.black};
+  }
+
+  tbody tr {
+    transition: all 0.2s;
+    position: relative;
   }
 
   td:first-of-type {
     width: 15rem;
   }
 
-  td:nth-of-type(2),
-  td:nth-of-type(3),
-  td:nth-of-type(4),
-  td:nth-of-type(5),
-  td:nth-of-type(6),
+  td:nth-of-type(2) {
+    width: 7rem;
+    max-width: 7rem;
+  }
+
+  td:nth-of-type(3) {
+    width: 8rem;
+    max-width: 8rem;
+  }
+
+  td:nth-of-type(4) {
+    width: 8rem;
+    max-width: 8rem;
+  }
+
+  td:nth-of-type(5) {
+    width: 8rem;
+    max-width: 8rem;
+  }
+
+  td:nth-of-type(6) {
+    width: 8rem;
+    max-width: 8rem;
+  }
+
   td:last-of-type {
     width: 8rem;
     max-width: 8rem;

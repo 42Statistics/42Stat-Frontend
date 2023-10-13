@@ -8,27 +8,21 @@ import {
 } from '@/Calculator/constants/levelRecords';
 import { AreaChart } from '@shared/components/Chart';
 import { DashboardContent } from '@shared/components/DashboardContent';
-import { TextDefault } from '@shared/components/DashboardContentView/Text/TextDefault';
 import { truncate } from 'lodash-es';
-import { useMemo } from 'react';
 
 export const LevelRecords = () => {
   const subjectList = useAtomValue(subjectListAtom);
   const { currentLevel } = useAtomValue(calculatorPropsAtom);
 
-  const filteredSubjectList = useMemo(
-    () => subjectList.filter((subject) => subject.name !== ''),
-    [subjectList],
-  );
-
   const title = '레벨 증가 그래프';
-
   const levelList = [
-    { x: '현재', y: currentLevel },
-    ...filteredSubjectList.map(({ name, finishLevel }) => ({
-      x: name,
-      y: finishLevel,
-    })),
+    { x: '현재 레벨', y: currentLevel },
+    ...subjectList
+      .filter((subject) => subject.name !== '')
+      .map((subject) => ({
+        x: subject.name,
+        y: subject.finishLevel,
+      })),
   ];
 
   const series: CalculatorLevelSeries = [
@@ -39,17 +33,9 @@ export const LevelRecords = () => {
   ];
 
   return (
-    <>
-      {filteredSubjectList.length === 0 ? (
-        <DashboardContent title={title}>
-          <TextDefault text="프로젝트를 추가하세요" />
-        </DashboardContent>
-      ) : (
-        <DashboardContent title={title} type="ApexCharts">
-          <LevelCalculatorChart series={series} />
-        </DashboardContent>
-      )}
-    </>
+    <DashboardContent title={title} type="ApexCharts">
+      <LevelCalculatorChart series={series} />
+    </DashboardContent>
   );
 };
 

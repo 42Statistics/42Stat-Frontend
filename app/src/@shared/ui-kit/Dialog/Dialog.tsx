@@ -78,7 +78,7 @@ const slideDownTopFixed = keyframes`
 
   to {
     transform: translate(-50%, 0);
-  }
+  } 
 `;
 
 type LayoutProps = {

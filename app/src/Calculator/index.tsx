@@ -2,9 +2,9 @@ import {
   Text,
   VStack,
   HStack,
+  H2BoldText,
   H3BoldText,
   Input,
-  H1BoldText,
 } from '@shared/ui-kit';
 import { Seo } from '@shared/components/Seo';
 import { Footer } from '@core/components/Footer';
@@ -103,7 +103,8 @@ const CalculatorLayout = () => {
     <VStack w="100%" spacing="2rem">
       <Seo title="블랙홀 계산기" />
       <VStack w="100%" align="start" spacing="1rem">
-        <H1BoldText>블랙홀 계산기</H1BoldText>
+        <H2BoldText>내 정보</H2BoldText>
+        <hr style={{ width: '100%', border: 'solid 0.5px grey' }} />
         <InputLayout>
           <HStack spacing="1rem">
             <H3BoldText>현재 레벨</H3BoldText>
@@ -141,6 +142,10 @@ const CalculatorLayout = () => {
             휴학일이 포함된 경우, 휴학 기간을 뺄 수 있어요.
           </Text>
         </VStack>
+      </VStack>
+      <VStack w="100%" align="start" spacing="1rem">
+        <H2BoldText>그래프</H2BoldText>
+        <hr style={{ width: '100%', border: 'solid 0.5px grey' }} />
       </VStack>
       <DashboardTemp
         contents={calculatorPageDashboardContents}

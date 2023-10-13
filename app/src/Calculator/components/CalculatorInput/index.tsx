@@ -5,7 +5,6 @@ import { useSetAtom } from 'jotai';
 import { OrderItemButtonGroup } from '@/Calculator/components/OrderItemButton';
 import { ProjectSpotlight } from '@/Calculator/components/ProjectSpotlight';
 import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
-import { isProjectSpotlightOpenAtom } from '@/Calculator/atoms/isProjectSpotlightOpenAtom';
 import type {
   Subject,
   TableRowList,
@@ -29,7 +28,6 @@ import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnit
 export const CalculatorInput = () => {
   const { subjectList, updateSubjectList } = useSubjectList();
   const setCalculatorDialogAtom = useSetAtom(calculatorDialogAtom);
-  const setIsProjectSpotlightOpen = useSetAtom(isProjectSpotlightOpenAtom);
   const theme = useTheme();
 
   const heads = [
@@ -54,7 +52,6 @@ export const CalculatorInput = () => {
       });
       return;
     }
-    setIsProjectSpotlightOpen(subjectList.length);
     updateSubjectList([
       ...subjectList,
       {

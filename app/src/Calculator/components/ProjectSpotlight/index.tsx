@@ -1,10 +1,8 @@
 import { useLazyQuery } from '@apollo/client';
 import styled from '@emotion/styled';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useDebounce } from 'usehooks-ts';
-import { useAtom } from 'jotai';
 
-import { isProjectSpotlightOpenAtom } from '@/Calculator/atoms/isProjectSpotlightOpenAtom';
 import { gql } from '@shared/__generated__';
 import { VStack, Writable } from '@shared/ui-kit';
 import { isEscapeKeyDown } from '@shared/utils/keyboard';
@@ -44,28 +42,19 @@ export const ProjectSpotlight = ({
 }: ProjectSpotlightProps) => {
   const [search, searchResult] = useLazyQuery(GET_PROJECTS);
   const LIMIT = 4;
-  const [isProjectSpotlightOpen, setIsProjectSpotlightOpen] = useAtom(
-    isProjectSpotlightOpenAtom,
-  );
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [isFocused, setIsFocused] = useState(false);
   const [input, setInput] = useState<string>('');
   const debouncedInput = useDebounce(input, 250);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
-    if (isProjectSpotlightOpen !== index) setIsProjectSpotlightOpen(index);
+    if (!isFocused) setIsFocused(true);
   };
 
   const handleBlur = () => {
-    setIsProjectSpotlightOpen(-1);
+    setIsFocused(false);
     setInput(keyword);
   };
-
-  useEffect(() => {
-    if (isProjectSpotlightOpen === index) {
-      inputRef.current?.focus();
-    }
-  }, [isProjectSpotlightOpen, index]);
 
   useEffect(() => {
     setInput(keyword);
@@ -91,8 +80,9 @@ export const ProjectSpotlight = ({
 
   useEffect(() => {
     const handleEscapeKeyDown = (e: KeyboardEvent) => {
-      if (isEscapeKeyDown(e) && isProjectSpotlightOpen === index) {
+      if (isEscapeKeyDown(e) && isFocused) {
         e.preventDefault();
+        setIsFocused(false);
       }
     };
     document.addEventListener('keydown', handleEscapeKeyDown);
@@ -111,15 +101,15 @@ export const ProjectSpotlight = ({
             id={index.toString()}
             value={input}
             onChange={handleInputChange}
-            onFocus={() => setIsProjectSpotlightOpen(index)}
-            ref={inputRef}
+            onFocus={() => setIsFocused(true)}
           />
-          {isProjectSpotlightOpen === index && debouncedInput.length >= 2 && (
+          {isFocused && debouncedInput.length >= 2 && (
             <Spotlight
               left={spotlightLeft}
               width={spotlightWidth}
               index={index}
               result={searchResult}
+              setIsFocused={setIsFocused}
             />
           )}
         </InputLayout>

@@ -12,7 +12,6 @@ import { calculatorDialogAtom } from '@core/atoms/calculatorDialogAtom';
 export const Spotlight = ({
   result: { loading, error, data },
   index,
-	width,
 }: SpotlightProps) => {
   const { subjectList, updateSubjectList } = useSubjectList();
   const setCalculatorDialogAtom = useSetAtom(calculatorDialogAtom);
@@ -24,7 +23,7 @@ export const Spotlight = ({
   }
   if (error) {
     return (
-      <Layout width={width}>
+      <Layout>
         <Center>
           <ApolloErrorView message={error.message} />
         </Center>
@@ -62,7 +61,7 @@ export const Spotlight = ({
 
   if (data.getSpotlight.projectPreviews.length === 0) {
     return (
-      <Layout width={width}>
+      <Layout>
         <Center>
           <Body1Text>검색 결과가 없습니다.</Body1Text>
         </Center>
@@ -71,7 +70,7 @@ export const Spotlight = ({
   }
 
   return (
-    <Layout width={width}>
+    <Layout>
       {data.getSpotlight.projectPreviews.map((project, i) => (
         <Item
           id={i.toString()}
@@ -96,7 +95,6 @@ type SpotlightProps = {
     }>
   >;
   index: number;
-	width: string;
 };
 
 type ItemProps = {
@@ -112,18 +110,11 @@ const Item = styled.div<ItemProps>`
   }
 `;
 
-const Layout = styled.div<LayoutProps>`
+const Layout = styled.div`
   position: absolute;
-	width: ${({ width }) => width};
-	top: 4.2rem;
-	left: 0rem;
   padding: 1rem 0;
   z-index: 100;
   min-width: 20rem;
   background-color: ${({ theme }) => theme.colors.background.box.default};
-  border-radius: ${({ theme }) => theme.radius.xs};
+  border-radius: ${({ theme }) => theme.radius.sm};
 `;
-
-type LayoutProps = {
-	width: string;
-};

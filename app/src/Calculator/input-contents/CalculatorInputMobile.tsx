@@ -92,31 +92,27 @@ const CalculatorInputMobile = () => {
         <hr style={{ width: '100%', border: 'solid 0.5px grey' }} />
       </VStack>
       {subjectList.map((subject, index) => (
-        <SubjectLayout key={subject.id}>
+        <Layout key={subject.id}>
           <HStack w="100%" justify="space-between">
-            <H3MediumText>프로젝트</H3MediumText>
+            <H3MediumText>프로젝트명: {subject.name}</H3MediumText>
             <OrderItemButton
               tableRowList={subjectList}
               index={index}
               onListChange={onListChange}
             />
           </HStack>
-          <HStack justify="start" w="100%" >
-            <VStack align="start" justify="start" w="100%">
+          <HStack justify="start" w="100%" wrap="wrap" spacing="1rem">
+            <VStack align="start" justify="start">
               <TextLayout>
                 <Body1ThinText>프로젝트 검색</Body1ThinText>
               </TextLayout>
               <ProjectSpotlight
                 index={index}
                 keyword={subject.name}
-                height="4rem"
-								isRelative={true}
-								spotlightWidth="100%"
+                width="15rem"
               />
             </VStack>
-          </HStack>
-					<HStack justify="space-between">
-            <VStack align="start" justify="start" w="40%">
+            <VStack align="start" justify="start">
               <TextLayout>
                 <Body1ThinText>점수</Body1ThinText>
               </TextLayout>
@@ -129,10 +125,13 @@ const CalculatorInputMobile = () => {
                   name="score"
                   onChange={handleInputChange}
                   value={subject.score}
+                  style={{ width: '8rem' }}
                 />
               </InputLayout>
             </VStack>
-						<HStack spacing="2rem">
+          </HStack>
+          <HStack justify="space-between" w="100%" wrap="wrap" spacing="1rem">
+            <HStack spacing="2rem">
               <VStack>
                 <Body1ThinText>코알리숑</Body1ThinText>
                 <Body1ThinText>보너스</Body1ThinText>
@@ -145,8 +144,6 @@ const CalculatorInputMobile = () => {
                 checked={subject.bonus}
               />
             </HStack>
-					 </HStack>
-          <HStack justify="space-around" w="100%" wrap="wrap" spacing="1rem">
             <VStack>
               <Body1ThinText>경험치</Body1ThinText>
               <Body1Text>{subject.expEdited}</Body1Text>
@@ -165,20 +162,18 @@ const CalculatorInputMobile = () => {
             </VStack>
           </HStack>
           <hr />
-        </SubjectLayout>
+        </Layout>
       ))}
     </>
   );
 };
 
 const InputLayout = styled.div`
-	display: flex;
-	align-items: center;
-  padding: 1rem;
+  padding: 0.5rem;
   margin: 0.2rem;
-  width: 100%;
-  height: 4rem;
-  border-radius: ${({ theme }) => theme.radius.xs};
+  width: 10rem;
+  height: 2.8rem;
+  border-radius: ${({ theme }) => theme.radius.sm};
   transition: all 0.2s;
   border: 1px solid ${({ theme }) => theme.colors.mono.gray200};
 
@@ -192,7 +187,7 @@ const TextLayout = styled.div`
   padding: 0 0 0 0.7rem;
 `;
 
-const SubjectLayout = styled.div`
+const Layout = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;

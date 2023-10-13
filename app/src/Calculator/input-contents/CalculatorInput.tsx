@@ -6,7 +6,6 @@ import {
   PrimaryMediumText,
   Writable,
   CheckBox,
-	Input,
 } from '@shared/ui-kit';
 import styled from '@emotion/styled';
 import { useSetAtom } from 'jotai';
@@ -122,7 +121,7 @@ const CalculatorInput = () => {
             ) => (
               <tr key={index}>
                 <td>
-                  <ProjectSpotlight index={index} keyword={name} spotlightWidth="auto" height="3rem"/>
+                  <ProjectSpotlight index={index} keyword={name} />
                 </td>
                 <td>{expEdited}</td>
                 <td>
@@ -198,34 +197,12 @@ const Table = styled.table`
 
   tbody tr {
     transition: all 0.2s;
-		position: relative;
   }
 
   td:first-of-type {
     border-top-left-radius: ${({ theme }) => theme.radius.xs};
     border-bottom-left-radius: ${({ theme }) => theme.radius.xs};
-		width: 15rem;
-	}
-
-	td:nth-of-type(2) {
-		width: 7rem;
-		max-width: 7rem;
-	}
-
-	td:nth-of-type(3) {
-		width: 8rem;
-		max-width: 8rem;
-	}
-
-	td:nth-of-type(5) {
-		width: 8rem;
-		max-width: 8rem;
-	}
-
-	td:nth-of-type(6) {
-		width: 8rem;
-		max-width: 8rem;
-	}
+  }
 
   td:last-of-type {
     border-top-right-radius: ${({ theme }) => theme.radius.xs};
@@ -234,13 +211,9 @@ const Table = styled.table`
 `;
 
 const InputLayout = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
   padding: 0.5rem;
   margin: 0.2rem;
-	height: 3rem;
-  border-radius: ${({ theme }) => theme.radius.xs};
+  border-radius: ${({ theme }) => theme.radius.sm};
   transition: all 0.2s;
   border: 1px solid ${({ theme }) => theme.colors.mono.gray200};
 

@@ -14,7 +14,7 @@ import { ProjectSpotlight } from '@/Calculator/ProjectSpotlight';
 import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
 import { calculatorDialogAtom } from '@core/atoms/calculatorDialogAtom';
 import { OrderItemButton } from '@/Calculator/input-contents/OrderItemButton';
-import { TableRowList, Subject } from '@/Calculator/types/OrderItemButton';
+import { TableRowList, Subject } from '@/Calculator/types/orderItemButton';
 import { Button } from '@shared/ui-kit';
 import { useTheme } from '@emotion/react';
 
@@ -41,7 +41,6 @@ const CalculatorInputMobile = () => {
         id: subjectList.length,
         name: '',
         exp: 0,
-        expEdited: 0,
         score: 100,
         blackhole: 0,
         bonus: false,
@@ -146,7 +145,7 @@ const CalculatorInputMobile = () => {
             </HStack>
             <VStack>
               <Body1ThinText>경험치</Body1ThinText>
-              <Body1Text>{subject.expEdited}</Body1Text>
+              <Body1Text>{subject.exp}</Body1Text>
             </VStack>
             <VStack>
               <Body1ThinText>통과 시 레벨</Body1ThinText>

@@ -1,4 +1,4 @@
 import { atom } from 'jotai';
-import { Subject } from '@/Calculator/types/OrderItemButton';
+import { Subject } from '../types/orderItemButton';
 
 export const subjectListAtom = atom<Subject[]>([]);

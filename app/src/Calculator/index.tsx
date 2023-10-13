@@ -90,7 +90,6 @@ const CalculatorLayout = () => {
         id: 0,
         name: '',
         exp: 0,
-        expEdited: 0,
         score: 100,
         blackhole: 0,
         bonus: false,

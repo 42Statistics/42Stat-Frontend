@@ -1,4 +1,4 @@
-import { TableRowList } from '@/Calculator/types/OrderItemButton';
+import { TableRowList } from '@/Calculator/types/orderItemButton';
 import { ReactComponent as MdDown } from '@shared/assets/icon/md-down.svg';
 import { ReactComponent as MdUp } from '@shared/assets/icon/md-up.svg';
 import { ReactComponent as MdDelete } from '@shared/assets/icon/md-delete.svg';

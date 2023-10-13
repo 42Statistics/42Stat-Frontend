@@ -26,7 +26,6 @@ type LayoutProps = {
 
 const Layout = styled.div<LayoutProps>`
   position: absolute;
-  max-width: 45vw;
 
   ${({ position }) =>
     (position === 'top' &&

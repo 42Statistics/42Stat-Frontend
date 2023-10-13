@@ -1,11 +1,4 @@
-import {
-  Text,
-  H3BoldText,
-  VStack,
-  HStack,
-  Writable,
-  H1BoldText,
-} from '@shared/ui-kit';
+import { Text, H3BoldText, VStack, HStack, Writable, H1BoldText } from '@shared/ui-kit';
 import { Seo } from '@shared/components/Seo';
 import { Footer } from '@core/components/Footer';
 import { DashboardTemp } from '@shared/components/Dashboard/DashboardTemp';
@@ -25,7 +18,6 @@ import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 import { gql } from '@shared/__generated__';
 import { useQuery } from '@apollo/client';
 import { getTimeDiffFromNow } from '@shared/utils/getTimeDiffFromNow';
-import { getBlackholeDaysLeft } from '@shared/utils/getBlackholeDaysLeft';
 
 export const GET_BLACKHOLE_INFO = gql(/* GraphQL */ `
   query GetBlackholeInfo {
@@ -56,19 +48,13 @@ const CalculatorLayout = () => {
     }));
   };
   useEffect(() => {
-    if (!data) {
-      return;
-    }
-    const {
-      beginAt,
-      blackholedAt,
-      userProfile: { level },
-    } = data.getPersonalGeneral;
+		if (!data) {
+			return;
+		}
+		const { beginAt, userProfile: { level }} = data.getPersonalGeneral;
 
     setCalculatorProps({
       currentLevel: level,
-      currentBlackhole:
-        blackholedAt != null ? getBlackholeDaysLeft(new Date(blackholedAt)) : 0,
       daysFromStart: -getTimeDiffFromNow(new Date(beginAt), 'day'),
     });
     setSubjectList([
@@ -79,7 +65,7 @@ const CalculatorLayout = () => {
         score: 100,
         blackhole: 0,
         bonus: false,
-        startLevel: level,
+				startLevel: level,
         finishLevel: level,
       },
     ]);
@@ -93,13 +79,13 @@ const CalculatorLayout = () => {
     <VStack w="100%" spacing="2rem">
       <Seo title="블랙홀 계산기" />
       <VStack w="100%" align="start" spacing="2rem">
-        <H1BoldText>블랙홀 계산기</H1BoldText>
+				<H1BoldText>블랙홀 계산기</H1BoldText>
         <InputLayout>
           <H3BoldText>현재 레벨</H3BoldText>
           <HStack w="3rem">
             <Writable
               name="currentLevel"
-              value={currentLevel}
+							value={currentLevel}
               onChange={handleChange}
             />
           </HStack>

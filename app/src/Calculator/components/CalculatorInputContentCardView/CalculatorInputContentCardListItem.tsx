@@ -64,7 +64,7 @@ export const CalculatorInputContentCardListItem = ({
               max="125"
               name="score"
               onChange={(event) => onInputChange(event, index)}
-              value={score}
+              value={score.toString()}
             />
           </InputLayout>
         </VStack>

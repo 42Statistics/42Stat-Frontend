@@ -18,20 +18,17 @@ const CalculatorInput = () => {
   ];
 
   const onAddClick = () => {
-    const calculatedSubjectList = calculateSubjectList({
-      subjectList: subjectList,
-      newSubject: {
-        id: subjectList.length,
-        name: '',
-        exp: 0,
-        score: 100,
-        blackhole: 0,
-        bonus: false,
-        startLevel: 0,
-        finishLevel: 0,
-      },
-    });
-    setSubjectList(calculatedSubjectList);
+		const calculatedSubjectList = calculateSubjectList({subjectList: subjectList, newSubject: {
+			id: subjectList.length,
+			name: '',
+			exp: 31241,
+			score: 100,
+			blackhole: 42,
+			bonus: false,
+			startLevel: 6,
+			finishLevel: 6.72,
+		}});
+		setSubjectList(calculatedSubjectList);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,9 +44,7 @@ const CalculatorInput = () => {
       }
       return subject;
     });
-    const calculatedSubjectList = calculateSubjectList({
-      subjectList: updatedSubjectList,
-    });
+		const calculatedSubjectList = calculateSubjectList({subjectList: updatedSubjectList});
     setSubjectList(calculatedSubjectList);
   };
 
@@ -65,9 +60,7 @@ const CalculatorInput = () => {
       }
       return subject;
     });
-    const calculatedSubjectList = calculateSubjectList({
-      subjectList: updatedSubjectList,
-    });
+		const calculatedSubjectList = calculateSubjectList({subjectList: updatedSubjectList});
     setSubjectList(calculatedSubjectList);
   };
 

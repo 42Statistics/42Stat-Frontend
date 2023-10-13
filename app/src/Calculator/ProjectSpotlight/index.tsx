@@ -4,38 +4,37 @@ import { useDebounce } from 'usehooks-ts';
 import { useEffect, useState } from 'react';
 import { VStack, Writable } from '@shared/ui-kit';
 import { Spotlight } from './Spotlight';
+import { set } from 'react-hook-form';
 
 export const GET_PROJECTS = gql(/* GraphQL */ `
   query GetProjects($input: String!, $limit: Int!) {
     getSpotlight(input: $input, limit: $limit) {
       projectPreviews {
-        id
-        name
-        difficulty
+        ...projectPreviewFields
       }
     }
   }
 `);
 
 export const ProjectSpotlight = ({ index, keyword }: ProjectSpotlightProps) => {
-  const [search, searchResult] = useLazyQuery(GET_PROJECTS);
+	const [search, searchResult] = useLazyQuery(GET_PROJECTS);
   const LIMIT = 4;
-  const [isFocused, setIsFocused] = useState(false);
-  const [input, setInput] = useState<string>('');
+	const [isFocused, setIsFocused] = useState(false);
+	const [input, setInput] = useState<string>('');
   const debouncedInput = useDebounce(input, 250);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value);
+		setInput(e.target.value);
   };
 
-  const handleBlur = () => {
-    setIsFocused(false);
-    setInput(keyword);
-  };
+	const handleBlur = () => {
+		setIsFocused(false);
+		setInput(keyword);
+	};
 
-  useEffect(() => {
-    setInput(keyword);
-  }, [keyword]);
+	useEffect(() => {
+		setInput(keyword);
+	}, [keyword]);
 
   useEffect(() => {
     if (debouncedInput.length >= 2) {
@@ -64,14 +63,13 @@ export const ProjectSpotlight = ({ index, keyword }: ProjectSpotlightProps) => {
         onChange={handleInputChange}
         onFocus={() => setIsFocused(true)}
       />
-      {isFocused && debouncedInput.length >= 2 && (
-        <Spotlight index={index} result={searchResult} />
-      )}
+      {isFocused && debouncedInput.length >= 2 && <Spotlight index={index} result={searchResult}/>}
     </VStack>
   );
 };
 
 type ProjectSpotlightProps = {
   index: number;
-  keyword: string;
+	keyword: string;
 };
+

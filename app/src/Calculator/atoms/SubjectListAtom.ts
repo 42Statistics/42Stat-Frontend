@@ -3,11 +3,11 @@ import { atom } from 'jotai';
 export type Subject = {
   id: number;
   name: string;
-  exp: number | null;
+  exp: number;
   score: number;
   bonus: boolean;
   blackhole: number;
-  startLevel: number;
+	startLevel: number;
   finishLevel: number;
 };
 

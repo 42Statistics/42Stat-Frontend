@@ -8,13 +8,13 @@ export const Level = () => {
   const [subjectList] = useAtom(SubjectListAtom);
   const [CalculatorProps] = useAtom(calculatorPropsAtom);
 
-  const levelList = [
-    { x: '현재 레벨', y: CalculatorProps.currentLevel },
-    ...subjectList.map((subject) => ({
-      x: subject.name,
-      y: subject.finishLevel,
-    })),
-  ];
+	const levelList = [
+		{ x: '현재 레벨', y: CalculatorProps.currentLevel },
+		...subjectList.map((subject) => ({
+			x: subject.name,
+			y: subject.finishLevel,
+		})),
+	];
 
   const series: ApexAxisChartSeries = [
     {

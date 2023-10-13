@@ -1,9 +1,6 @@
 import { DashboardContent } from '@shared/components/DashboardContent';
 import { DonutChart } from '@shared/components/Chart';
-import {
-  blackholeNameFormatter,
-  blackholeValueFormatter,
-} from '@shared/utils/formatters/blackholeFormatter';
+import { blackholeNameFormatter, blackholeValueFormatter } from '@shared/utils/formatters/blackholeFormatter';
 import { useAtomValue } from 'jotai';
 import { SubjectListAtom } from '../atoms/SubjectListAtom';
 import { calculatorPropsAtom } from '../atoms/CalculatorPropsAtom';
@@ -11,13 +8,13 @@ import { calculatorPropsAtom } from '../atoms/CalculatorPropsAtom';
 export const Blackhole = () => {
   const subjectList = useAtomValue(SubjectListAtom);
   const calculatorProps = useAtomValue(calculatorPropsAtom);
+	
+	const series = [
+		calculatorProps.daysFromStart,
+		...subjectList.map((subject) => subject.blackhole),
+	];
 
-  const series = [
-    calculatorProps.daysFromStart,
-    ...subjectList.map((subject) => subject.blackhole),
-  ];
-
-  const labels = ['현재', ...subjectList.map((subject) => subject.name)];
+	const labels = ['현재', ...subjectList.map((subject) => subject.name)];
 
   return (
     <DashboardContent title="Blackhole" type="ApexCharts">
@@ -35,12 +32,13 @@ const BlackholeCalculatorChart = ({
   labels,
   series,
 }: BlackholeCalculatorChartProps) => {
+
   const options: ApexCharts.ApexOptions = {
-    legend: {
+		legend: {
       show: false,
     },
     tooltip: {
-      enabled: false,
+      enabled: true,
     },
     dataLabels: {
       enabled: false,
@@ -56,14 +54,14 @@ const BlackholeCalculatorChart = ({
             total: {
               show: true,
             },
-            name: {
-              show: true,
-              offsetY: 130,
-              formatter: (value) => blackholeNameFormatter(value),
-            },
+						name: {
+							show: true,
+							offsetY: 130,
+							formatter: (value) => blackholeNameFormatter(value),
+						},
             value: {
               show: true,
-              offsetY: -5,
+							offsetY: -5,
               formatter: (value) => blackholeValueFormatter(parseInt(value)),
             },
           },

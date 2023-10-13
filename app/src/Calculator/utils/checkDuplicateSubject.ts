@@ -1,4 +1,4 @@
-import { Subject } from '@/Calculator/types/OrderItemButtonGroup';
+import { Subject } from '@/Calculator/types/OrderItemButton';
 
 export const checkDuplicateSubject = (subjects: Subject[], subject: string) => {
   if (!subjects.length || subject === '') return false;

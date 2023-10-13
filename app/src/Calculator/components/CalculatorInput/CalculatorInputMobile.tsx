@@ -3,13 +3,10 @@ import styled from '@emotion/styled';
 import { useSetAtom } from 'jotai';
 import { Fragment } from 'react';
 
-import { OrderItemButtonGroup } from '@/Calculator/components/OrderItemButton';
+import { OrderItemButton } from '@/Calculator/components/OrderItemButton';
 import { ProjectSpotlight } from '@/Calculator/components/ProjectSpotlight';
 import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
-import type {
-  Subject,
-  TableRowList,
-} from '@/Calculator/types/OrderItemButtonGroup';
+import type { Subject, TableRowList } from '@/Calculator/types/OrderItemButton';
 import { calculatorDialogAtom } from '@core/atoms/calculatorDialogAtom';
 import {
   Body1BoldText,
@@ -105,9 +102,11 @@ export const CalculatorInputMobile = () => {
             <VStack align="start" justify="start" w="100%" spacing="0.5rem">
               <HStack justify="space-between" w="100%">
                 <TextLayout>
-                  <Text color={theme.colors.primary.default}>프로젝트명</Text>
+                  <Text color={theme.colors.primary.default}>
+                    프로젝트 검색
+                  </Text>
                 </TextLayout>
-                <OrderItemButtonGroup
+                <OrderItemButton
                   tableRowList={subjectList}
                   index={index}
                   onListChange={handleSubjectListChange}

@@ -3,7 +3,6 @@ import styled from '@emotion/styled';
 import { useAtom } from 'jotai';
 import { SubjectListAtom } from '@/Calculator/atoms/SubjectListAtom';
 import { ProjectSpotlight } from '@/Calculator/ProjectSpotlight';
-import { calculateSubjectList } from '@/Calculator/utils/calculateSubjectList';
 
 const CalculatorInput = () => {
   const [subjectList, setSubjectList] = useAtom(SubjectListAtom);
@@ -18,17 +17,18 @@ const CalculatorInput = () => {
   ];
 
   const onAddClick = () => {
-		const calculatedSubjectList = calculateSubjectList({subjectList: subjectList, newSubject: {
-			id: subjectList.length,
-			name: '',
-			exp: 31241,
-			score: 100,
-			blackhole: 42,
-			bonus: false,
-			startLevel: 6,
-			finishLevel: 6.72,
-		}});
-		setSubjectList(calculatedSubjectList);
+    setSubjectList((prev) => [
+      ...prev,
+      {
+        id: subjectList.length,
+        name: '',
+        exp: 10042,
+        score: 100,
+        blackhole: 42,
+        bonus: false,
+        level: 6.72,
+      },
+    ]);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,8 +44,7 @@ const CalculatorInput = () => {
       }
       return subject;
     });
-		const calculatedSubjectList = calculateSubjectList({subjectList: updatedSubjectList});
-    setSubjectList(calculatedSubjectList);
+    setSubjectList(updatedSubjectList);
   };
 
   const onCheckBoxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,8 +59,7 @@ const CalculatorInput = () => {
       }
       return subject;
     });
-		const calculatedSubjectList = calculateSubjectList({subjectList: updatedSubjectList});
-    setSubjectList(calculatedSubjectList);
+    setSubjectList(updatedSubjectList);
   };
 
   return (
@@ -78,7 +76,7 @@ const CalculatorInput = () => {
         </thead>
         <tbody>
           {subjectList.map(
-            ({ id, name, exp, score, bonus, blackhole, finishLevel }) => (
+            ({ id, name, exp, score, bonus, blackhole, level }) => (
               <tr key={id}>
                 <td>
                   <ProjectSpotlight index={id} keyword={name} />
@@ -103,7 +101,7 @@ const CalculatorInput = () => {
                   />
                 </td>
                 <td>{blackhole}</td>
-                <td>{finishLevel}</td>
+                <td>{level}</td>
               </tr>
             ),
           )}

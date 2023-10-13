@@ -12,7 +12,7 @@ export const Level = () => {
 		{ x: '현재 레벨', y: CalculatorProps.currentLevel },
 		...subjectList.map((subject) => ({
 			x: subject.name,
-			y: subject.finishLevel,
+			y: subject.level,
 		})),
 	];
 

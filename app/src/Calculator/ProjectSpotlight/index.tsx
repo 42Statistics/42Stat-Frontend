@@ -7,7 +7,7 @@ import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 import styled from '@emotion/styled';
 import { VStack, Writable } from '@shared/ui-kit';
-import { calculateSubjectList } from '@/Calculator/utils/calculateSubjectList';
+import { set } from 'lodash-es';
 
 export const GET_PROJECTS = gql(/* GraphQL */ `
   query GetProjects($input: String!, $limit: Int!) {
@@ -49,8 +49,7 @@ export const ProjectSpotlight = ({ index, keyword }: ProjectSpotlightProps) => {
       }
       return subject;
     });
-		const calculatedSubjectList = calculateSubjectList({subjectList: updatedSubjectList});
-    setSubjectList(calculatedSubjectList);
+    setSubjectList(updatedSubjectList);
     return;
   };
 

@@ -65,8 +65,7 @@ const CalculatorLayout = () => {
         score: 100,
         blackhole: 0,
         bonus: false,
-				startLevel: level,
-        finishLevel: level,
+        level,
       },
     ]);
   }, [setCalculatorProps, setSubjectList, data]);

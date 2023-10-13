@@ -7,8 +7,7 @@ export type Subject = {
   score: number;
   bonus: boolean;
   blackhole: number;
-	startLevel: number;
-  finishLevel: number;
+  level: number;
 };
 
 export const SubjectListAtom = atom<Subject[]>([]);

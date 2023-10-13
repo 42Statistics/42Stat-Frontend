@@ -13,7 +13,6 @@ export const TabBar = () => {
         <TabItem route={NAV_ROUTES.PROFILE} />
         <TabItem route={NAV_ROUTES.LEADERBOARD} />
         <TabItem route={NAV_ROUTES.EVALLOG} />
-				<TabItem route={NAV_ROUTES.CALCULATOR} />
         <TabItem route={NAV_ROUTES.SETTING} />
       </HStack>
     </Layout>

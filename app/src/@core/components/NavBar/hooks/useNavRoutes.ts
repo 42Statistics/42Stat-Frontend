@@ -53,13 +53,6 @@ export const useNavRoutes = () => {
       icon: MdQuickReference,
       iconFocused: MdQuickReferenceFill,
     },
-		CALCULATOR: {
-			text: '블랙홀 계산기',
-			abbr: '계산기',
-			path: ROUTES.CALCULATOR,
-			icon: MdQuickReference,
-			iconFocused: MdQuickReferenceFill,
-		},
     SETTING: {
       text: '설정',
       abbr: '설정',

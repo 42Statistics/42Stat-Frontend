@@ -64,9 +64,7 @@ export const ProjectSpotlight = ({
   useEffect(() => {
     if (isProjectSpotlightOpen === index) {
       inputRef.current?.focus();
-      return;
     }
-    inputRef.current?.blur();
   }, [isProjectSpotlightOpen, index]);
 
   useEffect(() => {

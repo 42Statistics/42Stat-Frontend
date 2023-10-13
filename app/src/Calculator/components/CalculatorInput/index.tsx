@@ -51,7 +51,6 @@ export const CalculatorInput = () => {
       setCalculatorDialogAtom({
         isOpen: true,
         description: '과제는 최대 20개까지 추가 가능합니다.',
-        focus: 0,
       });
       return;
     }

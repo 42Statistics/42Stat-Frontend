@@ -33,10 +33,8 @@ export const Spotlight = ({
   left = '0',
 }: SpotlightProps) => {
   const { subjectList, updateSubjectList } = useSubjectList();
-  const setCalculatorDialog = useSetAtom(calculatorDialogAtom);
-  const [isProjectSpotlightOpen, setIsProjectSpotlightOpen] = useAtom(
-    isProjectSpotlightOpenAtom,
-  );
+  const [calculatorDialog, setCalculatorDialog] = useAtom(calculatorDialogAtom);
+  const setIsProjectSpotlightOpen = useSetAtom(isProjectSpotlightOpenAtom);
   const size = data?.getSpotlight.projectPreviews.length ?? 0;
   const { currentFocus, setCurrentFocus } = useRoveFocus(size);
 
@@ -45,9 +43,7 @@ export const Spotlight = ({
       setCalculatorDialog({
         isOpen: true,
         description: '이미 추가된 프로젝트입니다.',
-        focus: isProjectSpotlightOpen,
       });
-      setIsProjectSpotlightOpen(-1);
       return;
     }
     const updatedSubjectList = subjectList.map((subject, idx) => {

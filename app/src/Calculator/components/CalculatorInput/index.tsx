@@ -46,23 +46,6 @@ export const CalculatorInput = () => {
     updateSubjectList(subjectList as Subject[]);
   };
 
-  const handleResetButtonClick = () => {
-    updateSubjectList([
-      {
-        id: 0,
-        name: '',
-        exp: 0,
-        expEdited: 0,
-        score: 100,
-        blackhole: 0,
-        bonus: false,
-        startLevel: 0,
-        finishLevel: 0,
-      },
-    ]);
-    setIsProjectSpotlightOpen(0);
-  };
-
   const handleAddButtonClick = () => {
     if (subjectList.length >= 20) {
       setCalculatorDialogAtom({
@@ -76,9 +59,7 @@ export const CalculatorInput = () => {
       (subject) => subject.name === '',
     );
 
-    setIsProjectSpotlightOpen(
-      firstEmptyIndex === -1 ? subjectList.length : firstEmptyIndex,
-    );
+    setIsProjectSpotlightOpen(firstEmptyIndex);
     updateSubjectList([
       ...subjectList,
       {
@@ -135,13 +116,7 @@ export const CalculatorInput = () => {
           <H2BoldText>프로젝트 목록</H2BoldText>
           <CaptionText>최대 20개</CaptionText>
           <Spacer />
-          <Button
-            backgroundColor={theme.colors.semantic.warning}
-            onClick={handleResetButtonClick}
-          >
-            초기화
-          </Button>
-          <Button onClick={handleAddButtonClick}>프로젝트 추가</Button>
+          <Button onClick={handleAddButtonClick}>과제 추가</Button>
         </HStack>
         <Divider color={theme.colors.mono.black} />
       </VStack>

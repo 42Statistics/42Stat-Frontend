@@ -39,6 +39,7 @@ export const OrderItemButtonGroup = ({
   };
 
   const handleClickDelete = () => {
+    if (tableRowList.length <= 1) return;
     tableRowList.splice(index, 1);
     onListChange(tableRowList);
   };

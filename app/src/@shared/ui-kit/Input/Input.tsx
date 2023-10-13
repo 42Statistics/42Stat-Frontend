@@ -25,6 +25,5 @@ const Layout = styled.div`
   &:hover {
     border-color: ${({ theme }) => theme.colors.mono.gray300};
   }
-  color: ${({ theme }) => theme.colors.mono.black};
   background: ${({ theme }) => theme.colors.background.box.default};
 `;

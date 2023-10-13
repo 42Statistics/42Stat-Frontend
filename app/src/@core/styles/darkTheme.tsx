@@ -26,7 +26,6 @@ const colors = {
   },
   semantic: {
     error: '#ef3636',
-    warning: '#fe642e',
   },
   element: {
     hover: '#262626',

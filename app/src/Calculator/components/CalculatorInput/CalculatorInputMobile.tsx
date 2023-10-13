@@ -6,15 +6,16 @@ import { Fragment } from 'react';
 import { OrderItemButtonGroup } from '@/Calculator/components/OrderItemButton';
 import { ProjectSpotlight } from '@/Calculator/components/ProjectSpotlight';
 import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
+import { isProjectSpotlightOpenAtom } from '@/Calculator/atoms/isProjectSpotlightOpenAtom';
 import type {
   Subject,
   TableRowList,
 } from '@/Calculator/types/OrderItemButtonGroup';
 import { calculatorDialogAtom } from '@core/atoms/calculatorDialogAtom';
-import { InfoTooltip } from '@shared/components/InfoTooltip';
 import {
   Body1BoldText,
   Button,
+  CaptionText,
   Divider,
   H2BoldText,
   HStack,
@@ -30,25 +31,10 @@ export const CalculatorInputMobile = () => {
   const theme = useTheme();
   const { subjectList, updateSubjectList } = useSubjectList();
   const setCalculatorDialogAtom = useSetAtom(calculatorDialogAtom);
+  const setIsProjectSpotlightOpen = useSetAtom(isProjectSpotlightOpenAtom);
 
   const handleSubjectListChange = (subjectList: TableRowList[]) => {
     updateSubjectList(subjectList as Subject[]);
-  };
-
-  const handleResetButtonClick = () => {
-    updateSubjectList([
-      {
-        id: 0,
-        name: '',
-        exp: 0,
-        expEdited: 0,
-        score: 100,
-        blackhole: 0,
-        bonus: false,
-        startLevel: 0,
-        finishLevel: 0,
-      },
-    ]);
   };
 
   const handleAddButtonClick = () => {
@@ -60,7 +46,11 @@ export const CalculatorInputMobile = () => {
       });
       return;
     }
+    const firstEmptyIndex = subjectList.findIndex(
+      (subject) => subject.name === '',
+    );
 
+    setIsProjectSpotlightOpen(firstEmptyIndex);
     updateSubjectList([
       ...subjectList,
       {
@@ -112,11 +102,8 @@ export const CalculatorInputMobile = () => {
     <VStack w="100%" align="start" spacing="1rem">
       <HStack w="100%" align="baseline" spacing="1rem">
         <H2BoldText>프로젝트 목록</H2BoldText>
-        <InfoTooltip text="프로젝트는 최대 20개까지 추가 가능해요." />
+        <CaptionText>최대 20개</CaptionText>
         <Spacer />
-        <Button backgroundColor="#ff7f00" onClick={handleResetButtonClick}>
-          리셋
-        </Button>
         <Button onClick={handleAddButtonClick}>추가</Button>
       </HStack>
       <Divider color={theme.colors.mono.black} />

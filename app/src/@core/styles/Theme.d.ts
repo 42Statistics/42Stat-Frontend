@@ -52,10 +52,6 @@ type Colors = {
       default: string;
       gradient: string;
     };
-    button: {
-      hover: string;
-      shadow: string;
-    };
   };
   mono: {
     absolute: {

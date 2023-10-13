@@ -17,11 +17,10 @@ export const IconButton = styled(Clickable)<IconButtonProps>`
   transition: all 0.3s;
 
   &:hover {
-    background: ${({ theme }) =>
-      `linear-gradient(145deg, ${theme.colors.mono.white}, ${theme.colors.background.button.hover})`};
-    box-shadow: ${({ theme }) =>
-      `2px 2px 5px ${theme.colors.background.button.shadow}}},
-      -2px -2px 5px ${theme.colors.mono.white}`};
+    background: linear-gradient(145deg, #ffffff, #dadada);
+    box-shadow:
+      2px 2px 5px #cecece,
+      -2px -2px 5px #ffffff;
     transform: translateY(-1px);
   }
 

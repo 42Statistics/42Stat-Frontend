@@ -1,20 +1,12 @@
-import {
-  PrimaryMediumText,
-  TableInput,
-  Button,
-  CheckBox,
-} from '@shared/ui-kit';
+import { PrimaryMediumText, Writable, Button, CheckBox } from '@shared/ui-kit';
 import styled from '@emotion/styled';
 import { useAtom } from 'jotai';
 import { SubjectListAtom } from '@/Calculator/atoms/SubjectListAtom';
 import { ProjectSpotlight } from '@/Calculator/ProjectSpotlight';
-import { calculatorPropsAtom } from './atoms/CalculatorPropsAtom';
 import { calculateSubjectList } from '@/Calculator/utils/calculateSubjectList';
 
 const CalculatorInput = () => {
   const [subjectList, setSubjectList] = useAtom(SubjectListAtom);
-  const [calculatorProps] = useAtom(calculatorPropsAtom);
-  const currentLevel = calculatorProps.currentLevel;
 
   const heads = [
     '프로젝트명',
@@ -28,7 +20,6 @@ const CalculatorInput = () => {
   const onAddClick = () => {
     const calculatedSubjectList = calculateSubjectList({
       subjectList: subjectList,
-      currentLevel: currentLevel,
       newSubject: {
         id: subjectList.length,
         name: '',
@@ -44,21 +35,20 @@ const CalculatorInput = () => {
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = Number(e.target.value);
+    const { value } = e.target;
     const name = e.target.name as keyof typeof subjectList;
     const id = parseInt(e.target.id);
     const updatedSubjectList = subjectList.map((subject) => {
       if (subject.id === id) {
         return {
           ...subject,
-          [name]: value,
+          [name]: parseInt(value),
         };
       }
       return subject;
     });
     const calculatedSubjectList = calculateSubjectList({
       subjectList: updatedSubjectList,
-      currentLevel: currentLevel,
     });
     setSubjectList(calculatedSubjectList);
   };
@@ -77,7 +67,6 @@ const CalculatorInput = () => {
     });
     const calculatedSubjectList = calculateSubjectList({
       subjectList: updatedSubjectList,
-      currentLevel: currentLevel,
     });
     setSubjectList(calculatedSubjectList);
   };
@@ -103,15 +92,12 @@ const CalculatorInput = () => {
                 </td>
                 <td>{exp}</td>
                 <td>
-                  <TableInput
+                  <Writable
                     type="number"
-                    min="0"
-                    max="300"
                     id={id.toString()}
                     name="score"
                     onChange={handleInputChange}
                     value={score}
-                    style={{ width: '4rem' }}
                   />
                 </td>
                 <td>
@@ -154,7 +140,6 @@ const Table = styled.table`
     text-align: center;
     padding: 0.4rem 2rem;
     vertical-align: middle;
-    color: ${({ theme }) => theme.colors.mono.black};
   }
 
   tbody tr {

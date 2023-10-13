@@ -2,9 +2,8 @@ import { gql } from '@shared/__generated__';
 import { useLazyQuery } from '@apollo/client';
 import { useDebounce } from 'usehooks-ts';
 import { useEffect, useState } from 'react';
-import { VStack, TableInput } from '@shared/ui-kit';
+import { VStack, Writable } from '@shared/ui-kit';
 import { Spotlight } from './Spotlight';
-import styled from '@emotion/styled';
 
 export const GET_PROJECTS = gql(/* GraphQL */ `
   query GetProjects($input: String!, $limit: Int!) {
@@ -58,26 +57,19 @@ export const ProjectSpotlight = ({ index, keyword }: ProjectSpotlightProps) => {
 
   return (
     <VStack onBlur={handleBlur}>
-      <Layout>
-        <TableInput
-          name="name"
-          id={index.toString()}
-          value={input}
-          onChange={handleInputChange}
-          onFocus={() => setIsFocused(true)}
-          style={{ width: '10rem' }}
-        />
-        {isFocused && debouncedInput.length >= 2 && (
-          <Spotlight index={index} result={searchResult} />
-        )}
-      </Layout>
+      <Writable
+        name="name"
+        id={index.toString()}
+        value={input}
+        onChange={handleInputChange}
+        onFocus={() => setIsFocused(true)}
+      />
+      {isFocused && debouncedInput.length >= 2 && (
+        <Spotlight index={index} result={searchResult} />
+      )}
     </VStack>
   );
 };
-
-const Layout = styled.div`
-  position: absolute;
-`;
 
 type ProjectSpotlightProps = {
   index: number;

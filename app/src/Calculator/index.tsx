@@ -41,7 +41,6 @@ const CalculatorLayout = () => {
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
-    if (isNaN(value)) return;
     const name = e.target.name as keyof typeof calculatorProps;
     setCalculatorProps((prev) => ({
       ...prev,
@@ -50,26 +49,15 @@ const CalculatorLayout = () => {
   };
 
   useEffect(() => {
-    setCalculatorProps({
+    setCalculatorProps(() => ({
       currentLevel: data?.getPersonalGeneral.userProfile.level ?? 0,
-      daysFromStart: Math.abs(
+      daysFromStart:
         getTimeDiffFromNow(
           new Date(data?.getPersonalGeneral.beginAt ?? ''),
           'day',
-        ),
-      ),
-    });
-    setSubjectList([
-      {
-        id: 0,
-        name: '',
-        exp: 0,
-        score: 100,
-        blackhole: 0,
-        bonus: false,
-        level: data?.getPersonalGeneral.userProfile.level ?? 0,
-      },
-    ]);
+        ) * -1,
+    }));
+    setSubjectList([]);
   }, [setCalculatorProps, setSubjectList, data]);
 
   if (loading || error || !data) {
@@ -88,7 +76,7 @@ const CalculatorLayout = () => {
           <HStack w="3rem">
             <Writable
               name="currentLevel"
-              value={isNaN(currentLevel) ? 0 : currentLevel} //초기화 이슈
+              value={currentLevel}
               onChange={onChange}
             />
           </HStack>
@@ -99,7 +87,7 @@ const CalculatorLayout = () => {
             <HStack w="3rem">
               <Writable
                 name="daysFromStart"
-                value={isNaN(daysFromStart) ? 0 : daysFromStart}
+                value={daysFromStart}
                 onChange={onChange}
               />
             </HStack>

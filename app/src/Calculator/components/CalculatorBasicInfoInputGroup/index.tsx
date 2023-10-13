@@ -44,7 +44,7 @@ export const CalculatorBasicInfoInputGroup = () => {
           min="0"
           max="30"
           step="0.01"
-          value={currentLevel}
+          value={currentLevel.toString()}
           onChange={handleChange}
           style={{ width: '5rem' }}
         />
@@ -59,7 +59,7 @@ export const CalculatorBasicInfoInputGroup = () => {
             name="currentBlackhole"
             type="number"
             min="0"
-            value={currentBlackhole}
+            value={currentBlackhole.toString()}
             onChange={handleChange}
             style={{ width: '5rem' }}
           />
@@ -76,7 +76,7 @@ export const CalculatorBasicInfoInputGroup = () => {
             name="daysFromStart"
             type="number"
             min="0"
-            value={daysFromStart}
+            value={daysFromStart.toString()}
             onChange={handleChange}
             style={{ width: '5rem' }}
           />

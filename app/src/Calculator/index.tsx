@@ -130,7 +130,6 @@ const CalculatorPage = () => {
               type="number"
               min="0"
               max="30"
-              step="0.01"
               value={currentLevel}
               onChange={handleChange}
               style={{ width: '5rem' }}
@@ -145,7 +144,6 @@ const CalculatorPage = () => {
               <Input
                 name="currentBlackhole"
                 type="number"
-                min="0"
                 value={currentBlackhole}
                 onChange={handleChange}
                 style={{ width: '5rem' }}
@@ -162,7 +160,6 @@ const CalculatorPage = () => {
               <Input
                 name="daysFromStart"
                 type="number"
-                min="0"
                 value={daysFromStart}
                 onChange={handleChange}
                 style={{ width: '5rem' }}

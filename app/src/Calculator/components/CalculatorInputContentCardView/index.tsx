@@ -1,11 +1,11 @@
-import type { Subject } from '@/Calculator/types/Subject';
+import type { TableRowList } from '@/Calculator/types/OrderItemButtonGroup';
 
 import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
 import { useAtomValue } from 'jotai';
 import { CalculatorInputContentCardList } from './CalculatorInputContentCardList';
 
 export type CalculatorInputContentCardViewProps = {
-  onSubjectListChange: (subjectList: Subject[]) => void;
+  onSubjectListChange: (subjectList: TableRowList[]) => void;
   onInputChange: React.ChangeEventHandler<HTMLInputElement>;
   onCheckboxChange: (index: number) => void; // FIXME: Change to React.ChangeEventHandler<HTMLInputElement> when refactoring
 };

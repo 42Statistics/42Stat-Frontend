@@ -7,7 +7,7 @@ import {
   MAX_BLACKHOLE_DAYS,
   MAX_BLACKHOLE_NAME_LENGTH,
 } from '@/Calculator/constants/blackhole';
-import type { Subject } from '@/Calculator/types/Subject';
+import type { Subject } from '@/Calculator/types/OrderItemButtonGroup';
 import { DonutChart } from '@shared/components/Chart';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';

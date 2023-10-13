@@ -1,5 +1,8 @@
-export type Subject = {
+export type TableRowList = {
   id: number;
+};
+
+export type Subject = TableRowList & {
   name: string;
   exp: number | null;
   expEdited: number | null;

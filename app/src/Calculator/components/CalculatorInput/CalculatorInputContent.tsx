@@ -2,7 +2,10 @@ import { useAtomValue } from 'jotai';
 
 import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
 import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
-import type { Subject } from '@/Calculator/types/Subject';
+import type {
+  Subject,
+  TableRowList,
+} from '@/Calculator/types/OrderItemButtonGroup';
 import { Body1MediumText, VStack } from '@shared/ui-kit';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 
@@ -14,8 +17,8 @@ export const CalculatorInputContent = () => {
   const { updateSubjectList } = useSubjectList();
   const device = useDeviceType();
 
-  const handleSubjectListChange = (subjectList: Subject[]) => {
-    updateSubjectList(subjectList);
+  const handleSubjectListChange = (subjectList: TableRowList[]) => {
+    updateSubjectList(subjectList as Subject[]);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

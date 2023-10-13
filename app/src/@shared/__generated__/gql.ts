@@ -24,8 +24,6 @@ const documents = {
     "\n  fragment userPreviewFields on UserPreview {\n    id\n    login\n    imgUrl\n  }\n": types.UserPreviewFieldsFragmentDoc,
     "\n  fragment userProfileFields on UserProfile {\n    id\n    login\n    imgUrl\n    grade\n    displayname\n    coalition {\n      ...coalitionFields\n    }\n    titles {\n      titleId\n      name\n      selected\n      createdAt\n      updatedAt\n    }\n    level\n  }\n": types.UserProfileFieldsFragmentDoc,
     "\n  fragment userTeamFields on UserTeam {\n    id\n    name\n    occurrence\n    projectPreview {\n      ...projectPreviewFields\n    }\n    status\n    lastEventTime\n    isValidated\n    finalMark\n  }\n": types.UserTeamFieldsFragmentDoc,
-    "\n  query GetProjects($input: String!, $limit: Int!) {\n    getSpotlight(input: $input, limit: $limit) {\n      projectPreviews {\n        ...projectPreviewFields\n      }\n    }\n  }\n": types.GetProjectsDocument,
-    "\n  query GetBlackholeInfo {\n    getPersonalGeneral {\n      userProfile {\n        level\n      }\n      beginAt\n      blackholedAt\n    }\n  }\n": types.GetBlackholeInfoDocument,
     "\n  query GetEvalLogs(\n    $after: String\n    $first: Int\n    $corrector: String\n    $corrected: String\n    $projectName: String\n    $outstandingOnly: Boolean\n    $sortOrder: EvalLogSortOrder\n  ) {\n    getEvalLogs(\n      after: $after\n      first: $first\n      corrector: $corrector\n      corrected: $corrected\n      projectName: $projectName\n      outstandingOnly: $outstandingOnly\n      sortOrder: $sortOrder\n    ) {\n      edges {\n        cursor\n        node {\n          id\n          header {\n            corrector {\n              ...userPreviewFields\n            }\n            teamPreview {\n              ...teamPreviewFields\n            }\n            beginAt\n            projectPreview {\n              ...projectPreviewFields\n            }\n            flag {\n              id\n              name\n              isPositive\n            }\n          }\n          correctorReview {\n            mark\n            review\n          }\n          correctedsReview {\n            mark\n            review\n          }\n        }\n      }\n      pageInfo {\n        totalCount\n        hasNextPage\n        endCursor\n      }\n    }\n  }\n": types.GetEvalLogsDocument,
     "\n  mutation ftLogin($ftCode: String!) {\n    ftLogin(ftCode: $ftCode) {\n      message\n      accessToken\n      refreshToken\n      userId\n    }\n  }\n": types.FtLoginDocument,
     "\n  query GetIndividualizedMessage {\n    getMyInfo {\n      lastValidatedTeam {\n        status\n        lastEventTime\n        projectPreview {\n          id\n          name\n          url\n        }\n      }\n      isNewMember\n      blackholedAt\n      experienceRank\n      scoreRank\n      evalCountRank\n    }\n  }\n": types.GetIndividualizedMessageDocument,
@@ -153,14 +151,6 @@ export function gql(source: "\n  fragment userProfileFields on UserProfile {\n  
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  fragment userTeamFields on UserTeam {\n    id\n    name\n    occurrence\n    projectPreview {\n      ...projectPreviewFields\n    }\n    status\n    lastEventTime\n    isValidated\n    finalMark\n  }\n"): (typeof documents)["\n  fragment userTeamFields on UserTeam {\n    id\n    name\n    occurrence\n    projectPreview {\n      ...projectPreviewFields\n    }\n    status\n    lastEventTime\n    isValidated\n    finalMark\n  }\n"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function gql(source: "\n  query GetProjects($input: String!, $limit: Int!) {\n    getSpotlight(input: $input, limit: $limit) {\n      projectPreviews {\n        ...projectPreviewFields\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetProjects($input: String!, $limit: Int!) {\n    getSpotlight(input: $input, limit: $limit) {\n      projectPreviews {\n        ...projectPreviewFields\n      }\n    }\n  }\n"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function gql(source: "\n  query GetBlackholeInfo {\n    getPersonalGeneral {\n      userProfile {\n        level\n      }\n      beginAt\n      blackholedAt\n    }\n  }\n"): (typeof documents)["\n  query GetBlackholeInfo {\n    getPersonalGeneral {\n      userProfile {\n        level\n      }\n      beginAt\n      blackholedAt\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -3,7 +3,6 @@ import type { DashboardTempProps } from '@shared/types/Dashboard';
 import { DashboardRow } from './DashboardRow';
 import { DashboardRowItem } from './DashboardRowItem';
 
-//rowSpan,colSpan이 한 배열에 같이 있는 구조
 export const DashboardTemp = ({ rows, contents }: DashboardTempProps) => {
   return (
     <Layout>

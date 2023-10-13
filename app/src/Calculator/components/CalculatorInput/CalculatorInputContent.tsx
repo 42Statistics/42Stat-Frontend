@@ -4,7 +4,6 @@ import type {
   TableRowList,
 } from '@/Calculator/types/OrderItemButtonGroup';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
-import { VStack } from '@shared/ui-kit';
 
 import { CalculatorInputContentCardView } from '../CalculatorInputContentCardView';
 import { CalculatorInputContentTableView } from '../CalculatorInputContentTableView';
@@ -21,6 +20,7 @@ export const CalculatorInputContent = () => {
     const value = Number(e.target.value);
     const name = e.target.name as keyof typeof subjectList;
     const id = parseInt(e.target.id);
+    console.log(value);
     if (value < 0 || value > 125) return;
     const updatedSubjectList = subjectList.map((subject) => {
       if (subject.id === id) {
@@ -76,9 +76,6 @@ export const CalculatorInputContent = () => {
           onInputChange={handleInputChange}
           onCheckboxChange={handleCheckboxChange}
         />
-      )}
-      {subjectList.length === 0 && (
-        <VStack h="5rem">프로젝트를 추가하세요</VStack>
       )}
     </>
   );

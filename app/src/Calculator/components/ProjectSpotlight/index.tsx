@@ -43,7 +43,7 @@ export const ProjectSpotlight = ({
   spotlightWidth = '100%',
 }: ProjectSpotlightProps) => {
   const [search, searchResult] = useLazyQuery(GET_PROJECTS);
-  const LIMIT = 4;
+  const LIMIT = 5;
   const [currentOpenSpotlightIndex, setCurrentOpenSpotlightIndex] = useAtom(
     currentOpenSpotlightIndexAtom,
   );

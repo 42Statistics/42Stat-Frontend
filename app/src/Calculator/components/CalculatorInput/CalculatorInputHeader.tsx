@@ -7,6 +7,7 @@ import {
   subjectListAtomInitialValue,
 } from '@/Calculator/atoms/subjectListAtom';
 import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
+import { currentOpenSpotlightIndexAtom } from '@/Calculator/atoms/currentOpenSpotlightIndexAtom';
 import { calculatorDialogAtom } from '@core/atoms/calculatorDialogAtom';
 import styled from '@emotion/styled';
 import { Button, CaptionText, H2BoldText, HStack } from '@shared/ui-kit';
@@ -16,6 +17,9 @@ export const CalculatorInputHeader = () => {
   const theme = useTheme();
   const subjectList = useAtomValue(subjectListAtom);
   const setCalculatorDialog = useSetAtom(calculatorDialogAtom);
+  const setCurrentOpenSpotlightIndex = useSetAtom(
+    currentOpenSpotlightIndexAtom,
+  );
   const { updateSubjectList } = useSubjectList();
 
   const handleResetButtonClick = () => {
@@ -32,6 +36,13 @@ export const CalculatorInputHeader = () => {
       return;
     }
 
+    const firstEmptyIndex = subjectList.findIndex(
+      (subject) => subject.name === '',
+    );
+
+    setCurrentOpenSpotlightIndex(
+      firstEmptyIndex === -1 ? subjectList.length : firstEmptyIndex,
+    );
     updateSubjectList([...subjectList, emptySubject(subjectList.length)]);
   };
 

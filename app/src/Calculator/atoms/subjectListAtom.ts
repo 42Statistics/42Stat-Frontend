@@ -6,8 +6,8 @@ export const emptySubject = (index: number) => {
   return {
     id: index,
     name: '',
-    exp: null,
-    expEdited: null,
+    exp: 0,
+    expEdited: 0,
     score: 100,
     blackhole: 0,
     bonus: false,

@@ -190,7 +190,7 @@ const Table = styled.table`
     text-align: center;
     padding: 0.6rem 1rem;
     vertical-align: middle;
-    border-bottom: solid 1px ${({ theme }) => theme.colors.mono.gray400};
+    border-bottom: solid 1px ${({ theme }) => theme.colors.mono.gray300};
   }
 
   th {

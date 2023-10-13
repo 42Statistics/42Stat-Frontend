@@ -87,12 +87,7 @@ const CalculatorInputMobile = () => {
           <H2BoldText>프로젝트 목록</H2BoldText>
           <Button onClick={onAddClick}>추가</Button>
         </HStack>
-        <hr
-          style={{
-            width: '100%',
-            border: `solid 0.5px ${theme.colors.mono.black}`,
-          }}
-        />
+        <hr style={{ width: '100%', border: 'solid 0.5px grey' }} />
       </VStack>
       {subjectList.map((subject, index) => (
         <SubjectLayout key={subject.id}>
@@ -165,12 +160,7 @@ const CalculatorInputMobile = () => {
               </Body1Text>
             </VStack>
           </InfoLayout>
-          <hr
-            style={{
-              width: '100%',
-              border: `solid 0.5px ${theme.colors.mono.gray400}`,
-            }}
-          />
+          <hr />
         </SubjectLayout>
       ))}
     </>

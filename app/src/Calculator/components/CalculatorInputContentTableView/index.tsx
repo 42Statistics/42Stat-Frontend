@@ -11,14 +11,8 @@ import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnit
 
 type CalculatorInputContentTableViewProps = {
   onSubjectListChange: (subjectList: Subject[]) => void;
-  onInputChange: (
-    event: React.ChangeEvent<HTMLInputElement>,
-    index: number,
-  ) => void;
-  onCheckboxChange: (
-    event: React.ChangeEvent<HTMLInputElement>,
-    index: number,
-  ) => void;
+  onInputChange: React.ChangeEventHandler<HTMLInputElement>;
+  onCheckboxChange: React.ChangeEventHandler<HTMLInputElement>;
 };
 
 export const CalculatorInputContentTableView = ({
@@ -74,8 +68,9 @@ export const CalculatorInputContentTableView = ({
                     type="number"
                     min="0"
                     max="125"
+                    id={index.toString()}
                     name="score"
-                    onChange={(event) => onInputChange(event, index)}
+                    onChange={onInputChange}
                     value={score}
                     style={{ width: '4rem' }}
                   />
@@ -83,9 +78,10 @@ export const CalculatorInputContentTableView = ({
               </td>
               <td>
                 <input
+                  id={index.toString()}
                   type="checkbox"
                   name="bonus"
-                  onChange={(event) => onCheckboxChange(event, index)}
+                  onChange={onCheckboxChange}
                   checked={bonus}
                 />
               </td>

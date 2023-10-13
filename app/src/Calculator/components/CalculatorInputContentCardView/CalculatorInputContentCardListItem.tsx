@@ -62,8 +62,9 @@ export const CalculatorInputContentCardListItem = ({
               type="number"
               min="0"
               max="125"
+              id={index.toString()}
               name="score"
-              onChange={(event) => onInputChange(event, index)}
+              onChange={onInputChange}
               value={score}
             />
           </InputLayout>
@@ -75,7 +76,7 @@ export const CalculatorInputContentCardListItem = ({
           <VStack w="100%" h="4rem">
             <CheckboxWithLabel
               label="Bonus"
-              onClick={(event) => onCheckboxChange(event, index)}
+              onClick={() => onCheckboxChange(index)}
               checked={bonus}
             />
           </VStack>

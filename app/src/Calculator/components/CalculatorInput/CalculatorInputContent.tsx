@@ -18,15 +18,13 @@ export const CalculatorInputContent = () => {
     updateSubjectList(subjectList);
   };
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number,
-  ) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
     const name = e.target.name as keyof typeof subjectList;
+    const id = parseInt(e.target.id);
     if (value < 0 || value > 125) return;
     const updatedSubjectList = subjectList.map((subject) => {
-      if (subject.id === index) {
+      if (subject.id === id) {
         return {
           ...subject,
           [name]: value,
@@ -37,13 +35,11 @@ export const CalculatorInputContent = () => {
     updateSubjectList(updatedSubjectList);
   };
 
-  const handleCheckboxChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number,
-  ) => {
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const checked = e.target.checked;
+    const id = parseInt(e.target.id);
     const updatedSubjectList = subjectList.map((subject) => {
-      if (subject.id === index) {
+      if (subject.id === id) {
         return {
           ...subject,
           bonus: checked,
@@ -54,13 +50,26 @@ export const CalculatorInputContent = () => {
     updateSubjectList(updatedSubjectList);
   };
 
+  const handleCheckboxChangeByIndex = (index: number) => {
+    const newSubjectList = subjectList.map((subject, i) => {
+      if (i === index) {
+        return {
+          ...subject,
+          bonus: !subject.bonus, // Toggle bonus value
+        };
+      }
+      return subject;
+    });
+    updateSubjectList(newSubjectList);
+  };
+
   return (
     <>
       {device === 'mobile' ? (
         <CalculatorInputContentCardView
           onSubjectListChange={handleSubjectListChange}
           onInputChange={handleInputChange}
-          onCheckboxChange={handleCheckboxChange}
+          onCheckboxChange={handleCheckboxChangeByIndex}
         />
       ) : (
         <CalculatorInputContentTableView

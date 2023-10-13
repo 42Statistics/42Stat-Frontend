@@ -1,4 +1,3 @@
-import { useRef } from 'react';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 
@@ -6,7 +5,7 @@ import { ReactComponent as CheckboxBlank } from '@shared/assets/icon/checkbox-bl
 import { ReactComponent as CheckboxFilled } from '@shared/assets/icon/checkbox-filled.svg';
 
 type CheckboxWithLabelProps = {
-  onClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onClick: () => void;
   label: string;
   checked: boolean;
 };
@@ -16,37 +15,20 @@ export const CheckboxWithLabel = ({
   label,
   checked,
 }: CheckboxWithLabelProps) => {
-  const inputRef = useRef<HTMLInputElement>(null);
   const theme = useTheme();
 
-  const handleClick = () => {
-    inputRef.current?.click();
-  };
-
   return (
-    <Layout checked={checked} onClick={handleClick}>
-      <input
-        ref={inputRef}
-        type="checkbox"
-        checked={checked}
-        onChange={onClick}
-      />
-      <div>
-        {checked ? (
-          <CheckboxFilled
-            width={16}
-            height={16}
-            fill={theme.colors.accent.default}
-          />
-        ) : (
-          <CheckboxBlank
-            width={16}
-            height={16}
-            fill={theme.colors.mono.black}
-          />
-        )}
-        {label}
-      </div>
+    <Layout onClick={onClick} checked={checked}>
+      {checked ? (
+        <CheckboxFilled
+          width={16}
+          height={16}
+          fill={theme.colors.accent.default}
+        />
+      ) : (
+        <CheckboxBlank width={16} height={16} fill={theme.colors.mono.black} />
+      )}
+      {label}
     </Layout>
   );
 };
@@ -70,14 +52,4 @@ const Layout = styled.div<{ checked: boolean }>`
   background: ${({ theme }) => theme.colors.background.box.default};
   color: ${({ theme, checked }) =>
     checked ? theme.colors.accent.default : theme.colors.mono.black};
-
-  input {
-    display: none;
-  }
-
-  div {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
 `;

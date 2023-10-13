@@ -14,7 +14,13 @@ export const FtLoginButton = () => {
 
   return (
     <LoginButton
-      logo={<FtLogo width={18} height={18} fill={theme.colors.mono.black} />}
+      logo={
+        <FtLogo
+          width={18}
+          height={18}
+          fill={theme.colors.mono.absolute.black}
+        />
+      }
       text="42 계정으로 로그인"
       ariaLabel={ARIA_LABEL.BUTTON.LOGIN_WITH_42_ACCOUNT}
       onClick={() => {

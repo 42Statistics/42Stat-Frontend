@@ -26,7 +26,7 @@ export const LoginButton = ({
       <Layout>
         <Center w="40px">{logo}</Center>
         <HStack w="100%">
-          <MediumText color={rgba(theme.colors.mono.black, 0.75)}>
+          <MediumText color={rgba(theme.colors.mono.absolute.black, 0.75)}>
             {text}
           </MediumText>
         </HStack>
@@ -40,12 +40,13 @@ const Layout = styled.div`
   justify-content: center;
   align-items: center;
   width: 24rem;
-  background-color: ${({ theme }) => theme.colors.mono.white};
+  background-color: ${({ theme }) => theme.colors.mono.absolute.white};
   padding: 8px 20px 8px 8px;
   border-radius: ${({ theme }) => theme.radius.xs};
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: ${({ theme }) => rgba(theme.colors.mono.white, 0.9)};
+    background-color: ${({ theme }) =>
+      rgba(theme.colors.mono.absolute.white, 0.9)};
   }
 `;

@@ -1,2 +1,2 @@
-export const MAX_BLACKHOLE_DAYS = 670;
+export const MAX_BLACKHOLE_VALUE = 670;
 export const MAX_BLACKHOLE_NAME_LENGTH = 35;

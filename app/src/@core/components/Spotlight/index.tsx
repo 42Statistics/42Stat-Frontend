@@ -32,7 +32,7 @@ export const Spotlight = () => {
   const theme = useTheme();
   const device = useDeviceType();
   const [input, setInput] = useState<string>('');
-  const debouncedInput = useDebounce(input, 250);
+  const debouncedInput = useDebounce(input, 50);
   const [search, searchResult] = useLazyQuery(GET_SPOTLIGHT);
   const size =
     (searchResult.data?.getSpotlight.userPreviews.length ?? 0) +

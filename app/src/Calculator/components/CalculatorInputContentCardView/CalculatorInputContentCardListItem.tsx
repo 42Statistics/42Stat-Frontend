@@ -5,7 +5,13 @@ import { OrderItemButtonGroup } from '@/Calculator/components/OrderItemButtonGro
 import { ProjectSpotlight } from '@/Calculator/components/ProjectSpotlight';
 import { PROJECT_LIST_TITLES } from '@/Calculator/constants/projectListTitles';
 import type { Subject } from '@/Calculator/types/Subject';
-import { Body1BoldText, HStack, Text, VStack, Writable } from '@shared/ui-kit';
+import {
+  Body1BoldText,
+  HStack,
+  Text,
+  VStack,
+  WritableNum,
+} from '@shared/ui-kit';
 import { CheckboxWithLabel } from '@shared/ui-kit-styled';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 
@@ -60,13 +66,12 @@ export const CalculatorInputContentCardListItem = ({
             <Text color={theme.colors.primary.default}>{SCORE}</Text>
           </TextLayout>
           <InputLayout>
-            <Writable
-              type="number"
+            <WritableNum
               min="0"
               max="125"
               name="score"
               onChange={(event) => onInputChange(event, index)}
-              value={score.toString()}
+              value={score}
             />
           </InputLayout>
         </VStack>

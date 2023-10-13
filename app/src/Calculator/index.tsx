@@ -81,7 +81,7 @@ const CalculatorPage = () => {
     <>
       <Seo title="블랙홀 계산기" />
       <VStack w="100%" spacing="4rem">
-        <VStack w="100%" align="start" spacing="1rem">
+        <VStack w="100%" align="start" spacing="2rem">
           <H1BoldText>블랙홀 계산기</H1BoldText>
           <CalculatorBasicInfoInputGroup />
         </VStack>

@@ -167,7 +167,6 @@ const CalculatorInputMobile = () => {
           </InfoLayout>
           <hr
             style={{
-              margin: '0.5rem 0 0 0',
               width: '100%',
               border: `solid 0.5px ${theme.colors.mono.gray400}`,
             }}

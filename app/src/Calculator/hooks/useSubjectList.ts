@@ -1,19 +1,22 @@
 import { useAtom, useAtomValue } from 'jotai';
 import { useCallback } from 'react';
 
+import { calculatorPropsAtom } from '@/Calculator/atoms/calculatorPropsAtom';
 import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
 import { MAX_BLACKHOLE_DAYS } from '@/Calculator/constants/blackhole';
 import { MAX_EXP_VALUE } from '@/Calculator/constants/exp';
 import type { Subject } from '@/Calculator/types/OrderItemButtonGroup';
-import { calculatorUserInfoAtom } from '../atoms/calculatorUserInfoAtom';
-import { expTablesAtom } from '../atoms/expTablesAtom';
 
 export const useSubjectList = () => {
+  const calculatorProps = useAtomValue(calculatorPropsAtom);
+  const {
+    currentLevel,
+    expMaxTable,
+    expReqTable,
+    daysFromStart,
+    currentBlackhole,
+  } = calculatorProps;
   const [subjectList, setSubjectList] = useAtom(subjectListAtom);
-  const { expMaxTable, expReqTable } = useAtomValue(expTablesAtom);
-  const { currentLevel, currentBlackhole, daysFromStart } = useAtomValue(
-    calculatorUserInfoAtom,
-  );
 
   const calculateBlackhole = (
     startExp: number,

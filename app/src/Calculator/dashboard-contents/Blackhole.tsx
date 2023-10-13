@@ -1,7 +1,7 @@
 import { useAtomValue } from 'jotai';
 import { truncate } from 'lodash-es';
 
-import { calculatorUserInfoAtom } from '@/Calculator/atoms/calculatorUserInfoAtom';
+import { calculatorPropsAtom } from '@/Calculator/atoms/calculatorPropsAtom';
 import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
 import {
   MAX_BLACKHOLE_DAYS,
@@ -28,9 +28,7 @@ const getBlackholeDaysLeft = (currentDays: number, subjectList: Subject[]) => {
 
 export const Blackhole = () => {
   const subjectList = useAtomValue(subjectListAtom);
-  const { currentBlackhole, daysFromStart } = useAtomValue(
-    calculatorUserInfoAtom,
-  );
+  const { currentBlackhole, daysFromStart } = useAtomValue(calculatorPropsAtom);
 
   const blackholeDaysLeft = getBlackholeDaysLeft(
     daysFromStart + currentBlackhole,

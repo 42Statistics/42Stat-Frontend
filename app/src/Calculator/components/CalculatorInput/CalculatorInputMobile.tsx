@@ -23,7 +23,7 @@ import {
   VStack,
   Writable,
 } from '@shared/ui-kit';
-import { CheckboxWithLabel } from '@shared/ui-kit-styled';
+import { CustomCheckbox } from '@shared/ui-kit-styled';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 
 export const CalculatorInputMobile = () => {
@@ -116,14 +116,12 @@ export const CalculatorInputMobile = () => {
         <Spacer />
         <Button
           backgroundColor={theme.colors.semantic.warning}
-          color={theme.colors.mono.absolute.white}
           onClick={handleResetButtonClick}
         >
           리셋
         </Button>
         <Button
           backgroundColor={theme.colors.accent.default}
-          color={theme.colors.mono.absolute.white}
           onClick={handleAddButtonClick}
         >
           추가
@@ -176,7 +174,7 @@ export const CalculatorInputMobile = () => {
                   </Text>
                 </TextLayout>
                 <VStack w="100%" h="4rem">
-                  <CheckboxWithLabel
+                  <CustomCheckbox
                     label="Bonus"
                     onClick={() => handleCheckboxChange(index)}
                     checked={subject.bonus}

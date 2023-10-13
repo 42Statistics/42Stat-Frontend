@@ -6,7 +6,7 @@ import { OrderItemButtonGroup } from '@/Calculator/components/OrderItemButtonGro
 import { ProjectSpotlight } from '@/Calculator/components/ProjectSpotlight';
 import { PROJECT_LIST_TITLES } from '@/Calculator/constants/projectListTitles';
 import type { Subject } from '@/Calculator/types/Subject';
-import { MediumText, PrimaryMediumText, Writable } from '@shared/ui-kit';
+import { MediumText, PrimaryMediumText, WritableNum } from '@shared/ui-kit';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 
 type CalculatorInputContentTableViewProps = {
@@ -24,7 +24,6 @@ type CalculatorInputContentTableViewProps = {
 
 export const CalculatorInputContentTableView = ({
   onSubjectListChange,
-  onSubjectDelete,
   onInputChange,
   onCheckboxChange,
 }: CalculatorInputContentTableViewProps) => {
@@ -72,13 +71,12 @@ export const CalculatorInputContentTableView = ({
               </td>
               <td>
                 <InputLayout>
-                  <Writable
-                    type="number"
+                  <WritableNum
                     min="0"
                     max="125"
                     name="score"
                     onChange={(event) => onInputChange(event, index)}
-                    value={score.toString()}
+                    value={score}
                     style={{ width: '4rem' }}
                   />
                 </InputLayout>
@@ -106,7 +104,6 @@ export const CalculatorInputContentTableView = ({
                   tableRowList={subjectList}
                   index={index}
                   onListChange={onSubjectListChange}
-                  handleDelete={onSubjectDelete}
                 />
               </td>
             </tr>

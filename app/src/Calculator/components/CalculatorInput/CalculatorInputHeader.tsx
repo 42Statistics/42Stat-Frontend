@@ -1,7 +1,6 @@
 import { useTheme } from '@emotion/react';
-import { useAtomValue, useSetAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 
-import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
 import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
 import { calculatorDialogAtom } from '@core/atoms/calculatorDialogAtom';
 import styled from '@emotion/styled';
@@ -10,9 +9,8 @@ import { mq } from '@shared/utils/facepaint/mq';
 
 export const CalculatorInputHeader = () => {
   const theme = useTheme();
-  const subjectList = useAtomValue(subjectListAtom);
+  const { subjectList, updateSubjectList } = useSubjectList();
   const setCalculatorDialog = useSetAtom(calculatorDialogAtom);
-  const { updateSubjectList } = useSubjectList();
 
   const handleResetButtonClick = () => {
     updateSubjectList([

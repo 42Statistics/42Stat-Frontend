@@ -1,10 +1,9 @@
 import styled from '@emotion/styled';
-import { useAtomValue } from 'jotai';
 
-import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
 import { OrderItemButtonGroup } from '@/Calculator/components/OrderItemButtonGroup';
 import { ProjectSpotlight } from '@/Calculator/components/ProjectSpotlight';
 import { PROJECT_LIST_TITLES } from '@/Calculator/constants/projectListTitles';
+import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
 import type { TableRowList } from '@/Calculator/types/OrderItemButtonGroup';
 import { MediumText, PrimaryMediumText, Writable } from '@shared/ui-kit';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
@@ -20,7 +19,7 @@ export const CalculatorInputContentTableView = ({
   onInputChange,
   onCheckboxChange,
 }: CalculatorInputContentTableViewProps) => {
-  const subjectList = useAtomValue(subjectListAtom);
+  const { subjectList } = useSubjectList();
 
   const { PROJECT_NAME, SCORE, COALITION_BONUS, EXP, FINISH_LEVEL, BLACKHOLE } =
     PROJECT_LIST_TITLES;
@@ -85,7 +84,7 @@ export const CalculatorInputContentTableView = ({
                   checked={bonus}
                 />
               </td>
-              <td>{expEdited?.toLocaleString() ?? '-'}</td>
+              <td>{expEdited?.toLocaleString()}</td>
 
               <td>
                 <MediumText>

@@ -3,7 +3,6 @@ import { AreaChart } from '@shared/components/Chart';
 import { useAtom } from 'jotai';
 import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
 import { calculatorPropsAtom } from '@/Calculator/atoms/calculatorPropsAtom';
-import { MAX_XAXIS_COUNT, MAX_XVALUE_LENGTH } from '../constants/level';
 
 export const Level = () => {
   const [subjectList] = useAtom(subjectListAtom);
@@ -19,7 +18,7 @@ export const Level = () => {
       })),
   ];
 
-  const series: CalculatorLevelSeries = [
+  const series: ApexAxisChartSeries = [
     {
       name: '레벨',
       data: levelList,
@@ -34,34 +33,12 @@ export const Level = () => {
 };
 
 type LevelCalculatorChartProps = {
-  series: CalculatorLevelSeries;
-};
-
-type CalculatorLevelSeries = [
-  {
-    name: string;
-    data: Item[];
-  },
-];
-
-type Item = {
-  x: string;
-  y: number;
+  series: ApexAxisChartSeries;
 };
 
 const LevelCalculatorChart = ({ series }: LevelCalculatorChartProps) => {
-  const subjectLength = series[0].data.length;
   const options: ApexCharts.ApexOptions = {
     xaxis: {
-      overwriteCategories: series[0].data.map((item) => {
-        if (subjectLength > MAX_XAXIS_COUNT) {
-          return '';
-        }
-        if (item.x.length > MAX_XVALUE_LENGTH) {
-          return item.x.slice(0, MAX_XVALUE_LENGTH - 3) + '...';
-        }
-        return item.x;
-      }),
       labels: {
         formatter: (value) => value,
       },

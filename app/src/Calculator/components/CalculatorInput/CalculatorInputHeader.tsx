@@ -1,11 +1,7 @@
 import { useTheme } from '@emotion/react';
 import { useAtomValue, useSetAtom } from 'jotai';
 
-import {
-  emptySubject,
-  subjectListAtom,
-  subjectListAtomInitialValue,
-} from '@/Calculator/atoms/subjectListAtom';
+import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
 import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
 import { calculatorDialogAtom } from '@core/atoms/calculatorDialogAtom';
 import styled from '@emotion/styled';
@@ -19,7 +15,19 @@ export const CalculatorInputHeader = () => {
   const { updateSubjectList } = useSubjectList();
 
   const handleResetButtonClick = () => {
-    updateSubjectList(subjectListAtomInitialValue);
+    updateSubjectList([
+      {
+        id: 0,
+        name: '',
+        exp: 0,
+        expEdited: 0,
+        score: 100,
+        blackhole: 0,
+        bonus: false,
+        startLevel: 0,
+        finishLevel: 0,
+      },
+    ]);
   };
 
   const handleAddButtonClick = () => {
@@ -32,7 +40,20 @@ export const CalculatorInputHeader = () => {
       return;
     }
 
-    updateSubjectList([...subjectList, emptySubject]);
+    updateSubjectList([
+      ...subjectList,
+      {
+        id: subjectList.length,
+        name: '',
+        exp: 0,
+        expEdited: 0,
+        score: 100,
+        blackhole: 0,
+        bonus: false,
+        startLevel: 0,
+        finishLevel: 0,
+      },
+    ]);
   };
 
   return (

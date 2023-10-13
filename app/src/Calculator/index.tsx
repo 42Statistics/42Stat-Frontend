@@ -66,6 +66,19 @@ const CalculatorPage = () => {
       daysFromStart: -getTimeDiffFromNow(new Date(beginAt), 'day'),
     });
     setExpTables({ expMaxTable, expReqTable });
+    setSubjectList([
+      {
+        id: 0,
+        name: '',
+        exp: 0,
+        expEdited: 0,
+        score: 100,
+        blackhole: 0,
+        bonus: false,
+        startLevel: level,
+        finishLevel: level,
+      },
+    ]);
   }, [data, setCalculatorUserInfo, setExpTables, setSubjectList]);
 
   if (loading || error || !data) {

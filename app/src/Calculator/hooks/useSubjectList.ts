@@ -15,7 +15,6 @@ export const useSubjectList = () => {
     calculatorUserInfoAtom,
   );
 
-  // FIXME: 로직 가독성
   const updateSubjectList = useCallback(
     (subjectList: Subject[]) => {
       let newStartLevel = -1;
@@ -23,31 +22,10 @@ export const useSubjectList = () => {
 
       const updatedList = subjectList.map((subject) => {
         const { score, bonus, exp } = subject;
-
-        if (exp === null) {
-          return subject;
-        }
-
-        /**
-         * FIXME:
-         * [{
-         *   id: 0,
-         *   name: '',
-         *   exp: 0,
-         *   expEdited: 0,
-         *   score: 100,
-         *   blackhole: 0,
-         *   bonus: false,
-         *   startLevel: 0,
-         *   finishLevel: 0,
-         * }]
-         *
-         * 위 입력일 때 NaN 발생.
-         */
-
         if (newStartLevel === -1) newStartLevel = currentLevel;
         const editStartLevel = newStartLevel;
         const decimalLevel = Math.floor(newStartLevel);
+        if (exp === null) return subject;
         const currentExp = Math.floor(
           expMaxTable[decimalLevel] +
             expReqTable[decimalLevel + 1] * (newStartLevel - decimalLevel),

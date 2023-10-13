@@ -91,18 +91,19 @@ const CalculatorInputMobile = () => {
       </VStack>
       {subjectList.map((subject, index) => (
         <SubjectLayout key={subject.id}>
+          <HStack w="100%" justify="space-between">
+            <H3MediumText>프로젝트</H3MediumText>
+            <OrderItemButton
+              tableRowList={subjectList}
+              index={index}
+              onListChange={onListChange}
+            />
+          </HStack>
           <HStack justify="start" w="100%">
             <VStack align="start" justify="start" w="100%" spacing="0.5rem">
-              <HStack justify="space-between" w="100%">
-                <TextLayout>
-                  <Body1ThinText>프로젝트 검색</Body1ThinText>
-                </TextLayout>
-                <OrderItemButton
-                  tableRowList={subjectList}
-                  index={index}
-                  onListChange={onListChange}
-                />
-              </HStack>
+              <TextLayout>
+                <Body1ThinText>프로젝트 검색</Body1ThinText>
+              </TextLayout>
               <ProjectSpotlight
                 index={index}
                 keyword={subject.name}
@@ -112,34 +113,34 @@ const CalculatorInputMobile = () => {
               />
             </VStack>
           </HStack>
-          <HStack justify="space-between" spacing="1rem">
+          <HStack justify="space-between">
             <VStack align="start" w="100%" spacing="0.5rem">
               <TextLayout>
                 <Body1ThinText>점수</Body1ThinText>
               </TextLayout>
-              <InputLayout>
-                <Writable
-                  type="number"
-                  min="0"
-                  max="300"
-                  id={index.toString()}
-                  name="score"
-                  onChange={handleInputChange}
-                  value={subject.score}
-                />
-              </InputLayout>
-            </VStack>
-            <VStack align="start" w="100%" spacing="0.5rem">
-              <TextLayout>
-                <Body1ThinText>보너스</Body1ThinText>
-              </TextLayout>
-              <VStack w="100%" h="4rem">
+              <HStack
+                justify="space-between"
+                w="100%"
+                h="4.2rem"
+                spacing="2rem"
+              >
+                <InputLayout>
+                  <Writable
+                    type="number"
+                    min="0"
+                    max="300"
+                    id={index.toString()}
+                    name="score"
+                    onChange={handleInputChange}
+                    value={subject.score}
+                  />
+                </InputLayout>
                 <CustomCheckbox
                   label="코알리숑 보너스"
                   onClick={() => onCheckboxChange(index)}
                   checked={subject.bonus}
                 />
-              </VStack>
+              </HStack>
             </VStack>
           </HStack>
           <InfoLayout>
@@ -200,7 +201,6 @@ const TextLayout = styled.div`
 const SubjectLayout = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   width: 100%;
   padding: 1rem;
   gap: 1rem;

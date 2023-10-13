@@ -31,7 +31,6 @@ const Layout = styled.div<{ checked: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
   border-radius: ${({ theme }) => theme.radius.xs};
   transition: all 0.2s;
   width: 100%;

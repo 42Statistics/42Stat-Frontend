@@ -1,32 +1,17 @@
-import { PrimaryMediumText, Writable, Button, CheckBox } from '@shared/ui-kit';
+import { PrimaryMediumText, Writable, Button } from '@shared/ui-kit';
 import styled from '@emotion/styled';
 import { useAtom } from 'jotai';
-import { Subject, SubjectListAtom } from '@/Calculator/atoms/SubjectListAtom';
+import SubjectListAtom from '@/Calculator/atoms/SubjectListAtom';
 
 const CalculatorInput = () => {
   const [subjectList, setSubjectList] = useAtom(SubjectListAtom);
 
-  const heads = [
-    '프로젝트명',
-    '경험치',
-    '점수',
-    '코알리숑 보너스',
-    '블랙홀 증가 일수',
-    '통과시 레벨',
-  ];
+  const heads = ['프로젝트명', '경험치', '점수'];
 
-  const onAddClick = () => {
+  const onClick = () => {
     setSubjectList((prev) => [
       ...prev,
-      {
-        id: subjectList.length,
-        name: '',
-        exp: 0,
-        score: 0,
-        blackhole: 10,
-        bonus: false,
-        level: 0,
-      },
+      { id: subjectList.length, name: '', blackhole: 0, level: 0 },
     ]);
   };
 
@@ -39,21 +24,6 @@ const CalculatorInput = () => {
         return {
           ...subject,
           [name]: value,
-        };
-      }
-      return subject;
-    });
-    setSubjectList(updatedSubjectList);
-  };
-
-  const onCheckBoxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const checked = e.target.checked;
-    const id = parseInt(e.target.id);
-    const updatedSubjectList = subjectList.map((subject) => {
-      if (subject.id === id) {
-        return {
-          ...subject,
-          bonus: checked,
         };
       }
       return subject;
@@ -74,44 +44,37 @@ const CalculatorInput = () => {
           </tr>
         </thead>
         <tbody>
-          {subjectList.map(
-            ({ id, name, exp, score, bonus, blackhole, level }) => (
-              <tr key={id}>
-                <td>
-                  <Writable
-                    id={id.toString()}
-                    name="name"
-                    onChange={onInputChange}
-                    value={name}
-                  />
-                </td>
-                <td>{exp}</td>
-                <td>
-                  <Writable
-                    type="number"
-                    id={id.toString()}
-                    name="score"
-                    onChange={onInputChange}
-                    value={score}
-                  />
-                </td>
-                <td>
-                  <CheckBox
-                    id={id.toString()}
-                    type="checkbox"
-                    name="bonus"
-                    onChange={onCheckBoxChange}
-                    checked={bonus}
-                  />
-                </td>
-                <td>{blackhole}</td>
-                <td>{level}</td>
-              </tr>
-            ),
-          )}
+          {subjectList.map(({ id, name, blackhole, level }) => (
+            <tr key={id}>
+              <td>
+                <Writable
+                  id={id.toString()}
+                  name="name"
+                  onChange={onInputChange}
+                  value={name}
+                />
+              </td>
+              <td>
+                <Writable
+                  id={id.toString()}
+                  name="blackhole"
+                  onChange={onInputChange}
+                  value={blackhole}
+                />
+              </td>
+              <td>
+                <Writable
+                  id={id.toString()}
+                  name="level"
+                  onChange={onInputChange}
+                  value={level}
+                />
+              </td>
+            </tr>
+          ))}
         </tbody>
       </Table>
-      <Button onClick={onAddClick}>추가</Button>
+      <Button onClick={onClick}>추가</Button>
     </>
   );
 };

@@ -1,37 +1,16 @@
 import { DashboardContent } from '@shared/components/DashboardContent';
 import { DonutChart } from '@shared/components/Chart';
-import { blackholeFormatter } from '@shared/utils/formatters/blackholeFormatter';
+import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 import { useAtom } from 'jotai';
-import { SubjectListAtom } from '../atoms/SubjectListAtom';
-import { CalculatorPropsAtom } from '../atoms/CalculatorPropsAtom';
-import { useEffect, useState } from 'react';
-import { toInteger } from 'lodash-es';
+import SubjectListAtom from '../atoms/SubjectListAtom';
 
 export const Blackhole = () => {
   const [subjectList] = useAtom(SubjectListAtom);
-  const [CalculatorProps] = useAtom(CalculatorPropsAtom);
-  const [series, setSeries] = useState<number[]>([]);
-  const [labels, setLabels] = useState<string[]>([]);
-
-  useEffect(() => {
-    const filterList = subjectList.map((subject) => {
-      const blackhole = subject.blackhole;
-
-      if (!isNaN(blackhole)) {
-        subject.blackhole = toInteger(blackhole);
-        return subject;
-      }
-      return subject;
-    });
-    setSeries([
-      CalculatorProps.daysFromStart,
-      ...filterList.map((subject) => subject.blackhole),
-    ]);
-    setLabels(['현재', ...filterList.map((subject) => subject.name)]);
-  }, [CalculatorProps, subjectList]);
+  const series: number[] = subjectList.map((subject) => subject.blackhole);
+  const labels: string[] = subjectList.map((subject) => subject.name);
 
   return (
-    <DashboardContent title={'Blackhole'} type="ApexCharts">
+    <DashboardContent title={'blackhole'} type="ApexCharts">
       <BlackholeCalculatorChart labels={labels} series={series} />
     </DashboardContent>
   );
@@ -63,10 +42,14 @@ const BlackholeCalculatorChart = ({
             show: true,
             total: {
               show: true,
+              formatter: () => {
+                return '+350일';
+              },
             },
             value: {
               show: true,
-              formatter: (value) => blackholeFormatter(parseInt(value)),
+              formatter: (value) =>
+                numberWithUnitFormatter(parseInt(value), '명'),
             },
           },
         },

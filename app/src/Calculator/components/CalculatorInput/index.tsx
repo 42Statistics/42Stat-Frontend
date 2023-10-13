@@ -55,11 +55,7 @@ export const CalculatorInput = () => {
       });
       return;
     }
-    const firstEmptyIndex = subjectList.findIndex(
-      (subject) => subject.name === '',
-    );
-
-    setIsProjectSpotlightOpen(firstEmptyIndex);
+    setIsProjectSpotlightOpen(subjectList.length);
     updateSubjectList([
       ...subjectList,
       {

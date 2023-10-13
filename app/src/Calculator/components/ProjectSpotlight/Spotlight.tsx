@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 
-import { currentOpenSpotlightIndexAtom } from '@/Calculator/atoms/currentOpenSpotlightIndexAtom';
+import { isProjectSpotlightOpenAtom } from '@/Calculator/atoms/isProjectSpotlightOpenAtom';
 import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
 import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
 import { checkDuplicateSubject } from '@/Calculator/utils/checkDuplicateSubject';
@@ -37,7 +37,7 @@ export const Spotlight = ({
   const subjectList = useAtomValue(subjectListAtom);
   const setCalculatorDialog = useSetAtom(calculatorDialogAtom);
   const [isProjectSpotlightOpen, setIsProjectSpotlightOpen] = useAtom(
-    currentOpenSpotlightIndexAtom,
+    isProjectSpotlightOpenAtom,
   );
   const size = data?.getSpotlight.projectPreviews.length ?? 0;
   const { currentFocus, setCurrentFocus } = useRoveFocus(size);

@@ -4,12 +4,12 @@ import { useEffect } from 'react';
 import { AlertDialog } from '@shared/ui-kit';
 import { isEnterKeyDown, isEscapeKeyDown } from '@shared/utils/keyboard';
 import { calculatorDialogAtom } from '@core/atoms/calculatorDialogAtom';
-import { currentOpenSpotlightIndexAtom } from '@/Calculator/atoms/currentOpenSpotlightIndexAtom';
+import { isProjectSpotlightOpenAtom } from '@/Calculator/atoms/isProjectSpotlightOpenAtom';
 
 export const CalculatorDialog = () => {
   const [{ description, focus }, setCalculatorDialogAtom] =
     useAtom(calculatorDialogAtom);
-  const setIsProjectSpotlightOpen = useSetAtom(currentOpenSpotlightIndexAtom);
+  const setIsProjectSpotlightOpen = useSetAtom(isProjectSpotlightOpenAtom);
 
   const handleConfirm = () => {
     setCalculatorDialogAtom({

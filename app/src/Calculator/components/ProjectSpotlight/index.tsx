@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useDebounce } from 'usehooks-ts';
 import { useAtom } from 'jotai';
 
-import { currentOpenSpotlightIndexAtom } from '@/Calculator/atoms/currentOpenSpotlightIndexAtom';
+import { isProjectSpotlightOpenAtom } from '@/Calculator/atoms/isProjectSpotlightOpenAtom';
 import { gql } from '@shared/__generated__';
 import { VStack, Writable } from '@shared/ui-kit';
 import { isEscapeKeyDown } from '@shared/utils/keyboard';
@@ -45,7 +45,7 @@ export const ProjectSpotlight = ({
   const [search, searchResult] = useLazyQuery(GET_PROJECTS);
   const LIMIT = 4;
   const [isProjectSpotlightOpen, setIsProjectSpotlightOpen] = useAtom(
-    currentOpenSpotlightIndexAtom,
+    isProjectSpotlightOpenAtom,
   );
   const inputRef = useRef<HTMLInputElement>(null);
   const [input, setInput] = useState<string>('');

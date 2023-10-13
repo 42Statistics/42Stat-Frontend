@@ -1,81 +1,125 @@
-import { PrimaryMediumText, Writable, Button } from '@shared/ui-kit';
+import { PrimaryMediumText, Text, GraphTextInput, GraphNumberInput } from '@shared/ui-kit';
 import styled from '@emotion/styled';
-import { useAtom } from 'jotai';
-import SubjectListAtom from '@/Calculator/atoms/SubjectListAtom';
 
 const CalculatorInput = () => {
-  const [subjectList, setSubjectList] = useAtom(SubjectListAtom);
+const heads = ['프로젝트명', '경험치', '점수', '코알리숑 보너스', '블랙홀 증가 일수', '통과시 레벨'];
+const teams = [
+	{
+		id: 1,
+		name: "팀1",
+		occurrence: 1,
+		lastEventTime: "2021-10-01",
+		isValidated: false,
+		finalMark: 0,
+	},
+	{
+		id: 1,
+		name: "팀1",
+		occurrence: 1,
+		lastEventTime: "2021-10-01",
+		isValidated: false,
+		finalMark: 0,
+	},
+	{
+		id: 1,
+		name: "팀1",
+		occurrence: 1,
+		lastEventTime: "2021-10-01",
+		isValidated: false,
+		finalMark: 0,
+	},
+	{
+		id: 1,
+		name: "팀1",
+		occurrence: 1,
+		lastEventTime: "2021-10-01",
+		isValidated: false,
+		finalMark: 0,
+	},
+	{
+		id: 1,
+		name: "팀1",
+		occurrence: 1,
+		lastEventTime: "2021-10-01",
+		isValidated: false,
+		finalMark: 0,
+	},
+	{
+		id: 1,
+		name: "팀1",
+		occurrence: 1,
+		lastEventTime: "2021-10-01",
+		isValidated: false,
+		finalMark: 0,
+	},
+	{
+		id: 1,
+		name: "팀1",
+		occurrence: 1,
+		lastEventTime: "2021-10-01",
+		isValidated: false,
+		finalMark: 0,
+	},
+	{
+		id: 1,
+		name: "팀1",
+		occurrence: 1,
+		lastEventTime: "2021-10-01",
+		isValidated: false,
+		finalMark: 0,
+	},
+	{
+		id: 1,
+		name: "팀1",
+		occurrence: 1,
+		lastEventTime: "2021-10-01",
+		isValidated: false,
+		finalMark: 0,
+	},
 
-  const heads = ['프로젝트명', '경험치', '점수'];
-
-  const onClick = () => {
-    setSubjectList((prev) => [
-      ...prev,
-      { id: subjectList.length, name: '', blackhole: 0, level: 0 },
-    ]);
-  };
-
-  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    const name = e.target.name as keyof typeof subjectList;
-    const id = parseInt(e.target.id);
-    const updatedSubjectList = subjectList.map((subject) => {
-      if (subject.id === id) {
-        return {
-          ...subject,
-          [name]: value,
-        };
-      }
-      return subject;
-    });
-    setSubjectList(updatedSubjectList);
-  };
+];
 
   return (
-    <>
-      <Table>
-        <thead>
-          <tr>
-            {heads.map((head, index) => (
-              <th key={index}>
-                <PrimaryMediumText>{head}</PrimaryMediumText>
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {subjectList.map(({ id, name, blackhole, level }) => (
+    <Table>
+      <thead>
+        <tr>
+          {heads.map((head, index) => (
+            <th key={index}>
+              <PrimaryMediumText>{head}</PrimaryMediumText>
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {teams.map(
+          ({
+            id,
+            name,
+            occurrence,
+          }) => (
             <tr key={id}>
               <td>
-                <Writable
-                  id={id.toString()}
-                  name="name"
-                  onChange={onInputChange}
-                  value={name}
-                />
+                <GraphTextInput w="10rem"></GraphTextInput>
               </td>
               <td>
-                <Writable
-                  id={id.toString()}
-                  name="blackhole"
-                  onChange={onInputChange}
-                  value={blackhole}
-                />
+                <Text>{occurrence + 1}</Text>
               </td>
               <td>
-                <Writable
-                  id={id.toString()}
-                  name="level"
-                  onChange={onInputChange}
-                  value={level}
-                />
+                <GraphNumberInput w="7rem" type="number"></GraphNumberInput>
+              </td>
+              <td>
+                <Text>
+									time
+                </Text>
+              </td>
+              <td>
+								<Text>hello</Text>
               </td>
             </tr>
-          ))}
-        </tbody>
-      </Table>
-      <Button onClick={onClick}>추가</Button>
-    </>
+          ),
+        )}
+      </tbody>
+    </Table>
   );
 };
 
@@ -89,7 +133,7 @@ const Table = styled.table`
     text-align: center;
     padding: 0.8rem 2rem;
     vertical-align: middle;
-    border-bottom: solid 1px ${({ theme }) => theme.colors.mono.gray300};
+		border-bottom: solid 1px ${({ theme }) => theme.colors.mono.gray300};
   }
 
   td {

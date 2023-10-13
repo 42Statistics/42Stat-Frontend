@@ -1,10 +1,13 @@
 import { gql } from '@shared/__generated__';
 import { useLazyQuery } from '@apollo/client';
 import { useDebounce } from 'usehooks-ts';
-import { useEffect, useState } from 'react';
+import { useRoveFocus } from '@shared/hooks/useRoveFocus';
+import { SubjectListAtom } from '@/Calculator/atoms/SubjectListAtom';
+import { useAtom } from 'jotai';
+import { useEffect } from 'react';
+import styled from '@emotion/styled';
 import { VStack, Writable } from '@shared/ui-kit';
-import { Spotlight } from './Spotlight';
-import { set } from 'react-hook-form';
+import { calculateSubjectList } from '@/Calculator/utils/calculateSubjectList';
 
 export const GET_PROJECTS = gql(/* GraphQL */ `
   query GetProjects($input: String!, $limit: Int!) {
@@ -17,33 +20,65 @@ export const GET_PROJECTS = gql(/* GraphQL */ `
 `);
 
 export const ProjectSpotlight = ({ index, keyword }: ProjectSpotlightProps) => {
-	const [search, searchResult] = useLazyQuery(GET_PROJECTS);
+  const debouncedInput = useDebounce(keyword, 250);
+  const [search, searchResult] = useLazyQuery(GET_PROJECTS);
+  const { currentFocus, setCurrentFocus } = useRoveFocus(5); //TODO: Spotlight result 나눠서 사이즈 받을 것
   const LIMIT = 4;
-	const [isFocused, setIsFocused] = useState(false);
-	const [input, setInput] = useState<string>('');
-  const debouncedInput = useDebounce(input, 250);
+  const [subjectList, setSubjectList] = useAtom(SubjectListAtom);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setInput(e.target.value);
+  const handleClickOutside = () => {
+    setCurrentFocus(-1);
   };
 
-	const handleBlur = () => {
-		setIsFocused(false);
-		setInput(keyword);
-	};
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!searchResult.data) return;
+    const id = parseInt(e.currentTarget.id);
+    const project = searchResult.data.getSpotlight.projectPreviews[id];
 
-	useEffect(() => {
-		setInput(keyword);
-	}, [keyword]);
+    const updatedSubjectList = subjectList.map((subject, idx) => {
+      if (idx === index) {
+        return {
+          ...subject,
+          name: project.name,
+          exp: 10021,
+          score: 100,
+          blackhole: 103,
+          bonus: true,
+          level: 6.1,
+        };
+      }
+      return subject;
+    });
+		const calculatedSubjectList = calculateSubjectList({subjectList: updatedSubjectList});
+    setSubjectList(calculatedSubjectList);
+    return;
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    const name = e.target.name as keyof typeof subjectList;
+    const id = parseInt(e.target.id);
+    const updatedSubjectList = subjectList.map((subject) => {
+      if (subject.id === id) {
+        return {
+          ...subject,
+          [name]: value,
+        };
+      }
+      return subject;
+    });
+    setSubjectList(updatedSubjectList);
+  };
 
   useEffect(() => {
     if (debouncedInput.length >= 2) {
       return;
     }
+    setCurrentFocus(0);
     if (searchResult.data) {
       searchResult.data = undefined;
     }
-  }, [debouncedInput, searchResult]);
+  }, [debouncedInput, setCurrentFocus, searchResult]);
 
   useEffect(() => {
     if (debouncedInput.length < 2) {
@@ -55,21 +90,51 @@ export const ProjectSpotlight = ({ index, keyword }: ProjectSpotlightProps) => {
   }, [debouncedInput, search]);
 
   return (
-    <VStack onBlur={handleBlur}>
+    <VStack onBlur={handleClickOutside}>
       <Writable
         name="name"
         id={index.toString()}
-        value={input}
+        value={subjectList[index].name}
         onChange={handleInputChange}
-        onFocus={() => setIsFocused(true)}
+        onFocus={() => setCurrentFocus(0)}
       />
-      {isFocused && debouncedInput.length >= 2 && <Spotlight index={index} result={searchResult}/>}
+      {currentFocus !== -1 && searchResult.data && (
+        <Layout>
+          {searchResult.data.getSpotlight.projectPreviews.map((project, i) => (
+            <Item
+              id={i.toString()}
+              onMouseDown={handleClick}
+              isFocused={currentFocus === i}
+              onMouseOver={() => setCurrentFocus(i)}
+              key={project.id}
+            >
+              {project.name}
+            </Item>
+          ))}
+        </Layout>
+      )}
     </VStack>
   );
 };
 
 type ProjectSpotlightProps = {
   index: number;
-	keyword: string;
+  keyword: string;
 };
 
+const Layout = styled.div`
+  position: relative;
+  background-color: white;
+`;
+
+type ItemProps = {
+  isFocused: boolean;
+};
+
+const Item = styled.div<ItemProps>`
+  background-color: ${({ theme, isFocused }) =>
+    isFocused && theme.colors.element.active};
+  &:focus-visible {
+    outline: 2px solid blue;
+  }
+`;

@@ -24,7 +24,8 @@ export const useRoveFocus = (size: number) => {
   );
 
   useEffect(() => {
-	  document.addEventListener('keydown', handleKeyDown);
+    if (currentFocus == -1) return;
+    document.addEventListener('keydown', handleKeyDown);
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };

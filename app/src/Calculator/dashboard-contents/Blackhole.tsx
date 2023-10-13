@@ -1,6 +1,6 @@
 import { DashboardContent } from '@shared/components/DashboardContent';
 import { DonutChart } from '@shared/components/Chart';
-import { blackholeNameFormatter, blackholeValueFormatter } from '@shared/utils/formatters/blackholeFormatter';
+import { blackholeFormatter } from '@shared/utils/formatters/blackholeFormatter';
 import { useAtomValue } from 'jotai';
 import { SubjectListAtom } from '../atoms/SubjectListAtom';
 import { calculatorPropsAtom } from '../atoms/CalculatorPropsAtom';
@@ -32,11 +32,7 @@ const BlackholeCalculatorChart = ({
   labels,
   series,
 }: BlackholeCalculatorChartProps) => {
-
   const options: ApexCharts.ApexOptions = {
-		legend: {
-      show: false,
-    },
     tooltip: {
       enabled: true,
     },
@@ -54,15 +50,9 @@ const BlackholeCalculatorChart = ({
             total: {
               show: true,
             },
-						name: {
-							show: true,
-							offsetY: 130,
-							formatter: (value) => blackholeNameFormatter(value),
-						},
             value: {
               show: true,
-							offsetY: -5,
-              formatter: (value) => blackholeValueFormatter(parseInt(value)),
+              formatter: (value) => blackholeFormatter(parseInt(value)),
             },
           },
         },

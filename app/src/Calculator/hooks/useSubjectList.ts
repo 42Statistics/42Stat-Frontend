@@ -15,65 +15,100 @@ export const useSubjectList = () => {
     calculatorUserInfoAtom,
   );
 
-  // FIXME: 로직 가독성
   const updateSubjectList = useCallback(
     (subjectList: Subject[]) => {
-      let newStartLevel = -1;
       let sum = daysFromStart + currentBlackhole;
+      let finalLevel = currentLevel;
 
-      const updatedList = subjectList.map((subject) => {
+      const updatedList = subjectList.map((subject, index) => {
         const { score, bonus, exp } = subject;
 
         if (exp === null) {
           return subject;
         }
 
-        /**
-         * FIXME:
-         * [{
-         *   id: 0,
-         *   name: '',
-         *   exp: 0,
-         *   expEdited: 0,
-         *   score: 100,
-         *   blackhole: 0,
-         *   bonus: false,
-         *   startLevel: 0,
-         *   finishLevel: 0,
-         * }]
-         *
-         * 위 입력일 때 NaN 발생.
-         */
+        const calculateSubjectExp = (
+          exp: number,
+          score: number,
+          bonus: boolean,
+        ) => {
+          const expWithScore = exp * score;
+          const expWithBonus = bonus
+            ? Math.floor((expWithScore / 100) * 1.042)
+            : Math.floor(expWithScore / 100);
 
-        if (newStartLevel === -1) newStartLevel = currentLevel;
-        const editStartLevel = newStartLevel;
-        const decimalLevel = Math.floor(newStartLevel);
-        const currentExp = Math.floor(
-          expMaxTable[decimalLevel] +
-            expReqTable[decimalLevel + 1] * (newStartLevel - decimalLevel),
-        );
-        const newExp = bonus
-          ? Math.floor(((exp * score) / 100) * 1.042)
-          : Math.floor((exp * score) / 100);
+          if (isNaN(expWithBonus)) return 0;
+          return expWithBonus;
+        };
+
+        const calculateSubjectLevel = (newCurrentExp: number) => {
+          const newDecimalLevel = expMaxTable.findIndex(
+            (exp) => exp > newCurrentExp,
+          );
+
+          //레벨 소숫점 2자리까지 Math.round로 계산
+          const newLevel =
+            Math.round(
+              (newDecimalLevel +
+                (newCurrentExp - expMaxTable[newDecimalLevel]) /
+                  expReqTable[newDecimalLevel]) *
+                100,
+            ) / 100;
+
+          if (isNaN(newLevel)) return 0;
+          return newLevel;
+        };
+
+        const calculateCurrentExp = (newStartLevel: number) => {
+          const decimalLevel = Math.floor(newStartLevel);
+          const currentTotalExp = Math.floor(
+            expMaxTable[decimalLevel] +
+              expReqTable[decimalLevel + 1] * (newStartLevel - decimalLevel),
+          );
+
+          if (isNaN(currentTotalExp)) return 0;
+          return currentTotalExp;
+        };
+
+        const calculateBlackhole = (
+          startExp: number,
+          endExp: number,
+          sum: number,
+        ) => {
+          if (startExp >= MAX_EXP_VALUE) return 0;
+          if (endExp >= MAX_EXP_VALUE) endExp = MAX_EXP_VALUE;
+
+          //계산식 참조: https://medium.com/@benjaminmerchin/42-black-hole-deep-dive-cbc4b343c6b2
+          const blackhole = Math.floor(
+            ((endExp / 49980) ** 0.45 - (startExp / 49980) ** 0.45) * 483,
+          );
+
+          //받을 수 있는 총 블랙홀 수를 넘는 경우
+          if (blackhole + sum > MAX_BLACKHOLE_DAYS) {
+            const newBlackhole = Math.max(MAX_BLACKHOLE_DAYS - sum, 0);
+
+            if (isNaN(newBlackhole)) return 0;
+            return newBlackhole;
+          }
+
+          if (isNaN(blackhole)) return 0;
+          return blackhole;
+        };
+
+        const newStartLevel = finalLevel;
+        const newExp = calculateSubjectExp(exp, score, bonus);
+        const currentExp = calculateCurrentExp(newStartLevel);
         const newCurrentExp = currentExp + newExp;
-        const newDecimalLevel = expMaxTable.findIndex(
-          (exp) => exp > newCurrentExp,
-        );
-        const newLevel =
-          Math.round(
-            (newDecimalLevel +
-              (newCurrentExp - expMaxTable[newDecimalLevel]) /
-                expReqTable[newDecimalLevel]) *
-              100,
-          ) / 100;
+        const newLevel = calculateSubjectLevel(newCurrentExp);
         const newBlackhole = calculateBlackhole(currentExp, newCurrentExp, sum);
         sum += newBlackhole;
-        newStartLevel = newLevel;
+        finalLevel = newLevel;
 
         return {
           ...subject,
+          id: index,
           expEdited: newExp,
-          startLevel: editStartLevel,
+          startLevel: newStartLevel,
           finishLevel: newLevel,
           blackhole: newBlackhole,
         };
@@ -91,16 +126,4 @@ export const useSubjectList = () => {
   );
 
   return { updateSubjectList };
-};
-
-const calculateBlackhole = (startExp: number, endExp: number, sum: number) => {
-  if (startExp >= MAX_EXP_VALUE) return 0;
-  if (endExp >= MAX_EXP_VALUE) endExp = MAX_EXP_VALUE;
-  const blackhole = Math.floor(
-    ((endExp / 49980) ** 0.45 - (startExp / 49980) ** 0.45) * 483,
-  );
-  if (blackhole + sum > MAX_BLACKHOLE_DAYS) {
-    return Math.max(MAX_BLACKHOLE_DAYS - sum, 0);
-  }
-  return blackhole;
 };

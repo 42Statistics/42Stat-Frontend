@@ -22,6 +22,7 @@ import { expTablesAtom } from './atoms/expTablesAtom';
 import { subjectListAtom } from './atoms/subjectListAtom';
 import { CalculatorBasicInfoInputGroup } from './components/CalculatorBasicInfoInputGroup';
 import { getDifferences } from './utils/getDifferences';
+import { emptySubject } from './atoms/subjectListAtom';
 
 export const GET_BLACKHOLE_INFO = gql(/* GraphQL */ `
   query GetBlackholeInfo {
@@ -67,6 +68,10 @@ const CalculatorPage = () => {
     });
     setExpTables({ expMaxTable, expReqTable });
   }, [data, setCalculatorUserInfo, setExpTables, setSubjectList]);
+
+  useEffect(() => {
+    setSubjectList([emptySubject(0)]);
+  }, [setSubjectList]);
 
   if (loading || error || !data) {
     return <></>;

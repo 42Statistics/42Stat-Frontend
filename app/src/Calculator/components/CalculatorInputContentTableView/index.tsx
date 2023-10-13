@@ -11,6 +11,7 @@ import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnit
 
 type CalculatorInputContentTableViewProps = {
   onSubjectListChange: (subjectList: Subject[]) => void;
+  onSubjectDelete: (index: number) => void;
   onInputChange: (
     event: React.ChangeEvent<HTMLInputElement>,
     index: number,
@@ -23,6 +24,7 @@ type CalculatorInputContentTableViewProps = {
 
 export const CalculatorInputContentTableView = ({
   onSubjectListChange,
+  onSubjectDelete,
   onInputChange,
   onCheckboxChange,
 }: CalculatorInputContentTableViewProps) => {
@@ -104,6 +106,7 @@ export const CalculatorInputContentTableView = ({
                   tableRowList={subjectList}
                   index={index}
                   onListChange={onSubjectListChange}
+                  handleDelete={onSubjectDelete}
                 />
               </td>
             </tr>

@@ -1,9 +1,11 @@
 import { useAtomValue } from 'jotai';
 
-import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
+import {
+  emptySubject,
+  subjectListAtom,
+} from '@/Calculator/atoms/subjectListAtom';
 import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
 import type { Subject } from '@/Calculator/types/Subject';
-import { Body1MediumText, VStack } from '@shared/ui-kit';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 
 import { CalculatorInputContentCardView } from '../CalculatorInputContentCardView';
@@ -15,6 +17,16 @@ export const CalculatorInputContent = () => {
   const device = useDeviceType();
 
   const handleSubjectListChange = (subjectList: Subject[]) => {
+    updateSubjectList(subjectList);
+  };
+
+  const handleSubjectDelete = (index: number) => {
+    if (subjectList.length === 1) {
+      updateSubjectList([emptySubject(0)]);
+      return;
+    }
+
+    subjectList.splice(index, 1);
     updateSubjectList(subjectList);
   };
 
@@ -59,20 +71,17 @@ export const CalculatorInputContent = () => {
       {device === 'mobile' ? (
         <CalculatorInputContentCardView
           onSubjectListChange={handleSubjectListChange}
+          onSubjectDelete={handleSubjectDelete}
           onInputChange={handleInputChange}
           onCheckboxChange={handleCheckboxChange}
         />
       ) : (
         <CalculatorInputContentTableView
           onSubjectListChange={handleSubjectListChange}
+          onSubjectDelete={handleSubjectDelete}
           onInputChange={handleInputChange}
           onCheckboxChange={handleCheckboxChange}
         />
-      )}
-      {subjectList.length === 0 && (
-        <VStack h="5rem">
-          <Body1MediumText>프로젝트를 추가하세요</Body1MediumText>
-        </VStack>
       )}
     </>
   );

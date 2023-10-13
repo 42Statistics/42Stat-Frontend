@@ -6,6 +6,7 @@ import { CalculatorInputContentCardList } from './CalculatorInputContentCardList
 
 export type CalculatorInputContentCardViewProps = {
   onSubjectListChange: (subjectList: Subject[]) => void;
+  onSubjectDelete: (index: number) => void;
   onInputChange: (
     event: React.ChangeEvent<HTMLInputElement>,
     index: number,

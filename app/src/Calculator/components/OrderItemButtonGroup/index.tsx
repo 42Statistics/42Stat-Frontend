@@ -11,12 +11,14 @@ type OrderItemButtonGroupProps = {
   tableRowList: Subject[];
   index: number;
   onListChange: (tableRowList: Subject[]) => void;
+  handleDelete?: (index: number) => void;
 };
 
 export const OrderItemButtonGroup = ({
   tableRowList,
   index,
   onListChange,
+  handleDelete,
 }: OrderItemButtonGroupProps) => {
   const theme = useTheme();
 
@@ -39,6 +41,11 @@ export const OrderItemButtonGroup = ({
   };
 
   const handleClickDelete = () => {
+    if (handleDelete) {
+      handleDelete(index);
+      return;
+    }
+
     tableRowList.splice(index, 1);
     onListChange(tableRowList);
   };

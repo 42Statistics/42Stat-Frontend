@@ -23,6 +23,7 @@ export const CalculatorInputContentCardListItem = ({
   item: { name, expEdited, score, bonus, blackhole, finishLevel },
   index,
   onSubjectListChange,
+  onSubjectDelete,
   onInputChange,
   onCheckboxChange,
 }: CalculatorInputContentCardListItemProps) => {
@@ -42,6 +43,7 @@ export const CalculatorInputContentCardListItem = ({
             tableRowList={subjectList}
             index={index}
             onListChange={onSubjectListChange}
+            handleDelete={onSubjectDelete}
           />
         </HStack>
         <ProjectSpotlight

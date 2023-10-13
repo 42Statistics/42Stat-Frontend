@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { VStack, Writable } from '@shared/ui-kit';
 import { Spotlight } from './Spotlight';
 import styled from '@emotion/styled';
-import { isEscapeKeyDown } from '@shared/utils/keyboard';
+import { isEscapeKeyDown} from '@shared/utils/keyboard';
 
 export const GET_PROJECTS = gql(/* GraphQL */ `
   query GetProjects($input: String!, $limit: Int!) {

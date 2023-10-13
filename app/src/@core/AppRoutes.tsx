@@ -210,14 +210,14 @@ export const AppRoutes = () => {
               </Suspense>
             }
           />
-          <Route
-            path={ROUTES.CALCULATOR}
-            element={
-              <Suspense>
-                <CalculationPage />
-              </Suspense>
-            }
-          />
+					<Route
+						path={ROUTES.CALCULATOR}
+						element={
+							<Suspense>
+								<CalculationPage />
+							</Suspense>
+						}
+					/>
           <Route
             path={ROUTES.SETTING}
             element={

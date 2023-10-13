@@ -1,13 +1,13 @@
 import {
   H2BoldText,
   Writable,
+  CheckBox,
   VStack,
   HStack,
   Body1Text,
   Body1ThinText,
   H3MediumText,
 } from '@shared/ui-kit';
-import { CustomCheckbox } from '@shared/ui-kit-styled';
 import styled from '@emotion/styled';
 import { useSetAtom } from 'jotai';
 import { ProjectSpotlight } from '@/Calculator/ProjectSpotlight';
@@ -67,12 +67,14 @@ const CalculatorInputMobile = () => {
     updateSubjectList(updatedSubjectList);
   };
 
-  const onCheckboxChange = (index: number) => {
-    const updatedSubjectList = subjectList.map((subject, i) => {
-      if (i === index) {
+  const onCheckBoxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const checked = e.target.checked;
+    const id = parseInt(e.target.id);
+    const updatedSubjectList = subjectList.map((subject) => {
+      if (subject.id === id) {
         return {
           ...subject,
-          bonus: !subject.bonus, // Toggle bonus value
+          bonus: checked,
         };
       }
       return subject;
@@ -99,8 +101,8 @@ const CalculatorInputMobile = () => {
               onListChange={onListChange}
             />
           </HStack>
-          <HStack justify="start" w="100%">
-            <VStack align="start" justify="start" w="100%" spacing="0.5rem">
+          <HStack justify="start" w="100%" >
+            <VStack align="start" justify="start" w="100%">
               <TextLayout>
                 <Body1ThinText>프로젝트 검색</Body1ThinText>
               </TextLayout>
@@ -108,42 +110,43 @@ const CalculatorInputMobile = () => {
                 index={index}
                 keyword={subject.name}
                 height="4rem"
-                isRelative={true}
-                spotlightWidth="100%"
+								isRelative={true}
+								spotlightWidth="100%"
               />
             </VStack>
           </HStack>
-          <HStack justify="space-between">
-            <VStack align="start" w="100%" spacing="0.5rem">
+					<HStack justify="space-between">
+            <VStack align="start" justify="start" w="40%">
               <TextLayout>
                 <Body1ThinText>점수</Body1ThinText>
               </TextLayout>
-              <HStack
-                justify="space-between"
-                w="100%"
-                h="4.2rem"
-                spacing="2rem"
-              >
-                <InputLayout>
-                  <Writable
-                    type="number"
-                    min="0"
-                    max="300"
-                    id={index.toString()}
-                    name="score"
-                    onChange={handleInputChange}
-                    value={subject.score}
-                  />
-                </InputLayout>
-                <CustomCheckbox
-                  label="코알리숑 보너스"
-                  onClick={() => onCheckboxChange(index)}
-                  checked={subject.bonus}
+              <InputLayout>
+                <Writable
+                  type="number"
+                  min="0"
+                  max="300"
+                  id={index.toString()}
+                  name="score"
+                  onChange={handleInputChange}
+                  value={subject.score}
                 />
-              </HStack>
+              </InputLayout>
             </VStack>
-          </HStack>
-          <InfoLayout>
+						<HStack spacing="2rem">
+              <VStack>
+                <Body1ThinText>코알리숑</Body1ThinText>
+                <Body1ThinText>보너스</Body1ThinText>
+              </VStack>
+              <CheckBox
+                id={index.toString()}
+                type="checkbox"
+                name="bonus"
+                onChange={onCheckBoxChange}
+                checked={subject.bonus}
+              />
+            </HStack>
+					 </HStack>
+          <HStack justify="space-around" w="100%" wrap="wrap" spacing="1rem">
             <VStack>
               <Body1ThinText>경험치</Body1ThinText>
               <Body1Text>{subject.expEdited}</Body1Text>
@@ -160,7 +163,7 @@ const CalculatorInputMobile = () => {
                 +{subject.blackhole}일
               </Body1Text>
             </VStack>
-          </InfoLayout>
+          </HStack>
           <hr />
         </SubjectLayout>
       ))}
@@ -169,8 +172,8 @@ const CalculatorInputMobile = () => {
 };
 
 const InputLayout = styled.div`
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
   padding: 1rem;
   margin: 0.2rem;
   width: 100%;
@@ -183,15 +186,6 @@ const InputLayout = styled.div`
     border-color: ${({ theme }) => theme.colors.mono.gray300};
   }
   background: ${({ theme }) => theme.colors.background.box.default};
-`;
-
-const InfoLayout = styled.div`
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  border-radius: ${({ theme }) => theme.radius.xs};
-  border: 1px solid ${({ theme }) => theme.colors.mono.gray300};
-  padding: 1rem 0;
 `;
 
 const TextLayout = styled.div`

@@ -35,7 +35,7 @@ export const useSubjectList = () => {
   const updateSubjectList = useCallback(
     (subjectList: Subject[]) => {
       let newStartLevel = -1;
-      let sum = daysFromStart + currentBlackhole;
+      let sum = daysFromStart + currentBlackhole + 1;
 
       const updatedList = subjectList.map((subject) => {
         const { score, bonus, exp } = subject;

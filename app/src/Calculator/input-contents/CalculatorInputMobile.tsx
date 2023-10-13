@@ -4,7 +4,6 @@ import {
   VStack,
   HStack,
   Text,
-  CaptionText,
   Body1BoldText,
   Divider,
 } from '@shared/ui-kit';
@@ -87,10 +86,7 @@ const CalculatorInputMobile = () => {
     <>
       <VStack w="100%" align="start" spacing="1rem">
         <HStack w="100%" justify="space-between">
-          <HStack justify="start" align="baseline" spacing="1rem">
-            <H2BoldText>프로젝트 목록</H2BoldText>
-            <CaptionText>최대 20개</CaptionText>
-          </HStack>
+          <H2BoldText>프로젝트 목록</H2BoldText>
           <Button onClick={onAddClick}>추가</Button>
         </HStack>
         <Divider color={theme.colors.mono.black} />
@@ -152,21 +148,17 @@ const CalculatorInputMobile = () => {
             <InfoLayout>
               <VStack>
                 <Text>경험치</Text>
-                <Body1BoldText color={theme.colors.primary.default}>
+                <Body1BoldText>
                   {subject.expEdited?.toLocaleString()}
                 </Body1BoldText>
               </VStack>
               <VStack>
                 <Text>통과 레벨</Text>
-                <Body1BoldText color={theme.colors.primary.default}>
-                  {subject.finishLevel}
-                </Body1BoldText>
+                <Body1BoldText>{subject.finishLevel}</Body1BoldText>
               </VStack>
               <VStack>
                 <Text>블랙홀</Text>
-                <Body1BoldText color={theme.colors.primary.default}>
-                  +{subject.blackhole}일
-                </Body1BoldText>
+                <Body1BoldText>+{subject.blackhole}일</Body1BoldText>
               </VStack>
             </InfoLayout>
           </SubjectLayout>

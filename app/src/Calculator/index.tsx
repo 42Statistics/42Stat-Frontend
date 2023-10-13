@@ -135,7 +135,6 @@ const CalculatorLayout = () => {
         <InputLayout>
           <HStack spacing="1rem">
             <H3BoldText>현재 블랙홀</H3BoldText>
-            <InfoTooltip text="현재 블랙홀 + 본 과정 시작 날짜가 670일이 넘으면, 블랙홀 기간이 늘지 않아요." />
           </HStack>
           <HStack w="3rem">
             <Input
@@ -150,7 +149,7 @@ const CalculatorLayout = () => {
         <InputLayout>
           <HStack spacing="1rem">
             <H3BoldText>본 과정 시작한지</H3BoldText>
-            <InfoTooltip text="휴학일이 포함된 경우, 휴학 기간을 뺄 수 있어요." />
+            <InfoTooltip text="670일이 넘으면, 블랙홀 기간이 늘지 않아요." />
           </HStack>
           <HStack w="3rem">
             <Input

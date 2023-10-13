@@ -1,20 +1,19 @@
-import { useAtomValue } from 'jotai';
-
-import { calculatorPropsAtom } from '@/Calculator/atoms/calculatorPropsAtom';
+import { DashboardContent } from '@shared/components/DashboardContent';
+import { AreaChart } from '@shared/components/Chart';
+import { useAtom } from 'jotai';
 import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
+import { calculatorPropsAtom } from '@/Calculator/atoms/calculatorPropsAtom';
 import {
   MAX_XAXIS_COUNT,
   MAX_XVALUE_LENGTH,
 } from '@/Calculator/constants/level';
-import { AreaChart } from '@shared/components/Chart';
-import { DashboardContent } from '@shared/components/DashboardContent';
 
 export const Level = () => {
-  const subjectList = useAtomValue(subjectListAtom);
-  const calculatorProps = useAtomValue(calculatorPropsAtom);
+  const [subjectList] = useAtom(subjectListAtom);
+  const [CalculatorProps] = useAtom(calculatorPropsAtom);
 
   const levelList = [
-    { x: '현재 레벨', y: calculatorProps.currentLevel },
+    { x: '현재 레벨', y: CalculatorProps.currentLevel },
     ...subjectList
       .filter((subject) => subject.name !== '')
       .map((subject) => ({
@@ -37,20 +36,24 @@ export const Level = () => {
   );
 };
 
-type CalculatorLevelSeries = [
-  {
-    name: string;
-    data: { x: string; y: number }[];
-  },
-];
-
 type LevelCalculatorChartProps = {
   series: CalculatorLevelSeries;
 };
 
+type CalculatorLevelSeries = [
+  {
+    name: string;
+    data: Item[];
+  },
+];
+
+type Item = {
+  x: string;
+  y: number;
+};
+
 const LevelCalculatorChart = ({ series }: LevelCalculatorChartProps) => {
   const subjectLength = series[0].data.length;
-
   const options: ApexCharts.ApexOptions = {
     xaxis: {
       overwriteCategories: series[0].data.map((item) => {
@@ -72,6 +75,5 @@ const LevelCalculatorChart = ({ series }: LevelCalculatorChartProps) => {
       },
     },
   };
-
   return <AreaChart series={series} options={options} />;
 };

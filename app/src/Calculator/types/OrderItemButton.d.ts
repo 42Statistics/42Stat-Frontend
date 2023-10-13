@@ -1,6 +1,6 @@
-export type TableRowList = {
+export interface TableRowList {
   id: number;
-};
+}
 
 export type Subject = TableRowList & {
   name: string;

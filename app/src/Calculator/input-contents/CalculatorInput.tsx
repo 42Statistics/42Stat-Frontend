@@ -1,28 +1,25 @@
-import { useTheme } from '@emotion/react';
-import styled from '@emotion/styled';
-import { useSetAtom } from 'jotai';
-
-import { OrderItemButton } from '@/Calculator/components/OrderItemButton';
-import { ProjectSpotlight } from '@/Calculator/components/ProjectSpotlight';
-import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
-import type { Subject, TableRowList } from '@/Calculator/types/OrderItemButton';
-import { calculatorDialogAtom } from '@core/atoms/calculatorDialogAtom';
 import {
-  Button,
+  VStack,
+  HStack,
+  H2BoldText,
+  MediumText,
   CaptionText,
+  PrimaryMediumText,
+  Writable,
   Checkbox,
   Divider,
-  H2BoldText,
-  HStack,
-  MediumText,
-  PrimaryMediumText,
-  Spacer,
-  VStack,
-  Writable,
 } from '@shared/ui-kit';
-import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
+import styled from '@emotion/styled';
+import { useSetAtom } from 'jotai';
+import { ProjectSpotlight } from '@/Calculator/ProjectSpotlight';
+import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
+import { calculatorDialogAtom } from '@core/atoms/calculatorDialogAtom';
+import { OrderItemButton } from '@/Calculator/input-contents/OrderItemButton';
+import { TableRowList, Subject } from '@/Calculator/types/OrderItemButton';
+import { Button } from '@shared/ui-kit';
+import { useTheme } from '@emotion/react';
 
-export const CalculatorInput = () => {
+const CalculatorInput = () => {
   const { subjectList, updateSubjectList } = useSubjectList();
   const setCalculatorDialogAtom = useSetAtom(calculatorDialogAtom);
   const theme = useTheme();
@@ -34,14 +31,14 @@ export const CalculatorInput = () => {
     '코알리숑 보너스',
     '블랙홀',
     '통과시 레벨',
-    '',
+    '과제 추가',
   ];
 
-  const handleListChange = (subjectList: TableRowList[]) => {
+  const onListChange = (subjectList: TableRowList[]) => {
     updateSubjectList(subjectList as Subject[]);
   };
 
-  const handleAddButtonClick = () => {
+  const onAddClick = () => {
     if (subjectList.length >= 20) {
       setCalculatorDialogAtom({
         isOpen: true,
@@ -83,7 +80,7 @@ export const CalculatorInput = () => {
     updateSubjectList(updatedSubjectList);
   };
 
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onCheckBoxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const checked = e.target.checked;
     const id = parseInt(e.target.id);
     const updatedSubjectList = subjectList.map((subject) => {
@@ -104,8 +101,6 @@ export const CalculatorInput = () => {
         <HStack w="100%" justify="start" align="baseline" spacing="1rem">
           <H2BoldText>프로젝트 목록</H2BoldText>
           <CaptionText>최대 20개</CaptionText>
-          <Spacer />
-          <Button onClick={handleAddButtonClick}>과제 추가</Button>
         </HStack>
         <Divider color={theme.colors.mono.black} />
       </VStack>
@@ -114,7 +109,11 @@ export const CalculatorInput = () => {
           <tr>
             {heads.map((head, index) => (
               <th key={index}>
-                <PrimaryMediumText>{head}</PrimaryMediumText>
+                {index === heads.length - 1 ? (
+                  <Button onClick={onAddClick}>{head}</Button>
+                ) : (
+                  <PrimaryMediumText>{head}</PrimaryMediumText>
+                )}
               </th>
             ))}
           </tr>
@@ -155,14 +154,12 @@ export const CalculatorInput = () => {
                     id={index.toString()}
                     type="checkbox"
                     name="bonus"
-                    onChange={handleCheckboxChange}
+                    onChange={onCheckBoxChange}
                     checked={bonus}
                   />
                 </td>
                 <td>
-                  <MediumText>
-                    +{numberWithUnitFormatter(blackhole, '일')}
-                  </MediumText>
+                  <MediumText>+{blackhole}일</MediumText>
                 </td>
                 <td>
                   <MediumText>{finishLevel}</MediumText>
@@ -171,7 +168,7 @@ export const CalculatorInput = () => {
                   <OrderItemButton
                     tableRowList={subjectList}
                     index={index}
-                    onListChange={handleListChange}
+                    onListChange={onListChange}
                   />
                 </td>
               </tr>
@@ -234,3 +231,5 @@ const InputLayout = styled.div`
   }
   background: ${({ theme }) => theme.colors.background.box.default};
 `;
+
+export default CalculatorInput;

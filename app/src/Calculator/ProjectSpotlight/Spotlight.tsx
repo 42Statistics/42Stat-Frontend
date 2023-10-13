@@ -1,30 +1,15 @@
-import { QueryResult } from '@apollo/client';
 import styled from '@emotion/styled';
-import { useSetAtom } from 'jotai';
-import { useEffect } from 'react';
-
-import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
-import { checkDuplicateSubject } from '@/Calculator/utils/checkDuplicateSubject';
-import { calculatorDialogAtom } from '@core/atoms/calculatorDialogAtom';
+import { QueryResult } from '@apollo/client';
 import { Exact, GetProjectsQuery } from '@shared/__generated__/graphql';
 import { ApolloErrorView } from '@shared/components/ApolloError/ApolloErrorView';
+import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
+import { Center, Body1Text } from '@shared/ui-kit';
+import { useEffect } from 'react';
+import { useSetAtom } from 'jotai';
 import { useRoveFocus } from '@shared/hooks/useRoveFocus';
-import { Body1Text, Center } from '@shared/ui-kit';
+import { checkDuplicateSubject } from '../utils/checkDuplicateSubject';
+import { calculatorDialogAtom } from '@core/atoms/calculatorDialogAtom';
 import { isEnterKeyDown } from '@shared/utils/keyboard';
-
-type SpotlightProps = {
-  result: QueryResult<
-    GetProjectsQuery,
-    Exact<{
-      input: string;
-      limit: number;
-    }>
-  >;
-  index: number;
-  width: string;
-  left?: string;
-  setIsFocused: (isFocused: boolean) => void;
-};
 
 export const Spotlight = ({
   result: { loading, error, data },
@@ -38,7 +23,7 @@ export const Spotlight = ({
   const size = data?.getSpotlight.projectPreviews.length ?? 0;
   const { currentFocus, setCurrentFocus } = useRoveFocus(size);
 
-  const handleSelectSubject = (name: string, difficulty: number) => {
+  const onSelectSubject = (name: string, difficulty: number) => {
     if (checkDuplicateSubject(subjectList, name)) {
       setCalculatorDialogAtom({
         isOpen: true,
@@ -65,7 +50,7 @@ export const Spotlight = ({
       if (isEnterKeyDown(e) && data) {
         e.preventDefault();
         const project = data.getSpotlight.projectPreviews[currentFocus];
-        handleSelectSubject(project.name, project.difficulty ?? 0);
+        onSelectSubject(project.name, project.difficulty ?? 0);
       }
     };
 
@@ -80,7 +65,7 @@ export const Spotlight = ({
     if (!data) return;
     const id = parseInt(e.currentTarget.id);
     const project = data.getSpotlight.projectPreviews[id];
-    handleSelectSubject(project.name, project.difficulty ?? 0);
+    onSelectSubject(project.name, project.difficulty ?? 0);
   };
 
   if (loading) {
@@ -126,6 +111,20 @@ export const Spotlight = ({
   );
 };
 
+type SpotlightProps = {
+  result: QueryResult<
+    GetProjectsQuery,
+    Exact<{
+      input: string;
+      limit: number;
+    }>
+  >;
+  index: number;
+  width: string;
+  left?: string;
+  setIsFocused: (isFocused: boolean) => void;
+};
+
 type ItemProps = {
   isFocused: boolean;
 };
@@ -139,11 +138,6 @@ const Item = styled.div<ItemProps>`
   }
 `;
 
-type LayoutProps = {
-  width: string;
-  left?: string;
-};
-
 const Layout = styled.div<LayoutProps>`
   position: absolute;
   width: ${({ width }) => width};
@@ -155,3 +149,8 @@ const Layout = styled.div<LayoutProps>`
   background-color: ${({ theme }) => theme.colors.background.box.default};
   border-radius: ${({ theme }) => theme.radius.xs};
 `;
+
+type LayoutProps = {
+  width: string;
+  left?: string;
+};

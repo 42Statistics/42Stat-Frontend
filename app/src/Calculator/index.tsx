@@ -1,27 +1,25 @@
-import { useQuery } from '@apollo/client';
-import styled from '@emotion/styled';
-import { useAtom } from 'jotai';
-import { useEffect } from 'react';
-
-import { calculatorPropsAtom } from '@/Calculator/atoms/calculatorPropsAtom';
-import { CalculatorInput } from '@/Calculator/components/CalculatorInput';
+import { VStack, HStack, H3BoldText, Input, H1BoldText } from '@shared/ui-kit';
+import { Seo } from '@shared/components/Seo';
+import { Footer } from '@core/components/Footer';
+import { DashboardTemp } from '@shared/components/Dashboard/DashboardTemp';
+import { calculatorPageDashboardContents } from '@/Calculator/dashboard-frames/calculatorPageDashboardContents';
 import {
   calculatorPageDashboardDesktop,
   calculatorPageDashboardTablet,
 } from '@/Calculator/dashboard-frames/calculatorPageDashboardCols';
-import { calculatorPageDashboardContents } from '@/Calculator/dashboard-frames/calculatorPageDashboardContents';
-import { Footer } from '@core/components/Footer';
-import { gql } from '@shared/__generated__';
-import { DashboardTemp } from '@shared/components/Dashboard/DashboardTemp';
-import { InfoTooltip } from '@shared/components/InfoTooltip';
-import { Seo } from '@shared/components/Seo';
-import { H1BoldText, H3BoldText, HStack, Input, VStack } from '@shared/ui-kit';
-import { getBlackholeDaysLeft } from '@shared/utils/getBlackholeDaysLeft';
-import { getTimeDiffFromNow } from '@shared/utils/getTimeDiffFromNow';
-import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
-
+import CalculatorInput from '@/Calculator/input-contents/CalculatorInput';
+import { useAtom } from 'jotai';
+import { calculatorPropsAtom } from '@/Calculator/atoms/calculatorPropsAtom';
 import { subjectListAtom } from './atoms/subjectListAtom';
-import { CalculatorInputMobile } from './components/CalculatorInput/CalculatorInputMobile';
+import styled from '@emotion/styled';
+import { useEffect } from 'react';
+import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
+import { gql } from '@shared/__generated__';
+import { useQuery } from '@apollo/client';
+import { getTimeDiffFromNow } from '@shared/utils/getTimeDiffFromNow';
+import { getBlackholeDaysLeft } from '@shared/utils/getBlackholeDaysLeft';
+import { InfoTooltip } from '@shared/components/InfoTooltip';
+import CalculatorInputMobile from './input-contents/CalculatorInputMobile';
 import { useSubjectList } from './hooks/useSubjectList';
 
 export const GET_BLACKHOLE_INFO = gql(/* GraphQL */ `
@@ -40,7 +38,7 @@ export const GET_BLACKHOLE_INFO = gql(/* GraphQL */ `
   }
 `);
 
-const CalculatorPage = () => {
+const CalculatorLayout = () => {
   const [calculatorProps, setCalculatorProps] = useAtom(calculatorPropsAtom);
   const [subjectList, setSubjectList] = useAtom(subjectListAtom);
   const { updateSubjectList } = useSubjectList();
@@ -108,81 +106,75 @@ const CalculatorPage = () => {
   }
 
   return (
-    <>
+    <VStack w="100%" spacing="2rem">
       <Seo title="블랙홀 계산기" />
-      <VStack w="100%" spacing="2rem">
-        <VStack w="100%" align="start" spacing="1rem">
-          <H1BoldText>블랙홀 계산기</H1BoldText>
-          <InputLayout>
-            <HStack spacing="1rem">
-              <H3BoldText>현재 레벨</H3BoldText>
-              <InfoTooltip text="레벨이 8.41을 넘으면, 블랙홀 기간이 늘지 않아요." />
-            </HStack>
-            <HStack w="3rem">
-              <Input
-                name="currentLevel"
-                type="number"
-                min="0"
-                max="30"
-                value={currentLevel}
-                onChange={handleChange}
-                style={{ width: '5rem' }}
-              />
-            </HStack>
-          </InputLayout>
-          <InputLayout>
-            <HStack spacing="1rem">
-              <H3BoldText>현재 블랙홀</H3BoldText>
-              <InfoTooltip text="현재 블랙홀 + 본 과정 시작 날짜가 670일이 넘으면, 블랙홀 기간이 늘지 않아요." />
-            </HStack>
-            <HStack w="3rem">
-              <Input
-                name="currentBlackhole"
-                type="number"
-                value={currentBlackhole}
-                onChange={handleChange}
-                style={{ width: '5rem' }}
-              />
-            </HStack>
-          </InputLayout>
-          <InputLayout>
-            <HStack spacing="1rem">
-              <H3BoldText>본 과정 시작한지</H3BoldText>
-              <InfoTooltip text="휴학일이 포함된 경우, 휴학 기간을 뺄 수 있어요." />
-            </HStack>
-            <HStack w="3rem">
-              <Input
-                name="daysFromStart"
-                type="number"
-                value={daysFromStart}
-                onChange={handleChange}
-                style={{ width: '5rem' }}
-              />
-            </HStack>
-          </InputLayout>
-        </VStack>
-        <DashboardTemp
-          contents={calculatorPageDashboardContents}
-          rows={
-            device === 'desktop'
-              ? calculatorPageDashboardDesktop
-              : calculatorPageDashboardTablet
-          }
-        />
-        <CalculatorInputLayout>
-          {device === 'mobile' ? (
-            <CalculatorInputMobile />
-          ) : (
-            <CalculatorInput />
-          )}
-        </CalculatorInputLayout>
-        <Footer />
+      <VStack w="100%" align="start" spacing="1rem">
+        <H1BoldText>블랙홀 계산기</H1BoldText>
+        <InputLayout>
+          <HStack spacing="1rem">
+            <H3BoldText>현재 레벨</H3BoldText>
+            <InfoTooltip text="레벨이 8.41을 넘으면, 블랙홀 기간이 늘지 않아요." />
+          </HStack>
+          <HStack w="3rem">
+            <Input
+              name="currentLevel"
+              type="number"
+              min="0"
+              max="30"
+              value={currentLevel}
+              onChange={handleChange}
+              style={{ width: '5rem' }}
+            />
+          </HStack>
+        </InputLayout>
+        <InputLayout>
+          <HStack spacing="1rem">
+            <H3BoldText>현재 블랙홀</H3BoldText>
+            <InfoTooltip text="현재 블랙홀 + 본 과정 시작 날짜가 670일이 넘으면, 블랙홀 기간이 늘지 않아요." />
+          </HStack>
+          <HStack w="3rem">
+            <Input
+              name="currentBlackhole"
+              type="number"
+              value={currentBlackhole}
+              onChange={handleChange}
+              style={{ width: '5rem' }}
+            />
+          </HStack>
+        </InputLayout>
+        <InputLayout>
+          <HStack spacing="1rem">
+            <H3BoldText>본 과정 시작한지</H3BoldText>
+            <InfoTooltip text="휴학일이 포함된 경우, 휴학 기간을 뺄 수 있어요." />
+          </HStack>
+          <HStack w="3rem">
+            <Input
+              name="daysFromStart"
+              type="number"
+              value={daysFromStart}
+              onChange={handleChange}
+              style={{ width: '5rem' }}
+            />
+          </HStack>
+        </InputLayout>
       </VStack>
-    </>
+      <DashboardTemp
+        contents={calculatorPageDashboardContents}
+        rows={
+          device === 'desktop'
+            ? calculatorPageDashboardDesktop
+            : calculatorPageDashboardTablet
+        }
+      />
+      <CalculatorInputLayout>
+        {device === 'mobile' ? <CalculatorInputMobile /> : <CalculatorInput />}
+      </CalculatorInputLayout>
+      <Footer />
+    </VStack>
   );
 };
 
-export default CalculatorPage;
+export default CalculatorLayout;
 
 const InputLayout = styled.div`
   display: flex;

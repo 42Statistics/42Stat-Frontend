@@ -1,13 +1,11 @@
-import { useLazyQuery } from '@apollo/client';
-import styled from '@emotion/styled';
-import { useEffect, useState } from 'react';
-import { useDebounce } from 'usehooks-ts';
-
 import { gql } from '@shared/__generated__';
+import { useLazyQuery } from '@apollo/client';
+import { useDebounce } from 'usehooks-ts';
+import { useEffect, useState } from 'react';
 import { VStack, Writable } from '@shared/ui-kit';
-import { isEscapeKeyDown } from '@shared/utils/keyboard';
-
 import { Spotlight } from './Spotlight';
+import styled from '@emotion/styled';
+import { isEscapeKeyDown } from '@shared/utils/keyboard';
 
 export const GET_PROJECTS = gql(/* GraphQL */ `
   query GetProjects($input: String!, $limit: Int!) {
@@ -20,16 +18,6 @@ export const GET_PROJECTS = gql(/* GraphQL */ `
     }
   }
 `);
-
-type ProjectSpotlightProps = {
-  index: number;
-  keyword: string;
-  width?: string;
-  height?: string;
-  isRelative?: boolean;
-  spotlightWidth?: string;
-  spotlightLeft?: string;
-};
 
 export const ProjectSpotlight = ({
   index,
@@ -118,10 +106,6 @@ export const ProjectSpotlight = ({
   );
 };
 
-type LayoutProps = {
-  isRelative?: boolean;
-};
-
 const Layout = styled.div<LayoutProps>`
   display: flex;
   justify-content: center;
@@ -129,11 +113,6 @@ const Layout = styled.div<LayoutProps>`
   width: 100%;
   height: 100%;
 `;
-
-type InputLayoutProps = {
-  width: string;
-  height: string;
-};
 
 const InputLayout = styled.div<InputLayoutProps>`
   display: flex;
@@ -151,3 +130,22 @@ const InputLayout = styled.div<InputLayoutProps>`
   }
   background: ${({ theme }) => theme.colors.background.box.default};
 `;
+
+type LayoutProps = {
+  isRelative?: boolean;
+};
+
+type InputLayoutProps = {
+  width: string;
+  height: string;
+};
+
+type ProjectSpotlightProps = {
+  index: number;
+  keyword: string;
+  width?: string;
+  height?: string;
+  isRelative?: boolean;
+  spotlightWidth?: string;
+  spotlightLeft?: string;
+};

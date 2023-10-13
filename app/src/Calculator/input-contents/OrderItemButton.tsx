@@ -1,10 +1,9 @@
-import { useTheme } from '@emotion/react';
-import styled from '@emotion/styled';
-
-import type { TableRowList } from '@/Calculator/types/OrderItemButton';
-import { ReactComponent as MdDelete } from '@shared/assets/icon/md-delete.svg';
+import { TableRowList } from '@/Calculator/types/OrderItemButton';
 import { ReactComponent as MdDown } from '@shared/assets/icon/md-down.svg';
 import { ReactComponent as MdUp } from '@shared/assets/icon/md-up.svg';
+import { ReactComponent as MdDelete } from '@shared/assets/icon/md-delete.svg';
+import { useTheme } from '@emotion/react';
+import styled from '@emotion/styled';
 
 export const OrderItemButton = ({
   tableRowList,

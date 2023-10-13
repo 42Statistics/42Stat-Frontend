@@ -6,3 +6,7 @@ export const blackholeNameFormatter = (name: string): string => {
   }
   return name;
 };
+
+export const blackholeValueFormatter = (value: number): string => {
+  return `${value.toLocaleString()}일`;
+};

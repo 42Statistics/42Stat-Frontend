@@ -5,12 +5,12 @@ import {
   blackholeValueFormatter,
 } from '@shared/utils/formatters/blackholeFormatter';
 import { useAtomValue } from 'jotai';
-import { subjectListAtom } from '../atoms/subjectListAtom';
-import { calculatorPropsAtom } from '../atoms/calculatorPropsAtom';
+import { SubjectListAtom } from '../atoms/SubjectListAtom';
+import { calculatorPropsAtom } from '../atoms/CalculatorPropsAtom';
 import { MAX_BLACKHOLE_VALUE } from '../constants/blackhole';
 
 export const Blackhole = () => {
-  const subjectList = useAtomValue(subjectListAtom);
+  const subjectList = useAtomValue(SubjectListAtom);
   const calculatorProps = useAtomValue(calculatorPropsAtom);
   const currentDays =
     calculatorProps.daysFromStart + calculatorProps.currentBlackhole;
@@ -40,7 +40,7 @@ export const Blackhole = () => {
   ];
 
   return (
-    <DashboardContent title="블랙홀" type="ApexCharts">
+    <DashboardContent title="Blackhole" type="ApexCharts">
       <BlackholeCalculatorChart labels={labels} series={series} />
     </DashboardContent>
   );

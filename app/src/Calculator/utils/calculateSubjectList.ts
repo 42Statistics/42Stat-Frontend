@@ -1,4 +1,4 @@
-import { Subject } from '@/Calculator/types/orderItemButton';
+import { Subject } from '@/Calculator/atoms/SubjectListAtom';
 import {
   EXP_MAX,
   EXP_REQUIRED_FOR_NEXT_LEVEL,
@@ -11,7 +11,7 @@ export const calculateSubjectList = ({
   newSubject,
 }: CalculateSubjectListProps) => {
   if (!subjectList.length) return [];
-  if (newSubject) subjectList.push(newSubject);
+  newSubject && subjectList.push(newSubject);
   let newStartLevel = -1;
 
   const calculateBlackhole = (startExp: number, endExp: number) => {

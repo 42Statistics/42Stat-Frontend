@@ -5,15 +5,15 @@ import { ApolloErrorView } from '@shared/components/ApolloError/ApolloErrorView'
 import { calculateSubjectList } from '@/Calculator/utils/calculateSubjectList';
 import { Center, H3Text } from '@shared/ui-kit';
 import { useAtom } from 'jotai';
-import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
-import { calculatorPropsAtom } from '../atoms/calculatorPropsAtom';
+import { SubjectListAtom } from '@/Calculator/atoms/SubjectListAtom';
+import { calculatorPropsAtom } from '../atoms/CalculatorPropsAtom';
 import { useRoveFocus } from '@shared/hooks/useRoveFocus';
 
 export const Spotlight = ({
   result: { loading, error, data },
   index,
 }: SpotlightProps) => {
-  const [subjectList, setSubjectList] = useAtom(subjectListAtom);
+  const [subjectList, setSubjectList] = useAtom(SubjectListAtom);
   const [calculatorProps] = useAtom(calculatorPropsAtom);
   const size = data?.getSpotlight.projectPreviews.length ?? 0;
   const { currentFocus, setCurrentFocus } = useRoveFocus(size);

@@ -12,6 +12,7 @@ export const WritableNum = forwardRef(
       <StyledWritable
         {...restProps}
         value={value?.toString()}
+        type="number"
         ref={ref}
         autoComplete="off"
       />
@@ -24,7 +25,6 @@ WritableNum.displayName = 'WritableNum';
 const StyledWritable = styled.input`
   all: unset;
   width: 100%;
-  type: number;
 
   &::placeholder {
     color: ${({ theme }) => theme.colors.mono.gray500};

@@ -66,7 +66,7 @@ export function LeaderboardExpIncrementResult({
     end,
   } = data.getLeaderboardExpIncrement.byDateTemplate;
 
-  const unit = '회';
+  const unit = 'XP';
 
   return (
     <VStack w="100%" spacing="4rem">

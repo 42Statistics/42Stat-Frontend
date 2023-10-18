@@ -142,7 +142,7 @@ const TeamPage = () => {
         <VStack align="start" spacing="3rem">
           <H2BoldText>팀원</H2BoldText>
           <HStack spacing="2rem">
-            {users.toSorted(teamUserCompareFn).map((user) => (
+            {users.sort(teamUserCompareFn).map((user) => (
               <Link key={user.login} to={ROUTES.PROFILE_OF(user.login)}>
                 <VStack spacing="0.6rem">
                   {user.isLeader ? (

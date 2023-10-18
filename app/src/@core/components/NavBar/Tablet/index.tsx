@@ -1,15 +1,17 @@
 import { isSpotlightOpenAtom } from '@core/atoms/isSpotlightOpenAtom';
 import { TabletNavProfile } from '@core/components/NavProfile/Tablet';
+import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { ReactComponent as MdSearch } from '@shared/assets/icon/md-search.svg';
 import { userAtom } from '@shared/atoms/userAtom';
-import { ARIA_LABEL_BUTTON } from '@shared/constants/accessibility/ARIA_LABEL';
+import { ARIA_LABEL } from '@shared/constants/accessibility';
 import { Center, Clickable, VStack } from '@shared/ui-kit';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { TabletNavDrawer } from './TabletNavDrawer';
 import { TabletNavMenu } from './TabletNavMenu';
 
 export const TabletNavBar = () => {
+  const theme = useTheme();
   const user = useAtomValue(userAtom);
   const setIsSpotlightOpen = useSetAtom(isSpotlightOpenAtom);
 
@@ -26,9 +28,9 @@ export const TabletNavBar = () => {
         </Center>
         <Clickable
           onClick={openSpotlight}
-          aria-label={ARIA_LABEL_BUTTON.SEARCH_USER_OR_PROJECT_USING_SPOTLIGHT}
+          aria-label={ARIA_LABEL.BUTTON.SEARCH_USER_OR_PROJECT_USING_SPOTLIGHT}
         >
-          <MdSearch width={20} height={20} />
+          <MdSearch width={20} height={20} fill={theme.colors.mono.black} />
         </Clickable>
         <TabletNavMenu />
       </VStack>

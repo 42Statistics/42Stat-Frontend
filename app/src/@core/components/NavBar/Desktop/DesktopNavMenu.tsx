@@ -12,6 +12,7 @@ export const DesktopNavMenu = () => {
       <NavItem route={NAV_ROUTES.PROFILE} />
       <NavItem route={NAV_ROUTES.LEADERBOARD} />
       <NavItem route={NAV_ROUTES.EVALLOG} />
+      <NavItem route={NAV_ROUTES.CALCULATOR} />
       <Spacer />
       <NavItem route={NAV_ROUTES.SETTING} />
     </VStack>

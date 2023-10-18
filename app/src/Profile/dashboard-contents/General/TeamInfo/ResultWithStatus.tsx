@@ -17,5 +17,10 @@ export const ResultWithStatus = ({
   if (status !== TeamStatus.Finished) {
     return <Text>{getTeamStatusString(status)}</Text>;
   }
-  return <MarkLabel isValidate={isValidated!} finalMark={finalMark!} />; // 논의된 사항이기에 Assertion 가능
+  return (
+    <MarkLabel
+      isValidate={isValidated as boolean}
+      finalMark={finalMark as number}
+    />
+  ); // 논의된 사항이기에 Assertion 가능
 };

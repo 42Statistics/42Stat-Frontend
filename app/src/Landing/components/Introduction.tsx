@@ -1,8 +1,8 @@
 import { useQuery } from '@apollo/client';
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { gql } from '@shared/__generated__';
-import { WhiteBoldText } from '@shared/ui-kit';
+import { BoldText } from '@shared/ui-kit';
 import { mq } from '@shared/utils/facepaint/mq';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 import { useEffect, useState } from 'react';
@@ -42,6 +42,7 @@ type IntroData = {
 };
 
 export const Introduction = () => {
+  const theme = useTheme();
   const { data } = useQuery(GET_LANDING);
 
   const [introData, setIntroData] = useState<IntroData>({
@@ -108,7 +109,7 @@ export const Introduction = () => {
 
   return (
     <Layout>
-      <WhiteBoldText fontSize={fontSize}>
+      <BoldText fontSize={fontSize} color={theme.colors.mono.absolute.white}>
         은하수를 여행한지{' '}
         {
           <CountUp
@@ -119,8 +120,8 @@ export const Introduction = () => {
           />
         }
         일째
-      </WhiteBoldText>
-      <WhiteBoldText fontSize={fontSize}>
+      </BoldText>
+      <BoldText fontSize={fontSize} color={theme.colors.mono.absolute.white}>
         {
           <CountUp
             isCounting
@@ -130,7 +131,7 @@ export const Introduction = () => {
           />
         }
         명의 히치하이커와 함께 여행중
-      </WhiteBoldText>
+      </BoldText>
       <Slider
         arrows={false}
         infinite
@@ -144,9 +145,13 @@ export const Introduction = () => {
         css={device !== 'desktop' && SliderCenterStyle}
       >
         {strs.map((str, idx) => (
-          <WhiteBoldText fontSize={fontSize} key={idx}>
+          <BoldText
+            fontSize={fontSize}
+            key={idx}
+            color={theme.colors.mono.absolute.white}
+          >
             {str}
-          </WhiteBoldText>
+          </BoldText>
         ))}
       </Slider>
     </Layout>

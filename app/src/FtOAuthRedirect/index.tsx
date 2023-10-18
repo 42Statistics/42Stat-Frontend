@@ -2,7 +2,7 @@ import { useMutation } from '@apollo/client';
 import { gql } from '@shared/__generated__';
 import { userAtom } from '@shared/atoms/userAtom';
 import { GOOGLE_LOGIN } from '@shared/components/LoginButton';
-import { ROUTES } from '@shared/constants/ROUTES';
+import { ROUTES } from '@shared/constants/routes';
 import { useDisclosure } from '@shared/hooks/useDisclosure';
 import { AlertDialog, Loader } from '@shared/ui-kit';
 import { setAccessToken } from '@shared/utils/storage/accessToken';
@@ -111,7 +111,7 @@ const FtOAuthRedirectPage = () => {
     setRefreshToken(refreshToken);
     removeGoogleCredential();
     navigate(ROUTES.HOME);
-  }, [googleLoading, googleError, googleData]);
+  }, [googleLoading, googleError, googleData, navigate, onOpen]);
 
   if (ftCode === null) {
     return <Navigate to={ROUTES.ROOT} />;

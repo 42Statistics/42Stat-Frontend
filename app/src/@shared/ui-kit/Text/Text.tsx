@@ -4,10 +4,12 @@ type TextProps = Partial<{
   fontSize: string;
   fontWeight: number;
   color: string;
-  preventSelect?: boolean;
+  preventSelect: boolean;
+  inline: boolean;
 }>;
 
 export const Text = styled.p<TextProps>`
+  display: ${({ inline }) => inline && 'inline'};
   font-size: ${({ theme, fontSize = theme.fonts.size.body2 }) => fontSize};
   font-weight: ${({ fontWeight }) => fontWeight};
   color: ${({ theme, color = theme.colors.mono.black }) => color};

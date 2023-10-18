@@ -1,13 +1,16 @@
-import { GOOGLE_CREDENTIAL_KEY } from '@shared/constants/SESSION_STORAGE_KEY';
+import { SESSION_STORAGE_KEYS } from '@shared/constants/storage';
 
 export const getGoogleCredential = () => {
-  return sessionStorage.getItem(GOOGLE_CREDENTIAL_KEY);
+  return sessionStorage.getItem(SESSION_STORAGE_KEYS.GOOGLE_CREDENTIAL);
 };
 
 export const setGoogleCredential = (googleCredential: string) => {
-  sessionStorage.setItem(GOOGLE_CREDENTIAL_KEY, googleCredential);
+  sessionStorage.setItem(
+    SESSION_STORAGE_KEYS.GOOGLE_CREDENTIAL,
+    googleCredential,
+  );
 };
 
 export const removeGoogleCredential = () => {
-  sessionStorage.removeItem(GOOGLE_CREDENTIAL_KEY);
+  sessionStorage.removeItem(SESSION_STORAGE_KEYS.GOOGLE_CREDENTIAL);
 };

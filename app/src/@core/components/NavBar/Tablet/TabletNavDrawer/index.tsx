@@ -1,3 +1,4 @@
+import { useTheme } from '@emotion/react';
 import { ReactComponent as MdMenu } from '@shared/assets/icon/md-menu.svg';
 import { useDisclosure } from '@shared/hooks/useDisclosure';
 import { Clickable } from '@shared/ui-kit';
@@ -8,6 +9,7 @@ import { useLocation } from 'react-router-dom';
 import { TabletNavDrawerView } from './TabletNavDrawerView';
 
 export const TabletNavDrawer = () => {
+  const theme = useTheme();
   const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
   const location = useLocation();
   const browser = detect();
@@ -34,7 +36,7 @@ export const TabletNavDrawer = () => {
   return (
     <>
       <Clickable onClick={onOpen} aria-label="메뉴 열기">
-        <MdMenu width={22} height={22} />
+        <MdMenu width={22} height={22} fill={theme.colors.mono.black} />
       </Clickable>
       <TabletNavDrawerView isOpen={isOpen} onClose={onClose} />
     </>

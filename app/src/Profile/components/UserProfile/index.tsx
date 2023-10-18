@@ -6,15 +6,16 @@ import coalition_gun_cover from '@shared/assets/coalition/cover/coalition-gun-co
 import coalition_lee_cover from '@shared/assets/coalition/cover/coalition-lee-cover.jpg';
 
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
+import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { ALT } from '@shared/constants/accessibility/ALT';
+import { ALT } from '@shared/constants/accessibility';
 import {
   Avatar,
+  H3BoldText,
   HStack,
+  MediumText,
+  Text,
   VStack,
-  WhiteH3BoldText,
-  WhiteMediumText,
-  WhiteText,
 } from '@shared/ui-kit';
 import { titleCase } from '@shared/utils/formatters/titleCase';
 import { getTitleWithLogin } from '@shared/utils/getTitleWithLogin';
@@ -23,6 +24,7 @@ import { truncate } from 'lodash-es';
 import { useContext } from 'react';
 
 export const UserProfile = () => {
+  const theme = useTheme();
   const userProfile = useContext(UserProfileContext);
 
   const { login, imgUrl, titles, coalition, grade, level, displayname } =
@@ -72,14 +74,20 @@ export const UserProfile = () => {
       <Desktop>
         <HStack h="100%" spacing="4rem">
           <Avatar size="xl" src={imgUrl} alt={ALT.AVATAR_OF(login)} />
-          <WhiteH3BoldText>{titleCase(grade)}</WhiteH3BoldText>
-          <WhiteH3BoldText>{titleCase(displayname)}</WhiteH3BoldText>
-          <WhiteMediumText style={{}}>
+          <H3BoldText color={theme.colors.mono.absolute.white}>
+            {titleCase(grade)}
+          </H3BoldText>
+          <H3BoldText color={theme.colors.mono.absolute.white}>
+            {titleCase(displayname)}
+          </H3BoldText>
+          <MediumText color={theme.colors.mono.absolute.white}>
             {truncate(titleWithLogin, { length: 52 })}
-          </WhiteMediumText>
+          </MediumText>
           <HStack align="baseline">
-            <WhiteText>lv.</WhiteText>
-            <WhiteH3BoldText>{level.toFixed(2)}</WhiteH3BoldText>
+            <Text color={theme.colors.mono.absolute.white}>lv.</Text>
+            <H3BoldText color={theme.colors.mono.absolute.white}>
+              {level.toFixed(2)}
+            </H3BoldText>
           </HStack>
         </HStack>
       </Desktop>
@@ -89,14 +97,20 @@ export const UserProfile = () => {
             <Avatar size="2xl" src={imgUrl} alt={ALT.AVATAR_OF(login)} />
           </VStack>
           <VStack w="15rem" spacing="1rem" style={{ textAlign: 'center' }}>
-            <WhiteH3BoldText>{titleCase(grade)}</WhiteH3BoldText>
-            <WhiteH3BoldText>{titleCase(displayname)}</WhiteH3BoldText>
-            <WhiteMediumText>
+            <H3BoldText color={theme.colors.mono.absolute.white}>
+              {titleCase(grade)}
+            </H3BoldText>
+            <H3BoldText color={theme.colors.mono.absolute.white}>
+              {titleCase(displayname)}
+            </H3BoldText>
+            <MediumText color={theme.colors.mono.absolute.white}>
               {truncate(titleWithLogin, { length: 52 })}
-            </WhiteMediumText>
+            </MediumText>
             <HStack align="baseline">
-              <WhiteText>lv.</WhiteText>
-              <WhiteH3BoldText>{level.toFixed(2)}</WhiteH3BoldText>
+              <Text color={theme.colors.mono.absolute.white}>lv.</Text>
+              <H3BoldText color={theme.colors.mono.absolute.white}>
+                {level.toFixed(2)}
+              </H3BoldText>
             </HStack>
           </VStack>
         </HStack>
@@ -118,6 +132,7 @@ const Layout = styled.div<LayoutProps>`
   border-radius: ${({ theme }) => theme.radius.md};
   user-select: none;
   width: 100%;
+  min-height: 102px;
   transition: all 0.2s;
 
   padding: 2rem 0;

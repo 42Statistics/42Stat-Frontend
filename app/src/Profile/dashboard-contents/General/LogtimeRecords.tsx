@@ -78,7 +78,7 @@ const LogtimeRecordsChart = ({ series }: LogtimeRecordsChartProps) => {
     },
     yaxis: {
       labels: {
-        formatter: (value) => String(Math.floor(value / 60)),
+        formatter: (value) => Math.floor(value / 60).toString(),
       },
     },
     tooltip: {

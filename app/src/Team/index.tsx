@@ -9,7 +9,7 @@ import { FullPageApolloNotFoundView } from '@shared/components/ApolloError/FullP
 import { EvalLogList } from '@shared/components/EvalLogList/EvalLogList';
 import { CorrectorReviewLabel } from '@shared/components/EvalLogList/EvalLogListItem';
 import { Seo } from '@shared/components/Seo';
-import { ROUTES } from '@shared/constants/ROUTES';
+import { ROUTES } from '@shared/constants/routes';
 import {
   Avatar,
   CaptionText,
@@ -28,6 +28,7 @@ import { getDateDiffStringWithTeamStatus } from '@shared/utils/getDateDiffString
 import { getTeamStatusString } from '@shared/utils/getTeamStatusString';
 import { Link, useParams } from 'react-router-dom';
 import { MoulinetteEvalLogListItem } from './components/MoulinetteEvalLogListItem';
+import { teamUserCompareFn } from './utils/teamUserCompareFn';
 
 const GET_TEAM_INFO = gql(/* GraphQL */ `
   query GetTeamInfo($id: Int!) {
@@ -120,13 +121,13 @@ const TeamPage = () => {
             ) : (
               <CorrectorReviewLabel number={finalMark} />
             )}
-            <Text color={theme.colors.mono.gray300}>
+            <Text color={theme.colors.mono.gray500}>
               {getDateDiffStringWithTeamStatus(new Date(lastEventTime), status)}
             </Text>
           </HStack>
-          <H1BoldText>{name}</H1BoldText>
+          <H1BoldText style={{ wordBreak: 'break-all' }}>{name}</H1BoldText>
           <HStack spacing="1rem">
-            <FtLogo width={20} height={20} />
+            <FtLogo width={20} height={20} fill={theme.colors.mono.black} />
             <Link to={ROUTES.PROJECT_DETAIL_OF(projectPreview.name)}>
               <H3MediumText>{projectPreview.name}</H3MediumText>
             </Link>
@@ -141,7 +142,7 @@ const TeamPage = () => {
         <VStack align="start" spacing="3rem">
           <H2BoldText>팀원</H2BoldText>
           <HStack spacing="2rem">
-            {users.map((user) => (
+            {users.sort(teamUserCompareFn).map((user) => (
               <Link key={user.login} to={ROUTES.PROFILE_OF(user.login)}>
                 <VStack spacing="0.6rem">
                   {user.isLeader ? (
@@ -160,17 +161,17 @@ const TeamPage = () => {
               </Link>
             ))}
           </HStack>
-          <CustomLink to={url} target="_blank" rel="noreferrer">
+          <CustomLink to={url} target="_blank" rel="noopener noreferrer">
             Intra 팀 페이지 바로가기
           </CustomLink>
         </VStack>
         <Divider />
-        <VStack align="start" spacing="3rem">
+        <VStack w="100%" align="start" spacing="3rem">
           <H2BoldText>평가 기록</H2BoldText>
           {moulinette == null && evalLogs.length === 0 ? (
             <Text>평가 기록이 없습니다.</Text>
           ) : null}
-          <VStack align="start" spacing="1.5rem">
+          <VStack w="100%" align="start" spacing="1.5rem">
             <EvalLogList list={evalLogs} />
             {moulinette != null ? (
               <MoulinetteEvalLogListItem item={moulinette} />

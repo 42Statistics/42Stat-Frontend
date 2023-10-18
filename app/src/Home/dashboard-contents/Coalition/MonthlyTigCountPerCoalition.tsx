@@ -1,6 +1,5 @@
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
-import styled from '@emotion/styled';
 import { gql } from '@shared/__generated__';
 import { DateTemplate } from '@shared/__generated__/graphql';
 import { CoalitionMark } from '@shared/components/CoalitionMark';
@@ -12,6 +11,7 @@ import {
 } from '@shared/components/DashboardContentView/Error';
 import { TextMax } from '@shared/components/TextMax';
 import { Body1Text, Center, VStack } from '@shared/ui-kit';
+import { CoalitionTable } from '@shared/ui-kit-styled/CoalitionTable';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 import { getStartEndDateString } from '@shared/utils/getStartEndDateString';
 import { capitalize } from 'lodash-es';
@@ -42,7 +42,7 @@ const GET_TIG_COUNT_PER_COALITION_BY_DATE_TEMPLATE = gql(/* GraphQL */ `
 
 export const MonthlyTigCountPerCoalition = () => {
   const theme = useTheme();
-  const title = '월간 누적 코알리숑 티그 횟수';
+  const title = '월간 코알리숑 티그 횟수';
   const { loading, error, data } = useQuery(
     GET_TIG_COUNT_PER_COALITION_BY_DATE_TEMPLATE,
     {
@@ -84,7 +84,7 @@ export const MonthlyTigCountPerCoalition = () => {
     <DashboardContent title={title} description={description}>
       <Center>
         <VStack h="100%">
-          <MonthlyTigCountPerCoalitionTable>
+          <CoalitionTable>
             <tbody>
               {tableData.map(({ coalition, value }) => (
                 <tr key={coalition.name}>
@@ -105,19 +105,9 @@ export const MonthlyTigCountPerCoalition = () => {
                 </tr>
               ))}
             </tbody>
-          </MonthlyTigCountPerCoalitionTable>
+          </CoalitionTable>
         </VStack>
       </Center>
     </DashboardContent>
   );
 };
-
-const MonthlyTigCountPerCoalitionTable = styled.table`
-  width: 100%;
-  text-align: center;
-
-  td {
-    padding: 0.6rem 2rem;
-    vertical-align: middle;
-  }
-`;

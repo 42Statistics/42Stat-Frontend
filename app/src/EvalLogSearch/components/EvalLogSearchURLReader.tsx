@@ -15,7 +15,7 @@ export const EvalLogSearchURLReader = ({
 
   useEffect(() => {
     setEvalLogSearchArgs(searchParams);
-  }, [searchParams]);
+  }, [searchParams, setEvalLogSearchArgs]);
 
   return <>{children}</>;
 };

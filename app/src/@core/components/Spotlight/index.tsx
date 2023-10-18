@@ -32,7 +32,7 @@ export const Spotlight = () => {
   const theme = useTheme();
   const device = useDeviceType();
   const [input, setInput] = useState<string>('');
-  const debouncedInput = useDebounce(input, 250);
+  const debouncedInput = useDebounce(input, 50);
   const [search, searchResult] = useLazyQuery(GET_SPOTLIGHT);
   const size =
     (searchResult.data?.getSpotlight.userPreviews.length ?? 0) +
@@ -73,12 +73,14 @@ export const Spotlight = () => {
   }, [debouncedInput, setCurrentFocus, searchResult]);
 
   useEffect(() => {
-    if (debouncedInput.length < 2) {
+    const trimmedDebouncedInput = debouncedInput.trim();
+    if (
+      trimmedDebouncedInput.length < 2 ||
+      trimmedDebouncedInput.length > 100
+    ) {
       return;
     }
-    if (debouncedInput.length <= 100) {
-      search({ variables: { input: debouncedInput, limit: LIMIT } });
-    }
+    search({ variables: { input: trimmedDebouncedInput, limit: LIMIT } });
   }, [debouncedInput, search]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -96,7 +98,7 @@ export const Spotlight = () => {
                   <MdSearch
                     width={36}
                     height={36}
-                    fill={theme.colors.mono.gray300}
+                    fill={theme.colors.mono.gray500}
                   />
                 ) : (
                   <></>

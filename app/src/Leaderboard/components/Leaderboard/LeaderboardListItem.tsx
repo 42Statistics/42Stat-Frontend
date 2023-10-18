@@ -1,8 +1,8 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { UserRank } from '@shared/__generated__/graphql';
-import { ROUTES } from '@shared/constants/ROUTES';
-import { ALT } from '@shared/constants/accessibility/ALT';
+import { ALT } from '@shared/constants/accessibility';
+import { ROUTES } from '@shared/constants/routes';
 import {
   Avatar,
   Body1MediumText,
@@ -67,7 +67,7 @@ export const LeaderboardListItem = ({
           <Mobile>
             <HStack w="100%" spacing="2.4rem">
               <HStack w="2rem">
-                <MediumText color={color}>{rank}</MediumText>
+                <MediumText color={color}>{rank === 0 ? '–' : rank}</MediumText>
               </HStack>
               <Avatar size="sm" src={imgUrl} alt={ALT.AVATAR_OF(login)} />
               <MediumText color={color}>{login}</MediumText>
@@ -99,7 +99,7 @@ const Layout = styled.div<LayoutProps>`
   })}
   border-radius: ${({ theme }) => theme.radius.xs};
   background-color: ${({ isMe, theme }) =>
-    isMe && theme.colors.primary.default} !important; // FIXME: !important
+    isMe ? theme.colors.primary.default : theme.colors.background.box.default};
   user-select: ${({ isMe }) => isMe && 'none'};
   transition: background-color 0.2s;
 

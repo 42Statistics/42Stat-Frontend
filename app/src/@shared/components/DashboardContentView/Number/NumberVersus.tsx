@@ -27,7 +27,7 @@ export const NumberVersus = ({
             color={
               number1 >= number2
                 ? theme.colors.mono.black
-                : theme.colors.mono.gray300
+                : theme.colors.mono.gray500
             }
           >
             {number1.toLocaleString()}
@@ -37,7 +37,7 @@ export const NumberVersus = ({
               color={
                 number1 >= number2
                   ? theme.colors.mono.black
-                  : theme.colors.mono.gray300
+                  : theme.colors.mono.gray500
               }
             >
               {unit}
@@ -52,7 +52,7 @@ export const NumberVersus = ({
             color={
               number1 <= number2
                 ? theme.colors.mono.black
-                : theme.colors.mono.gray300
+                : theme.colors.mono.gray500
             }
           >
             {number2.toLocaleString()}
@@ -62,7 +62,7 @@ export const NumberVersus = ({
               color={
                 number1 <= number2
                   ? theme.colors.mono.black
-                  : theme.colors.mono.gray300
+                  : theme.colors.mono.gray500
               }
             >
               {unit}

@@ -6,7 +6,7 @@ import coalition_gon_mark from '@shared/assets/coalition/mark/coalition-gon-mark
 import coalition_gun_mark from '@shared/assets/coalition/mark/coalition-gun-mark.svg';
 import coalition_lee_mark from '@shared/assets/coalition/mark/coalition-lee-mark.svg';
 import ft_logo from '@shared/assets/logo/ft-logo.svg';
-import { ALT } from '@shared/constants/accessibility/ALT';
+import { ALT } from '@shared/constants/accessibility';
 import { Image } from '@shared/ui-kit';
 
 type CoalitionMarkProps = {

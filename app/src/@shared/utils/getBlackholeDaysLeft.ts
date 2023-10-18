@@ -1,4 +1,4 @@
-import { MILLISECONDS_IN_A_DAY } from '@shared/constants/Date';
+import { MILLISECONDS } from '@shared/constants/date';
 import { getTimeDiffFromNow } from './getTimeDiffFromNow';
 
 /**
@@ -8,6 +8,6 @@ import { getTimeDiffFromNow } from './getTimeDiffFromNow';
  */
 export const getBlackholeDaysLeft = (date: Date) => {
   const diff = getTimeDiffFromNow(date);
-  const daysLeft = Math.ceil(diff / MILLISECONDS_IN_A_DAY);
+  const daysLeft = Math.ceil(diff / MILLISECONDS.DAY);
   return daysLeft < 0 ? -1 : daysLeft;
 };

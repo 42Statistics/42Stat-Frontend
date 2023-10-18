@@ -4,16 +4,18 @@
   "version": "0.0.3",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite -m localhost",
     "build": "tsc && vite build",
     "build:dev": "tsc && vite build -m development",
     "preview": "vite preview",
-    "compile": "DOTENV_CONFIG_PATH=./env/.env.development graphql-codegen -r dotenv/config",
-    "watch": "DOTENV_CONFIG_PATH=./env/.env.development graphql-codegen -r dotenv/config -w",
-    "lint": "eslint './src/**/*.{ts,tsx}'",
-    "lint:fix": "eslint './src/**/*.{ts,tsx}' --fix",
+    "compile": "DOTENV_CONFIG_PATH=./env/.env.localhost graphql-codegen -r dotenv/config",
+    "watch": "DOTENV_CONFIG_PATH=./env/.env.localhost graphql-codegen -r dotenv/config -w",
+    "format": "prettier . --write",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "prepare": "cd .. && chmod ug+x .husky/* && husky install"
   },
   "dependencies": {
     "@apollo/client": "^3.7.15",
@@ -73,14 +75,21 @@
     "dotenv": "^16.1.4",
     "eslint": "^8.42.0",
     "eslint-config-prettier": "^8.8.0",
-    "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-storybook": "^0.6.12",
-    "prettier": "^2.8.8",
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
+    "prettier": "^3.0.2",
     "react-docgen-typescript-plugin": "^1.0.5",
     "storybook": "^7.0.22",
     "typescript": "^4.9.5",
     "vite": "^4.3.9"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
   }
 }

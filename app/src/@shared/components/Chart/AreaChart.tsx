@@ -1,7 +1,6 @@
 import { useTheme } from '@emotion/react';
 import { merge } from 'lodash-es';
-import ReactApexChart from 'react-apexcharts';
-import { defaultOptions } from './options';
+import Chart from './Chart';
 
 type AreaChartProps = {
   series: ApexAxisChartSeries;
@@ -15,9 +14,9 @@ export const AreaChart = ({
   const theme = useTheme();
 
   const areaChartOptions: ApexCharts.ApexOptions = {
-    colors: [theme.colors.accent.default],
+    colors: [theme.colors.chart.accent.default],
     stroke: {
-      width: 1.5,
+      width: 2,
       curve: 'smooth',
     },
     fill: {
@@ -29,20 +28,7 @@ export const AreaChart = ({
     responsive: [],
   };
 
-  const options = merge(
-    {},
-    defaultOptions,
-    areaChartOptions,
-    additionalOptions,
-  );
+  const options = merge({}, areaChartOptions, additionalOptions);
 
-  return (
-    <ReactApexChart
-      type="area"
-      series={series}
-      options={options}
-      width="99%"
-      height="100%"
-    />
-  );
+  return <Chart type="area" series={series} options={options} />;
 };

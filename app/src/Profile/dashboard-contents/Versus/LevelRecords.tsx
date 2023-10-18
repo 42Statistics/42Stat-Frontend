@@ -11,7 +11,7 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
-import { BREAKPOINT } from '@shared/constants/BREAKPOINT';
+import { BREAKPOINT } from '@shared/constants/responsive';
 import { useContext } from 'react';
 
 const GET_LEVEL_RECORDS_VERSUS = gql(/* GraphQL */ `
@@ -114,9 +114,14 @@ const LevelRecordsChart = ({ series }: LevelRecordsChartProps) => {
   };
 
   const options: ApexCharts.ApexOptions = {
-    colors: [theme.colors.primary.default, theme.colors.accent.default],
+    colors: [
+      theme.colors.chart.primary.default,
+      theme.colors.chart.accent.default,
+    ],
     xaxis: {
       type: 'numeric',
+      min: 0,
+      max: 24,
       tickAmount: 8,
       labels: {
         formatter: (value) => `${value}개월`,

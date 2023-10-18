@@ -1,8 +1,11 @@
-import { ROUTES } from '@shared/constants/ROUTES';
-import { Tab, Tabs, VStack } from '@shared/ui-kit';
 import { Outlet, useLocation } from 'react-router-dom';
 
-const LeaderboardLayout = () => {
+import { ROUTES } from '@shared/constants/routes';
+import { Tab, Tabs, VStack } from '@shared/ui-kit';
+
+import { LeaderboardPromoListProvider } from './components/LeaderboardPromoListProvider';
+
+export default function LeaderboardLayout() {
   const { pathname } = useLocation();
 
   return (
@@ -21,8 +24,8 @@ const LeaderboardLayout = () => {
           경험치 증가량
         </Tab>
         <Tab
-          selected={pathname.startsWith(ROUTES.LEADERBOARD_COALITION_SCORE)}
-          link={ROUTES.LEADERBOARD_COALITION_SCORE}
+          selected={pathname.startsWith(ROUTES.LEADERBOARD_SCORE)}
+          link={ROUTES.LEADERBOARD_SCORE}
         >
           코알리숑 스코어
         </Tab>
@@ -32,10 +35,16 @@ const LeaderboardLayout = () => {
         >
           평가 횟수
         </Tab>
+        <Tab
+          selected={pathname.startsWith(ROUTES.LEADERBOARD_COMMENT)}
+          link={ROUTES.LEADERBOARD_COMMENT}
+        >
+          코멘트 길이
+        </Tab>
       </Tabs>
-      <Outlet />
+      <LeaderboardPromoListProvider>
+        <Outlet />
+      </LeaderboardPromoListProvider>
     </VStack>
   );
-};
-
-export default LeaderboardLayout;
+}

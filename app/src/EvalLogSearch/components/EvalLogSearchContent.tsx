@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client';
+import { Footer } from '@core/components/Footer';
 import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
 import { EvalLogList } from '@shared/components/EvalLogList/EvalLogList';
 import { useIntersection } from '@shared/hooks/useIntersection';
@@ -46,7 +47,7 @@ export const EvalLogSearchContent = () => {
         variables: {
           after: data.getEvalLogs.pageInfo.endCursor,
         },
-      }).then((_) => setTimeout(() => setIsFetchingMore(false), 10));
+      }).then(() => setTimeout(() => setIsFetchingMore(false), 10));
     },
     [data, fetchMore],
   );
@@ -109,12 +110,22 @@ export const EvalLogSearchContent = () => {
     );
   }
 
-  return <EvalLogList list={nodes} />;
+  return (
+    <>
+      <EvalLogList list={nodes} />
+      <Footer />
+    </>
+  );
 };
 
 // #region Views
 const EvalLogSearchError = ({ message }: { message: string }) => {
-  return <FullPageApolloErrorView message={message} />;
+  return (
+    <>
+      <FullPageApolloErrorView message={message} />
+      <Footer />
+    </>
+  );
 };
 
 const EvalLogSkeleton = () => {
@@ -132,7 +143,7 @@ const EvalLogSearchInitialSkeleton = () => {
 };
 
 const EvalLogSearchNextPageSkeleton = forwardRef(
-  ({}, ref: React.ForwardedRef<HTMLDivElement>) => {
+  (_, ref: React.ForwardedRef<HTMLDivElement>) => {
     return (
       <VStack w="100%" spacing="1.2rem" ref={ref}>
         <EvalLogSkeleton />
@@ -140,4 +151,6 @@ const EvalLogSearchNextPageSkeleton = forwardRef(
     );
   },
 );
+
+EvalLogSearchNextPageSkeleton.displayName = 'EvalLogSearchNextPageSkeleton';
 // #endregion

@@ -1,141 +1,59 @@
-import { Leaderboard } from '@/Leaderboard/components/Leaderboard';
-import { LeaderboardResultSkeleton } from '@/Leaderboard/components/skeletons/LeaderboardResultSkeleton';
-import { QUERY_KEY } from '@/Leaderboard/constants/QUERY_KEY';
-import { parseDateTemplate } from '@/Leaderboard/utils/parseDateTemplate';
-import { stringifyDateTemplate } from '@/Leaderboard/utils/stringifyDateTemplate';
 import { useQuery } from '@apollo/client';
+import { useAtomValue } from 'jotai';
+import { useSearchParams } from 'react-router-dom';
+
+import { leaderboardPromoListAtom } from '@/Leaderboard/atoms/leaderboardPromoListAtom';
+import { PromoSelect } from '@/Leaderboard/components/PromoSelect';
+import { LEADERBOARD_DEFAULT_OPTIONS } from '@/Leaderboard/constants/defaultOptions';
+import { LEADERBOARD_PARAM_KEYS } from '@/Leaderboard/constants/paramKeys';
+import { toLeaderboardArgs } from '@/Leaderboard/utils/toLeaderboardArgs';
 import { Footer } from '@core/components/Footer';
-import { gql } from '@shared/__generated__';
 import { DateTemplate } from '@shared/__generated__/graphql';
-import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
-import { Pagination } from '@shared/components/Pagination';
 import { Seo } from '@shared/components/Seo';
-import { DeferredComponent, VStack } from '@shared/ui-kit';
-import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
-import {
-  createSearchParams,
-  useNavigate,
-  useSearchParams,
-} from 'react-router-dom';
+import { HStack, VStack } from '@shared/ui-kit';
 
-const GET_LEADERBOARD_LEVEL = gql(/* GraphQL */ `
-  query GetLeaderboardLevel(
-    $pageSize: Int!
-    $pageNumber: Int!
-    $dateTemplate: DateTemplate!
-  ) {
-    getLeaderboardLevel {
-      byDateTemplate(
-        pageSize: $pageSize
-        pageNumber: $pageNumber
-        dateTemplate: $dateTemplate
-      ) {
-        data {
-          me {
-            userPreview {
-              ...userPreviewFields
-            }
-            value
-            rank
-          }
-          totalRanking {
-            nodes {
-              userPreview {
-                ...userPreviewFields
-              }
-              value
-              rank
-            }
-            totalCount
-            pageSize
-            pageNumber
-          }
-        }
-        start
-        end
-      }
-    }
-  }
-`);
+import { LeaderboardLevelResult } from './components/LeaderboardLevelResult';
+import { GET_LEADERBOARD_LEVEL } from './queries/getLeaderboardLevel';
 
-const LeaderboardLevelPage = () => {
-  const SIZE_PER_PAGE = 50;
-  const device = useDeviceType();
-  const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const dateTemplate = parseDateTemplate(
-    searchParams.get(QUERY_KEY.DATE),
-    DateTemplate.Total,
-  );
-  const pageNumber = Number(searchParams.get(QUERY_KEY.PAGE) ?? '1');
-  const { loading, error, data } = useQuery(GET_LEADERBOARD_LEVEL, {
+export default function LeaderboardLevelPage() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const leaderboardArgs = toLeaderboardArgs(searchParams);
+  const { promo } = leaderboardArgs;
+  const { PROMO } = LEADERBOARD_PARAM_KEYS;
+
+  const promoList = useAtomValue(leaderboardPromoListAtom);
+
+  const result = useQuery(GET_LEADERBOARD_LEVEL, {
     variables: {
-      pageSize: SIZE_PER_PAGE,
-      pageNumber,
-      dateTemplate,
+      ...LEADERBOARD_DEFAULT_OPTIONS,
+      ...leaderboardArgs,
+      dateTemplate: DateTemplate.Total,
     },
   });
 
-  const handlePageNumberChange = (pageNumber: number) => {
-    navigate({
-      search: `?${createSearchParams({
-        [QUERY_KEY.DATE]: stringifyDateTemplate(dateTemplate),
-        [QUERY_KEY.PAGE]: String(pageNumber),
-      })}`,
-    });
-  };
+  function handlePromoChange(newPromo: string | null) {
+    const newURLSearchParams = new URLSearchParams();
 
-  if (loading) {
-    return (
-      <DeferredComponent>
-        <LeaderboardResultSkeleton />
-      </DeferredComponent>
-    );
-  }
-  if (error) {
-    return (
-      <DeferredComponent>
-        <FullPageApolloErrorView message={error.message} />
-      </DeferredComponent>
-    );
-  }
-  if (!data) {
-    return (
-      <DeferredComponent>
-        <LeaderboardResultSkeleton />
-      </DeferredComponent>
-    );
+    if (newPromo) {
+      newURLSearchParams.set(PROMO, newPromo);
+    }
+    setSearchParams(newURLSearchParams);
   }
 
-  const {
-    data: {
-      me,
-      totalRanking: { nodes, totalCount },
-    },
-    start,
-    end,
-  } = data.getLeaderboardLevel.byDateTemplate;
   return (
     <>
       <Seo title="랭킹 › 레벨" />
-      <VStack w="100%" spacing="6rem">
-        <Leaderboard
-          me={me}
-          list={nodes}
-          fixedNumber={2}
-          start={new Date(start)}
-          end={new Date(end)}
-        />
-        <Pagination
-          currPageNumber={pageNumber}
-          onPageNumberChange={handlePageNumberChange}
-          totalPageNumber={Math.ceil(totalCount / SIZE_PER_PAGE)}
-          pagePerRow={device === 'mobile' ? 5 : 10}
-        />
+      <VStack w="100%" spacing="1rem">
+        <HStack w="100%" justify="start">
+          <PromoSelect
+            curr={promo}
+            onChange={handlePromoChange}
+            list={promoList}
+          />
+        </HStack>
+        <LeaderboardLevelResult result={result} />
       </VStack>
       <Footer />
     </>
   );
-};
-
-export default LeaderboardLevelPage;
+}

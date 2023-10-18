@@ -6,6 +6,7 @@ export const GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME = gql(/* GraphQL */ `
       name
       circle
       url
+      pdfUrl
       description
       minUserCount
       maxUserCount

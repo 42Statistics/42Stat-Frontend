@@ -30,10 +30,22 @@ export const global = () => css`
   }
 
   html {
-    font-family: 'Pretendard Variable', Pretendard, -apple-system,
-      BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI',
-      'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic',
-      'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+    font-family:
+      'Pretendard Variable',
+      Pretendard,
+      -apple-system,
+      BlinkMacSystemFont,
+      system-ui,
+      Roboto,
+      'Helvetica Neue',
+      'Segoe UI',
+      'Apple SD Gothic Neo',
+      'Noto Sans KR',
+      'Malgun Gothic',
+      'Apple Color Emoji',
+      'Segoe UI Emoji',
+      'Segoe UI Symbol',
+      sans-serif;
     font-display: fallback; // for UX
     font-size: 62.5%; // 1rem = 10px
   }
@@ -46,7 +58,8 @@ export const global = () => css`
     outline: 2px solid blue;
   }
 
-  strong {
-    font-weight: 700;
+  // apexcharts 다크 모드 시 배경색이 변경되지 않는 버그
+  .apexcharts-canvas > svg {
+    background-color: transparent !important;
   }
 `;

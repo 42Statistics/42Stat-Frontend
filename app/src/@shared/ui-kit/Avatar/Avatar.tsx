@@ -69,7 +69,7 @@ export const Avatar = ({ size = 'md', src, alt = '', badge }: AvatarProps) => {
 const Cover = styled(Image)`
   position: absolute;
   border-radius: ${({ theme }) => theme.radius.circle};
-  background-color: ${({ theme }) => theme.colors.mono.gray100};
+  background-color: ${({ theme }) => theme.colors.mono.gray300};
 `;
 
 const StyledAvatar = styled(Image)`

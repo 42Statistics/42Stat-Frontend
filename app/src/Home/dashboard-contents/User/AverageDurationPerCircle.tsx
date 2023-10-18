@@ -44,7 +44,7 @@ export const AverageDurationPerCircle = () => {
   const { averageDurationPerCircle } = data.getHomeUser;
 
   const categories = averageDurationPerCircle.map(({ circle }) =>
-    String(circle),
+    circle.toString(),
   );
   const seriesData = averageDurationPerCircle.map(({ value }) => value);
 

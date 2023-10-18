@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { UserTeam } from '@shared/__generated__/graphql';
-import { ROUTES } from '@shared/constants/ROUTES';
+import { ROUTES } from '@shared/constants/routes';
 import { PrimaryMediumText, Text } from '@shared/ui-kit';
 import { getDateDiffStringWithTeamStatus } from '@shared/utils/getDateDiffStringWithTeamStatus';
 import { rgba } from 'emotion-rgba';
@@ -82,7 +82,8 @@ const Table = styled.table`
     text-align: center;
     padding: 0.8rem 2rem;
     vertical-align: middle;
-    background-color: ${({ theme }) => rgba(theme.colors.mono.white, 0.9)};
+    background-color: ${({ theme }) =>
+      rgba(theme.colors.background.box.default, 0.9)};
   }
 
   td {

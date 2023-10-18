@@ -6,7 +6,7 @@ import { ProfileVersusPageSkeleton } from '@/Profile/components/skeletons/Profil
 import { UserProfileSkeleton } from '@/Profile/components/skeletons/UserProfileSkeleton';
 import { AuthGuard } from '@core/guards/AuthGuard';
 import { UnAuthGuard } from '@core/guards/UnAuthGuard';
-import { ROUTES } from '@shared/constants/ROUTES';
+import { ROUTES } from '@shared/constants/routes';
 import { DeferredComponent } from '@shared/ui-kit';
 import { Suspense, lazy } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
@@ -26,17 +26,19 @@ const LeaderboardLevelPage = lazy(() => import('@/Leaderboard/pages/Level'));
 const LeaderboardExpIncrementPage = lazy(
   () => import('@/Leaderboard/pages/ExpIncrement'),
 );
-const LeaderboardCoalitionScorePage = lazy(
-  () => import('@/Leaderboard/pages/CoalitionScore'),
-);
+const LeaderboardScorePage = lazy(() => import('@/Leaderboard/pages/Score'));
 const LeaderboardEvalCountPage = lazy(
   () => import('@/Leaderboard/pages/EvalCount'),
+);
+const LeaderboardCommentPage = lazy(
+  () => import('@/Leaderboard/pages/Comment'),
 );
 const TeamPage = lazy(() => import('@/Team'));
 const NotFoundPage = lazy(() => import('@/Error/404'));
 const FtOAuthRequestPage = lazy(() => import('@/FtOAuthRequest'));
 const FtOAuthRedirectPage = lazy(() => import('@/FtOAuthRedirect'));
 const SettingPage = lazy(() => import('@/Setting'));
+const CalculatorPage = lazy(() => import('@/Calculator'));
 
 export const AppRoutes = () => {
   return (
@@ -160,10 +162,10 @@ export const AppRoutes = () => {
               }
             />
             <Route
-              path={ROUTES.LEADERBOARD_COALITION_SCORE}
+              path={ROUTES.LEADERBOARD_SCORE}
               element={
                 <Suspense fallback={<LeaderboardPageSkeleton />}>
-                  <LeaderboardCoalitionScorePage />
+                  <LeaderboardScorePage />
                 </Suspense>
               }
             />
@@ -172,6 +174,14 @@ export const AppRoutes = () => {
               element={
                 <Suspense fallback={<LeaderboardPageSkeleton />}>
                   <LeaderboardEvalCountPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path={ROUTES.LEADERBOARD_COMMENT}
+              element={
+                <Suspense fallback={<LeaderboardPageSkeleton />}>
+                  <LeaderboardCommentPage />
                 </Suspense>
               }
             />
@@ -197,6 +207,14 @@ export const AppRoutes = () => {
             element={
               <Suspense>
                 <ProjectDetailPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path={ROUTES.CALCULATOR}
+            element={
+              <Suspense>
+                <CalculatorPage />
               </Suspense>
             }
           />

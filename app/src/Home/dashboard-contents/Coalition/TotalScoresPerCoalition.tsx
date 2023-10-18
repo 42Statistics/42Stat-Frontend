@@ -24,7 +24,7 @@ const GET_TOTAL_SCORES_PER_COALITION = gql(/* GraphQL */ `
 `);
 
 export const TotalScoresPerCoalition = () => {
-  const title = '누적 코알리숑 스코어 합산';
+  const title = '누적 코알리숑 스코어';
   const { loading, error, data } = useQuery(GET_TOTAL_SCORES_PER_COALITION);
 
   if (loading) {

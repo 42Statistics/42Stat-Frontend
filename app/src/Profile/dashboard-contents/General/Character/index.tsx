@@ -1,5 +1,6 @@
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { useQuery } from '@apollo/client';
+import { useTheme } from '@emotion/react';
 import { gql } from '@shared/__generated__';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
@@ -7,7 +8,7 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
-import { ALT } from '@shared/constants/accessibility/ALT';
+import { ALT } from '@shared/constants/accessibility';
 import { H3MediumText, HStack, Image, Label, VStack } from '@shared/ui-kit';
 import { Tooltip } from '@shared/ui-kit/Tooltip';
 import { useContext } from 'react';
@@ -29,6 +30,7 @@ const GET_CHARACTER_BY_LOGIN = gql(/* GraphQL */ `
 `);
 
 export const Character = () => {
+  const theme = useTheme();
   const { login } = useContext(UserProfileContext);
 
   const title = '이 유저를 캐릭터로 표현한다면?';
@@ -71,7 +73,11 @@ export const Character = () => {
           <HStack spacing="1rem">
             {types?.map((type, idx) => (
               <Tooltip.Container key={idx}>
-                <Label backgroundColor={type.color} key={idx}>
+                <Label
+                  color={theme.colors.mono.absolute.white}
+                  backgroundColor={type.color}
+                  key={idx}
+                >
                   {type.name}
                 </Label>
                 <Tooltip position="top">{type.description}</Tooltip>

@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client';
 import { userAtom } from '@shared/atoms/userAtom';
 import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
 import { FullPageApolloNotFoundView } from '@shared/components/ApolloError/FullPageApolloNotFoundView';
-import { ROUTES } from '@shared/constants/ROUTES';
+import { ROUTES } from '@shared/constants/routes';
 import { Tab, Tabs, VStack } from '@shared/ui-kit';
 import { useAtomValue } from 'jotai';
 import { Outlet, useLocation, useParams } from 'react-router-dom';

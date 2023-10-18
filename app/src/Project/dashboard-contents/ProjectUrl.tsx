@@ -35,7 +35,7 @@ export const ProjectUrl = () => {
 
   return (
     <DashboardContent title={title}>
-      <CustomLink to={url} target="_blank" rel="noreferrer">
+      <CustomLink to={url} target="_blank" rel="noopener noreferrer">
         바로가기
       </CustomLink>
     </DashboardContent>

@@ -22,7 +22,9 @@ export const EvalLogListItem = ({ element }: EvalLogListItemProps) => {
           <Center w="10rem">
             <CorrectorReviewLabel number={correctorReview.mark} />
           </Center>
-          <Text style={{ width: '100%' }}>{correctorReview.review}</Text>
+          <Text style={{ width: '100%', wordBreak: 'break-all' }}>
+            {correctorReview.review}
+          </Text>
         </HStack>
         <HStack w="100%">
           <Center w="10rem">
@@ -33,9 +35,11 @@ export const EvalLogListItem = ({ element }: EvalLogListItemProps) => {
             )}
           </Center>
           {correctedsReview ? (
-            <Text style={{ width: '100%' }}>{correctedsReview.review}</Text>
+            <Text style={{ width: '100%', wordBreak: 'break-all' }}>
+              {correctedsReview.review}
+            </Text>
           ) : (
-            <Text color={theme.colors.mono.gray300} style={{ width: '100%' }}>
+            <Text color={theme.colors.mono.gray500} style={{ width: '100%' }}>
               아직 피드백을 작성하지 않았습니다.
             </Text>
           )}
@@ -61,7 +65,7 @@ export const CorrectorReviewLabel = ({ number }: { number: number }) => {
 
   const type = getType(number);
 
-  return <EvalLogLabel type={type}>{`${String(number)}%`}</EvalLogLabel>;
+  return <EvalLogLabel type={type}>{`${number.toString()}%`}</EvalLogLabel>;
 };
 
 const CorrectedsReviewLabel = ({
@@ -82,7 +86,7 @@ const CorrectedsReviewLabel = ({
 
   return (
     <EvalLogLabel type={type}>
-      {!isNone ? `${String(number)} / 5` : '- / 5'}
+      {!isNone ? `${number.toString()} / 5` : '- / 5'}
     </EvalLogLabel>
   );
 };

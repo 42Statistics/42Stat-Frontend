@@ -106,7 +106,7 @@ const LastExamResultChart = ({
     xaxis: {
       categories,
       labels: {
-        formatter: (value) => String(value).padStart(2, '0'),
+        formatter: (value) => value.toString().padStart(2, '0'), // value가 string 타입으로 추론되는데, toString()을 해주지 않으면 오류가 남. ApexCharts 문제인 듯.
       },
     },
     yaxis: {
@@ -117,7 +117,7 @@ const LastExamResultChart = ({
     },
     tooltip: {
       x: {
-        formatter: (value) => `Exam Rank ${String(value).padStart(2, '0')}`,
+        formatter: (value) => `Exam Rank ${value.toString().padStart(2, '0')}`,
       },
       y: {
         formatter: (value, { dataPointIndex }) =>

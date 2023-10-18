@@ -15,26 +15,60 @@ type Colors = {
     fail: string;
   };
   chart: {
-    up: string;
-    down: string;
+    primary: {
+      default: string;
+      light: string;
+    };
+    accent: {
+      default: string;
+      light: string;
+    };
   };
   semantic: {
     error: string;
+    warning: string;
   };
   element: {
     hover: string;
     active: string;
   };
   background: {
-    landing: string;
+    landing: {
+      default: string;
+      theme: string;
+    };
+    main: {
+      default: string;
+      theme: string;
+    };
+    box: {
+      default: string;
+      shadow: {
+        default: string;
+        hover: string;
+      };
+    };
+    skeleton: {
+      default: string;
+      gradient: string;
+    };
+    button: {
+      hover: string;
+      shadow: string;
+    };
   };
   mono: {
+    absolute: {
+      black: string;
+      white: string;
+    };
     black: string;
     white: string;
+    gray500: string;
+    gray400: string;
     gray300: string;
     gray200: string;
     gray100: string;
-    gray50: string;
   };
 };
 
@@ -63,6 +97,7 @@ type Fonts = {
 type ZIndex = {
   absoluteButton: number;
   modal: number;
+  dropdown: number;
   tooltip: number;
 };
 

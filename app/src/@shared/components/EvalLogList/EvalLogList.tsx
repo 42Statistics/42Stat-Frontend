@@ -34,3 +34,5 @@ export const EvalLogList = forwardRef(
     );
   },
 );
+
+EvalLogList.displayName = 'EvalLogList';

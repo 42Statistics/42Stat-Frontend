@@ -1,7 +1,6 @@
 import { useTheme } from '@emotion/react';
 import { merge } from 'lodash-es';
-import ReactApexChart from 'react-apexcharts';
-import { defaultOptions } from './options';
+import Chart from './Chart';
 
 type BarChartProps = {
   series: ApexAxisChartSeries;
@@ -25,11 +24,11 @@ export const BarChart = ({
     dataLabels: {
       offsetY: -20,
       style: {
-        colors: [theme.colors.mono.gray300],
+        colors: [theme.colors.mono.gray500],
         fontWeight: 400,
       },
     },
-    colors: [theme.colors.accent.default],
+    colors: [theme.colors.chart.accent.default],
     stroke: {
       width: 0,
     },
@@ -42,15 +41,7 @@ export const BarChart = ({
     },
   };
 
-  const options = merge({}, defaultOptions, barChartOptions, additionalOptions);
+  const options = merge({}, barChartOptions, additionalOptions);
 
-  return (
-    <ReactApexChart
-      type="bar"
-      series={series}
-      options={options}
-      width="99%"
-      height="100%"
-    />
-  );
+  return <Chart type="bar" series={series} options={options} />;
 };

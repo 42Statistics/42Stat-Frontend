@@ -75,6 +75,9 @@ export const client = new ApolloClient({
     typePolicies: {
       Query: {
         fields: {
+          getMyInfo: {
+            merge: true,
+          },
           getHomeEval: {
             merge: true,
           },
@@ -106,6 +109,9 @@ export const client = new ApolloClient({
             merge: true,
           },
           getLeaderboardScore: {
+            merge: true,
+          },
+          getLeaderboardComment: {
             merge: true,
           },
           getEvalLogs: {
@@ -162,7 +168,7 @@ const ResponseInterceptor400 = ({
     client.setLink(
       from([responseInterceptor400, errorLink, authLink, httpLink]),
     );
-  }, []);
+  }, [setReLoginDialogInfo]);
 
   return <>{children}</>;
 };

@@ -3,6 +3,7 @@ import {
   MonthlyTigCountPerCoalition,
   ScoreRecordsPerCoalition,
   TotalScoresPerCoalition,
+  WinCountPerCoalition,
 } from '../dashboard-contents/Coalition';
 import {
   AverageCommentLength,
@@ -98,10 +99,14 @@ export const homePageDashboardContents: DashboardItemProps[] = [
   },
   {
     id: 17,
-    content: TotalScoresPerCoalition,
+    content: WinCountPerCoalition,
   },
   {
     id: 18,
+    content: TotalScoresPerCoalition,
+  },
+  {
+    id: 19,
     content: MonthlyTigCountPerCoalition,
   },
 ];

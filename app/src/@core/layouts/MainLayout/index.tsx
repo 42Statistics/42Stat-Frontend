@@ -3,7 +3,7 @@ import { MobileHeader } from '@core/components/Header/Mobile';
 import { DesktopNavBar } from '@core/components/NavBar/Desktop';
 import { TabBar } from '@core/components/NavBar/Mobile(TabBar)';
 import { TabletNavBar } from '@core/components/NavBar/Tablet';
-import { Global } from '@emotion/react';
+import { Global, useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { mq } from '@shared/utils/facepaint/mq';
 import { isCtrlKKeyDown, isMacKKeyDown } from '@shared/utils/keyboard';
@@ -17,6 +17,7 @@ import { mainLayoutGlobalStyle } from './mainLayoutGlobalStyle';
 
 const MainLayout = () => {
   const [isSpotlightOpen, setIsSpotlightOpen] = useAtom(isSpotlightOpenAtom);
+  const theme = useTheme();
   const device = useDeviceType();
   const browser = detect();
   const isMacOS = browser?.os === 'Mac OS';
@@ -39,9 +40,11 @@ const MainLayout = () => {
   return (
     <>
       <Helmet>
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content={theme.colors.background.main.theme} />
       </Helmet>
-      <Global styles={mainLayoutGlobalStyle} />
+      <Global
+        styles={mainLayoutGlobalStyle(theme.colors.background.main.default)}
+      />
       {device === 'desktop' ? <DesktopNavBar /> : null}
       {device === 'tablet' ? <TabletNavBar /> : null}
       <MarginLayer>

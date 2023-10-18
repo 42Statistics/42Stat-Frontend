@@ -1,7 +1,8 @@
 import { useTheme } from '@emotion/react';
+import { paletteAtom } from '@shared/atoms/paletteAtom';
+import { useAtomValue } from 'jotai';
 import { merge } from 'lodash-es';
-import ReactApexChart from 'react-apexcharts';
-import { defaultOptions } from './options';
+import Chart from './Chart';
 
 type PieChartProps = {
   labels: string[];
@@ -15,9 +16,15 @@ export const PieChart = ({
   options: additionalOptions,
 }: PieChartProps) => {
   const theme = useTheme();
+  const palette = useAtomValue(paletteAtom);
 
   const pieChartOptions: ApexCharts.ApexOptions = {
     labels,
+    chart: {
+      dropShadow: {
+        enabled: palette === 'dark',
+      },
+    },
     plotOptions: {
       pie: {
         // startAngle: -270,
@@ -36,22 +43,17 @@ export const PieChart = ({
     legend: {
       position: 'bottom',
     },
-    colors: [theme.colors.primary.default, theme.colors.primary.light],
+    colors: [
+      theme.colors.chart.primary.default,
+      theme.colors.chart.primary.light,
+    ],
     stroke: {
       show: false,
     },
     responsive: [],
   };
 
-  const options = merge({}, defaultOptions, pieChartOptions, additionalOptions);
+  const options = merge({}, pieChartOptions, additionalOptions);
 
-  return (
-    <ReactApexChart
-      type="pie"
-      series={series}
-      options={options}
-      width="99%"
-      height="100%"
-    />
-  );
+  return <Chart type="pie" series={series} options={options} />;
 };

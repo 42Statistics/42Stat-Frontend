@@ -2,8 +2,8 @@ import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { AppLogoTitle } from '@shared/components/AppLogoTitle';
 import { FtLoginButton } from '@shared/components/LoginButton';
-import { ROUTES } from '@shared/constants/ROUTES';
-import { VStack, WhiteText } from '@shared/ui-kit';
+import { ROUTES } from '@shared/constants/routes';
+import { Text, VStack } from '@shared/ui-kit';
 import { mq } from '@shared/utils/facepaint/mq';
 import { getGoogleCredential } from '@shared/utils/storage/googleCredential';
 import { Link, Navigate } from 'react-router-dom';
@@ -20,9 +20,11 @@ const FtOAuthRequestPage = () => {
     <Layout>
       <VStack h="100%" spacing="5rem">
         <Link to={ROUTES.ROOT}>
-          <AppLogoTitle size="sm" color={theme.colors.mono.white} />
+          <AppLogoTitle size="sm" color={theme.colors.mono.absolute.white} />
         </Link>
-        <WhiteText>접속하기 위해서 42 계정과 연동이 필요합니다. </WhiteText>
+        <Text color={theme.colors.mono.absolute.white}>
+          접속하기 위해서 42 계정과 연동이 필요합니다.
+        </Text>
         <FtLoginButton />
       </VStack>
     </Layout>

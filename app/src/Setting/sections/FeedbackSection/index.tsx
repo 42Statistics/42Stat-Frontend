@@ -1,4 +1,3 @@
-import { FEEDBACK_URL } from '@/Setting/constants/feedbackUrl';
 import {
   Button,
   Divider,
@@ -10,6 +9,7 @@ import {
 import { CustomSection } from '@shared/ui-kit-styled';
 import { Mobile, TabletAndAbove } from '@shared/utils/react-responsive/Device';
 import { Link } from 'react-router-dom';
+import { URL } from '@shared/constants/url';
 
 export const FeedbackSection = () => {
   return (
@@ -18,7 +18,7 @@ export const FeedbackSection = () => {
         <HStack spacing="2rem">
           <H2BoldText>서비스 피드백</H2BoldText>
           <Spacer />
-          <Link to={FEEDBACK_URL} target="_blank" rel="noreferrer">
+          <Link to={URL.FEEDBACK} target="_blank" rel="noopener noreferrer">
             <Button
               onClick={() => {
                 /* pass */
@@ -33,7 +33,7 @@ export const FeedbackSection = () => {
         <VStack align="start" spacing="4rem">
           <H2BoldText>서비스 피드백</H2BoldText>
           <Divider />
-          <Link to={FEEDBACK_URL} target="_blank" rel="noreferrer">
+          <Link to={URL.FEEDBACK} target="_blank" rel="noopener noreferrer">
             <Button
               onClick={() => {
                 /* pass */

@@ -1,7 +1,8 @@
 import { useTheme } from '@emotion/react';
+import { paletteAtom } from '@shared/atoms/paletteAtom';
+import { useAtomValue } from 'jotai';
 import { merge } from 'lodash-es';
-import ReactApexChart from 'react-apexcharts';
-import { defaultOptions } from './options';
+import Chart from './Chart';
 
 type DonutChartProps = {
   labels: string[];
@@ -15,9 +16,15 @@ export const DonutChart = ({
   options: additionalOptions,
 }: DonutChartProps) => {
   const theme = useTheme();
+  const palette = useAtomValue(paletteAtom);
 
   const donutChartOptions: ApexCharts.ApexOptions = {
     labels,
+    chart: {
+      dropShadow: {
+        enabled: palette === 'dark',
+      },
+    },
     plotOptions: {
       pie: {
         donut: {
@@ -42,7 +49,7 @@ export const DonutChart = ({
       monochrome: {
         enabled: true,
         shadeTo: 'light',
-        color: theme.colors.primary.default,
+        color: theme.colors.chart.primary.default,
       },
     },
     stroke: {
@@ -51,20 +58,7 @@ export const DonutChart = ({
     responsive: [],
   };
 
-  const options = merge(
-    {},
-    defaultOptions,
-    donutChartOptions,
-    additionalOptions,
-  );
+  const options = merge({}, donutChartOptions, additionalOptions);
 
-  return (
-    <ReactApexChart
-      type="donut"
-      series={series}
-      options={options}
-      width="99%"
-      height="100%"
-    />
-  );
+  return <Chart type="donut" series={series} options={options} />;
 };

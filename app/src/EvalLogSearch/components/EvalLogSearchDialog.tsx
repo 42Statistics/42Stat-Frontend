@@ -1,5 +1,8 @@
+import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { Button, Dialog, Input, Select } from '@shared/ui-kit';
+import { ReactComponent as MdSwapVert } from '@shared/assets/icon/md-swap-vert.svg';
+import { ARIA_LABEL } from '@shared/constants/accessibility';
+import { Button, Clickable, Dialog, FormSelect, Input } from '@shared/ui-kit';
 import { useAtomValue } from 'jotai';
 import { useForm } from 'react-hook-form';
 import { useSearchParams } from 'react-router-dom';
@@ -10,13 +13,14 @@ import {
   EVAL_LOG_SEARCH_URL_PARAM_KEYS,
   EVAL_LOG_SEARCH_URL_PARAM_VALUES,
 } from '../constants/urlParams';
+import { trimEvalLogSearchForm } from '../utils/trimEvalLogSearchForm';
 
 type EvalLogSearchDialogProps = {
   isOpen: boolean;
   onClose: () => void;
 };
 
-type EvalLogSearchForm = Omit<
+export type EvalLogSearchForm = Omit<
   EvalLogSearchArgs,
   'after' | 'first' | 'outstandingOnly'
 > & {
@@ -36,22 +40,33 @@ export const EvalLogSearchDialog = ({
   isOpen,
   onClose,
 }: EvalLogSearchDialogProps) => {
-  const [_, setSearchParams] = useSearchParams();
+  const theme = useTheme();
+  const [, setSearchParams] = useSearchParams();
   const evalLogSearchArgs = useAtomValue(evalLogSearchArgsAtom);
 
-  const { register, handleSubmit } = useForm<EvalLogSearchForm>({
-    defaultValues: evalLogSearchArgs,
-  });
+  const { register, handleSubmit, getValues, setValue } =
+    useForm<EvalLogSearchForm>({
+      defaultValues: evalLogSearchArgs,
+    });
+
+  const handleSwapButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    const { corrector, corrected } = getValues();
+    setValue(CORRECTOR, corrected);
+    setValue(CORRECTED, corrector);
+  };
+
+  const onSubmit = (data: EvalLogSearchForm) => {
+    const trimmedData = trimEvalLogSearchForm(data);
+    setSearchParams(toURLSearchParams(trimmedData));
+    onClose();
+  };
 
   return (
     <Dialog isOpen={isOpen} onClose={onClose}>
       <Layout>
-        <EvalLogSearchForm
-          onSubmit={handleSubmit((evalLogSearchForm) => {
-            setSearchParams(toURLSearchParams(evalLogSearchForm));
-            onClose();
-          })}
-        >
+        <EvalLogSearchForm onSubmit={handleSubmit(onSubmit)}>
           <ul>
             <li>
               <label htmlFor={PROJECT_NAME}>과제명</label>
@@ -69,6 +84,17 @@ export const EvalLogSearchDialog = ({
                 {...register(CORRECTOR)}
                 style={{ width: '150px' }}
               />
+              <Clickable
+                type="button"
+                onClick={handleSwapButtonClick}
+                aria-label={ARIA_LABEL.BUTTON.SWAP_CORRECTOR_AND_CORRECTED}
+              >
+                <MdSwapVert
+                  width={20}
+                  height={20}
+                  fill={theme.colors.mono.black}
+                />
+              </Clickable>
             </li>
             <li>
               <label htmlFor={CORRECTED}>To</label>
@@ -80,23 +106,27 @@ export const EvalLogSearchDialog = ({
             </li>
             <li>
               <label htmlFor={FLAG}>플래그</label>
-              <Select id={FLAG} {...register(FLAG)} style={{ width: '150px' }}>
+              <FormSelect
+                id={FLAG}
+                {...register(FLAG)}
+                style={{ width: '150px' }}
+              >
                 <option value={ALL_FLAG}>{ALL_FLAG_INCLUDED}</option>
                 <option value={OUTSTANDING_FLAG}>
                   {OUTSTANDING_FLAG_ONLY}
                 </option>
-              </Select>
+              </FormSelect>
             </li>
             <li>
               <label htmlFor={SORT_ORDER}>정렬</label>
-              <Select
+              <FormSelect
                 id={SORT_ORDER}
                 {...register(SORT_ORDER)}
                 style={{ width: '150px' }}
               >
                 <option value={BEGIN_AT_DESC}>{DESC}</option>
                 <option value={BEGIN_AT_ASC}>{ASC}</option>
-              </Select>
+              </FormSelect>
             </li>
           </ul>
           <Button type="submit">검색하기</Button>
@@ -151,6 +181,8 @@ const EvalLogSearchForm = styled.form`
   align-items: center;
   gap: 6rem;
 
+  color: ${({ theme }) => theme.colors.mono.black};
+
   ul {
     display: flex;
     flex-direction: column;
@@ -160,7 +192,7 @@ const EvalLogSearchForm = styled.form`
   li {
     display: flex;
     align-items: center;
-    gap: 3rem;
+    gap: 1rem;
   }
 
   ul li label {

@@ -54,6 +54,7 @@ export const LinkGoogleButton = ({ onSuccess }: LinkGoogleButtonProps) => {
           },
         },
       });
+      // linkGoogle의 경우, google credential을 storage에 저장하지 않습니다.
     };
     if (status !== 'ready') {
       return;
@@ -79,7 +80,7 @@ export const LinkGoogleButton = ({ onSuccess }: LinkGoogleButtonProps) => {
       return;
     }
     if (!data) {
-      return;
+      return; // when reach?
     }
     onSuccess();
   }, [data, loading, error, onOpen, onSuccess]);

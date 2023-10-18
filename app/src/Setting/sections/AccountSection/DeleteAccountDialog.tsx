@@ -37,7 +37,6 @@ export const DeleteAccountDialog = ({
     if (data.deleteAccount) {
       removeAccessToken();
       removeRefreshToken();
-      removeGoogleCredential();
       navigate(ROUTES.ROOT);
     } else {
       onClose();

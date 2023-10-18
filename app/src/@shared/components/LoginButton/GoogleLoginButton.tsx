@@ -70,7 +70,16 @@ export const GoogleLoginButton = () => {
   }, [status, login]);
 
   useEffect(() => {
-    if (loading || error || !data) {
+    if (loading) {
+      return;
+    }
+
+    if (error) {
+      removeGoogleCredential();
+      return;
+    }
+
+    if (!data) {
       return;
     }
     if (data.googleLogin.__typename === 'LoginNotLinked') {

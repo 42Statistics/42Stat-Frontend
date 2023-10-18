@@ -33,12 +33,13 @@ export function LeaderboardCommentResult({
   result: { loading, error, data },
 }: LeaderboardCommentResultProps) {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { promo, pageNumber } = toLeaderboardArgs(searchParams);
-  const { PROMO, PAGE } = LEADERBOARD_PARAM_KEYS;
+  const { promo, dateTemplate, pageNumber } = toLeaderboardArgs(searchParams);
+  const { PROMO, DATE, PAGE } = LEADERBOARD_PARAM_KEYS;
 
   function handlePageNumberChange(newPageNumber: number) {
     const newURLSearchParams = new URLSearchParams();
 
+    newURLSearchParams.set(DATE, dateTemplate);
     if (promo) {
       newURLSearchParams.set(PROMO, promo.toString());
     }

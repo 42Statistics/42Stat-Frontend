@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import type { PropsWithReactNodeChildren } from '@shared/types/PropsWithChildren';
 
-type ClickableProps = PropsWithReactNodeChildren<
+export type ClickableProps = PropsWithReactNodeChildren<
   React.ButtonHTMLAttributes<HTMLButtonElement>
 > & {
   forwardRef?: React.Ref<HTMLButtonElement>;

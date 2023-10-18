@@ -157,7 +157,11 @@ const ResponseInterceptor400 = ({
               }
               setReLoginDialogInfo({
                 isOpen: true,
-                description: error.message,
+                /**
+                 * 현재 BE에서 400 상태코드를 Code로 구분해주지 않기 때문에, description이 항상 고정입니다.
+                 * 이후 BE에서 Code로 구분해주면, Code에 따라 상응하는 description(= ReLoginDialog body) 분기할 예정입니다.
+                 */
+                description: '다시 로그인해주세요.',
               });
               break;
           }

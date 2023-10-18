@@ -8,6 +8,7 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { UserRankList } from '@shared/components/DashboardContentView/Rank/UserRankList';
+import { TextDefault } from '@shared/components/DashboardContentView/Text/TextDefault';
 import { useContext } from 'react';
 
 const GET_DESTINY_RANKING_BY_LOGIN = gql(/* GraphQL */ `
@@ -54,7 +55,11 @@ export const DestinyRanking = () => {
 
   return (
     <DashboardContent title={title} description={description}>
-      <UserRankList list={destinyRanking} cnt={5} unit={unit} />
+      {destinyRanking.length !== 0 ? (
+        <UserRankList list={destinyRanking} cnt={5} unit={unit} />
+      ) : (
+        <TextDefault text="인연 기록이 없습니다" />
+      )}
     </DashboardContent>
   );
 };

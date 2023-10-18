@@ -10,7 +10,9 @@ import { LEADERBOARD_PARAM_KEYS } from '@/Leaderboard/constants/paramKeys';
 import { toLeaderboardArgs } from '@/Leaderboard/utils/toLeaderboardArgs';
 import {
   DateTemplate,
+  Exact,
   GetLeaderboardCommentQuery,
+  InputMaybe,
 } from '@shared/__generated__/graphql';
 import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
 import { HStack, Spacer, VStack } from '@shared/ui-kit';
@@ -18,12 +20,12 @@ import { HStack, Spacer, VStack } from '@shared/ui-kit';
 type LeaderboardCommentResultProps = {
   result: QueryResult<
     GetLeaderboardCommentQuery,
-    {
-      dateTemplate: DateTemplate;
-      pageNumber: number;
-      promo: number | null;
+    Exact<{
       pageSize: number;
-    }
+      pageNumber: number;
+      dateTemplate: DateTemplate;
+      promo?: InputMaybe<number> | undefined;
+    }>
   >;
 };
 

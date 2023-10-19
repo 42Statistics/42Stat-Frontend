@@ -88,7 +88,7 @@ const Table = styled.table`
 
   td {
     max-width: 300px;
-    overflow-x: hidden;
+    overflow: hidden;
     text-align: center;
     padding: 0.4rem 2rem;
     vertical-align: middle;

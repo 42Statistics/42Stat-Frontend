@@ -55,7 +55,7 @@ export const ValidatedRate = () => {
   if (validatedRate.total === 0) {
     return (
       <DashboardContent title={title}>
-        <H3Text>제출 기록이 없어요 😐</H3Text>
+        <H3Text>제출 기록이 없어요</H3Text>
       </DashboardContent>
     );
   }

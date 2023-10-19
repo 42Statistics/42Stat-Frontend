@@ -50,7 +50,7 @@ export const RecentComment = () => {
           title={title}
           titleRight={<InfoTooltip text="코멘트 : 평가하러 가서 작성한 리뷰" />}
         >
-          <TextDefault text="평가 기록이 없습니다" />
+          <TextDefault text="평가 기록이 없어요" />
         </DashboardContent>
       )}
     </>

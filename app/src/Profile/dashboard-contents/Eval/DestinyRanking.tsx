@@ -58,7 +58,7 @@ export const DestinyRanking = () => {
       {destinyRanking.length !== 0 ? (
         <UserRankList list={destinyRanking} cnt={5} unit={unit} />
       ) : (
-        <TextDefault text="인연 기록이 없습니다" />
+        <TextDefault text="인연 기록이 없어요" />
       )}
     </DashboardContent>
   );

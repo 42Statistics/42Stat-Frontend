@@ -169,7 +169,7 @@ const TeamPage = () => {
         <VStack w="100%" align="start" spacing="3rem">
           <H2BoldText>평가 기록</H2BoldText>
           {moulinette == null && evalLogs.length === 0 ? (
-            <Text>평가 기록이 없습니다.</Text>
+            <Text>평가 기록이 없어요</Text>
           ) : null}
           <VStack w="100%" align="start" spacing="1.5rem">
             <EvalLogList list={evalLogs} />

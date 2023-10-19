@@ -62,7 +62,7 @@ export const TeamInfo = () => {
         </TeamInfoLayout>
       ) : (
         <DashboardContent title={title}>
-          <TextDefault text="프로젝트 신청 기록이 없습니다." />
+          <TextDefault text="프로젝트 신청 기록이 없어요" />
         </DashboardContent>
       )}
     </>

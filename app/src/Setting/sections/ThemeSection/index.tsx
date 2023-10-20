@@ -1,6 +1,8 @@
+import { useAtom } from 'jotai';
+
 import {
-  ThemePreference,
   themePreferenceAtom,
+  type ThemePreference,
 } from '@shared/atoms/themePreferenceAtom';
 import { useSegmentedControl } from '@shared/hooks/useSegmentedControl';
 import {
@@ -13,7 +15,6 @@ import {
 } from '@shared/ui-kit';
 import { CustomSection } from '@shared/ui-kit-styled';
 import { Mobile, TabletAndAbove } from '@shared/utils/react-responsive/Device';
-import { useAtom } from 'jotai';
 
 export const ThemeSection = () => {
   const [themePreference, setThemePreference] = useAtom(themePreferenceAtom);

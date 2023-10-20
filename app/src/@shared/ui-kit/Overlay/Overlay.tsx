@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
-import { fadeIn } from '@shared/ui-kit-styled';
 import { rgba } from 'emotion-rgba';
+
+import { fadeIn } from '@shared/ui-kit-styled';
 
 export const Overlay = styled.div`
   position: fixed;

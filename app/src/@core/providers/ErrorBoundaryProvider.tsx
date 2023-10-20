@@ -1,5 +1,6 @@
-import { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
 import { ErrorBoundary } from 'react-error-boundary';
+
+import type { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
 
 const Provider = ({ children }: PropsWithReactElementChildren) => {
   return (

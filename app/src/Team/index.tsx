@@ -1,13 +1,17 @@
 import { useQuery } from '@apollo/client';
-import { Footer } from '@core/components/Footer';
 import { useTheme } from '@emotion/react';
+import { Link, useParams } from 'react-router-dom';
+
+import { MoulinetteEvalLogListItem } from '@/Team/components/MoulinetteEvalLogListItem';
+import { teamUserCompareFn } from '@/Team/utils/teamUserCompareFn';
+import { Footer } from '@core/components/Footer';
 import { gql } from '@shared/__generated__';
 import { ReactComponent as Star } from '@shared/assets/icon/star.svg';
 import { ReactComponent as FtLogo } from '@shared/assets/logo/ft-logo.svg';
 import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
 import { FullPageApolloNotFoundView } from '@shared/components/ApolloError/FullPageApolloNotFoundView';
+import { CorrectorReviewLabel } from '@shared/components/EvalLogLabel/CorrectorReviewLabel';
 import { EvalLogList } from '@shared/components/EvalLogList/EvalLogList';
-import { CorrectorReviewLabel } from '@shared/components/EvalLogList/EvalLogListItem';
 import { Seo } from '@shared/components/Seo';
 import { ROUTES } from '@shared/constants/routes';
 import {
@@ -26,9 +30,6 @@ import {
 import { CustomLink } from '@shared/ui-kit-styled/CustomLink';
 import { getDateDiffStringWithTeamStatus } from '@shared/utils/getDateDiffStringWithTeamStatus';
 import { getTeamStatusString } from '@shared/utils/getTeamStatusString';
-import { Link, useParams } from 'react-router-dom';
-import { MoulinetteEvalLogListItem } from './components/MoulinetteEvalLogListItem';
-import { teamUserCompareFn } from './utils/teamUserCompareFn';
 
 const GET_TEAM_INFO = gql(/* GraphQL */ `
   query GetTeamInfo($id: Int!) {

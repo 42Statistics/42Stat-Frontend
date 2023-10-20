@@ -1,9 +1,10 @@
 import { useTheme } from '@emotion/react';
-import { PrimaryBoldText, Text, VStack } from '@shared/ui-kit';
 import { useAtomValue } from 'jotai';
-import { evalLogSearchArgsAtom } from '../atoms/evalLogSearchArgsAtom';
-import { evalLogSearchTotalCountAtom } from '../atoms/evalLogSearchTotalCountAtom';
-import { EVAL_LOG_SEARCH_ARGS_HEADER_TEXT } from '../constants/evalLogArgsText';
+
+import { evalLogSearchArgsAtom } from '@/EvalLogSearch/atoms/evalLogSearchArgsAtom';
+import { evalLogSearchTotalCountAtom } from '@/EvalLogSearch/atoms/evalLogSearchTotalCountAtom';
+import { EVAL_LOG_SEARCH_ARGS_HEADER_TEXT } from '@/EvalLogSearch/constants/evalLogArgsText';
+import { PrimaryBoldText, Text, VStack } from '@shared/ui-kit';
 
 export const EvalLogSearchHeader = () => {
   return (

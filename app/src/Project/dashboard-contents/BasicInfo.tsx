@@ -1,4 +1,8 @@
 import { useQuery } from '@apollo/client';
+import { useContext } from 'react';
+
+import { ProjectNameContext } from '@/Project/contexts/ProjectNameContext';
+import { GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME } from '@/Project/dashboard-contents-queries/GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,
@@ -6,9 +10,6 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { TextDefault } from '@shared/components/DashboardContentView/Text/TextDefault';
-import { useContext } from 'react';
-import { ProjectNameContext } from '../contexts/ProjectNameContext';
-import { GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME } from '../dashboard-contents-queries/GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME';
 
 export const BasicInfo = () => {
   const projectName = useContext(ProjectNameContext);

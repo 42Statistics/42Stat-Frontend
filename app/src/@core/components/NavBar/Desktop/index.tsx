@@ -1,14 +1,15 @@
+import styled from '@emotion/styled';
+import { useAtomValue } from 'jotai';
+import { Link } from 'react-router-dom';
+
+import { DesktopNavMenu } from '@core/components/NavBar/Desktop/DesktopNavMenu';
 import { DesktopNavProfile } from '@core/components/NavProfile/Desktop';
 import { SearchBarShapeButton } from '@core/components/SearchBarShapeButton';
-import styled from '@emotion/styled';
 import { userAtom } from '@shared/atoms/userAtom';
 import { AppLogoTitle } from '@shared/components/AppLogoTitle';
 import { ARIA_LABEL } from '@shared/constants/accessibility';
 import { ROUTES } from '@shared/constants/routes';
 import { VStack } from '@shared/ui-kit';
-import { useAtomValue } from 'jotai';
-import { Link } from 'react-router-dom';
-import { DesktopNavMenu } from './DesktopNavMenu';
 
 type DesktopNavBarProps = {
   fixed?: boolean;

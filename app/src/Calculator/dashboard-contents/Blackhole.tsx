@@ -12,20 +12,6 @@ import { DonutChart } from '@shared/components/Chart';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 
-const getBlackholeDaysLeft = (currentDays: number, subjectList: Subject[]) => {
-  let sum = 0;
-  subjectList.forEach((subject) => {
-    sum += subject.blackhole;
-    if (subject.exp !== 0 && subject.blackhole === 0) {
-      sum = -1;
-      return false;
-    }
-  });
-  const total = MAX_BLACKHOLE_DAYS - sum - currentDays;
-  if (total <= 0 || sum === -1) return 0;
-  return total;
-};
-
 export const Blackhole = () => {
   const subjectList = useAtomValue(subjectListAtom);
   const { currentBlackhole, daysFromStart } = useAtomValue(
@@ -65,6 +51,20 @@ export const Blackhole = () => {
       />
     </DashboardContent>
   );
+};
+
+const getBlackholeDaysLeft = (currentDays: number, subjectList: Subject[]) => {
+  let sum = 0;
+  subjectList.forEach((subject) => {
+    sum += subject.blackhole;
+    if (subject.exp !== 0 && subject.blackhole === 0) {
+      sum = -1;
+      return false;
+    }
+  });
+  const total = MAX_BLACKHOLE_DAYS - sum - currentDays;
+  if (total <= 0 || sum === -1) return 0;
+  return total;
 };
 
 type BlackholeCalculatorChartProps = {

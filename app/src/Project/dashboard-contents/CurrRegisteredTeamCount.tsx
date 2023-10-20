@@ -1,4 +1,7 @@
 import { useQuery } from '@apollo/client';
+import { useContext } from 'react';
+
+import { ProjectNameContext } from '@/Project/contexts/ProjectNameContext';
 import { gql } from '@shared/__generated__';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
@@ -7,8 +10,6 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { NumberDefault } from '@shared/components/DashboardContentView/Number/NumberDefault';
-import { useContext } from 'react';
-import { ProjectNameContext } from '../contexts/ProjectNameContext';
 
 const GET_CURR_REGISTERED_TEAM_COUNT_BY_PROJECT_NAME = gql(/* GraphQL */ `
   query GetCurrRegisteredTeamCountByProjectName($projectName: String!) {

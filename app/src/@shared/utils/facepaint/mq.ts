@@ -1,5 +1,6 @@
-import { BREAKPOINT } from '@shared/constants/responsive';
 import facepaint from 'facepaint';
+
+import { BREAKPOINT } from '@shared/constants/responsive';
 
 const breakpoints = [BREAKPOINT.MOBILE, BREAKPOINT.TABLET];
 

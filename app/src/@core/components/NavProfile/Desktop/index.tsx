@@ -1,5 +1,8 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { useAtomValue } from 'jotai';
+import { Link } from 'react-router-dom';
+
 import { userAtom } from '@shared/atoms/userAtom';
 import { ALT, ARIA_LABEL } from '@shared/constants/accessibility';
 import { ROUTES } from '@shared/constants/routes';
@@ -11,8 +14,6 @@ import {
   VStack,
 } from '@shared/ui-kit';
 import { titleCase } from '@shared/utils/formatters/titleCase';
-import { useAtomValue } from 'jotai';
-import { Link } from 'react-router-dom';
 
 type DesktopNavProfileProps = {
   imgUrl: string | null | undefined;
@@ -25,8 +26,8 @@ export const DesktopNavProfile = ({
   name,
   login,
 }: DesktopNavProfileProps) => {
-  const user = useAtomValue(userAtom);
   const theme = useTheme();
+  const user = useAtomValue(userAtom);
 
   return (
     <Link

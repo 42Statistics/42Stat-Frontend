@@ -1,5 +1,5 @@
+import { TextDefault } from '@shared/components/DashboardContentView/Text/TextDefault';
 import { ROUTES } from '@shared/constants/routes';
-import { TextDefault } from './TextDefault';
 
 type TextProjectProps = {
   projectName: string;

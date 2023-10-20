@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
+
 import type { PropsWithStringChildren } from '@shared/types/PropsWithChildren';
-import { Clickable } from '../Clickable/Clickable';
+import { Clickable } from '@shared/ui-kit/Clickable';
 
 type ButtonSize = 'md';
 

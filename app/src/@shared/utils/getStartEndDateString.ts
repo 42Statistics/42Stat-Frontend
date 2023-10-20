@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
-import { compareDateDiff } from './compareDateDiff';
+
+import { compareDateDiff } from '@shared/utils/compareDateDiff';
 
 export const getStartEndDateString = (
   start: Date,

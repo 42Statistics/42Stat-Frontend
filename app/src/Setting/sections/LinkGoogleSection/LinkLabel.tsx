@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+
 import { HStack, MediumText, Spacer } from '@shared/ui-kit';
 
 type LinkLabelProps = {

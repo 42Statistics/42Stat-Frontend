@@ -1,6 +1,7 @@
 import { useTheme } from '@emotion/react';
+
 import { ReactComponent as MdInfo } from '@shared/assets/icon/md-info.svg';
-import { Tooltip } from '@shared/ui-kit/Tooltip';
+import { Tooltip } from '@shared/ui-kit';
 
 type InfoTooltipProps = {
   text: string;

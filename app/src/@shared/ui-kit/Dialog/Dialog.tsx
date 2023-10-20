@@ -1,12 +1,14 @@
 import { keyframes, useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { MODAL_ID } from '@shared/constants/HTML_ID';
-import type { DialogBaseProps } from '@shared/types/Modal';
-import { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
-import { Modal, Overlay } from '@shared/ui-kit';
-import { fadeIn } from '@shared/ui-kit-styled';
-import { isEscapeKeyDown } from '@shared/utils/keyboard';
 import { useEffect, useLayoutEffect, useState } from 'react';
+
+import { MODAL_ID } from '@shared/constants/htmlId';
+import type { DialogBaseProps } from '@shared/types/Modal';
+import type { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
+import { fadeIn } from '@shared/ui-kit-styled';
+import { Modal } from '@shared/ui-kit/Modal';
+import { Overlay } from '@shared/ui-kit/Overlay';
+import { isEscapeKeyDown } from '@shared/utils/keyboard';
 
 type DialogPosition = 'center' | 'top';
 

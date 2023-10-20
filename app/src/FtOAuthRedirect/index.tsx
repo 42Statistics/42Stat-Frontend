@@ -1,4 +1,8 @@
 import { useMutation } from '@apollo/client';
+import { useSetAtom } from 'jotai';
+import { useEffect, useState } from 'react';
+import { Navigate, useNavigate, useSearchParams } from 'react-router-dom';
+
 import { gql } from '@shared/__generated__';
 import { userAtom } from '@shared/atoms/userAtom';
 import { GOOGLE_LOGIN } from '@shared/components/LoginButton';
@@ -11,9 +15,6 @@ import {
   removeGoogleCredential,
 } from '@shared/utils/storage/googleCredential';
 import { setRefreshToken } from '@shared/utils/storage/refreshToken';
-import { useSetAtom } from 'jotai';
-import { useEffect, useState } from 'react';
-import { Navigate, useNavigate, useSearchParams } from 'react-router-dom';
 
 const FT_LOGIN = gql(/* GraphQL */ `
   mutation ftLogin($ftCode: String!) {

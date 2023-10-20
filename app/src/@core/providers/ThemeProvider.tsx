@@ -1,13 +1,14 @@
+import { ThemeProvider } from '@emotion/react';
+import { useAtomValue, useSetAtom } from 'jotai';
+
 import { darkTheme } from '@core/styles/darkTheme';
 import { lightTheme } from '@core/styles/lightTheme';
-import { ThemeProvider } from '@emotion/react';
 import { paletteAtom } from '@shared/atoms/paletteAtom';
 import {
   ThemePreference,
   themePreferenceAtom,
 } from '@shared/atoms/themePreferenceAtom';
-import { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
-import { useAtomValue, useSetAtom } from 'jotai';
+import type { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
 
 const Provider = ({ children }: PropsWithReactElementChildren) => {
   const themePreference = useAtomValue(themePreferenceAtom);

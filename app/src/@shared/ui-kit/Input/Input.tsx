@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
-import { Writable } from '@shared/ui-kit';
 import { forwardRef } from 'react';
+
+import { Writable } from '@shared/ui-kit/Writable';
 
 type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 

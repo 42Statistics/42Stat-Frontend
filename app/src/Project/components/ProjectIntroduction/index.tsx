@@ -1,11 +1,12 @@
-import { ProjectNameContext } from '@/Project/contexts/ProjectNameContext';
 import { useQuery } from '@apollo/client';
 import styled from '@emotion/styled';
+import { useContext } from 'react';
+
+import { ProjectNameContext } from '@/Project/contexts/ProjectNameContext';
+import { GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME } from '@/Project/dashboard-contents-queries/GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME';
 import { BoldText, Divider, HStack, Text, VStack } from '@shared/ui-kit';
 import { CustomLink } from '@shared/ui-kit-styled/CustomLink';
 import { Mobile, TabletAndAbove } from '@shared/utils/react-responsive/Device';
-import { useContext } from 'react';
-import { GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME } from '../../dashboard-contents-queries/GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME';
 
 export const ProjectIntroduction = () => {
   const projectName = useContext(ProjectNameContext);

@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+
 import { CustomBox } from '@shared/ui-kit-styled';
 
 export type DashboardRowItemProps = {

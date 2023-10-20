@@ -1,16 +1,18 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { CaptionText, VStack } from '@shared/ui-kit';
 import { Link, useLocation } from 'react-router-dom';
-import type { NavItemProps } from '../Desktop/DesktopNavItem';
+
+import type { NavItemProps } from '@core/components/NavBar/Desktop/DesktopNavItem';
+import { CaptionText, VStack } from '@shared/ui-kit';
 
 type TabItemProps = NavItemProps;
 
 export const TabItem = ({ route }: TabItemProps) => {
+  const theme = useTheme();
   const location = useLocation();
+
   const isFocused = location.pathname.startsWith(route.path);
   const TabItemIcon = isFocused ? route.iconFocused : route.icon;
-  const theme = useTheme();
   const color = isFocused
     ? theme.colors.primary.default
     : theme.colors.mono.black;

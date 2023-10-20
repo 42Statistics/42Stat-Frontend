@@ -1,8 +1,9 @@
 import type { QueryResult } from '@apollo/client';
-import type { GetEvalLogsQuery } from '@shared/__generated__/graphql';
 import { useAtom } from 'jotai';
 import { useEffect } from 'react';
-import { evalLogSearchTotalCountAtom } from '../atoms/evalLogSearchTotalCountAtom';
+
+import { evalLogSearchTotalCountAtom } from '@/EvalLogSearch/atoms/evalLogSearchTotalCountAtom';
+import type { GetEvalLogsQuery } from '@shared/__generated__/graphql';
 
 export const useSearchTotalCount = ({
   data,

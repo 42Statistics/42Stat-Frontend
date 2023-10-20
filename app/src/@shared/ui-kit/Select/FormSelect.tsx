@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+
 import triangle_down from '@shared/assets/icon/triangle-down.svg';
 
 // will depreciated

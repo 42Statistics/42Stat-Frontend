@@ -1,13 +1,15 @@
-import { Coalition } from '@shared/__generated__/graphql';
+import { useTheme } from '@emotion/react';
+import styled from '@emotion/styled';
+import { truncate } from 'lodash-es';
+import { useContext } from 'react';
+
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
+import type { Coalition } from '@shared/__generated__/graphql';
 import coalition_black_cover from '@shared/assets/coalition/cover/coalition-black-cover.jpg';
 import coalition_gam_cover from '@shared/assets/coalition/cover/coalition-gam-cover.jpg';
 import coalition_gon_cover from '@shared/assets/coalition/cover/coalition-gon-cover.jpg';
 import coalition_gun_cover from '@shared/assets/coalition/cover/coalition-gun-cover.jpg';
 import coalition_lee_cover from '@shared/assets/coalition/cover/coalition-lee-cover.jpg';
-
-import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
-import { useTheme } from '@emotion/react';
-import styled from '@emotion/styled';
 import { ALT } from '@shared/constants/accessibility';
 import {
   Avatar,
@@ -20,8 +22,6 @@ import {
 import { titleCase } from '@shared/utils/formatters/titleCase';
 import { getTitleWithLogin } from '@shared/utils/getTitleWithLogin';
 import { Desktop, TabletAndBelow } from '@shared/utils/react-responsive/Device';
-import { truncate } from 'lodash-es';
-import { useContext } from 'react';
 
 export const UserProfile = () => {
   const theme = useTheme();
@@ -30,38 +30,6 @@ export const UserProfile = () => {
   const { login, imgUrl, titles, coalition, grade, level, displayname } =
     userProfile;
   const titleWithLogin = getTitleWithLogin(titles, login);
-
-  const getCoalitionBackgroundFallbackUrlById = (id: number) => {
-    switch (id) {
-      case 85:
-        return coalition_gun_cover;
-      case 86:
-        return coalition_gon_cover;
-      case 87:
-        return coalition_gam_cover;
-      case 88:
-        return coalition_lee_cover;
-      default:
-        return coalition_black_cover;
-    }
-  };
-
-  const getCoalitionBackgroundUrlByCoalition = (
-    coalition?: Coalition | null,
-  ) => {
-    if (coalition == null || coalition.coverUrl == null) {
-      return {
-        backgroundUrl: coalition_black_cover,
-        backgroundFallbackUrl: coalition_black_cover,
-      };
-    }
-    return {
-      backgroundUrl: coalition.coverUrl,
-      backgroundFallbackUrl: getCoalitionBackgroundFallbackUrlById(
-        coalition.id,
-      ),
-    };
-  };
 
   const { backgroundUrl, backgroundFallbackUrl } =
     getCoalitionBackgroundUrlByCoalition(coalition);
@@ -137,3 +105,31 @@ const Layout = styled.div<LayoutProps>`
 
   padding: 2rem 0;
 `;
+
+const getCoalitionBackgroundFallbackUrlById = (id: number) => {
+  switch (id) {
+    case 85:
+      return coalition_gun_cover;
+    case 86:
+      return coalition_gon_cover;
+    case 87:
+      return coalition_gam_cover;
+    case 88:
+      return coalition_lee_cover;
+    default:
+      return coalition_black_cover;
+  }
+};
+
+const getCoalitionBackgroundUrlByCoalition = (coalition?: Coalition | null) => {
+  if (coalition == null || coalition.coverUrl == null) {
+    return {
+      backgroundUrl: coalition_black_cover,
+      backgroundFallbackUrl: coalition_black_cover,
+    };
+  }
+  return {
+    backgroundUrl: coalition.coverUrl,
+    backgroundFallbackUrl: getCoalitionBackgroundFallbackUrlById(coalition.id),
+  };
+};

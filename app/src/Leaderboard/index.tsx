@@ -1,11 +1,10 @@
 import { Outlet, useLocation } from 'react-router-dom';
 
+import { LeaderboardPromoListProvider } from '@/Leaderboard/components/LeaderboardPromoListProvider';
 import { ROUTES } from '@shared/constants/routes';
 import { Tab, Tabs, VStack } from '@shared/ui-kit';
 
-import { LeaderboardPromoListProvider } from './components/LeaderboardPromoListProvider';
-
-export default function LeaderboardLayout() {
+const LeaderboardLayout = () => {
   const { pathname } = useLocation();
 
   return (
@@ -47,4 +46,6 @@ export default function LeaderboardLayout() {
       </LeaderboardPromoListProvider>
     </VStack>
   );
-}
+};
+
+export default LeaderboardLayout;

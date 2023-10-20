@@ -1,4 +1,5 @@
 import { useTheme } from '@emotion/react';
+
 import { Text } from '@shared/ui-kit';
 import { getStartEndDateString } from '@shared/utils/getStartEndDateString';
 
@@ -7,10 +8,10 @@ type LeaderboardDateDescriptorProps = {
   end: Date;
 };
 
-export function LeaderboardDateDescriptor({
+export const LeaderboardDateDescriptor = ({
   start,
   end,
-}: LeaderboardDateDescriptorProps) {
+}: LeaderboardDateDescriptorProps) => {
   const theme = useTheme();
 
   return (
@@ -19,4 +20,4 @@ export function LeaderboardDateDescriptor({
       {getStartEndDateString(start, end, 'YYYY-MM-DD')}
     </Text>
   );
-}
+};

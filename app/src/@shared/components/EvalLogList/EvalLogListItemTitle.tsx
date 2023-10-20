@@ -1,12 +1,13 @@
-import {
+import dayjs from 'dayjs';
+import { Link } from 'react-router-dom';
+
+import type {
   EvalLogHeader,
   TeamEvalLogHeader,
 } from '@shared/__generated__/graphql';
+import { FlagLabel } from '@shared/components/FlagLabel';
 import { ROUTES } from '@shared/constants/routes';
 import { BoldText, HStack, PrimaryBoldText, Text } from '@shared/ui-kit';
-import dayjs from 'dayjs';
-import { Link } from 'react-router-dom';
-import { FlagLabel } from '../FlagLabel';
 
 type EvalLogListItemTitleProps = {
   header: EvalLogHeader | TeamEvalLogHeader;

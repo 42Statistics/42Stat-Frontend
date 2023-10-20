@@ -1,6 +1,7 @@
-import { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
 import { useEffect } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
+
+import type { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
 
 export const ScrollToTop = ({ children }: PropsWithReactElementChildren) => {
   const location = useLocation();

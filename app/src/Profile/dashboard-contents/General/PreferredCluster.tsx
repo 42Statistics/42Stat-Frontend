@@ -1,5 +1,7 @@
-import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { useQuery } from '@apollo/client';
+import { useContext } from 'react';
+
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { gql } from '@shared/__generated__';
 import { DateTemplate } from '@shared/__generated__/graphql';
 import { DashboardContent } from '@shared/components/DashboardContent';
@@ -11,7 +13,6 @@ import {
 } from '@shared/components/DashboardContentView/Error';
 import { TextDefault } from '@shared/components/DashboardContentView/Text/TextDefault';
 import { getStartEndDateString } from '@shared/utils/getStartEndDateString';
-import { useContext } from 'react';
 
 const GET_PREFERRED_CLUSTER_BY_DATE_TEMPLATE_BY_LOGIN = gql(/* GraphQL */ `
   query GetPreferredClusterByDateTemplateByLogin(

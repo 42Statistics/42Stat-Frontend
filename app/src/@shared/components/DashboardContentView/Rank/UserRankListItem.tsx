@@ -1,8 +1,8 @@
-import { UserRank } from '@shared/__generated__/graphql';
+import type { UserRank } from '@shared/__generated__/graphql';
+import { RankListItem } from '@shared/components/DashboardContentView/Rank/RankListItem';
 import { ALT } from '@shared/constants/accessibility';
 import { ROUTES } from '@shared/constants/routes';
 import { Avatar } from '@shared/ui-kit';
-import { RankListItem } from './RankListItem';
 
 type UserRankListItemProps = {
   item: UserRank;

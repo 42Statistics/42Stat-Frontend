@@ -1,3 +1,6 @@
+import { Suspense, lazy } from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
+
 import { HomePageSkeleton } from '@/Home/components/skeletons/HomePageSkeleton';
 import { LeaderboardPageSkeleton } from '@/Leaderboard/components/skeletons/LeaderboardPageSkeleton';
 import { ProfileEvalPageSkeleton } from '@/Profile/components/skeletons/ProfileEvalPageSkeleton';
@@ -8,8 +11,6 @@ import { AuthGuard } from '@core/guards/AuthGuard';
 import { UnAuthGuard } from '@core/guards/UnAuthGuard';
 import { ROUTES } from '@shared/constants/routes';
 import { DeferredComponent } from '@shared/ui-kit';
-import { Suspense, lazy } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
 
 const LandingLayout = lazy(() => import('@core/layouts/LandingLayout'));
 const MainLayout = lazy(() => import('@core/layouts/MainLayout'));

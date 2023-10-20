@@ -1,7 +1,8 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { Center, Clickable, HStack, MediumText } from '@shared/ui-kit';
 import { rgba } from 'emotion-rgba';
+
+import { Center, Clickable, HStack, MediumText } from '@shared/ui-kit';
 
 type LoginButtonProps = {
   logo: React.ReactNode;

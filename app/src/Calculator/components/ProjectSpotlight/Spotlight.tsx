@@ -8,7 +8,7 @@ import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
 import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
 import { checkDuplicateSubject } from '@/Calculator/utils/checkDuplicateSubject';
 import { calculatorDialogAtom } from '@core/atoms/calculatorDialogAtom';
-import { Exact, GetProjectsQuery } from '@shared/__generated__/graphql';
+import type { Exact, GetProjectsQuery } from '@shared/__generated__/graphql';
 import { ApolloErrorView } from '@shared/components/ApolloError/ApolloErrorView';
 import { useRoveFocus } from '@shared/hooks/useRoveFocus';
 import { Body1Text, Center } from '@shared/ui-kit';

@@ -1,9 +1,8 @@
-import { Promo } from '@shared/__generated__/graphql';
+import { PromoSelectList } from '@/Leaderboard/components//PromoSelect/PromoSelectList';
+import { useGetPromoSelectKey } from '@/Leaderboard/components//PromoSelect/hooks/useGetPromoSelectKey';
+import type { Promo } from '@shared/__generated__/graphql';
 import { Select, SelectContent, SelectTrigger } from '@shared/ui-kit';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
-
-import { PromoSelectList } from './PromoSelectList';
-import { useGetPromoSelectKey } from './hooks/useGetPromoSelectKey';
 
 type PromoSelectProps = {
   curr: number | null;
@@ -11,7 +10,7 @@ type PromoSelectProps = {
   onChange: (promo: string | null) => void;
 };
 
-export function PromoSelect({ curr, list, onChange }: PromoSelectProps) {
+export const PromoSelect = ({ curr, list, onChange }: PromoSelectProps) => {
   const unit = '기';
 
   const promoSelectKey = useGetPromoSelectKey();
@@ -32,4 +31,4 @@ export function PromoSelect({ curr, list, onChange }: PromoSelectProps) {
       </SelectContent>
     </Select>
   );
-}
+};

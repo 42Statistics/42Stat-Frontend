@@ -22,4 +22,5 @@ export * from './Stack';
 export * from './Switch';
 export * from './Tab';
 export * from './Text';
+export * from './Tooltip';
 export * from './Writable';

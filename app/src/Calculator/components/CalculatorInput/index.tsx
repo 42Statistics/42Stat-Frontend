@@ -2,8 +2,8 @@ import { useTheme } from '@emotion/react';
 
 import { Divider, VStack } from '@shared/ui-kit';
 
-import { CalculatorInputContent } from './CalculatorInputContent';
-import { CalculatorInputHeader } from './CalculatorInputHeader';
+import { CalculatorInputContent } from '@/Calculator/components/CalculatorInput/CalculatorInputContent';
+import { CalculatorInputHeader } from '@/Calculator/components/CalculatorInput/CalculatorInputHeader';
 
 export const CalculatorInput = () => {
   const theme = useTheme();

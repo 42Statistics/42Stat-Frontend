@@ -1,9 +1,10 @@
-import { SpotlightFocusContext } from '@core/contexts/SpotlightFocusContext';
 import styled from '@emotion/styled';
-import { Body1Text, HStack, Spacer } from '@shared/ui-kit';
-import { isEnterKeyDown } from '@shared/utils/keyboard';
 import { useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+
+import { SpotlightFocusContext } from '@core/contexts/SpotlightFocusContext';
+import { Body1Text, HStack, Spacer } from '@shared/ui-kit';
+import { isEnterKeyDown } from '@shared/utils/keyboard';
 
 type SpotlightListItemProps = {
   left: React.ReactElement;

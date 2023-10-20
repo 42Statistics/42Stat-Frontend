@@ -1,5 +1,6 @@
-import { SegmentType } from '@shared/ui-kit';
 import { createRef } from 'react';
+
+import type { SegmentType } from '@shared/ui-kit';
 
 export const useSegmentedControl = (options: Omit<SegmentType, 'ref'>[]) => {
   const controlRef = createRef<HTMLDivElement>();

@@ -1,19 +1,20 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { ReactComponent as MdSwapVert } from '@shared/assets/icon/md-swap-vert.svg';
-import { ARIA_LABEL } from '@shared/constants/accessibility';
-import { Button, Clickable, Dialog, FormSelect, Input } from '@shared/ui-kit';
 import { useAtomValue } from 'jotai';
 import { useForm } from 'react-hook-form';
 import { useSearchParams } from 'react-router-dom';
-import type { EvalLogSearchArgs } from '../api/getEvalLogs';
-import { evalLogSearchArgsAtom } from '../atoms/evalLogSearchArgsAtom';
-import { EVAL_LOG_SEARCH_ARGS_TEXT } from '../constants/evalLogArgsText';
+
+import type { EvalLogSearchArgs } from '@/EvalLogSearch/api/getEvalLogs';
+import { evalLogSearchArgsAtom } from '@/EvalLogSearch/atoms/evalLogSearchArgsAtom';
+import { EVAL_LOG_SEARCH_ARGS_TEXT } from '@/EvalLogSearch/constants/evalLogArgsText';
 import {
   EVAL_LOG_SEARCH_URL_PARAM_KEYS,
   EVAL_LOG_SEARCH_URL_PARAM_VALUES,
-} from '../constants/urlParams';
-import { trimEvalLogSearchForm } from '../utils/trimEvalLogSearchForm';
+} from '@/EvalLogSearch/constants/urlParams';
+import { trimEvalLogSearchForm } from '@/EvalLogSearch/utils/trimEvalLogSearchForm';
+import { ReactComponent as MdSwapVert } from '@shared/assets/icon/md-swap-vert.svg';
+import { ARIA_LABEL } from '@shared/constants/accessibility';
+import { Button, Clickable, Dialog, FormSelect, Input } from '@shared/ui-kit';
 
 type EvalLogSearchDialogProps = {
   isOpen: boolean;

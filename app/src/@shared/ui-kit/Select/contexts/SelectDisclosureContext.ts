@@ -1,5 +1,6 @@
-import { useDisclosure } from '@shared/hooks/useDisclosure';
 import { createContext, useContext } from 'react';
+
+import { useDisclosure } from '@shared/hooks/useDisclosure';
 
 type SelectDisclosure = ReturnType<typeof useDisclosure>;
 
@@ -7,7 +8,7 @@ export const SelectDisclosureContext = createContext<SelectDisclosure | null>(
   null,
 );
 
-export function useGetSelectDisclosureContext() {
+export const useGetSelectDisclosureContext = () => {
   const selectDisclosure = useContext(SelectDisclosureContext);
   if (!selectDisclosure) {
     throw new Error(
@@ -15,4 +16,4 @@ export function useGetSelectDisclosureContext() {
     );
   }
   return selectDisclosure;
-}
+};

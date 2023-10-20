@@ -1,4 +1,3 @@
-import type { DashboardItemProps } from '@shared/types/Dashboard';
 import {
   BeginAt,
   BlackholedAt,
@@ -12,7 +11,8 @@ import {
   PreferredTime,
   TeamInfo,
   Wallet,
-} from '../dashboard-contents/General';
+} from '@/Profile/dashboard-contents/General';
+import type { DashboardItemProps } from '@shared/types/Dashboard';
 
 export const profileGeneralPageDashboardContents: DashboardItemProps[] = [
   {

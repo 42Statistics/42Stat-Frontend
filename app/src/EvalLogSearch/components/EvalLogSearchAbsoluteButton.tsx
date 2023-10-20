@@ -1,5 +1,6 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+
 import { ReactComponent as MdSearch } from '@shared/assets/icon/md-search.svg';
 import { ARIA_LABEL } from '@shared/constants/accessibility';
 import { FAB } from '@shared/ui-kit/FAB';

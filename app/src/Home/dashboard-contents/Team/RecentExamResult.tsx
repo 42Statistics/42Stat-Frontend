@@ -1,4 +1,6 @@
 import { useQuery } from '@apollo/client';
+import dayjs from 'dayjs';
+
 import { gql } from '@shared/__generated__';
 import { BarChart } from '@shared/components/Chart';
 import { DashboardContent } from '@shared/components/DashboardContent';
@@ -7,7 +9,6 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
-import dayjs from 'dayjs';
 
 const GET_RECENT_EXAM_RESULT = gql(/* GraphQL */ `
   query GetRecentExamResult {

@@ -2,15 +2,17 @@ import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 
 import { ReactComponent as MdExpandMore } from '@shared/assets/icon/md-expand-more.svg';
-import { HStack, Spacer, Text } from '@shared/ui-kit';
-import { useGetSelectDisclosureContext } from './contexts/SelectDisclosureContext';
-import { useGetSelectValueContext } from './contexts/SelectValueContext';
+import { useGetSelectDisclosureContext } from '@shared/ui-kit/Select/contexts/SelectDisclosureContext';
+import { useGetSelectValueContext } from '@shared/ui-kit/Select/contexts/SelectValueContext';
+import { Spacer } from '@shared/ui-kit/Spacer';
+import { HStack } from '@shared/ui-kit/Stack';
+import { Text } from '@shared/ui-kit/Text';
 
 type SelectTriggerProps = {
   placeholder?: string;
 };
 
-export function SelectTrigger({ placeholder = '' }: SelectTriggerProps) {
+export const SelectTrigger = ({ placeholder = '' }: SelectTriggerProps) => {
   const theme = useTheme();
 
   const { internalValue, renderValue } = useGetSelectValueContext();
@@ -29,7 +31,7 @@ export function SelectTrigger({ placeholder = '' }: SelectTriggerProps) {
       </HStack>
     </StyledSelectTrigger>
   );
-}
+};
 
 const StyledSelectTrigger = styled.div`
   padding: 0.8rem 2rem;

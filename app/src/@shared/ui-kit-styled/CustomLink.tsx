@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
-import { PropsWithStringChildren } from '@shared/types/PropsWithChildren';
 import { Link } from 'react-router-dom';
+
+import { PropsWithStringChildren } from '@shared/types/PropsWithChildren';
 
 type CustomLinkProps = PropsWithStringChildren;
 

@@ -1,5 +1,7 @@
-import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { useQuery } from '@apollo/client';
+import { useContext } from 'react';
+
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { gql } from '@shared/__generated__';
 import { AreaChart } from '@shared/components/Chart';
 import { DashboardContent } from '@shared/components/DashboardContent';
@@ -9,7 +11,6 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
-import { useContext } from 'react';
 
 const GET_LOGTIME_RECORDS_BY_LOGIN = gql(/* GraphQL */ `
   query GetLogtimeRecords($login: String!, $last: Int!) {

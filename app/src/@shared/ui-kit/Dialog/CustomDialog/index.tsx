@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
-import { Dialog, DialogProps } from '../Dialog';
-import { CustomDialogBody } from './CustomDialogBody';
-import { CustomDialogFooter } from './CustomDialogFooter';
-import { CustomDialogHeader } from './CustomDialogHeader';
+
+import { Dialog, type DialogProps } from '@shared/ui-kit';
+import { CustomDialogBody } from '@shared/ui-kit/Dialog/CustomDialog/CustomDialogBody';
+import { CustomDialogFooter } from '@shared/ui-kit/Dialog/CustomDialog/CustomDialogFooter';
+import { CustomDialogHeader } from '@shared/ui-kit/Dialog/CustomDialog/CustomDialogHeader';
 
 export const CustomDialog = ({ children, ...props }: DialogProps) => {
   return (

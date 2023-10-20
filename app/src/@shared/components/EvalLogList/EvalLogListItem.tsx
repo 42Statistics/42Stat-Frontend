@@ -1,10 +1,12 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { EvalLog, TeamEvalLog } from '@shared/__generated__/graphql';
+
+import type { EvalLog, TeamEvalLog } from '@shared/__generated__/graphql';
+import { CorrectedsReviewLabel } from '@shared/components/EvalLogLabel/CorrectedsReviewLabel';
+import { CorrectorReviewLabel } from '@shared/components/EvalLogLabel/CorrectorReviewLabel';
+import { EvalLogListItemTitle } from '@shared/components/EvalLogList/EvalLogListItemTitle';
 import { Center, HStack, Text, VStack } from '@shared/ui-kit';
 import { CustomBox } from '@shared/ui-kit-styled';
-import { EvalLogLabel } from '../EvalLogLabel';
-import { EvalLogListItemTitle } from './EvalLogListItemTitle';
 
 type EvalLogListItemProps = {
   element: EvalLog | TeamEvalLog;
@@ -55,38 +57,3 @@ const Layout = styled(CustomBox)`
   gap: 2rem;
   padding: 2.5rem 3.5rem;
 `;
-
-export const CorrectorReviewLabel = ({ number }: { number: number }) => {
-  const getType = (number: number) => {
-    if (number >= 100) return 'positive';
-    if (number >= 80) return 'neutral';
-    return 'negative';
-  };
-
-  const type = getType(number);
-
-  return <EvalLogLabel type={type}>{`${number.toString()}%`}</EvalLogLabel>;
-};
-
-const CorrectedsReviewLabel = ({
-  number = 0,
-  isNone = false,
-}: {
-  number?: number; // isNone일 때만 undefined 가능
-  isNone?: boolean;
-}) => {
-  const computeType = (number: number, isNone: boolean) => {
-    if (isNone) return 'none';
-    if (number >= 5) return 'positive';
-    if (number >= 3) return 'neutral';
-    return 'negative';
-  };
-
-  const type = computeType(number, isNone);
-
-  return (
-    <EvalLogLabel type={type}>
-      {!isNone ? `${number.toString()} / 5` : '- / 5'}
-    </EvalLogLabel>
-  );
-};

@@ -1,13 +1,14 @@
 import { useMutation } from '@apollo/client';
+import { useSetAtom } from 'jotai';
+import { RESET } from 'jotai/utils';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { gql } from '@shared/__generated__';
 import { themePreferenceAtom } from '@shared/atoms/themePreferenceAtom';
 import { ROUTES } from '@shared/constants/routes';
 import { Button } from '@shared/ui-kit';
 import { clearStorage } from '@shared/utils/storage/clearStorage';
-import { useSetAtom } from 'jotai';
-import { RESET } from 'jotai/utils';
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 const LOGOUT = gql(/* GraphQL */ `
   mutation Logout {
@@ -16,9 +17,9 @@ const LOGOUT = gql(/* GraphQL */ `
 `);
 
 export const LogoutButton = () => {
+  const navigate = useNavigate();
   const [logout, { called, loading }] = useMutation(LOGOUT);
   const setThemePreference = useSetAtom(themePreferenceAtom);
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (!called) {

@@ -1,6 +1,7 @@
 import type { DialogBaseProps } from '@shared/types/Modal';
-import { Button } from '../Button';
-import { CustomDialog } from './CustomDialog';
+
+import { Button } from '@shared/ui-kit/Button';
+import { CustomDialog } from '@shared/ui-kit/Dialog/CustomDialog';
 
 type AlertDialogProps = DialogBaseProps & {
   title: string;

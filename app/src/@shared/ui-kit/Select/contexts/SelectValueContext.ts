@@ -10,10 +10,10 @@ type SelectValue = {
 
 export const SelectValueContext = createContext<SelectValue | null>(null);
 
-export function useGetSelectValueContext() {
+export const useGetSelectValueContext = () => {
   const selectValue = useContext(SelectValueContext);
   if (!selectValue) {
     throw new Error('useGetSelectValueContext must be used within a Provider');
   }
   return selectValue;
-}
+};

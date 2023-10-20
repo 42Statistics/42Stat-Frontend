@@ -1,6 +1,6 @@
-import { UserPreview } from '@shared/__generated__/graphql';
+import { SpotlightUserList } from '@core/components/Spotlight/SpotlightUserList';
+import type { UserPreview } from '@shared/__generated__/graphql';
 import { BoldText, Divider, VStack } from '@shared/ui-kit';
-import { SpotlightUserList } from './SpotlightUserList';
 
 type SpotlightUserSectionProps = {
   list: UserPreview[];

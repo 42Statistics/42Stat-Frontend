@@ -1,10 +1,11 @@
+import { useAtom } from 'jotai';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { reLoginDialogInfoAtom } from '@core/atoms/reLoginDialogInfoAtom';
 import { ROUTES } from '@shared/constants/routes';
 import { AlertDialog } from '@shared/ui-kit';
 import { clearStorage } from '@shared/utils/storage/clearStorage';
-import { useAtom } from 'jotai';
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 export const ReLoginDialog = () => {
   const navigate = useNavigate();

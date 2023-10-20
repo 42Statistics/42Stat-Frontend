@@ -1,5 +1,8 @@
 import { useMutation } from '@apollo/client';
 import { useTheme } from '@emotion/react';
+import { useEffect, useState } from 'react';
+import { useScript } from 'usehooks-ts';
+
 import { gql } from '@shared/__generated__';
 import { ReactComponent as MdSyncAlt } from '@shared/assets/icon/md-sync-alt.svg';
 import { ARIA_LABEL } from '@shared/constants/accessibility';
@@ -7,11 +10,9 @@ import { URL } from '@shared/constants/url';
 import { useDisclosure } from '@shared/hooks/useDisclosure';
 import { AlertDialog, Clickable, Spinner } from '@shared/ui-kit';
 import {
-  FakeGoogleWrapperType,
   createFakeGoogleWrapper,
+  type FakeGoogleWrapperType,
 } from '@shared/utils/createFakeGoogleWrapper';
-import { useEffect, useState } from 'react';
-import { useScript } from 'usehooks-ts';
 
 const LINK_GOOGLE = gql(/* GraphQL */ `
   mutation LinkGoogle($google: GoogleLoginInput!) {

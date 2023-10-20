@@ -1,8 +1,9 @@
+import { useContext } from 'react';
+
+import { ProjectNameContext } from '@/Project/contexts/ProjectNameContext';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import { ROUTES } from '@shared/constants/routes';
 import { CustomLink } from '@shared/ui-kit-styled/CustomLink';
-import { useContext } from 'react';
-import { ProjectNameContext } from '../contexts/ProjectNameContext';
 
 export const PastEvaluationLink = () => {
   const projectName = useContext(ProjectNameContext);

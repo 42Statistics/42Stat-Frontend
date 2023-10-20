@@ -1,4 +1,6 @@
 import { useAtomValue } from 'jotai';
+import { truncate } from 'lodash-es';
+import { useMemo } from 'react';
 
 import { calculatorUserInfoAtom } from '@/Calculator/atoms/calculatorUserInfoAtom';
 import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
@@ -9,8 +11,6 @@ import {
 import { AreaChart } from '@shared/components/Chart';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import { TextDefault } from '@shared/components/DashboardContentView/Text/TextDefault';
-import { truncate } from 'lodash-es';
-import { useMemo } from 'react';
 
 export const LevelRecords = () => {
   const subjectList = useAtomValue(subjectListAtom);

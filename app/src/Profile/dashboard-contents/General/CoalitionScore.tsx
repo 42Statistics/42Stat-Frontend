@@ -1,5 +1,8 @@
-import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { useQuery } from '@apollo/client';
+import { useContext } from 'react';
+
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
+import { GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN } from '@/Profile/dashboard-contents-queries/GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN';
 import { CoalitionMark } from '@shared/components/CoalitionMark';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
@@ -8,8 +11,6 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { Body1Text, H2MediumText, HStack } from '@shared/ui-kit';
-import { useContext } from 'react';
-import { GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN } from '../../dashboard-contents-queries/GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN';
 
 export const CoalitionScore = () => {
   const { login } = useContext(UserProfileContext);

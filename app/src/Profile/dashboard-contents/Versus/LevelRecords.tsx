@@ -1,8 +1,10 @@
+import { useQuery } from '@apollo/client';
+import { useTheme } from '@emotion/react';
+import { useContext } from 'react';
+
 import { MyUserProfileContext } from '@/Profile/contexts/MyUserProfileContext';
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { padWithNullValues } from '@/Profile/utils/padWithNullValues';
-import { useQuery } from '@apollo/client';
-import { useTheme } from '@emotion/react';
 import { gql } from '@shared/__generated__';
 import { LineChart } from '@shared/components/Chart';
 import { DashboardContent } from '@shared/components/DashboardContent';
@@ -12,7 +14,6 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { BREAKPOINT } from '@shared/constants/responsive';
-import { useContext } from 'react';
 
 const GET_LEVEL_RECORDS_VERSUS = gql(/* GraphQL */ `
   query GetLevelRecordsVersus($login1: String!, $login2: String!) {

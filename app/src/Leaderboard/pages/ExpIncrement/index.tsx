@@ -6,16 +6,15 @@ import { leaderboardPromoListAtom } from '@/Leaderboard/atoms/leaderboardPromoLi
 import { PromoSelect } from '@/Leaderboard/components/PromoSelect';
 import { LEADERBOARD_DEFAULT_OPTIONS } from '@/Leaderboard/constants/defaultOptions';
 import { LEADERBOARD_PARAM_KEYS } from '@/Leaderboard/constants/paramKeys';
+import { LeaderboardExpIncrementResult } from '@/Leaderboard/pages/ExpIncrement/components/LeaderboardExpIncrementResult';
+import { useLeaderboardExpIncrementSegmentedControl } from '@/Leaderboard/pages/ExpIncrement/hooks/useLeaderboardExpIncrementSegmentedControl';
+import { GET_LEADERBOARD_EXP_INCREMENT } from '@/Leaderboard/pages/ExpIncrement/queries/getLeaderboardExpIncrement';
 import { toLeaderboardArgs } from '@/Leaderboard/utils/toLeaderboardArgs';
 import { Footer } from '@core/components/Footer';
 import { Seo } from '@shared/components/Seo';
 import { HStack, SegmentedControl, VStack } from '@shared/ui-kit';
 
-import { LeaderboardExpIncrementResult } from './components/LeaderboardExpIncrementResult';
-import { useLeaderboardExpIncrementSegmentedControl } from './hooks/useLeaderboardExpIncrementSegmentedControl';
-import { GET_LEADERBOARD_EXP_INCREMENT } from './queries/getLeaderboardExpIncrement';
-
-export default function LeaderboardExpIncrementPage() {
+const LeaderboardExpIncrementPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const leaderboardArgs = toLeaderboardArgs(searchParams);
   const { dateTemplate, promo } = leaderboardArgs;
@@ -36,14 +35,14 @@ export default function LeaderboardExpIncrementPage() {
     (option) => option.value === dateTemplate,
   );
 
-  function handleSegmentedControlIndexChange(newIndex: number) {
+  const handleSegmentedControlIndexChange = (newIndex: number) => {
     const newURLSearchParams = new URLSearchParams();
 
     newURLSearchParams.set(DATE, options[newIndex].value);
     setSearchParams(newURLSearchParams);
-  }
+  };
 
-  function handlePromoChange(newPromo: string | null) {
+  const handlePromoChange = (newPromo: string | null) => {
     const newURLSearchParams = new URLSearchParams();
 
     newURLSearchParams.set(DATE, dateTemplate);
@@ -51,7 +50,7 @@ export default function LeaderboardExpIncrementPage() {
       newURLSearchParams.set(PROMO, newPromo);
     }
     setSearchParams(newURLSearchParams);
-  }
+  };
 
   return (
     <>
@@ -77,4 +76,6 @@ export default function LeaderboardExpIncrementPage() {
       <Footer />
     </>
   );
-}
+};
+
+export default LeaderboardExpIncrementPage;

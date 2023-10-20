@@ -1,5 +1,6 @@
-import { LOCAL_STORAGE_KEYS } from '@shared/constants/storage';
 import { atomWithStorage } from 'jotai/utils';
+
+import { LOCAL_STORAGE_KEYS } from '@shared/constants/storage';
 
 export type ThemePreference = 'light' | 'dark' | 'system';
 

@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
-import { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
+
+import type { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
 
 export const TooltipContainer = ({
   children,

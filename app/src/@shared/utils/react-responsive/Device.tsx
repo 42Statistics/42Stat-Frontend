@@ -1,5 +1,5 @@
-import { PropsWithReactNodeChildren } from '@shared/types/PropsWithChildren';
-import { useDeviceType } from './useDeviceType';
+import type { PropsWithReactNodeChildren } from '@shared/types/PropsWithChildren';
+import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 
 export const Desktop = ({ children }: PropsWithReactNodeChildren) => {
   const isDesktop = useDeviceType() === 'desktop';

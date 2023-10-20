@@ -1,8 +1,9 @@
+import { useEffect } from 'react';
+
+import { EvalLogSearchAbsoluteButton } from '@/EvalLogSearch/components/EvalLogSearchAbsoluteButton';
+import { EvalLogSearchDialog } from '@/EvalLogSearch/components/EvalLogSearchDialog';
 import { useDisclosure } from '@shared/hooks/useDisclosure';
 import { isSlashKeyDown } from '@shared/utils/keyboard';
-import { useEffect } from 'react';
-import { EvalLogSearchAbsoluteButton } from './EvalLogSearchAbsoluteButton';
-import { EvalLogSearchDialog } from './EvalLogSearchDialog';
 
 export const EvalLogSearchArgsDialogTrigger = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();

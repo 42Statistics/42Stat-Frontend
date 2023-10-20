@@ -16,9 +16,9 @@ import { Outlet } from 'react-router-dom';
 import { mainLayoutGlobalStyle } from './mainLayoutGlobalStyle';
 
 const MainLayout = () => {
-  const [isSpotlightOpen, setIsSpotlightOpen] = useAtom(isSpotlightOpenAtom);
   const theme = useTheme();
   const device = useDeviceType();
+  const [isSpotlightOpen, setIsSpotlightOpen] = useAtom(isSpotlightOpenAtom);
   const browser = detect();
   const isMacOS = browser?.os === 'Mac OS';
 

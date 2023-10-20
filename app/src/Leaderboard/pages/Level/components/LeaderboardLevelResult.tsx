@@ -10,7 +10,7 @@ import { LEADERBOARD_PARAM_KEYS } from '@/Leaderboard/constants/paramKeys';
 import { toLeaderboardArgs } from '@/Leaderboard/utils/toLeaderboardArgs';
 import {
   DateTemplate,
-  GetLeaderboardLevelQuery,
+  type GetLeaderboardLevelQuery,
 } from '@shared/__generated__/graphql';
 import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
 import { HStack, Spacer, VStack } from '@shared/ui-kit';
@@ -27,14 +27,14 @@ type LeaderboardLevelResultProps = {
   >;
 };
 
-export function LeaderboardLevelResult({
+export const LeaderboardLevelResult = ({
   result: { loading, error, data },
-}: LeaderboardLevelResultProps) {
+}: LeaderboardLevelResultProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { promo, pageNumber } = toLeaderboardArgs(searchParams);
   const { PROMO, PAGE } = LEADERBOARD_PARAM_KEYS;
 
-  function handlePageNumberChange(newPageNumber: number) {
+  const handlePageNumberChange = (newPageNumber: number) => {
     const newURLSearchParams = new URLSearchParams();
 
     if (promo) {
@@ -42,7 +42,7 @@ export function LeaderboardLevelResult({
     }
     newURLSearchParams.set(PAGE, newPageNumber.toString());
     setSearchParams(newURLSearchParams);
-  }
+  };
 
   if (loading) {
     return <LeaderboardResultSkeleton />;
@@ -82,4 +82,4 @@ export function LeaderboardLevelResult({
       />
     </VStack>
   );
-}
+};

@@ -1,14 +1,15 @@
-import { isSpotlightOpenAtom } from '@core/atoms/isSpotlightOpenAtom';
-import { TabletNavProfile } from '@core/components/NavProfile/Tablet';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { useAtomValue, useSetAtom } from 'jotai';
+
+import { isSpotlightOpenAtom } from '@core/atoms/isSpotlightOpenAtom';
+import { TabletNavDrawer } from '@core/components/NavBar/Tablet/TabletNavDrawer';
+import { TabletNavMenu } from '@core/components/NavBar/Tablet/TabletNavMenu';
+import { TabletNavProfile } from '@core/components/NavProfile/Tablet';
 import { ReactComponent as MdSearch } from '@shared/assets/icon/md-search.svg';
 import { userAtom } from '@shared/atoms/userAtom';
 import { ARIA_LABEL } from '@shared/constants/accessibility';
 import { Center, Clickable, VStack } from '@shared/ui-kit';
-import { useAtomValue, useSetAtom } from 'jotai';
-import { TabletNavDrawer } from './TabletNavDrawer';
-import { TabletNavMenu } from './TabletNavMenu';
 
 export const TabletNavBar = () => {
   const theme = useTheme();

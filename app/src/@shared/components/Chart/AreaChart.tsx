@@ -1,6 +1,7 @@
 import { useTheme } from '@emotion/react';
 import { merge } from 'lodash-es';
-import Chart from './Chart';
+
+import { Chart } from '@shared/components/Chart/Chart';
 
 type AreaChartProps = {
   series: ApexAxisChartSeries;

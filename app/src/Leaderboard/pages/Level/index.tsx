@@ -6,16 +6,15 @@ import { leaderboardPromoListAtom } from '@/Leaderboard/atoms/leaderboardPromoLi
 import { PromoSelect } from '@/Leaderboard/components/PromoSelect';
 import { LEADERBOARD_DEFAULT_OPTIONS } from '@/Leaderboard/constants/defaultOptions';
 import { LEADERBOARD_PARAM_KEYS } from '@/Leaderboard/constants/paramKeys';
+import { LeaderboardLevelResult } from '@/Leaderboard/pages/Level/components/LeaderboardLevelResult';
+import { GET_LEADERBOARD_LEVEL } from '@/Leaderboard/pages/Level/queries/getLeaderboardLevel';
 import { toLeaderboardArgs } from '@/Leaderboard/utils/toLeaderboardArgs';
 import { Footer } from '@core/components/Footer';
 import { DateTemplate } from '@shared/__generated__/graphql';
 import { Seo } from '@shared/components/Seo';
 import { HStack, VStack } from '@shared/ui-kit';
 
-import { LeaderboardLevelResult } from './components/LeaderboardLevelResult';
-import { GET_LEADERBOARD_LEVEL } from './queries/getLeaderboardLevel';
-
-export default function LeaderboardLevelPage() {
+const LeaderboardLevelPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const leaderboardArgs = toLeaderboardArgs(searchParams);
   const { promo } = leaderboardArgs;
@@ -31,14 +30,14 @@ export default function LeaderboardLevelPage() {
     },
   });
 
-  function handlePromoChange(newPromo: string | null) {
+  const handlePromoChange = (newPromo: string | null) => {
     const newURLSearchParams = new URLSearchParams();
 
     if (newPromo) {
       newURLSearchParams.set(PROMO, newPromo);
     }
     setSearchParams(newURLSearchParams);
-  }
+  };
 
   return (
     <>
@@ -56,4 +55,6 @@ export default function LeaderboardLevelPage() {
       <Footer />
     </>
   );
-}
+};
+
+export default LeaderboardLevelPage;

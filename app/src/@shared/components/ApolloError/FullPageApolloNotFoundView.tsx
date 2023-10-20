@@ -1,5 +1,5 @@
+import { ApolloNotFoundView } from '@shared/components/ApolloError/ApolloNotFoundView';
 import { Center } from '@shared/ui-kit';
-import { ApolloNotFoundView } from './ApolloNotFoundView';
 
 export const FullPageApolloNotFoundView = () => {
   return (

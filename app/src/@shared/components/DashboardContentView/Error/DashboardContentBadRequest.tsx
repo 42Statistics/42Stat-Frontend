@@ -1,7 +1,7 @@
 import { ApolloErrorView } from '@shared/components/ApolloError/ApolloErrorView';
 import {
   DashboardContent,
-  DashboardContentProps,
+  type DashboardContentProps,
 } from '@shared/components/DashboardContent';
 
 type DashboardContentBadRequestProps = {

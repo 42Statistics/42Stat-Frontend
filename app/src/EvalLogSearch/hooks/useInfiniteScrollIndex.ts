@@ -1,6 +1,7 @@
 import { QueryResult } from '@apollo/client';
-import { GetEvalLogsQuery } from '@shared/__generated__/graphql';
 import { useEffect, useRef } from 'react';
+
+import type { GetEvalLogsQuery } from '@shared/__generated__/graphql';
 
 // todo: 이후, useInfiniteScroll 을 추상화하면 그쪽으로 이동
 export const useInfiniteScrollIndex = ({

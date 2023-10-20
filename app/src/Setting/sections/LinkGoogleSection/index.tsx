@@ -1,8 +1,13 @@
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { useAtomValue } from 'jotai';
+
+import { LinkGoogleButton } from '@/Setting/sections/LinkGoogleSection/LinkGoogleButton';
+import { LinkLabel } from '@/Setting/sections/LinkGoogleSection/LinkLabel';
+import { UnlinkGoogleButton } from '@/Setting/sections/LinkGoogleSection/UnlinkGoogleButton';
 import { gql } from '@shared/__generated__';
-import { LinkableAccount } from '@shared/__generated__/graphql';
+import type { LinkableAccount } from '@shared/__generated__/graphql';
 import { ReactComponent as FtLogo } from '@shared/assets/logo/ft-logo.svg';
 import { ReactComponent as GoogleLogo } from '@shared/assets/logo/google-logo.svg';
 import { userAtom } from '@shared/atoms/userAtom';
@@ -15,10 +20,6 @@ import {
 } from '@shared/ui-kit';
 import { CustomSection } from '@shared/ui-kit-styled';
 import { mq } from '@shared/utils/facepaint/mq';
-import { useAtomValue } from 'jotai';
-import { LinkGoogleButton } from './LinkGoogleButton';
-import { LinkLabel } from './LinkLabel';
-import { UnlinkGoogleButton } from './UnlinkGoogleButton';
 
 export const ACCOUNT_FIELDS = gql(/* GraphQL */ `
   fragment AccountFields on Account {

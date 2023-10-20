@@ -1,6 +1,6 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
+import type { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
 import {
   Body1MediumText,
   CaptionText,

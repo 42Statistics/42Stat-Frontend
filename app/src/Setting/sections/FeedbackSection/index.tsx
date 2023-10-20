@@ -1,3 +1,6 @@
+import { Link } from 'react-router-dom';
+
+import { URL } from '@shared/constants/url';
 import {
   Button,
   Divider,
@@ -8,8 +11,6 @@ import {
 } from '@shared/ui-kit';
 import { CustomSection } from '@shared/ui-kit-styled';
 import { Mobile, TabletAndAbove } from '@shared/utils/react-responsive/Device';
-import { Link } from 'react-router-dom';
-import { URL } from '@shared/constants/url';
 
 export const FeedbackSection = () => {
   return (

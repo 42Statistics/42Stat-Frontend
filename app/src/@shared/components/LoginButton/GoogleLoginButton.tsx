@@ -1,12 +1,17 @@
 import { useMutation } from '@apollo/client';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useScript } from 'usehooks-ts';
+
 import { gql } from '@shared/__generated__';
 import { ReactComponent as GoogleLogo } from '@shared/assets/logo/google-logo.svg';
+import { LoginButton } from '@shared/components/LoginButton/LoginButton';
 import { ARIA_LABEL } from '@shared/constants/accessibility';
 import { ROUTES } from '@shared/constants/routes';
 import { URL } from '@shared/constants/url';
 import {
-  FakeGoogleWrapperType,
   createFakeGoogleWrapper,
+  type FakeGoogleWrapperType,
 } from '@shared/utils/createFakeGoogleWrapper';
 import { setAccessToken } from '@shared/utils/storage/accessToken';
 import {
@@ -14,10 +19,6 @@ import {
   setGoogleCredential,
 } from '@shared/utils/storage/googleCredential';
 import { setRefreshToken } from '@shared/utils/storage/refreshToken';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useScript } from 'usehooks-ts';
-import { LoginButton } from './LoginButton';
 
 export const GOOGLE_LOGIN = gql(/* GraphQL */ `
   mutation googleLogin($google: GoogleLoginInput!, $ftCode: String) {
@@ -37,11 +38,11 @@ export const GOOGLE_LOGIN = gql(/* GraphQL */ `
 `);
 
 export const GoogleLoginButton = () => {
-  const status = useScript(URL.GAPI, { removeOnUnmount: true });
+  const navigate = useNavigate();
   const [login, { data, loading, error }] = useMutation(GOOGLE_LOGIN);
+  const status = useScript(URL.GAPI, { removeOnUnmount: true });
   const [googleButtonWrapper, setGoogleButtonWrapper] =
     useState<FakeGoogleWrapperType>();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const handleClick = (

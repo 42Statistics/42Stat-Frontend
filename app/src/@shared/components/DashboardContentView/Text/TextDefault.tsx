@@ -1,5 +1,6 @@
-import { H3MediumText } from '@shared/ui-kit';
 import { Link } from 'react-router-dom';
+
+import { H3MediumText } from '@shared/ui-kit';
 
 type TextDefaultProps = {
   text: string;

@@ -1,6 +1,6 @@
-import { ProjectRank } from '@shared/__generated__/graphql';
+import type { ProjectRank } from '@shared/__generated__/graphql';
+import { RankListItem } from '@shared/components/DashboardContentView/Rank/RankListItem';
 import { ROUTES } from '@shared/constants/routes';
-import { RankListItem } from './RankListItem';
 
 type ProjectRankListItemProps = {
   item: ProjectRank;
@@ -16,6 +16,7 @@ export const ProjectRankListItem = ({
     projectPreview: { name },
     value,
   } = item;
+
   return (
     <RankListItem
       rank={rank}

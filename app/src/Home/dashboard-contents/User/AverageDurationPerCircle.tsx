@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client';
+
 import { gql } from '@shared/__generated__';
 import { HorizontalBarChart } from '@shared/components/Chart';
 import { DashboardContent } from '@shared/components/DashboardContent';

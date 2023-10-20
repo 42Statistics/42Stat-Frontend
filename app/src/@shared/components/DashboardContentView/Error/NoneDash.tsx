@@ -1,4 +1,5 @@
 import { useTheme } from '@emotion/react';
+
 import { ReactComponent as MdHorizontalRule } from '@shared/assets/icon/md-horizontal-rule.svg';
 
 export const NoneDash = () => {

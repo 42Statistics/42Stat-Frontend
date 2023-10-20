@@ -1,5 +1,6 @@
 import { atom } from 'jotai';
-import { ThemePreference } from './themePreferenceAtom';
+
+import type { ThemePreference } from '@shared/atoms/themePreferenceAtom';
 
 export type Palette = Omit<ThemePreference, 'system'>;
 

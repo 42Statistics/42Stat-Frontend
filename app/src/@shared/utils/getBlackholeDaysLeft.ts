@@ -1,5 +1,5 @@
 import { MILLISECONDS } from '@shared/constants/date';
-import { getTimeDiffFromNow } from './getTimeDiffFromNow';
+import { getTimeDiffFromNow } from '@shared/utils/getTimeDiffFromNow';
 
 /**
  * 인트라의 blackholed_at은 실제 블랙홀에 빠지는 시점이 아니라 a few hours left가 뜨는 시점인 듯하다.

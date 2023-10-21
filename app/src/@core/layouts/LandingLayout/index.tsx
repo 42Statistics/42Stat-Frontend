@@ -1,7 +1,7 @@
 import { Global, useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { Helmet } from 'react-helmet-async';
-import { Outlet } from 'react-router-dom';
+import { Outlet, ScrollRestoration } from 'react-router-dom';
 
 import { landingLayoutGlobalStyle } from '@core/layouts/LandingLayout/landingLayoutGlobalStyle';
 import space_background from '@shared/assets/space-background.webp';
@@ -18,6 +18,7 @@ const LandingLayout = () => {
           content={theme.colors.background.landing.theme}
         />
       </Helmet>
+      <ScrollRestoration />
       <Global styles={landingLayoutGlobalStyle} />
       <Layout>
         <Center h="100vh">

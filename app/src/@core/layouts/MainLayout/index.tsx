@@ -1,19 +1,20 @@
+import styled from '@emotion/styled';
+import { detect } from 'detect-browser';
+import { useAtom } from 'jotai';
+import { useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
+import { Outlet, ScrollRestoration } from 'react-router-dom';
+
 import { isSpotlightOpenAtom } from '@core/atoms/isSpotlightOpenAtom';
 import { MobileHeader } from '@core/components/Header/Mobile';
 import { DesktopNavBar } from '@core/components/NavBar/Desktop';
 import { TabBar } from '@core/components/NavBar/Mobile(TabBar)';
 import { TabletNavBar } from '@core/components/NavBar/Tablet';
+import { mainLayoutGlobalStyle } from '@core/layouts/MainLayout/mainLayoutGlobalStyle';
 import { Global, useTheme } from '@emotion/react';
-import styled from '@emotion/styled';
 import { mq } from '@shared/utils/facepaint/mq';
 import { isCtrlKKeyDown, isMacKKeyDown } from '@shared/utils/keyboard';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
-import { detect } from 'detect-browser';
-import { useAtom } from 'jotai';
-import { useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
-import { Outlet } from 'react-router-dom';
-import { mainLayoutGlobalStyle } from './mainLayoutGlobalStyle';
 
 const MainLayout = () => {
   const theme = useTheme();
@@ -42,6 +43,7 @@ const MainLayout = () => {
       <Helmet>
         <meta name="theme-color" content={theme.colors.background.main.theme} />
       </Helmet>
+      <ScrollRestoration />
       <Global
         styles={mainLayoutGlobalStyle(theme.colors.background.main.default)}
       />

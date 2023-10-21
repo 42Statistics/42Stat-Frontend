@@ -48,6 +48,10 @@ export const TeamInfo = () => {
   return (
     <>
       {teams.length === 0 ? (
+        <DashboardContent title={title}>
+          <TextDefault text="프로젝트 신청 기록이 없어요" />
+        </DashboardContent>
+      ) : (
         <TeamInfoLayout>
           <div
             style={{
@@ -60,10 +64,6 @@ export const TeamInfo = () => {
             <TeamInfoTable teams={teams} />
           </div>
         </TeamInfoLayout>
-      ) : (
-        <DashboardContent title={title}>
-          <TextDefault text="프로젝트 신청 기록이 없어요" />
-        </DashboardContent>
       )}
     </>
   );

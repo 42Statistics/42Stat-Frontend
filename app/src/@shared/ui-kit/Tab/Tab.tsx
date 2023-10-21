@@ -1,8 +1,9 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { PropsWithStringChildren } from '@shared/types/PropsWithChildren';
-import { Text } from '@shared/ui-kit';
 import { Link } from 'react-router-dom';
+
+import type { PropsWithStringChildren } from '@shared/types/PropsWithChildren';
+import { Text } from '@shared/ui-kit/Text';
 
 type TabProps = PropsWithStringChildren<{
   selected?: boolean;

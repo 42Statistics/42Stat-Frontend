@@ -1,7 +1,7 @@
 import { ApolloNotFoundView } from '@shared/components/ApolloError/ApolloNotFoundView';
 import {
   DashboardContent,
-  DashboardContentProps,
+  type DashboardContentProps,
 } from '@shared/components/DashboardContent';
 
 type DashboardContentNotFoundProps = Omit<

@@ -1,6 +1,7 @@
-import { Palette, paletteAtom } from '@shared/atoms/paletteAtom';
 import { useAtomValue } from 'jotai';
 import { merge } from 'lodash-es';
+
+import { Palette, paletteAtom } from '@shared/atoms/paletteAtom';
 
 export const useDefaultOptions = () => {
   const palette = useAtomValue(paletteAtom);

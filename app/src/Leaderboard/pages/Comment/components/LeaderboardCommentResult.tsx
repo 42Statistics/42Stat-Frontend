@@ -10,9 +10,9 @@ import { LEADERBOARD_PARAM_KEYS } from '@/Leaderboard/constants/paramKeys';
 import { toLeaderboardArgs } from '@/Leaderboard/utils/toLeaderboardArgs';
 import {
   DateTemplate,
-  Exact,
-  GetLeaderboardCommentQuery,
-  InputMaybe,
+  type Exact,
+  type GetLeaderboardCommentQuery,
+  type InputMaybe,
 } from '@shared/__generated__/graphql';
 import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
 import { HStack, Spacer, VStack } from '@shared/ui-kit';
@@ -29,22 +29,23 @@ type LeaderboardCommentResultProps = {
   >;
 };
 
-export function LeaderboardCommentResult({
+export const LeaderboardCommentResult = ({
   result: { loading, error, data },
-}: LeaderboardCommentResultProps) {
+}: LeaderboardCommentResultProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { promo, pageNumber } = toLeaderboardArgs(searchParams);
-  const { PROMO, PAGE } = LEADERBOARD_PARAM_KEYS;
+  const { promo, dateTemplate, pageNumber } = toLeaderboardArgs(searchParams);
+  const { PROMO, DATE, PAGE } = LEADERBOARD_PARAM_KEYS;
 
-  function handlePageNumberChange(newPageNumber: number) {
+  const handlePageNumberChange = (newPageNumber: number) => {
     const newURLSearchParams = new URLSearchParams();
 
+    newURLSearchParams.set(DATE, dateTemplate);
     if (promo) {
       newURLSearchParams.set(PROMO, promo.toString());
     }
     newURLSearchParams.set(PAGE, newPageNumber.toString());
     setSearchParams(newURLSearchParams);
-  }
+  };
 
   if (loading) {
     return <LeaderboardResultSkeleton />;
@@ -86,4 +87,4 @@ export function LeaderboardCommentResult({
       />
     </VStack>
   );
-}
+};

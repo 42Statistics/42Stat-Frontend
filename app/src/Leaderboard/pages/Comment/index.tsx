@@ -7,6 +7,8 @@ import { leaderboardPromoListAtom } from '@/Leaderboard/atoms/leaderboardPromoLi
 import { PromoSelect } from '@/Leaderboard/components/PromoSelect';
 import { LEADERBOARD_DEFAULT_OPTIONS } from '@/Leaderboard/constants/defaultOptions';
 import { LEADERBOARD_PARAM_KEYS } from '@/Leaderboard/constants/paramKeys';
+import { LeaderboardCommentResult } from '@/Leaderboard/pages/Comment/components/LeaderboardCommentResult';
+import { GET_LEADERBOARD_COMMENT } from '@/Leaderboard/pages/Comment/queries/getLeaderboardComment';
 import { useLeaderboardEvalCountSegmentedControl } from '@/Leaderboard/pages/EvalCount/hooks/useLeaderboardEvalCountSegmentedControl';
 import { toLeaderboardArgs } from '@/Leaderboard/utils/toLeaderboardArgs';
 import { Footer } from '@core/components/Footer';
@@ -14,10 +16,7 @@ import { DateTemplate } from '@shared/__generated__/graphql';
 import { Seo } from '@shared/components/Seo';
 import { CaptionText, HStack, SegmentedControl, VStack } from '@shared/ui-kit';
 
-import { LeaderboardCommentResult } from './components/LeaderboardCommentResult';
-import { GET_LEADERBOARD_COMMENT } from './queries/getLeaderboardComment';
-
-export default function LeaderboardCommentPage() {
+const LeaderboardCommentPage = () => {
   const theme = useTheme();
   const [searchParams, setSearchParams] = useSearchParams();
   const leaderboardArgs = toLeaderboardArgs(searchParams);
@@ -39,14 +38,14 @@ export default function LeaderboardCommentPage() {
     (option) => option.value === dateTemplate,
   );
 
-  function handleSegmentedControlIndexChange(newIndex: number) {
+  const handleSegmentedControlIndexChange = (newIndex: number) => {
     const newURLSearchParams = new URLSearchParams();
 
     newURLSearchParams.set(DATE, options[newIndex].value);
     setSearchParams(newURLSearchParams);
-  }
+  };
 
-  function handlePromoChange(newPromo: string | null) {
+  const handlePromoChange = (newPromo: string | null) => {
     const newURLSearchParams = new URLSearchParams();
 
     newURLSearchParams.set(DATE, dateTemplate);
@@ -54,7 +53,7 @@ export default function LeaderboardCommentPage() {
       newURLSearchParams.set(PROMO, newPromo);
     }
     setSearchParams(newURLSearchParams);
-  }
+  };
 
   return (
     <>
@@ -87,4 +86,6 @@ export default function LeaderboardCommentPage() {
       <Footer />
     </>
   );
-}
+};
+
+export default LeaderboardCommentPage;

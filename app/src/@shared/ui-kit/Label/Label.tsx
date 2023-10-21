@@ -1,7 +1,8 @@
-import { useTheme } from '@emotion/react';
+import { useTheme, type Theme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { Text } from '@shared/ui-kit';
-import { PropsWithStringChildren } from '@shared/types/PropsWithChildren';
+
+import type { PropsWithStringChildren } from '@shared/types/PropsWithChildren';
+import { Text } from '@shared/ui-kit/Text';
 
 type LabelSize = 'md';
 
@@ -20,30 +21,12 @@ export const Label = ({
   children,
 }: LabelProps) => {
   const theme = useTheme();
+
   color = color ?? theme.colors.mono.white;
   backgroundColor = backgroundColor ?? theme.colors.primary.default;
   fontWeight = fontWeight ?? theme.fonts.weight.regular;
-
-  const computePadding = (size: LabelSize) => {
-    switch (size) {
-      case 'md':
-        return '0.3rem 1.5rem';
-      default:
-        return '0.3rem 1.5rem';
-    }
-  };
-
-  const computeFontSize = (size: LabelSize) => {
-    switch (size) {
-      case 'md':
-        return theme.fonts.size.body2;
-      default:
-        return theme.fonts.size.body2;
-    }
-  };
-
   const padding = computePadding(size);
-  const fontSize = computeFontSize(size);
+  const fontSize = computeFontSize(theme, size);
 
   return (
     <StyledLabel backgroundColor={backgroundColor} padding={padding}>
@@ -66,3 +49,21 @@ export const StyledLabel = styled.div<StyledLabelProps>`
   border-radius: ${({ theme }) => theme.radius.md};
   user-select: none;
 `;
+
+const computePadding = (size: LabelSize) => {
+  switch (size) {
+    case 'md':
+      return '0.3rem 1.5rem';
+    default:
+      return '0.3rem 1.5rem';
+  }
+};
+
+const computeFontSize = (theme: Theme, size: LabelSize) => {
+  switch (size) {
+    case 'md':
+      return theme.fonts.size.body2;
+    default:
+      return theme.fonts.size.body2;
+  }
+};

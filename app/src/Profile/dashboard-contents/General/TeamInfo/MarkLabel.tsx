@@ -1,4 +1,5 @@
 import { useTheme } from '@emotion/react';
+
 import { ReactComponent as MdCheck } from '@shared/assets/icon/md-check.svg';
 import { ReactComponent as MdClose } from '@shared/assets/icon/md-close.svg';
 import { HStack, Text } from '@shared/ui-kit';

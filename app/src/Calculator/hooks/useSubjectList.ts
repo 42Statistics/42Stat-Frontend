@@ -1,12 +1,12 @@
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useCallback } from 'react';
 
+import { calculatorUserInfoAtom } from '@/Calculator/atoms/calculatorUserInfoAtom';
+import { expTablesAtom } from '@/Calculator/atoms/expTablesAtom';
 import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
 import { MAX_BLACKHOLE_DAYS } from '@/Calculator/constants/blackhole';
 import { MAX_EXP_VALUE } from '@/Calculator/constants/exp';
 import type { Subject } from '@/Calculator/types/Subject';
-import { calculatorUserInfoAtom } from '../atoms/calculatorUserInfoAtom';
-import { expTablesAtom } from '../atoms/expTablesAtom';
 
 export const useSubjectList = () => {
   const setSubjectList = useSetAtom(subjectListAtom);

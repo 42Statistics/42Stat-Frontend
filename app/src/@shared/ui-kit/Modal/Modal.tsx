@@ -1,9 +1,10 @@
 import { useTheme } from '@emotion/react';
+import { useEffect } from 'react';
+
 import { usePreventScroll } from '@shared/hooks/usePreventScroll';
 import type { ModalBaseProps } from '@shared/types/Modal';
-import { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
-import { Portal } from '@shared/ui-kit';
-import { useEffect } from 'react';
+import type { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
+import { Portal } from '@shared/ui-kit/Portal';
 
 type ModalProps = PropsWithReactElementChildren<
   ModalBaseProps & {

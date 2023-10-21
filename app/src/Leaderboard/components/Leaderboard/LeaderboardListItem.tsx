@@ -1,6 +1,8 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { UserRank } from '@shared/__generated__/graphql';
+import { Link } from 'react-router-dom';
+
+import type { UserRank } from '@shared/__generated__/graphql';
 import { ALT } from '@shared/constants/accessibility';
 import { ROUTES } from '@shared/constants/routes';
 import {
@@ -16,7 +18,6 @@ import {
 import { mq } from '@shared/utils/facepaint/mq';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 import { Mobile, TabletAndAbove } from '@shared/utils/react-responsive/Device';
-import { Link } from 'react-router-dom';
 
 type LeaderboardListItemProps = {
   item: UserRank;

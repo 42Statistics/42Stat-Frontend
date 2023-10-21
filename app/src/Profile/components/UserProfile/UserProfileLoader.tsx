@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+
 import coalition_gray_cover from '@shared/assets/coalition/cover/coalition-gray-cover.png';
 import { mq } from '@shared/utils/facepaint/mq';
 

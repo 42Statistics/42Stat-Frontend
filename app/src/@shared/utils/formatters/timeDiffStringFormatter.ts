@@ -1,5 +1,5 @@
 import { MILLISECONDS } from '@shared/constants/date';
-import { getTimeDiffFromNow } from '../getTimeDiffFromNow';
+import { getTimeDiffFromNow } from '@shared/utils/getTimeDiffFromNow';
 
 export const timeDiffStringFormatter = (date: Date) => {
   const diff = getTimeDiffFromNow(date);

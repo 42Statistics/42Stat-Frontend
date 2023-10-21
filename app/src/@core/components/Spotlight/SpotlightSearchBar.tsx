@@ -1,11 +1,12 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+
 import { HStack, Writable } from '@shared/ui-kit';
 
 type SpotlightSearchBarProps = {
   left: React.ReactElement;
   input: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
 };
 
 export const SpotlightSearchBar = ({

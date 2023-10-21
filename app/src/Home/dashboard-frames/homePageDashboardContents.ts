@@ -1,21 +1,20 @@
-import type { DashboardItemProps } from '@shared/types/Dashboard';
 import {
   MonthlyTigCountPerCoalition,
   ScoreRecordsPerCoalition,
   TotalScoresPerCoalition,
   WinCountPerCoalition,
-} from '../dashboard-contents/Coalition';
+} from '@/Home/dashboard-contents/Coalition';
 import {
   AverageCommentLength,
   AverageFeedbackLength,
   EvalCountRecords,
   TotalEvalCount,
-} from '../dashboard-contents/Eval';
+} from '@/Home/dashboard-contents/Eval';
 import {
   CurrRegisteredCountRanking,
   RecentExamResult,
   TeamCloseRecords,
-} from '../dashboard-contents/Team';
+} from '@/Home/dashboard-contents/Team';
 import {
   AliveUserCountRecords,
   AverageDurationPerCircle,
@@ -26,7 +25,8 @@ import {
   MemberRate,
   UserCountPerLevel,
   WalletRanking,
-} from '../dashboard-contents/User';
+} from '@/Home/dashboard-contents/User';
+import type { DashboardItemProps } from '@shared/types/Dashboard';
 
 export const homePageDashboardContents: DashboardItemProps[] = [
   {

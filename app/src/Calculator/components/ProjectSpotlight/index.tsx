@@ -1,15 +1,14 @@
 import { useLazyQuery } from '@apollo/client';
 import styled from '@emotion/styled';
-import { useEffect, useState, useRef } from 'react';
-import { useDebounce } from 'usehooks-ts';
 import { useAtom } from 'jotai';
+import { useEffect, useRef, useState } from 'react';
+import { useDebounce } from 'usehooks-ts';
 
 import { currentOpenSpotlightIndexAtom } from '@/Calculator/atoms/currentOpenSpotlightIndexAtom';
+import { Spotlight } from '@/Calculator/components/ProjectSpotlight/Spotlight';
 import { gql } from '@shared/__generated__';
 import { VStack, Writable } from '@shared/ui-kit';
 import { isEscapeKeyDown } from '@shared/utils/keyboard';
-
-import { Spotlight } from './Spotlight';
 
 export const GET_PROJECTS = gql(/* GraphQL */ `
   query GetProjects($input: String!, $limit: Int!) {

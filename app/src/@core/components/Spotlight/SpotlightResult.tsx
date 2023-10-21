@@ -1,10 +1,11 @@
 import { QueryResult } from '@apollo/client';
 import styled from '@emotion/styled';
-import { Exact, GetSpotlightQuery } from '@shared/__generated__/graphql';
+
+import { SpotlightProjectSection } from '@core/components/Spotlight/SpotlightProjectSection';
+import { SpotlightUserSection } from '@core/components/Spotlight/SpotlightUserSection';
+import type { Exact, GetSpotlightQuery } from '@shared/__generated__/graphql';
 import { ApolloErrorView } from '@shared/components/ApolloError/ApolloErrorView';
 import { Center, H3Text, VStack } from '@shared/ui-kit';
-import { SpotlightProjectSection } from './SpotlightProjectSection';
-import { SpotlightUserSection } from './SpotlightUserSection';
 
 type SpotlightResultProps = {
   result: QueryResult<

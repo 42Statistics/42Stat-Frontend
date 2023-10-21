@@ -1,8 +1,7 @@
-import { UserRank } from '@shared/__generated__/graphql';
+import { LeaderboardList } from '@/Leaderboard/components/Leaderboard/LeaderboardList';
+import { LeaderboardListItem } from '@/Leaderboard/components/Leaderboard/LeaderboardListItem';
+import type { UserRank } from '@shared/__generated__/graphql';
 import { VStack } from '@shared/ui-kit';
-
-import { LeaderboardList } from './LeaderboardList';
-import { LeaderboardListItem } from './LeaderboardListItem';
 
 type LeaderboardProps = {
   list: UserRank[];
@@ -10,6 +9,7 @@ type LeaderboardProps = {
   unit?: string;
   fixedNumber?: number;
 };
+
 export const Leaderboard = ({
   list,
   me,

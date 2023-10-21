@@ -1,6 +1,6 @@
+import styled from '@emotion/styled';
 import { useAtom, useAtomValue } from 'jotai';
 import { useEffect } from 'react';
-import styled from '@emotion/styled';
 
 import { calculatorUserInfoAtom } from '@/Calculator/atoms/calculatorUserInfoAtom';
 import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
@@ -22,7 +22,7 @@ export const CalculatorBasicInfoInputGroup = () => {
   const subjectList = useAtomValue(subjectListAtom);
   const { updateSubjectList } = useSubjectList();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     const value = Number(e.target.value);
     if (isNaN(value) || value < 0) return;
     const name = e.target.name as keyof typeof calculatorUserInfoAtom;

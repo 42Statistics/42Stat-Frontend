@@ -1,4 +1,5 @@
 import { useTheme } from '@emotion/react';
+
 import { ReactComponent as MdErrorOutline } from '@shared/assets/icon/md-error-outline.svg';
 import { HStack, Text } from '@shared/ui-kit';
 

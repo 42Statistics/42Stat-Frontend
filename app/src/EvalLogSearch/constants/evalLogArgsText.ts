@@ -1,5 +1,5 @@
+import type { EvalLogSearchArgs } from '@/EvalLogSearch/api/getEvalLogs';
 import { EvalLogSortOrder } from '@shared/__generated__/graphql';
-import type { EvalLogSearchArgs } from '../api/getEvalLogs';
 
 const ANY_USER = '누군가';
 const ANY_PROJECT = '모든 서브젝트';

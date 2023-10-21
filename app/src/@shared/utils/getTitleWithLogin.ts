@@ -1,4 +1,4 @@
-import { UserTitle } from '@shared/__generated__/graphql';
+import type { UserTitle } from '@shared/__generated__/graphql';
 
 export const getTitleWithLogin = (
   titles: (UserTitle | null)[],

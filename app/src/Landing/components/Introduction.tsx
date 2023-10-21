@@ -1,14 +1,15 @@
 import { useQuery } from '@apollo/client';
 import { css, useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { gql } from '@shared/__generated__';
-import { BoldText } from '@shared/ui-kit';
-import { mq } from '@shared/utils/facepaint/mq';
-import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 import { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import { CountUp } from 'use-count-up';
+
+import { gql } from '@shared/__generated__';
+import { BoldText } from '@shared/ui-kit';
+import { mq } from '@shared/utils/facepaint/mq';
+import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 
 const GET_LANDING = gql(/* GraphQL */ `
   query GetLanding {

@@ -1,14 +1,15 @@
 import { useQuery } from '@apollo/client';
+import { useAtomValue } from 'jotai';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
+
+import { UserProfile } from '@/Profile/components/UserProfile';
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
+import { GET_USER_PROFILE_BY_LOGIN } from '@/Profile/dashboard-contents-queries/GET_USER_PROFILE_BY_LOGIN';
 import { userAtom } from '@shared/atoms/userAtom';
 import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
 import { FullPageApolloNotFoundView } from '@shared/components/ApolloError/FullPageApolloNotFoundView';
 import { ROUTES } from '@shared/constants/routes';
 import { Tab, Tabs, VStack } from '@shared/ui-kit';
-import { useAtomValue } from 'jotai';
-import { Outlet, useLocation, useParams } from 'react-router-dom';
-import { UserProfile } from './components/UserProfile';
-import { UserProfileContext } from './contexts/UserProfileContext';
-import { GET_USER_PROFILE_BY_LOGIN } from './dashboard-contents-queries/GET_USER_PROFILE_BY_LOGIN';
 
 const ProfileLayout = () => {
   const { pathname } = useLocation();

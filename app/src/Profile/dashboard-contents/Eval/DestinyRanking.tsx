@@ -1,5 +1,7 @@
-import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { useQuery } from '@apollo/client';
+import { useContext } from 'react';
+
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { gql } from '@shared/__generated__';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
@@ -9,7 +11,6 @@ import {
 } from '@shared/components/DashboardContentView/Error';
 import { UserRankList } from '@shared/components/DashboardContentView/Rank/UserRankList';
 import { TextDefault } from '@shared/components/DashboardContentView/Text/TextDefault';
-import { useContext } from 'react';
 
 const GET_DESTINY_RANKING_BY_LOGIN = gql(/* GraphQL */ `
   query GetDestinyRankingByLogin($login: String!, $limit: Int!) {

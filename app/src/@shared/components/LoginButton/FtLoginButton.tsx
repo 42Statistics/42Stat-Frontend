@@ -1,15 +1,18 @@
 import { useTheme } from '@emotion/react';
+
 import { ReactComponent as FtLogo } from '@shared/assets/logo/ft-logo.svg';
+import { LoginButton } from '@shared/components/LoginButton/LoginButton';
 import { ARIA_LABEL } from '@shared/constants/accessibility';
 import { URL } from '@shared/constants/url';
-import { LoginButton } from './LoginButton';
 
 export const FtLoginButton = () => {
   const theme = useTheme();
+
   const params = new URLSearchParams();
   params.append('client_id', import.meta.env.VITE_FT_OAUTH_CLIENT_ID);
   params.append('redirect_uri', import.meta.env.VITE_FT_OAUTH_REDIRECT_URI);
   params.append('response_type', 'code');
+
   const FT_OAUTH_URL = `${URL.FT_OAUTH_ENDPOINT}?${params.toString()}`;
 
   return (

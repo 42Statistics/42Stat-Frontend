@@ -1,8 +1,8 @@
-import { UserPreview } from '@shared/__generated__/graphql';
+import { SpotlightListItem } from '@core/components/Spotlight/SpotlightListItem';
+import type { UserPreview } from '@shared/__generated__/graphql';
 import { ALT } from '@shared/constants/accessibility';
 import { ROUTES } from '@shared/constants/routes';
 import { Avatar } from '@shared/ui-kit';
-import { SpotlightListItem } from './SpotlightListItem';
 
 type SpotlightUserListItemProps = {
   item: UserPreview;

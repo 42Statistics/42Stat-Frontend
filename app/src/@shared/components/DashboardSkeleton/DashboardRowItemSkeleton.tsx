@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+
 import type { DashboardRowItemProps } from '@shared/components/Dashboard/DashboardRowItem';
 import { Skeleton } from '@shared/ui-kit';
 

@@ -2,8 +2,8 @@ import styled from '@emotion/styled';
 import { useEffect, useRef, useState } from 'react';
 
 import { useDisclosure } from '@shared/hooks/useDisclosure';
-import { SelectDisclosureContext } from './contexts/SelectDisclosureContext';
-import { SelectValueContext } from './contexts/SelectValueContext';
+import { SelectDisclosureContext } from '@shared/ui-kit/Select/contexts/SelectDisclosureContext';
+import { SelectValueContext } from '@shared/ui-kit/Select/contexts/SelectValueContext';
 
 type SelectProps = {
   children: React.ReactNode;
@@ -13,13 +13,13 @@ type SelectProps = {
   defaultRenderValue?: string;
 };
 
-export function Select({
+export const Select = ({
   children,
   width,
   onValueChange,
   defaultValue,
   defaultRenderValue,
-}: SelectProps) {
+}: SelectProps) => {
   const [internalValue, setInternalValue] = useState<string | null>(
     defaultValue ?? null,
   );
@@ -33,7 +33,7 @@ export function Select({
       return;
     }
 
-    function handleClickOutside(e: MouseEvent) {
+    const handleClickOutside = (e: MouseEvent) => {
       if (!ref.current) {
         return;
       }
@@ -43,7 +43,7 @@ export function Select({
       }
 
       onClose();
-    }
+    };
 
     document.addEventListener('click', handleClickOutside);
 
@@ -76,7 +76,7 @@ export function Select({
       </SelectValueContext.Provider>
     </SelectDisclosureContext.Provider>
   );
-}
+};
 
 type StyledSelectProps = {
   width?: string;

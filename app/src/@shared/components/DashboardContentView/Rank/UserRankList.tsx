@@ -1,6 +1,6 @@
-import { UserRank } from '@shared/__generated__/graphql';
+import type { UserRank } from '@shared/__generated__/graphql';
+import { UserRankListItem } from '@shared/components/DashboardContentView/Rank/UserRankListItem';
 import { VStack } from '@shared/ui-kit';
-import { UserRankListItem } from './UserRankListItem';
 
 type UserRankListProps = {
   list: UserRank[];

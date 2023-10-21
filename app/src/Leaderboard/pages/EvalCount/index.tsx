@@ -6,16 +6,15 @@ import { leaderboardPromoListAtom } from '@/Leaderboard/atoms/leaderboardPromoLi
 import { PromoSelect } from '@/Leaderboard/components/PromoSelect';
 import { LEADERBOARD_DEFAULT_OPTIONS } from '@/Leaderboard/constants/defaultOptions';
 import { LEADERBOARD_PARAM_KEYS } from '@/Leaderboard/constants/paramKeys';
+import { LeaderboardEvalCountResult } from '@/Leaderboard/pages/EvalCount/components/LeaderboardEvalCountResult';
+import { useLeaderboardEvalCountSegmentedControl } from '@/Leaderboard/pages/EvalCount/hooks/useLeaderboardEvalCountSegmentedControl';
+import { GET_LEADERBOARD_EVAL_COUNT } from '@/Leaderboard/pages/EvalCount/queries/getLeaderboardEvalCount';
 import { toLeaderboardArgs } from '@/Leaderboard/utils/toLeaderboardArgs';
 import { Footer } from '@core/components/Footer';
 import { Seo } from '@shared/components/Seo';
 import { HStack, SegmentedControl, VStack } from '@shared/ui-kit';
 
-import { LeaderboardEvalCountResult } from './components/LeaderboardEvalCountResult';
-import { useLeaderboardEvalCountSegmentedControl } from './hooks/useLeaderboardEvalCountSegmentedControl';
-import { GET_LEADERBOARD_EVAL_COUNT } from './queries/getLeaderboardEvalCount';
-
-export default function LeaderboardEvalCountPage() {
+const LeaderboardEvalCountPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const leaderboardArgs = toLeaderboardArgs(searchParams);
   const { dateTemplate, promo } = leaderboardArgs;
@@ -36,14 +35,14 @@ export default function LeaderboardEvalCountPage() {
     (option) => option.value === dateTemplate,
   );
 
-  function handleSegmentedControlIndexChange(newIndex: number) {
+  const handleSegmentedControlIndexChange = (newIndex: number) => {
     const newURLSearchParams = new URLSearchParams();
 
     newURLSearchParams.set(DATE, options[newIndex].value);
     setSearchParams(newURLSearchParams);
-  }
+  };
 
-  function handlePromoChange(newPromo: string | null) {
+  const handlePromoChange = (newPromo: string | null) => {
     const newURLSearchParams = new URLSearchParams();
 
     newURLSearchParams.set(DATE, dateTemplate);
@@ -51,7 +50,7 @@ export default function LeaderboardEvalCountPage() {
       newURLSearchParams.set(PROMO, newPromo);
     }
     setSearchParams(newURLSearchParams);
-  }
+  };
 
   return (
     <>
@@ -77,4 +76,6 @@ export default function LeaderboardEvalCountPage() {
       <Footer />
     </>
   );
-}
+};
+
+export default LeaderboardEvalCountPage;

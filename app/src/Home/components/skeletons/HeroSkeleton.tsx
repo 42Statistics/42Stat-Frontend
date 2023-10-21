@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+
 import { Skeleton } from '@shared/ui-kit';
 import { mq } from '@shared/utils/facepaint/mq';
 

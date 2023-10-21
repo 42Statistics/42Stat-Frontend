@@ -1,4 +1,4 @@
-import { getTimeDiffFromNow } from '../getTimeDiffFromNow';
+import { getTimeDiffFromNow } from '@shared/utils/getTimeDiffFromNow';
 
 export const dDayFormatter = (date: Date) => {
   const diffDays = getTimeDiffFromNow(date, 'day');

@@ -1,5 +1,5 @@
+import { DesktopNavBar } from '@core/components/NavBar/Desktop';
 import { Drawer } from '@shared/ui-kit';
-import { DesktopNavBar } from '../../Desktop';
 
 type TabletNavDrawerViewProps = {
   isOpen: boolean;

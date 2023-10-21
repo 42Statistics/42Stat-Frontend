@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
+import { rgba } from 'emotion-rgba';
+
 import type { PropsWithStringChildren } from '@shared/types/PropsWithChildren';
 import { Clickable } from '@shared/ui-kit';
-import { rgba } from 'emotion-rgba';
 
 type StartButtonProps = PropsWithStringChildren<{
   onClick: () => void;

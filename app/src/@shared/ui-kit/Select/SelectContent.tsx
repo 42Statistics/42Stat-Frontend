@@ -1,12 +1,13 @@
 import styled from '@emotion/styled';
-import { useGetSelectDisclosureContext } from './contexts/SelectDisclosureContext';
+
+import { useGetSelectDisclosureContext } from '@shared/ui-kit/Select/contexts/SelectDisclosureContext';
 
 type SelectContentProps = {
   children: React.ReactNode;
   maxHeight?: string;
 };
 
-export function SelectContent({ children, maxHeight }: SelectContentProps) {
+export const SelectContent = ({ children, maxHeight }: SelectContentProps) => {
   const { isOpen } = useGetSelectDisclosureContext();
 
   if (!isOpen) {
@@ -16,7 +17,7 @@ export function SelectContent({ children, maxHeight }: SelectContentProps) {
   return (
     <StyledSelectContent maxHeight={maxHeight}>{children}</StyledSelectContent>
   );
-}
+};
 
 type StyledSelectContentProps = {
   maxHeight?: string;

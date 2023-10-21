@@ -1,11 +1,12 @@
 import styled from '@emotion/styled';
-import { UserTeam } from '@shared/__generated__/graphql';
+import { rgba } from 'emotion-rgba';
+import { useNavigate } from 'react-router-dom';
+
+import { ResultWithStatus } from '@/Profile/dashboard-contents/General/TeamInfo/ResultWithStatus';
+import type { UserTeam } from '@shared/__generated__/graphql';
 import { ROUTES } from '@shared/constants/routes';
 import { PrimaryMediumText, Text } from '@shared/ui-kit';
 import { getDateDiffStringWithTeamStatus } from '@shared/utils/getDateDiffStringWithTeamStatus';
-import { rgba } from 'emotion-rgba';
-import { useNavigate } from 'react-router-dom';
-import { ResultWithStatus } from './ResultWithStatus';
 
 type TeamInfoTableProps = {
   teams: UserTeam[];
@@ -88,7 +89,7 @@ const Table = styled.table`
 
   td {
     max-width: 300px;
-    overflow-x: hidden;
+    overflow: hidden;
     text-align: center;
     padding: 0.4rem 2rem;
     vertical-align: middle;

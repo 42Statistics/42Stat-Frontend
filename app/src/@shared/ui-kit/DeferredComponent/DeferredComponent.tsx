@@ -1,7 +1,8 @@
-import { PropsWithReactNodeChildren } from '@shared/types/PropsWithChildren';
 import { useEffect, useState } from 'react';
 
-// https://tech.kakaopay.com/post/skeleton-ui-idea/
+import type { PropsWithReactNodeChildren } from '@shared/types/PropsWithChildren';
+
+// Ref. https://tech.kakaopay.com/post/skeleton-ui-idea/
 export const DeferredComponent = ({ children }: PropsWithReactNodeChildren) => {
   const [isDeferred, setIsDeferred] = useState(false);
 

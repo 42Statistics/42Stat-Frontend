@@ -10,9 +10,9 @@ import { LEADERBOARD_PARAM_KEYS } from '@/Leaderboard/constants/paramKeys';
 import { toLeaderboardArgs } from '@/Leaderboard/utils/toLeaderboardArgs';
 import {
   DateTemplate,
-  Exact,
-  GetLeaderboardEvalCountQuery,
-  InputMaybe,
+  type Exact,
+  type GetLeaderboardEvalCountQuery,
+  type InputMaybe,
 } from '@shared/__generated__/graphql';
 import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
 import { HStack, Spacer, VStack } from '@shared/ui-kit';
@@ -29,14 +29,14 @@ type LeaderboardEvalCountResultProps = {
   >;
 };
 
-export function LeaderboardEvalCountResult({
+export const LeaderboardEvalCountResult = ({
   result: { loading, error, data },
-}: LeaderboardEvalCountResultProps) {
+}: LeaderboardEvalCountResultProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { promo, dateTemplate, pageNumber } = toLeaderboardArgs(searchParams);
   const { PROMO, DATE, PAGE } = LEADERBOARD_PARAM_KEYS;
 
-  function handlePageNumberChange(newPageNumber: number) {
+  const handlePageNumberChange = (newPageNumber: number) => {
     const newURLSearchParams = new URLSearchParams();
 
     newURLSearchParams.set(DATE, dateTemplate);
@@ -45,7 +45,7 @@ export function LeaderboardEvalCountResult({
     }
     newURLSearchParams.set(PAGE, newPageNumber.toString());
     setSearchParams(newURLSearchParams);
-  }
+  };
 
   if (loading) {
     return <LeaderboardResultSkeleton />;
@@ -87,4 +87,4 @@ export function LeaderboardEvalCountResult({
       />
     </VStack>
   );
-}
+};

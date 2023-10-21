@@ -1,10 +1,9 @@
 import styled from '@emotion/styled';
-import { HStack } from '@shared/ui-kit';
-import { useNavRoutes } from '../hooks/useNavRoutes';
-import { TabItem } from './TabItem';
 import { useMediaQuery } from 'react-responsive';
 
-const useIsSmallDevice = () => useMediaQuery({ maxWidth: '480px' });
+import { TabItem } from '@core/components/NavBar/Mobile(TabBar)/TabItem';
+import { useNavRoutes } from '@core/components/NavBar/hooks/useNavRoutes';
+import { HStack } from '@shared/ui-kit';
 
 export const TabBar = () => {
   const { NAV_ROUTES } = useNavRoutes();
@@ -24,6 +23,12 @@ export const TabBar = () => {
   );
 };
 
+const useIsSmallDevice = () => useMediaQuery({ maxWidth: '480px' });
+
+type LayoutProps = {
+  isSmallDevice: boolean;
+};
+
 const Layout = styled.nav<LayoutProps>`
   position: fixed;
   bottom: 0;
@@ -33,7 +38,3 @@ const Layout = styled.nav<LayoutProps>`
   background-color: ${({ theme }) => theme.colors.mono.white};
   user-select: none;
 `;
-
-type LayoutProps = {
-  isSmallDevice: boolean;
-};

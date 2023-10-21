@@ -1,13 +1,12 @@
-import { Promo } from '@shared/__generated__/graphql';
+import { PromoSelectListItem } from '@/Leaderboard/components/PromoSelect/PromoSelectListItem';
+import type { Promo } from '@shared/__generated__/graphql';
 import { HStack, SelectItem, Text } from '@shared/ui-kit';
-
-import { PromoSelectListItem } from './PromoSelectListItem';
 
 type PromoSelectListProps = {
   list: Promo[];
 };
 
-export function PromoSelectList({ list }: PromoSelectListProps) {
+export const PromoSelectList = ({ list }: PromoSelectListProps) => {
   return (
     <>
       <SelectItem value={null}>
@@ -20,4 +19,4 @@ export function PromoSelectList({ list }: PromoSelectListProps) {
       ))}
     </>
   );
-}
+};

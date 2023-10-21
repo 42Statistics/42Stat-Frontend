@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
-import { H2BoldText } from '@shared/ui-kit';
+
 import type { PropsWithStringChildren } from '@shared/types/PropsWithChildren';
+import { H2BoldText } from '@shared/ui-kit/Text';
 
 export const CustomDialogHeader = ({ children }: PropsWithStringChildren) => {
   return (

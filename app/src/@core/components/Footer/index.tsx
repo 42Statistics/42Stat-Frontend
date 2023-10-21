@@ -1,9 +1,10 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { Link } from 'react-router-dom';
+
 import { ReactComponent as GithubLogo } from '@shared/assets/logo/github-logo.svg';
 import { ARIA_LABEL } from '@shared/constants/accessibility';
 import { CaptionText, HStack } from '@shared/ui-kit';
-import { Link } from 'react-router-dom';
 
 export const Footer = () => {
   const theme = useTheme();

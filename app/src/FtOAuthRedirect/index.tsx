@@ -1,4 +1,8 @@
 import { useMutation } from '@apollo/client';
+import { useSetAtom } from 'jotai';
+import { useEffect, useState } from 'react';
+import { Navigate, useNavigate, useSearchParams } from 'react-router-dom';
+
 import { gql } from '@shared/__generated__';
 import { userAtom } from '@shared/atoms/userAtom';
 import { GOOGLE_LOGIN } from '@shared/components/LoginButton';
@@ -11,9 +15,6 @@ import {
   removeGoogleCredential,
 } from '@shared/utils/storage/googleCredential';
 import { setRefreshToken } from '@shared/utils/storage/refreshToken';
-import { useSetAtom } from 'jotai';
-import { useEffect, useState } from 'react';
-import { Navigate, useNavigate, useSearchParams } from 'react-router-dom';
 
 const FT_LOGIN = gql(/* GraphQL */ `
   mutation ftLogin($ftCode: String!) {
@@ -92,11 +93,15 @@ const FtOAuthRedirectPage = () => {
       return;
     }
     if (googleError) {
+      removeGoogleCredential();
+
       const isConflict = googleError.graphQLErrors.some(
         (error) => error.extensions?.status === 409,
       );
       if (isConflict) {
         onOpen();
+      } else {
+        navigate(ROUTES.ROOT); // TODO: 적절한 에러 다이얼로그
       }
       return;
     }
@@ -126,10 +131,7 @@ const FtOAuthRedirectPage = () => {
         title="계정 연동 실패"
         description="해당 42 계정은 이미 다른 구글 계정과 연동되어있습니다."
         confirmText="홈으로 이동"
-        onConfirm={() => {
-          removeGoogleCredential();
-          navigate(ROUTES.ROOT);
-        }}
+        onConfirm={() => navigate(ROUTES.ROOT)}
       />
     </>
   );

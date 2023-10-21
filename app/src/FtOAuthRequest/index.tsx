@@ -1,12 +1,13 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { Link, Navigate } from 'react-router-dom';
+
 import { AppLogoTitle } from '@shared/components/AppLogoTitle';
 import { FtLoginButton } from '@shared/components/LoginButton';
 import { ROUTES } from '@shared/constants/routes';
 import { Text, VStack } from '@shared/ui-kit';
 import { mq } from '@shared/utils/facepaint/mq';
 import { getGoogleCredential } from '@shared/utils/storage/googleCredential';
-import { Link, Navigate } from 'react-router-dom';
 
 const FtOAuthRequestPage = () => {
   const theme = useTheme();

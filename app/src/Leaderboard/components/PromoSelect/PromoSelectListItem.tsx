@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 
-import { Promo } from '@shared/__generated__/graphql';
+import type { Promo } from '@shared/__generated__/graphql';
 import { CaptionText, HStack, SelectItem, Text } from '@shared/ui-kit';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 
@@ -8,7 +8,7 @@ type PromoSelectListItemProps = {
   item: Promo;
 };
 
-export function PromoSelectListItem({ item }: PromoSelectListItemProps) {
+export const PromoSelectListItem = ({ item }: PromoSelectListItemProps) => {
   const { promo, beginAt } = item;
 
   const unit = '기';
@@ -24,4 +24,4 @@ export function PromoSelectListItem({ item }: PromoSelectListItemProps) {
       </HStack>
     </SelectItem>
   );
-}
+};

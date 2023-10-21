@@ -1,4 +1,5 @@
 import { useTheme } from '@emotion/react';
+
 import { Avatar, H3MediumText, HStack, Text } from '@shared/ui-kit';
 
 type NumberVersusProps = {

@@ -1,13 +1,14 @@
-import { EvalLogSortOrder } from '@shared/__generated__/graphql';
-import { PropsWithReactNodeChildren } from '@shared/types/PropsWithChildren';
 import { atom } from 'jotai';
 import { useHydrateAtoms } from 'jotai/utils';
 import { useSearchParams } from 'react-router-dom';
-import type { EvalLogSearchArgs } from '../api/getEvalLogs';
+
+import type { EvalLogSearchArgs } from '@/EvalLogSearch/api/getEvalLogs';
 import {
   EVAL_LOG_SEARCH_URL_PARAM_KEYS,
   EVAL_LOG_SEARCH_URL_PARAM_VALUES,
-} from '../constants/urlParams';
+} from '@/EvalLogSearch/constants/urlParams';
+import { EvalLogSortOrder } from '@shared/__generated__/graphql';
+import type { PropsWithReactNodeChildren } from '@shared/types/PropsWithChildren';
 
 export const evalLogSearchArgsAtom = atom<EvalLogSearchArgs>({});
 

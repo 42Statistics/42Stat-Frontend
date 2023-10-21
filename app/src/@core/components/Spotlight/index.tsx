@@ -1,19 +1,20 @@
 import { useLazyQuery } from '@apollo/client';
-import { isSpotlightOpenAtom } from '@core/atoms/isSpotlightOpenAtom';
-import { SpotlightFocusContext } from '@core/contexts/SpotlightFocusContext';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { useSetAtom } from 'jotai';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useDebounce } from 'usehooks-ts';
+
+import { isSpotlightOpenAtom } from '@core/atoms/isSpotlightOpenAtom';
+import { SpotlightResult } from '@core/components/Spotlight/SpotlightResult';
+import { SpotlightSearchBar } from '@core/components/Spotlight/SpotlightSearchBar';
+import { SpotlightFocusContext } from '@core/contexts/SpotlightFocusContext';
 import { gql } from '@shared/__generated__';
 import { ReactComponent as MdSearch } from '@shared/assets/icon/md-search.svg';
 import { useRoveFocus } from '@shared/hooks/useRoveFocus';
 import { Dialog, VStack } from '@shared/ui-kit';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
-import { useSetAtom } from 'jotai';
-import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import { useDebounce } from 'usehooks-ts';
-import { SpotlightResult } from './SpotlightResult';
-import { SpotlightSearchBar } from './SpotlightSearchBar';
 
 export const GET_SPOTLIGHT = gql(/* GraphQL */ `
   query GetSpotlight($input: String!, $limit: Int!) {
@@ -30,7 +31,10 @@ export const GET_SPOTLIGHT = gql(/* GraphQL */ `
 
 export const Spotlight = () => {
   const theme = useTheme();
+  const location = useLocation();
   const device = useDeviceType();
+  const LIMIT = 4;
+  const [isMounted, setIsMounted] = useState(false);
   const [input, setInput] = useState<string>('');
   const debouncedInput = useDebounce(input, 50);
   const [search, searchResult] = useLazyQuery(GET_SPOTLIGHT);
@@ -38,13 +42,14 @@ export const Spotlight = () => {
     (searchResult.data?.getSpotlight.userPreviews.length ?? 0) +
     (searchResult.data?.getSpotlight.projectPreviews.length ?? 0);
   const { currentFocus, setCurrentFocus } = useRoveFocus(size);
-  const LIMIT = 4;
-  const location = useLocation();
-  const [isMounted, setIsMounted] = useState(false);
   const setIsSpotlightOpen = useSetAtom(isSpotlightOpenAtom);
 
   const closeSpotlight = () => {
     setIsSpotlightOpen(false);
+  };
+
+  const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    setInput(e.target.value);
   };
 
   useEffect(() => {
@@ -82,10 +87,6 @@ export const Spotlight = () => {
     }
     search({ variables: { input: trimmedDebouncedInput, limit: LIMIT } });
   }, [debouncedInput, search]);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value);
-  };
 
   return (
     <SpotlightFocusContext.Provider value={{ currentFocus, setCurrentFocus }}>

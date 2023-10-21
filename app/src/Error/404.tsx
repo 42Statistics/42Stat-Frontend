@@ -1,15 +1,16 @@
 import { useTheme } from '@emotion/react';
+import { Link } from 'react-router-dom';
+
 import { AppLogoTitle } from '@shared/components/AppLogoTitle';
 import { Seo } from '@shared/components/Seo';
 import { ARIA_LABEL } from '@shared/constants/accessibility';
 import { ROUTES } from '@shared/constants/routes';
 import { BoldText, Button, Text, VStack } from '@shared/ui-kit';
-import { Link } from 'react-router-dom';
 
 const NotFoundPage = () => {
+  const theme = useTheme();
   const statusCode = 404;
   const statusText = 'Not Found';
-  const theme = useTheme();
 
   return (
     <>

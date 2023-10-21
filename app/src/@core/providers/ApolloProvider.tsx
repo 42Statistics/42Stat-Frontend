@@ -9,13 +9,22 @@ import {
 } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 import { relayStylePagination } from '@apollo/client/utilities';
-import { reLoginDialogInfoAtom } from '@core/atoms/reLoginDialogInfoAtom';
-import { getNewAccessToken } from '@core/services/auth/getNewAccessToken';
-import { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
-import { getAccessToken } from '@shared/utils/storage/accessToken';
-import { getRefreshToken } from '@shared/utils/storage/refreshToken';
 import { useSetAtom } from 'jotai';
 import { useEffect } from 'react';
+
+import { reLoginDialogInfoAtom } from '@core/atoms/reLoginDialogInfoAtom';
+import { getNewAccessToken } from '@core/services/auth/getNewAccessToken';
+import type { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
+import { getAccessToken } from '@shared/utils/storage/accessToken';
+import { getRefreshToken } from '@shared/utils/storage/refreshToken';
+
+const Provider = ({ children }: PropsWithReactElementChildren) => {
+  return (
+    <ApolloProvider client={client}>
+      <ResponseInterceptor400>{children}</ResponseInterceptor400>
+    </ApolloProvider>
+  );
+};
 
 const httpLink = new HttpLink({
   uri: import.meta.env.VITE_BACKEND_GRAPHQL_ENDPOINT,
@@ -23,9 +32,11 @@ const httpLink = new HttpLink({
 
 const authLink = new ApolloLink((operation, forward) => {
   const accessToken = getAccessToken();
+
   if (accessToken === null) {
     return forward(operation);
   }
+
   const oldHeaders = operation.getContext().headers;
   operation.setContext({
     headers: {
@@ -33,6 +44,7 @@ const authLink = new ApolloLink((operation, forward) => {
       authorization: `Bearer ${accessToken}`,
     },
   });
+
   return forward(operation);
 });
 
@@ -130,14 +142,6 @@ export const client = new ApolloClient({
   }),
 });
 
-const Provider = ({ children }: PropsWithReactElementChildren) => {
-  return (
-    <ApolloProvider client={client}>
-      <ResponseInterceptor400>{children}</ResponseInterceptor400>
-    </ApolloProvider>
-  );
-};
-
 const ResponseInterceptor400 = ({
   children,
 }: PropsWithReactElementChildren) => {
@@ -157,7 +161,11 @@ const ResponseInterceptor400 = ({
               }
               setReLoginDialogInfo({
                 isOpen: true,
-                description: error.message,
+                /**
+                 * 현재 BE에서 400 상태코드를 Code로 구분해주지 않기 때문에, description이 항상 고정입니다.
+                 * 이후 BE에서 Code로 구분해주면, Code에 따라 상응하는 description(= ReLoginDialog body) 분기할 예정입니다.
+                 */
+                description: '다시 로그인해주세요.',
               });
               break;
           }

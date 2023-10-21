@@ -1,6 +1,6 @@
+import { TabletNavItem } from '@core/components/NavBar/Tablet/TabletNavItem';
+import { useNavRoutes } from '@core/components/NavBar/hooks/useNavRoutes';
 import { Spacer, VStack } from '@shared/ui-kit';
-import { useNavRoutes } from '../hooks/useNavRoutes';
-import { TabletNavItem } from './TabletNavItem';
 
 export const TabletNavMenu = () => {
   const { NAV_ROUTES } = useNavRoutes();

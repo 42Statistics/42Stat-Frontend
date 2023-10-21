@@ -1,7 +1,8 @@
+import { ApexOptions } from 'apexcharts';
 import { merge } from 'lodash-es';
 import ReactApexChart from 'react-apexcharts';
-import { useDefaultOptions } from './hooks/useDefaultOptions';
-import { ApexOptions } from 'apexcharts';
+
+import { useDefaultOptions } from '@shared/components/Chart/hooks/useDefaultOptions';
 
 type ApexChartType =
   | 'line'
@@ -27,7 +28,7 @@ type ChartProps = {
   options: ApexCharts.ApexOptions;
 };
 
-const Chart = ({ type, options: chartOptions, series }: ChartProps) => {
+export const Chart = ({ type, options: chartOptions, series }: ChartProps) => {
   const { defaultOptions } = useDefaultOptions();
 
   const options = merge({}, defaultOptions, chartOptions);
@@ -42,5 +43,3 @@ const Chart = ({ type, options: chartOptions, series }: ChartProps) => {
     />
   );
 };
-
-export default Chart;

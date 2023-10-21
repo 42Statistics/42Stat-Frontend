@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
+
+import { DashboardRow } from '@shared/components/Dashboard/DashboardRow';
+import { DashboardRowItem } from '@shared/components/Dashboard/DashboardRowItem';
 import type { DashboardProps } from '@shared/types/Dashboard';
-import { DashboardRow } from './DashboardRow';
-import { DashboardRowItem } from './DashboardRowItem';
 
 export const Dashboard = ({ rows, contents }: DashboardProps) => {
   return (

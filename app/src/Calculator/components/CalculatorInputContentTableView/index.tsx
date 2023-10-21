@@ -24,6 +24,7 @@ type CalculatorInputContentTableViewProps = {
 
 export const CalculatorInputContentTableView = ({
   onSubjectListChange,
+  onSubjectDelete,
   onInputChange,
   onCheckboxChange,
 }: CalculatorInputContentTableViewProps) => {
@@ -104,6 +105,7 @@ export const CalculatorInputContentTableView = ({
                   tableRowList={subjectList}
                   index={index}
                   onListChange={onSubjectListChange}
+                  handleDelete={onSubjectDelete}
                 />
               </td>
             </tr>

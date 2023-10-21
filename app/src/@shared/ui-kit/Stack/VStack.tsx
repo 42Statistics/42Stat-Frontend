@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+
 import type { StackProps } from '@shared/types/StackProps';
 
 export const VStack = styled.div<StackProps>`

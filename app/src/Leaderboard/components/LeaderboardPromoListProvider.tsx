@@ -2,13 +2,13 @@ import { useQuery } from '@apollo/client';
 import { useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 
+import { leaderboardPromoListAtom } from '@/Leaderboard/atoms/leaderboardPromoListAtom';
+import { GET_LEADERBOARD_PROMO_LIST } from '@/Leaderboard/queries/getLeaderboardPromoList';
 import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
-import { leaderboardPromoListAtom } from '../atoms/leaderboardPromoListAtom';
-import { GET_LEADERBOARD_PROMO_LIST } from '../queries/getLeaderboardPromoList';
 
-export function LeaderboardPromoListProvider({
+export const LeaderboardPromoListProvider = ({
   children,
-}: React.PropsWithChildren) {
+}: React.PropsWithChildren) => {
   const { loading, error, data } = useQuery(GET_LEADERBOARD_PROMO_LIST);
   const setPromoList = useSetAtom(leaderboardPromoListAtom);
 
@@ -29,4 +29,4 @@ export function LeaderboardPromoListProvider({
   }
 
   return <>{children}</>;
-}
+};

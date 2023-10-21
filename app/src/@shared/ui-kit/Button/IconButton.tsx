@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
-import { Clickable } from '../Clickable';
+
+import { Clickable } from '@shared/ui-kit/Clickable';
 
 type IconButtonSize = 'md';
 

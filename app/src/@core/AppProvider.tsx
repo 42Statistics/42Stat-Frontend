@@ -1,5 +1,3 @@
-import { BrowserRouter as Router } from 'react-router-dom';
-
 import ApolloProvider from '@core/providers/ApolloProvider';
 import ErrorBoundaryProvider from '@core/providers/ErrorBoundaryProvider';
 import HelmetProvider from '@core/providers/HelmetProvider';
@@ -14,11 +12,9 @@ export const AppProvider = ({ children }: PropsWithReactElementChildren) => {
       <ApolloProvider>
         <HelmetProvider>
           <ThemeProvider>
-            <Router>
-              <ScrollToTop>
-                <ModalProvider>{children}</ModalProvider>
-              </ScrollToTop>
-            </Router>
+            <ScrollToTop>
+              <ModalProvider>{children}</ModalProvider>
+            </ScrollToTop>
           </ThemeProvider>
         </HelmetProvider>
       </ApolloProvider>

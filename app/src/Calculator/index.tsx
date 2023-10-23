@@ -18,6 +18,7 @@ import {
 import { getDifferences } from '@/Calculator/utils/getDifferences';
 import { Footer } from '@core/components/Footer';
 import { gql } from '@shared/__generated__';
+import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
 import { DashboardTemp } from '@shared/components/Dashboard/DashboardTemp';
 import { Seo } from '@shared/components/Seo';
 import { H1BoldText, VStack } from '@shared/ui-kit';
@@ -74,8 +75,11 @@ const CalculatorPage = () => {
     setSubjectList([emptySubject(0)]);
   }, [setSubjectList]);
 
-  if (loading || error || !data) {
+  if (loading) {
     return <></>;
+  }
+  if (error || !data) {
+    return <FullPageApolloErrorView />;
   }
 
   return (

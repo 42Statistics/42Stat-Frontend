@@ -54,9 +54,9 @@ export const AverageFinalMark = () => {
   return (
     <DashboardContent title={title} description={description}>
       <NumberVersus
-        imgUrl1={myUserProfile.imgUrl}
+        userData1={myUserProfile}
         number1={myAverageFinalMark}
-        imgUrl2={userProfile.imgUrl}
+        userData2={userProfile}
         number2={averageFinalMark}
         unit={unit}
       />

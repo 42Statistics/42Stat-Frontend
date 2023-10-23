@@ -11,11 +11,11 @@ type TabletNavProfileProps = {
 };
 
 export const TabletNavProfile = ({ imgUrl }: TabletNavProfileProps) => {
-  const user = useAtomValue(userAtom);
+  const { login } = useAtomValue(userAtom);
 
   return (
-    <Link to={ROUTES.PROFILE_OF(user.login)}>
-      <Avatar size="sm" src={imgUrl} alt={ALT.AVATAR_OF(user.login)} />
+    <Link to={ROUTES.PROFILE_OF(login)}>
+      <Avatar size="sm" src={imgUrl} name={login} alt={ALT.AVATAR_OF(login)} />
     </Link>
   );
 };

@@ -43,9 +43,9 @@ export const Level = () => {
   return (
     <DashboardContent title={title}>
       <NumberVersus
-        imgUrl1={myUserProfile.imgUrl}
+        userData1={myUserProfile}
         number1={myLevel}
-        imgUrl2={userProfile.imgUrl}
+        userData2={userProfile}
         number2={level}
       />
     </DashboardContent>

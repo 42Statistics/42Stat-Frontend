@@ -55,9 +55,9 @@ export const AverageCommentLength = () => {
       titleRight={<InfoTooltip text="코멘트 : 평가하러 가서 작성한 리뷰" />}
     >
       <NumberVersus
-        imgUrl1={myUserProfile.imgUrl}
+        userData1={myUserProfile}
         number1={myAverageCommentLength}
-        imgUrl2={userProfile.imgUrl}
+        userData2={userProfile}
         number2={averageCommentLength}
         unit={unit}
       />

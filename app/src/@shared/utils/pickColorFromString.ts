@@ -14,5 +14,6 @@ export const pickColorFromString = (
     const value = (((hash >> (i * 8)) & 0xff) % range) + brightness;
     color += value.toString(16).padStart(2, '0');
   }
+
   return color;
 };

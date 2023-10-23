@@ -1,6 +1,6 @@
-import styled from '@emotion/styled';
 import { useState } from 'react';
 
+import styled from '@emotion/styled';
 import marvin from '@shared/assets/avatar/marvin.jpeg';
 import { AvatarInitials } from '@shared/ui-kit/Avatar/AvatarInitials';
 import { Image } from '@shared/ui-kit/Image';

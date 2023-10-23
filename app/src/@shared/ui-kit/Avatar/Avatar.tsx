@@ -15,6 +15,7 @@ type AvatarProps = {
   name?: string | undefined;
 };
 
+//Avatar name 속성을 넘겨받지 않으면 로딩실패시 marvin이 됩니다.
 export const Avatar = ({
   size = 'md',
   src,

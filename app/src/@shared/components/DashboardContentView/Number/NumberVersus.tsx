@@ -4,24 +4,24 @@ import type { UserProfile } from '@shared/__generated__/graphql';
 import { Avatar, H3MediumText, HStack, Text } from '@shared/ui-kit';
 
 type NumberVersusProps = {
-  userData1: UserProfile;
+  userProfile1: UserProfile;
   number1: number;
-  userData2: UserProfile;
+  userProfile2: UserProfile;
   number2: number;
   unit?: string;
 };
 
 export const NumberVersus = ({
-  userData1,
+  userProfile1,
   number1,
-  userData2,
+  userProfile2,
   number2,
   unit,
 }: NumberVersusProps) => {
   const theme = useTheme();
 
-  const { imgUrl: imgUrl1, login: name1 } = userData1;
-  const { imgUrl: imgUrl2, login: name2 } = userData2;
+  const { imgUrl: imgUrl1, login: name1 } = userProfile1;
+  const { imgUrl: imgUrl2, login: name2 } = userProfile2;
 
   return (
     <HStack spacing="3rem">

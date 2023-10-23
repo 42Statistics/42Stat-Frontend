@@ -62,9 +62,9 @@ export const TotalEvalCount = () => {
   return (
     <DashboardContent title={title}>
       <NumberVersus
-        userData1={myUserProfile}
+        userProfile1={myUserProfile}
         number1={myCount}
-        userData2={userProfile}
+        userProfile2={userProfile}
         number2={count}
         unit={unit}
       />

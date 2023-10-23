@@ -5,7 +5,7 @@ import marvin from '@shared/assets/avatar/marvin.jpeg';
 import { AvatarInitials } from '@shared/ui-kit/Avatar/AvatarInitials';
 import { Image } from '@shared/ui-kit/Image';
 
-type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
 type AvatarProps = {
   size?: AvatarSize;
@@ -37,7 +37,7 @@ export const Avatar = ({
   return (
     <div style={{ position: 'relative' }}>
       {name && !image && (isLoading || isError) ? (
-        <AvatarInitials width={width} name={name} />
+        <AvatarInitials size={size} width={width} name={name} />
       ) : (
         <StyledAvatar
           onLoad={() => setIsLoading(false)}

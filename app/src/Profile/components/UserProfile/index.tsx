@@ -41,7 +41,11 @@ export const UserProfile = () => {
     >
       <Desktop>
         <HStack h="100%" spacing="4rem">
-          <Avatar size="xl" src={imgUrl} alt={ALT.AVATAR_OF(login)} />
+          <Avatar /* name 속성을 빼면 사진 로딩 실패시 marvin이 됩니다. */
+            size="xl"
+            src={imgUrl}
+            alt={ALT.AVATAR_OF(login)}
+          />
           <H3BoldText color={theme.colors.mono.absolute.white}>
             {titleCase(grade)}
           </H3BoldText>
@@ -62,7 +66,11 @@ export const UserProfile = () => {
       <TabletAndBelow>
         <HStack h="100%" spacing="4rem">
           <VStack>
-            <Avatar size="2xl" src={imgUrl} alt={ALT.AVATAR_OF(login)} />
+            <Avatar /* name 속성을 빼면 사진 로딩 실패시 marvin이 됩니다. */
+              size="2xl"
+              src={imgUrl}
+              alt={ALT.AVATAR_OF(login)}
+            />
           </VStack>
           <VStack w="15rem" spacing="1rem" style={{ textAlign: 'center' }}>
             <H3BoldText color={theme.colors.mono.absolute.white}>

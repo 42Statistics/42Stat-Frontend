@@ -52,7 +52,7 @@ export const LeaderboardListItem = ({
                   {rank === 0 ? '–' : rank}
                 </Body1MediumText>
               </HStack>
-              <Avatar src={imgUrl} alt={ALT.AVATAR_OF(login)} />
+              <Avatar src={imgUrl} name={login} alt={ALT.AVATAR_OF(login)} />
               <MediumText color={color}>{login}</MediumText>
               <Spacer />
               <HStack align="baseline" spacing="0.2rem">

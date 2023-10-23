@@ -15,7 +15,14 @@ export const SpotlightUserListItem = ({
 }: SpotlightUserListItemProps) => {
   return (
     <SpotlightListItem
-      left={<Avatar size="xs" src={imgUrl} alt={ALT.AVATAR_OF(login)} />}
+      left={
+        <Avatar
+          size="xs"
+          src={imgUrl}
+          name={login}
+          alt={ALT.AVATAR_OF(login)}
+        />
+      }
       name={login}
       link={ROUTES.PROFILE_OF(login)}
       index={index}

@@ -37,7 +37,12 @@ export const DesktopNavProfile = ({
     >
       <Layout>
         <HStack w="100%" spacing="2rem">
-          <Avatar size="lg" src={imgUrl} alt={ALT.AVATAR_OF(login)} />
+          <Avatar
+            size="lg"
+            src={imgUrl}
+            name={login}
+            alt={ALT.AVATAR_OF(login)}
+          />
           <VStack align="start" spacing="0.5rem">
             <MediumText>{login}</MediumText>
             <CaptionText color={theme.colors.mono.gray500}>

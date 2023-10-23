@@ -59,9 +59,9 @@ export const TotalLogtime = () => {
   return (
     <DashboardContent title={title}>
       <NumberVersus
-        imgUrl1={myUserProfile.imgUrl}
+        userData1={myUserProfile}
         number1={myLogtimeByHours}
-        imgUrl2={userProfile.imgUrl}
+        userData2={userProfile}
         number2={logtimeByHours}
         unit={unit}
       />

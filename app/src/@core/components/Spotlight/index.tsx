@@ -3,7 +3,6 @@ import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useSetAtom } from 'jotai';
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { useDebounce } from 'usehooks-ts';
 
 import { isSpotlightOpenAtom } from '@core/atoms/isSpotlightOpenAtom';
@@ -31,10 +30,8 @@ export const GET_SPOTLIGHT = gql(/* GraphQL */ `
 
 export const Spotlight = () => {
   const theme = useTheme();
-  const location = useLocation();
   const device = useDeviceType();
   const LIMIT = 4;
-  const [isMounted, setIsMounted] = useState(false);
   const [input, setInput] = useState<string>('');
   const debouncedInput = useDebounce(input, 50);
   const [search, searchResult] = useLazyQuery(GET_SPOTLIGHT);
@@ -51,21 +48,6 @@ export const Spotlight = () => {
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setInput(e.target.value);
   };
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  // 페이지 이동 감지
-  useEffect(() => {
-    if (!isMounted) {
-      return;
-    }
-    setInput('');
-    closeSpotlight();
-    setCurrentFocus(0);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location]);
 
   useEffect(() => {
     setCurrentFocus(0);

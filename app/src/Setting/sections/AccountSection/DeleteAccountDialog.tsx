@@ -6,7 +6,6 @@ import { gql } from '@shared/__generated__';
 import { ROUTES } from '@shared/constants/routes';
 import { ConfirmDialog } from '@shared/ui-kit';
 import { removeAccessToken } from '@shared/utils/storage/accessToken';
-import { removeGoogleCredential } from '@shared/utils/storage/googleCredential';
 import { removeRefreshToken } from '@shared/utils/storage/refreshToken';
 
 const DELETE_ACCOUNT = gql(/* GraphQL */ `

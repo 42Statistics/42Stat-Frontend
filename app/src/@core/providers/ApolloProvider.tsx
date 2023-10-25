@@ -12,7 +12,7 @@ import { relayStylePagination } from '@apollo/client/utilities';
 import { useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 
-import { reLoginDialogAtom } from '@core/atoms/reLoginDialogAtom';
+import { isReLoginDialogOpenAtom } from '@core/atoms/isReLoginDialogOpenAtom';
 import { getNewAccessToken } from '@core/services/auth/getNewAccessToken';
 import type { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
 import { getAccessToken } from '@shared/utils/storage/accessToken';
@@ -145,7 +145,7 @@ export const client = new ApolloClient({
 const ResponseInterceptor400 = ({
   children,
 }: PropsWithReactElementChildren) => {
-  const setReLoginDialog = useSetAtom(reLoginDialogAtom);
+  const setReLoginDialog = useSetAtom(isReLoginDialogOpenAtom);
 
   useEffect(() => {
     const responseInterceptor400 = onError(({ graphQLErrors }) => {

@@ -12,7 +12,7 @@ import { relayStylePagination } from '@apollo/client/utilities';
 import { useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 
-import { reLoginDialogInfoAtom } from '@core/atoms/reLoginDialogInfoAtom';
+import { reLoginDialogAtom } from '@core/atoms/reLoginDialogAtom';
 import { getNewAccessToken } from '@core/services/auth/getNewAccessToken';
 import type { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
 import { getAccessToken } from '@shared/utils/storage/accessToken';
@@ -145,7 +145,7 @@ export const client = new ApolloClient({
 const ResponseInterceptor400 = ({
   children,
 }: PropsWithReactElementChildren) => {
-  const setReLoginDialogInfo = useSetAtom(reLoginDialogInfoAtom);
+  const setReLoginDialog = useSetAtom(reLoginDialogAtom);
 
   useEffect(() => {
     const responseInterceptor400 = onError(({ graphQLErrors }) => {
@@ -159,14 +159,7 @@ const ResponseInterceptor400 = ({
               if (refreshToken === null && accessToken === null) {
                 break;
               }
-              setReLoginDialogInfo({
-                isOpen: true,
-                /**
-                 * 현재 BE에서 400 상태코드를 Code로 구분해주지 않기 때문에, description이 항상 고정입니다.
-                 * 이후 BE에서 Code로 구분해주면, Code에 따라 상응하는 description(= ReLoginDialog body) 분기할 예정입니다.
-                 */
-                description: '다시 로그인해주세요.',
-              });
+              setReLoginDialog(true);
               break;
           }
         }
@@ -176,7 +169,7 @@ const ResponseInterceptor400 = ({
     client.setLink(
       from([responseInterceptor400, errorLink, authLink, httpLink]),
     );
-  }, [setReLoginDialogInfo]);
+  }, [setReLoginDialog]);
 
   return <>{children}</>;
 };

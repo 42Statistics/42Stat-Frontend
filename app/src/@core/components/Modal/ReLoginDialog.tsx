@@ -2,14 +2,14 @@ import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { reLoginDialogAtom } from '@core/atoms/reLoginDialogAtom';
+import { isReLoginDialogOpenAtom } from '@core/atoms/isReLoginDialogOpenAtom';
 import { ROUTES } from '@shared/constants/routes';
 import { AlertDialog } from '@shared/ui-kit';
 import { clearStorage } from '@shared/utils/storage/clearStorage';
 
 export const ReLoginDialog = () => {
   const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useAtom(reLoginDialogAtom);
+  const [isModalOpen, setIsModalOpen] = useAtom(isReLoginDialogOpenAtom);
 
   const closeReLoginDialog = () => {
     setIsModalOpen(false);

@@ -1,10 +1,10 @@
 import { useSetAtom } from 'jotai';
 
-import { logoutErrorAtom } from '@core/atoms/logoutErrorAtom';
+import { isLogoutErrorDialogOpenAtom } from '@core/atoms/isLogoutErrorDialogOpenAtom';
 import { AlertDialog } from '@shared/ui-kit';
 
 export const LogoutErrorDialog = () => {
-  const setIsModalOpen = useSetAtom(logoutErrorAtom);
+  const setIsModalOpen = useSetAtom(isLogoutErrorDialogOpenAtom);
 
   const handleConfirm = () => {
     setIsModalOpen(false);

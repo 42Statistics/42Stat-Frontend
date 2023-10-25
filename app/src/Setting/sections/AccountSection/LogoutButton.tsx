@@ -4,7 +4,7 @@ import { RESET } from 'jotai/utils';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { isDialogOpenAtom } from '@core/atoms/isDialogOpenAtom';
+import { logoutErrorAtom } from '@core/atoms/logoutErrorAtom';
 import { gql } from '@shared/__generated__';
 import { themePreferenceAtom } from '@shared/atoms/themePreferenceAtom';
 import { Button } from '@shared/ui-kit';
@@ -20,7 +20,7 @@ export const LogoutButton = () => {
   const navigate = useNavigate();
   const [logout, { called, loading, error }] = useMutation(LOGOUT);
   const setThemePreference = useSetAtom(themePreferenceAtom);
-  const setLogoutError = useSetAtom(isDialogOpenAtom);
+  const setLogoutError = useSetAtom(logoutErrorAtom);
 
   useEffect(() => {
     if (!called) {
@@ -30,19 +30,14 @@ export const LogoutButton = () => {
       return;
     }
     if (error) {
-      setLogoutError({
-        isOpen: true,
-        title: '로그아웃 오류',
-        description: '다시 시도해주세요.',
-        confirmText: '확인',
-      });
+      setLogoutError(true);
       return;
     }
 
     clearStorage();
     setThemePreference(RESET);
     window.location.reload(); // atom 초기화를 위해 새로고침
-  }, [called, loading, error, navigate, setThemePreference]);
+  }, [called, loading, error, navigate, setLogoutError, setThemePreference]);
 
   return <Button onClick={() => logout()}>로그아웃</Button>;
 };

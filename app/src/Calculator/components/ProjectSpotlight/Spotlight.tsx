@@ -46,7 +46,6 @@ export const Spotlight = ({
     if (checkDuplicateSubject(subjectList, name, index)) {
       setCalculatorDialog({
         isOpen: true,
-        description: '이미 추가된 프로젝트입니다.',
         focus: currentOpenSpotlightIndex,
       });
       setCurrentOpenSpotlightIndex(-1);

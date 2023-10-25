@@ -9,6 +9,7 @@ import { ProfileVersusPageSkeleton } from '@/Profile/components/skeletons/Profil
 import { UserProfileSkeleton } from '@/Profile/components/skeletons/UserProfileSkeleton';
 import { AuthGuard } from '@core/guards/AuthGuard';
 import { UnAuthGuard } from '@core/guards/UnAuthGuard';
+import { ModalProvider } from '@core/providers/ModalProvider';
 import { ROUTES } from '@shared/constants/routes';
 import { DeferredComponent } from '@shared/ui-kit';
 
@@ -43,213 +44,218 @@ const CalculatorPage = lazy(() => import('@/Calculator'));
 
 export const appRouter = createBrowserRouter([
   {
-    element: <UnAuthGuard />,
+    element: <ModalProvider />,
     children: [
       {
-        element: (
-          <Suspense>
-            <LandingLayout />
-          </Suspense>
-        ),
+        element: <UnAuthGuard />,
         children: [
           {
-            path: ROUTES.ROOT,
             element: (
               <Suspense>
-                <LandingPage />
-              </Suspense>
-            ),
-          },
-          {
-            path: ROUTES.FT_OAUTH_REQUEST,
-            element: (
-              <Suspense>
-                <FtOAuthRequestPage />
-              </Suspense>
-            ),
-          },
-          {
-            path: ROUTES.FT_OAUTH_REDIRECT,
-            element: (
-              <Suspense>
-                <FtOAuthRedirectPage />
-              </Suspense>
-            ),
-          },
-        ],
-      },
-    ],
-  },
-  {
-    element: <AuthGuard />,
-    children: [
-      {
-        element: (
-          <Suspense>
-            <MainLayout />
-          </Suspense>
-        ),
-        children: [
-          {
-            path: ROUTES.HOME,
-            element: (
-              <Suspense
-                fallback={
-                  <DeferredComponent>
-                    <HomePageSkeleton />
-                  </DeferredComponent>
-                }
-              >
-                <HomePage />
-              </Suspense>
-            ),
-          },
-          {
-            path: ROUTES.PROFILE,
-            element: (
-              <Suspense fallback={<UserProfileSkeleton />}>
-                <ProfileLayout />
+                <LandingLayout />
               </Suspense>
             ),
             children: [
               {
-                index: true,
-                element: <Navigate replace to="general" />,
-              },
-              {
-                path: ROUTES.PROFILE_GENERAL,
+                path: ROUTES.ROOT,
                 element: (
-                  <Suspense fallback={<ProfileGeneralPageSkeleton />}>
-                    <ProfileGeneralPage />
+                  <Suspense>
+                    <LandingPage />
                   </Suspense>
                 ),
               },
               {
-                path: ROUTES.PROFILE_EVAL,
+                path: ROUTES.FT_OAUTH_REQUEST,
                 element: (
-                  <Suspense fallback={<ProfileEvalPageSkeleton />}>
-                    <ProfileEvalPage />
+                  <Suspense>
+                    <FtOAuthRequestPage />
                   </Suspense>
                 ),
               },
               {
-                path: ROUTES.PROFILE_VERSUS,
+                path: ROUTES.FT_OAUTH_REDIRECT,
                 element: (
-                  <Suspense fallback={<ProfileVersusPageSkeleton />}>
-                    <ProfileVersusPage />
+                  <Suspense>
+                    <FtOAuthRedirectPage />
                   </Suspense>
                 ),
               },
             ],
           },
+        ],
+      },
+      {
+        element: <AuthGuard />,
+        children: [
           {
-            path: ROUTES.LEADERBOARD,
             element: (
               <Suspense>
-                <LeaderboardLayout />
+                <MainLayout />
               </Suspense>
             ),
             children: [
               {
-                index: true,
-                element: <Navigate replace to="level" />,
-              },
-              {
-                path: ROUTES.LEADERBOARD_LEVEL,
+                path: ROUTES.HOME,
                 element: (
-                  <Suspense fallback={<LeaderboardPageSkeleton />}>
-                    <LeaderboardLevelPage />
+                  <Suspense
+                    fallback={
+                      <DeferredComponent>
+                        <HomePageSkeleton />
+                      </DeferredComponent>
+                    }
+                  >
+                    <HomePage />
                   </Suspense>
                 ),
               },
               {
-                path: ROUTES.LEADERBOARD_EXP_INCREMENT,
+                path: ROUTES.PROFILE,
                 element: (
-                  <Suspense fallback={<LeaderboardPageSkeleton />}>
-                    <LeaderboardExpIncrementPage />
+                  <Suspense fallback={<UserProfileSkeleton />}>
+                    <ProfileLayout />
+                  </Suspense>
+                ),
+                children: [
+                  {
+                    index: true,
+                    element: <Navigate replace to="general" />,
+                  },
+                  {
+                    path: ROUTES.PROFILE_GENERAL,
+                    element: (
+                      <Suspense fallback={<ProfileGeneralPageSkeleton />}>
+                        <ProfileGeneralPage />
+                      </Suspense>
+                    ),
+                  },
+                  {
+                    path: ROUTES.PROFILE_EVAL,
+                    element: (
+                      <Suspense fallback={<ProfileEvalPageSkeleton />}>
+                        <ProfileEvalPage />
+                      </Suspense>
+                    ),
+                  },
+                  {
+                    path: ROUTES.PROFILE_VERSUS,
+                    element: (
+                      <Suspense fallback={<ProfileVersusPageSkeleton />}>
+                        <ProfileVersusPage />
+                      </Suspense>
+                    ),
+                  },
+                ],
+              },
+              {
+                path: ROUTES.LEADERBOARD,
+                element: (
+                  <Suspense>
+                    <LeaderboardLayout />
+                  </Suspense>
+                ),
+                children: [
+                  {
+                    index: true,
+                    element: <Navigate replace to="level" />,
+                  },
+                  {
+                    path: ROUTES.LEADERBOARD_LEVEL,
+                    element: (
+                      <Suspense fallback={<LeaderboardPageSkeleton />}>
+                        <LeaderboardLevelPage />
+                      </Suspense>
+                    ),
+                  },
+                  {
+                    path: ROUTES.LEADERBOARD_EXP_INCREMENT,
+                    element: (
+                      <Suspense fallback={<LeaderboardPageSkeleton />}>
+                        <LeaderboardExpIncrementPage />
+                      </Suspense>
+                    ),
+                  },
+                  {
+                    path: ROUTES.LEADERBOARD_SCORE,
+                    element: (
+                      <Suspense fallback={<LeaderboardPageSkeleton />}>
+                        <LeaderboardScorePage />
+                      </Suspense>
+                    ),
+                  },
+                  {
+                    path: ROUTES.LEADERBOARD_EVAL_COUNT,
+                    element: (
+                      <Suspense fallback={<LeaderboardPageSkeleton />}>
+                        <LeaderboardEvalCountPage />
+                      </Suspense>
+                    ),
+                  },
+                  {
+                    path: ROUTES.LEADERBOARD_COMMENT,
+                    element: (
+                      <Suspense fallback={<LeaderboardPageSkeleton />}>
+                        <LeaderboardCommentPage />
+                      </Suspense>
+                    ),
+                  },
+                ],
+              },
+              {
+                path: ROUTES.TEAM,
+                element: (
+                  <Suspense>
+                    <TeamPage />
                   </Suspense>
                 ),
               },
               {
-                path: ROUTES.LEADERBOARD_SCORE,
+                path: ROUTES.EVALLOG,
                 element: (
-                  <Suspense fallback={<LeaderboardPageSkeleton />}>
-                    <LeaderboardScorePage />
+                  <Suspense>
+                    <EvalLogSearchPage />
                   </Suspense>
                 ),
               },
               {
-                path: ROUTES.LEADERBOARD_EVAL_COUNT,
+                path: ROUTES.PROJECT_DETAIL,
                 element: (
-                  <Suspense fallback={<LeaderboardPageSkeleton />}>
-                    <LeaderboardEvalCountPage />
+                  <Suspense>
+                    <ProjectDetailPage />
                   </Suspense>
                 ),
               },
               {
-                path: ROUTES.LEADERBOARD_COMMENT,
+                path: ROUTES.CALCULATOR,
                 element: (
-                  <Suspense fallback={<LeaderboardPageSkeleton />}>
-                    <LeaderboardCommentPage />
+                  <Suspense>
+                    <CalculatorPage />
+                  </Suspense>
+                ),
+              },
+              {
+                path: ROUTES.SETTING,
+                element: (
+                  <Suspense>
+                    <SettingPage />
                   </Suspense>
                 ),
               },
             ],
           },
+        ],
+      },
+      {
+        element: <LandingLayout />,
+        children: [
           {
-            path: ROUTES.TEAM,
+            path: '*',
             element: (
               <Suspense>
-                <TeamPage />
-              </Suspense>
-            ),
-          },
-          {
-            path: ROUTES.EVALLOG,
-            element: (
-              <Suspense>
-                <EvalLogSearchPage />
-              </Suspense>
-            ),
-          },
-          {
-            path: ROUTES.PROJECT_DETAIL,
-            element: (
-              <Suspense>
-                <ProjectDetailPage />
-              </Suspense>
-            ),
-          },
-          {
-            path: ROUTES.CALCULATOR,
-            element: (
-              <Suspense>
-                <CalculatorPage />
-              </Suspense>
-            ),
-          },
-          {
-            path: ROUTES.SETTING,
-            element: (
-              <Suspense>
-                <SettingPage />
+                <NotFoundPage />
               </Suspense>
             ),
           },
         ],
-      },
-    ],
-  },
-  {
-    element: <LandingLayout />,
-    children: [
-      {
-        path: '*',
-        element: (
-          <Suspense>
-            <NotFoundPage />
-          </Suspense>
-        ),
       },
     ],
   },

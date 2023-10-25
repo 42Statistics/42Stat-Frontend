@@ -1,11 +1,14 @@
 import { useAtom } from 'jotai';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { reLoginDialogInfoAtom } from '@core/atoms/reLoginDialogInfoAtom';
+import { ROUTES } from '@shared/constants/routes';
 import { AlertDialog } from '@shared/ui-kit';
 import { clearStorage } from '@shared/utils/storage/clearStorage';
 
 export const ReLoginDialog = () => {
+  const navigate = useNavigate();
   const [{ isOpen, description }, setReLoginDialogInfo] = useAtom(
     reLoginDialogInfoAtom,
   );
@@ -20,7 +23,7 @@ export const ReLoginDialog = () => {
   const handleConfirm = () => {
     clearStorage();
     closeReLoginDialog();
-    window.location.reload();
+    navigate(ROUTES.ROOT);
   };
 
   useEffect(() => {

@@ -7,13 +7,13 @@ import { AlertDialog } from '@shared/ui-kit';
 import { isEnterKeyDown, isEscapeKeyDown } from '@shared/utils/keyboard';
 
 export const CalculatorDialog = () => {
-  const [{ focus }, setCalculatorDialogAtom] = useAtom(calculatorDialogAtom);
+  const [{ focus }, setIsModalOpen] = useAtom(calculatorDialogAtom);
   const setCurrentOpenSpotlightIndex = useSetAtom(
     currentOpenSpotlightIndexAtom,
   );
 
   const handleConfirm = () => {
-    setCalculatorDialogAtom({
+    setIsModalOpen({
       isOpen: false,
       focus: -1,
     });

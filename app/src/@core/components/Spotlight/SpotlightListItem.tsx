@@ -33,6 +33,7 @@ export const SpotlightListItem = ({
         if (!isFocused) {
           return;
         }
+        setIsSpotlightOpen(false);
         navigate(link);
       }
     };
@@ -40,7 +41,7 @@ export const SpotlightListItem = ({
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [currentFocus, isFocused, navigate, link]);
+  }, [currentFocus, isFocused, navigate, link, setIsSpotlightOpen]);
 
   return (
     <Link

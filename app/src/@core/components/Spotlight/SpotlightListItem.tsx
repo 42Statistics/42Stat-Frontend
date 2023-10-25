@@ -1,7 +1,9 @@
 import styled from '@emotion/styled';
+import { useSetAtom } from 'jotai';
 import { useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
+import { isSpotlightOpenAtom } from '@core/atoms/isSpotlightOpenAtom';
 import { SpotlightFocusContext } from '@core/contexts/SpotlightFocusContext';
 import { Body1Text, HStack, Spacer } from '@shared/ui-kit';
 import { isEnterKeyDown } from '@shared/utils/keyboard';
@@ -21,6 +23,7 @@ export const SpotlightListItem = ({
 }: SpotlightListItemProps) => {
   const navigate = useNavigate();
   const { currentFocus, setCurrentFocus } = useContext(SpotlightFocusContext);
+  const setIsSpotlightOpen = useSetAtom(isSpotlightOpenAtom);
   const isFocused = currentFocus === index;
 
   useEffect(() => {
@@ -40,7 +43,11 @@ export const SpotlightListItem = ({
   }, [currentFocus, isFocused, navigate, link]);
 
   return (
-    <Link to={link} style={{ width: '100%' }}>
+    <Link
+      to={link}
+      onClick={() => setIsSpotlightOpen(false)}
+      style={{ width: '100%' }}
+    >
       <Layout isFocused={isFocused} onMouseOver={() => setCurrentFocus(index)}>
         <HStack w="100%" align="start" spacing="2rem">
           {left}

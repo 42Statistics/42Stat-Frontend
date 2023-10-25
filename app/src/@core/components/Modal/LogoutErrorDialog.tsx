@@ -4,10 +4,10 @@ import { logoutErrorAtom } from '@core/atoms/logoutErrorAtom';
 import { AlertDialog } from '@shared/ui-kit';
 
 export const LogoutErrorDialog = () => {
-  const setLogoutErrorAtom = useSetAtom(logoutErrorAtom);
+  const setIsModalOpen = useSetAtom(logoutErrorAtom);
 
   const handleConfirm = () => {
-    setLogoutErrorAtom(false);
+    setIsModalOpen(false);
   };
 
   return (

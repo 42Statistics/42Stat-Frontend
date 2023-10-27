@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
+import { Palette } from '@shared/atoms/paletteAtom';
 
-export const global = () => css`
+export const global = (palette: Palette) => css`
   @font-face {
     font-family: Pretendard;
     src: url('/fonts/Pretendard-Thin.subset.woff2') format('woff2');
@@ -48,6 +49,12 @@ export const global = () => css`
       sans-serif;
     font-display: fallback; // for UX
     font-size: 62.5%; // 1rem = 10px
+    background: ${palette === 'light'
+      ? 'linear-gradient(150deg, #ffffff 0%, #e7e7e9 100%)'
+      : 'linear-gradient(150deg, #262626 0%, #0a0a0a 100%)'};
+    background-color: ${palette === 'light' ? '#ffffff' : '#262626'};
+    background-repeat: no-repeat;
+    background-attachment: fixed;
   }
 
   body {

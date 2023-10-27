@@ -28,12 +28,12 @@ import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 
 export const GET_BLACKHOLE_INFO = gql(/* GraphQL */ `
   query GetBlackholeInfo {
-    getPersonalGeneral {
-      userProfile {
-        level
-      }
+    getMyInfo {
+      level
       beginAt
-      blackholedAt
+      myRecentActivity {
+        blackholedAt
+      }
     }
     getExpTable {
       level
@@ -53,20 +53,21 @@ const CalculatorPage = () => {
     if (!data) {
       return;
     }
-    const {
-      beginAt,
-      blackholedAt,
-      userProfile: { level },
-    } = data.getPersonalGeneral;
+
+    const { level, beginAt, myRecentActivity } = data.getMyInfo || {};
+    const { blackholedAt } = myRecentActivity || {};
 
     const expMaxTable = data.getExpTable.map((level) => level.exp);
     const expReqTable = getDifferences(expMaxTable);
 
     setCalculatorUserInfo({
-      currentLevel: level,
+      currentLevel: level ?? 0,
       currentBlackhole:
         blackholedAt != null ? getBlackholeDaysLeft(new Date(blackholedAt)) : 0,
-      daysFromStart: -getTimeDiffFromNow(new Date(beginAt), 'day'),
+      daysFromStart: -getTimeDiffFromNow(
+        beginAt ? new Date(beginAt) : new Date(),
+        'day',
+      ),
     });
     setExpTables({ expMaxTable, expReqTable });
   }, [data, setCalculatorUserInfo, setExpTables, setSubjectList]);

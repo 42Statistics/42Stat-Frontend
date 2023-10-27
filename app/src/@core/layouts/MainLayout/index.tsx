@@ -44,9 +44,7 @@ const MainLayout = () => {
         <meta name="theme-color" content={theme.colors.background.main.theme} />
       </Helmet>
       <ScrollRestoration />
-      <Global
-        styles={mainLayoutGlobalStyle(theme.colors.background.main.default)}
-      />
+      <Global styles={mainLayoutGlobalStyle(theme)} />
       {device === 'desktop' ? <DesktopNavBar /> : null}
       {device === 'tablet' ? <TabletNavBar /> : null}
       <MarginLayer>

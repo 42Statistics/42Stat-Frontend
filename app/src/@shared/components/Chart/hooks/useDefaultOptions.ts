@@ -25,10 +25,16 @@ export const useDefaultOptions = () => {
 const defaultOptions: ApexCharts.ApexOptions = {
   chart: {
     toolbar: {
-      show: false,
-    },
-    zoom: {
-      enabled: false,
+      show: true,
+      tools: {
+        download: false,
+        selection: false,
+        zoom: true,
+        zoomin: true,
+        zoomout: true,
+        pan: false,
+        reset: true,
+      },
     },
     fontFamily:
       "'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif",

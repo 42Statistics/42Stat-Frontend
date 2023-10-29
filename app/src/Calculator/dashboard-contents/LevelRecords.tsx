@@ -68,6 +68,14 @@ const LevelCalculatorChart = ({ series }: LevelCalculatorChartProps) => {
   const subjectLength = series[0].data.length;
 
   const options: ApexCharts.ApexOptions = {
+    chart: {
+      toolbar: {
+        show: false,
+        tools: {
+          zoom: false,
+        },
+      },
+    },
     xaxis: {
       overwriteCategories: series[0].data.map((item) => {
         if (subjectLength > MAX_XAXIS_COUNT) {

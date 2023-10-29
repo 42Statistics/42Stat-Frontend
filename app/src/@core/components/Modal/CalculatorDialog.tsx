@@ -7,7 +7,8 @@ import { AlertDialog } from '@shared/ui-kit';
 import { isEnterKeyDown, isEscapeKeyDown } from '@shared/utils/keyboard';
 
 export const CalculatorDialog = () => {
-  const [{ focus }, setIsModalOpen] = useAtom(calculatorDialogAtom);
+  const [{ focus, description }, setIsModalOpen] =
+    useAtom(calculatorDialogAtom);
   const setCurrentOpenSpotlightIndex = useSetAtom(
     currentOpenSpotlightIndexAtom,
   );
@@ -15,6 +16,7 @@ export const CalculatorDialog = () => {
   const handleConfirm = () => {
     setIsModalOpen({
       isOpen: false,
+      description: '',
       focus: -1,
     });
     setCurrentOpenSpotlightIndex(focus);
@@ -38,11 +40,9 @@ export const CalculatorDialog = () => {
   return (
     <AlertDialog
       isOpen
-      onClose={() => {
-        /* can't close */
-      }}
+      onClose={handleConfirm}
       title="프로젝트 추가 오류"
-      description="이미 추가된 프로젝트입니다."
+      description={description}
       confirmText="확인"
       onConfirm={handleConfirm}
     />

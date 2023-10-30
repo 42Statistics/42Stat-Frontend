@@ -37,7 +37,7 @@ export const MobileNavBar = ({ isOpen, onClose }: MobileNavBarProps) => {
             name={user.displayname}
             login={user.login}
           />
-          <NavMenu onClose={onClose} />
+          <NavMenu />
         </VStack>
       </Layout>
     </Drawer>

@@ -39,16 +39,19 @@ const LeaderboardScorePage = () => {
   );
 
   const handleSegmentedControlIndexChange = (newIndex: number) => {
-    const newURLSearchParams = new URLSearchParams(searchParams);
+    const newURLSearchParams = new URLSearchParams();
 
     newURLSearchParams.set(DATE, options[newIndex].value);
     setSearchParams(newURLSearchParams);
   };
 
   const handleCoalitionChange = (newCoalitionId: string | null) => {
-    const newURLSearchParams = new URLSearchParams(searchParams);
+    const newURLSearchParams = new URLSearchParams();
 
     newURLSearchParams.set(DATE, dateTemplate);
+    if (promo) {
+      newURLSearchParams.set(PROMO, promo.toString());
+    }
     if (newCoalitionId) {
       newURLSearchParams.set(COALITION, newCoalitionId);
     }
@@ -56,9 +59,12 @@ const LeaderboardScorePage = () => {
   };
 
   const handlePromoChange = (newPromo: string | null) => {
-    const newURLSearchParams = new URLSearchParams(searchParams);
+    const newURLSearchParams = new URLSearchParams();
 
     newURLSearchParams.set(DATE, dateTemplate);
+    if (coalitionId) {
+      newURLSearchParams.set(COALITION, coalitionId.toString());
+    }
     if (newPromo) {
       newURLSearchParams.set(PROMO, newPromo);
     }

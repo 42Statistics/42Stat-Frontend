@@ -33,7 +33,7 @@ const Layout = styled.div`
   position: fixed;
 
   ${mq({
-    bottom: ['10rem', '5rem'],
+    bottom: ['3rem', '5rem'],
     right: ['3rem', '5rem'],
   })}
 `;

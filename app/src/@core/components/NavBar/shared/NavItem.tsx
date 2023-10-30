@@ -3,15 +3,14 @@ import styled from '@emotion/styled';
 import { Link, useLocation } from 'react-router-dom';
 
 import type { NavRoute } from '@core/components/NavBar/hooks/useNavRoutes';
-import type { NavMenuProps } from '@core/components/NavBar/shared/NavMenu';
 import { HStack, Text } from '@shared/ui-kit';
 
-export type NavItemProps = NavMenuProps & {
+export type NavItemProps = {
   route: NavRoute;
 };
 
 // TODO: Link와 Layout을 합쳐서 StyledLink를 만들고 싶지만, styled(Link)에 isFocused라는 custom prop을 전달할 수 없음.
-export const NavItem = ({ route, onClose }: NavItemProps) => {
+export const NavItem = ({ route }: NavItemProps) => {
   const theme = useTheme();
   const location = useLocation();
 
@@ -21,7 +20,7 @@ export const NavItem = ({ route, onClose }: NavItemProps) => {
 
   return (
     <li style={{ width: '100%' }}>
-      <Link to={route.path} onClick={onClose} style={{ display: 'block' }}>
+      <Link to={route.path} style={{ display: 'block' }}>
         <Layout isFocused={isFocused}>
           <HStack spacing="1.5rem" justify="start">
             <NavItemIcon width={18} height={18} fill={color} />

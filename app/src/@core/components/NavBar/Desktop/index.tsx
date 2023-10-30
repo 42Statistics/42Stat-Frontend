@@ -12,14 +12,10 @@ import { ROUTES } from '@shared/constants/routes';
 import { VStack } from '@shared/ui-kit';
 
 type DesktopNavBarProps = {
-  onClose?: () => void;
   fixed?: boolean;
 };
 
-export const DesktopNavBar = ({
-  onClose,
-  fixed = true,
-}: DesktopNavBarProps) => {
+export const DesktopNavBar = ({ fixed = true }: DesktopNavBarProps) => {
   const user = useAtomValue(userAtom);
 
   return (
@@ -34,7 +30,7 @@ export const DesktopNavBar = ({
           login={user.login}
         />
         <SearchBarShapeButton />
-        <NavMenu onClose={onClose} />
+        <NavMenu />
       </VStack>
     </Layout>
   );

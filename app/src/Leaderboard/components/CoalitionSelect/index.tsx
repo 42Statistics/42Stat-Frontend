@@ -1,5 +1,6 @@
 import { CoalitionSelectList } from '@/Leaderboard/components/CoalitionSelect/CoalitionSelectList';
 import { useGetSelectKey } from '@/Leaderboard/hooks/useGetSelectKey';
+import { CoalitionMark } from '@shared/components/CoalitionMark';
 import type { Coalition } from '@shared/types/Coalition';
 import { Select, SelectContent, SelectTrigger } from '@shared/ui-kit';
 
@@ -31,7 +32,14 @@ export const CoalitionSelect = ({
         currentCoalition !== null ? currentCoalition.name : undefined
       }
     >
-      <SelectTrigger placeholder="전체 코알리숑" />
+      <SelectTrigger
+        left={
+          currentCoalition ? (
+            <CoalitionMark coalition={currentCoalition} />
+          ) : null
+        }
+        placeholder="전체 코알리숑"
+      />
       <SelectContent maxHeight="20rem">
         <CoalitionSelectList list={list} />
       </SelectContent>

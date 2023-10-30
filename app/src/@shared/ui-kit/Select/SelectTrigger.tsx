@@ -9,10 +9,14 @@ import { HStack } from '@shared/ui-kit/Stack';
 import { Text } from '@shared/ui-kit/Text';
 
 type SelectTriggerProps = {
+  left?: React.ReactNode;
   placeholder?: string;
 };
 
-export const SelectTrigger = ({ placeholder = '' }: SelectTriggerProps) => {
+export const SelectTrigger = ({
+  left,
+  placeholder = '',
+}: SelectTriggerProps) => {
   const theme = useTheme();
 
   const { internalValue, renderValue } = useGetSelectValueContext();
@@ -20,7 +24,8 @@ export const SelectTrigger = ({ placeholder = '' }: SelectTriggerProps) => {
 
   return (
     <StyledSelectTrigger onClick={onToggle}>
-      <HStack w="100%" spacing="2rem">
+      <HStack w="100%" spacing="1.5rem">
+        {left}
         {internalValue != null ? (
           <Text>{renderValue}</Text>
         ) : (

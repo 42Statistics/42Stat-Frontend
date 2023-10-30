@@ -25,7 +25,7 @@ export const PromoSelect = ({ curr, list, onChange }: PromoSelectProps) => {
         curr !== null ? numberWithUnitFormatter(curr, unit) : undefined
       }
     >
-      <SelectTrigger placeholder="전체" />
+      <SelectTrigger placeholder="전체 기수" />
       <SelectContent maxHeight="20rem">
         <PromoSelectList list={list} />
       </SelectContent>

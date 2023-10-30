@@ -1,6 +1,6 @@
 import { PromoSelectList } from '@/Leaderboard/components//PromoSelect/PromoSelectList';
 import { useGetSelectKey } from '@/Leaderboard/hooks/useGetSelectKey';
-import type { Promo } from '@/Leaderboard/types/Promo';
+import type { Promo } from '@shared/types/Promo';
 import { Select, SelectContent, SelectTrigger } from '@shared/ui-kit';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 

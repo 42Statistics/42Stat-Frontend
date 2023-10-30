@@ -1,4 +1,4 @@
-import type { Coalition } from '@/Leaderboard/types/Coalition';
+import type { Coalition } from '@shared/types/Coalition';
 import { CaptionText, HStack, SelectItem, Text } from '@shared/ui-kit';
 
 type CoalitionSelectListItemProps = {

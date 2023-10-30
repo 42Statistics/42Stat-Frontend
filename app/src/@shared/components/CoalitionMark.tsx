@@ -1,7 +1,7 @@
 import { Theme, useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 
-import type { Coalition } from '@shared/__generated__/graphql';
+import type { Coalition } from '@shared/types/Coalition';
 import coalition_gam_mark from '@shared/assets/coalition/mark/coalition-gam-mark.svg';
 import coalition_gon_mark from '@shared/assets/coalition/mark/coalition-gon-mark.svg';
 import coalition_gun_mark from '@shared/assets/coalition/mark/coalition-gun-mark.svg';

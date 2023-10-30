@@ -1,5 +1,5 @@
 import { CoalitionSelectListItem } from '@/Leaderboard/components/CoalitionSelect/CoalitionSelectListItem';
-import type { Coalition } from '@/Leaderboard/types/Coalition';
+import type { Coalition } from '@shared/types/Coalition';
 import { HStack, SelectItem, Text } from '@shared/ui-kit';
 
 type CoalitionSelectListProps = {

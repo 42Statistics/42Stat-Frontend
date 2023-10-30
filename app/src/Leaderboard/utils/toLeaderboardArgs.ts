@@ -11,7 +11,7 @@ import {
 export const toLeaderboardArgs = (
   searchParams: URLSearchParams,
 ): LeaderboardArgs => {
-  const { DATE, PAGE, PROMO } = LEADERBOARD_PARAM_KEYS;
+  const { DATE, PAGE, PROMO, COALITION } = LEADERBOARD_PARAM_KEYS;
 
   const dateTemplate = parseDateTemplate(
     searchParams.get(DATE),
@@ -19,10 +19,12 @@ export const toLeaderboardArgs = (
   );
   const pageNumber = parsePageNumber(searchParams.get(PAGE));
   const promo = parsePromo(searchParams.get(PROMO));
+  const coalitionId = parsePromo(searchParams.get(COALITION));
 
   return {
     dateTemplate,
     pageNumber,
     promo,
+    coalitionId,
   };
 };

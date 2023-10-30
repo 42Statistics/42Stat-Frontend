@@ -22,18 +22,18 @@ export const CoalitionMark = ({
 }: CoalitionMarkProps) => {
   const theme = useTheme();
 
-  const { imageUrl, imageFallbackUrl, backgroundColor } =
-    getCoalitionImageUrlByCoalition(theme, coalition);
+  const { imgUrl, imgFallbackUrl, backgroundColor } =
+    getCoalitionImgUrlByCoalition(theme, coalition);
 
   const handleImageError = (
     e: React.SyntheticEvent<HTMLImageElement, Event>,
   ) => {
-    e.currentTarget.src = imageFallbackUrl;
+    e.currentTarget.src = imgFallbackUrl;
   };
 
   return (
     <StyledCoalitionMark
-      src={imageUrl}
+      src={imgUrl}
       alt={
         coalition != null ? ALT.COALITION_LOGO_OF(coalition.name) : ALT.LOGO_42
       }
@@ -47,29 +47,29 @@ export const CoalitionMark = ({
   );
 };
 
-const getCoalitionImageUrlByCoalition = (
+const getCoalitionImgUrlByCoalition = (
   theme: Theme,
   coalition?: Coalition | null,
 ) => {
   if (
     coalition == null ||
-    coalition.imageUrl == null ||
+    coalition.imgUrl == null ||
     coalition.color == null
   ) {
     return {
-      imageUrl: ft_logo,
-      imageFallbackUrl: ft_logo,
+      imgUrl: ft_logo,
+      imgFallbackUrl: ft_logo,
       backgroundColor: theme.colors.mono.white,
     };
   }
   return {
-    imageUrl: coalition.imageUrl,
-    imageFallbackUrl: getCoalitionImageFallbackUrlById(coalition.id),
+    imgUrl: coalition.imgUrl,
+    imgFallbackUrl: getCoalitionImgFallbackUrlById(coalition.id),
     backgroundColor: coalition.color,
   };
 };
 
-const getCoalitionImageFallbackUrlById = (id: number) => {
+const getCoalitionImgFallbackUrlById = (id: number) => {
   switch (id) {
     case 85:
       return coalition_gun_mark;

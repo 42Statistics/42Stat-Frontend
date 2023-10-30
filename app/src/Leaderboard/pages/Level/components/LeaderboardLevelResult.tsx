@@ -22,6 +22,7 @@ type LeaderboardLevelResultProps = {
       dateTemplate: DateTemplate;
       pageNumber: number;
       promo: number | null;
+      coalitionId: number | null;
       pageSize: number;
     }
   >;
@@ -31,14 +32,17 @@ export const LeaderboardLevelResult = ({
   result: { loading, error, data },
 }: LeaderboardLevelResultProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { promo, pageNumber } = toLeaderboardArgs(searchParams);
-  const { PROMO, PAGE } = LEADERBOARD_PARAM_KEYS;
+  const { promo, coalitionId, pageNumber } = toLeaderboardArgs(searchParams);
+  const { PROMO, COALITION, PAGE } = LEADERBOARD_PARAM_KEYS;
 
   const handlePageNumberChange = (newPageNumber: number) => {
     const newURLSearchParams = new URLSearchParams();
 
     if (promo) {
       newURLSearchParams.set(PROMO, promo.toString());
+    }
+    if (coalitionId) {
+      newURLSearchParams.set(COALITION, coalitionId.toString());
     }
     newURLSearchParams.set(PAGE, newPageNumber.toString());
     setSearchParams(newURLSearchParams);

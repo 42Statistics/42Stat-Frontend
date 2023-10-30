@@ -49,12 +49,14 @@ const MainLayout = () => {
       {device === 'tablet' ? <TabletNavBar /> : null}
       <MarginLayer>
         <Layout>
-          {device === 'mobile' ? <MobileHeader /> : null}
-          {device === 'mobile' ? (
-            <StyledSearchBarShapeButton>
-              <SearchBarShapeButton />
-            </StyledSearchBarShapeButton>
-          ) : null}
+          {device === 'mobile' && (
+            <>
+              <MobileHeader />
+              <StyledSearchBarShapeButton>
+                <SearchBarShapeButton />
+              </StyledSearchBarShapeButton>
+            </>
+          )}
           <Outlet />
         </Layout>
       </MarginLayer>

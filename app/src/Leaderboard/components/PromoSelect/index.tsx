@@ -1,6 +1,6 @@
 import { PromoSelectList } from '@/Leaderboard/components//PromoSelect/PromoSelectList';
-import { useGetPromoSelectKey } from '@/Leaderboard/components//PromoSelect/hooks/useGetPromoSelectKey';
-import type { Promo } from '@shared/__generated__/graphql';
+import { useGetSelectKey } from '@/Leaderboard/hooks/useGetSelectKey';
+import type { Promo } from '@/Leaderboard/types/Promo';
 import { Select, SelectContent, SelectTrigger } from '@shared/ui-kit';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 
@@ -13,7 +13,7 @@ type PromoSelectProps = {
 export const PromoSelect = ({ curr, list, onChange }: PromoSelectProps) => {
   const unit = '기';
 
-  const promoSelectKey = useGetPromoSelectKey();
+  const { promoSelectKey } = useGetSelectKey();
 
   return (
     <Select

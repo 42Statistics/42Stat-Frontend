@@ -1,4 +1,4 @@
-import type { Coalition } from '@shared/__generated__/graphql';
+import type { Coalition } from '@/Leaderboard/types/Coalition';
 import { CaptionText, HStack, SelectItem, Text } from '@shared/ui-kit';
 
 type CoalitionSelectListItemProps = {

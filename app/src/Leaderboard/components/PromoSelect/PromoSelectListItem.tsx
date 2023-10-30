@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 
-import type { Promo } from '@shared/__generated__/graphql';
+import type { Promo } from '@/Leaderboard/types/Promo';
 import { CaptionText, HStack, SelectItem, Text } from '@shared/ui-kit';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 

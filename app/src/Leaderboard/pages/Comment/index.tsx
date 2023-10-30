@@ -85,7 +85,7 @@ const LeaderboardCommentPage = () => {
           segments={segments}
         />
         <VStack w="100%" spacing="1rem">
-          <HStack w="100%" justify="start" spacing="1rem">
+          <HStack w="100%" justify="start" wrap="wrap" spacing="1rem">
             <PromoSelect
               curr={promo}
               onChange={handlePromoChange}

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { NavMenu } from '@core/components/NavBar/shared/NavMenu';
 import { MobileNavProfile } from '@core/components/NavProfile/Mobile';
+import { useTheme } from '@emotion/react';
 import { ReactComponent as MdClose } from '@shared/assets/icon/md-close.svg';
 import { userAtom } from '@shared/atoms/userAtom';
 import { AppLogoTitle } from '@shared/components/AppLogoTitle';
@@ -17,6 +18,7 @@ type MobileNavBarProps = {
 };
 
 export const MobileNavBar = ({ isOpen, onClose }: MobileNavBarProps) => {
+  const theme = useTheme();
   const user = useAtomValue(userAtom);
 
   return (
@@ -28,7 +30,7 @@ export const MobileNavBar = ({ isOpen, onClose }: MobileNavBarProps) => {
               <AppLogoTitle size="sm" />
             </Link>
             <Clickable onClick={onClose}>
-              <MdClose width={24} height={24} />
+              <MdClose width={24} height={24} fill={theme.colors.mono.black} />
             </Clickable>
           </HStack>
           <Divider />

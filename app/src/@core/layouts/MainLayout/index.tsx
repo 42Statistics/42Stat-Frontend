@@ -8,7 +8,6 @@ import { Outlet, ScrollRestoration } from 'react-router-dom';
 import { isSpotlightOpenAtom } from '@core/atoms/isSpotlightOpenAtom';
 import { MobileHeader } from '@core/components/Header/Mobile';
 import { DesktopNavBar } from '@core/components/NavBar/Desktop';
-import { TabBar } from '@core/components/NavBar/Mobile(TabBar)';
 import { TabletNavBar } from '@core/components/NavBar/Tablet';
 import { mainLayoutGlobalStyle } from '@core/layouts/MainLayout/mainLayoutGlobalStyle';
 import { Global, useTheme } from '@emotion/react';
@@ -53,7 +52,6 @@ const MainLayout = () => {
           <Outlet />
         </Layout>
       </MarginLayer>
-      {device === 'mobile' ? <TabBar /> : null}
     </>
   );
 };

@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/client';
 import { useAtomValue } from 'jotai';
 import { useSearchParams } from 'react-router-dom';
 
+import { leaderboardCoalitionListAtom } from '@/Leaderboard/atoms/leaderboardCoalitionListAtom';
 import { leaderboardPromoListAtom } from '@/Leaderboard/atoms/leaderboardPromoListAtom';
 import { PromoSelect } from '@/Leaderboard/components/PromoSelect';
 import { CoalitionSelect } from '@/Leaderboard/components/CoalitionSelect';
@@ -14,7 +15,6 @@ import { Footer } from '@core/components/Footer';
 import { DateTemplate } from '@shared/__generated__/graphql';
 import { Seo } from '@shared/components/Seo';
 import { HStack, VStack } from '@shared/ui-kit';
-import { leaderboardCoalitionListAtom } from '@/Leaderboard/atoms/leaderboardCoalitionListAtom';
 
 const LeaderboardLevelPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -22,8 +22,8 @@ const LeaderboardLevelPage = () => {
   const { promo, coalitionId } = leaderboardArgs;
   const { PROMO, COALITION } = LEADERBOARD_PARAM_KEYS;
 
-  const promoList = useAtomValue(leaderboardPromoListAtom);
   const coalitionList = useAtomValue(leaderboardCoalitionListAtom);
+  const promoList = useAtomValue(leaderboardPromoListAtom);
 
   const result = useQuery(GET_LEADERBOARD_LEVEL, {
     variables: {
@@ -33,20 +33,20 @@ const LeaderboardLevelPage = () => {
     },
   });
 
-  const handlePromoChange = (newPromo: string | null) => {
-    const newURLSearchParams = new URLSearchParams(searchParams);
-
-    if (newPromo) {
-      newURLSearchParams.set(PROMO, newPromo);
-    }
-    setSearchParams(newURLSearchParams);
-  };
-
   const handleCoalitionChange = (newCoalitionId: string | null) => {
     const newURLSearchParams = new URLSearchParams(searchParams);
 
     if (newCoalitionId) {
       newURLSearchParams.set(COALITION, newCoalitionId);
+    }
+    setSearchParams(newURLSearchParams);
+  };
+
+  const handlePromoChange = (newPromo: string | null) => {
+    const newURLSearchParams = new URLSearchParams(searchParams);
+
+    if (newPromo) {
+      newURLSearchParams.set(PROMO, newPromo);
     }
     setSearchParams(newURLSearchParams);
   };

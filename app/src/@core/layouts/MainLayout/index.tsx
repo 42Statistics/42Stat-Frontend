@@ -9,6 +9,7 @@ import { isSpotlightOpenAtom } from '@core/atoms/isSpotlightOpenAtom';
 import { MobileHeader } from '@core/components/Header/Mobile';
 import { DesktopNavBar } from '@core/components/NavBar/Desktop';
 import { TabletNavBar } from '@core/components/NavBar/Tablet';
+import { SearchBarShapeButton } from '@core/components/SearchBarShapeButton';
 import { mainLayoutGlobalStyle } from '@core/layouts/MainLayout/mainLayoutGlobalStyle';
 import { Global, useTheme } from '@emotion/react';
 import { mq } from '@shared/utils/facepaint/mq';
@@ -49,6 +50,11 @@ const MainLayout = () => {
       <MarginLayer>
         <Layout>
           {device === 'mobile' ? <MobileHeader /> : null}
+          {device === 'mobile' ? (
+            <StyledSearchBarShapeButton>
+              <SearchBarShapeButton />
+            </StyledSearchBarShapeButton>
+          ) : null}
           <Outlet />
         </Layout>
       </MarginLayer>
@@ -63,10 +69,19 @@ const MarginLayer = styled.div`
   })}
 `;
 
+const StyledSearchBarShapeButton = styled.div`
+  margin-top: 6rem; // fixed header height
+  width: 280px;
+  padding: 2rem 0;
+`;
+
 const Layout = styled.main`
   position: relative;
   min-height: 100vh;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   ${mq({
     maxWidth: ['480px', '800px', '1440px'],

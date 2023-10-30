@@ -2,25 +2,30 @@ import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 
 import { MobileNavBarButton } from '@core/components/NavBar/Mobile/MobileNavBarButton';
-import { SearchBarShapeButton } from '@core/components/SearchBarShapeButton';
 import { AppLogoTitle } from '@shared/components/AppLogoTitle';
 import { ROUTES } from '@shared/constants/routes';
-import { VStack } from '@shared/ui-kit';
+import { HStack } from '@shared/ui-kit';
 
 export const MobileHeader = () => {
   return (
     <Layout>
-      <MobileNavBarButton />
-      <VStack spacing="4rem">
+      <HStack w="100%" h="6rem" justify="space-between">
         <Link to={ROUTES.ROOT}>
           <AppLogoTitle size="sm" />
         </Link>
-        <SearchBarShapeButton />
-      </VStack>
+        <MobileNavBarButton />
+      </HStack>
     </Layout>
   );
 };
 
 const Layout = styled.header`
-  padding: 2rem 0 5rem 0;
+  position: fixed;
+  width: 100%;
+  height: 6rem;
+  padding: 0 3rem;
+  z-index: ${({ theme }) => theme.zIndex.header};
+  background-color: ${({ theme }) => theme.colors.mono.white};
+  opacity: 0.9;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.mono.gray200};
 `;

@@ -26,7 +26,7 @@ export const CoalitionSelect = ({
       width="20rem"
       onValueChange={onChange}
       defaultValue={
-        currentCoalition !== null ? currentCoalition.name : undefined
+        currentCoalition !== null ? currentCoalition.id.toString() : undefined
       }
       defaultRenderValue={
         currentCoalition !== null ? currentCoalition.name : undefined

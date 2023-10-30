@@ -10,11 +10,15 @@ import { Text } from '@shared/ui-kit/Text';
 
 type SelectTriggerProps = {
   left?: React.ReactNode;
+  right?: React.ReactNode;
+  spacing?: string;
   placeholder?: string;
 };
 
 export const SelectTrigger = ({
   left,
+  right,
+  spacing = '1.5rem',
   placeholder = '',
 }: SelectTriggerProps) => {
   const theme = useTheme();
@@ -24,13 +28,14 @@ export const SelectTrigger = ({
 
   return (
     <StyledSelectTrigger onClick={onToggle}>
-      <HStack w="100%" spacing="1.5rem">
+      <HStack w="100%" spacing={spacing}>
         {left}
         {internalValue != null ? (
           <Text>{renderValue}</Text>
         ) : (
           <Text color={theme.colors.mono.gray500}>{placeholder}</Text>
         )}
+        {right}
         <Spacer />
         <MdExpandMore width={16} height={16} fill={theme.colors.mono.black} />
       </HStack>

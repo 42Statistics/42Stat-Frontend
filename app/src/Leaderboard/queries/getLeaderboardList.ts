@@ -6,7 +6,6 @@ export const GET_LEADERBOARD_LIST = gql(/* GraphQL */ `
       promoList {
         promo
         beginAt
-        userCount
       }
       coalitionList {
         id
@@ -14,10 +13,6 @@ export const GET_LEADERBOARD_LIST = gql(/* GraphQL */ `
         imgUrl
         coverUrl
         color
-        slug
-        imageUrl
-        score
-        userId
       }
     }
   }

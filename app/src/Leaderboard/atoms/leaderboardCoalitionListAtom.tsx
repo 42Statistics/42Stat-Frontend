@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
 
-import type { Coalition } from '@shared/__generated__/graphql';
+import type { Coalition } from '@/Leaderboard/types/Coalition';
 
 export const leaderboardCoalitionListAtom = atom<Coalition[]>([]);

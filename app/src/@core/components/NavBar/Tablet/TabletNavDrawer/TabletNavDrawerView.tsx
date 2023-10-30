@@ -12,7 +12,7 @@ export const TabletNavDrawerView = ({
 }: TabletNavDrawerViewProps) => {
   return (
     <Drawer anchor="left" isOpen={isOpen} onClose={onClose}>
-      <DesktopNavBar fixed={false} />
+      <DesktopNavBar fixed={false} onClose={onClose} />
     </Drawer>
   );
 };

@@ -2,7 +2,7 @@ import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { Link, useLocation } from 'react-router-dom';
 
-import type { NavItemProps } from '@core/components/NavBar/Desktop/DesktopNavItem';
+import type { NavItemProps } from '@core/components/NavBar/shared/NavItem';
 import { CaptionText, VStack } from '@shared/ui-kit';
 
 type TabletNavItemProps = NavItemProps;

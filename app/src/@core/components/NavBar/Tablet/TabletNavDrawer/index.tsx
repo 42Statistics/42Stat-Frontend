@@ -1,7 +1,6 @@
 import { useTheme } from '@emotion/react';
 import { detect } from 'detect-browser';
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 
 import { TabletNavDrawerView } from '@core/components/NavBar/Tablet/TabletNavDrawer/TabletNavDrawerView';
 import { ReactComponent as MdMenu } from '@shared/assets/icon/md-menu.svg';
@@ -11,7 +10,6 @@ import { isCtrlBKeyDown, isMacBKeyDown } from '@shared/utils/keyboard';
 
 export const TabletNavDrawer = () => {
   const theme = useTheme();
-  const location = useLocation();
   const browser = detect();
 
   const isMacOS = browser?.os === 'Mac OS';
@@ -30,11 +28,6 @@ export const TabletNavDrawer = () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, [onToggle, isMacOS]);
-
-  useEffect(() => {
-    onClose();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location]);
 
   return (
     <>

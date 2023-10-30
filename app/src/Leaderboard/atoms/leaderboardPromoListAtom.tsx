@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
 
-import type { Promo } from '@/Leaderboard/types/Promo';
+import type { Promo } from '@shared/types/Promo';
 
 export const leaderboardPromoListAtom = atom<Promo[]>([]);

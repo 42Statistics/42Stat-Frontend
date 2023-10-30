@@ -1,6 +1,6 @@
 import { CoalitionSelectList } from '@/Leaderboard/components/CoalitionSelect/CoalitionSelectList';
 import { useGetSelectKey } from '@/Leaderboard/hooks/useGetSelectKey';
-import type { Coalition } from '@/Leaderboard/types/Coalition';
+import type { Coalition } from '@shared/types/Coalition';
 import { Select, SelectContent, SelectTrigger } from '@shared/ui-kit';
 
 type CoalitionSelectProps = {

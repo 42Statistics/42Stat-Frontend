@@ -23,15 +23,7 @@ const GET_TIG_COUNT_PER_COALITION_BY_DATE_TEMPLATE = gql(/* GraphQL */ `
       tigCountPerCoalitionByDateTemplate(dateTemplate: $dateTemplate) {
         data {
           coalition {
-            id
-            name
-            imgUrl
-            coverUrl
-            color
-            score
-            slug
-            imageUrl
-            userId
+            ...coalitionFields
           }
           value
         }

@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 
-import type { Promo } from '@/Leaderboard/types/Promo';
+import type { Promo } from '@shared/types/Promo';
 import { CaptionText, HStack, SelectItem, Text } from '@shared/ui-kit';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 

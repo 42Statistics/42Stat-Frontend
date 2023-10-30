@@ -4,11 +4,8 @@ export const COALITION_FIELDS = gql(/* GraphQL */ `
   fragment coalitionFields on Coalition {
     id
     name
-    slug
-    imageUrl
+    imgUrl
     coverUrl
     color
-    score
-    userId
   }
 `);

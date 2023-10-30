@@ -6,6 +6,7 @@ export const GET_LEADERBOARD_LEVEL = gql(/* GraphQL */ `
     $pageNumber: Int!
     $dateTemplate: DateTemplate!
     $promo: Int
+    $coalitionId: Int
   ) {
     getLeaderboardLevel {
       byDateTemplate(
@@ -13,6 +14,7 @@ export const GET_LEADERBOARD_LEVEL = gql(/* GraphQL */ `
         pageNumber: $pageNumber
         dateTemplate: $dateTemplate
         promo: $promo
+        coalitionId: $coalitionId
       ) {
         data {
           me {

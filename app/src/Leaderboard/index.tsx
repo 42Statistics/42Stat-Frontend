@@ -1,6 +1,6 @@
 import { Outlet, useLocation } from 'react-router-dom';
 
-import { LeaderboardPromoListProvider } from '@/Leaderboard/components/LeaderboardPromoListProvider';
+import { LeaderboardListProvider } from '@/Leaderboard/components/LeaderboardListProvider';
 import { ROUTES } from '@shared/constants/routes';
 import { Tab, Tabs, VStack } from '@shared/ui-kit';
 
@@ -41,9 +41,9 @@ const LeaderboardLayout = () => {
           코멘트 길이
         </Tab>
       </Tabs>
-      <LeaderboardPromoListProvider>
+      <LeaderboardListProvider>
         <Outlet />
-      </LeaderboardPromoListProvider>
+      </LeaderboardListProvider>
     </VStack>
   );
 };

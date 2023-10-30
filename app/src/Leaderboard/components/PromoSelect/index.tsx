@@ -1,7 +1,14 @@
+import dayjs from 'dayjs';
+
 import { PromoSelectList } from '@/Leaderboard/components//PromoSelect/PromoSelectList';
 import { useGetSelectKey } from '@/Leaderboard/hooks/useGetSelectKey';
 import type { Promo } from '@shared/types/Promo';
-import { Select, SelectContent, SelectTrigger } from '@shared/ui-kit';
+import {
+  CaptionThinText,
+  Select,
+  SelectContent,
+  SelectTrigger,
+} from '@shared/ui-kit';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 
 type PromoSelectProps = {
@@ -15,6 +22,8 @@ export const PromoSelect = ({ curr, list, onChange }: PromoSelectProps) => {
 
   const { promoSelectKey } = useGetSelectKey();
 
+  const currentPromo = list.find((promo) => promo.promo === curr) ?? null;
+
   return (
     <Select
       key={promoSelectKey} // 이게 없으면 기수를 바꾼 채 다른 DateTemplate으로 이동해도 Select가 재렌더링되지 않음.
@@ -25,7 +34,16 @@ export const PromoSelect = ({ curr, list, onChange }: PromoSelectProps) => {
         curr !== null ? numberWithUnitFormatter(curr, unit) : undefined
       }
     >
-      <SelectTrigger placeholder="전체 기수" />
+      <SelectTrigger
+        right={
+          currentPromo ? (
+            <CaptionThinText>
+              {dayjs(currentPromo.beginAt).format('YYYY. MM. DD.')}
+            </CaptionThinText>
+          ) : null
+        }
+        placeholder="전체 기수"
+      />
       <SelectContent maxHeight="20rem">
         <PromoSelectList list={list} />
       </SelectContent>

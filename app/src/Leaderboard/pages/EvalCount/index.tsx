@@ -2,7 +2,9 @@ import { useQuery } from '@apollo/client';
 import { useAtomValue } from 'jotai';
 import { useSearchParams } from 'react-router-dom';
 
+import { leaderboardCoalitionListAtom } from '@/Leaderboard/atoms/leaderboardCoalitionListAtom';
 import { leaderboardPromoListAtom } from '@/Leaderboard/atoms/leaderboardPromoListAtom';
+import { CoalitionSelect } from '@/Leaderboard/components/CoalitionSelect';
 import { PromoSelect } from '@/Leaderboard/components/PromoSelect';
 import { LEADERBOARD_DEFAULT_OPTIONS } from '@/Leaderboard/constants/defaultOptions';
 import { LEADERBOARD_PARAM_KEYS } from '@/Leaderboard/constants/paramKeys';
@@ -17,9 +19,10 @@ import { HStack, SegmentedControl, VStack } from '@shared/ui-kit';
 const LeaderboardEvalCountPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const leaderboardArgs = toLeaderboardArgs(searchParams);
-  const { dateTemplate, promo } = leaderboardArgs;
-  const { DATE, PROMO } = LEADERBOARD_PARAM_KEYS;
+  const { dateTemplate, promo, coalitionId } = leaderboardArgs;
+  const { DATE, PROMO, COALITION } = LEADERBOARD_PARAM_KEYS;
 
+  const coalitionList = useAtomValue(leaderboardCoalitionListAtom);
   const promoList = useAtomValue(leaderboardPromoListAtom);
 
   const result = useQuery(GET_LEADERBOARD_EVAL_COUNT, {
@@ -36,14 +39,24 @@ const LeaderboardEvalCountPage = () => {
   );
 
   const handleSegmentedControlIndexChange = (newIndex: number) => {
-    const newURLSearchParams = new URLSearchParams();
+    const newURLSearchParams = new URLSearchParams(searchParams);
 
     newURLSearchParams.set(DATE, options[newIndex].value);
     setSearchParams(newURLSearchParams);
   };
 
+  const handleCoalitionChange = (newCoalitionId: string | null) => {
+    const newURLSearchParams = new URLSearchParams(searchParams);
+
+    newURLSearchParams.set(DATE, dateTemplate);
+    if (newCoalitionId) {
+      newURLSearchParams.set(COALITION, newCoalitionId);
+    }
+    setSearchParams(newURLSearchParams);
+  };
+
   const handlePromoChange = (newPromo: string | null) => {
-    const newURLSearchParams = new URLSearchParams();
+    const newURLSearchParams = new URLSearchParams(searchParams);
 
     newURLSearchParams.set(DATE, dateTemplate);
     if (newPromo) {
@@ -63,11 +76,16 @@ const LeaderboardEvalCountPage = () => {
           segments={segments}
         />
         <VStack w="100%" spacing="1rem">
-          <HStack w="100%" justify="start">
+          <HStack w="100%" justify="start" spacing="1rem">
             <PromoSelect
               curr={promo}
               onChange={handlePromoChange}
               list={promoList}
+            />
+            <CoalitionSelect
+              curr={coalitionId}
+              onChange={handleCoalitionChange}
+              list={coalitionList}
             />
           </HStack>
           <LeaderboardEvalCountResult result={result} />

@@ -18,7 +18,7 @@ export const PromoSelect = ({ curr, list, onChange }: PromoSelectProps) => {
   return (
     <Select
       key={promoSelectKey} // 이게 없으면 기수를 바꾼 채 다른 DateTemplate으로 이동해도 Select가 재렌더링되지 않음.
-      width="21rem"
+      width="20rem"
       onValueChange={onChange}
       defaultValue={curr !== null ? curr.toString() : undefined}
       defaultRenderValue={

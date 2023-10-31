@@ -149,12 +149,18 @@ const TeamPage = () => {
                   {user.isLeader ? (
                     <Avatar
                       size="lg"
+                      name={user.login}
                       src={user.imgUrl}
                       alt={user.login}
                       badge={<Star width={18} height={18} fill="#ffd700" />}
                     />
                   ) : (
-                    <Avatar size="lg" src={user.imgUrl} alt={user.login} />
+                    <Avatar
+                      size="lg"
+                      src={user.imgUrl}
+                      name={user.login}
+                      alt={user.login}
+                    />
                   )}
                   <MediumText>{user.login}</MediumText>
                   <CaptionText>#{user.occurrence + 1}</CaptionText>

@@ -1,6 +1,6 @@
 import { useTheme } from '@emotion/react';
 
-import type { UserProfile } from '@shared/__generated__/graphql';
+import type { UserProfile } from '@shared/types/UserProfile';
 import { Avatar, H3MediumText, HStack, Text } from '@shared/ui-kit';
 
 type NumberVersusProps = {

@@ -4,7 +4,7 @@ import { truncate } from 'lodash-es';
 import { useContext } from 'react';
 
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
-import type { Coalition } from '@shared/__generated__/graphql';
+import type { Coalition } from '@shared/types/Coalition';
 import coalition_black_cover from '@shared/assets/coalition/cover/coalition-black-cover.jpg';
 import coalition_gam_cover from '@shared/assets/coalition/cover/coalition-gam-cover.jpg';
 import coalition_gon_cover from '@shared/assets/coalition/cover/coalition-gon-cover.jpg';

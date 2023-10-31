@@ -14,13 +14,9 @@ export const SearchBarShapeButton = () => {
   const browser = detect();
   const isMacOS = browser?.os === 'Mac OS';
 
-  const openSpotlight = () => {
-    setIsSpotlightOpen(true);
-  };
-
   return (
     <Layout
-      onClick={openSpotlight}
+      onClick={() => setIsSpotlightOpen(true)}
       aria-label={ARIA_LABEL.BUTTON.SEARCH_USER_OR_PROJECT_USING_SPOTLIGHT}
     >
       <HStack w="100%" spacing="1.6rem">

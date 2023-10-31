@@ -2,17 +2,20 @@ import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 
 import { MobileNavBarButton } from '@core/components/NavBar/Mobile/MobileNavBarButton';
+import { SearchButtonTriggerSpotlight } from '@core/components/Spotlight/SearchButtonTriggerSpotlight';
 import { AppLogoTitle } from '@shared/components/AppLogoTitle';
 import { ROUTES } from '@shared/constants/routes';
-import { HStack } from '@shared/ui-kit';
+import { HStack, Spacer } from '@shared/ui-kit';
 
 export const MobileHeader = () => {
   return (
     <Layout>
-      <HStack w="100%" h="6rem" justify="space-between">
+      <HStack w="100%" h="6rem" spacing="2rem">
         <Link to={ROUTES.ROOT}>
           <AppLogoTitle size="sm" />
         </Link>
+        <Spacer />
+        <SearchButtonTriggerSpotlight />
         <MobileNavBarButton />
       </HStack>
     </Layout>

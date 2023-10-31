@@ -1,13 +1,17 @@
 import { DateTemplate } from '@shared/__generated__/graphql';
 
-import { LEADERBOARD_PARAM_KEYS } from '../constants/paramKeys';
-import type { LeaderboardArgs } from '../types/LeaderboardArgs';
-import { parseDateTemplate, parsePageNumber, parsePromo } from './parse';
+import { LEADERBOARD_PARAM_KEYS } from '@/Leaderboard/constants/paramKeys';
+import type { LeaderboardArgs } from '@/Leaderboard/types/LeaderboardArgs';
+import {
+  parseDateTemplate,
+  parsePageNumber,
+  parsePromo,
+} from '@/Leaderboard/utils/parse';
 
-export function toLeaderboardArgs(
+export const toLeaderboardArgs = (
   searchParams: URLSearchParams,
-): LeaderboardArgs {
-  const { DATE, PAGE, PROMO } = LEADERBOARD_PARAM_KEYS;
+): LeaderboardArgs => {
+  const { DATE, PAGE, PROMO, COALITION } = LEADERBOARD_PARAM_KEYS;
 
   const dateTemplate = parseDateTemplate(
     searchParams.get(DATE),
@@ -15,10 +19,12 @@ export function toLeaderboardArgs(
   );
   const pageNumber = parsePageNumber(searchParams.get(PAGE));
   const promo = parsePromo(searchParams.get(PROMO));
+  const coalitionId = parsePromo(searchParams.get(COALITION));
 
   return {
     dateTemplate,
     pageNumber,
     promo,
+    coalitionId,
   };
-}
+};

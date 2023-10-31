@@ -3,7 +3,7 @@ export type FakeGoogleWrapperType = {
   remove: () => void;
 };
 
-// https://medium.com/@leonardosalles/a-guide-to-custom-google-sign-in-button-e7b02c2c5e4f
+// Ref. https://medium.com/@leonardosalles/a-guide-to-custom-google-sign-in-button-e7b02c2c5e4f
 export const createFakeGoogleWrapper = (
   onClick: (credentialResponse: google.accounts.id.CredentialResponse) => void,
   useOneTap = false,

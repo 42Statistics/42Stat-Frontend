@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
+
+import { DashboardRow } from '@shared/components/Dashboard/DashboardRow';
+import { DashboardRowItemSkeleton } from '@shared/components/DashboardSkeleton/DashboardRowItemSkeleton';
 import type { DashboardProps } from '@shared/types/Dashboard';
-import { DashboardRow } from '../Dashboard/DashboardRow';
-import { DashboardRowItemSkeleton } from './DashboardRowItemSkeleton';
 
 type DashboardSkeletonProps = Omit<DashboardProps, 'contents'>;
 

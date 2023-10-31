@@ -1,7 +1,8 @@
 import { useTheme } from '@emotion/react';
-import { DialogBaseProps } from '@shared/types/Modal';
-import { Button } from '../Button';
-import { CustomDialog } from './CustomDialog';
+
+import type { DialogBaseProps } from '@shared/types/Modal';
+import { Button } from '@shared/ui-kit/Button';
+import { CustomDialog } from '@shared/ui-kit/Dialog/CustomDialog';
 
 type ConfirmDialogProps = DialogBaseProps & {
   title: string;

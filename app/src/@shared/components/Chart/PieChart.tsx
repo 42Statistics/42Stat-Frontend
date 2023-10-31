@@ -1,8 +1,9 @@
 import { useTheme } from '@emotion/react';
-import { paletteAtom } from '@shared/atoms/paletteAtom';
 import { useAtomValue } from 'jotai';
 import { merge } from 'lodash-es';
-import Chart from './Chart';
+
+import { paletteAtom } from '@shared/atoms/paletteAtom';
+import { Chart } from '@shared/components/Chart/Chart';
 
 type PieChartProps = {
   labels: string[];

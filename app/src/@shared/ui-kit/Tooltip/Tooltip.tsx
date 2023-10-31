@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
+
 import { PropsWithStringChildren } from '@shared/types/PropsWithChildren';
 import { fadeIn } from '@shared/ui-kit-styled';
-import { WhiteCaptionText } from '../Text';
-import { TooltipContainer } from './TooltipContainer';
+import { WhiteCaptionText } from '@shared/ui-kit/Text';
+import { TooltipContainer } from '@shared/ui-kit/Tooltip/TooltipContainer';
 
 type TooltipPosition = 'top' | 'right' | 'bottom' | 'left';
 

@@ -1,6 +1,7 @@
-import { useTheme } from '@emotion/react';
+import { Theme, useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { Coalition } from '@shared/__generated__/graphql';
+
+import type { Coalition } from '@shared/types/Coalition';
 import coalition_gam_mark from '@shared/assets/coalition/mark/coalition-gam-mark.svg';
 import coalition_gon_mark from '@shared/assets/coalition/mark/coalition-gon-mark.svg';
 import coalition_gun_mark from '@shared/assets/coalition/mark/coalition-gun-mark.svg';
@@ -21,52 +22,18 @@ export const CoalitionMark = ({
 }: CoalitionMarkProps) => {
   const theme = useTheme();
 
-  const getCoalitionImageFallbackUrlById = (id: number) => {
-    switch (id) {
-      case 85:
-        return coalition_gun_mark;
-      case 86:
-        return coalition_gon_mark;
-      case 87:
-        return coalition_gam_mark;
-      case 88:
-        return coalition_lee_mark;
-      default:
-        return ft_logo;
-    }
-  };
-
-  const getCoalitionImageUrlByCoalition = (coalition?: Coalition | null) => {
-    if (
-      coalition == null ||
-      coalition.imageUrl == null ||
-      coalition.color == null
-    ) {
-      return {
-        imageUrl: ft_logo,
-        imageFallbackUrl: ft_logo,
-        backgroundColor: theme.colors.mono.white,
-      };
-    }
-    return {
-      imageUrl: coalition.imageUrl,
-      imageFallbackUrl: getCoalitionImageFallbackUrlById(coalition.id),
-      backgroundColor: coalition.color,
-    };
-  };
-
-  const { imageUrl, imageFallbackUrl, backgroundColor } =
-    getCoalitionImageUrlByCoalition(coalition);
+  const { imgUrl, imgFallbackUrl, backgroundColor } =
+    getCoalitionImgUrlByCoalition(theme, coalition);
 
   const handleImageError = (
     e: React.SyntheticEvent<HTMLImageElement, Event>,
   ) => {
-    e.currentTarget.src = imageFallbackUrl;
+    e.currentTarget.src = imgFallbackUrl;
   };
 
   return (
     <StyledCoalitionMark
-      src={imageUrl}
+      src={imgUrl}
       alt={
         coalition != null ? ALT.COALITION_LOGO_OF(coalition.name) : ALT.LOGO_42
       }
@@ -78,6 +45,43 @@ export const CoalitionMark = ({
       }}
     />
   );
+};
+
+const getCoalitionImgUrlByCoalition = (
+  theme: Theme,
+  coalition?: Coalition | null,
+) => {
+  if (
+    coalition == null ||
+    coalition.imgUrl == null ||
+    coalition.color == null
+  ) {
+    return {
+      imgUrl: ft_logo,
+      imgFallbackUrl: ft_logo,
+      backgroundColor: theme.colors.mono.white,
+    };
+  }
+  return {
+    imgUrl: coalition.imgUrl,
+    imgFallbackUrl: getCoalitionImgFallbackUrlById(coalition.id),
+    backgroundColor: coalition.color,
+  };
+};
+
+const getCoalitionImgFallbackUrlById = (id: number) => {
+  switch (id) {
+    case 85:
+      return coalition_gun_mark;
+    case 86:
+      return coalition_gon_mark;
+    case 87:
+      return coalition_gam_mark;
+    case 88:
+      return coalition_lee_mark;
+    default:
+      return ft_logo;
+  }
 };
 
 const StyledCoalitionMark = styled(Image)`

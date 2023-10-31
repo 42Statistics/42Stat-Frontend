@@ -1,5 +1,8 @@
+import {
+  ApolloErrorView,
+  type ApolloErrorViewProps,
+} from '@shared/components/ApolloError/ApolloErrorView';
 import { Center } from '@shared/ui-kit';
-import { ApolloErrorView, ApolloErrorViewProps } from './ApolloErrorView';
 
 type FullPageApolloErrorViewProps = ApolloErrorViewProps;
 

@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+
 import { SkeletonAnimation } from '@shared/ui-kit-styled';
 
 type SkeletonProps = Partial<{

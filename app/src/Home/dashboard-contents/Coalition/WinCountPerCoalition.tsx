@@ -1,5 +1,7 @@
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
+import { capitalize } from 'lodash-es';
+
 import { gql } from '@shared/__generated__';
 import { CoalitionMark } from '@shared/components/CoalitionMark';
 import { DashboardContent } from '@shared/components/DashboardContent';
@@ -12,7 +14,6 @@ import { TextMax } from '@shared/components/TextMax';
 import { Body1Text, Center, VStack } from '@shared/ui-kit';
 import { CoalitionTable } from '@shared/ui-kit-styled/CoalitionTable';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
-import { capitalize } from 'lodash-es';
 
 const GET_WIN_COUNT_PER_COALITION = gql(/* GraphQL */ `
   query GetWinCountPerCoalition {

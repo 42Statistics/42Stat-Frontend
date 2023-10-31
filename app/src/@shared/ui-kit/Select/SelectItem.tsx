@@ -1,8 +1,9 @@
+import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { ReactComponent as Check } from '@shared/assets/icon/md-check.svg';
 
-import { useGetSelectDisclosureContext } from './contexts/SelectDisclosureContext';
-import { useGetSelectValueContext } from './contexts/SelectValueContext';
+import { ReactComponent as MdCheck } from '@shared/assets/icon/md-check.svg';
+import { useGetSelectDisclosureContext } from '@shared/ui-kit/Select/contexts/SelectDisclosureContext';
+import { useGetSelectValueContext } from '@shared/ui-kit/Select/contexts/SelectValueContext';
 
 type SelectItemProps = {
   value: string | null;
@@ -10,33 +11,36 @@ type SelectItemProps = {
   children: React.ReactNode;
 };
 
-export function SelectItem({
+export const SelectItem = ({
   value,
   renderValue = value ?? '',
   children,
-}: SelectItemProps) {
+}: SelectItemProps) => {
+  const theme = useTheme();
   const { internalValue, setInternalValue, setRenderValue, onValueChange } =
     useGetSelectValueContext();
   const { onClose } = useGetSelectDisclosureContext();
 
-  function handleClick() {
+  const handleClick = () => {
     setInternalValue(value);
     onValueChange?.(value);
     setRenderValue(renderValue);
     onClose();
-  }
+  };
 
   const isActive = value === internalValue;
 
   return (
     <StyledSelectItem onClick={handleClick}>
       <div style={{ width: '1.6rem' }}>
-        {isActive && <Check width={16} height={16} />}
+        {isActive && (
+          <MdCheck width={16} height={16} fill={theme.colors.mono.black} />
+        )}
       </div>
       {children}
     </StyledSelectItem>
   );
-}
+};
 
 const StyledSelectItem = styled.li`
   padding: 0.6rem 2rem;

@@ -9,13 +9,22 @@ import {
 } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 import { relayStylePagination } from '@apollo/client/utilities';
-import { reLoginDialogInfoAtom } from '@core/atoms/reLoginDialogInfoAtom';
-import { getNewAccessToken } from '@core/services/auth/getNewAccessToken';
-import { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
-import { getAccessToken } from '@shared/utils/storage/accessToken';
-import { getRefreshToken } from '@shared/utils/storage/refreshToken';
 import { useSetAtom } from 'jotai';
 import { useEffect } from 'react';
+
+import { isReLoginDialogOpenAtom } from '@core/atoms/isReLoginDialogOpenAtom';
+import { getNewAccessToken } from '@core/services/auth/getNewAccessToken';
+import type { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
+import { getAccessToken } from '@shared/utils/storage/accessToken';
+import { getRefreshToken } from '@shared/utils/storage/refreshToken';
+
+const Provider = ({ children }: PropsWithReactElementChildren) => {
+  return (
+    <ApolloProvider client={client}>
+      <ResponseInterceptor400>{children}</ResponseInterceptor400>
+    </ApolloProvider>
+  );
+};
 
 const httpLink = new HttpLink({
   uri: import.meta.env.VITE_BACKEND_GRAPHQL_ENDPOINT,
@@ -23,9 +32,11 @@ const httpLink = new HttpLink({
 
 const authLink = new ApolloLink((operation, forward) => {
   const accessToken = getAccessToken();
+
   if (accessToken === null) {
     return forward(operation);
   }
+
   const oldHeaders = operation.getContext().headers;
   operation.setContext({
     headers: {
@@ -33,6 +44,7 @@ const authLink = new ApolloLink((operation, forward) => {
       authorization: `Bearer ${accessToken}`,
     },
   });
+
   return forward(operation);
 });
 
@@ -119,6 +131,7 @@ export const client = new ApolloClient({
             keyArgs: [
               'projectName',
               'outstandingOnly',
+              'imperfectOnly',
               'corrector',
               'corrected',
               'sortOrder',
@@ -130,18 +143,10 @@ export const client = new ApolloClient({
   }),
 });
 
-const Provider = ({ children }: PropsWithReactElementChildren) => {
-  return (
-    <ApolloProvider client={client}>
-      <ResponseInterceptor400>{children}</ResponseInterceptor400>
-    </ApolloProvider>
-  );
-};
-
 const ResponseInterceptor400 = ({
   children,
 }: PropsWithReactElementChildren) => {
-  const setReLoginDialogInfo = useSetAtom(reLoginDialogInfoAtom);
+  const setReLoginDialog = useSetAtom(isReLoginDialogOpenAtom);
 
   useEffect(() => {
     const responseInterceptor400 = onError(({ graphQLErrors }) => {
@@ -155,10 +160,7 @@ const ResponseInterceptor400 = ({
               if (refreshToken === null && accessToken === null) {
                 break;
               }
-              setReLoginDialogInfo({
-                isOpen: true,
-                description: error.message,
-              });
+              setReLoginDialog(true);
               break;
           }
         }
@@ -168,7 +170,7 @@ const ResponseInterceptor400 = ({
     client.setLink(
       from([responseInterceptor400, errorLink, authLink, httpLink]),
     );
-  }, [setReLoginDialogInfo]);
+  }, [setReLoginDialog]);
 
   return <>{children}</>;
 };

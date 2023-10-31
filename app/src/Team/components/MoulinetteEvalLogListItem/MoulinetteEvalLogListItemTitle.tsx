@@ -1,5 +1,6 @@
-import { BoldText, PrimaryBoldText, Text } from '@shared/ui-kit';
 import dayjs from 'dayjs';
+
+import { BoldText, PrimaryBoldText, Text } from '@shared/ui-kit';
 
 type MoulinetteEvalLogListItemTitleProps = {
   createdAt: string;

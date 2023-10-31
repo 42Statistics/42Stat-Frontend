@@ -8,8 +8,8 @@ import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
 import type { Subject } from '@/Calculator/types/Subject';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 
-import { CalculatorInputContentCardView } from '../CalculatorInputContentCardView';
-import { CalculatorInputContentTableView } from '../CalculatorInputContentTableView';
+import { CalculatorInputContentCardView } from '@/Calculator/components/CalculatorInputContentCardView';
+import { CalculatorInputContentTableView } from '@/Calculator/components/CalculatorInputContentTableView';
 
 export const CalculatorInputContent = () => {
   const subjectList = useAtomValue(subjectListAtom);

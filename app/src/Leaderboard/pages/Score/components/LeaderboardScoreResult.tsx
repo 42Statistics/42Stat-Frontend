@@ -10,9 +10,9 @@ import { LEADERBOARD_PARAM_KEYS } from '@/Leaderboard/constants/paramKeys';
 import { toLeaderboardArgs } from '@/Leaderboard/utils/toLeaderboardArgs';
 import {
   DateTemplate,
-  Exact,
-  GetLeaderboardScoreQuery,
-  InputMaybe,
+  type Exact,
+  type GetLeaderboardScoreQuery,
+  type InputMaybe,
 } from '@shared/__generated__/graphql';
 import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
 import { HStack, Spacer, VStack } from '@shared/ui-kit';
@@ -29,15 +29,15 @@ type LeaderboardScoreResultProps = {
   >;
 };
 
-export function LeaderboardScoreResult({
+export const LeaderboardScoreResult = ({
   result: { loading, error, data },
-}: LeaderboardScoreResultProps) {
+}: LeaderboardScoreResultProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const leaderboardArgs = toLeaderboardArgs(searchParams);
   const { promo, dateTemplate, pageNumber } = leaderboardArgs;
   const { PROMO, DATE, PAGE } = LEADERBOARD_PARAM_KEYS;
 
-  function handlePageNumberChange(newPageNumber: number) {
+  const handlePageNumberChange = (newPageNumber: number) => {
     const newURLSearchParams = new URLSearchParams();
 
     newURLSearchParams.set(DATE, dateTemplate);
@@ -46,7 +46,7 @@ export function LeaderboardScoreResult({
     }
     newURLSearchParams.set(PAGE, newPageNumber.toString());
     setSearchParams(newURLSearchParams);
-  }
+  };
 
   if (loading) {
     return <LeaderboardResultSkeleton />;
@@ -88,4 +88,4 @@ export function LeaderboardScoreResult({
       />
     </VStack>
   );
-}
+};

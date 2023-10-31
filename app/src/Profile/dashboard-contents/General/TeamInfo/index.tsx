@@ -1,14 +1,17 @@
-import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { useQuery } from '@apollo/client';
 import styled from '@emotion/styled';
+import { useContext } from 'react';
+
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
+import { TeamInfoTable } from '@/Profile/dashboard-contents/General/TeamInfo/TeamInfoTable';
 import { gql } from '@shared/__generated__';
+import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
-import { useContext } from 'react';
-import { TeamInfoTable } from './TeamInfoTable';
+import { TextDefault } from '@shared/components/DashboardContentView/Text/TextDefault';
 
 const GET_TEAM_INFO_BY_LOGIN = gql(/* GraphQL */ `
   query GetTeamInfoByLogin($login: String!) {
@@ -41,19 +44,29 @@ export const TeamInfo = () => {
 
   const { teams } = data.getPersonalGeneral.teamInfo;
 
+  const title = '팀 정보';
+
   return (
-    <TeamInfoLayout>
-      <div
-        style={{
-          position: 'relative',
-          width: '100%',
-          height: '100%',
-          overflow: 'auto',
-        }}
-      >
-        <TeamInfoTable teams={teams} />
-      </div>
-    </TeamInfoLayout>
+    <>
+      {teams.length === 0 ? (
+        <DashboardContent title={title}>
+          <TextDefault text="프로젝트 신청 기록이 없어요" />
+        </DashboardContent>
+      ) : (
+        <TeamInfoLayout>
+          <div
+            style={{
+              position: 'relative',
+              width: '100%',
+              height: '100%',
+              overflow: 'auto',
+            }}
+          >
+            <TeamInfoTable teams={teams} />
+          </div>
+        </TeamInfoLayout>
+      )}
+    </>
   );
 };
 

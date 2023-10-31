@@ -1,11 +1,13 @@
 import { useTheme } from '@emotion/react';
 import { merge } from 'lodash-es';
-import Chart from './Chart';
+
+import { Chart } from '@shared/components/Chart/Chart';
 
 type BarChartProps = {
   series: ApexAxisChartSeries;
   options: ApexCharts.ApexOptions;
 };
+
 export const HorizontalBarChart = ({
   series,
   options: additionalOptions,

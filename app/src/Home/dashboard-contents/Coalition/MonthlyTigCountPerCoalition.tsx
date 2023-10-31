@@ -1,5 +1,7 @@
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
+import { capitalize } from 'lodash-es';
+
 import { gql } from '@shared/__generated__';
 import { DateTemplate } from '@shared/__generated__/graphql';
 import { CoalitionMark } from '@shared/components/CoalitionMark';
@@ -14,7 +16,6 @@ import { Body1Text, Center, VStack } from '@shared/ui-kit';
 import { CoalitionTable } from '@shared/ui-kit-styled/CoalitionTable';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 import { getStartEndDateString } from '@shared/utils/getStartEndDateString';
-import { capitalize } from 'lodash-es';
 
 const GET_TIG_COUNT_PER_COALITION_BY_DATE_TEMPLATE = gql(/* GraphQL */ `
   query GetTigCountPerCoalitionByDateTemplate($dateTemplate: DateTemplate!) {
@@ -22,14 +23,7 @@ const GET_TIG_COUNT_PER_COALITION_BY_DATE_TEMPLATE = gql(/* GraphQL */ `
       tigCountPerCoalitionByDateTemplate(dateTemplate: $dateTemplate) {
         data {
           coalition {
-            id
-            name
-            slug
-            imageUrl
-            coverUrl
-            color
-            score
-            userId
+            ...coalitionFields
           }
           value
         }

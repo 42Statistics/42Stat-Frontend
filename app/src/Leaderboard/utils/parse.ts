@@ -1,9 +1,9 @@
 import { DateTemplate } from '@shared/__generated__/graphql';
 
-export function parseDateTemplate(
+export const parseDateTemplate = (
   str: string | null,
   defaultValue: DateTemplate,
-) {
+) => {
   if (
     str === DateTemplate.CurrWeek ||
     str === DateTemplate.CurrMonth ||
@@ -12,20 +12,20 @@ export function parseDateTemplate(
     return str;
   }
   return defaultValue;
-}
+};
 
-export function parsePageNumber(str: string | null) {
+export const parsePageNumber = (str: string | null) => {
   if (str === null) {
     return 1;
   }
   const number = Number(str);
   return number;
-}
+};
 
-export function parsePromo(str: string | null) {
+export const parsePromo = (str: string | null) => {
   if (str === null) {
     return null;
   }
   const number = Number(str);
   return number;
-}
+};

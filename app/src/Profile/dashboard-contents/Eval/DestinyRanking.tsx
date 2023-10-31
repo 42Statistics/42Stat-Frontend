@@ -1,5 +1,7 @@
-import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { useQuery } from '@apollo/client';
+import { useContext } from 'react';
+
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { gql } from '@shared/__generated__';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
@@ -8,7 +10,7 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { UserRankList } from '@shared/components/DashboardContentView/Rank/UserRankList';
-import { useContext } from 'react';
+import { TextDefault } from '@shared/components/DashboardContentView/Text/TextDefault';
 
 const GET_DESTINY_RANKING_BY_LOGIN = gql(/* GraphQL */ `
   query GetDestinyRankingByLogin($login: String!, $limit: Int!) {
@@ -54,7 +56,11 @@ export const DestinyRanking = () => {
 
   return (
     <DashboardContent title={title} description={description}>
-      <UserRankList list={destinyRanking} cnt={5} unit={unit} />
+      {destinyRanking.length !== 0 ? (
+        <UserRankList list={destinyRanking} cnt={5} unit={unit} />
+      ) : (
+        <TextDefault text="인연 기록이 없어요" />
+      )}
     </DashboardContent>
   );
 };

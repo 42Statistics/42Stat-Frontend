@@ -1,8 +1,8 @@
-import type { Subject } from '@/Calculator/types/Subject';
+import { useAtomValue } from 'jotai';
 
 import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
-import { useAtomValue } from 'jotai';
-import { CalculatorInputContentCardList } from './CalculatorInputContentCardList';
+import { CalculatorInputContentCardList } from '@/Calculator/components/CalculatorInputContentCardView/CalculatorInputContentCardList';
+import type { Subject } from '@/Calculator/types/Subject';
 
 export type CalculatorInputContentCardViewProps = {
   onSubjectListChange: (subjectList: Subject[]) => void;

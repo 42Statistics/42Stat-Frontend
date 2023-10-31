@@ -1,3 +1,7 @@
+import { useAtomValue } from 'jotai';
+
+import { ReactComponent as MdCalculateFill } from '@shared/assets/icon/md-calculate-fill.svg';
+import { ReactComponent as MdCalculate } from '@shared/assets/icon/md-calculate.svg';
 import { ReactComponent as MdHomeFill } from '@shared/assets/icon/md-home-fill.svg';
 import { ReactComponent as MdHome } from '@shared/assets/icon/md-home.svg';
 import { ReactComponent as MdLeaderboardFill } from '@shared/assets/icon/md-leaderboard-fill.svg';
@@ -6,14 +10,11 @@ import { ReactComponent as MdPersonFill } from '@shared/assets/icon/md-person-fi
 import { ReactComponent as MdPerson } from '@shared/assets/icon/md-person.svg';
 import { ReactComponent as MdQuickReferenceFill } from '@shared/assets/icon/md-quick-reference-fill.svg';
 import { ReactComponent as MdQuickReference } from '@shared/assets/icon/md-quick-reference.svg';
-import { ReactComponent as MdCalculateFill } from '@shared/assets/icon/md-calculate-fill.svg';
-import { ReactComponent as MdCalculate } from '@shared/assets/icon/md-calculate.svg';
 import { ReactComponent as MdSettingsFill } from '@shared/assets/icon/md-settings-fill.svg';
 import { ReactComponent as MdSettings } from '@shared/assets/icon/md-settings.svg';
 import { userAtom } from '@shared/atoms/userAtom';
 import { ROUTES } from '@shared/constants/routes';
 import type { SvgElement } from '@shared/types/SvgElement';
-import { useAtomValue } from 'jotai';
 
 export type NavRoute = {
   text: string;

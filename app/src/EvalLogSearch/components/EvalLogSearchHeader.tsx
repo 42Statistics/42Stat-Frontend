@@ -1,9 +1,10 @@
 import { useTheme } from '@emotion/react';
-import { PrimaryBoldText, Text, VStack } from '@shared/ui-kit';
 import { useAtomValue } from 'jotai';
-import { evalLogSearchArgsAtom } from '../atoms/evalLogSearchArgsAtom';
-import { evalLogSearchTotalCountAtom } from '../atoms/evalLogSearchTotalCountAtom';
-import { EVAL_LOG_SEARCH_ARGS_HEADER_TEXT } from '../constants/evalLogArgsText';
+
+import { evalLogSearchArgsAtom } from '@/EvalLogSearch/atoms/evalLogSearchArgsAtom';
+import { evalLogSearchTotalCountAtom } from '@/EvalLogSearch/atoms/evalLogSearchTotalCountAtom';
+import { EVAL_LOG_SEARCH_ARGS_HEADER_TEXT } from '@/EvalLogSearch/constants/evalLogArgsText';
+import { PrimaryBoldText, Text, VStack } from '@shared/ui-kit';
 
 export const EvalLogSearchHeader = () => {
   return (
@@ -18,15 +19,21 @@ const { USERS, PROJECT_NAME, FLAG, SORT_ORDER } =
   EVAL_LOG_SEARCH_ARGS_HEADER_TEXT;
 
 const EvalLogSearchHeaderFormDescriptor = () => {
-  const { corrector, corrected, projectName, outstandingOnly, sortOrder } =
-    useAtomValue(evalLogSearchArgsAtom);
+  const {
+    corrector,
+    corrected,
+    projectName,
+    outstandingOnly,
+    imperfectOnly,
+    sortOrder,
+  } = useAtomValue(evalLogSearchArgsAtom);
 
   return (
     <PrimaryBoldText>
       {[
         USERS(corrector, corrected),
         PROJECT_NAME(projectName),
-        FLAG(outstandingOnly),
+        FLAG(outstandingOnly, imperfectOnly),
         SORT_ORDER(sortOrder),
       ].join(' / ')}
     </PrimaryBoldText>

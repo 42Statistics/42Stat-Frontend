@@ -1,4 +1,4 @@
-import { DashboardTempType } from '@shared/types/Dashboard';
+import type { DashboardTempType } from '@shared/types/Dashboard';
 
 export const calculatorPageDashboardDesktop: DashboardTempType[] = [
   {

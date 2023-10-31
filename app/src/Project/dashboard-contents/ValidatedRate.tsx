@@ -1,5 +1,8 @@
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
+import { useContext } from 'react';
+
+import { ProjectNameContext } from '@/Project/contexts/ProjectNameContext';
 import { gql } from '@shared/__generated__';
 import { PieChart } from '@shared/components/Chart';
 import { DashboardContent } from '@shared/components/DashboardContent';
@@ -10,8 +13,6 @@ import {
 } from '@shared/components/DashboardContentView/Error';
 import { H3Text } from '@shared/ui-kit';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
-import { useContext } from 'react';
-import { ProjectNameContext } from '../contexts/ProjectNameContext';
 
 const GET_VALIDATED_RATE_BY_PROJECT_NAME = gql(/* GraphQL */ `
   query GetValidatedRateByProjectName($projectName: String!) {
@@ -55,7 +56,7 @@ export const ValidatedRate = () => {
   if (validatedRate.total === 0) {
     return (
       <DashboardContent title={title}>
-        <H3Text>제출 기록이 없어요 😐</H3Text>
+        <H3Text>제출 기록이 없어요</H3Text>
       </DashboardContent>
     );
   }

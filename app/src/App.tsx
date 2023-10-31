@@ -1,16 +1,18 @@
-import { AppRoutes } from '@core/AppRoutes';
+import { Global } from '@emotion/react';
+
+import { AppProvider } from '@core/AppProvider';
+import { appRouter } from '@core/appRouter';
 import { global } from '@core/styles/global';
 import { reset } from '@core/styles/reset';
-import { Global } from '@emotion/react';
-import { AppProvider } from './@core/AppProvider';
+import { RouterProvider } from 'react-router-dom';
 
-function App() {
+const App = () => {
   return (
     <AppProvider>
       <Global styles={[reset, global]} />
-      <AppRoutes />
+      <RouterProvider router={appRouter} />
     </AppProvider>
   );
-}
+};
 
 export default App;

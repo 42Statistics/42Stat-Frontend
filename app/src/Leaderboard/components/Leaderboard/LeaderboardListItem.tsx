@@ -1,6 +1,8 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { UserRank } from '@shared/__generated__/graphql';
+import { Link } from 'react-router-dom';
+
+import type { UserRank } from '@shared/__generated__/graphql';
 import { ALT } from '@shared/constants/accessibility';
 import { ROUTES } from '@shared/constants/routes';
 import {
@@ -16,7 +18,6 @@ import {
 import { mq } from '@shared/utils/facepaint/mq';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 import { Mobile, TabletAndAbove } from '@shared/utils/react-responsive/Device';
-import { Link } from 'react-router-dom';
 
 type LeaderboardListItemProps = {
   item: UserRank;
@@ -51,7 +52,7 @@ export const LeaderboardListItem = ({
                   {rank === 0 ? '–' : rank}
                 </Body1MediumText>
               </HStack>
-              <Avatar src={imgUrl} alt={ALT.AVATAR_OF(login)} />
+              <Avatar src={imgUrl} name={login} alt={ALT.AVATAR_OF(login)} />
               <MediumText color={color}>{login}</MediumText>
               <Spacer />
               <HStack align="baseline" spacing="0.2rem">

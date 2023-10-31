@@ -1,22 +1,18 @@
-import { reLoginDialogInfoAtom } from '@core/atoms/reLoginDialogInfoAtom';
-import { ROUTES } from '@shared/constants/routes';
-import { AlertDialog } from '@shared/ui-kit';
-import { clearStorage } from '@shared/utils/storage/clearStorage';
 import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { isReLoginDialogOpenAtom } from '@core/atoms/isReLoginDialogOpenAtom';
+import { ROUTES } from '@shared/constants/routes';
+import { AlertDialog } from '@shared/ui-kit';
+import { clearStorage } from '@shared/utils/storage/clearStorage';
+
 export const ReLoginDialog = () => {
   const navigate = useNavigate();
-  const [{ isOpen, description }, setReLoginDialogInfo] = useAtom(
-    reLoginDialogInfoAtom,
-  );
+  const [isModalOpen, setIsModalOpen] = useAtom(isReLoginDialogOpenAtom);
 
   const closeReLoginDialog = () => {
-    setReLoginDialogInfo({
-      isOpen: false,
-      description: '',
-    });
+    setIsModalOpen(false);
   };
 
   const handleConfirm = () => {
@@ -26,11 +22,11 @@ export const ReLoginDialog = () => {
   };
 
   useEffect(() => {
-    if (!isOpen) {
+    if (!isModalOpen) {
       return;
     }
     clearStorage();
-  }, [isOpen]);
+  }, [isModalOpen]);
 
   return (
     <AlertDialog
@@ -39,7 +35,13 @@ export const ReLoginDialog = () => {
         /* can't close */
       }}
       title="재로그인 요청"
-      description={description}
+      description={
+        /**
+         * 현재 BE에서 400 상태코드를 Code로 구분해주지 않기 때문에, description이 항상 고정입니다.
+         * 이후 BE에서 Code로 구분해주면, Code에 따라 상응하는 description(= ReLoginDialog body) 분기할 예정입니다.
+         */
+        '다시 로그인해주세요.'
+      }
       confirmText="홈으로 이동"
       onConfirm={handleConfirm}
     />

@@ -1,4 +1,6 @@
 import { useQuery } from '@apollo/client';
+import { capitalize } from 'lodash-es';
+
 import { gql } from '@shared/__generated__';
 import { PieChart } from '@shared/components/Chart';
 import { DashboardContent } from '@shared/components/DashboardContent';
@@ -8,7 +10,6 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
-import { capitalize } from 'lodash-es';
 
 const GET_MEMBER_RATE = gql(/* GraphQL */ `
   query GetMemberRate {

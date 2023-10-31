@@ -1,12 +1,12 @@
-import { isSpotlightOpenAtom } from '@core/atoms/isSpotlightOpenAtom';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { detect } from 'detect-browser';
+import { useSetAtom } from 'jotai';
+
+import { isSpotlightOpenAtom } from '@core/atoms/isSpotlightOpenAtom';
 import { ReactComponent as MdSearch } from '@shared/assets/icon/md-search.svg';
 import { ARIA_LABEL } from '@shared/constants/accessibility';
 import { CaptionText, Clickable, HStack, Spacer, Text } from '@shared/ui-kit';
-import { mq } from '@shared/utils/facepaint/mq';
-import { detect } from 'detect-browser';
-import { useSetAtom } from 'jotai';
 
 export const SearchBarShapeButton = () => {
   const theme = useTheme();
@@ -14,16 +14,12 @@ export const SearchBarShapeButton = () => {
   const browser = detect();
   const isMacOS = browser?.os === 'Mac OS';
 
-  const openSpotlight = () => {
-    setIsSpotlightOpen(true);
-  };
-
   return (
     <Layout
-      onClick={openSpotlight}
+      onClick={() => setIsSpotlightOpen(true)}
       aria-label={ARIA_LABEL.BUTTON.SEARCH_USER_OR_PROJECT_USING_SPOTLIGHT}
     >
-      <HStack w="100%" justify="start" spacing="1.6rem">
+      <HStack w="100%" spacing="1.6rem">
         <MdSearch width={18} height={18} fill={theme.colors.mono.gray500} />
         <Text color={theme.colors.mono.gray500}>Search</Text>
         <Spacer />
@@ -36,6 +32,7 @@ export const SearchBarShapeButton = () => {
 };
 
 const Layout = styled(Clickable)`
+  width: 100%;
   padding: 1rem 1.6rem;
   border-radius: ${({ theme }) => theme.radius.md};
   border: 1px solid ${({ theme }) => theme.colors.mono.gray200};
@@ -44,8 +41,4 @@ const Layout = styled(Clickable)`
   &:hover {
     border: 1px solid ${({ theme }) => theme.colors.mono.gray200};
   }
-
-  ${mq({
-    width: ['80%', '100%', '100%'],
-  })}
 `;

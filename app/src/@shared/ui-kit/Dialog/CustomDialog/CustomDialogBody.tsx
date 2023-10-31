@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
-import { Text } from '@shared/ui-kit';
+
 import type { PropsWithStringChildren } from '@shared/types/PropsWithChildren';
+import { Text } from '@shared/ui-kit/Text';
 
 export const CustomDialogBody = ({ children }: PropsWithStringChildren) => {
   return (

@@ -1,11 +1,10 @@
 import { Outlet, useLocation } from 'react-router-dom';
 
+import { LeaderboardListProvider } from '@/Leaderboard/components/LeaderboardListProvider';
 import { ROUTES } from '@shared/constants/routes';
 import { Tab, Tabs, VStack } from '@shared/ui-kit';
 
-import { LeaderboardPromoListProvider } from './components/LeaderboardPromoListProvider';
-
-export default function LeaderboardLayout() {
+const LeaderboardLayout = () => {
   const { pathname } = useLocation();
 
   return (
@@ -42,9 +41,11 @@ export default function LeaderboardLayout() {
           코멘트 길이
         </Tab>
       </Tabs>
-      <LeaderboardPromoListProvider>
+      <LeaderboardListProvider>
         <Outlet />
-      </LeaderboardPromoListProvider>
+      </LeaderboardListProvider>
     </VStack>
   );
-}
+};
+
+export default LeaderboardLayout;

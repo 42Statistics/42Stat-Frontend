@@ -1,7 +1,8 @@
-import { EvalLog, TeamEvalLog } from '@shared/__generated__/graphql';
-import { HStack, VStack } from '@shared/ui-kit';
 import { forwardRef } from 'react';
-import { EvalLogListItem } from './EvalLogListItem';
+
+import type { EvalLog, TeamEvalLog } from '@shared/__generated__/graphql';
+import { EvalLogListItem } from '@shared/components/EvalLogList/EvalLogListItem';
+import { HStack, VStack } from '@shared/ui-kit';
 
 type EvalLogListProps = {
   list: (EvalLog | TeamEvalLog)[];

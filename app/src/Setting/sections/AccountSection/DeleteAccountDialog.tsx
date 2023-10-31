@@ -1,12 +1,12 @@
 import { useMutation } from '@apollo/client';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { gql } from '@shared/__generated__';
 import { ROUTES } from '@shared/constants/routes';
 import { ConfirmDialog } from '@shared/ui-kit';
 import { removeAccessToken } from '@shared/utils/storage/accessToken';
-import { removeGoogleCredential } from '@shared/utils/storage/googleCredential';
 import { removeRefreshToken } from '@shared/utils/storage/refreshToken';
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 const DELETE_ACCOUNT = gql(/* GraphQL */ `
   mutation DeleteAccount {
@@ -37,7 +37,6 @@ export const DeleteAccountDialog = ({
     if (data.deleteAccount) {
       removeAccessToken();
       removeRefreshToken();
-      removeGoogleCredential();
       navigate(ROUTES.ROOT);
     } else {
       onClose();

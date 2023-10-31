@@ -1,6 +1,8 @@
+import { useQuery } from '@apollo/client';
+import { useContext } from 'react';
+
 import { MyUserProfileContext } from '@/Profile/contexts/MyUserProfileContext';
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
-import { useQuery } from '@apollo/client';
 import { gql } from '@shared/__generated__';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
@@ -9,7 +11,6 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { NumberVersus } from '@shared/components/DashboardContentView/Number/NumberVersus';
-import { useContext } from 'react';
 
 const GET_LOGTIME_BY_DATE_TEMPLATE_VERSUS = gql(/* GraphQL */ `
   query GetTotalLogtimeVersus($login1: String!, $login2: String!) {
@@ -58,9 +59,9 @@ export const TotalLogtime = () => {
   return (
     <DashboardContent title={title}>
       <NumberVersus
-        imgUrl1={myUserProfile.imgUrl}
+        userProfile1={myUserProfile}
         number1={myLogtimeByHours}
-        imgUrl2={userProfile.imgUrl}
+        userProfile2={userProfile}
         number2={logtimeByHours}
         unit={unit}
       />

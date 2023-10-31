@@ -1,17 +1,19 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { CaptionText, VStack } from '@shared/ui-kit';
 import { Link, useLocation } from 'react-router-dom';
-import type { NavItemProps } from '../Desktop/DesktopNavItem';
+
+import type { NavItemProps } from '@core/components/NavBar/shared/NavItem';
+import { CaptionText, VStack } from '@shared/ui-kit';
 
 type TabletNavItemProps = NavItemProps;
 
 // TODO: Link와 Layout을 합쳐서 StyledLink를 만들고 싶지만, styled(Link)에 isFocused라는 custom prop을 전달할 수 없음.
 export const TabletNavItem = ({ route }: TabletNavItemProps) => {
+  const theme = useTheme();
   const location = useLocation();
+
   const isFocused = location.pathname.startsWith(route.path);
   const NavItemIcon = isFocused ? route.iconFocused : route.icon;
-  const theme = useTheme();
   const color = isFocused
     ? theme.colors.primary.default
     : theme.colors.mono.black;

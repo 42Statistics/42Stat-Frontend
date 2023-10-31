@@ -1,5 +1,6 @@
-import styled from '@emotion/styled';
 import { useEffect, useRef } from 'react';
+
+import styled from '@emotion/styled';
 
 export type SegmentType = {
   label: string;
@@ -14,7 +15,7 @@ type SegmentedControlProps = {
   controlRef: React.RefObject<HTMLDivElement>;
 };
 
-// https://letsbuildui.dev/articles/building-a-segmented-control-component
+// Ref. https://letsbuildui.dev/articles/building-a-segmented-control-component
 // 위 내용에 type 추가, styled-components 방식으로 변경, css 테마에 맞게 변경
 export const SegmentedControl = ({
   segments,

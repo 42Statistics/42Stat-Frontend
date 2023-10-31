@@ -1,13 +1,13 @@
+import { MyInfo } from '@/Home/components/MyInfo';
+import { homeCircleDashboardRows } from '@/Home/dashboard-frames/homeCircleDashboardRows';
+import { homeCoalitionDashboardRows } from '@/Home/dashboard-frames/homeCoalitionDashboardRows';
+import { homePageDashboardContents } from '@/Home/dashboard-frames/homePageDashboardContents';
+import { homeRecordDashboardRows } from '@/Home/dashboard-frames/homeRecordDashboardRows';
+import { homeStatusDashboardRows } from '@/Home/dashboard-frames/homeStatusDashboardRows';
 import { Footer } from '@core/components/Footer';
 import { Dashboard } from '@shared/components/Dashboard';
 import { Seo } from '@shared/components/Seo';
 import { H2BoldText, VStack } from '@shared/ui-kit';
-import { MyInfo } from './components/MyInfo';
-import { homeCircleDashboardRows } from './dashboard-frames/homeCircleDashboardRows';
-import { homeCoalitionDashboardRows } from './dashboard-frames/homeCoalitionDashboardRows';
-import { homePageDashboardContents } from './dashboard-frames/homePageDashboardContents';
-import { homeRecordDashboardRows } from './dashboard-frames/homeRecordDashboardRows';
-import { homeStatusDashboardRows } from './dashboard-frames/homeStatusDashboardRows';
 
 const HomePage = () => {
   return (

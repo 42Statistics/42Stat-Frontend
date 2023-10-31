@@ -1,6 +1,9 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { useAtomValue } from 'jotai';
 
+import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
+import type { CalculatorInputContentCardViewProps } from '@/Calculator/components/CalculatorInputContentCardView';
 import { OrderItemButtonGroup } from '@/Calculator/components/OrderItemButtonGroup';
 import { ProjectSpotlight } from '@/Calculator/components/ProjectSpotlight';
 import { PROJECT_LIST_TITLES } from '@/Calculator/constants/projectListTitles';
@@ -14,10 +17,6 @@ import {
 } from '@shared/ui-kit';
 import { CheckboxWithLabel } from '@shared/ui-kit-styled';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
-
-import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
-import { useAtomValue } from 'jotai';
-import type { CalculatorInputContentCardViewProps } from '.';
 
 type CalculatorInputContentCardListItemProps =
   CalculatorInputContentCardViewProps & {

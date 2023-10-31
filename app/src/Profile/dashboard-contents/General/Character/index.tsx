@@ -1,6 +1,8 @@
-import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
+import { useContext } from 'react';
+
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { gql } from '@shared/__generated__';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
@@ -9,9 +11,14 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { ALT } from '@shared/constants/accessibility';
-import { H3MediumText, HStack, Image, Label, VStack } from '@shared/ui-kit';
-import { Tooltip } from '@shared/ui-kit/Tooltip';
-import { useContext } from 'react';
+import {
+  H3MediumText,
+  HStack,
+  Image,
+  Label,
+  VStack,
+  Tooltip,
+} from '@shared/ui-kit';
 
 const GET_CHARACTER_BY_LOGIN = gql(/* GraphQL */ `
   query GetCharacterByLogin($login: String!) {

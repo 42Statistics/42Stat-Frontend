@@ -11,6 +11,7 @@ export const EVAL_LOG_SEARCH_URL_PARAM_KEYS = {
 export const EVAL_LOG_SEARCH_URL_PARAM_VALUES = {
   ALL_FLAG: 'all',
   OUTSTANDING_FLAG: 'outstanding',
+  IMPERFECT_FLAG: 'imperfect',
   BEGIN_AT_ASC: EvalLogSortOrder.BeginAtAsc,
   BEGIN_AT_DESC: EvalLogSortOrder.BeginAtDesc,
 } as const;

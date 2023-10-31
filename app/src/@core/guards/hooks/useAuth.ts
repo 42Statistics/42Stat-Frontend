@@ -1,10 +1,11 @@
 import { useQuery } from '@apollo/client';
+import { useSetAtom } from 'jotai';
+import { useEffect, useState } from 'react';
+
 import { gql } from '@shared/__generated__';
 import { userAtom } from '@shared/atoms/userAtom';
 import { getAccessToken } from '@shared/utils/storage/accessToken';
 import { getRefreshToken } from '@shared/utils/storage/refreshToken';
-import { useSetAtom } from 'jotai';
-import { useEffect, useState } from 'react';
 
 const GET_MY_PREVIEW = gql(/* GraphQL */ `
   query GetMyPreview {
@@ -23,7 +24,6 @@ export const useAuth = () => {
   const { loading, error, data } = useQuery(GET_MY_PREVIEW);
   const [authLoading, setAuthLoading] = useState<boolean>(true);
   const [auth, setAuth] = useState<boolean>(false);
-
   const setUser = useSetAtom(userAtom);
 
   useEffect(() => {

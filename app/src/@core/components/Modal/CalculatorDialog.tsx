@@ -1,20 +1,20 @@
 import { useAtom, useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 
+import { currentOpenSpotlightIndexAtom } from '@/Calculator/atoms/currentOpenSpotlightIndexAtom';
+import { calculatorDialogAtom } from '@core/atoms/calculatorDialogAtom';
 import { AlertDialog } from '@shared/ui-kit';
 import { isEnterKeyDown, isEscapeKeyDown } from '@shared/utils/keyboard';
-import { calculatorDialogAtom } from '@core/atoms/calculatorDialogAtom';
-import { currentOpenSpotlightIndexAtom } from '@/Calculator/atoms/currentOpenSpotlightIndexAtom';
 
 export const CalculatorDialog = () => {
-  const [{ description, focus }, setCalculatorDialogAtom] =
+  const [{ focus, description }, setIsModalOpen] =
     useAtom(calculatorDialogAtom);
   const setCurrentOpenSpotlightIndex = useSetAtom(
     currentOpenSpotlightIndexAtom,
   );
 
   const handleConfirm = () => {
-    setCalculatorDialogAtom({
+    setIsModalOpen({
       isOpen: false,
       description: '',
       focus: -1,
@@ -40,9 +40,7 @@ export const CalculatorDialog = () => {
   return (
     <AlertDialog
       isOpen
-      onClose={() => {
-        /* can't close */
-      }}
+      onClose={handleConfirm}
       title="프로젝트 추가 오류"
       description={description}
       confirmText="확인"

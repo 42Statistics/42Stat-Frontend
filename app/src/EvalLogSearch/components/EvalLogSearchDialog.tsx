@@ -1,19 +1,20 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { ReactComponent as MdSwapVert } from '@shared/assets/icon/md-swap-vert.svg';
-import { ARIA_LABEL } from '@shared/constants/accessibility';
-import { Button, Clickable, Dialog, FormSelect, Input } from '@shared/ui-kit';
 import { useAtomValue } from 'jotai';
 import { useForm } from 'react-hook-form';
 import { useSearchParams } from 'react-router-dom';
-import type { EvalLogSearchArgs } from '../api/getEvalLogs';
-import { evalLogSearchArgsAtom } from '../atoms/evalLogSearchArgsAtom';
-import { EVAL_LOG_SEARCH_ARGS_TEXT } from '../constants/evalLogArgsText';
+
+import type { EvalLogSearchArgs } from '@/EvalLogSearch/api/getEvalLogs';
+import { evalLogSearchArgsAtom } from '@/EvalLogSearch/atoms/evalLogSearchArgsAtom';
+import { EVAL_LOG_SEARCH_ARGS_TEXT } from '@/EvalLogSearch/constants/evalLogArgsText';
 import {
   EVAL_LOG_SEARCH_URL_PARAM_KEYS,
   EVAL_LOG_SEARCH_URL_PARAM_VALUES,
-} from '../constants/urlParams';
-import { trimEvalLogSearchForm } from '../utils/trimEvalLogSearchForm';
+} from '@/EvalLogSearch/constants/urlParams';
+import { trimEvalLogSearchForm } from '@/EvalLogSearch/utils/trimEvalLogSearchForm';
+import { ReactComponent as MdSwapVert } from '@shared/assets/icon/md-swap-vert.svg';
+import { ARIA_LABEL } from '@shared/constants/accessibility';
+import { Button, Clickable, Dialog, FormSelect, Input } from '@shared/ui-kit';
 
 type EvalLogSearchDialogProps = {
   isOpen: boolean;
@@ -22,7 +23,7 @@ type EvalLogSearchDialogProps = {
 
 export type EvalLogSearchForm = Omit<
   EvalLogSearchArgs,
-  'after' | 'first' | 'outstandingOnly'
+  'after' | 'first' | 'outstandingOnly' | 'imperfectOnly'
 > & {
   flag: string;
 };
@@ -30,11 +31,21 @@ export type EvalLogSearchForm = Omit<
 const { CORRECTOR, CORRECTED, PROJECT_NAME, FLAG, SORT_ORDER } =
   EVAL_LOG_SEARCH_URL_PARAM_KEYS;
 
-const { ALL_FLAG, OUTSTANDING_FLAG, BEGIN_AT_ASC, BEGIN_AT_DESC } =
-  EVAL_LOG_SEARCH_URL_PARAM_VALUES;
+const {
+  ALL_FLAG,
+  OUTSTANDING_FLAG,
+  IMPERFECT_FLAG,
+  BEGIN_AT_ASC,
+  BEGIN_AT_DESC,
+} = EVAL_LOG_SEARCH_URL_PARAM_VALUES;
 
-const { ALL_FLAG_INCLUDED, OUTSTANDING_FLAG_ONLY, ASC, DESC } =
-  EVAL_LOG_SEARCH_ARGS_TEXT;
+const {
+  ALL_FLAG_INCLUDED,
+  OUTSTANDING_FLAG_ONLY,
+  IMPERFECT_FLAG_ONLY,
+  ASC,
+  DESC,
+} = EVAL_LOG_SEARCH_ARGS_TEXT;
 
 export const EvalLogSearchDialog = ({
   isOpen,
@@ -115,6 +126,7 @@ export const EvalLogSearchDialog = ({
                 <option value={OUTSTANDING_FLAG}>
                   {OUTSTANDING_FLAG_ONLY}
                 </option>
+                <option value={IMPERFECT_FLAG}>{IMPERFECT_FLAG_ONLY}</option>
               </FormSelect>
             </li>
             <li>

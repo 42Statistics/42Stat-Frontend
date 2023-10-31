@@ -1,6 +1,8 @@
+import { useQuery } from '@apollo/client';
+import { useContext } from 'react';
+
 import { MyUserProfileContext } from '@/Profile/contexts/MyUserProfileContext';
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
-import { useQuery } from '@apollo/client';
 import { gql } from '@shared/__generated__';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
@@ -10,7 +12,6 @@ import {
 } from '@shared/components/DashboardContentView/Error';
 import { NumberVersus } from '@shared/components/DashboardContentView/Number/NumberVersus';
 import { InfoTooltip } from '@shared/components/InfoTooltip';
-import { useContext } from 'react';
 
 const GET_AVERAGE_COMMENT_LENGTH_VERSUS = gql(/* GraphQL */ `
   query GetAverageCommentLengthVersus($login1: String!, $login2: String!) {
@@ -54,9 +55,9 @@ export const AverageCommentLength = () => {
       titleRight={<InfoTooltip text="코멘트 : 평가하러 가서 작성한 리뷰" />}
     >
       <NumberVersus
-        imgUrl1={myUserProfile.imgUrl}
+        userProfile1={myUserProfile}
         number1={myAverageCommentLength}
-        imgUrl2={userProfile.imgUrl}
+        userProfile2={userProfile}
         number2={averageCommentLength}
         unit={unit}
       />

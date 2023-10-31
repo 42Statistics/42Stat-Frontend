@@ -1,27 +1,32 @@
 import { useTheme } from '@emotion/react';
+
+import type { UserProfile } from '@shared/types/UserProfile';
 import { Avatar, H3MediumText, HStack, Text } from '@shared/ui-kit';
 
 type NumberVersusProps = {
-  imgUrl1: string | null | undefined;
+  userProfile1: UserProfile;
   number1: number;
-  imgUrl2: string | null | undefined;
+  userProfile2: UserProfile;
   number2: number;
   unit?: string;
 };
 
 export const NumberVersus = ({
-  imgUrl1,
+  userProfile1,
   number1,
-  imgUrl2,
+  userProfile2,
   number2,
   unit,
 }: NumberVersusProps) => {
   const theme = useTheme();
 
+  const { imgUrl: imgUrl1, login: name1 } = userProfile1;
+  const { imgUrl: imgUrl2, login: name2 } = userProfile2;
+
   return (
     <HStack spacing="3rem">
       <HStack spacing="1rem">
-        <Avatar size="xs" src={imgUrl1} />
+        <Avatar size="xs" src={imgUrl1} name={name1} />
         <HStack align="baseline" spacing="0.15rem">
           <H3MediumText
             color={
@@ -46,7 +51,7 @@ export const NumberVersus = ({
         </HStack>
       </HStack>
       <HStack spacing="1rem">
-        <Avatar size="xs" src={imgUrl2} />
+        <Avatar size="xs" src={imgUrl2} name={name2} />
         <HStack align="baseline" spacing="0.15rem">
           <H3MediumText
             color={

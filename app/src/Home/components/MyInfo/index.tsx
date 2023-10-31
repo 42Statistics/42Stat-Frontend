@@ -1,13 +1,14 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { useAtomValue } from 'jotai';
+
+import { useIndividualizedMessageQuery } from '@/Home/components/MyInfo/hooks/useIndividualizedMessage';
 import space_background from '@shared/assets/space-background.webp';
 import { userAtom } from '@shared/atoms/userAtom';
 import { ApolloErrorView } from '@shared/components/ApolloError/ApolloErrorView';
 import { ApolloNotFoundView } from '@shared/components/ApolloError/ApolloNotFoundView';
 import { H2BoldText, Loader, Text, VStack } from '@shared/ui-kit';
 import { CustomBox } from '@shared/ui-kit-styled';
-import { useAtomValue } from 'jotai';
-import { useIndividualizedMessageQuery } from './hooks/useIndividualizedMessage';
 
 export const MyInfo = () => {
   const theme = useTheme();

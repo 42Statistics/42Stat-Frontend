@@ -1,11 +1,12 @@
 import { useTheme } from '@emotion/react';
+
 import { ReactComponent as MdChevronLeft } from '@shared/assets/icon/md-chevron-left.svg';
 import { ReactComponent as MdChevronRight } from '@shared/assets/icon/md-chevron-right.svg';
 import { ReactComponent as MdFirstPage } from '@shared/assets/icon/md-first-page.svg';
 import { ReactComponent as MdLastPage } from '@shared/assets/icon/md-last-page.svg';
+import { PageButton } from '@shared/components/Pagination/PageButton';
 import { ARIA_LABEL } from '@shared/constants/accessibility';
 import { Clickable, HStack } from '@shared/ui-kit';
-import { PageButton } from './PageButton';
 
 export type PaginationProps = {
   currPageNumber: number;
@@ -21,6 +22,7 @@ export const Pagination = ({
   pagePerRow = 5,
 }: PaginationProps) => {
   const theme = useTheme();
+
   const start = Math.floor((currPageNumber - 1) / pagePerRow) * pagePerRow + 1;
   const end = Math.min(start + pagePerRow - 1, totalPageNumber);
   const pageNumberList = Array.from(

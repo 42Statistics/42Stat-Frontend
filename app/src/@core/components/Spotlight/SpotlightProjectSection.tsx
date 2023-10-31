@@ -1,6 +1,6 @@
-import { ProjectPreview } from '@shared/__generated__/graphql';
+import { SpotlightProjectList } from '@core/components/Spotlight/SpotlightProjectList';
+import type { ProjectPreview } from '@shared/__generated__/graphql';
 import { BoldText, Divider, VStack } from '@shared/ui-kit';
-import { SpotlightProjectList } from './SpotlightProjectList';
 
 type SpotlightProjectSectionProps = {
   list: ProjectPreview[];

@@ -1,10 +1,12 @@
 import { keyframes, useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { Modal, Overlay } from '@shared/ui-kit';
-import { MODAL_ID } from '@shared/constants/HTML_ID';
-import { ModalBaseProps } from '@shared/types/Modal';
-import { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
 import { useLayoutEffect, useState } from 'react';
+
+import { MODAL_ID } from '@shared/constants/htmlId';
+import type { ModalBaseProps } from '@shared/types/Modal';
+import type { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
+import { Modal } from '@shared/ui-kit/Modal';
+import { Overlay } from '@shared/ui-kit/Overlay';
 
 type Anchor = 'left' | 'right' | 'top' | 'bottom';
 

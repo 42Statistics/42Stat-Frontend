@@ -2,14 +2,23 @@ import { useQuery } from '@apollo/client';
 import { useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 
+import { calculatorUserInfoAtom } from '@/Calculator/atoms/calculatorUserInfoAtom';
+import { expTablesAtom } from '@/Calculator/atoms/expTablesAtom';
+import {
+  emptySubject,
+  subjectListAtom,
+} from '@/Calculator/atoms/subjectListAtom';
+import { CalculatorBasicInfoInputGroup } from '@/Calculator/components/CalculatorBasicInfoInputGroup';
 import { CalculatorInput } from '@/Calculator/components/CalculatorInput';
 import { calculatorPageDashboardContents } from '@/Calculator/dashboard-frames/calculatorPageDashboardContents';
 import {
   calculatorPageDashboardDesktop,
   calculatorPageDashboardTablet,
 } from '@/Calculator/dashboard-frames/calculatorPageDashboardRows';
+import { getDifferences } from '@/Calculator/utils/getDifferences';
 import { Footer } from '@core/components/Footer';
 import { gql } from '@shared/__generated__';
+import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
 import { DashboardTemp } from '@shared/components/Dashboard/DashboardTemp';
 import { Seo } from '@shared/components/Seo';
 import { H1BoldText, VStack } from '@shared/ui-kit';
@@ -17,21 +26,14 @@ import { getBlackholeDaysLeft } from '@shared/utils/getBlackholeDaysLeft';
 import { getTimeDiffFromNow } from '@shared/utils/getTimeDiffFromNow';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 
-import { calculatorUserInfoAtom } from './atoms/calculatorUserInfoAtom';
-import { expTablesAtom } from './atoms/expTablesAtom';
-import { subjectListAtom } from './atoms/subjectListAtom';
-import { CalculatorBasicInfoInputGroup } from './components/CalculatorBasicInfoInputGroup';
-import { getDifferences } from './utils/getDifferences';
-import { emptySubject } from './atoms/subjectListAtom';
-
 export const GET_BLACKHOLE_INFO = gql(/* GraphQL */ `
   query GetBlackholeInfo {
-    getPersonalGeneral {
-      userProfile {
-        level
-      }
+    getMyInfo {
+      level
       beginAt
-      blackholedAt
+      myRecentActivity {
+        blackholedAt
+      }
     }
     getExpTable {
       level
@@ -51,20 +53,21 @@ const CalculatorPage = () => {
     if (!data) {
       return;
     }
-    const {
-      beginAt,
-      blackholedAt,
-      userProfile: { level },
-    } = data.getPersonalGeneral;
+
+    const { level, beginAt, myRecentActivity } = data.getMyInfo || {};
+    const { blackholedAt } = myRecentActivity || {};
 
     const expMaxTable = data.getExpTable.map((level) => level.exp);
     const expReqTable = getDifferences(expMaxTable);
 
     setCalculatorUserInfo({
-      currentLevel: level,
+      currentLevel: level ?? 0,
       currentBlackhole:
         blackholedAt != null ? getBlackholeDaysLeft(new Date(blackholedAt)) : 0,
-      daysFromStart: -getTimeDiffFromNow(new Date(beginAt), 'day'),
+      daysFromStart: -getTimeDiffFromNow(
+        beginAt ? new Date(beginAt) : new Date(),
+        'day',
+      ),
     });
     setExpTables({ expMaxTable, expReqTable });
   }, [data, setCalculatorUserInfo, setExpTables, setSubjectList]);
@@ -73,8 +76,11 @@ const CalculatorPage = () => {
     setSubjectList([emptySubject(0)]);
   }, [setSubjectList]);
 
-  if (loading || error || !data) {
+  if (loading) {
     return <></>;
+  }
+  if (error || !data) {
+    return <FullPageApolloErrorView />;
   }
 
   return (

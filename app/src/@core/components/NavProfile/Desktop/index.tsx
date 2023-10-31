@@ -1,5 +1,8 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { useAtomValue } from 'jotai';
+import { Link } from 'react-router-dom';
+
 import { userAtom } from '@shared/atoms/userAtom';
 import { ALT, ARIA_LABEL } from '@shared/constants/accessibility';
 import { ROUTES } from '@shared/constants/routes';
@@ -11,8 +14,6 @@ import {
   VStack,
 } from '@shared/ui-kit';
 import { titleCase } from '@shared/utils/formatters/titleCase';
-import { useAtomValue } from 'jotai';
-import { Link } from 'react-router-dom';
 
 type DesktopNavProfileProps = {
   imgUrl: string | null | undefined;
@@ -25,8 +26,8 @@ export const DesktopNavProfile = ({
   name,
   login,
 }: DesktopNavProfileProps) => {
-  const user = useAtomValue(userAtom);
   const theme = useTheme();
+  const user = useAtomValue(userAtom);
 
   return (
     <Link
@@ -36,7 +37,12 @@ export const DesktopNavProfile = ({
     >
       <Layout>
         <HStack w="100%" spacing="2rem">
-          <Avatar size="lg" src={imgUrl} alt={ALT.AVATAR_OF(login)} />
+          <Avatar
+            size="lg"
+            src={imgUrl}
+            name={login}
+            alt={ALT.AVATAR_OF(login)}
+          />
           <VStack align="start" spacing="0.5rem">
             <MediumText>{login}</MediumText>
             <CaptionText color={theme.colors.mono.gray500}>

@@ -2,15 +2,25 @@ import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 
 import { ReactComponent as MdExpandMore } from '@shared/assets/icon/md-expand-more.svg';
-import { HStack, Spacer, Text } from '@shared/ui-kit';
-import { useGetSelectDisclosureContext } from './contexts/SelectDisclosureContext';
-import { useGetSelectValueContext } from './contexts/SelectValueContext';
+import { useGetSelectDisclosureContext } from '@shared/ui-kit/Select/contexts/SelectDisclosureContext';
+import { useGetSelectValueContext } from '@shared/ui-kit/Select/contexts/SelectValueContext';
+import { Spacer } from '@shared/ui-kit/Spacer';
+import { HStack } from '@shared/ui-kit/Stack';
+import { Text } from '@shared/ui-kit/Text';
 
 type SelectTriggerProps = {
+  left?: React.ReactNode;
+  right?: React.ReactNode;
+  spacing?: string;
   placeholder?: string;
 };
 
-export function SelectTrigger({ placeholder = '' }: SelectTriggerProps) {
+export const SelectTrigger = ({
+  left,
+  right,
+  spacing = '1.5rem',
+  placeholder = '',
+}: SelectTriggerProps) => {
   const theme = useTheme();
 
   const { internalValue, renderValue } = useGetSelectValueContext();
@@ -18,18 +28,20 @@ export function SelectTrigger({ placeholder = '' }: SelectTriggerProps) {
 
   return (
     <StyledSelectTrigger onClick={onToggle}>
-      <HStack w="100%" spacing="2rem">
+      <HStack w="100%" spacing={spacing}>
+        {left}
         {internalValue != null ? (
           <Text>{renderValue}</Text>
         ) : (
           <Text color={theme.colors.mono.gray500}>{placeholder}</Text>
         )}
+        {right}
         <Spacer />
         <MdExpandMore width={16} height={16} fill={theme.colors.mono.black} />
       </HStack>
     </StyledSelectTrigger>
   );
-}
+};
 
 const StyledSelectTrigger = styled.div`
   padding: 0.8rem 2rem;

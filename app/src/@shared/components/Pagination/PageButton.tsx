@@ -1,5 +1,6 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+
 import { ARIA_LABEL } from '@shared/constants/accessibility';
 import { Clickable, Text } from '@shared/ui-kit';
 
@@ -22,6 +23,7 @@ export const PageButton = ({
     }
     onPageNumberChange(pageNumber);
   };
+
   return (
     <Layout
       isCurrPage={pageNumber === currPageNumber}

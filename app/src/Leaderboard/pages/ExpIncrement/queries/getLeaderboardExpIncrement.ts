@@ -6,6 +6,7 @@ export const GET_LEADERBOARD_EXP_INCREMENT = gql(/* GraphQL */ `
     $pageNumber: Int!
     $dateTemplate: DateTemplate!
     $promo: Int
+    $coalitionId: Int
   ) {
     getLeaderboardExpIncrement {
       byDateTemplate(
@@ -13,6 +14,7 @@ export const GET_LEADERBOARD_EXP_INCREMENT = gql(/* GraphQL */ `
         pageNumber: $pageNumber
         dateTemplate: $dateTemplate
         promo: $promo
+        coalitionId: $coalitionId
       ) {
         data {
           me {

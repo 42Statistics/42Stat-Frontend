@@ -9,7 +9,7 @@ export const FormSelect = styled.select`
   border: 1px solid ${({ theme }) => theme.colors.mono.gray200};
   border-radius: ${({ theme }) => theme.radius.md};
   background: ${({ theme }) =>
-    `url(${triangle_down}) no-repeat right 2rem center ${theme.colors.mono.white}`};
+    `url(${triangle_down}) no-repeat right 2rem center ${theme.colors.background.box.default}`};
   background-size: 10px;
   user-select: none;
 

@@ -1,6 +1,7 @@
+import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 
-import { ReactComponent as Check } from '@shared/assets/icon/md-check.svg';
+import { ReactComponent as MdCheck } from '@shared/assets/icon/md-check.svg';
 import { useGetSelectDisclosureContext } from '@shared/ui-kit/Select/contexts/SelectDisclosureContext';
 import { useGetSelectValueContext } from '@shared/ui-kit/Select/contexts/SelectValueContext';
 
@@ -15,6 +16,7 @@ export const SelectItem = ({
   renderValue = value ?? '',
   children,
 }: SelectItemProps) => {
+  const theme = useTheme();
   const { internalValue, setInternalValue, setRenderValue, onValueChange } =
     useGetSelectValueContext();
   const { onClose } = useGetSelectDisclosureContext();
@@ -31,7 +33,9 @@ export const SelectItem = ({
   return (
     <StyledSelectItem onClick={handleClick}>
       <div style={{ width: '1.6rem' }}>
-        {isActive && <Check width={16} height={16} />}
+        {isActive && (
+          <MdCheck width={16} height={16} fill={theme.colors.mono.black} />
+        )}
       </div>
       {children}
     </StyledSelectItem>

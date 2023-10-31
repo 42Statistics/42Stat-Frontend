@@ -97,6 +97,7 @@ const fonts = {
 const zIndex = {
   modal: 1000,
   dropdown: 500,
+  header: 400,
   tooltip: 300,
   absoluteButton: 200,
 };

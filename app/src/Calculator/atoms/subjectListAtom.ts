@@ -16,6 +16,6 @@ export const emptySubject = (index: number) => {
   };
 };
 
-export const subjectListAtomInitialValue: Subject[] = [];
+export const subjectListAtomInitialValue: Subject[] = [emptySubject(0)];
 
 export const subjectListAtom = atom<Subject[]>(subjectListAtomInitialValue);

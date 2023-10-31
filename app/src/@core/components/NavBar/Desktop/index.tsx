@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { useAtomValue } from 'jotai';
 import { Link } from 'react-router-dom';
 
-import { DesktopNavMenu } from '@core/components/NavBar/Desktop/DesktopNavMenu';
+import { NavMenu } from '@core/components/NavBar/shared/NavMenu';
 import { DesktopNavProfile } from '@core/components/NavProfile/Desktop';
 import { SearchBarShapeButton } from '@core/components/SearchBarShapeButton';
 import { userAtom } from '@shared/atoms/userAtom';
@@ -30,7 +30,7 @@ export const DesktopNavBar = ({ fixed = true }: DesktopNavBarProps) => {
           login={user.login}
         />
         <SearchBarShapeButton />
-        <DesktopNavMenu />
+        <NavMenu />
       </VStack>
     </Layout>
   );

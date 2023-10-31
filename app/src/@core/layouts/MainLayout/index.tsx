@@ -8,8 +8,8 @@ import { Outlet, ScrollRestoration } from 'react-router-dom';
 import { isSpotlightOpenAtom } from '@core/atoms/isSpotlightOpenAtom';
 import { MobileHeader } from '@core/components/Header/Mobile';
 import { DesktopNavBar } from '@core/components/NavBar/Desktop';
-import { TabBar } from '@core/components/NavBar/Mobile(TabBar)';
 import { TabletNavBar } from '@core/components/NavBar/Tablet';
+import { SearchBarShapeButton } from '@core/components/SearchBarShapeButton';
 import { mainLayoutGlobalStyle } from '@core/layouts/MainLayout/mainLayoutGlobalStyle';
 import { Global, useTheme } from '@emotion/react';
 import { mq } from '@shared/utils/facepaint/mq';
@@ -49,11 +49,17 @@ const MainLayout = () => {
       {device === 'tablet' ? <TabletNavBar /> : null}
       <MarginLayer>
         <Layout>
-          {device === 'mobile' ? <MobileHeader /> : null}
+          {device === 'mobile' && (
+            <>
+              <MobileHeader />
+              <StyledSearchBarShapeButton>
+                <SearchBarShapeButton />
+              </StyledSearchBarShapeButton>
+            </>
+          )}
           <Outlet />
         </Layout>
       </MarginLayer>
-      {device === 'mobile' ? <TabBar /> : null}
     </>
   );
 };
@@ -65,10 +71,19 @@ const MarginLayer = styled.div`
   })}
 `;
 
+const StyledSearchBarShapeButton = styled.div`
+  margin-top: 6rem; // fixed header height
+  width: 280px;
+  padding: 2rem 0;
+`;
+
 const Layout = styled.main`
   position: relative;
   min-height: 100vh;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   ${mq({
     maxWidth: ['480px', '800px', '1440px'],

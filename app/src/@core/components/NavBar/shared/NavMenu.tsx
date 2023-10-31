@@ -1,9 +1,9 @@
-import { NavItem } from '@core/components/NavBar/Desktop/DesktopNavItem';
 import { useNavRoutes } from '@core/components/NavBar/hooks/useNavRoutes';
+import { NavItem } from '@core/components/NavBar/shared/NavItem';
 import { Spacer, VStack } from '@shared/ui-kit';
 
 // TODO: SidebarMenu와 TabBar의 로직 유사하므로 통합 필요
-export const DesktopNavMenu = () => {
+export const NavMenu = () => {
   const { NAV_ROUTES } = useNavRoutes();
 
   return (

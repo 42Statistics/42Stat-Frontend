@@ -23,7 +23,7 @@ type EvalLogSearchDialogProps = {
 
 export type EvalLogSearchForm = Omit<
   EvalLogSearchArgs,
-  'after' | 'first' | 'outstandingOnly'
+  'after' | 'first' | 'outstandingOnly' | 'imperfectOnly'
 > & {
   flag: string;
 };
@@ -31,11 +31,21 @@ export type EvalLogSearchForm = Omit<
 const { CORRECTOR, CORRECTED, PROJECT_NAME, FLAG, SORT_ORDER } =
   EVAL_LOG_SEARCH_URL_PARAM_KEYS;
 
-const { ALL_FLAG, OUTSTANDING_FLAG, BEGIN_AT_ASC, BEGIN_AT_DESC } =
-  EVAL_LOG_SEARCH_URL_PARAM_VALUES;
+const {
+  ALL_FLAG,
+  OUTSTANDING_FLAG,
+  IMPERFECT_FLAG,
+  BEGIN_AT_ASC,
+  BEGIN_AT_DESC,
+} = EVAL_LOG_SEARCH_URL_PARAM_VALUES;
 
-const { ALL_FLAG_INCLUDED, OUTSTANDING_FLAG_ONLY, ASC, DESC } =
-  EVAL_LOG_SEARCH_ARGS_TEXT;
+const {
+  ALL_FLAG_INCLUDED,
+  OUTSTANDING_FLAG_ONLY,
+  IMPERFECT_FLAG_ONLY,
+  ASC,
+  DESC,
+} = EVAL_LOG_SEARCH_ARGS_TEXT;
 
 export const EvalLogSearchDialog = ({
   isOpen,
@@ -116,6 +126,7 @@ export const EvalLogSearchDialog = ({
                 <option value={OUTSTANDING_FLAG}>
                   {OUTSTANDING_FLAG_ONLY}
                 </option>
+                <option value={IMPERFECT_FLAG}>{IMPERFECT_FLAG_ONLY}</option>
               </FormSelect>
             </li>
             <li>

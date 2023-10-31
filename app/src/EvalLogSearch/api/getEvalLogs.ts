@@ -10,6 +10,7 @@ export const GET_EVAL_LOGS = gql(/* GraphQL */ `
     $corrected: String
     $projectName: String
     $outstandingOnly: Boolean
+    $imperfectOnly: Boolean
     $sortOrder: EvalLogSortOrder
   ) {
     getEvalLogs(
@@ -19,6 +20,7 @@ export const GET_EVAL_LOGS = gql(/* GraphQL */ `
       corrected: $corrected
       projectName: $projectName
       outstandingOnly: $outstandingOnly
+      imperfectOnly: $imperfectOnly
       sortOrder: $sortOrder
     ) {
       edges {
@@ -64,6 +66,7 @@ export const GET_EVAL_LOGS = gql(/* GraphQL */ `
 export type EvalLogSearchArgs = Partial<{
   projectName: string;
   outstandingOnly: boolean;
+  imperfectOnly: boolean;
   corrector: string;
   corrected: string;
   sortOrder: EvalLogSortOrder;
@@ -75,4 +78,5 @@ export const GET_EVAL_LOGS_DEFAULT_VARIABLES: EvalLogSearchArgs = {
   first: RESULT_PER_PAGE,
   sortOrder: EvalLogSortOrder.BeginAtDesc,
   outstandingOnly: false,
+  imperfectOnly: false,
 };

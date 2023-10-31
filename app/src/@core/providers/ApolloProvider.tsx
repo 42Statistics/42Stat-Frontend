@@ -131,6 +131,7 @@ export const client = new ApolloClient({
             keyArgs: [
               'projectName',
               'outstandingOnly',
+              'imperfectOnly',
               'corrector',
               'corrected',
               'sortOrder',

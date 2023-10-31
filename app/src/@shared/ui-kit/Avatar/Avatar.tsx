@@ -33,9 +33,9 @@ export const Avatar = ({
 
   return (
     <div style={{ position: 'relative' }}>
-      {src != null ? (
+      {src != null && !isError ? (
         <>
-          {(isLoading || isError) && (
+          {isLoading && (
             <AvatarInitials size={size} width={width} name={name} isAbsolute />
           )}
           <StyledAvatar

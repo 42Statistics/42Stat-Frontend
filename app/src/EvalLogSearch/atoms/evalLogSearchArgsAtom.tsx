@@ -31,7 +31,7 @@ export const EvalLogSearchArgsAtomHydrator = ({
 const { CORRECTOR, CORRECTED, PROJECT_NAME, FLAG, SORT_ORDER } =
   EVAL_LOG_SEARCH_URL_PARAM_KEYS;
 
-const { BEGIN_AT_ASC, OUTSTANDING_FLAG } = EVAL_LOG_SEARCH_URL_PARAM_VALUES;
+const { BEGIN_AT_ASC, OUTSTANDING_FLAG, IMPERFECT_FLAG } = EVAL_LOG_SEARCH_URL_PARAM_VALUES;
 
 const toEvalLogSearchArgs = (
   searchParams: URLSearchParams,
@@ -41,6 +41,7 @@ const toEvalLogSearchArgs = (
     corrected: searchParams.get(CORRECTED) ?? undefined,
     projectName: searchParams.get(PROJECT_NAME) ?? undefined,
     outstandingOnly: searchParams.get(FLAG) === OUTSTANDING_FLAG ? true : false,
+		imperfectOnly: searchParams.get(FLAG) === IMPERFECT_FLAG ? true : false,
     sortOrder:
       searchParams.get(SORT_ORDER) === BEGIN_AT_ASC
         ? EvalLogSortOrder.BeginAtAsc

@@ -19,15 +19,21 @@ const { USERS, PROJECT_NAME, FLAG, SORT_ORDER } =
   EVAL_LOG_SEARCH_ARGS_HEADER_TEXT;
 
 const EvalLogSearchHeaderFormDescriptor = () => {
-  const { corrector, corrected, projectName, outstandingOnly, sortOrder } =
-    useAtomValue(evalLogSearchArgsAtom);
+  const {
+    corrector,
+    corrected,
+    projectName,
+    outstandingOnly,
+    imperfectOnly,
+    sortOrder,
+  } = useAtomValue(evalLogSearchArgsAtom);
 
   return (
     <PrimaryBoldText>
       {[
         USERS(corrector, corrected),
         PROJECT_NAME(projectName),
-        FLAG(outstandingOnly),
+        FLAG(outstandingOnly, imperfectOnly),
         SORT_ORDER(sortOrder),
       ].join(' / ')}
     </PrimaryBoldText>

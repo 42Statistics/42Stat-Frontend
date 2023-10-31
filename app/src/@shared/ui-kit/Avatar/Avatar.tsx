@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 import styled from '@emotion/styled';
-import marvin from '@shared/assets/avatar/marvin.jpeg';
 import { AvatarInitials } from '@shared/ui-kit/Avatar/AvatarInitials';
 import { Image } from '@shared/ui-kit/Image';
 
@@ -12,7 +11,7 @@ type AvatarProps = {
   src?: string | null | undefined;
   alt?: string;
   badge?: React.ReactNode;
-  name?: string | undefined;
+  name: string;
 };
 
 //Avatar name 속성을 넘겨받지 않으면 로딩실패시 marvin이 됩니다.
@@ -23,30 +22,33 @@ export const Avatar = ({
   badge,
   name,
 }: AvatarProps) => {
-  const [image, setImage] = useState(src);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
   const width = getWidth(size);
 
   const handleError = () => {
-    setImage(null);
     setIsLoading(false);
     setIsError(true);
   };
 
   return (
     <div style={{ position: 'relative' }}>
-      {name && !image && (isLoading || isError) ? (
-        <AvatarInitials size={size} width={width} name={name} />
+      {src != null ? (
+        <>
+          {(isLoading || isError) && (
+            <AvatarInitials size={size} width={width} name={name} isAbsolute />
+          )}
+          <StyledAvatar
+            onLoad={() => setIsLoading(false)}
+            onError={handleError}
+            src={src}
+            alt={alt}
+            style={{ width, height: width }}
+          />
+        </>
       ) : (
-        <StyledAvatar
-          onLoad={() => setIsLoading(false)}
-          onError={handleError}
-          src={image || marvin}
-          alt={alt}
-          style={{ width, height: width }}
-        />
+        <AvatarInitials size={size} width={width} name={name} />
       )}
       {badge != null ? (
         <div style={{ position: 'absolute', top: '-10%', right: '-10%' }}>

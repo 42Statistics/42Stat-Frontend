@@ -9,7 +9,6 @@ import { isSpotlightOpenAtom } from '@core/atoms/isSpotlightOpenAtom';
 import { MobileHeader } from '@core/components/Header/Mobile';
 import { DesktopNavBar } from '@core/components/NavBar/Desktop';
 import { TabletNavBar } from '@core/components/NavBar/Tablet';
-import { SearchBarShapeButton } from '@core/components/SearchBarShapeButton';
 import { mainLayoutGlobalStyle } from '@core/layouts/MainLayout/mainLayoutGlobalStyle';
 import { Global, useTheme } from '@emotion/react';
 import { mq } from '@shared/utils/facepaint/mq';
@@ -52,9 +51,7 @@ const MainLayout = () => {
           {device === 'mobile' && (
             <>
               <MobileHeader />
-              <StyledSearchBarShapeButton>
-                <SearchBarShapeButton />
-              </StyledSearchBarShapeButton>
+              <div style={{ height: '10rem' }} />
             </>
           )}
           <Outlet />
@@ -69,12 +66,6 @@ const MarginLayer = styled.div`
     marginLeft: ['0', '7rem', '24rem'],
     paddingBottom: ['8rem', '0', '0'],
   })}
-`;
-
-const StyledSearchBarShapeButton = styled.div`
-  margin-top: 6rem; // fixed header height
-  width: 280px;
-  padding: 2rem 0;
 `;
 
 const Layout = styled.main`

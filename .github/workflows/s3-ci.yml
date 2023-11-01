@@ -2,7 +2,7 @@ name: Upload build result to s3 bucket (production ver.)
 
 on:
   release:
-    types: [created]
+    types: [published]
 
 jobs:
   build:

@@ -5,6 +5,6 @@ RUN apk add python3 make g++
 
 WORKDIR /app
 
-COPY entry.sh /tmp/
+COPY entry.prod.sh /tmp/
 
-ENTRYPOINT [ "sh", "/tmp/entry.sh" ]
+ENTRYPOINT [ "sh", "/tmp/entry.prod.sh" ]

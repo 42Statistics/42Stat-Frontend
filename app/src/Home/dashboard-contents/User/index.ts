@@ -7,3 +7,4 @@ export * from './MemberRate';
 export * from './BlackholedCountRecords';
 export * from './UserCountPerLevel';
 export * from './WalletRanking';
+export * from './UserRate';

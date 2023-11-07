@@ -25,6 +25,7 @@ import {
   MemberRate,
   UserCountPerLevel,
   WalletRanking,
+  UserRate,
 } from '@/Home/dashboard-contents/User';
 import type { DashboardItemProps } from '@shared/types/Dashboard';
 
@@ -108,5 +109,9 @@ export const homePageDashboardContents: DashboardItemProps[] = [
   {
     id: 19,
     content: MonthlyTigCountPerCoalition,
+  },
+  {
+    id: 20,
+    content: UserRate,
   },
 ];

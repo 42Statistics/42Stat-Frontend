@@ -24,6 +24,10 @@ export const homeCircleDashboardRows: DashboardRowType[] = [
         rowSpan: 2,
         elementId: 15,
       },
+      {
+        rowSpan: 2,
+        elementId: 20,
+      },
     ],
   },
 ];

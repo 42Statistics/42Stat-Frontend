@@ -22,8 +22,8 @@ import {
   BlackholedCountRecords,
   CorrectionPointRanking,
   UserCountPerLevel,
-  WalletRanking,
   UserRate,
+  WalletRanking,
 } from '@/Home/dashboard-contents/User';
 import type { DashboardItemProps } from '@shared/types/Dashboard';
 

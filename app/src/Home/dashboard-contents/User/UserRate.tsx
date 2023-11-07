@@ -47,18 +47,21 @@ export const UserRate = () => {
     return <DashboardContentNotFound />;
   }
 
-  const { fields: memberFields } = data.getHomeUser.memberRate;
-  const { fields: blackholedFields } = data.getHomeUser.blackholedRate;
-  const BLACK_HOLED = 0;
-  const ALIVE = 1;
-  const MEMBER = 0;
+  const { fields: memberRateFields } = data.getHomeUser.memberRate;
+  const { fields: blackholedRateFields } = data.getHomeUser.blackholedRate;
+
+  const BLACK_HOLED_INDEX = 0;
+  const ALIVE_INDEX = 1;
+  const MEMBER_INDEX = 0;
 
   const fields: Pair[] = [
-    blackholedFields[BLACK_HOLED],
-    memberFields[MEMBER],
+    blackholedRateFields[BLACK_HOLED_INDEX],
+    memberRateFields[MEMBER_INDEX],
     {
       key: 'learner',
-      value: blackholedFields[ALIVE].value - memberFields[MEMBER].value,
+      value:
+        blackholedRateFields[ALIVE_INDEX].value -
+        memberRateFields[MEMBER_INDEX].value,
     },
   ];
 
@@ -79,6 +82,7 @@ type UserRateChartProps = {
 
 const UserRateChart = ({ labels, series }: UserRateChartProps) => {
   const theme = useTheme();
+  const BLACKHOLE_COLOR = theme.colors.mono.absolute.black;
 
   const options: ApexCharts.ApexOptions = {
     tooltip: {
@@ -87,7 +91,7 @@ const UserRateChart = ({ labels, series }: UserRateChartProps) => {
       },
     },
     colors: [
-      theme.colors.mono.absolute.black,
+      BLACKHOLE_COLOR,
       theme.colors.chart.primary.default,
       theme.colors.chart.primary.light,
     ],

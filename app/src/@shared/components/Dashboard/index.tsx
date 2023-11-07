@@ -5,6 +5,14 @@ import { DashboardRowItem } from '@shared/components/Dashboard/DashboardRowItem'
 import type { DashboardProps } from '@shared/types/Dashboard';
 
 export const Dashboard = ({ rows, contents }: DashboardProps) => {
+  const findContentById = (elementId: number) => {
+    const foundContent = contents.find((content) => content.id === elementId);
+    if (foundContent === undefined) {
+      throw new Error(`Content with ID ${elementId} not found`);
+    }
+    return foundContent;
+  };
+
   return (
     <Layout>
       {rows.map(({ colSpan, items }, rowIdx) => (
@@ -14,7 +22,7 @@ export const Dashboard = ({ rows, contents }: DashboardProps) => {
               key={itemIdx}
               rowSpan={rowSpan}
               colSpan={colSpan}
-              content={contents[elementId].content}
+              content={findContentById(elementId).content}
             />
           ))}
         </DashboardRow>

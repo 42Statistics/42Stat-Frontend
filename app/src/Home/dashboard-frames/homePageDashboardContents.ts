@@ -20,9 +20,7 @@ import {
   AverageDurationPerCircle,
   BlackholedCountPerCircle,
   BlackholedCountRecords,
-  BlackholedRate,
   CorrectionPointRanking,
-  MemberRate,
   UserCountPerLevel,
   WalletRanking,
   UserRate,
@@ -66,14 +64,7 @@ export const homePageDashboardContents: DashboardItemProps[] = [
     id: 8,
     content: UserCountPerLevel,
   },
-  {
-    id: 9,
-    content: MemberRate,
-  },
-  {
-    id: 10,
-    content: BlackholedRate,
-  },
+  //id 9,10 userRate로 통합
   {
     id: 11,
     content: BlackholedCountPerCircle,

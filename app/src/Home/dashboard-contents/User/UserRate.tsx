@@ -3,6 +3,7 @@ import { useTheme } from '@emotion/react';
 import { capitalize } from 'lodash-es';
 
 import { gql } from '@shared/__generated__';
+import type { Pair } from '@shared/__generated__/graphql';
 import { PieChart } from '@shared/components/Chart';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
@@ -11,7 +12,6 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
-import type { Pair } from '@shared/__generated__/graphql';
 
 const GET_USER_RATE = gql(/* GraphQL */ `
   query GetUserRate {

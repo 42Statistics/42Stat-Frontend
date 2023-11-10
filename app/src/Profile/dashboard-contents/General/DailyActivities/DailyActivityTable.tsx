@@ -1,13 +1,14 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { Fragment } from 'react';
 
-import type { DailyActivityScore } from '@/Profile/dashboard-contents/General/DailyActivities';
-import { DailyActivityTableData } from '@/Profile/dashboard-contents/General/DailyActivities/DailyActivityTableData';
+import { DailyActivityTableHeader } from '@/Profile/dashboard-contents/General/DailyActivities/DailyActivityTableHeader';
+import { DailyActivityTableRow } from '@/Profile/dashboard-contents/General/DailyActivities/DailyActivityTableWeek';
 import { DAY_OF_WEEK } from '@/Profile/dashboard-contents/General/DailyActivities/constants/dayOfWeek';
+import type { DailyActivityScore } from '@/Profile/dashboard-contents/General/DailyActivities/types/DailyActivityScore';
+import { groupByDayOfTheWeek } from '@/Profile/dashboard-contents/General/DailyActivities/utils/groupByDayOfTheWeek';
+import { matchDatesWithScores } from '@/Profile/dashboard-contents/General/DailyActivities/utils/matchDatesWithScore';
 import { CaptionText, HStack, VStack } from '@shared/ui-kit';
 import { getDatesBetween } from '@shared/utils/getDatesBetween';
-import { isSameDate } from '@shared/utils/isSameDate';
 
 type DailyActivitiyTableProps = {
   list: DailyActivityScore[];
@@ -34,25 +35,7 @@ export const DailyActivityTable = ({
   return (
     <ScrollXArea>
       <VStack align="start" spacing="0.2rem">
-        <HStack h="3rem" spacing="0.2rem">
-          <div style={{ width: '4rem' }} />
-          {dateGroupsWithScores[dateGroupsWithScores.length - 1].map(
-            ({ date }, index) => (
-              <BlankTableData key={index}>
-                {date.getDate() <= 7 && (
-                  <div style={{ position: 'absolute' }}>
-                    <CaptionText
-                      color={theme.colors.mono.gray400}
-                      style={{ wordBreak: 'keep-all' }}
-                    >
-                      {date.getMonth() + 1}월
-                    </CaptionText>
-                  </div>
-                )}
-              </BlankTableData>
-            ),
-          )}
-        </HStack>
+        <DailyActivityTableHeader dateGroupsWithScores={dateGroupsWithScores} />
         {dateGroupsWithScores.map((dateGroupWithScores, index) => (
           <HStack spacing="0.2rem" key={index}>
             <CaptionText
@@ -62,19 +45,10 @@ export const DailyActivityTable = ({
             >
               {DAY_OF_WEEK[index]}
             </CaptionText>
-            {dateGroupWithScores.map(({ score, date }, index) => (
-              <Fragment key={index}>
-                {score === -1 ? (
-                  <BlankTableData />
-                ) : (
-                  <DailyActivityTableData
-                    date={date}
-                    score={score}
-                    color={color}
-                  />
-                )}
-              </Fragment>
-            ))}
+            <DailyActivityTableRow
+              dateGroupWithScores={dateGroupWithScores}
+              color={color}
+            />
           </HStack>
         ))}
       </VStack>
@@ -91,53 +65,7 @@ const ScrollXArea = styled.div`
   position: relative;
 `;
 
-const BlankTableData = styled.div`
+export const BlankTableData = styled.div`
   width: 1.6rem;
   height: 1.6rem;
 `;
-
-// 첫 날짜가 수요일이라면, 일요일부터 화요일까지는 한 칸을 -1로 채움.
-const groupByDayOfTheWeek = (datesWithScores: DateWithScore[]) => {
-  const group = datesWithScores.reduce(
-    (acc, dateWithScore) => {
-      const day = dateWithScore.date.getDay();
-      if (!acc[day]) {
-        acc[day] = [];
-      }
-      acc[day].push(dateWithScore);
-      return acc;
-    },
-    {} as Record<number, DateWithScore[]>,
-  );
-
-  const dayOfFirstDate = datesWithScores[0].date.getDay();
-
-  for (let day = 0; day < dayOfFirstDate; day++) {
-    group[day].unshift({ date: new Date(), score: -1 });
-  }
-  return group;
-};
-
-type DateWithScore = {
-  date: Date;
-  score: number;
-};
-
-const matchDatesWithScores = (
-  dates: Date[],
-  scores: DailyActivityScore[],
-): DateWithScore[] => {
-  let currentScoreIndex = 0;
-
-  return dates.map((date) => {
-    if (currentScoreIndex >= scores.length) {
-      return { date, score: 0 };
-    }
-    const dailyActivityScore = scores[currentScoreIndex];
-    if (isSameDate(dailyActivityScore.date, date)) {
-      currentScoreIndex++;
-      return { date, score: dailyActivityScore.score };
-    }
-    return { date, score: 0 };
-  });
-};

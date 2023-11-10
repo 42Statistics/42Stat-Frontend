@@ -23,6 +23,7 @@ const colors = {
       default: '#00c48c',
       light: '#90e5cd',
     },
+    blackhole: '#161616',
   },
   semantic: {
     error: '#b1232d',

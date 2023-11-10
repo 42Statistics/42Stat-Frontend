@@ -5,8 +5,8 @@ type DailyActivitySquareProps = {
 };
 
 export const DailyActivitySquare = styled.div<DailyActivitySquareProps>`
-  width: 1.6rem;
-  height: 1.6rem;
-  border-radius: 0.3rem;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 0.5rem;
   background-color: ${({ color }) => color};
 `;

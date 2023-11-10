@@ -4,7 +4,7 @@ import { capitalize } from 'lodash-es';
 
 import { gql } from '@shared/__generated__';
 import type { Pair } from '@shared/__generated__/graphql';
-import { PieChart } from '@shared/components/Chart';
+import { DonutChart } from '@shared/components/Chart';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,
@@ -82,12 +82,33 @@ type UserRateChartProps = {
 
 const UserRateChart = ({ labels, series }: UserRateChartProps) => {
   const theme = useTheme();
-  const BLACKHOLE_COLOR = theme.colors.mono.absolute.black;
+  const BLACKHOLE_COLOR = theme.colors.chart.blackhole;
 
   const options: ApexCharts.ApexOptions = {
     tooltip: {
-      y: {
-        formatter: (value) => numberWithUnitFormatter(value, '명'),
+      enabled: false,
+    },
+    plotOptions: {
+      pie: {
+        donut: {
+          labels: {
+            show: true,
+            total: {
+              show: true,
+              color: theme.colors.mono.black,
+            },
+            value: {
+              show: true,
+              formatter: (value) =>
+                numberWithUnitFormatter(parseInt(value), '명'),
+            },
+          },
+        },
+      },
+    },
+    theme: {
+      monochrome: {
+        enabled: false,
       },
     },
     colors: [
@@ -97,5 +118,5 @@ const UserRateChart = ({ labels, series }: UserRateChartProps) => {
     ],
   };
 
-  return <PieChart labels={labels} series={series} options={options} />;
+  return <DonutChart labels={labels} series={series} options={options} />;
 };

@@ -13,8 +13,7 @@ export const DailyActivityTableHeader = ({
   const theme = useTheme();
 
   return (
-    <HStack h="3rem" spacing="0.2rem">
-      <div style={{ width: '4rem' }} />
+    <HStack h="4rem" spacing="0.2rem">
       {dateGroupsWithScores[dateGroupsWithScores.length - 1].map(
         ({ date }, index) => (
           <BlankTableData key={index}>

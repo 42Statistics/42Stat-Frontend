@@ -1,13 +1,12 @@
-import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 
+import { DailyActivityTableDayOfWeekHeader } from '@/Profile/dashboard-contents/General/DailyActivities/DailyActivityTableDayOfWeekHeader';
 import { DailyActivityTableHeader } from '@/Profile/dashboard-contents/General/DailyActivities/DailyActivityTableHeader';
 import { DailyActivityTableRow } from '@/Profile/dashboard-contents/General/DailyActivities/DailyActivityTableWeek';
-import { DAY_OF_WEEK } from '@/Profile/dashboard-contents/General/DailyActivities/constants/dayOfWeek';
 import type { DailyActivityScore } from '@/Profile/dashboard-contents/General/DailyActivities/types/DailyActivityScore';
 import { groupByDayOfTheWeek } from '@/Profile/dashboard-contents/General/DailyActivities/utils/groupByDayOfTheWeek';
 import { matchDatesWithScores } from '@/Profile/dashboard-contents/General/DailyActivities/utils/matchDatesWithScore';
-import { CaptionText, HStack, VStack } from '@shared/ui-kit';
+import { HStack, VStack } from '@shared/ui-kit';
 import { getDatesBetween } from '@shared/utils/getDatesBetween';
 
 type DailyActivitiyTableProps = {
@@ -25,7 +24,6 @@ export const DailyActivityTable = ({
   from,
   to,
 }: DailyActivitiyTableProps) => {
-  const theme = useTheme();
   const dates = getDatesBetween(from, to);
   const datesWithScores = matchDatesWithScores(dates, list);
   const dateGroupsWithScores = Object.values(
@@ -34,24 +32,24 @@ export const DailyActivityTable = ({
 
   return (
     <ScrollXArea>
-      <VStack align="start" spacing="0.2rem">
-        <DailyActivityTableHeader dateGroupsWithScores={dateGroupsWithScores} />
-        {dateGroupsWithScores.map((dateGroupWithScores, index) => (
-          <HStack spacing="0.2rem" key={index}>
-            <CaptionText
-              lineHeight={1}
-              color={theme.colors.mono.gray400}
-              style={{ width: '4rem' }}
-            >
-              {DAY_OF_WEEK[index]}
-            </CaptionText>
-            <DailyActivityTableRow
-              dateGroupWithScores={dateGroupWithScores}
-              color={color}
-            />
-          </HStack>
-        ))}
-      </VStack>
+      <HStack style={{ margin: '0 auto' }}>
+        <DailyActivityTableDayOfWeekHeader />
+        <VStack align="start">
+          <DailyActivityTableHeader
+            dateGroupsWithScores={dateGroupsWithScores}
+          />
+          <VStack align="start" spacing="0.2rem">
+            {dateGroupsWithScores.map((dateGroupWithScores, index) => (
+              <HStack spacing="0.2rem" key={index}>
+                <DailyActivityTableRow
+                  dateGroupWithScores={dateGroupWithScores}
+                  color={color}
+                />
+              </HStack>
+            ))}
+          </VStack>
+        </VStack>
+      </HStack>
     </ScrollXArea>
   );
 };
@@ -59,7 +57,7 @@ export const DailyActivityTable = ({
 const ScrollXArea = styled.div`
   display: flex;
   align-items: center;
-  max-width: 100%;
+  width: 100%;
   overflow-x: auto;
   margin: 0 auto;
   padding: 2rem 0;

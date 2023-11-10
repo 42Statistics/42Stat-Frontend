@@ -33,7 +33,7 @@ export const ColorLegendList = ({ color }: ColorLegendListProps) => {
   });
 
   return (
-    <HStack spacing="3rem">
+    <HStack spacing="2rem">
       {intervals.map((interval, index) => (
         <ColorLegend
           key={index}

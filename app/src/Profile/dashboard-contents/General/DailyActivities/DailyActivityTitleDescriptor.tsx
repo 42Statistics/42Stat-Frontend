@@ -13,7 +13,7 @@ export const DailyActivityTitleDescriptor = ({
   const unit = '년';
 
   return (
-    <VStack align="start">
+    <VStack align="start" style={{ marginLeft: '1rem' }}>
       <Text>{year !== null ? `${year}${unit}` : `최근 1${unit}`} 기준</Text>
       <HStack spacing="1rem">
         <div>

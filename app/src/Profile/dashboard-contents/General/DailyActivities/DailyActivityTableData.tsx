@@ -30,9 +30,12 @@ export const DailyActivityTableData = ({
     <div style={{ position: 'relative' }}>
       <Tooltip.Container>
         <DailyActivitySquare color={color} />
-        <Tooltip position="top">{`${dayjs(date).format(
-          'YYYY-MM-DD',
-        )}: ${numberWithUnitFormatter(score, unit)}`}</Tooltip>
+        <Tooltip position="top">
+          {`${dayjs(date).format('YYYY-MM-DD')}: ${numberWithUnitFormatter(
+            score,
+            unit,
+          )}`}
+        </Tooltip>
       </Tooltip.Container>
     </div>
   );

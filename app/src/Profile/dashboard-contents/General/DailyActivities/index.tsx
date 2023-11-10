@@ -8,13 +8,8 @@ import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { DailyActivitiesResult } from '@/Profile/dashboard-contents/General/DailyActivities/DailyActivitiesResult';
 import { DailyActivityTitleDescriptor } from '@/Profile/dashboard-contents/General/DailyActivities/DailyActivityTitleDescriptor';
 import { YearSelect } from '@/Profile/dashboard-contents/General/DailyActivities/YearSelect';
+import { calculateDailyActivityScores } from '@/Profile/dashboard-contents/General/DailyActivities/utils/calculateDailyActivityScores';
 import { gql } from '@shared/__generated__';
-import {
-  DailyAcitivtyType,
-  type DailyActivity,
-  type DailyActivityRecord,
-} from '@shared/__generated__/graphql';
-import { MILLISECONDS } from '@shared/constants/date';
 import { HStack, VStack } from '@shared/ui-kit';
 import { getYearsBetween } from '@shared/utils/getYearsBetween';
 
@@ -83,47 +78,3 @@ const Layout = styled.div`
   height: 100%;
   padding: 2.4rem;
 `;
-
-export type DailyActivityScore = {
-  date: Date;
-  score: number;
-};
-
-const calculateDailyActivityScores = (
-  list: DailyActivity[],
-): DailyActivityScore[] => {
-  return list.map(({ date, records }) => ({
-    date: new Date(date),
-    score: calculateDailyActivityScore(records),
-  }));
-};
-
-const calculateDailyActivityScore = (records: DailyActivity['records']) => {
-  return sum(records.map((record) => getScoreByDailyActivityType(record)));
-};
-
-const getScoreByDailyActivityType = (record: DailyActivityRecord) => {
-  if (record.__typename === 'DailyDefaultRecord') {
-    switch (record.type) {
-      case DailyAcitivtyType.Corrected:
-        return 1;
-      case DailyAcitivtyType.Corrector:
-        return 1;
-      case DailyAcitivtyType.Event:
-        return 1;
-      default:
-        throw new Error(`Unexpected DailyActivityType: ${record.type}`);
-    }
-  }
-
-  if (record.__typename === 'DailyLogtimeRecord') {
-    switch (record.type) {
-      case DailyAcitivtyType.Logtime:
-        return Math.ceil(record.value / MILLISECONDS.HOUR);
-      default:
-        throw new Error(`Unexpected DailyActivityType: ${record.type}`);
-    }
-  }
-
-  throw new Error(`Unexpected DailyActivityRecord: ${record.__typename}`);
-};

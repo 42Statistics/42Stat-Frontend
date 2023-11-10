@@ -3,9 +3,10 @@ import { useTheme } from '@emotion/react';
 import { useContext } from 'react';
 
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
-import { DailyActivityScore } from '@/Profile/dashboard-contents/General/DailyActivities';
 import { ColorLegendList } from '@/Profile/dashboard-contents/General/DailyActivities/ColorLegendList';
 import { DailyActivityTable } from '@/Profile/dashboard-contents/General/DailyActivities/DailyActivityTable';
+import type { DailyActivityScore } from '@/Profile/dashboard-contents/General/DailyActivities/types/DailyActivityScore';
+import { getFromAndToByYear } from '@/Profile/dashboard-contents/General/DailyActivities/utils/getFromAndToByYear';
 import type { GetDailyActivitiesByLoginQuery } from '@shared/__generated__/graphql';
 import { ApolloErrorView } from '@shared/components/ApolloError/ApolloErrorView';
 import { ApolloNotFoundView } from '@shared/components/ApolloError/ApolloNotFoundView';
@@ -69,28 +70,4 @@ export const DailyActivitiesResult = ({
       </HStack>
     </VStack>
   );
-};
-
-const getFromAndToByYear = (year: number | null) => {
-  switch (year) {
-    case null:
-      return getFromAndToByRecentYear();
-    default:
-      return getFromAndToByYearNumber(year);
-  }
-};
-
-const getFromAndToByRecentYear = () => {
-  const now = new Date();
-  const from = new Date(now.getFullYear() - 1, now.getMonth(), now.getDate());
-  const to = new Date();
-
-  return [from, to];
-};
-
-const getFromAndToByYearNumber = (year: number) => {
-  const from = new Date(year, 0, 1);
-  const to = new Date(year, 11, 31);
-
-  return [from, to];
 };

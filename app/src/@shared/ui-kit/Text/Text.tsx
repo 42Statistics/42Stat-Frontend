@@ -6,6 +6,7 @@ type TextProps = Partial<{
   color: string;
   preventSelect: boolean;
   inline: boolean;
+  lineHeight: number;
 }>;
 
 export const Text = styled.p<TextProps>`
@@ -13,7 +14,7 @@ export const Text = styled.p<TextProps>`
   font-size: ${({ theme, fontSize = theme.fonts.size.body2 }) => fontSize};
   font-weight: ${({ fontWeight }) => fontWeight};
   color: ${({ theme, color = theme.colors.mono.black }) => color};
-  line-height: 1.5;
+  line-height: ${({ lineHeight }) => lineHeight ?? 1.5};
   user-select: ${({ preventSelect }) => preventSelect && 'none'};
 `;
 

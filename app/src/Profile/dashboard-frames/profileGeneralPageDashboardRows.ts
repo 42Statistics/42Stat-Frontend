@@ -74,4 +74,13 @@ export const profileGeneralPageDashboardRows: DashboardRowType[] = [
       },
     ],
   },
+  {
+    colSpan: 3,
+    items: [
+      {
+        rowSpan: 2,
+        elementId: 12,
+      },
+    ],
+  },
 ];

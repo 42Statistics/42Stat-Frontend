@@ -35,6 +35,15 @@ export const profileGeneralPageDashboardRows: DashboardRowType[] = [
     items: [
       {
         rowSpan: 2,
+        elementId: 12,
+      },
+    ],
+  },
+  {
+    colSpan: 3,
+    items: [
+      {
+        rowSpan: 2,
         elementId: 11,
       },
     ],
@@ -71,15 +80,6 @@ export const profileGeneralPageDashboardRows: DashboardRowType[] = [
       {
         rowSpan: 2,
         elementId: 9,
-      },
-    ],
-  },
-  {
-    colSpan: 3,
-    items: [
-      {
-        rowSpan: 2,
-        elementId: 12,
       },
     ],
   },

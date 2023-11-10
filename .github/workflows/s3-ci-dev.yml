@@ -39,3 +39,4 @@ jobs:
       - name: Upload to S3
         run: |
           aws s3 sync ./app/dist s3://$S3_BUCKET --region $DEFAULT_BUCKET_REGION
+          aws s3 cp --cache-control 'max-age=0' index.html s3://$S3_BUCKET

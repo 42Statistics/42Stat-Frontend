@@ -5,10 +5,13 @@ export const ROUTES = {
   FT_OAUTH_REDIRECT: '/auth/ft/redirect',
   PROFILE: '/profile/:login',
   PROFILE_GENERAL: '/profile/:login/general',
+  PROFILE_LOGTIME_AND_PROJECT: '/profile/:login/logtime_and_project',
   PROFILE_EVAL: '/profile/:login/eval',
   PROFILE_VERSUS: '/profile/:login/versus',
   PROFILE_OF: (login: string) => `/profile/${login}`,
   PROFILE_GENERAL_OF: (login: string) => `/profile/${login}/general`,
+  PROFILE_LOGTIME_AND_PROJECT_OF: (login: string) =>
+    `/profile/${login}/logtime_and_project`,
   PROFILE_EVAL_OF: (login: string) => `/profile/${login}/eval`,
   PROFILE_VERSUS_OF: (login: string) => `/profile/${login}/versus`,
   PROJECT_DETAIL: '/project/:projectName',

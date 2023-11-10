@@ -12,6 +12,7 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       DEFAULT_BUCKET_REGION: ${{ secrets.DEFAULT_BUCKET_REGION }}
       S3_BUCKET: ${{ secrets.DEV_S3_BUCKET }}
+      CLODUFRONT_DISTRIBUTION_ID: ${{ secrets.DEV_CLODUFRONT_DISTRIBUTION_ID }}
 
     steps:
       - name: Checkout source code
@@ -40,3 +41,7 @@ jobs:
         run: |
           aws s3 sync ./app/dist s3://$S3_BUCKET --region $DEFAULT_BUCKET_REGION
           aws s3 cp --cache-control 'max-age=0' index.html s3://$S3_BUCKET
+
+      - name: Invalidate CloudFront
+        run: |
+          aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/index.html"

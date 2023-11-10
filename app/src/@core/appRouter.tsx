@@ -22,6 +22,9 @@ const HomePage = lazy(() => import('@/Home'));
 const EvalLogSearchPage = lazy(() => import('@/EvalLogSearch'));
 const ProjectDetailPage = lazy(() => import('@/Project/ProjectDetailPage'));
 const ProfileGeneralPage = lazy(() => import('@/Profile/pages/General'));
+const ProfileLogtimeAndProjectPage = lazy(
+  () => import('@/Profile/pages/LogtimeAndProject'),
+);
 const ProfileEvalPage = lazy(() => import('@/Profile/pages/Eval'));
 const ProfileVersusPage = lazy(() => import('@/Profile/pages/Versus'));
 const LeaderboardLevelPage = lazy(() => import('@/Leaderboard/pages/Level'));
@@ -125,6 +128,14 @@ export const appRouter = createBrowserRouter([
                     element: (
                       <Suspense fallback={<ProfileGeneralPageSkeleton />}>
                         <ProfileGeneralPage />
+                      </Suspense>
+                    ),
+                  },
+                  {
+                    path: ROUTES.PROFILE_LOGTIME_AND_PROJECT,
+                    element: (
+                      <Suspense>
+                        <ProfileLogtimeAndProjectPage />
                       </Suspense>
                     ),
                   },

@@ -40,41 +40,6 @@ export const profileGeneralPageDashboardRows: DashboardRowType[] = [
     ],
   },
   {
-    colSpan: 3,
-    items: [
-      {
-        rowSpan: 2,
-        elementId: 11,
-      },
-    ],
-  },
-  {
-    colSpan: 1,
-    items: [
-      {
-        rowSpan: 2,
-        elementId: 2,
-      },
-      {
-        rowSpan: 2,
-        elementId: 10,
-      },
-      {
-        rowSpan: 2,
-        elementId: 5,
-      },
-    ],
-  },
-  {
-    colSpan: 3,
-    items: [
-      {
-        rowSpan: 2,
-        elementId: 8,
-      },
-    ],
-  },
-  {
     colSpan: 1,
     items: [
       {

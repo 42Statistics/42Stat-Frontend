@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { useContext } from 'react';
 
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
-import { TeamInfoTable } from '@/Profile/dashboard-contents/General/TeamInfo/TeamInfoTable';
+import { TeamInfoTable } from '@/Profile/dashboard-contents/LogtimeAndProject/TeamInfo/TeamInfoTable';
 import { gql } from '@shared/__generated__';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {

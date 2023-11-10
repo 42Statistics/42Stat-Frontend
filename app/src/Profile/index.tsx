@@ -44,6 +44,14 @@ const ProfileLayout = () => {
             일반
           </Tab>
           <Tab
+            selected={pathname.startsWith(
+              ROUTES.PROFILE_LOGTIME_AND_PROJECT_OF(login),
+            )}
+            link={ROUTES.PROFILE_LOGTIME_AND_PROJECT_OF(login)}
+          >
+            접속 · 과제
+          </Tab>
+          <Tab
             selected={pathname.startsWith(ROUTES.PROFILE_EVAL_OF(login))}
             link={ROUTES.PROFILE_EVAL_OF(login)}
           >

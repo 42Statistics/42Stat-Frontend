@@ -5,7 +5,7 @@ import { fadeIn } from '@shared/ui-kit-styled';
 import { WhiteCaptionText } from '@shared/ui-kit/Text';
 import { TooltipContainer } from '@shared/ui-kit/Tooltip/TooltipContainer';
 
-type TooltipPosition = 'top' | 'right' | 'bottom' | 'left';
+export type TooltipPosition = 'top' | 'right' | 'bottom' | 'left';
 
 type TooltipProps = PropsWithStringChildren<{
   position: TooltipPosition;

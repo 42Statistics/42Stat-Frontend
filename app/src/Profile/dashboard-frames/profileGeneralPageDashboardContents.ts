@@ -3,6 +3,7 @@ import {
   BlackholedAt,
   Character,
   CoalitionScore,
+  DailyActivities,
   LastPassed,
   LastRegistered,
   LevelRecords,
@@ -62,5 +63,9 @@ export const profileGeneralPageDashboardContents: DashboardItemProps[] = [
   {
     id: 11,
     content: TeamInfo,
+  },
+  {
+    id: 12,
+    content: DailyActivities,
   },
 ];

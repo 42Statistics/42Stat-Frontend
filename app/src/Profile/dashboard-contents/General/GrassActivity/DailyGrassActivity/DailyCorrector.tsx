@@ -5,11 +5,20 @@ import { useContext } from 'react';
 import { ReactComponent as MdCorrector } from '@/Profile/assets/activity/corrector.svg';
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { BoldText, CaptionText, HStack, Text, VStack } from '@shared/ui-kit';
+import { useNavigate } from 'react-router-dom';
 
 export const DailyCorrector = (data: any) => {
   const { coalition, login } = useContext(UserProfileContext);
   const theme = useTheme();
+  const navigate = useNavigate();
+
   const color = coalition?.color ?? theme.colors.accent.default;
+  const start = new Date(data.data.beginAt);
+  const end = new Date(data.data.filledAt);
+
+  const handleClick = () => {
+    navigate(`/team/${data.data.teamId}`);
+  };
 
   return (
     <>
@@ -20,9 +29,13 @@ export const DailyCorrector = (data: any) => {
           </IconLayout>
         </IconWhiteLayout>
         <VStack spacing="0.2rem" align="start" style={{ marginTop: '0.5rem' }}>
-          <BoldText>{`[평가] ${login} -> ${data.data.leaderLogin}`}</BoldText>
+          <BoldText
+            color={theme.colors.chart.primary.default}
+            onClick={handleClick}
+            style={{ cursor: 'pointer' }}
+          >{`[평가] ${login} -> ${data.data.leaderLogin}`}</BoldText>
           <Text>{data.data.projectName}</Text>
-          <CaptionText>16:30 - 17:00</CaptionText>
+          <CaptionText>{`${start.getHours()}:${start.getMinutes()} - ${end.getHours()}:${end.getMinutes()}`}</CaptionText>
         </VStack>
       </HStack>
     </>

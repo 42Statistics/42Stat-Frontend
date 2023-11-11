@@ -36,6 +36,7 @@ const Layout = styled.div`
   align-items: start;
   width: 100%;
   height: 100%;
+  overflow-y: scroll;
 `;
 
 const Divider = styled.div`
@@ -47,7 +48,7 @@ const Divider = styled.div`
 `;
 
 const VerticalDivider = styled.div`
-  flex: 1; // Divide the remaining space
+  flex: 1;
   width: 2.5px;
   margin-left: 4rem;
   border-radius: 10px;

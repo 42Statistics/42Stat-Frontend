@@ -29,6 +29,20 @@ export const DailyGrassActivityDetail = () => {
       beginAt: '2023-03-10T03:00:00.000Z',
       endAt: '2023-03-10T04:00:00.000Z',
     },
+    {
+      type: 'EVENT',
+      name: '학장님과 교육생간의 간담회(3월)',
+      location: '지하1층 오픈스튜디오',
+      beginAt: '2023-03-10T03:00:00.000Z',
+      endAt: '2023-03-10T04:00:00.000Z',
+    },
+    {
+      type: 'EVENT',
+      name: '학장님과 교육생간의 간담회(3월)',
+      location: '지하1층 오픈스튜디오',
+      beginAt: '2023-03-10T03:00:00.000Z',
+      endAt: '2023-03-10T04:00:00.000Z',
+    },
   ];
 
   return (
@@ -55,6 +69,6 @@ const Layout = styled.div`
   width: 100%;
   height: 100%;
   margin-left: 2.4rem;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   gap: 0.5rem;
 `;

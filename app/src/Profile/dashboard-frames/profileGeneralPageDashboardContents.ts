@@ -4,6 +4,7 @@ import {
   Character,
   CoalitionScore,
   DailyActivities,
+  GrassActivity,
   LastPassed,
   LastRegistered,
   Wallet,
@@ -42,5 +43,9 @@ export const profileGeneralPageDashboardContents: DashboardItemProps[] = [
   {
     id: 12,
     content: DailyActivities,
+  },
+  {
+    id: 13,
+    content: GrassActivity,
   },
 ];

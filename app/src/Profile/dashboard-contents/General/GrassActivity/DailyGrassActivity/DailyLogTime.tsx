@@ -43,5 +43,5 @@ const IconWhiteLayout = styled.div`
   width: 3.5rem;
   height: 3.5rem;
   border-radius: 50%;
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors.background.box.default};
 `;

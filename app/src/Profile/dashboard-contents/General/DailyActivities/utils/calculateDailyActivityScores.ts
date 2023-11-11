@@ -10,6 +10,7 @@ export const calculateDailyActivityScores = (
   return list.map(({ date, records }) => ({
     date: new Date(date),
     score: calculateDailyActivityScore(records),
+    records: records,
   }));
 };
 

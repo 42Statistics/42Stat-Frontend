@@ -44,9 +44,7 @@ const documents = {
     "\n  query GetAverageDurationPerCircle {\n    getHomeUser {\n      averageDurationPerCircle {\n        circle\n        value\n      }\n    }\n  }\n": types.GetAverageDurationPerCircleDocument,
     "\n  query GetBlackholedCountPerCircle {\n    getHomeUser {\n      blackholedCountPerCircle {\n        circle\n        value\n      }\n    }\n  }\n": types.GetBlackholedCountPerCircleDocument,
     "\n  query GetBlackholedCountRecords($last: Int!) {\n    getHomeUser {\n      blackholedCountRecords(last: $last) {\n        at\n        value\n      }\n    }\n  }\n": types.GetBlackholedCountRecordsDocument,
-    "\n  query GetBlackholedRate {\n    getHomeUser {\n      blackholedRate {\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n": types.GetBlackholedRateDocument,
     "\n  query GetCorrectionPointRanking($limit: Int!) {\n    getHomeUser {\n      correctionPointRanking(limit: $limit) {\n        userPreview {\n          ...userPreviewFields\n        }\n        value\n        rank\n      }\n    }\n  }\n": types.GetCorrectionPointRankingDocument,
-    "\n  query GetMemberRate {\n    getHomeUser {\n      memberRate {\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n": types.GetMemberRateDocument,
     "\n  query GetUserCountPerLevel {\n    getHomeUser {\n      userCountPerLevel {\n        level\n        value\n      }\n    }\n  }\n": types.GetUserCountPerLevelDocument,
     "\n  query GetUserRate {\n    getHomeUser {\n      memberRate {\n        fields {\n          key\n          value\n        }\n      }\n      blackholedRate {\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n": types.GetUserRateDocument,
     "\n  query GetWalletRanking($limit: Int!) {\n    getHomeUser {\n      walletRanking(limit: $limit) {\n        userPreview {\n          ...userPreviewFields\n        }\n        value\n        rank\n      }\n    }\n  }\n": types.GetWalletRankingDocument,
@@ -71,6 +69,7 @@ const documents = {
     "\n  query GetTotalDurationByLogin($login: String!) {\n    getPersonalEval(login: $login) {\n      totalDuration\n    }\n  }\n": types.GetTotalDurationByLoginDocument,
     "\n  query GetCharacterByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      character {\n        name\n        imgUrl\n        types {\n          name\n          description\n          color\n        }\n      }\n    }\n  }\n": types.GetCharacterByLoginDocument,
     "\n  query GetDailyActivitiesByLogin($login: String!, $year: Int) {\n    getPersonalGeneral(login: $login) {\n      dailyActivities(year: $year) {\n        date\n        records {\n          ... on DailyLogtimeRecord {\n            type\n            value\n          }\n          ... on DailyDefaultRecord {\n            type\n            id\n            at\n          }\n        }\n      }\n    }\n  }\n": types.GetDailyActivitiesByLoginDocument,
+    "\n  query GetPersonalActivityLog(\n    $login: String!\n    $args: [DailyActivityDetailRecordIdWithType!]!\n  ) {\n    getPersonalGeneral(login: $login) {\n      dailyActivityDetailRecords(args: $args) {\n        ... on DailyEventDetailRecord {\n          name\n          location\n          beginAt\n          endAt\n        }\n        ... on DailyEvaluationDetailRecord {\n          type\n          teamId\n          leaderLogin\n          projectName\n          beginAt\n          filledAt\n        }\n      }\n    }\n  }\n": types.GetPersonalActivityLogDocument,
     "\n  query GetLevelRecordsByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      userLevelRecords {\n        monthsPassed\n        level\n      }\n      promoLevelRecords {\n        monthsPassed\n        level\n      }\n      promoMemberLevelRecords {\n        monthsPassed\n        level\n      }\n    }\n  }\n": types.GetLevelRecordsByLoginDocument,
     "\n  query GetLogtimeRecords($login: String!, $last: Int!) {\n    getPersonalGeneral(login: $login) {\n      logtimeRecords(last: $last) {\n        at\n        value\n      }\n    }\n  }\n": types.GetLogtimeRecordsDocument,
     "\n  query GetPreferredClusterByDateTemplateByLogin(\n    $login: String!\n    $dateTemplate: DateTemplate!\n  ) {\n    getPersonalGeneral(login: $login) {\n      preferredClusterByDateTemplate(dateTemplate: $dateTemplate) {\n        data {\n          name\n        }\n        start\n        end\n      }\n    }\n  }\n": types.GetPreferredClusterByDateTemplateByLoginDocument,
@@ -238,15 +237,7 @@ export function gql(source: "\n  query GetBlackholedCountRecords($last: Int!) {\
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query GetBlackholedRate {\n    getHomeUser {\n      blackholedRate {\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetBlackholedRate {\n    getHomeUser {\n      blackholedRate {\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
 export function gql(source: "\n  query GetCorrectionPointRanking($limit: Int!) {\n    getHomeUser {\n      correctionPointRanking(limit: $limit) {\n        userPreview {\n          ...userPreviewFields\n        }\n        value\n        rank\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetCorrectionPointRanking($limit: Int!) {\n    getHomeUser {\n      correctionPointRanking(limit: $limit) {\n        userPreview {\n          ...userPreviewFields\n        }\n        value\n        rank\n      }\n    }\n  }\n"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function gql(source: "\n  query GetMemberRate {\n    getHomeUser {\n      memberRate {\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetMemberRate {\n    getHomeUser {\n      memberRate {\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -343,6 +334,10 @@ export function gql(source: "\n  query GetCharacterByLogin($login: String!) {\n 
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query GetDailyActivitiesByLogin($login: String!, $year: Int) {\n    getPersonalGeneral(login: $login) {\n      dailyActivities(year: $year) {\n        date\n        records {\n          ... on DailyLogtimeRecord {\n            type\n            value\n          }\n          ... on DailyDefaultRecord {\n            type\n            id\n            at\n          }\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetDailyActivitiesByLogin($login: String!, $year: Int) {\n    getPersonalGeneral(login: $login) {\n      dailyActivities(year: $year) {\n        date\n        records {\n          ... on DailyLogtimeRecord {\n            type\n            value\n          }\n          ... on DailyDefaultRecord {\n            type\n            id\n            at\n          }\n        }\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query GetPersonalActivityLog(\n    $login: String!\n    $args: [DailyActivityDetailRecordIdWithType!]!\n  ) {\n    getPersonalGeneral(login: $login) {\n      dailyActivityDetailRecords(args: $args) {\n        ... on DailyEventDetailRecord {\n          name\n          location\n          beginAt\n          endAt\n        }\n        ... on DailyEvaluationDetailRecord {\n          type\n          teamId\n          leaderLogin\n          projectName\n          beginAt\n          filledAt\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetPersonalActivityLog(\n    $login: String!\n    $args: [DailyActivityDetailRecordIdWithType!]!\n  ) {\n    getPersonalGeneral(login: $login) {\n      dailyActivityDetailRecords(args: $args) {\n        ... on DailyEventDetailRecord {\n          name\n          location\n          beginAt\n          endAt\n        }\n        ... on DailyEvaluationDetailRecord {\n          type\n          teamId\n          leaderLogin\n          projectName\n          beginAt\n          filledAt\n        }\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -13,6 +13,7 @@ import { gql } from '@shared/__generated__';
 import { useContext, useEffect } from 'react';
 import { DailyActivityType } from '@shared/__generated__/graphql';
 import { DashboardContent } from '@shared/components/DashboardContent';
+import { HStack, VStack, Body1MediumText } from '@shared/ui-kit';
 
 const GET_PERSONAL_ACTIVITY_LOG = gql(/* GraphQL */ `
   query GetPersonalActivityLog(
@@ -76,9 +77,22 @@ export const GrassActivity = () => {
   }
 
   return (
-    <DashboardContent title={title}>
-      <TotalGrassActivity />
-      <DailyGrassActivity />
-    </DashboardContent>
+    <Layout>
+      <VStack w="100%" h="100%" spacing="2rem" align="start">
+        <HStack style={{ marginLeft: '1rem' }}>
+          <Body1MediumText>{title}</Body1MediumText>
+        </HStack>
+        <HStack w="100%" h="100%">
+          <TotalGrassActivity />
+          <DailyGrassActivity />
+        </HStack>
+      </VStack>
+    </Layout>
   );
 };
+
+const Layout = styled.div`
+  width: 100%;
+  height: 100%;
+  padding: 2.4rem;
+`;

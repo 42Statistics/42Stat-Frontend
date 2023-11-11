@@ -1,8 +1,8 @@
 import { useQuery } from '@apollo/client';
 import styled from '@emotion/styled';
 
-import { TotalActivity } from '@/Profile/dashboard-contents/General/GrassActivity/TotalActivity';
-import { DailyActivity } from '@/Profile/dashboard-contents/General/GrassActivity/DailyActivity';
+import { TotalGrassActivity } from '@/Profile/dashboard-contents/General/GrassActivity/TotalGrassActivity';
+import { DailyGrassActivity } from '@/Profile/dashboard-contents/General/GrassActivity/DailyGrassActivity';
 import {
   DashboardContentBadRequest,
   DashboardContentLoading,
@@ -11,6 +11,10 @@ import {
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { gql } from '@shared/__generated__';
 import { useContext, useEffect } from 'react';
+import {
+  DailyActivityType,
+  type DailyActivityDetailRecordIdWithType,
+} from '@shared/__generated__/graphql';
 
 const GET_PERSONAL_ACTIVITY_LOG = gql(/* GraphQL */ `
   query GetPersonalActivityLog(
@@ -48,7 +52,12 @@ export const GrassActivity = () => {
     {
       variables: {
         login,
-        args: [{ type: 'CORRECTOR', id: 124 }] /* 수정 필요 */ ?? undefined,
+        args: [
+          { id: 4970811, type: DailyActivityType.Corrected },
+          { id: 4962990, type: DailyActivityType.Corrected },
+          { id: 4970811, type: DailyActivityType.Corrector },
+          { id: 15072, type: DailyActivityType.Event },
+        ] /* 수정 필요 */,
       },
     },
   );
@@ -70,8 +79,8 @@ export const GrassActivity = () => {
 
   return (
     <Layout>
-      <TotalActivity />
-      <DailyActivity />
+      <TotalGrassActivity />
+      <DailyGrassActivity />
     </Layout>
   );
 };

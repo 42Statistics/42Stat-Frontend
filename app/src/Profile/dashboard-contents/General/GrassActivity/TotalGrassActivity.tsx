@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { Divider } from '@shared/ui-kit';
 
-export const TotalActivity = () => {
+export const TotalGrassActivity = () => {
   return (
     <Layout>
       누적 활동 내역 <Divider />

@@ -9,7 +9,7 @@ import { matchDatesWithScores } from '@/Profile/dashboard-contents/General/Daily
 import { HStack, VStack } from '@shared/ui-kit';
 import { getDatesBetween } from '@shared/utils/getDatesBetween';
 
-type DailyActivitiyTableProps = {
+type DailyActivityTableProps = {
   list: DailyActivityScore[];
   color: string;
   from: Date;
@@ -23,7 +23,7 @@ export const DailyActivityTable = ({
   color,
   from,
   to,
-}: DailyActivitiyTableProps) => {
+}: DailyActivityTableProps) => {
   const dates = getDatesBetween(from, to);
   const datesWithScores = matchDatesWithScores(dates, list);
   const dateGroupsWithScores = Object.values(

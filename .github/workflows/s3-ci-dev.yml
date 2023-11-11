@@ -12,7 +12,7 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       DEFAULT_BUCKET_REGION: ${{ secrets.DEFAULT_BUCKET_REGION }}
       S3_BUCKET: ${{ secrets.DEV_S3_BUCKET }}
-      CLODUFRONT_DISTRIBUTION_ID: ${{ secrets.DEV_CLODUFRONT_DISTRIBUTION_ID }}
+      CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.DEV_CLOUDFRONT_DISTRIBUTION_ID }}
 
     steps:
       - name: Checkout source code

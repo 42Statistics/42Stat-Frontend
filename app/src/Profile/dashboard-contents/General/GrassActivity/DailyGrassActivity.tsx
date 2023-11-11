@@ -6,7 +6,7 @@ type DailyGrassActivityProps = {
 };
 
 export const DailyGrassActivity = ({ data }: DailyGrassActivityProps) => {
-  return <Layout></Layout>;
+  return <Layout>awef</Layout>;
 };
 
 const Layout = styled.div`

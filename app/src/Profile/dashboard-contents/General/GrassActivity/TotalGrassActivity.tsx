@@ -4,7 +4,8 @@ import { Divider } from '@shared/ui-kit';
 export const TotalGrassActivity = () => {
   return (
     <Layout>
-      누적 활동 내역 <Divider />
+      <p>누적 활동 내역</p>
+      <Divider />
     </Layout>
   );
 };
@@ -12,6 +13,5 @@ export const TotalGrassActivity = () => {
 const Layout = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   width: 100%;
 `;

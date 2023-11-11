@@ -11,10 +11,8 @@ import {
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { gql } from '@shared/__generated__';
 import { useContext, useEffect } from 'react';
-import {
-  DailyActivityType,
-  type DailyActivityDetailRecordIdWithType,
-} from '@shared/__generated__/graphql';
+import { DailyActivityType } from '@shared/__generated__/graphql';
+import { DashboardContent } from '@shared/components/DashboardContent';
 
 const GET_PERSONAL_ACTIVITY_LOG = gql(/* GraphQL */ `
   query GetPersonalActivityLog(
@@ -78,16 +76,9 @@ export const GrassActivity = () => {
   }
 
   return (
-    <Layout>
+    <DashboardContent title={title}>
       <TotalGrassActivity />
       <DailyGrassActivity />
-    </Layout>
+    </DashboardContent>
   );
 };
-
-const Layout = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-`;

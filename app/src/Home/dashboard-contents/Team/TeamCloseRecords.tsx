@@ -25,7 +25,7 @@ export const TeamCloseRecords = () => {
   const title = '일간 팀 제출 횟수 추이';
   const { loading, error, data } = useQuery(GET_TEAM_CLOSE_RECORDS, {
     variables: {
-      last: 30,
+      last: 60,
     },
   });
   if (loading) {

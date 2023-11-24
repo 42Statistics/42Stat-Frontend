@@ -25,7 +25,7 @@ export const BlackholedCountRecords = () => {
   const title = '월간 블랙홀 인원 추이';
   const { loading, error, data } = useQuery(GET_BLACKHOLED_COUNT_RECORDS, {
     variables: {
-      last: 12,
+      last: 24,
     },
   });
 

@@ -25,7 +25,7 @@ export const EvalCountRecords = () => {
   const title = '일간 평가 횟수 추이';
   const { loading, error, data } = useQuery(GET_EVAL_COUNT_RECORDS, {
     variables: {
-      last: 30,
+      last: 60,
     },
   });
   if (loading) {

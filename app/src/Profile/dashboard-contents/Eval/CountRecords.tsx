@@ -30,7 +30,7 @@ export const CountRecords = () => {
   const { loading, error, data } = useQuery(GET_COUNT_RECORDS_BY_LOGIN, {
     variables: {
       login,
-      last: 12,
+      last: 24,
     },
   });
 

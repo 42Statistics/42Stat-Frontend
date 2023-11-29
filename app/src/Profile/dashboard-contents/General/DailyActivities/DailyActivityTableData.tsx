@@ -5,16 +5,21 @@ import { DailyActivitySquare } from '@/Profile/dashboard-contents/General/DailyA
 import { getDailyActivityTableDataColor } from '@/Profile/dashboard-contents/General/DailyActivities/utils/getDailyActivityTableDataColor';
 import { Tooltip } from '@shared/ui-kit';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
+import { DailyActivity } from '@shared/__generated__/graphql';
+import { useSetAtom } from 'jotai';
+import { activityDailyAtom } from '../atoms/activityDailyAtom';
 
 type DailyActivityTableDataProps = {
   date: Date;
   score: number;
+  records: DailyActivity['records'];
   color: string;
 };
 
 export const DailyActivityTableData = ({
   date,
   score,
+  records,
   color: standardColor,
 }: DailyActivityTableDataProps) => {
   const theme = useTheme();
@@ -23,11 +28,16 @@ export const DailyActivityTableData = ({
     standardColor,
     theme.colors.mono.gray100,
   );
+  const setActivityDaily = useSetAtom(activityDailyAtom);
 
   const unit = '점';
 
+  const handleClick = () => {
+    setActivityDaily({ date: date.toDateString(), records: records });
+  };
+
   return (
-    <div style={{ position: 'relative' }}>
+    <div style={{ position: 'relative' }} onClick={handleClick}>
       <Tooltip.Container>
         <DailyActivitySquare color={color} />
         <Tooltip position="top">

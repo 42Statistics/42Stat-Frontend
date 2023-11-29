@@ -14,6 +14,8 @@ import { useContext, useEffect } from 'react';
 import { DailyActivityType } from '@shared/__generated__/graphql';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import { HStack, VStack, Body1MediumText } from '@shared/ui-kit';
+import { activityDailyAtom } from '../atoms/activityDailyAtom';
+import { useAtomValue } from 'jotai';
 
 const GET_PERSONAL_ACTIVITY_LOG = gql(/* GraphQL */ `
   query GetPersonalActivityLog(
@@ -43,9 +45,10 @@ const GET_PERSONAL_ACTIVITY_LOG = gql(/* GraphQL */ `
 
 export const GrassActivity = () => {
   const { login } = useContext(UserProfileContext);
-  // const grassData = useAtomValue(grassAtom);
-  //클릭된 잔디 상태 불러오기
+  const activityDaily = useAtomValue(activityDailyAtom);
+
   const title = '활동 내역';
+  console.log(activityDaily);
   const { loading, error, data, refetch } = useQuery(
     GET_PERSONAL_ACTIVITY_LOG,
     {

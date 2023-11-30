@@ -7,7 +7,7 @@ import { Tooltip } from '@shared/ui-kit';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 import { DailyActivity } from '@shared/__generated__/graphql';
 import { useSetAtom } from 'jotai';
-import { activityDailyAtom } from '../atoms/activityDailyAtom';
+import { dailyActivityAtom } from '../atoms/dailyActivityAtom';
 
 type DailyActivityTableDataProps = {
   date: Date;
@@ -28,7 +28,7 @@ export const DailyActivityTableData = ({
     standardColor,
     theme.colors.mono.gray100,
   );
-  const setActivityDaily = useSetAtom(activityDailyAtom);
+  const setActivityDaily = useSetAtom(dailyActivityAtom);
 
   const unit = '점';
 

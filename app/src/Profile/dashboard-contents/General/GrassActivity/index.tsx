@@ -11,11 +11,10 @@ import {
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { gql } from '@shared/__generated__';
 import { useContext, useEffect } from 'react';
-import { DailyActivityType } from '@shared/__generated__/graphql';
-import { DashboardContent } from '@shared/components/DashboardContent';
 import { HStack, VStack, Body1MediumText } from '@shared/ui-kit';
-import { activityDailyAtom } from '../atoms/activityDailyAtom';
+import { dailyActivityAtom } from '../atoms/dailyActivityAtom';
 import { useAtomValue } from 'jotai';
+import { parseDailyActivity } from './utils/parseDailyActivity';
 
 const GET_PERSONAL_ACTIVITY_LOG = gql(/* GraphQL */ `
   query GetPersonalActivityLog(
@@ -45,29 +44,26 @@ const GET_PERSONAL_ACTIVITY_LOG = gql(/* GraphQL */ `
 
 export const GrassActivity = () => {
   const { login } = useContext(UserProfileContext);
-  const activityDaily = useAtomValue(activityDailyAtom);
+  const dailyActivity = useAtomValue(dailyActivityAtom);
+  const { dailyRecords, timeRecord } = parseDailyActivity(
+    dailyActivity.records,
+  );
 
   const title = '활동 내역';
-  console.log(activityDaily);
+
   const { loading, error, data, refetch } = useQuery(
     GET_PERSONAL_ACTIVITY_LOG,
     {
       variables: {
         login,
-        args: [
-          { id: 4970811, type: DailyActivityType.Corrected },
-          { id: 4962990, type: DailyActivityType.Corrected },
-          { id: 4970811, type: DailyActivityType.Corrector },
-          { id: 15072, type: DailyActivityType.Event },
-        ] /* 수정 필요 */,
+        args: dailyRecords,
       },
     },
   );
 
-  //불러온 상태에 따라 refetch
-  // useEffect(() => {
-  //   refetch(grassData);
-  // }, [grassData]);
+  useEffect(() => {
+    refetch({ login, args: dailyRecords });
+  }, [refetch, login, dailyRecords]);
 
   if (loading) {
     return <DashboardContentLoading title={title} />;

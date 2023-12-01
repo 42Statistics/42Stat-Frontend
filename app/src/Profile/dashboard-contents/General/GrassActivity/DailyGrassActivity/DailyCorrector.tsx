@@ -7,17 +7,28 @@ import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { BoldText, CaptionText, HStack, Text, VStack } from '@shared/ui-kit';
 import { useNavigate } from 'react-router-dom';
 
-export const DailyCorrector = (data: any) => {
+type DailyCorrecterProps = {
+  data: {
+    beginAt: string;
+    filledAt: string;
+    leaderLogin: string;
+    projectName: string;
+    teamId: number;
+  };
+};
+
+export const DailyCorrector = ({ data }: DailyCorrecterProps) => {
+  const { beginAt, filledAt, leaderLogin, projectName, teamId } = data;
   const { coalition, login } = useContext(UserProfileContext);
   const theme = useTheme();
   const navigate = useNavigate();
 
   const color = coalition?.color ?? theme.colors.accent.default;
-  const start = new Date(data.data.beginAt);
-  const end = new Date(data.data.filledAt);
+  const start = new Date(beginAt);
+  const end = new Date(filledAt);
 
   const handleClick = () => {
-    navigate(`/team/${data.data.teamId}`);
+    navigate(`/team/${teamId}`);
   };
 
   return (
@@ -33,8 +44,8 @@ export const DailyCorrector = (data: any) => {
             color={theme.colors.chart.primary.default}
             onClick={handleClick}
             style={{ cursor: 'pointer' }}
-          >{`[평가] ${login} -> ${data.data.leaderLogin}`}</BoldText>
-          <Text>{data.data.projectName}</Text>
+          >{`[평가] ${login} -> ${leaderLogin}`}</BoldText>
+          <Text>{projectName}</Text>
           <CaptionText>{`${start.getHours()}:${start.getMinutes()} - ${end.getHours()}:${end.getMinutes()}`}</CaptionText>
         </VStack>
       </HStack>

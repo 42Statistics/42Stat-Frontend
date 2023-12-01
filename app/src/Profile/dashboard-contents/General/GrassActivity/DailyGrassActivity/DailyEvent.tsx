@@ -6,7 +6,15 @@ import { ReactComponent as MdEvent } from '@/Profile/assets/activity/event.svg';
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { BoldText, CaptionText, HStack, Text, VStack } from '@shared/ui-kit';
 
-export const DailyEvent = (data: any) => {
+type DailyEventProps = {
+  data: {
+    name: string;
+    location: string;
+  };
+};
+
+export const DailyEvent = ({ data }: DailyEventProps) => {
+  const { name, location } = data;
   const { coalition } = useContext(UserProfileContext);
   const theme = useTheme();
   const color = coalition?.color ?? theme.colors.accent.default;
@@ -20,8 +28,8 @@ export const DailyEvent = (data: any) => {
           </IconLayout>
         </IconWhiteLayout>
         <VStack spacing="0.2rem" align="start" style={{ marginTop: '0.5rem' }}>
-          <BoldText>{data.data.name}</BoldText>
-          <Text>{data.data.location}</Text>
+          <BoldText>{name}</BoldText>
+          <Text>{location}</Text>
           <CaptionText>16:30 - 17:00</CaptionText>
         </VStack>
       </HStack>

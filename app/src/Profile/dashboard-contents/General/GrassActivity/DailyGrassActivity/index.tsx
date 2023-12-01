@@ -1,14 +1,20 @@
 import styled from '@emotion/styled';
-import type { DailyActivityDetailRecordIdWithType } from '@shared/__generated__/graphql';
+import type { GetPersonalActivityLogQuery } from '@shared/__generated__/graphql';
 import { HStack, Text, VStack } from '@shared/ui-kit';
 import { DailyGrassActivityDetail } from '@/Profile/dashboard-contents/General/GrassActivity/DailyGrassActivity/DailyGrassActivityDetail';
 
 type DailyGrassActivityProps = {
-  data?: DailyActivityDetailRecordIdWithType[];
+  data?: GetPersonalActivityLogQuery;
+  time: {
+    timeRecord: number;
+    date: string;
+  };
 };
 
-export const DailyGrassActivity = ({ data }: DailyGrassActivityProps) => {
-  const title = '2023.10.10';
+export const DailyGrassActivity = ({ data, time }: DailyGrassActivityProps) => {
+  const date = new Date(time.date).toLocaleDateString();
+
+  if (!data) return null;
 
   return (
     <VStack w="100%" h="100%" spacing="2rem" align="start">
@@ -18,12 +24,12 @@ export const DailyGrassActivity = ({ data }: DailyGrassActivityProps) => {
         align="start"
         style={{ marginLeft: '1rem' }}
       >
-        <Text>{title}</Text>
+        <Text>{date}</Text>
         <Divider />
       </HStack>
       <Layout>
         <VerticalDivider />
-        <DailyGrassActivityDetail />
+        <DailyGrassActivityDetail time={time.timeRecord} data={data} />
       </Layout>
     </VStack>
   );

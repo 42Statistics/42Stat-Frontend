@@ -6,11 +6,12 @@ import { ReactComponent as MdLogTime } from '@/Profile/assets/activity/log-time.
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { HStack, Text } from '@shared/ui-kit';
 
-export const DailyLogTime = () => {
+export const DailyLogTime = ({ time }: { time: number }) => {
   const { coalition } = useContext(UserProfileContext);
   const theme = useTheme();
   const color = coalition?.color ?? theme.colors.accent.default;
-  const time = '1020시간 42분';
+  const hour = Math.floor(time / 60);
+  const minute = time % 60;
 
   return (
     <>
@@ -20,7 +21,7 @@ export const DailyLogTime = () => {
             <MdLogTime width={15} height={15} />
           </IconLayout>
         </IconWhiteLayout>
-        <Text>아이맥 접속시간: {time}</Text>
+        <Text>아이맥 접속시간: {`${hour}시간 ${minute}분`}</Text>
       </HStack>
     </>
   );

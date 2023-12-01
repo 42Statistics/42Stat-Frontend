@@ -33,7 +33,7 @@ export const DailyActivityTableData = ({
   const unit = '점';
 
   const handleClick = () => {
-    setActivityDaily({ date: date.toDateString(), records: records });
+    setActivityDaily({ date: date.toString(), records: records });
   };
 
   return (

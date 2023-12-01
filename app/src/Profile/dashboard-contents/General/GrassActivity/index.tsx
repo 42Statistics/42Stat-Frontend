@@ -44,10 +44,8 @@ const GET_PERSONAL_ACTIVITY_LOG = gql(/* GraphQL */ `
 
 export const GrassActivity = () => {
   const { login } = useContext(UserProfileContext);
-  const dailyActivity = useAtomValue(dailyActivityAtom);
-  const { dailyRecords, timeRecord } = parseDailyActivity(
-    dailyActivity.records,
-  );
+  const { date, records } = useAtomValue(dailyActivityAtom);
+  const { dailyRecords, timeRecord } = parseDailyActivity(records);
 
   const title = '활동 내역';
 
@@ -62,6 +60,7 @@ export const GrassActivity = () => {
   );
 
   useEffect(() => {
+    if (dailyRecords.length === 0) return;
     refetch({ login, args: dailyRecords });
   }, [refetch, login, dailyRecords]);
 
@@ -71,9 +70,9 @@ export const GrassActivity = () => {
   if (error) {
     return <DashboardContentBadRequest title={title} message={error.message} />;
   }
-  if (!data) {
-    return <DashboardContentNotFound title={title} />;
-  }
+  // if (!data) {
+  //   return <DashboardContentNotFound title={title} />;
+  // }
 
   return (
     <Layout>
@@ -83,7 +82,7 @@ export const GrassActivity = () => {
         </HStack>
         <HStack w="100%" h="100%">
           <TotalGrassActivity />
-          <DailyGrassActivity />
+          <DailyGrassActivity time={{ date, timeRecord }} data={data} />
         </HStack>
       </VStack>
     </Layout>

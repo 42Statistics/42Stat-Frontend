@@ -15,6 +15,7 @@ import { HStack, VStack } from '@shared/ui-kit';
 import { getYearsBetween } from '@shared/utils/getYearsBetween';
 import { calculateDailyActivityScoresByCategory } from './utils/calculateDailyActivityScoresByCategory';
 import { activitySumAtom } from '../atoms/activitySumAtom';
+import { dailyActivityAtom } from '../atoms/dailyActivityAtom';
 
 const GET_DAILY_ACTIVITIES_BY_LOGIN = gql(/* GraphQL */ `
   query GetDailyActivitiesByLogin($login: String!, $year: Int) {
@@ -46,13 +47,18 @@ export const DailyActivities = () => {
   const { data, refetch } = result;
   const beginAt = useContext(BeginAtContext);
   const setActivitySum = useSetAtom(activitySumAtom);
-
   const { dailyActivities } = data?.getPersonalGeneral ?? {};
   const dailyActivityScores =
     dailyActivities !== undefined
       ? calculateDailyActivityScores(dailyActivities)
       : [];
   const total = sum(dailyActivityScores.map(({ score }) => score));
+  const yearsFromBeginAt = getYearsBetween(beginAt, new Date()).reverse();
+  const handleYearChange = (year: number | null) => {
+    setYear(year);
+    refetch({ login, year: year ?? undefined });
+  };
+  const setDailyActivityAtom = useSetAtom(dailyActivityAtom);
 
   useEffect(() => {
     const dailyActivityScoresTotalByCategory =
@@ -60,13 +66,16 @@ export const DailyActivities = () => {
         ? calculateDailyActivityScoresByCategory(dailyActivities)
         : { logTime: 0, event: 0, corrector: 0, corrected: 0 };
     setActivitySum(dailyActivityScoresTotalByCategory);
-  }, [setActivitySum, dailyActivities]);
 
-  const yearsFromBeginAt = getYearsBetween(beginAt, new Date()).reverse();
-  const handleYearChange = (year: number | null) => {
-    setYear(year);
-    refetch({ login, year: year ?? undefined });
-  };
+    if (dailyActivities !== undefined) {
+      const lastestDailyActivity = dailyActivities[dailyActivities.length - 1];
+
+      setDailyActivityAtom({
+        date: lastestDailyActivity.date,
+        records: lastestDailyActivity.records,
+      });
+    }
+  }, [setActivitySum, setDailyActivityAtom, dailyActivities]);
 
   return (
     <Layout>

@@ -11,14 +11,14 @@ type DailyCorrectedProps = {
   data: {
     beginAt: string;
     filledAt: string;
-    leaderLogin: string;
+    correctorLogin: string;
     projectName: string;
     teamId: number;
   };
 };
 
 export const DailyCorrected = ({ data }: DailyCorrectedProps) => {
-  const { beginAt, filledAt, leaderLogin, projectName, teamId } = data;
+  const { beginAt, filledAt, correctorLogin, projectName, teamId } = data;
   const { coalition, login } = useContext(UserProfileContext);
   const theme = useTheme();
   const navigate = useNavigate();
@@ -50,7 +50,7 @@ export const DailyCorrected = ({ data }: DailyCorrectedProps) => {
             color={theme.colors.chart.primary.default}
             onClick={handleClick}
             style={{ cursor: 'pointer' }}
-          >{`[피평가] ${leaderLogin} -> ${login}`}</BoldText>
+          >{`[피평가] ${correctorLogin} -> ${login}`}</BoldText>
           <Text>{projectName}</Text>
           <CaptionText>{`${getTimeFormat(start)} - ${getTimeFormat(
             end,

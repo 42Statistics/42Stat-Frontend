@@ -32,6 +32,7 @@ const GET_PERSONAL_ACTIVITY_LOG = gql(/* GraphQL */ `
         ... on DailyEvaluationDetailRecord {
           type
           teamId
+          correctorLogin
           leaderLogin
           projectName
           beginAt

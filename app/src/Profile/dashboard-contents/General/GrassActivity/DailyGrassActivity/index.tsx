@@ -12,7 +12,8 @@ type DailyGrassActivityProps = {
 };
 
 export const DailyGrassActivity = ({ data, time }: DailyGrassActivityProps) => {
-  const date = new Date(time.date).toLocaleDateString();
+  const { date, timeRecord } = time;
+  const title = new Date(date).toLocaleDateString();
 
   if (!data) return null;
 
@@ -24,12 +25,12 @@ export const DailyGrassActivity = ({ data, time }: DailyGrassActivityProps) => {
         align="start"
         style={{ marginLeft: '1rem' }}
       >
-        <Text>{date}</Text>
+        <Text>{title}</Text>
         <Divider />
       </HStack>
       <Layout>
         <VerticalDivider />
-        <DailyGrassActivityDetail time={time.timeRecord} data={data} />
+        <DailyGrassActivityDetail time={timeRecord} data={data} />
       </Layout>
     </VStack>
   );

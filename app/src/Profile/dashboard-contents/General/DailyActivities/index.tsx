@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/client';
 import styled from '@emotion/styled';
+import { useSetAtom } from 'jotai';
 import { sum } from 'lodash-es';
 import { useContext, useState } from 'react';
 
@@ -12,6 +13,9 @@ import { calculateDailyActivityScores } from '@/Profile/dashboard-contents/Gener
 import { gql } from '@shared/__generated__';
 import { HStack, VStack } from '@shared/ui-kit';
 import { getYearsBetween } from '@shared/utils/getYearsBetween';
+import { calculateDailyActivityScoresByCategory } from './utils/calculateDailyActivityScoresByCategory';
+import { activitySumAtom } from '../atoms/activitySumAtom';
+import { DailyActivityType } from '@shared/__generated__/graphql';
 
 const GET_DAILY_ACTIVITIES_BY_LOGIN = gql(/* GraphQL */ `
   query GetDailyActivitiesByLogin($login: String!, $year: Int) {
@@ -42,6 +46,7 @@ export const DailyActivities = () => {
   });
   const { data, refetch } = result;
   const beginAt = useContext(BeginAtContext);
+  const setActivitySum = useSetAtom(activitySumAtom);
 
   const { dailyActivities } = data?.getPersonalGeneral ?? {};
   const dailyActivityScores =
@@ -49,8 +54,12 @@ export const DailyActivities = () => {
       ? calculateDailyActivityScores(dailyActivities)
       : [];
   const total = sum(dailyActivityScores.map(({ score }) => score));
+  const dailyActivityScoresTotalByCategory =
+    dailyActivities !== undefined
+      ? calculateDailyActivityScoresByCategory(dailyActivities)
+      : { logTime: 0, event: 0, corrector: 0, corrected: 0 };
+  setActivitySum(dailyActivityScoresTotalByCategory);
   const yearsFromBeginAt = getYearsBetween(beginAt, new Date()).reverse();
-
   const handleYearChange = (year: number | null) => {
     setYear(year);
     refetch({ login, year: year ?? undefined });

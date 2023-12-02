@@ -7,32 +7,37 @@ import { ReactComponent as MdEvent } from '@/Profile/assets/activity/event.svg';
 import { useTheme } from '@emotion/react';
 import { useContext } from 'react';
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
+import { activitySumAtom } from '../atoms/activitySumAtom';
+import { useAtomValue } from 'jotai';
+import { MINUTES } from '@shared/constants/date';
 
 export const TotalGrassActivity = () => {
   const theme = useTheme();
   const { coalition } = useContext(UserProfileContext);
+  const activitySum = useAtomValue(activitySumAtom);
+
   const color = coalition?.color ?? theme.colors.accent.default;
   const iconSize = '30';
   const icons = [
     {
       icon: <MdLogTime width={iconSize} height={iconSize} />,
       label: '아이맥',
-      value: '1020시간 42분',
+      value: `${Math.floor(activitySum.logTime / MINUTES.HOUR)} 시간`,
     },
     {
       icon: <MdEvent width={iconSize} height={iconSize} />,
       label: '아젠다',
-      value: 1,
+      value: activitySum.event,
     },
     {
       icon: <MdCorrected width={iconSize} height={iconSize} />,
       label: '피평가',
-      value: 3,
+      value: activitySum.corrected,
     },
     {
       icon: <MdCorrector width={iconSize} height={iconSize} />,
       label: '평가',
-      value: 6,
+      value: activitySum.corrector,
     },
   ];
 

@@ -91,7 +91,7 @@ const GridLayout = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  gap: 10px; // Add the desired gap between grid areas
+  gap: 10px;
   width: 100%;
   height: 100%;
 `;
@@ -100,14 +100,14 @@ const GridArea = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #ccc; // Add a border or styling as needed
+  border: 1px solid #ccc;
   border-radius: 10px;
 `;
 
 const Divider = styled.div`
-  flex: 1; // Divide the remaining space
+  flex: 1;
   height: 1px;
   margin-top: 1rem;
   margin-right: 1rem;
-  background-color: #ccc; // Divider의 색상을 설정하세요
+  background-color: #ccc;
 `;

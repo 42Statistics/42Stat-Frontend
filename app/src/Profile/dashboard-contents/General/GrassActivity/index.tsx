@@ -15,6 +15,8 @@ import { HStack, VStack, Body1MediumText } from '@shared/ui-kit';
 import { dailyActivityAtom } from '../atoms/dailyActivityAtom';
 import { useAtomValue } from 'jotai';
 import { parseDailyActivity } from './utils/parseDailyActivity';
+import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
+import { Device } from '@shared/types/Device';
 
 const GET_PERSONAL_ACTIVITY_LOG = gql(/* GraphQL */ `
   query GetPersonalActivityLog(
@@ -47,6 +49,7 @@ export const GrassActivity = () => {
   const { login } = useContext(UserProfileContext);
   const { date, records } = useAtomValue(dailyActivityAtom);
   const { dailyRecords, timeRecord } = parseDailyActivity(records);
+  const device = useDeviceType();
 
   const title = '활동 내역';
 
@@ -81,10 +84,10 @@ export const GrassActivity = () => {
         <HStack style={{ marginLeft: '1rem' }}>
           <Body1MediumText>{title}</Body1MediumText>
         </HStack>
-        <HStack w="100%" h="100%">
+        <DetailLayout device={device}>
           <TotalGrassActivity />
           <DailyGrassActivity time={{ date, timeRecord }} data={data} />
-        </HStack>
+        </DetailLayout>
       </VStack>
     </Layout>
   );
@@ -94,4 +97,12 @@ const Layout = styled.div`
   width: 100%;
   height: 100%;
   padding: 2.4rem;
+`;
+
+const DetailLayout = styled.div<{ device: Device | null }>`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: ${({ device }) => (device === 'mobile' ? 'column' : 'row')};
+  align-items: center;
 `;

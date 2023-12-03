@@ -9,6 +9,7 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
+import { injectEmptyDay } from '@shared/utils/injectEmptyDay';
 
 const GET_TEAM_CLOSE_RECORDS = gql(/* GraphQL */ `
   query GetTeamCloseRecords($last: Int!) {
@@ -23,9 +24,11 @@ const GET_TEAM_CLOSE_RECORDS = gql(/* GraphQL */ `
 
 export const TeamCloseRecords = () => {
   const title = '일간 팀 제출 횟수 추이';
+  const last = 180;
+
   const { loading, error, data } = useQuery(GET_TEAM_CLOSE_RECORDS, {
     variables: {
-      last: 365,
+      last,
     },
   });
   if (loading) {
@@ -39,10 +42,13 @@ export const TeamCloseRecords = () => {
   }
 
   const { teamCloseRecords } = data.getHomeTeam;
-  const seriesData = teamCloseRecords.map(({ at, value }) => ({
-    x: at,
-    y: value,
-  }));
+  const seriesData = injectEmptyDay(
+    teamCloseRecords.map(({ at, value }) => ({
+      x: new Date(at),
+      y: value,
+    })),
+    last,
+  );
   const series: ApexAxisChartSeries = [
     {
       name: '제출 횟수',

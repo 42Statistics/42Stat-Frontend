@@ -9,6 +9,7 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
+import { injectEmptyDay } from '@shared/utils/injectEmptyDay';
 
 const GET_EVAL_COUNT_RECORDS = gql(/* GraphQL */ `
   query GetEvalCountRecords($last: Int!) {
@@ -23,9 +24,11 @@ const GET_EVAL_COUNT_RECORDS = gql(/* GraphQL */ `
 
 export const EvalCountRecords = () => {
   const title = '일간 평가 횟수 추이';
+  const last = 180;
+
   const { loading, error, data } = useQuery(GET_EVAL_COUNT_RECORDS, {
     variables: {
-      last: 365,
+      last,
     },
   });
   if (loading) {
@@ -39,10 +42,13 @@ export const EvalCountRecords = () => {
   }
 
   const { evalCountRecords } = data.getHomeEval;
-  const seriesData = evalCountRecords.map(({ at, value }) => ({
-    x: at,
-    y: value,
-  }));
+  const seriesData = injectEmptyDay(
+    evalCountRecords.map(({ at, value }) => ({
+      x: new Date(at),
+      y: value,
+    })),
+    last,
+  );
   const series: ApexAxisChartSeries = [
     {
       name: '평가 횟수',

@@ -30,7 +30,7 @@ const documents = {
     "\n  mutation ftLogin($ftCode: String!) {\n    ftLogin(ftCode: $ftCode) {\n      message\n      accessToken\n      refreshToken\n      userId\n    }\n  }\n": types.FtLoginDocument,
     "\n  query GetIndividualizedMessage {\n    getMyInfo {\n      lastValidatedTeam {\n        status\n        lastEventTime\n        projectPreview {\n          id\n          name\n          url\n        }\n      }\n      isNewMember\n      blackholedAt\n      experienceRank\n      scoreRank\n      evalCountRank\n    }\n  }\n": types.GetIndividualizedMessageDocument,
     "\n  query GetTigCountPerCoalitionByDateTemplate($dateTemplate: DateTemplate!) {\n    getHomeCoalition {\n      tigCountPerCoalitionByDateTemplate(dateTemplate: $dateTemplate) {\n        data {\n          coalition {\n            ...coalitionFields\n          }\n          value\n        }\n        start\n        end\n      }\n    }\n  }\n": types.GetTigCountPerCoalitionByDateTemplateDocument,
-    "\n  query GetScoreRecordsPerCoalition {\n    getHomeCoalition {\n      scoreRecordsPerCoalition {\n        coalition {\n          ...coalitionFields\n        }\n        records {\n          at\n          value\n        }\n      }\n    }\n  }\n": types.GetScoreRecordsPerCoalitionDocument,
+    "\n  query GetScoreRecordsPerCoalition($last: Int!) {\n    getHomeCoalition {\n      scoreRecordsPerCoalition(last: $last) {\n        coalition {\n          ...coalitionFields\n        }\n        records {\n          at\n          value\n        }\n      }\n    }\n  }\n": types.GetScoreRecordsPerCoalitionDocument,
     "\n  query GetTotalScoresPerCoalition {\n    getHomeCoalition {\n      totalScoresPerCoalition {\n        coalition {\n          ...coalitionFields\n        }\n        value\n      }\n    }\n  }\n": types.GetTotalScoresPerCoalitionDocument,
     "\n  query GetWinCountPerCoalition {\n    getHomeCoalition {\n      winCountPerCoalition {\n        coalition {\n          ...coalitionFields\n        }\n        value\n      }\n    }\n  }\n": types.GetWinCountPerCoalitionDocument,
     "\n  query GetAverageCommentLength {\n    getHomeEval {\n      averageCommentLength\n    }\n  }\n": types.GetAverageCommentLengthDocument,
@@ -40,13 +40,11 @@ const documents = {
     "\n  query GetCurrRegisteredCountRanking($limit: Int!) {\n    getHomeTeam {\n      currRegisteredCountRanking(limit: $limit) {\n        projectPreview {\n          ...projectPreviewFields\n        }\n        rank\n        value\n      }\n    }\n  }\n": types.GetCurrRegisteredCountRankingDocument,
     "\n  query GetRecentExamResult {\n    getHomeTeam {\n      recentExamResult {\n        data {\n          resultPerRank {\n            rank\n            rate {\n              total\n              fields {\n                key\n                value\n              }\n            }\n          }\n          beginAt\n          location\n        }\n      }\n    }\n  }\n": types.GetRecentExamResultDocument,
     "\n  query GetTeamCloseRecords($last: Int!) {\n    getHomeTeam {\n      teamCloseRecords(last: $last) {\n        at\n        value\n      }\n    }\n  }\n": types.GetTeamCloseRecordsDocument,
-    "\n  query GetAliveUserCountRecords {\n    getHomeUser {\n      aliveUserCountRecords {\n        at\n        value\n      }\n    }\n  }\n": types.GetAliveUserCountRecordsDocument,
+    "\n  query GetDailyAliveUserCountRecords($last: Int!) {\n    getHomeUser {\n      dailyAliveUserCountRecords(last: $last) {\n        at\n        value\n      }\n    }\n  }\n": types.GetDailyAliveUserCountRecordsDocument,
     "\n  query GetAverageDurationPerCircle {\n    getHomeUser {\n      averageDurationPerCircle {\n        circle\n        value\n      }\n    }\n  }\n": types.GetAverageDurationPerCircleDocument,
     "\n  query GetBlackholedCountPerCircle {\n    getHomeUser {\n      blackholedCountPerCircle {\n        circle\n        value\n      }\n    }\n  }\n": types.GetBlackholedCountPerCircleDocument,
     "\n  query GetBlackholedCountRecords($last: Int!) {\n    getHomeUser {\n      blackholedCountRecords(last: $last) {\n        at\n        value\n      }\n    }\n  }\n": types.GetBlackholedCountRecordsDocument,
-    "\n  query GetBlackholedRate {\n    getHomeUser {\n      blackholedRate {\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n": types.GetBlackholedRateDocument,
     "\n  query GetCorrectionPointRanking($limit: Int!) {\n    getHomeUser {\n      correctionPointRanking(limit: $limit) {\n        userPreview {\n          ...userPreviewFields\n        }\n        value\n        rank\n      }\n    }\n  }\n": types.GetCorrectionPointRankingDocument,
-    "\n  query GetMemberRate {\n    getHomeUser {\n      memberRate {\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n": types.GetMemberRateDocument,
     "\n  query GetUserCountPerLevel {\n    getHomeUser {\n      userCountPerLevel {\n        level\n        value\n      }\n    }\n  }\n": types.GetUserCountPerLevelDocument,
     "\n  query GetUserRate {\n    getHomeUser {\n      memberRate {\n        fields {\n          key\n          value\n        }\n      }\n      blackholedRate {\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n": types.GetUserRateDocument,
     "\n  query GetWalletRanking($limit: Int!) {\n    getHomeUser {\n      walletRanking(limit: $limit) {\n        userPreview {\n          ...userPreviewFields\n        }\n        value\n        rank\n      }\n    }\n  }\n": types.GetWalletRankingDocument,
@@ -182,7 +180,7 @@ export function gql(source: "\n  query GetTigCountPerCoalitionByDateTemplate($da
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query GetScoreRecordsPerCoalition {\n    getHomeCoalition {\n      scoreRecordsPerCoalition {\n        coalition {\n          ...coalitionFields\n        }\n        records {\n          at\n          value\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetScoreRecordsPerCoalition {\n    getHomeCoalition {\n      scoreRecordsPerCoalition {\n        coalition {\n          ...coalitionFields\n        }\n        records {\n          at\n          value\n        }\n      }\n    }\n  }\n"];
+export function gql(source: "\n  query GetScoreRecordsPerCoalition($last: Int!) {\n    getHomeCoalition {\n      scoreRecordsPerCoalition(last: $last) {\n        coalition {\n          ...coalitionFields\n        }\n        records {\n          at\n          value\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetScoreRecordsPerCoalition($last: Int!) {\n    getHomeCoalition {\n      scoreRecordsPerCoalition(last: $last) {\n        coalition {\n          ...coalitionFields\n        }\n        records {\n          at\n          value\n        }\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -222,7 +220,7 @@ export function gql(source: "\n  query GetTeamCloseRecords($last: Int!) {\n    g
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query GetAliveUserCountRecords {\n    getHomeUser {\n      aliveUserCountRecords {\n        at\n        value\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetAliveUserCountRecords {\n    getHomeUser {\n      aliveUserCountRecords {\n        at\n        value\n      }\n    }\n  }\n"];
+export function gql(source: "\n  query GetDailyAliveUserCountRecords($last: Int!) {\n    getHomeUser {\n      dailyAliveUserCountRecords(last: $last) {\n        at\n        value\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetDailyAliveUserCountRecords($last: Int!) {\n    getHomeUser {\n      dailyAliveUserCountRecords(last: $last) {\n        at\n        value\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -238,15 +236,7 @@ export function gql(source: "\n  query GetBlackholedCountRecords($last: Int!) {\
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query GetBlackholedRate {\n    getHomeUser {\n      blackholedRate {\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetBlackholedRate {\n    getHomeUser {\n      blackholedRate {\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
 export function gql(source: "\n  query GetCorrectionPointRanking($limit: Int!) {\n    getHomeUser {\n      correctionPointRanking(limit: $limit) {\n        userPreview {\n          ...userPreviewFields\n        }\n        value\n        rank\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetCorrectionPointRanking($limit: Int!) {\n    getHomeUser {\n      correctionPointRanking(limit: $limit) {\n        userPreview {\n          ...userPreviewFields\n        }\n        value\n        rank\n      }\n    }\n  }\n"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function gql(source: "\n  query GetMemberRate {\n    getHomeUser {\n      memberRate {\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetMemberRate {\n    getHomeUser {\n      memberRate {\n        fields {\n          key\n          value\n        }\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

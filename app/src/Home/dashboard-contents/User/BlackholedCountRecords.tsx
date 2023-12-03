@@ -8,7 +8,9 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
+import { CALENDAR_MONTHS_FROM_FT_BEGIN_AT } from '@shared/constants/date';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
+import { injectEmptyMonth } from '@shared/utils/injectEmptyMonth';
 
 const GET_BLACKHOLED_COUNT_RECORDS = gql(/* GraphQL */ `
   query GetBlackholedCountRecords($last: Int!) {
@@ -23,9 +25,11 @@ const GET_BLACKHOLED_COUNT_RECORDS = gql(/* GraphQL */ `
 
 export const BlackholedCountRecords = () => {
   const title = '월간 블랙홀 인원 추이';
+  const last = CALENDAR_MONTHS_FROM_FT_BEGIN_AT + 1;
+
   const { loading, error, data } = useQuery(GET_BLACKHOLED_COUNT_RECORDS, {
     variables: {
-      last: 48,
+      last,
     },
   });
 
@@ -40,10 +44,14 @@ export const BlackholedCountRecords = () => {
   }
 
   const { blackholedCountRecords } = data.getHomeUser;
-  const seriesData = blackholedCountRecords.map(({ at, value }) => ({
-    x: at,
-    y: value,
-  }));
+  const seriesData = injectEmptyMonth(
+    blackholedCountRecords.map(({ at, value }) => ({
+      x: new Date(at),
+      y: value,
+    })),
+    last,
+  );
+
   const series: ApexAxisChartSeries = [
     {
       name: '인원수',

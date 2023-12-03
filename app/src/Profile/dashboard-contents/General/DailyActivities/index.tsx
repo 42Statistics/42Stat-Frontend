@@ -46,45 +46,48 @@ export const DailyActivities = () => {
   });
   const { data, refetch } = result;
   const beginAt = useContext(BeginAtContext);
-  const setDailyActivitySum = useSetAtom(dailyActivitySumAtom);
+
   const { dailyActivities } = data?.getPersonalGeneral ?? {};
   const dailyActivityScores =
     dailyActivities !== undefined
       ? calculateDailyActivityScores(dailyActivities)
       : [];
+
   const total = sum(dailyActivityScores.map(({ score }) => score));
   const yearsFromBeginAt = getYearsBetween(beginAt, new Date()).reverse();
   const handleYearChange = (year: number | null) => {
     setYear(year);
     refetch({ login, year: year ?? undefined });
   };
+
+  const setDailyActivitySum = useSetAtom(dailyActivitySumAtom);
   const setSelectedDailyActivity = useSetAtom(selectedDailyActivityAtom);
 
   useEffect(() => {
-    const dailyActivityScoresTotalByCategory =
-      dailyActivities !== undefined
-        ? calculateDailyActivityScoresByCategory(dailyActivities)
-        : { logTime: 0, event: 0, corrector: 0, corrected: 0 };
-    setDailyActivitySum(dailyActivityScoresTotalByCategory);
-
-    if (dailyActivities !== undefined) {
-      const latestDailyActivity = dailyActivities
-        .slice()
-        .reverse()
-        .find(
-          (dailyActivity) =>
-            dailyActivity.records.filter(
-              (record) => record.__typename === 'DailyDefaultRecord',
-            ).length > 0,
-        );
-
-      if (latestDailyActivity === undefined) return;
-
-      setSelectedDailyActivity({
-        ...latestDailyActivity,
-      });
+    if (dailyActivities === undefined) {
+      return;
     }
-  }, [setDailyActivitySum, setSelectedDailyActivity, dailyActivities]);
+
+    setDailyActivitySum(
+      calculateDailyActivityScoresByCategory(dailyActivities),
+    );
+
+    const latestDailyActivity = dailyActivities.findLast(
+      (dailyActivity) => dailyActivity.records.length > 0,
+    );
+
+    if (latestDailyActivity === undefined) {
+      setSelectedDailyActivity({
+        date: new Date().toString(), // FIXME: 해당 Year 구간의 마지막 날짜로 변경
+        records: [],
+      });
+      return;
+    }
+
+    setSelectedDailyActivity({
+      ...latestDailyActivity,
+    });
+  }, [dailyActivities, setDailyActivitySum, setSelectedDailyActivity]);
 
   return (
     <Layout>

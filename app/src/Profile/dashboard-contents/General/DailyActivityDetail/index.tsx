@@ -11,7 +11,7 @@ import {
   DashboardContentBadRequest,
   DashboardContentLoading,
 } from '@shared/components/DashboardContentView/Error';
-import { dailyActivityAtom } from '../atoms/dailyActivityAtom';
+import { selectedDailyActivityAtom } from '../atoms/selectedDailyActivityAtom';
 import { parseDailyActivity } from './utils/parseDailyActivity';
 
 const GET_DAILY_ACTIVITY_DETAIL_RECORDS = gql(/* GraphQL */ `
@@ -43,7 +43,7 @@ const GET_DAILY_ACTIVITY_DETAIL_RECORDS = gql(/* GraphQL */ `
 
 export const DailyActivityDetail = () => {
   const { login } = useContext(UserProfileContext);
-  const { date, records } = useAtomValue(dailyActivityAtom);
+  const { date, records } = useAtomValue(selectedDailyActivityAtom);
   const { dailyRecords, timeRecord } = parseDailyActivity(records);
 
   const title = '일별 활동 내역';

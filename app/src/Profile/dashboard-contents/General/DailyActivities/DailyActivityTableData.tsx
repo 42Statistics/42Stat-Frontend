@@ -3,11 +3,11 @@ import dayjs from 'dayjs';
 
 import { DailyActivitySquare } from '@/Profile/dashboard-contents/General/DailyActivities/DailyActivitySquare';
 import { getDailyActivityTableDataColor } from '@/Profile/dashboard-contents/General/DailyActivities/utils/getDailyActivityTableDataColor';
+import { DailyActivity } from '@shared/__generated__/graphql';
 import { Tooltip } from '@shared/ui-kit';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
-import { DailyActivity } from '@shared/__generated__/graphql';
 import { useSetAtom } from 'jotai';
-import { dailyActivityAtom } from '../atoms/dailyActivityAtom';
+import { selectedDailyActivityAtom } from '../atoms/selectedDailyActivityAtom';
 
 type DailyActivityTableDataProps = {
   date: Date;
@@ -28,12 +28,12 @@ export const DailyActivityTableData = ({
     standardColor,
     theme.colors.mono.gray100,
   );
-  const setActivityDaily = useSetAtom(dailyActivityAtom);
+  const setSelectedDailyActivity = useSetAtom(selectedDailyActivityAtom);
 
   const unit = '점';
 
   const handleClick = () => {
-    setActivityDaily({ date: date.toString(), records: records });
+    setSelectedDailyActivity({ date: date.toString(), records: records });
   };
 
   return (

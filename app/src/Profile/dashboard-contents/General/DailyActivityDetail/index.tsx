@@ -4,7 +4,7 @@ import { useAtomValue } from 'jotai';
 import { useContext, useEffect } from 'react';
 
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
-import { DailyActivityDetailContent } from '@/Profile/dashboard-contents/General/DailyActivityDetail/DailyActivityDetailContent';
+import { DailyActivityTimeline } from '@/Profile/dashboard-contents/General/DailyActivityDetail/DailyActivityTimeline';
 import { gql } from '@shared/__generated__';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
@@ -76,7 +76,7 @@ export const DailyActivityDetail = () => {
       description={dayjs(date).format('YYYY년 M월 D일')}
       type="Scrollable"
     >
-      <DailyActivityDetailContent timeRecord={timeRecord} data={data} />
+      <DailyActivityTimeline timeRecord={timeRecord} data={data} />
     </DashboardContent>
   );
 };

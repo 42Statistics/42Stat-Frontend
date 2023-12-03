@@ -1,24 +1,22 @@
-import { ReactComponent as MdLogTime } from '@/Profile/assets/activity/log-time.svg';
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { useTheme } from '@emotion/react';
 import type { GetDailyActivityDetailRecordsQuery } from '@shared/__generated__/graphql';
-import { Text, VStack } from '@shared/ui-kit';
+import { VStack } from '@shared/ui-kit';
 import { useContext } from 'react';
-import { TimelineItem } from '../TimelineItem';
 import { DailyCorrected } from './DailyCorrected';
 import { DailyCorrector } from './DailyCorrector';
 import { DailyEvent } from './DailyEvent';
 import { DailyLogTime } from './DailyLogTime';
 
-type DailyActivityDetailContentProps = {
+type DailyActivityTimelineProps = {
   data?: GetDailyActivityDetailRecordsQuery;
   timeRecord: number;
 };
 
-export const DailyActivityDetailContent = ({
+export const DailyActivityTimeline = ({
   data,
   timeRecord,
-}: DailyActivityDetailContentProps) => {
+}: DailyActivityTimelineProps) => {
   const { coalition } = useContext(UserProfileContext);
   const theme = useTheme();
 

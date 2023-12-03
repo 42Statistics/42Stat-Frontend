@@ -1,6 +1,8 @@
 import { useQuery } from '@apollo/client';
+import { differenceInCalendarMonths } from 'date-fns';
 import { useContext } from 'react';
 
+import { BeginAtContext } from '@/Profile/contexts/BeginAtContext';
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { gql } from '@shared/__generated__';
 import { AreaChart } from '@shared/components/Chart';
@@ -11,6 +13,7 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
+import { injectEmptyMonth } from '@shared/utils/injectEmptyMonth';
 
 const GET_COUNT_RECORDS_BY_LOGIN = gql(/* GraphQL */ `
   query GetCountRecordsByLogin($login: String!, $last: Int!) {
@@ -25,13 +28,14 @@ const GET_COUNT_RECORDS_BY_LOGIN = gql(/* GraphQL */ `
 
 export const CountRecords = () => {
   const { login } = useContext(UserProfileContext);
-  // const beginAt = useContext(BeginAtContext);
+  const beginAt = useContext(BeginAtContext);
+  const last = differenceInCalendarMonths(new Date(), beginAt) + 1;
 
   const title = '월간 평가 횟수 추이';
   const { loading, error, data } = useQuery(GET_COUNT_RECORDS_BY_LOGIN, {
     variables: {
       login,
-      last: 48,
+      last,
     },
   });
 
@@ -46,10 +50,14 @@ export const CountRecords = () => {
   }
 
   const { countRecords } = data.getPersonalEval;
-  const seriesData = countRecords.map(({ at, value }) => ({
-    x: at,
-    y: value,
-  }));
+  const seriesData = injectEmptyMonth(
+    countRecords.map(({ at, value }) => ({
+      x: new Date(at),
+      y: value,
+    })),
+    last,
+  );
+
   const series: ApexAxisChartSeries = [
     {
       name: '평가 횟수',

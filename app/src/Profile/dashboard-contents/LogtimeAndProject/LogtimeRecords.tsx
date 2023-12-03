@@ -30,7 +30,7 @@ export const LogtimeRecords = () => {
   const { loading, error, data } = useQuery(GET_LOGTIME_RECORDS_BY_LOGIN, {
     variables: {
       login,
-      last: 24,
+      last: 48,
     },
   });
 

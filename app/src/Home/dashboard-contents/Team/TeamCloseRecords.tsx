@@ -25,7 +25,7 @@ export const TeamCloseRecords = () => {
   const title = '일간 팀 제출 횟수 추이';
   const { loading, error, data } = useQuery(GET_TEAM_CLOSE_RECORDS, {
     variables: {
-      last: 60,
+      last: 365,
     },
   });
   if (loading) {
@@ -72,7 +72,7 @@ const EvalCountRecordsChart = ({ series }: EvalCountRecordsChartProps) => {
     },
     tooltip: {
       x: {
-        format: 'M월 d일',
+        format: 'yyyy년 M월 d일',
       },
       y: {
         formatter: (value) => numberWithUnitFormatter(value, '회'),

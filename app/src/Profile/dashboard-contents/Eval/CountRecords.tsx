@@ -25,12 +25,13 @@ const GET_COUNT_RECORDS_BY_LOGIN = gql(/* GraphQL */ `
 
 export const CountRecords = () => {
   const { login } = useContext(UserProfileContext);
+  // const beginAt = useContext(BeginAtContext);
 
   const title = '월간 평가 횟수 추이';
   const { loading, error, data } = useQuery(GET_COUNT_RECORDS_BY_LOGIN, {
     variables: {
       login,
-      last: 24,
+      last: 48,
     },
   });
 

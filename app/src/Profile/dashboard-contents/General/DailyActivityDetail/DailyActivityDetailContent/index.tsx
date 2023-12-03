@@ -1,48 +1,45 @@
-import { DailyGrassActivityDetail } from '@/Profile/dashboard-contents/General/DailyActivityDetail/DailyActivityDetailContent/DailyGrassActivityDetail';
-import styled from '@emotion/styled';
+import { ReactComponent as MdLogTime } from '@/Profile/assets/activity/log-time.svg';
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
+import { useTheme } from '@emotion/react';
 import type { GetDailyActivityDetailRecordsQuery } from '@shared/__generated__/graphql';
-import { VStack } from '@shared/ui-kit';
+import { Text, VStack } from '@shared/ui-kit';
+import { useContext } from 'react';
+import { TimelineItem } from '../TimelineItem';
+import { DailyCorrected } from './DailyCorrected';
+import { DailyCorrector } from './DailyCorrector';
+import { DailyEvent } from './DailyEvent';
+import { DailyLogTime } from './DailyLogTime';
 
 type DailyActivityDetailContentProps = {
   data?: GetDailyActivityDetailRecordsQuery;
-  time: {
-    timeRecord: number;
-    date: string;
-  };
+  timeRecord: number;
 };
 
 export const DailyActivityDetailContent = ({
   data,
-  time,
+  timeRecord,
 }: DailyActivityDetailContentProps) => {
-  const { date, timeRecord } = time;
+  const { coalition } = useContext(UserProfileContext);
+  const theme = useTheme();
+
+  const color = coalition?.color ?? theme.colors.mono.black;
+
+  if (!data) {
+    return null; // FIXME: handling
+  }
 
   return (
-    <VStack w="100%" h="100%" spacing="2rem" align="start">
-      <Layout>
-        <VerticalDivider />
-        {data ? (
-          <DailyGrassActivityDetail time={timeRecord} data={data} />
-        ) : null}
-      </Layout>
+    <VStack w="100%" align="start">
+      <DailyLogTime timeRecord={timeRecord} color={color} />
+      {data.getPersonalGeneral.dailyActivityDetailRecords.map((item, index) => {
+        if ('teamId' in item) {
+          if (item.type === 'CORRECTED')
+            return <DailyCorrected key={index} data={item} color={color} />;
+          else return <DailyCorrector key={index} data={item} color={color} />;
+        } else {
+          return <DailyEvent key={index} data={item} color={color} />;
+        }
+      })}
     </VStack>
   );
 };
-
-const Layout = styled.div`
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  align-items: start;
-  width: 100%;
-  height: 100%;
-  overflow-y: scroll;
-`;
-
-const VerticalDivider = styled.div`
-  flex: 1;
-  width: 2.5px;
-  margin-left: 4rem;
-  border-radius: 10px;
-  background-color: #ccc; // Divider의 색상을 설정하세요
-`;

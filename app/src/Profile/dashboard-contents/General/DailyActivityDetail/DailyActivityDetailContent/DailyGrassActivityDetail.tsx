@@ -1,15 +1,15 @@
 import styled from '@emotion/styled';
-import { DailyLogTime } from './DailyLogTime';
-import { DailyCorrector } from './DailyCorrector';
+import { GetDailyActivityDetailRecordsQuery } from '@shared/__generated__/graphql';
 import { DailyCorrected } from './DailyCorrected';
+import { DailyCorrector } from './DailyCorrector';
 import { DailyEvent } from './DailyEvent';
-import { GetPersonalActivityLogQuery } from '@shared/__generated__/graphql';
+import { DailyLogTime } from './DailyLogTime';
 
 export const DailyGrassActivityDetail = ({
   data,
   time,
 }: {
-  data: GetPersonalActivityLogQuery;
+  data: GetDailyActivityDetailRecordsQuery;
   time: number;
 }) => {
   return (

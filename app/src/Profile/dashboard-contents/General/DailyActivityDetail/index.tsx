@@ -2,22 +2,23 @@ import { useQuery } from '@apollo/client';
 import styled from '@emotion/styled';
 
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
-import { DailyGrassActivity } from '@/Profile/dashboard-contents/General/GrassActivity/DailyGrassActivity';
+import { DailyActivityDetailContent } from '@/Profile/dashboard-contents/General/DailyActivityDetail/DailyActivityDetailContent';
 import { gql } from '@shared/__generated__';
 import {
   DashboardContentBadRequest,
   DashboardContentLoading,
 } from '@shared/components/DashboardContentView/Error';
 import { Device } from '@shared/types/Device';
-import { Body1MediumText, HStack, VStack } from '@shared/ui-kit';
+import { Body1MediumText, Text, VStack } from '@shared/ui-kit';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
+import dayjs from 'dayjs';
 import { useAtomValue } from 'jotai';
 import { useContext, useEffect } from 'react';
 import { dailyActivityAtom } from '../atoms/dailyActivityAtom';
 import { parseDailyActivity } from './utils/parseDailyActivity';
 
-const GET_PERSONAL_ACTIVITY_LOG = gql(/* GraphQL */ `
-  query GetPersonalActivityLog(
+const GET_DAILY_ACTIVITY_DETAIL_RECORDS = gql(/* GraphQL */ `
+  query GetDailyActivityDetailRecords(
     $login: String!
     $args: [DailyActivityDetailRecordIdWithType!]!
   ) {
@@ -43,16 +44,16 @@ const GET_PERSONAL_ACTIVITY_LOG = gql(/* GraphQL */ `
   }
 `);
 
-export const GrassActivity = () => {
+export const DailyActivityDetail = () => {
   const { login } = useContext(UserProfileContext);
   const { date, records } = useAtomValue(dailyActivityAtom);
   const { dailyRecords, timeRecord } = parseDailyActivity(records);
   const device = useDeviceType();
 
-  const title = '활동 내역';
+  const title = '일별 활동 내역';
 
   const { loading, error, data, refetch } = useQuery(
-    GET_PERSONAL_ACTIVITY_LOG,
+    GET_DAILY_ACTIVITY_DETAIL_RECORDS,
     {
       variables: {
         login,
@@ -76,11 +77,12 @@ export const GrassActivity = () => {
   return (
     <Layout>
       <VStack w="100%" h="100%" spacing="2rem" align="start">
-        <HStack style={{ marginLeft: '1rem' }}>
+        <VStack align="start" spacing="0.4rem" style={{ marginLeft: '1rem' }}>
           <Body1MediumText>{title}</Body1MediumText>
-        </HStack>
+          <Text>{dayjs(date).format('YYYY년 M월 D일')}</Text>
+        </VStack>
         <DetailLayout device={device}>
-          <DailyGrassActivity time={{ date, timeRecord }} data={data} />
+          <DailyActivityDetailContent time={{ date, timeRecord }} data={data} />
         </DetailLayout>
       </VStack>
     </Layout>

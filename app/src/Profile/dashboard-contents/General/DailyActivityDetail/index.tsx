@@ -1,82 +1,32 @@
-import { useQuery } from '@apollo/client';
 import dayjs from 'dayjs';
 import { useAtomValue } from 'jotai';
-import { useContext, useEffect } from 'react';
 
-import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
-import { DailyActivityTimeline } from '@/Profile/dashboard-contents/General/DailyActivityDetail/DailyActivityTimeline';
-import { gql } from '@shared/__generated__';
+import { selectedDailyActivityAtom } from '@/Profile/dashboard-contents/General/atoms/selectedDailyActivityAtom';
 import { DashboardContent } from '@shared/components/DashboardContent';
-import {
-  DashboardContentBadRequest,
-  DashboardContentLoading,
-} from '@shared/components/DashboardContentView/Error';
-import { selectedDailyActivityAtom } from '../atoms/selectedDailyActivityAtom';
-import { parseDailyActivity } from './utils/parseDailyActivity';
-
-const GET_DAILY_ACTIVITY_DETAIL_RECORDS = gql(/* GraphQL */ `
-  query GetDailyActivityDetailRecords(
-    $login: String!
-    $args: [DailyActivityDetailRecordIdWithType!]!
-  ) {
-    getPersonalGeneral(login: $login) {
-      dailyActivityDetailRecords(args: $args) {
-        ... on DailyEventDetailRecord {
-          name
-          location
-          beginAt
-          endAt
-        }
-        ... on DailyEvaluationDetailRecord {
-          type
-          teamId
-          correctorLogin
-          leaderLogin
-          projectName
-          beginAt
-          filledAt
-        }
-      }
-    }
-  }
-`);
+import { DashboardContentLoading } from '@shared/components/DashboardContentView/Error';
+import { Body1Text } from '@shared/ui-kit';
+import { DailyActivityTimeline } from './DailyActivityTimeline';
 
 export const DailyActivityDetail = () => {
-  const { login } = useContext(UserProfileContext);
   const { date, records } = useAtomValue(selectedDailyActivityAtom);
-  const { dailyRecords, timeRecord } = parseDailyActivity(records);
 
   const title = '일별 활동 내역';
+  const description = dayjs(date).format('YYYY년 M월 D일');
 
-  const { loading, error, data, refetch } = useQuery(
-    GET_DAILY_ACTIVITY_DETAIL_RECORDS,
-    {
-      variables: {
-        login,
-        args: dailyRecords,
-      },
-    },
-  );
-
-  useEffect(() => {
-    if (dailyRecords.length === 0) return;
-    refetch({ login, args: dailyRecords });
-  }, [refetch, login, dailyRecords]);
-
-  if (loading) {
+  if (date === '') {
     return <DashboardContentLoading title={title} />;
   }
-  if (error) {
-    return <DashboardContentBadRequest title={title} message={error.message} />;
+
+  if (records.length === 0) {
+    return (
+      <DashboardContent title={title} description={description}>
+        <Body1Text>해당일에 활동 내역이 없습니다.</Body1Text>
+      </DashboardContent>
+    );
   }
 
-  return (
-    <DashboardContent
-      title={title}
-      description={dayjs(date).format('YYYY년 M월 D일')}
-      type="Scrollable"
-    >
-      <DailyActivityTimeline timeRecord={timeRecord} data={data} />
-    </DashboardContent>
-  );
+  // useQuery를 조건부로 사용할 수 없기 때문에, date === '', records.length === 0 등의 조건을 먼저 검사하고,
+  // 데이터가 정제된 상태로 하위 컴포넌트인 DailyActivityTimeline 내에서 useQuery를 사용하도록 해야 합니다.
+  // 물론 DailyActivityTimeline이라는 네이밍이 더 이상 유효하지 않아서 수정이 필요합니다.
+  return <DailyActivityTimeline title={title} description={description} />;
 };

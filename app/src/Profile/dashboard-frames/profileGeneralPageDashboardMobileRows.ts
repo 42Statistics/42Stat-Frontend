@@ -47,7 +47,7 @@ export const profileGeneralPageDashboardMobileRows: DashboardTempType[] = [
   {
     items: [
       {
-        rowSpan: 4,
+        rowSpan: 2,
         colSpan: 2,
         elementId: 13,
       },

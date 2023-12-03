@@ -68,7 +68,17 @@ export const DailyActivities = () => {
     setActivitySum(dailyActivityScoresTotalByCategory);
 
     if (dailyActivities !== undefined) {
-      const lastestDailyActivity = dailyActivities[dailyActivities.length - 1];
+      const lastestDailyActivity = dailyActivities
+        .slice()
+        .reverse()
+        .find(
+          (dailyActivity) =>
+            dailyActivity.records.filter(
+              (record) => record.__typename === 'DailyDefaultRecord',
+            ).length > 0,
+        );
+
+      if (lastestDailyActivity === undefined) return;
 
       setDailyActivityAtom({
         date: lastestDailyActivity.date,

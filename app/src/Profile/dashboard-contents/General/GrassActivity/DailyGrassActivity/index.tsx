@@ -15,8 +15,6 @@ export const DailyGrassActivity = ({ data, time }: DailyGrassActivityProps) => {
   const { date, timeRecord } = time;
   const title = new Date(date).toLocaleDateString();
 
-  if (!data) return null;
-
   return (
     <VStack w="100%" h="100%" spacing="2rem" align="start">
       <HStack
@@ -30,7 +28,9 @@ export const DailyGrassActivity = ({ data, time }: DailyGrassActivityProps) => {
       </HStack>
       <Layout>
         <VerticalDivider />
-        <DailyGrassActivityDetail time={timeRecord} data={data} />
+        {data ? (
+          <DailyGrassActivityDetail time={timeRecord} data={data} />
+        ) : null}
       </Layout>
     </VStack>
   );

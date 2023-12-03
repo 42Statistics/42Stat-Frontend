@@ -1,21 +1,20 @@
 import { useQuery } from '@apollo/client';
 import styled from '@emotion/styled';
 
-import { TotalGrassActivity } from '@/Profile/dashboard-contents/General/GrassActivity/TotalGrassActivity';
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { DailyGrassActivity } from '@/Profile/dashboard-contents/General/GrassActivity/DailyGrassActivity';
+import { gql } from '@shared/__generated__';
 import {
   DashboardContentBadRequest,
   DashboardContentLoading,
 } from '@shared/components/DashboardContentView/Error';
-import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
-import { gql } from '@shared/__generated__';
-import { useContext, useEffect } from 'react';
-import { HStack, VStack, Body1MediumText } from '@shared/ui-kit';
-import { dailyActivityAtom } from '../atoms/dailyActivityAtom';
-import { useAtomValue } from 'jotai';
-import { parseDailyActivity } from './utils/parseDailyActivity';
-import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 import { Device } from '@shared/types/Device';
+import { Body1MediumText, HStack, VStack } from '@shared/ui-kit';
+import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
+import { useAtomValue } from 'jotai';
+import { useContext, useEffect } from 'react';
+import { dailyActivityAtom } from '../atoms/dailyActivityAtom';
+import { parseDailyActivity } from './utils/parseDailyActivity';
 
 const GET_PERSONAL_ACTIVITY_LOG = gql(/* GraphQL */ `
   query GetPersonalActivityLog(
@@ -81,7 +80,6 @@ export const GrassActivity = () => {
           <Body1MediumText>{title}</Body1MediumText>
         </HStack>
         <DetailLayout device={device}>
-          <TotalGrassActivity />
           <DailyGrassActivity time={{ date, timeRecord }} data={data} />
         </DetailLayout>
       </VStack>

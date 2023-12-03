@@ -1,27 +1,28 @@
 import { useAtomValue } from 'jotai';
 
-import { activitySumAtom } from '@/Profile/dashboard-contents/General/atoms/activitySumAtom';
+import { dailyActivitySumAtom } from '@/Profile/dashboard-contents/General/atoms/dailyActivitySumAtom';
 import { MINUTES } from '@shared/constants/date';
 import { BoldText, Text } from '@shared/ui-kit';
 
 export const TotalDailyActivityDescriptor = () => {
-  const activitySum = useAtomValue(activitySumAtom);
+  const { logTime, event, corrector, corrected } =
+    useAtomValue(dailyActivitySumAtom);
 
   return (
     <div style={{ wordBreak: 'break-all' }}>
       <Text inline>접속&nbsp;</Text>
       <BoldText inline>
-        {Math.floor(activitySum.logTime / MINUTES.HOUR).toLocaleString()}
+        {Math.floor(logTime / MINUTES.HOUR).toLocaleString()}
       </BoldText>
       <Text inline>시간 •&nbsp;</Text>
       <Text inline>아젠다&nbsp;</Text>
-      <BoldText inline>{activitySum.event.toLocaleString()}</BoldText>
+      <BoldText inline>{event.toLocaleString()}</BoldText>
       <Text inline>개 참여 •&nbsp;</Text>
       <Text inline>평가&nbsp;</Text>
-      <BoldText inline>{activitySum.corrector.toLocaleString()}</BoldText>
+      <BoldText inline>{corrector.toLocaleString()}</BoldText>
       <Text inline>건 •&nbsp;</Text>
       <Text inline>피평가&nbsp;</Text>
-      <BoldText inline>{activitySum.corrected.toLocaleString()}</BoldText>
+      <BoldText inline>{corrected.toLocaleString()}</BoldText>
       <Text inline>건</Text>
     </div>
   );

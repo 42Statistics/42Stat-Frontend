@@ -13,9 +13,9 @@ import { calculateDailyActivityScores } from '@/Profile/dashboard-contents/Gener
 import { gql } from '@shared/__generated__';
 import { HStack, VStack } from '@shared/ui-kit';
 import { getYearsBetween } from '@shared/utils/getYearsBetween';
+import { dailyActivitySumAtom } from '../atoms/dailyActivitySumAtom';
+import { selectedDailyActivityAtom } from '../atoms/selectedDailyActivityAtom';
 import { calculateDailyActivityScoresByCategory } from './utils/calculateDailyActivityScoresByCategory';
-import { activitySumAtom } from '../atoms/activitySumAtom';
-import { dailyActivityAtom } from '../atoms/dailyActivityAtom';
 
 const GET_DAILY_ACTIVITIES_BY_LOGIN = gql(/* GraphQL */ `
   query GetDailyActivitiesByLogin($login: String!, $year: Int) {
@@ -46,7 +46,7 @@ export const DailyActivities = () => {
   });
   const { data, refetch } = result;
   const beginAt = useContext(BeginAtContext);
-  const setActivitySum = useSetAtom(activitySumAtom);
+  const setDailyActivitySum = useSetAtom(dailyActivitySumAtom);
   const { dailyActivities } = data?.getPersonalGeneral ?? {};
   const dailyActivityScores =
     dailyActivities !== undefined
@@ -58,17 +58,17 @@ export const DailyActivities = () => {
     setYear(year);
     refetch({ login, year: year ?? undefined });
   };
-  const setDailyActivityAtom = useSetAtom(dailyActivityAtom);
+  const setSelectedDailyActivity = useSetAtom(selectedDailyActivityAtom);
 
   useEffect(() => {
     const dailyActivityScoresTotalByCategory =
       dailyActivities !== undefined
         ? calculateDailyActivityScoresByCategory(dailyActivities)
         : { logTime: 0, event: 0, corrector: 0, corrected: 0 };
-    setActivitySum(dailyActivityScoresTotalByCategory);
+    setDailyActivitySum(dailyActivityScoresTotalByCategory);
 
     if (dailyActivities !== undefined) {
-      const lastestDailyActivity = dailyActivities
+      const latestDailyActivity = dailyActivities
         .slice()
         .reverse()
         .find(
@@ -78,14 +78,13 @@ export const DailyActivities = () => {
             ).length > 0,
         );
 
-      if (lastestDailyActivity === undefined) return;
+      if (latestDailyActivity === undefined) return;
 
-      setDailyActivityAtom({
-        date: lastestDailyActivity.date,
-        records: lastestDailyActivity.records,
+      setSelectedDailyActivity({
+        ...latestDailyActivity,
       });
     }
-  }, [setActivitySum, setDailyActivityAtom, dailyActivities]);
+  }, [setDailyActivitySum, setSelectedDailyActivity, dailyActivities]);
 
   return (
     <Layout>

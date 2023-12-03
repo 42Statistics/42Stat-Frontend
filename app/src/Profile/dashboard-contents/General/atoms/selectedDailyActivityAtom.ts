@@ -6,4 +6,5 @@ const initialDailyActivity: DailyActivity = {
   records: [],
 };
 
-export const dailyActivityAtom = atom<DailyActivity>(initialDailyActivity);
+export const selectedDailyActivityAtom =
+  atom<DailyActivity>(initialDailyActivity);

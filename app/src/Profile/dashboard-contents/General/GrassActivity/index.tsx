@@ -6,7 +6,6 @@ import { DailyGrassActivity } from '@/Profile/dashboard-contents/General/GrassAc
 import {
   DashboardContentBadRequest,
   DashboardContentLoading,
-  DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { gql } from '@shared/__generated__';
@@ -74,9 +73,6 @@ export const GrassActivity = () => {
   if (error) {
     return <DashboardContentBadRequest title={title} message={error.message} />;
   }
-  // if (!data) {
-  //   return <DashboardContentNotFound title={title} />;
-  // }
 
   return (
     <Layout>

@@ -48,7 +48,7 @@ export const profileGeneralPageDashboardRows: DashboardTempType[] = [
     items: [
       {
         rowSpan: 2,
-        colSpan: 2,
+        colSpan: 1,
         elementId: 13,
       },
       {

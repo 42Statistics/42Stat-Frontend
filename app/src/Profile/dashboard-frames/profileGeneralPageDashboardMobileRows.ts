@@ -1,6 +1,6 @@
 import type { DashboardTempType } from '@shared/types/Dashboard';
 
-export const profileGeneralPageDashboardRows: DashboardTempType[] = [
+export const profileGeneralPageDashboardMobileRows: DashboardTempType[] = [
   {
     items: [
       {
@@ -44,12 +44,12 @@ export const profileGeneralPageDashboardRows: DashboardTempType[] = [
       },
       {
         rowSpan: 2,
-        colSpan: 1,
+        colSpan: 2,
         elementId: 13,
       },
       {
         rowSpan: 2,
-        colSpan: 1,
+        colSpan: 2,
         elementId: 9,
       },
     ],

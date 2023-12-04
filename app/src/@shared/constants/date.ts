@@ -19,3 +19,13 @@ export const CALENDAR_DAYS_FROM_FT_BEGIN_AT = differenceInCalendarDays(
   new Date(),
   FT_BEGIN_AT,
 );
+
+export const MINUTES = {
+  MILLISECOND: 1 / 1000,
+  SECOND: 1 / 60,
+  HOUR: 60,
+  DAY: 60 * 24,
+  WEEK: 60 * 24 * 7,
+  MONTH: 60 * 24 * 30,
+  YEAR: 60 * 24 * 365,
+} as const;

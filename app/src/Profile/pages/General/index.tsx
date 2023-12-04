@@ -4,19 +4,29 @@ import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { profileGeneralPageDashboardContents } from '@/Profile/dashboard-frames/profileGeneralPageDashboardContents';
 import { profileGeneralPageDashboardRows } from '@/Profile/dashboard-frames/profileGeneralPageDashboardRows';
 import { Footer } from '@core/components/Footer';
-import { Dashboard } from '@shared/components/Dashboard';
+import { DashboardTemp } from '@shared/components/Dashboard/DashboardTemp';
 import { Seo } from '@shared/components/Seo';
+import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
+import { profileGeneralPageDashboardMobileRows } from '@/Profile/dashboard-frames/profileGeneralPageDashboardMobileRows';
 
 const ProfileGeneralPage = () => {
   const { login } = useContext(UserProfileContext);
+  const device = useDeviceType();
 
   return (
     <>
       <Seo title={`${login} › 일반`} />
-      <Dashboard
-        contents={profileGeneralPageDashboardContents}
-        rows={profileGeneralPageDashboardRows}
-      />
+        {device !== 'mobile' ? (
+          <DashboardTemp
+            contents={profileGeneralPageDashboardContents}
+            rows={profileGeneralPageDashboardRows}
+          />
+        ) : (
+          <DashboardTemp
+            contents={profileGeneralPageDashboardContents}
+            rows={profileGeneralPageDashboardMobileRows}
+          />
+        )}
       <Footer />
     </>
   );

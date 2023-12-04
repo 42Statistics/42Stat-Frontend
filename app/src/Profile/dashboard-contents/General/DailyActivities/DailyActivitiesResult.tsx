@@ -1,5 +1,6 @@
 import { QueryResult } from '@apollo/client';
 import { useTheme } from '@emotion/react';
+import styled from '@emotion/styled';
 import { useContext } from 'react';
 
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
@@ -10,7 +11,8 @@ import { getFromAndToByYear } from '@/Profile/dashboard-contents/General/DailyAc
 import type { GetDailyActivitiesByLoginQuery } from '@shared/__generated__/graphql';
 import { ApolloErrorView } from '@shared/components/ApolloError/ApolloErrorView';
 import { ApolloNotFoundView } from '@shared/components/ApolloError/ApolloNotFoundView';
-import { Center, HStack, Spacer, Spinner, VStack } from '@shared/ui-kit';
+import { Center, Spinner, VStack } from '@shared/ui-kit';
+import { TotalDailyActivityDescriptor } from './TotalDailyActivityDescriptor';
 
 type DailyActivitiesResultProps = {
   year: number | null;
@@ -64,10 +66,20 @@ export const DailyActivitiesResult = ({
         from={from}
         to={to}
       />
-      <HStack w="100%">
-        <Spacer />
+      <DailyActivitiesResultFooterLayout>
+        <TotalDailyActivityDescriptor />
         <ColorLegendList color={color} />
-      </HStack>
+      </DailyActivitiesResultFooterLayout>
     </VStack>
   );
 };
+
+const DailyActivitiesResultFooterLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 2rem;
+  width: 100%;
+  padding: 0 1rem;
+`;

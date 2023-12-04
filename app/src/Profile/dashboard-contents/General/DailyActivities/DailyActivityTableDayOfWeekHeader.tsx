@@ -35,7 +35,7 @@ const Layout = styled.div`
   z-index: 1;
   background: linear-gradient(
     to right,
-    ${({ theme }) => theme.colors.mono.white} 60%,
-    ${({ theme }) => rgba(theme.colors.mono.white, 0)} 100%
+    ${({ theme }) => theme.colors.background.box.default} 60%,
+    ${({ theme }) => rgba(theme.colors.background.box.default, 0)} 100%
   );
 `;

@@ -6,6 +6,14 @@ import type { DashboardTempProps } from '@shared/types/Dashboard';
 
 //rowSpan,colSpan이 한 배열에 같이 있는 구조
 export const DashboardTemp = ({ rows, contents }: DashboardTempProps) => {
+  const findContentById = (elementId: number) => {
+    const foundContent = contents.find((content) => content.id === elementId);
+    if (foundContent === undefined) {
+      throw new Error(`Content with ID ${elementId} not found`);
+    }
+    return foundContent;
+  };
+
   return (
     <Layout>
       {rows.map(({ items }, rowIdx) => (
@@ -15,7 +23,7 @@ export const DashboardTemp = ({ rows, contents }: DashboardTempProps) => {
               key={itemIdx}
               rowSpan={rowSpan}
               colSpan={colSpan}
-              content={contents[elementId].content}
+              content={findContentById(elementId).content}
             />
           ))}
         </DashboardRow>
@@ -26,6 +34,7 @@ export const DashboardTemp = ({ rows, contents }: DashboardTempProps) => {
 
 const Layout = styled.div`
   display: flex;
+  flex-direction: column;
   gap: 1.6rem;
   width: 100%;
 `;

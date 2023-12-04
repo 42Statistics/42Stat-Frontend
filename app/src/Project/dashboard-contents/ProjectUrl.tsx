@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client';
+import { useTheme } from '@emotion/react';
 import { useContext } from 'react';
 
 import { ProjectNameContext } from '@/Project/contexts/ProjectNameContext';
@@ -12,6 +13,7 @@ import {
 import { CustomLink } from '@shared/ui-kit-styled/CustomLink';
 
 export const ProjectUrl = () => {
+  const theme = useTheme();
   const projectName = useContext(ProjectNameContext);
   const title = 'Intra 프로젝트 링크';
 
@@ -36,7 +38,12 @@ export const ProjectUrl = () => {
 
   return (
     <DashboardContent title={title}>
-      <CustomLink to={url} target="_blank" rel="noopener noreferrer">
+      <CustomLink
+        to={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        fontSize={theme.fonts.size.body1}
+      >
         바로가기
       </CustomLink>
     </DashboardContent>

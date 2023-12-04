@@ -2,7 +2,7 @@ import {
   DailyActivityRecord,
   DailyActivityType,
 } from '@shared/__generated__/graphql';
-import { MILLISECONDS } from '@shared/constants/date';
+import { MINUTES } from '@shared/constants/date';
 
 export const getScoreByDailyActivityType = (record: DailyActivityRecord) => {
   if (record.__typename === 'DailyDefaultRecord') {
@@ -21,7 +21,7 @@ export const getScoreByDailyActivityType = (record: DailyActivityRecord) => {
   if (record.__typename === 'DailyLogtimeRecord') {
     switch (record.type) {
       case DailyActivityType.Logtime:
-        return Math.ceil(record.value / MILLISECONDS.HOUR);
+        return Math.ceil(record.value / MINUTES.HOUR);
       default:
         throw new Error(`Unexpected DailyActivityType: ${record.type}`);
     }

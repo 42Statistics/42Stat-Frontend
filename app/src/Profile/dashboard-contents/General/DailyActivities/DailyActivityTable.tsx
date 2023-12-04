@@ -1,4 +1,6 @@
 import styled from '@emotion/styled';
+import { useAtomValue } from 'jotai';
+import { useEffect, useRef } from 'react';
 
 import { DailyActivityTableDayOfWeekHeader } from '@/Profile/dashboard-contents/General/DailyActivities/DailyActivityTableDayOfWeekHeader';
 import { DailyActivityTableHeader } from '@/Profile/dashboard-contents/General/DailyActivities/DailyActivityTableHeader';
@@ -8,8 +10,9 @@ import { groupByDayOfTheWeek } from '@/Profile/dashboard-contents/General/DailyA
 import { matchDatesWithScores } from '@/Profile/dashboard-contents/General/DailyActivities/utils/matchDatesWithScore';
 import { HStack, VStack } from '@shared/ui-kit';
 import { getDatesBetween } from '@shared/utils/getDatesBetween';
+import { currentDateScrollLeftAtom } from './atoms/currentDateScrollLeftAtom';
 
-type DailyActivitiyTableProps = {
+type DailyActivityTableProps = {
   list: DailyActivityScore[];
   color: string;
   from: Date;
@@ -23,16 +26,30 @@ export const DailyActivityTable = ({
   color,
   from,
   to,
-}: DailyActivitiyTableProps) => {
+}: DailyActivityTableProps) => {
   const dates = getDatesBetween(from, to);
   const datesWithScores = matchDatesWithScores(dates, list);
   const dateGroupsWithScores = Object.values(
     groupByDayOfTheWeek(datesWithScores),
   );
 
+  const currentRef = useRef<HTMLDivElement>(null);
+  const currentDateScrollLeft = useAtomValue(currentDateScrollLeftAtom);
+
+  useEffect(() => {
+    if (currentRef.current === null) {
+      return;
+    }
+
+    currentRef.current.scrollTo({
+      left: currentDateScrollLeft,
+      behavior: 'smooth',
+    });
+  }, [currentDateScrollLeft]);
+
   return (
-    <ScrollXArea>
-      <HStack style={{ margin: '0 auto' }}>
+    <ScrollXArea ref={currentRef}>
+      <HStack style={{ marginRight: '5rem' }}>
         <DailyActivityTableDayOfWeekHeader />
         <VStack align="start">
           <DailyActivityTableHeader

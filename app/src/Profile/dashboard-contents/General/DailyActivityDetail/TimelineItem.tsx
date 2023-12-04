@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+
 import { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
 
 type TimelineItemProps = {

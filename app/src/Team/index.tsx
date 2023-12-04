@@ -168,7 +168,12 @@ const TeamPage = () => {
               </Link>
             ))}
           </HStack>
-          <CustomLink to={url} target="_blank" rel="noopener noreferrer">
+          <CustomLink
+            to={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            fontSize={theme.fonts.size.body1}
+          >
             Intra 팀 페이지 바로가기
           </CustomLink>
         </VStack>

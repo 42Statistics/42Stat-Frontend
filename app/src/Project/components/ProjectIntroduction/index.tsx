@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client';
+import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useContext } from 'react';
 
@@ -9,6 +10,7 @@ import { CustomLink } from '@shared/ui-kit-styled/CustomLink';
 import { Mobile, TabletAndAbove } from '@shared/utils/react-responsive/Device';
 
 export const ProjectIntroduction = () => {
+  const theme = useTheme();
   const projectName = useContext(ProjectNameContext);
   const { loading, error, data } = useQuery(
     GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME,
@@ -61,7 +63,12 @@ export const ProjectIntroduction = () => {
             </div>
           ) : null}
           {pdfUrl != null && (
-            <CustomLink to={pdfUrl} target="_blank" rel="noopener noreferrer">
+            <CustomLink
+              to={pdfUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              fontSize={theme.fonts.size.body1}
+            >
               프로젝트 PDF 보기
             </CustomLink>
           )}

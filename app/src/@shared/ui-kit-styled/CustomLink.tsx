@@ -3,12 +3,14 @@ import { Link } from 'react-router-dom';
 
 import { PropsWithStringChildren } from '@shared/types/PropsWithChildren';
 
-type CustomLinkProps = PropsWithStringChildren;
+type CustomLinkProps = {
+  fontSize?: string;
+} & PropsWithStringChildren;
 
 export const CustomLink = styled(Link)<CustomLinkProps>`
   color: ${({ theme }) => theme.colors.accent.default};
   font-weight: ${({ theme }) => theme.fonts.weight.bold};
-  font-size: ${({ theme }) => theme.fonts.size.body1};
+  font-size: ${({ theme, fontSize }) => fontSize ?? theme.fonts.size.body2};
 
   &:hover {
     text-decoration: underline;

@@ -1,6 +1,6 @@
 import { useTheme } from '@emotion/react';
 import dayjs from 'dayjs';
-import { useSetAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import { useEffect, useRef } from 'react';
 
 import { DailyActivitySquare } from '@/Profile/dashboard-contents/General/DailyActivities/DailyActivitySquare';
@@ -31,9 +31,12 @@ export const DailyActivityTableData = ({
     standardColor,
     theme.colors.mono.gray100,
   );
-  const setSelectedDailyActivity = useSetAtom(selectedDailyActivityAtom);
+  const [{ date: selectedDate }, setSelectedDailyActivity] = useAtom(
+    selectedDailyActivityAtom,
+  );
   const currentRef = useRef<HTMLDivElement>(null);
-  const isMatch = isSameDate(date, new Date());
+  const isMatch = isSameDate(date, new Date(selectedDate));
+  const isToday = isSameDate(date, new Date());
   const setCurrentDateScrollLeft = useSetAtom(currentDateScrollLeftAtom);
 
   const unit = '점';
@@ -67,7 +70,10 @@ export const DailyActivityTableData = ({
     >
       <Tooltip.Container>
         <DailyActivitySquare
-          color={isMatch ? theme.colors.mono.gray300 : color}
+          color={isToday ? theme.colors.mono.gray300 : color}
+          isSelected={
+            selectedDate !== '' && isSameDate(date, new Date(selectedDate))
+          }
           hasHoverEffect
         />
         <Tooltip position="top">

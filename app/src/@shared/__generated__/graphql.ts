@@ -1302,6 +1302,7 @@ export type GetDailyActivityDetailRecordsQueryVariables = Exact<{
   args: Array<DailyActivityDetailRecordIdWithType> | DailyActivityDetailRecordIdWithType;
 }>;
 
+
 export type GetDailyActivityDetailRecordsQuery = { __typename?: 'Query', getPersonalGeneral: { __typename?: 'PersonalGeneral', dailyActivityDetailRecords: Array<{ __typename?: 'DailyEvaluationDetailRecord', type: DailyActivityType, teamId: number, correctorLogin: string, leaderLogin: string, projectName: string, beginAt: string, filledAt: string } | { __typename?: 'DailyEventDetailRecord', name: string, location: string, beginAt: string, endAt: string }> } };
 
 export type GetLevelRecordsByLoginQueryVariables = Exact<{

@@ -85,9 +85,6 @@ const UserRateChart = ({ labels, series }: UserRateChartProps) => {
   const BLACKHOLE_COLOR = theme.colors.chart.blackhole;
 
   const options: ApexCharts.ApexOptions = {
-    legend: {
-      show: false,
-    },
     tooltip: {
       enabled: false,
     },

@@ -12,7 +12,6 @@ import type { GetDailyActivitiesByLoginQuery } from '@shared/__generated__/graph
 import { ApolloErrorView } from '@shared/components/ApolloError/ApolloErrorView';
 import { ApolloNotFoundView } from '@shared/components/ApolloError/ApolloNotFoundView';
 import { Center, Spinner, VStack } from '@shared/ui-kit';
-import { mq } from '@shared/utils/facepaint/mq';
 import { TotalDailyActivityDescriptor } from './TotalDailyActivityDescriptor';
 
 type DailyActivitiesResultProps = {
@@ -77,13 +76,10 @@ export const DailyActivitiesResult = ({
 
 const DailyActivitiesResultFooterLayout = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
+  align-items: flex-end;
+  gap: 2rem;
   width: 100%;
   padding: 0 1rem;
-
-  ${mq({
-    flexDirection: ['column', 'column', 'row'],
-    alignItems: ['flex-end', 'flex-end', 'center'],
-    gap: ['2rem', '2rem', '0'],
-  })}
 `;

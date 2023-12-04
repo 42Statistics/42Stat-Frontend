@@ -88,7 +88,6 @@ export const Introduction = () => {
       return;
     }
     const {
-      // daysAfterBeginAt,
       aliveCount,
       blackholedCount,
       memberCount,

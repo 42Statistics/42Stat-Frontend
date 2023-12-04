@@ -1,6 +1,3 @@
-import { sum } from 'lodash-es';
-
-import { getScoreByDailyActivityType } from '@/Profile/dashboard-contents/General/DailyActivities/utils/getScoreByDailyActivityType';
 import {
   DailyActivity,
   DailyActivityType,

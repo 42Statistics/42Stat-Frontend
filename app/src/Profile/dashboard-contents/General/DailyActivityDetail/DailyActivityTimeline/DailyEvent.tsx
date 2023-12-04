@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 import { ReactComponent as MdEvent } from '@/Profile/assets/activity/event.svg';
 import { BoldText, CaptionText, Text, VStack } from '@shared/ui-kit';
 import { TimelineItem } from '../TimelineItem';
@@ -6,19 +8,23 @@ type DailyEventProps = {
   data: {
     name: string;
     location: string;
+    beginAt: string;
+    endAt: string;
   };
   color: string;
 };
 
 export const DailyEvent = ({ data, color }: DailyEventProps) => {
-  const { name, location } = data;
+  const { name, location, beginAt, endAt } = data;
 
   return (
     <TimelineItem icon={<MdEvent width={15} height={15} />} color={color}>
       <VStack spacing="0.2rem" align="start" style={{ marginTop: '0.5rem' }}>
         <BoldText>{name}</BoldText>
         <Text>{location}</Text>
-        <CaptionText>16:30 - 17:00</CaptionText>
+        <CaptionText>{`${dayjs(beginAt).format('HH:mm')} ~ ${dayjs(
+          endAt,
+        ).format('HH:mm')}`}</CaptionText>
       </VStack>
     </TimelineItem>
   );

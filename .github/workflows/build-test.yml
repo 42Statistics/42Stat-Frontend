@@ -21,3 +21,8 @@ jobs:
         run: |
           docker compose -f docker-compose.dev.yml up -d
           docker compose -f docker-compose.dev.yml logs -f
+
+      - name: Copy built files to ./dist
+        run: |
+          mkdir -p ./dist
+          cp -r ./app/dist/* ./dist/

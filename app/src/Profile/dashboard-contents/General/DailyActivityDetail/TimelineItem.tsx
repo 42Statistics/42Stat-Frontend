@@ -4,13 +4,20 @@ import { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
 type TimelineItemProps = {
   icon: JSX.Element;
   color: string;
+  hasVerticalLine?: boolean;
 } & PropsWithReactElementChildren;
 
-export const TimelineItem = ({ icon, color, children }: TimelineItemProps) => {
+export const TimelineItem = ({
+  icon,
+  color,
+  hasVerticalLine = true,
+  children,
+}: TimelineItemProps) => {
   return (
-    <Layout lineColor={color}>
+    <Layout lineColor={color} hasVerticalLine={hasVerticalLine}>
       <IconLayout backgroundColor={color}>{icon}</IconLayout>
-      {children}
+      {/* TODO: calc 로직 */}
+      <div style={{ maxWidth: 'calc(100% - 3rem - 1.6rem)' }}>{children}</div>
     </Layout>
   );
 };
@@ -33,20 +40,26 @@ const IconLayout = styled.div<IconLayoutProps>`
 
 type LayoutProps = {
   lineColor: string;
+  hasVerticalLine: boolean;
 };
 
 const Layout = styled.div<LayoutProps>`
   position: relative;
   display: flex;
+  width: 100%;
   gap: 1.6rem;
   padding: 1rem 0;
 
+  ${({ hasVerticalLine, lineColor }) =>
+    hasVerticalLine &&
+    `
   ::before {
     content: '';
     position: absolute;
     left: 1.4rem;
     width: 0.2rem;
     height: 100%;
-    background-color: ${({ lineColor }) => lineColor};
+    background-color: ${lineColor};
   }
+`}
 `;

@@ -49,7 +49,7 @@ export const DailyActivityTable = ({
 
   return (
     <ScrollXArea ref={currentRef}>
-      <HStack style={{ margin: '0 auto' }}>
+      <HStack style={{ marginRight: '5rem' }}>
         <DailyActivityTableDayOfWeekHeader />
         <VStack align="start">
           <DailyActivityTableHeader

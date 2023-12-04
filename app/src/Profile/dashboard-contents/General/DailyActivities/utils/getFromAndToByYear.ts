@@ -9,7 +9,11 @@ export const getFromAndToByYear = (year: number | null) => {
 
 const getFromAndToByRecentYear = () => {
   const now = new Date();
-  const from = new Date(now.getFullYear() - 1, now.getMonth(), now.getDate());
+  const from = new Date(
+    now.getFullYear() - 1,
+    now.getMonth(),
+    now.getDate() + 1,
+  );
   const to = new Date();
 
   return [from, to];

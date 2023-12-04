@@ -11,10 +11,10 @@ import {
 import { InfoTooltip } from '@shared/components/InfoTooltip';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 
-const GET_ALIVE_USER_COUNT_RECORDS = gql(/* GraphQL */ `
-  query GetAliveUserCountRecords {
+const GET_DAILY_ALIVE_USER_COUNT_RECORDS = gql(/* GraphQL */ `
+  query GetDailyAliveUserCountRecords($last: Int!) {
     getHomeUser {
-      aliveUserCountRecords {
+      dailyAliveUserCountRecords(last: $last) {
         at
         value
       }
@@ -24,7 +24,16 @@ const GET_ALIVE_USER_COUNT_RECORDS = gql(/* GraphQL */ `
 
 export const AliveUserCountRecords = () => {
   const title = '여행 중인 유저 수 추이';
-  const { loading, error, data } = useQuery(GET_ALIVE_USER_COUNT_RECORDS);
+  const last = 365;
+
+  const { loading, error, data } = useQuery(
+    GET_DAILY_ALIVE_USER_COUNT_RECORDS,
+    {
+      variables: {
+        last,
+      },
+    },
+  );
 
   if (loading) {
     return <DashboardContentLoading title={title} />;
@@ -36,9 +45,9 @@ export const AliveUserCountRecords = () => {
     return <DashboardContentNotFound title={title} />;
   }
 
-  const { aliveUserCountRecords } = data.getHomeUser;
-  const seriesData = aliveUserCountRecords.map(({ at, value }) => ({
-    x: at,
+  const { dailyAliveUserCountRecords } = data.getHomeUser;
+  const seriesData = dailyAliveUserCountRecords.map(({ at, value }) => ({
+    x: new Date(at),
     y: value,
   }));
   const series: ApexAxisChartSeries = [
@@ -83,7 +92,7 @@ const ActiveUserCountRecordsChart = ({
     },
     tooltip: {
       x: {
-        format: 'yyyy년 M월',
+        format: 'yyyy년 M월 d일',
       },
       y: {
         formatter: (value) => numberWithUnitFormatter(value, '명'),

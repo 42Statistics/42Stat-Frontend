@@ -1,6 +1,6 @@
 import {
-  DailyActivityType,
   DailyActivityRecord,
+  DailyActivityType,
 } from '@shared/__generated__/graphql';
 import { MINUTES } from '@shared/constants/date';
 

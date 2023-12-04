@@ -124,6 +124,14 @@ const LevelRecordsChart = ({ series }: LevelRecordsChartProps) => {
   };
 
   const options: ApexCharts.ApexOptions = {
+    chart: {
+      toolbar: {
+        show: false,
+        tools: {
+          zoom: false,
+        },
+      },
+    },
     colors: [
       theme.colors.chart.primary.default,
       theme.colors.mono.gray500,

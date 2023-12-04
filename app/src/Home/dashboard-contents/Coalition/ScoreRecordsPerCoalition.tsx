@@ -8,13 +8,15 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
+import { CALENDAR_MONTHS_FROM_FT_BEGIN_AT } from '@shared/constants/date';
 import { kiloFormatter } from '@shared/utils/formatters/kiloFormatter';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
+import { injectEmptyMonth } from '@shared/utils/injectEmptyMonth';
 
 const GET_SCORE_RECORDS_PER_COALITION = gql(/* GraphQL */ `
-  query GetScoreRecordsPerCoalition {
+  query GetScoreRecordsPerCoalition($last: Int!) {
     getHomeCoalition {
-      scoreRecordsPerCoalition {
+      scoreRecordsPerCoalition(last: $last) {
         coalition {
           ...coalitionFields
         }
@@ -29,7 +31,13 @@ const GET_SCORE_RECORDS_PER_COALITION = gql(/* GraphQL */ `
 
 export const ScoreRecordsPerCoalition = () => {
   const title = '코알리숑 스코어 변동 추이';
-  const { loading, error, data } = useQuery(GET_SCORE_RECORDS_PER_COALITION);
+  const last = CALENDAR_MONTHS_FROM_FT_BEGIN_AT + 1;
+
+  const { loading, error, data } = useQuery(GET_SCORE_RECORDS_PER_COALITION, {
+    variables: {
+      last,
+    },
+  });
 
   if (loading) {
     return <DashboardContentLoading title={title} />;
@@ -45,10 +53,13 @@ export const ScoreRecordsPerCoalition = () => {
 
   const colors: string[] = [];
   const series = scoreRecordsPerCoalition.map(({ coalition, records }) => {
-    const seriesData = records.map(({ at, value }) => ({
-      x: at,
-      y: value,
-    }));
+    const seriesData = injectEmptyMonth(
+      records.map(({ at, value }) => ({
+        x: new Date(at),
+        y: value,
+      })),
+      last,
+    );
     colors.push(coalition.color ?? 'black');
     return {
       name: coalition.name,

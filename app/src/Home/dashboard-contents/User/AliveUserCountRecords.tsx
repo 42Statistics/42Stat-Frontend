@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client';
+import { subDays } from 'date-fns';
 
 import { gql } from '@shared/__generated__';
 import { AreaChart } from '@shared/components/Chart';
@@ -10,6 +11,7 @@ import {
 } from '@shared/components/DashboardContentView/Error';
 import { InfoTooltip } from '@shared/components/InfoTooltip';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
+import { MILLISECONDS } from '@shared/constants/date';
 
 const GET_DAILY_ALIVE_USER_COUNT_RECORDS = gql(/* GraphQL */ `
   query GetDailyAliveUserCountRecords($last: Int!) {
@@ -78,12 +80,37 @@ const ActiveUserCountRecordsChart = ({
   series,
 }: ActiveUserCountRecordsChartProps) => {
   const options: ApexCharts.ApexOptions = {
+    chart: {
+      events: {
+        beforeZoom: (ctx, { xaxis }) => {
+          if (xaxis.max - xaxis.min < MILLISECONDS.DAY * 2) {
+            return {
+              xaxis: {
+                min: ctx.minX,
+                max: ctx.maxX,
+              },
+            };
+          }
+
+          const newMinX = Math.max(xaxis.min, ctx.w.globals.initialMinX);
+          const newMaxX = Math.min(xaxis.max, ctx.w.globals.initialMaxX);
+
+          return {
+            xaxis: {
+              min: newMinX,
+              max: newMaxX,
+            },
+          };
+        },
+      },
+    },
     xaxis: {
       type: 'datetime',
       labels: {
         format: "'yy MMM",
         datetimeUTC: false,
       },
+      min: subDays(new Date(), 18).getTime(),
     },
     yaxis: {
       labels: {

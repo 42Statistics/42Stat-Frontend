@@ -100,6 +100,14 @@ const BlackholedCountRecordsChart = ({
             },
           };
         },
+        beforeResetZoom: (ctx) => {
+          return {
+            xaxis: {
+              min: subMonths(new Date(), 12).getTime(),
+              max: ctx.maxX,
+            },
+          };
+        },
       },
     },
     xaxis: {

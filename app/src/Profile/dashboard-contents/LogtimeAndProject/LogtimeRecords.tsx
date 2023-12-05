@@ -102,6 +102,17 @@ const LogtimeRecordsChart = ({ series }: LogtimeRecordsChartProps) => {
             },
           };
         },
+        beforeResetZoom: (ctx) => {
+          return {
+            xaxis: {
+              min: Math.max(
+                beginAt.getTime(),
+                subMonths(new Date(), 12).getTime(),
+              ),
+              max: ctx.maxX,
+            },
+          };
+        },
       },
     },
     xaxis: {

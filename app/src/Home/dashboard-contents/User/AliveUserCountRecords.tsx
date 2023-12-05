@@ -10,8 +10,8 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { InfoTooltip } from '@shared/components/InfoTooltip';
-import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 import { MILLISECONDS } from '@shared/constants/date';
+import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 
 const GET_DAILY_ALIVE_USER_COUNT_RECORDS = gql(/* GraphQL */ `
   query GetDailyAliveUserCountRecords($last: Int!) {
@@ -99,6 +99,14 @@ const ActiveUserCountRecordsChart = ({
             xaxis: {
               min: newMinX,
               max: newMaxX,
+            },
+          };
+        },
+        beforeResetZoom: (ctx) => {
+          return {
+            xaxis: {
+              min: subDays(new Date(), 18).getTime(),
+              max: ctx.maxX,
             },
           };
         },

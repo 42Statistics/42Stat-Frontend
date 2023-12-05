@@ -59,7 +59,7 @@ export const DailyActivitiesResult = ({
   }
 
   return (
-    <VStack w="100%" h="100%" spacing="2rem">
+    <VStack w="100%" h="100%" spacing="1rem">
       <DailyActivityTable
         list={dailyActivityScores}
         color={color}

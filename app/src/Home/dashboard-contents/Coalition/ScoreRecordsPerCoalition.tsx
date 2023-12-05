@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client';
+import { subMonths } from 'date-fns';
 
 import { gql } from '@shared/__generated__';
 import { LineChart } from '@shared/components/Chart';
@@ -8,7 +9,10 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
-import { CALENDAR_MONTHS_FROM_FT_BEGIN_AT } from '@shared/constants/date';
+import {
+  CALENDAR_MONTHS_FROM_FT_BEGIN_AT,
+  MILLISECONDS,
+} from '@shared/constants/date';
 import { kiloFormatter } from '@shared/utils/formatters/kiloFormatter';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 import { injectEmptyMonth } from '@shared/utils/injectEmptyMonth';
@@ -94,6 +98,28 @@ const ScoreRecordsPerCoalitionChart = ({
   const options: ApexCharts.ApexOptions = {
     chart: {
       width: '100%',
+      events: {
+        beforeZoom: (ctx, { xaxis }) => {
+          if (xaxis.max - xaxis.min < MILLISECONDS.MONTH * 2) {
+            return {
+              xaxis: {
+                min: ctx.minX,
+                max: ctx.maxX,
+              },
+            };
+          }
+
+          const newMinX = Math.max(xaxis.min, ctx.w.globals.initialMinX);
+          const newMaxX = Math.min(xaxis.max, ctx.w.globals.initialMaxX);
+
+          return {
+            xaxis: {
+              min: newMinX,
+              max: newMaxX,
+            },
+          };
+        },
+      },
     },
     xaxis: {
       type: 'datetime',
@@ -101,11 +127,10 @@ const ScoreRecordsPerCoalitionChart = ({
         datetimeUTC: false,
         format: "'yy MMM",
       },
+      min: subMonths(new Date(), 8).getTime(),
     },
     colors: colors,
     yaxis: {
-      min: Math.floor(min / 10000) * 10000,
-      max: Math.ceil(max / 10000) * 10000,
       labels: {
         formatter: (value) => kiloFormatter(value, 0),
       },

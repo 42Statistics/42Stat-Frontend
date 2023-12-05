@@ -79,7 +79,7 @@ export const CalculatorBasicInfoInputGroup = () => {
       <HStack spacing="2rem">
         <HStack w="13rem" justify="start" spacing="1rem">
           <Body1MediumText>본과정 시작한지</Body1MediumText>
-          <WarningTooltip text="수동으로 추가된 블랙홀은 직접 추가해주세요. 예상되는 추가일수: 6·7·8기-6일, 9기-5일, 10기-1일" />
+          <WarningTooltip text="수동으로 추가된 블랙홀만큼 직접 빼주세요. 예상되는 추가일수: 6·7·8기-6일, 9기-5일, 10기-1일" />
         </HStack>
         <HStack spacing="0.3rem">
           <InputLayout>

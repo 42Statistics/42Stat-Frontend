@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
-import { useAtomValue } from 'jotai';
 import { useEffect, useRef } from 'react';
+import { differenceInCalendarMonths } from 'date-fns';
 
 import { DailyActivityTableDayOfWeekHeader } from '@/Profile/dashboard-contents/General/DailyActivities/DailyActivityTableDayOfWeekHeader';
 import { DailyActivityTableHeader } from '@/Profile/dashboard-contents/General/DailyActivities/DailyActivityTableHeader';
@@ -10,7 +10,6 @@ import { groupByDayOfTheWeek } from '@/Profile/dashboard-contents/General/DailyA
 import { matchDatesWithScores } from '@/Profile/dashboard-contents/General/DailyActivities/utils/matchDatesWithScore';
 import { HStack, VStack } from '@shared/ui-kit';
 import { getDatesBetween } from '@shared/utils/getDatesBetween';
-import { currentDateScrollLeftAtom } from './atoms/currentDateScrollLeftAtom';
 
 type DailyActivityTableProps = {
   list: DailyActivityScore[];
@@ -34,18 +33,27 @@ export const DailyActivityTable = ({
   );
 
   const currentRef = useRef<HTMLDivElement>(null);
-  const currentDateScrollLeft = useAtomValue(currentDateScrollLeftAtom);
+  const latestDailyActivity = datesWithScores.findLast(
+    (dailyActivity) => dailyActivity.records.length > 0,
+  );
 
   useEffect(() => {
-    if (currentRef.current === null) {
+    if (currentRef.current === null || latestDailyActivity === undefined) {
       return;
     }
+
+    const currentRefWidth = currentRef.current.clientWidth;
+    const monthDiff = differenceInCalendarMonths(
+      latestDailyActivity.date,
+      datesWithScores[0].date,
+    );
+    const currentDateScrollLeft = (currentRefWidth * monthDiff) / 12;
 
     currentRef.current.scrollTo({
       left: currentDateScrollLeft,
       behavior: 'smooth',
     });
-  }, [currentDateScrollLeft]);
+  }, [currentRef, datesWithScores, latestDailyActivity]);
 
   return (
     <ScrollXArea ref={currentRef}>

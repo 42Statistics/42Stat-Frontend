@@ -1,7 +1,7 @@
 import { useTheme } from '@emotion/react';
 import dayjs from 'dayjs';
-import { useAtom, useSetAtom } from 'jotai';
-import { useEffect, useRef } from 'react';
+import { useAtom } from 'jotai';
+import { useRef } from 'react';
 
 import { DailyActivitySquare } from '@/Profile/dashboard-contents/General/DailyActivities/DailyActivitySquare';
 import { getDailyActivityTableDataColor } from '@/Profile/dashboard-contents/General/DailyActivities/utils/getDailyActivityTableDataColor';
@@ -10,7 +10,6 @@ import { Tooltip } from '@shared/ui-kit';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 import { isSameDate } from '@shared/utils/isSameDate';
 import { selectedDailyActivityAtom } from '../atoms/selectedDailyActivityAtom';
-import { currentDateScrollLeftAtom } from './atoms/currentDateScrollLeftAtom';
 
 type DailyActivityTableDataProps = {
   date: Date;
@@ -35,32 +34,13 @@ export const DailyActivityTableData = ({
     selectedDailyActivityAtom,
   );
   const currentRef = useRef<HTMLDivElement>(null);
-  const isMatch = isSameDate(date, new Date(selectedDate));
   const isToday = isSameDate(date, new Date());
-  const setCurrentDateScrollLeft = useSetAtom(currentDateScrollLeftAtom);
 
   const unit = '점';
 
   const handleClick = () => {
     setSelectedDailyActivity({ date: date.toString(), records: records });
   };
-
-  useEffect(() => {
-    if (!isMatch) {
-      return;
-    }
-
-    if (currentRef.current === null) {
-      return;
-    }
-
-    const targetRect = currentRef.current.getBoundingClientRect();
-    setCurrentDateScrollLeft(targetRect.left);
-
-    return () => {
-      setCurrentDateScrollLeft(0);
-    };
-  }, [isMatch, setCurrentDateScrollLeft]);
 
   return (
     <div

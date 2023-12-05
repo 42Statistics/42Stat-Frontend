@@ -34,6 +34,7 @@ export const DailyActivityTable = ({
 
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const tableRowRef = useRef<HTMLDivElement>(null);
+  const tableWithHeaderRef = useRef<HTMLDivElement>(null);
   const latestDailyActivity = datesWithScores.findLast(
     (dailyActivity) => dailyActivity.records.length > 0,
   );
@@ -42,27 +43,38 @@ export const DailyActivityTable = ({
     if (
       scrollAreaRef.current === null ||
       tableRowRef.current === null ||
+      tableWithHeaderRef.current === null ||
       latestDailyActivity === undefined
     ) {
       return;
     }
 
+    const scrollAreaWidth = scrollAreaRef.current.clientWidth;
     const tableWidth = tableRowRef.current.clientWidth;
+    const tableWithHeaderWidth = tableWithHeaderRef.current.clientWidth;
+    const headerWidth = tableWithHeaderWidth - tableWidth;
     const monthDiff = differenceInCalendarMonths(
       latestDailyActivity.date,
       datesWithScores[0].date,
     );
-    const currentDateScrollLeft = (tableWidth * monthDiff) / 12;
+    const currentDateScrollLeft =
+      (tableWidth * monthDiff) / 12 - scrollAreaWidth / 2 + headerWidth;
 
     scrollAreaRef.current.scrollTo({
       left: currentDateScrollLeft,
       behavior: 'smooth',
     });
-  }, [scrollAreaRef, tableRowRef, datesWithScores, latestDailyActivity]);
+  }, [
+    scrollAreaRef,
+    tableRowRef,
+    datesWithScores,
+    latestDailyActivity,
+    tableWithHeaderRef,
+  ]);
 
   return (
     <ScrollXArea ref={scrollAreaRef}>
-      <HStack style={{ marginRight: '5rem' }}>
+      <HStack style={{ marginRight: '5rem' }} ref={tableWithHeaderRef}>
         <DailyActivityTableDayOfWeekHeader />
         <VStack align="start">
           <DailyActivityTableHeader

@@ -27,7 +27,7 @@ export const MobileNavProfile = ({
       to={ROUTES.PROFILE_OF(user.login)}
       aria-label={ARIA_LABEL.LINK.PROFILE_OF(user.login)}
     >
-      <HStack spacing="2rem" style={{ marginLeft: '1rem' }}>
+      <HStack spacing="2rem" style={{ marginLeft: '1rem', padding: '1rem 0' }}>
         <Avatar
           size="lg"
           src={imgUrl}

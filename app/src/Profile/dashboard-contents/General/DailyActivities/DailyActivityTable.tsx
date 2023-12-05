@@ -102,7 +102,7 @@ const ScrollXArea = styled.div`
   width: 100%;
   overflow-x: auto;
   margin: 0 auto;
-  padding: 2rem 0;
+  padding: 1rem 0;
   position: relative;
 `;
 

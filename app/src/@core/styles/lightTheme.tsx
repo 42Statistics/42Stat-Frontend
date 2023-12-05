@@ -40,7 +40,7 @@ const colors = {
     },
     main: {
       default: '#f4f4f4',
-      theme: '#f4f4f4',
+      theme: '#ffffff',
     },
     box: {
       default: '#ffffff',

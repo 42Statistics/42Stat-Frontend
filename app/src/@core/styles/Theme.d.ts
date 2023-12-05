@@ -70,6 +70,7 @@ type Colors = {
     gray300: string;
     gray200: string;
     gray100: string;
+    red: string;
   };
 };
 

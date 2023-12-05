@@ -13,6 +13,7 @@ import {
   VStack,
   WritableNum,
 } from '@shared/ui-kit';
+import { WarningTooltip } from '@shared/components/WarningTooltip';
 
 export const CalculatorBasicInfoInputGroup = () => {
   const [calculatorUserInfo, setCalculatorUserInfo] = useAtom(
@@ -60,7 +61,7 @@ export const CalculatorBasicInfoInputGroup = () => {
       <HStack spacing="2rem">
         <HStack w="13rem" justify="start" spacing="1rem">
           <Body1MediumText>현재 블랙홀</Body1MediumText>
-          <InfoTooltip text="현재 블랙홀 + 본 과정 시작 날짜가 670일이 넘으면, 블랙홀 기간이 늘지 않아요." />
+          <InfoTooltip text="현재 블랙홀 + 본 과정 시작 날짜가 671일이 넘으면, 블랙홀 기간이 늘지 않아요." />
         </HStack>
         <HStack spacing="0.3rem">
           <InputLayout>
@@ -78,7 +79,7 @@ export const CalculatorBasicInfoInputGroup = () => {
       <HStack spacing="2rem">
         <HStack w="13rem" justify="start" spacing="1rem">
           <Body1MediumText>본과정 시작한지</Body1MediumText>
-          <InfoTooltip text="휴학일이 포함된 경우, 휴학 기간을 뺄 수 있어요." />
+          <WarningTooltip text="수동으로 추가된 블랙홀은 직접 추가해주세요. 예상되는 추가일수: 6·7·8기-6일, 9기-5일, 10기-1일" />
         </HStack>
         <HStack spacing="0.3rem">
           <InputLayout>

@@ -70,6 +70,7 @@ const colors = {
     gray300: '#bbbbbb',
     gray200: '#dddddd',
     gray100: '#f0f0f0',
+    red: '#ff0000',
   },
 };
 

@@ -93,6 +93,14 @@ const EvalCountRecordsChart = ({ series }: EvalCountRecordsChartProps) => {
             },
           };
         },
+        beforeResetZoom: (ctx) => {
+          return {
+            xaxis: {
+              min: subDays(new Date(), 18).getTime(),
+              max: ctx.maxX,
+            },
+          };
+        },
       },
     },
     xaxis: {

@@ -119,6 +119,14 @@ const ScoreRecordsPerCoalitionChart = ({
             },
           };
         },
+        beforeResetZoom: (ctx) => {
+          return {
+            xaxis: {
+              min: subMonths(new Date(), 8).getTime(),
+              max: ctx.maxX,
+            },
+          };
+        },
       },
     },
     xaxis: {

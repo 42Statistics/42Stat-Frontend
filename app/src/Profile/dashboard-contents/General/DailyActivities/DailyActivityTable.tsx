@@ -32,31 +32,36 @@ export const DailyActivityTable = ({
     groupByDayOfTheWeek(datesWithScores),
   );
 
-  const currentRef = useRef<HTMLDivElement>(null);
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const tableRowRef = useRef<HTMLDivElement>(null);
   const latestDailyActivity = datesWithScores.findLast(
     (dailyActivity) => dailyActivity.records.length > 0,
   );
 
   useEffect(() => {
-    if (currentRef.current === null || latestDailyActivity === undefined) {
+    if (
+      scrollAreaRef.current === null ||
+      tableRowRef.current === null ||
+      latestDailyActivity === undefined
+    ) {
       return;
     }
 
-    const currentRefWidth = currentRef.current.clientWidth;
+    const tableWidth = tableRowRef.current.clientWidth;
     const monthDiff = differenceInCalendarMonths(
       latestDailyActivity.date,
       datesWithScores[0].date,
     );
-    const currentDateScrollLeft = (currentRefWidth * monthDiff) / 12;
+    const currentDateScrollLeft = (tableWidth * monthDiff) / 12;
 
-    currentRef.current.scrollTo({
+    scrollAreaRef.current.scrollTo({
       left: currentDateScrollLeft,
       behavior: 'smooth',
     });
-  }, [currentRef, datesWithScores, latestDailyActivity]);
+  }, [scrollAreaRef, tableRowRef, datesWithScores, latestDailyActivity]);
 
   return (
-    <ScrollXArea ref={currentRef}>
+    <ScrollXArea ref={scrollAreaRef}>
       <HStack style={{ marginRight: '5rem' }}>
         <DailyActivityTableDayOfWeekHeader />
         <VStack align="start">
@@ -65,7 +70,7 @@ export const DailyActivityTable = ({
           />
           <VStack align="start" spacing="0.2rem">
             {dateGroupsWithScores.map((dateGroupWithScores, index) => (
-              <HStack spacing="0.2rem" key={index}>
+              <HStack spacing="0.2rem" ref={tableRowRef} key={index}>
                 <DailyActivityTableRow
                   dateGroupWithScores={dateGroupWithScores}
                   color={color}

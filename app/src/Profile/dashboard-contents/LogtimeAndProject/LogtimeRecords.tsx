@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import { differenceInCalendarMonths } from 'date-fns';
+import { differenceInCalendarMonths, subMonths } from 'date-fns';
 import { useContext } from 'react';
 
 import { BeginAtContext } from '@/Profile/contexts/BeginAtContext';
@@ -12,6 +12,7 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
+import { MILLISECONDS } from '@shared/constants/date';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 import { injectEmptyMonth } from '@shared/utils/injectEmptyMonth';
 
@@ -76,7 +77,44 @@ type LogtimeRecordsChartProps = {
 };
 
 const LogtimeRecordsChart = ({ series }: LogtimeRecordsChartProps) => {
+  const beginAt = useContext(BeginAtContext);
+
   const options: ApexCharts.ApexOptions = {
+    chart: {
+      events: {
+        beforeZoom: (ctx, { xaxis }) => {
+          if (xaxis.max - xaxis.min < MILLISECONDS.MONTH * 2) {
+            return {
+              xaxis: {
+                min: ctx.minX,
+                max: ctx.maxX,
+              },
+            };
+          }
+
+          const newMinX = Math.max(xaxis.min, ctx.w.globals.initialMinX);
+          const newMaxX = Math.min(xaxis.max, ctx.w.globals.initialMaxX);
+
+          return {
+            xaxis: {
+              min: newMinX,
+              max: newMaxX,
+            },
+          };
+        },
+        beforeResetZoom: (ctx) => {
+          return {
+            xaxis: {
+              min: Math.max(
+                beginAt.getTime(),
+                subMonths(new Date(), 12).getTime(),
+              ),
+              max: ctx.maxX,
+            },
+          };
+        },
+      },
+    },
     xaxis: {
       type: 'datetime',
 
@@ -84,6 +122,7 @@ const LogtimeRecordsChart = ({ series }: LogtimeRecordsChartProps) => {
         datetimeUTC: false,
         format: "'yy MMM",
       },
+      min: Math.max(beginAt.getTime(), subMonths(new Date(), 12).getTime()),
     },
     yaxis: {
       labels: {

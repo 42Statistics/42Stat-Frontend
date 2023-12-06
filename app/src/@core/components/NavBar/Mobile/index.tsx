@@ -10,7 +10,7 @@ import { userAtom } from '@shared/atoms/userAtom';
 import { AppLogoTitle } from '@shared/components/AppLogoTitle';
 import { ARIA_LABEL } from '@shared/constants/accessibility';
 import { ROUTES } from '@shared/constants/routes';
-import { Clickable, Divider, Drawer, HStack, VStack } from '@shared/ui-kit';
+import { Clickable, Drawer, HStack, VStack } from '@shared/ui-kit';
 
 type MobileNavBarProps = {
   isOpen: boolean;
@@ -33,13 +33,12 @@ export const MobileNavBar = ({ isOpen, onClose }: MobileNavBarProps) => {
               <MdClose width={24} height={24} fill={theme.colors.mono.black} />
             </Clickable>
           </HStack>
-          <Divider />
           <MobileNavProfile
             imgUrl={user.imgUrl}
             name={user.displayname}
             login={user.login}
           />
-          <NavMenu />
+          <NavMenu hasSpacer={false} />
         </VStack>
       </Layout>
     </Drawer>

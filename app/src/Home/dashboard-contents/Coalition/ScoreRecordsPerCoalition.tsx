@@ -13,9 +13,11 @@ import {
   CALENDAR_MONTHS_FROM_FT_BEGIN_AT,
   MILLISECONDS,
 } from '@shared/constants/date';
+import { BREAKPOINT } from '@shared/constants/responsive';
 import { kiloFormatter } from '@shared/utils/formatters/kiloFormatter';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 import { injectEmptyMonth } from '@shared/utils/injectEmptyMonth';
+import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 
 const GET_SCORE_RECORDS_PER_COALITION = gql(/* GraphQL */ `
   query GetScoreRecordsPerCoalition($last: Int!) {
@@ -35,7 +37,10 @@ const GET_SCORE_RECORDS_PER_COALITION = gql(/* GraphQL */ `
 
 export const ScoreRecordsPerCoalition = () => {
   const title = '코알리숑 스코어 변동 추이';
-  const last = CALENDAR_MONTHS_FROM_FT_BEGIN_AT + 1;
+
+  const device = useDeviceType();
+  const isDesktop = device === 'desktop';
+  const last = isDesktop ? CALENDAR_MONTHS_FROM_FT_BEGIN_AT + 1 : 8;
 
   const { loading, error, data } = useQuery(GET_SCORE_RECORDS_PER_COALITION, {
     variables: {
@@ -143,6 +148,8 @@ const ScoreRecordsPerCoalitionChart = ({
         formatter: (value) => kiloFormatter(value, 0),
       },
       tickAmount: 4,
+      min,
+      max,
     },
     tooltip: {
       x: {
@@ -155,6 +162,22 @@ const ScoreRecordsPerCoalitionChart = ({
     forecastDataPoints: {
       count: 1,
     },
+    responsive: [
+      {
+        breakpoint: BREAKPOINT.TABLET,
+        options: {
+          chart: {
+            event: {
+              beforeZoom: undefined,
+              beforeResetZoom: undefined,
+            },
+          },
+          xaxis: {
+            min: undefined,
+          },
+        },
+      },
+    ],
   };
 
   return <LineChart series={series} options={options} />;

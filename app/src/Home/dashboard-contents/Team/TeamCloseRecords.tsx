@@ -10,8 +10,10 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { MILLISECONDS } from '@shared/constants/date';
+import { BREAKPOINT } from '@shared/constants/responsive';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 import { injectEmptyDay } from '@shared/utils/injectEmptyDay';
+import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 
 const GET_TEAM_CLOSE_RECORDS = gql(/* GraphQL */ `
   query GetTeamCloseRecords($last: Int!) {
@@ -26,7 +28,10 @@ const GET_TEAM_CLOSE_RECORDS = gql(/* GraphQL */ `
 
 export const TeamCloseRecords = () => {
   const title = '일간 팀 제출 횟수 추이';
-  const last = 365;
+
+  const device = useDeviceType();
+  const isDesktop = device === 'desktop';
+  const last = isDesktop ? 365 : 30;
 
   const { loading, error, data } = useQuery(GET_TEAM_CLOSE_RECORDS, {
     variables: {
@@ -122,6 +127,22 @@ const EvalCountRecordsChart = ({ series }: EvalCountRecordsChartProps) => {
     forecastDataPoints: {
       count: 1,
     },
+    responsive: [
+      {
+        breakpoint: BREAKPOINT.TABLET,
+        options: {
+          chart: {
+            event: {
+              beforeZoom: undefined,
+              beforeResetZoom: undefined,
+            },
+          },
+          xaxis: {
+            min: undefined,
+          },
+        },
+      },
+    ],
   };
   return <AreaChart series={series} options={options} />;
 };

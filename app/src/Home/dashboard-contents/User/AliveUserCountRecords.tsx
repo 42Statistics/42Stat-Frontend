@@ -8,7 +8,7 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
-import { InfoTooltip } from '@shared/components/InfoTooltip';
+import { CustomTooltip } from '@shared/components/CustomTooltip';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 
 const GET_DAILY_ALIVE_USER_COUNT_RECORDS = gql(/* GraphQL */ `
@@ -61,7 +61,7 @@ export const AliveUserCountRecords = () => {
     <DashboardContent
       title={title}
       titleRight={
-        <InfoTooltip text="여행 중 : 멤버 포함, 블랙홀 제외한 러너" />
+        <CustomTooltip text="여행 중 : 멤버 포함, 블랙홀 제외한 러너" />
       }
       type="ApexCharts"
     >

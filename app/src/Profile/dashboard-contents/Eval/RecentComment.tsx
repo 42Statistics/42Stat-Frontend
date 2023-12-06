@@ -10,7 +10,7 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { TextDefault } from '@shared/components/DashboardContentView/Text/TextDefault';
-import { InfoTooltip } from '@shared/components/InfoTooltip';
+import { CustomTooltip } from '@shared/components/CustomTooltip';
 import { Text } from '@shared/ui-kit';
 
 export const RecentComment = () => {
@@ -41,7 +41,9 @@ export const RecentComment = () => {
       {recentComment ? (
         <DashboardContent
           title={title}
-          titleRight={<InfoTooltip text="코멘트 : 평가하러 가서 작성한 리뷰" />}
+          titleRight={
+            <CustomTooltip text="코멘트 : 평가하러 가서 작성한 리뷰" />
+          }
           type="Scrollable"
         >
           <Text>{recentComment}</Text>
@@ -49,7 +51,9 @@ export const RecentComment = () => {
       ) : (
         <DashboardContent
           title={title}
-          titleRight={<InfoTooltip text="코멘트 : 평가하러 가서 작성한 리뷰" />}
+          titleRight={
+            <CustomTooltip text="코멘트 : 평가하러 가서 작성한 리뷰" />
+          }
         >
           <TextDefault text="평가 기록이 없어요" />
         </DashboardContent>

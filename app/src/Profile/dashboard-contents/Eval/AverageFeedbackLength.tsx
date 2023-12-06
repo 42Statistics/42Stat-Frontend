@@ -10,7 +10,7 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { NumberDefault } from '@shared/components/DashboardContentView/Number/NumberDefault';
-import { InfoTooltip } from '@shared/components/InfoTooltip';
+import { CustomTooltip } from '@shared/components/CustomTooltip';
 
 const GET_AVERAGE_FEEDBACK_LENGTH_BY_LOGIN = gql(/* GraphQL */ `
   query GetAverageFeedbackLengthByLogin($login: String!) {
@@ -47,7 +47,7 @@ export const AverageFeedbackLength = () => {
   return (
     <DashboardContent
       title={title}
-      titleRight={<InfoTooltip text="피드백 : 평가받고 나서 작성한 리뷰" />}
+      titleRight={<CustomTooltip text="피드백 : 평가받고 나서 작성한 리뷰" />}
     >
       <NumberDefault number={averageFeedbackLength} unit={unit} />
     </DashboardContent>

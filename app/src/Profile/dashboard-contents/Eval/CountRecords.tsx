@@ -13,8 +13,10 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { MILLISECONDS } from '@shared/constants/date';
+import { BREAKPOINT } from '@shared/constants/responsive';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 import { injectEmptyMonth } from '@shared/utils/injectEmptyMonth';
+import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 
 const GET_COUNT_RECORDS_BY_LOGIN = gql(/* GraphQL */ `
   query GetCountRecordsByLogin($login: String!, $last: Int!) {
@@ -30,7 +32,12 @@ const GET_COUNT_RECORDS_BY_LOGIN = gql(/* GraphQL */ `
 export const CountRecords = () => {
   const { login } = useContext(UserProfileContext);
   const beginAt = useContext(BeginAtContext);
-  const last = differenceInCalendarMonths(new Date(), beginAt) + 1;
+
+  const device = useDeviceType();
+  const isDesktop = device === 'desktop';
+  const last = isDesktop
+    ? differenceInCalendarMonths(new Date(), beginAt) + 1
+    : Math.min(differenceInCalendarMonths(new Date(), beginAt) + 1, 12);
 
   const title = '월간 평가 횟수 추이';
   const { loading, error, data } = useQuery(GET_COUNT_RECORDS_BY_LOGIN, {
@@ -135,6 +142,22 @@ const CountRecordsChart = ({ series }: CountRecordsChartProps) => {
     forecastDataPoints: {
       count: 1,
     },
+    responsive: [
+      {
+        breakpoint: BREAKPOINT.TABLET,
+        options: {
+          chart: {
+            event: {
+              beforeZoom: undefined,
+              beforeResetZoom: undefined,
+            },
+          },
+          xaxis: {
+            min: undefined,
+          },
+        },
+      },
+    ],
   };
   return <AreaChart series={series} options={options} />;
 };

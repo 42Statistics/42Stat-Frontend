@@ -13,8 +13,10 @@ import {
   CALENDAR_MONTHS_FROM_FT_BEGIN_AT,
   MILLISECONDS,
 } from '@shared/constants/date';
+import { BREAKPOINT } from '@shared/constants/responsive';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 import { injectEmptyMonth } from '@shared/utils/injectEmptyMonth';
+import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 
 const GET_BLACKHOLED_COUNT_RECORDS = gql(/* GraphQL */ `
   query GetBlackholedCountRecords($last: Int!) {
@@ -29,7 +31,10 @@ const GET_BLACKHOLED_COUNT_RECORDS = gql(/* GraphQL */ `
 
 export const BlackholedCountRecords = () => {
   const title = '월간 블랙홀 인원 추이';
-  const last = CALENDAR_MONTHS_FROM_FT_BEGIN_AT + 1;
+
+  const device = useDeviceType();
+  const isDesktop = device === 'desktop';
+  const last = isDesktop ? CALENDAR_MONTHS_FROM_FT_BEGIN_AT + 1 : 12;
 
   const { loading, error, data } = useQuery(GET_BLACKHOLED_COUNT_RECORDS, {
     variables: {
@@ -129,6 +134,22 @@ const BlackholedCountRecordsChart = ({
     forecastDataPoints: {
       count: 1,
     },
+    responsive: [
+      {
+        breakpoint: BREAKPOINT.TABLET,
+        options: {
+          chart: {
+            event: {
+              beforeZoom: undefined,
+              beforeResetZoom: undefined,
+            },
+          },
+          xaxis: {
+            min: undefined,
+          },
+        },
+      },
+    ],
   };
   return <AreaChart series={series} options={options} />;
 };

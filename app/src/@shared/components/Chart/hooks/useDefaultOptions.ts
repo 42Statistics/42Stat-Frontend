@@ -2,6 +2,7 @@ import { useAtomValue } from 'jotai';
 import { merge } from 'lodash-es';
 
 import { Palette, paletteAtom } from '@shared/atoms/paletteAtom';
+import { BREAKPOINT } from '@shared/constants/responsive';
 
 export const useDefaultOptions = () => {
   const palette = useAtomValue(paletteAtom);
@@ -37,6 +38,9 @@ const defaultOptions: ApexCharts.ApexOptions = {
       },
       autoSelected: 'pan',
     },
+    zoom: {
+      enabled: true,
+    },
     fontFamily:
       "'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif",
   },
@@ -54,6 +58,21 @@ const defaultOptions: ApexCharts.ApexOptions = {
       },
     },
   },
+  responsive: [
+    {
+      breakpoint: BREAKPOINT.TABLET,
+      options: {
+        chart: {
+          toolbar: {
+            show: false,
+          },
+          zoom: {
+            enabled: false,
+          },
+        },
+      },
+    },
+  ],
 };
 
 export const defaultLightOptions = defaultOptions;

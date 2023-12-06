@@ -16,7 +16,7 @@ export const WarningTooltip = ({
 
   return (
     <Tooltip.Container>
-      <MdWarning width={16} height={16} fill={theme.colors.mono.red} />
+      <MdWarning width={16} height={16} fill={theme.colors.semantic.warning} />
       <Tooltip position={position}>{text}</Tooltip>
     </Tooltip.Container>
   );

@@ -59,7 +59,7 @@ export const DailyActivityTimeline = ({
   const color = coalition?.color ?? theme.colors.mono.black;
   const { login } = useContext(UserProfileContext);
   const { records } = useAtomValue(selectedDailyActivityAtom);
-  const { dailyRecords, timeRecord } = parseDailyActivity(records);
+  const { dailyRecords, dailyLogtime } = parseDailyActivity(records);
 
   const { loading, error, data } = useQuery(GET_DAILY_ACTIVITY_DETAIL_RECORDS, {
     variables: {
@@ -82,7 +82,7 @@ export const DailyActivityTimeline = ({
   return (
     <DashboardContent title={title} description={description} type="Scrollable">
       <VStack w="100%" align="start">
-        <DailyLogTime timeRecord={timeRecord} color={color} />
+        <DailyLogTime dailyLogtime={dailyLogtime} color={color} />
         {data?.getPersonalGeneral.dailyActivityDetailRecords.map(
           (item, index) => {
             if ('teamId' in item) {

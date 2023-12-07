@@ -5,23 +5,18 @@ import {
   DailyLogtimeRecord,
 } from '@shared/__generated__/graphql';
 
-export const parseDailyActivity = (
-  records: DailyActivity['records'],
-): {
-  dailyRecords: DailyActivityDetailRecordIdWithType[];
-  timeRecord: number;
-} => {
+export const parseDailyActivity = (records: DailyActivity['records']) => {
   return records.reduce(
     (
       result: {
         dailyRecords: DailyActivityDetailRecordIdWithType[];
-        timeRecord: number;
+        dailyLogtime: number;
       },
       record: DailyDefaultRecord | DailyLogtimeRecord,
     ) => {
       if ('value' in record) {
         //DailyLogtimeRecord
-        result.timeRecord += record.value;
+        result.dailyLogtime += record.value;
       } else {
         //DailyDefaultRecord
         result.dailyRecords.push({
@@ -33,7 +28,7 @@ export const parseDailyActivity = (
     },
     {
       dailyRecords: [],
-      timeRecord: 0,
+      dailyLogtime: 0,
     },
   );
 };

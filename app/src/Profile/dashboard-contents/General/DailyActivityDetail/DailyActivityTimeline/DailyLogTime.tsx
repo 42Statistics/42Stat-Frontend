@@ -3,12 +3,12 @@ import { Text } from '@shared/ui-kit';
 import { TimelineItem } from '../TimelineItem';
 
 type DailyLogtimeProps = {
-  timeRecord: number;
+  dailyLogtime: number;
   color: string;
 };
 
-export const DailyLogTime = ({ timeRecord, color }: DailyLogtimeProps) => {
-  const [hour, minute] = [Math.floor(timeRecord / 60), timeRecord % 60];
+export const DailyLogTime = ({ dailyLogtime, color }: DailyLogtimeProps) => {
+  const [hour, minute] = [Math.floor(dailyLogtime / 60), dailyLogtime % 60];
 
   return (
     <TimelineItem

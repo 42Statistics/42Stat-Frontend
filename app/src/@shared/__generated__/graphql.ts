@@ -268,8 +268,10 @@ export type HomeUser = {
   blackholedCountRecords: Array<IntRecord>;
   blackholedRate: Rate;
   correctionPointRanking: Array<UserRank>;
-  dailyAliveUserCountRecords: Array<IntRecord>;
   memberRate: Rate;
+  monthlyAliveUserCountRecordsByDate: Array<IntRecord>;
+  monthlyAliveUserCountRecordsFromEnd: Array<IntRecord>;
+  monthlyAliveUserCountRecordsFromStart: Array<IntRecord>;
   userCountPerLevel: Array<UserCountPerLevel>;
   walletRanking: Array<UserRank>;
 };
@@ -285,8 +287,19 @@ export type HomeUserCorrectionPointRankingArgs = {
 };
 
 
-export type HomeUserDailyAliveUserCountRecordsArgs = {
+export type HomeUserMonthlyAliveUserCountRecordsByDateArgs = {
+  firstOrLast: Scalars['Int'];
+  timestamp: Scalars['Int'];
+};
+
+
+export type HomeUserMonthlyAliveUserCountRecordsFromEndArgs = {
   last: Scalars['Int'];
+};
+
+
+export type HomeUserMonthlyAliveUserCountRecordsFromStartArgs = {
+  first: Scalars['Int'];
 };
 
 
@@ -1080,12 +1093,12 @@ export type GetTeamCloseRecordsQueryVariables = Exact<{
 
 export type GetTeamCloseRecordsQuery = { __typename?: 'Query', getHomeTeam: { __typename?: 'HomeTeam', teamCloseRecords: Array<{ __typename?: 'IntRecord', at: string, value: number }> } };
 
-export type GetDailyAliveUserCountRecordsQueryVariables = Exact<{
+export type GetMonthlyAliveUserCountRecordsFromEndQueryVariables = Exact<{
   last: Scalars['Int'];
 }>;
 
 
-export type GetDailyAliveUserCountRecordsQuery = { __typename?: 'Query', getHomeUser: { __typename?: 'HomeUser', dailyAliveUserCountRecords: Array<{ __typename?: 'IntRecord', at: string, value: number }> } };
+export type GetMonthlyAliveUserCountRecordsFromEndQuery = { __typename?: 'Query', getHomeUser: { __typename?: 'HomeUser', monthlyAliveUserCountRecordsFromEnd: Array<{ __typename?: 'IntRecord', at: string, value: number }> } };
 
 export type GetAverageDurationPerCircleQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1500,7 +1513,7 @@ export const GetTotalEvalCountDocument = {"kind":"Document","definitions":[{"kin
 export const GetCurrRegisteredCountRankingDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCurrRegisteredCountRanking"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getHomeTeam"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"currRegisteredCountRanking"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"projectPreview"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"projectPreviewFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"rank"}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"projectPreviewFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ProjectPreview"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"circle"}}]}}]} as unknown as DocumentNode<GetCurrRegisteredCountRankingQuery, GetCurrRegisteredCountRankingQueryVariables>;
 export const GetRecentExamResultDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetRecentExamResult"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getHomeTeam"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"recentExamResult"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"resultPerRank"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rank"}},{"kind":"Field","name":{"kind":"Name","value":"rate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"total"}},{"kind":"Field","name":{"kind":"Name","value":"fields"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"key"}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"beginAt"}},{"kind":"Field","name":{"kind":"Name","value":"location"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetRecentExamResultQuery, GetRecentExamResultQueryVariables>;
 export const GetTeamCloseRecordsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetTeamCloseRecords"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"last"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getHomeTeam"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"teamCloseRecords"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"last"},"value":{"kind":"Variable","name":{"kind":"Name","value":"last"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"at"}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]}}]} as unknown as DocumentNode<GetTeamCloseRecordsQuery, GetTeamCloseRecordsQueryVariables>;
-export const GetDailyAliveUserCountRecordsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetDailyAliveUserCountRecords"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"last"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getHomeUser"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"dailyAliveUserCountRecords"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"last"},"value":{"kind":"Variable","name":{"kind":"Name","value":"last"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"at"}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]}}]} as unknown as DocumentNode<GetDailyAliveUserCountRecordsQuery, GetDailyAliveUserCountRecordsQueryVariables>;
+export const GetMonthlyAliveUserCountRecordsFromEndDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetMonthlyAliveUserCountRecordsFromEnd"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"last"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getHomeUser"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"monthlyAliveUserCountRecordsFromEnd"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"last"},"value":{"kind":"Variable","name":{"kind":"Name","value":"last"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"at"}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]}}]} as unknown as DocumentNode<GetMonthlyAliveUserCountRecordsFromEndQuery, GetMonthlyAliveUserCountRecordsFromEndQueryVariables>;
 export const GetAverageDurationPerCircleDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetAverageDurationPerCircle"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getHomeUser"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"averageDurationPerCircle"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"circle"}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]}}]} as unknown as DocumentNode<GetAverageDurationPerCircleQuery, GetAverageDurationPerCircleQueryVariables>;
 export const GetBlackholedCountPerCircleDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetBlackholedCountPerCircle"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getHomeUser"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blackholedCountPerCircle"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"circle"}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]}}]} as unknown as DocumentNode<GetBlackholedCountPerCircleQuery, GetBlackholedCountPerCircleQueryVariables>;
 export const GetBlackholedCountRecordsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetBlackholedCountRecords"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"last"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getHomeUser"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blackholedCountRecords"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"last"},"value":{"kind":"Variable","name":{"kind":"Name","value":"last"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"at"}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]}}]} as unknown as DocumentNode<GetBlackholedCountRecordsQuery, GetBlackholedCountRecordsQueryVariables>;

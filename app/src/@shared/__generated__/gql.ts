@@ -40,7 +40,7 @@ const documents = {
     "\n  query GetCurrRegisteredCountRanking($limit: Int!) {\n    getHomeTeam {\n      currRegisteredCountRanking(limit: $limit) {\n        projectPreview {\n          ...projectPreviewFields\n        }\n        rank\n        value\n      }\n    }\n  }\n": types.GetCurrRegisteredCountRankingDocument,
     "\n  query GetRecentExamResult {\n    getHomeTeam {\n      recentExamResult {\n        data {\n          resultPerRank {\n            rank\n            rate {\n              total\n              fields {\n                key\n                value\n              }\n            }\n          }\n          beginAt\n          location\n        }\n      }\n    }\n  }\n": types.GetRecentExamResultDocument,
     "\n  query GetTeamCloseRecords($last: Int!) {\n    getHomeTeam {\n      teamCloseRecords(last: $last) {\n        at\n        value\n      }\n    }\n  }\n": types.GetTeamCloseRecordsDocument,
-    "\n  query GetDailyAliveUserCountRecords($last: Int!) {\n    getHomeUser {\n      dailyAliveUserCountRecords(last: $last) {\n        at\n        value\n      }\n    }\n  }\n": types.GetDailyAliveUserCountRecordsDocument,
+    "\n  query GetMonthlyAliveUserCountRecordsFromEnd($last: Int!) {\n    getHomeUser {\n      monthlyAliveUserCountRecordsFromEnd(last: $last) {\n        at\n        value\n      }\n    }\n  }\n": types.GetMonthlyAliveUserCountRecordsFromEndDocument,
     "\n  query GetAverageDurationPerCircle {\n    getHomeUser {\n      averageDurationPerCircle {\n        circle\n        value\n      }\n    }\n  }\n": types.GetAverageDurationPerCircleDocument,
     "\n  query GetBlackholedCountPerCircle {\n    getHomeUser {\n      blackholedCountPerCircle {\n        circle\n        value\n      }\n    }\n  }\n": types.GetBlackholedCountPerCircleDocument,
     "\n  query GetBlackholedCountRecords($last: Int!) {\n    getHomeUser {\n      blackholedCountRecords(last: $last) {\n        at\n        value\n      }\n    }\n  }\n": types.GetBlackholedCountRecordsDocument,
@@ -221,7 +221,7 @@ export function gql(source: "\n  query GetTeamCloseRecords($last: Int!) {\n    g
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query GetDailyAliveUserCountRecords($last: Int!) {\n    getHomeUser {\n      dailyAliveUserCountRecords(last: $last) {\n        at\n        value\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetDailyAliveUserCountRecords($last: Int!) {\n    getHomeUser {\n      dailyAliveUserCountRecords(last: $last) {\n        at\n        value\n      }\n    }\n  }\n"];
+export function gql(source: "\n  query GetMonthlyAliveUserCountRecordsFromEnd($last: Int!) {\n    getHomeUser {\n      monthlyAliveUserCountRecordsFromEnd(last: $last) {\n        at\n        value\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetMonthlyAliveUserCountRecordsFromEnd($last: Int!) {\n    getHomeUser {\n      monthlyAliveUserCountRecordsFromEnd(last: $last) {\n        at\n        value\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

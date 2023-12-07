@@ -1,22 +1,27 @@
 import { useQuery } from '@apollo/client';
-import { subDays } from 'date-fns';
+import { subMonths } from 'date-fns';
 
 import { gql } from '@shared/__generated__';
 import { AreaChart } from '@shared/components/Chart';
+import { CustomTooltip } from '@shared/components/CustomTooltip';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
-import { CustomTooltip } from '@shared/components/CustomTooltip';
-import { MILLISECONDS } from '@shared/constants/date';
+import {
+  CALENDAR_MONTHS_FROM_FT_BEGIN_AT,
+  MILLISECONDS,
+} from '@shared/constants/date';
+import { BREAKPOINT } from '@shared/constants/responsive';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
+import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 
-const GET_DAILY_ALIVE_USER_COUNT_RECORDS = gql(/* GraphQL */ `
-  query GetDailyAliveUserCountRecords($last: Int!) {
+const GET_MONTHLY_ALIVE_USER_COUNT_RECORDS_FROM_END = gql(/* GraphQL */ `
+  query GetMonthlyAliveUserCountRecordsFromEnd($last: Int!) {
     getHomeUser {
-      dailyAliveUserCountRecords(last: $last) {
+      monthlyAliveUserCountRecordsFromEnd(last: $last) {
         at
         value
       }
@@ -26,10 +31,13 @@ const GET_DAILY_ALIVE_USER_COUNT_RECORDS = gql(/* GraphQL */ `
 
 export const AliveUserCountRecords = () => {
   const title = '여행 중인 유저 수 추이';
-  const last = 365;
+
+  const device = useDeviceType();
+  const isDesktop = device === 'desktop';
+  const last = isDesktop ? CALENDAR_MONTHS_FROM_FT_BEGIN_AT + 1 : 12;
 
   const { loading, error, data } = useQuery(
-    GET_DAILY_ALIVE_USER_COUNT_RECORDS,
+    GET_MONTHLY_ALIVE_USER_COUNT_RECORDS_FROM_END,
     {
       variables: {
         last,
@@ -47,11 +55,13 @@ export const AliveUserCountRecords = () => {
     return <DashboardContentNotFound title={title} />;
   }
 
-  const { dailyAliveUserCountRecords } = data.getHomeUser;
-  const seriesData = dailyAliveUserCountRecords.map(({ at, value }) => ({
-    x: new Date(at),
-    y: value,
-  }));
+  const { monthlyAliveUserCountRecordsFromEnd } = data.getHomeUser;
+  const seriesData = monthlyAliveUserCountRecordsFromEnd.map(
+    ({ at, value }) => ({
+      x: new Date(at),
+      y: value,
+    }),
+  );
   const series: ApexAxisChartSeries = [
     {
       name: '인원수',
@@ -105,7 +115,7 @@ const ActiveUserCountRecordsChart = ({
         beforeResetZoom: (ctx) => {
           return {
             xaxis: {
-              min: subDays(new Date(), 18).getTime(),
+              min: subMonths(new Date(), 12).getTime(),
               max: ctx.maxX,
             },
           };
@@ -118,7 +128,7 @@ const ActiveUserCountRecordsChart = ({
         format: "'yy MMM",
         datetimeUTC: false,
       },
-      min: subDays(new Date(), 18).getTime(),
+      min: subMonths(new Date(), 12).getTime(),
     },
     yaxis: {
       labels: {
@@ -139,6 +149,22 @@ const ActiveUserCountRecordsChart = ({
     forecastDataPoints: {
       count: 1,
     },
+    responsive: [
+      {
+        breakpoint: BREAKPOINT.TABLET,
+        options: {
+          chart: {
+            event: {
+              beforeZoom: undefined,
+              beforeResetZoom: undefined,
+            },
+          },
+          xaxis: {
+            min: undefined,
+          },
+        },
+      },
+    ],
   };
   return <AreaChart series={series} options={options} />;
 };

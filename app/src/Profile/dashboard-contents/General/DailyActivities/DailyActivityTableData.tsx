@@ -11,8 +11,7 @@ import { isSameDate } from '@shared/utils/isSameDate';
 
 import { getDailyActivityTableDataColor } from '@/Profile/dashboard-contents/General/DailyActivities/utils/getDailyActivityTableDataColor';
 import { DailyActivitySquare } from '@/Profile/dashboard-contents/General/DailyActivities/DailyActivitySquare';
-
-import { selectedDailyActivityAtom } from '../atoms/selectedDailyActivityAtom';
+import { selectedDailyActivityAtom } from '@/Profile/dashboard-contents/General/atoms/selectedDailyActivityAtom';
 
 type DailyActivityTableDataProps = {
   date: Date;

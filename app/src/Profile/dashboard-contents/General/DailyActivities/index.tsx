@@ -15,9 +15,9 @@ import { DailyActivitiesResult } from '@/Profile/dashboard-contents/General/Dail
 import { DailyActivityTitleDescriptor } from '@/Profile/dashboard-contents/General/DailyActivities/DailyActivityTitleDescriptor';
 import { YearSelect } from '@/Profile/dashboard-contents/General/DailyActivities/YearSelect';
 import { calculateDailyActivityScores } from '@/Profile/dashboard-contents/General/DailyActivities/utils/calculateDailyActivityScores';
+import { dailyActivitySumAtom } from '@/Profile/dashboard-contents/General/atoms/dailyActivitySumAtom';
+import { selectedDailyActivityAtom } from '@/Profile/dashboard-contents/General/atoms/selectedDailyActivityAtom';
 
-import { dailyActivitySumAtom } from '../atoms/dailyActivitySumAtom';
-import { selectedDailyActivityAtom } from '../atoms/selectedDailyActivityAtom';
 import { calculateDailyActivityScoresByCategory } from './utils/calculateDailyActivityScoresByCategory';
 
 const GET_DAILY_ACTIVITIES_BY_LOGIN = gql(/* GraphQL */ `

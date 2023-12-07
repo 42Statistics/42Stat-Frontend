@@ -1,4 +1,5 @@
-import { HStack } from '../Stack';
+import { HStack } from '@/@shared/ui-kit/Stack';
+
 import { Divider } from './Divider';
 
 import type { Meta, StoryObj } from '@storybook/react';

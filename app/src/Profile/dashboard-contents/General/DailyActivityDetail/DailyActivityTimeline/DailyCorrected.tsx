@@ -8,8 +8,7 @@ import { CustomLink } from '@shared/ui-kit-styled/CustomLink';
 
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { ReactComponent as MdCorrected } from '@/Profile/assets/activity/corrected.svg';
-
-import { TimelineItem } from '../TimelineItem';
+import { TimelineItem } from '@/Profile/dashboard-contents/General/DailyActivityDetail/TimelineItem';
 
 type DailyCorrectedProps = {
   data: {

@@ -16,7 +16,13 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["import", "react", "react-hooks", "@typescript-eslint"],
+  "plugins": [
+    "import",
+    "react",
+    "react-hooks",
+    "@typescript-eslint",
+    "no-relative-import-paths"
+  ],
   "rules": {
     "react/react-in-jsx-scope": "off",
     "react-hooks/rules-of-hooks": "error",
@@ -54,6 +60,10 @@
         "pathGroupsExcludedImportTypes": ["builtin", "object"],
         "newlines-between": "always"
       }
+    ],
+    "no-relative-import-paths/no-relative-import-paths": [
+      "error",
+      { "allowSameFolder": true, "rootDir": "src", "prefix": "@" }
     ]
   },
   "settings": {

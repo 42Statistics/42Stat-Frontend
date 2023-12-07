@@ -3,8 +3,7 @@ import dayjs from 'dayjs';
 import { BoldText, CaptionText, Text, VStack } from '@shared/ui-kit';
 
 import { ReactComponent as MdEvent } from '@/Profile/assets/activity/event.svg';
-
-import { TimelineItem } from '../TimelineItem';
+import { TimelineItem } from '@/Profile/dashboard-contents/General/DailyActivityDetail/TimelineItem';
 
 type DailyEventProps = {
   data: {

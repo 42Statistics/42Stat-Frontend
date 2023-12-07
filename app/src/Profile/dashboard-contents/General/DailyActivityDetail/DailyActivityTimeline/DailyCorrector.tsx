@@ -8,8 +8,7 @@ import { CustomLink } from '@shared/ui-kit-styled/CustomLink';
 
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { ReactComponent as MdCorrector } from '@/Profile/assets/activity/corrector.svg';
-
-import { TimelineItem } from '../TimelineItem';
+import { TimelineItem } from '@/Profile/dashboard-contents/General/DailyActivityDetail/TimelineItem';
 
 type DailyCorrectorProps = {
   data: {

@@ -1,5 +1,6 @@
-import { useAtomValue } from 'jotai';
 import { Outlet } from 'react-router-dom';
+
+import { useAtomValue } from 'jotai';
 
 import { calculatorDialogAtom } from '@core/atoms/calculatorDialogAtom';
 import { isLogoutErrorDialogOpenAtom } from '@core/atoms/isLogoutErrorDialogOpenAtom';

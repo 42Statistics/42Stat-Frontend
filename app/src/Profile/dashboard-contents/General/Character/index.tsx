@@ -1,8 +1,8 @@
-import { useQuery } from '@apollo/client';
-import { useTheme } from '@emotion/react';
 import { useContext } from 'react';
 
-import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
+import { useTheme } from '@emotion/react';
+import { useQuery } from '@apollo/client';
+
 import { gql } from '@shared/__generated__';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
@@ -19,6 +19,8 @@ import {
   VStack,
   Tooltip,
 } from '@shared/ui-kit';
+
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 
 const GET_CHARACTER_BY_LOGIN = gql(/* GraphQL */ `
   query GetCharacterByLogin($login: String!) {

@@ -1,8 +1,13 @@
+import { useForm } from 'react-hook-form';
+import { useSearchParams } from 'react-router-dom';
+
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useAtomValue } from 'jotai';
-import { useForm } from 'react-hook-form';
-import { useSearchParams } from 'react-router-dom';
+
+import { ReactComponent as MdSwapVert } from '@shared/assets/icon/md-swap-vert.svg';
+import { ARIA_LABEL } from '@shared/constants/accessibility';
+import { Button, Clickable, Dialog, FormSelect, Input } from '@shared/ui-kit';
 
 import type { EvalLogSearchArgs } from '@/EvalLogSearch/api/getEvalLogs';
 import { evalLogSearchArgsAtom } from '@/EvalLogSearch/atoms/evalLogSearchArgsAtom';
@@ -12,9 +17,6 @@ import {
   EVAL_LOG_SEARCH_URL_PARAM_VALUES,
 } from '@/EvalLogSearch/constants/urlParams';
 import { trimEvalLogSearchForm } from '@/EvalLogSearch/utils/trimEvalLogSearchForm';
-import { ReactComponent as MdSwapVert } from '@shared/assets/icon/md-swap-vert.svg';
-import { ARIA_LABEL } from '@shared/constants/accessibility';
-import { Button, Clickable, Dialog, FormSelect, Input } from '@shared/ui-kit';
 
 type EvalLogSearchDialogProps = {
   isOpen: boolean;

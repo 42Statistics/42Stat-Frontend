@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react';
 import { EvalLogLabel } from '.';
+
+import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
   title: 'Common/Label/EvalLogLabel',

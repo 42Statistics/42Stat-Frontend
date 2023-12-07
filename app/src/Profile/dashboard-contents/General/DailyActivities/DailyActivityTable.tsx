@@ -1,6 +1,10 @@
-import styled from '@emotion/styled';
 import { useEffect, useRef } from 'react';
+
+import styled from '@emotion/styled';
 import { differenceInCalendarMonths } from 'date-fns';
+
+import { HStack, VStack } from '@shared/ui-kit';
+import { getDatesBetween } from '@shared/utils/getDatesBetween';
 
 import { DailyActivityTableDayOfWeekHeader } from '@/Profile/dashboard-contents/General/DailyActivities/DailyActivityTableDayOfWeekHeader';
 import { DailyActivityTableHeader } from '@/Profile/dashboard-contents/General/DailyActivities/DailyActivityTableHeader';
@@ -8,8 +12,6 @@ import { DailyActivityTableRow } from '@/Profile/dashboard-contents/General/Dail
 import type { DailyActivityScore } from '@/Profile/dashboard-contents/General/DailyActivities/types/DailyActivityScore';
 import { groupByDayOfTheWeek } from '@/Profile/dashboard-contents/General/DailyActivities/utils/groupByDayOfTheWeek';
 import { matchDatesWithScores } from '@/Profile/dashboard-contents/General/DailyActivities/utils/matchDatesWithScore';
-import { HStack, VStack } from '@shared/ui-kit';
-import { getDatesBetween } from '@shared/utils/getDatesBetween';
 
 type DailyActivityTableProps = {
   list: DailyActivityScore[];

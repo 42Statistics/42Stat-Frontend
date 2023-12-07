@@ -1,19 +1,22 @@
-import { useQuery } from '@apollo/client';
-import { useAtomValue } from 'jotai';
 import { forwardRef, useCallback, useEffect, useRef, useState } from 'react';
 
-import {
-  GET_EVAL_LOGS,
-  GET_EVAL_LOGS_DEFAULT_VARIABLES,
-} from '@/EvalLogSearch/api/getEvalLogs';
-import { evalLogSearchArgsAtom } from '@/EvalLogSearch/atoms/evalLogSearchArgsAtom';
-import { useInfiniteScrollIndex } from '@/EvalLogSearch/hooks/useInfiniteScrollIndex';
-import { useSearchTotalCount } from '@/EvalLogSearch/hooks/useSearchTotalCount';
+import { useQuery } from '@apollo/client';
+import { useAtomValue } from 'jotai';
+
 import { Footer } from '@core/components/Footer';
+
 import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
 import { EvalLogList } from '@shared/components/EvalLogList/EvalLogList';
 import { useIntersection } from '@shared/hooks/useIntersection';
 import { Skeleton, VStack } from '@shared/ui-kit';
+
+import { useSearchTotalCount } from '@/EvalLogSearch/hooks/useSearchTotalCount';
+import { useInfiniteScrollIndex } from '@/EvalLogSearch/hooks/useInfiniteScrollIndex';
+import { evalLogSearchArgsAtom } from '@/EvalLogSearch/atoms/evalLogSearchArgsAtom';
+import {
+  GET_EVAL_LOGS,
+  GET_EVAL_LOGS_DEFAULT_VARIABLES,
+} from '@/EvalLogSearch/api/getEvalLogs';
 
 // todo: useQuery 를 추상화하면, useInfiniteQuery 도 추상화 할 수 있음.
 // Apollo Client 에 영향 받지 않는 인터페이스를 만들 것.

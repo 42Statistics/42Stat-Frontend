@@ -1,3 +1,5 @@
+import type { DashboardItemProps } from '@shared/types/Dashboard';
+
 import {
   AverageCommentLength,
   AverageFinalMark,
@@ -8,7 +10,6 @@ import {
   TotalEvalCount,
   TotalLogtime,
 } from '@/Profile/dashboard-contents/Versus';
-import type { DashboardItemProps } from '@shared/types/Dashboard';
 
 export const profileVersusPageDashboardContents: DashboardItemProps[] = [
   {

@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 
 import { SpotlightProjectSection } from '@core/components/Spotlight/SpotlightProjectSection';
 import { SpotlightUserSection } from '@core/components/Spotlight/SpotlightUserSection';
+
 import type { Exact, GetSpotlightQuery } from '@shared/__generated__/graphql';
 import { ApolloErrorView } from '@shared/components/ApolloError/ApolloErrorView';
 import { Center, H3Text, VStack } from '@shared/ui-kit';

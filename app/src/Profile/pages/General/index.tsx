@@ -1,12 +1,14 @@
 import { useContext } from 'react';
 
-import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
-import { profileGeneralPageDashboardContents } from '@/Profile/dashboard-frames/profileGeneralPageDashboardContents';
-import { profileGeneralPageDashboardRows } from '@/Profile/dashboard-frames/profileGeneralPageDashboardRows';
 import { Footer } from '@core/components/Footer';
+
 import { DashboardTemp } from '@shared/components/Dashboard/DashboardTemp';
 import { Seo } from '@shared/components/Seo';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
+
+import { profileGeneralPageDashboardRows } from '@/Profile/dashboard-frames/profileGeneralPageDashboardRows';
+import { profileGeneralPageDashboardContents } from '@/Profile/dashboard-frames/profileGeneralPageDashboardContents';
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { profileGeneralPageDashboardMobileRows } from '@/Profile/dashboard-frames/profileGeneralPageDashboardMobileRows';
 
 const ProfileGeneralPage = () => {
@@ -16,17 +18,17 @@ const ProfileGeneralPage = () => {
   return (
     <>
       <Seo title={`${login} › 일반`} />
-        {device !== 'mobile' ? (
-          <DashboardTemp
-            contents={profileGeneralPageDashboardContents}
-            rows={profileGeneralPageDashboardRows}
-          />
-        ) : (
-          <DashboardTemp
-            contents={profileGeneralPageDashboardContents}
-            rows={profileGeneralPageDashboardMobileRows}
-          />
-        )}
+      {device !== 'mobile' ? (
+        <DashboardTemp
+          contents={profileGeneralPageDashboardContents}
+          rows={profileGeneralPageDashboardRows}
+        />
+      ) : (
+        <DashboardTemp
+          contents={profileGeneralPageDashboardContents}
+          rows={profileGeneralPageDashboardMobileRows}
+        />
+      )}
       <Footer />
     </>
   );

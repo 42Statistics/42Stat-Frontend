@@ -1,10 +1,12 @@
-import { useMutation } from '@apollo/client';
-import { useSetAtom } from 'jotai';
-import { RESET } from 'jotai/utils';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { useMutation } from '@apollo/client';
+import { useSetAtom } from 'jotai';
+import { RESET } from 'jotai/utils';
+
 import { isLogoutErrorDialogOpenAtom } from '@core/atoms/isLogoutErrorDialogOpenAtom';
+
 import { gql } from '@shared/__generated__';
 import { themePreferenceAtom } from '@shared/atoms/themePreferenceAtom';
 import { Button } from '@shared/ui-kit';

@@ -1,7 +1,8 @@
-import { useMutation } from '@apollo/client';
-import { useSetAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 import { Navigate, useNavigate, useSearchParams } from 'react-router-dom';
+
+import { useMutation } from '@apollo/client';
+import { useSetAtom } from 'jotai';
 
 import { gql } from '@shared/__generated__';
 import { userAtom } from '@shared/atoms/userAtom';

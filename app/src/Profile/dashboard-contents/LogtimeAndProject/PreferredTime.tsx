@@ -1,8 +1,8 @@
-import { useQuery } from '@apollo/client';
-import { sum } from 'lodash-es';
 import { useContext } from 'react';
 
-import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
+import { useQuery } from '@apollo/client';
+import { sum } from 'lodash-es';
+
 import { gql } from '@shared/__generated__';
 import { DateTemplate } from '@shared/__generated__/graphql';
 import { DashboardContent } from '@shared/components/DashboardContent';
@@ -15,6 +15,8 @@ import { ProgressionBar } from '@shared/components/ProgressionBar';
 import { TextMax } from '@shared/components/TextMax';
 import { H3MediumText, HStack, Text, VStack } from '@shared/ui-kit';
 import { getStartEndDateString } from '@shared/utils/getStartEndDateString';
+
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 
 const GET_PREFERRED_TIME_BY_DATE_TEMPLATE_BY_LOGIN = gql(/* GraphQL */ `
   query GetPrefferedTimeByDateTemplateByLogin(

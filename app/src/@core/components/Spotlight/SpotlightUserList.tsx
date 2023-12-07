@@ -1,7 +1,7 @@
+import { SpotlightUserListItem } from '@core/components/Spotlight/SpotlightUserListItem';
+
 import type { UserPreview } from '@shared/__generated__/graphql';
 import { VStack } from '@shared/ui-kit';
-
-import { SpotlightUserListItem } from '@core/components/Spotlight/SpotlightUserListItem';
 
 type SpotlightUserListProps = {
   list: UserPreview[];

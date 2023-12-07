@@ -1,3 +1,5 @@
+import type { DashboardItemProps } from '@shared/types/Dashboard';
+
 import {
   LevelRecords,
   LogtimeRecords,
@@ -5,7 +7,6 @@ import {
   PreferredTime,
   TeamInfo,
 } from '@/Profile/dashboard-contents/LogtimeAndProject';
-import type { DashboardItemProps } from '@shared/types/Dashboard';
 
 export const profileLogtimeAndProjectPageDashboardContents: DashboardItemProps[] =
   [

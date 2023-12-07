@@ -2,8 +2,9 @@ import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { rgba } from 'emotion-rgba';
 
-import { DAY_OF_WEEK } from '@/Profile/dashboard-contents/General/DailyActivities/constants/dayOfWeek';
 import { CaptionText } from '@shared/ui-kit';
+
+import { DAY_OF_WEEK } from '@/Profile/dashboard-contents/General/DailyActivities/constants/dayOfWeek';
 
 export const DailyActivityTableDayOfWeekHeader = () => {
   const theme = useTheme();

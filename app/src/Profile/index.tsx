@@ -1,12 +1,14 @@
-import { useAtomValue } from 'jotai';
 import { Outlet, useLocation, useParams } from 'react-router-dom';
+
+import { useAtomValue } from 'jotai';
+
+import { userAtom } from '@shared/atoms/userAtom';
+import { ROUTES } from '@shared/constants/routes';
+import { Tab, Tabs, VStack } from '@shared/ui-kit';
 
 import { BeginAtProvider } from '@/Profile/components/BeginAtProvider';
 import { UserProfile } from '@/Profile/components/UserProfile';
 import { UserProfileProvider } from '@/Profile/components/UserProfileProvider';
-import { userAtom } from '@shared/atoms/userAtom';
-import { ROUTES } from '@shared/constants/routes';
-import { Tab, Tabs, VStack } from '@shared/ui-kit';
 
 const ProfileLayout = () => {
   const { pathname } = useLocation();

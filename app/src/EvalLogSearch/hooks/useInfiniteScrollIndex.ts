@@ -1,5 +1,6 @@
-import { QueryResult } from '@apollo/client';
 import { useEffect, useRef } from 'react';
+
+import { QueryResult } from '@apollo/client';
 
 import type { GetEvalLogsQuery } from '@shared/__generated__/graphql';
 

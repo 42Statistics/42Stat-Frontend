@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 
 import { DashboardRow } from '@shared/components/Dashboard/DashboardRow';
 import type { DashboardTempProps } from '@shared/types/Dashboard';
+
 import { DashboardRowItemSkeleton } from './DashboardRowItemSkeleton';
 
 type DashboardTempSkeletonProps = Omit<DashboardTempProps, 'contents'>;

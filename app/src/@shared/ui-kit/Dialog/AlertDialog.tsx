@@ -1,5 +1,4 @@
 import type { DialogBaseProps } from '@shared/types/Modal';
-
 import { Button } from '@shared/ui-kit/Button';
 import { CustomDialog } from '@shared/ui-kit/Dialog/CustomDialog';
 

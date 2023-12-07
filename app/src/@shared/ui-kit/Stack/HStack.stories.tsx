@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react';
-
 import { HStack } from './HStack';
+
+import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
   title: 'Common/Stack/HStack',

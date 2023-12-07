@@ -1,10 +1,10 @@
-import { useQuery } from '@apollo/client';
-import { useTheme } from '@emotion/react';
 import { Link, useParams } from 'react-router-dom';
 
-import { MoulinetteEvalLogListItem } from '@/Team/components/MoulinetteEvalLogListItem';
-import { teamUserCompareFn } from '@/Team/utils/teamUserCompareFn';
+import { useTheme } from '@emotion/react';
+import { useQuery } from '@apollo/client';
+
 import { Footer } from '@core/components/Footer';
+
 import { gql } from '@shared/__generated__';
 import { ReactComponent as Star } from '@shared/assets/icon/star.svg';
 import { ReactComponent as FtLogo } from '@shared/assets/logo/ft-logo.svg';
@@ -30,6 +30,9 @@ import {
 import { CustomLink } from '@shared/ui-kit-styled/CustomLink';
 import { getDateDiffStringWithTeamStatus } from '@shared/utils/getDateDiffStringWithTeamStatus';
 import { getTeamStatusString } from '@shared/utils/getTeamStatusString';
+
+import { teamUserCompareFn } from '@/Team/utils/teamUserCompareFn';
+import { MoulinetteEvalLogListItem } from '@/Team/components/MoulinetteEvalLogListItem';
 
 const GET_TEAM_INFO = gql(/* GraphQL */ `
   query GetTeamInfo($id: Int!) {

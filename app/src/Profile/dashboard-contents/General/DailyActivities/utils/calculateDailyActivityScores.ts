@@ -1,8 +1,9 @@
 import { sum } from 'lodash-es';
 
+import { DailyActivity } from '@shared/__generated__/graphql';
+
 import type { DailyActivityScore } from '@/Profile/dashboard-contents/General/DailyActivities/types/DailyActivityScore';
 import { getScoreByDailyActivityType } from '@/Profile/dashboard-contents/General/DailyActivities/utils/getScoreByDailyActivityType';
-import { DailyActivity } from '@shared/__generated__/graphql';
 
 export const calculateDailyActivityScores = (
   list: DailyActivity[],

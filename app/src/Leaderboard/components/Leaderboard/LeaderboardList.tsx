@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
 
-import { LeaderboardListItem } from '@/Leaderboard/components/Leaderboard/LeaderboardListItem';
 import type { UserRank } from '@shared/__generated__/graphql';
+
+import { LeaderboardListItem } from '@/Leaderboard/components/Leaderboard/LeaderboardListItem';
 
 type LeaderboardListProps = {
   list: UserRank[];

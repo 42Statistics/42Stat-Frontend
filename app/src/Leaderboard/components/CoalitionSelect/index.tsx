@@ -1,8 +1,9 @@
-import { CoalitionSelectList } from '@/Leaderboard/components/CoalitionSelect/CoalitionSelectList';
-import { useGetSelectKey } from '@/Leaderboard/hooks/useGetSelectKey';
 import { CoalitionMark } from '@shared/components/CoalitionMark';
 import type { Coalition } from '@shared/types/Coalition';
 import { Select, SelectContent, SelectTrigger } from '@shared/ui-kit';
+
+import { useGetSelectKey } from '@/Leaderboard/hooks/useGetSelectKey';
+import { CoalitionSelectList } from '@/Leaderboard/components/CoalitionSelect/CoalitionSelectList';
 
 type CoalitionSelectProps = {
   curr: number | null;

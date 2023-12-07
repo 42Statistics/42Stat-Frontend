@@ -1,12 +1,14 @@
-import styled from '@emotion/styled';
-import { rgba } from 'emotion-rgba';
 import { useNavigate } from 'react-router-dom';
 
-import { ResultWithStatus } from '@/Profile/dashboard-contents/LogtimeAndProject/TeamInfo/ResultWithStatus';
+import styled from '@emotion/styled';
+import { rgba } from 'emotion-rgba';
+
 import type { UserTeam } from '@shared/__generated__/graphql';
 import { ROUTES } from '@shared/constants/routes';
 import { PrimaryMediumText, Text } from '@shared/ui-kit';
 import { getDateDiffStringWithTeamStatus } from '@shared/utils/getDateDiffStringWithTeamStatus';
+
+import { ResultWithStatus } from '@/Profile/dashboard-contents/LogtimeAndProject/TeamInfo/ResultWithStatus';
 
 type TeamInfoTableProps = {
   teams: UserTeam[];

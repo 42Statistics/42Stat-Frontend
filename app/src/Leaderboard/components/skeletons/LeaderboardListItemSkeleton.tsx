@@ -1,4 +1,5 @@
 import { useTheme } from '@emotion/react';
+
 import { Skeleton } from '@shared/ui-kit';
 
 export const LeaderboardListItemSkeleteon = () => {

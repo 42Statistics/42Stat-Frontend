@@ -1,9 +1,11 @@
-import { useTheme } from '@emotion/react';
-import { detect } from 'detect-browser';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
+import { useTheme } from '@emotion/react';
+import { detect } from 'detect-browser';
+
 import { TabletNavDrawerView } from '@core/components/NavBar/Tablet/TabletNavDrawer/TabletNavDrawerView';
+
 import { ReactComponent as MdMenu } from '@shared/assets/icon/md-menu.svg';
 import { useDisclosure } from '@shared/hooks/useDisclosure';
 import { Clickable } from '@shared/ui-kit';

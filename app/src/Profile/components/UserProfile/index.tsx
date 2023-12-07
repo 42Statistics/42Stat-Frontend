@@ -1,9 +1,9 @@
+import { useContext } from 'react';
+
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { truncate } from 'lodash-es';
-import { useContext } from 'react';
 
-import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import coalition_black_cover from '@shared/assets/coalition/cover/coalition-black-cover.jpg';
 import coalition_gam_cover from '@shared/assets/coalition/cover/coalition-gam-cover.jpg';
 import coalition_gon_cover from '@shared/assets/coalition/cover/coalition-gon-cover.jpg';
@@ -22,6 +22,8 @@ import {
 import { titleCase } from '@shared/utils/formatters/titleCase';
 import { getTitleWithLogin } from '@shared/utils/getTitleWithLogin';
 import { Desktop, TabletAndBelow } from '@shared/utils/react-responsive/Device';
+
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 
 export const UserProfile = () => {
   const theme = useTheme();

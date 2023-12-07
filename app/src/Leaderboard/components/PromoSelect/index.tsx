@@ -1,7 +1,5 @@
 import dayjs from 'dayjs';
 
-import { PromoSelectList } from '@/Leaderboard/components//PromoSelect/PromoSelectList';
-import { useGetSelectKey } from '@/Leaderboard/hooks/useGetSelectKey';
 import type { Promo } from '@shared/types/Promo';
 import {
   CaptionThinText,
@@ -10,6 +8,9 @@ import {
   SelectTrigger,
 } from '@shared/ui-kit';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
+
+import { useGetSelectKey } from '@/Leaderboard/hooks/useGetSelectKey';
+import { PromoSelectList } from '@/Leaderboard/components//PromoSelect/PromoSelectList';
 
 type PromoSelectProps = {
   curr: number | null;

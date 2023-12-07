@@ -1,6 +1,6 @@
 import { useAtomValue } from 'jotai';
-
 import styled from '@emotion/styled';
+
 import { paletteAtom } from '@shared/atoms/paletteAtom';
 import type { AvatarSize } from '@shared/ui-kit/Avatar';
 import { pickColorFromString } from '@shared/utils/pickColorFromString';

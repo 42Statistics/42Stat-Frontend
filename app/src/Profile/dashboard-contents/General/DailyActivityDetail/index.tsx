@@ -1,10 +1,12 @@
 import dayjs from 'dayjs';
 import { useAtomValue } from 'jotai';
 
-import { selectedDailyActivityAtom } from '@/Profile/dashboard-contents/General/atoms/selectedDailyActivityAtom';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import { DashboardContentLoading } from '@shared/components/DashboardContentView/Error';
 import { Body1Text } from '@shared/ui-kit';
+
+import { selectedDailyActivityAtom } from '@/Profile/dashboard-contents/General/atoms/selectedDailyActivityAtom';
+
 import { DailyActivityTimeline } from './DailyActivityTimeline';
 
 export const DailyActivityDetail = () => {

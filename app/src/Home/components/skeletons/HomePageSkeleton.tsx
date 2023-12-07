@@ -1,10 +1,11 @@
+import { DashboardSkeleton } from '@shared/components/DashboardSkeleton';
+import { H2BoldText, VStack } from '@shared/ui-kit';
+
 import { HeroSkeleton } from '@/Home/components/skeletons/HeroSkeleton';
 import { homeCircleDashboardRows } from '@/Home/dashboard-frames/homeCircleDashboardRows';
 import { homeCoalitionDashboardRows } from '@/Home/dashboard-frames/homeCoalitionDashboardRows';
 import { homeRecordDashboardRows } from '@/Home/dashboard-frames/homeRecordDashboardRows';
 import { homeStatusDashboardRows } from '@/Home/dashboard-frames/homeStatusDashboardRows';
-import { DashboardSkeleton } from '@shared/components/DashboardSkeleton';
-import { H2BoldText, VStack } from '@shared/ui-kit';
 
 export const HomePageSkeleton = () => {
   return (

@@ -1,8 +1,9 @@
 import { useAtomValue } from 'jotai';
 
-import { dailyActivitySumAtom } from '@/Profile/dashboard-contents/General/atoms/dailyActivitySumAtom';
 import { MINUTES } from '@shared/constants/date';
 import { BoldText, Text } from '@shared/ui-kit';
+
+import { dailyActivitySumAtom } from '@/Profile/dashboard-contents/General/atoms/dailyActivitySumAtom';
 
 export const TotalDailyActivityDescriptor = () => {
   const { logTime, event, corrector, corrected } =

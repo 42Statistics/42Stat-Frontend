@@ -1,6 +1,10 @@
 import { useAtomValue } from 'jotai';
 import { truncate } from 'lodash-es';
 
+import { DonutChart } from '@shared/components/Chart';
+import { DashboardContent } from '@shared/components/DashboardContent';
+import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
+
 import { calculatorUserInfoAtom } from '@/Calculator/atoms/calculatorUserInfoAtom';
 import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
 import {
@@ -8,9 +12,6 @@ import {
   MAX_BLACKHOLE_NAME_LENGTH,
 } from '@/Calculator/constants/blackhole';
 import type { Subject } from '@/Calculator/types/Subject';
-import { DonutChart } from '@shared/components/Chart';
-import { DashboardContent } from '@shared/components/DashboardContent';
-import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 
 export const Blackhole = () => {
   const subjectList = useAtomValue(subjectListAtom);

@@ -1,5 +1,6 @@
-import styled from '@emotion/styled';
 import { useEffect, useRef, useState } from 'react';
+
+import styled from '@emotion/styled';
 
 import { useDisclosure } from '@shared/hooks/useDisclosure';
 import { SelectDisclosureContext } from '@shared/ui-kit/Select/contexts/SelectDisclosureContext';

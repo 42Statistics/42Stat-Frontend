@@ -1,3 +1,5 @@
+import type { DashboardItemProps } from '@shared/types/Dashboard';
+
 import {
   AverageCommentLength,
   AverageDuration,
@@ -10,7 +12,6 @@ import {
   RecentComment,
   TotalCount,
 } from '@/Profile/dashboard-contents/Eval';
-import type { DashboardItemProps } from '@shared/types/Dashboard';
 
 export const profileEvalPageDashboardContents: DashboardItemProps[] = [
   {

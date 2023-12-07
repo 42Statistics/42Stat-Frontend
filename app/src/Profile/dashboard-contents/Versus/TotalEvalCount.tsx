@@ -1,8 +1,7 @@
-import { useQuery } from '@apollo/client';
 import { useContext } from 'react';
 
-import { MyUserProfileContext } from '@/Profile/contexts/MyUserProfileContext';
-import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
+import { useQuery } from '@apollo/client';
+
 import { gql } from '@shared/__generated__';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
@@ -11,6 +10,9 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { NumberVersus } from '@shared/components/DashboardContentView/Number/NumberVersus';
+
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
+import { MyUserProfileContext } from '@/Profile/contexts/MyUserProfileContext';
 
 const GET_TOTAL_EVAL_COUNT_VERSUS = gql(/* GraphQL */ `
   query GetTotalEvalCountVersus($login1: String!, $login2: String!) {

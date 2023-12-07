@@ -1,5 +1,6 @@
-import { useTheme } from '@emotion/react';
 import { useEffect } from 'react';
+
+import { useTheme } from '@emotion/react';
 
 import { usePreventScroll } from '@shared/hooks/usePreventScroll';
 import type { ModalBaseProps } from '@shared/types/Modal';

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import styled from '@emotion/styled';
+
 import { AvatarInitials } from '@shared/ui-kit/Avatar/AvatarInitials';
 import { Image } from '@shared/ui-kit/Image';
 

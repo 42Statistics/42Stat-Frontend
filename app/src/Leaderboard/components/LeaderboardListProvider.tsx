@@ -1,11 +1,13 @@
+import { useEffect } from 'react';
+
 import { useQuery } from '@apollo/client';
 import { useSetAtom } from 'jotai';
-import { useEffect } from 'react';
+
+import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
 
 import { leaderboardCoalitionListAtom } from '@/Leaderboard/atoms/leaderboardCoalitionListAtom';
 import { leaderboardPromoListAtom } from '@/Leaderboard/atoms/leaderboardPromoListAtom';
 import { GET_LEADERBOARD_LIST } from '@/Leaderboard/queries/getLeaderboardList';
-import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
 
 export const LeaderboardListProvider = ({
   children,

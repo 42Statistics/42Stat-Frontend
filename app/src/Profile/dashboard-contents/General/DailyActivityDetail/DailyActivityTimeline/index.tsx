@@ -1,11 +1,9 @@
-import { useQuery } from '@apollo/client';
-import { useTheme } from '@emotion/react';
-import { useAtomValue } from 'jotai';
 import { useContext } from 'react';
 
-import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
-import { parseDailyActivity } from '@/Profile/dashboard-contents/General/DailyActivityDetail/utils/parseDailyActivity';
-import { selectedDailyActivityAtom } from '@/Profile/dashboard-contents/General/atoms/selectedDailyActivityAtom';
+import { useTheme } from '@emotion/react';
+import { useQuery } from '@apollo/client';
+import { useAtomValue } from 'jotai';
+
 import { gql } from '@shared/__generated__';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
@@ -13,6 +11,11 @@ import {
   DashboardContentLoading,
 } from '@shared/components/DashboardContentView/Error';
 import { VStack } from '@shared/ui-kit';
+
+import { selectedDailyActivityAtom } from '@/Profile/dashboard-contents/General/atoms/selectedDailyActivityAtom';
+import { parseDailyActivity } from '@/Profile/dashboard-contents/General/DailyActivityDetail/utils/parseDailyActivity';
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
+
 import { DailyCorrected } from './DailyCorrected';
 import { DailyCorrector } from './DailyCorrector';
 import { DailyEvent } from './DailyEvent';

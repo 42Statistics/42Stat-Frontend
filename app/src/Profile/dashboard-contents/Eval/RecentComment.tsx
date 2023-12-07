@@ -1,8 +1,7 @@
-import { useQuery } from '@apollo/client';
 import { useContext } from 'react';
 
-import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
-import { GET_PERSONAL_EVAL_ZERO_COST_BY_LOGIN } from '@/Profile/dashboard-contents-queries/GET_PERSONAL_EVAL_ZERO_COST_BY_LOGIN';
+import { useQuery } from '@apollo/client';
+
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,
@@ -12,6 +11,9 @@ import {
 import { TextDefault } from '@shared/components/DashboardContentView/Text/TextDefault';
 import { CustomTooltip } from '@shared/components/CustomTooltip';
 import { Text } from '@shared/ui-kit';
+
+import { GET_PERSONAL_EVAL_ZERO_COST_BY_LOGIN } from '@/Profile/dashboard-contents-queries/GET_PERSONAL_EVAL_ZERO_COST_BY_LOGIN';
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 
 export const RecentComment = () => {
   const { login } = useContext(UserProfileContext);

@@ -1,9 +1,8 @@
-import { useQuery } from '@apollo/client';
-import { differenceInCalendarMonths, subMonths } from 'date-fns';
 import { useContext } from 'react';
 
-import { BeginAtContext } from '@/Profile/contexts/BeginAtContext';
-import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
+import { useQuery } from '@apollo/client';
+import { differenceInCalendarMonths, subMonths } from 'date-fns';
+
 import { gql } from '@shared/__generated__';
 import { AreaChart } from '@shared/components/Chart';
 import { DashboardContent } from '@shared/components/DashboardContent';
@@ -17,6 +16,9 @@ import { BREAKPOINT } from '@shared/constants/responsive';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 import { injectEmptyMonth } from '@shared/utils/injectEmptyMonth';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
+
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
+import { BeginAtContext } from '@/Profile/contexts/BeginAtContext';
 
 const GET_LOGTIME_RECORDS_BY_LOGIN = gql(/* GraphQL */ `
   query GetLogtimeRecords($login: String!, $last: Int!) {

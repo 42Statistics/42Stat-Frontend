@@ -1,7 +1,7 @@
-import { useQuery } from '@apollo/client';
 import { useContext } from 'react';
 
-import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
+import { useQuery } from '@apollo/client';
+
 import { gql } from '@shared/__generated__';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
@@ -10,6 +10,8 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { TextDefault } from '@shared/components/DashboardContentView/Text/TextDefault';
+
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 
 const GET_TOTAL_DURATION_BY_LOGIN = gql(/* GraphQL */ `
   query GetTotalDurationByLogin($login: String!) {

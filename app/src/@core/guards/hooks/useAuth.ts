@@ -1,6 +1,7 @@
+import { useEffect, useState } from 'react';
+
 import { useQuery } from '@apollo/client';
 import { useSetAtom } from 'jotai';
-import { useEffect, useState } from 'react';
 
 import { gql } from '@shared/__generated__';
 import { userAtom } from '@shared/atoms/userAtom';

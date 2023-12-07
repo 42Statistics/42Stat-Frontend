@@ -1,6 +1,7 @@
+import { Link } from 'react-router-dom';
+
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { Link } from 'react-router-dom';
 
 import type { PropsWithStringChildren } from '@shared/types/PropsWithChildren';
 import { Text } from '@shared/ui-kit/Text';

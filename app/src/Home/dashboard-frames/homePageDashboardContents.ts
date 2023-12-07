@@ -1,3 +1,5 @@
+import type { DashboardItemProps } from '@shared/types/Dashboard';
+
 import {
   MonthlyTigCountPerCoalition,
   ScoreRecordsPerCoalition,
@@ -25,7 +27,6 @@ import {
   UserRate,
   WalletRanking,
 } from '@/Home/dashboard-contents/User';
-import type { DashboardItemProps } from '@shared/types/Dashboard';
 
 export const homePageDashboardContents: DashboardItemProps[] = [
   {

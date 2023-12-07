@@ -1,7 +1,8 @@
+import { Link } from 'react-router-dom';
+
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useAtomValue } from 'jotai';
-import { Link } from 'react-router-dom';
 
 import { userAtom } from '@shared/atoms/userAtom';
 import { ALT, ARIA_LABEL } from '@shared/constants/accessibility';

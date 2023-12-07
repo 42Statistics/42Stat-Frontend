@@ -1,17 +1,20 @@
-import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 
-import { ProjectIntroduction } from '@/Project/components/ProjectIntroduction';
-import { ProjectNameContext } from '@/Project/contexts/ProjectNameContext';
-import { projectDetailPageDashboardContents } from '@/Project/dashboard-frames/projectDetailPageDashboardContents';
-import { projectDetailPageDashboardRows } from '@/Project/dashboard-frames/projectDetailPageDashboardRows';
+import { useQuery } from '@apollo/client';
+
 import { Footer } from '@core/components/Footer';
+
 import { gql } from '@shared/__generated__';
 import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
 import { FullPageApolloNotFoundView } from '@shared/components/ApolloError/FullPageApolloNotFoundView';
 import { Dashboard } from '@shared/components/Dashboard';
 import { Seo } from '@shared/components/Seo';
 import { VStack } from '@shared/ui-kit';
+
+import { projectDetailPageDashboardRows } from '@/Project/dashboard-frames/projectDetailPageDashboardRows';
+import { projectDetailPageDashboardContents } from '@/Project/dashboard-frames/projectDetailPageDashboardContents';
+import { ProjectNameContext } from '@/Project/contexts/ProjectNameContext';
+import { ProjectIntroduction } from '@/Project/components/ProjectIntroduction';
 
 const GET_PROJECT_EXISTS = gql(/* GraphQL */ `
   query GetProjectExists($projectName: String!) {

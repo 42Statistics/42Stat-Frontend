@@ -1,7 +1,8 @@
 import { useTheme } from '@emotion/react';
 
-import { BlankTableData } from '@/Profile/dashboard-contents/General/DailyActivities/DailyActivityTable';
 import { CaptionText, HStack } from '@shared/ui-kit';
+
+import { BlankTableData } from '@/Profile/dashboard-contents/General/DailyActivities/DailyActivityTable';
 
 type DailyActivityTableHeaderProps = {
   dateGroupsWithScores: { date: Date; score: number }[][];

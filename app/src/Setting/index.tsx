@@ -1,10 +1,12 @@
+import { Footer } from '@core/components/Footer';
+
+import { Seo } from '@shared/components/Seo';
+import { H1BoldText, VStack } from '@shared/ui-kit';
+
 import { AccountSection } from '@/Setting/sections/AccountSection';
 import { FeedbackSection } from '@/Setting/sections/FeedbackSection';
 import { LinkGoogleSection } from '@/Setting/sections/LinkGoogleSection';
 import { ThemeSection } from '@/Setting/sections/ThemeSection';
-import { Footer } from '@core/components/Footer';
-import { Seo } from '@shared/components/Seo';
-import { H1BoldText, VStack } from '@shared/ui-kit';
 
 const SettingPage = () => {
   return (

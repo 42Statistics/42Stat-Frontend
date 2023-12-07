@@ -1,3 +1,5 @@
+import type { DashboardItemProps } from '@shared/types/Dashboard';
+
 import {
   BeginAt,
   BlackholedAt,
@@ -9,7 +11,6 @@ import {
   LastRegistered,
   Wallet,
 } from '@/Profile/dashboard-contents/General';
-import type { DashboardItemProps } from '@shared/types/Dashboard';
 
 export const profileGeneralPageDashboardContents: DashboardItemProps[] = [
   {

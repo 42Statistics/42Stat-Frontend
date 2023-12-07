@@ -1,6 +1,7 @@
+import { Link } from 'react-router-dom';
+
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { Link } from 'react-router-dom';
 
 import type { UserRank } from '@shared/__generated__/graphql';
 import { ALT } from '@shared/constants/accessibility';

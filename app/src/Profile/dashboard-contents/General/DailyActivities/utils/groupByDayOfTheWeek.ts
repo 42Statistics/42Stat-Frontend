@@ -1,5 +1,6 @@
-import type { DailyActivityScore } from '@/Profile/dashboard-contents/General/DailyActivities/types/DailyActivityScore';
 import { DailyActivity } from '@shared/__generated__/graphql';
+
+import type { DailyActivityScore } from '@/Profile/dashboard-contents/General/DailyActivities/types/DailyActivityScore';
 
 // 첫 날짜가 수요일이라면, 일요일부터 화요일까지는 한 칸을 -1로 채움.
 export const groupByDayOfTheWeek = (datesWithScores: DailyActivityScore[]) => {

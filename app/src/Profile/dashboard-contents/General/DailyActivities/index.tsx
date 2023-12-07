@@ -1,8 +1,13 @@
+import { useContext, useEffect, useState } from 'react';
+
 import { useQuery } from '@apollo/client';
 import styled from '@emotion/styled';
 import { useSetAtom } from 'jotai';
 import { sum } from 'lodash-es';
-import { useContext, useEffect, useState } from 'react';
+
+import { gql } from '@shared/__generated__';
+import { HStack, VStack } from '@shared/ui-kit';
+import { getYearsBetween } from '@shared/utils/getYearsBetween';
 
 import { BeginAtContext } from '@/Profile/contexts/BeginAtContext';
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
@@ -10,9 +15,7 @@ import { DailyActivitiesResult } from '@/Profile/dashboard-contents/General/Dail
 import { DailyActivityTitleDescriptor } from '@/Profile/dashboard-contents/General/DailyActivities/DailyActivityTitleDescriptor';
 import { YearSelect } from '@/Profile/dashboard-contents/General/DailyActivities/YearSelect';
 import { calculateDailyActivityScores } from '@/Profile/dashboard-contents/General/DailyActivities/utils/calculateDailyActivityScores';
-import { gql } from '@shared/__generated__';
-import { HStack, VStack } from '@shared/ui-kit';
-import { getYearsBetween } from '@shared/utils/getYearsBetween';
+
 import { dailyActivitySumAtom } from '../atoms/dailyActivitySumAtom';
 import { selectedDailyActivityAtom } from '../atoms/selectedDailyActivityAtom';
 import { calculateDailyActivityScoresByCategory } from './utils/calculateDailyActivityScoresByCategory';

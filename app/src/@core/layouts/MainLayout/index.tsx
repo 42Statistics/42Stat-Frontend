@@ -1,16 +1,18 @@
-import styled from '@emotion/styled';
-import { detect } from 'detect-browser';
-import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Outlet, ScrollRestoration } from 'react-router-dom';
+
+import { Global, useTheme } from '@emotion/react';
+import styled from '@emotion/styled';
+import { detect } from 'detect-browser';
+import { useAtom } from 'jotai';
 
 import { isSpotlightOpenAtom } from '@core/atoms/isSpotlightOpenAtom';
 import { MobileHeader } from '@core/components/Header/Mobile';
 import { DesktopNavBar } from '@core/components/NavBar/Desktop';
 import { TabletNavBar } from '@core/components/NavBar/Tablet';
 import { mainLayoutGlobalStyle } from '@core/layouts/MainLayout/mainLayoutGlobalStyle';
-import { Global, useTheme } from '@emotion/react';
+
 import { mq } from '@shared/utils/facepaint/mq';
 import { isCtrlKKeyDown, isMacKKeyDown } from '@shared/utils/keyboard';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';

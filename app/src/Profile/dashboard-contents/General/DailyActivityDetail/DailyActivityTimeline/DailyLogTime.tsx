@@ -1,5 +1,7 @@
-import { ReactComponent as MdLogTime } from '@/Profile/assets/activity/log-time.svg';
 import { Text } from '@shared/ui-kit';
+
+import { ReactComponent as MdLogTime } from '@/Profile/assets/activity/log-time.svg';
+
 import { TimelineItem } from '../TimelineItem';
 
 type DailyLogtimeProps = {

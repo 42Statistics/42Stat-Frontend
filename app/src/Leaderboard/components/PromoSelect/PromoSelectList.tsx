@@ -1,6 +1,7 @@
-import { PromoSelectListItem } from '@/Leaderboard/components/PromoSelect/PromoSelectListItem';
 import type { Promo } from '@shared/types/Promo';
 import { HStack, SelectItem, Text } from '@shared/ui-kit';
+
+import { PromoSelectListItem } from '@/Leaderboard/components/PromoSelect/PromoSelectListItem';
 
 type PromoSelectListProps = {
   list: Promo[];

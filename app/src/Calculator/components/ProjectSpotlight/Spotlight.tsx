@@ -1,18 +1,21 @@
+import { useEffect } from 'react';
+
 import { QueryResult } from '@apollo/client';
 import styled from '@emotion/styled';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
-import { useEffect } from 'react';
 
-import { currentOpenSpotlightIndexAtom } from '@/Calculator/atoms/currentOpenSpotlightIndexAtom';
-import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
-import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
-import { checkDuplicateSubject } from '@/Calculator/utils/checkDuplicateSubject';
 import { calculatorDialogAtom } from '@core/atoms/calculatorDialogAtom';
+
 import type { Exact, GetProjectsQuery } from '@shared/__generated__/graphql';
 import { ApolloErrorView } from '@shared/components/ApolloError/ApolloErrorView';
 import { useRoveFocus } from '@shared/hooks/useRoveFocus';
 import { Body1Text, Center } from '@shared/ui-kit';
 import { isEnterKeyDown } from '@shared/utils/keyboard';
+
+import { checkDuplicateSubject } from '@/Calculator/utils/checkDuplicateSubject';
+import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
+import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
+import { currentOpenSpotlightIndexAtom } from '@/Calculator/atoms/currentOpenSpotlightIndexAtom';
 
 type SpotlightProps = {
   result: QueryResult<

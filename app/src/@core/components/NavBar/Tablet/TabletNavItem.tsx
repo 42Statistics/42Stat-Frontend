@@ -1,8 +1,10 @@
-import { useTheme } from '@emotion/react';
-import styled from '@emotion/styled';
 import { Link, useLocation } from 'react-router-dom';
 
+import { useTheme } from '@emotion/react';
+import styled from '@emotion/styled';
+
 import type { NavItemProps } from '@core/components/NavBar/shared/NavItem';
+
 import { CaptionText, VStack } from '@shared/ui-kit';
 
 type TabletNavItemProps = NavItemProps;

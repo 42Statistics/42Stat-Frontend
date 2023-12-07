@@ -1,22 +1,10 @@
-import { useQuery } from '@apollo/client';
-import { useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 
-import { calculatorUserInfoAtom } from '@/Calculator/atoms/calculatorUserInfoAtom';
-import { expTablesAtom } from '@/Calculator/atoms/expTablesAtom';
-import {
-  emptySubject,
-  subjectListAtom,
-} from '@/Calculator/atoms/subjectListAtom';
-import { CalculatorBasicInfoInputGroup } from '@/Calculator/components/CalculatorBasicInfoInputGroup';
-import { CalculatorInput } from '@/Calculator/components/CalculatorInput';
-import { calculatorPageDashboardContents } from '@/Calculator/dashboard-frames/calculatorPageDashboardContents';
-import {
-  calculatorPageDashboardDesktop,
-  calculatorPageDashboardTablet,
-} from '@/Calculator/dashboard-frames/calculatorPageDashboardRows';
-import { getDifferences } from '@/Calculator/utils/getDifferences';
+import { useQuery } from '@apollo/client';
+import { useSetAtom } from 'jotai';
+
 import { Footer } from '@core/components/Footer';
+
 import { gql } from '@shared/__generated__';
 import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
 import { DashboardTemp } from '@shared/components/Dashboard/DashboardTemp';
@@ -25,6 +13,21 @@ import { H1BoldText, VStack } from '@shared/ui-kit';
 import { getBlackholeDaysLeft } from '@shared/utils/getBlackholeDaysLeft';
 import { getTimeDiffFromNow } from '@shared/utils/getTimeDiffFromNow';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
+
+import { getDifferences } from '@/Calculator/utils/getDifferences';
+import {
+  calculatorPageDashboardDesktop,
+  calculatorPageDashboardTablet,
+} from '@/Calculator/dashboard-frames/calculatorPageDashboardRows';
+import { calculatorPageDashboardContents } from '@/Calculator/dashboard-frames/calculatorPageDashboardContents';
+import { CalculatorInput } from '@/Calculator/components/CalculatorInput';
+import { CalculatorBasicInfoInputGroup } from '@/Calculator/components/CalculatorBasicInfoInputGroup';
+import {
+  emptySubject,
+  subjectListAtom,
+} from '@/Calculator/atoms/subjectListAtom';
+import { expTablesAtom } from '@/Calculator/atoms/expTablesAtom';
+import { calculatorUserInfoAtom } from '@/Calculator/atoms/calculatorUserInfoAtom';
 
 export const GET_BLACKHOLE_INFO = gql(/* GraphQL */ `
   query GetBlackholeInfo {

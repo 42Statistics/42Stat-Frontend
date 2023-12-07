@@ -1,8 +1,10 @@
-import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { useAtom } from 'jotai';
+
 import { isReLoginDialogOpenAtom } from '@core/atoms/isReLoginDialogOpenAtom';
+
 import { ROUTES } from '@shared/constants/routes';
 import { AlertDialog } from '@shared/ui-kit';
 import { clearStorage } from '@shared/utils/storage/clearStorage';

@@ -1,9 +1,8 @@
-import { useQuery } from '@apollo/client';
-import dayjs from 'dayjs';
 import { useContext } from 'react';
 
-import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
-import { GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN } from '@/Profile/dashboard-contents-queries/GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN';
+import { useQuery } from '@apollo/client';
+import dayjs from 'dayjs';
+
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,
@@ -12,6 +11,9 @@ import {
 } from '@shared/components/DashboardContentView/Error';
 import { Body1Text, H3MediumText, HStack } from '@shared/ui-kit';
 import { dDayFormatter } from '@shared/utils/formatters/dDayFormatter';
+
+import { GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN } from '@/Profile/dashboard-contents-queries/GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN';
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 
 export const BeginAt = () => {
   const { login } = useContext(UserProfileContext);

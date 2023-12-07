@@ -1,5 +1,6 @@
-import { useTheme } from '@emotion/react';
 import { Link } from 'react-router-dom';
+
+import { useTheme } from '@emotion/react';
 
 import { Body1Text, Center, H3Text, HStack, Text } from '@shared/ui-kit';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';

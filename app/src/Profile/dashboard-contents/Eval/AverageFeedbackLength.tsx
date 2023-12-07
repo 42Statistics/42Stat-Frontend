@@ -1,7 +1,7 @@
-import { useQuery } from '@apollo/client';
 import { useContext } from 'react';
 
-import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
+import { useQuery } from '@apollo/client';
+
 import { gql } from '@shared/__generated__';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
@@ -11,6 +11,8 @@ import {
 } from '@shared/components/DashboardContentView/Error';
 import { NumberDefault } from '@shared/components/DashboardContentView/Number/NumberDefault';
 import { CustomTooltip } from '@shared/components/CustomTooltip';
+
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 
 const GET_AVERAGE_FEEDBACK_LENGTH_BY_LOGIN = gql(/* GraphQL */ `
   query GetAverageFeedbackLengthByLogin($login: String!) {

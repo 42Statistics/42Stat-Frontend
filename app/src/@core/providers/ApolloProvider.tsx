@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import {
   ApolloClient,
   ApolloLink,
@@ -10,10 +12,10 @@ import {
 import { onError } from '@apollo/client/link/error';
 import { relayStylePagination } from '@apollo/client/utilities';
 import { useSetAtom } from 'jotai';
-import { useEffect } from 'react';
 
 import { isReLoginDialogOpenAtom } from '@core/atoms/isReLoginDialogOpenAtom';
 import { getNewAccessToken } from '@core/services/auth/getNewAccessToken';
+
 import type { PropsWithReactElementChildren } from '@shared/types/PropsWithChildren';
 import { getAccessToken } from '@shared/utils/storage/accessToken';
 import { getRefreshToken } from '@shared/utils/storage/refreshToken';

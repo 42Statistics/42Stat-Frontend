@@ -1,5 +1,6 @@
 import { useNavRoutes } from '@core/components/NavBar/hooks/useNavRoutes';
 import { NavItem } from '@core/components/NavBar/shared/NavItem';
+
 import { Spacer, VStack } from '@shared/ui-kit';
 
 type NavMenuProps = {

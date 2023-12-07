@@ -1,7 +1,8 @@
-import { LeaderboardList } from '@/Leaderboard/components/Leaderboard/LeaderboardList';
-import { LeaderboardListItem } from '@/Leaderboard/components/Leaderboard/LeaderboardListItem';
 import type { UserRank } from '@shared/__generated__/graphql';
 import { VStack } from '@shared/ui-kit';
+
+import { LeaderboardList } from '@/Leaderboard/components/Leaderboard/LeaderboardList';
+import { LeaderboardListItem } from '@/Leaderboard/components/Leaderboard/LeaderboardListItem';
 
 type LeaderboardProps = {
   list: UserRank[];

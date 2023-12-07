@@ -1,8 +1,10 @@
-import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
+
+import styled from '@emotion/styled';
 
 import { MobileNavBarButton } from '@core/components/NavBar/Mobile/MobileNavBarButton';
 import { SearchButtonTriggerSpotlight } from '@core/components/Spotlight/SearchButtonTriggerSpotlight';
+
 import { AppLogoTitle } from '@shared/components/AppLogoTitle';
 import { ROUTES } from '@shared/constants/routes';
 import { HStack, Spacer } from '@shared/ui-kit';

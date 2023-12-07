@@ -1,7 +1,8 @@
 import { useTheme } from '@emotion/react';
 
-import { DailyActivitySquare } from '@/Profile/dashboard-contents/General/DailyActivities/DailyActivitySquare';
 import { CaptionText, HStack } from '@shared/ui-kit';
+
+import { DailyActivitySquare } from '@/Profile/dashboard-contents/General/DailyActivities/DailyActivitySquare';
 
 type ColorLegendProps = {
   from?: number;

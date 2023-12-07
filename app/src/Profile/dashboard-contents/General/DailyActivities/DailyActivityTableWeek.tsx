@@ -1,8 +1,9 @@
 import { Fragment } from 'react';
 
+import { DailyActivity } from '@shared/__generated__/graphql';
+
 import { BlankTableData } from './DailyActivityTable';
 import { DailyActivityTableData } from './DailyActivityTableData';
-import { DailyActivity } from '@shared/__generated__/graphql';
 
 type DailyActivityTableRowProps = {
   dateGroupWithScores: {

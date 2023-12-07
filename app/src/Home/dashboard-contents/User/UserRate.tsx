@@ -1,5 +1,5 @@
-import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
+import { useQuery } from '@apollo/client';
 import { capitalize } from 'lodash-es';
 
 import { gql } from '@shared/__generated__';

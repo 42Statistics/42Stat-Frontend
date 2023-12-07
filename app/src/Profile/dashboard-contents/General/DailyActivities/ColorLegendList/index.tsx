@@ -1,4 +1,5 @@
 import { useTheme } from '@emotion/react';
+
 import { HStack } from '@shared/ui-kit';
 
 import { SCORE_BREAKPOINTS } from '@/Profile/dashboard-contents/General/DailyActivities/constants/scoreBreakpoints';

@@ -1,4 +1,5 @@
 import { SpotlightProjectListItem } from '@core/components/Spotlight/SpotlightProjectListItem';
+
 import type { ProjectPreview } from '@shared/__generated__/graphql';
 import { VStack } from '@shared/ui-kit';
 

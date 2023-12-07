@@ -1,6 +1,7 @@
-import { RESULT_PER_PAGE } from '@/EvalLogSearch/constants/resultPerPage';
 import { gql } from '@shared/__generated__';
 import { EvalLogSortOrder } from '@shared/__generated__/graphql';
+
+import { RESULT_PER_PAGE } from '@/EvalLogSearch/constants/resultPerPage';
 
 export const GET_EVAL_LOGS = gql(/* GraphQL */ `
   query GetEvalLogs(

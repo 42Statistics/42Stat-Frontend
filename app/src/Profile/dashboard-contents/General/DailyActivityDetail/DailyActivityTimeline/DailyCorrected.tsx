@@ -1,11 +1,14 @@
-import dayjs from 'dayjs';
 import { useContext } from 'react';
 
-import { ReactComponent as MdCorrected } from '@/Profile/assets/activity/corrected.svg';
-import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
+import dayjs from 'dayjs';
+
 import { ROUTES } from '@shared/constants/routes';
 import { CaptionText, Text, VStack } from '@shared/ui-kit';
 import { CustomLink } from '@shared/ui-kit-styled/CustomLink';
+
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
+import { ReactComponent as MdCorrected } from '@/Profile/assets/activity/corrected.svg';
+
 import { TimelineItem } from '../TimelineItem';
 
 type DailyCorrectedProps = {

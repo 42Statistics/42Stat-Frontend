@@ -1,6 +1,7 @@
-import { useMutation } from '@apollo/client';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { useMutation } from '@apollo/client';
 import { useScript } from 'usehooks-ts';
 
 import { gql } from '@shared/__generated__';

@@ -1,7 +1,8 @@
-import { MarkLabel } from '@/Profile/dashboard-contents/LogtimeAndProject/TeamInfo/MarkLabel';
 import { TeamStatus } from '@shared/__generated__/graphql';
 import { Text } from '@shared/ui-kit';
 import { getTeamStatusString } from '@shared/utils/getTeamStatusString';
+
+import { MarkLabel } from '@/Profile/dashboard-contents/LogtimeAndProject/TeamInfo/MarkLabel';
 
 type ResultWithStatusProps = {
   isValidated?: boolean | null;

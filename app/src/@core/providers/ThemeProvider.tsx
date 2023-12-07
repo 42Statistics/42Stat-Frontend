@@ -3,6 +3,7 @@ import { useAtomValue, useSetAtom } from 'jotai';
 
 import { darkTheme } from '@core/styles/darkTheme';
 import { lightTheme } from '@core/styles/lightTheme';
+
 import { paletteAtom } from '@shared/atoms/paletteAtom';
 import {
   ThemePreference,

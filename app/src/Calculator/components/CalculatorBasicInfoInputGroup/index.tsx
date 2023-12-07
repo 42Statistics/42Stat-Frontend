@@ -1,10 +1,8 @@
-import styled from '@emotion/styled';
-import { useAtom, useAtomValue } from 'jotai';
 import { useEffect } from 'react';
 
-import { calculatorUserInfoAtom } from '@/Calculator/atoms/calculatorUserInfoAtom';
-import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
-import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
+import styled from '@emotion/styled';
+import { useAtom, useAtomValue } from 'jotai';
+
 import { CustomTooltip } from '@shared/components/CustomTooltip';
 import {
   Body1MediumText,
@@ -13,6 +11,10 @@ import {
   VStack,
   WritableNum,
 } from '@shared/ui-kit';
+
+import { calculatorUserInfoAtom } from '@/Calculator/atoms/calculatorUserInfoAtom';
+import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
+import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
 
 export const CalculatorBasicInfoInputGroup = () => {
   const [calculatorUserInfo, setCalculatorUserInfo] = useAtom(

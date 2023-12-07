@@ -1,6 +1,7 @@
+import { Link, Navigate } from 'react-router-dom';
+
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { Link, Navigate } from 'react-router-dom';
 
 import { AppLogoTitle } from '@shared/components/AppLogoTitle';
 import { FtLoginButton } from '@shared/components/LoginButton';

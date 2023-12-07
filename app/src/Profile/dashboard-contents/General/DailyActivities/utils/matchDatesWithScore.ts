@@ -1,6 +1,7 @@
-import type { DailyActivityScore } from '@/Profile/dashboard-contents/General/DailyActivities/types/DailyActivityScore';
 import type { DailyActivity } from '@shared/__generated__/graphql';
 import { isSameDate } from '@shared/utils/isSameDate';
+
+import type { DailyActivityScore } from '@/Profile/dashboard-contents/General/DailyActivities/types/DailyActivityScore';
 
 export const matchDatesWithScores = (
   dates: Date[],

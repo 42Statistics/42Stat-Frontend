@@ -1,13 +1,13 @@
 import { useAtomValue } from 'jotai';
 
+import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
+
 import {
   emptySubject,
   subjectListAtom,
 } from '@/Calculator/atoms/subjectListAtom';
 import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
 import type { Subject } from '@/Calculator/types/Subject';
-import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
-
 import { CalculatorInputContentCardView } from '@/Calculator/components/CalculatorInputContentCardView';
 import { CalculatorInputContentTableView } from '@/Calculator/components/CalculatorInputContentTableView';
 

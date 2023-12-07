@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react';
-
 import { HStack } from '../Stack';
 import { Divider } from './Divider';
+
+import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
   title: 'Common/Divider',

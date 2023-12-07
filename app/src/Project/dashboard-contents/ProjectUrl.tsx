@@ -1,9 +1,8 @@
-import { useQuery } from '@apollo/client';
-import { useTheme } from '@emotion/react';
 import { useContext } from 'react';
 
-import { ProjectNameContext } from '@/Project/contexts/ProjectNameContext';
-import { GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME } from '@/Project/dashboard-contents-queries/GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME';
+import { useTheme } from '@emotion/react';
+import { useQuery } from '@apollo/client';
+
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,
@@ -11,6 +10,9 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { CustomLink } from '@shared/ui-kit-styled/CustomLink';
+
+import { GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME } from '@/Project/dashboard-contents-queries/GET_PROJECT_INFO_ZERO_COST_BY_PROJECT_NAME';
+import { ProjectNameContext } from '@/Project/contexts/ProjectNameContext';
 
 export const ProjectUrl = () => {
   const theme = useTheme();

@@ -1,8 +1,9 @@
-import { useQuery } from '@apollo/client';
-import { css, useTheme } from '@emotion/react';
-import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
 import Slider from 'react-slick';
+
+import { css, useTheme } from '@emotion/react';
+import { useQuery } from '@apollo/client';
+import styled from '@emotion/styled';
 import 'slick-carousel/slick/slick.css';
 import { CountUp } from 'use-count-up';
 

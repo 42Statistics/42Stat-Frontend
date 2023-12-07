@@ -1,5 +1,6 @@
-import { useAtomValue, useSetAtom } from 'jotai';
 import { useCallback } from 'react';
+
+import { useAtomValue, useSetAtom } from 'jotai';
 
 import { calculatorUserInfoAtom } from '@/Calculator/atoms/calculatorUserInfoAtom';
 import { expTablesAtom } from '@/Calculator/atoms/expTablesAtom';

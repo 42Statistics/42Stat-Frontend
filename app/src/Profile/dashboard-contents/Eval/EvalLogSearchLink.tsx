@@ -1,11 +1,13 @@
-import { useTheme } from '@emotion/react';
 import { useContext } from 'react';
 
-import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
+import { useTheme } from '@emotion/react';
+
 import { DashboardContent } from '@shared/components/DashboardContent';
 import { ROUTES } from '@shared/constants/routes';
 import { Center } from '@shared/ui-kit';
 import { CustomLink } from '@shared/ui-kit-styled/CustomLink';
+
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 
 export const EvalLogSearchLink = () => {
   const theme = useTheme();

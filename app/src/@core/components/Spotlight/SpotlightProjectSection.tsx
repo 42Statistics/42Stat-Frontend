@@ -1,4 +1,5 @@
 import { SpotlightProjectList } from '@core/components/Spotlight/SpotlightProjectList';
+
 import type { ProjectPreview } from '@shared/__generated__/graphql';
 import { BoldText, Divider, VStack } from '@shared/ui-kit';
 

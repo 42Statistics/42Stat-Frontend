@@ -1,14 +1,17 @@
+import { useRef } from 'react';
+
 import { useTheme } from '@emotion/react';
 import dayjs from 'dayjs';
 import { useAtom } from 'jotai';
-import { useRef } from 'react';
 
-import { DailyActivitySquare } from '@/Profile/dashboard-contents/General/DailyActivities/DailyActivitySquare';
-import { getDailyActivityTableDataColor } from '@/Profile/dashboard-contents/General/DailyActivities/utils/getDailyActivityTableDataColor';
 import { DailyActivity } from '@shared/__generated__/graphql';
 import { Tooltip } from '@shared/ui-kit';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 import { isSameDate } from '@shared/utils/isSameDate';
+
+import { getDailyActivityTableDataColor } from '@/Profile/dashboard-contents/General/DailyActivities/utils/getDailyActivityTableDataColor';
+import { DailyActivitySquare } from '@/Profile/dashboard-contents/General/DailyActivities/DailyActivitySquare';
+
 import { selectedDailyActivityAtom } from '../atoms/selectedDailyActivityAtom';
 
 type DailyActivityTableDataProps = {

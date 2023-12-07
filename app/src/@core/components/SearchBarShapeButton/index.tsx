@@ -4,6 +4,7 @@ import { detect } from 'detect-browser';
 import { useSetAtom } from 'jotai';
 
 import { isSpotlightOpenAtom } from '@core/atoms/isSpotlightOpenAtom';
+
 import { ReactComponent as MdSearch } from '@shared/assets/icon/md-search.svg';
 import { ARIA_LABEL } from '@shared/constants/accessibility';
 import { CaptionText, Clickable, HStack, Spacer, Text } from '@shared/ui-kit';

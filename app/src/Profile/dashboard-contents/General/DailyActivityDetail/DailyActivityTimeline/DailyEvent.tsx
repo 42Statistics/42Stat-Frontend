@@ -1,7 +1,9 @@
 import dayjs from 'dayjs';
 
-import { ReactComponent as MdEvent } from '@/Profile/assets/activity/event.svg';
 import { BoldText, CaptionText, Text, VStack } from '@shared/ui-kit';
+
+import { ReactComponent as MdEvent } from '@/Profile/assets/activity/event.svg';
+
 import { TimelineItem } from '../TimelineItem';
 
 type DailyEventProps = {

@@ -1,5 +1,6 @@
-import { useAtomValue } from 'jotai';
 import { Link } from 'react-router-dom';
+
+import { useAtomValue } from 'jotai';
 
 import { userAtom } from '@shared/atoms/userAtom';
 import { ALT } from '@shared/constants/accessibility';

@@ -1,9 +1,8 @@
-import { useQuery } from '@apollo/client';
-import { useTheme } from '@emotion/react';
 import { useContext } from 'react';
 
-import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
-import { padWithNullValues } from '@/Profile/utils/padWithNullValues';
+import { useTheme } from '@emotion/react';
+import { useQuery } from '@apollo/client';
+
 import { gql } from '@shared/__generated__';
 import { LineChart } from '@shared/components/Chart';
 import { DashboardContent } from '@shared/components/DashboardContent';
@@ -13,6 +12,9 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { BREAKPOINT } from '@shared/constants/responsive';
+
+import { padWithNullValues } from '@/Profile/utils/padWithNullValues';
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 
 const GET_LEVEL_RECORDS_BY_LOGIN = gql(/* GraphQL */ `
   query GetLevelRecordsByLogin($login: String!) {

@@ -1,9 +1,8 @@
-import { useQuery } from '@apollo/client';
-import styled from '@emotion/styled';
 import { useContext } from 'react';
 
-import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
-import { TeamInfoTable } from '@/Profile/dashboard-contents/LogtimeAndProject/TeamInfo/TeamInfoTable';
+import { useQuery } from '@apollo/client';
+import styled from '@emotion/styled';
+
 import { gql } from '@shared/__generated__';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
@@ -12,6 +11,9 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { TextDefault } from '@shared/components/DashboardContentView/Text/TextDefault';
+
+import { TeamInfoTable } from '@/Profile/dashboard-contents/LogtimeAndProject/TeamInfo/TeamInfoTable';
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 
 const GET_TEAM_INFO_BY_LOGIN = gql(/* GraphQL */ `
   query GetTeamInfoByLogin($login: String!) {

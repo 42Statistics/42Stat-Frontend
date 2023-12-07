@@ -17,7 +17,7 @@ export const DailyLogTime = ({ dailyLogtime, color }: DailyLogtimeProps) => {
       hasVerticalLine={false}
     >
       <Text style={{ marginTop: '0.5rem' }}>
-        {hour}시간 {minute}분 접속
+        {dailyLogtime === 0 ? '접속 기록 없음' : `${hour}시간 ${minute}분 접속`}
       </Text>
     </TimelineItem>
   );

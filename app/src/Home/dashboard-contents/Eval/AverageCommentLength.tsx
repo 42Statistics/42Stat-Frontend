@@ -8,7 +8,7 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { NumberDefault } from '@shared/components/DashboardContentView/Number/NumberDefault';
-import { InfoTooltip } from '@shared/components/InfoTooltip';
+import { CustomTooltip } from '@shared/components/CustomTooltip';
 
 const GET_AVERAGE_COMMENT_LENGTH = gql(/* GraphQL */ `
   query GetAverageCommentLength {
@@ -38,7 +38,7 @@ export const AverageCommentLength = () => {
   return (
     <DashboardContent
       title={title}
-      titleRight={<InfoTooltip text="코멘트 : 평가하러 가서 작성한 리뷰" />}
+      titleRight={<CustomTooltip text="코멘트 : 평가하러 가서 작성한 리뷰" />}
     >
       <NumberDefault number={averageCommentLength} unit={unit} />
     </DashboardContent>

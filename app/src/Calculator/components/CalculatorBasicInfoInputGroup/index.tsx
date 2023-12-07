@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { calculatorUserInfoAtom } from '@/Calculator/atoms/calculatorUserInfoAtom';
 import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
 import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
-import { InfoTooltip } from '@shared/components/InfoTooltip';
+import { CustomTooltip } from '@shared/components/CustomTooltip';
 import {
   Body1MediumText,
   HStack,
@@ -43,7 +43,7 @@ export const CalculatorBasicInfoInputGroup = () => {
       <HStack spacing="2rem">
         <HStack w="13rem" justify="start" spacing="1rem">
           <Body1MediumText>현재 레벨</Body1MediumText>
-          <InfoTooltip text="레벨이 8.41을 넘으면, 블랙홀 기간이 늘지 않아요." />
+          <CustomTooltip text="레벨이 8.41을 넘으면, 블랙홀 기간이 늘지 않아요." />
         </HStack>
         <InputLayout>
           <WritableNum
@@ -60,7 +60,7 @@ export const CalculatorBasicInfoInputGroup = () => {
       <HStack spacing="2rem">
         <HStack w="13rem" justify="start" spacing="1rem">
           <Body1MediumText>현재 블랙홀</Body1MediumText>
-          <InfoTooltip text="현재 블랙홀 + 본 과정 시작 날짜가 670일이 넘으면, 블랙홀 기간이 늘지 않아요." />
+          <CustomTooltip text="현재 블랙홀 + 본 과정 시작 날짜가 671일이 넘으면, 블랙홀 기간이 늘지 않아요." />
         </HStack>
         <HStack spacing="0.3rem">
           <InputLayout>
@@ -78,7 +78,11 @@ export const CalculatorBasicInfoInputGroup = () => {
       <HStack spacing="2rem">
         <HStack w="13rem" justify="start" spacing="1rem">
           <Body1MediumText>본과정 시작한지</Body1MediumText>
-          <InfoTooltip text="휴학일이 포함된 경우, 휴학 기간을 뺄 수 있어요." />
+          <CustomTooltip
+            type="warning"
+            size="16"
+            text="추가 지급된 블랙홀은 직접 빼주세요. (6~8기: 6일 / 9기: 5일 / 10기: 1일)"
+          />
         </HStack>
         <HStack spacing="0.3rem">
           <InputLayout>

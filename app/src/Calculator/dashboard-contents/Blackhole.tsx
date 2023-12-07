@@ -27,7 +27,7 @@ export const Blackhole = () => {
     '본과정 시작한지',
     '현재 블랙홀',
     ...subjectList.map((subject) => subject.name),
-    '670일까지 남은 일수',
+    '671일까지 남은 일수',
   ];
 
   const series = [

@@ -1,8 +1,10 @@
-import { useTheme } from '@emotion/react';
-import styled from '@emotion/styled';
 import { Link, useLocation } from 'react-router-dom';
 
+import { useTheme } from '@emotion/react';
+import styled from '@emotion/styled';
+
 import type { NavRoute } from '@core/components/NavBar/hooks/useNavRoutes';
+
 import { HStack, Text } from '@shared/ui-kit';
 
 export type NavItemProps = {

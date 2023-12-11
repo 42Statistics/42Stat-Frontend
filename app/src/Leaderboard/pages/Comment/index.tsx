@@ -1,7 +1,14 @@
-import { useQuery } from '@apollo/client';
-import { useTheme } from '@emotion/react';
-import { useAtomValue } from 'jotai';
 import { useSearchParams } from 'react-router-dom';
+
+import { useTheme } from '@emotion/react';
+import { useQuery } from '@apollo/client';
+import { useAtomValue } from 'jotai';
+
+import { Footer } from '@core/components/Footer';
+
+import { DateTemplate } from '@shared/__generated__/graphql';
+import { Seo } from '@shared/components/Seo';
+import { CaptionText, HStack, SegmentedControl, VStack } from '@shared/ui-kit';
 
 import { leaderboardCoalitionListAtom } from '@/Leaderboard/atoms/leaderboardCoalitionListAtom';
 import { leaderboardPromoListAtom } from '@/Leaderboard/atoms/leaderboardPromoListAtom';
@@ -13,10 +20,6 @@ import { LeaderboardCommentResult } from '@/Leaderboard/pages/Comment/components
 import { GET_LEADERBOARD_COMMENT } from '@/Leaderboard/pages/Comment/queries/getLeaderboardComment';
 import { useLeaderboardEvalCountSegmentedControl } from '@/Leaderboard/pages/EvalCount/hooks/useLeaderboardEvalCountSegmentedControl';
 import { toLeaderboardArgs } from '@/Leaderboard/utils/toLeaderboardArgs';
-import { Footer } from '@core/components/Footer';
-import { DateTemplate } from '@shared/__generated__/graphql';
-import { Seo } from '@shared/components/Seo';
-import { CaptionText, HStack, SegmentedControl, VStack } from '@shared/ui-kit';
 
 const LeaderboardCommentPage = () => {
   const theme = useTheme();

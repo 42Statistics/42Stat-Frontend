@@ -1,10 +1,8 @@
-import { useQuery } from '@apollo/client';
-import { useTheme } from '@emotion/react';
 import { useContext } from 'react';
 
-import { MyUserProfileContext } from '@/Profile/contexts/MyUserProfileContext';
-import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
-import { getPercentile } from '@/Profile/utils/getPercentile';
+import { useTheme } from '@emotion/react';
+import { useQuery } from '@apollo/client';
+
 import { gql } from '@shared/__generated__';
 import { RadarChart } from '@shared/components/Chart';
 import { DashboardContent } from '@shared/components/DashboardContent';
@@ -13,6 +11,10 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
+
+import { getPercentile } from '@/Profile/utils/getPercentile';
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
+import { MyUserProfileContext } from '@/Profile/contexts/MyUserProfileContext';
 
 const GET_RANKINGS_VERSUS = gql(/* GraphQL */ `
   query GetRankingsVersus($login1: String!, $login2: String!) {

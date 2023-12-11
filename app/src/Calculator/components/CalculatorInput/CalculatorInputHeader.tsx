@@ -1,17 +1,19 @@
 import { useTheme } from '@emotion/react';
 import { useAtomValue, useSetAtom } from 'jotai';
+import styled from '@emotion/styled';
 
+import { calculatorDialogAtom } from '@core/atoms/calculatorDialogAtom';
+
+import { Button, CaptionText, H2BoldText, HStack } from '@shared/ui-kit';
+import { mq } from '@shared/utils/facepaint/mq';
+
+import { currentOpenSpotlightIndexAtom } from '@/Calculator/atoms/currentOpenSpotlightIndexAtom';
+import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
 import {
   emptySubject,
   subjectListAtom,
   subjectListAtomInitialValue,
 } from '@/Calculator/atoms/subjectListAtom';
-import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
-import { currentOpenSpotlightIndexAtom } from '@/Calculator/atoms/currentOpenSpotlightIndexAtom';
-import { calculatorDialogAtom } from '@core/atoms/calculatorDialogAtom';
-import styled from '@emotion/styled';
-import { Button, CaptionText, H2BoldText, HStack } from '@shared/ui-kit';
-import { mq } from '@shared/utils/facepaint/mq';
 
 export const CalculatorInputHeader = () => {
   const theme = useTheme();

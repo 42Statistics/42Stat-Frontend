@@ -1,6 +1,7 @@
+import ReactApexChart from 'react-apexcharts';
+
 import { ApexOptions } from 'apexcharts';
 import { merge } from 'lodash-es';
-import ReactApexChart from 'react-apexcharts';
 
 import { useDefaultOptions } from '@shared/components/Chart/hooks/useDefaultOptions';
 

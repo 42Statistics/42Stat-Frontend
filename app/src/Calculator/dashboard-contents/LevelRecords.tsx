@@ -1,6 +1,11 @@
+import { useMemo } from 'react';
+
 import { useAtomValue } from 'jotai';
 import { truncate } from 'lodash-es';
-import { useMemo } from 'react';
+
+import { AreaChart } from '@shared/components/Chart';
+import { DashboardContent } from '@shared/components/DashboardContent';
+import { TextDefault } from '@shared/components/DashboardContentView/Text/TextDefault';
 
 import { calculatorUserInfoAtom } from '@/Calculator/atoms/calculatorUserInfoAtom';
 import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
@@ -8,9 +13,6 @@ import {
   MAX_XAXIS_COUNT,
   MAX_XVALUE_LENGTH,
 } from '@/Calculator/constants/levelRecords';
-import { AreaChart } from '@shared/components/Chart';
-import { DashboardContent } from '@shared/components/DashboardContent';
-import { TextDefault } from '@shared/components/DashboardContentView/Text/TextDefault';
 
 export const LevelRecords = () => {
   const subjectList = useAtomValue(subjectListAtom);
@@ -68,6 +70,14 @@ const LevelCalculatorChart = ({ series }: LevelCalculatorChartProps) => {
   const subjectLength = series[0].data.length;
 
   const options: ApexCharts.ApexOptions = {
+    chart: {
+      toolbar: {
+        show: false,
+        tools: {
+          zoom: false,
+        },
+      },
+    },
     xaxis: {
       overwriteCategories: series[0].data.map((item) => {
         if (subjectLength > MAX_XAXIS_COUNT) {

@@ -1,8 +1,6 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 
-import astronaut from '@/Landing/assets/astronaut.png';
-import { Introduction } from '@/Landing/components/Introduction';
 import { AppLogoTitle } from '@shared/components/AppLogoTitle';
 import {
   FtLoginButton,
@@ -12,6 +10,9 @@ import { ARIA_LABEL } from '@shared/constants/accessibility';
 import { HStack, Image, VStack } from '@shared/ui-kit';
 import { mq } from '@shared/utils/facepaint/mq';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
+
+import { Introduction } from '@/Landing/components/Introduction';
+import astronaut from '@/Landing/assets/astronaut.png';
 
 const LandingPage = () => {
   const theme = useTheme();

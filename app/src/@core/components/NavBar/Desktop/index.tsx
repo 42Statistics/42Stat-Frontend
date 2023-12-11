@@ -1,10 +1,12 @@
+import { Link } from 'react-router-dom';
+
 import styled from '@emotion/styled';
 import { useAtomValue } from 'jotai';
-import { Link } from 'react-router-dom';
 
 import { NavMenu } from '@core/components/NavBar/shared/NavMenu';
 import { DesktopNavProfile } from '@core/components/NavProfile/Desktop';
 import { SearchBarShapeButton } from '@core/components/SearchBarShapeButton';
+
 import { userAtom } from '@shared/atoms/userAtom';
 import { AppLogoTitle } from '@shared/components/AppLogoTitle';
 import { ARIA_LABEL } from '@shared/constants/accessibility';

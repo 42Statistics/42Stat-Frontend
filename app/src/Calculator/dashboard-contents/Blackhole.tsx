@@ -1,6 +1,10 @@
 import { useAtomValue } from 'jotai';
 import { truncate } from 'lodash-es';
 
+import { DonutChart } from '@shared/components/Chart';
+import { DashboardContent } from '@shared/components/DashboardContent';
+import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
+
 import { calculatorUserInfoAtom } from '@/Calculator/atoms/calculatorUserInfoAtom';
 import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
 import {
@@ -8,9 +12,6 @@ import {
   MAX_BLACKHOLE_NAME_LENGTH,
 } from '@/Calculator/constants/blackhole';
 import type { Subject } from '@/Calculator/types/Subject';
-import { DonutChart } from '@shared/components/Chart';
-import { DashboardContent } from '@shared/components/DashboardContent';
-import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 
 export const Blackhole = () => {
   const subjectList = useAtomValue(subjectListAtom);
@@ -27,7 +28,7 @@ export const Blackhole = () => {
     '본과정 시작한지',
     '현재 블랙홀',
     ...subjectList.map((subject) => subject.name),
-    '670일까지 남은 일수',
+    '671일까지 남은 일수',
   ];
 
   const series = [

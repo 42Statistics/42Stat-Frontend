@@ -1,10 +1,13 @@
-import { useAtom, useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 
-import { currentOpenSpotlightIndexAtom } from '@/Calculator/atoms/currentOpenSpotlightIndexAtom';
+import { useAtom, useSetAtom } from 'jotai';
+
 import { calculatorDialogAtom } from '@core/atoms/calculatorDialogAtom';
+
 import { AlertDialog } from '@shared/ui-kit';
 import { isEnterKeyDown, isEscapeKeyDown } from '@shared/utils/keyboard';
+
+import { currentOpenSpotlightIndexAtom } from '@/Calculator/atoms/currentOpenSpotlightIndexAtom';
 
 export const CalculatorDialog = () => {
   const [{ focus, description }, setIsModalOpen] =

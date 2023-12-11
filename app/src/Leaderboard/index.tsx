@@ -1,8 +1,9 @@
 import { Outlet, useLocation } from 'react-router-dom';
 
-import { LeaderboardListProvider } from '@/Leaderboard/components/LeaderboardListProvider';
 import { ROUTES } from '@shared/constants/routes';
 import { Tab, Tabs, VStack } from '@shared/ui-kit';
+
+import { LeaderboardListProvider } from '@/Leaderboard/components/LeaderboardListProvider';
 
 const LeaderboardLayout = () => {
   const { pathname } = useLocation();

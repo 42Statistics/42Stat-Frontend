@@ -5,6 +5,7 @@ import { TabletNavDrawer } from '@core/components/NavBar/Tablet/TabletNavDrawer'
 import { TabletNavMenu } from '@core/components/NavBar/Tablet/TabletNavMenu';
 import { TabletNavProfile } from '@core/components/NavProfile/Tablet';
 import { SearchButtonTriggerSpotlight } from '@core/components/Spotlight/SearchButtonTriggerSpotlight';
+
 import { userAtom } from '@shared/atoms/userAtom';
 import { Center, VStack } from '@shared/ui-kit';
 

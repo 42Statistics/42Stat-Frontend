@@ -1,10 +1,11 @@
-import { DeleteAccountButton } from '@/Setting/sections/AccountSection/DeleteAccountButton';
-import { DeleteAccountDialog } from '@/Setting/sections/AccountSection/DeleteAccountDialog';
-import { LogoutButton } from '@/Setting/sections/AccountSection/LogoutButton';
 import { useDisclosure } from '@shared/hooks/useDisclosure';
 import { Divider, H2BoldText, HStack, Spacer, VStack } from '@shared/ui-kit';
 import { CustomSection } from '@shared/ui-kit-styled';
 import { Mobile, TabletAndAbove } from '@shared/utils/react-responsive/Device';
+
+import { LogoutButton } from '@/Setting/sections/AccountSection/LogoutButton';
+import { DeleteAccountDialog } from '@/Setting/sections/AccountSection/DeleteAccountDialog';
+import { DeleteAccountButton } from '@/Setting/sections/AccountSection/DeleteAccountButton';
 
 export const AccountSection = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();

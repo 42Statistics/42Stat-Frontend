@@ -1,12 +1,14 @@
-import { useQuery } from '@apollo/client';
-import { css, useTheme } from '@emotion/react';
-import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
 import Slider from 'react-slick';
+
+import { css, useTheme } from '@emotion/react';
+import { useQuery } from '@apollo/client';
+import styled from '@emotion/styled';
 import 'slick-carousel/slick/slick.css';
 import { CountUp } from 'use-count-up';
 
 import { gql } from '@shared/__generated__';
+import { CALENDAR_DAYS_FROM_FT_BEGIN_AT } from '@shared/constants/date';
 import { BoldText } from '@shared/ui-kit';
 import { mq } from '@shared/utils/facepaint/mq';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
@@ -47,7 +49,7 @@ export const Introduction = () => {
   const { data } = useQuery(GET_LANDING);
 
   const [introData, setIntroData] = useState<IntroData>({
-    daysAfterBeginAt: 1262,
+    daysAfterBeginAt: CALENDAR_DAYS_FROM_FT_BEGIN_AT,
     aliveCount: 1030,
     blackholedCount: 1326,
     memberCount: 244,
@@ -87,7 +89,6 @@ export const Introduction = () => {
       return;
     }
     const {
-      daysAfterBeginAt,
       aliveCount,
       blackholedCount,
       memberCount,
@@ -98,7 +99,7 @@ export const Introduction = () => {
       },
     } = data.getLanding;
     setIntroData({
-      daysAfterBeginAt,
+      daysAfterBeginAt: CALENDAR_DAYS_FROM_FT_BEGIN_AT,
       aliveCount,
       blackholedCount,
       memberCount,

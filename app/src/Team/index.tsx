@@ -1,10 +1,10 @@
-import { useQuery } from '@apollo/client';
-import { useTheme } from '@emotion/react';
 import { Link, useParams } from 'react-router-dom';
 
-import { MoulinetteEvalLogListItem } from '@/Team/components/MoulinetteEvalLogListItem';
-import { teamUserCompareFn } from '@/Team/utils/teamUserCompareFn';
+import { useTheme } from '@emotion/react';
+import { useQuery } from '@apollo/client';
+
 import { Footer } from '@core/components/Footer';
+
 import { gql } from '@shared/__generated__';
 import { ReactComponent as Star } from '@shared/assets/icon/star.svg';
 import { ReactComponent as FtLogo } from '@shared/assets/logo/ft-logo.svg';
@@ -30,6 +30,9 @@ import {
 import { CustomLink } from '@shared/ui-kit-styled/CustomLink';
 import { getDateDiffStringWithTeamStatus } from '@shared/utils/getDateDiffStringWithTeamStatus';
 import { getTeamStatusString } from '@shared/utils/getTeamStatusString';
+
+import { teamUserCompareFn } from '@/Team/utils/teamUserCompareFn';
+import { MoulinetteEvalLogListItem } from '@/Team/components/MoulinetteEvalLogListItem';
 
 const GET_TEAM_INFO = gql(/* GraphQL */ `
   query GetTeamInfo($id: Int!) {
@@ -149,12 +152,18 @@ const TeamPage = () => {
                   {user.isLeader ? (
                     <Avatar
                       size="lg"
+                      name={user.login}
                       src={user.imgUrl}
                       alt={user.login}
                       badge={<Star width={18} height={18} fill="#ffd700" />}
                     />
                   ) : (
-                    <Avatar size="lg" src={user.imgUrl} alt={user.login} />
+                    <Avatar
+                      size="lg"
+                      src={user.imgUrl}
+                      name={user.login}
+                      alt={user.login}
+                    />
                   )}
                   <MediumText>{user.login}</MediumText>
                   <CaptionText>#{user.occurrence + 1}</CaptionText>
@@ -162,7 +171,12 @@ const TeamPage = () => {
               </Link>
             ))}
           </HStack>
-          <CustomLink to={url} target="_blank" rel="noopener noreferrer">
+          <CustomLink
+            to={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            fontSize={theme.fonts.size.body1}
+          >
             Intra 팀 페이지 바로가기
           </CustomLink>
         </VStack>

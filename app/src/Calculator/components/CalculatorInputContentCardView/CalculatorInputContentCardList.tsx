@@ -1,9 +1,10 @@
 import { Fragment } from 'react';
 
+import { Divider } from '@shared/ui-kit';
+
 import type { CalculatorInputContentCardViewProps } from '@/Calculator/components/CalculatorInputContentCardView';
 import { CalculatorInputContentCardListItem } from '@/Calculator/components/CalculatorInputContentCardView/CalculatorInputContentCardListItem';
 import type { Subject } from '@/Calculator/types/Subject';
-import { Divider } from '@shared/ui-kit';
 
 type CalculatorInputContentCardListProps =
   CalculatorInputContentCardViewProps & {

@@ -1,6 +1,7 @@
 import { useSetAtom } from 'jotai';
 
 import { isLogoutErrorDialogOpenAtom } from '@core/atoms/isLogoutErrorDialogOpenAtom';
+
 import { AlertDialog } from '@shared/ui-kit';
 
 export const LogoutErrorDialog = () => {

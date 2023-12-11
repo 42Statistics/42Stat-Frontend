@@ -1,17 +1,19 @@
 import { Suspense, lazy } from 'react';
 import { Navigate, createBrowserRouter } from 'react-router-dom';
 
+import { AuthGuard } from '@core/guards/AuthGuard';
+import { UnAuthGuard } from '@core/guards/UnAuthGuard';
+import { ModalProvider } from '@core/providers/ModalProvider';
+
+import { ROUTES } from '@shared/constants/routes';
+import { DeferredComponent } from '@shared/ui-kit';
+
 import { HomePageSkeleton } from '@/Home/components/skeletons/HomePageSkeleton';
 import { LeaderboardPageSkeleton } from '@/Leaderboard/components/skeletons/LeaderboardPageSkeleton';
 import { ProfileEvalPageSkeleton } from '@/Profile/components/skeletons/ProfileEvalPageSkeleton';
 import { ProfileGeneralPageSkeleton } from '@/Profile/components/skeletons/ProfileGeneralPageSkeleton';
 import { ProfileVersusPageSkeleton } from '@/Profile/components/skeletons/ProfileVersusPageSkeleton';
 import { UserProfileSkeleton } from '@/Profile/components/skeletons/UserProfileSkeleton';
-import { AuthGuard } from '@core/guards/AuthGuard';
-import { UnAuthGuard } from '@core/guards/UnAuthGuard';
-import { ModalProvider } from '@core/providers/ModalProvider';
-import { ROUTES } from '@shared/constants/routes';
-import { DeferredComponent } from '@shared/ui-kit';
 
 const LandingLayout = lazy(() => import('@core/layouts/LandingLayout'));
 const MainLayout = lazy(() => import('@core/layouts/MainLayout'));
@@ -22,6 +24,9 @@ const HomePage = lazy(() => import('@/Home'));
 const EvalLogSearchPage = lazy(() => import('@/EvalLogSearch'));
 const ProjectDetailPage = lazy(() => import('@/Project/ProjectDetailPage'));
 const ProfileGeneralPage = lazy(() => import('@/Profile/pages/General'));
+const ProfileLogtimeAndProjectPage = lazy(
+  () => import('@/Profile/pages/LogtimeAndProject'),
+);
 const ProfileEvalPage = lazy(() => import('@/Profile/pages/Eval'));
 const ProfileVersusPage = lazy(() => import('@/Profile/pages/Versus'));
 const LeaderboardLevelPage = lazy(() => import('@/Leaderboard/pages/Level'));
@@ -125,6 +130,14 @@ export const appRouter = createBrowserRouter([
                     element: (
                       <Suspense fallback={<ProfileGeneralPageSkeleton />}>
                         <ProfileGeneralPage />
+                      </Suspense>
+                    ),
+                  },
+                  {
+                    path: ROUTES.PROFILE_LOGTIME_AND_PROJECT,
+                    element: (
+                      <Suspense>
+                        <ProfileLogtimeAndProjectPage />
                       </Suspense>
                     ),
                   },

@@ -1,6 +1,7 @@
+import { useLayoutEffect, useState } from 'react';
+
 import { keyframes, useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { useLayoutEffect, useState } from 'react';
 
 import { MODAL_ID } from '@shared/constants/htmlId';
 import type { ModalBaseProps } from '@shared/types/Modal';

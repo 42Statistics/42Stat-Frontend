@@ -1,6 +1,12 @@
+import { useSearchParams } from 'react-router-dom';
+
 import { useQuery } from '@apollo/client';
 import { useAtomValue } from 'jotai';
-import { useSearchParams } from 'react-router-dom';
+
+import { Footer } from '@core/components/Footer';
+
+import { Seo } from '@shared/components/Seo';
+import { HStack, SegmentedControl, VStack } from '@shared/ui-kit';
 
 import { leaderboardCoalitionListAtom } from '@/Leaderboard/atoms/leaderboardCoalitionListAtom';
 import { leaderboardPromoListAtom } from '@/Leaderboard/atoms/leaderboardPromoListAtom';
@@ -12,9 +18,6 @@ import { LeaderboardExpIncrementResult } from '@/Leaderboard/pages/ExpIncrement/
 import { useLeaderboardExpIncrementSegmentedControl } from '@/Leaderboard/pages/ExpIncrement/hooks/useLeaderboardExpIncrementSegmentedControl';
 import { GET_LEADERBOARD_EXP_INCREMENT } from '@/Leaderboard/pages/ExpIncrement/queries/getLeaderboardExpIncrement';
 import { toLeaderboardArgs } from '@/Leaderboard/utils/toLeaderboardArgs';
-import { Footer } from '@core/components/Footer';
-import { Seo } from '@shared/components/Seo';
-import { HStack, SegmentedControl, VStack } from '@shared/ui-kit';
 
 const LeaderboardExpIncrementPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();

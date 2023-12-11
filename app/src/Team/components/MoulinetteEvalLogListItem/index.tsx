@@ -1,10 +1,11 @@
 import styled from '@emotion/styled';
 
-import { MoulinetteEvalLogListItemTitle } from '@/Team/components/MoulinetteEvalLogListItem/MoulinetteEvalLogListItemTitle';
 import type { TeamUpload } from '@shared/__generated__/graphql';
 import { CorrectorReviewLabel } from '@shared/components/EvalLogLabel/CorrectorReviewLabel';
 import { Center, HStack, Text } from '@shared/ui-kit';
 import { CustomBox } from '@shared/ui-kit-styled';
+
+import { MoulinetteEvalLogListItemTitle } from '@/Team/components/MoulinetteEvalLogListItem/MoulinetteEvalLogListItemTitle';
 
 type MoulinetteEvalLogListItemProps = {
   item: TeamUpload;

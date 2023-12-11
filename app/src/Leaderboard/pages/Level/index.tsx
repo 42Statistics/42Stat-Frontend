@@ -1,6 +1,13 @@
+import { useSearchParams } from 'react-router-dom';
+
 import { useQuery } from '@apollo/client';
 import { useAtomValue } from 'jotai';
-import { useSearchParams } from 'react-router-dom';
+
+import { Footer } from '@core/components/Footer';
+
+import { DateTemplate } from '@shared/__generated__/graphql';
+import { Seo } from '@shared/components/Seo';
+import { HStack, VStack } from '@shared/ui-kit';
 
 import { leaderboardCoalitionListAtom } from '@/Leaderboard/atoms/leaderboardCoalitionListAtom';
 import { leaderboardPromoListAtom } from '@/Leaderboard/atoms/leaderboardPromoListAtom';
@@ -11,10 +18,6 @@ import { LEADERBOARD_PARAM_KEYS } from '@/Leaderboard/constants/paramKeys';
 import { LeaderboardLevelResult } from '@/Leaderboard/pages/Level/components/LeaderboardLevelResult';
 import { GET_LEADERBOARD_LEVEL } from '@/Leaderboard/pages/Level/queries/getLeaderboardLevel';
 import { toLeaderboardArgs } from '@/Leaderboard/utils/toLeaderboardArgs';
-import { Footer } from '@core/components/Footer';
-import { DateTemplate } from '@shared/__generated__/graphql';
-import { Seo } from '@shared/components/Seo';
-import { HStack, VStack } from '@shared/ui-kit';
 
 const LeaderboardLevelPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();

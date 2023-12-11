@@ -23,6 +23,7 @@ const colors = {
       default: '#00c48c',
       light: '#90e5cd',
     },
+    blackhole: '#161616',
   },
   semantic: {
     error: '#b1232d',
@@ -38,8 +39,8 @@ const colors = {
       theme: '#070f21',
     },
     main: {
-      default: 'linear-gradient(150deg, #ffffff 0%, #e7e7e9 100%)',
-      theme: '#f2f2f2',
+      default: '#f4f4f4',
+      theme: '#ffffff',
     },
     box: {
       default: '#ffffff',

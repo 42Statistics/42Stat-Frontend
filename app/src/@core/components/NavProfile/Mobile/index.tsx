@@ -1,6 +1,7 @@
+import { Link } from 'react-router-dom';
+
 import { useTheme } from '@emotion/react';
 import { useAtomValue } from 'jotai';
-import { Link } from 'react-router-dom';
 
 import { userAtom } from '@shared/atoms/userAtom';
 import { ALT, ARIA_LABEL } from '@shared/constants/accessibility';
@@ -27,7 +28,7 @@ export const MobileNavProfile = ({
       to={ROUTES.PROFILE_OF(user.login)}
       aria-label={ARIA_LABEL.LINK.PROFILE_OF(user.login)}
     >
-      <HStack spacing="2rem" style={{ marginLeft: '1rem' }}>
+      <HStack spacing="2rem" style={{ marginLeft: '1rem', padding: '1rem 0' }}>
         <Avatar
           size="lg"
           src={imgUrl}

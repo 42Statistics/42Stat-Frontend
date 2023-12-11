@@ -1,7 +1,8 @@
 import { useTheme } from '@emotion/react';
-import { ROUTES } from '@shared/constants/routes';
 
 import { SpotlightListItem } from '@core/components/Spotlight/SpotlightListItem';
+
+import { ROUTES } from '@shared/constants/routes';
 import type { ProjectPreview } from '@shared/__generated__/graphql';
 import { ReactComponent as FtLogo } from '@shared/assets/logo/ft-logo.svg';
 

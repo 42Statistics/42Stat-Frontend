@@ -23,6 +23,7 @@ type Colors = {
       default: string;
       light: string;
     };
+    blackhole: string;
   };
   semantic: {
     error: string;

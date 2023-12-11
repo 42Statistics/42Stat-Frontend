@@ -1,6 +1,6 @@
 import { useAtomValue } from 'jotai';
-
 import styled from '@emotion/styled';
+
 import { paletteAtom } from '@shared/atoms/paletteAtom';
 import type { AvatarSize } from '@shared/ui-kit/Avatar';
 import { pickColorFromString } from '@shared/utils/pickColorFromString';
@@ -9,9 +9,15 @@ type AvatarInitialsProps = {
   size: AvatarSize;
   width: string;
   name: string;
+  isAbsolute?: boolean;
 };
 
-export const AvatarInitials = ({ size, width, name }: AvatarInitialsProps) => {
+export const AvatarInitials = ({
+  size,
+  width,
+  name,
+  isAbsolute,
+}: AvatarInitialsProps) => {
   const palette = useAtomValue(paletteAtom);
 
   const brightness = palette === 'light' ? 0 : 128;
@@ -21,7 +27,13 @@ export const AvatarInitials = ({ size, width, name }: AvatarInitialsProps) => {
   const fontSize = getFontSize(size);
 
   return (
-    <Layout w={width} h={width} bg={randomColor} fontSize={fontSize}>
+    <Layout
+      w={width}
+      h={width}
+      bg={randomColor}
+      fontSize={fontSize}
+      isAbsolute={isAbsolute}
+    >
       {name.slice(0, 2).toUpperCase()}
     </Layout>
   );
@@ -32,9 +44,11 @@ type LayoutProps = {
   h: string;
   bg: string;
   fontSize: string;
+  isAbsolute?: boolean;
 };
 
 const Layout = styled.div<LayoutProps>`
+  position: ${({ isAbsolute }) => (isAbsolute ? 'absolute' : 'relative')};
   background-color: ${({ bg }) => bg};
   border-radius: 50%;
   width: ${({ w }) => w};

@@ -1,9 +1,11 @@
-import { useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { setEvalLogSearchArgsByURLSearchParamsAtom } from '@/EvalLogSearch/atoms/evalLogSearchArgsAtom';
+import { useSetAtom } from 'jotai';
+
 import type { PropsWithReactNodeChildren } from '@shared/types/PropsWithChildren';
+
+import { setEvalLogSearchArgsByURLSearchParamsAtom } from '@/EvalLogSearch/atoms/evalLogSearchArgsAtom';
 
 export const EvalLogSearchURLReader = ({
   children,

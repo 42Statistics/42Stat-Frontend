@@ -1,6 +1,12 @@
+import { useSearchParams } from 'react-router-dom';
+
 import { useQuery } from '@apollo/client';
 import { useAtomValue } from 'jotai';
-import { useSearchParams } from 'react-router-dom';
+
+import { Footer } from '@core/components/Footer';
+
+import { Seo } from '@shared/components/Seo';
+import { HStack, SegmentedControl, VStack } from '@shared/ui-kit';
 
 import { leaderboardCoalitionListAtom } from '@/Leaderboard/atoms/leaderboardCoalitionListAtom';
 import { leaderboardPromoListAtom } from '@/Leaderboard/atoms/leaderboardPromoListAtom';
@@ -12,9 +18,6 @@ import { LeaderboardEvalCountResult } from '@/Leaderboard/pages/EvalCount/compon
 import { useLeaderboardEvalCountSegmentedControl } from '@/Leaderboard/pages/EvalCount/hooks/useLeaderboardEvalCountSegmentedControl';
 import { GET_LEADERBOARD_EVAL_COUNT } from '@/Leaderboard/pages/EvalCount/queries/getLeaderboardEvalCount';
 import { toLeaderboardArgs } from '@/Leaderboard/utils/toLeaderboardArgs';
-import { Footer } from '@core/components/Footer';
-import { Seo } from '@shared/components/Seo';
-import { HStack, SegmentedControl, VStack } from '@shared/ui-kit';
 
 const LeaderboardEvalCountPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();

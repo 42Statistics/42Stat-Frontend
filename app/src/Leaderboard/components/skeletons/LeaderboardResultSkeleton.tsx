@@ -1,4 +1,5 @@
 import { VStack } from '@shared/ui-kit';
+
 import { LeaderboardListItemSkeleteon } from './LeaderboardListItemSkeleton';
 
 export const LeaderboardResultSkeleton = () => {

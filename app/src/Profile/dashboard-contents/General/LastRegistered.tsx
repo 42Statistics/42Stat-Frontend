@@ -1,8 +1,7 @@
-import { useQuery } from '@apollo/client';
 import { useContext } from 'react';
 
-import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
-import { GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN } from '@/Profile/dashboard-contents-queries/GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN';
+import { useQuery } from '@apollo/client';
+
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,
@@ -12,6 +11,9 @@ import {
 } from '@shared/components/DashboardContentView/Error';
 import { TextDefault } from '@shared/components/DashboardContentView/Text/TextDefault';
 import { ROUTES } from '@shared/constants/routes';
+
+import { GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN } from '@/Profile/dashboard-contents-queries/GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN';
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 
 export const LastRegistered = () => {
   const { login } = useContext(UserProfileContext);

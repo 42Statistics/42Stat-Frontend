@@ -1,6 +1,6 @@
+import { Theme, useTheme } from '@emotion/react';
 import { rgba } from 'emotion-rgba';
 
-import { Theme, useTheme } from '@emotion/react';
 import type { PropsWithStringChildren } from '@shared/types/PropsWithChildren';
 import { StyledLabel, Text } from '@shared/ui-kit';
 

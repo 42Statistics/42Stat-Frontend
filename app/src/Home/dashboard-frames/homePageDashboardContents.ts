@@ -1,3 +1,5 @@
+import type { DashboardItemProps } from '@shared/types/Dashboard';
+
 import {
   MonthlyTigCountPerCoalition,
   ScoreRecordsPerCoalition,
@@ -20,13 +22,11 @@ import {
   AverageDurationPerCircle,
   BlackholedCountPerCircle,
   BlackholedCountRecords,
-  BlackholedRate,
   CorrectionPointRanking,
-  MemberRate,
   UserCountPerLevel,
+  UserRate,
   WalletRanking,
 } from '@/Home/dashboard-contents/User';
-import type { DashboardItemProps } from '@shared/types/Dashboard';
 
 export const homePageDashboardContents: DashboardItemProps[] = [
   {
@@ -65,14 +65,7 @@ export const homePageDashboardContents: DashboardItemProps[] = [
     id: 8,
     content: UserCountPerLevel,
   },
-  {
-    id: 9,
-    content: MemberRate,
-  },
-  {
-    id: 10,
-    content: BlackholedRate,
-  },
+  //id 9,10 userRate로 통합
   {
     id: 11,
     content: BlackholedCountPerCircle,
@@ -108,5 +101,9 @@ export const homePageDashboardContents: DashboardItemProps[] = [
   {
     id: 19,
     content: MonthlyTigCountPerCoalition,
+  },
+  {
+    id: 20,
+    content: UserRate,
   },
 ];

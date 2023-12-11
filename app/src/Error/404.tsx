@@ -1,5 +1,6 @@
-import { useTheme } from '@emotion/react';
 import { Link } from 'react-router-dom';
+
+import { useTheme } from '@emotion/react';
 
 import { AppLogoTitle } from '@shared/components/AppLogoTitle';
 import { Seo } from '@shared/components/Seo';

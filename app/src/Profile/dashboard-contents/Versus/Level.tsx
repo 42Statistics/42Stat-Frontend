@@ -1,9 +1,7 @@
-import { useQuery } from '@apollo/client';
 import { useContext } from 'react';
 
-import { MyUserProfileContext } from '@/Profile/contexts/MyUserProfileContext';
-import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
-import { GET_VERSUS_ZERO_COST } from '@/Profile/dashboard-contents-queries/GET_VERSUS_ZERO_COST';
+import { useQuery } from '@apollo/client';
+
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,
@@ -11,6 +9,10 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { NumberVersus } from '@shared/components/DashboardContentView/Number/NumberVersus';
+
+import { MyUserProfileContext } from '@/Profile/contexts/MyUserProfileContext';
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
+import { GET_VERSUS_ZERO_COST } from '@/Profile/dashboard-contents-queries/GET_VERSUS_ZERO_COST';
 
 export const Level = () => {
   const myUserProfile = useContext(MyUserProfileContext);

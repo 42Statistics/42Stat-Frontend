@@ -1,14 +1,16 @@
-import { useLazyQuery } from '@apollo/client';
+import { useEffect, useState } from 'react';
+
 import { useTheme } from '@emotion/react';
+import { useLazyQuery } from '@apollo/client';
 import styled from '@emotion/styled';
 import { useSetAtom } from 'jotai';
-import { useEffect, useState } from 'react';
 import { useDebounce } from 'usehooks-ts';
 
 import { isSpotlightOpenAtom } from '@core/atoms/isSpotlightOpenAtom';
 import { SpotlightResult } from '@core/components/Spotlight/SpotlightResult';
 import { SpotlightSearchBar } from '@core/components/Spotlight/SpotlightSearchBar';
 import { SpotlightFocusContext } from '@core/contexts/SpotlightFocusContext';
+
 import { gql } from '@shared/__generated__';
 import { ReactComponent as MdSearch } from '@shared/assets/icon/md-search.svg';
 import { useRoveFocus } from '@shared/hooks/useRoveFocus';

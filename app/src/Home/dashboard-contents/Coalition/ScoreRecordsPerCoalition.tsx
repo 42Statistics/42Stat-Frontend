@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client';
+import { subMonths } from 'date-fns';
 
 import { gql } from '@shared/__generated__';
 import { LineChart } from '@shared/components/Chart';
@@ -8,13 +9,20 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
+import {
+  CALENDAR_MONTHS_FROM_FT_BEGIN_AT,
+  MILLISECONDS,
+} from '@shared/constants/date';
+import { BREAKPOINT } from '@shared/constants/responsive';
 import { kiloFormatter } from '@shared/utils/formatters/kiloFormatter';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
+import { injectEmptyMonth } from '@shared/utils/injectEmptyMonth';
+import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 
 const GET_SCORE_RECORDS_PER_COALITION = gql(/* GraphQL */ `
-  query GetScoreRecordsPerCoalition {
+  query GetScoreRecordsPerCoalition($last: Int!) {
     getHomeCoalition {
-      scoreRecordsPerCoalition {
+      scoreRecordsPerCoalition(last: $last) {
         coalition {
           ...coalitionFields
         }
@@ -29,7 +37,16 @@ const GET_SCORE_RECORDS_PER_COALITION = gql(/* GraphQL */ `
 
 export const ScoreRecordsPerCoalition = () => {
   const title = '코알리숑 스코어 변동 추이';
-  const { loading, error, data } = useQuery(GET_SCORE_RECORDS_PER_COALITION);
+
+  const device = useDeviceType();
+  const isDesktop = device === 'desktop';
+  const last = isDesktop ? CALENDAR_MONTHS_FROM_FT_BEGIN_AT + 1 : 8;
+
+  const { loading, error, data } = useQuery(GET_SCORE_RECORDS_PER_COALITION, {
+    variables: {
+      last,
+    },
+  });
 
   if (loading) {
     return <DashboardContentLoading title={title} />;
@@ -45,10 +62,13 @@ export const ScoreRecordsPerCoalition = () => {
 
   const colors: string[] = [];
   const series = scoreRecordsPerCoalition.map(({ coalition, records }) => {
-    const seriesData = records.map(({ at, value }) => ({
-      x: at,
-      y: value,
-    }));
+    const seriesData = injectEmptyMonth(
+      records.map(({ at, value }) => ({
+        x: new Date(at),
+        y: value,
+      })),
+      last,
+    );
     colors.push(coalition.color ?? 'black');
     return {
       name: coalition.name,
@@ -83,6 +103,36 @@ const ScoreRecordsPerCoalitionChart = ({
   const options: ApexCharts.ApexOptions = {
     chart: {
       width: '100%',
+      events: {
+        beforeZoom: (ctx, { xaxis }) => {
+          if (xaxis.max - xaxis.min < MILLISECONDS.MONTH * 2) {
+            return {
+              xaxis: {
+                min: ctx.minX,
+                max: ctx.maxX,
+              },
+            };
+          }
+
+          const newMinX = Math.max(xaxis.min, ctx.w.globals.initialMinX);
+          const newMaxX = Math.min(xaxis.max, ctx.w.globals.initialMaxX);
+
+          return {
+            xaxis: {
+              min: newMinX,
+              max: newMaxX,
+            },
+          };
+        },
+        beforeResetZoom: (ctx) => {
+          return {
+            xaxis: {
+              min: subMonths(new Date(), 8).getTime(),
+              max: ctx.maxX,
+            },
+          };
+        },
+      },
     },
     xaxis: {
       type: 'datetime',
@@ -90,15 +140,16 @@ const ScoreRecordsPerCoalitionChart = ({
         datetimeUTC: false,
         format: "'yy MMM",
       },
+      min: subMonths(new Date(), 8).getTime(),
     },
     colors: colors,
     yaxis: {
-      min: Math.floor(min / 10000) * 10000,
-      max: Math.ceil(max / 10000) * 10000,
       labels: {
         formatter: (value) => kiloFormatter(value, 0),
       },
       tickAmount: 4,
+      min,
+      max,
     },
     tooltip: {
       x: {
@@ -111,6 +162,22 @@ const ScoreRecordsPerCoalitionChart = ({
     forecastDataPoints: {
       count: 1,
     },
+    responsive: [
+      {
+        breakpoint: BREAKPOINT.TABLET,
+        options: {
+          chart: {
+            event: {
+              beforeZoom: undefined,
+              beforeResetZoom: undefined,
+            },
+          },
+          xaxis: {
+            min: undefined,
+          },
+        },
+      },
+    ],
   };
 
   return <LineChart series={series} options={options} />;

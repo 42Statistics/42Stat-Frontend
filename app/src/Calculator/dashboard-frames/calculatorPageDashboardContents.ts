@@ -1,5 +1,6 @@
-import { Blackhole, LevelRecords } from '@/Calculator/dashboard-contents';
 import { DashboardItemProps } from '@shared/types/Dashboard';
+
+import { Blackhole, LevelRecords } from '@/Calculator/dashboard-contents';
 
 export const calculatorPageDashboardContents: DashboardItemProps[] = [
   {

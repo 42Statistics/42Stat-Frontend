@@ -1,5 +1,13 @@
-import { QueryResult } from '@apollo/client';
 import { useSearchParams } from 'react-router-dom';
+
+import { QueryResult } from '@apollo/client';
+
+import {
+  DateTemplate,
+  type GetLeaderboardLevelQuery,
+} from '@shared/__generated__/graphql';
+import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
+import { HStack, Spacer, VStack } from '@shared/ui-kit';
 
 import { Leaderboard } from '@/Leaderboard/components/Leaderboard';
 import { LeaderboardDateDescriptor } from '@/Leaderboard/components/Leaderboard/LeaderboardDateDescriptor';
@@ -8,12 +16,6 @@ import { LeaderboardResultSkeleton } from '@/Leaderboard/components/skeletons/Le
 import { SIZE_PER_PAGE } from '@/Leaderboard/constants/defaultOptions';
 import { LEADERBOARD_PARAM_KEYS } from '@/Leaderboard/constants/paramKeys';
 import { toLeaderboardArgs } from '@/Leaderboard/utils/toLeaderboardArgs';
-import {
-  DateTemplate,
-  type GetLeaderboardLevelQuery,
-} from '@shared/__generated__/graphql';
-import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
-import { HStack, Spacer, VStack } from '@shared/ui-kit';
 
 type LeaderboardLevelResultProps = {
   result: QueryResult<

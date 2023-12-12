@@ -19,7 +19,7 @@ export const YearSelect = ({ list, onChange }: YearSelectProps) => {
   };
 
   return (
-    <Select width="14rem" onValueChange={handleChange}>
+    <Select width="12rem" onValueChange={handleChange}>
       <SelectTrigger placeholder="최근 1년" />
       <SelectContent>
         <SelectItem value={null}>

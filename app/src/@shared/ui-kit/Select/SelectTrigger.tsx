@@ -18,7 +18,7 @@ type SelectTriggerProps = {
 export const SelectTrigger = ({
   left,
   right,
-  spacing = '1.5rem',
+  spacing = '0.5rem',
   placeholder = '',
 }: SelectTriggerProps) => {
   const theme = useTheme();

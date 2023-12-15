@@ -16,12 +16,22 @@ export const profileGeneralPageDashboardRows: DashboardTempType[] = [
       {
         rowSpan: 1,
         colSpan: 1,
-        elementId: 4,
+        elementId: 1,
       },
       {
         rowSpan: 1,
         colSpan: 1,
         elementId: 7,
+      },
+      {
+        rowSpan: 1,
+        colSpan: 1,
+        elementId: 4,
+      },
+      {
+        rowSpan: 1,
+        colSpan: 1,
+        elementId: 2,
       },
     ],
   },

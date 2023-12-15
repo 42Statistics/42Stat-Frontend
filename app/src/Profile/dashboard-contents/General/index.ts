@@ -5,3 +5,5 @@ export * from './CoalitionScore';
 export * from './DailyActivities';
 export * from './DailyActivityDetail';
 export * from './Wallet';
+export * from './Followers';
+export * from './Following';

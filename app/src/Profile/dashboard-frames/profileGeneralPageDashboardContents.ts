@@ -7,6 +7,8 @@ import {
   CoalitionScore,
   DailyActivities,
   DailyActivityDetail,
+  Followers,
+  Following,
   Wallet,
 } from '@/Profile/dashboard-contents/General';
 
@@ -14,6 +16,14 @@ export const profileGeneralPageDashboardContents: DashboardItemProps[] = [
   {
     id: 0,
     content: BeginAt,
+  },
+  {
+    id: 1,
+    content: Followers,
+  },
+  {
+    id: 2,
+    content: Following,
   },
   {
     id: 4,

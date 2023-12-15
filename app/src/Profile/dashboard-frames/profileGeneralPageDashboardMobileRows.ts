@@ -23,6 +23,16 @@ export const profileGeneralPageDashboardMobileRows: DashboardTempType[] = [
         colSpan: 1,
         elementId: 7,
       },
+      {
+        rowSpan: 1,
+        colSpan: 1,
+        elementId: 1,
+      },
+      {
+        rowSpan: 1,
+        colSpan: 1,
+        elementId: 2,
+      },
     ],
   },
   {

@@ -19,6 +19,19 @@ export const profileLogtimeAndProjectPageDashboardRows: DashboardRowType[] = [
     ],
   },
   {
+    colSpan: 1,
+    items: [
+      {
+        rowSpan: 1,
+        elementId: 5,
+      },
+      {
+        rowSpan: 1,
+        elementId: 6,
+      },
+    ],
+  },
+  {
     colSpan: 3,
     items: [
       {

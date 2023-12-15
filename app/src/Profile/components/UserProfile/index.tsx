@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
@@ -32,6 +32,12 @@ export const UserProfile = () => {
   const { login, imgUrl, titles, coalition, grade, level, displayname } =
     userProfile;
   const titleWithLogin = getTitleWithLogin(titles, login);
+  //todo: followStatus
+  const [followStatus, setFollowStatus] = useState(false);
+
+  const handleFollowStatus = () => {
+    setFollowStatus(!followStatus);
+  };
 
   const { backgroundUrl, backgroundFallbackUrl } =
     getCoalitionBackgroundUrlByCoalition(coalition);
@@ -64,17 +70,27 @@ export const UserProfile = () => {
               {level.toFixed(2)}
             </H3BoldText>
           </HStack>
+          <FollowButtonLayout onClick={handleFollowStatus}>
+            <H3BoldText color={theme.colors.mono.absolute.white}>
+              {followStatus ? 'Unfollow' : 'Follow'}
+            </H3BoldText>
+          </FollowButtonLayout>
         </HStack>
       </Desktop>
       <TabletAndBelow>
         <HStack h="100%" spacing="4rem">
-          <VStack>
+          <VStack spacing="1rem">
             <Avatar
               size="2xl"
               name={login}
               src={imgUrl}
               alt={ALT.AVATAR_OF(login)}
             />
+            <FollowButtonLayout onClick={handleFollowStatus}>
+              <H3BoldText color={theme.colors.mono.absolute.white}>
+                {followStatus ? 'Unfollow' : 'Follow'}
+              </H3BoldText>
+            </FollowButtonLayout>
           </VStack>
           <VStack w="15rem" spacing="1rem" style={{ textAlign: 'center' }}>
             <H3BoldText color={theme.colors.mono.absolute.white}>
@@ -116,6 +132,18 @@ const Layout = styled.div<LayoutProps>`
   transition: all 0.2s;
 
   padding: 2rem 0;
+`;
+
+const FollowButtonLayout = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid ${({ theme }) => theme.colors.mono.absolute.white};
+  border-radius: ${({ theme }) => theme.radius.md};
+  background-color: ${({ theme }) => theme.colors.mono.absolute.black}95;
+  width: 10rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
 `;
 
 const getCoalitionBackgroundFallbackUrlById = (id: number) => {

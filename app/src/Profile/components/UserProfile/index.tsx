@@ -3,12 +3,14 @@ import { useContext, useState } from 'react';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { truncate } from 'lodash-es';
+import { useAtomValue } from 'jotai';
 
 import coalition_black_cover from '@shared/assets/coalition/cover/coalition-black-cover.jpg';
 import coalition_gam_cover from '@shared/assets/coalition/cover/coalition-gam-cover.jpg';
 import coalition_gon_cover from '@shared/assets/coalition/cover/coalition-gon-cover.jpg';
 import coalition_gun_cover from '@shared/assets/coalition/cover/coalition-gun-cover.jpg';
 import coalition_lee_cover from '@shared/assets/coalition/cover/coalition-lee-cover.jpg';
+import { userAtom } from '@shared/atoms/userAtom';
 import { ALT } from '@shared/constants/accessibility';
 import type { Coalition } from '@shared/types/Coalition';
 import {
@@ -28,6 +30,7 @@ import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 export const UserProfile = () => {
   const theme = useTheme();
   const userProfile = useContext(UserProfileContext);
+  const user = useAtomValue(userAtom);
 
   const { login, imgUrl, titles, coalition, grade, level, displayname } =
     userProfile;
@@ -70,11 +73,13 @@ export const UserProfile = () => {
               {level.toFixed(2)}
             </H3BoldText>
           </HStack>
-          <FollowButtonLayout onClick={handleFollowStatus}>
-            <H3BoldText color={theme.colors.mono.absolute.white}>
-              {followStatus ? 'Unfollow' : 'Follow'}
-            </H3BoldText>
-          </FollowButtonLayout>
+          {user.login !== login && (
+            <FollowButtonLayout onClick={handleFollowStatus}>
+              <H3BoldText color={theme.colors.mono.absolute.white}>
+                {followStatus ? 'Unfollow' : 'Follow'}
+              </H3BoldText>
+            </FollowButtonLayout>
+          )}
         </HStack>
       </Desktop>
       <TabletAndBelow>
@@ -86,11 +91,13 @@ export const UserProfile = () => {
               src={imgUrl}
               alt={ALT.AVATAR_OF(login)}
             />
-            <FollowButtonLayout onClick={handleFollowStatus}>
-              <H3BoldText color={theme.colors.mono.absolute.white}>
-                {followStatus ? 'Unfollow' : 'Follow'}
-              </H3BoldText>
-            </FollowButtonLayout>
+            {user.login !== login && (
+              <FollowButtonLayout onClick={handleFollowStatus}>
+                <H3BoldText color={theme.colors.mono.absolute.white}>
+                  {followStatus ? 'Unfollow' : 'Follow'}
+                </H3BoldText>
+              </FollowButtonLayout>
+            )}
           </VStack>
           <VStack w="15rem" spacing="1rem" style={{ textAlign: 'center' }}>
             <H3BoldText color={theme.colors.mono.absolute.white}>

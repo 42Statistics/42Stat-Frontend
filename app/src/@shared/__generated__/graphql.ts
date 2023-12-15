@@ -200,6 +200,32 @@ export type Flag = {
   name: Scalars['String'];
 };
 
+export type FollowFail = {
+  __typename?: 'FollowFail';
+  message: Scalars['String'];
+};
+
+export type FollowList = {
+  __typename?: 'FollowList';
+  isFollowing?: Maybe<Scalars['Boolean']>;
+  user: UserPreview;
+};
+
+export type FollowListWithCount = {
+  __typename?: 'FollowListWithCount';
+  count: Scalars['Int'];
+  followList: Array<FollowList>;
+};
+
+export type FollowResult = FollowFail | FollowSuccess;
+
+export type FollowSuccess = {
+  __typename?: 'FollowSuccess';
+  followId: Scalars['Int'];
+  message: Scalars['String'];
+  userId: Scalars['Int'];
+};
+
 export type GoogleLoginInput = {
   clientId: Scalars['String'];
   credential: Scalars['String'];
@@ -470,18 +496,46 @@ export type LoginSuccess = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  /** 프론트 테스트용 임시 함수 */
+  MakeFollow: FollowResult;
   deleteAccount: Scalars['Int'];
+  followUser: FollowResult;
   ftLogin: LoginSuccess;
+  getFollowerList: FollowListWithCount;
+  getFollowingList: FollowListWithCount;
   googleLogin: LoginResult;
   linkGoogle: Account;
   logout: Scalars['Int'];
   refreshToken: LoginSuccess;
+  unfollowUser: FollowResult;
   unlinkAccount: Account;
+};
+
+
+export type MutationMakeFollowArgs = {
+  from: Scalars['String'];
+  to: Scalars['String'];
+  type: Scalars['String'];
+};
+
+
+export type MutationFollowUserArgs = {
+  target: Scalars['String'];
 };
 
 
 export type MutationFtLoginArgs = {
   ftCode: Scalars['String'];
+};
+
+
+export type MutationGetFollowerListArgs = {
+  target: Scalars['String'];
+};
+
+
+export type MutationGetFollowingListArgs = {
+  target: Scalars['String'];
 };
 
 
@@ -498,6 +552,11 @@ export type MutationLinkGoogleArgs = {
 
 export type MutationRefreshTokenArgs = {
   refreshToken: Scalars['String'];
+};
+
+
+export type MutationUnfollowUserArgs = {
+  target: Scalars['String'];
 };
 
 

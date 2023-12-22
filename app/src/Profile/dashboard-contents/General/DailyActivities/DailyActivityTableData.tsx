@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useContext, useRef } from 'react';
 
 import { useTheme } from '@emotion/react';
 import dayjs from 'dayjs';
@@ -12,6 +12,7 @@ import { isSameDate } from '@shared/utils/isSameDate';
 import { getDailyActivityTableDataColor } from '@/Profile/dashboard-contents/General/DailyActivities/utils/getDailyActivityTableDataColor';
 import { DailyActivitySquare } from '@/Profile/dashboard-contents/General/DailyActivities/DailyActivitySquare';
 import { selectedDailyActivityAtom } from '@/Profile/dashboard-contents/General/atoms/selectedDailyActivityAtom';
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 
 type DailyActivityTableDataProps = {
   date: Date;
@@ -26,6 +27,7 @@ export const DailyActivityTableData = ({
   records,
   color: standardColor,
 }: DailyActivityTableDataProps) => {
+  const { login } = useContext(UserProfileContext);
   const theme = useTheme();
   const color = getDailyActivityTableDataColor(
     score,
@@ -41,7 +43,11 @@ export const DailyActivityTableData = ({
   const unit = '점';
 
   const handleClick = () => {
-    setSelectedDailyActivity({ date: date.toString(), records: records });
+    setSelectedDailyActivity({
+      date: date.toString(),
+      records: records,
+      login: login,
+    });
   };
 
   return (

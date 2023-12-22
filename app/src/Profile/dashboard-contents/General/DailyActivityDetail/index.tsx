@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+
 import dayjs from 'dayjs';
 import { useAtomValue } from 'jotai';
 
@@ -5,17 +7,24 @@ import { DashboardContent } from '@shared/components/DashboardContent';
 import { DashboardContentLoading } from '@shared/components/DashboardContentView/Error';
 import { Body1Text } from '@shared/ui-kit';
 
+import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { selectedDailyActivityAtom } from '@/Profile/dashboard-contents/General/atoms/selectedDailyActivityAtom';
 
 import { DailyActivityTimeline } from './DailyActivityTimeline';
 
 export const DailyActivityDetail = () => {
-  const { date, records } = useAtomValue(selectedDailyActivityAtom);
+  const {
+    date,
+    records,
+    login: activityLogin,
+  } = useAtomValue(selectedDailyActivityAtom);
+  const { login } = useContext(UserProfileContext);
 
   const title = '일별 활동 내역';
   const description = dayjs(date).format('YYYY년 M월 D일');
+  console.log(login, activityLogin);
 
-  if (date === '') {
+  if (date === '' || login !== activityLogin) {
     return <DashboardContentLoading title={title} />;
   }
 

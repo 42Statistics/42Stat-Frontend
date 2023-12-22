@@ -83,14 +83,17 @@ export const DailyActivities = () => {
       setSelectedDailyActivity({
         date: new Date().toString(), // FIXME: 해당 Year 구간의 마지막 날짜로 변경
         records: [],
+        login: login,
       });
       return;
     }
 
     setSelectedDailyActivity({
-      ...latestDailyActivity,
+      date: latestDailyActivity.date,
+      records: latestDailyActivity.records,
+      login: login,
     });
-  }, [dailyActivities, setDailyActivitySum, setSelectedDailyActivity]);
+  }, [login, dailyActivities, setDailyActivitySum, setSelectedDailyActivity]);
 
   return (
     <Layout>

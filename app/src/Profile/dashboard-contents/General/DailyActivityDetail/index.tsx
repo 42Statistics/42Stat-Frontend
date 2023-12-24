@@ -47,7 +47,7 @@ export const DailyActivityDetail = () => {
   // 데이터가 정제된 상태로 하위 컴포넌트인 DailyActivityTimeline 내에서 useQuery를 사용하도록 해야 합니다.
   return (
     <DashboardContent title={title} description={description} type="Scrollable">
-      <VStack w="100%" align="start">
+      <VStack w="100%" h="100%" justify="start" align="start">
         <DailyLogTime dailyLogtime={dailyLogtime} color={color} />
         {dailyRecords.length !== 0 && (
           <DailyActivityTimeline dailyRecords={dailyRecords} />

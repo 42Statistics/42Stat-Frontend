@@ -2,18 +2,17 @@ import { useContext } from 'react';
 
 import { useTheme } from '@emotion/react';
 import { useQuery } from '@apollo/client';
-import { useAtomValue } from 'jotai';
 
 import { gql } from '@shared/__generated__';
+import { DailyActivityDetailRecordIdWithType } from '@shared/__generated__/graphql';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,
   DashboardContentLoading,
+	DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { VStack } from '@shared/ui-kit';
 
-import { selectedDailyActivityAtom } from '@/Profile/dashboard-contents/General/atoms/selectedDailyActivityAtom';
-import { parseDailyActivity } from '@/Profile/dashboard-contents/General/DailyActivityDetail/utils/parseDailyActivity';
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 
 import { DailyCorrected } from './DailyCorrected';
@@ -51,18 +50,22 @@ const GET_DAILY_ACTIVITY_DETAIL_RECORDS = gql(/* GraphQL */ `
 type DailyActivityTimelineProps = {
   title: string;
   description: string;
+  records: {
+    dailyRecords: DailyActivityDetailRecordIdWithType[];
+    dailyLogtime: number;
+  };
 };
 
 export const DailyActivityTimeline = ({
   title,
   description,
+  records,
 }: DailyActivityTimelineProps) => {
   const theme = useTheme();
   const { coalition } = useContext(UserProfileContext);
   const color = coalition?.color ?? theme.colors.mono.black;
   const { login } = useContext(UserProfileContext);
-  const { records } = useAtomValue(selectedDailyActivityAtom);
-  const { dailyRecords, dailyLogtime } = parseDailyActivity(records);
+  const { dailyRecords, dailyLogtime } = records;
 
   const { loading, error, data } = useQuery(GET_DAILY_ACTIVITY_DETAIL_RECORDS, {
     variables: {
@@ -77,10 +80,9 @@ export const DailyActivityTimeline = ({
   if (error) {
     <DashboardContentBadRequest title={title} description={description} />;
   }
-  // TODO: 왜 이 조건을 넣으면 NotFound에서 변하지 않는지 모르겠음
-  // if (!data) {
-  //   return <DashboardContentNotFound title={title} description={description} />;
-  // }
+  if (!data) {
+    return <DashboardContentNotFound title={title} description={description} />;
+  }
 
   return (
     <DashboardContent title={title} description={description} type="Scrollable">

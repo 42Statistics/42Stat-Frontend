@@ -61,24 +61,23 @@ export const DailyActivityTimeline = ({
     },
   });
 
-  //todo: height 중앙값으로 수정
   if (loading) {
     return (
-      <VStack w="100%" h="21rem">
+      <VStack w="100%" h="100%">
         <Loader />
       </VStack>
     );
   }
   if (error) {
     return (
-      <VStack w="100%" h="21rem">
+      <VStack w="100%" h="100%">
         <ApolloErrorView message={error.message} />
       </VStack>
     );
   }
   if (!data) {
     return (
-      <VStack w="100%" h="21rem">
+      <VStack w="100%" h="100%">
         <ApolloNotFoundView />
       </VStack>
     );

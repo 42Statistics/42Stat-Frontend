@@ -72,7 +72,7 @@ export const DailyActivityTimeline = ({
   if (error) {
     return (
       <VStack w="100%" h="21rem">
-        <ApolloErrorView message={'Something Went Wrong'} />
+        <ApolloErrorView message={error.message} />
       </VStack>
     );
   }

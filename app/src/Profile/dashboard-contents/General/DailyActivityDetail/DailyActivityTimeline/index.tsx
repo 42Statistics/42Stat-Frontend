@@ -5,20 +5,15 @@ import { useQuery } from '@apollo/client';
 
 import { gql } from '@shared/__generated__';
 import { DailyActivityDetailRecordIdWithType } from '@shared/__generated__/graphql';
-import { DashboardContent } from '@shared/components/DashboardContent';
-import {
-  DashboardContentBadRequest,
-  DashboardContentLoading,
-	DashboardContentNotFound,
-} from '@shared/components/DashboardContentView/Error';
-import { VStack } from '@shared/ui-kit';
+import { ApolloErrorView } from '@shared/components/ApolloError/ApolloErrorView';
+import { ApolloNotFoundView } from '@shared/components/ApolloError/ApolloNotFoundView';
+import { Loader, VStack } from '@shared/ui-kit';
 
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 
 import { DailyCorrected } from './DailyCorrected';
 import { DailyCorrector } from './DailyCorrector';
 import { DailyEvent } from './DailyEvent';
-import { DailyLogTime } from './DailyLogTime';
 
 const GET_DAILY_ACTIVITY_DETAIL_RECORDS = gql(/* GraphQL */ `
   query GetDailyActivityDetailRecords(
@@ -48,24 +43,16 @@ const GET_DAILY_ACTIVITY_DETAIL_RECORDS = gql(/* GraphQL */ `
 `);
 
 type DailyActivityTimelineProps = {
-  title: string;
-  description: string;
-  records: {
-    dailyRecords: DailyActivityDetailRecordIdWithType[];
-    dailyLogtime: number;
-  };
+  dailyRecords: DailyActivityDetailRecordIdWithType[];
 };
 
 export const DailyActivityTimeline = ({
-  title,
-  description,
-  records,
+  dailyRecords,
 }: DailyActivityTimelineProps) => {
   const theme = useTheme();
   const { coalition } = useContext(UserProfileContext);
   const color = coalition?.color ?? theme.colors.mono.black;
   const { login } = useContext(UserProfileContext);
-  const { dailyRecords, dailyLogtime } = records;
 
   const { loading, error, data } = useQuery(GET_DAILY_ACTIVITY_DETAIL_RECORDS, {
     variables: {
@@ -74,33 +61,43 @@ export const DailyActivityTimeline = ({
     },
   });
 
+  //todo: height 중앙값으로 수정
   if (loading) {
-    return <DashboardContentLoading title={title} description={description} />;
+    return (
+      <VStack w="100%" h="21rem">
+        <Loader />
+      </VStack>
+    );
   }
   if (error) {
-    <DashboardContentBadRequest title={title} description={description} />;
+    return (
+      <VStack w="100%" h="21rem">
+        <ApolloErrorView message={'Something Went Wrong'} />
+      </VStack>
+    );
   }
   if (!data) {
-    return <DashboardContentNotFound title={title} description={description} />;
+    return (
+      <VStack w="100%" h="21rem">
+        <ApolloNotFoundView />
+      </VStack>
+    );
   }
 
   return (
-    <DashboardContent title={title} description={description} type="Scrollable">
-      <VStack w="100%" align="start">
-        <DailyLogTime dailyLogtime={dailyLogtime} color={color} />
-        {data?.getPersonalGeneral.dailyActivityDetailRecords.map(
-          (item, index) => {
-            if ('teamId' in item) {
-              if (item.type === 'CORRECTED')
-                return <DailyCorrected key={index} data={item} color={color} />;
-              else
-                return <DailyCorrector key={index} data={item} color={color} />;
-            } else {
-              return <DailyEvent key={index} data={item} color={color} />;
-            }
-          },
-        )}
-      </VStack>
-    </DashboardContent>
+    <>
+      {data?.getPersonalGeneral.dailyActivityDetailRecords.map(
+        (item, index) => {
+          if ('teamId' in item) {
+            if (item.type === 'CORRECTED')
+              return <DailyCorrected key={index} data={item} color={color} />;
+            else
+              return <DailyCorrector key={index} data={item} color={color} />;
+          } else {
+            return <DailyEvent key={index} data={item} color={color} />;
+          }
+        },
+      )}
+    </>
   );
 };

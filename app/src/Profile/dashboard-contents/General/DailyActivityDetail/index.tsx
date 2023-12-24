@@ -22,7 +22,6 @@ export const DailyActivityDetail = () => {
 
   const title = '일별 활동 내역';
   const description = dayjs(date).format('YYYY년 M월 D일');
-  console.log(login, activityLogin);
 
   if (date === '' || login !== activityLogin) {
     return <DashboardContentLoading title={title} />;

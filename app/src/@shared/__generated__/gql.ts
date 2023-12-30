@@ -83,6 +83,7 @@ const documents = {
     "\n  query GetTotalLogtimeVersus($login1: String!, $login2: String!) {\n    data1: getPersonalVersus(login: $login1) {\n      totalLogtime\n    }\n    data2: getPersonalVersus(login: $login2) {\n      totalLogtime\n    }\n  }\n": types.GetTotalLogtimeVersusDocument,
     "\n  mutation FollowUser($login: String!) {\n    followUser(target: $login) {\n      ... on FollowSuccess {\n        message\n      }\n      ... on FollowFail {\n        message\n      }\n    }\n  }\n": types.FollowUserDocument,
     "\n  mutation UnfollowUser($login: String!) {\n    unfollowUser(target: $login) {\n      ... on FollowSuccess {\n        message\n      }\n      ... on FollowFail {\n        message\n      }\n    }\n  }\n": types.UnfollowUserDocument,
+    "\n  query FollowStatus($login: String!) {\n    getFollowStatus(target: $login)\n  }\n": types.FollowStatusDocument,
     "\n  query GetProjectExists($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      name\n    }\n  }\n": types.GetProjectExistsDocument,
     "\n  query GetProjectInfoZeroCostByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      name\n      circle\n      url\n      pdfUrl\n      description\n      minUserCount\n      maxUserCount\n      estimateTime\n      difficulty\n      objectives\n      skills\n    }\n  }\n": types.GetProjectInfoZeroCostByProjectNameDocument,
     "\n  query GetAveragePassFinalMarkByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      averagePassFinalMark\n    }\n  }\n": types.GetAveragePassFinalMarkByProjectNameDocument,
@@ -392,6 +393,10 @@ export function gql(source: "\n  mutation FollowUser($login: String!) {\n    fol
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  mutation UnfollowUser($login: String!) {\n    unfollowUser(target: $login) {\n      ... on FollowSuccess {\n        message\n      }\n      ... on FollowFail {\n        message\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation UnfollowUser($login: String!) {\n    unfollowUser(target: $login) {\n      ... on FollowSuccess {\n        message\n      }\n      ... on FollowFail {\n        message\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query FollowStatus($login: String!) {\n    getFollowStatus(target: $login)\n  }\n"): (typeof documents)["\n  query FollowStatus($login: String!) {\n    getFollowStatus(target: $login)\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -1,6 +1,4 @@
-import { useState } from 'react';
-
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 
 import { gql } from '@shared/__generated__';
 
@@ -30,29 +28,42 @@ const UNFOLLOW_USER = gql(/* GraphQL */ `
   }
 `);
 
-export const useFollow = () => {
-  const [followStatus /* setFollowStatus */] = useState(false);
+const FOLLOW_STATUS = gql(/* GraphQL */ `
+  query FollowStatus($login: String!) {
+    getFollowStatus(target: $login)
+  }
+`);
 
-  //setFollowStatus
+export const useFollow = (login: string) => {
+  const [hitFollow, { loading: loadingFollow, error: errorFollow }] =
+    useMutation(FOLLOW_USER);
+  const [hitUnfollow, { loading: loadingUnfollow, error: errorUnfollow }] =
+    useMutation(UNFOLLOW_USER);
+  const { data: dataFollowStatus, refetch: refetchFollowStatus } = useQuery(
+    FOLLOW_STATUS,
+    {
+      variables: { login },
+    },
+  );
 
-  const [
-    hitFollow,
-    { data: dataFollow, loading: loadingFollow, error: errorFollow },
-  ] = useMutation(FOLLOW_USER);
-  const [
-    hitUnfollow,
-    { data: dataUnfollow, loading: loadingUnfollow, error: errorUnfollow },
-  ] = useMutation(UNFOLLOW_USER);
+  //todo: followStatus, hitFollow, hitUnfollow 에러일 때 처리
+  let followStatus = dataFollowStatus?.getFollowStatus ?? false;
 
-  const handleFollow = followStatus ? hitFollow : hitUnfollow;
-  const data = followStatus ? dataFollow : dataUnfollow;
+  const handleFollow = async () => {
+    await (followStatus
+      ? hitUnfollow({ variables: { login: login } })
+      : hitFollow({ variables: { login: login } }));
+
+    refetchFollowStatus();
+    followStatus = dataFollowStatus?.getFollowStatus ?? false;
+  };
+
   const loading = followStatus ? loadingFollow : loadingUnfollow;
   const error = followStatus ? errorFollow : errorUnfollow;
 
   return {
     handleFollow,
     followStatus,
-    data,
     loading,
     error,
   };

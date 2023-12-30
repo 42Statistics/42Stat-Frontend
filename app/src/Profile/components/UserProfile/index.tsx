@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
@@ -36,12 +36,10 @@ export const UserProfile = () => {
   const { login, imgUrl, titles, coalition, grade, level, displayname } =
     userProfile;
   const titleWithLogin = getTitleWithLogin(titles, login);
-  //todo: followStatus
-  const { handleFollow } = useFollow();
-  const [followStatus, setFollowStatus] = useState(false);
+  const { handleFollow, followStatus } = useFollow(login);
 
   const handleFollowStatus = () => {
-    setFollowStatus(!followStatus);
+    handleFollow();
   };
 
   const { backgroundUrl, backgroundFallbackUrl } =
@@ -76,9 +74,7 @@ export const UserProfile = () => {
             </H3BoldText>
           </HStack>
           {user.login !== login && (
-            <FollowButtonLayout
-              onClick={() => handleFollow({ variables: { login: login } })}
-            >
+            <FollowButtonLayout onClick={handleFollowStatus}>
               <H3BoldText color={theme.colors.mono.absolute.white}>
                 {followStatus ? 'Unfollow' : 'Follow'}
               </H3BoldText>

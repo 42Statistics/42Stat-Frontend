@@ -211,6 +211,18 @@ export type FollowList = {
   user: UserPreview;
 };
 
+export type FollowListEdge = {
+  __typename?: 'FollowListEdge';
+  cursor: Scalars['String'];
+  node: FollowList;
+};
+
+export type FollowListPaginated = {
+  __typename?: 'FollowListPaginated';
+  edges: Array<FollowListEdge>;
+  pageInfo: CursorPageInfo;
+};
+
 export type FollowListWithCount = {
   __typename?: 'FollowListWithCount';
   count: Scalars['Int'];
@@ -218,6 +230,11 @@ export type FollowListWithCount = {
 };
 
 export type FollowResult = FollowFail | FollowSuccess;
+
+export enum FollowSortOrder {
+  FollowAtAsc = 'FOLLOW_AT_ASC',
+  FollowAtDesc = 'FOLLOW_AT_DESC'
+}
 
 export type FollowSuccess = {
   __typename?: 'FollowSuccess';
@@ -496,8 +513,6 @@ export type LoginSuccess = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  /** 프론트 테스트용 임시 함수 */
-  MakeFollow: FollowResult;
   deleteAccount: Scalars['Int'];
   followUser: FollowResult;
   ftLogin: LoginSuccess;
@@ -507,13 +522,6 @@ export type Mutation = {
   refreshToken: LoginSuccess;
   unfollowUser: FollowResult;
   unlinkAccount: Account;
-};
-
-
-export type MutationMakeFollowArgs = {
-  from: Scalars['String'];
-  to: Scalars['String'];
-  type: Scalars['String'];
 };
 
 
@@ -750,8 +758,11 @@ export type Query = {
   __typename?: 'Query';
   getEvalLogs: EvalLogsPaginated;
   getExpTable: Array<ExpTable>;
+  getFollowStatus?: Maybe<Scalars['Boolean']>;
   getFollowerList: FollowListWithCount;
+  getFollowerPaginated: FollowListPaginated;
   getFollowingList: FollowListWithCount;
+  getFollowingPaginated: FollowListPaginated;
   getHomeCoalition: HomeCoalition;
   getHomeEval: HomeEval;
   getHomeTeam: HomeTeam;
@@ -786,14 +797,37 @@ export type QueryGetEvalLogsArgs = {
 };
 
 
+export type QueryGetFollowStatusArgs = {
+  target: Scalars['String'];
+};
+
+
 export type QueryGetFollowerListArgs = {
   limit?: Scalars['Int'];
+  sortOrder?: FollowSortOrder;
+  target: Scalars['String'];
+};
+
+
+export type QueryGetFollowerPaginatedArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first?: Scalars['Int'];
+  sortOrder?: FollowSortOrder;
   target: Scalars['String'];
 };
 
 
 export type QueryGetFollowingListArgs = {
   limit?: Scalars['Int'];
+  sortOrder?: FollowSortOrder;
+  target: Scalars['String'];
+};
+
+
+export type QueryGetFollowingPaginatedArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first?: Scalars['Int'];
+  sortOrder?: FollowSortOrder;
   target: Scalars['String'];
 };
 
@@ -1484,6 +1518,13 @@ export type UnfollowUserMutationVariables = Exact<{
 
 export type UnfollowUserMutation = { __typename?: 'Mutation', unfollowUser: { __typename?: 'FollowFail', message: string } | { __typename?: 'FollowSuccess', message: string } };
 
+export type FollowStatusQueryVariables = Exact<{
+  login: Scalars['String'];
+}>;
+
+
+export type FollowStatusQuery = { __typename?: 'Query', getFollowStatus?: boolean | null };
+
 export type GetProjectExistsQueryVariables = Exact<{
   projectName: Scalars['String'];
 }>;
@@ -1636,6 +1677,7 @@ export const GetTotalEvalCountVersusDocument = {"kind":"Document","definitions":
 export const GetTotalLogtimeVersusDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetTotalLogtimeVersus"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"login1"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"login2"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"data1"},"name":{"kind":"Name","value":"getPersonalVersus"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"login"},"value":{"kind":"Variable","name":{"kind":"Name","value":"login1"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"totalLogtime"}}]}},{"kind":"Field","alias":{"kind":"Name","value":"data2"},"name":{"kind":"Name","value":"getPersonalVersus"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"login"},"value":{"kind":"Variable","name":{"kind":"Name","value":"login2"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"totalLogtime"}}]}}]}}]} as unknown as DocumentNode<GetTotalLogtimeVersusQuery, GetTotalLogtimeVersusQueryVariables>;
 export const FollowUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"FollowUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"login"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"followUser"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"target"},"value":{"kind":"Variable","name":{"kind":"Name","value":"login"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"FollowSuccess"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"FollowFail"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}}]}}]}}]}}]} as unknown as DocumentNode<FollowUserMutation, FollowUserMutationVariables>;
 export const UnfollowUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UnfollowUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"login"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"unfollowUser"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"target"},"value":{"kind":"Variable","name":{"kind":"Name","value":"login"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"FollowSuccess"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"FollowFail"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}}]}}]}}]}}]} as unknown as DocumentNode<UnfollowUserMutation, UnfollowUserMutationVariables>;
+export const FollowStatusDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"FollowStatus"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"login"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getFollowStatus"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"target"},"value":{"kind":"Variable","name":{"kind":"Name","value":"login"}}}]}]}}]} as unknown as DocumentNode<FollowStatusQuery, FollowStatusQueryVariables>;
 export const GetProjectExistsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetProjectExists"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"projectName"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getProjectInfo"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"projectName"},"value":{"kind":"Variable","name":{"kind":"Name","value":"projectName"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<GetProjectExistsQuery, GetProjectExistsQueryVariables>;
 export const GetProjectInfoZeroCostByProjectNameDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetProjectInfoZeroCostByProjectName"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"projectName"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getProjectInfo"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"projectName"},"value":{"kind":"Variable","name":{"kind":"Name","value":"projectName"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"circle"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"pdfUrl"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"minUserCount"}},{"kind":"Field","name":{"kind":"Name","value":"maxUserCount"}},{"kind":"Field","name":{"kind":"Name","value":"estimateTime"}},{"kind":"Field","name":{"kind":"Name","value":"difficulty"}},{"kind":"Field","name":{"kind":"Name","value":"objectives"}},{"kind":"Field","name":{"kind":"Name","value":"skills"}}]}}]}}]} as unknown as DocumentNode<GetProjectInfoZeroCostByProjectNameQuery, GetProjectInfoZeroCostByProjectNameQueryVariables>;
 export const GetAveragePassFinalMarkByProjectNameDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetAveragePassFinalMarkByProjectName"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"projectName"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getProjectInfo"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"projectName"},"value":{"kind":"Variable","name":{"kind":"Name","value":"projectName"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"averagePassFinalMark"}}]}}]}}]} as unknown as DocumentNode<GetAveragePassFinalMarkByProjectNameQuery, GetAveragePassFinalMarkByProjectNameQueryVariables>;

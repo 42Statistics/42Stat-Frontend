@@ -1,5 +1,7 @@
 import { isSameMonth, isSameYear } from 'date-fns';
 
+import { firstDayInPreviousMonth } from './firstDayInPreviousMonth';
+
 export const injectEmptyMonth = (
   series: { x: Date; y: number }[],
   last: number,
@@ -9,8 +11,7 @@ export const injectEmptyMonth = (
   let currIndex = 0;
 
   for (let i = last - 1; i >= 0; i--) {
-    const date = new Date();
-    date.setMonth(date.getMonth() - i);
+    const date = firstDayInPreviousMonth(new Date(), i);
 
     if (
       currIndex < series.length &&

@@ -30,6 +30,12 @@ const ProfileLogtimeAndProjectPage = lazy(
 );
 const ProfileEvalPage = lazy(() => import('@/Profile/pages/Eval'));
 const ProfileVersusPage = lazy(() => import('@/Profile/pages/Versus'));
+const ProfileFollowersPage = lazy(
+  () => import('@/Profile/pages/Follow/Followers'),
+);
+const ProfileFollowingPage = lazy(
+  () => import('@/Profile/pages/Follow/Following'),
+);
 const LeaderboardLevelPage = lazy(() => import('@/Leaderboard/pages/Level'));
 const LeaderboardExpIncrementPage = lazy(
   () => import('@/Leaderboard/pages/ExpIncrement'),
@@ -86,6 +92,22 @@ export const appRouter = createBrowserRouter([
                     element: (
                       <Suspense>
                         <FtOAuthRedirectPage />
+                      </Suspense>
+                    ),
+                  },
+                  {
+                    path: ROUTES.PROFILE_FOLLOWERS,
+                    element: (
+                      <Suspense fallback={<ProfileVersusPageSkeleton />}>
+                        <ProfileFollowersPage />
+                      </Suspense>
+                    ),
+                  },
+                  {
+                    path: ROUTES.PROFILE_FOLLOWING,
+                    element: (
+                      <Suspense fallback={<ProfileVersusPageSkeleton />}>
+                        <ProfileFollowingPage />
                       </Suspense>
                     ),
                   },

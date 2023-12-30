@@ -1,41 +1,31 @@
 import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 
-import { useQuery } from '@apollo/client';
+import styled from '@emotion/styled';
 
 import { DashboardContent } from '@shared/components/DashboardContent';
-import {
-  DashboardContentBadRequest,
-  DashboardContentLoading,
-  DashboardContentNotFound,
-} from '@shared/components/DashboardContentView/Error';
+import { ROUTES } from '@shared/constants/routes';
 
-import { GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN } from '@/Profile/dashboard-contents-queries/GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN';
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 
 export const Followers = () => {
   const { login } = useContext(UserProfileContext);
 
   const title = 'Followers';
-  const { loading, error, data } = useQuery(
-    GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN,
-    {
-      variables: { login },
-    },
-  );
-
-  if (loading) {
-    return <DashboardContentLoading title={title} />;
-  }
-  if (error) {
-    return <DashboardContentBadRequest title={title} message={error.message} />;
-  }
-  if (!data) {
-    return <DashboardContentNotFound title={title} />;
-  }
 
   return (
     <DashboardContent title={title}>
-      <div></div>
+      <Layout>
+        <Link to={ROUTES.PROFILE_FOLLOWERS_OF(login)}>Followers</Link>
+      </Layout>
     </DashboardContent>
   );
 };
+
+const Layout = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 5rem;
+  height: 3rem;
+`;

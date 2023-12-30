@@ -26,6 +26,7 @@ import { getTitleWithLogin } from '@shared/utils/getTitleWithLogin';
 import { Desktop, TabletAndBelow } from '@shared/utils/react-responsive/Device';
 
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
+import { useFollow } from '@/Profile/hooks/useFollow';
 
 export const UserProfile = () => {
   const theme = useTheme();
@@ -36,6 +37,7 @@ export const UserProfile = () => {
     userProfile;
   const titleWithLogin = getTitleWithLogin(titles, login);
   //todo: followStatus
+  const { handleFollow } = useFollow();
   const [followStatus, setFollowStatus] = useState(false);
 
   const handleFollowStatus = () => {
@@ -74,7 +76,9 @@ export const UserProfile = () => {
             </H3BoldText>
           </HStack>
           {user.login !== login && (
-            <FollowButtonLayout onClick={handleFollowStatus}>
+            <FollowButtonLayout
+              onClick={() => handleFollow({ variables: { login: login } })}
+            >
               <H3BoldText color={theme.colors.mono.absolute.white}>
                 {followStatus ? 'Unfollow' : 'Follow'}
               </H3BoldText>

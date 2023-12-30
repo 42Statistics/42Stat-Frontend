@@ -1,52 +1,43 @@
 import { useMutation, useQuery } from '@apollo/client';
 
-import { gql } from '@shared/__generated__';
-
-const FOLLOW_USER = gql(/* GraphQL */ `
-  mutation FollowUser($login: String!) {
-    followUser(target: $login) {
-      ... on FollowSuccess {
-        message
-      }
-      ... on FollowFail {
-        message
-      }
-    }
-  }
-`);
-
-const UNFOLLOW_USER = gql(/* GraphQL */ `
-  mutation UnfollowUser($login: String!) {
-    unfollowUser(target: $login) {
-      ... on FollowSuccess {
-        message
-      }
-      ... on FollowFail {
-        message
-      }
-    }
-  }
-`);
-
-const FOLLOW_STATUS = gql(/* GraphQL */ `
-  query FollowStatus($login: String!) {
-    getFollowStatus(target: $login)
-  }
-`);
+import {
+  FOLLOW_USER,
+  UNFOLLOW_USER,
+  GET_FOLLOW_STATUS,
+  GET_FOLLOWING_LIST,
+  GET_FOLLOWER_LIST,
+} from '@/Profile/dashboard-contents-queries/GET_FOLLOW_DATA';
 
 export const useFollow = (login: string) => {
   const [hitFollow, { loading: loadingFollow, error: errorFollow }] =
     useMutation(FOLLOW_USER);
   const [hitUnfollow, { loading: loadingUnfollow, error: errorUnfollow }] =
     useMutation(UNFOLLOW_USER);
-  const { data: dataFollowStatus, refetch: refetchFollowStatus } = useQuery(
-    FOLLOW_STATUS,
-    {
-      variables: { login },
-    },
-  );
+  const {
+    data: dataFollowStatus,
+    loading: loadingFollowStatus,
+    error: errorFollowStatus,
+    refetch: refetchFollowStatus,
+  } = useQuery(GET_FOLLOW_STATUS, {
+    variables: { login },
+  });
+  const {
+    data: followingList,
+    loading: loadingFollowingList,
+    error: errorFollowingList,
+    refetch: refetchFollowingList,
+  } = useQuery(GET_FOLLOWING_LIST, {
+    variables: { login },
+  });
+  const {
+    data: followerList,
+    loading: loadingFollowerList,
+    error: errorFollowerList,
+    refetch: refetchFollowerList,
+  } = useQuery(GET_FOLLOWER_LIST, {
+    variables: { login },
+  });
 
-  //todo: followStatus, hitFollow, hitUnfollow 에러일 때 처리
   let followStatus = dataFollowStatus?.getFollowStatus ?? false;
 
   const handleFollow = async () => {
@@ -55,14 +46,28 @@ export const useFollow = (login: string) => {
       : hitFollow({ variables: { login: login } }));
 
     refetchFollowStatus();
+    refetchFollowingList();
+    refetchFollowerList();
     followStatus = dataFollowStatus?.getFollowStatus ?? false;
   };
 
-  const loading = followStatus ? loadingFollow : loadingUnfollow;
-  const error = followStatus ? errorFollow : errorUnfollow;
+  const loading =
+    loadingFollow ||
+    loadingUnfollow ||
+    loadingFollowStatus ||
+    loadingFollowingList ||
+    loadingFollowerList;
+  const error =
+    errorFollow ||
+    errorUnfollow ||
+    errorFollowStatus ||
+    errorFollowingList ||
+    errorFollowerList;
 
   return {
     handleFollow,
+    followingList,
+    followerList,
     followStatus,
     loading,
     error,

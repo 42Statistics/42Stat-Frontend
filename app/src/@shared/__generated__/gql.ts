@@ -55,6 +55,11 @@ const documents = {
     "\n  query GetLeaderboardLevel(\n    $pageSize: Int!\n    $pageNumber: Int!\n    $dateTemplate: DateTemplate!\n    $promo: Int\n    $coalitionId: Int\n  ) {\n    getLeaderboardLevel {\n      byDateTemplate(\n        pageSize: $pageSize\n        pageNumber: $pageNumber\n        dateTemplate: $dateTemplate\n        promo: $promo\n        coalitionId: $coalitionId\n      ) {\n        data {\n          me {\n            userPreview {\n              ...userPreviewFields\n            }\n            value\n            rank\n          }\n          totalRanking {\n            nodes {\n              userPreview {\n                ...userPreviewFields\n              }\n              value\n              rank\n            }\n            totalCount\n            pageSize\n            pageNumber\n          }\n        }\n        start\n        end\n      }\n    }\n  }\n": types.GetLeaderboardLevelDocument,
     "\n  query GetLeaderboardScore(\n    $pageSize: Int!\n    $pageNumber: Int!\n    $dateTemplate: DateTemplate!\n    $promo: Int\n    $coalitionId: Int\n  ) {\n    getLeaderboardScore {\n      byDateTemplate(\n        pageSize: $pageSize\n        pageNumber: $pageNumber\n        dateTemplate: $dateTemplate\n        promo: $promo\n        coalitionId: $coalitionId\n      ) {\n        data {\n          me {\n            userPreview {\n              ...userPreviewFields\n            }\n            value\n            rank\n          }\n          totalRanking {\n            nodes {\n              userPreview {\n                ...userPreviewFields\n              }\n              value\n              rank\n            }\n            totalCount\n            pageSize\n            pageNumber\n          }\n        }\n        start\n        end\n      }\n    }\n  }\n": types.GetLeaderboardScoreDocument,
     "\n  query GetLeaderboardList {\n    getLeaderboardMetadata {\n      promoList {\n        promo\n        beginAt\n      }\n      coalitionList {\n        id\n        name\n        imgUrl\n        coverUrl\n        color\n      }\n    }\n  }\n": types.GetLeaderboardListDocument,
+    "\n  mutation FollowUser($login: String!) {\n    followUser(target: $login) {\n      ... on FollowSuccess {\n        message\n      }\n      ... on FollowFail {\n        message\n      }\n    }\n  }\n": types.FollowUserDocument,
+    "\n  mutation UnfollowUser($login: String!) {\n    unfollowUser(target: $login) {\n      ... on FollowSuccess {\n        message\n      }\n      ... on FollowFail {\n        message\n      }\n    }\n  }\n": types.UnfollowUserDocument,
+    "\n  query getFollowStatus($login: String!) {\n    getFollowStatus(target: $login)\n  }\n": types.GetFollowStatusDocument,
+    "\n  query getFollowerList($login: String!) {\n    getFollowerList(target: $login) {\n      followList {\n        user {\n          id\n          login\n          imgUrl\n        }\n      }\n      count\n    }\n  }\n": types.GetFollowerListDocument,
+    "\n  query getFollowingList($login: String!) {\n    getFollowingList(target: $login) {\n      followList {\n        user {\n          id\n          login\n          imgUrl\n        }\n      }\n      count\n    }\n  }\n": types.GetFollowingListDocument,
     "\n  query GetPersonalEvalZeroCostByLogin($login: String!) {\n    getPersonalEval(login: $login) {\n      correctionPoint\n      recentComment\n    }\n  }\n": types.GetPersonalEvalZeroCostByLoginDocument,
     "\n  query GetPersonalGeneralZeroCostByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      beginAt\n      blackholedAt\n      ...coalitionScoreFragment\n      teamInfo {\n        lastPassed {\n          ...userTeamFields\n        }\n        lastRegistered {\n          ...userTeamFields\n        }\n      }\n      wallet\n    }\n  }\n\n  fragment coalitionScoreFragment on PersonalGeneral {\n    userProfile {\n      coalition {\n        ...coalitionFields\n      }\n    }\n    scoreInfo {\n      value\n      rankInCoalition\n    }\n  }\n": types.GetPersonalGeneralZeroCostByLoginDocument,
     "\n  query GetUserProfileByLogin($login: String!) {\n    getPersonalGeneral(login: $login) {\n      userProfile {\n        ...userProfileFields\n      }\n    }\n  }\n": types.GetUserProfileByLoginDocument,
@@ -81,9 +86,6 @@ const documents = {
     "\n  query GetRankingsVersus($login1: String!, $login2: String!) {\n    data1: getPersonalVersus(login: $login1) {\n      levelRankWithTotal {\n        rank\n        totalUserCount\n      }\n      totalScoreRankWithTotal {\n        rank\n        totalUserCount\n      }\n      totalEvalCountRankWithTotal {\n        rank\n        totalUserCount\n      }\n      currMonthExpIncreamentRankWithTotal {\n        rank\n        totalUserCount\n      }\n      currMonthScoreRankWithTotal {\n        rank\n        totalUserCount\n      }\n      currMonthEvalCountRankWithTotal {\n        rank\n        totalUserCount\n      }\n    }\n    data2: getPersonalVersus(login: $login2) {\n      levelRankWithTotal {\n        rank\n        totalUserCount\n      }\n      totalScoreRankWithTotal {\n        rank\n        totalUserCount\n      }\n      totalEvalCountRankWithTotal {\n        rank\n        totalUserCount\n      }\n      currMonthExpIncreamentRankWithTotal {\n        rank\n        totalUserCount\n      }\n      currMonthScoreRankWithTotal {\n        rank\n        totalUserCount\n      }\n      currMonthEvalCountRankWithTotal {\n        rank\n        totalUserCount\n      }\n    }\n  }\n": types.GetRankingsVersusDocument,
     "\n  query GetTotalEvalCountVersus($login1: String!, $login2: String!) {\n    data1: getPersonalVersus(login: $login1) {\n      totalEvalCountRankWithTotal {\n        value\n      }\n    }\n    data2: getPersonalVersus(login: $login2) {\n      totalEvalCountRankWithTotal {\n        value\n      }\n    }\n  }\n": types.GetTotalEvalCountVersusDocument,
     "\n  query GetTotalLogtimeVersus($login1: String!, $login2: String!) {\n    data1: getPersonalVersus(login: $login1) {\n      totalLogtime\n    }\n    data2: getPersonalVersus(login: $login2) {\n      totalLogtime\n    }\n  }\n": types.GetTotalLogtimeVersusDocument,
-    "\n  mutation FollowUser($login: String!) {\n    followUser(target: $login) {\n      ... on FollowSuccess {\n        message\n      }\n      ... on FollowFail {\n        message\n      }\n    }\n  }\n": types.FollowUserDocument,
-    "\n  mutation UnfollowUser($login: String!) {\n    unfollowUser(target: $login) {\n      ... on FollowSuccess {\n        message\n      }\n      ... on FollowFail {\n        message\n      }\n    }\n  }\n": types.UnfollowUserDocument,
-    "\n  query FollowStatus($login: String!) {\n    getFollowStatus(target: $login)\n  }\n": types.FollowStatusDocument,
     "\n  query GetProjectExists($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      name\n    }\n  }\n": types.GetProjectExistsDocument,
     "\n  query GetProjectInfoZeroCostByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      name\n      circle\n      url\n      pdfUrl\n      description\n      minUserCount\n      maxUserCount\n      estimateTime\n      difficulty\n      objectives\n      skills\n    }\n  }\n": types.GetProjectInfoZeroCostByProjectNameDocument,
     "\n  query GetAveragePassFinalMarkByProjectName($projectName: String!) {\n    getProjectInfo(projectName: $projectName) {\n      averagePassFinalMark\n    }\n  }\n": types.GetAveragePassFinalMarkByProjectNameDocument,
@@ -284,6 +286,26 @@ export function gql(source: "\n  query GetLeaderboardList {\n    getLeaderboardM
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function gql(source: "\n  mutation FollowUser($login: String!) {\n    followUser(target: $login) {\n      ... on FollowSuccess {\n        message\n      }\n      ... on FollowFail {\n        message\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation FollowUser($login: String!) {\n    followUser(target: $login) {\n      ... on FollowSuccess {\n        message\n      }\n      ... on FollowFail {\n        message\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation UnfollowUser($login: String!) {\n    unfollowUser(target: $login) {\n      ... on FollowSuccess {\n        message\n      }\n      ... on FollowFail {\n        message\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation UnfollowUser($login: String!) {\n    unfollowUser(target: $login) {\n      ... on FollowSuccess {\n        message\n      }\n      ... on FollowFail {\n        message\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query getFollowStatus($login: String!) {\n    getFollowStatus(target: $login)\n  }\n"): (typeof documents)["\n  query getFollowStatus($login: String!) {\n    getFollowStatus(target: $login)\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query getFollowerList($login: String!) {\n    getFollowerList(target: $login) {\n      followList {\n        user {\n          id\n          login\n          imgUrl\n        }\n      }\n      count\n    }\n  }\n"): (typeof documents)["\n  query getFollowerList($login: String!) {\n    getFollowerList(target: $login) {\n      followList {\n        user {\n          id\n          login\n          imgUrl\n        }\n      }\n      count\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query getFollowingList($login: String!) {\n    getFollowingList(target: $login) {\n      followList {\n        user {\n          id\n          login\n          imgUrl\n        }\n      }\n      count\n    }\n  }\n"): (typeof documents)["\n  query getFollowingList($login: String!) {\n    getFollowingList(target: $login) {\n      followList {\n        user {\n          id\n          login\n          imgUrl\n        }\n      }\n      count\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function gql(source: "\n  query GetPersonalEvalZeroCostByLogin($login: String!) {\n    getPersonalEval(login: $login) {\n      correctionPoint\n      recentComment\n    }\n  }\n"): (typeof documents)["\n  query GetPersonalEvalZeroCostByLogin($login: String!) {\n    getPersonalEval(login: $login) {\n      correctionPoint\n      recentComment\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -385,18 +407,6 @@ export function gql(source: "\n  query GetTotalEvalCountVersus($login1: String!,
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query GetTotalLogtimeVersus($login1: String!, $login2: String!) {\n    data1: getPersonalVersus(login: $login1) {\n      totalLogtime\n    }\n    data2: getPersonalVersus(login: $login2) {\n      totalLogtime\n    }\n  }\n"): (typeof documents)["\n  query GetTotalLogtimeVersus($login1: String!, $login2: String!) {\n    data1: getPersonalVersus(login: $login1) {\n      totalLogtime\n    }\n    data2: getPersonalVersus(login: $login2) {\n      totalLogtime\n    }\n  }\n"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function gql(source: "\n  mutation FollowUser($login: String!) {\n    followUser(target: $login) {\n      ... on FollowSuccess {\n        message\n      }\n      ... on FollowFail {\n        message\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation FollowUser($login: String!) {\n    followUser(target: $login) {\n      ... on FollowSuccess {\n        message\n      }\n      ... on FollowFail {\n        message\n      }\n    }\n  }\n"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function gql(source: "\n  mutation UnfollowUser($login: String!) {\n    unfollowUser(target: $login) {\n      ... on FollowSuccess {\n        message\n      }\n      ... on FollowFail {\n        message\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation UnfollowUser($login: String!) {\n    unfollowUser(target: $login) {\n      ... on FollowSuccess {\n        message\n      }\n      ... on FollowFail {\n        message\n      }\n    }\n  }\n"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function gql(source: "\n  query FollowStatus($login: String!) {\n    getFollowStatus(target: $login)\n  }\n"): (typeof documents)["\n  query FollowStatus($login: String!) {\n    getFollowStatus(target: $login)\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

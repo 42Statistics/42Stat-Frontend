@@ -1,7 +1,14 @@
+import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useAtomValue } from 'jotai';
 
-import { MediumText, PrimaryMediumText, WritableNum } from '@shared/ui-kit';
+import {
+  DashedButton,
+  MediumText,
+  PrimaryMediumText,
+  Text,
+  WritableNum,
+} from '@shared/ui-kit';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 
 import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
@@ -12,6 +19,7 @@ import type { Subject } from '@/Calculator/types/Subject';
 
 type CalculatorInputContentTableViewProps = {
   onSubjectListChange: (subjectList: Subject[]) => void;
+  onSubjectAdd: () => void;
   onSubjectDelete: (index: number) => void;
   onInputChange: (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -25,11 +33,13 @@ type CalculatorInputContentTableViewProps = {
 
 export const CalculatorInputContentTableView = ({
   onSubjectListChange,
+  onSubjectAdd,
   onSubjectDelete,
   onInputChange,
   onCheckboxChange,
 }: CalculatorInputContentTableViewProps) => {
   const subjectList = useAtomValue(subjectListAtom);
+  const theme = useTheme();
 
   const { PROJECT_NAME, SCORE, COALITION_BONUS, EXP, FINISH_LEVEL, BLACKHOLE } =
     PROJECT_LIST_TITLES;
@@ -45,77 +55,95 @@ export const CalculatorInputContentTableView = ({
   ];
 
   return (
-    <Table>
-      <thead>
-        <tr>
-          {heads.map((head, index) => (
-            <th key={index}>
-              <PrimaryMediumText>{head}</PrimaryMediumText>
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {subjectList.map(
-          (
-            { name, expEdited, score, bonus, blackhole, finishLevel },
-            index,
-          ) => (
-            <tr key={index}>
-              <td>
-                <ProjectSpotlight
-                  index={index}
-                  keyword={name}
-                  spotlightLeft="1.2rem"
-                  spotlightWidth="auto"
-                  height="3rem"
-                />
-              </td>
-              <td>
-                <InputLayout>
-                  <WritableNum
-                    min="0"
-                    max="125"
-                    name="score"
-                    onChange={(event) => onInputChange(event, index)}
-                    value={score}
-                    style={{ width: '4rem' }}
+    <Layout>
+      <Table>
+        <thead>
+          <tr>
+            {heads.map((head, index) => (
+              <th key={index}>
+                <PrimaryMediumText>{head}</PrimaryMediumText>
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {subjectList.map(
+            (
+              { name, expEdited, score, bonus, blackhole, finishLevel },
+              index,
+            ) => (
+              <tr key={index}>
+                <td>
+                  <ProjectSpotlight
+                    index={index}
+                    keyword={name}
+                    spotlightLeft="1.2rem"
+                    spotlightWidth="auto"
+                    height="3rem"
                   />
-                </InputLayout>
-              </td>
-              <td>
-                <input
-                  type="checkbox"
-                  name="bonus"
-                  onChange={(event) => onCheckboxChange(event, index)}
-                  checked={bonus}
-                />
-              </td>
-              <td>{expEdited?.toLocaleString() ?? '-'}</td>
+                </td>
+                <td>
+                  <InputLayout>
+                    <WritableNum
+                      min="0"
+                      max="125"
+                      name="score"
+                      onChange={(event) => onInputChange(event, index)}
+                      value={score}
+                      style={{ width: '4rem' }}
+                    />
+                  </InputLayout>
+                </td>
+                <td>
+                  <input
+                    type="checkbox"
+                    name="bonus"
+                    onChange={(event) => onCheckboxChange(event, index)}
+                    checked={bonus}
+                  />
+                </td>
+                <td>{expEdited?.toLocaleString() ?? '-'}</td>
 
-              <td>
-                <MediumText>
-                  +{numberWithUnitFormatter(blackhole, '일')}
-                </MediumText>
-              </td>
-              <td>
-                <MediumText>{finishLevel}</MediumText>
-              </td>
-              <td>
-                <OrderItemButtonGroup
-                  tableRowList={subjectList}
-                  index={index}
-                  onListChange={onSubjectListChange}
-                  handleDelete={onSubjectDelete}
-                />
-              </td>
-            </tr>
-          ),
-        )}
-      </tbody>
-    </Table>
+                <td>
+                  <MediumText>
+                    +{numberWithUnitFormatter(blackhole, '일')}
+                  </MediumText>
+                </td>
+                <td>
+                  <MediumText>{finishLevel}</MediumText>
+                </td>
+                <td>
+                  <OrderItemButtonGroup
+                    tableRowList={subjectList}
+                    index={index}
+                    onListChange={onSubjectListChange}
+                    handleDelete={onSubjectDelete}
+                  />
+                </td>
+              </tr>
+            ),
+          )}
+        </tbody>
+      </Table>
+      <ButtonLayout>
+        <DashedButton height="4rem" onClick={onSubjectAdd}>
+          <Text color={theme.colors.mono.gray400}>프로젝트 추가</Text>
+        </DashedButton>
+      </ButtonLayout>
+    </Layout>
   );
 };
+
+const Layout = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1rem;
+`;
+
+const ButtonLayout = styled.div`
+  padding: 0 1.2rem;
+`;
 
 const Table = styled.table`
   margin-top: 1rem;

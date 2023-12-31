@@ -7,11 +7,11 @@ import {
   type GetLeaderboardLevelQuery,
 } from '@shared/__generated__/graphql';
 import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
+import { ResponsivePagination } from '@shared/components/Pagination/ResponsivePagination';
 import { HStack, Spacer, VStack } from '@shared/ui-kit';
 
 import { Leaderboard } from '@/Leaderboard/components/Leaderboard';
 import { LeaderboardDateDescriptor } from '@/Leaderboard/components/Leaderboard/LeaderboardDateDescriptor';
-import { LeaderboardPagination } from '@/Leaderboard/components/LeaderboardPagination';
 import { LeaderboardResultSkeleton } from '@/Leaderboard/components/skeletons/LeaderboardResultSkeleton';
 import { SIZE_PER_PAGE } from '@/Leaderboard/constants/defaultOptions';
 import { LEADERBOARD_PARAM_KEYS } from '@/Leaderboard/constants/paramKeys';
@@ -81,7 +81,7 @@ export const LeaderboardLevelResult = ({
         </HStack>
         <Leaderboard me={me} list={nodes} fixedNumber={2} />
       </VStack>
-      <LeaderboardPagination
+      <ResponsivePagination
         currPageNumber={pageNumber}
         onPageNumberChange={handlePageNumberChange}
         totalPageNumber={Math.ceil(totalCount / SIZE_PER_PAGE)}

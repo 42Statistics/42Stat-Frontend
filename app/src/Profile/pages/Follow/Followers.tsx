@@ -11,6 +11,7 @@ import Follow from '@/Profile/dashboard-contents/Follow';
 const FollowerPage = () => {
   const { login } = useContext(UserProfileContext);
 
+  //todo: variable page size, page number 추가 필요
   const { data, loading, error, refetch } = useQuery(GET_FOLLOWER_LIST, {
     variables: { login: login },
   });
@@ -26,10 +27,11 @@ const FollowerPage = () => {
   const followList = data.getFollowerPaginated.edges.map(
     (item: FollowListEdge) => item.node.user,
   );
+  const totalCount = data.getFollowerPaginated.pageInfo.totalCount;
 
   return (
     <>
-      <Follow followList={followList} />
+      <Follow followList={followList} totalCount={totalCount} />
     </>
   );
 };

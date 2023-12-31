@@ -1,8 +1,14 @@
+import { useSearchParams } from 'react-router-dom';
+
 import styled from '@emotion/styled';
 
 import { UserPreview } from '@shared/__generated__/graphql';
 import { DashboardRow } from '@shared/components/Dashboard/DashboardRow';
 import { DashboardRowItem } from '@shared/components/Dashboard/DashboardRowItem';
+import { ResponsivePagination } from '@shared/components/Pagination/ResponsivePagination';
+import { parsePageNumber } from '@shared/utils/parsePaginationArgs';
+
+import { FOLLOW_SIZE_PER_PAGE } from '@/Profile/constants/followSizePerPage';
 
 import FollowItem from './FollowItem';
 
@@ -14,8 +20,24 @@ const sliceRowList = (array: UserPreview[], chunkSize: number) => {
   return chunks;
 };
 
-const Follow = ({ followList }: { followList: UserPreview[] }) => {
+const Follow = ({
+  followList,
+  totalCount,
+}: {
+  followList: UserPreview[];
+  totalCount: number;
+}) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const pageNumber = parsePageNumber(searchParams.get('page'));
+
   const followRowList = sliceRowList(followList, 6);
+
+  const handlePageNumberChange = (newPageNumber: number) => {
+    const newURLSearchParams = new URLSearchParams();
+
+    newURLSearchParams.set('page', newPageNumber.toString());
+    setSearchParams(newURLSearchParams);
+  };
 
   return (
     <Layout>
@@ -31,6 +53,11 @@ const Follow = ({ followList }: { followList: UserPreview[] }) => {
           ))}
         </DashboardRow>
       ))}
+      <ResponsivePagination
+        currPageNumber={pageNumber}
+        onPageNumberChange={handlePageNumberChange}
+        totalPageNumber={Math.ceil(totalCount / FOLLOW_SIZE_PER_PAGE)}
+      />
     </Layout>
   );
 };

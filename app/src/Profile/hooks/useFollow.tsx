@@ -1,11 +1,13 @@
+import { useEffect } from 'react';
+
 import { useMutation, useQuery } from '@apollo/client';
 
 import {
   FOLLOW_USER,
   UNFOLLOW_USER,
   GET_FOLLOW_STATUS,
-  GET_FOLLOWING_LIST,
-  GET_FOLLOWER_LIST,
+  GET_FOLLOWING_LIST_PREVIEW,
+  GET_FOLLOWER_LIST_PREVIEW,
 } from '@/Profile/dashboard-contents-queries/GET_FOLLOW_DATA';
 
 export const useFollow = (login: string) => {
@@ -26,7 +28,7 @@ export const useFollow = (login: string) => {
     loading: loadingFollowingList,
     error: errorFollowingList,
     refetch: refetchFollowingList,
-  } = useQuery(GET_FOLLOWING_LIST, {
+  } = useQuery(GET_FOLLOWING_LIST_PREVIEW, {
     variables: { login },
   });
   const {
@@ -34,7 +36,7 @@ export const useFollow = (login: string) => {
     loading: loadingFollowerList,
     error: errorFollowerList,
     refetch: refetchFollowerList,
-  } = useQuery(GET_FOLLOWER_LIST, {
+  } = useQuery(GET_FOLLOWER_LIST_PREVIEW, {
     variables: { login },
   });
 
@@ -50,6 +52,12 @@ export const useFollow = (login: string) => {
     refetchFollowerList();
     followStatus = dataFollowStatus?.getFollowStatus ?? false;
   };
+
+  useEffect(() => {
+    refetchFollowStatus();
+    refetchFollowingList();
+    refetchFollowerList();
+  }, [refetchFollowStatus, refetchFollowingList, refetchFollowerList]);
 
   const loading =
     loadingFollow ||

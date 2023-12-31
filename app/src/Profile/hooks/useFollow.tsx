@@ -6,8 +6,6 @@ import {
   FOLLOW_USER,
   UNFOLLOW_USER,
   GET_FOLLOW_STATUS,
-  GET_FOLLOWING_LIST_PREVIEW,
-  GET_FOLLOWER_LIST_PREVIEW,
 } from '@/Profile/dashboard-contents-queries/GET_FOLLOW_DATA';
 
 export const useFollow = (login: string) => {
@@ -23,22 +21,6 @@ export const useFollow = (login: string) => {
   } = useQuery(GET_FOLLOW_STATUS, {
     variables: { login },
   });
-  const {
-    data: followingList,
-    loading: loadingFollowingList,
-    error: errorFollowingList,
-    refetch: refetchFollowingList,
-  } = useQuery(GET_FOLLOWING_LIST_PREVIEW, {
-    variables: { login },
-  });
-  const {
-    data: followerList,
-    loading: loadingFollowerList,
-    error: errorFollowerList,
-    refetch: refetchFollowerList,
-  } = useQuery(GET_FOLLOWER_LIST_PREVIEW, {
-    variables: { login },
-  });
 
   let followStatus = dataFollowStatus?.getFollowStatus ?? false;
 
@@ -48,34 +30,18 @@ export const useFollow = (login: string) => {
       : hitFollow({ variables: { login: login } }));
 
     refetchFollowStatus();
-    refetchFollowingList();
-    refetchFollowerList();
     followStatus = dataFollowStatus?.getFollowStatus ?? false;
   };
 
   useEffect(() => {
     refetchFollowStatus();
-    refetchFollowingList();
-    refetchFollowerList();
-  }, [refetchFollowStatus, refetchFollowingList, refetchFollowerList]);
+  }, [refetchFollowStatus]);
 
-  const loading =
-    loadingFollow ||
-    loadingUnfollow ||
-    loadingFollowStatus ||
-    loadingFollowingList ||
-    loadingFollowerList;
-  const error =
-    errorFollow ||
-    errorUnfollow ||
-    errorFollowStatus ||
-    errorFollowingList ||
-    errorFollowerList;
+  const loading = loadingFollow || loadingUnfollow || loadingFollowStatus;
+  const error = errorFollow || errorUnfollow || errorFollowStatus;
 
   return {
     handleFollow,
-    followingList,
-    followerList,
     followStatus,
     loading,
     error,

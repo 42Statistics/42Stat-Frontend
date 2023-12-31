@@ -1,6 +1,7 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+import { useQuery } from '@apollo/client';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 
@@ -15,7 +16,7 @@ import { ROUTES } from '@shared/constants/routes';
 import { Avatar, Text } from '@shared/ui-kit';
 
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
-import { useFollow } from '@/Profile/hooks/useFollow';
+import { GET_FOLLOWING_LIST_PREVIEW } from '@/Profile/dashboard-contents-queries/GET_FOLLOW_DATA';
 
 export const Following = () => {
   const { login } = useContext(UserProfileContext);
@@ -23,7 +24,17 @@ export const Following = () => {
 
   const title = 'Following';
 
-  const { followingList, loading, error } = useFollow(login);
+  const { data, loading, error, refetch } = useQuery(
+    GET_FOLLOWING_LIST_PREVIEW,
+    {
+      variables: { login },
+    },
+  );
+
+	//todo: update될때만 요청하도록 수정 필요
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
 
   if (loading) {
     return <DashboardContentLoading title={title} />;
@@ -31,27 +42,30 @@ export const Following = () => {
   if (error) {
     return <DashboardContentBadRequest title={title} message={error.message} />;
   }
-  if (!followingList) {
+  if (!data) {
     return <DashboardContentNotFound title={title} />;
   }
+
+  const followingList = data.getFollowingList.followList.map(
+    (item) => item.user,
+  );
+  const totalCount = data.getFollowingList.count;
 
   return (
     <DashboardContent title={title}>
       <Link to={ROUTES.PROFILE_FOLLOWING_OF(login)}>
         <Layout>
-          {followingList.getFollowingList.followList.map((user) => (
+          {followingList.map((user) => (
             <Avatar
-              key={user.user.login}
-              name={user.user.login}
-              src={user.user.imgUrl}
-              alt={ALT.AVATAR_OF(user.user.login)}
+              key={user.login}
+              name={user.login}
+              src={user.imgUrl}
+              alt={ALT.AVATAR_OF(user.login)}
               radius={theme.radius.xs}
             />
           ))}
           <Text style={{ marginLeft: '1rem' }}>
-            {followingList.getFollowingList.count === 0
-              ? '팔로잉 0'
-              : followingList.getFollowingList.count}
+            {totalCount === 0 ? '팔로잉 0' : totalCount}
           </Text>
         </Layout>
       </Link>

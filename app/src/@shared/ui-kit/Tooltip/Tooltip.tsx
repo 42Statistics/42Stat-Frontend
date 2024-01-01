@@ -58,7 +58,7 @@ const Layout = styled.div<LayoutProps>`
         return `
           top: ${top + window.scrollY + 0.5 * refHeight}px;
           left: ${left + window.scrollX + refWidth}px;
-          transform: translate(10px, -50%);
+          transform: translate(5px, -50%);
         `;
       case 'bottom':
         return `

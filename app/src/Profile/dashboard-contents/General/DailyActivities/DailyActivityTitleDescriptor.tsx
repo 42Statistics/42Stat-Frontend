@@ -1,4 +1,4 @@
-import { CustomTooltip } from '@shared/components/CustomTooltip';
+import { IconTooltip } from '@shared/ui-kit/Tooltip/IconTooltip';
 import { H2BoldText, H2Text, HStack, Text, VStack } from '@shared/ui-kit';
 
 type DailyActivityTitleDescriptorProps = {
@@ -21,7 +21,7 @@ export const DailyActivityTitleDescriptor = ({
           <H2BoldText inline>{total.toLocaleString()}</H2BoldText>
           <H2Text inline>점</H2Text>
         </div>
-        <CustomTooltip
+        <IconTooltip
           position="right"
           text="접속 시간당 1점, 평가 · 피평가 · 아젠다 참여 시 1점이 쌓입니다."
         />

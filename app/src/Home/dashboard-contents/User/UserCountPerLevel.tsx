@@ -8,7 +8,7 @@ import {
   DashboardContentLoading,
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
-import { CustomTooltip } from '@shared/components/CustomTooltip';
+import { IconTooltip } from '@shared/ui-kit/Tooltip/IconTooltip';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 
 const GET_USER_COUNT_PER_LEVEL = gql(/* GraphQL */ `
@@ -66,7 +66,7 @@ export const UserCountPerLevel = () => {
     <DashboardContent
       title={title}
       titleRight={
-        <CustomTooltip text="여행 중 : 멤버 포함, 블랙홀 제외한 러너" />
+        <IconTooltip text="여행 중 : 멤버 포함, 블랙홀 제외한 러너" />
       }
       type="ApexCharts"
     >

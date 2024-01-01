@@ -2,10 +2,11 @@ import { useContext, useRef } from 'react';
 
 import { useTheme } from '@emotion/react';
 import dayjs from 'dayjs';
-import { useAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
+
+import { tooltipAtom } from '@core/atoms/tooltipAtom';
 
 import { DailyActivity } from '@shared/__generated__/graphql';
-import { Tooltip } from '@shared/ui-kit';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 import { isSameDate } from '@shared/utils/isSameDate';
 
@@ -28,6 +29,8 @@ export const DailyActivityTableData = ({
   color: standardColor,
 }: DailyActivityTableDataProps) => {
   const { login } = useContext(UserProfileContext);
+  const currentRef = useRef<HTMLDivElement>(null);
+  const setTooltip = useSetAtom(tooltipAtom);
   const theme = useTheme();
   const color = getDailyActivityTableDataColor(
     score,
@@ -37,8 +40,25 @@ export const DailyActivityTableData = ({
   const [{ date: selectedDate }, setSelectedDailyActivity] = useAtom(
     selectedDailyActivityAtom,
   );
-  const currentRef = useRef<HTMLDivElement>(null);
   const isToday = isSameDate(date, new Date());
+
+  const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+    setTooltip({
+      ref: e.currentTarget,
+      position: 'top',
+      text: `${dayjs(date).format('YYYY-MM-DD')}: ${numberWithUnitFormatter(
+        score,
+        unit,
+      )}`,
+    });
+  };
+  const handleMouseLeave = () => {
+    setTooltip({
+      ref: null,
+      position: 'top',
+      text: '',
+    });
+  };
 
   const unit = '점';
 
@@ -55,22 +75,16 @@ export const DailyActivityTableData = ({
       style={{ position: 'relative' }}
       onClick={handleClick}
       ref={currentRef}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
-      <Tooltip.Container>
-        <DailyActivitySquare
-          color={isToday ? theme.colors.mono.gray300 : color}
-          isSelected={
-            selectedDate !== '' && isSameDate(date, new Date(selectedDate))
-          }
-          hasHoverEffect
-        />
-        <Tooltip position="top">
-          {`${dayjs(date).format('YYYY-MM-DD')}: ${numberWithUnitFormatter(
-            score,
-            unit,
-          )}`}
-        </Tooltip>
-      </Tooltip.Container>
+      <DailyActivitySquare
+        color={isToday ? theme.colors.mono.gray300 : color}
+        isSelected={
+          selectedDate !== '' && isSameDate(date, new Date(selectedDate))
+        }
+        hasHoverEffect
+      />
     </div>
   );
 };

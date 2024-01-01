@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import styled from '@emotion/styled';
 import { useAtom, useAtomValue } from 'jotai';
 
-import { CustomTooltip } from '@shared/components/CustomTooltip';
+import { IconTooltip } from '@shared/ui-kit/Tooltip/IconTooltip';
 import {
   Body1MediumText,
   HStack,
@@ -45,7 +45,7 @@ export const CalculatorBasicInfoInputGroup = () => {
       <HStack spacing="2rem">
         <HStack w="13rem" justify="start" spacing="1rem">
           <Body1MediumText>현재 레벨</Body1MediumText>
-          <CustomTooltip text="레벨이 8.41을 넘으면, 블랙홀 기간이 늘지 않아요." />
+          <IconTooltip text="레벨이 8.41을 넘으면, 블랙홀 기간이 늘지 않아요." />
         </HStack>
         <InputLayout>
           <WritableNum
@@ -62,7 +62,7 @@ export const CalculatorBasicInfoInputGroup = () => {
       <HStack spacing="2rem">
         <HStack w="13rem" justify="start" spacing="1rem">
           <Body1MediumText>현재 블랙홀</Body1MediumText>
-          <CustomTooltip text="현재 블랙홀 + 본 과정 시작 날짜가 671일이 넘으면, 블랙홀 기간이 늘지 않아요." />
+          <IconTooltip text="현재 블랙홀 + 본 과정 시작 날짜가 671일이 넘으면, 블랙홀 기간이 늘지 않아요." />
         </HStack>
         <HStack spacing="0.3rem">
           <InputLayout>
@@ -80,7 +80,7 @@ export const CalculatorBasicInfoInputGroup = () => {
       <HStack spacing="2rem">
         <HStack w="13rem" justify="start" spacing="1rem">
           <Body1MediumText>본과정 시작한지</Body1MediumText>
-          <CustomTooltip
+          <IconTooltip
             type="warning"
             size="16"
             text="추가 지급된 블랙홀은 직접 빼주세요. (6~8기: 6일 / 9기: 5일 / 10기: 1일)"

@@ -3,7 +3,7 @@ import { subMonths } from 'date-fns';
 
 import { gql } from '@shared/__generated__';
 import { AreaChart } from '@shared/components/Chart';
-import { CustomTooltip } from '@shared/components/CustomTooltip';
+import { IconTooltip } from '@shared/ui-kit/Tooltip/IconTooltip';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
   DashboardContentBadRequest,
@@ -73,7 +73,7 @@ export const AliveUserCountRecords = () => {
     <DashboardContent
       title={title}
       titleRight={
-        <CustomTooltip text="여행 중 : 멤버 포함, 블랙홀 제외한 러너" />
+        <IconTooltip text="여행 중 : 멤버 포함, 블랙홀 제외한 러너" />
       }
       type="ApexCharts"
     >

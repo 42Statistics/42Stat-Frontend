@@ -10,7 +10,7 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { NumberVersus } from '@shared/components/DashboardContentView/Number/NumberVersus';
-import { CustomTooltip } from '@shared/components/CustomTooltip';
+import { IconTooltip } from '@shared/ui-kit/Tooltip/IconTooltip';
 
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { MyUserProfileContext } from '@/Profile/contexts/MyUserProfileContext';
@@ -54,7 +54,7 @@ export const AverageCommentLength = () => {
   return (
     <DashboardContent
       title={title}
-      titleRight={<CustomTooltip text="코멘트 : 평가하러 가서 작성한 리뷰" />}
+      titleRight={<IconTooltip text="코멘트 : 평가하러 가서 작성한 리뷰" />}
     >
       <NumberVersus
         userProfile1={myUserProfile}

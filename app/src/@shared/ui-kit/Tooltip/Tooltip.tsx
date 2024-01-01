@@ -19,14 +19,6 @@ export const Tooltip = () => {
   const refWidth = rect.width;
   const refHeight = rect.height;
 
-  if (
-    top === undefined ||
-    left === undefined ||
-    refWidth === undefined ||
-    refHeight === undefined
-  )
-    return null;
-
   return (
     <Layout
       hover={ref ? true : false}

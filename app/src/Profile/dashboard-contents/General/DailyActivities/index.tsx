@@ -15,6 +15,7 @@ import { DailyActivitiesResult } from '@/Profile/dashboard-contents/General/Dail
 import { DailyActivityTitleDescriptor } from '@/Profile/dashboard-contents/General/DailyActivities/DailyActivityTitleDescriptor';
 import { YearSelect } from '@/Profile/dashboard-contents/General/DailyActivities/YearSelect';
 import { calculateDailyActivityScores } from '@/Profile/dashboard-contents/General/DailyActivities/utils/calculateDailyActivityScores';
+import { dailyActivityErrorAtom } from '@/Profile/dashboard-contents/General/atoms/dailyActivityErrorAtom';
 import { dailyActivitySumAtom } from '@/Profile/dashboard-contents/General/atoms/dailyActivitySumAtom';
 import { selectedDailyActivityAtom } from '@/Profile/dashboard-contents/General/atoms/selectedDailyActivityAtom';
 
@@ -47,8 +48,9 @@ export const DailyActivities = () => {
   const result = useQuery(GET_DAILY_ACTIVITIES_BY_LOGIN, {
     variables: { login, year: year ?? undefined },
   });
-  const { data, refetch } = result;
+  const { data, error, refetch } = result;
   const beginAt = useContext(BeginAtContext);
+  const setDailyActivityError = useSetAtom(dailyActivityErrorAtom);
 
   const { dailyActivities } = data?.getPersonalGeneral ?? {};
   const dailyActivityScores =
@@ -65,6 +67,7 @@ export const DailyActivities = () => {
 
   const setDailyActivitySum = useSetAtom(dailyActivitySumAtom);
   const setSelectedDailyActivity = useSetAtom(selectedDailyActivityAtom);
+  setDailyActivityError(error);
 
   useEffect(() => {
     if (dailyActivities === undefined) {

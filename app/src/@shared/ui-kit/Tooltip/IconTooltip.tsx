@@ -32,11 +32,11 @@ export const IconTooltip = ({
     });
   };
   const handleMouseLeave = () => {
-    // setTooltip({
-    //   ref: null,
-    //   position,
-    //   text,
-    // });
+    setTooltip({
+      ref: null,
+      position,
+      text,
+    });
   };
 
   const Icon = type === 'info' ? MdInfo : MdWarning;

@@ -2,7 +2,7 @@ import { atom } from 'jotai';
 
 import { TooltipPosition } from '@shared/types/TooltipPosition';
 
-export type TooltipAtomProps = {
+type TooltipAtomProps = {
   ref: HTMLDivElement | null;
   text: string;
   position: TooltipPosition;

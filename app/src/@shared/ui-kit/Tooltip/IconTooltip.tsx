@@ -15,8 +15,6 @@ type IconTooltipProps = {
   text: string;
 };
 
-/* 직접 컴포넌트를 지정해서 툴팁을 사용하고 싶은 경우 IconTooltip의 Layout에
-설정한 것처럼 해당 컴포넌트에서 설정해주면 됩니다. */
 export const IconTooltip = ({
   type = 'info',
   position = 'top',
@@ -34,11 +32,11 @@ export const IconTooltip = ({
     });
   };
   const handleMouseLeave = () => {
-    setTooltip({
-      ref: null,
-      position,
-      text,
-    });
+    // setTooltip({
+    //   ref: null,
+    //   position,
+    //   text,
+    // });
   };
 
   const Icon = type === 'info' ? MdInfo : MdWarning;

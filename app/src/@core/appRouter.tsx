@@ -95,22 +95,6 @@ export const appRouter = createBrowserRouter([
                       </Suspense>
                     ),
                   },
-                  {
-                    path: ROUTES.PROFILE_FOLLOWERS,
-                    element: (
-                      <Suspense fallback={<ProfileVersusPageSkeleton />}>
-                        <ProfileFollowersPage />
-                      </Suspense>
-                    ),
-                  },
-                  {
-                    path: ROUTES.PROFILE_FOLLOWING,
-                    element: (
-                      <Suspense fallback={<ProfileVersusPageSkeleton />}>
-                        <ProfileFollowingPage />
-                      </Suspense>
-                    ),
-                  },
                 ],
               },
             ],
@@ -180,6 +164,22 @@ export const appRouter = createBrowserRouter([
                         element: (
                           <Suspense fallback={<ProfileVersusPageSkeleton />}>
                             <ProfileVersusPage />
+                          </Suspense>
+                        ),
+                      },
+                      {
+                        path: ROUTES.PROFILE_FOLLOWERS,
+                        element: (
+                          <Suspense fallback={<ProfileVersusPageSkeleton />}>
+                            <ProfileFollowersPage />
+                          </Suspense>
+                        ),
+                      },
+                      {
+                        path: ROUTES.PROFILE_FOLLOWING,
+                        element: (
+                          <Suspense fallback={<ProfileVersusPageSkeleton />}>
+                            <ProfileFollowingPage />
                           </Suspense>
                         ),
                       },

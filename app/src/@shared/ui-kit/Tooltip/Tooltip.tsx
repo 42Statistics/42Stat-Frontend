@@ -21,7 +21,7 @@ export const Tooltip = () => {
 
   return (
     <Layout
-      hover={ref ? true : false}
+      hover={ref !== null}
       position={position}
       top={top}
       left={left}

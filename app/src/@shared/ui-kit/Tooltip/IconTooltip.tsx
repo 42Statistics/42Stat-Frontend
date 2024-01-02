@@ -25,9 +25,26 @@ export const IconTooltip = ({
     text,
   });
 
-  const Icon = type === 'info' ? MdInfo : MdWarning;
-  const iconColor =
-    type === 'info' ? theme.colors.mono.gray500 : theme.colors.semantic.warning;
+  const Icon = (() => {
+    switch (type) {
+      case 'info':
+        return MdInfo;
+      case 'warning':
+        return MdWarning;
+      default:
+        return MdInfo;
+    }
+  })();
+  const iconColor = (() => {
+    switch (type) {
+      case 'info':
+        return theme.colors.mono.gray500;
+      case 'warning':
+        return theme.colors.semantic.warning;
+      default:
+        return theme.colors.mono.gray500;
+    }
+  })();
 
   return (
     <Layout onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>

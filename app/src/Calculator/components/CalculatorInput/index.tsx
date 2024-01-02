@@ -23,7 +23,7 @@ export const CalculatorInput = () => {
   );
   const { updateSubjectList } = useSubjectList();
 
-  const handleSubjectAdd = () => {
+  const onSubjectAdd = () => {
     if (subjectList.length >= 20) {
       setCalculatorDialog({
         isOpen: true,
@@ -45,9 +45,9 @@ export const CalculatorInput = () => {
 
   return (
     <VStack w="100%" spacing="1rem">
-      <CalculatorInputHeader handleSubjectAdd={handleSubjectAdd} />
+      <CalculatorInputHeader handleSubjectAdd={onSubjectAdd} />
       <Divider color={theme.colors.mono.black} />
-      <CalculatorInputContent handleSubjectAdd={handleSubjectAdd}/>
+      <CalculatorInputContent handleSubjectAdd={onSubjectAdd} />
     </VStack>
   );
 };

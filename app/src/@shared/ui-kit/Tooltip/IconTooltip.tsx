@@ -1,12 +1,10 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { useSetAtom } from 'jotai';
-
-import { tooltipAtom } from '@core/atoms/tooltipAtom';
 
 import { ReactComponent as MdInfo } from '@shared/assets/icon/md-info.svg';
 import { ReactComponent as MdWarning } from '@shared/assets/icon/md-warning.svg';
 import type { TooltipPosition } from '@shared/types/TooltipPosition';
+import { useTooltipEventHandler } from '@shared/hooks/useTooltipEventHandler';
 
 type IconTooltipProps = {
   type?: 'info' | 'warning';
@@ -22,22 +20,10 @@ export const IconTooltip = ({
   text,
 }: IconTooltipProps) => {
   const theme = useTheme();
-  const setTooltip = useSetAtom(tooltipAtom);
-
-  const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
-    setTooltip({
-      ref: e.currentTarget,
-      position,
-      text,
-    });
-  };
-  const handleMouseLeave = () => {
-    setTooltip({
-      ref: null,
-      position,
-      text,
-    });
-  };
+  const { handleMouseEnter, handleMouseLeave } = useTooltipEventHandler({
+    position,
+    text,
+  });
 
   const Icon = type === 'info' ? MdInfo : MdWarning;
   const iconColor =

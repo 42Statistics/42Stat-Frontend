@@ -14,6 +14,7 @@ import {
 
 import { calculatorUserInfoAtom } from '@/Calculator/atoms/calculatorUserInfoAtom';
 import { subjectListAtom } from '@/Calculator/atoms/subjectListAtom';
+import { MAX_LEVEL } from '@/Calculator/constants/levelRecords';
 import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
 
 export const CalculatorBasicInfoInputGroup = () => {
@@ -24,13 +25,24 @@ export const CalculatorBasicInfoInputGroup = () => {
   const subjectList = useAtomValue(subjectListAtom);
   const { updateSubjectList } = useSubjectList();
 
+  const parseInputValue = (value: number) => {
+    const stringValue = value.toString();
+
+    if (stringValue === '0') return '';
+    return value;
+  };
+
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    const value = Number(e.target.value);
-    if (isNaN(value) || value < 0) return;
+    const { value, name: targetName } = e.target;
+    let numericValue = parseFloat(value);
+
+    if (isNaN(numericValue) || numericValue < 0) numericValue = 0;
+    if (targetName === 'currentLevel' && numericValue > MAX_LEVEL)
+      numericValue = MAX_LEVEL;
     const name = e.target.name as keyof typeof calculatorUserInfoAtom;
     setCalculatorUserInfo((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: numericValue,
     }));
   };
 
@@ -53,7 +65,7 @@ export const CalculatorBasicInfoInputGroup = () => {
             min="0"
             max="30"
             step="0.01"
-            value={currentLevel}
+            value={parseInputValue(currentLevel)}
             onChange={handleChange}
             style={{ width: '5rem' }}
           />
@@ -69,7 +81,7 @@ export const CalculatorBasicInfoInputGroup = () => {
             <WritableNum
               name="currentBlackhole"
               min="0"
-              value={currentBlackhole}
+              value={parseInputValue(currentBlackhole)}
               onChange={handleChange}
               style={{ width: '5rem' }}
             />
@@ -91,7 +103,7 @@ export const CalculatorBasicInfoInputGroup = () => {
             <WritableNum
               name="daysFromStart"
               min="0"
-              value={daysFromStart}
+              value={parseInputValue(daysFromStart)}
               onChange={handleChange}
               style={{ width: '5rem' }}
             />

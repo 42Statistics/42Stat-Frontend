@@ -47,6 +47,8 @@ export const useSubjectList = () => {
             (exp) => exp > newCurrentExp,
           );
 
+          if (newDecimalLevel === -1) return expMaxTable.length - 1;
+
           //레벨 소숫점 2자리까지 Math.round로 계산
           const newLevel =
             Math.round(
@@ -56,12 +58,20 @@ export const useSubjectList = () => {
                 100,
             ) / 100;
 
-          if (isNaN(newLevel)) return 0;
+          if (isNaN(newLevel)) {
+            console.log('isNaN returned');
+            return 0;
+          }
           return newLevel;
         };
 
         const calculateCurrentExp = (newStartLevel: number) => {
           const decimalLevel = Math.floor(newStartLevel);
+
+          //최대 레벨에 도달한 경우
+          if (decimalLevel >= expMaxTable.length - 1) {
+            return expMaxTable[expMaxTable.length - 1];
+          }
           const currentTotalExp = Math.floor(
             expMaxTable[decimalLevel] +
               expReqTable[decimalLevel + 1] * (newStartLevel - decimalLevel),

@@ -59,7 +59,6 @@ export const useSubjectList = () => {
             ) / 100;
 
           if (isNaN(newLevel)) {
-            console.log('isNaN returned');
             return 0;
           }
           return newLevel;

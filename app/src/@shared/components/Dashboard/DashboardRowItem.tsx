@@ -5,7 +5,7 @@ import { CustomBox } from '@shared/ui-kit-styled';
 export type DashboardRowItemProps = {
   rowSpan: number;
   colSpan: number;
-  content: React.FC;
+  content: () => JSX.Element;
 };
 
 export const DashboardRowItem = ({

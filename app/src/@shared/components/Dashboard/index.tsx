@@ -15,9 +15,9 @@ export const Dashboard = ({ rows, contents }: DashboardProps) => {
 
   return (
     <Layout>
-      {rows.map(({ colSpan, items }, rowIdx) => (
+      {rows.map(({ items }, rowIdx) => (
         <DashboardRow key={rowIdx}>
-          {items.map(({ rowSpan, elementId }, itemIdx) => (
+          {items.map(({ rowSpan, colSpan, elementId }, itemIdx) => (
             <DashboardRowItem
               key={itemIdx}
               rowSpan={rowSpan}

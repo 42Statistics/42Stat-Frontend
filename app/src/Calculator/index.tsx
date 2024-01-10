@@ -7,12 +7,11 @@ import { Footer } from '@core/components/Footer';
 
 import { gql } from '@shared/__generated__';
 import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
+import { Dashboard } from '@shared/components/Dashboard';
 import { Seo } from '@shared/components/Seo';
 import { H1BoldText, VStack } from '@shared/ui-kit';
 import { getBlackholeDaysLeft } from '@shared/utils/getBlackholeDaysLeft';
 import { getTimeDiffFromNow } from '@shared/utils/getTimeDiffFromNow';
-import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
-import { Dashboard } from '@shared/components/Dashboard';
 
 import { calculatorUserInfoAtom } from '@/Calculator/atoms/calculatorUserInfoAtom';
 import { expTablesAtom } from '@/Calculator/atoms/expTablesAtom';
@@ -24,8 +23,8 @@ import { CalculatorBasicInfoInputGroup } from '@/Calculator/components/Calculato
 import { CalculatorInput } from '@/Calculator/components/CalculatorInput';
 import { calculatorPageDashboardContents } from '@/Calculator/dashboard-frames/calculatorPageDashboardContents';
 import {
+  calculatorPageDashboardRows,
   calculatorPageDashboardRowsDesktop,
-  calculatorPageDashboardRowsTablet,
 } from '@/Calculator/dashboard-frames/calculatorPageDashboardRows';
 import { getDifferences } from '@/Calculator/utils/getDifferences';
 
@@ -49,7 +48,6 @@ const CalculatorPage = () => {
   const setCalculatorUserInfo = useSetAtom(calculatorUserInfoAtom);
   const setExpTables = useSetAtom(expTablesAtom);
   const setSubjectList = useSetAtom(subjectListAtom);
-  const device = useDeviceType();
   const { loading, error, data } = useQuery(GET_BLACKHOLE_INFO);
 
   useEffect(() => {
@@ -96,11 +94,8 @@ const CalculatorPage = () => {
         </VStack>
         <Dashboard
           contents={calculatorPageDashboardContents}
-          rows={
-            device === 'desktop'
-              ? calculatorPageDashboardRowsDesktop
-              : calculatorPageDashboardRowsTablet
-          }
+          defaultRows={calculatorPageDashboardRows}
+          desktopRows={calculatorPageDashboardRowsDesktop}
         />
         <CalculatorInput />
         <Footer />

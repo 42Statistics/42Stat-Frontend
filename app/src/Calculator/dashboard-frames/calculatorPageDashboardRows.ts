@@ -17,7 +17,7 @@ export const calculatorPageDashboardRowsDesktop: DashboardRowType[] = [
   },
 ];
 
-export const calculatorPageDashboardRowsTablet: DashboardRowType[] = [
+export const calculatorPageDashboardRows: DashboardRowType[] = [
   {
     items: [
       {

@@ -2,14 +2,16 @@ import { useContext } from 'react';
 
 import { Footer } from '@core/components/Footer';
 
-import { DashboardTemp } from '@shared/components/Dashboard/DashboardTemp';
 import { Seo } from '@shared/components/Seo';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
+import { Dashboard } from '@shared/components/Dashboard';
 
-import { profileGeneralPageDashboardRows } from '@/Profile/dashboard-frames/profileGeneralPageDashboardRows';
-import { profileGeneralPageDashboardContents } from '@/Profile/dashboard-frames/profileGeneralPageDashboardContents';
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
-import { profileGeneralPageDashboardMobileRows } from '@/Profile/dashboard-frames/profileGeneralPageDashboardMobileRows';
+import { profileGeneralPageDashboardContents } from '@/Profile/dashboard-frames/profileGeneralPageDashboardContents';
+import {
+  profileGeneralPageDashboardRowsDesktop,
+  profileGeneralPageDashboardRowsMobile,
+} from '@/Profile/dashboard-frames/profileGeneralPageDashboardRows';
 
 const ProfileGeneralPage = () => {
   const { login } = useContext(UserProfileContext);
@@ -19,14 +21,14 @@ const ProfileGeneralPage = () => {
     <>
       <Seo title={`${login} › 일반`} />
       {device !== 'mobile' ? (
-        <DashboardTemp
+        <Dashboard
           contents={profileGeneralPageDashboardContents}
-          rows={profileGeneralPageDashboardRows}
+          rows={profileGeneralPageDashboardRowsDesktop}
         />
       ) : (
-        <DashboardTemp
+        <Dashboard
           contents={profileGeneralPageDashboardContents}
-          rows={profileGeneralPageDashboardMobileRows}
+          rows={profileGeneralPageDashboardRowsMobile}
         />
       )}
       <Footer />

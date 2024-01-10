@@ -3,25 +3,14 @@ export type DashboardProps = {
   contents: DashboardItemProps[];
 };
 
-export type DashboardTempProps = {
-  rows: DashboardTempType[];
-  contents: DashboardItemProps[];
-};
-
-export type DashboardTempType = {
-  items: {
-    rowSpan: number;
-    colSpan: number;
-    elementId: number;
-  }[];
-};
-
 export type DashboardRowType = {
+  items: DashboardItemType[];
+};
+
+export type DashboardItemType = {
+  rowSpan: number;
   colSpan: number;
-  items: {
-    rowSpan: number;
-    elementId: number;
-  }[];
+  elementId: number;
 };
 
 export type DashboardItemProps = {

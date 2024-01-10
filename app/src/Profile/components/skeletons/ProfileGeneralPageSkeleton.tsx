@@ -1,7 +1,7 @@
-import { DashboardTempSkeleton } from '@shared/components/DashboardSkeleton/DashboardTempSkeleton';
+import { DashboardSkeleton } from '@shared/components/DashboardSkeleton';
 
-import { profileGeneralPageDashboardRows } from '@/Profile/dashboard-frames/profileGeneralPageDashboardRows';
+import { profileGeneralPageDashboardRowsDesktop } from '@/Profile/dashboard-frames/profileGeneralPageDashboardRows';
 
 export const ProfileGeneralPageSkeleton = () => {
-  return <DashboardTempSkeleton rows={profileGeneralPageDashboardRows} />;
+  return <DashboardSkeleton rows={profileGeneralPageDashboardRowsDesktop} />;
 };

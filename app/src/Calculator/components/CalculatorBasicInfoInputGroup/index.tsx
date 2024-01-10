@@ -25,13 +25,6 @@ export const CalculatorBasicInfoInputGroup = () => {
   const subjectList = useAtomValue(subjectListAtom);
   const { updateSubjectList } = useSubjectList();
 
-  const parseInputValue = (value: number) => {
-    const stringValue = value.toString();
-
-    if (stringValue === '0') return '';
-    return value;
-  };
-
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     const { value, name: targetName } = e.target;
     let numericValue = parseFloat(value);
@@ -65,7 +58,7 @@ export const CalculatorBasicInfoInputGroup = () => {
             min="0"
             max="30"
             step="0.01"
-            value={parseInputValue(currentLevel)}
+            defaultValue={currentLevel === 0 ? '' : currentLevel}
             onChange={handleChange}
             style={{ width: '5rem' }}
           />
@@ -81,7 +74,7 @@ export const CalculatorBasicInfoInputGroup = () => {
             <WritableNum
               name="currentBlackhole"
               min="0"
-              value={parseInputValue(currentBlackhole)}
+              defaultValue={currentBlackhole === 0 ? '' : currentBlackhole}
               onChange={handleChange}
               style={{ width: '5rem' }}
             />
@@ -103,7 +96,7 @@ export const CalculatorBasicInfoInputGroup = () => {
             <WritableNum
               name="daysFromStart"
               min="0"
-              value={parseInputValue(daysFromStart)}
+              defaultValue={daysFromStart === 0 ? '' : daysFromStart}
               onChange={handleChange}
               style={{ width: '5rem' }}
             />

@@ -22,28 +22,28 @@ const HomePage = () => {
             <H2BoldText>✨ 현재 여행 현황</H2BoldText>
             <Dashboard
               contents={homePageDashboardContents}
-              rows={homeStatusDashboardRows}
+              defaultRows={homeStatusDashboardRows}
             />
           </VStack>
           <VStack w="100%" align="start" spacing="2rem">
             <H2BoldText>🚀 이너서클 · 멤버 관련 통계</H2BoldText>
             <Dashboard
               contents={homePageDashboardContents}
-              rows={homeCircleDashboardRows}
+              defaultRows={homeCircleDashboardRows}
             />
           </VStack>
           <VStack w="100%" align="start" spacing="2rem">
             <H2BoldText>🏅 역대 기록</H2BoldText>
             <Dashboard
               contents={homePageDashboardContents}
-              rows={homeRecordDashboardRows}
+              defaultRows={homeRecordDashboardRows}
             />
           </VStack>
           <VStack w="100%" align="start" spacing="2rem">
             <H2BoldText>🥊 코알리숑 비교</H2BoldText>
             <Dashboard
               contents={homePageDashboardContents}
-              rows={homeCoalitionDashboardRows}
+              defaultRows={homeCoalitionDashboardRows}
             />
           </VStack>
         </VStack>

@@ -16,7 +16,7 @@ const ProfileLogtimeAndProjectPage = () => {
       <Seo title={`${login} › 접속 · 과제`} />
       <Dashboard
         contents={profileLogtimeAndProjectPageDashboardContents}
-        rows={profileLogtimeAndProjectPageDashboardRows}
+        defaultRows={profileLogtimeAndProjectPageDashboardRows}
       />
       <Footer />
     </>

@@ -33,10 +33,13 @@ export const UserProfile = () => {
   const userProfile = useContext(UserProfileContext);
   const user = useAtomValue(userAtom);
 
-  const { login, imgUrl, titles, coalition, grade, level, displayname } =
+  const { login, id, imgUrl, titles, coalition, grade, level, displayname } =
     userProfile;
   const titleWithLogin = getTitleWithLogin(titles, login);
-  const { handleFollow, followStatus } = useFollow(login);
+  const { handleFollow, followStatus } = useFollow({
+    id: id,
+    isFollowing: null,
+  });
 
   const handleFollowStatus = () => {
     handleFollow();

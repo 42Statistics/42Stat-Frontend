@@ -16,22 +16,19 @@ import { ROUTES } from '@shared/constants/routes';
 import { Avatar, Text } from '@shared/ui-kit';
 
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
-import { GET_FOLLOWING_LIST_PREVIEW } from '@/Profile/dashboard-contents-queries/GET_FOLLOW_DATA';
+import { GET_FOLLOWING_LIST } from '@/Profile/dashboard-contents-queries/GET_FOLLOW_DATA';
 
 export const Following = () => {
-  const { login } = useContext(UserProfileContext);
+  const { id, login } = useContext(UserProfileContext);
   const theme = useTheme();
 
   const title = 'Following';
 
-  const { data, loading, error, refetch } = useQuery(
-    GET_FOLLOWING_LIST_PREVIEW,
-    {
-      variables: { login },
-    },
-  );
+  const { data, loading, error, refetch } = useQuery(GET_FOLLOWING_LIST, {
+    variables: { id, pageSize: 3, pageNumber: 1 },
+  });
 
-	//todo: update될때만 요청하도록 수정 필요
+  //todo: update될때만 요청하도록 수정 필요
   useEffect(() => {
     refetch();
   }, [refetch]);
@@ -46,10 +43,10 @@ export const Following = () => {
     return <DashboardContentNotFound title={title} />;
   }
 
-  const followingList = data.getFollowingList.followList.map(
-    (item) => item.user,
+  const followingList = data.getFollowingPaginated.nodes.map(
+    (item) => item.userPreview,
   );
-  const totalCount = data.getFollowingList.count;
+  const totalCount = data.getFollowingPaginated.totalCount;
 
   return (
     <DashboardContent title={title}>

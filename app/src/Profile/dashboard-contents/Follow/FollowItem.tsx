@@ -1,16 +1,20 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 
-import { UserPreview } from '@shared/__generated__/graphql';
+import { FollowList } from '@shared/__generated__/graphql';
 import { ALT } from '@shared/constants/accessibility';
 import { Avatar, H3BoldText } from '@shared/ui-kit';
 
 import { useFollow } from '@/Profile/hooks/useFollow';
 
-const FollowItem = ({ user }: { user: UserPreview }) => {
-  const { login, imgUrl } = user;
+const FollowItem = ({ user }: { user: FollowList }) => {
+  const { id, login, imgUrl } = user.userPreview;
+  const isFollowing = user.isFollowing;
   const theme = useTheme();
-  const { handleFollow, followStatus } = useFollow(login);
+  const { handleFollow, followStatus } = useFollow({
+    id: id,
+    isFollowing: isFollowing,
+  });
 
   const handleFollowStatus = () => {
     handleFollow();

@@ -16,20 +16,17 @@ import { ROUTES } from '@shared/constants/routes';
 import { Avatar, Text } from '@shared/ui-kit';
 
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
-import { GET_FOLLOWER_LIST_PREVIEW } from '@/Profile/dashboard-contents-queries/GET_FOLLOW_DATA';
+import { GET_FOLLOWER_LIST } from '@/Profile/dashboard-contents-queries/GET_FOLLOW_DATA';
 
 export const Followers = () => {
-  const { login } = useContext(UserProfileContext);
+  const { login, id } = useContext(UserProfileContext);
   const theme = useTheme();
 
   const title = 'Followers';
 
-  const { data, loading, error, refetch } = useQuery(
-    GET_FOLLOWER_LIST_PREVIEW,
-    {
-      variables: { login },
-    },
-  );
+  const { data, loading, error, refetch } = useQuery(GET_FOLLOWER_LIST, {
+    variables: { id, pageSize: 3, pageNumber: 1 },
+  });
 
   //todo: update될때만 요청하도록 수정 필요
   useEffect(() => {
@@ -46,14 +43,14 @@ export const Followers = () => {
     return <DashboardContentNotFound title={title} />;
   }
 
-  const followingList = data.getFollowerList.followList.map(
-    (item) => item.user,
+  const followingList = data.getFollowerPaginated.nodes.map(
+    (item) => item.userPreview,
   );
-  const totalCount = data.getFollowerList.count;
+  const totalCount = data.getFollowerPaginated.totalCount;
 
   return (
     <DashboardContent title={title}>
-      <Link to={ROUTES.PROFILE_FOLLOWING_OF(login)}>
+      <Link to={ROUTES.PROFILE_FOLLOWERS_OF(login)}>
         <Layout>
           {followingList.map((user) => (
             <Avatar

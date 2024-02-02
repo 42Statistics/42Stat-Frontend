@@ -2,7 +2,7 @@ import { useSearchParams } from 'react-router-dom';
 
 import styled from '@emotion/styled';
 
-import { UserPreview } from '@shared/__generated__/graphql';
+import { FollowList } from '@shared/__generated__/graphql';
 import { DashboardRow } from '@shared/components/Dashboard/DashboardRow';
 import { DashboardRowItem } from '@shared/components/Dashboard/DashboardRowItem';
 import { ResponsivePagination } from '@shared/components/Pagination/ResponsivePagination';
@@ -12,7 +12,7 @@ import { FOLLOW_SIZE_PER_PAGE } from '@/Profile/constants/followSizePerPage';
 
 import FollowItem from './FollowItem';
 
-const sliceRowList = (array: UserPreview[], chunkSize: number) => {
+const sliceRowList = (array: FollowList[], chunkSize: number) => {
   const chunks = [];
   for (let i = 0; i < array.length; i += chunkSize) {
     chunks.push(array.slice(i, chunkSize + i));
@@ -24,7 +24,7 @@ const Follow = ({
   followList,
   totalCount,
 }: {
-  followList: UserPreview[];
+  followList: FollowList[];
   totalCount: number;
 }) => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -45,7 +45,7 @@ const Follow = ({
         <DashboardRow key={col}>
           {chunk.map((user) => (
             <DashboardRowItem
-              key={user.id}
+              key={user.userPreview.id}
               rowSpan={1}
               colSpan={1}
               content={() => <FollowItem user={user} />}

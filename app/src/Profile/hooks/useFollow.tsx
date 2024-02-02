@@ -5,32 +5,38 @@ import { useMutation, useQuery } from '@apollo/client';
 import {
   FOLLOW_USER,
   UNFOLLOW_USER,
-  GET_FOLLOW_STATUS,
+  GET_IS_FOLLOWING,
 } from '@/Profile/dashboard-contents-queries/GET_FOLLOW_DATA';
 
-export const useFollow = (login: string) => {
+type FollowProps = {
+  id: number;
+  isFollowing: boolean | null;
+};
+
+export const useFollow = ({ id, isFollowing }: FollowProps) => {
   const [hitFollow, { loading: loadingFollow, error: errorFollow }] =
     useMutation(FOLLOW_USER);
   const [hitUnfollow, { loading: loadingUnfollow, error: errorUnfollow }] =
     useMutation(UNFOLLOW_USER);
+  let followStatus = isFollowing !== null ? isFollowing : false;
+
   const {
     data: dataFollowStatus,
     loading: loadingFollowStatus,
     error: errorFollowStatus,
     refetch: refetchFollowStatus,
-  } = useQuery(GET_FOLLOW_STATUS, {
-    variables: { login },
+  } = useQuery(GET_IS_FOLLOWING, {
+    skip: isFollowing === null,
+    variables: { id },
   });
-
-  let followStatus = dataFollowStatus?.getFollowStatus ?? false;
 
   const handleFollow = async () => {
     await (followStatus
-      ? hitUnfollow({ variables: { login: login } })
-      : hitFollow({ variables: { login: login } }));
+      ? hitUnfollow({ variables: { id: id } })
+      : hitFollow({ variables: { id: id } }));
 
     refetchFollowStatus();
-    followStatus = dataFollowStatus?.getFollowStatus ?? false;
+    followStatus = dataFollowStatus?.getIsFollowing ?? false;
   };
 
   useEffect(() => {

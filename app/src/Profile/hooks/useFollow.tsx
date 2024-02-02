@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useMutation, useQuery } from '@apollo/client';
 
@@ -8,9 +8,11 @@ import {
   GET_IS_FOLLOWING,
 } from '@/Profile/dashboard-contents-queries/GET_FOLLOW_DATA';
 
+type FollowingState = boolean | undefined;
+
 type FollowProps = {
   id: number;
-  isFollowing: boolean | null;
+  isFollowing: FollowingState;
 };
 
 export const useFollow = ({ id, isFollowing }: FollowProps) => {
@@ -18,7 +20,9 @@ export const useFollow = ({ id, isFollowing }: FollowProps) => {
     useMutation(FOLLOW_USER);
   const [hitUnfollow, { loading: loadingUnfollow, error: errorUnfollow }] =
     useMutation(UNFOLLOW_USER);
-  let followStatus = isFollowing !== null ? isFollowing : false;
+  const [followStatus, setFollowStatus] = useState<FollowingState>(
+    isFollowing !== undefined ? isFollowing : undefined,
+  );
 
   const {
     data: dataFollowStatus,
@@ -26,7 +30,6 @@ export const useFollow = ({ id, isFollowing }: FollowProps) => {
     error: errorFollowStatus,
     refetch: refetchFollowStatus,
   } = useQuery(GET_IS_FOLLOWING, {
-    skip: isFollowing === null,
     variables: { id },
   });
 
@@ -36,12 +39,18 @@ export const useFollow = ({ id, isFollowing }: FollowProps) => {
       : hitFollow({ variables: { id: id } }));
 
     refetchFollowStatus();
-    followStatus = dataFollowStatus?.getIsFollowing ?? false;
   };
 
   useEffect(() => {
+    // Update followStatus only when dataFollowStatus changes
+    if (dataFollowStatus) {
+      setFollowStatus(dataFollowStatus.getIsFollowing);
+    }
+  }, [dataFollowStatus]);
+
+  useEffect(() => {
     refetchFollowStatus();
-  }, [refetchFollowStatus]);
+  }, [refetchFollowStatus, id]); // Add id as a dependency if necessary
 
   const loading = loadingFollow || loadingUnfollow || loadingFollowStatus;
   const error = errorFollow || errorUnfollow || errorFollowStatus;

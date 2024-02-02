@@ -38,8 +38,19 @@ export const UserProfile = () => {
   const titleWithLogin = getTitleWithLogin(titles, login);
   const { handleFollow, followStatus } = useFollow({
     id: id,
-    isFollowing: null,
+    isFollowing: undefined,
   });
+
+  const followStatusText = (followStatus: boolean | undefined) => {
+    switch (followStatus) {
+      case true:
+        return 'Unfollow';
+      case false:
+        return 'Follow';
+      default:
+        return '';
+    }
+  };
 
   const handleFollowStatus = () => {
     handleFollow();
@@ -79,7 +90,7 @@ export const UserProfile = () => {
           {user.login !== login && (
             <FollowButtonLayout onClick={handleFollowStatus}>
               <H3BoldText color={theme.colors.mono.absolute.white}>
-                {followStatus ? 'Unfollow' : 'Follow'}
+                {followStatusText(followStatus)}
               </H3BoldText>
             </FollowButtonLayout>
           )}
@@ -97,7 +108,7 @@ export const UserProfile = () => {
             {user.login !== login && (
               <FollowButtonLayout onClick={handleFollowStatus}>
                 <H3BoldText color={theme.colors.mono.absolute.white}>
-                  {followStatus ? 'Unfollow' : 'Follow'}
+                  {followStatusText(followStatus)}
                 </H3BoldText>
               </FollowButtonLayout>
             )}

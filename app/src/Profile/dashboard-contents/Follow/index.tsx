@@ -1,35 +1,27 @@
-import { useSearchParams } from 'react-router-dom';
-
 import styled from '@emotion/styled';
 
 import { FollowList } from '@shared/__generated__/graphql';
 import { DashboardRow } from '@shared/components/Dashboard/DashboardRow';
 import { DashboardRowItem } from '@shared/components/Dashboard/DashboardRowItem';
 import { ResponsivePagination } from '@shared/components/Pagination/ResponsivePagination';
-import { parsePageNumber } from '@shared/utils/parsePaginationArgs';
 
 import { FOLLOW_SIZE_PER_PAGE } from '@/Profile/constants/followSizePerPage';
 
 import FollowItem from './FollowItem';
 
-const sliceRowList = (array: FollowList[], chunkSize: number) => {
-  const chunks = [];
-  for (let i = 0; i < array.length; i += chunkSize) {
-    chunks.push(array.slice(i, chunkSize + i));
-  }
-  return chunks;
+type FollowPageProps = {
+  followList: FollowList[];
+  totalCount: number;
+  currentPage: number;
+  setSearchParams: (newURLSearchParams: URLSearchParams) => void;
 };
 
 const Follow = ({
   followList,
   totalCount,
-}: {
-  followList: FollowList[];
-  totalCount: number;
-}) => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const pageNumber = parsePageNumber(searchParams.get('page'));
-
+  currentPage,
+  setSearchParams,
+}: FollowPageProps) => {
   const followRowList = sliceRowList(followList, 6);
 
   const handlePageNumberChange = (newPageNumber: number) => {
@@ -54,12 +46,20 @@ const Follow = ({
         </DashboardRow>
       ))}
       <ResponsivePagination
-        currPageNumber={pageNumber}
+        currPageNumber={currentPage}
         onPageNumberChange={handlePageNumberChange}
         totalPageNumber={Math.ceil(totalCount / FOLLOW_SIZE_PER_PAGE)}
       />
     </Layout>
   );
+};
+
+const sliceRowList = (array: FollowList[], chunkSize: number) => {
+  const chunks = [];
+  for (let i = 0; i < array.length; i += chunkSize) {
+    chunks.push(array.slice(i, chunkSize + i));
+  }
+  return chunks;
 };
 
 const Layout = styled.div`

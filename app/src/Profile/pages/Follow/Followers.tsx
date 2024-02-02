@@ -1,17 +1,20 @@
 import { useContext, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import { useQuery } from '@apollo/client';
 
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { GET_FOLLOWER_LIST } from '@/Profile/dashboard-contents-queries/GET_FOLLOW_DATA';
 import Follow from '@/Profile/dashboard-contents/Follow';
+import { followPageArgs } from '@/Profile/utils/followPageArgs';
 
 const FollowerPage = () => {
   const { id } = useContext(UserProfileContext);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { pageNumber, pageSize } = followPageArgs(searchParams);
 
-  //todo: variable page size, page number 추가 필요
   const { data, loading, error, refetch } = useQuery(GET_FOLLOWER_LIST, {
-    variables: { id: id, pageSize: 20, pageNumber: 1 },
+    variables: { id: id, pageSize: pageSize, pageNumber: pageNumber },
   });
 
   useEffect(() => {
@@ -27,7 +30,12 @@ const FollowerPage = () => {
 
   return (
     <>
-      <Follow followList={followList} totalCount={totalCount} />
+      <Follow
+        followList={followList}
+        totalCount={totalCount}
+        currentPage={pageNumber}
+        setSearchParams={setSearchParams}
+      />
     </>
   );
 };

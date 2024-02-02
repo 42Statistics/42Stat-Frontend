@@ -1,13 +1,16 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
+import { useAtomValue } from 'jotai';
 
 import { FollowList } from '@shared/__generated__/graphql';
+import { userAtom } from '@shared/atoms/userAtom';
 import { ALT } from '@shared/constants/accessibility';
 import { Avatar, H3BoldText } from '@shared/ui-kit';
 
 import { useFollow } from '@/Profile/hooks/useFollow';
 
 const FollowItem = ({ user }: { user: FollowList }) => {
+  const { id: userId } = useAtomValue(userAtom);
   const { id, login, imgUrl } = user.userPreview;
   const isFollowing = user.isFollowing;
   const theme = useTheme();
@@ -31,11 +34,13 @@ const FollowItem = ({ user }: { user: FollowList }) => {
         />
         <H3BoldText color={theme.colors.mono.black}>{login}</H3BoldText>
       </ProfileLayout>
-      <FollowButtonLayout onClick={handleFollowStatus}>
-        <H3BoldText color={theme.colors.mono.black}>
-          {followStatus ? 'Unfollow' : 'Follow'}
-        </H3BoldText>
-      </FollowButtonLayout>
+      {userId !== id && (
+        <FollowButtonLayout onClick={handleFollowStatus}>
+          <H3BoldText color={theme.colors.mono.black}>
+            {followStatus ? 'Unfollow' : 'Follow'}
+          </H3BoldText>
+        </FollowButtonLayout>
+      )}
     </Layout>
   );
 };

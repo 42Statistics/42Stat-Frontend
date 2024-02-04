@@ -2,9 +2,23 @@ import styled from '@emotion/styled';
 
 import { DashboardRow } from '@shared/components/Dashboard/DashboardRow';
 import { DashboardRowItem } from '@shared/components/Dashboard/DashboardRowItem';
+import { useSelectDashboardRowsByDevice } from '@shared/components/Dashboard/hooks/useSelectDashboardRowsByDevice';
 import type { DashboardProps } from '@shared/types/Dashboard';
 
-export const Dashboard = ({ rows, contents }: DashboardProps) => {
+export const Dashboard = ({
+  defaultRows,
+  desktopRows,
+  tabletRows,
+  mobileRows,
+  contents,
+}: DashboardProps) => {
+  const { rows } = useSelectDashboardRowsByDevice({
+    defaultRows,
+    desktopRows,
+    tabletRows,
+    mobileRows,
+  });
+
   const findContentById = (elementId: number) => {
     const foundContent = contents.find((content) => content.id === elementId);
     if (foundContent === undefined) {
@@ -15,9 +29,9 @@ export const Dashboard = ({ rows, contents }: DashboardProps) => {
 
   return (
     <Layout>
-      {rows.map(({ colSpan, items }, rowIdx) => (
+      {rows.map(({ items }, rowIdx) => (
         <DashboardRow key={rowIdx}>
-          {items.map(({ rowSpan, elementId }, itemIdx) => (
+          {items.map(({ rowSpan, colSpan, elementId }, itemIdx) => (
             <DashboardRowItem
               key={itemIdx}
               rowSpan={rowSpan}

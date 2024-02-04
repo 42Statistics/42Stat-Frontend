@@ -7,27 +7,26 @@ import { Footer } from '@core/components/Footer';
 
 import { gql } from '@shared/__generated__';
 import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
-import { DashboardTemp } from '@shared/components/Dashboard/DashboardTemp';
+import { Dashboard } from '@shared/components/Dashboard';
 import { Seo } from '@shared/components/Seo';
 import { H1BoldText, VStack } from '@shared/ui-kit';
 import { getBlackholeDaysLeft } from '@shared/utils/getBlackholeDaysLeft';
 import { getTimeDiffFromNow } from '@shared/utils/getTimeDiffFromNow';
-import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 
-import { getDifferences } from '@/Calculator/utils/getDifferences';
-import {
-  calculatorPageDashboardDesktop,
-  calculatorPageDashboardTablet,
-} from '@/Calculator/dashboard-frames/calculatorPageDashboardRows';
-import { calculatorPageDashboardContents } from '@/Calculator/dashboard-frames/calculatorPageDashboardContents';
-import { CalculatorInput } from '@/Calculator/components/CalculatorInput';
-import { CalculatorBasicInfoInputGroup } from '@/Calculator/components/CalculatorBasicInfoInputGroup';
+import { calculatorUserInfoAtom } from '@/Calculator/atoms/calculatorUserInfoAtom';
+import { expTablesAtom } from '@/Calculator/atoms/expTablesAtom';
 import {
   emptySubject,
   subjectListAtom,
 } from '@/Calculator/atoms/subjectListAtom';
-import { expTablesAtom } from '@/Calculator/atoms/expTablesAtom';
-import { calculatorUserInfoAtom } from '@/Calculator/atoms/calculatorUserInfoAtom';
+import { CalculatorBasicInfoInputGroup } from '@/Calculator/components/CalculatorBasicInfoInputGroup';
+import { CalculatorInput } from '@/Calculator/components/CalculatorInput';
+import { calculatorPageDashboardContents } from '@/Calculator/dashboard-frames/calculatorPageDashboardContents';
+import {
+  calculatorPageDashboardRows,
+  calculatorPageDashboardRowsDesktop,
+} from '@/Calculator/dashboard-frames/calculatorPageDashboardRows';
+import { getDifferences } from '@/Calculator/utils/getDifferences';
 
 export const GET_BLACKHOLE_INFO = gql(/* GraphQL */ `
   query GetBlackholeInfo {
@@ -49,7 +48,6 @@ const CalculatorPage = () => {
   const setCalculatorUserInfo = useSetAtom(calculatorUserInfoAtom);
   const setExpTables = useSetAtom(expTablesAtom);
   const setSubjectList = useSetAtom(subjectListAtom);
-  const device = useDeviceType();
   const { loading, error, data } = useQuery(GET_BLACKHOLE_INFO);
 
   useEffect(() => {
@@ -94,13 +92,10 @@ const CalculatorPage = () => {
           <H1BoldText>블랙홀 계산기</H1BoldText>
           <CalculatorBasicInfoInputGroup />
         </VStack>
-        <DashboardTemp
+        <Dashboard
           contents={calculatorPageDashboardContents}
-          rows={
-            device === 'desktop'
-              ? calculatorPageDashboardDesktop
-              : calculatorPageDashboardTablet
-          }
+          defaultRows={calculatorPageDashboardRows}
+          desktopRows={calculatorPageDashboardRowsDesktop}
         />
         <CalculatorInput />
         <Footer />

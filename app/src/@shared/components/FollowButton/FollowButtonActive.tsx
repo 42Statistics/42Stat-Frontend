@@ -1,11 +1,20 @@
 import { useTheme } from '@emotion/react';
-import styled from '@emotion/styled';
 
 import { H3BoldText } from '@shared/ui-kit';
 
 import { useFollow } from '@/Profile/hooks/useFollow';
 
-export const FollowButtonActive = ({ id }: { id: number }) => {
+import { type FollowButtonColor, FollowButtonLayout } from '.';
+
+type FollowButtonActiveProps = {
+  color?: FollowButtonColor;
+  id: number;
+};
+
+export const FollowButtonActive = ({
+  id,
+  color = 'default',
+}: FollowButtonActiveProps) => {
   const theme = useTheme();
   const { handleFollow, followStatus } = useFollow(id);
 
@@ -21,22 +30,16 @@ export const FollowButtonActive = ({ id }: { id: number }) => {
   };
 
   return (
-    <Layout onClick={handleFollow}>
-      <H3BoldText color={theme.colors.mono.absolute.white}>
+    <FollowButtonLayout color={color} onClick={handleFollow}>
+      <H3BoldText
+        color={
+          color === 'absoluteBlack'
+            ? theme.colors.mono.absolute.white
+            : theme.colors.mono.black
+        }
+      >
         {followStatusText(followStatus)}
       </H3BoldText>
-    </Layout>
+    </FollowButtonLayout>
   );
 };
-
-const Layout = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid ${({ theme }) => theme.colors.mono.absolute.white};
-  border-radius: ${({ theme }) => theme.radius.md};
-  background-color: ${({ theme }) => theme.colors.mono.absolute.black}95;
-  width: 10rem;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-`;

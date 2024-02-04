@@ -68,7 +68,9 @@ export const UserProfile = () => {
               {level.toFixed(2)}
             </H3BoldText>
           </HStack>
-          {user.login !== login && <FollowButton id={id} />}
+          {user.login !== login && (
+            <FollowButton id={id} color="absoluteBlack" />
+          )}
         </HStack>
       </Desktop>
       <TabletAndBelow>
@@ -80,7 +82,9 @@ export const UserProfile = () => {
               src={imgUrl}
               alt={ALT.AVATAR_OF(login)}
             />
-            {user.login !== login && <FollowButton id={id} />}
+            {user.login !== login && (
+              <FollowButton id={id} color="absoluteBlack" />
+            )}
           </VStack>
           <VStack w="15rem" spacing="1rem" style={{ textAlign: 'center' }}>
             <H3BoldText color={theme.colors.mono.absolute.white}>

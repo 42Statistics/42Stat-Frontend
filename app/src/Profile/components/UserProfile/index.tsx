@@ -21,12 +21,12 @@ import {
   Text,
   VStack,
 } from '@shared/ui-kit';
+import { FollowButton } from '@shared/components/FollowButton';
 import { titleCase } from '@shared/utils/formatters/titleCase';
 import { getTitleWithLogin } from '@shared/utils/getTitleWithLogin';
 import { Desktop, TabletAndBelow } from '@shared/utils/react-responsive/Device';
 
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
-import { useFollow } from '@/Profile/hooks/useFollow';
 
 export const UserProfile = () => {
   const theme = useTheme();
@@ -36,25 +36,6 @@ export const UserProfile = () => {
   const { login, id, imgUrl, titles, coalition, grade, level, displayname } =
     userProfile;
   const titleWithLogin = getTitleWithLogin(titles, login);
-  const { handleFollow, followStatus } = useFollow({
-    id: id,
-    isFollowing: undefined,
-  });
-
-  const followStatusText = (followStatus: boolean | undefined) => {
-    switch (followStatus) {
-      case true:
-        return 'Unfollow';
-      case false:
-        return 'Follow';
-      default:
-        return '';
-    }
-  };
-
-  const handleFollowStatus = () => {
-    handleFollow();
-  };
 
   const { backgroundUrl, backgroundFallbackUrl } =
     getCoalitionBackgroundUrlByCoalition(coalition);
@@ -87,13 +68,7 @@ export const UserProfile = () => {
               {level.toFixed(2)}
             </H3BoldText>
           </HStack>
-          {user.login !== login && (
-            <FollowButtonLayout onClick={handleFollowStatus}>
-              <H3BoldText color={theme.colors.mono.absolute.white}>
-                {followStatusText(followStatus)}
-              </H3BoldText>
-            </FollowButtonLayout>
-          )}
+          {user.login !== login && <FollowButton id={id} />}
         </HStack>
       </Desktop>
       <TabletAndBelow>
@@ -105,13 +80,7 @@ export const UserProfile = () => {
               src={imgUrl}
               alt={ALT.AVATAR_OF(login)}
             />
-            {user.login !== login && (
-              <FollowButtonLayout onClick={handleFollowStatus}>
-                <H3BoldText color={theme.colors.mono.absolute.white}>
-                  {followStatusText(followStatus)}
-                </H3BoldText>
-              </FollowButtonLayout>
-            )}
+            {user.login !== login && <FollowButton id={id} />}
           </VStack>
           <VStack w="15rem" spacing="1rem" style={{ textAlign: 'center' }}>
             <H3BoldText color={theme.colors.mono.absolute.white}>
@@ -153,18 +122,6 @@ const Layout = styled.div<LayoutProps>`
   transition: all 0.2s;
 
   padding: 2rem 0;
-`;
-
-const FollowButtonLayout = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid ${({ theme }) => theme.colors.mono.absolute.white};
-  border-radius: ${({ theme }) => theme.radius.md};
-  background-color: ${({ theme }) => theme.colors.mono.absolute.black}95;
-  width: 10rem;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
 `;
 
 const getCoalitionBackgroundFallbackUrlById = (id: number) => {

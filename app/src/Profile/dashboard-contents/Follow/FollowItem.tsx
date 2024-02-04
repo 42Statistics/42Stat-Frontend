@@ -4,24 +4,15 @@ import { useAtomValue } from 'jotai';
 
 import { FollowList } from '@shared/__generated__/graphql';
 import { userAtom } from '@shared/atoms/userAtom';
+import { FollowButton } from '@shared/components/FollowButton';
 import { ALT } from '@shared/constants/accessibility';
 import { Avatar, H3BoldText } from '@shared/ui-kit';
-
-import { useFollow } from '@/Profile/hooks/useFollow';
 
 const FollowItem = ({ user }: { user: FollowList }) => {
   const { id: userId } = useAtomValue(userAtom);
   const { id, login, imgUrl } = user.userPreview;
   const isFollowing = user.isFollowing;
   const theme = useTheme();
-  const { handleFollow, followStatus } = useFollow({
-    id: id,
-    isFollowing: isFollowing,
-  });
-
-  const handleFollowStatus = () => {
-    handleFollow();
-  };
 
   return (
     <Layout>
@@ -35,11 +26,7 @@ const FollowItem = ({ user }: { user: FollowList }) => {
         <H3BoldText color={theme.colors.mono.black}>{login}</H3BoldText>
       </ProfileLayout>
       {userId !== id && (
-        <FollowButtonLayout onClick={handleFollowStatus}>
-          <H3BoldText color={theme.colors.mono.black}>
-            {followStatus ? 'Unfollow' : 'Follow'}
-          </H3BoldText>
-        </FollowButtonLayout>
+        <FollowButton id={id} followStatusFromList={isFollowing} />
       )}
     </Layout>
   );
@@ -59,18 +46,6 @@ const ProfileLayout = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-`;
-
-const FollowButtonLayout = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid ${({ theme }) => theme.colors.mono.black};
-  border-radius: ${({ theme }) => theme.radius.md};
-  background-color: ${({ theme }) => theme.colors.mono.white};
-  width: 10rem;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
 `;
 
 export default FollowItem;

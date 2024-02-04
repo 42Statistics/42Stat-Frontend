@@ -8,21 +8,12 @@ import {
   GET_IS_FOLLOWING,
 } from '@/Profile/dashboard-contents-queries/GET_FOLLOW_DATA';
 
-type FollowingState = boolean | undefined;
-
-type FollowProps = {
-  id: number;
-  isFollowing: FollowingState;
-};
-
-export const useFollow = ({ id, isFollowing }: FollowProps) => {
+export const useFollow = (id: number) => {
   const [hitFollow, { loading: loadingFollow, error: errorFollow }] =
     useMutation(FOLLOW_USER);
   const [hitUnfollow, { loading: loadingUnfollow, error: errorUnfollow }] =
     useMutation(UNFOLLOW_USER);
-  const [followStatus, setFollowStatus] = useState<FollowingState>(
-    isFollowing !== undefined ? isFollowing : undefined,
-  );
+  const [followStatus, setFollowStatus] = useState<boolean>(false);
 
   const {
     data: dataFollowStatus,
@@ -42,7 +33,6 @@ export const useFollow = ({ id, isFollowing }: FollowProps) => {
   };
 
   useEffect(() => {
-    // Update followStatus only when dataFollowStatus changes
     if (dataFollowStatus) {
       setFollowStatus(dataFollowStatus.getIsFollowing);
     }
@@ -50,7 +40,7 @@ export const useFollow = ({ id, isFollowing }: FollowProps) => {
 
   useEffect(() => {
     refetchFollowStatus();
-  }, [refetchFollowStatus, id]); // Add id as a dependency if necessary
+  }, [refetchFollowStatus, id]);
 
   const loading = loadingFollow || loadingUnfollow || loadingFollowStatus;
   const error = errorFollow || errorUnfollow || errorFollowStatus;

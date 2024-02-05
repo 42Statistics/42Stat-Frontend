@@ -1,11 +1,11 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { useQuery } from '@apollo/client';
 
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { GET_FOLLOWING_LIST } from '@/Profile/dashboard-contents-queries/GET_FOLLOW_DATA';
-import Follow from '@/Profile/dashboard-contents/Follow';
+import Follow from '@/Profile/components/Follow';
 import { followPageArgs } from '@/Profile/utils/followPageArgs';
 
 const FollowingPage = () => {
@@ -13,13 +13,9 @@ const FollowingPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { pageNumber, pageSize } = followPageArgs(searchParams);
 
-  const { data, loading, error, refetch } = useQuery(GET_FOLLOWING_LIST, {
+  const { data, loading, error } = useQuery(GET_FOLLOWING_LIST, {
     variables: { id: id, pageSize: pageSize, pageNumber: pageNumber },
   });
-
-  useEffect(() => {
-    refetch();
-  }, [refetch]);
 
   if (loading) return <div>loading</div>;
   if (error) return <div>error</div>;

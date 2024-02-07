@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { useQuery } from '@apollo/client';
+import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 
 import { ReactComponent as MdGroup } from '@shared/assets/icon/md-group.svg';
@@ -18,6 +19,7 @@ const FollowerPage = () => {
   const { id, login } = useContext(UserProfileContext);
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
+  const theme = useTheme();
   const { pageNumber, pageSize } = followPageArgs(searchParams);
   const title = '팔로워';
 
@@ -39,7 +41,7 @@ const FollowerPage = () => {
         <TitleLayout
           onClick={() => navigate(ROUTES.PROFILE_FOLLOWING_OF(login))}
         >
-          <MdGroup width="30" height="30" />
+          <MdGroup fill={theme.colors.mono.black} width="30" height="30" />
           <H1BoldText>{title}</H1BoldText>
           <BadgeLayout>
             <Body1BoldText>{totalCount}명</Body1BoldText>

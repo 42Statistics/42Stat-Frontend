@@ -67,7 +67,11 @@ export const FollowButton = ({
         }
       >
         {isFollowing === undefined ? (
-          <FollowButtonStatus id={id} onIsFollowingChange={setIsFollowing} />
+          <FollowButtonStatus
+            id={id}
+            isFollowing={isFollowing}
+            onIsFollowingChange={setIsFollowing}
+          />
         ) : (
           followStatusText(isFollowing)
         )}

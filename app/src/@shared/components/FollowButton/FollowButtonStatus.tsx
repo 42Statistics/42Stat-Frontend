@@ -1,6 +1,9 @@
-import { useQuery } from '@apollo/client';
+import { useEffect } from 'react';
 
-import { H3BoldText } from '@shared/ui-kit';
+import { useQuery } from '@apollo/client';
+import { useSetAtom } from 'jotai';
+
+import { followErrorDialogAtom } from '@core/atoms/followErrorDialogAtom';
 
 import { GET_IS_FOLLOWING } from '@/Profile/dashboard-contents-queries/GET_FOLLOW_DATA';
 
@@ -8,23 +11,28 @@ import { followStatusText } from '.';
 
 type FollowButtonStatusProps = {
   id: number;
+  isFollowing: boolean | undefined;
   onIsFollowingChange: (isFollowing: boolean) => void;
 };
 
 export const FollowButtonStatus = ({
   id,
+  isFollowing,
   onIsFollowingChange,
 }: FollowButtonStatusProps) => {
-  const { data, loading, error } = useQuery(GET_IS_FOLLOWING, {
+  const { data, error } = useQuery(GET_IS_FOLLOWING, {
     variables: { id },
   });
+  const setFollowErrorDialog = useSetAtom(followErrorDialogAtom);
 
-  if (!data || loading || error)
-    return <H3BoldText>{followStatusText(false)}</H3BoldText>;
+  useEffect(() => {
+    if (data && !error) {
+      onIsFollowingChange(data.getIsFollowing);
+    }
+    if (error) {
+      setFollowErrorDialog(true);
+    }
+  }, [data, error, onIsFollowingChange, setFollowErrorDialog]);
 
-  const isFollowing = data.getIsFollowing;
-
-  onIsFollowingChange(isFollowing);
-
-  return <H3BoldText>{followStatusText(isFollowing)}</H3BoldText>;
+  return <>{followStatusText(isFollowing)}</>;
 };

@@ -1,17 +1,13 @@
 import { useState } from 'react';
 
-import { useMutation } from '@apollo/client';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 
 import { H3BoldText } from '@shared/ui-kit';
 
-import {
-  FOLLOW_USER,
-  UNFOLLOW_USER,
-} from '@/Profile/dashboard-contents-queries/GET_FOLLOW_DATA';
+import { useHitFollow } from '@/Profile/hooks/useHitFollow';
 
-import { FollowButtonActive } from './FollowButtonActive';
+import { FollowButtonStatus } from './FollowButtonStatus';
 
 export type FollowButtonColor = 'absoluteBlack' | 'default';
 
@@ -25,63 +21,65 @@ type LayoutProps = {
   color: FollowButtonColor;
 };
 
+export const followStatusText = (followStatus: boolean | undefined) => {
+  switch (followStatus) {
+    case true:
+      return 'Unfollow';
+    case false:
+      return 'Follow';
+    default:
+      return 'Unfollow';
+  }
+};
+
 export const FollowButton = ({
   id,
   followStatusFromList = undefined,
   color = 'default',
 }: FollowButtonProps) => {
-  const theme = useTheme();
-  const [needFollowData, setNeedFollowData] = useState<boolean>(
-    followStatusFromList === undefined,
+  const [isFollowing, setIsFollowing] = useState<boolean | undefined>(
+    followStatusFromList,
   );
-  const [hitFollow] = useMutation(FOLLOW_USER, {
-    onCompleted: () => {
-      setNeedFollowData(true);
-    },
-  });
-  const [hitUnfollow] = useMutation(UNFOLLOW_USER, {
-    onCompleted: () => {
-      setNeedFollowData(true);
-    },
+
+  const theme = useTheme();
+  const { handleHitFollow, handleHitUnfollow, error } = useHitFollow({
+    id,
+    setIsFollowing,
   });
 
   const handleClick = () => {
-    if (followStatusFromList) {
-      hitUnfollow({ variables: { id: id } });
+    if (isFollowing === undefined) return undefined;
+
+    if (isFollowing) {
+      handleHitUnfollow();
+      setIsFollowing(false);
     } else {
-      hitFollow({ variables: { id: id } });
+      handleHitFollow();
+      setIsFollowing(true);
     }
   };
 
-  const followStatusText = (followStatus: boolean | undefined) => {
-    switch (followStatus) {
-      case true:
-        return 'Unfollow';
-      case false:
-        return 'Follow';
-      default:
-        return 'Unfollow';
-    }
-  };
+  //todo: modal로 변경
+  if (error) {
+    console.error(error);
+  }
 
   return (
-    <>
-      {needFollowData ? (
-        <FollowButtonActive color={color} id={id} />
-      ) : (
-        <FollowButtonLayout color={color} onClick={handleClick}>
-          <H3BoldText
-            color={
-              color === 'absoluteBlack'
-                ? theme.colors.mono.absolute.white
-                : theme.colors.mono.black
-            }
-          >
-            {followStatusText(followStatusFromList)}
-          </H3BoldText>
-        </FollowButtonLayout>
-      )}
-    </>
+    <FollowButtonLayout color={color} onClick={handleClick}>
+      <H3BoldText
+        color={
+          color === 'absoluteBlack'
+            ? theme.colors.mono.absolute.white
+            : theme.colors.mono.black
+        }
+      >
+        {isFollowing === undefined ? (
+          <FollowButtonStatus id={id} onIsFollowingChange={setIsFollowing} />
+        ) : (
+          followStatusText(isFollowing)
+        )}
+      </H3BoldText>
+    </FollowButtonLayout>
   );
 };
 

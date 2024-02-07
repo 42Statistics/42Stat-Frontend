@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useQuery } from '@apollo/client';
@@ -24,14 +24,9 @@ export const Followers = () => {
 
   const title = 'Followers';
 
-  const { data, loading, error, refetch } = useQuery(GET_FOLLOWER_LIST, {
+  const { data, loading, error } = useQuery(GET_FOLLOWER_LIST, {
     variables: { id, pageSize: 3, pageNumber: 1 },
   });
-
-  //todo: update될때만 요청하도록 수정 필요
-  useEffect(() => {
-    refetch();
-  }, [refetch]);
 
   if (loading) {
     return <DashboardContentLoading title={title} />;

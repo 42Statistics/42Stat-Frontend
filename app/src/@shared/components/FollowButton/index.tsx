@@ -42,7 +42,7 @@ export const FollowButton = ({
   );
 
   const theme = useTheme();
-  const { handleHitFollow, handleHitUnfollow, error } = useHitFollow({
+  const { handleHitFollow, handleHitUnfollow } = useHitFollow({
     id,
     setIsFollowing,
   });
@@ -52,17 +52,10 @@ export const FollowButton = ({
 
     if (isFollowing) {
       handleHitUnfollow();
-      setIsFollowing(false);
     } else {
       handleHitFollow();
-      setIsFollowing(true);
     }
   };
-
-  //todo: modal로 변경
-  if (error) {
-    console.error(error);
-  }
 
   return (
     <FollowButtonLayout color={color} onClick={handleClick}>

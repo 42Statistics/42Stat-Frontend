@@ -1,4 +1,7 @@
 import { useMutation } from '@apollo/client';
+import { useSetAtom } from 'jotai';
+
+import { followErrorDialogAtom } from '@core/atoms/followErrorDialogAtom';
 
 import {
   FOLLOW_USER,
@@ -23,9 +26,14 @@ export const useHitFollow = ({ id, setIsFollowing }: HitFollowProps) => {
         setIsFollowing(false);
       },
     });
+  const setFollowErrorDialog = useSetAtom(followErrorDialogAtom);
 
   const loading = loadingFollow || loadingUnfollow;
   const error = errorFollow || errorUnfollow;
+
+  if (error) {
+    setFollowErrorDialog(true);
+  }
 
   const handleHitFollow = async () => {
     if (loading) return;
@@ -39,6 +47,5 @@ export const useHitFollow = ({ id, setIsFollowing }: HitFollowProps) => {
   return {
     handleHitFollow,
     handleHitUnfollow,
-    error,
   };
 };

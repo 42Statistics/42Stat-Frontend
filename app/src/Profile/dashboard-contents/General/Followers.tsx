@@ -22,7 +22,7 @@ export const Followers = () => {
   const { login, id } = useContext(UserProfileContext);
   const theme = useTheme();
 
-  const title = 'Followers';
+  const title = '팔로워';
 
   const { data, loading, error } = useQuery(GET_FOLLOWER_LIST, {
     variables: { id, pageSize: 3, pageNumber: 1 },

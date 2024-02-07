@@ -22,7 +22,7 @@ export const Following = () => {
   const { id, login } = useContext(UserProfileContext);
   const theme = useTheme();
 
-  const title = 'Following';
+  const title = '팔로잉';
 
   const { data, loading, error } = useQuery(GET_FOLLOWING_LIST, {
     variables: { id, pageSize: 3, pageNumber: 1 },

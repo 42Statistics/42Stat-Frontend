@@ -36,8 +36,8 @@ export const LeaderboardScoreResult = ({
 }: LeaderboardScoreResultProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const leaderboardArgs = toLeaderboardArgs(searchParams);
-  const { promo, dateTemplate, pageNumber } = leaderboardArgs;
-  const { PROMO, DATE, PAGE } = LEADERBOARD_PARAM_KEYS;
+  const { promo, dateTemplate, pageNumber, coalitionId } = leaderboardArgs;
+  const { PROMO, DATE, PAGE, COALITION } = LEADERBOARD_PARAM_KEYS;
 
   const handlePageNumberChange = (newPageNumber: number) => {
     const newURLSearchParams = new URLSearchParams();
@@ -45,6 +45,9 @@ export const LeaderboardScoreResult = ({
     newURLSearchParams.set(DATE, dateTemplate);
     if (promo) {
       newURLSearchParams.set(PROMO, promo.toString());
+    }
+    if (coalitionId) {
+      newURLSearchParams.set(COALITION, coalitionId.toString());
     }
     newURLSearchParams.set(PAGE, newPageNumber.toString());
     setSearchParams(newURLSearchParams);

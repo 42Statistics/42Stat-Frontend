@@ -8,8 +8,8 @@ export const ROUTES = {
   PROFILE_LOGTIME_AND_PROJECT: '/profile/:login/logtime_and_project',
   PROFILE_EVAL: '/profile/:login/eval',
   PROFILE_VERSUS: '/profile/:login/versus',
-	PROFILE_FOLLOWERS: '/profile/:login/followers',
-	PROFILE_FOLLOWING: '/profile/:login/following',
+  PROFILE_FOLLOWERS: '/profile/:login/followers',
+  PROFILE_FOLLOWING: '/profile/:login/following',
   PROFILE_OF: (login: string) => `/profile/${login}`,
   PROFILE_GENERAL_OF: (login: string) => `/profile/${login}/general`,
   PROFILE_LOGTIME_AND_PROJECT_OF: (login: string) =>
@@ -27,6 +27,7 @@ export const ROUTES = {
   LEADERBOARD_EVAL_COUNT: '/leaderboard/eval_count',
   LEADERBOARD_COMMENT: '/leaderboard/comment',
   EVALLOG: '/evallog',
+  STAT: '/stat',
   TEAM: '/team/:id',
   TEAM_OF: (id: number) => `/team/${id}`,
   CALCULATOR: '/calculator',

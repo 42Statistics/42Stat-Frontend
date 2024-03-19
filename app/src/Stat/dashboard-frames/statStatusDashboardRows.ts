@@ -1,6 +1,6 @@
 import type { DashboardRowType } from '@shared/types/Dashboard';
 
-export const homeStatusDashboardRows: DashboardRowType[] = [
+export const statStatusDashboardRows: DashboardRowType[] = [
   {
     items: [
       {

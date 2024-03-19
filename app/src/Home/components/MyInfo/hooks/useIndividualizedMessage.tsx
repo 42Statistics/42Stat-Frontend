@@ -5,7 +5,7 @@ import { timeDiffStringFormatter } from '@shared/utils/formatters/timeDiffString
 import { getBlackholeDaysLeft } from '@shared/utils/getBlackholeDaysLeft';
 import { getTimeDiffFromNow } from '@shared/utils/getTimeDiffFromNow';
 
-import { getDailyProgrammingQuote } from '@/Home/utils/getDailyProgrammingQuote';
+import { getDailyProgrammingQuote } from '@/Stat/utils/getDailyProgrammingQuote';
 import { GET_INDIVIDUALIZED_MESSAGE } from '@/Home/components/MyInfo/api/getInidividualizedMessage';
 
 export const useIndividualizedMessageQuery = () => {

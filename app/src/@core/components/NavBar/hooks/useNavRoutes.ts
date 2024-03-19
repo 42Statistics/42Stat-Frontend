@@ -10,6 +10,8 @@ import { ReactComponent as MdPersonFill } from '@shared/assets/icon/md-person-fi
 import { ReactComponent as MdPerson } from '@shared/assets/icon/md-person.svg';
 import { ReactComponent as MdQuickReferenceFill } from '@shared/assets/icon/md-quick-reference-fill.svg';
 import { ReactComponent as MdQuickReference } from '@shared/assets/icon/md-quick-reference.svg';
+import { ReactComponent as MdChartDataFill } from '@shared/assets/icon/md-chart-data-fill.svg';
+import { ReactComponent as MdChartData } from '@shared/assets/icon/md-chart-data.svg';
 import { ReactComponent as MdSettingsFill } from '@shared/assets/icon/md-settings-fill.svg';
 import { ReactComponent as MdSettings } from '@shared/assets/icon/md-settings.svg';
 import { userAtom } from '@shared/atoms/userAtom';
@@ -62,6 +64,13 @@ export const useNavRoutes = () => {
       path: ROUTES.CALCULATOR,
       icon: MdCalculate,
       iconFocused: MdCalculateFill,
+    },
+    STAT: {
+      text: '통계',
+      abbr: '통계',
+      path: ROUTES.STAT,
+      icon: MdChartData,
+      iconFocused: MdChartDataFill,
     },
     SETTING: {
       text: '설정',

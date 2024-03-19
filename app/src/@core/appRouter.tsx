@@ -9,12 +9,14 @@ import { TooltipProvider } from '@core/providers/TooltipProvider';
 import { ROUTES } from '@shared/constants/routes';
 import { DeferredComponent } from '@shared/ui-kit';
 
-import { HomePageSkeleton } from '@/Home/components/skeletons/HomePageSkeleton';
+import { StatPageSkeleton } from '@/Stat/skeletons/StatPageSkeleton';
 import { LeaderboardPageSkeleton } from '@/Leaderboard/components/skeletons/LeaderboardPageSkeleton';
 import { ProfileEvalPageSkeleton } from '@/Profile/components/skeletons/ProfileEvalPageSkeleton';
 import { ProfileGeneralPageSkeleton } from '@/Profile/components/skeletons/ProfileGeneralPageSkeleton';
 import { ProfileVersusPageSkeleton } from '@/Profile/components/skeletons/ProfileVersusPageSkeleton';
 import { UserProfileSkeleton } from '@/Profile/components/skeletons/UserProfileSkeleton';
+import StatPage from '@/Stat';
+import { HomePageSkeleton } from '@/Home/components/skeletons/HomePageSkeleton';
 
 const LandingLayout = lazy(() => import('@core/layouts/LandingLayout'));
 const MainLayout = lazy(() => import('@core/layouts/MainLayout'));
@@ -112,13 +114,7 @@ export const appRouter = createBrowserRouter([
                   {
                     path: ROUTES.HOME,
                     element: (
-                      <Suspense
-                        fallback={
-                          <DeferredComponent>
-                            <HomePageSkeleton />
-                          </DeferredComponent>
-                        }
-                      >
+                      <Suspense fallback={<HomePageSkeleton />}>
                         <HomePage />
                       </Suspense>
                     ),
@@ -276,6 +272,20 @@ export const appRouter = createBrowserRouter([
                     element: (
                       <Suspense>
                         <SettingPage />
+                      </Suspense>
+                    ),
+                  },
+                  {
+                    path: ROUTES.STAT,
+                    element: (
+                      <Suspense
+                        fallback={
+                          <DeferredComponent>
+                            <StatPageSkeleton />
+                          </DeferredComponent>
+                        }
+                      >
+                        <StatPage />
                       </Suspense>
                     ),
                   },

@@ -5,18 +5,18 @@ import {
   ScoreRecordsPerCoalition,
   TotalScoresPerCoalition,
   WinCountPerCoalition,
-} from '@/Home/dashboard-contents/Coalition';
+} from '@/Stat/dashboard-contents/Coalition';
 import {
   AverageCommentLength,
   AverageFeedbackLength,
   EvalCountRecords,
   TotalEvalCount,
-} from '@/Home/dashboard-contents/Eval';
+} from '@/Stat/dashboard-contents/Eval';
 import {
   CurrRegisteredCountRanking,
   RecentExamResult,
   TeamCloseRecords,
-} from '@/Home/dashboard-contents/Team';
+} from '@/Stat/dashboard-contents/Team';
 import {
   AliveUserCountRecords,
   AverageDurationPerCircle,
@@ -26,9 +26,9 @@ import {
   UserCountPerLevel,
   UserRate,
   WalletRanking,
-} from '@/Home/dashboard-contents/User';
+} from '@/Stat/dashboard-contents/User';
 
-export const homePageDashboardContents: DashboardItemProps[] = [
+export const statPageDashboardContents: DashboardItemProps[] = [
   {
     id: 0,
     content: EvalCountRecords,

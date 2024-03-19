@@ -22,6 +22,15 @@ export type Account = {
   userId: Scalars['Int'];
 };
 
+export type BlackholedAtFeed = {
+  __typename?: 'BlackholedAtFeed';
+  at: Scalars['DateTime'];
+  blackholedAt: Scalars['DateTime'];
+  id: Scalars['Int'];
+  type: FeedType;
+  userPreview: UserPreview;
+};
+
 export type Character = {
   __typename?: 'Character';
   imgUrl: Scalars['String'];
@@ -169,6 +178,15 @@ export type EvalReview = {
   review: Scalars['String'];
 };
 
+export type EventFeed = {
+  __typename?: 'EventFeed';
+  at: Scalars['DateTime'];
+  event: Scalars['String'];
+  id: Scalars['Int'];
+  type: FeedType;
+  userPreview: UserPreview;
+};
+
 export type ExamResult = {
   __typename?: 'ExamResult';
   beginAt: Scalars['DateTime'];
@@ -193,6 +211,24 @@ export type ExpTable = {
   level: Scalars['Int'];
 };
 
+export type FeedPaginationed = {
+  __typename?: 'FeedPaginationed';
+  edges: Array<UndefinedEdge>;
+  pageInfo: CursorPageInfo;
+};
+
+export enum FeedType {
+  BlackholedAt = 'BLACKHOLED_AT',
+  Event = 'EVENT',
+  Follow = 'FOLLOW',
+  Location = 'LOCATION',
+  NewMember = 'NEW_MEMBER',
+  StatusMessage = 'STATUS_MESSAGE',
+  TeamStatusFinished = 'TEAM_STATUS_FINISHED'
+}
+
+export type FeedUnion = BlackholedAtFeed | EventFeed | FollowFeed | LocationFeed | NewMemberFeed | StatusMessageFeed | TeamStatusFinishedFeed;
+
 export type Flag = {
   __typename?: 'Flag';
   id: Scalars['Int'];
@@ -200,19 +236,13 @@ export type Flag = {
   name: Scalars['String'];
 };
 
-export type FollowList = {
-  __typename?: 'FollowList';
-  followAt: Scalars['DateTime'];
-  isFollowing: Scalars['Boolean'];
+export type FollowFeed = {
+  __typename?: 'FollowFeed';
+  at: Scalars['DateTime'];
+  followed: UserPreview;
+  id: Scalars['Int'];
+  type: FeedType;
   userPreview: UserPreview;
-};
-
-export type FollowListPaginated = {
-  __typename?: 'FollowListPaginated';
-  nodes: Array<FollowList>;
-  pageNumber: Scalars['Int'];
-  pageSize: Scalars['Int'];
-  totalCount: Scalars['Int'];
 };
 
 export enum FollowSortOrder {
@@ -479,6 +509,15 @@ export type LinkableAccount = {
   platform: Scalars['String'];
 };
 
+export type LocationFeed = {
+  __typename?: 'LocationFeed';
+  at: Scalars['DateTime'];
+  id: Scalars['Int'];
+  location: Scalars['String'];
+  type: FeedType;
+  userPreview: UserPreview;
+};
+
 export type LoginNotLinked = {
   __typename?: 'LoginNotLinked';
   message: Scalars['String'];
@@ -505,6 +544,7 @@ export type Mutation = {
   refreshToken: LoginSuccess;
   unfollowUser: FollowSuccess;
   unlinkAccount: Account;
+  updateFeed: Scalars['Boolean'];
 };
 
 
@@ -543,6 +583,21 @@ export type MutationUnlinkAccountArgs = {
   targetPlatform: Scalars['String'];
 };
 
+export type MyFollow = {
+  __typename?: 'MyFollow';
+  followAt: Scalars['DateTime'];
+  isFollowing: Scalars['Boolean'];
+  userPreview: UserPreview;
+};
+
+export type MyFollowPaginated = {
+  __typename?: 'MyFollowPaginated';
+  nodes: Array<MyFollow>;
+  pageNumber: Scalars['Int'];
+  pageSize: Scalars['Int'];
+  totalCount: Scalars['Int'];
+};
+
 export type MyInfo = {
   __typename?: 'MyInfo';
   beginAt?: Maybe<Scalars['DateTime']>;
@@ -572,6 +627,15 @@ export type MyRecentActivity = {
   isNewMember: Scalars['Boolean'];
   lastValidatedTeam?: Maybe<UserTeam>;
   scoreRank?: Maybe<Scalars['Int']>;
+};
+
+export type NewMemberFeed = {
+  __typename?: 'NewMemberFeed';
+  at: Scalars['DateTime'];
+  id: Scalars['Int'];
+  memberAt: Scalars['DateTime'];
+  type: FeedType;
+  userPreview: UserPreview;
 };
 
 export type Pair = {
@@ -741,8 +805,9 @@ export type Query = {
   __typename?: 'Query';
   getEvalLogs: EvalLogsPaginated;
   getExpTable: Array<ExpTable>;
-  getFollowerPaginated: FollowListPaginated;
-  getFollowingPaginated: FollowListPaginated;
+  getFeed: FeedPaginationed;
+  getFollowerPaginated: MyFollowPaginated;
+  getFollowingPaginated: MyFollowPaginated;
   getHomeCoalition: HomeCoalition;
   getHomeEval: HomeEval;
   getHomeTeam: HomeTeam;
@@ -775,6 +840,12 @@ export type QueryGetEvalLogsArgs = {
   outstandingOnly?: Scalars['Boolean'];
   projectName?: InputMaybe<Scalars['String']>;
   sortOrder?: EvalLogSortOrder;
+};
+
+
+export type QueryGetFeedArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first?: Scalars['Int'];
 };
 
 
@@ -861,6 +932,15 @@ export type Spotlight = {
   userPreviews: Array<UserPreview>;
 };
 
+export type StatusMessageFeed = {
+  __typename?: 'StatusMessageFeed';
+  at: Scalars['DateTime'];
+  id: Scalars['Int'];
+  message: Scalars['String'];
+  type: FeedType;
+  userPreview: UserPreview;
+};
+
 export type Subscription = {
   __typename?: 'Subscription';
   followUpdated: FollowSuccess;
@@ -912,6 +992,15 @@ export enum TeamStatus {
   Registered = 'REGISTERED',
   WaitingForCorrection = 'WAITING_FOR_CORRECTION'
 }
+
+export type TeamStatusFinishedFeed = {
+  __typename?: 'TeamStatusFinishedFeed';
+  at: Scalars['DateTime'];
+  id: Scalars['Int'];
+  teamInfo: Scalars['String'];
+  type: FeedType;
+  userPreview: UserPreview;
+};
 
 export type TeamUpload = {
   __typename?: 'TeamUpload';
@@ -1012,6 +1101,12 @@ export type UserTitle = {
   selected: Scalars['Boolean'];
   titleId: Scalars['Int'];
   updatedAt: Scalars['DateTime'];
+};
+
+export type UndefinedEdge = {
+  __typename?: 'undefinedEdge';
+  cursor: Scalars['String'];
+  node: FeedUnion;
 };
 
 export type GetSpotlightQueryVariables = Exact<{
@@ -1301,7 +1396,7 @@ export type GetFollowingListQueryVariables = Exact<{
 }>;
 
 
-export type GetFollowingListQuery = { __typename?: 'Query', getFollowingPaginated: { __typename?: 'FollowListPaginated', totalCount: number, pageSize: number, pageNumber: number, nodes: Array<{ __typename?: 'FollowList', isFollowing: boolean, followAt: string, userPreview: { __typename?: 'UserPreview', id: number, login: string, imgUrl?: string | null } }> } };
+export type GetFollowingListQuery = { __typename?: 'Query', getFollowingPaginated: { __typename?: 'MyFollowPaginated', totalCount: number, pageSize: number, pageNumber: number, nodes: Array<{ __typename?: 'MyFollow', isFollowing: boolean, followAt: string, userPreview: { __typename?: 'UserPreview', id: number, login: string, imgUrl?: string | null } }> } };
 
 export type GetFollowerListQueryVariables = Exact<{
   id: Scalars['Int'];
@@ -1310,7 +1405,7 @@ export type GetFollowerListQueryVariables = Exact<{
 }>;
 
 
-export type GetFollowerListQuery = { __typename?: 'Query', getFollowerPaginated: { __typename?: 'FollowListPaginated', totalCount: number, pageSize: number, pageNumber: number, nodes: Array<{ __typename?: 'FollowList', isFollowing: boolean, followAt: string, userPreview: { __typename?: 'UserPreview', id: number, login: string, imgUrl?: string | null } }> } };
+export type GetFollowerListQuery = { __typename?: 'Query', getFollowerPaginated: { __typename?: 'MyFollowPaginated', totalCount: number, pageSize: number, pageNumber: number, nodes: Array<{ __typename?: 'MyFollow', isFollowing: boolean, followAt: string, userPreview: { __typename?: 'UserPreview', id: number, login: string, imgUrl?: string | null } }> } };
 
 export type GetPersonalEvalZeroCostByLoginQueryVariables = Exact<{
   login: Scalars['String'];

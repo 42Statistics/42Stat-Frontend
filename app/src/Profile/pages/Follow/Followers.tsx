@@ -31,7 +31,7 @@ const FollowerPage = () => {
   if (error) return <div>error</div>;
   if (!data) return <div>no data</div>;
 
-  const followList = data.getFollowerPaginated.nodes;
+  const myFollow = data.getFollowerPaginated.nodes;
   const totalCount = data.getFollowerPaginated.totalCount;
 
   return (
@@ -48,7 +48,7 @@ const FollowerPage = () => {
           </BadgeLayout>
         </TitleLayout>
         <Follow
-          followList={followList}
+          myFollow={myFollow}
           totalCount={totalCount}
           currentPage={pageNumber}
           setSearchParams={setSearchParams}

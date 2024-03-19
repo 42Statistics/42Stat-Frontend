@@ -2,13 +2,13 @@ import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useAtomValue } from 'jotai';
 
-import { FollowList } from '@shared/__generated__/graphql';
+import { MyFollow } from '@shared/__generated__/graphql';
 import { userAtom } from '@shared/atoms/userAtom';
 import { FollowButton } from '@shared/components/FollowButton';
 import { ALT } from '@shared/constants/accessibility';
 import { Avatar, H3BoldText } from '@shared/ui-kit';
 
-const FollowItem = ({ user }: { user: FollowList }) => {
+const FollowItem = ({ user }: { user: MyFollow }) => {
   const { id: userId } = useAtomValue(userAtom);
   const { id, login, imgUrl } = user.userPreview;
   const isFollowing = user.isFollowing;

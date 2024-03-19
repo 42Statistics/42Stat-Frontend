@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import { FollowList } from '@shared/__generated__/graphql';
+import { MyFollow } from '@shared/__generated__/graphql';
 import { DashboardRow } from '@shared/components/Dashboard/DashboardRow';
 import { DashboardRowItem } from '@shared/components/Dashboard/DashboardRowItem';
 import { ResponsivePagination } from '@shared/components/Pagination/ResponsivePagination';
@@ -10,19 +10,19 @@ import { FOLLOW_SIZE_PER_PAGE } from '@/Profile/constants/followSizePerPage';
 import FollowItem from './FollowItem';
 
 type FollowPageProps = {
-  followList: FollowList[];
+  myFollow: MyFollow[];
   totalCount: number;
   currentPage: number;
   setSearchParams: (newURLSearchParams: URLSearchParams) => void;
 };
 
 const Follow = ({
-  followList,
+  myFollow,
   totalCount,
   currentPage,
   setSearchParams,
 }: FollowPageProps) => {
-  const followRowList = sliceRowList(followList, 6);
+  const followRowList = sliceRowList(myFollow, 6);
 
   const handlePageNumberChange = (newPageNumber: number) => {
     const newURLSearchParams = new URLSearchParams();
@@ -54,7 +54,7 @@ const Follow = ({
   );
 };
 
-const sliceRowList = (array: FollowList[], chunkSize: number) => {
+const sliceRowList = (array: MyFollow[], chunkSize: number) => {
   const chunks = [];
   for (let i = 0; i < array.length; i += chunkSize) {
     chunks.push(array.slice(i, chunkSize + i));

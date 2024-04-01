@@ -26,6 +26,7 @@ export const Followers = () => {
 
   const { data, loading, error } = useQuery(GET_FOLLOWER_LIST, {
     variables: { id, pageSize: 3, pageNumber: 1 },
+    fetchPolicy: 'no-cache',
   });
 
   if (loading) {

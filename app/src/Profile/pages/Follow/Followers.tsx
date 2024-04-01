@@ -25,6 +25,7 @@ const FollowerPage = () => {
 
   const { data, loading, error } = useQuery(GET_FOLLOWER_LIST, {
     variables: { id: id, pageSize: pageSize, pageNumber: pageNumber },
+    fetchPolicy: 'no-cache',
   });
 
   if (loading) return <div>loading</div>;

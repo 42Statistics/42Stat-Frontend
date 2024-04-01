@@ -25,6 +25,7 @@ const FollowingPage = () => {
 
   const { data, loading, error } = useQuery(GET_FOLLOWING_LIST, {
     variables: { id: id, pageSize: pageSize, pageNumber: pageNumber },
+    fetchPolicy: 'no-cache',
   });
 
   if (loading) return <div>loading</div>;

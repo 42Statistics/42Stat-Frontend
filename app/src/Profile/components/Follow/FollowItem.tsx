@@ -8,7 +8,11 @@ import { FollowButton } from '@shared/components/FollowButton';
 import { ALT } from '@shared/constants/accessibility';
 import { Avatar, H3BoldText } from '@shared/ui-kit';
 
-const FollowItem = ({ user }: { user: MyFollow }) => {
+type FollowItemProps = {
+  user: MyFollow;
+};
+
+const FollowItem = ({ user }: FollowItemProps) => {
   const { id: userId } = useAtomValue(userAtom);
   const { id, login, imgUrl } = user.userPreview;
   const theme = useTheme();

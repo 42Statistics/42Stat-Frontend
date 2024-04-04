@@ -3,14 +3,17 @@ import { useSearchParams } from 'react-router-dom';
 
 import { useQuery } from '@apollo/client';
 
+import { Footer } from '@core/components/Footer';
+
+import { FullPageApolloErrorView } from '@shared/components/ApolloError/FullPageApolloErrorView';
 import { Seo } from '@shared/components/Seo';
-import { VStack } from '@shared/ui-kit';
 
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { GET_FOLLOWING_LIST } from '@/Profile/dashboard-contents-queries/GET_FOLLOW_DATA';
 import { FollowTabBody } from '@/Profile/components/Follow/FollowTabBody';
 import { followPageArgs } from '@/Profile/utils/followPageArgs';
 import { FollowPageHeader } from '@/Profile/components/Follow/FollowPageHeader';
+import { ProfileFollowPageSkeleton } from '@/Profile/components/skeletons/ProfileFollowPageSkeleton';
 
 const FollowingPage = () => {
   const { id } = useContext(UserProfileContext);
@@ -23,9 +26,8 @@ const FollowingPage = () => {
     fetchPolicy: 'no-cache',
   });
 
-  if (loading) return <div>loading</div>;
-  if (error) return <div>error</div>;
-  if (!data) return <div>no data</div>;
+  if (loading) return <ProfileFollowPageSkeleton title={title} />;
+  if (error || !data) return <FullPageApolloErrorView />;
 
   const myFollow = data.getFollowingPaginated.nodes;
   const totalCount = data.getFollowingPaginated.totalCount;
@@ -33,15 +35,14 @@ const FollowingPage = () => {
   return (
     <>
       <Seo title={title} />
-      <VStack w="100%" spacing="2rem" align="start">
-        <FollowPageHeader title={title} totalCount={totalCount} />
-        <FollowTabBody
-          myFollow={myFollow}
-          totalCount={totalCount}
-          currentPage={pageNumber}
-          setSearchParams={setSearchParams}
-        />
-      </VStack>
+      <FollowPageHeader title={title} totalCount={totalCount} />
+      <FollowTabBody
+        myFollow={myFollow}
+        totalCount={totalCount}
+        currentPage={pageNumber}
+        setSearchParams={setSearchParams}
+      />
+      <Footer />
     </>
   );
 };

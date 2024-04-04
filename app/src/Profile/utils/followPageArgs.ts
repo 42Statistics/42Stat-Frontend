@@ -1,11 +1,7 @@
 import { parsePageNumber } from '@shared/utils/parsePaginationArgs';
 
 import { FOLLOW_SIZE_PER_PAGE } from '@/Profile/constants/followSizePerPage';
-
-type FollowPageArgsProps = {
-  pageNumber: number;
-  pageSize: number;
-};
+import type { FollowPageArgsProps } from '@/Profile/types/Follow';
 
 export const followPageArgs = (
   searchParams: URLSearchParams,

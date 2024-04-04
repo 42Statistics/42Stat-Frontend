@@ -53,8 +53,8 @@ export const ProfileTabList = () => {
             </Tab>
           )}
         </>
+        <FollowTabList />
       </Tabs>
-      <FollowTabList />
     </>
   );
 };

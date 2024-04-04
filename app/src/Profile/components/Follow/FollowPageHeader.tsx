@@ -7,7 +7,7 @@ import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnit
 
 type FollowPageHeaderProps = {
   title: string;
-  totalCount: number;
+  totalCount?: number;
 };
 
 export const FollowPageHeader = ({
@@ -21,9 +21,11 @@ export const FollowPageHeader = ({
       <MdGroup fill={theme.colors.mono.black} width="30" height="30" />
       <H1BoldText>{title}</H1BoldText>
       <BadgeLayout>
-        <Body1BoldText>
-          {numberWithUnitFormatter(totalCount, '명')}
-        </Body1BoldText>
+        {totalCount && (
+          <Body1BoldText>
+            {numberWithUnitFormatter(totalCount, '명')}
+          </Body1BoldText>
+        )}
       </BadgeLayout>
     </TitleLayout>
   );
@@ -33,7 +35,7 @@ const TitleLayout = styled(HStack)`
   justify-content: start;
   width: 100%;
   gap: 1rem;
-  padding: 1rem;
+  padding: 0 1rem;
 `;
 
 const BadgeLayout = styled(HStack)`

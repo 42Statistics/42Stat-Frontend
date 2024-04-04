@@ -1,11 +1,15 @@
 import { useLocation, useParams } from 'react-router-dom';
 
-import { Tab, Tabs, VStack } from '@shared/ui-kit';
+import { useAtomValue } from 'jotai';
+
+import { Tab } from '@shared/ui-kit';
 import { ROUTES } from '@shared/constants/routes';
+import { userAtom } from '@shared/atoms/userAtom';
 
 export const FollowTabList = () => {
   const { pathname } = useLocation();
   const { login } = useParams() as { login: string };
+  const user = useAtomValue(userAtom);
 
   const startsWith = pathname.startsWith.bind(pathname);
 
@@ -17,28 +21,24 @@ export const FollowTabList = () => {
       ? true
       : false;
 
-  if (!isCurrentPathFollowPage) {
+  if (!isCurrentPathFollowPage && login !== user.login) {
     return null;
   }
 
   return (
-    <VStack w="100%" justify="start" align="start">
-      <VStack>
-        <Tabs>
-          <Tab
-            selected={startsWith(PROFILE_FOLLOWERS_OF(login))}
-            link={PROFILE_FOLLOWERS_OF(login)}
-          >
-            팔로워
-          </Tab>
-          <Tab
-            selected={startsWith(PROFILE_FOLLOWING_OF(login))}
-            link={PROFILE_FOLLOWING_OF(login)}
-          >
-            팔로잉
-          </Tab>
-        </Tabs>
-      </VStack>
-    </VStack>
+    <>
+      <Tab
+        selected={startsWith(PROFILE_FOLLOWERS_OF(login))}
+        link={PROFILE_FOLLOWERS_OF(login)}
+      >
+        팔로워
+      </Tab>
+      <Tab
+        selected={startsWith(PROFILE_FOLLOWING_OF(login))}
+        link={PROFILE_FOLLOWING_OF(login)}
+      >
+        팔로잉
+      </Tab>
+    </>
   );
 };

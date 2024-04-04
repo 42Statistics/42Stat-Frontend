@@ -15,6 +15,7 @@ import { ProfileEvalPageSkeleton } from '@/Profile/components/skeletons/ProfileE
 import { ProfileGeneralPageSkeleton } from '@/Profile/components/skeletons/ProfileGeneralPageSkeleton';
 import { ProfileVersusPageSkeleton } from '@/Profile/components/skeletons/ProfileVersusPageSkeleton';
 import { UserProfileSkeleton } from '@/Profile/components/skeletons/UserProfileSkeleton';
+import { ProfileFollowPageSkeleton } from '@/Profile/components/skeletons/ProfileFollowPageSkeleton';
 
 const LandingLayout = lazy(() => import('@core/layouts/LandingLayout'));
 const MainLayout = lazy(() => import('@core/layouts/MainLayout'));
@@ -170,7 +171,11 @@ export const appRouter = createBrowserRouter([
                       {
                         path: ROUTES.PROFILE_FOLLOWERS,
                         element: (
-                          <Suspense fallback={<ProfileVersusPageSkeleton />}>
+                          <Suspense
+                            fallback={
+                              <ProfileFollowPageSkeleton title={'팔로워'} />
+                            }
+                          >
                             <ProfileFollowersPage />
                           </Suspense>
                         ),
@@ -178,7 +183,11 @@ export const appRouter = createBrowserRouter([
                       {
                         path: ROUTES.PROFILE_FOLLOWING,
                         element: (
-                          <Suspense fallback={<ProfileVersusPageSkeleton />}>
+                          <Suspense
+                            fallback={
+                              <ProfileFollowPageSkeleton title={'팔로우'} />
+                            }
+                          >
                             <ProfileFollowingPage />
                           </Suspense>
                         ),

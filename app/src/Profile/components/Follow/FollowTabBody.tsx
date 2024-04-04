@@ -6,8 +6,7 @@ import { DashboardRowItem } from '@shared/components/Dashboard/DashboardRowItem'
 import { ResponsivePagination } from '@shared/components/Pagination/ResponsivePagination';
 
 import { FOLLOW_SIZE_PER_PAGE } from '@/Profile/constants/followSizePerPage';
-
-import FollowItem from './FollowItem';
+import { FollowTabBodyItem } from '@/Profile/components/Follow/FollowTabBodyItem';
 
 type FollowPageProps = {
   myFollow: MyFollow[];
@@ -16,7 +15,7 @@ type FollowPageProps = {
   setSearchParams: (newURLSearchParams: URLSearchParams) => void;
 };
 
-const Follow = ({
+export const FollowTabBody = ({
   myFollow,
   totalCount,
   currentPage,
@@ -40,7 +39,7 @@ const Follow = ({
               key={user.userPreview.id}
               rowSpan={1}
               colSpan={1}
-              content={() => <FollowItem user={user} />}
+              content={() => <FollowTabBodyItem user={user} />}
             ></DashboardRowItem>
           ))}
         </DashboardRow>
@@ -68,5 +67,3 @@ const Layout = styled.div`
   gap: 1.6rem;
   width: 100%;
 `;
-
-export default Follow;

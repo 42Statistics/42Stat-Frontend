@@ -8,7 +8,7 @@ import { VStack } from '@shared/ui-kit';
 
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { GET_FOLLOWER_LIST } from '@/Profile/dashboard-contents-queries/GET_FOLLOW_DATA';
-import Follow from '@/Profile/components/Follow';
+import { FollowTabBody } from '@/Profile/components/Follow/FollowTabBody';
 import { followPageArgs } from '@/Profile/utils/followPageArgs';
 import { FollowPageHeader } from '@/Profile/components/Follow/FollowPageHeader';
 
@@ -36,7 +36,7 @@ const FollowerPage = () => {
       <Seo title={title} />
       <VStack w="100%" spacing="2rem" align="start">
         <FollowPageHeader title={title} totalCount={totalCount} />
-        <Follow
+        <FollowTabBody
           myFollow={myFollow}
           totalCount={totalCount}
           currentPage={pageNumber}

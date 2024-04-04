@@ -12,7 +12,7 @@ type FollowItemProps = {
   user: MyFollow;
 };
 
-const FollowItem = ({ user }: FollowItemProps) => {
+export const FollowTabBodyItem = ({ user }: FollowItemProps) => {
   const { id: userId } = useAtomValue(userAtom);
   const { id, login, imgUrl } = user.userPreview;
   const theme = useTheme();
@@ -48,5 +48,3 @@ const ProfileLayout = styled.div`
   align-items: center;
   gap: 1rem;
 `;
-
-export default FollowItem;

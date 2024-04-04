@@ -13,7 +13,7 @@ export type FollowButtonColor = 'absoluteBlack' | 'default';
 
 type FollowButtonProps = {
   id: number;
-  followStatusFromList?: boolean | undefined;
+  isFollowing?: boolean | undefined;
   color?: FollowButtonColor;
 };
 
@@ -34,23 +34,23 @@ export const followStatusText = (followStatus: boolean | undefined) => {
 
 export const FollowButton = ({
   id,
-  followStatusFromList = undefined,
+  isFollowing = undefined,
   color = 'default',
 }: FollowButtonProps) => {
-  const [isFollowing, setIsFollowing] = useState<boolean | undefined>(
-    followStatusFromList,
-  );
+  const [isFollowingLocalState, setIsFollowingLocalState] = useState<
+    boolean | undefined
+  >(isFollowing);
 
   const theme = useTheme();
   const { handleHitFollow, handleHitUnfollow } = useHitFollow({
     id,
-    setIsFollowing,
+    setIsFollowingLocalState,
   });
 
   const handleClick = () => {
-    if (isFollowing === undefined) return undefined;
+    if (isFollowingLocalState === undefined) return undefined;
 
-    if (isFollowing) {
+    if (isFollowingLocalState) {
       handleHitUnfollow();
     } else {
       handleHitFollow();
@@ -66,14 +66,14 @@ export const FollowButton = ({
             : theme.colors.mono.black
         }
       >
-        {isFollowing === undefined ? (
+        {isFollowingLocalState === undefined ? (
           <FollowButtonStatus
             id={id}
-            isFollowing={isFollowing}
-            onIsFollowingChange={setIsFollowing}
+            isFollowing={isFollowingLocalState}
+            onIsFollowingChange={setIsFollowingLocalState}
           />
         ) : (
-          followStatusText(isFollowing)
+          followStatusText(isFollowingLocalState)
         )}
       </H3BoldText>
     </FollowButtonLayout>

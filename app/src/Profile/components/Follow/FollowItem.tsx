@@ -11,7 +11,6 @@ import { Avatar, H3BoldText } from '@shared/ui-kit';
 const FollowItem = ({ user }: { user: MyFollow }) => {
   const { id: userId } = useAtomValue(userAtom);
   const { id, login, imgUrl } = user.userPreview;
-  const isFollowing = user.isFollowing;
   const theme = useTheme();
 
   return (
@@ -25,9 +24,7 @@ const FollowItem = ({ user }: { user: MyFollow }) => {
         />
         <H3BoldText color={theme.colors.mono.black}>{login}</H3BoldText>
       </ProfileLayout>
-      {userId !== id && (
-        <FollowButton id={id} followStatusFromList={isFollowing} />
-      )}
+      {userId !== id && <FollowButton id={id} isFollowing={user.isFollowing} />}
     </Layout>
   );
 };

@@ -10,20 +10,23 @@ import {
 
 type HitFollowProps = {
   id: number;
-  setIsFollowing: (isFollowing: boolean) => void;
+  setIsFollowingLocalState: (isFollowing: boolean) => void;
 };
 
-export const useHitFollow = ({ id, setIsFollowing }: HitFollowProps) => {
+export const useHitFollow = ({
+  id,
+  setIsFollowingLocalState,
+}: HitFollowProps) => {
   const [hitFollow, { loading: loadingFollow, error: errorFollow }] =
     useMutation(FOLLOW_USER, {
       onCompleted: () => {
-        setIsFollowing(true);
+        setIsFollowingLocalState(true);
       },
     });
   const [hitUnfollow, { loading: loadingUnfollow, error: errorUnfollow }] =
     useMutation(UNFOLLOW_USER, {
       onCompleted: () => {
-        setIsFollowing(false);
+        setIsFollowingLocalState(false);
       },
     });
   const setFollowErrorDialog = useSetAtom(followErrorDialogAtom);

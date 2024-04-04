@@ -185,7 +185,7 @@ export const appRouter = createBrowserRouter([
                         element: (
                           <Suspense
                             fallback={
-                              <ProfileFollowPageSkeleton title={'팔로우'} />
+                              <ProfileFollowPageSkeleton title={'팔로잉'} />
                             }
                           >
                             <ProfileFollowingPage />

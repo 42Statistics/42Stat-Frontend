@@ -31,10 +31,10 @@ const ProfileLogtimeAndProjectPage = lazy(
 const ProfileEvalPage = lazy(() => import('@/Profile/pages/Eval'));
 const ProfileVersusPage = lazy(() => import('@/Profile/pages/Versus'));
 const ProfileFollowersPage = lazy(
-  () => import('@/Profile/pages/Follow/Followers'),
+  () => import('@/Profile/pages/FollowPage/FollowersPage'),
 );
 const ProfileFollowingPage = lazy(
-  () => import('@/Profile/pages/Follow/Following'),
+  () => import('@/Profile/pages/FollowPage/FollowingPage'),
 );
 const LeaderboardLevelPage = lazy(() => import('@/Leaderboard/pages/Level'));
 const LeaderboardExpIncrementPage = lazy(

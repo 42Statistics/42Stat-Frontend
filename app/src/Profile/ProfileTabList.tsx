@@ -8,10 +8,10 @@ import { Tab, Tabs } from '@shared/ui-kit';
 
 export const ProfileTabList = () => {
   const user = useAtomValue(userAtom);
-  const {
-    pathname: { startsWith },
-  } = useLocation();
+  const { pathname } = useLocation();
   const { login } = useParams() as { login: string };
+
+  const startsWith = pathname.startsWith.bind(pathname);
 
   const {
     PROFILE_EVAL_OF,

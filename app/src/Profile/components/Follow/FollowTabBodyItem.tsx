@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useAtomValue } from 'jotai';
@@ -7,6 +9,7 @@ import { userAtom } from '@shared/atoms/userAtom';
 import { FollowButton } from '@shared/components/FollowButton';
 import { ALT } from '@shared/constants/accessibility';
 import { Avatar, H3BoldText } from '@shared/ui-kit';
+import { ROUTES } from '@shared/constants/routes';
 
 type FollowItemProps = {
   user: MyFollow;
@@ -19,15 +22,17 @@ export const FollowTabBodyItem = ({ user }: FollowItemProps) => {
 
   return (
     <Layout>
-      <ProfileLayout>
-        <Avatar
-          size="2xl"
-          name={login}
-          src={imgUrl}
-          alt={ALT.AVATAR_OF(login)}
-        />
-        <H3BoldText color={theme.colors.mono.black}>{login}</H3BoldText>
-      </ProfileLayout>
+      <Link to={ROUTES.PROFILE_GENERAL_OF(login)}>
+        <ProfileLayout>
+          <Avatar
+            size="2xl"
+            name={login}
+            src={imgUrl}
+            alt={ALT.AVATAR_OF(login)}
+          />
+          <H3BoldText color={theme.colors.mono.black}>{login}</H3BoldText>
+        </ProfileLayout>
+      </Link>
       {userId !== id && <FollowButton id={id} isFollowing={user.isFollowing} />}
     </Layout>
   );
@@ -38,7 +43,7 @@ const Layout = styled.div`
   width: 100%;
   height: 100%;
   padding: 2rem;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
 `;
 

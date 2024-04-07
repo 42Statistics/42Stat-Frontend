@@ -1,9 +1,8 @@
 import styled from '@emotion/styled';
 
 import { DashboardRowItemProps } from '@shared/types/Dashboard';
-import { CustomBox } from '@shared/ui-kit-styled';
 
-export const DashboardRowItem = ({
+export const EmptyDashboardRowItem = ({
   content: Content,
   ...props
 }: DashboardRowItemProps) => {
@@ -16,7 +15,9 @@ export const DashboardRowItem = ({
 
 type LayoutProps = Omit<DashboardRowItemProps, 'content'>;
 
-const Layout = styled(CustomBox)<LayoutProps>`
+const Layout = styled.div<LayoutProps>`
+  width: 100%;
+  height: 100%;
   grid-column: ${({ colSpan }) => `span ${colSpan}`};
   grid-row: ${({ rowSpan }) => `span ${rowSpan}`};
 `;

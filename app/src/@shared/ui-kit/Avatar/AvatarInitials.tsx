@@ -10,6 +10,7 @@ type AvatarInitialsProps = {
   width: string;
   name: string;
   isAbsolute?: boolean;
+  radius: string;
 };
 
 export const AvatarInitials = ({
@@ -17,6 +18,7 @@ export const AvatarInitials = ({
   width,
   name,
   isAbsolute,
+  radius,
 }: AvatarInitialsProps) => {
   const palette = useAtomValue(paletteAtom);
 
@@ -33,6 +35,7 @@ export const AvatarInitials = ({
       bg={randomColor}
       fontSize={fontSize}
       isAbsolute={isAbsolute}
+      radius={radius}
     >
       {name.slice(0, 2).toUpperCase()}
     </Layout>
@@ -45,12 +48,13 @@ type LayoutProps = {
   bg: string;
   fontSize: string;
   isAbsolute?: boolean;
+  radius: string;
 };
 
 const Layout = styled.div<LayoutProps>`
   position: ${({ isAbsolute }) => (isAbsolute ? 'absolute' : 'relative')};
   background-color: ${({ bg }) => bg};
-  border-radius: 50%;
+  border-radius: ${({ radius }) => radius};
   width: ${({ w }) => w};
   height: ${({ h }) => h};
   font-size: ${({ fontSize }) => fontSize};

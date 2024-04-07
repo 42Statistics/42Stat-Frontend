@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import type { DashboardRowItemProps } from '@shared/components/Dashboard/DashboardRowItem';
+import type { DashboardRowItemProps } from '@shared/types/Dashboard';
 import { Skeleton } from '@shared/ui-kit';
 
 type DashboardRowItemSkeletonProps = Omit<DashboardRowItemProps, 'content'>;

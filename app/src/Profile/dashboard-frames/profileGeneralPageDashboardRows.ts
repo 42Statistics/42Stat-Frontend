@@ -16,22 +16,22 @@ export const profileGeneralPageDashboardRows: DashboardRowType[] = [
       {
         rowSpan: 1,
         colSpan: 1,
-        elementId: 4,
-      },
-      {
-        rowSpan: 1,
-        colSpan: 1,
         elementId: 1,
       },
       {
         rowSpan: 1,
         colSpan: 1,
-        elementId: 3,
+        elementId: 7,
       },
       {
         rowSpan: 1,
         colSpan: 1,
-        elementId: 7,
+        elementId: 4,
+      },
+      {
+        rowSpan: 1,
+        colSpan: 1,
+        elementId: 2,
       },
     ],
   },
@@ -77,17 +77,17 @@ export const profileGeneralPageDashboardRowsMobile: DashboardRowType[] = [
       {
         rowSpan: 1,
         colSpan: 1,
+        elementId: 7,
+      },
+      {
+        rowSpan: 1,
+        colSpan: 1,
         elementId: 1,
       },
       {
         rowSpan: 1,
         colSpan: 1,
-        elementId: 3,
-      },
-      {
-        rowSpan: 1,
-        colSpan: 1,
-        elementId: 7,
+        elementId: 2,
       },
     ],
   },

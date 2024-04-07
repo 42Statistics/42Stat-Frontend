@@ -6,6 +6,8 @@ import {
   PreferredCluster,
   PreferredTime,
   TeamInfo,
+  LastPassed,
+  LastRegistered,
 } from '@/Profile/dashboard-contents/LogtimeAndProject';
 
 export const profileLogtimeAndProjectPageDashboardContents: DashboardItemProps[] =
@@ -29,5 +31,13 @@ export const profileLogtimeAndProjectPageDashboardContents: DashboardItemProps[]
     {
       id: 4,
       content: LevelRecords,
+    },
+    {
+      id: 5,
+      content: LastPassed,
+    },
+    {
+      id: 6,
+      content: LastRegistered,
     },
   ];

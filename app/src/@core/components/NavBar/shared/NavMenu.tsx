@@ -17,6 +17,7 @@ export const NavMenu = ({ hasSpacer = true }: NavMenuProps) => {
       <NavItem route={NAV_ROUTES.LEADERBOARD} />
       <NavItem route={NAV_ROUTES.EVALLOG} />
       <NavItem route={NAV_ROUTES.CALCULATOR} />
+      <NavItem route={NAV_ROUTES.FEED} />
       {hasSpacer && <Spacer />}
       <NavItem route={NAV_ROUTES.SETTING} />
     </VStack>

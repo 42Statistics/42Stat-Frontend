@@ -54,6 +54,7 @@ const FtOAuthRequestPage = lazy(() => import('@/FtOAuthRequest'));
 const FtOAuthRedirectPage = lazy(() => import('@/FtOAuthRedirect'));
 const SettingPage = lazy(() => import('@/Setting'));
 const CalculatorPage = lazy(() => import('@/Calculator'));
+const FeedPage = lazy(() => import('@/Feed'));
 
 export const appRouter = createBrowserRouter([
   {
@@ -277,6 +278,14 @@ export const appRouter = createBrowserRouter([
                     element: (
                       <Suspense>
                         <CalculatorPage />
+                      </Suspense>
+                    ),
+                  },
+                  {
+                    path: ROUTES.FEED,
+                    element: (
+                      <Suspense>
+                        <FeedPage />
                       </Suspense>
                     ),
                   },

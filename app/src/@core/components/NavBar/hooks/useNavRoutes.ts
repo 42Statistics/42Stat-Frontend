@@ -10,6 +10,8 @@ import { ReactComponent as MdPersonFill } from '@shared/assets/icon/md-person-fi
 import { ReactComponent as MdPerson } from '@shared/assets/icon/md-person.svg';
 import { ReactComponent as MdQuickReferenceFill } from '@shared/assets/icon/md-quick-reference-fill.svg';
 import { ReactComponent as MdQuickReference } from '@shared/assets/icon/md-quick-reference.svg';
+import { ReactComponent as MdNoti } from '@shared/assets/icon/md-noti.svg';
+import { ReactComponent as MdNotiFill } from '@shared/assets/icon/md-noti-fill.svg';
 import { ReactComponent as MdSettingsFill } from '@shared/assets/icon/md-settings-fill.svg';
 import { ReactComponent as MdSettings } from '@shared/assets/icon/md-settings.svg';
 import { userAtom } from '@shared/atoms/userAtom';
@@ -62,6 +64,13 @@ export const useNavRoutes = () => {
       path: ROUTES.CALCULATOR,
       icon: MdCalculate,
       iconFocused: MdCalculateFill,
+    },
+    FEED: {
+      text: '피드',
+      abbr: '피드',
+      path: ROUTES.FEED,
+      icon: MdNoti,
+      iconFocused: MdNotiFill,
     },
     SETTING: {
       text: '설정',

@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { useTheme, type Theme } from '@emotion/react';
+import { useTheme } from '@emotion/react';
 import { useQuery } from '@apollo/client';
 
 import { DashboardContent } from '@shared/components/DashboardContent';
@@ -11,12 +11,8 @@ import {
 } from '@shared/components/DashboardContentView/Error';
 import { H2BoldText, HStack } from '@shared/ui-kit';
 import { getBlackholeDaysLeft } from '@shared/utils/getBlackholeDaysLeft';
+import { getBlackholeColorAndText } from '@shared/utils/getBlackholeColorsAndText';
 
-import { ReactComponent as SmileyCheekySvg } from '@/Profile/assets/blackhole/smiley-cheeky.svg';
-import { ReactComponent as SmileySadSvg } from '@/Profile/assets/blackhole/smiley-sad.svg';
-import { ReactComponent as SmileyScaredSvg } from '@/Profile/assets/blackhole/smiley-scared.svg';
-import { ReactComponent as SmileySleepySvg } from '@/Profile/assets/blackhole/smiley-sleepy.svg';
-import { ReactComponent as SmileySmile1Svg } from '@/Profile/assets/blackhole/smiley-smile-1.svg';
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 import { GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN } from '@/Profile/dashboard-contents-queries/GET_PERSONAL_GENERAL_ZERO_COST_BY_LOGIN';
 
@@ -46,7 +42,7 @@ export const BlackholedAt = () => {
   const daysLeft =
     blackholedAt != null ? getBlackholeDaysLeft(new Date(blackholedAt)) : null;
 
-  const { color, Svg, text } = getColorAndText(theme, daysLeft);
+  const { color, Svg, text } = getBlackholeColorAndText(theme, daysLeft);
 
   return (
     <DashboardContent title={title}>
@@ -58,44 +54,4 @@ export const BlackholedAt = () => {
       </HStack>
     </DashboardContent>
   );
-};
-
-const getColorAndText = (theme: Theme, daysLeft: number | null) => {
-  if (daysLeft === null)
-    return {
-      color: theme.colors.mono.black,
-      Svg: SmileyCheekySvg,
-      text: 'Never',
-    };
-  if (daysLeft >= 365)
-    return {
-      color: '#3db618',
-      Svg: SmileySleepySvg,
-      text: `${daysLeft.toLocaleString()} days left`,
-    };
-  if (daysLeft >= 42)
-    return {
-      color: '#3db618',
-      Svg: SmileySmile1Svg,
-      text: `${daysLeft.toLocaleString()} days left`,
-    };
-  if (daysLeft >= 19)
-    return {
-      color: '#d7a900',
-      Svg: SmileyScaredSvg,
-      text: `${daysLeft.toLocaleString()} days left`,
-    };
-  if (daysLeft > 0)
-    return {
-      color: '#ff0303',
-      Svg: SmileySadSvg,
-      text: `${daysLeft.toLocaleString()} days left`,
-    };
-  if (daysLeft === 0)
-    return { color: '#ff0303', Svg: SmileySadSvg, text: 'a few hours left' };
-  return {
-    color: '#ff0303',
-    Svg: null,
-    text: 'Absorbed by Black Hole',
-  };
 };

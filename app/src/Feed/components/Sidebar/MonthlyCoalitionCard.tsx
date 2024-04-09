@@ -19,13 +19,25 @@ export const MonthlyCoalitionCard = () => {
   });
 
   if (loading) {
-    return <Loader />;
+    return (
+      <Layout>
+        <Loader />
+      </Layout>
+    );
   }
   if (error) {
-    return <ApolloErrorView />;
+    return (
+      <Layout>
+        <ApolloErrorView />
+      </Layout>
+    );
   }
   if (!data) {
-    return <ApolloNotFoundView />;
+    return (
+      <Layout>
+        <ApolloNotFoundView />
+      </Layout>
+    );
   }
 
   const { scoreRecordsPerCoalition } = data.getHomeCoalition;
@@ -61,8 +73,11 @@ export const MonthlyCoalitionCard = () => {
 };
 
 const Layout = styled(VStack)`
+  border-sizing: border-box;
+  height: 30rem;
   width: 100%;
-  padding: 2rem;
+  padding: 4rem 2rem;
+  gap: 2rem;
   background-color: ${({ theme }) => theme.colors.background.box.default};
   border-radius: ${({ theme }) => theme.radius.md};
 `;

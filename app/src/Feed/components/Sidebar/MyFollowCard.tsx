@@ -10,9 +10,9 @@ import { userAtom } from '@shared/atoms/userAtom';
 import {
   Avatar,
   Body1MediumText,
+  CaptionText,
   HStack,
   Loader,
-  Text,
   VStack,
 } from '@shared/ui-kit';
 import { ApolloErrorView } from '@shared/components/ApolloError/ApolloErrorView';
@@ -72,13 +72,25 @@ export const MyFollowCard = () => {
   const theme = useTheme();
 
   if (loading) {
-    return <Loader />;
+    return (
+      <Layout>
+        <Loader />
+      </Layout>
+    );
   }
   if (error) {
-    return <ApolloErrorView />;
+    return (
+      <Layout>
+        <ApolloErrorView />
+      </Layout>
+    );
   }
   if (!data) {
-    return <ApolloNotFoundView />;
+    return (
+      <Layout>
+        <ApolloNotFoundView />
+      </Layout>
+    );
   }
 
   const followerList: MyFollow[] = data.getFollowerPaginated.nodes;
@@ -88,15 +100,15 @@ export const MyFollowCard = () => {
 
   return (
     <Layout>
-      <HStack w="100%" spacing="1rem" justify="start">
+      <HStack w="100%" h="100%" spacing="1rem" justify="start">
         <Body1MediumText>
           팔로잉 ({numberFormatter(followingTotalCount)})
         </Body1MediumText>
         <Link to={ROUTES.PROFILE_FOLLOWING_OF(login)}>
-          <Text>모두 보기</Text>
+          <CaptionText>모두 보기</CaptionText>
         </Link>
       </HStack>
-      <HStack w="100%" justify="space-around" spacing="0.6rem">
+      <HStack w="100%" h="100%" justify="start" spacing="0.6rem">
         {followingList.map(({ userPreview: { login, imgUrl } }) => {
           return (
             <Avatar
@@ -109,15 +121,15 @@ export const MyFollowCard = () => {
           );
         })}
       </HStack>
-      <HStack w="100%" spacing="1rem" justify="start">
+      <HStack w="100%" h="100%" spacing="1rem" justify="start">
         <Body1MediumText>
           팔로워 ({numberFormatter(followerTotalCount)})
         </Body1MediumText>
         <Link to={ROUTES.PROFILE_FOLLOWERS_OF(login)}>
-          <Text>모두 보기</Text>
+          <CaptionText>모두 보기</CaptionText>
         </Link>
       </HStack>
-      <HStack w="100%" justify="space-around" spacing="0.6rem">
+      <HStack w="100%" h="100%" justify="start" spacing="0.6rem">
         {followerList.map(({ userPreview: { login, imgUrl } }) => {
           return (
             <Avatar
@@ -135,9 +147,11 @@ export const MyFollowCard = () => {
 };
 
 const Layout = styled(VStack)`
+  border-sizing: border-box;
+  height: 24rem;
   width: 100%;
   gap: 1rem;
-  padding: 2rem 2rem;
+  padding: 2rem;
   background-color: ${({ theme }) => theme.colors.background.box.default};
   border-radius: ${({ theme }) => theme.radius.md};
 `;

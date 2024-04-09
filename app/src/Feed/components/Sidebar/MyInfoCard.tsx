@@ -53,9 +53,11 @@ export const MyInfoCard = () => {
 };
 
 const Layout = styled(VStack)`
+  border-sizing: border-box;
+  height: 20rem;
   width: 100%;
   gap: 3rem;
-  padding: 3rem 5rem 4rem;
+  padding: 4rem;
   background-color: ${({ theme }) => theme.colors.background.box.default};
   border-radius: ${({ theme }) => theme.radius.md};
 `;

@@ -34,13 +34,25 @@ export const MyBlackholeCard = () => {
   });
 
   if (loading) {
-    return <Loader />;
+    return (
+      <Layout>
+        <Loader />
+      </Layout>
+    );
   }
   if (error) {
-    return <ApolloErrorView />;
+    return (
+      <Layout>
+        <ApolloErrorView />
+      </Layout>
+    );
   }
   if (!data) {
-    return <ApolloNotFoundView />;
+    return (
+      <Layout>
+        <ApolloNotFoundView />
+      </Layout>
+    );
   }
 
   const { blackholedAt } = data.getPersonalGeneral;
@@ -51,14 +63,9 @@ export const MyBlackholeCard = () => {
 
   return (
     <Layout>
-      <VStack
-        w="100%"
-        align="start"
-        spacing="3rem"
-        style={{ marginLeft: '1rem' }}
-      >
+      <VStack w="100%" h="100%" align="start" spacing="3rem">
         <Body1MediumText>Black Hole Absorption</Body1MediumText>
-        <HStack w="100%" spacing="1rem">
+        <HStack w="100%" h="100%" spacing="1rem">
           {Svg !== null ? <Svg width={24} height={24} stroke={color} /> : null}
           <H2BoldText color={color} style={{ textAlign: 'center' }}>
             {text}
@@ -70,9 +77,10 @@ export const MyBlackholeCard = () => {
 };
 
 const Layout = styled(VStack)`
+  box-sizing: border-box;
+  height: 16rem;
   width: 100%;
-  gap: 5rem;
-  padding: 2rem 2rem 4rem;
+  padding: 2rem;
   background-color: ${({ theme }) => theme.colors.background.box.default};
   border-radius: ${({ theme }) => theme.radius.md};
 `;

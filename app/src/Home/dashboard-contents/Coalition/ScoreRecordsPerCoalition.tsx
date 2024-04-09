@@ -1,7 +1,6 @@
 import { useQuery } from '@apollo/client';
 import { subMonths } from 'date-fns';
 
-import { gql } from '@shared/__generated__';
 import { LineChart } from '@shared/components/Chart';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
@@ -19,21 +18,7 @@ import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnit
 import { injectEmptyMonth } from '@shared/utils/injectEmptyMonth';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 
-const GET_SCORE_RECORDS_PER_COALITION = gql(/* GraphQL */ `
-  query GetScoreRecordsPerCoalition($last: Int!) {
-    getHomeCoalition {
-      scoreRecordsPerCoalition(last: $last) {
-        coalition {
-          ...coalitionFields
-        }
-        records {
-          at
-          value
-        }
-      }
-    }
-  }
-`);
+import { GET_SCORE_RECORDS_PER_COALITION } from '@/Home/dashboard-contents-queries/GET_SCORE_RECORDS_PER_COALITION';
 
 export const ScoreRecordsPerCoalition = () => {
   const title = '코알리숑 스코어 변동 추이';

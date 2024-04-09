@@ -1,6 +1,5 @@
 import { useQuery } from '@apollo/client';
 
-import { gql } from '@shared/__generated__';
 import { BarChart } from '@shared/components/Chart';
 import { DashboardContent } from '@shared/components/DashboardContent';
 import {
@@ -11,18 +10,7 @@ import {
 import { kiloFormatter } from '@shared/utils/formatters/kiloFormatter';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 
-const GET_TOTAL_SCORES_PER_COALITION = gql(/* GraphQL */ `
-  query GetTotalScoresPerCoalition {
-    getHomeCoalition {
-      totalScoresPerCoalition {
-        coalition {
-          ...coalitionFields
-        }
-        value
-      }
-    }
-  }
-`);
+import { GET_TOTAL_SCORES_PER_COALITION } from '@/Home/dashboard-contents-queries/GET_TOTAL_SCORES_PER_COALITION';
 
 export const TotalScoresPerCoalition = () => {
   const title = '누적 코알리숑 스코어';

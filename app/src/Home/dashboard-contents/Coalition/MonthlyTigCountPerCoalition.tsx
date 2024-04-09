@@ -2,7 +2,6 @@ import { useTheme } from '@emotion/react';
 import { useQuery } from '@apollo/client';
 import { capitalize } from 'lodash-es';
 
-import { gql } from '@shared/__generated__';
 import { DateTemplate } from '@shared/__generated__/graphql';
 import { CoalitionMark } from '@shared/components/CoalitionMark';
 import { DashboardContent } from '@shared/components/DashboardContent';
@@ -17,22 +16,7 @@ import { CoalitionTable } from '@shared/ui-kit-styled/CoalitionTable';
 import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnitFormatter';
 import { getStartEndDateString } from '@shared/utils/getStartEndDateString';
 
-const GET_TIG_COUNT_PER_COALITION_BY_DATE_TEMPLATE = gql(/* GraphQL */ `
-  query GetTigCountPerCoalitionByDateTemplate($dateTemplate: DateTemplate!) {
-    getHomeCoalition {
-      tigCountPerCoalitionByDateTemplate(dateTemplate: $dateTemplate) {
-        data {
-          coalition {
-            ...coalitionFields
-          }
-          value
-        }
-        start
-        end
-      }
-    }
-  }
-`);
+import { GET_TIG_COUNT_PER_COALITION_BY_DATE_TEMPLATE } from '@/Home/dashboard-contents-queries/GET_TIG_COUNT_PER_COALITION_BY_DATE_TEMPLATE';
 
 export const MonthlyTigCountPerCoalition = () => {
   const theme = useTheme();

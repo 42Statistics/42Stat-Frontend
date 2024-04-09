@@ -9,7 +9,7 @@ import { TooltipProvider } from '@core/providers/TooltipProvider';
 import { ROUTES } from '@shared/constants/routes';
 import { DeferredComponent } from '@shared/ui-kit';
 
-import { HomePageSkeleton } from '@/Home/components/skeletons/HomePageSkeleton';
+import { HomePageSkeleton } from '@/Home/components/HomePageSkeleton';
 import { LeaderboardPageSkeleton } from '@/Leaderboard/components/skeletons/LeaderboardPageSkeleton';
 import { ProfileEvalPageSkeleton } from '@/Profile/components/skeletons/ProfileEvalPageSkeleton';
 import { ProfileGeneralPageSkeleton } from '@/Profile/components/skeletons/ProfileGeneralPageSkeleton';

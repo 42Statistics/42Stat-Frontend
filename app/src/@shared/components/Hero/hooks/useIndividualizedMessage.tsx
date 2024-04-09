@@ -4,9 +4,9 @@ import type { GetIndividualizedMessageQuery } from '@shared/__generated__/graphq
 import { timeDiffStringFormatter } from '@shared/utils/formatters/timeDiffStringFormatter';
 import { getBlackholeDaysLeft } from '@shared/utils/getBlackholeDaysLeft';
 import { getTimeDiffFromNow } from '@shared/utils/getTimeDiffFromNow';
+import { GET_INDIVIDUALIZED_MESSAGE } from '@shared/components/Hero/api/getInidividualizedMessage';
 
 import { getDailyProgrammingQuote } from '@/Home/utils/getDailyProgrammingQuote';
-import { GET_INDIVIDUALIZED_MESSAGE } from '@/Home/components/MyInfo/api/getInidividualizedMessage';
 
 export const useIndividualizedMessageQuery = () => {
   const { loading, error, data } = useQuery(GET_INDIVIDUALIZED_MESSAGE);

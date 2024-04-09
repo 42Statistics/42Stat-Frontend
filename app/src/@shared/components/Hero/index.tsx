@@ -8,10 +8,9 @@ import { ApolloErrorView } from '@shared/components/ApolloError/ApolloErrorView'
 import { ApolloNotFoundView } from '@shared/components/ApolloError/ApolloNotFoundView';
 import { H2BoldText, Loader, Text, VStack } from '@shared/ui-kit';
 import { CustomBox } from '@shared/ui-kit-styled';
+import { useIndividualizedMessageQuery } from '@shared/components/Hero/hooks/useIndividualizedMessage';
 
-import { useIndividualizedMessageQuery } from '@/Home/components/MyInfo/hooks/useIndividualizedMessage';
-
-export const MyInfo = () => {
+export const Hero = () => {
   const theme = useTheme();
   const { loading, error, data, message } = useIndividualizedMessageQuery();
   const { login } = useAtomValue(userAtom);

@@ -74,7 +74,9 @@ const ScrollableContainer = styled(Scroll)`
  * @see https://github.com/recharts/recharts/issues/1767#issuecomment-598607012
  */
 
-const ApexChartsContainer = ({ children }: PropsWithReactElementChildren) => {
+export const ApexChartsContainer = ({
+  children,
+}: PropsWithReactElementChildren) => {
   return (
     <div
       style={{

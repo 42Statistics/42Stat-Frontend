@@ -3,7 +3,7 @@ import { VStack } from '@shared/ui-kit';
 import { MyInfoCard } from '@/Feed/components/Sidebar/MyInfoCard';
 import { MyBlackholeCard } from '@/Feed/components/Sidebar/MyBlackholeCard';
 import { MyFollowCard } from '@/Feed/components/Sidebar/MyFollowCard';
-// import { MonthlyCoalitionCard } from '@/Feed/components/Sidebar/MonthlyCoalitionCard';
+import { MonthlyCoalitionCard } from '@/Feed/components/Sidebar/MonthlyCoalitionCard';
 
 export const Sidebar = () => {
   return (
@@ -11,7 +11,7 @@ export const Sidebar = () => {
       <MyInfoCard />
       <MyBlackholeCard />
       <MyFollowCard />
-      {/* <MonthlyCoalitionCard /> */}
+      <MonthlyCoalitionCard />
     </VStack>
   );
 };

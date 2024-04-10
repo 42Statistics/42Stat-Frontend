@@ -15,15 +15,8 @@ import {
 import { ApolloNotFoundView } from '@shared/components/ApolloError/ApolloNotFoundView';
 import { getBlackholeDaysLeft } from '@shared/utils/getBlackholeDaysLeft';
 import { getBlackholeColorAndText } from '@shared/utils/getBlackholeColorsAndText';
-import { gql } from '@shared/__generated__';
 
-const GET_PERSONAL_BLACKHOLE = gql(/* GraphQL */ `
-  query GetPersonalBlackhole($login: String!) {
-    getPersonalGeneral(login: $login) {
-      blackholedAt
-    }
-  }
-`);
+import { GET_PERSONAL_BLACKHOLE } from '@/Feed/queries/GET_PERSONAL_BLACKHOLE';
 
 export const MyBlackholeCard = () => {
   const theme = useTheme();

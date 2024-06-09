@@ -21,11 +21,6 @@ export const homeRecordDashboardRows: DashboardRowType[] = [
       {
         rowSpan: 2,
         colSpan: 1,
-        elementId: 7,
-      },
-      {
-        rowSpan: 2,
-        colSpan: 1,
         elementId: 14,
       },
     ],

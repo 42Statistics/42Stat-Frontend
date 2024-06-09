@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/client';
 import { subMonths } from 'date-fns';
+import { useTheme } from '@emotion/react';
 
 import { gql } from '@shared/__generated__';
 import { AreaChart } from '@shared/components/Chart';
@@ -25,11 +26,16 @@ const GET_MONTHLY_ALIVE_USER_COUNT_RECORDS_FROM_END = gql(/* GraphQL */ `
         at
         value
       }
+      monthlyActiveUserCountRecordsFromEnd(last: $last) {
+        at
+        value
+      }
     }
   }
 `);
 
 export const AliveUserCountRecords = () => {
+  const theme = useTheme();
   const title = '여행 중인 유저 수 추이';
 
   const device = useDeviceType();
@@ -55,19 +61,25 @@ export const AliveUserCountRecords = () => {
     return <DashboardContentNotFound title={title} />;
   }
 
-  const { monthlyAliveUserCountRecordsFromEnd } = data.getHomeUser;
-  const seriesData = monthlyAliveUserCountRecordsFromEnd.map(
-    ({ at, value }) => ({
-      x: new Date(at),
-      y: value,
-    }),
-  );
-  const series: ApexAxisChartSeries = [
+  const seriesWithColor = [
     {
       name: '인원수',
-      data: seriesData,
+      color: theme.colors.chart.accent.default,
+      rawData: data.getHomeUser.monthlyAliveUserCountRecordsFromEnd,
     },
-  ];
+    {
+      name: '활동중',
+      color: theme.colors.chart.primary.default,
+      rawData: data.getHomeUser.monthlyActiveUserCountRecordsFromEnd,
+    },
+  ].map(({ name, color, rawData }) => ({
+    name,
+    color,
+    data: rawData.map(({ at, value }) => ({
+      x: new Date(at),
+      y: value,
+    })),
+  }));
 
   return (
     <DashboardContent
@@ -77,17 +89,17 @@ export const AliveUserCountRecords = () => {
       }
       type="ApexCharts"
     >
-      <ActiveUserCountRecordsChart series={series} />
+      <ActiveUserCountRecordsChart seriesWithColor={seriesWithColor} />
     </DashboardContent>
   );
 };
 
 type ActiveUserCountRecordsChartProps = {
-  series: ApexAxisChartSeries;
+  seriesWithColor: Array<ApexAxisChartSeries[0] & { color: string }>;
 };
 
 const ActiveUserCountRecordsChart = ({
-  series,
+  seriesWithColor,
 }: ActiveUserCountRecordsChartProps) => {
   const options: ApexCharts.ApexOptions = {
     chart: {
@@ -130,6 +142,7 @@ const ActiveUserCountRecordsChart = ({
       },
       min: subMonths(new Date(), 12).getTime(),
     },
+    colors: seriesWithColor.map(({ color }) => color),
     yaxis: {
       labels: {
         formatter: (value) => value.toLocaleString(),
@@ -137,7 +150,7 @@ const ActiveUserCountRecordsChart = ({
     },
     tooltip: {
       x: {
-        format: 'yyyy년 M월 d일',
+        format: 'yyyy년 M월',
       },
       y: {
         formatter: (value) => numberWithUnitFormatter(value, '명'),
@@ -166,5 +179,11 @@ const ActiveUserCountRecordsChart = ({
       },
     ],
   };
-  return <AreaChart series={series} options={options} />;
+
+  return (
+    <AreaChart
+      series={seriesWithColor.map(({ name, data }) => ({ name, data }))}
+      options={options}
+    />
+  );
 };

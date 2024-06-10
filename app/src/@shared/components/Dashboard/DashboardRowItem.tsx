@@ -1,7 +1,12 @@
 import styled from '@emotion/styled';
 
-import { DashboardRowItemProps } from '@shared/types/Dashboard';
 import { CustomBox } from '@shared/ui-kit-styled';
+
+export type DashboardRowItemProps = {
+  rowSpan: number;
+  colSpan: number;
+  content: () => JSX.Element;
+};
 
 export const DashboardRowItem = ({
   content: Content,

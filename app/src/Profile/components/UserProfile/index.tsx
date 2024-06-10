@@ -3,14 +3,12 @@ import { useContext } from 'react';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { truncate } from 'lodash-es';
-import { useAtomValue } from 'jotai';
 
 import coalition_black_cover from '@shared/assets/coalition/cover/coalition-black-cover.jpg';
 import coalition_gam_cover from '@shared/assets/coalition/cover/coalition-gam-cover.jpg';
 import coalition_gon_cover from '@shared/assets/coalition/cover/coalition-gon-cover.jpg';
 import coalition_gun_cover from '@shared/assets/coalition/cover/coalition-gun-cover.jpg';
 import coalition_lee_cover from '@shared/assets/coalition/cover/coalition-lee-cover.jpg';
-import { userAtom } from '@shared/atoms/userAtom';
 import { ALT } from '@shared/constants/accessibility';
 import type { Coalition } from '@shared/types/Coalition';
 import {
@@ -21,7 +19,6 @@ import {
   Text,
   VStack,
 } from '@shared/ui-kit';
-import { FollowButton } from '@shared/components/FollowButton';
 import { titleCase } from '@shared/utils/formatters/titleCase';
 import { getTitleWithLogin } from '@shared/utils/getTitleWithLogin';
 import { Desktop, TabletAndBelow } from '@shared/utils/react-responsive/Device';
@@ -31,9 +28,8 @@ import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
 export const UserProfile = () => {
   const theme = useTheme();
   const userProfile = useContext(UserProfileContext);
-  const user = useAtomValue(userAtom);
 
-  const { login, id, imgUrl, titles, coalition, grade, level, displayname } =
+  const { login, imgUrl, titles, coalition, grade, level, displayname } =
     userProfile;
   const titleWithLogin = getTitleWithLogin(titles, login);
 
@@ -68,23 +64,17 @@ export const UserProfile = () => {
               {level.toFixed(2)}
             </H3BoldText>
           </HStack>
-          {user.login !== login && (
-            <FollowButton id={id} color="absoluteBlack" />
-          )}
         </HStack>
       </Desktop>
       <TabletAndBelow>
         <HStack h="100%" spacing="4rem">
-          <VStack spacing="1rem">
+          <VStack>
             <Avatar
               size="2xl"
               name={login}
               src={imgUrl}
               alt={ALT.AVATAR_OF(login)}
             />
-            {user.login !== login && (
-              <FollowButton id={id} color="absoluteBlack" />
-            )}
           </VStack>
           <VStack w="15rem" spacing="1rem" style={{ textAlign: 'center' }}>
             <H3BoldText color={theme.colors.mono.absolute.white}>

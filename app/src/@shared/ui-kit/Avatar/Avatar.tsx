@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 
 import { AvatarInitials } from '@shared/ui-kit/Avatar/AvatarInitials';
@@ -14,12 +13,6 @@ type AvatarProps = {
   alt?: string;
   badge?: React.ReactNode;
   name: string;
-  radius?: string;
-};
-
-type StyledAvatarProps = {
-  width: string;
-  radius: string;
 };
 
 export const Avatar = ({
@@ -28,11 +21,9 @@ export const Avatar = ({
   alt = '',
   badge,
   name,
-  radius,
 }: AvatarProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
-  const theme = useTheme();
 
   const width = getWidth(size);
 
@@ -46,30 +37,18 @@ export const Avatar = ({
       {src != null && !isError ? (
         <>
           {isLoading && (
-            <AvatarInitials
-              size={size}
-              width={width}
-              name={name}
-              radius={radius ?? theme.radius.circle}
-              isAbsolute
-            />
+            <AvatarInitials size={size} width={width} name={name} isAbsolute />
           )}
           <StyledAvatar
             onLoad={() => setIsLoading(false)}
             onError={handleError}
             src={src}
             alt={alt}
-            width={width}
-            radius={radius ?? theme.radius.circle}
+            style={{ width, height: width }}
           />
         </>
       ) : (
-        <AvatarInitials
-          size={size}
-          width={width}
-          name={name}
-          radius={radius ?? theme.radius.circle}
-        />
+        <AvatarInitials size={size} width={width} name={name} />
       )}
       {badge != null ? (
         <div style={{ position: 'absolute', top: '-10%', right: '-10%' }}>
@@ -80,14 +59,9 @@ export const Avatar = ({
   );
 };
 
-const StyledAvatar = styled(Image)<StyledAvatarProps>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+const StyledAvatar = styled(Image)`
   object-fit: cover;
-  width: ${({ width }) => width};
-  height: ${({ width }) => width};
-  border-radius: ${({ radius }) => radius};
+  border-radius: ${({ theme }) => theme.radius.circle};
 `;
 
 const getWidth = (size: AvatarSize) => {

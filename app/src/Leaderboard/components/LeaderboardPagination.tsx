@@ -4,9 +4,9 @@ import {
 } from '@shared/components/Pagination';
 import { useDeviceType } from '@shared/utils/react-responsive/useDeviceType';
 
-type ResponsivePaginationProps = Omit<PaginationProps, 'pagePerRow'>;
+type LeaderboardPaginationProps = Omit<PaginationProps, 'pagePerRow'>;
 
-export const ResponsivePagination = (props: ResponsivePaginationProps) => {
+export const LeaderboardPagination = (props: LeaderboardPaginationProps) => {
   const device = useDeviceType();
   const pagePerRow = device === 'mobile' ? 5 : 10;
 

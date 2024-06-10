@@ -19,12 +19,6 @@ export type DashboardItemType = {
   elementId: number;
 };
 
-export type DashboardRowItemProps = {
-  rowSpan: number;
-  colSpan: number;
-  content: () => JSX.Element;
-};
-
 export type DashboardItemProps = {
   id: number;
   content: () => JSX.Element;

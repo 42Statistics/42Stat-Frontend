@@ -1,6 +1,6 @@
-import type { DashboardTempType } from '@shared/types/Dashboard';
+import type { DashboardRowType } from '@shared/types/Dashboard';
 
-export const calculatorPageDashboardDesktop: DashboardTempType[] = [
+export const calculatorPageDashboardRowsDesktop: DashboardRowType[] = [
   {
     items: [
       {
@@ -17,7 +17,7 @@ export const calculatorPageDashboardDesktop: DashboardTempType[] = [
   },
 ];
 
-export const calculatorPageDashboardTablet: DashboardTempType[] = [
+export const calculatorPageDashboardRows: DashboardRowType[] = [
   {
     items: [
       {

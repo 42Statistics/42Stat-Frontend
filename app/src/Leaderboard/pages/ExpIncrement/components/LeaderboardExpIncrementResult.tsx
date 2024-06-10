@@ -35,8 +35,9 @@ export const LeaderboardExpIncrementResult = ({
   result: { loading, error, data },
 }: LeaderboardExpIncrementResultProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { promo, dateTemplate, pageNumber } = toLeaderboardArgs(searchParams);
-  const { PROMO, PAGE, DATE } = LEADERBOARD_PARAM_KEYS;
+  const { promo, dateTemplate, pageNumber, coalitionId } =
+    toLeaderboardArgs(searchParams);
+  const { PROMO, PAGE, DATE, COALITION } = LEADERBOARD_PARAM_KEYS;
 
   const handlePageNumberChange = (newPageNumber: number) => {
     const newURLSearchParams = new URLSearchParams();
@@ -44,6 +45,9 @@ export const LeaderboardExpIncrementResult = ({
     newURLSearchParams.set(DATE, dateTemplate);
     if (promo) {
       newURLSearchParams.set(PROMO, promo.toString());
+    }
+    if (coalitionId) {
+      newURLSearchParams.set(COALITION, coalitionId.toString());
     }
     newURLSearchParams.set(PAGE, newPageNumber.toString());
     setSearchParams(newURLSearchParams);

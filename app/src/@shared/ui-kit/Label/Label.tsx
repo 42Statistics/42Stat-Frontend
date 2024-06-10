@@ -6,7 +6,7 @@ import { Text } from '@shared/ui-kit/Text';
 
 type LabelSize = 'md';
 
-type LabelProps = PropsWithStringChildren<{
+export type LabelProps = PropsWithStringChildren<{
   size?: LabelSize;
   color?: string;
   fontWeight?: number;

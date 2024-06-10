@@ -11,7 +11,11 @@ import type { Subject } from '@/Calculator/types/Subject';
 import { CalculatorInputContentCardView } from '@/Calculator/components/CalculatorInputContentCardView';
 import { CalculatorInputContentTableView } from '@/Calculator/components/CalculatorInputContentTableView';
 
-export const CalculatorInputContent = () => {
+export const CalculatorInputContent = ({
+  handleSubjectAdd,
+}: {
+  handleSubjectAdd: () => void;
+}) => {
   const subjectList = useAtomValue(subjectListAtom);
   const { updateSubjectList } = useSubjectList();
   const device = useDeviceType();
@@ -71,6 +75,7 @@ export const CalculatorInputContent = () => {
       {device === 'mobile' ? (
         <CalculatorInputContentCardView
           onSubjectListChange={handleSubjectListChange}
+					onSubjectAdd={handleSubjectAdd}
           onSubjectDelete={handleSubjectDelete}
           onInputChange={handleInputChange}
           onCheckboxChange={handleCheckboxChange}
@@ -78,6 +83,7 @@ export const CalculatorInputContent = () => {
       ) : (
         <CalculatorInputContentTableView
           onSubjectListChange={handleSubjectListChange}
+					onSubjectAdd={handleSubjectAdd}
           onSubjectDelete={handleSubjectDelete}
           onInputChange={handleInputChange}
           onCheckboxChange={handleCheckboxChange}

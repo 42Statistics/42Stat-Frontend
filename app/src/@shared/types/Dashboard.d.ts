@@ -1,27 +1,22 @@
 export type DashboardProps = {
-  rows: DashboardRowType[];
-  contents: DashboardItemProps[];
-};
+  defaultRows: DashboardRowType[];
 
-export type DashboardTempProps = {
-  rows: DashboardTempType[];
-  contents: DashboardItemProps[];
-};
+  // 값이 있다면 해당 디바이스에서는 defaultRows 대신 들어온 값으로 대체한다.
+  desktopRows?: DashboardRowType[];
+  tabletRows?: DashboardRowType[];
+  mobileRows?: DashboardRowType[];
 
-export type DashboardTempType = {
-  items: {
-    rowSpan: number;
-    colSpan: number;
-    elementId: number;
-  }[];
+  contents: DashboardItemProps[];
 };
 
 export type DashboardRowType = {
+  items: DashboardItemType[];
+};
+
+export type DashboardItemType = {
+  rowSpan: number;
   colSpan: number;
-  items: {
-    rowSpan: number;
-    elementId: number;
-  }[];
+  elementId: number;
 };
 
 export type DashboardItemProps = {

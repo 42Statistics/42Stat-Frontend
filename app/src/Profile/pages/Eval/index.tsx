@@ -17,7 +17,7 @@ const ProfileEvalPage = () => {
       <Seo title={`${login} › 평가`} />
       <Dashboard
         contents={profileEvalPageDashboardContents}
-        rows={profileEvalPageDashboardRows}
+        defaultRows={profileEvalPageDashboardRows}
       />
       <Footer />
     </>

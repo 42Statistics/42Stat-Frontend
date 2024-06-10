@@ -11,10 +11,10 @@ import { Dashboard } from '@shared/components/Dashboard';
 import { Seo } from '@shared/components/Seo';
 import { VStack } from '@shared/ui-kit';
 
-import { projectDetailPageDashboardRows } from '@/Project/dashboard-frames/projectDetailPageDashboardRows';
-import { projectDetailPageDashboardContents } from '@/Project/dashboard-frames/projectDetailPageDashboardContents';
-import { ProjectNameContext } from '@/Project/contexts/ProjectNameContext';
 import { ProjectIntroduction } from '@/Project/components/ProjectIntroduction';
+import { ProjectNameContext } from '@/Project/contexts/ProjectNameContext';
+import { projectDetailPageDashboardContents } from '@/Project/dashboard-frames/projectDetailPageDashboardContents';
+import { projectDetailPageDashboardRows } from '@/Project/dashboard-frames/projectDetailPageDashboardRows';
 
 const GET_PROJECT_EXISTS = gql(/* GraphQL */ `
   query GetProjectExists($projectName: String!) {
@@ -50,7 +50,7 @@ const ProjectDetailPage = () => {
           <ProjectIntroduction />
           <Dashboard
             contents={projectDetailPageDashboardContents}
-            rows={projectDetailPageDashboardRows}
+            defaultRows={projectDetailPageDashboardRows}
           />
         </VStack>
       </ProjectNameContext.Provider>

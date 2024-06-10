@@ -43,7 +43,7 @@ const ProfileVersusPage = () => {
       <MyUserProfileContext.Provider value={userProfile}>
         <Dashboard
           contents={profileVersusPageDashboardContents}
-          rows={profileVersusPageDashboardRows}
+          defaultRows={profileVersusPageDashboardRows}
         />
       </MyUserProfileContext.Provider>
       <Footer />

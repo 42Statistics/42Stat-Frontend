@@ -7,16 +7,8 @@ export const WritableNum = forwardRef(
     props: React.InputHTMLAttributes<HTMLInputElement>,
     ref: React.Ref<HTMLInputElement>,
   ) => {
-    const { value, ...restProps } = props;
-
     return (
-      <StyledWritable
-        {...restProps}
-        value={value?.toString()}
-        type="number"
-        ref={ref}
-        autoComplete="off"
-      />
+      <StyledWritable {...props} type="number" ref={ref} autoComplete="off" />
     );
   },
 );

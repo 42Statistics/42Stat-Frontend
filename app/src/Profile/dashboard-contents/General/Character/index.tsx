@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 
-import { useTheme } from '@emotion/react';
 import { useQuery } from '@apollo/client';
 
 import { gql } from '@shared/__generated__';
@@ -11,16 +10,10 @@ import {
   DashboardContentNotFound,
 } from '@shared/components/DashboardContentView/Error';
 import { ALT } from '@shared/constants/accessibility';
-import {
-  H3MediumText,
-  HStack,
-  Image,
-  Label,
-  VStack,
-  Tooltip,
-} from '@shared/ui-kit';
+import { H3MediumText, HStack, Image, VStack } from '@shared/ui-kit';
 
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
+import { CharacterTypeLabel } from '@/Profile/dashboard-contents/General/Character/CharacterTypeLabel';
 
 const GET_CHARACTER_BY_LOGIN = gql(/* GraphQL */ `
   query GetCharacterByLogin($login: String!) {
@@ -39,7 +32,6 @@ const GET_CHARACTER_BY_LOGIN = gql(/* GraphQL */ `
 `);
 
 export const Character = () => {
-  const theme = useTheme();
   const { login } = useContext(UserProfileContext);
 
   const title = '이 유저를 캐릭터로 표현한다면?';
@@ -81,16 +73,13 @@ export const Character = () => {
         <VStack spacing="2rem">
           <HStack spacing="1rem">
             {types?.map((type, idx) => (
-              <Tooltip.Container key={idx}>
-                <Label
-                  color={theme.colors.mono.absolute.white}
-                  backgroundColor={type.color}
-                  key={idx}
-                >
-                  {type.name}
-                </Label>
-                <Tooltip position="top">{type.description}</Tooltip>
-              </Tooltip.Container>
+              <CharacterTypeLabel
+                key={idx}
+                backgroundColor={type.color}
+                description={type.description}
+              >
+                {type.name}
+              </CharacterTypeLabel>
             ))}
           </HStack>
           <H3MediumText>{name ?? ''}</H3MediumText>

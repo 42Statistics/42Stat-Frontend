@@ -5,10 +5,14 @@ import dayjs from 'dayjs';
 import { useAtomValue } from 'jotai';
 
 import { DashboardContent } from '@shared/components/DashboardContent';
-import { DashboardContentLoading } from '@shared/components/DashboardContentView/Error';
+import {
+  DashboardContentBadRequest,
+  DashboardContentLoading,
+} from '@shared/components/DashboardContentView/Error';
 import { Body1Text, VStack } from '@shared/ui-kit';
 
 import { UserProfileContext } from '@/Profile/contexts/UserProfileContext';
+import { dailyActivityErrorAtom } from '@/Profile/dashboard-contents/General/atoms/dailyActivityErrorAtom';
 import { selectedDailyActivityAtom } from '@/Profile/dashboard-contents/General/atoms/selectedDailyActivityAtom';
 
 import { DailyActivityTimeline } from './DailyActivityTimeline';
@@ -19,6 +23,7 @@ export const DailyActivityDetail = () => {
   const theme = useTheme();
   const { login } = useContext(UserProfileContext);
   const { coalition } = useContext(UserProfileContext);
+  const dailyActivityError = useAtomValue(dailyActivityErrorAtom);
 
   const {
     date,
@@ -30,6 +35,15 @@ export const DailyActivityDetail = () => {
 
   const title = '일별 활동 내역';
   const description = dayjs(date).format('YYYY년 M월 D일');
+
+  if (dailyActivityError) {
+    return (
+      <DashboardContentBadRequest
+        title={title}
+        message={dailyActivityError.message}
+      />
+    );
+  }
 
   if (date === '' || activityLogin !== login) {
     return <DashboardContentLoading title={title} />;

@@ -15,7 +15,6 @@ import { ProfileEvalPageSkeleton } from '@/Profile/components/skeletons/ProfileE
 import { ProfileGeneralPageSkeleton } from '@/Profile/components/skeletons/ProfileGeneralPageSkeleton';
 import { ProfileVersusPageSkeleton } from '@/Profile/components/skeletons/ProfileVersusPageSkeleton';
 import { UserProfileSkeleton } from '@/Profile/components/skeletons/UserProfileSkeleton';
-import { ProfileFollowPageSkeleton } from '@/Profile/components/skeletons/ProfileFollowPageSkeleton';
 
 const LandingLayout = lazy(() => import('@core/layouts/LandingLayout'));
 const MainLayout = lazy(() => import('@core/layouts/MainLayout'));
@@ -31,12 +30,6 @@ const ProfileLogtimeAndProjectPage = lazy(
 );
 const ProfileEvalPage = lazy(() => import('@/Profile/pages/Eval'));
 const ProfileVersusPage = lazy(() => import('@/Profile/pages/Versus'));
-const ProfileFollowersPage = lazy(
-  () => import('@/Profile/pages/FollowPage/FollowersPage'),
-);
-const ProfileFollowingPage = lazy(
-  () => import('@/Profile/pages/FollowPage/FollowingPage'),
-);
 const LeaderboardLevelPage = lazy(() => import('@/Leaderboard/pages/Level'));
 const LeaderboardExpIncrementPage = lazy(
   () => import('@/Leaderboard/pages/ExpIncrement'),
@@ -165,30 +158,6 @@ export const appRouter = createBrowserRouter([
                         element: (
                           <Suspense fallback={<ProfileVersusPageSkeleton />}>
                             <ProfileVersusPage />
-                          </Suspense>
-                        ),
-                      },
-                      {
-                        path: ROUTES.PROFILE_FOLLOWERS,
-                        element: (
-                          <Suspense
-                            fallback={
-                              <ProfileFollowPageSkeleton title={'팔로워'} />
-                            }
-                          >
-                            <ProfileFollowersPage />
-                          </Suspense>
-                        ),
-                      },
-                      {
-                        path: ROUTES.PROFILE_FOLLOWING,
-                        element: (
-                          <Suspense
-                            fallback={
-                              <ProfileFollowPageSkeleton title={'팔로잉'} />
-                            }
-                          >
-                            <ProfileFollowingPage />
                           </Suspense>
                         ),
                       },

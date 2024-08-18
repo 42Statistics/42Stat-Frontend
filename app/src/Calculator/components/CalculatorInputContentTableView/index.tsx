@@ -89,7 +89,7 @@ export const CalculatorInputContentTableView = ({
                       max="125"
                       name="score"
                       onChange={(event) => onInputChange(event, index)}
-                      value={score}
+                      defaultValue={score}
                       style={{ width: '4rem' }}
                     />
                   </InputLayout>

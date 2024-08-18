@@ -40,7 +40,13 @@ export const CalculatorInputContent = ({
   ) => {
     const value = Number(e.target.value);
     const name = e.target.name as keyof typeof subjectList;
-    if (value < 0 || value > 125) return;
+
+    if (value < 0 || value > 125) {
+      return;
+    }
+
+    e.target.value = value.toString();
+
     const updatedSubjectList = subjectList.map((subject) => {
       if (subject.id === index) {
         return {
@@ -48,8 +54,10 @@ export const CalculatorInputContent = ({
           [name]: value,
         };
       }
+
       return subject;
     });
+
     updateSubjectList(updatedSubjectList);
   };
 
@@ -75,7 +83,7 @@ export const CalculatorInputContent = ({
       {device === 'mobile' ? (
         <CalculatorInputContentCardView
           onSubjectListChange={handleSubjectListChange}
-					onSubjectAdd={handleSubjectAdd}
+          onSubjectAdd={handleSubjectAdd}
           onSubjectDelete={handleSubjectDelete}
           onInputChange={handleInputChange}
           onCheckboxChange={handleCheckboxChange}
@@ -83,7 +91,7 @@ export const CalculatorInputContent = ({
       ) : (
         <CalculatorInputContentTableView
           onSubjectListChange={handleSubjectListChange}
-					onSubjectAdd={handleSubjectAdd}
+          onSubjectAdd={handleSubjectAdd}
           onSubjectDelete={handleSubjectDelete}
           onInputChange={handleInputChange}
           onCheckboxChange={handleCheckboxChange}

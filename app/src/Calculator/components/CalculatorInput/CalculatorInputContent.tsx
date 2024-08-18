@@ -6,10 +6,10 @@ import {
   emptySubject,
   subjectListAtom,
 } from '@/Calculator/atoms/subjectListAtom';
-import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
-import type { Subject } from '@/Calculator/types/Subject';
 import { CalculatorInputContentCardView } from '@/Calculator/components/CalculatorInputContentCardView';
 import { CalculatorInputContentTableView } from '@/Calculator/components/CalculatorInputContentTableView';
+import { useSubjectList } from '@/Calculator/hooks/useSubjectList';
+import type { Subject } from '@/Calculator/types/Subject';
 
 export const CalculatorInputContent = ({
   handleSubjectAdd,
@@ -38,20 +38,19 @@ export const CalculatorInputContent = ({
     e: React.ChangeEvent<HTMLInputElement>,
     index: number,
   ) => {
-    const value = Number(e.target.value);
     const name = e.target.name as keyof typeof subjectList;
+    const inputValue = Number(e.target.value);
+    const prevValue = subjectList.find(({ id }) => id === index)?.score ?? 100;
 
-    if (value < 0 || value > 125) {
-      return;
-    }
+    const validValue = isValidValue(inputValue) ? inputValue : prevValue;
 
-    e.target.value = value.toString();
+    e.target.value = validValue.toString();
 
     const updatedSubjectList = subjectList.map((subject) => {
       if (subject.id === index) {
         return {
           ...subject,
-          [name]: value,
+          [name]: validValue,
         };
       }
 
@@ -99,4 +98,8 @@ export const CalculatorInputContent = ({
       )}
     </>
   );
+};
+
+const isValidValue = (value: number): boolean => {
+  return !isNaN(value) && value >= 0 && value <= 125;
 };

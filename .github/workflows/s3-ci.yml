@@ -39,5 +39,5 @@ jobs:
 
       - name: Upload to S3
         run: |
-          aws s3 sync ./app/dist s3://$S3_BUCKET --region $DEFAULT_BUCKET_REGION --delete --exclude "cdn/*" --exclude "fonts/*"
+          aws s3 sync ./app/dist s3://$S3_BUCKET --region $DEFAULT_BUCKET_REGION --exclude "cdn/*" --exclude "fonts/*"
           aws s3 cp --cache-control 'max-age=300, stale-if-error=86400' ./app/dist/index.html s3://$S3_BUCKET --region $DEFAULT_BUCKET_REGION

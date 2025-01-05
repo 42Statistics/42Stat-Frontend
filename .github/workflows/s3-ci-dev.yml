@@ -8,8 +8,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       DEFAULT_BUCKET_REGION: ${{ secrets.DEFAULT_BUCKET_REGION }}
       S3_BUCKET: ${{ secrets.DEV_S3_BUCKET }}
       CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.DEV_CLOUDFRONT_DISTRIBUTION_ID }}
@@ -21,6 +19,13 @@ jobs:
           ref: develop
           submodules: true
           token: ${{ secrets.READ_PRIVATE_SUBMODULE_TOKEN }}
+
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_TO_ASSUME }}
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC
+          aws-region: ${{ vars.AWS_REGION }}
 
       - name: Waiting build using Docker Compose
         run: |

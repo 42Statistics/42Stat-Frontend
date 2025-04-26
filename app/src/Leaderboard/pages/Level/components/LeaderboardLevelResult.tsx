@@ -23,8 +23,8 @@ type LeaderboardLevelResultProps = {
     {
       dateTemplate: DateTemplate;
       pageNumber: number;
-      promo: number | null;
-      coalitionId: number | null;
+      promo?: number | null;
+      coalitionId?: number | null;
       pageSize: number;
     }
   >;

@@ -23,7 +23,7 @@ type DailyActivitiesResultProps = {
     GetDailyActivitiesByLoginQuery,
     {
       login: string;
-      year: number | undefined;
+      year?: number | null | undefined;
     }
   >;
   dailyActivityScores: DailyActivityScore[];

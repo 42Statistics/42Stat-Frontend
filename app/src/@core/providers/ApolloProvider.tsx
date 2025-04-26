@@ -55,7 +55,7 @@ const errorLink = onError(({ graphQLErrors, operation, forward }) => {
 
   if (graphQLErrors) {
     for (const error of graphQLErrors) {
-      switch (error.extensions.status) {
+      switch (error.extensions?.status) {
         case 401:
           return fromPromise(
             getNewAccessToken(getRefreshToken() ?? ''),
@@ -157,7 +157,7 @@ const ResponseInterceptor400 = ({
         const accessToken = getAccessToken();
 
         for (const error of graphQLErrors) {
-          switch (error.extensions.status) {
+          switch (error.extensions?.status) {
             case 400:
               if (refreshToken === null && accessToken === null) {
                 break;

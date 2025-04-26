@@ -43,8 +43,7 @@ jobs:
 
       - name: Install AWS
         run: |
-          sudo apt-get update
-          sudo apt-get install awscli
+          sudo snap install aws-cli --classic
 
       - name: Upload to S3
         run: |

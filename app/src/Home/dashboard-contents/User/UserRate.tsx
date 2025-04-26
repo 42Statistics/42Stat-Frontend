@@ -102,6 +102,7 @@ const UserRateChart = ({ labels, series }: UserRateChartProps) => {
       BLACKHOLE_COLOR,
       theme.colors.chart.primary.default,
       theme.colors.chart.primary.light,
+      theme.colors.mono.gray500,
     ],
   };
 

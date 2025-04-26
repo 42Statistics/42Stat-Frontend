@@ -2,7 +2,7 @@ name: Upload build result to s3 bucket (development ver.)
 
 on:
   push:
-    branches: [develop]
+    branches: [dev]
 
 jobs:
   build:
@@ -16,7 +16,7 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v3
         with:
-          ref: develop
+          ref: dev
           submodules: true
           token: ${{ secrets.READ_PRIVATE_SUBMODULE_TOKEN }}
 

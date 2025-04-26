@@ -16,13 +16,7 @@ import { numberWithUnitFormatter } from '@shared/utils/formatters/numberWithUnit
 const GET_USER_RATE = gql(/* GraphQL */ `
   query GetUserRate {
     getHomeUser {
-      memberRate {
-        fields {
-          key
-          value
-        }
-      }
-      blackholedRate {
+      userRate {
         fields {
           key
           value
@@ -47,26 +41,19 @@ export const UserRate = () => {
     return <DashboardContentNotFound />;
   }
 
-  const { fields: memberRateFields } = data.getHomeUser.memberRate;
-  const { fields: blackholedRateFields } = data.getHomeUser.blackholedRate;
+  // 백엔드에서 순서 정해서 주던가 했어야 했다
+  const fields = data.getHomeUser.userRate.fields;
+  const blackholed = fields.find((field: Pair) => field.key === 'blackholed');
+  const cadet = fields.find((field: Pair) => field.key === 'cadet');
+  const member = fields.find((field: Pair) => field.key === 'transcender');
+  const alumni = fields.find((field: Pair) => field.key === 'alumni');
 
-  const BLACK_HOLED_INDEX = 0;
-  const ALIVE_INDEX = 1;
-  const MEMBER_INDEX = 0;
+  const orderedFields = [blackholed, cadet, member, alumni].filter(
+    (field) => field !== undefined,
+  );
 
-  const fields: Pair[] = [
-    blackholedRateFields[BLACK_HOLED_INDEX],
-    memberRateFields[MEMBER_INDEX],
-    {
-      key: 'learner',
-      value:
-        blackholedRateFields[ALIVE_INDEX].value -
-        memberRateFields[MEMBER_INDEX].value,
-    },
-  ];
-
-  const labels = fields.map((field) => capitalize(field.key));
-  const series = fields.map((field) => field.value);
+  const labels = orderedFields.map((field) => capitalize(field.key));
+  const series = orderedFields.map((field) => field.value);
 
   return (
     <DashboardContent title={title} type="ApexCharts">
